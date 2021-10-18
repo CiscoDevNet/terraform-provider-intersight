@@ -72,10 +72,10 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 				},
 			},
 			"burst": {
-				Description: "The burst traffic, in bytes, allowed on the vNIC.",
+				Description: "The burst traffic, in bytes, allowed on the vHBA.",
 				Type:        schema.TypeInt,
 				Optional:    true,
-				Default:     1024,
+				Default:     10240,
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -451,14 +451,14 @@ func resourceVnicFcQosPolicyCreate(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if v, ok := d.GetOk("burst"); ok {
+	if v, ok := d.GetOkExists("burst"); ok {
 		x := int64(v.(int))
 		o.SetBurst(x)
 	}
 
 	o.SetClassId("vnic.FcQosPolicy")
 
-	if v, ok := d.GetOk("cos"); ok {
+	if v, ok := d.GetOkExists("cos"); ok {
 		x := int64(v.(int))
 		o.SetCos(x)
 	}
@@ -468,7 +468,7 @@ func resourceVnicFcQosPolicyCreate(c context.Context, d *schema.ResourceData, me
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("max_data_field_size"); ok {
+	if v, ok := d.GetOkExists("max_data_field_size"); ok {
 		x := int64(v.(int))
 		o.SetMaxDataFieldSize(x)
 	}
@@ -528,7 +528,7 @@ func resourceVnicFcQosPolicyCreate(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if v, ok := d.GetOk("rate_limit"); ok {
+	if v, ok := d.GetOkExists("rate_limit"); ok {
 		x := int64(v.(int))
 		o.SetRateLimit(x)
 	}

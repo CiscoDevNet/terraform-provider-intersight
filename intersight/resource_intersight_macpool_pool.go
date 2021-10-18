@@ -178,7 +178,6 @@ func resourceMacpoolPool() *schema.Resource {
 							Description: "Number of identifiers this block can hold.",
 							Type:        schema.TypeInt,
 							Optional:    true,
-							Computed:    true,
 						},
 						"to": {
 							Description: "Ending address of the block must be in hexadecimal format xx:xx:xx:xx:xx:xx.",
@@ -562,6 +561,12 @@ func resourceMacpoolPoolCreate(c context.Context, d *schema.ResourceData, meta i
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSize(x)
+				}
+			}
 			if v, ok := l["to"]; ok {
 				{
 					x := (v.(string))
@@ -857,6 +862,12 @@ func resourceMacpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta i
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSize(x)
 				}
 			}
 			if v, ok := l["to"]; ok {

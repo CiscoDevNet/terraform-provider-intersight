@@ -1040,7 +1040,7 @@ func resourceFirmwareServerConfigurationUtilityDistributableCreate(c context.Con
 		o.SetSha512sum(x)
 	}
 
-	if v, ok := d.GetOk("size"); ok {
+	if v, ok := d.GetOkExists("size"); ok {
 		x := int64(v.(int))
 		o.SetSize(x)
 	}

@@ -150,6 +150,34 @@ func dataSourceMetaDefinition() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"identity_constraints": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"fields": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"is_concrete": {
 			Description: "Boolean flag to specify whether the meta class is a concrete class or not.",
 			Type:        schema.TypeBool,
@@ -289,6 +317,28 @@ func dataSourceMetaDefinition() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"default": {
+						Description: "The default value of the property. Not applicable when IsComplexType is True.",
+						Type:        schema.TypeMap,
+						Elem: &schema.Schema{
+							Type: schema.TypeString,
+						}, Optional: true,
+					},
+					"is_collection": {
+						Description: "Indicates whether the property is a collection (i.e. a JSON array), otherwise it is a single value.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_complex_type": {
+						Description: "Indicates whether the property is a complex type, otherwise it is a basic scalar type.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"kind": {
+						Description: "The kind of the property.\n* `Unknown` - The property kind is unknown.\n* `Boolean` - The 'Boolean' kind of property.\n* `String` - The 'String' kind of property.\n* `Integer` - The 'Integer' kind of property.\n* `Int32` - The 'Int32' kind of property.\n* `Int64` - The 'Int64' kind of property.\n* `Float` - The 'Float' kind of property.\n* `Double` - The 'Double' kind of property.\n* `Date` - The 'Date' kind of property.\n* `Duration` - The 'Duration' kind of property.\n* `Time` - The 'Time' kind of property.\n* `Json` - The 'JSON' kind of property.\n* `Binary` - The 'Binary' kind of property.\n* `EnumString` - The 'EnumString' kind of property.\n* `EnumInteger` - The 'EnumInteger' kind of property.\n* `ComplexType` - The 'ComplexType' kind of property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"name": {
 						Description: "The name of the property.",
 						Type:        schema.TypeString,
@@ -307,6 +357,11 @@ func dataSourceMetaDefinition() *schema.Resource {
 					"search_weight": {
 						Description: "Enables the property to be searchable from global search. A value of 0 means this property is not globally searchable.",
 						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"type": {
+						Description: "The type of the property. In case of collection properties the type is that of individual elements.",
+						Type:        schema.TypeString,
 						Optional:    true,
 					},
 				},
@@ -667,6 +722,34 @@ func dataSourceMetaDefinition() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"identity_constraints": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"fields": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"is_concrete": {
 			Description: "Boolean flag to specify whether the meta class is a concrete class or not.",
 			Type:        schema.TypeBool,
@@ -806,6 +889,28 @@ func dataSourceMetaDefinition() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"default": {
+						Description: "The default value of the property. Not applicable when IsComplexType is True.",
+						Type:        schema.TypeMap,
+						Elem: &schema.Schema{
+							Type: schema.TypeString,
+						}, Optional: true,
+					},
+					"is_collection": {
+						Description: "Indicates whether the property is a collection (i.e. a JSON array), otherwise it is a single value.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"is_complex_type": {
+						Description: "Indicates whether the property is a complex type, otherwise it is a basic scalar type.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"kind": {
+						Description: "The kind of the property.\n* `Unknown` - The property kind is unknown.\n* `Boolean` - The 'Boolean' kind of property.\n* `String` - The 'String' kind of property.\n* `Integer` - The 'Integer' kind of property.\n* `Int32` - The 'Int32' kind of property.\n* `Int64` - The 'Int64' kind of property.\n* `Float` - The 'Float' kind of property.\n* `Double` - The 'Double' kind of property.\n* `Date` - The 'Date' kind of property.\n* `Duration` - The 'Duration' kind of property.\n* `Time` - The 'Time' kind of property.\n* `Json` - The 'JSON' kind of property.\n* `Binary` - The 'Binary' kind of property.\n* `EnumString` - The 'EnumString' kind of property.\n* `EnumInteger` - The 'EnumInteger' kind of property.\n* `ComplexType` - The 'ComplexType' kind of property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"name": {
 						Description: "The name of the property.",
 						Type:        schema.TypeString,
@@ -824,6 +929,11 @@ func dataSourceMetaDefinition() *schema.Resource {
 					"search_weight": {
 						Description: "Enables the property to be searchable from global search. A value of 0 means this property is not globally searchable.",
 						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"type": {
+						Description: "The type of the property. In case of collection properties the type is that of individual elements.",
+						Type:        schema.TypeString,
 						Optional:    true,
 					},
 				},
@@ -1065,8 +1175,7 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.MetaDefinition{}
-	if _, ok := d.GetOk("access_privileges"); ok {
-		v := d.Get("access_privileges")
+	if v, ok := d.GetOk("access_privileges"); ok {
 		x := make([]models.MetaAccessPrivilege, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1094,14 +1203,12 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		o.SetAccessPrivileges(x)
 	}
 
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1110,8 +1217,7 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if _, ok := d.GetOk("ancestor_classes"); ok {
-		v := d.Get("ancestor_classes")
+	if v, ok := d.GetOk("ancestor_classes"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1120,8 +1226,7 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		o.SetAncestorClasses(x)
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1161,20 +1266,17 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("display_name_metas"); ok {
-		v := d.Get("display_name_metas")
+	if v, ok := d.GetOk("display_name_metas"); ok {
 		x := make([]models.MetaDisplayNameDefinition, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1202,52 +1304,87 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		o.SetDisplayNameMetas(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	o.SetIsConcrete(d.Get("is_concrete").(bool))
+	if v, ok := d.GetOk("identity_constraints"); ok {
+		x := make([]models.MetaIdentityDefinition, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MetaIdentityDefinition{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("meta.IdentityDefinition")
+			if v, ok := l["fields"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						x = append(x, y.Index(i).Interface().(string))
+					}
+					if len(x) > 0 {
+						o.SetFields(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetIdentityConstraints(x)
+	}
 
-	if _, ok := d.GetOk("meta_type"); ok {
-		v := d.Get("meta_type")
+	if v, ok := d.GetOkExists("is_concrete"); ok {
+		x := (v.(bool))
+		o.SetIsConcrete(x)
+	}
+
+	if v, ok := d.GetOk("meta_type"); ok {
 		x := (v.(string))
 		o.SetMetaType(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("namespace"); ok {
-		v := d.Get("namespace")
+	if v, ok := d.GetOk("namespace"); ok {
 		x := (v.(string))
 		o.SetNamespace(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1256,8 +1393,7 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1300,14 +1436,12 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if _, ok := d.GetOk("parent_class"); ok {
-		v := d.Get("parent_class")
+	if v, ok := d.GetOk("parent_class"); ok {
 		x := (v.(string))
 		o.SetParentClass(x)
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1347,10 +1481,12 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		o.SetPermissionResources(x)
 	}
 
-	o.SetPermissionSupported(d.Get("permission_supported").(bool))
+	if v, ok := d.GetOkExists("permission_supported"); ok {
+		x := (v.(bool))
+		o.SetPermissionSupported(x)
+	}
 
-	if _, ok := d.GetOk("properties"); ok {
-		v := d.Get("properties")
+	if v, ok := d.GetOk("properties"); ok {
 		x := make([]models.MetaPropDefinition, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1367,6 +1503,11 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 				}
 			}
 			o.SetClassId("meta.PropDefinition")
+			if v, ok := l["default"]; ok {
+				{
+					o.SetDefault(v)
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1378,10 +1519,12 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		o.SetProperties(x)
 	}
 
-	o.SetRbacResource(d.Get("rbac_resource").(bool))
+	if v, ok := d.GetOkExists("rbac_resource"); ok {
+		x := (v.(bool))
+		o.SetRbacResource(x)
+	}
 
-	if _, ok := d.GetOk("relationships"); ok {
-		v := d.Get("relationships")
+	if v, ok := d.GetOk("relationships"); ok {
 		x := make([]models.MetaRelationshipDefinition, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1409,8 +1552,7 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		o.SetRelationships(x)
 	}
 
-	if _, ok := d.GetOk("resource_pool_types"); ok {
-		v := d.Get("resource_pool_types")
+	if v, ok := d.GetOk("resource_pool_types"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1419,20 +1561,17 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		o.SetResourcePoolTypes(x)
 	}
 
-	if _, ok := d.GetOk("rest_path"); ok {
-		v := d.Get("rest_path")
+	if v, ok := d.GetOk("rest_path"); ok {
 		x := (v.(string))
 		o.SetRestPath(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1465,14 +1604,12 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("nr_version"); ok {
-		v := d.Get("nr_version")
+	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1546,75 +1683,6 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("is_concrete"); ok {
-		x := (v.(bool))
-		o.SetIsConcrete(x)
-	}
-	if v, ok := d.GetOk("meta_type"); ok {
-		x := (v.(string))
-		o.SetMetaType(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("namespace"); ok {
-		x := (v.(string))
-		o.SetNamespace(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("parent_class"); ok {
-		x := (v.(string))
-		o.SetParentClass(x)
-	}
-	if v, ok := d.GetOk("permission_supported"); ok {
-		x := (v.(bool))
-		o.SetPermissionSupported(x)
-	}
-	if v, ok := d.GetOk("rbac_resource"); ok {
-		x := (v.(bool))
-		o.SetRbacResource(x)
-	}
-	if v, ok := d.GetOk("rest_path"); ok {
-		x := (v.(string))
-		o.SetRestPath(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("nr_version"); ok {
-		x := (v.(string))
-		o.SetVersion(x)
-	}
-
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of MetaDefinition object failed with error : %s", err.Error())
@@ -1664,6 +1732,8 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 
 				temp["display_name_metas"] = flattenListMetaDisplayNameDefinition(s.GetDisplayNameMetas(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["identity_constraints"] = flattenListMetaIdentityDefinition(s.GetIdentityConstraints(), d)
 				temp["is_concrete"] = (s.GetIsConcrete())
 				temp["meta_type"] = (s.GetMetaType())
 

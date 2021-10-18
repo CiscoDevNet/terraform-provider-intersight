@@ -747,7 +747,10 @@ func resourceIamCertificateRequestCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	o.SetSelfSigned(d.Get("self_signed").(bool))
+	if v, ok := d.GetOkExists("self_signed"); ok {
+		x := (v.(bool))
+		o.SetSelfSigned(x)
+	}
 
 	if v, ok := d.GetOk("subject"); ok {
 		p := make([]models.PkixDistinguishedName, 0, 1)

@@ -911,14 +911,12 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricElementIdentity{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -927,20 +925,17 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("admin_action"); ok {
-		v := d.Get("admin_action")
+	if v, ok := d.GetOk("admin_action"); ok {
 		x := (v.(string))
 		o.SetAdminAction(x)
 	}
 
-	if _, ok := d.GetOk("admin_action_state"); ok {
-		v := d.Get("admin_action_state")
+	if v, ok := d.GetOk("admin_action_state"); ok {
 		x := (v.(string))
 		o.SetAdminActionState(x)
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -980,62 +975,52 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain"); ok {
-		v := d.Get("domain")
+	if v, ok := d.GetOk("domain"); ok {
 		x := (v.(string))
 		o.SetDomain(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("identifier"); ok {
-		v := d.Get("identifier")
+	if v, ok := d.GetOkExists("identifier"); ok {
 		x := int64(v.(int))
 		o.SetIdentifier(x)
 	}
 
-	if _, ok := d.GetOk("nr_lifecycle"); ok {
-		v := d.Get("nr_lifecycle")
+	if v, ok := d.GetOk("nr_lifecycle"); ok {
 		x := (v.(string))
 		o.SetLifecycle(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("model"); ok {
-		v := d.Get("model")
+	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("network_element"); ok {
-		v := d.Get("network_element")
+	if v, ok := d.GetOk("network_element"); ok {
 		p := make([]models.NetworkElementRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1078,14 +1063,12 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1094,8 +1077,7 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1138,8 +1120,7 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1179,8 +1160,7 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1223,8 +1203,7 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("replacement_target"); ok {
-		v := d.Get("replacement_target")
+	if v, ok := d.GetOk("replacement_target"); ok {
 		p := make([]models.NetworkElementRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1267,32 +1246,27 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("replacement_type"); ok {
-		v := d.Get("replacement_type")
+	if v, ok := d.GetOk("replacement_type"); ok {
 		x := (v.(string))
 		o.SetReplacementType(x)
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("switch_id"); ok {
-		v := d.Get("switch_id")
+	if v, ok := d.GetOk("switch_id"); ok {
 		x := (v.(string))
 		o.SetSwitchId(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1325,14 +1299,12 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("vendor"); ok {
-		v := d.Get("vendor")
+	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1404,79 +1376,6 @@ func dataSourceFabricElementIdentityRead(c context.Context, d *schema.ResourceDa
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("admin_action"); ok {
-		x := (v.(string))
-		o.SetAdminAction(x)
-	}
-	if v, ok := d.GetOk("admin_action_state"); ok {
-		x := (v.(string))
-		o.SetAdminActionState(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain"); ok {
-		x := (v.(string))
-		o.SetDomain(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("identifier"); ok {
-		x := int64(v.(int))
-		o.SetIdentifier(x)
-	}
-	if v, ok := d.GetOk("nr_lifecycle"); ok {
-		x := (v.(string))
-		o.SetLifecycle(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("model"); ok {
-		x := (v.(string))
-		o.SetModel(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("replacement_type"); ok {
-		x := (v.(string))
-		o.SetReplacementType(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("switch_id"); ok {
-		x := (v.(string))
-		o.SetSwitchId(x)
-	}
-	if v, ok := d.GetOk("vendor"); ok {
-		x := (v.(string))
-		o.SetVendor(x)
 	}
 
 	data, err := o.MarshalJSON()

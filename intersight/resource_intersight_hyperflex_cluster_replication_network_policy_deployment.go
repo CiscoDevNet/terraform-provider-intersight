@@ -672,7 +672,10 @@ func resourceHyperflexClusterReplicationNetworkPolicyDeploymentCreate(c context.
 		}
 	}
 
-	o.SetDiscovered(d.Get("discovered").(bool))
+	if v, ok := d.GetOkExists("discovered"); ok {
+		x := (v.(bool))
+		o.SetDiscovered(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

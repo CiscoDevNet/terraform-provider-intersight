@@ -164,6 +164,11 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"hardware_uuid": {
+			Description: "The universally unique hardware identity of the server provided by the manufacturer.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"inventory_device_info": {
 			Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -847,6 +852,11 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"hardware_uuid": {
+			Description: "The universally unique hardware identity of the server provided by the manufacturer.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"inventory_device_info": {
 			Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1397,14 +1407,12 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ComputePhysicalSummary{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1413,14 +1421,12 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("admin_power_state"); ok {
-		v := d.Get("admin_power_state")
+	if v, ok := d.GetOk("admin_power_state"); ok {
 		x := (v.(string))
 		o.SetAdminPowerState(x)
 	}
 
-	if _, ok := d.GetOk("alarm_summary"); ok {
-		v := d.Get("alarm_summary")
+	if v, ok := d.GetOk("alarm_summary"); ok {
 		p := make([]models.ComputeAlarmSummary, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1463,8 +1469,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1504,82 +1509,77 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("asset_tag"); ok {
-		v := d.Get("asset_tag")
+	if v, ok := d.GetOk("asset_tag"); ok {
 		x := (v.(string))
 		o.SetAssetTag(x)
 	}
 
-	if _, ok := d.GetOk("available_memory"); ok {
-		v := d.Get("available_memory")
+	if v, ok := d.GetOkExists("available_memory"); ok {
 		x := int64(v.(int))
 		o.SetAvailableMemory(x)
 	}
 
-	o.SetBiosPostComplete(d.Get("bios_post_complete").(bool))
+	if v, ok := d.GetOkExists("bios_post_complete"); ok {
+		x := (v.(bool))
+		o.SetBiosPostComplete(x)
+	}
 
-	if _, ok := d.GetOk("chassis_id"); ok {
-		v := d.Get("chassis_id")
+	if v, ok := d.GetOk("chassis_id"); ok {
 		x := (v.(string))
 		o.SetChassisId(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("connection_status"); ok {
-		v := d.Get("connection_status")
+	if v, ok := d.GetOk("connection_status"); ok {
 		x := (v.(string))
 		o.SetConnectionStatus(x)
 	}
 
-	if _, ok := d.GetOk("cpu_capacity"); ok {
-		v := d.Get("cpu_capacity")
+	if v, ok := d.GetOk("cpu_capacity"); ok {
 		x := v.(float32)
 		o.SetCpuCapacity(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("device_mo_id"); ok {
-		v := d.Get("device_mo_id")
+	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
 	}
 
-	if _, ok := d.GetOk("dn"); ok {
-		v := d.Get("dn")
+	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("fault_summary"); ok {
-		v := d.Get("fault_summary")
+	if v, ok := d.GetOkExists("fault_summary"); ok {
 		x := int64(v.(int))
 		o.SetFaultSummary(x)
 	}
 
-	if _, ok := d.GetOk("firmware"); ok {
-		v := d.Get("firmware")
+	if v, ok := d.GetOk("firmware"); ok {
 		x := (v.(string))
 		o.SetFirmware(x)
 	}
 
-	if _, ok := d.GetOk("inventory_device_info"); ok {
-		v := d.Get("inventory_device_info")
+	if v, ok := d.GetOk("hardware_uuid"); ok {
+		x := (v.(string))
+		o.SetHardwareUuid(x)
+	}
+
+	if v, ok := d.GetOk("inventory_device_info"); ok {
 		p := make([]models.InventoryDeviceInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1622,14 +1622,12 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("ipv4_address"); ok {
-		v := d.Get("ipv4_address")
+	if v, ok := d.GetOk("ipv4_address"); ok {
 		x := (v.(string))
 		o.SetIpv4Address(x)
 	}
 
-	if _, ok := d.GetOk("kvm_ip_addresses"); ok {
-		v := d.Get("kvm_ip_addresses")
+	if v, ok := d.GetOk("kvm_ip_addresses"); ok {
 		x := make([]models.ComputeIpAddress, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1657,104 +1655,87 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetKvmIpAddresses(x)
 	}
 
-	if _, ok := d.GetOk("management_mode"); ok {
-		v := d.Get("management_mode")
+	if v, ok := d.GetOk("management_mode"); ok {
 		x := (v.(string))
 		o.SetManagementMode(x)
 	}
 
-	if _, ok := d.GetOk("memory_speed"); ok {
-		v := d.Get("memory_speed")
+	if v, ok := d.GetOk("memory_speed"); ok {
 		x := (v.(string))
 		o.SetMemorySpeed(x)
 	}
 
-	if _, ok := d.GetOk("mgmt_ip_address"); ok {
-		v := d.Get("mgmt_ip_address")
+	if v, ok := d.GetOk("mgmt_ip_address"); ok {
 		x := (v.(string))
 		o.SetMgmtIpAddress(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("model"); ok {
-		v := d.Get("model")
+	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("num_adaptors"); ok {
-		v := d.Get("num_adaptors")
+	if v, ok := d.GetOkExists("num_adaptors"); ok {
 		x := int64(v.(int))
 		o.SetNumAdaptors(x)
 	}
 
-	if _, ok := d.GetOk("num_cpu_cores"); ok {
-		v := d.Get("num_cpu_cores")
+	if v, ok := d.GetOkExists("num_cpu_cores"); ok {
 		x := int64(v.(int))
 		o.SetNumCpuCores(x)
 	}
 
-	if _, ok := d.GetOk("num_cpu_cores_enabled"); ok {
-		v := d.Get("num_cpu_cores_enabled")
+	if v, ok := d.GetOkExists("num_cpu_cores_enabled"); ok {
 		x := int64(v.(int))
 		o.SetNumCpuCoresEnabled(x)
 	}
 
-	if _, ok := d.GetOk("num_cpus"); ok {
-		v := d.Get("num_cpus")
+	if v, ok := d.GetOkExists("num_cpus"); ok {
 		x := int64(v.(int))
 		o.SetNumCpus(x)
 	}
 
-	if _, ok := d.GetOk("num_eth_host_interfaces"); ok {
-		v := d.Get("num_eth_host_interfaces")
+	if v, ok := d.GetOkExists("num_eth_host_interfaces"); ok {
 		x := int64(v.(int))
 		o.SetNumEthHostInterfaces(x)
 	}
 
-	if _, ok := d.GetOk("num_fc_host_interfaces"); ok {
-		v := d.Get("num_fc_host_interfaces")
+	if v, ok := d.GetOkExists("num_fc_host_interfaces"); ok {
 		x := int64(v.(int))
 		o.SetNumFcHostInterfaces(x)
 	}
 
-	if _, ok := d.GetOk("num_threads"); ok {
-		v := d.Get("num_threads")
+	if v, ok := d.GetOkExists("num_threads"); ok {
 		x := int64(v.(int))
 		o.SetNumThreads(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("oper_power_state"); ok {
-		v := d.Get("oper_power_state")
+	if v, ok := d.GetOk("oper_power_state"); ok {
 		x := (v.(string))
 		o.SetOperPowerState(x)
 	}
 
-	if _, ok := d.GetOk("oper_reason"); ok {
-		v := d.Get("oper_reason")
+	if v, ok := d.GetOk("oper_reason"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1763,20 +1744,17 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetOperReason(x)
 	}
 
-	if _, ok := d.GetOk("oper_state"); ok {
-		v := d.Get("oper_state")
+	if v, ok := d.GetOk("oper_state"); ok {
 		x := (v.(string))
 		o.SetOperState(x)
 	}
 
-	if _, ok := d.GetOk("operability"); ok {
-		v := d.Get("operability")
+	if v, ok := d.GetOk("operability"); ok {
 		x := (v.(string))
 		o.SetOperability(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1785,8 +1763,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1829,8 +1806,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1870,20 +1846,17 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("platform_type"); ok {
-		v := d.Get("platform_type")
+	if v, ok := d.GetOk("platform_type"); ok {
 		x := (v.(string))
 		o.SetPlatformType(x)
 	}
 
-	if _, ok := d.GetOk("presence"); ok {
-		v := d.Get("presence")
+	if v, ok := d.GetOk("presence"); ok {
 		x := (v.(string))
 		o.SetPresence(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1926,62 +1899,52 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if _, ok := d.GetOk("revision"); ok {
-		v := d.Get("revision")
+	if v, ok := d.GetOk("revision"); ok {
 		x := (v.(string))
 		o.SetRevision(x)
 	}
 
-	if _, ok := d.GetOk("rn"); ok {
-		v := d.Get("rn")
+	if v, ok := d.GetOk("rn"); ok {
 		x := (v.(string))
 		o.SetRn(x)
 	}
 
-	if _, ok := d.GetOk("scaled_mode"); ok {
-		v := d.Get("scaled_mode")
+	if v, ok := d.GetOk("scaled_mode"); ok {
 		x := (v.(string))
 		o.SetScaledMode(x)
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("server_id"); ok {
-		v := d.Get("server_id")
+	if v, ok := d.GetOkExists("server_id"); ok {
 		x := int64(v.(int))
 		o.SetServerId(x)
 	}
 
-	if _, ok := d.GetOk("service_profile"); ok {
-		v := d.Get("service_profile")
+	if v, ok := d.GetOk("service_profile"); ok {
 		x := (v.(string))
 		o.SetServiceProfile(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("slot_id"); ok {
-		v := d.Get("slot_id")
+	if v, ok := d.GetOkExists("slot_id"); ok {
 		x := int64(v.(int))
 		o.SetSlotId(x)
 	}
 
-	if _, ok := d.GetOk("source_object_type"); ok {
-		v := d.Get("source_object_type")
+	if v, ok := d.GetOk("source_object_type"); ok {
 		x := (v.(string))
 		o.SetSourceObjectType(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2014,38 +1977,32 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("topology_scan_status"); ok {
-		v := d.Get("topology_scan_status")
+	if v, ok := d.GetOk("topology_scan_status"); ok {
 		x := (v.(string))
 		o.SetTopologyScanStatus(x)
 	}
 
-	if _, ok := d.GetOk("total_memory"); ok {
-		v := d.Get("total_memory")
+	if v, ok := d.GetOkExists("total_memory"); ok {
 		x := int64(v.(int))
 		o.SetTotalMemory(x)
 	}
 
-	if _, ok := d.GetOk("user_label"); ok {
-		v := d.Get("user_label")
+	if v, ok := d.GetOk("user_label"); ok {
 		x := (v.(string))
 		o.SetUserLabel(x)
 	}
 
-	if _, ok := d.GetOk("uuid"); ok {
-		v := d.Get("uuid")
+	if v, ok := d.GetOk("uuid"); ok {
 		x := (v.(string))
 		o.SetUuid(x)
 	}
 
-	if _, ok := d.GetOk("vendor"); ok {
-		v := d.Get("vendor")
+	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2119,207 +2076,6 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("admin_power_state"); ok {
-		x := (v.(string))
-		o.SetAdminPowerState(x)
-	}
-	if v, ok := d.GetOk("asset_tag"); ok {
-		x := (v.(string))
-		o.SetAssetTag(x)
-	}
-	if v, ok := d.GetOk("available_memory"); ok {
-		x := int64(v.(int))
-		o.SetAvailableMemory(x)
-	}
-	if v, ok := d.GetOk("bios_post_complete"); ok {
-		x := (v.(bool))
-		o.SetBiosPostComplete(x)
-	}
-	if v, ok := d.GetOk("chassis_id"); ok {
-		x := (v.(string))
-		o.SetChassisId(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("connection_status"); ok {
-		x := (v.(string))
-		o.SetConnectionStatus(x)
-	}
-	if v, ok := d.GetOk("cpu_capacity"); ok {
-		x := v.(float32)
-		o.SetCpuCapacity(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("device_mo_id"); ok {
-		x := (v.(string))
-		o.SetDeviceMoId(x)
-	}
-	if v, ok := d.GetOk("dn"); ok {
-		x := (v.(string))
-		o.SetDn(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("fault_summary"); ok {
-		x := int64(v.(int))
-		o.SetFaultSummary(x)
-	}
-	if v, ok := d.GetOk("firmware"); ok {
-		x := (v.(string))
-		o.SetFirmware(x)
-	}
-	if v, ok := d.GetOk("ipv4_address"); ok {
-		x := (v.(string))
-		o.SetIpv4Address(x)
-	}
-	if v, ok := d.GetOk("management_mode"); ok {
-		x := (v.(string))
-		o.SetManagementMode(x)
-	}
-	if v, ok := d.GetOk("memory_speed"); ok {
-		x := (v.(string))
-		o.SetMemorySpeed(x)
-	}
-	if v, ok := d.GetOk("mgmt_ip_address"); ok {
-		x := (v.(string))
-		o.SetMgmtIpAddress(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("model"); ok {
-		x := (v.(string))
-		o.SetModel(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("num_adaptors"); ok {
-		x := int64(v.(int))
-		o.SetNumAdaptors(x)
-	}
-	if v, ok := d.GetOk("num_cpu_cores"); ok {
-		x := int64(v.(int))
-		o.SetNumCpuCores(x)
-	}
-	if v, ok := d.GetOk("num_cpu_cores_enabled"); ok {
-		x := int64(v.(int))
-		o.SetNumCpuCoresEnabled(x)
-	}
-	if v, ok := d.GetOk("num_cpus"); ok {
-		x := int64(v.(int))
-		o.SetNumCpus(x)
-	}
-	if v, ok := d.GetOk("num_eth_host_interfaces"); ok {
-		x := int64(v.(int))
-		o.SetNumEthHostInterfaces(x)
-	}
-	if v, ok := d.GetOk("num_fc_host_interfaces"); ok {
-		x := int64(v.(int))
-		o.SetNumFcHostInterfaces(x)
-	}
-	if v, ok := d.GetOk("num_threads"); ok {
-		x := int64(v.(int))
-		o.SetNumThreads(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("oper_power_state"); ok {
-		x := (v.(string))
-		o.SetOperPowerState(x)
-	}
-	if v, ok := d.GetOk("oper_state"); ok {
-		x := (v.(string))
-		o.SetOperState(x)
-	}
-	if v, ok := d.GetOk("operability"); ok {
-		x := (v.(string))
-		o.SetOperability(x)
-	}
-	if v, ok := d.GetOk("platform_type"); ok {
-		x := (v.(string))
-		o.SetPlatformType(x)
-	}
-	if v, ok := d.GetOk("presence"); ok {
-		x := (v.(string))
-		o.SetPresence(x)
-	}
-	if v, ok := d.GetOk("revision"); ok {
-		x := (v.(string))
-		o.SetRevision(x)
-	}
-	if v, ok := d.GetOk("rn"); ok {
-		x := (v.(string))
-		o.SetRn(x)
-	}
-	if v, ok := d.GetOk("scaled_mode"); ok {
-		x := (v.(string))
-		o.SetScaledMode(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("server_id"); ok {
-		x := int64(v.(int))
-		o.SetServerId(x)
-	}
-	if v, ok := d.GetOk("service_profile"); ok {
-		x := (v.(string))
-		o.SetServiceProfile(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("slot_id"); ok {
-		x := int64(v.(int))
-		o.SetSlotId(x)
-	}
-	if v, ok := d.GetOk("source_object_type"); ok {
-		x := (v.(string))
-		o.SetSourceObjectType(x)
-	}
-	if v, ok := d.GetOk("topology_scan_status"); ok {
-		x := (v.(string))
-		o.SetTopologyScanStatus(x)
-	}
-	if v, ok := d.GetOk("total_memory"); ok {
-		x := int64(v.(int))
-		o.SetTotalMemory(x)
-	}
-	if v, ok := d.GetOk("user_label"); ok {
-		x := (v.(string))
-		o.SetUserLabel(x)
-	}
-	if v, ok := d.GetOk("uuid"); ok {
-		x := (v.(string))
-		o.SetUuid(x)
-	}
-	if v, ok := d.GetOk("vendor"); ok {
-		x := (v.(string))
-		o.SetVendor(x)
-	}
-
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of ComputePhysicalSummary object failed with error : %s", err.Error())
@@ -2377,6 +2133,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["fault_summary"] = (s.GetFaultSummary())
 				temp["firmware"] = (s.GetFirmware())
+				temp["hardware_uuid"] = (s.GetHardwareUuid())
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 				temp["ipv4_address"] = (s.GetIpv4Address())

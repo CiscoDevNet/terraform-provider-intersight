@@ -6,11 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.ClusterManagementConfig"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.ClusterManagementConfig"]
+**IsTacPasswdSet** | Pointer to **bool** | Indicates whether the value of the &#39;tacPasswd&#39; property has been set. | [optional] [readonly] [default to false]
 **LoadBalancerCount** | Pointer to **int64** | Number of IP addresses to reserve for load balancer services. | [optional] 
 **LoadBalancers** | Pointer to **[]string** |  | [optional] 
 **MasterVip** | Pointer to **string** | VIP for the cluster Kubernetes API server. If this is empty and a cluster IP pool is specified, it will be allocated from the IP pool. | [optional] 
 **SshKeys** | Pointer to **[]string** |  | [optional] 
 **SshUser** | Pointer to **string** | Name of the user to SSH to nodes in a cluster. | [optional] [readonly] [default to "iksadmin"]
+**TacPasswd** | Pointer to **string** | Hashed password of the TAC user. | [optional] 
 
 ## Methods
 
@@ -70,6 +72,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetIsTacPasswdSet
+
+`func (o *KubernetesClusterManagementConfigAllOf) GetIsTacPasswdSet() bool`
+
+GetIsTacPasswdSet returns the IsTacPasswdSet field if non-nil, zero value otherwise.
+
+### GetIsTacPasswdSetOk
+
+`func (o *KubernetesClusterManagementConfigAllOf) GetIsTacPasswdSetOk() (*bool, bool)`
+
+GetIsTacPasswdSetOk returns a tuple with the IsTacPasswdSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsTacPasswdSet
+
+`func (o *KubernetesClusterManagementConfigAllOf) SetIsTacPasswdSet(v bool)`
+
+SetIsTacPasswdSet sets IsTacPasswdSet field to given value.
+
+### HasIsTacPasswdSet
+
+`func (o *KubernetesClusterManagementConfigAllOf) HasIsTacPasswdSet() bool`
+
+HasIsTacPasswdSet returns a boolean if a field has been set.
 
 ### GetLoadBalancerCount
 
@@ -215,6 +242,31 @@ SetSshUser sets SshUser field to given value.
 `func (o *KubernetesClusterManagementConfigAllOf) HasSshUser() bool`
 
 HasSshUser returns a boolean if a field has been set.
+
+### GetTacPasswd
+
+`func (o *KubernetesClusterManagementConfigAllOf) GetTacPasswd() string`
+
+GetTacPasswd returns the TacPasswd field if non-nil, zero value otherwise.
+
+### GetTacPasswdOk
+
+`func (o *KubernetesClusterManagementConfigAllOf) GetTacPasswdOk() (*string, bool)`
+
+GetTacPasswdOk returns a tuple with the TacPasswd field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTacPasswd
+
+`func (o *KubernetesClusterManagementConfigAllOf) SetTacPasswd(v string)`
+
+SetTacPasswd sets TacPasswd field to given value.
+
+### HasTacPasswd
+
+`func (o *KubernetesClusterManagementConfigAllOf) HasTacPasswd() bool`
+
+HasTacPasswd returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4437
+API version: 1.0.9-4663
 Contact: intersight@cisco.com
 */
 
@@ -77,6 +77,10 @@ type BiosPolicyAllOf struct {
 	BootPerformanceMode *string `json:"BootPerformanceMode,omitempty"`
 	// BIOS Token for setting Burst and Postponed Refresh configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	BurstAndPostponedRefresh *string `json:"BurstAndPostponedRefresh,omitempty"`
+	// BIOS Token for setting C1 Auto Demotion configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	C1autoDemotion *string `json:"C1autoDemotion,omitempty"`
+	// BIOS Token for setting C1 Auto UnDemotion configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	C1autoUnDemotion *string `json:"C1autoUnDemotion,omitempty"`
 	// BIOS Token for setting APBDIS configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `0` - Value - 0 for configuring CbsCmnApbdis token. * `1` - Value - 1 for configuring CbsCmnApbdis token. * `Auto` - Value - Auto for configuring CbsCmnApbdis token.
 	CbsCmnApbdis *string `json:"CbsCmnApbdis,omitempty"`
 	// BIOS Token for setting Core Performance Boost configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CbsCmnCpuCpb token. * `disabled` - Value - disabled for configuring CbsCmnCpuCpb token.
@@ -163,6 +167,8 @@ type BiosPolicyAllOf struct {
 	CpuEnergyPerformance *string `json:"CpuEnergyPerformance,omitempty"`
 	// BIOS Token for setting Frequency Floor Override configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	CpuFrequencyFloor *string `json:"CpuFrequencyFloor,omitempty"`
+	// BIOS Token for setting Enhanced CPU Performance configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring CpuPerfEnhancement token. * `Disabled` - Value - Disabled for configuring CpuPerfEnhancement token.
+	CpuPerfEnhancement *string `json:"CpuPerfEnhancement,omitempty"`
 	// BIOS Token for setting CPU Performance configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `custom` - Value - custom for configuring CpuPerformance token. * `enterprise` - Value - enterprise for configuring CpuPerformance token. * `high-throughput` - Value - high-throughput for configuring CpuPerformance token. * `hpc` - Value - hpc for configuring CpuPerformance token.
 	CpuPerformance *string `json:"CpuPerformance,omitempty"`
 	// BIOS Token for setting Power Technology configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `custom` - Value - custom for configuring CpuPowerManagement token. * `disabled` - Value - disabled for configuring CpuPowerManagement token. * `energy-efficient` - Value - energy-efficient for configuring CpuPowerManagement token. * `performance` - Value - performance for configuring CpuPowerManagement token.
@@ -261,6 +267,8 @@ type BiosPolicyAllOf struct {
 	LegacyOsRedirection *string `json:"LegacyOsRedirection,omitempty"`
 	// BIOS Token for setting Legacy USB Support configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `auto` - Value - auto for configuring LegacyUsbSupport token. * `disabled` - Value - disabled for configuring LegacyUsbSupport token. * `enabled` - Value - enabled for configuring LegacyUsbSupport token.
 	LegacyUsbSupport *string `json:"LegacyUsbSupport,omitempty"`
+	// BIOS Token for setting LLC Dead Line configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring LlcAlloc token. * `disabled` - Value - disabled for configuring LlcAlloc token. * `enabled` - Value - enabled for configuring LlcAlloc token.
+	LlcAlloc *string `json:"LlcAlloc,omitempty"`
 	// BIOS Token for setting LLC Prefetch configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	LlcPrefetch *string `json:"LlcPrefetch,omitempty"`
 	// BIOS Token for setting LOM Port 0 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `disabled` - Value - disabled for configuring LomPort0state token. * `enabled` - Value - enabled for configuring LomPort0state token. * `Legacy Only` - Value - Legacy Only for configuring LomPort0state token. * `UEFI Only` - Value - UEFI Only for configuring LomPort0state token.
@@ -389,6 +397,8 @@ type BiosPolicyAllOf struct {
 	PcieSlotNvme6linkSpeed *string `json:"PcieSlotNvme6linkSpeed,omitempty"`
 	// BIOS Token for setting NVME 6 OptionROM configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	PcieSlotNvme6optionRom *string `json:"PcieSlotNvme6optionRom,omitempty"`
+	// BIOS Token for setting PCIe Slots CDN Control configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	PcieSlotsCdnEnable *string `json:"PcieSlotsCdnEnable,omitempty"`
 	// BIOS Token for setting Power ON Password configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	PopSupport *string `json:"PopSupport,omitempty"`
 	// BIOS Token for setting POST Error Pause configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -453,6 +463,10 @@ type BiosPolicyAllOf struct {
 	SgxPackageInfoInBandAccess *string `json:"SgxPackageInfoInBandAccess,omitempty"`
 	// BIOS Token for setting SGX QoS configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	SgxQos *string `json:"SgxQos,omitempty"`
+	// BIOS Token for setting SHA-1 PCR Bank configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	Sha1pcrBank *string `json:"Sha1pcrBank,omitempty"`
+	// BIOS Token for setting SHA256 PCR Bank configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	Sha256pcrBank *string `json:"Sha256pcrBank,omitempty"`
 	// BIOS Token for setting Single PCTL configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `No` - Value - No for configuring SinglePctlEnable token. * `Yes` - Value - Yes for configuring SinglePctlEnable token.
 	SinglePctlEnable *string `json:"SinglePctlEnable,omitempty"`
 	// BIOS Token for setting PCIe Slot:10 Link Speed configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring Slot10linkSpeed token. * `Disabled` - Value - Disabled for configuring Slot10linkSpeed token. * `GEN1` - Value - GEN1 for configuring Slot10linkSpeed token. * `GEN2` - Value - GEN2 for configuring Slot10linkSpeed token. * `GEN3` - Value - GEN3 for configuring Slot10linkSpeed token.
@@ -753,6 +767,10 @@ type BiosPolicyAllOf struct {
 	UfsDisable *string `json:"UfsDisable,omitempty"`
 	// BIOS Token for setting UMA Based Clustering configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Disable (All2All)` - Value - Disable (All2All) for configuring UmaBasedClustering token. * `Hemisphere (2-clusters)` - Value - Hemisphere (2-clusters) for configuring UmaBasedClustering token.
 	UmaBasedClustering *string `json:"UmaBasedClustering,omitempty"`
+	// BIOS Token for setting UPI Link Enablement configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1` - Value - 1 for configuring UpiLinkEnablement token. * `2` - Value - 2 for configuring UpiLinkEnablement token. * `Auto` - Value - Auto for configuring UpiLinkEnablement token.
+	UpiLinkEnablement *string `json:"UpiLinkEnablement,omitempty"`
+	// BIOS Token for setting UPI Power Manangement configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	UpiPowerManagement *string `json:"UpiPowerManagement,omitempty"`
 	// BIOS Token for setting Port 60/64 Emulation configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	UsbEmul6064 *string `json:"UsbEmul6064,omitempty"`
 	// BIOS Token for setting USB Port Front configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
@@ -771,6 +789,8 @@ type BiosPolicyAllOf struct {
 	UsbXhciSupport *string `json:"UsbXhciSupport,omitempty"`
 	// BIOS Token for setting VGA Priority configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Offboard` - Value - Offboard for configuring VgaPriority token. * `Onboard` - Value - Onboard for configuring VgaPriority token. * `Onboard VGA Disabled` - Value - Onboard VGA Disabled for configuring VgaPriority token.
 	VgaPriority *string `json:"VgaPriority,omitempty"`
+	// BIOS Token for setting Virtual NUMA configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
+	VirtualNuma *string `json:"VirtualNuma,omitempty"`
 	// BIOS Token for setting VMD Enablement configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `enabled` - Enables the BIOS setting. * `disabled` - Disables the BIOS setting.
 	VmdEnable *string `json:"VmdEnable,omitempty"`
 	// BIOS Token for setting Volatile Memory Mode configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `1LM` - Value - 1LM for configuring VolMemoryMode token. * `2LM` - Value - 2LM for configuring VolMemoryMode token.
@@ -778,8 +798,10 @@ type BiosPolicyAllOf struct {
 	// BIOS Token for setting Workload Configuration configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Balanced` - Value - Balanced for configuring WorkLoadConfig token. * `I/O Sensitive` - Value - I/O Sensitive for configuring WorkLoadConfig token. * `NUMA` - Value - NUMA for configuring WorkLoadConfig token. * `UMA` - Value - UMA for configuring WorkLoadConfig token.
 	WorkLoadConfig *string `json:"WorkLoadConfig,omitempty"`
 	// BIOS Token for setting XPT Prefetch configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring XptPrefetch token. * `disabled` - Value - disabled for configuring XptPrefetch token. * `enabled` - Value - enabled for configuring XptPrefetch token.
-	XptPrefetch  *string                               `json:"XptPrefetch,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	XptPrefetch *string `json:"XptPrefetch,omitempty"`
+	// BIOS Token for setting XPT Remote Prefetch configuration. * `platform-default` - Default value used by the platform for the BIOS setting. * `Auto` - Value - Auto for configuring XptRemotePrefetch token. * `disabled` - Value - disabled for configuring XptRemotePrefetch token. * `enabled` - Value - enabled for configuring XptRemotePrefetch token.
+	XptRemotePrefetch *string                               `json:"XptRemotePrefetch,omitempty"`
+	Organization      *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -851,6 +873,10 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.BootPerformanceMode = &bootPerformanceMode
 	var burstAndPostponedRefresh string = "platform-default"
 	this.BurstAndPostponedRefresh = &burstAndPostponedRefresh
+	var c1autoDemotion string = "platform-default"
+	this.C1autoDemotion = &c1autoDemotion
+	var c1autoUnDemotion string = "platform-default"
+	this.C1autoUnDemotion = &c1autoUnDemotion
 	var cbsCmnApbdis string = "platform-default"
 	this.CbsCmnApbdis = &cbsCmnApbdis
 	var cbsCmnCpuCpb string = "platform-default"
@@ -937,6 +963,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.CpuEnergyPerformance = &cpuEnergyPerformance
 	var cpuFrequencyFloor string = "platform-default"
 	this.CpuFrequencyFloor = &cpuFrequencyFloor
+	var cpuPerfEnhancement string = "platform-default"
+	this.CpuPerfEnhancement = &cpuPerfEnhancement
 	var cpuPerformance string = "platform-default"
 	this.CpuPerformance = &cpuPerformance
 	var cpuPowerManagement string = "platform-default"
@@ -1035,6 +1063,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.LegacyOsRedirection = &legacyOsRedirection
 	var legacyUsbSupport string = "platform-default"
 	this.LegacyUsbSupport = &legacyUsbSupport
+	var llcAlloc string = "platform-default"
+	this.LlcAlloc = &llcAlloc
 	var llcPrefetch string = "platform-default"
 	this.LlcPrefetch = &llcPrefetch
 	var lomPort0state string = "platform-default"
@@ -1163,6 +1193,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.PcieSlotNvme6linkSpeed = &pcieSlotNvme6linkSpeed
 	var pcieSlotNvme6optionRom string = "platform-default"
 	this.PcieSlotNvme6optionRom = &pcieSlotNvme6optionRom
+	var pcieSlotsCdnEnable string = "platform-default"
+	this.PcieSlotsCdnEnable = &pcieSlotsCdnEnable
 	var popSupport string = "platform-default"
 	this.PopSupport = &popSupport
 	var postErrorPause string = "platform-default"
@@ -1227,6 +1259,10 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.SgxPackageInfoInBandAccess = &sgxPackageInfoInBandAccess
 	var sgxQos string = "platform-default"
 	this.SgxQos = &sgxQos
+	var sha1pcrBank string = "platform-default"
+	this.Sha1pcrBank = &sha1pcrBank
+	var sha256pcrBank string = "platform-default"
+	this.Sha256pcrBank = &sha256pcrBank
 	var singlePctlEnable string = "platform-default"
 	this.SinglePctlEnable = &singlePctlEnable
 	var slot10linkSpeed string = "platform-default"
@@ -1527,6 +1563,10 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.UfsDisable = &ufsDisable
 	var umaBasedClustering string = "platform-default"
 	this.UmaBasedClustering = &umaBasedClustering
+	var upiLinkEnablement string = "platform-default"
+	this.UpiLinkEnablement = &upiLinkEnablement
+	var upiPowerManagement string = "platform-default"
+	this.UpiPowerManagement = &upiPowerManagement
 	var usbEmul6064 string = "platform-default"
 	this.UsbEmul6064 = &usbEmul6064
 	var usbPortFront string = "platform-default"
@@ -1545,6 +1585,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.UsbXhciSupport = &usbXhciSupport
 	var vgaPriority string = "platform-default"
 	this.VgaPriority = &vgaPriority
+	var virtualNuma string = "platform-default"
+	this.VirtualNuma = &virtualNuma
 	var vmdEnable string = "platform-default"
 	this.VmdEnable = &vmdEnable
 	var volMemoryMode string = "platform-default"
@@ -1553,6 +1595,8 @@ func NewBiosPolicyAllOf(classId string, objectType string) *BiosPolicyAllOf {
 	this.WorkLoadConfig = &workLoadConfig
 	var xptPrefetch string = "platform-default"
 	this.XptPrefetch = &xptPrefetch
+	var xptRemotePrefetch string = "platform-default"
+	this.XptRemotePrefetch = &xptRemotePrefetch
 	return &this
 }
 
@@ -1621,6 +1665,10 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.BootPerformanceMode = &bootPerformanceMode
 	var burstAndPostponedRefresh string = "platform-default"
 	this.BurstAndPostponedRefresh = &burstAndPostponedRefresh
+	var c1autoDemotion string = "platform-default"
+	this.C1autoDemotion = &c1autoDemotion
+	var c1autoUnDemotion string = "platform-default"
+	this.C1autoUnDemotion = &c1autoUnDemotion
 	var cbsCmnApbdis string = "platform-default"
 	this.CbsCmnApbdis = &cbsCmnApbdis
 	var cbsCmnCpuCpb string = "platform-default"
@@ -1707,6 +1755,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.CpuEnergyPerformance = &cpuEnergyPerformance
 	var cpuFrequencyFloor string = "platform-default"
 	this.CpuFrequencyFloor = &cpuFrequencyFloor
+	var cpuPerfEnhancement string = "platform-default"
+	this.CpuPerfEnhancement = &cpuPerfEnhancement
 	var cpuPerformance string = "platform-default"
 	this.CpuPerformance = &cpuPerformance
 	var cpuPowerManagement string = "platform-default"
@@ -1805,6 +1855,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.LegacyOsRedirection = &legacyOsRedirection
 	var legacyUsbSupport string = "platform-default"
 	this.LegacyUsbSupport = &legacyUsbSupport
+	var llcAlloc string = "platform-default"
+	this.LlcAlloc = &llcAlloc
 	var llcPrefetch string = "platform-default"
 	this.LlcPrefetch = &llcPrefetch
 	var lomPort0state string = "platform-default"
@@ -1933,6 +1985,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.PcieSlotNvme6linkSpeed = &pcieSlotNvme6linkSpeed
 	var pcieSlotNvme6optionRom string = "platform-default"
 	this.PcieSlotNvme6optionRom = &pcieSlotNvme6optionRom
+	var pcieSlotsCdnEnable string = "platform-default"
+	this.PcieSlotsCdnEnable = &pcieSlotsCdnEnable
 	var popSupport string = "platform-default"
 	this.PopSupport = &popSupport
 	var postErrorPause string = "platform-default"
@@ -1997,6 +2051,10 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.SgxPackageInfoInBandAccess = &sgxPackageInfoInBandAccess
 	var sgxQos string = "platform-default"
 	this.SgxQos = &sgxQos
+	var sha1pcrBank string = "platform-default"
+	this.Sha1pcrBank = &sha1pcrBank
+	var sha256pcrBank string = "platform-default"
+	this.Sha256pcrBank = &sha256pcrBank
 	var singlePctlEnable string = "platform-default"
 	this.SinglePctlEnable = &singlePctlEnable
 	var slot10linkSpeed string = "platform-default"
@@ -2297,6 +2355,10 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.UfsDisable = &ufsDisable
 	var umaBasedClustering string = "platform-default"
 	this.UmaBasedClustering = &umaBasedClustering
+	var upiLinkEnablement string = "platform-default"
+	this.UpiLinkEnablement = &upiLinkEnablement
+	var upiPowerManagement string = "platform-default"
+	this.UpiPowerManagement = &upiPowerManagement
 	var usbEmul6064 string = "platform-default"
 	this.UsbEmul6064 = &usbEmul6064
 	var usbPortFront string = "platform-default"
@@ -2315,6 +2377,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.UsbXhciSupport = &usbXhciSupport
 	var vgaPriority string = "platform-default"
 	this.VgaPriority = &vgaPriority
+	var virtualNuma string = "platform-default"
+	this.VirtualNuma = &virtualNuma
 	var vmdEnable string = "platform-default"
 	this.VmdEnable = &vmdEnable
 	var volMemoryMode string = "platform-default"
@@ -2323,6 +2387,8 @@ func NewBiosPolicyAllOfWithDefaults() *BiosPolicyAllOf {
 	this.WorkLoadConfig = &workLoadConfig
 	var xptPrefetch string = "platform-default"
 	this.XptPrefetch = &xptPrefetch
+	var xptRemotePrefetch string = "platform-default"
+	this.XptRemotePrefetch = &xptRemotePrefetch
 	return &this
 }
 
@@ -3268,6 +3334,70 @@ func (o *BiosPolicyAllOf) HasBurstAndPostponedRefresh() bool {
 // SetBurstAndPostponedRefresh gets a reference to the given string and assigns it to the BurstAndPostponedRefresh field.
 func (o *BiosPolicyAllOf) SetBurstAndPostponedRefresh(v string) {
 	o.BurstAndPostponedRefresh = &v
+}
+
+// GetC1autoDemotion returns the C1autoDemotion field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetC1autoDemotion() string {
+	if o == nil || o.C1autoDemotion == nil {
+		var ret string
+		return ret
+	}
+	return *o.C1autoDemotion
+}
+
+// GetC1autoDemotionOk returns a tuple with the C1autoDemotion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetC1autoDemotionOk() (*string, bool) {
+	if o == nil || o.C1autoDemotion == nil {
+		return nil, false
+	}
+	return o.C1autoDemotion, true
+}
+
+// HasC1autoDemotion returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasC1autoDemotion() bool {
+	if o != nil && o.C1autoDemotion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetC1autoDemotion gets a reference to the given string and assigns it to the C1autoDemotion field.
+func (o *BiosPolicyAllOf) SetC1autoDemotion(v string) {
+	o.C1autoDemotion = &v
+}
+
+// GetC1autoUnDemotion returns the C1autoUnDemotion field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetC1autoUnDemotion() string {
+	if o == nil || o.C1autoUnDemotion == nil {
+		var ret string
+		return ret
+	}
+	return *o.C1autoUnDemotion
+}
+
+// GetC1autoUnDemotionOk returns a tuple with the C1autoUnDemotion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetC1autoUnDemotionOk() (*string, bool) {
+	if o == nil || o.C1autoUnDemotion == nil {
+		return nil, false
+	}
+	return o.C1autoUnDemotion, true
+}
+
+// HasC1autoUnDemotion returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasC1autoUnDemotion() bool {
+	if o != nil && o.C1autoUnDemotion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetC1autoUnDemotion gets a reference to the given string and assigns it to the C1autoUnDemotion field.
+func (o *BiosPolicyAllOf) SetC1autoUnDemotion(v string) {
+	o.C1autoUnDemotion = &v
 }
 
 // GetCbsCmnApbdis returns the CbsCmnApbdis field value if set, zero value otherwise.
@@ -4644,6 +4774,38 @@ func (o *BiosPolicyAllOf) HasCpuFrequencyFloor() bool {
 // SetCpuFrequencyFloor gets a reference to the given string and assigns it to the CpuFrequencyFloor field.
 func (o *BiosPolicyAllOf) SetCpuFrequencyFloor(v string) {
 	o.CpuFrequencyFloor = &v
+}
+
+// GetCpuPerfEnhancement returns the CpuPerfEnhancement field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetCpuPerfEnhancement() string {
+	if o == nil || o.CpuPerfEnhancement == nil {
+		var ret string
+		return ret
+	}
+	return *o.CpuPerfEnhancement
+}
+
+// GetCpuPerfEnhancementOk returns a tuple with the CpuPerfEnhancement field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetCpuPerfEnhancementOk() (*string, bool) {
+	if o == nil || o.CpuPerfEnhancement == nil {
+		return nil, false
+	}
+	return o.CpuPerfEnhancement, true
+}
+
+// HasCpuPerfEnhancement returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasCpuPerfEnhancement() bool {
+	if o != nil && o.CpuPerfEnhancement != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCpuPerfEnhancement gets a reference to the given string and assigns it to the CpuPerfEnhancement field.
+func (o *BiosPolicyAllOf) SetCpuPerfEnhancement(v string) {
+	o.CpuPerfEnhancement = &v
 }
 
 // GetCpuPerformance returns the CpuPerformance field value if set, zero value otherwise.
@@ -6212,6 +6374,38 @@ func (o *BiosPolicyAllOf) HasLegacyUsbSupport() bool {
 // SetLegacyUsbSupport gets a reference to the given string and assigns it to the LegacyUsbSupport field.
 func (o *BiosPolicyAllOf) SetLegacyUsbSupport(v string) {
 	o.LegacyUsbSupport = &v
+}
+
+// GetLlcAlloc returns the LlcAlloc field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetLlcAlloc() string {
+	if o == nil || o.LlcAlloc == nil {
+		var ret string
+		return ret
+	}
+	return *o.LlcAlloc
+}
+
+// GetLlcAllocOk returns a tuple with the LlcAlloc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetLlcAllocOk() (*string, bool) {
+	if o == nil || o.LlcAlloc == nil {
+		return nil, false
+	}
+	return o.LlcAlloc, true
+}
+
+// HasLlcAlloc returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasLlcAlloc() bool {
+	if o != nil && o.LlcAlloc != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLlcAlloc gets a reference to the given string and assigns it to the LlcAlloc field.
+func (o *BiosPolicyAllOf) SetLlcAlloc(v string) {
+	o.LlcAlloc = &v
 }
 
 // GetLlcPrefetch returns the LlcPrefetch field value if set, zero value otherwise.
@@ -8262,6 +8456,38 @@ func (o *BiosPolicyAllOf) SetPcieSlotNvme6optionRom(v string) {
 	o.PcieSlotNvme6optionRom = &v
 }
 
+// GetPcieSlotsCdnEnable returns the PcieSlotsCdnEnable field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetPcieSlotsCdnEnable() string {
+	if o == nil || o.PcieSlotsCdnEnable == nil {
+		var ret string
+		return ret
+	}
+	return *o.PcieSlotsCdnEnable
+}
+
+// GetPcieSlotsCdnEnableOk returns a tuple with the PcieSlotsCdnEnable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetPcieSlotsCdnEnableOk() (*string, bool) {
+	if o == nil || o.PcieSlotsCdnEnable == nil {
+		return nil, false
+	}
+	return o.PcieSlotsCdnEnable, true
+}
+
+// HasPcieSlotsCdnEnable returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasPcieSlotsCdnEnable() bool {
+	if o != nil && o.PcieSlotsCdnEnable != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPcieSlotsCdnEnable gets a reference to the given string and assigns it to the PcieSlotsCdnEnable field.
+func (o *BiosPolicyAllOf) SetPcieSlotsCdnEnable(v string) {
+	o.PcieSlotsCdnEnable = &v
+}
+
 // GetPopSupport returns the PopSupport field value if set, zero value otherwise.
 func (o *BiosPolicyAllOf) GetPopSupport() string {
 	if o == nil || o.PopSupport == nil {
@@ -9284,6 +9510,70 @@ func (o *BiosPolicyAllOf) HasSgxQos() bool {
 // SetSgxQos gets a reference to the given string and assigns it to the SgxQos field.
 func (o *BiosPolicyAllOf) SetSgxQos(v string) {
 	o.SgxQos = &v
+}
+
+// GetSha1pcrBank returns the Sha1pcrBank field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetSha1pcrBank() string {
+	if o == nil || o.Sha1pcrBank == nil {
+		var ret string
+		return ret
+	}
+	return *o.Sha1pcrBank
+}
+
+// GetSha1pcrBankOk returns a tuple with the Sha1pcrBank field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetSha1pcrBankOk() (*string, bool) {
+	if o == nil || o.Sha1pcrBank == nil {
+		return nil, false
+	}
+	return o.Sha1pcrBank, true
+}
+
+// HasSha1pcrBank returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasSha1pcrBank() bool {
+	if o != nil && o.Sha1pcrBank != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSha1pcrBank gets a reference to the given string and assigns it to the Sha1pcrBank field.
+func (o *BiosPolicyAllOf) SetSha1pcrBank(v string) {
+	o.Sha1pcrBank = &v
+}
+
+// GetSha256pcrBank returns the Sha256pcrBank field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetSha256pcrBank() string {
+	if o == nil || o.Sha256pcrBank == nil {
+		var ret string
+		return ret
+	}
+	return *o.Sha256pcrBank
+}
+
+// GetSha256pcrBankOk returns a tuple with the Sha256pcrBank field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetSha256pcrBankOk() (*string, bool) {
+	if o == nil || o.Sha256pcrBank == nil {
+		return nil, false
+	}
+	return o.Sha256pcrBank, true
+}
+
+// HasSha256pcrBank returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasSha256pcrBank() bool {
+	if o != nil && o.Sha256pcrBank != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSha256pcrBank gets a reference to the given string and assigns it to the Sha256pcrBank field.
+func (o *BiosPolicyAllOf) SetSha256pcrBank(v string) {
+	o.Sha256pcrBank = &v
 }
 
 // GetSinglePctlEnable returns the SinglePctlEnable field value if set, zero value otherwise.
@@ -14086,6 +14376,70 @@ func (o *BiosPolicyAllOf) SetUmaBasedClustering(v string) {
 	o.UmaBasedClustering = &v
 }
 
+// GetUpiLinkEnablement returns the UpiLinkEnablement field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetUpiLinkEnablement() string {
+	if o == nil || o.UpiLinkEnablement == nil {
+		var ret string
+		return ret
+	}
+	return *o.UpiLinkEnablement
+}
+
+// GetUpiLinkEnablementOk returns a tuple with the UpiLinkEnablement field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetUpiLinkEnablementOk() (*string, bool) {
+	if o == nil || o.UpiLinkEnablement == nil {
+		return nil, false
+	}
+	return o.UpiLinkEnablement, true
+}
+
+// HasUpiLinkEnablement returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasUpiLinkEnablement() bool {
+	if o != nil && o.UpiLinkEnablement != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpiLinkEnablement gets a reference to the given string and assigns it to the UpiLinkEnablement field.
+func (o *BiosPolicyAllOf) SetUpiLinkEnablement(v string) {
+	o.UpiLinkEnablement = &v
+}
+
+// GetUpiPowerManagement returns the UpiPowerManagement field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetUpiPowerManagement() string {
+	if o == nil || o.UpiPowerManagement == nil {
+		var ret string
+		return ret
+	}
+	return *o.UpiPowerManagement
+}
+
+// GetUpiPowerManagementOk returns a tuple with the UpiPowerManagement field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetUpiPowerManagementOk() (*string, bool) {
+	if o == nil || o.UpiPowerManagement == nil {
+		return nil, false
+	}
+	return o.UpiPowerManagement, true
+}
+
+// HasUpiPowerManagement returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasUpiPowerManagement() bool {
+	if o != nil && o.UpiPowerManagement != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpiPowerManagement gets a reference to the given string and assigns it to the UpiPowerManagement field.
+func (o *BiosPolicyAllOf) SetUpiPowerManagement(v string) {
+	o.UpiPowerManagement = &v
+}
+
 // GetUsbEmul6064 returns the UsbEmul6064 field value if set, zero value otherwise.
 func (o *BiosPolicyAllOf) GetUsbEmul6064() string {
 	if o == nil || o.UsbEmul6064 == nil {
@@ -14374,6 +14728,38 @@ func (o *BiosPolicyAllOf) SetVgaPriority(v string) {
 	o.VgaPriority = &v
 }
 
+// GetVirtualNuma returns the VirtualNuma field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetVirtualNuma() string {
+	if o == nil || o.VirtualNuma == nil {
+		var ret string
+		return ret
+	}
+	return *o.VirtualNuma
+}
+
+// GetVirtualNumaOk returns a tuple with the VirtualNuma field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetVirtualNumaOk() (*string, bool) {
+	if o == nil || o.VirtualNuma == nil {
+		return nil, false
+	}
+	return o.VirtualNuma, true
+}
+
+// HasVirtualNuma returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasVirtualNuma() bool {
+	if o != nil && o.VirtualNuma != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVirtualNuma gets a reference to the given string and assigns it to the VirtualNuma field.
+func (o *BiosPolicyAllOf) SetVirtualNuma(v string) {
+	o.VirtualNuma = &v
+}
+
 // GetVmdEnable returns the VmdEnable field value if set, zero value otherwise.
 func (o *BiosPolicyAllOf) GetVmdEnable() string {
 	if o == nil || o.VmdEnable == nil {
@@ -14500,6 +14886,38 @@ func (o *BiosPolicyAllOf) HasXptPrefetch() bool {
 // SetXptPrefetch gets a reference to the given string and assigns it to the XptPrefetch field.
 func (o *BiosPolicyAllOf) SetXptPrefetch(v string) {
 	o.XptPrefetch = &v
+}
+
+// GetXptRemotePrefetch returns the XptRemotePrefetch field value if set, zero value otherwise.
+func (o *BiosPolicyAllOf) GetXptRemotePrefetch() string {
+	if o == nil || o.XptRemotePrefetch == nil {
+		var ret string
+		return ret
+	}
+	return *o.XptRemotePrefetch
+}
+
+// GetXptRemotePrefetchOk returns a tuple with the XptRemotePrefetch field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BiosPolicyAllOf) GetXptRemotePrefetchOk() (*string, bool) {
+	if o == nil || o.XptRemotePrefetch == nil {
+		return nil, false
+	}
+	return o.XptRemotePrefetch, true
+}
+
+// HasXptRemotePrefetch returns a boolean if a field has been set.
+func (o *BiosPolicyAllOf) HasXptRemotePrefetch() bool {
+	if o != nil && o.XptRemotePrefetch != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetXptRemotePrefetch gets a reference to the given string and assigns it to the XptRemotePrefetch field.
+func (o *BiosPolicyAllOf) SetXptRemotePrefetch(v string) {
+	o.XptRemotePrefetch = &v
 }
 
 // GetOrganization returns the Organization field value if set, zero value otherwise.
@@ -14659,6 +15077,12 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.BurstAndPostponedRefresh != nil {
 		toSerialize["BurstAndPostponedRefresh"] = o.BurstAndPostponedRefresh
 	}
+	if o.C1autoDemotion != nil {
+		toSerialize["C1autoDemotion"] = o.C1autoDemotion
+	}
+	if o.C1autoUnDemotion != nil {
+		toSerialize["C1autoUnDemotion"] = o.C1autoUnDemotion
+	}
 	if o.CbsCmnApbdis != nil {
 		toSerialize["CbsCmnApbdis"] = o.CbsCmnApbdis
 	}
@@ -14787,6 +15211,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.CpuFrequencyFloor != nil {
 		toSerialize["CpuFrequencyFloor"] = o.CpuFrequencyFloor
+	}
+	if o.CpuPerfEnhancement != nil {
+		toSerialize["CpuPerfEnhancement"] = o.CpuPerfEnhancement
 	}
 	if o.CpuPerformance != nil {
 		toSerialize["CpuPerformance"] = o.CpuPerformance
@@ -14934,6 +15361,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.LegacyUsbSupport != nil {
 		toSerialize["LegacyUsbSupport"] = o.LegacyUsbSupport
+	}
+	if o.LlcAlloc != nil {
+		toSerialize["LlcAlloc"] = o.LlcAlloc
 	}
 	if o.LlcPrefetch != nil {
 		toSerialize["LlcPrefetch"] = o.LlcPrefetch
@@ -15127,6 +15557,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.PcieSlotNvme6optionRom != nil {
 		toSerialize["PcieSlotNvme6optionRom"] = o.PcieSlotNvme6optionRom
 	}
+	if o.PcieSlotsCdnEnable != nil {
+		toSerialize["PcieSlotsCdnEnable"] = o.PcieSlotsCdnEnable
+	}
 	if o.PopSupport != nil {
 		toSerialize["PopSupport"] = o.PopSupport
 	}
@@ -15222,6 +15655,12 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.SgxQos != nil {
 		toSerialize["SgxQos"] = o.SgxQos
+	}
+	if o.Sha1pcrBank != nil {
+		toSerialize["Sha1pcrBank"] = o.Sha1pcrBank
+	}
+	if o.Sha256pcrBank != nil {
+		toSerialize["Sha256pcrBank"] = o.Sha256pcrBank
 	}
 	if o.SinglePctlEnable != nil {
 		toSerialize["SinglePctlEnable"] = o.SinglePctlEnable
@@ -15673,6 +16112,12 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.UmaBasedClustering != nil {
 		toSerialize["UmaBasedClustering"] = o.UmaBasedClustering
 	}
+	if o.UpiLinkEnablement != nil {
+		toSerialize["UpiLinkEnablement"] = o.UpiLinkEnablement
+	}
+	if o.UpiPowerManagement != nil {
+		toSerialize["UpiPowerManagement"] = o.UpiPowerManagement
+	}
 	if o.UsbEmul6064 != nil {
 		toSerialize["UsbEmul6064"] = o.UsbEmul6064
 	}
@@ -15700,6 +16145,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.VgaPriority != nil {
 		toSerialize["VgaPriority"] = o.VgaPriority
 	}
+	if o.VirtualNuma != nil {
+		toSerialize["VirtualNuma"] = o.VirtualNuma
+	}
 	if o.VmdEnable != nil {
 		toSerialize["VmdEnable"] = o.VmdEnable
 	}
@@ -15711,6 +16159,9 @@ func (o BiosPolicyAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.XptPrefetch != nil {
 		toSerialize["XptPrefetch"] = o.XptPrefetch
+	}
+	if o.XptRemotePrefetch != nil {
+		toSerialize["XptRemotePrefetch"] = o.XptRemotePrefetch
 	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
@@ -15766,6 +16217,8 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "BootOptionRetry")
 		delete(additionalProperties, "BootPerformanceMode")
 		delete(additionalProperties, "BurstAndPostponedRefresh")
+		delete(additionalProperties, "C1autoDemotion")
+		delete(additionalProperties, "C1autoUnDemotion")
 		delete(additionalProperties, "CbsCmnApbdis")
 		delete(additionalProperties, "CbsCmnCpuCpb")
 		delete(additionalProperties, "CbsCmnCpuGenDowncoreCtrl")
@@ -15809,6 +16262,7 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "CoreMultiProcessing")
 		delete(additionalProperties, "CpuEnergyPerformance")
 		delete(additionalProperties, "CpuFrequencyFloor")
+		delete(additionalProperties, "CpuPerfEnhancement")
 		delete(additionalProperties, "CpuPerformance")
 		delete(additionalProperties, "CpuPowerManagement")
 		delete(additionalProperties, "CrQos")
@@ -15858,6 +16312,7 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "KtiPrefetch")
 		delete(additionalProperties, "LegacyOsRedirection")
 		delete(additionalProperties, "LegacyUsbSupport")
+		delete(additionalProperties, "LlcAlloc")
 		delete(additionalProperties, "LlcPrefetch")
 		delete(additionalProperties, "LomPort0state")
 		delete(additionalProperties, "LomPort1state")
@@ -15922,6 +16377,7 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "PcieSlotNvme5optionRom")
 		delete(additionalProperties, "PcieSlotNvme6linkSpeed")
 		delete(additionalProperties, "PcieSlotNvme6optionRom")
+		delete(additionalProperties, "PcieSlotsCdnEnable")
 		delete(additionalProperties, "PopSupport")
 		delete(additionalProperties, "PostErrorPause")
 		delete(additionalProperties, "PostPackageRepair")
@@ -15954,6 +16410,8 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "SgxLeWr")
 		delete(additionalProperties, "SgxPackageInfoInBandAccess")
 		delete(additionalProperties, "SgxQos")
+		delete(additionalProperties, "Sha1pcrBank")
+		delete(additionalProperties, "Sha256pcrBank")
 		delete(additionalProperties, "SinglePctlEnable")
 		delete(additionalProperties, "Slot10linkSpeed")
 		delete(additionalProperties, "Slot10state")
@@ -16104,6 +16562,8 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "UcsmBootOrderRule")
 		delete(additionalProperties, "UfsDisable")
 		delete(additionalProperties, "UmaBasedClustering")
+		delete(additionalProperties, "UpiLinkEnablement")
+		delete(additionalProperties, "UpiPowerManagement")
 		delete(additionalProperties, "UsbEmul6064")
 		delete(additionalProperties, "UsbPortFront")
 		delete(additionalProperties, "UsbPortInternal")
@@ -16113,10 +16573,12 @@ func (o *BiosPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "UsbPortVmedia")
 		delete(additionalProperties, "UsbXhciSupport")
 		delete(additionalProperties, "VgaPriority")
+		delete(additionalProperties, "VirtualNuma")
 		delete(additionalProperties, "VmdEnable")
 		delete(additionalProperties, "VolMemoryMode")
 		delete(additionalProperties, "WorkLoadConfig")
 		delete(additionalProperties, "XptPrefetch")
+		delete(additionalProperties, "XptRemotePrefetch")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Profiles")
 		o.AdditionalProperties = additionalProperties

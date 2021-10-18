@@ -532,14 +532,14 @@ func resourceOprsDeploymentCreate(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if v, ok := d.GetOk("available_replicas"); ok {
+	if v, ok := d.GetOkExists("available_replicas"); ok {
 		x := int64(v.(int))
 		o.SetAvailableReplicas(x)
 	}
 
 	o.SetClassId("oprs.Deployment")
 
-	if v, ok := d.GetOk("desired_replicas"); ok {
+	if v, ok := d.GetOkExists("desired_replicas"); ok {
 		x := int64(v.(int))
 		o.SetDesiredReplicas(x)
 	}
@@ -648,7 +648,7 @@ func resourceOprsDeploymentCreate(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if v, ok := d.GetOk("unavailable_replicas"); ok {
+	if v, ok := d.GetOkExists("unavailable_replicas"); ok {
 		x := int64(v.(int))
 		o.SetUnavailableReplicas(x)
 	}

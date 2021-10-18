@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.Properties"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.Properties"]
+**Cloneable** | Pointer to **bool** | When set to false task is not cloneable. It is set to true only if task is of ApiTask type and it is not system defined. | [optional] [readonly] [default to true]
 **ExternalMeta** | Pointer to **bool** | When set to false the task definition can only be used by internal system workflows. When set to true then the task can be included in user defined workflows. | [optional] [default to false]
 **InputDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
 **OutputDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
@@ -74,6 +75,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetCloneable
+
+`func (o *WorkflowPropertiesAllOf) GetCloneable() bool`
+
+GetCloneable returns the Cloneable field if non-nil, zero value otherwise.
+
+### GetCloneableOk
+
+`func (o *WorkflowPropertiesAllOf) GetCloneableOk() (*bool, bool)`
+
+GetCloneableOk returns a tuple with the Cloneable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCloneable
+
+`func (o *WorkflowPropertiesAllOf) SetCloneable(v bool)`
+
+SetCloneable sets Cloneable field to given value.
+
+### HasCloneable
+
+`func (o *WorkflowPropertiesAllOf) HasCloneable() bool`
+
+HasCloneable returns a boolean if a field has been set.
 
 ### GetExternalMeta
 

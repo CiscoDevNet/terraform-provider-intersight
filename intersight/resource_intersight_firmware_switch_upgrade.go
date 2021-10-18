@@ -1253,7 +1253,10 @@ func resourceFirmwareSwitchUpgradeCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	o.SetEnableFabricEvacuation(d.Get("enable_fabric_evacuation").(bool))
+	if v, ok := d.GetOkExists("enable_fabric_evacuation"); ok {
+		x := (v.(bool))
+		o.SetEnableFabricEvacuation(x)
+	}
 
 	if v, ok := d.GetOk("file_server"); ok {
 		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
@@ -1565,7 +1568,10 @@ func resourceFirmwareSwitchUpgradeCreate(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	o.SetSkipEstimateImpact(d.Get("skip_estimate_impact").(bool))
+	if v, ok := d.GetOkExists("skip_estimate_impact"); ok {
+		x := (v.(bool))
+		o.SetSkipEstimateImpact(x)
+	}
 
 	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))

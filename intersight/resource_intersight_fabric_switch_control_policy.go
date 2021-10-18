@@ -773,7 +773,10 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 		}
 	}
 
-	o.SetVlanPortOptimizationEnabled(d.Get("vlan_port_optimization_enabled").(bool))
+	if v, ok := d.GetOkExists("vlan_port_optimization_enabled"); ok {
+		x := (v.(bool))
+		o.SetVlanPortOptimizationEnabled(x)
+	}
 
 	r := conn.ApiClient.FabricApi.CreateFabricSwitchControlPolicy(conn.ctx).FabricSwitchControlPolicy(*o)
 	resultMo, _, responseErr := r.Execute()

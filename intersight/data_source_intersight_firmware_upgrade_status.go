@@ -921,14 +921,12 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FirmwareUpgradeStatus{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -937,8 +935,7 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -978,8 +975,7 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("checksum"); ok {
-		v := d.Get("checksum")
+	if v, ok := d.GetOk("checksum"); ok {
 		p := make([]models.ConnectorFileChecksum, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1016,104 +1012,87 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("download_error"); ok {
-		v := d.Get("download_error")
+	if v, ok := d.GetOk("download_error"); ok {
 		x := (v.(string))
 		o.SetDownloadError(x)
 	}
 
-	if _, ok := d.GetOk("download_message"); ok {
-		v := d.Get("download_message")
+	if v, ok := d.GetOk("download_message"); ok {
 		x := (v.(string))
 		o.SetDownloadMessage(x)
 	}
 
-	if _, ok := d.GetOk("download_percentage"); ok {
-		v := d.Get("download_percentage")
+	if v, ok := d.GetOkExists("download_percentage"); ok {
 		x := int64(v.(int))
 		o.SetDownloadPercentage(x)
 	}
 
-	if _, ok := d.GetOk("download_progress"); ok {
-		v := d.Get("download_progress")
+	if v, ok := d.GetOkExists("download_progress"); ok {
 		x := int64(v.(int))
 		o.SetDownloadProgress(x)
 	}
 
-	if _, ok := d.GetOk("download_retries"); ok {
-		v := d.Get("download_retries")
+	if v, ok := d.GetOkExists("download_retries"); ok {
 		x := int64(v.(int))
 		o.SetDownloadRetries(x)
 	}
 
-	if _, ok := d.GetOk("download_stage"); ok {
-		v := d.Get("download_stage")
+	if v, ok := d.GetOk("download_stage"); ok {
 		x := (v.(string))
 		o.SetDownloadStage(x)
 	}
 
-	if _, ok := d.GetOk("ep_power_status"); ok {
-		v := d.Get("ep_power_status")
+	if v, ok := d.GetOk("ep_power_status"); ok {
 		x := (v.(string))
 		o.SetEpPowerStatus(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("overall_error"); ok {
-		v := d.Get("overall_error")
+	if v, ok := d.GetOk("overall_error"); ok {
 		x := (v.(string))
 		o.SetOverallError(x)
 	}
 
-	if _, ok := d.GetOk("overall_percentage"); ok {
-		v := d.Get("overall_percentage")
+	if v, ok := d.GetOkExists("overall_percentage"); ok {
 		x := int64(v.(int))
 		o.SetOverallPercentage(x)
 	}
 
-	if _, ok := d.GetOk("overallstatus"); ok {
-		v := d.Get("overallstatus")
+	if v, ok := d.GetOk("overallstatus"); ok {
 		x := (v.(string))
 		o.SetOverallstatus(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1122,8 +1101,7 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1166,14 +1144,12 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("pending_type"); ok {
-		v := d.Get("pending_type")
+	if v, ok := d.GetOk("pending_type"); ok {
 		x := (v.(string))
 		o.SetPendingType(x)
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1213,20 +1189,17 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("sd_card_download_error"); ok {
-		v := d.Get("sd_card_download_error")
+	if v, ok := d.GetOk("sd_card_download_error"); ok {
 		x := (v.(string))
 		o.SetSdCardDownloadError(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1259,8 +1232,7 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("upgrade"); ok {
-		v := d.Get("upgrade")
+	if v, ok := d.GetOk("upgrade"); ok {
 		p := make([]models.FirmwareUpgradeBaseRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1303,8 +1275,7 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1378,8 +1349,7 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
-	if _, ok := d.GetOk("workflow"); ok {
-		v := d.Get("workflow")
+	if v, ok := d.GetOk("workflow"); ok {
 		p := make([]models.WorkflowWorkflowInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1420,87 +1390,6 @@ func dataSourceFirmwareUpgradeStatusRead(c context.Context, d *schema.ResourceDa
 			x := p[0]
 			o.SetWorkflow(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("download_error"); ok {
-		x := (v.(string))
-		o.SetDownloadError(x)
-	}
-	if v, ok := d.GetOk("download_message"); ok {
-		x := (v.(string))
-		o.SetDownloadMessage(x)
-	}
-	if v, ok := d.GetOk("download_percentage"); ok {
-		x := int64(v.(int))
-		o.SetDownloadPercentage(x)
-	}
-	if v, ok := d.GetOk("download_progress"); ok {
-		x := int64(v.(int))
-		o.SetDownloadProgress(x)
-	}
-	if v, ok := d.GetOk("download_retries"); ok {
-		x := int64(v.(int))
-		o.SetDownloadRetries(x)
-	}
-	if v, ok := d.GetOk("download_stage"); ok {
-		x := (v.(string))
-		o.SetDownloadStage(x)
-	}
-	if v, ok := d.GetOk("ep_power_status"); ok {
-		x := (v.(string))
-		o.SetEpPowerStatus(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("overall_error"); ok {
-		x := (v.(string))
-		o.SetOverallError(x)
-	}
-	if v, ok := d.GetOk("overall_percentage"); ok {
-		x := int64(v.(int))
-		o.SetOverallPercentage(x)
-	}
-	if v, ok := d.GetOk("overallstatus"); ok {
-		x := (v.(string))
-		o.SetOverallstatus(x)
-	}
-	if v, ok := d.GetOk("pending_type"); ok {
-		x := (v.(string))
-		o.SetPendingType(x)
-	}
-	if v, ok := d.GetOk("sd_card_download_error"); ok {
-		x := (v.(string))
-		o.SetSdCardDownloadError(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
 	}
 
 	data, err := o.MarshalJSON()

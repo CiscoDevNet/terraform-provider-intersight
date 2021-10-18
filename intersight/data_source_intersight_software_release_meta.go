@@ -781,14 +781,12 @@ func dataSourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwareReleaseMeta{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -797,8 +795,7 @@ func dataSourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -838,8 +835,7 @@ func dataSourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("catalog"); ok {
-		v := d.Get("catalog")
+	if v, ok := d.GetOk("catalog"); ok {
 		p := make([]models.SoftwarerepositoryCatalogRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -882,26 +878,22 @@ func dataSourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("image"); ok {
-		v := d.Get("image")
+	if v, ok := d.GetOk("image"); ok {
 		p := make([]models.FirmwareBaseDistributableRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -944,44 +936,37 @@ func dataSourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("image_type"); ok {
-		v := d.Get("image_type")
+	if v, ok := d.GetOk("image_type"); ok {
 		x := (v.(string))
 		o.SetImageType(x)
 	}
 
-	if _, ok := d.GetOk("latest_file_name"); ok {
-		v := d.Get("latest_file_name")
+	if v, ok := d.GetOk("latest_file_name"); ok {
 		x := (v.(string))
 		o.SetLatestFileName(x)
 	}
 
-	if _, ok := d.GetOk("latest_version"); ok {
-		v := d.Get("latest_version")
+	if v, ok := d.GetOk("latest_version"); ok {
 		x := (v.(string))
 		o.SetLatestVersion(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -990,8 +975,7 @@ func dataSourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1034,8 +1018,7 @@ func dataSourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1075,20 +1058,17 @@ func dataSourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("software_type_id"); ok {
-		v := d.Get("software_type_id")
+	if v, ok := d.GetOk("software_type_id"); ok {
 		x := (v.(string))
 		o.SetSoftwareTypeId(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1121,8 +1101,7 @@ func dataSourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1194,55 +1173,6 @@ func dataSourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("image_type"); ok {
-		x := (v.(string))
-		o.SetImageType(x)
-	}
-	if v, ok := d.GetOk("latest_file_name"); ok {
-		x := (v.(string))
-		o.SetLatestFileName(x)
-	}
-	if v, ok := d.GetOk("latest_version"); ok {
-		x := (v.(string))
-		o.SetLatestVersion(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("software_type_id"); ok {
-		x := (v.(string))
-		o.SetSoftwareTypeId(x)
 	}
 
 	data, err := o.MarshalJSON()

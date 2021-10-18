@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4437
+API version: 1.0.9-4663
 Contact: intersight@cisco.com
 */
 
@@ -29,15 +29,26 @@ type ServerProfile struct {
 	// Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set.
 	IsPmcDeployedSecurePassphraseSet *bool `json:"IsPmcDeployedSecurePassphraseSet,omitempty"`
 	// Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy.
-	PmcDeployedSecurePassphrase *string                      `json:"PmcDeployedSecurePassphrase,omitempty"`
-	AssignedServer              *ComputePhysicalRelationship `json:"AssignedServer,omitempty"`
-	AssociatedServer            *ComputePhysicalRelationship `json:"AssociatedServer,omitempty"`
+	PmcDeployedSecurePassphrase *string `json:"PmcDeployedSecurePassphrase,omitempty"`
+	// Source of the server assigned to the server profile. Values can be Static, Pool or None. Static is used if a server is attached directly to server profile. Pool is used if a resource pool is attached to server profile. None is used if no server or resource pool is attached to server profile. * `None` - No server is assigned to the server profile. * `Static` - Server is directly assigned to server profile using assign server. * `Pool` - Server is assigned from a resource pool.
+	ServerAssignmentMode *string `json:"ServerAssignmentMode,omitempty"`
+	// The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx.
+	StaticUuidAddress *string `json:"StaticUuidAddress,omitempty"`
+	// The UUID address that is assigned to the server based on the UUID pool.
+	Uuid                 *string                       `json:"Uuid,omitempty"`
+	AssignedServer       *ComputePhysicalRelationship  `json:"AssignedServer,omitempty"`
+	AssociatedServer     *ComputePhysicalRelationship  `json:"AssociatedServer,omitempty"`
+	AssociatedServerPool *ResourcepoolPoolRelationship `json:"AssociatedServerPool,omitempty"`
 	// An array of relationships to serverConfigChangeDetail resources.
 	ConfigChangeDetails []ServerConfigChangeDetailRelationship `json:"ConfigChangeDetails,omitempty"`
 	ConfigResult        *ServerConfigResultRelationship        `json:"ConfigResult,omitempty"`
+	LeasedServer        *ComputePhysicalRelationship           `json:"LeasedServer,omitempty"`
 	Organization        *OrganizationOrganizationRelationship  `json:"Organization,omitempty"`
+	ResourceLease       *ResourcepoolLeaseRelationship         `json:"ResourceLease,omitempty"`
 	// An array of relationships to workflowWorkflowInfo resources.
 	RunningWorkflows     []WorkflowWorkflowInfoRelationship `json:"RunningWorkflows,omitempty"`
+	ServerPool           *ResourcepoolPoolRelationship      `json:"ServerPool,omitempty"`
+	UuidLease            *UuidpoolUuidLeaseRelationship     `json:"UuidLease,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -57,6 +68,10 @@ func NewServerProfile(classId string, objectType string) *ServerProfile {
 	this.Action = &action
 	var targetPlatform string = "Standalone"
 	this.TargetPlatform = &targetPlatform
+	var uuidAddressType string = "NONE"
+	this.UuidAddressType = &uuidAddressType
+	var serverAssignmentMode string = "None"
+	this.ServerAssignmentMode = &serverAssignmentMode
 	return &this
 }
 
@@ -69,6 +84,8 @@ func NewServerProfileWithDefaults() *ServerProfile {
 	this.ClassId = classId
 	var objectType string = "server.Profile"
 	this.ObjectType = objectType
+	var serverAssignmentMode string = "None"
+	this.ServerAssignmentMode = &serverAssignmentMode
 	return &this
 }
 
@@ -270,6 +287,102 @@ func (o *ServerProfile) SetPmcDeployedSecurePassphrase(v string) {
 	o.PmcDeployedSecurePassphrase = &v
 }
 
+// GetServerAssignmentMode returns the ServerAssignmentMode field value if set, zero value otherwise.
+func (o *ServerProfile) GetServerAssignmentMode() string {
+	if o == nil || o.ServerAssignmentMode == nil {
+		var ret string
+		return ret
+	}
+	return *o.ServerAssignmentMode
+}
+
+// GetServerAssignmentModeOk returns a tuple with the ServerAssignmentMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetServerAssignmentModeOk() (*string, bool) {
+	if o == nil || o.ServerAssignmentMode == nil {
+		return nil, false
+	}
+	return o.ServerAssignmentMode, true
+}
+
+// HasServerAssignmentMode returns a boolean if a field has been set.
+func (o *ServerProfile) HasServerAssignmentMode() bool {
+	if o != nil && o.ServerAssignmentMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetServerAssignmentMode gets a reference to the given string and assigns it to the ServerAssignmentMode field.
+func (o *ServerProfile) SetServerAssignmentMode(v string) {
+	o.ServerAssignmentMode = &v
+}
+
+// GetStaticUuidAddress returns the StaticUuidAddress field value if set, zero value otherwise.
+func (o *ServerProfile) GetStaticUuidAddress() string {
+	if o == nil || o.StaticUuidAddress == nil {
+		var ret string
+		return ret
+	}
+	return *o.StaticUuidAddress
+}
+
+// GetStaticUuidAddressOk returns a tuple with the StaticUuidAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetStaticUuidAddressOk() (*string, bool) {
+	if o == nil || o.StaticUuidAddress == nil {
+		return nil, false
+	}
+	return o.StaticUuidAddress, true
+}
+
+// HasStaticUuidAddress returns a boolean if a field has been set.
+func (o *ServerProfile) HasStaticUuidAddress() bool {
+	if o != nil && o.StaticUuidAddress != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticUuidAddress gets a reference to the given string and assigns it to the StaticUuidAddress field.
+func (o *ServerProfile) SetStaticUuidAddress(v string) {
+	o.StaticUuidAddress = &v
+}
+
+// GetUuid returns the Uuid field value if set, zero value otherwise.
+func (o *ServerProfile) GetUuid() string {
+	if o == nil || o.Uuid == nil {
+		var ret string
+		return ret
+	}
+	return *o.Uuid
+}
+
+// GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetUuidOk() (*string, bool) {
+	if o == nil || o.Uuid == nil {
+		return nil, false
+	}
+	return o.Uuid, true
+}
+
+// HasUuid returns a boolean if a field has been set.
+func (o *ServerProfile) HasUuid() bool {
+	if o != nil && o.Uuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUuid gets a reference to the given string and assigns it to the Uuid field.
+func (o *ServerProfile) SetUuid(v string) {
+	o.Uuid = &v
+}
+
 // GetAssignedServer returns the AssignedServer field value if set, zero value otherwise.
 func (o *ServerProfile) GetAssignedServer() ComputePhysicalRelationship {
 	if o == nil || o.AssignedServer == nil {
@@ -332,6 +445,38 @@ func (o *ServerProfile) HasAssociatedServer() bool {
 // SetAssociatedServer gets a reference to the given ComputePhysicalRelationship and assigns it to the AssociatedServer field.
 func (o *ServerProfile) SetAssociatedServer(v ComputePhysicalRelationship) {
 	o.AssociatedServer = &v
+}
+
+// GetAssociatedServerPool returns the AssociatedServerPool field value if set, zero value otherwise.
+func (o *ServerProfile) GetAssociatedServerPool() ResourcepoolPoolRelationship {
+	if o == nil || o.AssociatedServerPool == nil {
+		var ret ResourcepoolPoolRelationship
+		return ret
+	}
+	return *o.AssociatedServerPool
+}
+
+// GetAssociatedServerPoolOk returns a tuple with the AssociatedServerPool field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetAssociatedServerPoolOk() (*ResourcepoolPoolRelationship, bool) {
+	if o == nil || o.AssociatedServerPool == nil {
+		return nil, false
+	}
+	return o.AssociatedServerPool, true
+}
+
+// HasAssociatedServerPool returns a boolean if a field has been set.
+func (o *ServerProfile) HasAssociatedServerPool() bool {
+	if o != nil && o.AssociatedServerPool != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAssociatedServerPool gets a reference to the given ResourcepoolPoolRelationship and assigns it to the AssociatedServerPool field.
+func (o *ServerProfile) SetAssociatedServerPool(v ResourcepoolPoolRelationship) {
+	o.AssociatedServerPool = &v
 }
 
 // GetConfigChangeDetails returns the ConfigChangeDetails field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -399,6 +544,38 @@ func (o *ServerProfile) SetConfigResult(v ServerConfigResultRelationship) {
 	o.ConfigResult = &v
 }
 
+// GetLeasedServer returns the LeasedServer field value if set, zero value otherwise.
+func (o *ServerProfile) GetLeasedServer() ComputePhysicalRelationship {
+	if o == nil || o.LeasedServer == nil {
+		var ret ComputePhysicalRelationship
+		return ret
+	}
+	return *o.LeasedServer
+}
+
+// GetLeasedServerOk returns a tuple with the LeasedServer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetLeasedServerOk() (*ComputePhysicalRelationship, bool) {
+	if o == nil || o.LeasedServer == nil {
+		return nil, false
+	}
+	return o.LeasedServer, true
+}
+
+// HasLeasedServer returns a boolean if a field has been set.
+func (o *ServerProfile) HasLeasedServer() bool {
+	if o != nil && o.LeasedServer != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLeasedServer gets a reference to the given ComputePhysicalRelationship and assigns it to the LeasedServer field.
+func (o *ServerProfile) SetLeasedServer(v ComputePhysicalRelationship) {
+	o.LeasedServer = &v
+}
+
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *ServerProfile) GetOrganization() OrganizationOrganizationRelationship {
 	if o == nil || o.Organization == nil {
@@ -429,6 +606,38 @@ func (o *ServerProfile) HasOrganization() bool {
 // SetOrganization gets a reference to the given OrganizationOrganizationRelationship and assigns it to the Organization field.
 func (o *ServerProfile) SetOrganization(v OrganizationOrganizationRelationship) {
 	o.Organization = &v
+}
+
+// GetResourceLease returns the ResourceLease field value if set, zero value otherwise.
+func (o *ServerProfile) GetResourceLease() ResourcepoolLeaseRelationship {
+	if o == nil || o.ResourceLease == nil {
+		var ret ResourcepoolLeaseRelationship
+		return ret
+	}
+	return *o.ResourceLease
+}
+
+// GetResourceLeaseOk returns a tuple with the ResourceLease field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetResourceLeaseOk() (*ResourcepoolLeaseRelationship, bool) {
+	if o == nil || o.ResourceLease == nil {
+		return nil, false
+	}
+	return o.ResourceLease, true
+}
+
+// HasResourceLease returns a boolean if a field has been set.
+func (o *ServerProfile) HasResourceLease() bool {
+	if o != nil && o.ResourceLease != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResourceLease gets a reference to the given ResourcepoolLeaseRelationship and assigns it to the ResourceLease field.
+func (o *ServerProfile) SetResourceLease(v ResourcepoolLeaseRelationship) {
+	o.ResourceLease = &v
 }
 
 // GetRunningWorkflows returns the RunningWorkflows field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -464,6 +673,70 @@ func (o *ServerProfile) SetRunningWorkflows(v []WorkflowWorkflowInfoRelationship
 	o.RunningWorkflows = v
 }
 
+// GetServerPool returns the ServerPool field value if set, zero value otherwise.
+func (o *ServerProfile) GetServerPool() ResourcepoolPoolRelationship {
+	if o == nil || o.ServerPool == nil {
+		var ret ResourcepoolPoolRelationship
+		return ret
+	}
+	return *o.ServerPool
+}
+
+// GetServerPoolOk returns a tuple with the ServerPool field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetServerPoolOk() (*ResourcepoolPoolRelationship, bool) {
+	if o == nil || o.ServerPool == nil {
+		return nil, false
+	}
+	return o.ServerPool, true
+}
+
+// HasServerPool returns a boolean if a field has been set.
+func (o *ServerProfile) HasServerPool() bool {
+	if o != nil && o.ServerPool != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetServerPool gets a reference to the given ResourcepoolPoolRelationship and assigns it to the ServerPool field.
+func (o *ServerProfile) SetServerPool(v ResourcepoolPoolRelationship) {
+	o.ServerPool = &v
+}
+
+// GetUuidLease returns the UuidLease field value if set, zero value otherwise.
+func (o *ServerProfile) GetUuidLease() UuidpoolUuidLeaseRelationship {
+	if o == nil || o.UuidLease == nil {
+		var ret UuidpoolUuidLeaseRelationship
+		return ret
+	}
+	return *o.UuidLease
+}
+
+// GetUuidLeaseOk returns a tuple with the UuidLease field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerProfile) GetUuidLeaseOk() (*UuidpoolUuidLeaseRelationship, bool) {
+	if o == nil || o.UuidLease == nil {
+		return nil, false
+	}
+	return o.UuidLease, true
+}
+
+// HasUuidLease returns a boolean if a field has been set.
+func (o *ServerProfile) HasUuidLease() bool {
+	if o != nil && o.UuidLease != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUuidLease gets a reference to the given UuidpoolUuidLeaseRelationship and assigns it to the UuidLease field.
+func (o *ServerProfile) SetUuidLease(v UuidpoolUuidLeaseRelationship) {
+	o.UuidLease = &v
+}
+
 func (o ServerProfile) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedServerBaseProfile, errServerBaseProfile := json.Marshal(o.ServerBaseProfile)
@@ -492,11 +765,23 @@ func (o ServerProfile) MarshalJSON() ([]byte, error) {
 	if o.PmcDeployedSecurePassphrase != nil {
 		toSerialize["PmcDeployedSecurePassphrase"] = o.PmcDeployedSecurePassphrase
 	}
+	if o.ServerAssignmentMode != nil {
+		toSerialize["ServerAssignmentMode"] = o.ServerAssignmentMode
+	}
+	if o.StaticUuidAddress != nil {
+		toSerialize["StaticUuidAddress"] = o.StaticUuidAddress
+	}
+	if o.Uuid != nil {
+		toSerialize["Uuid"] = o.Uuid
+	}
 	if o.AssignedServer != nil {
 		toSerialize["AssignedServer"] = o.AssignedServer
 	}
 	if o.AssociatedServer != nil {
 		toSerialize["AssociatedServer"] = o.AssociatedServer
+	}
+	if o.AssociatedServerPool != nil {
+		toSerialize["AssociatedServerPool"] = o.AssociatedServerPool
 	}
 	if o.ConfigChangeDetails != nil {
 		toSerialize["ConfigChangeDetails"] = o.ConfigChangeDetails
@@ -504,11 +789,23 @@ func (o ServerProfile) MarshalJSON() ([]byte, error) {
 	if o.ConfigResult != nil {
 		toSerialize["ConfigResult"] = o.ConfigResult
 	}
+	if o.LeasedServer != nil {
+		toSerialize["LeasedServer"] = o.LeasedServer
+	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
 	}
+	if o.ResourceLease != nil {
+		toSerialize["ResourceLease"] = o.ResourceLease
+	}
 	if o.RunningWorkflows != nil {
 		toSerialize["RunningWorkflows"] = o.RunningWorkflows
+	}
+	if o.ServerPool != nil {
+		toSerialize["ServerPool"] = o.ServerPool
+	}
+	if o.UuidLease != nil {
+		toSerialize["UuidLease"] = o.UuidLease
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -529,15 +826,26 @@ func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
 		// Indicates whether the value of the 'pmcDeployedSecurePassphrase' property has been set.
 		IsPmcDeployedSecurePassphraseSet *bool `json:"IsPmcDeployedSecurePassphraseSet,omitempty"`
 		// Secure passphrase that is already deployed on all the Persistent Memory Modules on the server. This deployed passphrase is required during deploy of server profile if secure passphrase is changed or security is disabled in the attached persistent memory policy.
-		PmcDeployedSecurePassphrase *string                      `json:"PmcDeployedSecurePassphrase,omitempty"`
-		AssignedServer              *ComputePhysicalRelationship `json:"AssignedServer,omitempty"`
-		AssociatedServer            *ComputePhysicalRelationship `json:"AssociatedServer,omitempty"`
+		PmcDeployedSecurePassphrase *string `json:"PmcDeployedSecurePassphrase,omitempty"`
+		// Source of the server assigned to the server profile. Values can be Static, Pool or None. Static is used if a server is attached directly to server profile. Pool is used if a resource pool is attached to server profile. None is used if no server or resource pool is attached to server profile. * `None` - No server is assigned to the server profile. * `Static` - Server is directly assigned to server profile using assign server. * `Pool` - Server is assigned from a resource pool.
+		ServerAssignmentMode *string `json:"ServerAssignmentMode,omitempty"`
+		// The UUID address for the server must include UUID prefix xxxxxxxx-xxxx-xxxx along with the UUID suffix of format xxxx-xxxxxxxxxxxx.
+		StaticUuidAddress *string `json:"StaticUuidAddress,omitempty"`
+		// The UUID address that is assigned to the server based on the UUID pool.
+		Uuid                 *string                       `json:"Uuid,omitempty"`
+		AssignedServer       *ComputePhysicalRelationship  `json:"AssignedServer,omitempty"`
+		AssociatedServer     *ComputePhysicalRelationship  `json:"AssociatedServer,omitempty"`
+		AssociatedServerPool *ResourcepoolPoolRelationship `json:"AssociatedServerPool,omitempty"`
 		// An array of relationships to serverConfigChangeDetail resources.
 		ConfigChangeDetails []ServerConfigChangeDetailRelationship `json:"ConfigChangeDetails,omitempty"`
 		ConfigResult        *ServerConfigResultRelationship        `json:"ConfigResult,omitempty"`
+		LeasedServer        *ComputePhysicalRelationship           `json:"LeasedServer,omitempty"`
 		Organization        *OrganizationOrganizationRelationship  `json:"Organization,omitempty"`
+		ResourceLease       *ResourcepoolLeaseRelationship         `json:"ResourceLease,omitempty"`
 		// An array of relationships to workflowWorkflowInfo resources.
 		RunningWorkflows []WorkflowWorkflowInfoRelationship `json:"RunningWorkflows,omitempty"`
+		ServerPool       *ResourcepoolPoolRelationship      `json:"ServerPool,omitempty"`
+		UuidLease        *UuidpoolUuidLeaseRelationship     `json:"UuidLease,omitempty"`
 	}
 
 	varServerProfileWithoutEmbeddedStruct := ServerProfileWithoutEmbeddedStruct{}
@@ -551,12 +859,20 @@ func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
 		varServerProfile.ConfigChanges = varServerProfileWithoutEmbeddedStruct.ConfigChanges
 		varServerProfile.IsPmcDeployedSecurePassphraseSet = varServerProfileWithoutEmbeddedStruct.IsPmcDeployedSecurePassphraseSet
 		varServerProfile.PmcDeployedSecurePassphrase = varServerProfileWithoutEmbeddedStruct.PmcDeployedSecurePassphrase
+		varServerProfile.ServerAssignmentMode = varServerProfileWithoutEmbeddedStruct.ServerAssignmentMode
+		varServerProfile.StaticUuidAddress = varServerProfileWithoutEmbeddedStruct.StaticUuidAddress
+		varServerProfile.Uuid = varServerProfileWithoutEmbeddedStruct.Uuid
 		varServerProfile.AssignedServer = varServerProfileWithoutEmbeddedStruct.AssignedServer
 		varServerProfile.AssociatedServer = varServerProfileWithoutEmbeddedStruct.AssociatedServer
+		varServerProfile.AssociatedServerPool = varServerProfileWithoutEmbeddedStruct.AssociatedServerPool
 		varServerProfile.ConfigChangeDetails = varServerProfileWithoutEmbeddedStruct.ConfigChangeDetails
 		varServerProfile.ConfigResult = varServerProfileWithoutEmbeddedStruct.ConfigResult
+		varServerProfile.LeasedServer = varServerProfileWithoutEmbeddedStruct.LeasedServer
 		varServerProfile.Organization = varServerProfileWithoutEmbeddedStruct.Organization
+		varServerProfile.ResourceLease = varServerProfileWithoutEmbeddedStruct.ResourceLease
 		varServerProfile.RunningWorkflows = varServerProfileWithoutEmbeddedStruct.RunningWorkflows
+		varServerProfile.ServerPool = varServerProfileWithoutEmbeddedStruct.ServerPool
+		varServerProfile.UuidLease = varServerProfileWithoutEmbeddedStruct.UuidLease
 		*o = ServerProfile(varServerProfile)
 	} else {
 		return err
@@ -580,12 +896,20 @@ func (o *ServerProfile) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ConfigChanges")
 		delete(additionalProperties, "IsPmcDeployedSecurePassphraseSet")
 		delete(additionalProperties, "PmcDeployedSecurePassphrase")
+		delete(additionalProperties, "ServerAssignmentMode")
+		delete(additionalProperties, "StaticUuidAddress")
+		delete(additionalProperties, "Uuid")
 		delete(additionalProperties, "AssignedServer")
 		delete(additionalProperties, "AssociatedServer")
+		delete(additionalProperties, "AssociatedServerPool")
 		delete(additionalProperties, "ConfigChangeDetails")
 		delete(additionalProperties, "ConfigResult")
+		delete(additionalProperties, "LeasedServer")
 		delete(additionalProperties, "Organization")
+		delete(additionalProperties, "ResourceLease")
 		delete(additionalProperties, "RunningWorkflows")
+		delete(additionalProperties, "ServerPool")
+		delete(additionalProperties, "UuidLease")
 
 		// remove fields from embedded structs
 		reflectServerBaseProfile := reflect.ValueOf(o.ServerBaseProfile)

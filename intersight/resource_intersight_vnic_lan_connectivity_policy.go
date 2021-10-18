@@ -568,7 +568,10 @@ func resourceVnicLanConnectivityPolicyCreate(c context.Context, d *schema.Resour
 		}
 	}
 
-	o.SetAzureQosEnabled(d.Get("azure_qos_enabled").(bool))
+	if v, ok := d.GetOkExists("azure_qos_enabled"); ok {
+		x := (v.(bool))
+		o.SetAzureQosEnabled(x)
+	}
 
 	o.SetClassId("vnic.LanConnectivityPolicy")
 

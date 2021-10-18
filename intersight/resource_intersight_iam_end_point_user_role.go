@@ -511,11 +511,12 @@ func resourceIamEndPointUserRoleCreate(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	o.SetChangePassword(d.Get("change_password").(bool))
-
 	o.SetClassId("iam.EndPointUserRole")
 
-	o.SetEnabled(d.Get("enabled").(bool))
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
 
 	if v, ok := d.GetOk("end_point_role"); ok {
 		x := make([]models.IamEndPointRoleRelationship, 0)
@@ -644,8 +645,6 @@ func resourceIamEndPointUserRoleCreate(c context.Context, d *schema.ResourceData
 			o.SetEndPointUserPolicy(x)
 		}
 	}
-
-	o.SetIsPasswordSet(d.Get("is_password_set").(bool))
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

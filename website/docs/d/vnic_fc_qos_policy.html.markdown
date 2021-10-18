@@ -14,7 +14,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_vnic_fc_qos_policy.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
-* `burst`:(int) The burst traffic, in bytes, allowed on the vNIC. 
+* `burst`:(int) The burst traffic, in bytes, allowed on the vHBA. 
 * `cos`:(int) Class of Service to be associated to the traffic on the virtual interface. 
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 

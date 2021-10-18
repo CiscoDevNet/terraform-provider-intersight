@@ -417,7 +417,10 @@ func resourceApplianceAutoRmaPolicyCreate(c context.Context, d *schema.ResourceD
 
 	o.SetClassId("appliance.AutoRmaPolicy")
 
-	o.SetEnable(d.Get("enable").(bool))
+	if v, ok := d.GetOkExists("enable"); ok {
+		x := (v.(bool))
+		o.SetEnable(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

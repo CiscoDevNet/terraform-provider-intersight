@@ -382,7 +382,10 @@ func resourceCapabilitySiocModuleCapabilityDefCreate(c context.Context, d *schem
 
 	o.SetClassId("capability.SiocModuleCapabilityDef")
 
-	o.SetDcSupported(d.Get("dc_supported").(bool))
+	if v, ok := d.GetOkExists("dc_supported"); ok {
+		x := (v.(bool))
+		o.SetDcSupported(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

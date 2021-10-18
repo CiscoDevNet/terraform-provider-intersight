@@ -490,14 +490,15 @@ func resourceIpmioverlanPolicyCreate(c context.Context, d *schema.ResourceData, 
 		o.SetDescription(x)
 	}
 
-	o.SetEnabled(d.Get("enabled").(bool))
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
 
 	if v, ok := d.GetOk("encryption_key"); ok {
 		x := (v.(string))
 		o.SetEncryptionKey(x)
 	}
-
-	o.SetIsEncryptionKeySet(d.Get("is_encryption_key_set").(bool))
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

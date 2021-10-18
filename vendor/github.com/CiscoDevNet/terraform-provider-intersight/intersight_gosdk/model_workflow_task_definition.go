@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4437
+API version: 1.0.9-4663
 Contact: intersight@cisco.com
 */
 
@@ -29,7 +29,7 @@ type WorkflowTaskDefinition struct {
 	// A user friendly description about task on what operations are done as part of the task execution and any other specific information about task input and output.
 	Description        *string                            `json:"Description,omitempty"`
 	InternalProperties NullableWorkflowInternalProperties `json:"InternalProperties,omitempty"`
-	// A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_).
+	// A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters.
 	Label *string `json:"Label,omitempty"`
 	// License entitlement required to run this task. It is determined by license requirement of features. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type.
 	LicenseEntitlement *string `json:"LicenseEntitlement,omitempty"`
@@ -40,8 +40,9 @@ type WorkflowTaskDefinition struct {
 	// If set to true, the task requires access to secure properties and uses an encryption token associated with a workflow moid to encrypt or decrypt the secure properties.
 	SecurePropAccess *bool `json:"SecurePropAccess,omitempty"`
 	// The version of the task definition so we can support multiple versions of a task definition.
-	Version *int64                       `json:"Version,omitempty"`
-	Catalog *WorkflowCatalogRelationship `json:"Catalog,omitempty"`
+	Version    *int64                              `json:"Version,omitempty"`
+	Catalog    *WorkflowCatalogRelationship        `json:"Catalog,omitempty"`
+	ClonedFrom *WorkflowTaskDefinitionRelationship `json:"ClonedFrom,omitempty"`
 	// An array of relationships to workflowTaskDefinition resources.
 	ImplementedTasks     []WorkflowTaskDefinitionRelationship `json:"ImplementedTasks,omitempty"`
 	InterfaceTask        *WorkflowTaskDefinitionRelationship  `json:"InterfaceTask,omitempty"`
@@ -501,6 +502,38 @@ func (o *WorkflowTaskDefinition) SetCatalog(v WorkflowCatalogRelationship) {
 	o.Catalog = &v
 }
 
+// GetClonedFrom returns the ClonedFrom field value if set, zero value otherwise.
+func (o *WorkflowTaskDefinition) GetClonedFrom() WorkflowTaskDefinitionRelationship {
+	if o == nil || o.ClonedFrom == nil {
+		var ret WorkflowTaskDefinitionRelationship
+		return ret
+	}
+	return *o.ClonedFrom
+}
+
+// GetClonedFromOk returns a tuple with the ClonedFrom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowTaskDefinition) GetClonedFromOk() (*WorkflowTaskDefinitionRelationship, bool) {
+	if o == nil || o.ClonedFrom == nil {
+		return nil, false
+	}
+	return o.ClonedFrom, true
+}
+
+// HasClonedFrom returns a boolean if a field has been set.
+func (o *WorkflowTaskDefinition) HasClonedFrom() bool {
+	if o != nil && o.ClonedFrom != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClonedFrom gets a reference to the given WorkflowTaskDefinitionRelationship and assigns it to the ClonedFrom field.
+func (o *WorkflowTaskDefinition) SetClonedFrom(v WorkflowTaskDefinitionRelationship) {
+	o.ClonedFrom = &v
+}
+
 // GetImplementedTasks returns the ImplementedTasks field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowTaskDefinition) GetImplementedTasks() []WorkflowTaskDefinitionRelationship {
 	if o == nil {
@@ -647,6 +680,9 @@ func (o WorkflowTaskDefinition) MarshalJSON() ([]byte, error) {
 	if o.Catalog != nil {
 		toSerialize["Catalog"] = o.Catalog
 	}
+	if o.ClonedFrom != nil {
+		toSerialize["ClonedFrom"] = o.ClonedFrom
+	}
 	if o.ImplementedTasks != nil {
 		toSerialize["ImplementedTasks"] = o.ImplementedTasks
 	}
@@ -675,7 +711,7 @@ func (o *WorkflowTaskDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		// A user friendly description about task on what operations are done as part of the task execution and any other specific information about task input and output.
 		Description        *string                            `json:"Description,omitempty"`
 		InternalProperties NullableWorkflowInternalProperties `json:"InternalProperties,omitempty"`
-		// A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_).
+		// A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters.
 		Label *string `json:"Label,omitempty"`
 		// License entitlement required to run this task. It is determined by license requirement of features. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type.
 		LicenseEntitlement *string `json:"LicenseEntitlement,omitempty"`
@@ -686,8 +722,9 @@ func (o *WorkflowTaskDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		// If set to true, the task requires access to secure properties and uses an encryption token associated with a workflow moid to encrypt or decrypt the secure properties.
 		SecurePropAccess *bool `json:"SecurePropAccess,omitempty"`
 		// The version of the task definition so we can support multiple versions of a task definition.
-		Version *int64                       `json:"Version,omitempty"`
-		Catalog *WorkflowCatalogRelationship `json:"Catalog,omitempty"`
+		Version    *int64                              `json:"Version,omitempty"`
+		Catalog    *WorkflowCatalogRelationship        `json:"Catalog,omitempty"`
+		ClonedFrom *WorkflowTaskDefinitionRelationship `json:"ClonedFrom,omitempty"`
 		// An array of relationships to workflowTaskDefinition resources.
 		ImplementedTasks []WorkflowTaskDefinitionRelationship `json:"ImplementedTasks,omitempty"`
 		InterfaceTask    *WorkflowTaskDefinitionRelationship  `json:"InterfaceTask,omitempty"`
@@ -712,6 +749,7 @@ func (o *WorkflowTaskDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowTaskDefinition.SecurePropAccess = varWorkflowTaskDefinitionWithoutEmbeddedStruct.SecurePropAccess
 		varWorkflowTaskDefinition.Version = varWorkflowTaskDefinitionWithoutEmbeddedStruct.Version
 		varWorkflowTaskDefinition.Catalog = varWorkflowTaskDefinitionWithoutEmbeddedStruct.Catalog
+		varWorkflowTaskDefinition.ClonedFrom = varWorkflowTaskDefinitionWithoutEmbeddedStruct.ClonedFrom
 		varWorkflowTaskDefinition.ImplementedTasks = varWorkflowTaskDefinitionWithoutEmbeddedStruct.ImplementedTasks
 		varWorkflowTaskDefinition.InterfaceTask = varWorkflowTaskDefinitionWithoutEmbeddedStruct.InterfaceTask
 		varWorkflowTaskDefinition.TaskMetadata = varWorkflowTaskDefinitionWithoutEmbeddedStruct.TaskMetadata
@@ -745,6 +783,7 @@ func (o *WorkflowTaskDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "SecurePropAccess")
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "Catalog")
+		delete(additionalProperties, "ClonedFrom")
 		delete(additionalProperties, "ImplementedTasks")
 		delete(additionalProperties, "InterfaceTask")
 		delete(additionalProperties, "TaskMetadata")

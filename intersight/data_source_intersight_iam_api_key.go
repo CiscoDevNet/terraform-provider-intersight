@@ -841,14 +841,12 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamApiKey{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -857,8 +855,7 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -898,32 +895,27 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("hash_algorithm"); ok {
-		v := d.Get("hash_algorithm")
+	if v, ok := d.GetOk("hash_algorithm"); ok {
 		x := (v.(string))
 		o.SetHashAlgorithm(x)
 	}
 
-	if _, ok := d.GetOk("key_spec"); ok {
-		v := d.Get("key_spec")
+	if v, ok := d.GetOk("key_spec"); ok {
 		p := make([]models.PkixKeyGenerationSpec, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -954,26 +946,22 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -982,8 +970,7 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1026,8 +1013,7 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("permission"); ok {
-		v := d.Get("permission")
+	if v, ok := d.GetOk("permission"); ok {
 		p := make([]models.IamPermissionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1070,8 +1056,7 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1111,32 +1096,27 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("private_key"); ok {
-		v := d.Get("private_key")
+	if v, ok := d.GetOk("private_key"); ok {
 		x := (v.(string))
 		o.SetPrivateKey(x)
 	}
 
-	if _, ok := d.GetOk("purpose"); ok {
-		v := d.Get("purpose")
+	if v, ok := d.GetOk("purpose"); ok {
 		x := (v.(string))
 		o.SetPurpose(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("signing_algorithm"); ok {
-		v := d.Get("signing_algorithm")
+	if v, ok := d.GetOk("signing_algorithm"); ok {
 		x := (v.(string))
 		o.SetSigningAlgorithm(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1169,8 +1149,7 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("user"); ok {
-		v := d.Get("user")
+	if v, ok := d.GetOk("user"); ok {
 		p := make([]models.IamUserRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1213,8 +1192,7 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1286,55 +1264,6 @@ func dataSourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta int
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("hash_algorithm"); ok {
-		x := (v.(string))
-		o.SetHashAlgorithm(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("private_key"); ok {
-		x := (v.(string))
-		o.SetPrivateKey(x)
-	}
-	if v, ok := d.GetOk("purpose"); ok {
-		x := (v.(string))
-		o.SetPurpose(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("signing_algorithm"); ok {
-		x := (v.(string))
-		o.SetSigningAlgorithm(x)
 	}
 
 	data, err := o.MarshalJSON()

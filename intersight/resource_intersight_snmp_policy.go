@@ -669,7 +669,10 @@ func resourceSnmpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetDescription(x)
 	}
 
-	o.SetEnabled(d.Get("enabled").(bool))
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
 
 	if v, ok := d.GetOk("engine_id"); ok {
 		x := (v.(string))
@@ -773,7 +776,7 @@ func resourceSnmpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if v, ok := d.GetOk("snmp_port"); ok {
+	if v, ok := d.GetOkExists("snmp_port"); ok {
 		x := int64(v.(int))
 		o.SetSnmpPort(x)
 	}
@@ -966,9 +969,15 @@ func resourceSnmpPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetTrapCommunity(x)
 	}
 
-	o.SetV2Enabled(d.Get("v2_enabled").(bool))
+	if v, ok := d.GetOkExists("v2_enabled"); ok {
+		x := (v.(bool))
+		o.SetV2Enabled(x)
+	}
 
-	o.SetV3Enabled(d.Get("v3_enabled").(bool))
+	if v, ok := d.GetOkExists("v3_enabled"); ok {
+		x := (v.(bool))
+		o.SetV3Enabled(x)
+	}
 
 	r := conn.ApiClient.SnmpApi.CreateSnmpPolicy(conn.ctx).SnmpPolicy(*o)
 	resultMo, _, responseErr := r.Execute()

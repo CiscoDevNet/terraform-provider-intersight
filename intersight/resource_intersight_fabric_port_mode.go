@@ -445,12 +445,12 @@ func resourceFabricPortModeCreate(c context.Context, d *schema.ResourceData, met
 
 	o.SetObjectType("fabric.PortMode")
 
-	if v, ok := d.GetOk("port_id_end"); ok {
+	if v, ok := d.GetOkExists("port_id_end"); ok {
 		x := int64(v.(int))
 		o.SetPortIdEnd(x)
 	}
 
-	if v, ok := d.GetOk("port_id_start"); ok {
+	if v, ok := d.GetOkExists("port_id_start"); ok {
 		x := int64(v.(int))
 		o.SetPortIdStart(x)
 	}
@@ -498,7 +498,7 @@ func resourceFabricPortModeCreate(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if v, ok := d.GetOk("slot_id"); ok {
+	if v, ok := d.GetOkExists("slot_id"); ok {
 		x := int64(v.(int))
 		o.SetSlotId(x)
 	}

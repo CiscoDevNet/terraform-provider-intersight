@@ -493,7 +493,7 @@ func resourceFabricFcUplinkPcRoleCreate(c context.Context, d *schema.ResourceDat
 
 	o.SetObjectType("fabric.FcUplinkPcRole")
 
-	if v, ok := d.GetOk("pc_id"); ok {
+	if v, ok := d.GetOkExists("pc_id"); ok {
 		x := int64(v.(int))
 		o.SetPcId(x)
 	}
@@ -624,7 +624,7 @@ func resourceFabricFcUplinkPcRoleCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
-	if v, ok := d.GetOk("vsan_id"); ok {
+	if v, ok := d.GetOkExists("vsan_id"); ok {
 		x := int64(v.(int))
 		o.SetVsanId(x)
 	}

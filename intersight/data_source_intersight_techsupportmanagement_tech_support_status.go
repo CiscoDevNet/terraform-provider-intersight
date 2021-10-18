@@ -951,14 +951,12 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.TechsupportmanagementTechSupportStatus{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -967,8 +965,7 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1008,14 +1005,12 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("cluster_member"); ok {
-		v := d.Get("cluster_member")
+	if v, ok := d.GetOk("cluster_member"); ok {
 		p := make([]models.AssetClusterMemberRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1058,14 +1053,12 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		}
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("device_registration"); ok {
-		v := d.Get("device_registration")
+	if v, ok := d.GetOk("device_registration"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1108,38 +1101,32 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		}
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("file_name"); ok {
-		v := d.Get("file_name")
+	if v, ok := d.GetOk("file_name"); ok {
 		x := (v.(string))
 		o.SetFileName(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("origin_resource"); ok {
-		v := d.Get("origin_resource")
+	if v, ok := d.GetOk("origin_resource"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1182,8 +1169,7 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		}
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1192,8 +1178,7 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1236,8 +1221,7 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1277,44 +1261,37 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("reason"); ok {
-		v := d.Get("reason")
+	if v, ok := d.GetOk("reason"); ok {
 		x := (v.(string))
 		o.SetReason(x)
 	}
 
-	if _, ok := d.GetOk("relay_reason"); ok {
-		v := d.Get("relay_reason")
+	if v, ok := d.GetOk("relay_reason"); ok {
 		x := (v.(string))
 		o.SetRelayReason(x)
 	}
 
-	if _, ok := d.GetOk("relay_status"); ok {
-		v := d.Get("relay_status")
+	if v, ok := d.GetOk("relay_status"); ok {
 		x := (v.(string))
 		o.SetRelayStatus(x)
 	}
 
-	if _, ok := d.GetOk("request_ts"); ok {
-		v := d.Get("request_ts")
+	if v, ok := d.GetOk("request_ts"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetRequestTs(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("status"); ok {
-		v := d.Get("status")
+	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1347,8 +1324,7 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("tech_support_request"); ok {
-		v := d.Get("tech_support_request")
+	if v, ok := d.GetOk("tech_support_request"); ok {
 		p := make([]models.TechsupportmanagementTechSupportBundleRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1391,14 +1367,12 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 		}
 	}
 
-	if _, ok := d.GetOk("techsupport_download_url"); ok {
-		v := d.Get("techsupport_download_url")
+	if v, ok := d.GetOk("techsupport_download_url"); ok {
 		x := (v.(string))
 		o.SetTechsupportDownloadUrl(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1470,67 +1444,6 @@ func dataSourceTechsupportmanagementTechSupportStatusRead(c context.Context, d *
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("file_name"); ok {
-		x := (v.(string))
-		o.SetFileName(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("reason"); ok {
-		x := (v.(string))
-		o.SetReason(x)
-	}
-	if v, ok := d.GetOk("relay_reason"); ok {
-		x := (v.(string))
-		o.SetRelayReason(x)
-	}
-	if v, ok := d.GetOk("relay_status"); ok {
-		x := (v.(string))
-		o.SetRelayStatus(x)
-	}
-	if v, ok := d.GetOk("request_ts"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetRequestTs(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
-	}
-	if v, ok := d.GetOk("techsupport_download_url"); ok {
-		x := (v.(string))
-		o.SetTechsupportDownloadUrl(x)
 	}
 
 	data, err := o.MarshalJSON()

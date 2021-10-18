@@ -939,8 +939,7 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.AaaAuditRecord{}
-	if _, ok := d.GetOk("account"); ok {
-		v := d.Get("account")
+	if v, ok := d.GetOk("account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -983,14 +982,12 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -999,8 +996,7 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1040,79 +1036,66 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("email"); ok {
-		v := d.Get("email")
+	if v, ok := d.GetOk("email"); ok {
 		x := (v.(string))
 		o.SetEmail(x)
 	}
 
-	if _, ok := d.GetOk("event"); ok {
-		v := d.Get("event")
+	if v, ok := d.GetOk("event"); ok {
 		x := (v.(string))
 		o.SetEvent(x)
 	}
 
-	if _, ok := d.GetOk("inst_id"); ok {
-		v := d.Get("inst_id")
+	if v, ok := d.GetOk("inst_id"); ok {
 		x := (v.(string))
 		o.SetInstId(x)
 	}
 
-	if _, ok := d.GetOk("mo_display_names"); ok {
-		v := d.Get("mo_display_names")
+	if v, ok := d.GetOk("mo_display_names"); ok {
 		o.SetMoDisplayNames(v)
 	}
 
-	if _, ok := d.GetOk("mo_type"); ok {
-		v := d.Get("mo_type")
+	if v, ok := d.GetOk("mo_type"); ok {
 		x := (v.(string))
 		o.SetMoType(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_moid"); ok {
-		v := d.Get("object_moid")
+	if v, ok := d.GetOk("object_moid"); ok {
 		x := (v.(string))
 		o.SetObjectMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1121,8 +1104,7 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1165,8 +1147,7 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1206,19 +1187,16 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("request"); ok {
-		v := d.Get("request")
+	if v, ok := d.GetOk("request"); ok {
 		o.SetRequest(v)
 	}
 
-	if _, ok := d.GetOk("session_id"); ok {
-		v := d.Get("session_id")
+	if v, ok := d.GetOk("session_id"); ok {
 		x := (v.(string))
 		o.SetSessionId(x)
 	}
 
-	if _, ok := d.GetOk("sessions"); ok {
-		v := d.Get("sessions")
+	if v, ok := d.GetOk("sessions"); ok {
 		p := make([]models.IamSessionRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1261,20 +1239,17 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("source_ip"); ok {
-		v := d.Get("source_ip")
+	if v, ok := d.GetOk("source_ip"); ok {
 		x := (v.(string))
 		o.SetSourceIp(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1307,20 +1282,17 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("timestamp"); ok {
-		v := d.Get("timestamp")
+	if v, ok := d.GetOk("timestamp"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetTimestamp(x)
 	}
 
-	if _, ok := d.GetOk("trace_id"); ok {
-		v := d.Get("trace_id")
+	if v, ok := d.GetOk("trace_id"); ok {
 		x := (v.(string))
 		o.SetTraceId(x)
 	}
 
-	if _, ok := d.GetOk("user"); ok {
-		v := d.Get("user")
+	if v, ok := d.GetOk("user"); ok {
 		p := make([]models.IamUserRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1363,14 +1335,12 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
-	if _, ok := d.GetOk("user_id_or_email"); ok {
-		v := d.Get("user_id_or_email")
+	if v, ok := d.GetOk("user_id_or_email"); ok {
 		x := (v.(string))
 		o.SetUserIdOrEmail(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1442,79 +1412,6 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("email"); ok {
-		x := (v.(string))
-		o.SetEmail(x)
-	}
-	if v, ok := d.GetOk("event"); ok {
-		x := (v.(string))
-		o.SetEvent(x)
-	}
-	if v, ok := d.GetOk("inst_id"); ok {
-		x := (v.(string))
-		o.SetInstId(x)
-	}
-	if v, ok := d.GetOk("mo_type"); ok {
-		x := (v.(string))
-		o.SetMoType(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_moid"); ok {
-		x := (v.(string))
-		o.SetObjectMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("session_id"); ok {
-		x := (v.(string))
-		o.SetSessionId(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("source_ip"); ok {
-		x := (v.(string))
-		o.SetSourceIp(x)
-	}
-	if v, ok := d.GetOk("timestamp"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetTimestamp(x)
-	}
-	if v, ok := d.GetOk("trace_id"); ok {
-		x := (v.(string))
-		o.SetTraceId(x)
-	}
-	if v, ok := d.GetOk("user_id_or_email"); ok {
-		x := (v.(string))
-		o.SetUserIdOrEmail(x)
 	}
 
 	data, err := o.MarshalJSON()

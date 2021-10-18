@@ -434,7 +434,7 @@ func dataSourceVirtualizationVirtualMachine() *schema.Resource {
 			Optional:    true,
 		},
 		"hypervisor_type": {
-			Description: "Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+			Description: "Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1319,7 +1319,7 @@ func dataSourceVirtualizationVirtualMachine() *schema.Resource {
 			Optional:    true,
 		},
 		"hypervisor_type": {
-			Description: "Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+			Description: "Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1801,20 +1801,17 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationVirtualMachine{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("action"); ok {
-		v := d.Get("action")
+	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
 		o.SetAction(x)
 	}
 
-	if _, ok := d.GetOk("action_info"); ok {
-		v := d.Get("action_info")
+	if v, ok := d.GetOk("action_info"); ok {
 		p := make([]models.VirtualizationActionInfo, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1845,8 +1842,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1855,8 +1851,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("affinity_selectors"); ok {
-		v := d.Get("affinity_selectors")
+	if v, ok := d.GetOk("affinity_selectors"); ok {
 		x := make([]models.InfraMetaData, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1884,8 +1879,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		o.SetAffinitySelectors(x)
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1925,8 +1919,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("anti_affinity_selectors"); ok {
-		v := d.Get("anti_affinity_selectors")
+	if v, ok := d.GetOk("anti_affinity_selectors"); ok {
 		x := make([]models.InfraMetaData, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1954,14 +1947,12 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		o.SetAntiAffinitySelectors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("cloud_init_config"); ok {
-		v := d.Get("cloud_init_config")
+	if v, ok := d.GetOk("cloud_init_config"); ok {
 		p := make([]models.VirtualizationCloudInitConfig, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2022,8 +2013,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("cluster"); ok {
-		v := d.Get("cluster")
+	if v, ok := d.GetOk("cluster"); ok {
 		p := make([]models.VirtualizationBaseClusterRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2066,28 +2056,27 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("cluster_esxi"); ok {
-		v := d.Get("cluster_esxi")
+	if v, ok := d.GetOk("cluster_esxi"); ok {
 		x := (v.(string))
 		o.SetClusterEsxi(x)
 	}
 
-	if _, ok := d.GetOk("cpu"); ok {
-		v := d.Get("cpu")
+	if v, ok := d.GetOkExists("cpu"); ok {
 		x := int64(v.(int))
 		o.SetCpu(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	o.SetDiscovered(d.Get("discovered").(bool))
+	if v, ok := d.GetOkExists("discovered"); ok {
+		x := (v.(bool))
+		o.SetDiscovered(x)
+	}
 
-	if _, ok := d.GetOk("disk"); ok {
-		v := d.Get("disk")
+	if v, ok := d.GetOk("disk"); ok {
 		x := make([]models.VirtualizationVirtualMachineDisk, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2207,22 +2196,22 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		o.SetDisk(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	o.SetForceDelete(d.Get("force_delete").(bool))
+	if v, ok := d.GetOkExists("force_delete"); ok {
+		x := (v.(bool))
+		o.SetForceDelete(x)
+	}
 
-	if _, ok := d.GetOk("guest_os"); ok {
-		v := d.Get("guest_os")
+	if v, ok := d.GetOk("guest_os"); ok {
 		x := (v.(string))
 		o.SetGuestOs(x)
 	}
 
-	if _, ok := d.GetOk("host"); ok {
-		v := d.Get("host")
+	if v, ok := d.GetOk("host"); ok {
 		p := make([]models.VirtualizationBaseHostRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2265,20 +2254,17 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("host_esxi"); ok {
-		v := d.Get("host_esxi")
+	if v, ok := d.GetOk("host_esxi"); ok {
 		x := (v.(string))
 		o.SetHostEsxi(x)
 	}
 
-	if _, ok := d.GetOk("hypervisor_type"); ok {
-		v := d.Get("hypervisor_type")
+	if v, ok := d.GetOk("hypervisor_type"); ok {
 		x := (v.(string))
 		o.SetHypervisorType(x)
 	}
 
-	if _, ok := d.GetOk("interfaces"); ok {
-		v := d.Get("interfaces")
+	if v, ok := d.GetOk("interfaces"); ok {
 		x := make([]models.VirtualizationNetworkInterface, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2342,8 +2328,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		o.SetInterfaces(x)
 	}
 
-	if _, ok := d.GetOk("inventory"); ok {
-		v := d.Get("inventory")
+	if v, ok := d.GetOk("inventory"); ok {
 		p := make([]models.VirtualizationBaseVirtualMachineRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2386,8 +2371,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("labels"); ok {
-		v := d.Get("labels")
+	if v, ok := d.GetOk("labels"); ok {
 		x := make([]models.InfraMetaData, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2415,38 +2399,32 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		o.SetLabels(x)
 	}
 
-	if _, ok := d.GetOk("memory"); ok {
-		v := d.Get("memory")
+	if v, ok := d.GetOkExists("memory"); ok {
 		x := int64(v.(int))
 		o.SetMemory(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2455,8 +2433,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2499,8 +2476,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2540,20 +2516,17 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("power_state"); ok {
-		v := d.Get("power_state")
+	if v, ok := d.GetOk("power_state"); ok {
 		x := (v.(string))
 		o.SetPowerState(x)
 	}
 
-	if _, ok := d.GetOk("provision_type"); ok {
-		v := d.Get("provision_type")
+	if v, ok := d.GetOk("provision_type"); ok {
 		x := (v.(string))
 		o.SetProvisionType(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2596,14 +2569,12 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2636,8 +2607,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2711,8 +2681,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("vm_config"); ok {
-		v := d.Get("vm_config")
+	if v, ok := d.GetOk("vm_config"); ok {
 		p := make([]models.VirtualizationBaseVmConfiguration, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2743,8 +2712,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 		}
 	}
 
-	if _, ok := d.GetOk("workflow_info"); ok {
-		v := d.Get("workflow_info")
+	if v, ok := d.GetOk("workflow_info"); ok {
 		p := make([]models.WorkflowWorkflowInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2785,87 +2753,6 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 			x := p[0]
 			o.SetWorkflowInfo(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("action"); ok {
-		x := (v.(string))
-		o.SetAction(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("cluster_esxi"); ok {
-		x := (v.(string))
-		o.SetClusterEsxi(x)
-	}
-	if v, ok := d.GetOk("cpu"); ok {
-		x := int64(v.(int))
-		o.SetCpu(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("discovered"); ok {
-		x := (v.(bool))
-		o.SetDiscovered(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("force_delete"); ok {
-		x := (v.(bool))
-		o.SetForceDelete(x)
-	}
-	if v, ok := d.GetOk("guest_os"); ok {
-		x := (v.(string))
-		o.SetGuestOs(x)
-	}
-	if v, ok := d.GetOk("host_esxi"); ok {
-		x := (v.(string))
-		o.SetHostEsxi(x)
-	}
-	if v, ok := d.GetOk("hypervisor_type"); ok {
-		x := (v.(string))
-		o.SetHypervisorType(x)
-	}
-	if v, ok := d.GetOk("memory"); ok {
-		x := int64(v.(int))
-		o.SetMemory(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("power_state"); ok {
-		x := (v.(string))
-		o.SetPowerState(x)
-	}
-	if v, ok := d.GetOk("provision_type"); ok {
-		x := (v.(string))
-		o.SetProvisionType(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
 	}
 
 	data, err := o.MarshalJSON()

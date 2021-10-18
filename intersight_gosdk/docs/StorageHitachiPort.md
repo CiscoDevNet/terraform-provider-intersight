@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Ipv4Address** | Pointer to **string** | IPv4 address of Hitachi Port. | [optional] [readonly] 
 **Ipv6GlobalAddress** | Pointer to **string** | IPv6 global address value. | [optional] [readonly] 
 **Ipv6LinkLocalAddress** | Pointer to **string** | IPv6 link local address value. | [optional] [readonly] 
-**IsIpv6Enable** | Pointer to **bool** | IPv6 mode. | [optional] [readonly] 
+**IsIpv6Enable** | Pointer to **bool** | Determines if IPv6 mode is enabled on the port. | [optional] [readonly] 
 **LoopId** | Pointer to **string** | The value set for the port loop ID (AL_PA). | [optional] [readonly] 
 **PortConnection** | Pointer to **string** | Topology setting for the port. | [optional] [readonly] 
 **PortLunSecurity** | Pointer to **bool** | LUN security setting for the port. | [optional] [readonly] 

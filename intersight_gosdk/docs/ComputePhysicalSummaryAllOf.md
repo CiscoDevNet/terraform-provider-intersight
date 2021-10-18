@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Dn** | Pointer to **string** | The Distinguished Name unambiguously identifies an object in the system. | [optional] [readonly] 
 **FaultSummary** | Pointer to **int64** | The fault summary for the server. | [optional] [readonly] 
 **Firmware** | Pointer to **string** | The firmware version of the Cisco Integrated Management Controller (CIMC) for this server. | [optional] [readonly] 
+**HardwareUuid** | Pointer to **string** | The universally unique hardware identity of the server provided by the manufacturer. | [optional] [readonly] 
 **Ipv4Address** | Pointer to **string** | The IPv4 address configured on the management interface of the Integrated Management Controller. | [optional] [readonly] 
 **KvmIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
 **ManagementMode** | Pointer to **string** | The management mode of the server. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [readonly] [default to "IntersightStandalone"]
@@ -422,6 +423,31 @@ SetFirmware sets Firmware field to given value.
 `func (o *ComputePhysicalSummaryAllOf) HasFirmware() bool`
 
 HasFirmware returns a boolean if a field has been set.
+
+### GetHardwareUuid
+
+`func (o *ComputePhysicalSummaryAllOf) GetHardwareUuid() string`
+
+GetHardwareUuid returns the HardwareUuid field if non-nil, zero value otherwise.
+
+### GetHardwareUuidOk
+
+`func (o *ComputePhysicalSummaryAllOf) GetHardwareUuidOk() (*string, bool)`
+
+GetHardwareUuidOk returns a tuple with the HardwareUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHardwareUuid
+
+`func (o *ComputePhysicalSummaryAllOf) SetHardwareUuid(v string)`
+
+SetHardwareUuid sets HardwareUuid field to given value.
+
+### HasHardwareUuid
+
+`func (o *ComputePhysicalSummaryAllOf) HasHardwareUuid() bool`
+
+HasHardwareUuid returns a boolean if a field has been set.
 
 ### GetIpv4Address
 

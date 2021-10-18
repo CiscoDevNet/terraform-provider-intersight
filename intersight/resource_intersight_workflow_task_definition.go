@@ -118,6 +118,46 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 				Optional:    true,
 				Default:     "workflow.TaskDefinition",
 			},
+			"cloned_from": {
+				Description: "A reference to a workflowTaskDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "mo.MoRef",
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
 				Type:        schema.TypeString,
@@ -303,7 +343,7 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 				},
 			},
 			"label": {
-				Description: "A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_).",
+				Description: "A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -443,6 +483,12 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "workflow.Properties",
+						},
+						"cloneable": {
+							Description: "When set to false task is not cloneable. It is set to true only if task is of ApiTask type and it is not system defined.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Computed:    true,
 						},
 						"external_meta": {
 							Description: "When set to false the task definition can only be used by internal system workflows. When set to true then the task can be included in user defined workflows.",
@@ -815,6 +861,12 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 							Optional:    true,
 							Default:     "workflow.RollbackTask",
 						},
+						"skip_condition": {
+							Description: "The rollback task will not be executed if the given condition evaluates to \"true\".",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
 						"task_moid": {
 							Description: "The resolved referenced rollback task definition managed object.",
 							Type:        schema.TypeString,
@@ -1101,7 +1153,10 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 
 	o.SetClassId("workflow.TaskDefinition")
 
-	o.SetDefaultVersion(d.Get("default_version").(bool))
+	if v, ok := d.GetOkExists("default_version"); ok {
+		x := (v.(bool))
+		o.SetDefaultVersion(x)
+	}
 
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
@@ -1642,7 +1697,10 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	o.SetSecurePropAccess(d.Get("secure_prop_access").(bool))
+	if v, ok := d.GetOkExists("secure_prop_access"); ok {
+		x := (v.(bool))
+		o.SetSecurePropAccess(x)
+	}
 
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
@@ -1722,7 +1780,7 @@ func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceD
 		}
 	}
 
-	if v, ok := d.GetOk("nr_version"); ok {
+	if v, ok := d.GetOkExists("nr_version"); ok {
 		x := int64(v.(int))
 		o.SetVersion(x)
 	}
@@ -1781,6 +1839,10 @@ func resourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceDat
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in WorkflowTaskDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("cloned_from", flattenMapWorkflowTaskDefinitionRelationship(s.GetClonedFrom(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ClonedFrom in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("create_time", (s.GetCreateTime()).String()); err != nil {

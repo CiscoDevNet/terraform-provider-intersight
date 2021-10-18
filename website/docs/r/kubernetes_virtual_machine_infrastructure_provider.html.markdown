@@ -110,4 +110,5 @@ Infrastructure provider allocation configuration for ESXi virtual machine Kubern
 
 ### [kubernetes.HyperFlexApVirtualMachineInfraConfig](#argument-reference)
 Infrastructure provider allocation configuration for HyperFlex Application platform virtual machine Kubernetes nodes.
+* `disk_mode`:(string) Disk mode to use for volumes.* `Block` - It is a Block virtual disk.* `Filesystem` - It is a File system virtual disk.* `` - Disk mode is either unknown or not supported. 
   

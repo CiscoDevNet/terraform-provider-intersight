@@ -1565,14 +1565,12 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.StoragePhysicalDisk{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1581,8 +1579,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1622,104 +1619,87 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("block_size"); ok {
-		v := d.Get("block_size")
+	if v, ok := d.GetOk("block_size"); ok {
 		x := (v.(string))
 		o.SetBlockSize(x)
 	}
 
-	if _, ok := d.GetOk("bootable"); ok {
-		v := d.Get("bootable")
+	if v, ok := d.GetOk("bootable"); ok {
 		x := (v.(string))
 		o.SetBootable(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("configuration_checkpoint"); ok {
-		v := d.Get("configuration_checkpoint")
+	if v, ok := d.GetOk("configuration_checkpoint"); ok {
 		x := (v.(string))
 		o.SetConfigurationCheckpoint(x)
 	}
 
-	if _, ok := d.GetOk("configuration_state"); ok {
-		v := d.Get("configuration_state")
+	if v, ok := d.GetOk("configuration_state"); ok {
 		x := (v.(string))
 		o.SetConfigurationState(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("device_mo_id"); ok {
-		v := d.Get("device_mo_id")
+	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
 	}
 
-	if _, ok := d.GetOk("discovered_path"); ok {
-		v := d.Get("discovered_path")
+	if v, ok := d.GetOk("discovered_path"); ok {
 		x := (v.(string))
 		o.SetDiscoveredPath(x)
 	}
 
-	if _, ok := d.GetOk("disk_id"); ok {
-		v := d.Get("disk_id")
+	if v, ok := d.GetOk("disk_id"); ok {
 		x := (v.(string))
 		o.SetDiskId(x)
 	}
 
-	if _, ok := d.GetOk("disk_state"); ok {
-		v := d.Get("disk_state")
+	if v, ok := d.GetOk("disk_state"); ok {
 		x := (v.(string))
 		o.SetDiskState(x)
 	}
 
-	if _, ok := d.GetOk("dn"); ok {
-		v := d.Get("dn")
+	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("drive_firmware"); ok {
-		v := d.Get("drive_firmware")
+	if v, ok := d.GetOk("drive_firmware"); ok {
 		x := (v.(string))
 		o.SetDriveFirmware(x)
 	}
 
-	if _, ok := d.GetOk("drive_state"); ok {
-		v := d.Get("drive_state")
+	if v, ok := d.GetOk("drive_state"); ok {
 		x := (v.(string))
 		o.SetDriveState(x)
 	}
 
-	if _, ok := d.GetOk("fde_capable"); ok {
-		v := d.Get("fde_capable")
+	if v, ok := d.GetOk("fde_capable"); ok {
 		x := (v.(string))
 		o.SetFdeCapable(x)
 	}
 
-	if _, ok := d.GetOk("hot_spare_type"); ok {
-		v := d.Get("hot_spare_type")
+	if v, ok := d.GetOk("hot_spare_type"); ok {
 		x := (v.(string))
 		o.SetHotSpareType(x)
 	}
 
-	if _, ok := d.GetOk("inventory_device_info"); ok {
-		v := d.Get("inventory_device_info")
+	if v, ok := d.GetOk("inventory_device_info"); ok {
 		p := make([]models.InventoryDeviceInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1762,20 +1742,17 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("link_speed"); ok {
-		v := d.Get("link_speed")
+	if v, ok := d.GetOk("link_speed"); ok {
 		x := (v.(string))
 		o.SetLinkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("link_state"); ok {
-		v := d.Get("link_state")
+	if v, ok := d.GetOk("link_state"); ok {
 		x := (v.(string))
 		o.SetLinkState(x)
 	}
 
-	if _, ok := d.GetOk("locator_led"); ok {
-		v := d.Get("locator_led")
+	if v, ok := d.GetOk("locator_led"); ok {
 		p := make([]models.EquipmentLocatorLedRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1818,56 +1795,47 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("model"); ok {
-		v := d.Get("model")
+	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("num_blocks"); ok {
-		v := d.Get("num_blocks")
+	if v, ok := d.GetOk("num_blocks"); ok {
 		x := (v.(string))
 		o.SetNumBlocks(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("oper_power_state"); ok {
-		v := d.Get("oper_power_state")
+	if v, ok := d.GetOk("oper_power_state"); ok {
 		x := (v.(string))
 		o.SetOperPowerState(x)
 	}
 
-	if _, ok := d.GetOk("oper_qualifier_reason"); ok {
-		v := d.Get("oper_qualifier_reason")
+	if v, ok := d.GetOk("oper_qualifier_reason"); ok {
 		x := (v.(string))
 		o.SetOperQualifierReason(x)
 	}
 
-	if _, ok := d.GetOk("operability"); ok {
-		v := d.Get("operability")
+	if v, ok := d.GetOk("operability"); ok {
 		x := (v.(string))
 		o.SetOperability(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1876,8 +1844,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1920,8 +1887,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1961,14 +1927,12 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("physical_block_size"); ok {
-		v := d.Get("physical_block_size")
+	if v, ok := d.GetOk("physical_block_size"); ok {
 		x := (v.(string))
 		o.SetPhysicalBlockSize(x)
 	}
 
-	if _, ok := d.GetOk("physical_disk_extensions"); ok {
-		v := d.Get("physical_disk_extensions")
+	if v, ok := d.GetOk("physical_disk_extensions"); ok {
 		x := make([]models.StoragePhysicalDiskExtensionRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2008,20 +1972,17 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetPhysicalDiskExtensions(x)
 	}
 
-	if _, ok := d.GetOk("pid"); ok {
-		v := d.Get("pid")
+	if v, ok := d.GetOk("pid"); ok {
 		x := (v.(string))
 		o.SetPid(x)
 	}
 
-	if _, ok := d.GetOk("presence"); ok {
-		v := d.Get("presence")
+	if v, ok := d.GetOk("presence"); ok {
 		x := (v.(string))
 		o.SetPresence(x)
 	}
 
-	if _, ok := d.GetOk("previous_fru"); ok {
-		v := d.Get("previous_fru")
+	if v, ok := d.GetOk("previous_fru"); ok {
 		p := make([]models.EquipmentFruRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2064,20 +2025,17 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("protocol"); ok {
-		v := d.Get("protocol")
+	if v, ok := d.GetOk("protocol"); ok {
 		x := (v.(string))
 		o.SetProtocol(x)
 	}
 
-	if _, ok := d.GetOk("raw_size"); ok {
-		v := d.Get("raw_size")
+	if v, ok := d.GetOk("raw_size"); ok {
 		x := (v.(string))
 		o.SetRawSize(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2120,20 +2078,17 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("revision"); ok {
-		v := d.Get("revision")
+	if v, ok := d.GetOk("revision"); ok {
 		x := (v.(string))
 		o.SetRevision(x)
 	}
 
-	if _, ok := d.GetOk("rn"); ok {
-		v := d.Get("rn")
+	if v, ok := d.GetOk("rn"); ok {
 		x := (v.(string))
 		o.SetRn(x)
 	}
 
-	if _, ok := d.GetOk("running_firmware"); ok {
-		v := d.Get("running_firmware")
+	if v, ok := d.GetOk("running_firmware"); ok {
 		x := make([]models.FirmwareRunningFirmwareRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2173,8 +2128,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetRunningFirmware(x)
 	}
 
-	if _, ok := d.GetOk("sas_ports"); ok {
-		v := d.Get("sas_ports")
+	if v, ok := d.GetOk("sas_ports"); ok {
 		x := make([]models.StorageSasPortRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2214,32 +2168,27 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetSasPorts(x)
 	}
 
-	if _, ok := d.GetOk("secured"); ok {
-		v := d.Get("secured")
+	if v, ok := d.GetOk("secured"); ok {
 		x := (v.(string))
 		o.SetSecured(x)
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("size"); ok {
-		v := d.Get("size")
+	if v, ok := d.GetOk("size"); ok {
 		x := (v.(string))
 		o.SetSize(x)
 	}
 
-	if _, ok := d.GetOk("storage_controller"); ok {
-		v := d.Get("storage_controller")
+	if v, ok := d.GetOk("storage_controller"); ok {
 		p := make([]models.StorageControllerRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2282,8 +2231,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("storage_enclosure"); ok {
-		v := d.Get("storage_enclosure")
+	if v, ok := d.GetOk("storage_enclosure"); ok {
 		p := make([]models.StorageEnclosureRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2326,8 +2274,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2360,32 +2307,27 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("thermal"); ok {
-		v := d.Get("thermal")
+	if v, ok := d.GetOk("thermal"); ok {
 		x := (v.(string))
 		o.SetThermal(x)
 	}
 
-	if _, ok := d.GetOk("type"); ok {
-		v := d.Get("type")
+	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
 	}
 
-	if _, ok := d.GetOk("variant_type"); ok {
-		v := d.Get("variant_type")
+	if v, ok := d.GetOk("variant_type"); ok {
 		x := (v.(string))
 		o.SetVariantType(x)
 	}
 
-	if _, ok := d.GetOk("vendor"); ok {
-		v := d.Get("vendor")
+	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2457,175 +2399,6 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("block_size"); ok {
-		x := (v.(string))
-		o.SetBlockSize(x)
-	}
-	if v, ok := d.GetOk("bootable"); ok {
-		x := (v.(string))
-		o.SetBootable(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("configuration_checkpoint"); ok {
-		x := (v.(string))
-		o.SetConfigurationCheckpoint(x)
-	}
-	if v, ok := d.GetOk("configuration_state"); ok {
-		x := (v.(string))
-		o.SetConfigurationState(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("device_mo_id"); ok {
-		x := (v.(string))
-		o.SetDeviceMoId(x)
-	}
-	if v, ok := d.GetOk("discovered_path"); ok {
-		x := (v.(string))
-		o.SetDiscoveredPath(x)
-	}
-	if v, ok := d.GetOk("disk_id"); ok {
-		x := (v.(string))
-		o.SetDiskId(x)
-	}
-	if v, ok := d.GetOk("disk_state"); ok {
-		x := (v.(string))
-		o.SetDiskState(x)
-	}
-	if v, ok := d.GetOk("dn"); ok {
-		x := (v.(string))
-		o.SetDn(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("drive_firmware"); ok {
-		x := (v.(string))
-		o.SetDriveFirmware(x)
-	}
-	if v, ok := d.GetOk("drive_state"); ok {
-		x := (v.(string))
-		o.SetDriveState(x)
-	}
-	if v, ok := d.GetOk("fde_capable"); ok {
-		x := (v.(string))
-		o.SetFdeCapable(x)
-	}
-	if v, ok := d.GetOk("hot_spare_type"); ok {
-		x := (v.(string))
-		o.SetHotSpareType(x)
-	}
-	if v, ok := d.GetOk("link_speed"); ok {
-		x := (v.(string))
-		o.SetLinkSpeed(x)
-	}
-	if v, ok := d.GetOk("link_state"); ok {
-		x := (v.(string))
-		o.SetLinkState(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("model"); ok {
-		x := (v.(string))
-		o.SetModel(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("num_blocks"); ok {
-		x := (v.(string))
-		o.SetNumBlocks(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("oper_power_state"); ok {
-		x := (v.(string))
-		o.SetOperPowerState(x)
-	}
-	if v, ok := d.GetOk("oper_qualifier_reason"); ok {
-		x := (v.(string))
-		o.SetOperQualifierReason(x)
-	}
-	if v, ok := d.GetOk("operability"); ok {
-		x := (v.(string))
-		o.SetOperability(x)
-	}
-	if v, ok := d.GetOk("physical_block_size"); ok {
-		x := (v.(string))
-		o.SetPhysicalBlockSize(x)
-	}
-	if v, ok := d.GetOk("pid"); ok {
-		x := (v.(string))
-		o.SetPid(x)
-	}
-	if v, ok := d.GetOk("presence"); ok {
-		x := (v.(string))
-		o.SetPresence(x)
-	}
-	if v, ok := d.GetOk("protocol"); ok {
-		x := (v.(string))
-		o.SetProtocol(x)
-	}
-	if v, ok := d.GetOk("raw_size"); ok {
-		x := (v.(string))
-		o.SetRawSize(x)
-	}
-	if v, ok := d.GetOk("revision"); ok {
-		x := (v.(string))
-		o.SetRevision(x)
-	}
-	if v, ok := d.GetOk("rn"); ok {
-		x := (v.(string))
-		o.SetRn(x)
-	}
-	if v, ok := d.GetOk("secured"); ok {
-		x := (v.(string))
-		o.SetSecured(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("size"); ok {
-		x := (v.(string))
-		o.SetSize(x)
-	}
-	if v, ok := d.GetOk("thermal"); ok {
-		x := (v.(string))
-		o.SetThermal(x)
-	}
-	if v, ok := d.GetOk("type"); ok {
-		x := (v.(string))
-		o.SetType(x)
-	}
-	if v, ok := d.GetOk("variant_type"); ok {
-		x := (v.(string))
-		o.SetVariantType(x)
-	}
-	if v, ok := d.GetOk("vendor"); ok {
-		x := (v.(string))
-		o.SetVendor(x)
 	}
 
 	data, err := o.MarshalJSON()

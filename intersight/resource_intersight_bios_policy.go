@@ -239,6 +239,18 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 				Default:     "platform-default",
 			},
+			"c1auto_demotion": {
+				Description: "BIOS Token for setting C1 Auto Demotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "platform-default",
+			},
+			"c1auto_un_demotion": {
+				Description: "BIOS Token for setting C1 Auto UnDemotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "platform-default",
+			},
 			"cbs_cmn_apbdis": {
 				Description: "BIOS Token for setting APBDIS configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `0` - Value - 0 for configuring CbsCmnApbdis token.\n* `1` - Value - 1 for configuring CbsCmnApbdis token.\n* `Auto` - Value - Auto for configuring CbsCmnApbdis token.",
 				Type:        schema.TypeString,
@@ -499,6 +511,12 @@ func resourceBiosPolicy() *schema.Resource {
 			},
 			"cpu_frequency_floor": {
 				Description: "BIOS Token for setting Frequency Floor Override configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "platform-default",
+			},
+			"cpu_perf_enhancement": {
+				Description: "BIOS Token for setting Enhanced CPU Performance configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CpuPerfEnhancement token.\n* `Disabled` - Value - Disabled for configuring CpuPerfEnhancement token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "platform-default",
@@ -810,6 +828,12 @@ func resourceBiosPolicy() *schema.Resource {
 			},
 			"legacy_usb_support": {
 				Description: "BIOS Token for setting Legacy USB Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `auto` - Value - auto for configuring LegacyUsbSupport token.\n* `disabled` - Value - disabled for configuring LegacyUsbSupport token.\n* `enabled` - Value - enabled for configuring LegacyUsbSupport token.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "platform-default",
+			},
+			"llc_alloc": {
+				Description: "BIOS Token for setting LLC Dead Line configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring LlcAlloc token.\n* `disabled` - Value - disabled for configuring LlcAlloc token.\n* `enabled` - Value - enabled for configuring LlcAlloc token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "platform-default",
@@ -1310,6 +1334,12 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 				Default:     "platform-default",
 			},
+			"pcie_slots_cdn_enable": {
+				Description: "BIOS Token for setting PCIe Slots CDN Control configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "platform-default",
+			},
 			"permission_resources": {
 				Description: "An array of relationships to moBaseMo resources.",
 				Type:        schema.TypeList,
@@ -1576,6 +1606,18 @@ func resourceBiosPolicy() *schema.Resource {
 			},
 			"sgx_qos": {
 				Description: "BIOS Token for setting SGX QoS configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "platform-default",
+			},
+			"sha1pcr_bank": {
+				Description: "BIOS Token for setting SHA-1 PCR Bank configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "platform-default",
+			},
+			"sha256pcr_bank": {
+				Description: "BIOS Token for setting SHA256 PCR Bank configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "platform-default",
@@ -2511,6 +2553,18 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 				Default:     "platform-default",
 			},
+			"upi_link_enablement": {
+				Description: "BIOS Token for setting UPI Link Enablement configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1` - Value - 1 for configuring UpiLinkEnablement token.\n* `2` - Value - 2 for configuring UpiLinkEnablement token.\n* `Auto` - Value - Auto for configuring UpiLinkEnablement token.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "platform-default",
+			},
+			"upi_power_management": {
+				Description: "BIOS Token for setting UPI Power Manangement configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "platform-default",
+			},
 			"usb_emul6064": {
 				Description: "BIOS Token for setting Port 60/64 Emulation configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
@@ -2690,6 +2744,12 @@ func resourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 				Default:     "platform-default",
 			},
+			"virtual_numa": {
+				Description: "BIOS Token for setting Virtual NUMA configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "platform-default",
+			},
 			"vmd_enable": {
 				Description: "BIOS Token for setting VMD Enablement configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
@@ -2710,6 +2770,12 @@ func resourceBiosPolicy() *schema.Resource {
 			},
 			"xpt_prefetch": {
 				Description: "BIOS Token for setting XPT Prefetch configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring XptPrefetch token.\n* `disabled` - Value - disabled for configuring XptPrefetch token.\n* `enabled` - Value - enabled for configuring XptPrefetch token.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "platform-default",
+			},
+			"xpt_remote_prefetch": {
+				Description: "BIOS Token for setting XPT Remote Prefetch configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring XptRemotePrefetch token.\n* `disabled` - Value - disabled for configuring XptRemotePrefetch token.\n* `enabled` - Value - enabled for configuring XptRemotePrefetch token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "platform-default",
@@ -2872,6 +2938,16 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("burst_and_postponed_refresh"); ok {
 		x := (v.(string))
 		o.SetBurstAndPostponedRefresh(x)
+	}
+
+	if v, ok := d.GetOk("c1auto_demotion"); ok {
+		x := (v.(string))
+		o.SetC1autoDemotion(x)
+	}
+
+	if v, ok := d.GetOk("c1auto_un_demotion"); ok {
+		x := (v.(string))
+		o.SetC1autoUnDemotion(x)
 	}
 
 	if v, ok := d.GetOk("cbs_cmn_apbdis"); ok {
@@ -3089,6 +3165,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("cpu_frequency_floor"); ok {
 		x := (v.(string))
 		o.SetCpuFrequencyFloor(x)
+	}
+
+	if v, ok := d.GetOk("cpu_perf_enhancement"); ok {
+		x := (v.(string))
+		o.SetCpuPerfEnhancement(x)
 	}
 
 	if v, ok := d.GetOk("cpu_performance"); ok {
@@ -3339,6 +3420,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("legacy_usb_support"); ok {
 		x := (v.(string))
 		o.SetLegacyUsbSupport(x)
+	}
+
+	if v, ok := d.GetOk("llc_alloc"); ok {
+		x := (v.(string))
+		o.SetLlcAlloc(x)
 	}
 
 	if v, ok := d.GetOk("llc_prefetch"); ok {
@@ -3716,6 +3802,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetPcieSlotNvme6optionRom(x)
 	}
 
+	if v, ok := d.GetOk("pcie_slots_cdn_enable"); ok {
+		x := (v.(string))
+		o.SetPcieSlotsCdnEnable(x)
+	}
+
 	if v, ok := d.GetOk("pop_support"); ok {
 		x := (v.(string))
 		o.SetPopSupport(x)
@@ -3916,6 +4007,16 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("sgx_qos"); ok {
 		x := (v.(string))
 		o.SetSgxQos(x)
+	}
+
+	if v, ok := d.GetOk("sha1pcr_bank"); ok {
+		x := (v.(string))
+		o.SetSha1pcrBank(x)
+	}
+
+	if v, ok := d.GetOk("sha256pcr_bank"); ok {
+		x := (v.(string))
+		o.SetSha256pcrBank(x)
 	}
 
 	if v, ok := d.GetOk("single_pctl_enable"); ok {
@@ -4703,6 +4804,16 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetUmaBasedClustering(x)
 	}
 
+	if v, ok := d.GetOk("upi_link_enablement"); ok {
+		x := (v.(string))
+		o.SetUpiLinkEnablement(x)
+	}
+
+	if v, ok := d.GetOk("upi_power_management"); ok {
+		x := (v.(string))
+		o.SetUpiPowerManagement(x)
+	}
+
 	if v, ok := d.GetOk("usb_emul6064"); ok {
 		x := (v.(string))
 		o.SetUsbEmul6064(x)
@@ -4748,6 +4859,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetVgaPriority(x)
 	}
 
+	if v, ok := d.GetOk("virtual_numa"); ok {
+		x := (v.(string))
+		o.SetVirtualNuma(x)
+	}
+
 	if v, ok := d.GetOk("vmd_enable"); ok {
 		x := (v.(string))
 		o.SetVmdEnable(x)
@@ -4766,6 +4882,11 @@ func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("xpt_prefetch"); ok {
 		x := (v.(string))
 		o.SetXptPrefetch(x)
+	}
+
+	if v, ok := d.GetOk("xpt_remote_prefetch"); ok {
+		x := (v.(string))
+		o.SetXptRemotePrefetch(x)
 	}
 
 	r := conn.ApiClient.BiosApi.CreateBiosPolicy(conn.ctx).BiosPolicy(*o)
@@ -4950,6 +5071,14 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property BurstAndPostponedRefresh in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("c1auto_demotion", (s.GetC1autoDemotion())); err != nil {
+		return diag.Errorf("error occurred while setting property C1autoDemotion in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("c1auto_un_demotion", (s.GetC1autoUnDemotion())); err != nil {
+		return diag.Errorf("error occurred while setting property C1autoUnDemotion in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("cbs_cmn_apbdis", (s.GetCbsCmnApbdis())); err != nil {
 		return diag.Errorf("error occurred while setting property CbsCmnApbdis in BiosPolicy object: %s", err.Error())
 	}
@@ -5124,6 +5253,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("cpu_frequency_floor", (s.GetCpuFrequencyFloor())); err != nil {
 		return diag.Errorf("error occurred while setting property CpuFrequencyFloor in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("cpu_perf_enhancement", (s.GetCpuPerfEnhancement())); err != nil {
+		return diag.Errorf("error occurred while setting property CpuPerfEnhancement in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cpu_performance", (s.GetCpuPerformance())); err != nil {
@@ -5332,6 +5465,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("legacy_usb_support", (s.GetLegacyUsbSupport())); err != nil {
 		return diag.Errorf("error occurred while setting property LegacyUsbSupport in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("llc_alloc", (s.GetLlcAlloc())); err != nil {
+		return diag.Errorf("error occurred while setting property LlcAlloc in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("llc_prefetch", (s.GetLlcPrefetch())); err != nil {
@@ -5618,6 +5755,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property PcieSlotNvme6optionRom in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("pcie_slots_cdn_enable", (s.GetPcieSlotsCdnEnable())); err != nil {
+		return diag.Errorf("error occurred while setting property PcieSlotsCdnEnable in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("permission_resources", flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PermissionResources in BiosPolicy object: %s", err.Error())
 	}
@@ -5752,6 +5893,14 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("sgx_qos", (s.GetSgxQos())); err != nil {
 		return diag.Errorf("error occurred while setting property SgxQos in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("sha1pcr_bank", (s.GetSha1pcrBank())); err != nil {
+		return diag.Errorf("error occurred while setting property Sha1pcrBank in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("sha256pcr_bank", (s.GetSha256pcrBank())); err != nil {
+		return diag.Errorf("error occurred while setting property Sha256pcrBank in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
@@ -6362,6 +6511,14 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property UmaBasedClustering in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("upi_link_enablement", (s.GetUpiLinkEnablement())); err != nil {
+		return diag.Errorf("error occurred while setting property UpiLinkEnablement in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("upi_power_management", (s.GetUpiPowerManagement())); err != nil {
+		return diag.Errorf("error occurred while setting property UpiPowerManagement in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("usb_emul6064", (s.GetUsbEmul6064())); err != nil {
 		return diag.Errorf("error occurred while setting property UsbEmul6064 in BiosPolicy object: %s", err.Error())
 	}
@@ -6402,6 +6559,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property VgaPriority in BiosPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("virtual_numa", (s.GetVirtualNuma())); err != nil {
+		return diag.Errorf("error occurred while setting property VirtualNuma in BiosPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("vmd_enable", (s.GetVmdEnable())); err != nil {
 		return diag.Errorf("error occurred while setting property VmdEnable in BiosPolicy object: %s", err.Error())
 	}
@@ -6416,6 +6577,10 @@ func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("xpt_prefetch", (s.GetXptPrefetch())); err != nil {
 		return diag.Errorf("error occurred while setting property XptPrefetch in BiosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("xpt_remote_prefetch", (s.GetXptRemotePrefetch())); err != nil {
+		return diag.Errorf("error occurred while setting property XptRemotePrefetch in BiosPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
@@ -6606,6 +6771,18 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("burst_and_postponed_refresh")
 		x := (v.(string))
 		o.SetBurstAndPostponedRefresh(x)
+	}
+
+	if d.HasChange("c1auto_demotion") {
+		v := d.Get("c1auto_demotion")
+		x := (v.(string))
+		o.SetC1autoDemotion(x)
+	}
+
+	if d.HasChange("c1auto_un_demotion") {
+		v := d.Get("c1auto_un_demotion")
+		x := (v.(string))
+		o.SetC1autoUnDemotion(x)
 	}
 
 	if d.HasChange("cbs_cmn_apbdis") {
@@ -6866,6 +7043,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("cpu_frequency_floor")
 		x := (v.(string))
 		o.SetCpuFrequencyFloor(x)
+	}
+
+	if d.HasChange("cpu_perf_enhancement") {
+		v := d.Get("cpu_perf_enhancement")
+		x := (v.(string))
+		o.SetCpuPerfEnhancement(x)
 	}
 
 	if d.HasChange("cpu_performance") {
@@ -7166,6 +7349,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("legacy_usb_support")
 		x := (v.(string))
 		o.SetLegacyUsbSupport(x)
+	}
+
+	if d.HasChange("llc_alloc") {
+		v := d.Get("llc_alloc")
+		x := (v.(string))
+		o.SetLlcAlloc(x)
 	}
 
 	if d.HasChange("llc_prefetch") {
@@ -7610,6 +7799,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetPcieSlotNvme6optionRom(x)
 	}
 
+	if d.HasChange("pcie_slots_cdn_enable") {
+		v := d.Get("pcie_slots_cdn_enable")
+		x := (v.(string))
+		o.SetPcieSlotsCdnEnable(x)
+	}
+
 	if d.HasChange("pop_support") {
 		v := d.Get("pop_support")
 		x := (v.(string))
@@ -7841,6 +8036,18 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("sgx_qos")
 		x := (v.(string))
 		o.SetSgxQos(x)
+	}
+
+	if d.HasChange("sha1pcr_bank") {
+		v := d.Get("sha1pcr_bank")
+		x := (v.(string))
+		o.SetSha1pcrBank(x)
+	}
+
+	if d.HasChange("sha256pcr_bank") {
+		v := d.Get("sha256pcr_bank")
+		x := (v.(string))
+		o.SetSha256pcrBank(x)
 	}
 
 	if d.HasChange("single_pctl_enable") {
@@ -8777,6 +8984,18 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetUmaBasedClustering(x)
 	}
 
+	if d.HasChange("upi_link_enablement") {
+		v := d.Get("upi_link_enablement")
+		x := (v.(string))
+		o.SetUpiLinkEnablement(x)
+	}
+
+	if d.HasChange("upi_power_management") {
+		v := d.Get("upi_power_management")
+		x := (v.(string))
+		o.SetUpiPowerManagement(x)
+	}
+
 	if d.HasChange("usb_emul6064") {
 		v := d.Get("usb_emul6064")
 		x := (v.(string))
@@ -8831,6 +9050,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		o.SetVgaPriority(x)
 	}
 
+	if d.HasChange("virtual_numa") {
+		v := d.Get("virtual_numa")
+		x := (v.(string))
+		o.SetVirtualNuma(x)
+	}
+
 	if d.HasChange("vmd_enable") {
 		v := d.Get("vmd_enable")
 		x := (v.(string))
@@ -8853,6 +9078,12 @@ func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("xpt_prefetch")
 		x := (v.(string))
 		o.SetXptPrefetch(x)
+	}
+
+	if d.HasChange("xpt_remote_prefetch") {
+		v := d.Get("xpt_remote_prefetch")
+		x := (v.(string))
+		o.SetXptRemotePrefetch(x)
 	}
 
 	r := conn.ApiClient.BiosApi.UpdateBiosPolicy(conn.ctx, d.Id()).BiosPolicy(*o)

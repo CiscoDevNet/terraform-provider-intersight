@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4437
+API version: 1.0.9-4663
 Contact: intersight@cisco.com
 */
 
@@ -44,12 +44,13 @@ type KubernetesClusterProfile struct {
 	MasterVipLease       *IppoolIpLeaseRelationship           `json:"MasterVipLease,omitempty"`
 	NetConfig            *KubernetesNetworkPolicyRelationship `json:"NetConfig,omitempty"`
 	// An array of relationships to kubernetesNodeGroupProfile resources.
-	NodeGroups           []KubernetesNodeGroupProfileRelationship       `json:"NodeGroups,omitempty"`
-	Organization         *OrganizationOrganizationRelationship          `json:"Organization,omitempty"`
-	SysConfig            *KubernetesSysConfigPolicyRelationship         `json:"SysConfig,omitempty"`
-	TrustedRegistries    *KubernetesTrustedRegistriesPolicyRelationship `json:"TrustedRegistries,omitempty"`
-	WorkflowInfo         *WorkflowWorkflowInfoRelationship              `json:"WorkflowInfo,omitempty"`
-	AdditionalProperties map[string]interface{}
+	NodeGroups            []KubernetesNodeGroupProfileRelationship       `json:"NodeGroups,omitempty"`
+	Organization          *OrganizationOrganizationRelationship          `json:"Organization,omitempty"`
+	ParentSolutionProfile *MoBaseMoRelationship                          `json:"ParentSolutionProfile,omitempty"`
+	SysConfig             *KubernetesSysConfigPolicyRelationship         `json:"SysConfig,omitempty"`
+	TrustedRegistries     *KubernetesTrustedRegistriesPolicyRelationship `json:"TrustedRegistries,omitempty"`
+	WorkflowInfo          *WorkflowWorkflowInfoRelationship              `json:"WorkflowInfo,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _KubernetesClusterProfile KubernetesClusterProfile
@@ -700,6 +701,38 @@ func (o *KubernetesClusterProfile) SetOrganization(v OrganizationOrganizationRel
 	o.Organization = &v
 }
 
+// GetParentSolutionProfile returns the ParentSolutionProfile field value if set, zero value otherwise.
+func (o *KubernetesClusterProfile) GetParentSolutionProfile() MoBaseMoRelationship {
+	if o == nil || o.ParentSolutionProfile == nil {
+		var ret MoBaseMoRelationship
+		return ret
+	}
+	return *o.ParentSolutionProfile
+}
+
+// GetParentSolutionProfileOk returns a tuple with the ParentSolutionProfile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KubernetesClusterProfile) GetParentSolutionProfileOk() (*MoBaseMoRelationship, bool) {
+	if o == nil || o.ParentSolutionProfile == nil {
+		return nil, false
+	}
+	return o.ParentSolutionProfile, true
+}
+
+// HasParentSolutionProfile returns a boolean if a field has been set.
+func (o *KubernetesClusterProfile) HasParentSolutionProfile() bool {
+	if o != nil && o.ParentSolutionProfile != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetParentSolutionProfile gets a reference to the given MoBaseMoRelationship and assigns it to the ParentSolutionProfile field.
+func (o *KubernetesClusterProfile) SetParentSolutionProfile(v MoBaseMoRelationship) {
+	o.ParentSolutionProfile = &v
+}
+
 // GetSysConfig returns the SysConfig field value if set, zero value otherwise.
 func (o *KubernetesClusterProfile) GetSysConfig() KubernetesSysConfigPolicyRelationship {
 	if o == nil || o.SysConfig == nil {
@@ -860,6 +893,9 @@ func (o KubernetesClusterProfile) MarshalJSON() ([]byte, error) {
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
 	}
+	if o.ParentSolutionProfile != nil {
+		toSerialize["ParentSolutionProfile"] = o.ParentSolutionProfile
+	}
 	if o.SysConfig != nil {
 		toSerialize["SysConfig"] = o.SysConfig
 	}
@@ -903,11 +939,12 @@ func (o *KubernetesClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 		MasterVipLease       *IppoolIpLeaseRelationship           `json:"MasterVipLease,omitempty"`
 		NetConfig            *KubernetesNetworkPolicyRelationship `json:"NetConfig,omitempty"`
 		// An array of relationships to kubernetesNodeGroupProfile resources.
-		NodeGroups        []KubernetesNodeGroupProfileRelationship       `json:"NodeGroups,omitempty"`
-		Organization      *OrganizationOrganizationRelationship          `json:"Organization,omitempty"`
-		SysConfig         *KubernetesSysConfigPolicyRelationship         `json:"SysConfig,omitempty"`
-		TrustedRegistries *KubernetesTrustedRegistriesPolicyRelationship `json:"TrustedRegistries,omitempty"`
-		WorkflowInfo      *WorkflowWorkflowInfoRelationship              `json:"WorkflowInfo,omitempty"`
+		NodeGroups            []KubernetesNodeGroupProfileRelationship       `json:"NodeGroups,omitempty"`
+		Organization          *OrganizationOrganizationRelationship          `json:"Organization,omitempty"`
+		ParentSolutionProfile *MoBaseMoRelationship                          `json:"ParentSolutionProfile,omitempty"`
+		SysConfig             *KubernetesSysConfigPolicyRelationship         `json:"SysConfig,omitempty"`
+		TrustedRegistries     *KubernetesTrustedRegistriesPolicyRelationship `json:"TrustedRegistries,omitempty"`
+		WorkflowInfo          *WorkflowWorkflowInfoRelationship              `json:"WorkflowInfo,omitempty"`
 	}
 
 	varKubernetesClusterProfileWithoutEmbeddedStruct := KubernetesClusterProfileWithoutEmbeddedStruct{}
@@ -933,6 +970,7 @@ func (o *KubernetesClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 		varKubernetesClusterProfile.NetConfig = varKubernetesClusterProfileWithoutEmbeddedStruct.NetConfig
 		varKubernetesClusterProfile.NodeGroups = varKubernetesClusterProfileWithoutEmbeddedStruct.NodeGroups
 		varKubernetesClusterProfile.Organization = varKubernetesClusterProfileWithoutEmbeddedStruct.Organization
+		varKubernetesClusterProfile.ParentSolutionProfile = varKubernetesClusterProfileWithoutEmbeddedStruct.ParentSolutionProfile
 		varKubernetesClusterProfile.SysConfig = varKubernetesClusterProfileWithoutEmbeddedStruct.SysConfig
 		varKubernetesClusterProfile.TrustedRegistries = varKubernetesClusterProfileWithoutEmbeddedStruct.TrustedRegistries
 		varKubernetesClusterProfile.WorkflowInfo = varKubernetesClusterProfileWithoutEmbeddedStruct.WorkflowInfo
@@ -971,6 +1009,7 @@ func (o *KubernetesClusterProfile) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "NetConfig")
 		delete(additionalProperties, "NodeGroups")
 		delete(additionalProperties, "Organization")
+		delete(additionalProperties, "ParentSolutionProfile")
 		delete(additionalProperties, "SysConfig")
 		delete(additionalProperties, "TrustedRegistries")
 		delete(additionalProperties, "WorkflowInfo")

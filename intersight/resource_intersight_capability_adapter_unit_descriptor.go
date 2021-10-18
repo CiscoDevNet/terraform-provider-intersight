@@ -525,24 +525,30 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("ethernet_port_speed"); ok {
+	if v, ok := d.GetOkExists("ethernet_port_speed"); ok {
 		x := int64(v.(int))
 		o.SetEthernetPortSpeed(x)
 	}
 
-	if v, ok := d.GetOk("fibre_channel_port_speed"); ok {
+	if v, ok := d.GetOkExists("fibre_channel_port_speed"); ok {
 		x := int64(v.(int))
 		o.SetFibreChannelPortSpeed(x)
 	}
 
-	if v, ok := d.GetOk("fibre_channel_scsi_ioq_limit"); ok {
+	if v, ok := d.GetOkExists("fibre_channel_scsi_ioq_limit"); ok {
 		x := int64(v.(int))
 		o.SetFibreChannelScsiIoqLimit(x)
 	}
 
-	o.SetIsAzureQosSupported(d.Get("is_azure_qos_supported").(bool))
+	if v, ok := d.GetOkExists("is_azure_qos_supported"); ok {
+		x := (v.(bool))
+		o.SetIsAzureQosSupported(x)
+	}
 
-	o.SetIsGeneveSupported(d.Get("is_geneve_supported").(bool))
+	if v, ok := d.GetOkExists("is_geneve_supported"); ok {
+		x := (v.(bool))
+		o.SetIsGeneveSupported(x)
+	}
 
 	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
@@ -554,7 +560,7 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("num_dce_ports"); ok {
+	if v, ok := d.GetOkExists("num_dce_ports"); ok {
 		x := int64(v.(int))
 		o.SetNumDcePorts(x)
 	}

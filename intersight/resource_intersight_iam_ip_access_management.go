@@ -462,7 +462,10 @@ func resourceIamIpAccessManagementCreate(c context.Context, d *schema.ResourceDa
 
 	o.SetClassId("iam.IpAccessManagement")
 
-	o.SetEnable(d.Get("enable").(bool))
+	if v, ok := d.GetOkExists("enable"); ok {
+		x := (v.(bool))
+		o.SetEnable(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

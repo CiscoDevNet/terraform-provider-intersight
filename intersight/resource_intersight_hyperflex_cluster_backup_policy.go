@@ -574,7 +574,7 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 		o.SetBackupDataStoreName(x)
 	}
 
-	if v, ok := d.GetOk("backup_data_store_size"); ok {
+	if v, ok := d.GetOkExists("backup_data_store_size"); ok {
 		x := int64(v.(int))
 		o.SetBackupDataStoreSize(x)
 	}
@@ -773,7 +773,7 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 		}
 	}
 
-	if v, ok := d.GetOk("snapshot_retention_count"); ok {
+	if v, ok := d.GetOkExists("snapshot_retention_count"); ok {
 		x := int64(v.(int))
 		o.SetSnapshotRetentionCount(x)
 	}

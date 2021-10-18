@@ -513,8 +513,6 @@ func resourceLicenseLicenseInfoCreate(c context.Context, d *schema.ResourceData,
 		}
 	}
 
-	o.SetActiveAdmin(d.Get("active_admin").(bool))
-
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
@@ -526,12 +524,12 @@ func resourceLicenseLicenseInfoCreate(c context.Context, d *schema.ResourceData,
 
 	o.SetClassId("license.LicenseInfo")
 
-	if v, ok := d.GetOk("evaluation_period"); ok {
+	if v, ok := d.GetOkExists("evaluation_period"); ok {
 		x := int64(v.(int))
 		o.SetEvaluationPeriod(x)
 	}
 
-	if v, ok := d.GetOk("extra_evaluation"); ok {
+	if v, ok := d.GetOkExists("extra_evaluation"); ok {
 		x := int64(v.(int))
 		o.SetExtraEvaluation(x)
 	}
@@ -577,8 +575,6 @@ func resourceLicenseLicenseInfoCreate(c context.Context, d *schema.ResourceData,
 			o.SetTags(x)
 		}
 	}
-
-	o.SetTrialAdmin(d.Get("trial_admin").(bool))
 
 	r := conn.ApiClient.LicenseApi.CreateLicenseLicenseInfo(conn.ctx).LicenseLicenseInfo(*o)
 	resultMo, _, responseErr := r.Execute()

@@ -901,14 +901,12 @@ func dataSourceNiatelemetryApicCoreFileDetailsRead(c context.Context, d *schema.
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryApicCoreFileDetails{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -917,8 +915,7 @@ func dataSourceNiatelemetryApicCoreFileDetailsRead(c context.Context, d *schema.
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -958,140 +955,117 @@ func dataSourceNiatelemetryApicCoreFileDetailsRead(c context.Context, d *schema.
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("annotation"); ok {
-		v := d.Get("annotation")
+	if v, ok := d.GetOk("annotation"); ok {
 		x := (v.(string))
 		o.SetAnnotation(x)
 	}
 
-	if _, ok := d.GetOk("child_action"); ok {
-		v := d.Get("child_action")
+	if v, ok := d.GetOk("child_action"); ok {
 		x := (v.(string))
 		o.SetChildAction(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("collection_time"); ok {
-		v := d.Get("collection_time")
+	if v, ok := d.GetOk("collection_time"); ok {
 		x := (v.(string))
 		o.SetCollectionTime(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("data_type"); ok {
-		v := d.Get("data_type")
+	if v, ok := d.GetOk("data_type"); ok {
 		x := (v.(string))
 		o.SetDataType(x)
 	}
 
-	if _, ok := d.GetOk("dn"); ok {
-		v := d.Get("dn")
+	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("export_file_uri"); ok {
-		v := d.Get("export_file_uri")
+	if v, ok := d.GetOk("export_file_uri"); ok {
 		x := (v.(string))
 		o.SetExportFileUri(x)
 	}
 
-	if _, ok := d.GetOk("export_status"); ok {
-		v := d.Get("export_status")
+	if v, ok := d.GetOk("export_status"); ok {
 		x := (v.(string))
 		o.SetExportStatus(x)
 	}
 
-	if _, ok := d.GetOk("export_status_str"); ok {
-		v := d.Get("export_status_str")
+	if v, ok := d.GetOkExists("export_status_str"); ok {
 		x := int64(v.(int))
 		o.SetExportStatusStr(x)
 	}
 
-	if _, ok := d.GetOk("export_tech_sup_file_uri"); ok {
-		v := d.Get("export_tech_sup_file_uri")
+	if v, ok := d.GetOk("export_tech_sup_file_uri"); ok {
 		x := (v.(string))
 		o.SetExportTechSupFileUri(x)
 	}
 
-	if _, ok := d.GetOk("exported_to_controller"); ok {
-		v := d.Get("exported_to_controller")
+	if v, ok := d.GetOk("exported_to_controller"); ok {
 		x := (v.(string))
 		o.SetExportedToController(x)
 	}
 
-	if _, ok := d.GetOk("ext_mngd_by"); ok {
-		v := d.Get("ext_mngd_by")
+	if v, ok := d.GetOk("ext_mngd_by"); ok {
 		x := (v.(string))
 		o.SetExtMngdBy(x)
 	}
 
-	if _, ok := d.GetOk("file_size"); ok {
-		v := d.Get("file_size")
+	if v, ok := d.GetOkExists("file_size"); ok {
 		x := int64(v.(int))
 		o.SetFileSize(x)
 	}
 
-	if _, ok := d.GetOk("host_name"); ok {
-		v := d.Get("host_name")
+	if v, ok := d.GetOk("host_name"); ok {
 		x := (v.(string))
 		o.SetHostName(x)
 	}
 
-	if _, ok := d.GetOk("lc_own"); ok {
-		v := d.Get("lc_own")
+	if v, ok := d.GetOk("lc_own"); ok {
 		x := (v.(string))
 		o.SetLcOwn(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("mod_ts"); ok {
-		v := d.Get("mod_ts")
+	if v, ok := d.GetOkExists("mod_ts"); ok {
 		x := int64(v.(int))
 		o.SetModTs(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("node_id"); ok {
-		v := d.Get("node_id")
+	if v, ok := d.GetOk("node_id"); ok {
 		x := (v.(string))
 		o.SetNodeId(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1100,8 +1074,7 @@ func dataSourceNiatelemetryApicCoreFileDetailsRead(c context.Context, d *schema.
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1144,8 +1117,7 @@ func dataSourceNiatelemetryApicCoreFileDetailsRead(c context.Context, d *schema.
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1185,26 +1157,22 @@ func dataSourceNiatelemetryApicCoreFileDetailsRead(c context.Context, d *schema.
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("pol_name"); ok {
-		v := d.Get("pol_name")
+	if v, ok := d.GetOk("pol_name"); ok {
 		x := (v.(string))
 		o.SetPolName(x)
 	}
 
-	if _, ok := d.GetOk("record_type"); ok {
-		v := d.Get("record_type")
+	if v, ok := d.GetOk("record_type"); ok {
 		x := (v.(string))
 		o.SetRecordType(x)
 	}
 
-	if _, ok := d.GetOk("record_version"); ok {
-		v := d.Get("record_version")
+	if v, ok := d.GetOk("record_version"); ok {
 		x := (v.(string))
 		o.SetRecordVersion(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1247,26 +1215,22 @@ func dataSourceNiatelemetryApicCoreFileDetailsRead(c context.Context, d *schema.
 		}
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("site_name"); ok {
-		v := d.Get("site_name")
+	if v, ok := d.GetOk("site_name"); ok {
 		x := (v.(string))
 		o.SetSiteName(x)
 	}
 
-	if _, ok := d.GetOk("status"); ok {
-		v := d.Get("status")
+	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1299,20 +1263,17 @@ func dataSourceNiatelemetryApicCoreFileDetailsRead(c context.Context, d *schema.
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("uid"); ok {
-		v := d.Get("uid")
+	if v, ok := d.GetOk("uid"); ok {
 		x := (v.(string))
 		o.SetUid(x)
 	}
 
-	if _, ok := d.GetOk("userdom"); ok {
-		v := d.Get("userdom")
+	if v, ok := d.GetOk("userdom"); ok {
 		x := (v.(string))
 		o.SetUserdom(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1384,131 +1345,6 @@ func dataSourceNiatelemetryApicCoreFileDetailsRead(c context.Context, d *schema.
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("annotation"); ok {
-		x := (v.(string))
-		o.SetAnnotation(x)
-	}
-	if v, ok := d.GetOk("child_action"); ok {
-		x := (v.(string))
-		o.SetChildAction(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("collection_time"); ok {
-		x := (v.(string))
-		o.SetCollectionTime(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("data_type"); ok {
-		x := (v.(string))
-		o.SetDataType(x)
-	}
-	if v, ok := d.GetOk("dn"); ok {
-		x := (v.(string))
-		o.SetDn(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("export_file_uri"); ok {
-		x := (v.(string))
-		o.SetExportFileUri(x)
-	}
-	if v, ok := d.GetOk("export_status"); ok {
-		x := (v.(string))
-		o.SetExportStatus(x)
-	}
-	if v, ok := d.GetOk("export_status_str"); ok {
-		x := int64(v.(int))
-		o.SetExportStatusStr(x)
-	}
-	if v, ok := d.GetOk("export_tech_sup_file_uri"); ok {
-		x := (v.(string))
-		o.SetExportTechSupFileUri(x)
-	}
-	if v, ok := d.GetOk("exported_to_controller"); ok {
-		x := (v.(string))
-		o.SetExportedToController(x)
-	}
-	if v, ok := d.GetOk("ext_mngd_by"); ok {
-		x := (v.(string))
-		o.SetExtMngdBy(x)
-	}
-	if v, ok := d.GetOk("file_size"); ok {
-		x := int64(v.(int))
-		o.SetFileSize(x)
-	}
-	if v, ok := d.GetOk("host_name"); ok {
-		x := (v.(string))
-		o.SetHostName(x)
-	}
-	if v, ok := d.GetOk("lc_own"); ok {
-		x := (v.(string))
-		o.SetLcOwn(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("mod_ts"); ok {
-		x := int64(v.(int))
-		o.SetModTs(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("node_id"); ok {
-		x := (v.(string))
-		o.SetNodeId(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("pol_name"); ok {
-		x := (v.(string))
-		o.SetPolName(x)
-	}
-	if v, ok := d.GetOk("record_type"); ok {
-		x := (v.(string))
-		o.SetRecordType(x)
-	}
-	if v, ok := d.GetOk("record_version"); ok {
-		x := (v.(string))
-		o.SetRecordVersion(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("site_name"); ok {
-		x := (v.(string))
-		o.SetSiteName(x)
-	}
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
-	}
-	if v, ok := d.GetOk("uid"); ok {
-		x := (v.(string))
-		o.SetUid(x)
-	}
-	if v, ok := d.GetOk("userdom"); ok {
-		x := (v.(string))
-		o.SetUserdom(x)
 	}
 
 	data, err := o.MarshalJSON()

@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iqnpool.IqnSuffixBlock"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iqnpool.IqnSuffixBlock"]
-**From** | Pointer to **int64** | The first suffix number in the block. | [optional] [readonly] 
+**From** | Pointer to **int64** | The first suffix number in the block. | [optional] 
 **Suffix** | Pointer to **string** | The suffix for this bock of IQNs. | [optional] 
-**To** | Pointer to **int64** | The last suffix number in the block. | [optional] [readonly] 
+**To** | Pointer to **int64** | The last suffix number in the block. | [optional] 
 
 ## Methods
 

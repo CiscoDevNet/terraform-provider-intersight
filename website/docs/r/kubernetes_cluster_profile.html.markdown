@@ -126,6 +126,7 @@ This complex property has following sub-properties:
 * `managed_mode`:(string) Management mode for the cluster. In some cases Intersight kubernetes service is not requiredto provision and manage the management entities and endpoints (for e.g. EKS). In most other casesit will be required to provision and manage these entities and endpoints.* `Provided` - Cluster management entities and endpoints are provided by the infrastructure platform.* `Managed` - Cluster management entities and endpoints are provisioned and managed by Intersight kubernetes service. 
 * `management_config`:(HashMap) - Configuration required for provisioning and management of cluster management entities. Required if'managedMode' is set to 'Managed'. 
 This complex property has following sub-properties:
+  + `is_tac_passwd_set`:(bool)(ReadOnly) Indicates whether the value of the 'tacPasswd' property has been set. 
   + `load_balancer_count`:(int) Number of IP addresses to reserve for load balancer services. 
   + `load_balancers`:
                 (Array of schema.TypeString) -
@@ -134,6 +135,7 @@ This complex property has following sub-properties:
   + `ssh_keys`:
                 (Array of schema.TypeString) -
   + `ssh_user`:(string)(ReadOnly) Name of the user to SSH to nodes in a cluster. 
+  + `tac_passwd`:(string) Hashed password of the TAC user. 
 * `master_vip_lease`:(HashMap) - A reference to a ippoolIpLease resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -160,6 +162,11 @@ This complex property has following sub-properties:
 * `owners`:
                 (Array of schema.TypeString) -(ReadOnly)
 * `parent`:(HashMap) -(ReadOnly) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `parent_solution_profile`:(HashMap) - A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 

@@ -505,7 +505,7 @@ func dataSourceHyperflexClusterProfile() *schema.Resource {
 			Optional:    true,
 		},
 		"hypervisor_type": {
-			Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+			Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1767,7 +1767,7 @@ func dataSourceHyperflexClusterProfile() *schema.Resource {
 			Optional:    true,
 		},
 		"hypervisor_type": {
-			Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+			Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -2555,20 +2555,17 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexClusterProfile{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("action"); ok {
-		v := d.Get("action")
+	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
 		o.SetAction(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -2577,8 +2574,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2618,8 +2614,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("associated_cluster"); ok {
-		v := d.Get("associated_cluster")
+	if v, ok := d.GetOk("associated_cluster"); ok {
 		p := make([]models.HyperflexClusterRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2662,8 +2657,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("associated_compute_cluster"); ok {
-		v := d.Get("associated_compute_cluster")
+	if v, ok := d.GetOk("associated_compute_cluster"); ok {
 		p := make([]models.HyperflexHxapClusterRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2706,8 +2700,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("auto_support"); ok {
-		v := d.Get("auto_support")
+	if v, ok := d.GetOk("auto_support"); ok {
 		p := make([]models.HyperflexAutoSupportPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2750,14 +2743,12 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("cluster_internal_subnet"); ok {
-		v := d.Get("cluster_internal_subnet")
+	if v, ok := d.GetOk("cluster_internal_subnet"); ok {
 		p := make([]models.CommIpV4Interface, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2806,8 +2797,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("cluster_network"); ok {
-		v := d.Get("cluster_network")
+	if v, ok := d.GetOk("cluster_network"); ok {
 		p := make([]models.HyperflexClusterNetworkPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2850,8 +2840,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("cluster_storage"); ok {
-		v := d.Get("cluster_storage")
+	if v, ok := d.GetOk("cluster_storage"); ok {
 		p := make([]models.HyperflexClusterStoragePolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2894,8 +2883,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("config_context"); ok {
-		v := d.Get("config_context")
+	if v, ok := d.GetOk("config_context"); ok {
 		p := make([]models.PolicyConfigContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2938,8 +2926,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("config_result"); ok {
-		v := d.Get("config_result")
+	if v, ok := d.GetOk("config_result"); ok {
 		p := make([]models.HyperflexConfigResultRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2982,32 +2969,27 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("data_ip_address"); ok {
-		v := d.Get("data_ip_address")
+	if v, ok := d.GetOk("data_ip_address"); ok {
 		x := (v.(string))
 		o.SetDataIpAddress(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("ext_fc_storage"); ok {
-		v := d.Get("ext_fc_storage")
+	if v, ok := d.GetOk("ext_fc_storage"); ok {
 		p := make([]models.HyperflexExtFcStoragePolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3050,8 +3032,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("ext_iscsi_storage"); ok {
-		v := d.Get("ext_iscsi_storage")
+	if v, ok := d.GetOk("ext_iscsi_storage"); ok {
 		p := make([]models.HyperflexExtIscsiStoragePolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3094,14 +3075,12 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("host_name_prefix"); ok {
-		v := d.Get("host_name_prefix")
+	if v, ok := d.GetOk("host_name_prefix"); ok {
 		x := (v.(string))
 		o.SetHostNamePrefix(x)
 	}
 
-	if _, ok := d.GetOk("httpproxypolicy"); ok {
-		v := d.Get("httpproxypolicy")
+	if v, ok := d.GetOk("httpproxypolicy"); ok {
 		p := make([]models.CommHttpProxyPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3144,20 +3123,17 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("hypervisor_control_ip_address"); ok {
-		v := d.Get("hypervisor_control_ip_address")
+	if v, ok := d.GetOk("hypervisor_control_ip_address"); ok {
 		x := (v.(string))
 		o.SetHypervisorControlIpAddress(x)
 	}
 
-	if _, ok := d.GetOk("hypervisor_type"); ok {
-		v := d.Get("hypervisor_type")
+	if v, ok := d.GetOk("hypervisor_type"); ok {
 		x := (v.(string))
 		o.SetHypervisorType(x)
 	}
 
-	if _, ok := d.GetOk("local_credential"); ok {
-		v := d.Get("local_credential")
+	if v, ok := d.GetOk("local_credential"); ok {
 		p := make([]models.HyperflexLocalCredentialPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3200,44 +3176,37 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("mac_address_prefix"); ok {
-		v := d.Get("mac_address_prefix")
+	if v, ok := d.GetOk("mac_address_prefix"); ok {
 		x := (v.(string))
 		o.SetMacAddressPrefix(x)
 	}
 
-	if _, ok := d.GetOk("mgmt_ip_address"); ok {
-		v := d.Get("mgmt_ip_address")
+	if v, ok := d.GetOk("mgmt_ip_address"); ok {
 		x := (v.(string))
 		o.SetMgmtIpAddress(x)
 	}
 
-	if _, ok := d.GetOk("mgmt_platform"); ok {
-		v := d.Get("mgmt_platform")
+	if v, ok := d.GetOk("mgmt_platform"); ok {
 		x := (v.(string))
 		o.SetMgmtPlatform(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("node_config"); ok {
-		v := d.Get("node_config")
+	if v, ok := d.GetOk("node_config"); ok {
 		p := make([]models.HyperflexNodeConfigPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3280,8 +3249,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("node_profile_config"); ok {
-		v := d.Get("node_profile_config")
+	if v, ok := d.GetOk("node_profile_config"); ok {
 		x := make([]models.HyperflexNodeProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3321,14 +3289,12 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		o.SetNodeProfileConfig(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("organization"); ok {
-		v := d.Get("organization")
+	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3371,8 +3337,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -3381,8 +3346,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3425,8 +3389,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3466,8 +3429,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("policy_bucket"); ok {
-		v := d.Get("policy_bucket")
+	if v, ok := d.GetOk("policy_bucket"); ok {
 		x := make([]models.PolicyAbstractPolicyRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3507,8 +3469,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		o.SetPolicyBucket(x)
 	}
 
-	if _, ok := d.GetOk("proxy_setting"); ok {
-		v := d.Get("proxy_setting")
+	if v, ok := d.GetOk("proxy_setting"); ok {
 		p := make([]models.HyperflexProxySettingPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3551,14 +3512,12 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("replication"); ok {
-		v := d.Get("replication")
+	if v, ok := d.GetOkExists("replication"); ok {
 		x := int64(v.(int))
 		o.SetReplication(x)
 	}
 
-	if _, ok := d.GetOk("running_workflows"); ok {
-		v := d.Get("running_workflows")
+	if v, ok := d.GetOk("running_workflows"); ok {
 		x := make([]models.WorkflowWorkflowInfoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3598,14 +3557,12 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		o.SetRunningWorkflows(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("software_version"); ok {
-		v := d.Get("software_version")
+	if v, ok := d.GetOk("software_version"); ok {
 		p := make([]models.HyperflexSoftwareVersionPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3648,8 +3605,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("src_template"); ok {
-		v := d.Get("src_template")
+	if v, ok := d.GetOk("src_template"); ok {
 		p := make([]models.PolicyAbstractProfileRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3692,20 +3648,17 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("storage_client_ip_address"); ok {
-		v := d.Get("storage_client_ip_address")
+	if v, ok := d.GetOk("storage_client_ip_address"); ok {
 		x := (v.(string))
 		o.SetStorageClientIpAddress(x)
 	}
 
-	if _, ok := d.GetOk("storage_client_netmask"); ok {
-		v := d.Get("storage_client_netmask")
+	if v, ok := d.GetOk("storage_client_netmask"); ok {
 		x := (v.(string))
 		o.SetStorageClientNetmask(x)
 	}
 
-	if _, ok := d.GetOk("storage_client_vlan"); ok {
-		v := d.Get("storage_client_vlan")
+	if v, ok := d.GetOk("storage_client_vlan"); ok {
 		p := make([]models.HyperflexNamedVlan, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3748,14 +3701,12 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("storage_cluster_auxiliary_ip"); ok {
-		v := d.Get("storage_cluster_auxiliary_ip")
+	if v, ok := d.GetOk("storage_cluster_auxiliary_ip"); ok {
 		x := (v.(string))
 		o.SetStorageClusterAuxiliaryIp(x)
 	}
 
-	if _, ok := d.GetOk("storage_data_vlan"); ok {
-		v := d.Get("storage_data_vlan")
+	if v, ok := d.GetOk("storage_data_vlan"); ok {
 		p := make([]models.HyperflexNamedVlan, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3798,14 +3749,12 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("storage_type"); ok {
-		v := d.Get("storage_type")
+	if v, ok := d.GetOk("storage_type"); ok {
 		x := (v.(string))
 		o.SetStorageType(x)
 	}
 
-	if _, ok := d.GetOk("sys_config"); ok {
-		v := d.Get("sys_config")
+	if v, ok := d.GetOk("sys_config"); ok {
 		p := make([]models.HyperflexSysConfigPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3848,8 +3797,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3882,14 +3830,12 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("type"); ok {
-		v := d.Get("type")
+	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
 	}
 
-	if _, ok := d.GetOk("ucsm_config"); ok {
-		v := d.Get("ucsm_config")
+	if v, ok := d.GetOk("ucsm_config"); ok {
 		p := make([]models.HyperflexUcsmConfigPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3932,8 +3878,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("vcenter_config"); ok {
-		v := d.Get("vcenter_config")
+	if v, ok := d.GetOk("vcenter_config"); ok {
 		p := make([]models.HyperflexVcenterConfigPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3976,8 +3921,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4051,108 +3995,6 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("wwxn_prefix"); ok {
-		v := d.Get("wwxn_prefix")
-		x := (v.(string))
-		o.SetWwxnPrefix(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("action"); ok {
-		x := (v.(string))
-		o.SetAction(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("data_ip_address"); ok {
-		x := (v.(string))
-		o.SetDataIpAddress(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("host_name_prefix"); ok {
-		x := (v.(string))
-		o.SetHostNamePrefix(x)
-	}
-	if v, ok := d.GetOk("hypervisor_control_ip_address"); ok {
-		x := (v.(string))
-		o.SetHypervisorControlIpAddress(x)
-	}
-	if v, ok := d.GetOk("hypervisor_type"); ok {
-		x := (v.(string))
-		o.SetHypervisorType(x)
-	}
-	if v, ok := d.GetOk("mac_address_prefix"); ok {
-		x := (v.(string))
-		o.SetMacAddressPrefix(x)
-	}
-	if v, ok := d.GetOk("mgmt_ip_address"); ok {
-		x := (v.(string))
-		o.SetMgmtIpAddress(x)
-	}
-	if v, ok := d.GetOk("mgmt_platform"); ok {
-		x := (v.(string))
-		o.SetMgmtPlatform(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("replication"); ok {
-		x := int64(v.(int))
-		o.SetReplication(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("storage_client_ip_address"); ok {
-		x := (v.(string))
-		o.SetStorageClientIpAddress(x)
-	}
-	if v, ok := d.GetOk("storage_client_netmask"); ok {
-		x := (v.(string))
-		o.SetStorageClientNetmask(x)
-	}
-	if v, ok := d.GetOk("storage_cluster_auxiliary_ip"); ok {
-		x := (v.(string))
-		o.SetStorageClusterAuxiliaryIp(x)
-	}
-	if v, ok := d.GetOk("storage_type"); ok {
-		x := (v.(string))
-		o.SetStorageType(x)
-	}
-	if v, ok := d.GetOk("type"); ok {
-		x := (v.(string))
-		o.SetType(x)
-	}
 	if v, ok := d.GetOk("wwxn_prefix"); ok {
 		x := (v.(string))
 		o.SetWwxnPrefix(x)

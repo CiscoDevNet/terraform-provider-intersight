@@ -6,7 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.CimcFirmwareDescriptor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.CimcFirmwareDescriptor"]
+**AdapterEpProxyEnabled** | Pointer to **bool** | Indicates whether the server uses ep proxy to communicate with the adapter. | [optional] [readonly] 
 **Revision** | Pointer to **string** | Revision information for the server. | [optional] 
+**UuidSupportedVer** | Pointer to **string** | Minimum server firmware version for UUID feature support. | [optional] [readonly] 
 
 ## Methods
 
@@ -67,6 +69,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAdapterEpProxyEnabled
+
+`func (o *CapabilityCimcFirmwareDescriptorAllOf) GetAdapterEpProxyEnabled() bool`
+
+GetAdapterEpProxyEnabled returns the AdapterEpProxyEnabled field if non-nil, zero value otherwise.
+
+### GetAdapterEpProxyEnabledOk
+
+`func (o *CapabilityCimcFirmwareDescriptorAllOf) GetAdapterEpProxyEnabledOk() (*bool, bool)`
+
+GetAdapterEpProxyEnabledOk returns a tuple with the AdapterEpProxyEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdapterEpProxyEnabled
+
+`func (o *CapabilityCimcFirmwareDescriptorAllOf) SetAdapterEpProxyEnabled(v bool)`
+
+SetAdapterEpProxyEnabled sets AdapterEpProxyEnabled field to given value.
+
+### HasAdapterEpProxyEnabled
+
+`func (o *CapabilityCimcFirmwareDescriptorAllOf) HasAdapterEpProxyEnabled() bool`
+
+HasAdapterEpProxyEnabled returns a boolean if a field has been set.
+
 ### GetRevision
 
 `func (o *CapabilityCimcFirmwareDescriptorAllOf) GetRevision() string`
@@ -91,6 +118,31 @@ SetRevision sets Revision field to given value.
 `func (o *CapabilityCimcFirmwareDescriptorAllOf) HasRevision() bool`
 
 HasRevision returns a boolean if a field has been set.
+
+### GetUuidSupportedVer
+
+`func (o *CapabilityCimcFirmwareDescriptorAllOf) GetUuidSupportedVer() string`
+
+GetUuidSupportedVer returns the UuidSupportedVer field if non-nil, zero value otherwise.
+
+### GetUuidSupportedVerOk
+
+`func (o *CapabilityCimcFirmwareDescriptorAllOf) GetUuidSupportedVerOk() (*string, bool)`
+
+GetUuidSupportedVerOk returns a tuple with the UuidSupportedVer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUuidSupportedVer
+
+`func (o *CapabilityCimcFirmwareDescriptorAllOf) SetUuidSupportedVer(v string)`
+
+SetUuidSupportedVer sets UuidSupportedVer field to given value.
+
+### HasUuidSupportedVer
+
+`func (o *CapabilityCimcFirmwareDescriptorAllOf) HasUuidSupportedVer() bool`
+
+HasUuidSupportedVer returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

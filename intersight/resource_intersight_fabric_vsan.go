@@ -491,7 +491,7 @@ func resourceFabricVsanCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetFcZoneSharingMode(x)
 	}
 
-	if v, ok := d.GetOk("fcoe_vlan"); ok {
+	if v, ok := d.GetOkExists("fcoe_vlan"); ok {
 		x := int64(v.(int))
 		o.SetFcoeVlan(x)
 	}
@@ -543,7 +543,7 @@ func resourceFabricVsanCreate(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if v, ok := d.GetOk("vsan_id"); ok {
+	if v, ok := d.GetOkExists("vsan_id"); ok {
 		x := int64(v.(int))
 		o.SetVsanId(x)
 	}

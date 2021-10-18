@@ -504,7 +504,7 @@ func resourceCapabilityIoCardDescriptorCreate(c context.Context, d *schema.Resou
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("num_hif_ports"); ok {
+	if v, ok := d.GetOkExists("num_hif_ports"); ok {
 		x := int64(v.(int))
 		o.SetNumHifPorts(x)
 	}

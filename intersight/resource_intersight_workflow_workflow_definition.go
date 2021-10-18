@@ -1155,7 +1155,10 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 
 	o.SetClassId("workflow.WorkflowDefinition")
 
-	o.SetDefaultVersion(d.Get("default_version").(bool))
+	if v, ok := d.GetOkExists("default_version"); ok {
+		x := (v.(bool))
+		o.SetDefaultVersion(x)
+	}
 
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
@@ -1737,7 +1740,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 		o.SetUiRenderingData(v)
 	}
 
-	if v, ok := d.GetOk("nr_version"); ok {
+	if v, ok := d.GetOkExists("nr_version"); ok {
 		x := int64(v.(int))
 		o.SetVersion(x)
 	}

@@ -1651,14 +1651,12 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FirmwareUpgrade{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1667,8 +1665,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1708,20 +1705,17 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("device"); ok {
-		v := d.Get("device")
+	if v, ok := d.GetOk("device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1764,8 +1758,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("direct_download"); ok {
-		v := d.Get("direct_download")
+	if v, ok := d.GetOk("direct_download"); ok {
 		p := make([]models.FirmwareDirectDownload, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1864,8 +1857,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("distributable"); ok {
-		v := d.Get("distributable")
+	if v, ok := d.GetOk("distributable"); ok {
 		p := make([]models.FirmwareDistributableRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1908,14 +1900,12 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("exclude_component_list"); ok {
-		v := d.Get("exclude_component_list")
+	if v, ok := d.GetOk("exclude_component_list"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1924,8 +1914,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		o.SetExcludeComponentList(x)
 	}
 
-	if _, ok := d.GetOk("file_server"); ok {
-		v := d.Get("file_server")
+	if v, ok := d.GetOk("file_server"); ok {
 		p := make([]models.SoftwarerepositoryFileServer, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1956,20 +1945,17 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("network_share"); ok {
-		v := d.Get("network_share")
+	if v, ok := d.GetOk("network_share"); ok {
 		p := make([]models.FirmwareNetworkShare, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2156,14 +2142,12 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2172,8 +2156,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2216,8 +2199,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2257,8 +2239,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("release"); ok {
-		v := d.Get("release")
+	if v, ok := d.GetOk("release"); ok {
 		p := make([]models.SoftwarerepositoryReleaseRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2301,8 +2282,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("server"); ok {
-		v := d.Get("server")
+	if v, ok := d.GetOk("server"); ok {
 		p := make([]models.ComputePhysicalRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2345,22 +2325,22 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	o.SetSkipEstimateImpact(d.Get("skip_estimate_impact").(bool))
+	if v, ok := d.GetOkExists("skip_estimate_impact"); ok {
+		x := (v.(bool))
+		o.SetSkipEstimateImpact(x)
+	}
 
-	if _, ok := d.GetOk("status"); ok {
-		v := d.Get("status")
+	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2393,8 +2373,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("upgrade_impact"); ok {
-		v := d.Get("upgrade_impact")
+	if v, ok := d.GetOk("upgrade_impact"); ok {
 		p := make([]models.FirmwareUpgradeImpactStatusRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2437,8 +2416,7 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("upgrade_status"); ok {
-		v := d.Get("upgrade_status")
+	if v, ok := d.GetOk("upgrade_status"); ok {
 		p := make([]models.FirmwareUpgradeStatusRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2481,14 +2459,12 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("upgrade_type"); ok {
-		v := d.Get("upgrade_type")
+	if v, ok := d.GetOk("upgrade_type"); ok {
 		x := (v.(string))
 		o.SetUpgradeType(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2560,51 +2536,6 @@ func dataSourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, me
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("skip_estimate_impact"); ok {
-		x := (v.(bool))
-		o.SetSkipEstimateImpact(x)
-	}
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
-	}
-	if v, ok := d.GetOk("upgrade_type"); ok {
-		x := (v.(string))
-		o.SetUpgradeType(x)
 	}
 
 	data, err := o.MarshalJSON()

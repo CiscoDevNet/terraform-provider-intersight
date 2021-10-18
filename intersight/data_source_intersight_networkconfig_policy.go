@@ -919,14 +919,12 @@ func dataSourceNetworkconfigPolicyRead(c context.Context, d *schema.ResourceData
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NetworkconfigPolicy{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -935,20 +933,17 @@ func dataSourceNetworkconfigPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("alternate_ipv4dns_server"); ok {
-		v := d.Get("alternate_ipv4dns_server")
+	if v, ok := d.GetOk("alternate_ipv4dns_server"); ok {
 		x := (v.(string))
 		o.SetAlternateIpv4dnsServer(x)
 	}
 
-	if _, ok := d.GetOk("alternate_ipv6dns_server"); ok {
-		v := d.Get("alternate_ipv6dns_server")
+	if v, ok := d.GetOk("alternate_ipv6dns_server"); ok {
 		x := (v.(string))
 		o.SetAlternateIpv6dnsServer(x)
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -988,8 +983,7 @@ func dataSourceNetworkconfigPolicyRead(c context.Context, d *schema.ResourceData
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("appliance_account"); ok {
-		v := d.Get("appliance_account")
+	if v, ok := d.GetOk("appliance_account"); ok {
 		p := make([]models.IamAccountRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1032,70 +1026,72 @@ func dataSourceNetworkconfigPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("dynamic_dns_domain"); ok {
-		v := d.Get("dynamic_dns_domain")
+	if v, ok := d.GetOk("dynamic_dns_domain"); ok {
 		x := (v.(string))
 		o.SetDynamicDnsDomain(x)
 	}
 
-	o.SetEnableDynamicDns(d.Get("enable_dynamic_dns").(bool))
+	if v, ok := d.GetOkExists("enable_dynamic_dns"); ok {
+		x := (v.(bool))
+		o.SetEnableDynamicDns(x)
+	}
 
-	o.SetEnableIpv4dnsFromDhcp(d.Get("enable_ipv4dns_from_dhcp").(bool))
+	if v, ok := d.GetOkExists("enable_ipv4dns_from_dhcp"); ok {
+		x := (v.(bool))
+		o.SetEnableIpv4dnsFromDhcp(x)
+	}
 
-	o.SetEnableIpv6(d.Get("enable_ipv6").(bool))
+	if v, ok := d.GetOkExists("enable_ipv6"); ok {
+		x := (v.(bool))
+		o.SetEnableIpv6(x)
+	}
 
-	o.SetEnableIpv6dnsFromDhcp(d.Get("enable_ipv6dns_from_dhcp").(bool))
+	if v, ok := d.GetOkExists("enable_ipv6dns_from_dhcp"); ok {
+		x := (v.(bool))
+		o.SetEnableIpv6dnsFromDhcp(x)
+	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("organization"); ok {
-		v := d.Get("organization")
+	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1138,8 +1134,7 @@ func dataSourceNetworkconfigPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1148,8 +1143,7 @@ func dataSourceNetworkconfigPolicyRead(c context.Context, d *schema.ResourceData
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1192,8 +1186,7 @@ func dataSourceNetworkconfigPolicyRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1233,20 +1226,17 @@ func dataSourceNetworkconfigPolicyRead(c context.Context, d *schema.ResourceData
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("preferred_ipv4dns_server"); ok {
-		v := d.Get("preferred_ipv4dns_server")
+	if v, ok := d.GetOk("preferred_ipv4dns_server"); ok {
 		x := (v.(string))
 		o.SetPreferredIpv4dnsServer(x)
 	}
 
-	if _, ok := d.GetOk("preferred_ipv6dns_server"); ok {
-		v := d.Get("preferred_ipv6dns_server")
+	if v, ok := d.GetOk("preferred_ipv6dns_server"); ok {
 		x := (v.(string))
 		o.SetPreferredIpv6dnsServer(x)
 	}
 
-	if _, ok := d.GetOk("profiles"); ok {
-		v := d.Get("profiles")
+	if v, ok := d.GetOk("profiles"); ok {
 		x := make([]models.PolicyAbstractConfigProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1286,14 +1276,12 @@ func dataSourceNetworkconfigPolicyRead(c context.Context, d *schema.ResourceData
 		o.SetProfiles(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1326,8 +1314,7 @@ func dataSourceNetworkconfigPolicyRead(c context.Context, d *schema.ResourceData
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1399,83 +1386,6 @@ func dataSourceNetworkconfigPolicyRead(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("alternate_ipv4dns_server"); ok {
-		x := (v.(string))
-		o.SetAlternateIpv4dnsServer(x)
-	}
-	if v, ok := d.GetOk("alternate_ipv6dns_server"); ok {
-		x := (v.(string))
-		o.SetAlternateIpv6dnsServer(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("dynamic_dns_domain"); ok {
-		x := (v.(string))
-		o.SetDynamicDnsDomain(x)
-	}
-	if v, ok := d.GetOk("enable_dynamic_dns"); ok {
-		x := (v.(bool))
-		o.SetEnableDynamicDns(x)
-	}
-	if v, ok := d.GetOk("enable_ipv4dns_from_dhcp"); ok {
-		x := (v.(bool))
-		o.SetEnableIpv4dnsFromDhcp(x)
-	}
-	if v, ok := d.GetOk("enable_ipv6"); ok {
-		x := (v.(bool))
-		o.SetEnableIpv6(x)
-	}
-	if v, ok := d.GetOk("enable_ipv6dns_from_dhcp"); ok {
-		x := (v.(bool))
-		o.SetEnableIpv6dnsFromDhcp(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("preferred_ipv4dns_server"); ok {
-		x := (v.(string))
-		o.SetPreferredIpv4dnsServer(x)
-	}
-	if v, ok := d.GetOk("preferred_ipv6dns_server"); ok {
-		x := (v.(string))
-		o.SetPreferredIpv6dnsServer(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
 	}
 
 	data, err := o.MarshalJSON()

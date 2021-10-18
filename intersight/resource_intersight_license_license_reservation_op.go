@@ -496,13 +496,17 @@ func resourceLicenseLicenseReservationOpCreate(c context.Context, d *schema.Reso
 		o.SetAuthCode(x)
 	}
 
-	o.SetAuthCodeInstalled(d.Get("auth_code_installed").(bool))
-
 	o.SetClassId("license.LicenseReservationOp")
 
-	o.SetGenerateRequestCode(d.Get("generate_request_code").(bool))
+	if v, ok := d.GetOkExists("generate_request_code"); ok {
+		x := (v.(bool))
+		o.SetGenerateRequestCode(x)
+	}
 
-	o.SetGenerateReturnCode(d.Get("generate_return_code").(bool))
+	if v, ok := d.GetOkExists("generate_return_code"); ok {
+		x := (v.(bool))
+		o.SetGenerateReturnCode(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

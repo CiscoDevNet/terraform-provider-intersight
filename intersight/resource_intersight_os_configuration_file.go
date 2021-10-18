@@ -516,7 +516,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 																			Default:     "workflow.EnumEntry",
 																		},
 																		"label": {
-																			Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_).",
+																			Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters.",
 																			Type:        schema.TypeString,
 																			Optional:    true,
 																		},
@@ -957,7 +957,10 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 		o.SetFileContent(x)
 	}
 
-	o.SetInternal(d.Get("internal").(bool))
+	if v, ok := d.GetOkExists("internal"); ok {
+		x := (v.(bool))
+		o.SetInternal(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -1394,8 +1397,6 @@ func resourceOsConfigurationFileCreate(c context.Context, d *schema.ResourceData
 			o.SetPlaceholders(x)
 		}
 	}
-
-	o.SetSupported(d.Get("supported").(bool))
 
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)

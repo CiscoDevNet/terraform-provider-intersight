@@ -564,7 +564,10 @@ func resourceBootPrecisionPolicyCreate(c context.Context, d *schema.ResourceData
 		o.SetDescription(x)
 	}
 
-	o.SetEnforceUefiSecureBoot(d.Get("enforce_uefi_secure_boot").(bool))
+	if v, ok := d.GetOkExists("enforce_uefi_secure_boot"); ok {
+		x := (v.(bool))
+		o.SetEnforceUefiSecureBoot(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4437
+API version: 1.0.9-4663
 Contact: intersight@cisco.com
 */
 
@@ -25,6 +25,8 @@ type ApplianceSetupInfo struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// The version of Intersight Appliance backup which can restore to.
+	BackupVersion *string `json:"BackupVersion,omitempty"`
 	// Build type of the Intersight Appliance setup (e.g. release or debug).
 	BuildType    *string                 `json:"BuildType,omitempty"`
 	Capabilities []ApplianceKeyValuePair `json:"Capabilities,omitempty"`
@@ -33,8 +35,10 @@ type ApplianceSetupInfo struct {
 	// Indicates where Intersight Appliance is installed in air-gapped or connected mode. In connected mode, Intersight Appliance is claimed by Intesight SaaS. In air-gapped mode, Intersight Appliance does not connect to any Cisco services. * `Connected` - In connected mode, Intersight Appliance connects to Intersight SaaS and other cisco.com services. * `Private` - In private mode, Intersight Appliance does not connect to Intersight SaaS or any cisco.com services.
 	DeploymentMode *string `json:"DeploymentMode,omitempty"`
 	// End date of the Intersight Appliance's initial setup.
-	EndTime     *time.Time `json:"EndTime,omitempty"`
-	SetupStates []string   `json:"SetupStates,omitempty"`
+	EndTime *time.Time `json:"EndTime,omitempty"`
+	// The most recent version which Intersight Appliance can upgrade to.
+	LatestVersion *string  `json:"LatestVersion,omitempty"`
+	SetupStates   []string `json:"SetupStates,omitempty"`
 	// Start date of the Intersight Appliance's initial setup.
 	StartTime            *time.Time              `json:"StartTime,omitempty"`
 	Account              *IamAccountRelationship `json:"Account,omitempty"`
@@ -112,6 +116,38 @@ func (o *ApplianceSetupInfo) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *ApplianceSetupInfo) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetBackupVersion returns the BackupVersion field value if set, zero value otherwise.
+func (o *ApplianceSetupInfo) GetBackupVersion() string {
+	if o == nil || o.BackupVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.BackupVersion
+}
+
+// GetBackupVersionOk returns a tuple with the BackupVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceSetupInfo) GetBackupVersionOk() (*string, bool) {
+	if o == nil || o.BackupVersion == nil {
+		return nil, false
+	}
+	return o.BackupVersion, true
+}
+
+// HasBackupVersion returns a boolean if a field has been set.
+func (o *ApplianceSetupInfo) HasBackupVersion() bool {
+	if o != nil && o.BackupVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupVersion gets a reference to the given string and assigns it to the BackupVersion field.
+func (o *ApplianceSetupInfo) SetBackupVersion(v string) {
+	o.BackupVersion = &v
 }
 
 // GetBuildType returns the BuildType field value if set, zero value otherwise.
@@ -275,6 +311,38 @@ func (o *ApplianceSetupInfo) SetEndTime(v time.Time) {
 	o.EndTime = &v
 }
 
+// GetLatestVersion returns the LatestVersion field value if set, zero value otherwise.
+func (o *ApplianceSetupInfo) GetLatestVersion() string {
+	if o == nil || o.LatestVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.LatestVersion
+}
+
+// GetLatestVersionOk returns a tuple with the LatestVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApplianceSetupInfo) GetLatestVersionOk() (*string, bool) {
+	if o == nil || o.LatestVersion == nil {
+		return nil, false
+	}
+	return o.LatestVersion, true
+}
+
+// HasLatestVersion returns a boolean if a field has been set.
+func (o *ApplianceSetupInfo) HasLatestVersion() bool {
+	if o != nil && o.LatestVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLatestVersion gets a reference to the given string and assigns it to the LatestVersion field.
+func (o *ApplianceSetupInfo) SetLatestVersion(v string) {
+	o.LatestVersion = &v
+}
+
 // GetSetupStates returns the SetupStates field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ApplianceSetupInfo) GetSetupStates() []string {
 	if o == nil {
@@ -388,6 +456,9 @@ func (o ApplianceSetupInfo) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.BackupVersion != nil {
+		toSerialize["BackupVersion"] = o.BackupVersion
+	}
 	if o.BuildType != nil {
 		toSerialize["BuildType"] = o.BuildType
 	}
@@ -402,6 +473,9 @@ func (o ApplianceSetupInfo) MarshalJSON() ([]byte, error) {
 	}
 	if o.EndTime != nil {
 		toSerialize["EndTime"] = o.EndTime
+	}
+	if o.LatestVersion != nil {
+		toSerialize["LatestVersion"] = o.LatestVersion
 	}
 	if o.SetupStates != nil {
 		toSerialize["SetupStates"] = o.SetupStates
@@ -426,6 +500,8 @@ func (o *ApplianceSetupInfo) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// The version of Intersight Appliance backup which can restore to.
+		BackupVersion *string `json:"BackupVersion,omitempty"`
 		// Build type of the Intersight Appliance setup (e.g. release or debug).
 		BuildType    *string                 `json:"BuildType,omitempty"`
 		Capabilities []ApplianceKeyValuePair `json:"Capabilities,omitempty"`
@@ -434,8 +510,10 @@ func (o *ApplianceSetupInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// Indicates where Intersight Appliance is installed in air-gapped or connected mode. In connected mode, Intersight Appliance is claimed by Intesight SaaS. In air-gapped mode, Intersight Appliance does not connect to any Cisco services. * `Connected` - In connected mode, Intersight Appliance connects to Intersight SaaS and other cisco.com services. * `Private` - In private mode, Intersight Appliance does not connect to Intersight SaaS or any cisco.com services.
 		DeploymentMode *string `json:"DeploymentMode,omitempty"`
 		// End date of the Intersight Appliance's initial setup.
-		EndTime     *time.Time `json:"EndTime,omitempty"`
-		SetupStates []string   `json:"SetupStates,omitempty"`
+		EndTime *time.Time `json:"EndTime,omitempty"`
+		// The most recent version which Intersight Appliance can upgrade to.
+		LatestVersion *string  `json:"LatestVersion,omitempty"`
+		SetupStates   []string `json:"SetupStates,omitempty"`
 		// Start date of the Intersight Appliance's initial setup.
 		StartTime *time.Time              `json:"StartTime,omitempty"`
 		Account   *IamAccountRelationship `json:"Account,omitempty"`
@@ -448,11 +526,13 @@ func (o *ApplianceSetupInfo) UnmarshalJSON(bytes []byte) (err error) {
 		varApplianceSetupInfo := _ApplianceSetupInfo{}
 		varApplianceSetupInfo.ClassId = varApplianceSetupInfoWithoutEmbeddedStruct.ClassId
 		varApplianceSetupInfo.ObjectType = varApplianceSetupInfoWithoutEmbeddedStruct.ObjectType
+		varApplianceSetupInfo.BackupVersion = varApplianceSetupInfoWithoutEmbeddedStruct.BackupVersion
 		varApplianceSetupInfo.BuildType = varApplianceSetupInfoWithoutEmbeddedStruct.BuildType
 		varApplianceSetupInfo.Capabilities = varApplianceSetupInfoWithoutEmbeddedStruct.Capabilities
 		varApplianceSetupInfo.CloudUrl = varApplianceSetupInfoWithoutEmbeddedStruct.CloudUrl
 		varApplianceSetupInfo.DeploymentMode = varApplianceSetupInfoWithoutEmbeddedStruct.DeploymentMode
 		varApplianceSetupInfo.EndTime = varApplianceSetupInfoWithoutEmbeddedStruct.EndTime
+		varApplianceSetupInfo.LatestVersion = varApplianceSetupInfoWithoutEmbeddedStruct.LatestVersion
 		varApplianceSetupInfo.SetupStates = varApplianceSetupInfoWithoutEmbeddedStruct.SetupStates
 		varApplianceSetupInfo.StartTime = varApplianceSetupInfoWithoutEmbeddedStruct.StartTime
 		varApplianceSetupInfo.Account = varApplianceSetupInfoWithoutEmbeddedStruct.Account
@@ -475,11 +555,13 @@ func (o *ApplianceSetupInfo) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "BackupVersion")
 		delete(additionalProperties, "BuildType")
 		delete(additionalProperties, "Capabilities")
 		delete(additionalProperties, "CloudUrl")
 		delete(additionalProperties, "DeploymentMode")
 		delete(additionalProperties, "EndTime")
+		delete(additionalProperties, "LatestVersion")
 		delete(additionalProperties, "SetupStates")
 		delete(additionalProperties, "StartTime")
 		delete(additionalProperties, "Account")

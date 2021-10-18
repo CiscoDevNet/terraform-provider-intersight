@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **SerialNumber** | Pointer to **string** | Obtained from the device connector management UI or API (REST endpoint &#39;/connector/DeviceIdentifiers&#39;). | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **Device** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**Reservation** | Pointer to [**ResourceReservationRelationship**](ResourceReservationRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -205,6 +206,31 @@ SetDevice sets Device field to given value.
 `func (o *AssetDeviceClaimAllOf) HasDevice() bool`
 
 HasDevice returns a boolean if a field has been set.
+
+### GetReservation
+
+`func (o *AssetDeviceClaimAllOf) GetReservation() ResourceReservationRelationship`
+
+GetReservation returns the Reservation field if non-nil, zero value otherwise.
+
+### GetReservationOk
+
+`func (o *AssetDeviceClaimAllOf) GetReservationOk() (*ResourceReservationRelationship, bool)`
+
+GetReservationOk returns a tuple with the Reservation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReservation
+
+`func (o *AssetDeviceClaimAllOf) SetReservation(v ResourceReservationRelationship)`
+
+SetReservation sets Reservation field to given value.
+
+### HasReservation
+
+`func (o *AssetDeviceClaimAllOf) HasReservation() bool`
+
+HasReservation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

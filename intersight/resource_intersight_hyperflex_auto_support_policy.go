@@ -471,7 +471,10 @@ func resourceHyperflexAutoSupportPolicyCreate(c context.Context, d *schema.Resou
 		}
 	}
 
-	o.SetAdminState(d.Get("admin_state").(bool))
+	if v, ok := d.GetOkExists("admin_state"); ok {
+		x := (v.(bool))
+		o.SetAdminState(x)
+	}
 
 	o.SetClassId("hyperflex.AutoSupportPolicy")
 

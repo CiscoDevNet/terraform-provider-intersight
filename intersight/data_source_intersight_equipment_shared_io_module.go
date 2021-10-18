@@ -1189,14 +1189,12 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.EquipmentSharedIoModule{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1205,8 +1203,7 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1246,20 +1243,17 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("config_state"); ok {
-		v := d.Get("config_state")
+	if v, ok := d.GetOk("config_state"); ok {
 		x := (v.(string))
 		o.SetConfigState(x)
 	}
 
-	if _, ok := d.GetOk("controller"); ok {
-		v := d.Get("controller")
+	if v, ok := d.GetOk("controller"); ok {
 		p := make([]models.ManagementControllerRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1302,38 +1296,32 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("device_mo_id"); ok {
-		v := d.Get("device_mo_id")
+	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
 	}
 
-	if _, ok := d.GetOk("discovery"); ok {
-		v := d.Get("discovery")
+	if v, ok := d.GetOk("discovery"); ok {
 		x := (v.(string))
 		o.SetDiscovery(x)
 	}
 
-	if _, ok := d.GetOk("dn"); ok {
-		v := d.Get("dn")
+	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("equipment_system_io_controller"); ok {
-		v := d.Get("equipment_system_io_controller")
+	if v, ok := d.GetOk("equipment_system_io_controller"); ok {
 		p := make([]models.EquipmentSystemIoControllerRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1376,8 +1364,7 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("inventory_device_info"); ok {
-		v := d.Get("inventory_device_info")
+	if v, ok := d.GetOk("inventory_device_info"); ok {
 		p := make([]models.InventoryDeviceInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1420,50 +1407,42 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("mac_of_shared_iom_aside"); ok {
-		v := d.Get("mac_of_shared_iom_aside")
+	if v, ok := d.GetOk("mac_of_shared_iom_aside"); ok {
 		x := (v.(string))
 		o.SetMacOfSharedIomAside(x)
 	}
 
-	if _, ok := d.GetOk("mac_of_shared_iom_bside"); ok {
-		v := d.Get("mac_of_shared_iom_bside")
+	if v, ok := d.GetOk("mac_of_shared_iom_bside"); ok {
 		x := (v.(string))
 		o.SetMacOfSharedIomBside(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("model"); ok {
-		v := d.Get("model")
+	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("oper_state"); ok {
-		v := d.Get("oper_state")
+	if v, ok := d.GetOk("oper_state"); ok {
 		x := (v.(string))
 		o.SetOperState(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1472,8 +1451,7 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1516,14 +1494,12 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("part_number"); ok {
-		v := d.Get("part_number")
+	if v, ok := d.GetOk("part_number"); ok {
 		x := (v.(string))
 		o.SetPartNumber(x)
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1563,8 +1539,7 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("port_groups"); ok {
-		v := d.Get("port_groups")
+	if v, ok := d.GetOk("port_groups"); ok {
 		x := make([]models.PortGroupRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1604,14 +1579,12 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		o.SetPortGroups(x)
 	}
 
-	if _, ok := d.GetOk("presence"); ok {
-		v := d.Get("presence")
+	if v, ok := d.GetOk("presence"); ok {
 		x := (v.(string))
 		o.SetPresence(x)
 	}
 
-	if _, ok := d.GetOk("previous_fru"); ok {
-		v := d.Get("previous_fru")
+	if v, ok := d.GetOk("previous_fru"); ok {
 		p := make([]models.EquipmentFruRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1654,14 +1627,12 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("reachability"); ok {
-		v := d.Get("reachability")
+	if v, ok := d.GetOk("reachability"); ok {
 		x := (v.(string))
 		o.SetReachability(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1704,32 +1675,27 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("revision"); ok {
-		v := d.Get("revision")
+	if v, ok := d.GetOk("revision"); ok {
 		x := (v.(string))
 		o.SetRevision(x)
 	}
 
-	if _, ok := d.GetOk("rn"); ok {
-		v := d.Get("rn")
+	if v, ok := d.GetOk("rn"); ok {
 		x := (v.(string))
 		o.SetRn(x)
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1762,20 +1728,17 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("usr_lbl"); ok {
-		v := d.Get("usr_lbl")
+	if v, ok := d.GetOk("usr_lbl"); ok {
 		x := (v.(string))
 		o.SetUsrLbl(x)
 	}
 
-	if _, ok := d.GetOk("vendor"); ok {
-		v := d.Get("vendor")
+	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1849,108 +1812,6 @@ func dataSourceEquipmentSharedIoModuleRead(c context.Context, d *schema.Resource
 		}
 	}
 
-	if _, ok := d.GetOk("vid"); ok {
-		v := d.Get("vid")
-		x := (v.(string))
-		o.SetVid(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("config_state"); ok {
-		x := (v.(string))
-		o.SetConfigState(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("device_mo_id"); ok {
-		x := (v.(string))
-		o.SetDeviceMoId(x)
-	}
-	if v, ok := d.GetOk("discovery"); ok {
-		x := (v.(string))
-		o.SetDiscovery(x)
-	}
-	if v, ok := d.GetOk("dn"); ok {
-		x := (v.(string))
-		o.SetDn(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("mac_of_shared_iom_aside"); ok {
-		x := (v.(string))
-		o.SetMacOfSharedIomAside(x)
-	}
-	if v, ok := d.GetOk("mac_of_shared_iom_bside"); ok {
-		x := (v.(string))
-		o.SetMacOfSharedIomBside(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("model"); ok {
-		x := (v.(string))
-		o.SetModel(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("oper_state"); ok {
-		x := (v.(string))
-		o.SetOperState(x)
-	}
-	if v, ok := d.GetOk("part_number"); ok {
-		x := (v.(string))
-		o.SetPartNumber(x)
-	}
-	if v, ok := d.GetOk("presence"); ok {
-		x := (v.(string))
-		o.SetPresence(x)
-	}
-	if v, ok := d.GetOk("reachability"); ok {
-		x := (v.(string))
-		o.SetReachability(x)
-	}
-	if v, ok := d.GetOk("revision"); ok {
-		x := (v.(string))
-		o.SetRevision(x)
-	}
-	if v, ok := d.GetOk("rn"); ok {
-		x := (v.(string))
-		o.SetRn(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("usr_lbl"); ok {
-		x := (v.(string))
-		o.SetUsrLbl(x)
-	}
-	if v, ok := d.GetOk("vendor"); ok {
-		x := (v.(string))
-		o.SetVendor(x)
-	}
 	if v, ok := d.GetOk("vid"); ok {
 		x := (v.(string))
 		o.SetVid(x)

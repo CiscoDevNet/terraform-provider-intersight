@@ -1443,14 +1443,12 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamAccount{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1459,8 +1457,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1500,8 +1497,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("app_registrations"); ok {
-		v := d.Get("app_registrations")
+	if v, ok := d.GetOk("app_registrations"); ok {
 		x := make([]models.IamAppRegistrationRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1541,26 +1537,22 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetAppRegistrations(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("domain_groups"); ok {
-		v := d.Get("domain_groups")
+	if v, ok := d.GetOk("domain_groups"); ok {
 		x := make([]models.IamDomainGroupRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1600,8 +1592,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetDomainGroups(x)
 	}
 
-	if _, ok := d.GetOk("end_point_roles"); ok {
-		v := d.Get("end_point_roles")
+	if v, ok := d.GetOk("end_point_roles"); ok {
 		x := make([]models.IamEndPointRoleRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1641,8 +1632,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetEndPointRoles(x)
 	}
 
-	if _, ok := d.GetOk("idpreferences"); ok {
-		v := d.Get("idpreferences")
+	if v, ok := d.GetOk("idpreferences"); ok {
 		x := make([]models.IamIdpReferenceRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1682,8 +1672,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetIdpreferences(x)
 	}
 
-	if _, ok := d.GetOk("idps"); ok {
-		v := d.Get("idps")
+	if v, ok := d.GetOk("idps"); ok {
 		x := make([]models.IamIdpRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1723,32 +1712,27 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetIdps(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1757,8 +1741,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1801,8 +1784,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1842,8 +1824,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("permissions"); ok {
-		v := d.Get("permissions")
+	if v, ok := d.GetOk("permissions"); ok {
 		x := make([]models.IamPermissionRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1883,8 +1864,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetPermissions(x)
 	}
 
-	if _, ok := d.GetOk("privilege_sets"); ok {
-		v := d.Get("privilege_sets")
+	if v, ok := d.GetOk("privilege_sets"); ok {
 		x := make([]models.IamPrivilegeSetRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1924,8 +1904,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetPrivilegeSets(x)
 	}
 
-	if _, ok := d.GetOk("privileges"); ok {
-		v := d.Get("privileges")
+	if v, ok := d.GetOk("privileges"); ok {
 		x := make([]models.IamPrivilegeRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1965,8 +1944,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetPrivileges(x)
 	}
 
-	if _, ok := d.GetOk("resource_limits"); ok {
-		v := d.Get("resource_limits")
+	if v, ok := d.GetOk("resource_limits"); ok {
 		p := make([]models.IamResourceLimitsRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2009,8 +1987,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if _, ok := d.GetOk("roles"); ok {
-		v := d.Get("roles")
+	if v, ok := d.GetOk("roles"); ok {
 		x := make([]models.IamRoleRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2050,8 +2027,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetRoles(x)
 	}
 
-	if _, ok := d.GetOk("security_holder"); ok {
-		v := d.Get("security_holder")
+	if v, ok := d.GetOk("security_holder"); ok {
 		p := make([]models.IamSecurityHolderRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2094,8 +2070,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if _, ok := d.GetOk("session_limits"); ok {
-		v := d.Get("session_limits")
+	if v, ok := d.GetOk("session_limits"); ok {
 		p := make([]models.IamSessionLimitsRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2138,20 +2113,17 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("status"); ok {
-		v := d.Get("status")
+	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2184,8 +2156,7 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2257,47 +2228,6 @@ func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta in
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
 	}
 
 	data, err := o.MarshalJSON()

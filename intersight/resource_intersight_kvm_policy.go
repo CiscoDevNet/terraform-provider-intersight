@@ -101,7 +101,7 @@ func resourceKvmPolicy() *schema.Resource {
 				Default:     true,
 			},
 			"enable_video_encryption": {
-				Description: "If enabled, encrypts all video information sent through KVM.",
+				Description: "If enabled, encrypts all video information sent through KVM. Please note that this is no longer applicable for servers running versions 4.2 and above.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Default:     true,
@@ -497,13 +497,22 @@ func resourceKvmPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 		o.SetDescription(x)
 	}
 
-	o.SetEnableLocalServerVideo(d.Get("enable_local_server_video").(bool))
+	if v, ok := d.GetOkExists("enable_local_server_video"); ok {
+		x := (v.(bool))
+		o.SetEnableLocalServerVideo(x)
+	}
 
-	o.SetEnableVideoEncryption(d.Get("enable_video_encryption").(bool))
+	if v, ok := d.GetOkExists("enable_video_encryption"); ok {
+		x := (v.(bool))
+		o.SetEnableVideoEncryption(x)
+	}
 
-	o.SetEnabled(d.Get("enabled").(bool))
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
 
-	if v, ok := d.GetOk("maximum_sessions"); ok {
+	if v, ok := d.GetOkExists("maximum_sessions"); ok {
 		x := int64(v.(int))
 		o.SetMaximumSessions(x)
 	}
@@ -605,7 +614,7 @@ func resourceKvmPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if v, ok := d.GetOk("remote_port"); ok {
+	if v, ok := d.GetOkExists("remote_port"); ok {
 		x := int64(v.(int))
 		o.SetRemotePort(x)
 	}

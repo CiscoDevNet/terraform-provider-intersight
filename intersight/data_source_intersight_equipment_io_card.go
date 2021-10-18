@@ -174,6 +174,40 @@ func dataSourceEquipmentIoCard() *schema.Resource {
 				},
 			},
 		},
+		"fan_modules": {
+			Description: "An array of relationships to equipmentFanModule resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"host_ports": {
 			Description: "An array of relationships to etherHostPort resources.",
 			Type:        schema.TypeList,
@@ -960,6 +994,40 @@ func dataSourceEquipmentIoCard() *schema.Resource {
 				},
 			},
 		},
+		"fan_modules": {
+			Description: "An array of relationships to equipmentFanModule resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"host_ports": {
 			Description: "An array of relationships to etherHostPort resources.",
 			Type:        schema.TypeList,
@@ -1603,14 +1671,12 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.EquipmentIoCard{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1619,8 +1685,7 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1660,58 +1725,52 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("connection_path"); ok {
-		v := d.Get("connection_path")
+	if v, ok := d.GetOk("connection_path"); ok {
 		x := (v.(string))
 		o.SetConnectionPath(x)
 	}
 
-	if _, ok := d.GetOk("connection_status"); ok {
-		v := d.Get("connection_status")
+	if v, ok := d.GetOk("connection_status"); ok {
 		x := (v.(string))
 		o.SetConnectionStatus(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	o.SetDcSupported(d.Get("dc_supported").(bool))
+	if v, ok := d.GetOkExists("dc_supported"); ok {
+		x := (v.(bool))
+		o.SetDcSupported(x)
+	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("device_mo_id"); ok {
-		v := d.Get("device_mo_id")
+	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
 	}
 
-	if _, ok := d.GetOk("dn"); ok {
-		v := d.Get("dn")
+	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("equipment_chassis"); ok {
-		v := d.Get("equipment_chassis")
+	if v, ok := d.GetOk("equipment_chassis"); ok {
 		p := make([]models.EquipmentChassisRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1754,8 +1813,7 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("equipment_fex"); ok {
-		v := d.Get("equipment_fex")
+	if v, ok := d.GetOk("equipment_fex"); ok {
 		p := make([]models.EquipmentFexRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1798,8 +1856,47 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("host_ports"); ok {
-		v := d.Get("host_ports")
+	if v, ok := d.GetOk("fan_modules"); ok {
+		x := make([]models.EquipmentFanModuleRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsEquipmentFanModuleRelationship(o))
+		}
+		o.SetFanModules(x)
+	}
+
+	if v, ok := d.GetOk("host_ports"); ok {
 		x := make([]models.EtherHostPortRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1839,8 +1936,7 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		o.SetHostPorts(x)
 	}
 
-	if _, ok := d.GetOk("inband_ip_addresses"); ok {
-		v := d.Get("inband_ip_addresses")
+	if v, ok := d.GetOk("inband_ip_addresses"); ok {
 		x := make([]models.ComputeIpAddress, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1868,8 +1964,7 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		o.SetInbandIpAddresses(x)
 	}
 
-	if _, ok := d.GetOk("inventory_device_info"); ok {
-		v := d.Get("inventory_device_info")
+	if v, ok := d.GetOk("inventory_device_info"); ok {
 		p := make([]models.InventoryDeviceInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1912,8 +2007,7 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("mgmt_controller"); ok {
-		v := d.Get("mgmt_controller")
+	if v, ok := d.GetOk("mgmt_controller"); ok {
 		p := make([]models.ManagementControllerRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1956,32 +2050,27 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("model"); ok {
-		v := d.Get("model")
+	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
 	}
 
-	if _, ok := d.GetOk("module_id"); ok {
-		v := d.Get("module_id")
+	if v, ok := d.GetOkExists("module_id"); ok {
 		x := int64(v.(int))
 		o.SetModuleId(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("network_ports"); ok {
-		v := d.Get("network_ports")
+	if v, ok := d.GetOk("network_ports"); ok {
 		x := make([]models.EtherNetworkPortRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2021,14 +2110,12 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		o.SetNetworkPorts(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("oper_reason"); ok {
-		v := d.Get("oper_reason")
+	if v, ok := d.GetOk("oper_reason"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2037,14 +2124,12 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		o.SetOperReason(x)
 	}
 
-	if _, ok := d.GetOk("oper_state"); ok {
-		v := d.Get("oper_state")
+	if v, ok := d.GetOk("oper_state"); ok {
 		x := (v.(string))
 		o.SetOperState(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2053,8 +2138,7 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2097,14 +2181,12 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("part_number"); ok {
-		v := d.Get("part_number")
+	if v, ok := d.GetOk("part_number"); ok {
 		x := (v.(string))
 		o.SetPartNumber(x)
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2144,8 +2226,7 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("physical_device_registration"); ok {
-		v := d.Get("physical_device_registration")
+	if v, ok := d.GetOk("physical_device_registration"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2188,20 +2269,17 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("pid"); ok {
-		v := d.Get("pid")
+	if v, ok := d.GetOk("pid"); ok {
 		x := (v.(string))
 		o.SetPid(x)
 	}
 
-	if _, ok := d.GetOk("presence"); ok {
-		v := d.Get("presence")
+	if v, ok := d.GetOk("presence"); ok {
 		x := (v.(string))
 		o.SetPresence(x)
 	}
 
-	if _, ok := d.GetOk("previous_fru"); ok {
-		v := d.Get("previous_fru")
+	if v, ok := d.GetOk("previous_fru"); ok {
 		p := make([]models.EquipmentFruRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2244,14 +2322,12 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("product_name"); ok {
-		v := d.Get("product_name")
+	if v, ok := d.GetOk("product_name"); ok {
 		x := (v.(string))
 		o.SetProductName(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2294,44 +2370,37 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("revision"); ok {
-		v := d.Get("revision")
+	if v, ok := d.GetOk("revision"); ok {
 		x := (v.(string))
 		o.SetRevision(x)
 	}
 
-	if _, ok := d.GetOk("rn"); ok {
-		v := d.Get("rn")
+	if v, ok := d.GetOk("rn"); ok {
 		x := (v.(string))
 		o.SetRn(x)
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("side"); ok {
-		v := d.Get("side")
+	if v, ok := d.GetOk("side"); ok {
 		x := (v.(string))
 		o.SetSide(x)
 	}
 
-	if _, ok := d.GetOk("sku"); ok {
-		v := d.Get("sku")
+	if v, ok := d.GetOk("sku"); ok {
 		x := (v.(string))
 		o.SetSku(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2364,20 +2433,17 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("vendor"); ok {
-		v := d.Get("vendor")
+	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
 	}
 
-	if _, ok := d.GetOk("nr_version"); ok {
-		v := d.Get("nr_version")
+	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2451,124 +2517,6 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if _, ok := d.GetOk("vid"); ok {
-		v := d.Get("vid")
-		x := (v.(string))
-		o.SetVid(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("connection_path"); ok {
-		x := (v.(string))
-		o.SetConnectionPath(x)
-	}
-	if v, ok := d.GetOk("connection_status"); ok {
-		x := (v.(string))
-		o.SetConnectionStatus(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("dc_supported"); ok {
-		x := (v.(bool))
-		o.SetDcSupported(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("device_mo_id"); ok {
-		x := (v.(string))
-		o.SetDeviceMoId(x)
-	}
-	if v, ok := d.GetOk("dn"); ok {
-		x := (v.(string))
-		o.SetDn(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("model"); ok {
-		x := (v.(string))
-		o.SetModel(x)
-	}
-	if v, ok := d.GetOk("module_id"); ok {
-		x := int64(v.(int))
-		o.SetModuleId(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("oper_state"); ok {
-		x := (v.(string))
-		o.SetOperState(x)
-	}
-	if v, ok := d.GetOk("part_number"); ok {
-		x := (v.(string))
-		o.SetPartNumber(x)
-	}
-	if v, ok := d.GetOk("pid"); ok {
-		x := (v.(string))
-		o.SetPid(x)
-	}
-	if v, ok := d.GetOk("presence"); ok {
-		x := (v.(string))
-		o.SetPresence(x)
-	}
-	if v, ok := d.GetOk("product_name"); ok {
-		x := (v.(string))
-		o.SetProductName(x)
-	}
-	if v, ok := d.GetOk("revision"); ok {
-		x := (v.(string))
-		o.SetRevision(x)
-	}
-	if v, ok := d.GetOk("rn"); ok {
-		x := (v.(string))
-		o.SetRn(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("side"); ok {
-		x := (v.(string))
-		o.SetSide(x)
-	}
-	if v, ok := d.GetOk("sku"); ok {
-		x := (v.(string))
-		o.SetSku(x)
-	}
-	if v, ok := d.GetOk("vendor"); ok {
-		x := (v.(string))
-		o.SetVendor(x)
-	}
-	if v, ok := d.GetOk("nr_version"); ok {
-		x := (v.(string))
-		o.SetVersion(x)
-	}
 	if v, ok := d.GetOk("vid"); ok {
 		x := (v.(string))
 		o.SetVid(x)
@@ -2628,6 +2576,8 @@ func dataSourceEquipmentIoCardRead(c context.Context, d *schema.ResourceData, me
 				temp["equipment_chassis"] = flattenMapEquipmentChassisRelationship(s.GetEquipmentChassis(), d)
 
 				temp["equipment_fex"] = flattenMapEquipmentFexRelationship(s.GetEquipmentFex(), d)
+
+				temp["fan_modules"] = flattenListEquipmentFanModuleRelationship(s.GetFanModules(), d)
 
 				temp["host_ports"] = flattenListEtherHostPortRelationship(s.GetHostPorts(), d)
 

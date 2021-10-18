@@ -183,7 +183,7 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 				Computed:    true,
 			},
 			"label": {
-				Description: "A user friendly short name to identify the custom data type definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), or an underscore (_).",
+				Description: "A user friendly short name to identify the custom data type definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), or an underscore (_) and must be at least 2 characters.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -753,7 +753,10 @@ func resourceWorkflowCustomDataTypeDefinitionCreate(c context.Context, d *schema
 
 	o.SetClassId("workflow.CustomDataTypeDefinition")
 
-	o.SetCompositeType(d.Get("composite_type").(bool))
+	if v, ok := d.GetOkExists("composite_type"); ok {
+		x := (v.(bool))
+		o.SetCompositeType(x)
+	}
 
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))

@@ -1101,20 +1101,17 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SnmpPolicy{}
-	if _, ok := d.GetOk("access_community_string"); ok {
-		v := d.Get("access_community_string")
+	if v, ok := d.GetOk("access_community_string"); ok {
 		x := (v.(string))
 		o.SetAccessCommunityString(x)
 	}
 
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1123,8 +1120,7 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1164,70 +1160,62 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("community_access"); ok {
-		v := d.Get("community_access")
+	if v, ok := d.GetOk("community_access"); ok {
 		x := (v.(string))
 		o.SetCommunityAccess(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	o.SetEnabled(d.Get("enabled").(bool))
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
 
-	if _, ok := d.GetOk("engine_id"); ok {
-		v := d.Get("engine_id")
+	if v, ok := d.GetOk("engine_id"); ok {
 		x := (v.(string))
 		o.SetEngineId(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("organization"); ok {
-		v := d.Get("organization")
+	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1270,8 +1258,7 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1280,8 +1267,7 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1324,8 +1310,7 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1365,8 +1350,7 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("profiles"); ok {
-		v := d.Get("profiles")
+	if v, ok := d.GetOk("profiles"); ok {
 		x := make([]models.PolicyAbstractConfigProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1406,20 +1390,17 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetProfiles(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("snmp_port"); ok {
-		v := d.Get("snmp_port")
+	if v, ok := d.GetOkExists("snmp_port"); ok {
 		x := int64(v.(int))
 		o.SetSnmpPort(x)
 	}
 
-	if _, ok := d.GetOk("snmp_traps"); ok {
-		v := d.Get("snmp_traps")
+	if v, ok := d.GetOk("snmp_traps"); ok {
 		x := make([]models.SnmpTrap, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1489,8 +1470,7 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetSnmpTraps(x)
 	}
 
-	if _, ok := d.GetOk("snmp_users"); ok {
-		v := d.Get("snmp_users")
+	if v, ok := d.GetOk("snmp_users"); ok {
 		x := make([]models.SnmpUser, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1554,20 +1534,17 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetSnmpUsers(x)
 	}
 
-	if _, ok := d.GetOk("sys_contact"); ok {
-		v := d.Get("sys_contact")
+	if v, ok := d.GetOk("sys_contact"); ok {
 		x := (v.(string))
 		o.SetSysContact(x)
 	}
 
-	if _, ok := d.GetOk("sys_location"); ok {
-		v := d.Get("sys_location")
+	if v, ok := d.GetOk("sys_location"); ok {
 		x := (v.(string))
 		o.SetSysLocation(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1600,18 +1577,22 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("trap_community"); ok {
-		v := d.Get("trap_community")
+	if v, ok := d.GetOk("trap_community"); ok {
 		x := (v.(string))
 		o.SetTrapCommunity(x)
 	}
 
-	o.SetV2Enabled(d.Get("v2_enabled").(bool))
+	if v, ok := d.GetOkExists("v2_enabled"); ok {
+		x := (v.(bool))
+		o.SetV2Enabled(x)
+	}
 
-	o.SetV3Enabled(d.Get("v3_enabled").(bool))
+	if v, ok := d.GetOkExists("v3_enabled"); ok {
+		x := (v.(bool))
+		o.SetV3Enabled(x)
+	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1683,87 +1664,6 @@ func dataSourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("access_community_string"); ok {
-		x := (v.(string))
-		o.SetAccessCommunityString(x)
-	}
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("community_access"); ok {
-		x := (v.(string))
-		o.SetCommunityAccess(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("enabled"); ok {
-		x := (v.(bool))
-		o.SetEnabled(x)
-	}
-	if v, ok := d.GetOk("engine_id"); ok {
-		x := (v.(string))
-		o.SetEngineId(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("snmp_port"); ok {
-		x := int64(v.(int))
-		o.SetSnmpPort(x)
-	}
-	if v, ok := d.GetOk("sys_contact"); ok {
-		x := (v.(string))
-		o.SetSysContact(x)
-	}
-	if v, ok := d.GetOk("sys_location"); ok {
-		x := (v.(string))
-		o.SetSysLocation(x)
-	}
-	if v, ok := d.GetOk("trap_community"); ok {
-		x := (v.(string))
-		o.SetTrapCommunity(x)
-	}
-	if v, ok := d.GetOk("v2_enabled"); ok {
-		x := (v.(bool))
-		o.SetV2Enabled(x)
-	}
-	if v, ok := d.GetOk("v3_enabled"); ok {
-		x := (v.(bool))
-		o.SetV3Enabled(x)
 	}
 
 	data, err := o.MarshalJSON()

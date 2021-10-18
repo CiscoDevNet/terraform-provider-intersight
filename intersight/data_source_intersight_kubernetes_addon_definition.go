@@ -204,6 +204,11 @@ func dataSourceKubernetesAddonDefinition() *schema.Resource {
 				},
 			},
 		},
+		"overrides": {
+			Description: "Properties that can be overridden for an addon.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"owners": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -614,6 +619,11 @@ func dataSourceKubernetesAddonDefinition() *schema.Resource {
 				},
 			},
 		},
+		"overrides": {
+			Description: "Properties that can be overridden for an addon.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"owners": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -851,14 +861,12 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesAddonDefinition{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -867,8 +875,7 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -908,8 +915,7 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("catalog"); ok {
-		v := d.Get("catalog")
+	if v, ok := d.GetOk("catalog"); ok {
 		p := make([]models.KubernetesCatalogRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -952,68 +958,57 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("chart_url"); ok {
-		v := d.Get("chart_url")
+	if v, ok := d.GetOk("chart_url"); ok {
 		x := (v.(string))
 		o.SetChartUrl(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("default_install_strategy"); ok {
-		v := d.Get("default_install_strategy")
+	if v, ok := d.GetOk("default_install_strategy"); ok {
 		x := (v.(string))
 		o.SetDefaultInstallStrategy(x)
 	}
 
-	if _, ok := d.GetOk("default_namespace"); ok {
-		v := d.Get("default_namespace")
+	if v, ok := d.GetOk("default_namespace"); ok {
 		x := (v.(string))
 		o.SetDefaultNamespace(x)
 	}
 
-	if _, ok := d.GetOk("default_upgrade_strategy"); ok {
-		v := d.Get("default_upgrade_strategy")
+	if v, ok := d.GetOk("default_upgrade_strategy"); ok {
 		x := (v.(string))
 		o.SetDefaultUpgradeStrategy(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("digest"); ok {
-		v := d.Get("digest")
+	if v, ok := d.GetOk("digest"); ok {
 		x := (v.(string))
 		o.SetDigest(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("icon_url"); ok {
-		v := d.Get("icon_url")
+	if v, ok := d.GetOk("icon_url"); ok {
 		x := (v.(string))
 		o.SetIconUrl(x)
 	}
 
-	if _, ok := d.GetOk("labels"); ok {
-		v := d.Get("labels")
+	if v, ok := d.GetOk("labels"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1022,32 +1017,27 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 		o.SetLabels(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("organization"); ok {
-		v := d.Get("organization")
+	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1090,8 +1080,12 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("overrides"); ok {
+		x := (v.(string))
+		o.SetOverrides(x)
+	}
+
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1100,8 +1094,7 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1144,8 +1137,7 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1185,8 +1177,7 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("platforms"); ok {
-		v := d.Get("platforms")
+	if v, ok := d.GetOk("platforms"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1195,14 +1186,12 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 		o.SetPlatforms(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1235,14 +1224,12 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("nr_version"); ok {
-		v := d.Get("nr_version")
+	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1316,75 +1303,6 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 		}
 	}
 
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("chart_url"); ok {
-		x := (v.(string))
-		o.SetChartUrl(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("default_install_strategy"); ok {
-		x := (v.(string))
-		o.SetDefaultInstallStrategy(x)
-	}
-	if v, ok := d.GetOk("default_namespace"); ok {
-		x := (v.(string))
-		o.SetDefaultNamespace(x)
-	}
-	if v, ok := d.GetOk("default_upgrade_strategy"); ok {
-		x := (v.(string))
-		o.SetDefaultUpgradeStrategy(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("digest"); ok {
-		x := (v.(string))
-		o.SetDigest(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("icon_url"); ok {
-		x := (v.(string))
-		o.SetIconUrl(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("nr_version"); ok {
-		x := (v.(string))
-		o.SetVersion(x)
-	}
-
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of KubernetesAddonDefinition object failed with error : %s", err.Error())
@@ -1446,6 +1364,7 @@ func dataSourceKubernetesAddonDefinitionRead(c context.Context, d *schema.Resour
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
+				temp["overrides"] = (s.GetOverrides())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)

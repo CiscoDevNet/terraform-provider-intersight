@@ -216,7 +216,7 @@ func dataSourceOsInstall() *schema.Resource {
 																		Optional:    true,
 																	},
 																	"label": {
-																		Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_).",
+																		Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters.",
 																		Type:        schema.TypeString,
 																		Optional:    true,
 																	},
@@ -1233,7 +1233,7 @@ func dataSourceOsInstall() *schema.Resource {
 																		Optional:    true,
 																	},
 																	"label": {
-																		Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_).",
+																		Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters.",
 																		Type:        schema.TypeString,
 																		Optional:    true,
 																	},
@@ -2065,14 +2065,12 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.OsInstall{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_parameters"); ok {
-		v := d.Get("additional_parameters")
+	if v, ok := d.GetOk("additional_parameters"); ok {
 		x := make([]models.OsPlaceHolder, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2494,8 +2492,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetAdditionalParameters(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -2504,8 +2501,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2545,8 +2541,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("answers"); ok {
-		v := d.Get("answers")
+	if v, ok := d.GetOk("answers"); ok {
 		p := make([]models.OsAnswers, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2657,14 +2652,12 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("configuration_file"); ok {
-		v := d.Get("configuration_file")
+	if v, ok := d.GetOk("configuration_file"); ok {
 		p := make([]models.OsConfigurationFileRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2707,32 +2700,27 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("error_msg"); ok {
-		v := d.Get("error_msg")
+	if v, ok := d.GetOk("error_msg"); ok {
 		x := (v.(string))
 		o.SetErrorMsg(x)
 	}
 
-	if _, ok := d.GetOk("image"); ok {
-		v := d.Get("image")
+	if v, ok := d.GetOk("image"); ok {
 		p := make([]models.SoftwarerepositoryOperatingSystemFileRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2775,14 +2763,12 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("install_method"); ok {
-		v := d.Get("install_method")
+	if v, ok := d.GetOk("install_method"); ok {
 		x := (v.(string))
 		o.SetInstallMethod(x)
 	}
 
-	if _, ok := d.GetOk("install_target"); ok {
-		v := d.Get("install_target")
+	if v, ok := d.GetOk("install_target"); ok {
 		p := make([]models.OsInstallTarget, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2813,38 +2799,32 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("oper_state"); ok {
-		v := d.Get("oper_state")
+	if v, ok := d.GetOk("oper_state"); ok {
 		x := (v.(string))
 		o.SetOperState(x)
 	}
 
-	if _, ok := d.GetOk("operating_system_parameters"); ok {
-		v := d.Get("operating_system_parameters")
+	if v, ok := d.GetOk("operating_system_parameters"); ok {
 		p := make([]models.OsOperatingSystemParameters, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2875,8 +2855,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("organization"); ok {
-		v := d.Get("organization")
+	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2919,8 +2898,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("osdu_image"); ok {
-		v := d.Get("osdu_image")
+	if v, ok := d.GetOk("osdu_image"); ok {
 		p := make([]models.FirmwareServerConfigurationUtilityDistributableRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2963,8 +2941,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2973,8 +2950,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3017,8 +2993,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3058,8 +3033,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("server"); ok {
-		v := d.Get("server")
+	if v, ok := d.GetOk("server"); ok {
 		p := make([]models.ComputePhysicalRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3102,14 +3076,12 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3142,8 +3114,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3217,8 +3188,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if _, ok := d.GetOk("workflow_info"); ok {
-		v := d.Get("workflow_info")
+	if v, ok := d.GetOk("workflow_info"); ok {
 		p := make([]models.WorkflowWorkflowInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3259,59 +3229,6 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 			x := p[0]
 			o.SetWorkflowInfo(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("error_msg"); ok {
-		x := (v.(string))
-		o.SetErrorMsg(x)
-	}
-	if v, ok := d.GetOk("install_method"); ok {
-		x := (v.(string))
-		o.SetInstallMethod(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("oper_state"); ok {
-		x := (v.(string))
-		o.SetOperState(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
 	}
 
 	data, err := o.MarshalJSON()

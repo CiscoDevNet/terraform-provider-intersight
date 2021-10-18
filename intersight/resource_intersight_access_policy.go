@@ -679,7 +679,7 @@ func resourceAccessPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if v, ok := d.GetOk("inband_vlan"); ok {
+	if v, ok := d.GetOkExists("inband_vlan"); ok {
 		x := int64(v.(int))
 		o.SetInbandVlan(x)
 	}

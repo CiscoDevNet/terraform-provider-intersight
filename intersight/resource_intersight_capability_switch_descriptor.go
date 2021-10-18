@@ -488,7 +488,7 @@ func resourceCapabilitySwitchDescriptorCreate(c context.Context, d *schema.Resou
 		o.SetDescription(x)
 	}
 
-	if v, ok := d.GetOk("expected_memory"); ok {
+	if v, ok := d.GetOkExists("expected_memory"); ok {
 		x := int64(v.(int))
 		o.SetExpectedMemory(x)
 	}

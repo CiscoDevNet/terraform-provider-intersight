@@ -485,7 +485,10 @@ func resourceSshPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 		o.SetDescription(x)
 	}
 
-	o.SetEnabled(d.Get("enabled").(bool))
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -542,7 +545,7 @@ func resourceSshPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if v, ok := d.GetOk("port"); ok {
+	if v, ok := d.GetOkExists("port"); ok {
 		x := int64(v.(int))
 		o.SetPort(x)
 	}
@@ -624,7 +627,7 @@ func resourceSshPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
-	if v, ok := d.GetOk("timeout"); ok {
+	if v, ok := d.GetOkExists("timeout"); ok {
 		x := int64(v.(int))
 		o.SetTimeout(x)
 	}

@@ -199,6 +199,16 @@ func dataSourceBiosPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"c1auto_demotion": {
+			Description: "BIOS Token for setting C1 Auto Demotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"c1auto_un_demotion": {
+			Description: "BIOS Token for setting C1 Auto UnDemotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"cbs_cmn_apbdis": {
 			Description: "BIOS Token for setting APBDIS configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `0` - Value - 0 for configuring CbsCmnApbdis token.\n* `1` - Value - 1 for configuring CbsCmnApbdis token.\n* `Auto` - Value - Auto for configuring CbsCmnApbdis token.",
 			Type:        schema.TypeString,
@@ -416,6 +426,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 		},
 		"cpu_frequency_floor": {
 			Description: "BIOS Token for setting Frequency Floor Override configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cpu_perf_enhancement": {
+			Description: "BIOS Token for setting Enhanced CPU Performance configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CpuPerfEnhancement token.\n* `Disabled` - Value - Disabled for configuring CpuPerfEnhancement token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -676,6 +691,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 		},
 		"legacy_usb_support": {
 			Description: "BIOS Token for setting Legacy USB Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `auto` - Value - auto for configuring LegacyUsbSupport token.\n* `disabled` - Value - disabled for configuring LegacyUsbSupport token.\n* `enabled` - Value - enabled for configuring LegacyUsbSupport token.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"llc_alloc": {
+			Description: "BIOS Token for setting LLC Dead Line configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring LlcAlloc token.\n* `disabled` - Value - disabled for configuring LlcAlloc token.\n* `enabled` - Value - enabled for configuring LlcAlloc token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1094,6 +1114,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"pcie_slots_cdn_enable": {
+			Description: "BIOS Token for setting PCIe Slots CDN Control configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -1319,6 +1344,16 @@ func dataSourceBiosPolicy() *schema.Resource {
 		},
 		"sgx_qos": {
 			Description: "BIOS Token for setting SGX QoS configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"sha1pcr_bank": {
+			Description: "BIOS Token for setting SHA-1 PCR Bank configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"sha256pcr_bank": {
+			Description: "BIOS Token for setting SHA256 PCR Bank configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -2100,6 +2135,16 @@ func dataSourceBiosPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"upi_link_enablement": {
+			Description: "BIOS Token for setting UPI Link Enablement configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1` - Value - 1 for configuring UpiLinkEnablement token.\n* `2` - Value - 2 for configuring UpiLinkEnablement token.\n* `Auto` - Value - Auto for configuring UpiLinkEnablement token.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"upi_power_management": {
+			Description: "BIOS Token for setting UPI Power Manangement configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"usb_emul6064": {
 			Description: "BIOS Token for setting Port 60/64 Emulation configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 			Type:        schema.TypeString,
@@ -2253,6 +2298,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"virtual_numa": {
+			Description: "BIOS Token for setting Virtual NUMA configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"vmd_enable": {
 			Description: "BIOS Token for setting VMD Enablement configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 			Type:        schema.TypeString,
@@ -2270,6 +2320,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 		},
 		"xpt_prefetch": {
 			Description: "BIOS Token for setting XPT Prefetch configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring XptPrefetch token.\n* `disabled` - Value - disabled for configuring XptPrefetch token.\n* `enabled` - Value - enabled for configuring XptPrefetch token.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"xpt_remote_prefetch": {
+			Description: "BIOS Token for setting XPT Remote Prefetch configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring XptRemotePrefetch token.\n* `disabled` - Value - disabled for configuring XptRemotePrefetch token.\n* `enabled` - Value - enabled for configuring XptRemotePrefetch token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -2458,6 +2513,16 @@ func dataSourceBiosPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"c1auto_demotion": {
+			Description: "BIOS Token for setting C1 Auto Demotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"c1auto_un_demotion": {
+			Description: "BIOS Token for setting C1 Auto UnDemotion configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"cbs_cmn_apbdis": {
 			Description: "BIOS Token for setting APBDIS configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `0` - Value - 0 for configuring CbsCmnApbdis token.\n* `1` - Value - 1 for configuring CbsCmnApbdis token.\n* `Auto` - Value - Auto for configuring CbsCmnApbdis token.",
 			Type:        schema.TypeString,
@@ -2675,6 +2740,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 		},
 		"cpu_frequency_floor": {
 			Description: "BIOS Token for setting Frequency Floor Override configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cpu_perf_enhancement": {
+			Description: "BIOS Token for setting Enhanced CPU Performance configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CpuPerfEnhancement token.\n* `Disabled` - Value - Disabled for configuring CpuPerfEnhancement token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -2935,6 +3005,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 		},
 		"legacy_usb_support": {
 			Description: "BIOS Token for setting Legacy USB Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `auto` - Value - auto for configuring LegacyUsbSupport token.\n* `disabled` - Value - disabled for configuring LegacyUsbSupport token.\n* `enabled` - Value - enabled for configuring LegacyUsbSupport token.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"llc_alloc": {
+			Description: "BIOS Token for setting LLC Dead Line configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring LlcAlloc token.\n* `disabled` - Value - disabled for configuring LlcAlloc token.\n* `enabled` - Value - enabled for configuring LlcAlloc token.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -3353,6 +3428,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"pcie_slots_cdn_enable": {
+			Description: "BIOS Token for setting PCIe Slots CDN Control configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -3578,6 +3658,16 @@ func dataSourceBiosPolicy() *schema.Resource {
 		},
 		"sgx_qos": {
 			Description: "BIOS Token for setting SGX QoS configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"sha1pcr_bank": {
+			Description: "BIOS Token for setting SHA-1 PCR Bank configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"sha256pcr_bank": {
+			Description: "BIOS Token for setting SHA256 PCR Bank configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -4359,6 +4449,16 @@ func dataSourceBiosPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"upi_link_enablement": {
+			Description: "BIOS Token for setting UPI Link Enablement configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1` - Value - 1 for configuring UpiLinkEnablement token.\n* `2` - Value - 2 for configuring UpiLinkEnablement token.\n* `Auto` - Value - Auto for configuring UpiLinkEnablement token.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"upi_power_management": {
+			Description: "BIOS Token for setting UPI Power Manangement configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"usb_emul6064": {
 			Description: "BIOS Token for setting Port 60/64 Emulation configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 			Type:        schema.TypeString,
@@ -4512,6 +4612,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"virtual_numa": {
+			Description: "BIOS Token for setting Virtual NUMA configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"vmd_enable": {
 			Description: "BIOS Token for setting VMD Enablement configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 			Type:        schema.TypeString,
@@ -4532,6 +4637,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"xpt_remote_prefetch": {
+			Description: "BIOS Token for setting XPT Remote Prefetch configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring XptRemotePrefetch token.\n* `disabled` - Value - disabled for configuring XptRemotePrefetch token.\n* `enabled` - Value - enabled for configuring XptRemotePrefetch token.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 	}
 	model["results"] = &schema.Schema{
 		Type:     schema.TypeList,
@@ -4549,86 +4659,72 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.BiosPolicy{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("acs_control_gpu1state"); ok {
-		v := d.Get("acs_control_gpu1state")
+	if v, ok := d.GetOk("acs_control_gpu1state"); ok {
 		x := (v.(string))
 		o.SetAcsControlGpu1state(x)
 	}
 
-	if _, ok := d.GetOk("acs_control_gpu2state"); ok {
-		v := d.Get("acs_control_gpu2state")
+	if v, ok := d.GetOk("acs_control_gpu2state"); ok {
 		x := (v.(string))
 		o.SetAcsControlGpu2state(x)
 	}
 
-	if _, ok := d.GetOk("acs_control_gpu3state"); ok {
-		v := d.Get("acs_control_gpu3state")
+	if v, ok := d.GetOk("acs_control_gpu3state"); ok {
 		x := (v.(string))
 		o.SetAcsControlGpu3state(x)
 	}
 
-	if _, ok := d.GetOk("acs_control_gpu4state"); ok {
-		v := d.Get("acs_control_gpu4state")
+	if v, ok := d.GetOk("acs_control_gpu4state"); ok {
 		x := (v.(string))
 		o.SetAcsControlGpu4state(x)
 	}
 
-	if _, ok := d.GetOk("acs_control_gpu5state"); ok {
-		v := d.Get("acs_control_gpu5state")
+	if v, ok := d.GetOk("acs_control_gpu5state"); ok {
 		x := (v.(string))
 		o.SetAcsControlGpu5state(x)
 	}
 
-	if _, ok := d.GetOk("acs_control_gpu6state"); ok {
-		v := d.Get("acs_control_gpu6state")
+	if v, ok := d.GetOk("acs_control_gpu6state"); ok {
 		x := (v.(string))
 		o.SetAcsControlGpu6state(x)
 	}
 
-	if _, ok := d.GetOk("acs_control_gpu7state"); ok {
-		v := d.Get("acs_control_gpu7state")
+	if v, ok := d.GetOk("acs_control_gpu7state"); ok {
 		x := (v.(string))
 		o.SetAcsControlGpu7state(x)
 	}
 
-	if _, ok := d.GetOk("acs_control_gpu8state"); ok {
-		v := d.Get("acs_control_gpu8state")
+	if v, ok := d.GetOk("acs_control_gpu8state"); ok {
 		x := (v.(string))
 		o.SetAcsControlGpu8state(x)
 	}
 
-	if _, ok := d.GetOk("acs_control_slot11state"); ok {
-		v := d.Get("acs_control_slot11state")
+	if v, ok := d.GetOk("acs_control_slot11state"); ok {
 		x := (v.(string))
 		o.SetAcsControlSlot11state(x)
 	}
 
-	if _, ok := d.GetOk("acs_control_slot12state"); ok {
-		v := d.Get("acs_control_slot12state")
+	if v, ok := d.GetOk("acs_control_slot12state"); ok {
 		x := (v.(string))
 		o.SetAcsControlSlot12state(x)
 	}
 
-	if _, ok := d.GetOk("acs_control_slot13state"); ok {
-		v := d.Get("acs_control_slot13state")
+	if v, ok := d.GetOk("acs_control_slot13state"); ok {
 		x := (v.(string))
 		o.SetAcsControlSlot13state(x)
 	}
 
-	if _, ok := d.GetOk("acs_control_slot14state"); ok {
-		v := d.Get("acs_control_slot14state")
+	if v, ok := d.GetOk("acs_control_slot14state"); ok {
 		x := (v.(string))
 		o.SetAcsControlSlot14state(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -4637,32 +4733,27 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if _, ok := d.GetOk("adjacent_cache_line_prefetch"); ok {
-		v := d.Get("adjacent_cache_line_prefetch")
+	if v, ok := d.GetOk("adjacent_cache_line_prefetch"); ok {
 		x := (v.(string))
 		o.SetAdjacentCacheLinePrefetch(x)
 	}
 
-	if _, ok := d.GetOk("advanced_mem_test"); ok {
-		v := d.Get("advanced_mem_test")
+	if v, ok := d.GetOk("advanced_mem_test"); ok {
 		x := (v.(string))
 		o.SetAdvancedMemTest(x)
 	}
 
-	if _, ok := d.GetOk("all_usb_devices"); ok {
-		v := d.Get("all_usb_devices")
+	if v, ok := d.GetOk("all_usb_devices"); ok {
 		x := (v.(string))
 		o.SetAllUsbDevices(x)
 	}
 
-	if _, ok := d.GetOk("altitude"); ok {
-		v := d.Get("altitude")
+	if v, ok := d.GetOk("altitude"); ok {
 		x := (v.(string))
 		o.SetAltitude(x)
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -4702,824 +4793,707 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("aspm_support"); ok {
-		v := d.Get("aspm_support")
+	if v, ok := d.GetOk("aspm_support"); ok {
 		x := (v.(string))
 		o.SetAspmSupport(x)
 	}
 
-	if _, ok := d.GetOk("assert_nmi_on_perr"); ok {
-		v := d.Get("assert_nmi_on_perr")
+	if v, ok := d.GetOk("assert_nmi_on_perr"); ok {
 		x := (v.(string))
 		o.SetAssertNmiOnPerr(x)
 	}
 
-	if _, ok := d.GetOk("assert_nmi_on_serr"); ok {
-		v := d.Get("assert_nmi_on_serr")
+	if v, ok := d.GetOk("assert_nmi_on_serr"); ok {
 		x := (v.(string))
 		o.SetAssertNmiOnSerr(x)
 	}
 
-	if _, ok := d.GetOk("auto_cc_state"); ok {
-		v := d.Get("auto_cc_state")
+	if v, ok := d.GetOk("auto_cc_state"); ok {
 		x := (v.(string))
 		o.SetAutoCcState(x)
 	}
 
-	if _, ok := d.GetOk("autonumous_cstate_enable"); ok {
-		v := d.Get("autonumous_cstate_enable")
+	if v, ok := d.GetOk("autonumous_cstate_enable"); ok {
 		x := (v.(string))
 		o.SetAutonumousCstateEnable(x)
 	}
 
-	if _, ok := d.GetOk("baud_rate"); ok {
-		v := d.Get("baud_rate")
+	if v, ok := d.GetOk("baud_rate"); ok {
 		x := (v.(string))
 		o.SetBaudRate(x)
 	}
 
-	if _, ok := d.GetOk("bme_dma_mitigation"); ok {
-		v := d.Get("bme_dma_mitigation")
+	if v, ok := d.GetOk("bme_dma_mitigation"); ok {
 		x := (v.(string))
 		o.SetBmeDmaMitigation(x)
 	}
 
-	if _, ok := d.GetOk("boot_option_num_retry"); ok {
-		v := d.Get("boot_option_num_retry")
+	if v, ok := d.GetOk("boot_option_num_retry"); ok {
 		x := (v.(string))
 		o.SetBootOptionNumRetry(x)
 	}
 
-	if _, ok := d.GetOk("boot_option_re_cool_down"); ok {
-		v := d.Get("boot_option_re_cool_down")
+	if v, ok := d.GetOk("boot_option_re_cool_down"); ok {
 		x := (v.(string))
 		o.SetBootOptionReCoolDown(x)
 	}
 
-	if _, ok := d.GetOk("boot_option_retry"); ok {
-		v := d.Get("boot_option_retry")
+	if v, ok := d.GetOk("boot_option_retry"); ok {
 		x := (v.(string))
 		o.SetBootOptionRetry(x)
 	}
 
-	if _, ok := d.GetOk("boot_performance_mode"); ok {
-		v := d.Get("boot_performance_mode")
+	if v, ok := d.GetOk("boot_performance_mode"); ok {
 		x := (v.(string))
 		o.SetBootPerformanceMode(x)
 	}
 
-	if _, ok := d.GetOk("burst_and_postponed_refresh"); ok {
-		v := d.Get("burst_and_postponed_refresh")
+	if v, ok := d.GetOk("burst_and_postponed_refresh"); ok {
 		x := (v.(string))
 		o.SetBurstAndPostponedRefresh(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_apbdis"); ok {
-		v := d.Get("cbs_cmn_apbdis")
+	if v, ok := d.GetOk("c1auto_demotion"); ok {
+		x := (v.(string))
+		o.SetC1autoDemotion(x)
+	}
+
+	if v, ok := d.GetOk("c1auto_un_demotion"); ok {
+		x := (v.(string))
+		o.SetC1autoUnDemotion(x)
+	}
+
+	if v, ok := d.GetOk("cbs_cmn_apbdis"); ok {
 		x := (v.(string))
 		o.SetCbsCmnApbdis(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_cpu_cpb"); ok {
-		v := d.Get("cbs_cmn_cpu_cpb")
+	if v, ok := d.GetOk("cbs_cmn_cpu_cpb"); ok {
 		x := (v.(string))
 		o.SetCbsCmnCpuCpb(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_cpu_gen_downcore_ctrl"); ok {
-		v := d.Get("cbs_cmn_cpu_gen_downcore_ctrl")
+	if v, ok := d.GetOk("cbs_cmn_cpu_gen_downcore_ctrl"); ok {
 		x := (v.(string))
 		o.SetCbsCmnCpuGenDowncoreCtrl(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_cpu_global_cstate_ctrl"); ok {
-		v := d.Get("cbs_cmn_cpu_global_cstate_ctrl")
+	if v, ok := d.GetOk("cbs_cmn_cpu_global_cstate_ctrl"); ok {
 		x := (v.(string))
 		o.SetCbsCmnCpuGlobalCstateCtrl(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_cpu_l1stream_hw_prefetcher"); ok {
-		v := d.Get("cbs_cmn_cpu_l1stream_hw_prefetcher")
+	if v, ok := d.GetOk("cbs_cmn_cpu_l1stream_hw_prefetcher"); ok {
 		x := (v.(string))
 		o.SetCbsCmnCpuL1streamHwPrefetcher(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_cpu_l2stream_hw_prefetcher"); ok {
-		v := d.Get("cbs_cmn_cpu_l2stream_hw_prefetcher")
+	if v, ok := d.GetOk("cbs_cmn_cpu_l2stream_hw_prefetcher"); ok {
 		x := (v.(string))
 		o.SetCbsCmnCpuL2streamHwPrefetcher(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_cpu_smee"); ok {
-		v := d.Get("cbs_cmn_cpu_smee")
+	if v, ok := d.GetOk("cbs_cmn_cpu_smee"); ok {
 		x := (v.(string))
 		o.SetCbsCmnCpuSmee(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_cpu_streaming_stores_ctrl"); ok {
-		v := d.Get("cbs_cmn_cpu_streaming_stores_ctrl")
+	if v, ok := d.GetOk("cbs_cmn_cpu_streaming_stores_ctrl"); ok {
 		x := (v.(string))
 		o.SetCbsCmnCpuStreamingStoresCtrl(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_determinism_slider"); ok {
-		v := d.Get("cbs_cmn_determinism_slider")
+	if v, ok := d.GetOk("cbs_cmn_determinism_slider"); ok {
 		x := (v.(string))
 		o.SetCbsCmnDeterminismSlider(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_efficiency_mode_en"); ok {
-		v := d.Get("cbs_cmn_efficiency_mode_en")
+	if v, ok := d.GetOk("cbs_cmn_efficiency_mode_en"); ok {
 		x := (v.(string))
 		o.SetCbsCmnEfficiencyModeEn(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_fixed_soc_pstate"); ok {
-		v := d.Get("cbs_cmn_fixed_soc_pstate")
+	if v, ok := d.GetOk("cbs_cmn_fixed_soc_pstate"); ok {
 		x := (v.(string))
 		o.SetCbsCmnFixedSocPstate(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_gnb_nb_iommu"); ok {
-		v := d.Get("cbs_cmn_gnb_nb_iommu")
+	if v, ok := d.GetOk("cbs_cmn_gnb_nb_iommu"); ok {
 		x := (v.(string))
 		o.SetCbsCmnGnbNbIommu(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_gnb_smu_df_cstates"); ok {
-		v := d.Get("cbs_cmn_gnb_smu_df_cstates")
+	if v, ok := d.GetOk("cbs_cmn_gnb_smu_df_cstates"); ok {
 		x := (v.(string))
 		o.SetCbsCmnGnbSmuDfCstates(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_gnb_smucppc"); ok {
-		v := d.Get("cbs_cmn_gnb_smucppc")
+	if v, ok := d.GetOk("cbs_cmn_gnb_smucppc"); ok {
 		x := (v.(string))
 		o.SetCbsCmnGnbSmucppc(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_mem_ctrl_bank_group_swap_ddr4"); ok {
-		v := d.Get("cbs_cmn_mem_ctrl_bank_group_swap_ddr4")
+	if v, ok := d.GetOk("cbs_cmn_mem_ctrl_bank_group_swap_ddr4"); ok {
 		x := (v.(string))
 		o.SetCbsCmnMemCtrlBankGroupSwapDdr4(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmn_mem_map_bank_interleave_ddr4"); ok {
-		v := d.Get("cbs_cmn_mem_map_bank_interleave_ddr4")
+	if v, ok := d.GetOk("cbs_cmn_mem_map_bank_interleave_ddr4"); ok {
 		x := (v.(string))
 		o.SetCbsCmnMemMapBankInterleaveDdr4(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cmnc_tdp_ctl"); ok {
-		v := d.Get("cbs_cmnc_tdp_ctl")
+	if v, ok := d.GetOk("cbs_cmnc_tdp_ctl"); ok {
 		x := (v.(string))
 		o.SetCbsCmncTdpCtl(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cpu_ccd_ctrl_ssp"); ok {
-		v := d.Get("cbs_cpu_ccd_ctrl_ssp")
+	if v, ok := d.GetOk("cbs_cpu_ccd_ctrl_ssp"); ok {
 		x := (v.(string))
 		o.SetCbsCpuCcdCtrlSsp(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cpu_core_ctrl"); ok {
-		v := d.Get("cbs_cpu_core_ctrl")
+	if v, ok := d.GetOk("cbs_cpu_core_ctrl"); ok {
 		x := (v.(string))
 		o.SetCbsCpuCoreCtrl(x)
 	}
 
-	if _, ok := d.GetOk("cbs_cpu_smt_ctrl"); ok {
-		v := d.Get("cbs_cpu_smt_ctrl")
+	if v, ok := d.GetOk("cbs_cpu_smt_ctrl"); ok {
 		x := (v.(string))
 		o.SetCbsCpuSmtCtrl(x)
 	}
 
-	if _, ok := d.GetOk("cbs_dbg_cpu_snp_mem_cover"); ok {
-		v := d.Get("cbs_dbg_cpu_snp_mem_cover")
+	if v, ok := d.GetOk("cbs_dbg_cpu_snp_mem_cover"); ok {
 		x := (v.(string))
 		o.SetCbsDbgCpuSnpMemCover(x)
 	}
 
-	if _, ok := d.GetOk("cbs_dbg_cpu_snp_mem_size_cover"); ok {
-		v := d.Get("cbs_dbg_cpu_snp_mem_size_cover")
+	if v, ok := d.GetOk("cbs_dbg_cpu_snp_mem_size_cover"); ok {
 		x := (v.(string))
 		o.SetCbsDbgCpuSnpMemSizeCover(x)
 	}
 
-	if _, ok := d.GetOk("cbs_df_cmn_acpi_srat_l3numa"); ok {
-		v := d.Get("cbs_df_cmn_acpi_srat_l3numa")
+	if v, ok := d.GetOk("cbs_df_cmn_acpi_srat_l3numa"); ok {
 		x := (v.(string))
 		o.SetCbsDfCmnAcpiSratL3numa(x)
 	}
 
-	if _, ok := d.GetOk("cbs_df_cmn_dram_nps"); ok {
-		v := d.Get("cbs_df_cmn_dram_nps")
+	if v, ok := d.GetOk("cbs_df_cmn_dram_nps"); ok {
 		x := (v.(string))
 		o.SetCbsDfCmnDramNps(x)
 	}
 
-	if _, ok := d.GetOk("cbs_df_cmn_mem_intlv"); ok {
-		v := d.Get("cbs_df_cmn_mem_intlv")
+	if v, ok := d.GetOk("cbs_df_cmn_mem_intlv"); ok {
 		x := (v.(string))
 		o.SetCbsDfCmnMemIntlv(x)
 	}
 
-	if _, ok := d.GetOk("cbs_df_cmn_mem_intlv_size"); ok {
-		v := d.Get("cbs_df_cmn_mem_intlv_size")
+	if v, ok := d.GetOk("cbs_df_cmn_mem_intlv_size"); ok {
 		x := (v.(string))
 		o.SetCbsDfCmnMemIntlvSize(x)
 	}
 
-	if _, ok := d.GetOk("cbs_sev_snp_support"); ok {
-		v := d.Get("cbs_sev_snp_support")
+	if v, ok := d.GetOk("cbs_sev_snp_support"); ok {
 		x := (v.(string))
 		o.SetCbsSevSnpSupport(x)
 	}
 
-	if _, ok := d.GetOk("cdn_enable"); ok {
-		v := d.Get("cdn_enable")
+	if v, ok := d.GetOk("cdn_enable"); ok {
 		x := (v.(string))
 		o.SetCdnEnable(x)
 	}
 
-	if _, ok := d.GetOk("cdn_support"); ok {
-		v := d.Get("cdn_support")
+	if v, ok := d.GetOk("cdn_support"); ok {
 		x := (v.(string))
 		o.SetCdnSupport(x)
 	}
 
-	if _, ok := d.GetOk("channel_inter_leave"); ok {
-		v := d.Get("channel_inter_leave")
+	if v, ok := d.GetOk("channel_inter_leave"); ok {
 		x := (v.(string))
 		o.SetChannelInterLeave(x)
 	}
 
-	if _, ok := d.GetOk("cisco_adaptive_mem_training"); ok {
-		v := d.Get("cisco_adaptive_mem_training")
+	if v, ok := d.GetOk("cisco_adaptive_mem_training"); ok {
 		x := (v.(string))
 		o.SetCiscoAdaptiveMemTraining(x)
 	}
 
-	if _, ok := d.GetOk("cisco_debug_level"); ok {
-		v := d.Get("cisco_debug_level")
+	if v, ok := d.GetOk("cisco_debug_level"); ok {
 		x := (v.(string))
 		o.SetCiscoDebugLevel(x)
 	}
 
-	if _, ok := d.GetOk("cisco_oprom_launch_optimization"); ok {
-		v := d.Get("cisco_oprom_launch_optimization")
+	if v, ok := d.GetOk("cisco_oprom_launch_optimization"); ok {
 		x := (v.(string))
 		o.SetCiscoOpromLaunchOptimization(x)
 	}
 
-	if _, ok := d.GetOk("cisco_xgmi_max_speed"); ok {
-		v := d.Get("cisco_xgmi_max_speed")
+	if v, ok := d.GetOk("cisco_xgmi_max_speed"); ok {
 		x := (v.(string))
 		o.SetCiscoXgmiMaxSpeed(x)
 	}
 
-	if _, ok := d.GetOk("cke_low_policy"); ok {
-		v := d.Get("cke_low_policy")
+	if v, ok := d.GetOk("cke_low_policy"); ok {
 		x := (v.(string))
 		o.SetCkeLowPolicy(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("closed_loop_therm_throtl"); ok {
-		v := d.Get("closed_loop_therm_throtl")
+	if v, ok := d.GetOk("closed_loop_therm_throtl"); ok {
 		x := (v.(string))
 		o.SetClosedLoopThermThrotl(x)
 	}
 
-	if _, ok := d.GetOk("cmci_enable"); ok {
-		v := d.Get("cmci_enable")
+	if v, ok := d.GetOk("cmci_enable"); ok {
 		x := (v.(string))
 		o.SetCmciEnable(x)
 	}
 
-	if _, ok := d.GetOk("config_tdp"); ok {
-		v := d.Get("config_tdp")
+	if v, ok := d.GetOk("config_tdp"); ok {
 		x := (v.(string))
 		o.SetConfigTdp(x)
 	}
 
-	if _, ok := d.GetOk("config_tdp_level"); ok {
-		v := d.Get("config_tdp_level")
+	if v, ok := d.GetOk("config_tdp_level"); ok {
 		x := (v.(string))
 		o.SetConfigTdpLevel(x)
 	}
 
-	if _, ok := d.GetOk("console_redirection"); ok {
-		v := d.Get("console_redirection")
+	if v, ok := d.GetOk("console_redirection"); ok {
 		x := (v.(string))
 		o.SetConsoleRedirection(x)
 	}
 
-	if _, ok := d.GetOk("core_multi_processing"); ok {
-		v := d.Get("core_multi_processing")
+	if v, ok := d.GetOk("core_multi_processing"); ok {
 		x := (v.(string))
 		o.SetCoreMultiProcessing(x)
 	}
 
-	if _, ok := d.GetOk("cpu_energy_performance"); ok {
-		v := d.Get("cpu_energy_performance")
+	if v, ok := d.GetOk("cpu_energy_performance"); ok {
 		x := (v.(string))
 		o.SetCpuEnergyPerformance(x)
 	}
 
-	if _, ok := d.GetOk("cpu_frequency_floor"); ok {
-		v := d.Get("cpu_frequency_floor")
+	if v, ok := d.GetOk("cpu_frequency_floor"); ok {
 		x := (v.(string))
 		o.SetCpuFrequencyFloor(x)
 	}
 
-	if _, ok := d.GetOk("cpu_performance"); ok {
-		v := d.Get("cpu_performance")
+	if v, ok := d.GetOk("cpu_perf_enhancement"); ok {
+		x := (v.(string))
+		o.SetCpuPerfEnhancement(x)
+	}
+
+	if v, ok := d.GetOk("cpu_performance"); ok {
 		x := (v.(string))
 		o.SetCpuPerformance(x)
 	}
 
-	if _, ok := d.GetOk("cpu_power_management"); ok {
-		v := d.Get("cpu_power_management")
+	if v, ok := d.GetOk("cpu_power_management"); ok {
 		x := (v.(string))
 		o.SetCpuPowerManagement(x)
 	}
 
-	if _, ok := d.GetOk("cr_qos"); ok {
-		v := d.Get("cr_qos")
+	if v, ok := d.GetOk("cr_qos"); ok {
 		x := (v.(string))
 		o.SetCrQos(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("crfastgo_config"); ok {
-		v := d.Get("crfastgo_config")
+	if v, ok := d.GetOk("crfastgo_config"); ok {
 		x := (v.(string))
 		o.SetCrfastgoConfig(x)
 	}
 
-	if _, ok := d.GetOk("dcpmm_firmware_downgrade"); ok {
-		v := d.Get("dcpmm_firmware_downgrade")
+	if v, ok := d.GetOk("dcpmm_firmware_downgrade"); ok {
 		x := (v.(string))
 		o.SetDcpmmFirmwareDowngrade(x)
 	}
 
-	if _, ok := d.GetOk("demand_scrub"); ok {
-		v := d.Get("demand_scrub")
+	if v, ok := d.GetOk("demand_scrub"); ok {
 		x := (v.(string))
 		o.SetDemandScrub(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("direct_cache_access"); ok {
-		v := d.Get("direct_cache_access")
+	if v, ok := d.GetOk("direct_cache_access"); ok {
 		x := (v.(string))
 		o.SetDirectCacheAccess(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("dram_clock_throttling"); ok {
-		v := d.Get("dram_clock_throttling")
+	if v, ok := d.GetOk("dram_clock_throttling"); ok {
 		x := (v.(string))
 		o.SetDramClockThrottling(x)
 	}
 
-	if _, ok := d.GetOk("dram_refresh_rate"); ok {
-		v := d.Get("dram_refresh_rate")
+	if v, ok := d.GetOk("dram_refresh_rate"); ok {
 		x := (v.(string))
 		o.SetDramRefreshRate(x)
 	}
 
-	if _, ok := d.GetOk("dram_sw_thermal_throttling"); ok {
-		v := d.Get("dram_sw_thermal_throttling")
+	if v, ok := d.GetOk("dram_sw_thermal_throttling"); ok {
 		x := (v.(string))
 		o.SetDramSwThermalThrottling(x)
 	}
 
-	if _, ok := d.GetOk("eadr_support"); ok {
-		v := d.Get("eadr_support")
+	if v, ok := d.GetOk("eadr_support"); ok {
 		x := (v.(string))
 		o.SetEadrSupport(x)
 	}
 
-	if _, ok := d.GetOk("edpc_en"); ok {
-		v := d.Get("edpc_en")
+	if v, ok := d.GetOk("edpc_en"); ok {
 		x := (v.(string))
 		o.SetEdpcEn(x)
 	}
 
-	if _, ok := d.GetOk("enable_clock_spread_spec"); ok {
-		v := d.Get("enable_clock_spread_spec")
+	if v, ok := d.GetOk("enable_clock_spread_spec"); ok {
 		x := (v.(string))
 		o.SetEnableClockSpreadSpec(x)
 	}
 
-	if _, ok := d.GetOk("enable_mktme"); ok {
-		v := d.Get("enable_mktme")
+	if v, ok := d.GetOk("enable_mktme"); ok {
 		x := (v.(string))
 		o.SetEnableMktme(x)
 	}
 
-	if _, ok := d.GetOk("enable_sgx"); ok {
-		v := d.Get("enable_sgx")
+	if v, ok := d.GetOk("enable_sgx"); ok {
 		x := (v.(string))
 		o.SetEnableSgx(x)
 	}
 
-	if _, ok := d.GetOk("enable_tme"); ok {
-		v := d.Get("enable_tme")
+	if v, ok := d.GetOk("enable_tme"); ok {
 		x := (v.(string))
 		o.SetEnableTme(x)
 	}
 
-	if _, ok := d.GetOk("energy_efficient_turbo"); ok {
-		v := d.Get("energy_efficient_turbo")
+	if v, ok := d.GetOk("energy_efficient_turbo"); ok {
 		x := (v.(string))
 		o.SetEnergyEfficientTurbo(x)
 	}
 
-	if _, ok := d.GetOk("eng_perf_tuning"); ok {
-		v := d.Get("eng_perf_tuning")
+	if v, ok := d.GetOk("eng_perf_tuning"); ok {
 		x := (v.(string))
 		o.SetEngPerfTuning(x)
 	}
 
-	if _, ok := d.GetOk("enhanced_intel_speed_step_tech"); ok {
-		v := d.Get("enhanced_intel_speed_step_tech")
+	if v, ok := d.GetOk("enhanced_intel_speed_step_tech"); ok {
 		x := (v.(string))
 		o.SetEnhancedIntelSpeedStepTech(x)
 	}
 
-	if _, ok := d.GetOk("epoch_update"); ok {
-		v := d.Get("epoch_update")
+	if v, ok := d.GetOk("epoch_update"); ok {
 		x := (v.(string))
 		o.SetEpochUpdate(x)
 	}
 
-	if _, ok := d.GetOk("epp_enable"); ok {
-		v := d.Get("epp_enable")
+	if v, ok := d.GetOk("epp_enable"); ok {
 		x := (v.(string))
 		o.SetEppEnable(x)
 	}
 
-	if _, ok := d.GetOk("epp_profile"); ok {
-		v := d.Get("epp_profile")
+	if v, ok := d.GetOk("epp_profile"); ok {
 		x := (v.(string))
 		o.SetEppProfile(x)
 	}
 
-	if _, ok := d.GetOk("execute_disable_bit"); ok {
-		v := d.Get("execute_disable_bit")
+	if v, ok := d.GetOk("execute_disable_bit"); ok {
 		x := (v.(string))
 		o.SetExecuteDisableBit(x)
 	}
 
-	if _, ok := d.GetOk("extended_apic"); ok {
-		v := d.Get("extended_apic")
+	if v, ok := d.GetOk("extended_apic"); ok {
 		x := (v.(string))
 		o.SetExtendedApic(x)
 	}
 
-	if _, ok := d.GetOk("flow_control"); ok {
-		v := d.Get("flow_control")
+	if v, ok := d.GetOk("flow_control"); ok {
 		x := (v.(string))
 		o.SetFlowControl(x)
 	}
 
-	if _, ok := d.GetOk("frb2enable"); ok {
-		v := d.Get("frb2enable")
+	if v, ok := d.GetOk("frb2enable"); ok {
 		x := (v.(string))
 		o.SetFrb2enable(x)
 	}
 
-	if _, ok := d.GetOk("hardware_prefetch"); ok {
-		v := d.Get("hardware_prefetch")
+	if v, ok := d.GetOk("hardware_prefetch"); ok {
 		x := (v.(string))
 		o.SetHardwarePrefetch(x)
 	}
 
-	if _, ok := d.GetOk("hwpm_enable"); ok {
-		v := d.Get("hwpm_enable")
+	if v, ok := d.GetOk("hwpm_enable"); ok {
 		x := (v.(string))
 		o.SetHwpmEnable(x)
 	}
 
-	if _, ok := d.GetOk("imc_interleave"); ok {
-		v := d.Get("imc_interleave")
+	if v, ok := d.GetOk("imc_interleave"); ok {
 		x := (v.(string))
 		o.SetImcInterleave(x)
 	}
 
-	if _, ok := d.GetOk("intel_dynamic_speed_select"); ok {
-		v := d.Get("intel_dynamic_speed_select")
+	if v, ok := d.GetOk("intel_dynamic_speed_select"); ok {
 		x := (v.(string))
 		o.SetIntelDynamicSpeedSelect(x)
 	}
 
-	if _, ok := d.GetOk("intel_hyper_threading_tech"); ok {
-		v := d.Get("intel_hyper_threading_tech")
+	if v, ok := d.GetOk("intel_hyper_threading_tech"); ok {
 		x := (v.(string))
 		o.SetIntelHyperThreadingTech(x)
 	}
 
-	if _, ok := d.GetOk("intel_speed_select"); ok {
-		v := d.Get("intel_speed_select")
+	if v, ok := d.GetOk("intel_speed_select"); ok {
 		x := (v.(string))
 		o.SetIntelSpeedSelect(x)
 	}
 
-	if _, ok := d.GetOk("intel_turbo_boost_tech"); ok {
-		v := d.Get("intel_turbo_boost_tech")
+	if v, ok := d.GetOk("intel_turbo_boost_tech"); ok {
 		x := (v.(string))
 		o.SetIntelTurboBoostTech(x)
 	}
 
-	if _, ok := d.GetOk("intel_virtualization_technology"); ok {
-		v := d.Get("intel_virtualization_technology")
+	if v, ok := d.GetOk("intel_virtualization_technology"); ok {
 		x := (v.(string))
 		o.SetIntelVirtualizationTechnology(x)
 	}
 
-	if _, ok := d.GetOk("intel_vt_for_directed_io"); ok {
-		v := d.Get("intel_vt_for_directed_io")
+	if v, ok := d.GetOk("intel_vt_for_directed_io"); ok {
 		x := (v.(string))
 		o.SetIntelVtForDirectedIo(x)
 	}
 
-	if _, ok := d.GetOk("intel_vtd_coherency_support"); ok {
-		v := d.Get("intel_vtd_coherency_support")
+	if v, ok := d.GetOk("intel_vtd_coherency_support"); ok {
 		x := (v.(string))
 		o.SetIntelVtdCoherencySupport(x)
 	}
 
-	if _, ok := d.GetOk("intel_vtd_interrupt_remapping"); ok {
-		v := d.Get("intel_vtd_interrupt_remapping")
+	if v, ok := d.GetOk("intel_vtd_interrupt_remapping"); ok {
 		x := (v.(string))
 		o.SetIntelVtdInterruptRemapping(x)
 	}
 
-	if _, ok := d.GetOk("intel_vtd_pass_through_dma_support"); ok {
-		v := d.Get("intel_vtd_pass_through_dma_support")
+	if v, ok := d.GetOk("intel_vtd_pass_through_dma_support"); ok {
 		x := (v.(string))
 		o.SetIntelVtdPassThroughDmaSupport(x)
 	}
 
-	if _, ok := d.GetOk("intel_vtdats_support"); ok {
-		v := d.Get("intel_vtdats_support")
+	if v, ok := d.GetOk("intel_vtdats_support"); ok {
 		x := (v.(string))
 		o.SetIntelVtdatsSupport(x)
 	}
 
-	if _, ok := d.GetOk("ioh_error_enable"); ok {
-		v := d.Get("ioh_error_enable")
+	if v, ok := d.GetOk("ioh_error_enable"); ok {
 		x := (v.(string))
 		o.SetIohErrorEnable(x)
 	}
 
-	if _, ok := d.GetOk("ioh_resource"); ok {
-		v := d.Get("ioh_resource")
+	if v, ok := d.GetOk("ioh_resource"); ok {
 		x := (v.(string))
 		o.SetIohResource(x)
 	}
 
-	if _, ok := d.GetOk("ip_prefetch"); ok {
-		v := d.Get("ip_prefetch")
+	if v, ok := d.GetOk("ip_prefetch"); ok {
 		x := (v.(string))
 		o.SetIpPrefetch(x)
 	}
 
-	if _, ok := d.GetOk("ipv4http"); ok {
-		v := d.Get("ipv4http")
+	if v, ok := d.GetOk("ipv4http"); ok {
 		x := (v.(string))
 		o.SetIpv4http(x)
 	}
 
-	if _, ok := d.GetOk("ipv4pxe"); ok {
-		v := d.Get("ipv4pxe")
+	if v, ok := d.GetOk("ipv4pxe"); ok {
 		x := (v.(string))
 		o.SetIpv4pxe(x)
 	}
 
-	if _, ok := d.GetOk("ipv6http"); ok {
-		v := d.Get("ipv6http")
+	if v, ok := d.GetOk("ipv6http"); ok {
 		x := (v.(string))
 		o.SetIpv6http(x)
 	}
 
-	if _, ok := d.GetOk("ipv6pxe"); ok {
-		v := d.Get("ipv6pxe")
+	if v, ok := d.GetOk("ipv6pxe"); ok {
 		x := (v.(string))
 		o.SetIpv6pxe(x)
 	}
 
-	if _, ok := d.GetOk("kti_prefetch"); ok {
-		v := d.Get("kti_prefetch")
+	if v, ok := d.GetOk("kti_prefetch"); ok {
 		x := (v.(string))
 		o.SetKtiPrefetch(x)
 	}
 
-	if _, ok := d.GetOk("legacy_os_redirection"); ok {
-		v := d.Get("legacy_os_redirection")
+	if v, ok := d.GetOk("legacy_os_redirection"); ok {
 		x := (v.(string))
 		o.SetLegacyOsRedirection(x)
 	}
 
-	if _, ok := d.GetOk("legacy_usb_support"); ok {
-		v := d.Get("legacy_usb_support")
+	if v, ok := d.GetOk("legacy_usb_support"); ok {
 		x := (v.(string))
 		o.SetLegacyUsbSupport(x)
 	}
 
-	if _, ok := d.GetOk("llc_prefetch"); ok {
-		v := d.Get("llc_prefetch")
+	if v, ok := d.GetOk("llc_alloc"); ok {
+		x := (v.(string))
+		o.SetLlcAlloc(x)
+	}
+
+	if v, ok := d.GetOk("llc_prefetch"); ok {
 		x := (v.(string))
 		o.SetLlcPrefetch(x)
 	}
 
-	if _, ok := d.GetOk("lom_port0state"); ok {
-		v := d.Get("lom_port0state")
+	if v, ok := d.GetOk("lom_port0state"); ok {
 		x := (v.(string))
 		o.SetLomPort0state(x)
 	}
 
-	if _, ok := d.GetOk("lom_port1state"); ok {
-		v := d.Get("lom_port1state")
+	if v, ok := d.GetOk("lom_port1state"); ok {
 		x := (v.(string))
 		o.SetLomPort1state(x)
 	}
 
-	if _, ok := d.GetOk("lom_port2state"); ok {
-		v := d.Get("lom_port2state")
+	if v, ok := d.GetOk("lom_port2state"); ok {
 		x := (v.(string))
 		o.SetLomPort2state(x)
 	}
 
-	if _, ok := d.GetOk("lom_port3state"); ok {
-		v := d.Get("lom_port3state")
+	if v, ok := d.GetOk("lom_port3state"); ok {
 		x := (v.(string))
 		o.SetLomPort3state(x)
 	}
 
-	if _, ok := d.GetOk("lom_ports_all_state"); ok {
-		v := d.Get("lom_ports_all_state")
+	if v, ok := d.GetOk("lom_ports_all_state"); ok {
 		x := (v.(string))
 		o.SetLomPortsAllState(x)
 	}
 
-	if _, ok := d.GetOk("lv_ddr_mode"); ok {
-		v := d.Get("lv_ddr_mode")
+	if v, ok := d.GetOk("lv_ddr_mode"); ok {
 		x := (v.(string))
 		o.SetLvDdrMode(x)
 	}
 
-	if _, ok := d.GetOk("make_device_non_bootable"); ok {
-		v := d.Get("make_device_non_bootable")
+	if v, ok := d.GetOk("make_device_non_bootable"); ok {
 		x := (v.(string))
 		o.SetMakeDeviceNonBootable(x)
 	}
 
-	if _, ok := d.GetOk("memory_bandwidth_boost"); ok {
-		v := d.Get("memory_bandwidth_boost")
+	if v, ok := d.GetOk("memory_bandwidth_boost"); ok {
 		x := (v.(string))
 		o.SetMemoryBandwidthBoost(x)
 	}
 
-	if _, ok := d.GetOk("memory_inter_leave"); ok {
-		v := d.Get("memory_inter_leave")
+	if v, ok := d.GetOk("memory_inter_leave"); ok {
 		x := (v.(string))
 		o.SetMemoryInterLeave(x)
 	}
 
-	if _, ok := d.GetOk("memory_mapped_io_above4gb"); ok {
-		v := d.Get("memory_mapped_io_above4gb")
+	if v, ok := d.GetOk("memory_mapped_io_above4gb"); ok {
 		x := (v.(string))
 		o.SetMemoryMappedIoAbove4gb(x)
 	}
 
-	if _, ok := d.GetOk("memory_refresh_rate"); ok {
-		v := d.Get("memory_refresh_rate")
+	if v, ok := d.GetOk("memory_refresh_rate"); ok {
 		x := (v.(string))
 		o.SetMemoryRefreshRate(x)
 	}
 
-	if _, ok := d.GetOk("memory_size_limit"); ok {
-		v := d.Get("memory_size_limit")
+	if v, ok := d.GetOk("memory_size_limit"); ok {
 		x := (v.(string))
 		o.SetMemorySizeLimit(x)
 	}
 
-	if _, ok := d.GetOk("memory_thermal_throttling"); ok {
-		v := d.Get("memory_thermal_throttling")
+	if v, ok := d.GetOk("memory_thermal_throttling"); ok {
 		x := (v.(string))
 		o.SetMemoryThermalThrottling(x)
 	}
 
-	if _, ok := d.GetOk("mirroring_mode"); ok {
-		v := d.Get("mirroring_mode")
+	if v, ok := d.GetOk("mirroring_mode"); ok {
 		x := (v.(string))
 		o.SetMirroringMode(x)
 	}
 
-	if _, ok := d.GetOk("mmcfg_base"); ok {
-		v := d.Get("mmcfg_base")
+	if v, ok := d.GetOk("mmcfg_base"); ok {
 		x := (v.(string))
 		o.SetMmcfgBase(x)
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("network_stack"); ok {
-		v := d.Get("network_stack")
+	if v, ok := d.GetOk("network_stack"); ok {
 		x := (v.(string))
 		o.SetNetworkStack(x)
 	}
 
-	if _, ok := d.GetOk("numa_optimized"); ok {
-		v := d.Get("numa_optimized")
+	if v, ok := d.GetOk("numa_optimized"); ok {
 		x := (v.(string))
 		o.SetNumaOptimized(x)
 	}
 
-	if _, ok := d.GetOk("nvmdimm_perform_config"); ok {
-		v := d.Get("nvmdimm_perform_config")
+	if v, ok := d.GetOk("nvmdimm_perform_config"); ok {
 		x := (v.(string))
 		o.SetNvmdimmPerformConfig(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("onboard10gbit_lom"); ok {
-		v := d.Get("onboard10gbit_lom")
+	if v, ok := d.GetOk("onboard10gbit_lom"); ok {
 		x := (v.(string))
 		o.SetOnboard10gbitLom(x)
 	}
 
-	if _, ok := d.GetOk("onboard_gbit_lom"); ok {
-		v := d.Get("onboard_gbit_lom")
+	if v, ok := d.GetOk("onboard_gbit_lom"); ok {
 		x := (v.(string))
 		o.SetOnboardGbitLom(x)
 	}
 
-	if _, ok := d.GetOk("onboard_scu_storage_support"); ok {
-		v := d.Get("onboard_scu_storage_support")
+	if v, ok := d.GetOk("onboard_scu_storage_support"); ok {
 		x := (v.(string))
 		o.SetOnboardScuStorageSupport(x)
 	}
 
-	if _, ok := d.GetOk("onboard_scu_storage_sw_stack"); ok {
-		v := d.Get("onboard_scu_storage_sw_stack")
+	if v, ok := d.GetOk("onboard_scu_storage_sw_stack"); ok {
 		x := (v.(string))
 		o.SetOnboardScuStorageSwStack(x)
 	}
 
-	if _, ok := d.GetOk("operation_mode"); ok {
-		v := d.Get("operation_mode")
+	if v, ok := d.GetOk("operation_mode"); ok {
 		x := (v.(string))
 		o.SetOperationMode(x)
 	}
 
-	if _, ok := d.GetOk("organization"); ok {
-		v := d.Get("organization")
+	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5562,32 +5536,27 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if _, ok := d.GetOk("os_boot_watchdog_timer"); ok {
-		v := d.Get("os_boot_watchdog_timer")
+	if v, ok := d.GetOk("os_boot_watchdog_timer"); ok {
 		x := (v.(string))
 		o.SetOsBootWatchdogTimer(x)
 	}
 
-	if _, ok := d.GetOk("os_boot_watchdog_timer_policy"); ok {
-		v := d.Get("os_boot_watchdog_timer_policy")
+	if v, ok := d.GetOk("os_boot_watchdog_timer_policy"); ok {
 		x := (v.(string))
 		o.SetOsBootWatchdogTimerPolicy(x)
 	}
 
-	if _, ok := d.GetOk("os_boot_watchdog_timer_timeout"); ok {
-		v := d.Get("os_boot_watchdog_timer_timeout")
+	if v, ok := d.GetOk("os_boot_watchdog_timer_timeout"); ok {
 		x := (v.(string))
 		o.SetOsBootWatchdogTimerTimeout(x)
 	}
 
-	if _, ok := d.GetOk("out_of_band_mgmt_port"); ok {
-		v := d.Get("out_of_band_mgmt_port")
+	if v, ok := d.GetOk("out_of_band_mgmt_port"); ok {
 		x := (v.(string))
 		o.SetOutOfBandMgmtPort(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -5596,20 +5565,17 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("package_cstate_limit"); ok {
-		v := d.Get("package_cstate_limit")
+	if v, ok := d.GetOk("package_cstate_limit"); ok {
 		x := (v.(string))
 		o.SetPackageCstateLimit(x)
 	}
 
-	if _, ok := d.GetOk("panic_high_watermark"); ok {
-		v := d.Get("panic_high_watermark")
+	if v, ok := d.GetOk("panic_high_watermark"); ok {
 		x := (v.(string))
 		o.SetPanicHighWatermark(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5652,212 +5618,182 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if _, ok := d.GetOk("partial_cache_line_sparing"); ok {
-		v := d.Get("partial_cache_line_sparing")
+	if v, ok := d.GetOk("partial_cache_line_sparing"); ok {
 		x := (v.(string))
 		o.SetPartialCacheLineSparing(x)
 	}
 
-	if _, ok := d.GetOk("partial_mirror_mode_config"); ok {
-		v := d.Get("partial_mirror_mode_config")
+	if v, ok := d.GetOk("partial_mirror_mode_config"); ok {
 		x := (v.(string))
 		o.SetPartialMirrorModeConfig(x)
 	}
 
-	if _, ok := d.GetOk("partial_mirror_percent"); ok {
-		v := d.Get("partial_mirror_percent")
+	if v, ok := d.GetOk("partial_mirror_percent"); ok {
 		x := (v.(string))
 		o.SetPartialMirrorPercent(x)
 	}
 
-	if _, ok := d.GetOk("partial_mirror_value1"); ok {
-		v := d.Get("partial_mirror_value1")
+	if v, ok := d.GetOk("partial_mirror_value1"); ok {
 		x := (v.(string))
 		o.SetPartialMirrorValue1(x)
 	}
 
-	if _, ok := d.GetOk("partial_mirror_value2"); ok {
-		v := d.Get("partial_mirror_value2")
+	if v, ok := d.GetOk("partial_mirror_value2"); ok {
 		x := (v.(string))
 		o.SetPartialMirrorValue2(x)
 	}
 
-	if _, ok := d.GetOk("partial_mirror_value3"); ok {
-		v := d.Get("partial_mirror_value3")
+	if v, ok := d.GetOk("partial_mirror_value3"); ok {
 		x := (v.(string))
 		o.SetPartialMirrorValue3(x)
 	}
 
-	if _, ok := d.GetOk("partial_mirror_value4"); ok {
-		v := d.Get("partial_mirror_value4")
+	if v, ok := d.GetOk("partial_mirror_value4"); ok {
 		x := (v.(string))
 		o.SetPartialMirrorValue4(x)
 	}
 
-	if _, ok := d.GetOk("patrol_scrub"); ok {
-		v := d.Get("patrol_scrub")
+	if v, ok := d.GetOk("patrol_scrub"); ok {
 		x := (v.(string))
 		o.SetPatrolScrub(x)
 	}
 
-	if _, ok := d.GetOk("patrol_scrub_duration"); ok {
-		v := d.Get("patrol_scrub_duration")
+	if v, ok := d.GetOk("patrol_scrub_duration"); ok {
 		x := (v.(string))
 		o.SetPatrolScrubDuration(x)
 	}
 
-	if _, ok := d.GetOk("pc_ie_ras_support"); ok {
-		v := d.Get("pc_ie_ras_support")
+	if v, ok := d.GetOk("pc_ie_ras_support"); ok {
 		x := (v.(string))
 		o.SetPcIeRasSupport(x)
 	}
 
-	if _, ok := d.GetOk("pc_ie_ssd_hot_plug_support"); ok {
-		v := d.Get("pc_ie_ssd_hot_plug_support")
+	if v, ok := d.GetOk("pc_ie_ssd_hot_plug_support"); ok {
 		x := (v.(string))
 		o.SetPcIeSsdHotPlugSupport(x)
 	}
 
-	if _, ok := d.GetOk("pch_usb30mode"); ok {
-		v := d.Get("pch_usb30mode")
+	if v, ok := d.GetOk("pch_usb30mode"); ok {
 		x := (v.(string))
 		o.SetPchUsb30mode(x)
 	}
 
-	if _, ok := d.GetOk("pci_option_ro_ms"); ok {
-		v := d.Get("pci_option_ro_ms")
+	if v, ok := d.GetOk("pci_option_ro_ms"); ok {
 		x := (v.(string))
 		o.SetPciOptionRoMs(x)
 	}
 
-	if _, ok := d.GetOk("pci_rom_clp"); ok {
-		v := d.Get("pci_rom_clp")
+	if v, ok := d.GetOk("pci_rom_clp"); ok {
 		x := (v.(string))
 		o.SetPciRomClp(x)
 	}
 
-	if _, ok := d.GetOk("pcie_ari_support"); ok {
-		v := d.Get("pcie_ari_support")
+	if v, ok := d.GetOk("pcie_ari_support"); ok {
 		x := (v.(string))
 		o.SetPcieAriSupport(x)
 	}
 
-	if _, ok := d.GetOk("pcie_pll_ssc"); ok {
-		v := d.Get("pcie_pll_ssc")
+	if v, ok := d.GetOk("pcie_pll_ssc"); ok {
 		x := (v.(string))
 		o.SetPciePllSsc(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_mraid1link_speed"); ok {
-		v := d.Get("pcie_slot_mraid1link_speed")
+	if v, ok := d.GetOk("pcie_slot_mraid1link_speed"); ok {
 		x := (v.(string))
 		o.SetPcieSlotMraid1linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_mraid1option_rom"); ok {
-		v := d.Get("pcie_slot_mraid1option_rom")
+	if v, ok := d.GetOk("pcie_slot_mraid1option_rom"); ok {
 		x := (v.(string))
 		o.SetPcieSlotMraid1optionRom(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_mraid2link_speed"); ok {
-		v := d.Get("pcie_slot_mraid2link_speed")
+	if v, ok := d.GetOk("pcie_slot_mraid2link_speed"); ok {
 		x := (v.(string))
 		o.SetPcieSlotMraid2linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_mraid2option_rom"); ok {
-		v := d.Get("pcie_slot_mraid2option_rom")
+	if v, ok := d.GetOk("pcie_slot_mraid2option_rom"); ok {
 		x := (v.(string))
 		o.SetPcieSlotMraid2optionRom(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_mstorraid_link_speed"); ok {
-		v := d.Get("pcie_slot_mstorraid_link_speed")
+	if v, ok := d.GetOk("pcie_slot_mstorraid_link_speed"); ok {
 		x := (v.(string))
 		o.SetPcieSlotMstorraidLinkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_mstorraid_option_rom"); ok {
-		v := d.Get("pcie_slot_mstorraid_option_rom")
+	if v, ok := d.GetOk("pcie_slot_mstorraid_option_rom"); ok {
 		x := (v.(string))
 		o.SetPcieSlotMstorraidOptionRom(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_nvme1link_speed"); ok {
-		v := d.Get("pcie_slot_nvme1link_speed")
+	if v, ok := d.GetOk("pcie_slot_nvme1link_speed"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme1linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_nvme1option_rom"); ok {
-		v := d.Get("pcie_slot_nvme1option_rom")
+	if v, ok := d.GetOk("pcie_slot_nvme1option_rom"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme1optionRom(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_nvme2link_speed"); ok {
-		v := d.Get("pcie_slot_nvme2link_speed")
+	if v, ok := d.GetOk("pcie_slot_nvme2link_speed"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme2linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_nvme2option_rom"); ok {
-		v := d.Get("pcie_slot_nvme2option_rom")
+	if v, ok := d.GetOk("pcie_slot_nvme2option_rom"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme2optionRom(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_nvme3link_speed"); ok {
-		v := d.Get("pcie_slot_nvme3link_speed")
+	if v, ok := d.GetOk("pcie_slot_nvme3link_speed"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme3linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_nvme3option_rom"); ok {
-		v := d.Get("pcie_slot_nvme3option_rom")
+	if v, ok := d.GetOk("pcie_slot_nvme3option_rom"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme3optionRom(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_nvme4link_speed"); ok {
-		v := d.Get("pcie_slot_nvme4link_speed")
+	if v, ok := d.GetOk("pcie_slot_nvme4link_speed"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme4linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_nvme4option_rom"); ok {
-		v := d.Get("pcie_slot_nvme4option_rom")
+	if v, ok := d.GetOk("pcie_slot_nvme4option_rom"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme4optionRom(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_nvme5link_speed"); ok {
-		v := d.Get("pcie_slot_nvme5link_speed")
+	if v, ok := d.GetOk("pcie_slot_nvme5link_speed"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme5linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_nvme5option_rom"); ok {
-		v := d.Get("pcie_slot_nvme5option_rom")
+	if v, ok := d.GetOk("pcie_slot_nvme5option_rom"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme5optionRom(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_nvme6link_speed"); ok {
-		v := d.Get("pcie_slot_nvme6link_speed")
+	if v, ok := d.GetOk("pcie_slot_nvme6link_speed"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme6linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("pcie_slot_nvme6option_rom"); ok {
-		v := d.Get("pcie_slot_nvme6option_rom")
+	if v, ok := d.GetOk("pcie_slot_nvme6option_rom"); ok {
 		x := (v.(string))
 		o.SetPcieSlotNvme6optionRom(x)
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("pcie_slots_cdn_enable"); ok {
+		x := (v.(string))
+		o.SetPcieSlotsCdnEnable(x)
+	}
+
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5897,50 +5833,42 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("pop_support"); ok {
-		v := d.Get("pop_support")
+	if v, ok := d.GetOk("pop_support"); ok {
 		x := (v.(string))
 		o.SetPopSupport(x)
 	}
 
-	if _, ok := d.GetOk("post_error_pause"); ok {
-		v := d.Get("post_error_pause")
+	if v, ok := d.GetOk("post_error_pause"); ok {
 		x := (v.(string))
 		o.SetPostErrorPause(x)
 	}
 
-	if _, ok := d.GetOk("post_package_repair"); ok {
-		v := d.Get("post_package_repair")
+	if v, ok := d.GetOk("post_package_repair"); ok {
 		x := (v.(string))
 		o.SetPostPackageRepair(x)
 	}
 
-	if _, ok := d.GetOk("processor_c1e"); ok {
-		v := d.Get("processor_c1e")
+	if v, ok := d.GetOk("processor_c1e"); ok {
 		x := (v.(string))
 		o.SetProcessorC1e(x)
 	}
 
-	if _, ok := d.GetOk("processor_c3report"); ok {
-		v := d.Get("processor_c3report")
+	if v, ok := d.GetOk("processor_c3report"); ok {
 		x := (v.(string))
 		o.SetProcessorC3report(x)
 	}
 
-	if _, ok := d.GetOk("processor_c6report"); ok {
-		v := d.Get("processor_c6report")
+	if v, ok := d.GetOk("processor_c6report"); ok {
 		x := (v.(string))
 		o.SetProcessorC6report(x)
 	}
 
-	if _, ok := d.GetOk("processor_cstate"); ok {
-		v := d.Get("processor_cstate")
+	if v, ok := d.GetOk("processor_cstate"); ok {
 		x := (v.(string))
 		o.SetProcessorCstate(x)
 	}
 
-	if _, ok := d.GetOk("profiles"); ok {
-		v := d.Get("profiles")
+	if v, ok := d.GetOk("profiles"); ok {
 		x := make([]models.PolicyAbstractConfigProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -5980,1010 +5908,852 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetProfiles(x)
 	}
 
-	if _, ok := d.GetOk("psata"); ok {
-		v := d.Get("psata")
+	if v, ok := d.GetOk("psata"); ok {
 		x := (v.(string))
 		o.SetPsata(x)
 	}
 
-	if _, ok := d.GetOk("pstate_coord_type"); ok {
-		v := d.Get("pstate_coord_type")
+	if v, ok := d.GetOk("pstate_coord_type"); ok {
 		x := (v.(string))
 		o.SetPstateCoordType(x)
 	}
 
-	if _, ok := d.GetOk("putty_key_pad"); ok {
-		v := d.Get("putty_key_pad")
+	if v, ok := d.GetOk("putty_key_pad"); ok {
 		x := (v.(string))
 		o.SetPuttyKeyPad(x)
 	}
 
-	if _, ok := d.GetOk("pwr_perf_tuning"); ok {
-		v := d.Get("pwr_perf_tuning")
+	if v, ok := d.GetOk("pwr_perf_tuning"); ok {
 		x := (v.(string))
 		o.SetPwrPerfTuning(x)
 	}
 
-	if _, ok := d.GetOk("qpi_link_frequency"); ok {
-		v := d.Get("qpi_link_frequency")
+	if v, ok := d.GetOk("qpi_link_frequency"); ok {
 		x := (v.(string))
 		o.SetQpiLinkFrequency(x)
 	}
 
-	if _, ok := d.GetOk("qpi_link_speed"); ok {
-		v := d.Get("qpi_link_speed")
+	if v, ok := d.GetOk("qpi_link_speed"); ok {
 		x := (v.(string))
 		o.SetQpiLinkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("qpi_snoop_mode"); ok {
-		v := d.Get("qpi_snoop_mode")
+	if v, ok := d.GetOk("qpi_snoop_mode"); ok {
 		x := (v.(string))
 		o.SetQpiSnoopMode(x)
 	}
 
-	if _, ok := d.GetOk("rank_inter_leave"); ok {
-		v := d.Get("rank_inter_leave")
+	if v, ok := d.GetOk("rank_inter_leave"); ok {
 		x := (v.(string))
 		o.SetRankInterLeave(x)
 	}
 
-	if _, ok := d.GetOk("redirection_after_post"); ok {
-		v := d.Get("redirection_after_post")
+	if v, ok := d.GetOk("redirection_after_post"); ok {
 		x := (v.(string))
 		o.SetRedirectionAfterPost(x)
 	}
 
-	if _, ok := d.GetOk("sata_mode_select"); ok {
-		v := d.Get("sata_mode_select")
+	if v, ok := d.GetOk("sata_mode_select"); ok {
 		x := (v.(string))
 		o.SetSataModeSelect(x)
 	}
 
-	if _, ok := d.GetOk("select_memory_ras_configuration"); ok {
-		v := d.Get("select_memory_ras_configuration")
+	if v, ok := d.GetOk("select_memory_ras_configuration"); ok {
 		x := (v.(string))
 		o.SetSelectMemoryRasConfiguration(x)
 	}
 
-	if _, ok := d.GetOk("select_ppr_type"); ok {
-		v := d.Get("select_ppr_type")
+	if v, ok := d.GetOk("select_ppr_type"); ok {
 		x := (v.(string))
 		o.SetSelectPprType(x)
 	}
 
-	if _, ok := d.GetOk("serial_port_aenable"); ok {
-		v := d.Get("serial_port_aenable")
+	if v, ok := d.GetOk("serial_port_aenable"); ok {
 		x := (v.(string))
 		o.SetSerialPortAenable(x)
 	}
 
-	if _, ok := d.GetOk("sev"); ok {
-		v := d.Get("sev")
+	if v, ok := d.GetOk("sev"); ok {
 		x := (v.(string))
 		o.SetSev(x)
 	}
 
-	if _, ok := d.GetOk("sgx_auto_registration_agent"); ok {
-		v := d.Get("sgx_auto_registration_agent")
+	if v, ok := d.GetOk("sgx_auto_registration_agent"); ok {
 		x := (v.(string))
 		o.SetSgxAutoRegistrationAgent(x)
 	}
 
-	if _, ok := d.GetOk("sgx_epoch0"); ok {
-		v := d.Get("sgx_epoch0")
+	if v, ok := d.GetOk("sgx_epoch0"); ok {
 		x := (v.(string))
 		o.SetSgxEpoch0(x)
 	}
 
-	if _, ok := d.GetOk("sgx_epoch1"); ok {
-		v := d.Get("sgx_epoch1")
+	if v, ok := d.GetOk("sgx_epoch1"); ok {
 		x := (v.(string))
 		o.SetSgxEpoch1(x)
 	}
 
-	if _, ok := d.GetOk("sgx_factory_reset"); ok {
-		v := d.Get("sgx_factory_reset")
+	if v, ok := d.GetOk("sgx_factory_reset"); ok {
 		x := (v.(string))
 		o.SetSgxFactoryReset(x)
 	}
 
-	if _, ok := d.GetOk("sgx_le_pub_key_hash0"); ok {
-		v := d.Get("sgx_le_pub_key_hash0")
+	if v, ok := d.GetOk("sgx_le_pub_key_hash0"); ok {
 		x := (v.(string))
 		o.SetSgxLePubKeyHash0(x)
 	}
 
-	if _, ok := d.GetOk("sgx_le_pub_key_hash1"); ok {
-		v := d.Get("sgx_le_pub_key_hash1")
+	if v, ok := d.GetOk("sgx_le_pub_key_hash1"); ok {
 		x := (v.(string))
 		o.SetSgxLePubKeyHash1(x)
 	}
 
-	if _, ok := d.GetOk("sgx_le_pub_key_hash2"); ok {
-		v := d.Get("sgx_le_pub_key_hash2")
+	if v, ok := d.GetOk("sgx_le_pub_key_hash2"); ok {
 		x := (v.(string))
 		o.SetSgxLePubKeyHash2(x)
 	}
 
-	if _, ok := d.GetOk("sgx_le_pub_key_hash3"); ok {
-		v := d.Get("sgx_le_pub_key_hash3")
+	if v, ok := d.GetOk("sgx_le_pub_key_hash3"); ok {
 		x := (v.(string))
 		o.SetSgxLePubKeyHash3(x)
 	}
 
-	if _, ok := d.GetOk("sgx_le_wr"); ok {
-		v := d.Get("sgx_le_wr")
+	if v, ok := d.GetOk("sgx_le_wr"); ok {
 		x := (v.(string))
 		o.SetSgxLeWr(x)
 	}
 
-	if _, ok := d.GetOk("sgx_package_info_in_band_access"); ok {
-		v := d.Get("sgx_package_info_in_band_access")
+	if v, ok := d.GetOk("sgx_package_info_in_band_access"); ok {
 		x := (v.(string))
 		o.SetSgxPackageInfoInBandAccess(x)
 	}
 
-	if _, ok := d.GetOk("sgx_qos"); ok {
-		v := d.Get("sgx_qos")
+	if v, ok := d.GetOk("sgx_qos"); ok {
 		x := (v.(string))
 		o.SetSgxQos(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("sha1pcr_bank"); ok {
+		x := (v.(string))
+		o.SetSha1pcrBank(x)
+	}
+
+	if v, ok := d.GetOk("sha256pcr_bank"); ok {
+		x := (v.(string))
+		o.SetSha256pcrBank(x)
+	}
+
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("single_pctl_enable"); ok {
-		v := d.Get("single_pctl_enable")
+	if v, ok := d.GetOk("single_pctl_enable"); ok {
 		x := (v.(string))
 		o.SetSinglePctlEnable(x)
 	}
 
-	if _, ok := d.GetOk("slot10link_speed"); ok {
-		v := d.Get("slot10link_speed")
+	if v, ok := d.GetOk("slot10link_speed"); ok {
 		x := (v.(string))
 		o.SetSlot10linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot10state"); ok {
-		v := d.Get("slot10state")
+	if v, ok := d.GetOk("slot10state"); ok {
 		x := (v.(string))
 		o.SetSlot10state(x)
 	}
 
-	if _, ok := d.GetOk("slot11link_speed"); ok {
-		v := d.Get("slot11link_speed")
+	if v, ok := d.GetOk("slot11link_speed"); ok {
 		x := (v.(string))
 		o.SetSlot11linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot11state"); ok {
-		v := d.Get("slot11state")
+	if v, ok := d.GetOk("slot11state"); ok {
 		x := (v.(string))
 		o.SetSlot11state(x)
 	}
 
-	if _, ok := d.GetOk("slot12link_speed"); ok {
-		v := d.Get("slot12link_speed")
+	if v, ok := d.GetOk("slot12link_speed"); ok {
 		x := (v.(string))
 		o.SetSlot12linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot12state"); ok {
-		v := d.Get("slot12state")
+	if v, ok := d.GetOk("slot12state"); ok {
 		x := (v.(string))
 		o.SetSlot12state(x)
 	}
 
-	if _, ok := d.GetOk("slot13state"); ok {
-		v := d.Get("slot13state")
+	if v, ok := d.GetOk("slot13state"); ok {
 		x := (v.(string))
 		o.SetSlot13state(x)
 	}
 
-	if _, ok := d.GetOk("slot14state"); ok {
-		v := d.Get("slot14state")
+	if v, ok := d.GetOk("slot14state"); ok {
 		x := (v.(string))
 		o.SetSlot14state(x)
 	}
 
-	if _, ok := d.GetOk("slot1link_speed"); ok {
-		v := d.Get("slot1link_speed")
+	if v, ok := d.GetOk("slot1link_speed"); ok {
 		x := (v.(string))
 		o.SetSlot1linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot1state"); ok {
-		v := d.Get("slot1state")
+	if v, ok := d.GetOk("slot1state"); ok {
 		x := (v.(string))
 		o.SetSlot1state(x)
 	}
 
-	if _, ok := d.GetOk("slot2link_speed"); ok {
-		v := d.Get("slot2link_speed")
+	if v, ok := d.GetOk("slot2link_speed"); ok {
 		x := (v.(string))
 		o.SetSlot2linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot2state"); ok {
-		v := d.Get("slot2state")
+	if v, ok := d.GetOk("slot2state"); ok {
 		x := (v.(string))
 		o.SetSlot2state(x)
 	}
 
-	if _, ok := d.GetOk("slot3link_speed"); ok {
-		v := d.Get("slot3link_speed")
+	if v, ok := d.GetOk("slot3link_speed"); ok {
 		x := (v.(string))
 		o.SetSlot3linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot3state"); ok {
-		v := d.Get("slot3state")
+	if v, ok := d.GetOk("slot3state"); ok {
 		x := (v.(string))
 		o.SetSlot3state(x)
 	}
 
-	if _, ok := d.GetOk("slot4link_speed"); ok {
-		v := d.Get("slot4link_speed")
+	if v, ok := d.GetOk("slot4link_speed"); ok {
 		x := (v.(string))
 		o.SetSlot4linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot4state"); ok {
-		v := d.Get("slot4state")
+	if v, ok := d.GetOk("slot4state"); ok {
 		x := (v.(string))
 		o.SetSlot4state(x)
 	}
 
-	if _, ok := d.GetOk("slot5link_speed"); ok {
-		v := d.Get("slot5link_speed")
+	if v, ok := d.GetOk("slot5link_speed"); ok {
 		x := (v.(string))
 		o.SetSlot5linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot5state"); ok {
-		v := d.Get("slot5state")
+	if v, ok := d.GetOk("slot5state"); ok {
 		x := (v.(string))
 		o.SetSlot5state(x)
 	}
 
-	if _, ok := d.GetOk("slot6link_speed"); ok {
-		v := d.Get("slot6link_speed")
+	if v, ok := d.GetOk("slot6link_speed"); ok {
 		x := (v.(string))
 		o.SetSlot6linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot6state"); ok {
-		v := d.Get("slot6state")
+	if v, ok := d.GetOk("slot6state"); ok {
 		x := (v.(string))
 		o.SetSlot6state(x)
 	}
 
-	if _, ok := d.GetOk("slot7link_speed"); ok {
-		v := d.Get("slot7link_speed")
+	if v, ok := d.GetOk("slot7link_speed"); ok {
 		x := (v.(string))
 		o.SetSlot7linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot7state"); ok {
-		v := d.Get("slot7state")
+	if v, ok := d.GetOk("slot7state"); ok {
 		x := (v.(string))
 		o.SetSlot7state(x)
 	}
 
-	if _, ok := d.GetOk("slot8link_speed"); ok {
-		v := d.Get("slot8link_speed")
+	if v, ok := d.GetOk("slot8link_speed"); ok {
 		x := (v.(string))
 		o.SetSlot8linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot8state"); ok {
-		v := d.Get("slot8state")
+	if v, ok := d.GetOk("slot8state"); ok {
 		x := (v.(string))
 		o.SetSlot8state(x)
 	}
 
-	if _, ok := d.GetOk("slot9link_speed"); ok {
-		v := d.Get("slot9link_speed")
+	if v, ok := d.GetOk("slot9link_speed"); ok {
 		x := (v.(string))
 		o.SetSlot9linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot9state"); ok {
-		v := d.Get("slot9state")
+	if v, ok := d.GetOk("slot9state"); ok {
 		x := (v.(string))
 		o.SetSlot9state(x)
 	}
 
-	if _, ok := d.GetOk("slot_flom_link_speed"); ok {
-		v := d.Get("slot_flom_link_speed")
+	if v, ok := d.GetOk("slot_flom_link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFlomLinkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme10link_speed"); ok {
-		v := d.Get("slot_front_nvme10link_speed")
+	if v, ok := d.GetOk("slot_front_nvme10link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme10linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme10option_rom"); ok {
-		v := d.Get("slot_front_nvme10option_rom")
+	if v, ok := d.GetOk("slot_front_nvme10option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme10optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme11link_speed"); ok {
-		v := d.Get("slot_front_nvme11link_speed")
+	if v, ok := d.GetOk("slot_front_nvme11link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme11linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme11option_rom"); ok {
-		v := d.Get("slot_front_nvme11option_rom")
+	if v, ok := d.GetOk("slot_front_nvme11option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme11optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme12link_speed"); ok {
-		v := d.Get("slot_front_nvme12link_speed")
+	if v, ok := d.GetOk("slot_front_nvme12link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme12linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme12option_rom"); ok {
-		v := d.Get("slot_front_nvme12option_rom")
+	if v, ok := d.GetOk("slot_front_nvme12option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme12optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme13option_rom"); ok {
-		v := d.Get("slot_front_nvme13option_rom")
+	if v, ok := d.GetOk("slot_front_nvme13option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme13optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme14option_rom"); ok {
-		v := d.Get("slot_front_nvme14option_rom")
+	if v, ok := d.GetOk("slot_front_nvme14option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme14optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme15option_rom"); ok {
-		v := d.Get("slot_front_nvme15option_rom")
+	if v, ok := d.GetOk("slot_front_nvme15option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme15optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme16option_rom"); ok {
-		v := d.Get("slot_front_nvme16option_rom")
+	if v, ok := d.GetOk("slot_front_nvme16option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme16optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme17option_rom"); ok {
-		v := d.Get("slot_front_nvme17option_rom")
+	if v, ok := d.GetOk("slot_front_nvme17option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme17optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme18option_rom"); ok {
-		v := d.Get("slot_front_nvme18option_rom")
+	if v, ok := d.GetOk("slot_front_nvme18option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme18optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme19option_rom"); ok {
-		v := d.Get("slot_front_nvme19option_rom")
+	if v, ok := d.GetOk("slot_front_nvme19option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme19optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme1link_speed"); ok {
-		v := d.Get("slot_front_nvme1link_speed")
+	if v, ok := d.GetOk("slot_front_nvme1link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme1linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme1option_rom"); ok {
-		v := d.Get("slot_front_nvme1option_rom")
+	if v, ok := d.GetOk("slot_front_nvme1option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme1optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme20option_rom"); ok {
-		v := d.Get("slot_front_nvme20option_rom")
+	if v, ok := d.GetOk("slot_front_nvme20option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme20optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme21option_rom"); ok {
-		v := d.Get("slot_front_nvme21option_rom")
+	if v, ok := d.GetOk("slot_front_nvme21option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme21optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme22option_rom"); ok {
-		v := d.Get("slot_front_nvme22option_rom")
+	if v, ok := d.GetOk("slot_front_nvme22option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme22optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme23option_rom"); ok {
-		v := d.Get("slot_front_nvme23option_rom")
+	if v, ok := d.GetOk("slot_front_nvme23option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme23optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme24option_rom"); ok {
-		v := d.Get("slot_front_nvme24option_rom")
+	if v, ok := d.GetOk("slot_front_nvme24option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme24optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme2link_speed"); ok {
-		v := d.Get("slot_front_nvme2link_speed")
+	if v, ok := d.GetOk("slot_front_nvme2link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme2linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme2option_rom"); ok {
-		v := d.Get("slot_front_nvme2option_rom")
+	if v, ok := d.GetOk("slot_front_nvme2option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme2optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme3link_speed"); ok {
-		v := d.Get("slot_front_nvme3link_speed")
+	if v, ok := d.GetOk("slot_front_nvme3link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme3linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme3option_rom"); ok {
-		v := d.Get("slot_front_nvme3option_rom")
+	if v, ok := d.GetOk("slot_front_nvme3option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme3optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme4link_speed"); ok {
-		v := d.Get("slot_front_nvme4link_speed")
+	if v, ok := d.GetOk("slot_front_nvme4link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme4linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme4option_rom"); ok {
-		v := d.Get("slot_front_nvme4option_rom")
+	if v, ok := d.GetOk("slot_front_nvme4option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme4optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme5link_speed"); ok {
-		v := d.Get("slot_front_nvme5link_speed")
+	if v, ok := d.GetOk("slot_front_nvme5link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme5linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme5option_rom"); ok {
-		v := d.Get("slot_front_nvme5option_rom")
+	if v, ok := d.GetOk("slot_front_nvme5option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme5optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme6link_speed"); ok {
-		v := d.Get("slot_front_nvme6link_speed")
+	if v, ok := d.GetOk("slot_front_nvme6link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme6linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme6option_rom"); ok {
-		v := d.Get("slot_front_nvme6option_rom")
+	if v, ok := d.GetOk("slot_front_nvme6option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme6optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme7link_speed"); ok {
-		v := d.Get("slot_front_nvme7link_speed")
+	if v, ok := d.GetOk("slot_front_nvme7link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme7linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme7option_rom"); ok {
-		v := d.Get("slot_front_nvme7option_rom")
+	if v, ok := d.GetOk("slot_front_nvme7option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme7optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme8link_speed"); ok {
-		v := d.Get("slot_front_nvme8link_speed")
+	if v, ok := d.GetOk("slot_front_nvme8link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme8linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme8option_rom"); ok {
-		v := d.Get("slot_front_nvme8option_rom")
+	if v, ok := d.GetOk("slot_front_nvme8option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme8optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme9link_speed"); ok {
-		v := d.Get("slot_front_nvme9link_speed")
+	if v, ok := d.GetOk("slot_front_nvme9link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme9linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_nvme9option_rom"); ok {
-		v := d.Get("slot_front_nvme9option_rom")
+	if v, ok := d.GetOk("slot_front_nvme9option_rom"); ok {
 		x := (v.(string))
 		o.SetSlotFrontNvme9optionRom(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_slot5link_speed"); ok {
-		v := d.Get("slot_front_slot5link_speed")
+	if v, ok := d.GetOk("slot_front_slot5link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontSlot5linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_front_slot6link_speed"); ok {
-		v := d.Get("slot_front_slot6link_speed")
+	if v, ok := d.GetOk("slot_front_slot6link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotFrontSlot6linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_gpu1state"); ok {
-		v := d.Get("slot_gpu1state")
+	if v, ok := d.GetOk("slot_gpu1state"); ok {
 		x := (v.(string))
 		o.SetSlotGpu1state(x)
 	}
 
-	if _, ok := d.GetOk("slot_gpu2state"); ok {
-		v := d.Get("slot_gpu2state")
+	if v, ok := d.GetOk("slot_gpu2state"); ok {
 		x := (v.(string))
 		o.SetSlotGpu2state(x)
 	}
 
-	if _, ok := d.GetOk("slot_gpu3state"); ok {
-		v := d.Get("slot_gpu3state")
+	if v, ok := d.GetOk("slot_gpu3state"); ok {
 		x := (v.(string))
 		o.SetSlotGpu3state(x)
 	}
 
-	if _, ok := d.GetOk("slot_gpu4state"); ok {
-		v := d.Get("slot_gpu4state")
+	if v, ok := d.GetOk("slot_gpu4state"); ok {
 		x := (v.(string))
 		o.SetSlotGpu4state(x)
 	}
 
-	if _, ok := d.GetOk("slot_gpu5state"); ok {
-		v := d.Get("slot_gpu5state")
+	if v, ok := d.GetOk("slot_gpu5state"); ok {
 		x := (v.(string))
 		o.SetSlotGpu5state(x)
 	}
 
-	if _, ok := d.GetOk("slot_gpu6state"); ok {
-		v := d.Get("slot_gpu6state")
+	if v, ok := d.GetOk("slot_gpu6state"); ok {
 		x := (v.(string))
 		o.SetSlotGpu6state(x)
 	}
 
-	if _, ok := d.GetOk("slot_gpu7state"); ok {
-		v := d.Get("slot_gpu7state")
+	if v, ok := d.GetOk("slot_gpu7state"); ok {
 		x := (v.(string))
 		o.SetSlotGpu7state(x)
 	}
 
-	if _, ok := d.GetOk("slot_gpu8state"); ok {
-		v := d.Get("slot_gpu8state")
+	if v, ok := d.GetOk("slot_gpu8state"); ok {
 		x := (v.(string))
 		o.SetSlotGpu8state(x)
 	}
 
-	if _, ok := d.GetOk("slot_hba_link_speed"); ok {
-		v := d.Get("slot_hba_link_speed")
+	if v, ok := d.GetOk("slot_hba_link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotHbaLinkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_hba_state"); ok {
-		v := d.Get("slot_hba_state")
+	if v, ok := d.GetOk("slot_hba_state"); ok {
 		x := (v.(string))
 		o.SetSlotHbaState(x)
 	}
 
-	if _, ok := d.GetOk("slot_lom1link"); ok {
-		v := d.Get("slot_lom1link")
+	if v, ok := d.GetOk("slot_lom1link"); ok {
 		x := (v.(string))
 		o.SetSlotLom1link(x)
 	}
 
-	if _, ok := d.GetOk("slot_lom2link"); ok {
-		v := d.Get("slot_lom2link")
+	if v, ok := d.GetOk("slot_lom2link"); ok {
 		x := (v.(string))
 		o.SetSlotLom2link(x)
 	}
 
-	if _, ok := d.GetOk("slot_mezz_state"); ok {
-		v := d.Get("slot_mezz_state")
+	if v, ok := d.GetOk("slot_mezz_state"); ok {
 		x := (v.(string))
 		o.SetSlotMezzState(x)
 	}
 
-	if _, ok := d.GetOk("slot_mlom_link_speed"); ok {
-		v := d.Get("slot_mlom_link_speed")
+	if v, ok := d.GetOk("slot_mlom_link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotMlomLinkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_mlom_state"); ok {
-		v := d.Get("slot_mlom_state")
+	if v, ok := d.GetOk("slot_mlom_state"); ok {
 		x := (v.(string))
 		o.SetSlotMlomState(x)
 	}
 
-	if _, ok := d.GetOk("slot_mraid_link_speed"); ok {
-		v := d.Get("slot_mraid_link_speed")
+	if v, ok := d.GetOk("slot_mraid_link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotMraidLinkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_mraid_state"); ok {
-		v := d.Get("slot_mraid_state")
+	if v, ok := d.GetOk("slot_mraid_state"); ok {
 		x := (v.(string))
 		o.SetSlotMraidState(x)
 	}
 
-	if _, ok := d.GetOk("slot_n10state"); ok {
-		v := d.Get("slot_n10state")
+	if v, ok := d.GetOk("slot_n10state"); ok {
 		x := (v.(string))
 		o.SetSlotN10state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n11state"); ok {
-		v := d.Get("slot_n11state")
+	if v, ok := d.GetOk("slot_n11state"); ok {
 		x := (v.(string))
 		o.SetSlotN11state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n12state"); ok {
-		v := d.Get("slot_n12state")
+	if v, ok := d.GetOk("slot_n12state"); ok {
 		x := (v.(string))
 		o.SetSlotN12state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n13state"); ok {
-		v := d.Get("slot_n13state")
+	if v, ok := d.GetOk("slot_n13state"); ok {
 		x := (v.(string))
 		o.SetSlotN13state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n14state"); ok {
-		v := d.Get("slot_n14state")
+	if v, ok := d.GetOk("slot_n14state"); ok {
 		x := (v.(string))
 		o.SetSlotN14state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n15state"); ok {
-		v := d.Get("slot_n15state")
+	if v, ok := d.GetOk("slot_n15state"); ok {
 		x := (v.(string))
 		o.SetSlotN15state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n16state"); ok {
-		v := d.Get("slot_n16state")
+	if v, ok := d.GetOk("slot_n16state"); ok {
 		x := (v.(string))
 		o.SetSlotN16state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n17state"); ok {
-		v := d.Get("slot_n17state")
+	if v, ok := d.GetOk("slot_n17state"); ok {
 		x := (v.(string))
 		o.SetSlotN17state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n18state"); ok {
-		v := d.Get("slot_n18state")
+	if v, ok := d.GetOk("slot_n18state"); ok {
 		x := (v.(string))
 		o.SetSlotN18state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n19state"); ok {
-		v := d.Get("slot_n19state")
+	if v, ok := d.GetOk("slot_n19state"); ok {
 		x := (v.(string))
 		o.SetSlotN19state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n1state"); ok {
-		v := d.Get("slot_n1state")
+	if v, ok := d.GetOk("slot_n1state"); ok {
 		x := (v.(string))
 		o.SetSlotN1state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n20state"); ok {
-		v := d.Get("slot_n20state")
+	if v, ok := d.GetOk("slot_n20state"); ok {
 		x := (v.(string))
 		o.SetSlotN20state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n21state"); ok {
-		v := d.Get("slot_n21state")
+	if v, ok := d.GetOk("slot_n21state"); ok {
 		x := (v.(string))
 		o.SetSlotN21state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n22state"); ok {
-		v := d.Get("slot_n22state")
+	if v, ok := d.GetOk("slot_n22state"); ok {
 		x := (v.(string))
 		o.SetSlotN22state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n23state"); ok {
-		v := d.Get("slot_n23state")
+	if v, ok := d.GetOk("slot_n23state"); ok {
 		x := (v.(string))
 		o.SetSlotN23state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n24state"); ok {
-		v := d.Get("slot_n24state")
+	if v, ok := d.GetOk("slot_n24state"); ok {
 		x := (v.(string))
 		o.SetSlotN24state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n2state"); ok {
-		v := d.Get("slot_n2state")
+	if v, ok := d.GetOk("slot_n2state"); ok {
 		x := (v.(string))
 		o.SetSlotN2state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n3state"); ok {
-		v := d.Get("slot_n3state")
+	if v, ok := d.GetOk("slot_n3state"); ok {
 		x := (v.(string))
 		o.SetSlotN3state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n4state"); ok {
-		v := d.Get("slot_n4state")
+	if v, ok := d.GetOk("slot_n4state"); ok {
 		x := (v.(string))
 		o.SetSlotN4state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n5state"); ok {
-		v := d.Get("slot_n5state")
+	if v, ok := d.GetOk("slot_n5state"); ok {
 		x := (v.(string))
 		o.SetSlotN5state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n6state"); ok {
-		v := d.Get("slot_n6state")
+	if v, ok := d.GetOk("slot_n6state"); ok {
 		x := (v.(string))
 		o.SetSlotN6state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n7state"); ok {
-		v := d.Get("slot_n7state")
+	if v, ok := d.GetOk("slot_n7state"); ok {
 		x := (v.(string))
 		o.SetSlotN7state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n8state"); ok {
-		v := d.Get("slot_n8state")
+	if v, ok := d.GetOk("slot_n8state"); ok {
 		x := (v.(string))
 		o.SetSlotN8state(x)
 	}
 
-	if _, ok := d.GetOk("slot_n9state"); ok {
-		v := d.Get("slot_n9state")
+	if v, ok := d.GetOk("slot_n9state"); ok {
 		x := (v.(string))
 		o.SetSlotN9state(x)
 	}
 
-	if _, ok := d.GetOk("slot_raid_link_speed"); ok {
-		v := d.Get("slot_raid_link_speed")
+	if v, ok := d.GetOk("slot_raid_link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRaidLinkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_raid_state"); ok {
-		v := d.Get("slot_raid_state")
+	if v, ok := d.GetOk("slot_raid_state"); ok {
 		x := (v.(string))
 		o.SetSlotRaidState(x)
 	}
 
-	if _, ok := d.GetOk("slot_rear_nvme1link_speed"); ok {
-		v := d.Get("slot_rear_nvme1link_speed")
+	if v, ok := d.GetOk("slot_rear_nvme1link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRearNvme1linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_rear_nvme1state"); ok {
-		v := d.Get("slot_rear_nvme1state")
+	if v, ok := d.GetOk("slot_rear_nvme1state"); ok {
 		x := (v.(string))
 		o.SetSlotRearNvme1state(x)
 	}
 
-	if _, ok := d.GetOk("slot_rear_nvme2link_speed"); ok {
-		v := d.Get("slot_rear_nvme2link_speed")
+	if v, ok := d.GetOk("slot_rear_nvme2link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRearNvme2linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_rear_nvme2state"); ok {
-		v := d.Get("slot_rear_nvme2state")
+	if v, ok := d.GetOk("slot_rear_nvme2state"); ok {
 		x := (v.(string))
 		o.SetSlotRearNvme2state(x)
 	}
 
-	if _, ok := d.GetOk("slot_rear_nvme3link_speed"); ok {
-		v := d.Get("slot_rear_nvme3link_speed")
+	if v, ok := d.GetOk("slot_rear_nvme3link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRearNvme3linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_rear_nvme3state"); ok {
-		v := d.Get("slot_rear_nvme3state")
+	if v, ok := d.GetOk("slot_rear_nvme3state"); ok {
 		x := (v.(string))
 		o.SetSlotRearNvme3state(x)
 	}
 
-	if _, ok := d.GetOk("slot_rear_nvme4link_speed"); ok {
-		v := d.Get("slot_rear_nvme4link_speed")
+	if v, ok := d.GetOk("slot_rear_nvme4link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRearNvme4linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_rear_nvme4state"); ok {
-		v := d.Get("slot_rear_nvme4state")
+	if v, ok := d.GetOk("slot_rear_nvme4state"); ok {
 		x := (v.(string))
 		o.SetSlotRearNvme4state(x)
 	}
 
-	if _, ok := d.GetOk("slot_rear_nvme5state"); ok {
-		v := d.Get("slot_rear_nvme5state")
+	if v, ok := d.GetOk("slot_rear_nvme5state"); ok {
 		x := (v.(string))
 		o.SetSlotRearNvme5state(x)
 	}
 
-	if _, ok := d.GetOk("slot_rear_nvme6state"); ok {
-		v := d.Get("slot_rear_nvme6state")
+	if v, ok := d.GetOk("slot_rear_nvme6state"); ok {
 		x := (v.(string))
 		o.SetSlotRearNvme6state(x)
 	}
 
-	if _, ok := d.GetOk("slot_rear_nvme7state"); ok {
-		v := d.Get("slot_rear_nvme7state")
+	if v, ok := d.GetOk("slot_rear_nvme7state"); ok {
 		x := (v.(string))
 		o.SetSlotRearNvme7state(x)
 	}
 
-	if _, ok := d.GetOk("slot_rear_nvme8state"); ok {
-		v := d.Get("slot_rear_nvme8state")
+	if v, ok := d.GetOk("slot_rear_nvme8state"); ok {
 		x := (v.(string))
 		o.SetSlotRearNvme8state(x)
 	}
 
-	if _, ok := d.GetOk("slot_riser1link_speed"); ok {
-		v := d.Get("slot_riser1link_speed")
+	if v, ok := d.GetOk("slot_riser1link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRiser1linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_riser1slot1link_speed"); ok {
-		v := d.Get("slot_riser1slot1link_speed")
+	if v, ok := d.GetOk("slot_riser1slot1link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRiser1slot1linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_riser1slot2link_speed"); ok {
-		v := d.Get("slot_riser1slot2link_speed")
+	if v, ok := d.GetOk("slot_riser1slot2link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRiser1slot2linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_riser1slot3link_speed"); ok {
-		v := d.Get("slot_riser1slot3link_speed")
+	if v, ok := d.GetOk("slot_riser1slot3link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRiser1slot3linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_riser2link_speed"); ok {
-		v := d.Get("slot_riser2link_speed")
+	if v, ok := d.GetOk("slot_riser2link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRiser2linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_riser2slot4link_speed"); ok {
-		v := d.Get("slot_riser2slot4link_speed")
+	if v, ok := d.GetOk("slot_riser2slot4link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRiser2slot4linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_riser2slot5link_speed"); ok {
-		v := d.Get("slot_riser2slot5link_speed")
+	if v, ok := d.GetOk("slot_riser2slot5link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRiser2slot5linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_riser2slot6link_speed"); ok {
-		v := d.Get("slot_riser2slot6link_speed")
+	if v, ok := d.GetOk("slot_riser2slot6link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotRiser2slot6linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_sas_state"); ok {
-		v := d.Get("slot_sas_state")
+	if v, ok := d.GetOk("slot_sas_state"); ok {
 		x := (v.(string))
 		o.SetSlotSasState(x)
 	}
 
-	if _, ok := d.GetOk("slot_ssd_slot1link_speed"); ok {
-		v := d.Get("slot_ssd_slot1link_speed")
+	if v, ok := d.GetOk("slot_ssd_slot1link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotSsdSlot1linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("slot_ssd_slot2link_speed"); ok {
-		v := d.Get("slot_ssd_slot2link_speed")
+	if v, ok := d.GetOk("slot_ssd_slot2link_speed"); ok {
 		x := (v.(string))
 		o.SetSlotSsdSlot2linkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("smee"); ok {
-		v := d.Get("smee")
+	if v, ok := d.GetOk("smee"); ok {
 		x := (v.(string))
 		o.SetSmee(x)
 	}
 
-	if _, ok := d.GetOk("smt_mode"); ok {
-		v := d.Get("smt_mode")
+	if v, ok := d.GetOk("smt_mode"); ok {
 		x := (v.(string))
 		o.SetSmtMode(x)
 	}
 
-	if _, ok := d.GetOk("snc"); ok {
-		v := d.Get("snc")
+	if v, ok := d.GetOk("snc"); ok {
 		x := (v.(string))
 		o.SetSnc(x)
 	}
 
-	if _, ok := d.GetOk("snoopy_mode_for2lm"); ok {
-		v := d.Get("snoopy_mode_for2lm")
+	if v, ok := d.GetOk("snoopy_mode_for2lm"); ok {
 		x := (v.(string))
 		o.SetSnoopyModeFor2lm(x)
 	}
 
-	if _, ok := d.GetOk("snoopy_mode_for_ad"); ok {
-		v := d.Get("snoopy_mode_for_ad")
+	if v, ok := d.GetOk("snoopy_mode_for_ad"); ok {
 		x := (v.(string))
 		o.SetSnoopyModeForAd(x)
 	}
 
-	if _, ok := d.GetOk("sparing_mode"); ok {
-		v := d.Get("sparing_mode")
+	if v, ok := d.GetOk("sparing_mode"); ok {
 		x := (v.(string))
 		o.SetSparingMode(x)
 	}
 
-	if _, ok := d.GetOk("sr_iov"); ok {
-		v := d.Get("sr_iov")
+	if v, ok := d.GetOk("sr_iov"); ok {
 		x := (v.(string))
 		o.SetSrIov(x)
 	}
 
-	if _, ok := d.GetOk("streamer_prefetch"); ok {
-		v := d.Get("streamer_prefetch")
+	if v, ok := d.GetOk("streamer_prefetch"); ok {
 		x := (v.(string))
 		o.SetStreamerPrefetch(x)
 	}
 
-	if _, ok := d.GetOk("svm_mode"); ok {
-		v := d.Get("svm_mode")
+	if v, ok := d.GetOk("svm_mode"); ok {
 		x := (v.(string))
 		o.SetSvmMode(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -7016,110 +6786,102 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("terminal_type"); ok {
-		v := d.Get("terminal_type")
+	if v, ok := d.GetOk("terminal_type"); ok {
 		x := (v.(string))
 		o.SetTerminalType(x)
 	}
 
-	if _, ok := d.GetOk("tpm_control"); ok {
-		v := d.Get("tpm_control")
+	if v, ok := d.GetOk("tpm_control"); ok {
 		x := (v.(string))
 		o.SetTpmControl(x)
 	}
 
-	if _, ok := d.GetOk("tpm_pending_operation"); ok {
-		v := d.Get("tpm_pending_operation")
+	if v, ok := d.GetOk("tpm_pending_operation"); ok {
 		x := (v.(string))
 		o.SetTpmPendingOperation(x)
 	}
 
-	if _, ok := d.GetOk("tpm_support"); ok {
-		v := d.Get("tpm_support")
+	if v, ok := d.GetOk("tpm_support"); ok {
 		x := (v.(string))
 		o.SetTpmSupport(x)
 	}
 
-	if _, ok := d.GetOk("tsme"); ok {
-		v := d.Get("tsme")
+	if v, ok := d.GetOk("tsme"); ok {
 		x := (v.(string))
 		o.SetTsme(x)
 	}
 
-	if _, ok := d.GetOk("txt_support"); ok {
-		v := d.Get("txt_support")
+	if v, ok := d.GetOk("txt_support"); ok {
 		x := (v.(string))
 		o.SetTxtSupport(x)
 	}
 
-	if _, ok := d.GetOk("ucsm_boot_order_rule"); ok {
-		v := d.Get("ucsm_boot_order_rule")
+	if v, ok := d.GetOk("ucsm_boot_order_rule"); ok {
 		x := (v.(string))
 		o.SetUcsmBootOrderRule(x)
 	}
 
-	if _, ok := d.GetOk("ufs_disable"); ok {
-		v := d.Get("ufs_disable")
+	if v, ok := d.GetOk("ufs_disable"); ok {
 		x := (v.(string))
 		o.SetUfsDisable(x)
 	}
 
-	if _, ok := d.GetOk("uma_based_clustering"); ok {
-		v := d.Get("uma_based_clustering")
+	if v, ok := d.GetOk("uma_based_clustering"); ok {
 		x := (v.(string))
 		o.SetUmaBasedClustering(x)
 	}
 
-	if _, ok := d.GetOk("usb_emul6064"); ok {
-		v := d.Get("usb_emul6064")
+	if v, ok := d.GetOk("upi_link_enablement"); ok {
+		x := (v.(string))
+		o.SetUpiLinkEnablement(x)
+	}
+
+	if v, ok := d.GetOk("upi_power_management"); ok {
+		x := (v.(string))
+		o.SetUpiPowerManagement(x)
+	}
+
+	if v, ok := d.GetOk("usb_emul6064"); ok {
 		x := (v.(string))
 		o.SetUsbEmul6064(x)
 	}
 
-	if _, ok := d.GetOk("usb_port_front"); ok {
-		v := d.Get("usb_port_front")
+	if v, ok := d.GetOk("usb_port_front"); ok {
 		x := (v.(string))
 		o.SetUsbPortFront(x)
 	}
 
-	if _, ok := d.GetOk("usb_port_internal"); ok {
-		v := d.Get("usb_port_internal")
+	if v, ok := d.GetOk("usb_port_internal"); ok {
 		x := (v.(string))
 		o.SetUsbPortInternal(x)
 	}
 
-	if _, ok := d.GetOk("usb_port_kvm"); ok {
-		v := d.Get("usb_port_kvm")
+	if v, ok := d.GetOk("usb_port_kvm"); ok {
 		x := (v.(string))
 		o.SetUsbPortKvm(x)
 	}
 
-	if _, ok := d.GetOk("usb_port_rear"); ok {
-		v := d.Get("usb_port_rear")
+	if v, ok := d.GetOk("usb_port_rear"); ok {
 		x := (v.(string))
 		o.SetUsbPortRear(x)
 	}
 
-	if _, ok := d.GetOk("usb_port_sd_card"); ok {
-		v := d.Get("usb_port_sd_card")
+	if v, ok := d.GetOk("usb_port_sd_card"); ok {
 		x := (v.(string))
 		o.SetUsbPortSdCard(x)
 	}
 
-	if _, ok := d.GetOk("usb_port_vmedia"); ok {
-		v := d.Get("usb_port_vmedia")
+	if v, ok := d.GetOk("usb_port_vmedia"); ok {
 		x := (v.(string))
 		o.SetUsbPortVmedia(x)
 	}
 
-	if _, ok := d.GetOk("usb_xhci_support"); ok {
-		v := d.Get("usb_xhci_support")
+	if v, ok := d.GetOk("usb_xhci_support"); ok {
 		x := (v.(string))
 		o.SetUsbXhciSupport(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -7193,1591 +6955,39 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		}
 	}
 
-	if _, ok := d.GetOk("vga_priority"); ok {
-		v := d.Get("vga_priority")
-		x := (v.(string))
-		o.SetVgaPriority(x)
-	}
-
-	if _, ok := d.GetOk("vmd_enable"); ok {
-		v := d.Get("vmd_enable")
-		x := (v.(string))
-		o.SetVmdEnable(x)
-	}
-
-	if _, ok := d.GetOk("vol_memory_mode"); ok {
-		v := d.Get("vol_memory_mode")
-		x := (v.(string))
-		o.SetVolMemoryMode(x)
-	}
-
-	if _, ok := d.GetOk("work_load_config"); ok {
-		v := d.Get("work_load_config")
-		x := (v.(string))
-		o.SetWorkLoadConfig(x)
-	}
-
-	if _, ok := d.GetOk("xpt_prefetch"); ok {
-		v := d.Get("xpt_prefetch")
-		x := (v.(string))
-		o.SetXptPrefetch(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("acs_control_gpu1state"); ok {
-		x := (v.(string))
-		o.SetAcsControlGpu1state(x)
-	}
-	if v, ok := d.GetOk("acs_control_gpu2state"); ok {
-		x := (v.(string))
-		o.SetAcsControlGpu2state(x)
-	}
-	if v, ok := d.GetOk("acs_control_gpu3state"); ok {
-		x := (v.(string))
-		o.SetAcsControlGpu3state(x)
-	}
-	if v, ok := d.GetOk("acs_control_gpu4state"); ok {
-		x := (v.(string))
-		o.SetAcsControlGpu4state(x)
-	}
-	if v, ok := d.GetOk("acs_control_gpu5state"); ok {
-		x := (v.(string))
-		o.SetAcsControlGpu5state(x)
-	}
-	if v, ok := d.GetOk("acs_control_gpu6state"); ok {
-		x := (v.(string))
-		o.SetAcsControlGpu6state(x)
-	}
-	if v, ok := d.GetOk("acs_control_gpu7state"); ok {
-		x := (v.(string))
-		o.SetAcsControlGpu7state(x)
-	}
-	if v, ok := d.GetOk("acs_control_gpu8state"); ok {
-		x := (v.(string))
-		o.SetAcsControlGpu8state(x)
-	}
-	if v, ok := d.GetOk("acs_control_slot11state"); ok {
-		x := (v.(string))
-		o.SetAcsControlSlot11state(x)
-	}
-	if v, ok := d.GetOk("acs_control_slot12state"); ok {
-		x := (v.(string))
-		o.SetAcsControlSlot12state(x)
-	}
-	if v, ok := d.GetOk("acs_control_slot13state"); ok {
-		x := (v.(string))
-		o.SetAcsControlSlot13state(x)
-	}
-	if v, ok := d.GetOk("acs_control_slot14state"); ok {
-		x := (v.(string))
-		o.SetAcsControlSlot14state(x)
-	}
-	if v, ok := d.GetOk("adjacent_cache_line_prefetch"); ok {
-		x := (v.(string))
-		o.SetAdjacentCacheLinePrefetch(x)
-	}
-	if v, ok := d.GetOk("advanced_mem_test"); ok {
-		x := (v.(string))
-		o.SetAdvancedMemTest(x)
-	}
-	if v, ok := d.GetOk("all_usb_devices"); ok {
-		x := (v.(string))
-		o.SetAllUsbDevices(x)
-	}
-	if v, ok := d.GetOk("altitude"); ok {
-		x := (v.(string))
-		o.SetAltitude(x)
-	}
-	if v, ok := d.GetOk("aspm_support"); ok {
-		x := (v.(string))
-		o.SetAspmSupport(x)
-	}
-	if v, ok := d.GetOk("assert_nmi_on_perr"); ok {
-		x := (v.(string))
-		o.SetAssertNmiOnPerr(x)
-	}
-	if v, ok := d.GetOk("assert_nmi_on_serr"); ok {
-		x := (v.(string))
-		o.SetAssertNmiOnSerr(x)
-	}
-	if v, ok := d.GetOk("auto_cc_state"); ok {
-		x := (v.(string))
-		o.SetAutoCcState(x)
-	}
-	if v, ok := d.GetOk("autonumous_cstate_enable"); ok {
-		x := (v.(string))
-		o.SetAutonumousCstateEnable(x)
-	}
-	if v, ok := d.GetOk("baud_rate"); ok {
-		x := (v.(string))
-		o.SetBaudRate(x)
-	}
-	if v, ok := d.GetOk("bme_dma_mitigation"); ok {
-		x := (v.(string))
-		o.SetBmeDmaMitigation(x)
-	}
-	if v, ok := d.GetOk("boot_option_num_retry"); ok {
-		x := (v.(string))
-		o.SetBootOptionNumRetry(x)
-	}
-	if v, ok := d.GetOk("boot_option_re_cool_down"); ok {
-		x := (v.(string))
-		o.SetBootOptionReCoolDown(x)
-	}
-	if v, ok := d.GetOk("boot_option_retry"); ok {
-		x := (v.(string))
-		o.SetBootOptionRetry(x)
-	}
-	if v, ok := d.GetOk("boot_performance_mode"); ok {
-		x := (v.(string))
-		o.SetBootPerformanceMode(x)
-	}
-	if v, ok := d.GetOk("burst_and_postponed_refresh"); ok {
-		x := (v.(string))
-		o.SetBurstAndPostponedRefresh(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_apbdis"); ok {
-		x := (v.(string))
-		o.SetCbsCmnApbdis(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_cpu_cpb"); ok {
-		x := (v.(string))
-		o.SetCbsCmnCpuCpb(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_cpu_gen_downcore_ctrl"); ok {
-		x := (v.(string))
-		o.SetCbsCmnCpuGenDowncoreCtrl(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_cpu_global_cstate_ctrl"); ok {
-		x := (v.(string))
-		o.SetCbsCmnCpuGlobalCstateCtrl(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_cpu_l1stream_hw_prefetcher"); ok {
-		x := (v.(string))
-		o.SetCbsCmnCpuL1streamHwPrefetcher(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_cpu_l2stream_hw_prefetcher"); ok {
-		x := (v.(string))
-		o.SetCbsCmnCpuL2streamHwPrefetcher(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_cpu_smee"); ok {
-		x := (v.(string))
-		o.SetCbsCmnCpuSmee(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_cpu_streaming_stores_ctrl"); ok {
-		x := (v.(string))
-		o.SetCbsCmnCpuStreamingStoresCtrl(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_determinism_slider"); ok {
-		x := (v.(string))
-		o.SetCbsCmnDeterminismSlider(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_efficiency_mode_en"); ok {
-		x := (v.(string))
-		o.SetCbsCmnEfficiencyModeEn(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_fixed_soc_pstate"); ok {
-		x := (v.(string))
-		o.SetCbsCmnFixedSocPstate(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_gnb_nb_iommu"); ok {
-		x := (v.(string))
-		o.SetCbsCmnGnbNbIommu(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_gnb_smu_df_cstates"); ok {
-		x := (v.(string))
-		o.SetCbsCmnGnbSmuDfCstates(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_gnb_smucppc"); ok {
-		x := (v.(string))
-		o.SetCbsCmnGnbSmucppc(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_mem_ctrl_bank_group_swap_ddr4"); ok {
-		x := (v.(string))
-		o.SetCbsCmnMemCtrlBankGroupSwapDdr4(x)
-	}
-	if v, ok := d.GetOk("cbs_cmn_mem_map_bank_interleave_ddr4"); ok {
-		x := (v.(string))
-		o.SetCbsCmnMemMapBankInterleaveDdr4(x)
-	}
-	if v, ok := d.GetOk("cbs_cmnc_tdp_ctl"); ok {
-		x := (v.(string))
-		o.SetCbsCmncTdpCtl(x)
-	}
-	if v, ok := d.GetOk("cbs_cpu_ccd_ctrl_ssp"); ok {
-		x := (v.(string))
-		o.SetCbsCpuCcdCtrlSsp(x)
-	}
-	if v, ok := d.GetOk("cbs_cpu_core_ctrl"); ok {
-		x := (v.(string))
-		o.SetCbsCpuCoreCtrl(x)
-	}
-	if v, ok := d.GetOk("cbs_cpu_smt_ctrl"); ok {
-		x := (v.(string))
-		o.SetCbsCpuSmtCtrl(x)
-	}
-	if v, ok := d.GetOk("cbs_dbg_cpu_snp_mem_cover"); ok {
-		x := (v.(string))
-		o.SetCbsDbgCpuSnpMemCover(x)
-	}
-	if v, ok := d.GetOk("cbs_dbg_cpu_snp_mem_size_cover"); ok {
-		x := (v.(string))
-		o.SetCbsDbgCpuSnpMemSizeCover(x)
-	}
-	if v, ok := d.GetOk("cbs_df_cmn_acpi_srat_l3numa"); ok {
-		x := (v.(string))
-		o.SetCbsDfCmnAcpiSratL3numa(x)
-	}
-	if v, ok := d.GetOk("cbs_df_cmn_dram_nps"); ok {
-		x := (v.(string))
-		o.SetCbsDfCmnDramNps(x)
-	}
-	if v, ok := d.GetOk("cbs_df_cmn_mem_intlv"); ok {
-		x := (v.(string))
-		o.SetCbsDfCmnMemIntlv(x)
-	}
-	if v, ok := d.GetOk("cbs_df_cmn_mem_intlv_size"); ok {
-		x := (v.(string))
-		o.SetCbsDfCmnMemIntlvSize(x)
-	}
-	if v, ok := d.GetOk("cbs_sev_snp_support"); ok {
-		x := (v.(string))
-		o.SetCbsSevSnpSupport(x)
-	}
-	if v, ok := d.GetOk("cdn_enable"); ok {
-		x := (v.(string))
-		o.SetCdnEnable(x)
-	}
-	if v, ok := d.GetOk("cdn_support"); ok {
-		x := (v.(string))
-		o.SetCdnSupport(x)
-	}
-	if v, ok := d.GetOk("channel_inter_leave"); ok {
-		x := (v.(string))
-		o.SetChannelInterLeave(x)
-	}
-	if v, ok := d.GetOk("cisco_adaptive_mem_training"); ok {
-		x := (v.(string))
-		o.SetCiscoAdaptiveMemTraining(x)
-	}
-	if v, ok := d.GetOk("cisco_debug_level"); ok {
-		x := (v.(string))
-		o.SetCiscoDebugLevel(x)
-	}
-	if v, ok := d.GetOk("cisco_oprom_launch_optimization"); ok {
-		x := (v.(string))
-		o.SetCiscoOpromLaunchOptimization(x)
-	}
-	if v, ok := d.GetOk("cisco_xgmi_max_speed"); ok {
-		x := (v.(string))
-		o.SetCiscoXgmiMaxSpeed(x)
-	}
-	if v, ok := d.GetOk("cke_low_policy"); ok {
-		x := (v.(string))
-		o.SetCkeLowPolicy(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("closed_loop_therm_throtl"); ok {
-		x := (v.(string))
-		o.SetClosedLoopThermThrotl(x)
-	}
-	if v, ok := d.GetOk("cmci_enable"); ok {
-		x := (v.(string))
-		o.SetCmciEnable(x)
-	}
-	if v, ok := d.GetOk("config_tdp"); ok {
-		x := (v.(string))
-		o.SetConfigTdp(x)
-	}
-	if v, ok := d.GetOk("config_tdp_level"); ok {
-		x := (v.(string))
-		o.SetConfigTdpLevel(x)
-	}
-	if v, ok := d.GetOk("console_redirection"); ok {
-		x := (v.(string))
-		o.SetConsoleRedirection(x)
-	}
-	if v, ok := d.GetOk("core_multi_processing"); ok {
-		x := (v.(string))
-		o.SetCoreMultiProcessing(x)
-	}
-	if v, ok := d.GetOk("cpu_energy_performance"); ok {
-		x := (v.(string))
-		o.SetCpuEnergyPerformance(x)
-	}
-	if v, ok := d.GetOk("cpu_frequency_floor"); ok {
-		x := (v.(string))
-		o.SetCpuFrequencyFloor(x)
-	}
-	if v, ok := d.GetOk("cpu_performance"); ok {
-		x := (v.(string))
-		o.SetCpuPerformance(x)
-	}
-	if v, ok := d.GetOk("cpu_power_management"); ok {
-		x := (v.(string))
-		o.SetCpuPowerManagement(x)
-	}
-	if v, ok := d.GetOk("cr_qos"); ok {
-		x := (v.(string))
-		o.SetCrQos(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("crfastgo_config"); ok {
-		x := (v.(string))
-		o.SetCrfastgoConfig(x)
-	}
-	if v, ok := d.GetOk("dcpmm_firmware_downgrade"); ok {
-		x := (v.(string))
-		o.SetDcpmmFirmwareDowngrade(x)
-	}
-	if v, ok := d.GetOk("demand_scrub"); ok {
-		x := (v.(string))
-		o.SetDemandScrub(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("direct_cache_access"); ok {
-		x := (v.(string))
-		o.SetDirectCacheAccess(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("dram_clock_throttling"); ok {
-		x := (v.(string))
-		o.SetDramClockThrottling(x)
-	}
-	if v, ok := d.GetOk("dram_refresh_rate"); ok {
-		x := (v.(string))
-		o.SetDramRefreshRate(x)
-	}
-	if v, ok := d.GetOk("dram_sw_thermal_throttling"); ok {
-		x := (v.(string))
-		o.SetDramSwThermalThrottling(x)
-	}
-	if v, ok := d.GetOk("eadr_support"); ok {
-		x := (v.(string))
-		o.SetEadrSupport(x)
-	}
-	if v, ok := d.GetOk("edpc_en"); ok {
-		x := (v.(string))
-		o.SetEdpcEn(x)
-	}
-	if v, ok := d.GetOk("enable_clock_spread_spec"); ok {
-		x := (v.(string))
-		o.SetEnableClockSpreadSpec(x)
-	}
-	if v, ok := d.GetOk("enable_mktme"); ok {
-		x := (v.(string))
-		o.SetEnableMktme(x)
-	}
-	if v, ok := d.GetOk("enable_sgx"); ok {
-		x := (v.(string))
-		o.SetEnableSgx(x)
-	}
-	if v, ok := d.GetOk("enable_tme"); ok {
-		x := (v.(string))
-		o.SetEnableTme(x)
-	}
-	if v, ok := d.GetOk("energy_efficient_turbo"); ok {
-		x := (v.(string))
-		o.SetEnergyEfficientTurbo(x)
-	}
-	if v, ok := d.GetOk("eng_perf_tuning"); ok {
-		x := (v.(string))
-		o.SetEngPerfTuning(x)
-	}
-	if v, ok := d.GetOk("enhanced_intel_speed_step_tech"); ok {
-		x := (v.(string))
-		o.SetEnhancedIntelSpeedStepTech(x)
-	}
-	if v, ok := d.GetOk("epoch_update"); ok {
-		x := (v.(string))
-		o.SetEpochUpdate(x)
-	}
-	if v, ok := d.GetOk("epp_enable"); ok {
-		x := (v.(string))
-		o.SetEppEnable(x)
-	}
-	if v, ok := d.GetOk("epp_profile"); ok {
-		x := (v.(string))
-		o.SetEppProfile(x)
-	}
-	if v, ok := d.GetOk("execute_disable_bit"); ok {
-		x := (v.(string))
-		o.SetExecuteDisableBit(x)
-	}
-	if v, ok := d.GetOk("extended_apic"); ok {
-		x := (v.(string))
-		o.SetExtendedApic(x)
-	}
-	if v, ok := d.GetOk("flow_control"); ok {
-		x := (v.(string))
-		o.SetFlowControl(x)
-	}
-	if v, ok := d.GetOk("frb2enable"); ok {
-		x := (v.(string))
-		o.SetFrb2enable(x)
-	}
-	if v, ok := d.GetOk("hardware_prefetch"); ok {
-		x := (v.(string))
-		o.SetHardwarePrefetch(x)
-	}
-	if v, ok := d.GetOk("hwpm_enable"); ok {
-		x := (v.(string))
-		o.SetHwpmEnable(x)
-	}
-	if v, ok := d.GetOk("imc_interleave"); ok {
-		x := (v.(string))
-		o.SetImcInterleave(x)
-	}
-	if v, ok := d.GetOk("intel_dynamic_speed_select"); ok {
-		x := (v.(string))
-		o.SetIntelDynamicSpeedSelect(x)
-	}
-	if v, ok := d.GetOk("intel_hyper_threading_tech"); ok {
-		x := (v.(string))
-		o.SetIntelHyperThreadingTech(x)
-	}
-	if v, ok := d.GetOk("intel_speed_select"); ok {
-		x := (v.(string))
-		o.SetIntelSpeedSelect(x)
-	}
-	if v, ok := d.GetOk("intel_turbo_boost_tech"); ok {
-		x := (v.(string))
-		o.SetIntelTurboBoostTech(x)
-	}
-	if v, ok := d.GetOk("intel_virtualization_technology"); ok {
-		x := (v.(string))
-		o.SetIntelVirtualizationTechnology(x)
-	}
-	if v, ok := d.GetOk("intel_vt_for_directed_io"); ok {
-		x := (v.(string))
-		o.SetIntelVtForDirectedIo(x)
-	}
-	if v, ok := d.GetOk("intel_vtd_coherency_support"); ok {
-		x := (v.(string))
-		o.SetIntelVtdCoherencySupport(x)
-	}
-	if v, ok := d.GetOk("intel_vtd_interrupt_remapping"); ok {
-		x := (v.(string))
-		o.SetIntelVtdInterruptRemapping(x)
-	}
-	if v, ok := d.GetOk("intel_vtd_pass_through_dma_support"); ok {
-		x := (v.(string))
-		o.SetIntelVtdPassThroughDmaSupport(x)
-	}
-	if v, ok := d.GetOk("intel_vtdats_support"); ok {
-		x := (v.(string))
-		o.SetIntelVtdatsSupport(x)
-	}
-	if v, ok := d.GetOk("ioh_error_enable"); ok {
-		x := (v.(string))
-		o.SetIohErrorEnable(x)
-	}
-	if v, ok := d.GetOk("ioh_resource"); ok {
-		x := (v.(string))
-		o.SetIohResource(x)
-	}
-	if v, ok := d.GetOk("ip_prefetch"); ok {
-		x := (v.(string))
-		o.SetIpPrefetch(x)
-	}
-	if v, ok := d.GetOk("ipv4http"); ok {
-		x := (v.(string))
-		o.SetIpv4http(x)
-	}
-	if v, ok := d.GetOk("ipv4pxe"); ok {
-		x := (v.(string))
-		o.SetIpv4pxe(x)
-	}
-	if v, ok := d.GetOk("ipv6http"); ok {
-		x := (v.(string))
-		o.SetIpv6http(x)
-	}
-	if v, ok := d.GetOk("ipv6pxe"); ok {
-		x := (v.(string))
-		o.SetIpv6pxe(x)
-	}
-	if v, ok := d.GetOk("kti_prefetch"); ok {
-		x := (v.(string))
-		o.SetKtiPrefetch(x)
-	}
-	if v, ok := d.GetOk("legacy_os_redirection"); ok {
-		x := (v.(string))
-		o.SetLegacyOsRedirection(x)
-	}
-	if v, ok := d.GetOk("legacy_usb_support"); ok {
-		x := (v.(string))
-		o.SetLegacyUsbSupport(x)
-	}
-	if v, ok := d.GetOk("llc_prefetch"); ok {
-		x := (v.(string))
-		o.SetLlcPrefetch(x)
-	}
-	if v, ok := d.GetOk("lom_port0state"); ok {
-		x := (v.(string))
-		o.SetLomPort0state(x)
-	}
-	if v, ok := d.GetOk("lom_port1state"); ok {
-		x := (v.(string))
-		o.SetLomPort1state(x)
-	}
-	if v, ok := d.GetOk("lom_port2state"); ok {
-		x := (v.(string))
-		o.SetLomPort2state(x)
-	}
-	if v, ok := d.GetOk("lom_port3state"); ok {
-		x := (v.(string))
-		o.SetLomPort3state(x)
-	}
-	if v, ok := d.GetOk("lom_ports_all_state"); ok {
-		x := (v.(string))
-		o.SetLomPortsAllState(x)
-	}
-	if v, ok := d.GetOk("lv_ddr_mode"); ok {
-		x := (v.(string))
-		o.SetLvDdrMode(x)
-	}
-	if v, ok := d.GetOk("make_device_non_bootable"); ok {
-		x := (v.(string))
-		o.SetMakeDeviceNonBootable(x)
-	}
-	if v, ok := d.GetOk("memory_bandwidth_boost"); ok {
-		x := (v.(string))
-		o.SetMemoryBandwidthBoost(x)
-	}
-	if v, ok := d.GetOk("memory_inter_leave"); ok {
-		x := (v.(string))
-		o.SetMemoryInterLeave(x)
-	}
-	if v, ok := d.GetOk("memory_mapped_io_above4gb"); ok {
-		x := (v.(string))
-		o.SetMemoryMappedIoAbove4gb(x)
-	}
-	if v, ok := d.GetOk("memory_refresh_rate"); ok {
-		x := (v.(string))
-		o.SetMemoryRefreshRate(x)
-	}
-	if v, ok := d.GetOk("memory_size_limit"); ok {
-		x := (v.(string))
-		o.SetMemorySizeLimit(x)
-	}
-	if v, ok := d.GetOk("memory_thermal_throttling"); ok {
-		x := (v.(string))
-		o.SetMemoryThermalThrottling(x)
-	}
-	if v, ok := d.GetOk("mirroring_mode"); ok {
-		x := (v.(string))
-		o.SetMirroringMode(x)
-	}
-	if v, ok := d.GetOk("mmcfg_base"); ok {
-		x := (v.(string))
-		o.SetMmcfgBase(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("network_stack"); ok {
-		x := (v.(string))
-		o.SetNetworkStack(x)
-	}
-	if v, ok := d.GetOk("numa_optimized"); ok {
-		x := (v.(string))
-		o.SetNumaOptimized(x)
-	}
-	if v, ok := d.GetOk("nvmdimm_perform_config"); ok {
-		x := (v.(string))
-		o.SetNvmdimmPerformConfig(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("onboard10gbit_lom"); ok {
-		x := (v.(string))
-		o.SetOnboard10gbitLom(x)
-	}
-	if v, ok := d.GetOk("onboard_gbit_lom"); ok {
-		x := (v.(string))
-		o.SetOnboardGbitLom(x)
-	}
-	if v, ok := d.GetOk("onboard_scu_storage_support"); ok {
-		x := (v.(string))
-		o.SetOnboardScuStorageSupport(x)
-	}
-	if v, ok := d.GetOk("onboard_scu_storage_sw_stack"); ok {
-		x := (v.(string))
-		o.SetOnboardScuStorageSwStack(x)
-	}
-	if v, ok := d.GetOk("operation_mode"); ok {
-		x := (v.(string))
-		o.SetOperationMode(x)
-	}
-	if v, ok := d.GetOk("os_boot_watchdog_timer"); ok {
-		x := (v.(string))
-		o.SetOsBootWatchdogTimer(x)
-	}
-	if v, ok := d.GetOk("os_boot_watchdog_timer_policy"); ok {
-		x := (v.(string))
-		o.SetOsBootWatchdogTimerPolicy(x)
-	}
-	if v, ok := d.GetOk("os_boot_watchdog_timer_timeout"); ok {
-		x := (v.(string))
-		o.SetOsBootWatchdogTimerTimeout(x)
-	}
-	if v, ok := d.GetOk("out_of_band_mgmt_port"); ok {
-		x := (v.(string))
-		o.SetOutOfBandMgmtPort(x)
-	}
-	if v, ok := d.GetOk("package_cstate_limit"); ok {
-		x := (v.(string))
-		o.SetPackageCstateLimit(x)
-	}
-	if v, ok := d.GetOk("panic_high_watermark"); ok {
-		x := (v.(string))
-		o.SetPanicHighWatermark(x)
-	}
-	if v, ok := d.GetOk("partial_cache_line_sparing"); ok {
-		x := (v.(string))
-		o.SetPartialCacheLineSparing(x)
-	}
-	if v, ok := d.GetOk("partial_mirror_mode_config"); ok {
-		x := (v.(string))
-		o.SetPartialMirrorModeConfig(x)
-	}
-	if v, ok := d.GetOk("partial_mirror_percent"); ok {
-		x := (v.(string))
-		o.SetPartialMirrorPercent(x)
-	}
-	if v, ok := d.GetOk("partial_mirror_value1"); ok {
-		x := (v.(string))
-		o.SetPartialMirrorValue1(x)
-	}
-	if v, ok := d.GetOk("partial_mirror_value2"); ok {
-		x := (v.(string))
-		o.SetPartialMirrorValue2(x)
-	}
-	if v, ok := d.GetOk("partial_mirror_value3"); ok {
-		x := (v.(string))
-		o.SetPartialMirrorValue3(x)
-	}
-	if v, ok := d.GetOk("partial_mirror_value4"); ok {
-		x := (v.(string))
-		o.SetPartialMirrorValue4(x)
-	}
-	if v, ok := d.GetOk("patrol_scrub"); ok {
-		x := (v.(string))
-		o.SetPatrolScrub(x)
-	}
-	if v, ok := d.GetOk("patrol_scrub_duration"); ok {
-		x := (v.(string))
-		o.SetPatrolScrubDuration(x)
-	}
-	if v, ok := d.GetOk("pc_ie_ras_support"); ok {
-		x := (v.(string))
-		o.SetPcIeRasSupport(x)
-	}
-	if v, ok := d.GetOk("pc_ie_ssd_hot_plug_support"); ok {
-		x := (v.(string))
-		o.SetPcIeSsdHotPlugSupport(x)
-	}
-	if v, ok := d.GetOk("pch_usb30mode"); ok {
-		x := (v.(string))
-		o.SetPchUsb30mode(x)
-	}
-	if v, ok := d.GetOk("pci_option_ro_ms"); ok {
-		x := (v.(string))
-		o.SetPciOptionRoMs(x)
-	}
-	if v, ok := d.GetOk("pci_rom_clp"); ok {
-		x := (v.(string))
-		o.SetPciRomClp(x)
-	}
-	if v, ok := d.GetOk("pcie_ari_support"); ok {
-		x := (v.(string))
-		o.SetPcieAriSupport(x)
-	}
-	if v, ok := d.GetOk("pcie_pll_ssc"); ok {
-		x := (v.(string))
-		o.SetPciePllSsc(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_mraid1link_speed"); ok {
-		x := (v.(string))
-		o.SetPcieSlotMraid1linkSpeed(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_mraid1option_rom"); ok {
-		x := (v.(string))
-		o.SetPcieSlotMraid1optionRom(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_mraid2link_speed"); ok {
-		x := (v.(string))
-		o.SetPcieSlotMraid2linkSpeed(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_mraid2option_rom"); ok {
-		x := (v.(string))
-		o.SetPcieSlotMraid2optionRom(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_mstorraid_link_speed"); ok {
-		x := (v.(string))
-		o.SetPcieSlotMstorraidLinkSpeed(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_mstorraid_option_rom"); ok {
-		x := (v.(string))
-		o.SetPcieSlotMstorraidOptionRom(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_nvme1link_speed"); ok {
-		x := (v.(string))
-		o.SetPcieSlotNvme1linkSpeed(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_nvme1option_rom"); ok {
-		x := (v.(string))
-		o.SetPcieSlotNvme1optionRom(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_nvme2link_speed"); ok {
-		x := (v.(string))
-		o.SetPcieSlotNvme2linkSpeed(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_nvme2option_rom"); ok {
-		x := (v.(string))
-		o.SetPcieSlotNvme2optionRom(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_nvme3link_speed"); ok {
-		x := (v.(string))
-		o.SetPcieSlotNvme3linkSpeed(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_nvme3option_rom"); ok {
-		x := (v.(string))
-		o.SetPcieSlotNvme3optionRom(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_nvme4link_speed"); ok {
-		x := (v.(string))
-		o.SetPcieSlotNvme4linkSpeed(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_nvme4option_rom"); ok {
-		x := (v.(string))
-		o.SetPcieSlotNvme4optionRom(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_nvme5link_speed"); ok {
-		x := (v.(string))
-		o.SetPcieSlotNvme5linkSpeed(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_nvme5option_rom"); ok {
-		x := (v.(string))
-		o.SetPcieSlotNvme5optionRom(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_nvme6link_speed"); ok {
-		x := (v.(string))
-		o.SetPcieSlotNvme6linkSpeed(x)
-	}
-	if v, ok := d.GetOk("pcie_slot_nvme6option_rom"); ok {
-		x := (v.(string))
-		o.SetPcieSlotNvme6optionRom(x)
-	}
-	if v, ok := d.GetOk("pop_support"); ok {
-		x := (v.(string))
-		o.SetPopSupport(x)
-	}
-	if v, ok := d.GetOk("post_error_pause"); ok {
-		x := (v.(string))
-		o.SetPostErrorPause(x)
-	}
-	if v, ok := d.GetOk("post_package_repair"); ok {
-		x := (v.(string))
-		o.SetPostPackageRepair(x)
-	}
-	if v, ok := d.GetOk("processor_c1e"); ok {
-		x := (v.(string))
-		o.SetProcessorC1e(x)
-	}
-	if v, ok := d.GetOk("processor_c3report"); ok {
-		x := (v.(string))
-		o.SetProcessorC3report(x)
-	}
-	if v, ok := d.GetOk("processor_c6report"); ok {
-		x := (v.(string))
-		o.SetProcessorC6report(x)
-	}
-	if v, ok := d.GetOk("processor_cstate"); ok {
-		x := (v.(string))
-		o.SetProcessorCstate(x)
-	}
-	if v, ok := d.GetOk("psata"); ok {
-		x := (v.(string))
-		o.SetPsata(x)
-	}
-	if v, ok := d.GetOk("pstate_coord_type"); ok {
-		x := (v.(string))
-		o.SetPstateCoordType(x)
-	}
-	if v, ok := d.GetOk("putty_key_pad"); ok {
-		x := (v.(string))
-		o.SetPuttyKeyPad(x)
-	}
-	if v, ok := d.GetOk("pwr_perf_tuning"); ok {
-		x := (v.(string))
-		o.SetPwrPerfTuning(x)
-	}
-	if v, ok := d.GetOk("qpi_link_frequency"); ok {
-		x := (v.(string))
-		o.SetQpiLinkFrequency(x)
-	}
-	if v, ok := d.GetOk("qpi_link_speed"); ok {
-		x := (v.(string))
-		o.SetQpiLinkSpeed(x)
-	}
-	if v, ok := d.GetOk("qpi_snoop_mode"); ok {
-		x := (v.(string))
-		o.SetQpiSnoopMode(x)
-	}
-	if v, ok := d.GetOk("rank_inter_leave"); ok {
-		x := (v.(string))
-		o.SetRankInterLeave(x)
-	}
-	if v, ok := d.GetOk("redirection_after_post"); ok {
-		x := (v.(string))
-		o.SetRedirectionAfterPost(x)
-	}
-	if v, ok := d.GetOk("sata_mode_select"); ok {
-		x := (v.(string))
-		o.SetSataModeSelect(x)
-	}
-	if v, ok := d.GetOk("select_memory_ras_configuration"); ok {
-		x := (v.(string))
-		o.SetSelectMemoryRasConfiguration(x)
-	}
-	if v, ok := d.GetOk("select_ppr_type"); ok {
-		x := (v.(string))
-		o.SetSelectPprType(x)
-	}
-	if v, ok := d.GetOk("serial_port_aenable"); ok {
-		x := (v.(string))
-		o.SetSerialPortAenable(x)
-	}
-	if v, ok := d.GetOk("sev"); ok {
-		x := (v.(string))
-		o.SetSev(x)
-	}
-	if v, ok := d.GetOk("sgx_auto_registration_agent"); ok {
-		x := (v.(string))
-		o.SetSgxAutoRegistrationAgent(x)
-	}
-	if v, ok := d.GetOk("sgx_epoch0"); ok {
-		x := (v.(string))
-		o.SetSgxEpoch0(x)
-	}
-	if v, ok := d.GetOk("sgx_epoch1"); ok {
-		x := (v.(string))
-		o.SetSgxEpoch1(x)
-	}
-	if v, ok := d.GetOk("sgx_factory_reset"); ok {
-		x := (v.(string))
-		o.SetSgxFactoryReset(x)
-	}
-	if v, ok := d.GetOk("sgx_le_pub_key_hash0"); ok {
-		x := (v.(string))
-		o.SetSgxLePubKeyHash0(x)
-	}
-	if v, ok := d.GetOk("sgx_le_pub_key_hash1"); ok {
-		x := (v.(string))
-		o.SetSgxLePubKeyHash1(x)
-	}
-	if v, ok := d.GetOk("sgx_le_pub_key_hash2"); ok {
-		x := (v.(string))
-		o.SetSgxLePubKeyHash2(x)
-	}
-	if v, ok := d.GetOk("sgx_le_pub_key_hash3"); ok {
-		x := (v.(string))
-		o.SetSgxLePubKeyHash3(x)
-	}
-	if v, ok := d.GetOk("sgx_le_wr"); ok {
-		x := (v.(string))
-		o.SetSgxLeWr(x)
-	}
-	if v, ok := d.GetOk("sgx_package_info_in_band_access"); ok {
-		x := (v.(string))
-		o.SetSgxPackageInfoInBandAccess(x)
-	}
-	if v, ok := d.GetOk("sgx_qos"); ok {
-		x := (v.(string))
-		o.SetSgxQos(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("single_pctl_enable"); ok {
-		x := (v.(string))
-		o.SetSinglePctlEnable(x)
-	}
-	if v, ok := d.GetOk("slot10link_speed"); ok {
-		x := (v.(string))
-		o.SetSlot10linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot10state"); ok {
-		x := (v.(string))
-		o.SetSlot10state(x)
-	}
-	if v, ok := d.GetOk("slot11link_speed"); ok {
-		x := (v.(string))
-		o.SetSlot11linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot11state"); ok {
-		x := (v.(string))
-		o.SetSlot11state(x)
-	}
-	if v, ok := d.GetOk("slot12link_speed"); ok {
-		x := (v.(string))
-		o.SetSlot12linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot12state"); ok {
-		x := (v.(string))
-		o.SetSlot12state(x)
-	}
-	if v, ok := d.GetOk("slot13state"); ok {
-		x := (v.(string))
-		o.SetSlot13state(x)
-	}
-	if v, ok := d.GetOk("slot14state"); ok {
-		x := (v.(string))
-		o.SetSlot14state(x)
-	}
-	if v, ok := d.GetOk("slot1link_speed"); ok {
-		x := (v.(string))
-		o.SetSlot1linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot1state"); ok {
-		x := (v.(string))
-		o.SetSlot1state(x)
-	}
-	if v, ok := d.GetOk("slot2link_speed"); ok {
-		x := (v.(string))
-		o.SetSlot2linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot2state"); ok {
-		x := (v.(string))
-		o.SetSlot2state(x)
-	}
-	if v, ok := d.GetOk("slot3link_speed"); ok {
-		x := (v.(string))
-		o.SetSlot3linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot3state"); ok {
-		x := (v.(string))
-		o.SetSlot3state(x)
-	}
-	if v, ok := d.GetOk("slot4link_speed"); ok {
-		x := (v.(string))
-		o.SetSlot4linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot4state"); ok {
-		x := (v.(string))
-		o.SetSlot4state(x)
-	}
-	if v, ok := d.GetOk("slot5link_speed"); ok {
-		x := (v.(string))
-		o.SetSlot5linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot5state"); ok {
-		x := (v.(string))
-		o.SetSlot5state(x)
-	}
-	if v, ok := d.GetOk("slot6link_speed"); ok {
-		x := (v.(string))
-		o.SetSlot6linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot6state"); ok {
-		x := (v.(string))
-		o.SetSlot6state(x)
-	}
-	if v, ok := d.GetOk("slot7link_speed"); ok {
-		x := (v.(string))
-		o.SetSlot7linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot7state"); ok {
-		x := (v.(string))
-		o.SetSlot7state(x)
-	}
-	if v, ok := d.GetOk("slot8link_speed"); ok {
-		x := (v.(string))
-		o.SetSlot8linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot8state"); ok {
-		x := (v.(string))
-		o.SetSlot8state(x)
-	}
-	if v, ok := d.GetOk("slot9link_speed"); ok {
-		x := (v.(string))
-		o.SetSlot9linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot9state"); ok {
-		x := (v.(string))
-		o.SetSlot9state(x)
-	}
-	if v, ok := d.GetOk("slot_flom_link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFlomLinkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme10link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme10linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme10option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme10optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme11link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme11linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme11option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme11optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme12link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme12linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme12option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme12optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme13option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme13optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme14option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme14optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme15option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme15optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme16option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme16optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme17option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme17optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme18option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme18optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme19option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme19optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme1link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme1linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme1option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme1optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme20option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme20optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme21option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme21optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme22option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme22optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme23option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme23optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme24option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme24optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme2link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme2linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme2option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme2optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme3link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme3linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme3option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme3optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme4link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme4linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme4option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme4optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme5link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme5linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme5option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme5optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme6link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme6linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme6option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme6optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme7link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme7linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme7option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme7optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme8link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme8linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme8option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme8optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme9link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme9linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_nvme9option_rom"); ok {
-		x := (v.(string))
-		o.SetSlotFrontNvme9optionRom(x)
-	}
-	if v, ok := d.GetOk("slot_front_slot5link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontSlot5linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_front_slot6link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotFrontSlot6linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_gpu1state"); ok {
-		x := (v.(string))
-		o.SetSlotGpu1state(x)
-	}
-	if v, ok := d.GetOk("slot_gpu2state"); ok {
-		x := (v.(string))
-		o.SetSlotGpu2state(x)
-	}
-	if v, ok := d.GetOk("slot_gpu3state"); ok {
-		x := (v.(string))
-		o.SetSlotGpu3state(x)
-	}
-	if v, ok := d.GetOk("slot_gpu4state"); ok {
-		x := (v.(string))
-		o.SetSlotGpu4state(x)
-	}
-	if v, ok := d.GetOk("slot_gpu5state"); ok {
-		x := (v.(string))
-		o.SetSlotGpu5state(x)
-	}
-	if v, ok := d.GetOk("slot_gpu6state"); ok {
-		x := (v.(string))
-		o.SetSlotGpu6state(x)
-	}
-	if v, ok := d.GetOk("slot_gpu7state"); ok {
-		x := (v.(string))
-		o.SetSlotGpu7state(x)
-	}
-	if v, ok := d.GetOk("slot_gpu8state"); ok {
-		x := (v.(string))
-		o.SetSlotGpu8state(x)
-	}
-	if v, ok := d.GetOk("slot_hba_link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotHbaLinkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_hba_state"); ok {
-		x := (v.(string))
-		o.SetSlotHbaState(x)
-	}
-	if v, ok := d.GetOk("slot_lom1link"); ok {
-		x := (v.(string))
-		o.SetSlotLom1link(x)
-	}
-	if v, ok := d.GetOk("slot_lom2link"); ok {
-		x := (v.(string))
-		o.SetSlotLom2link(x)
-	}
-	if v, ok := d.GetOk("slot_mezz_state"); ok {
-		x := (v.(string))
-		o.SetSlotMezzState(x)
-	}
-	if v, ok := d.GetOk("slot_mlom_link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotMlomLinkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_mlom_state"); ok {
-		x := (v.(string))
-		o.SetSlotMlomState(x)
-	}
-	if v, ok := d.GetOk("slot_mraid_link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotMraidLinkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_mraid_state"); ok {
-		x := (v.(string))
-		o.SetSlotMraidState(x)
-	}
-	if v, ok := d.GetOk("slot_n10state"); ok {
-		x := (v.(string))
-		o.SetSlotN10state(x)
-	}
-	if v, ok := d.GetOk("slot_n11state"); ok {
-		x := (v.(string))
-		o.SetSlotN11state(x)
-	}
-	if v, ok := d.GetOk("slot_n12state"); ok {
-		x := (v.(string))
-		o.SetSlotN12state(x)
-	}
-	if v, ok := d.GetOk("slot_n13state"); ok {
-		x := (v.(string))
-		o.SetSlotN13state(x)
-	}
-	if v, ok := d.GetOk("slot_n14state"); ok {
-		x := (v.(string))
-		o.SetSlotN14state(x)
-	}
-	if v, ok := d.GetOk("slot_n15state"); ok {
-		x := (v.(string))
-		o.SetSlotN15state(x)
-	}
-	if v, ok := d.GetOk("slot_n16state"); ok {
-		x := (v.(string))
-		o.SetSlotN16state(x)
-	}
-	if v, ok := d.GetOk("slot_n17state"); ok {
-		x := (v.(string))
-		o.SetSlotN17state(x)
-	}
-	if v, ok := d.GetOk("slot_n18state"); ok {
-		x := (v.(string))
-		o.SetSlotN18state(x)
-	}
-	if v, ok := d.GetOk("slot_n19state"); ok {
-		x := (v.(string))
-		o.SetSlotN19state(x)
-	}
-	if v, ok := d.GetOk("slot_n1state"); ok {
-		x := (v.(string))
-		o.SetSlotN1state(x)
-	}
-	if v, ok := d.GetOk("slot_n20state"); ok {
-		x := (v.(string))
-		o.SetSlotN20state(x)
-	}
-	if v, ok := d.GetOk("slot_n21state"); ok {
-		x := (v.(string))
-		o.SetSlotN21state(x)
-	}
-	if v, ok := d.GetOk("slot_n22state"); ok {
-		x := (v.(string))
-		o.SetSlotN22state(x)
-	}
-	if v, ok := d.GetOk("slot_n23state"); ok {
-		x := (v.(string))
-		o.SetSlotN23state(x)
-	}
-	if v, ok := d.GetOk("slot_n24state"); ok {
-		x := (v.(string))
-		o.SetSlotN24state(x)
-	}
-	if v, ok := d.GetOk("slot_n2state"); ok {
-		x := (v.(string))
-		o.SetSlotN2state(x)
-	}
-	if v, ok := d.GetOk("slot_n3state"); ok {
-		x := (v.(string))
-		o.SetSlotN3state(x)
-	}
-	if v, ok := d.GetOk("slot_n4state"); ok {
-		x := (v.(string))
-		o.SetSlotN4state(x)
-	}
-	if v, ok := d.GetOk("slot_n5state"); ok {
-		x := (v.(string))
-		o.SetSlotN5state(x)
-	}
-	if v, ok := d.GetOk("slot_n6state"); ok {
-		x := (v.(string))
-		o.SetSlotN6state(x)
-	}
-	if v, ok := d.GetOk("slot_n7state"); ok {
-		x := (v.(string))
-		o.SetSlotN7state(x)
-	}
-	if v, ok := d.GetOk("slot_n8state"); ok {
-		x := (v.(string))
-		o.SetSlotN8state(x)
-	}
-	if v, ok := d.GetOk("slot_n9state"); ok {
-		x := (v.(string))
-		o.SetSlotN9state(x)
-	}
-	if v, ok := d.GetOk("slot_raid_link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRaidLinkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_raid_state"); ok {
-		x := (v.(string))
-		o.SetSlotRaidState(x)
-	}
-	if v, ok := d.GetOk("slot_rear_nvme1link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRearNvme1linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_rear_nvme1state"); ok {
-		x := (v.(string))
-		o.SetSlotRearNvme1state(x)
-	}
-	if v, ok := d.GetOk("slot_rear_nvme2link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRearNvme2linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_rear_nvme2state"); ok {
-		x := (v.(string))
-		o.SetSlotRearNvme2state(x)
-	}
-	if v, ok := d.GetOk("slot_rear_nvme3link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRearNvme3linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_rear_nvme3state"); ok {
-		x := (v.(string))
-		o.SetSlotRearNvme3state(x)
-	}
-	if v, ok := d.GetOk("slot_rear_nvme4link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRearNvme4linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_rear_nvme4state"); ok {
-		x := (v.(string))
-		o.SetSlotRearNvme4state(x)
-	}
-	if v, ok := d.GetOk("slot_rear_nvme5state"); ok {
-		x := (v.(string))
-		o.SetSlotRearNvme5state(x)
-	}
-	if v, ok := d.GetOk("slot_rear_nvme6state"); ok {
-		x := (v.(string))
-		o.SetSlotRearNvme6state(x)
-	}
-	if v, ok := d.GetOk("slot_rear_nvme7state"); ok {
-		x := (v.(string))
-		o.SetSlotRearNvme7state(x)
-	}
-	if v, ok := d.GetOk("slot_rear_nvme8state"); ok {
-		x := (v.(string))
-		o.SetSlotRearNvme8state(x)
-	}
-	if v, ok := d.GetOk("slot_riser1link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRiser1linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_riser1slot1link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRiser1slot1linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_riser1slot2link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRiser1slot2linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_riser1slot3link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRiser1slot3linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_riser2link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRiser2linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_riser2slot4link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRiser2slot4linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_riser2slot5link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRiser2slot5linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_riser2slot6link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotRiser2slot6linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_sas_state"); ok {
-		x := (v.(string))
-		o.SetSlotSasState(x)
-	}
-	if v, ok := d.GetOk("slot_ssd_slot1link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotSsdSlot1linkSpeed(x)
-	}
-	if v, ok := d.GetOk("slot_ssd_slot2link_speed"); ok {
-		x := (v.(string))
-		o.SetSlotSsdSlot2linkSpeed(x)
-	}
-	if v, ok := d.GetOk("smee"); ok {
-		x := (v.(string))
-		o.SetSmee(x)
-	}
-	if v, ok := d.GetOk("smt_mode"); ok {
-		x := (v.(string))
-		o.SetSmtMode(x)
-	}
-	if v, ok := d.GetOk("snc"); ok {
-		x := (v.(string))
-		o.SetSnc(x)
-	}
-	if v, ok := d.GetOk("snoopy_mode_for2lm"); ok {
-		x := (v.(string))
-		o.SetSnoopyModeFor2lm(x)
-	}
-	if v, ok := d.GetOk("snoopy_mode_for_ad"); ok {
-		x := (v.(string))
-		o.SetSnoopyModeForAd(x)
-	}
-	if v, ok := d.GetOk("sparing_mode"); ok {
-		x := (v.(string))
-		o.SetSparingMode(x)
-	}
-	if v, ok := d.GetOk("sr_iov"); ok {
-		x := (v.(string))
-		o.SetSrIov(x)
-	}
-	if v, ok := d.GetOk("streamer_prefetch"); ok {
-		x := (v.(string))
-		o.SetStreamerPrefetch(x)
-	}
-	if v, ok := d.GetOk("svm_mode"); ok {
-		x := (v.(string))
-		o.SetSvmMode(x)
-	}
-	if v, ok := d.GetOk("terminal_type"); ok {
-		x := (v.(string))
-		o.SetTerminalType(x)
-	}
-	if v, ok := d.GetOk("tpm_control"); ok {
-		x := (v.(string))
-		o.SetTpmControl(x)
-	}
-	if v, ok := d.GetOk("tpm_pending_operation"); ok {
-		x := (v.(string))
-		o.SetTpmPendingOperation(x)
-	}
-	if v, ok := d.GetOk("tpm_support"); ok {
-		x := (v.(string))
-		o.SetTpmSupport(x)
-	}
-	if v, ok := d.GetOk("tsme"); ok {
-		x := (v.(string))
-		o.SetTsme(x)
-	}
-	if v, ok := d.GetOk("txt_support"); ok {
-		x := (v.(string))
-		o.SetTxtSupport(x)
-	}
-	if v, ok := d.GetOk("ucsm_boot_order_rule"); ok {
-		x := (v.(string))
-		o.SetUcsmBootOrderRule(x)
-	}
-	if v, ok := d.GetOk("ufs_disable"); ok {
-		x := (v.(string))
-		o.SetUfsDisable(x)
-	}
-	if v, ok := d.GetOk("uma_based_clustering"); ok {
-		x := (v.(string))
-		o.SetUmaBasedClustering(x)
-	}
-	if v, ok := d.GetOk("usb_emul6064"); ok {
-		x := (v.(string))
-		o.SetUsbEmul6064(x)
-	}
-	if v, ok := d.GetOk("usb_port_front"); ok {
-		x := (v.(string))
-		o.SetUsbPortFront(x)
-	}
-	if v, ok := d.GetOk("usb_port_internal"); ok {
-		x := (v.(string))
-		o.SetUsbPortInternal(x)
-	}
-	if v, ok := d.GetOk("usb_port_kvm"); ok {
-		x := (v.(string))
-		o.SetUsbPortKvm(x)
-	}
-	if v, ok := d.GetOk("usb_port_rear"); ok {
-		x := (v.(string))
-		o.SetUsbPortRear(x)
-	}
-	if v, ok := d.GetOk("usb_port_sd_card"); ok {
-		x := (v.(string))
-		o.SetUsbPortSdCard(x)
-	}
-	if v, ok := d.GetOk("usb_port_vmedia"); ok {
-		x := (v.(string))
-		o.SetUsbPortVmedia(x)
-	}
-	if v, ok := d.GetOk("usb_xhci_support"); ok {
-		x := (v.(string))
-		o.SetUsbXhciSupport(x)
-	}
 	if v, ok := d.GetOk("vga_priority"); ok {
 		x := (v.(string))
 		o.SetVgaPriority(x)
 	}
+
+	if v, ok := d.GetOk("virtual_numa"); ok {
+		x := (v.(string))
+		o.SetVirtualNuma(x)
+	}
+
 	if v, ok := d.GetOk("vmd_enable"); ok {
 		x := (v.(string))
 		o.SetVmdEnable(x)
 	}
+
 	if v, ok := d.GetOk("vol_memory_mode"); ok {
 		x := (v.(string))
 		o.SetVolMemoryMode(x)
 	}
+
 	if v, ok := d.GetOk("work_load_config"); ok {
 		x := (v.(string))
 		o.SetWorkLoadConfig(x)
 	}
+
 	if v, ok := d.GetOk("xpt_prefetch"); ok {
 		x := (v.(string))
 		o.SetXptPrefetch(x)
+	}
+
+	if v, ok := d.GetOk("xpt_remote_prefetch"); ok {
+		x := (v.(string))
+		o.SetXptRemotePrefetch(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -8848,6 +7058,8 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["boot_option_retry"] = (s.GetBootOptionRetry())
 				temp["boot_performance_mode"] = (s.GetBootPerformanceMode())
 				temp["burst_and_postponed_refresh"] = (s.GetBurstAndPostponedRefresh())
+				temp["c1auto_demotion"] = (s.GetC1autoDemotion())
+				temp["c1auto_un_demotion"] = (s.GetC1autoUnDemotion())
 				temp["cbs_cmn_apbdis"] = (s.GetCbsCmnApbdis())
 				temp["cbs_cmn_cpu_cpb"] = (s.GetCbsCmnCpuCpb())
 				temp["cbs_cmn_cpu_gen_downcore_ctrl"] = (s.GetCbsCmnCpuGenDowncoreCtrl())
@@ -8892,6 +7104,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["core_multi_processing"] = (s.GetCoreMultiProcessing())
 				temp["cpu_energy_performance"] = (s.GetCpuEnergyPerformance())
 				temp["cpu_frequency_floor"] = (s.GetCpuFrequencyFloor())
+				temp["cpu_perf_enhancement"] = (s.GetCpuPerfEnhancement())
 				temp["cpu_performance"] = (s.GetCpuPerformance())
 				temp["cpu_power_management"] = (s.GetCpuPowerManagement())
 				temp["cr_qos"] = (s.GetCrQos())
@@ -8945,6 +7158,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["kti_prefetch"] = (s.GetKtiPrefetch())
 				temp["legacy_os_redirection"] = (s.GetLegacyOsRedirection())
 				temp["legacy_usb_support"] = (s.GetLegacyUsbSupport())
+				temp["llc_alloc"] = (s.GetLlcAlloc())
 				temp["llc_prefetch"] = (s.GetLlcPrefetch())
 				temp["lom_port0state"] = (s.GetLomPort0state())
 				temp["lom_port1state"] = (s.GetLomPort1state())
@@ -9019,6 +7233,7 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["pcie_slot_nvme5option_rom"] = (s.GetPcieSlotNvme5optionRom())
 				temp["pcie_slot_nvme6link_speed"] = (s.GetPcieSlotNvme6linkSpeed())
 				temp["pcie_slot_nvme6option_rom"] = (s.GetPcieSlotNvme6optionRom())
+				temp["pcie_slots_cdn_enable"] = (s.GetPcieSlotsCdnEnable())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["pop_support"] = (s.GetPopSupport())
@@ -9055,6 +7270,8 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["sgx_le_wr"] = (s.GetSgxLeWr())
 				temp["sgx_package_info_in_band_access"] = (s.GetSgxPackageInfoInBandAccess())
 				temp["sgx_qos"] = (s.GetSgxQos())
+				temp["sha1pcr_bank"] = (s.GetSha1pcrBank())
+				temp["sha256pcr_bank"] = (s.GetSha256pcrBank())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["single_pctl_enable"] = (s.GetSinglePctlEnable())
 				temp["slot10link_speed"] = (s.GetSlot10linkSpeed())
@@ -9208,6 +7425,8 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["ucsm_boot_order_rule"] = (s.GetUcsmBootOrderRule())
 				temp["ufs_disable"] = (s.GetUfsDisable())
 				temp["uma_based_clustering"] = (s.GetUmaBasedClustering())
+				temp["upi_link_enablement"] = (s.GetUpiLinkEnablement())
+				temp["upi_power_management"] = (s.GetUpiPowerManagement())
 				temp["usb_emul6064"] = (s.GetUsbEmul6064())
 				temp["usb_port_front"] = (s.GetUsbPortFront())
 				temp["usb_port_internal"] = (s.GetUsbPortInternal())
@@ -9219,10 +7438,12 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vga_priority"] = (s.GetVgaPriority())
+				temp["virtual_numa"] = (s.GetVirtualNuma())
 				temp["vmd_enable"] = (s.GetVmdEnable())
 				temp["vol_memory_mode"] = (s.GetVolMemoryMode())
 				temp["work_load_config"] = (s.GetWorkLoadConfig())
 				temp["xpt_prefetch"] = (s.GetXptPrefetch())
+				temp["xpt_remote_prefetch"] = (s.GetXptRemotePrefetch())
 				biosPolicyResults[j] = temp
 				j += 1
 			}

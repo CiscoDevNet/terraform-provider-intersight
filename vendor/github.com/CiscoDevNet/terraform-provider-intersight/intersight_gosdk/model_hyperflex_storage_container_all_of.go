@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4437
+API version: 1.0.9-4663
 Contact: intersight@cisco.com
 */
 
@@ -22,8 +22,11 @@ type HyperflexStorageContainerAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Storage container accessibility summary. * `NOT_APPLICABLE` - The HyperFlex storage container accessibility summary is not applicable. * `ACCESSIBLE` - The HyperFlex storage container is accessible. * `NOT_ACCESSIBLE` - The HyperFlex storage container is not accessible. * `PARTIALLY_ACCESSIBLE` - The HyperFlex storage container is partially accessible.
+	AccessibilitySummary *string `json:"AccessibilitySummary,omitempty"`
 	// Storage container data block size in bytes.
-	DataBlockSize *int64 `json:"DataBlockSize,omitempty"`
+	DataBlockSize   *int64                                   `json:"DataBlockSize,omitempty"`
+	HostMountStatus []StorageStorageContainerHostMountStatus `json:"HostMountStatus,omitempty"`
 	// Indicates whether the storage container has volumes.
 	InUse *bool `json:"InUse,omitempty"`
 	// Indicates whether the storage container was user-created, or system-created. * `UNKNOWN` - The storage container creator is unknown. * `USER_CREATED` - The storage container was created by a user action. * `INTERNAL` - The storage container was created by the system.
@@ -127,6 +130,38 @@ func (o *HyperflexStorageContainerAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetAccessibilitySummary returns the AccessibilitySummary field value if set, zero value otherwise.
+func (o *HyperflexStorageContainerAllOf) GetAccessibilitySummary() string {
+	if o == nil || o.AccessibilitySummary == nil {
+		var ret string
+		return ret
+	}
+	return *o.AccessibilitySummary
+}
+
+// GetAccessibilitySummaryOk returns a tuple with the AccessibilitySummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexStorageContainerAllOf) GetAccessibilitySummaryOk() (*string, bool) {
+	if o == nil || o.AccessibilitySummary == nil {
+		return nil, false
+	}
+	return o.AccessibilitySummary, true
+}
+
+// HasAccessibilitySummary returns a boolean if a field has been set.
+func (o *HyperflexStorageContainerAllOf) HasAccessibilitySummary() bool {
+	if o != nil && o.AccessibilitySummary != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessibilitySummary gets a reference to the given string and assigns it to the AccessibilitySummary field.
+func (o *HyperflexStorageContainerAllOf) SetAccessibilitySummary(v string) {
+	o.AccessibilitySummary = &v
+}
+
 // GetDataBlockSize returns the DataBlockSize field value if set, zero value otherwise.
 func (o *HyperflexStorageContainerAllOf) GetDataBlockSize() int64 {
 	if o == nil || o.DataBlockSize == nil {
@@ -157,6 +192,39 @@ func (o *HyperflexStorageContainerAllOf) HasDataBlockSize() bool {
 // SetDataBlockSize gets a reference to the given int64 and assigns it to the DataBlockSize field.
 func (o *HyperflexStorageContainerAllOf) SetDataBlockSize(v int64) {
 	o.DataBlockSize = &v
+}
+
+// GetHostMountStatus returns the HostMountStatus field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexStorageContainerAllOf) GetHostMountStatus() []StorageStorageContainerHostMountStatus {
+	if o == nil {
+		var ret []StorageStorageContainerHostMountStatus
+		return ret
+	}
+	return o.HostMountStatus
+}
+
+// GetHostMountStatusOk returns a tuple with the HostMountStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexStorageContainerAllOf) GetHostMountStatusOk() (*[]StorageStorageContainerHostMountStatus, bool) {
+	if o == nil || o.HostMountStatus == nil {
+		return nil, false
+	}
+	return &o.HostMountStatus, true
+}
+
+// HasHostMountStatus returns a boolean if a field has been set.
+func (o *HyperflexStorageContainerAllOf) HasHostMountStatus() bool {
+	if o != nil && o.HostMountStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHostMountStatus gets a reference to the given []StorageStorageContainerHostMountStatus and assigns it to the HostMountStatus field.
+func (o *HyperflexStorageContainerAllOf) SetHostMountStatus(v []StorageStorageContainerHostMountStatus) {
+	o.HostMountStatus = v
 }
 
 // GetInUse returns the InUse field value if set, zero value otherwise.
@@ -616,8 +684,14 @@ func (o HyperflexStorageContainerAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.AccessibilitySummary != nil {
+		toSerialize["AccessibilitySummary"] = o.AccessibilitySummary
+	}
 	if o.DataBlockSize != nil {
 		toSerialize["DataBlockSize"] = o.DataBlockSize
+	}
+	if o.HostMountStatus != nil {
+		toSerialize["HostMountStatus"] = o.HostMountStatus
 	}
 	if o.InUse != nil {
 		toSerialize["InUse"] = o.InUse
@@ -681,7 +755,9 @@ func (o *HyperflexStorageContainerAllOf) UnmarshalJSON(bytes []byte) (err error)
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AccessibilitySummary")
 		delete(additionalProperties, "DataBlockSize")
+		delete(additionalProperties, "HostMountStatus")
 		delete(additionalProperties, "InUse")
 		delete(additionalProperties, "Kind")
 		delete(additionalProperties, "LastAccessTime")

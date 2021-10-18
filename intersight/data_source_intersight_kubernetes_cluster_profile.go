@@ -615,6 +615,11 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"is_tac_passwd_set": {
+						Description: "Indicates whether the value of the 'tacPasswd' property has been set.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"load_balancer_count": {
 						Description: "Number of IP addresses to reserve for load balancer services.",
 						Type:        schema.TypeInt,
@@ -642,6 +647,11 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 							Type: schema.TypeString}},
 					"ssh_user": {
 						Description: "Name of the user to SSH to nodes in a cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"tac_passwd": {
+						Description: "Hashed password of the TAC user.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -813,6 +823,41 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
 		"parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"parent_solution_profile": {
 			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
@@ -1802,6 +1847,11 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"is_tac_passwd_set": {
+						Description: "Indicates whether the value of the 'tacPasswd' property has been set.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"load_balancer_count": {
 						Description: "Number of IP addresses to reserve for load balancer services.",
 						Type:        schema.TypeInt,
@@ -1829,6 +1879,11 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 							Type: schema.TypeString}},
 					"ssh_user": {
 						Description: "Name of the user to SSH to nodes in a cluster.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"tac_passwd": {
+						Description: "Hashed password of the TAC user.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -2000,6 +2055,41 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 			Elem: &schema.Schema{
 				Type: schema.TypeString}},
 		"parent": {
+			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"parent_solution_profile": {
 			Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
@@ -2405,14 +2495,12 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesClusterProfile{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("aci_cni_profile"); ok {
-		v := d.Get("aci_cni_profile")
+	if v, ok := d.GetOk("aci_cni_profile"); ok {
 		p := make([]models.KubernetesAciCniProfileRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2455,14 +2543,12 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("action"); ok {
-		v := d.Get("action")
+	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
 		o.SetAction(x)
 	}
 
-	if _, ok := d.GetOk("action_info"); ok {
-		v := d.Get("action_info")
+	if v, ok := d.GetOk("action_info"); ok {
 		p := make([]models.KubernetesActionInfo, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2499,8 +2585,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -2509,8 +2594,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2550,8 +2634,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("associated_cluster"); ok {
-		v := d.Get("associated_cluster")
+	if v, ok := d.GetOk("associated_cluster"); ok {
 		p := make([]models.KubernetesClusterRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2594,8 +2677,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("cert_config"); ok {
-		v := d.Get("cert_config")
+	if v, ok := d.GetOk("cert_config"); ok {
 		p := make([]models.KubernetesClusterCertificateConfiguration, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2686,14 +2768,12 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("cluster_ip_pools"); ok {
-		v := d.Get("cluster_ip_pools")
+	if v, ok := d.GetOk("cluster_ip_pools"); ok {
 		x := make([]models.IppoolPoolRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2733,8 +2813,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		o.SetClusterIpPools(x)
 	}
 
-	if _, ok := d.GetOk("config_context"); ok {
-		v := d.Get("config_context")
+	if v, ok := d.GetOk("config_context"); ok {
 		p := make([]models.PolicyConfigContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2777,8 +2856,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("container_runtime_config"); ok {
-		v := d.Get("container_runtime_config")
+	if v, ok := d.GetOk("container_runtime_config"); ok {
 		p := make([]models.KubernetesContainerRuntimePolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2821,26 +2899,22 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("essential_addons"); ok {
-		v := d.Get("essential_addons")
+	if v, ok := d.GetOk("essential_addons"); ok {
 		x := make([]models.KubernetesEssentialAddon, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3023,8 +3097,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		o.SetEssentialAddons(x)
 	}
 
-	if _, ok := d.GetOk("kube_config"); ok {
-		v := d.Get("kube_config")
+	if v, ok := d.GetOk("kube_config"); ok {
 		p := make([]models.KubernetesConfiguration, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3055,8 +3128,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("loadbalancer_ip_leases"); ok {
-		v := d.Get("loadbalancer_ip_leases")
+	if v, ok := d.GetOk("loadbalancer_ip_leases"); ok {
 		x := make([]models.IppoolIpLeaseRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3096,14 +3168,12 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		o.SetLoadbalancerIpLeases(x)
 	}
 
-	if _, ok := d.GetOk("managed_mode"); ok {
-		v := d.Get("managed_mode")
+	if v, ok := d.GetOk("managed_mode"); ok {
 		x := (v.(string))
 		o.SetManagedMode(x)
 	}
 
-	if _, ok := d.GetOk("management_config"); ok {
-		v := d.Get("management_config")
+	if v, ok := d.GetOk("management_config"); ok {
 		p := make([]models.KubernetesClusterManagementConfig, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3162,6 +3232,12 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
+			if v, ok := l["tac_passwd"]; ok {
+				{
+					x := (v.(string))
+					o.SetTacPasswd(x)
+				}
+			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {
@@ -3170,8 +3246,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("master_vip_lease"); ok {
-		v := d.Get("master_vip_lease")
+	if v, ok := d.GetOk("master_vip_lease"); ok {
 		p := make([]models.IppoolIpLeaseRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3214,26 +3289,22 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("net_config"); ok {
-		v := d.Get("net_config")
+	if v, ok := d.GetOk("net_config"); ok {
 		p := make([]models.KubernetesNetworkPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3276,8 +3347,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("node_groups"); ok {
-		v := d.Get("node_groups")
+	if v, ok := d.GetOk("node_groups"); ok {
 		x := make([]models.KubernetesNodeGroupProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3317,14 +3387,12 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		o.SetNodeGroups(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("organization"); ok {
-		v := d.Get("organization")
+	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3367,8 +3435,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -3377,8 +3444,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3421,8 +3487,50 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("parent_solution_profile"); ok {
+		p := make([]models.MoBaseMoRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsMoBaseMoRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetParentSolutionProfile(x)
+		}
+	}
+
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3462,8 +3570,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("policy_bucket"); ok {
-		v := d.Get("policy_bucket")
+	if v, ok := d.GetOk("policy_bucket"); ok {
 		x := make([]models.PolicyAbstractPolicyRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3503,14 +3610,12 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		o.SetPolicyBucket(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("src_template"); ok {
-		v := d.Get("src_template")
+	if v, ok := d.GetOk("src_template"); ok {
 		p := make([]models.PolicyAbstractProfileRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3553,14 +3658,12 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("status"); ok {
-		v := d.Get("status")
+	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
 	}
 
-	if _, ok := d.GetOk("sys_config"); ok {
-		v := d.Get("sys_config")
+	if v, ok := d.GetOk("sys_config"); ok {
 		p := make([]models.KubernetesSysConfigPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3603,8 +3706,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3637,8 +3739,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("trusted_registries"); ok {
-		v := d.Get("trusted_registries")
+	if v, ok := d.GetOk("trusted_registries"); ok {
 		p := make([]models.KubernetesTrustedRegistriesPolicyRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3681,14 +3782,12 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("type"); ok {
-		v := d.Get("type")
+	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3762,8 +3861,7 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 	}
 
-	if _, ok := d.GetOk("workflow_info"); ok {
-		v := d.Get("workflow_info")
+	if v, ok := d.GetOk("workflow_info"); ok {
 		p := make([]models.WorkflowWorkflowInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -3804,63 +3902,6 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 			x := p[0]
 			o.SetWorkflowInfo(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("action"); ok {
-		x := (v.(string))
-		o.SetAction(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("managed_mode"); ok {
-		x := (v.(string))
-		o.SetManagedMode(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
-	}
-	if v, ok := d.GetOk("type"); ok {
-		x := (v.(string))
-		o.SetType(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -3948,6 +3989,8 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+
+				temp["parent_solution_profile"] = flattenMapMoBaseMoRelationship(s.GetParentSolutionProfile(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 

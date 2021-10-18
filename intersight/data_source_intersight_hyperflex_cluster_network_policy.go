@@ -1211,14 +1211,12 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexClusterNetworkPolicy{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1227,8 +1225,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1268,14 +1265,12 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("cluster_profiles"); ok {
-		v := d.Get("cluster_profiles")
+	if v, ok := d.GetOk("cluster_profiles"); ok {
 		x := make([]models.HyperflexClusterProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1315,28 +1310,27 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		o.SetClusterProfiles(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("description"); ok {
-		v := d.Get("description")
+	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	o.SetJumboFrame(d.Get("jumbo_frame").(bool))
+	if v, ok := d.GetOkExists("jumbo_frame"); ok {
+		x := (v.(bool))
+		o.SetJumboFrame(x)
+	}
 
-	if _, ok := d.GetOk("kvm_ip_range"); ok {
-		v := d.Get("kvm_ip_range")
+	if v, ok := d.GetOk("kvm_ip_range"); ok {
 		p := make([]models.HyperflexIpAddrRange, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1434,8 +1428,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		}
 	}
 
-	if _, ok := d.GetOk("mac_prefix_range"); ok {
-		v := d.Get("mac_prefix_range")
+	if v, ok := d.GetOk("mac_prefix_range"); ok {
 		p := make([]models.HyperflexMacAddrPrefixRange, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1478,8 +1471,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		}
 	}
 
-	if _, ok := d.GetOk("mgmt_vlan"); ok {
-		v := d.Get("mgmt_vlan")
+	if v, ok := d.GetOk("mgmt_vlan"); ok {
 		p := make([]models.HyperflexNamedVlan, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1522,32 +1514,27 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		}
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("organization"); ok {
-		v := d.Get("organization")
+	if v, ok := d.GetOk("organization"); ok {
 		p := make([]models.OrganizationOrganizationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1590,8 +1577,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		}
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1600,8 +1586,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1644,8 +1629,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1685,14 +1669,12 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1725,14 +1707,12 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("uplink_speed"); ok {
-		v := d.Get("uplink_speed")
+	if v, ok := d.GetOk("uplink_speed"); ok {
 		x := (v.(string))
 		o.SetUplinkSpeed(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1806,8 +1786,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		}
 	}
 
-	if _, ok := d.GetOk("vm_migration_vlan"); ok {
-		v := d.Get("vm_migration_vlan")
+	if v, ok := d.GetOk("vm_migration_vlan"); ok {
 		p := make([]models.HyperflexNamedVlan, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1850,8 +1829,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 		}
 	}
 
-	if _, ok := d.GetOk("vm_network_vlans"); ok {
-		v := d.Get("vm_network_vlans")
+	if v, ok := d.GetOk("vm_network_vlans"); ok {
 		x := make([]models.HyperflexNamedVlan, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1889,55 +1867,6 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 			x = append(x, *o)
 		}
 		o.SetVmNetworkVlans(x)
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("description"); ok {
-		x := (v.(string))
-		o.SetDescription(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("jumbo_frame"); ok {
-		x := (v.(bool))
-		o.SetJumboFrame(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("uplink_speed"); ok {
-		x := (v.(string))
-		o.SetUplinkSpeed(x)
 	}
 
 	data, err := o.MarshalJSON()

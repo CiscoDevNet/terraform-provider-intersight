@@ -178,7 +178,6 @@ func resourceFcpoolPool() *schema.Resource {
 							Description: "Number of identifiers this block can hold.",
 							Type:        schema.TypeInt,
 							Optional:    true,
-							Computed:    true,
 						},
 						"to": {
 							Description: "Ending WWN identifier of the block must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.",
@@ -567,6 +566,12 @@ func resourceFcpoolPoolCreate(c context.Context, d *schema.ResourceData, meta in
 					o.SetObjectType(x)
 				}
 			}
+			if v, ok := l["size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSize(x)
+				}
+			}
 			if v, ok := l["to"]; ok {
 				{
 					x := (v.(string))
@@ -871,6 +876,12 @@ func resourceFcpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta in
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["size"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSize(x)
 				}
 			}
 			if v, ok := l["to"]; ok {

@@ -1115,14 +1115,12 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IaasUcsdInfo{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1131,8 +1129,7 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1172,14 +1169,12 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("connector_pack"); ok {
-		v := d.Get("connector_pack")
+	if v, ok := d.GetOk("connector_pack"); ok {
 		x := make([]models.IaasConnectorPackRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1219,20 +1214,17 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetConnectorPack(x)
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("device_id"); ok {
-		v := d.Get("device_id")
+	if v, ok := d.GetOk("device_id"); ok {
 		x := (v.(string))
 		o.SetDeviceId(x)
 	}
 
-	if _, ok := d.GetOk("device_status"); ok {
-		v := d.Get("device_status")
+	if v, ok := d.GetOk("device_status"); ok {
 		x := make([]models.IaasDeviceStatusRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1272,38 +1264,32 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetDeviceStatus(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("guid"); ok {
-		v := d.Get("guid")
+	if v, ok := d.GetOk("guid"); ok {
 		x := (v.(string))
 		o.SetGuid(x)
 	}
 
-	if _, ok := d.GetOk("host_name"); ok {
-		v := d.Get("host_name")
+	if v, ok := d.GetOk("host_name"); ok {
 		x := (v.(string))
 		o.SetHostName(x)
 	}
 
-	if _, ok := d.GetOk("ip"); ok {
-		v := d.Get("ip")
+	if v, ok := d.GetOk("ip"); ok {
 		x := (v.(string))
 		o.SetIp(x)
 	}
 
-	if _, ok := d.GetOk("last_backup"); ok {
-		v := d.Get("last_backup")
+	if v, ok := d.GetOk("last_backup"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetLastBackup(x)
 	}
 
-	if _, ok := d.GetOk("license_info"); ok {
-		v := d.Get("license_info")
+	if v, ok := d.GetOk("license_info"); ok {
 		p := make([]models.IaasLicenseInfoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1346,20 +1332,17 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("most_run_tasks"); ok {
-		v := d.Get("most_run_tasks")
+	if v, ok := d.GetOk("most_run_tasks"); ok {
 		x := make([]models.IaasMostRunTasksRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1399,20 +1382,17 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetMostRunTasks(x)
 	}
 
-	if _, ok := d.GetOk("node_type"); ok {
-		v := d.Get("node_type")
+	if v, ok := d.GetOk("node_type"); ok {
 		x := (v.(string))
 		o.SetNodeType(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -1421,8 +1401,7 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1465,8 +1444,7 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1506,26 +1484,22 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("product_name"); ok {
-		v := d.Get("product_name")
+	if v, ok := d.GetOk("product_name"); ok {
 		x := (v.(string))
 		o.SetProductName(x)
 	}
 
-	if _, ok := d.GetOk("product_vendor"); ok {
-		v := d.Get("product_vendor")
+	if v, ok := d.GetOk("product_vendor"); ok {
 		x := (v.(string))
 		o.SetProductVendor(x)
 	}
 
-	if _, ok := d.GetOk("product_version"); ok {
-		v := d.Get("product_version")
+	if v, ok := d.GetOk("product_version"); ok {
 		x := (v.(string))
 		o.SetProductVersion(x)
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1568,20 +1542,17 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("status"); ok {
-		v := d.Get("status")
+	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1614,8 +1585,7 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("ucsd_managed_infra"); ok {
-		v := d.Get("ucsd_managed_infra")
+	if v, ok := d.GetOk("ucsd_managed_infra"); ok {
 		p := make([]models.IaasUcsdManagedInfraRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1658,8 +1628,7 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 		}
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1731,79 +1700,6 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("device_id"); ok {
-		x := (v.(string))
-		o.SetDeviceId(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("guid"); ok {
-		x := (v.(string))
-		o.SetGuid(x)
-	}
-	if v, ok := d.GetOk("host_name"); ok {
-		x := (v.(string))
-		o.SetHostName(x)
-	}
-	if v, ok := d.GetOk("ip"); ok {
-		x := (v.(string))
-		o.SetIp(x)
-	}
-	if v, ok := d.GetOk("last_backup"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetLastBackup(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("node_type"); ok {
-		x := (v.(string))
-		o.SetNodeType(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("product_name"); ok {
-		x := (v.(string))
-		o.SetProductName(x)
-	}
-	if v, ok := d.GetOk("product_vendor"); ok {
-		x := (v.(string))
-		o.SetProductVendor(x)
-	}
-	if v, ok := d.GetOk("product_version"); ok {
-		x := (v.(string))
-		o.SetProductVersion(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
 	}
 
 	data, err := o.MarshalJSON()

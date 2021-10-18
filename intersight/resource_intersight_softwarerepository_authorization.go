@@ -440,10 +440,6 @@ func resourceSoftwarerepositoryAuthorizationCreate(c context.Context, d *schema.
 
 	o.SetClassId("softwarerepository.Authorization")
 
-	o.SetIsPasswordSet(d.Get("is_password_set").(bool))
-
-	o.SetIsUserIdSet(d.Get("is_user_id_set").(bool))
-
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **AccessPrivileges** | Pointer to [**[]MetaAccessPrivilege**](MetaAccessPrivilege.md) |  | [optional] 
 **AncestorClasses** | Pointer to **[]string** |  | [optional] 
 **DisplayNameMetas** | Pointer to [**[]MetaDisplayNameDefinition**](MetaDisplayNameDefinition.md) |  | [optional] 
+**IdentityConstraints** | Pointer to [**[]MetaIdentityDefinition**](MetaIdentityDefinition.md) |  | [optional] 
 **IsConcrete** | Pointer to **bool** | Boolean flag to specify whether the meta class is a concrete class or not. | [optional] [readonly] 
 **MetaType** | Pointer to **string** | Indicates whether the meta class is a complex type or managed object. * &#x60;ManagedObject&#x60; - The meta.Definition object describes a managed object. * &#x60;ComplexType&#x60; - The meta.Definition object describes a nested complex type within a managed object. | [optional] [readonly] [default to "ManagedObject"]
 **Name** | Pointer to **string** | The fully-qualified class name of the Managed Object or complex type. For example, \&quot;compute:Blade\&quot; where the Managed Object is \&quot;Blade\&quot; and the package is &#39;compute&#39;. | [optional] [readonly] 
@@ -186,6 +187,41 @@ HasDisplayNameMetas returns a boolean if a field has been set.
 `func (o *MetaDefinitionAllOf) UnsetDisplayNameMetas()`
 
 UnsetDisplayNameMetas ensures that no value is present for DisplayNameMetas, not even an explicit nil
+### GetIdentityConstraints
+
+`func (o *MetaDefinitionAllOf) GetIdentityConstraints() []MetaIdentityDefinition`
+
+GetIdentityConstraints returns the IdentityConstraints field if non-nil, zero value otherwise.
+
+### GetIdentityConstraintsOk
+
+`func (o *MetaDefinitionAllOf) GetIdentityConstraintsOk() (*[]MetaIdentityDefinition, bool)`
+
+GetIdentityConstraintsOk returns a tuple with the IdentityConstraints field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdentityConstraints
+
+`func (o *MetaDefinitionAllOf) SetIdentityConstraints(v []MetaIdentityDefinition)`
+
+SetIdentityConstraints sets IdentityConstraints field to given value.
+
+### HasIdentityConstraints
+
+`func (o *MetaDefinitionAllOf) HasIdentityConstraints() bool`
+
+HasIdentityConstraints returns a boolean if a field has been set.
+
+### SetIdentityConstraintsNil
+
+`func (o *MetaDefinitionAllOf) SetIdentityConstraintsNil(b bool)`
+
+ SetIdentityConstraintsNil sets the value for IdentityConstraints to be an explicit nil
+
+### UnsetIdentityConstraints
+`func (o *MetaDefinitionAllOf) UnsetIdentityConstraints()`
+
+UnsetIdentityConstraints ensures that no value is present for IdentityConstraints, not even an explicit nil
 ### GetIsConcrete
 
 `func (o *MetaDefinitionAllOf) GetIsConcrete() bool`

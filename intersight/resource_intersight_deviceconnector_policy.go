@@ -473,7 +473,10 @@ func resourceDeviceconnectorPolicyCreate(c context.Context, d *schema.ResourceDa
 		o.SetDescription(x)
 	}
 
-	o.SetLockoutEnabled(d.Get("lockout_enabled").(bool))
+	if v, ok := d.GetOkExists("lockout_enabled"); ok {
+		x := (v.(bool))
+		o.SetLockoutEnabled(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

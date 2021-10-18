@@ -555,7 +555,10 @@ func resourceHyperflexClusterStoragePolicyCreate(c context.Context, d *schema.Re
 		o.SetDescription(x)
 	}
 
-	o.SetDiskPartitionCleanup(d.Get("disk_partition_cleanup").(bool))
+	if v, ok := d.GetOkExists("disk_partition_cleanup"); ok {
+		x := (v.(bool))
+		o.SetDiskPartitionCleanup(x)
+	}
 
 	if v, ok := d.GetOk("logical_avalability_zone_config"); ok {
 		p := make([]models.HyperflexLogicalAvailabilityZone, 0, 1)
@@ -684,7 +687,10 @@ func resourceHyperflexClusterStoragePolicyCreate(c context.Context, d *schema.Re
 		}
 	}
 
-	o.SetVdiOptimization(d.Get("vdi_optimization").(bool))
+	if v, ok := d.GetOkExists("vdi_optimization"); ok {
+		x := (v.(bool))
+		o.SetVdiOptimization(x)
+	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexClusterStoragePolicy(conn.ctx).HyperflexClusterStoragePolicy(*o)
 	resultMo, _, responseErr := r.Execute()

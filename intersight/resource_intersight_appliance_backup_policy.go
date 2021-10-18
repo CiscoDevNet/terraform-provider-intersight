@@ -577,9 +577,10 @@ func resourceApplianceBackupPolicyCreate(c context.Context, d *schema.ResourceDa
 		o.SetFilename(x)
 	}
 
-	o.SetIsPasswordSet(d.Get("is_password_set").(bool))
-
-	o.SetManualBackup(d.Get("manual_backup").(bool))
+	if v, ok := d.GetOkExists("manual_backup"); ok {
+		x := (v.(bool))
+		o.SetManualBackup(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -608,7 +609,7 @@ func resourceApplianceBackupPolicyCreate(c context.Context, d *schema.ResourceDa
 		o.SetRemotePath(x)
 	}
 
-	if v, ok := d.GetOk("remote_port"); ok {
+	if v, ok := d.GetOkExists("remote_port"); ok {
 		x := int64(v.(int))
 		o.SetRemotePort(x)
 	}

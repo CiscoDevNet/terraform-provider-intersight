@@ -484,7 +484,7 @@ func resourcePowerPolicyCreate(c context.Context, d *schema.ResourceData, meta i
 		}
 	}
 
-	if v, ok := d.GetOk("allocated_budget"); ok {
+	if v, ok := d.GetOkExists("allocated_budget"); ok {
 		x := int64(v.(int))
 		o.SetAllocatedBudget(x)
 	}

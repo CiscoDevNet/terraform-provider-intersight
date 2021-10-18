@@ -672,7 +672,10 @@ func resourceNtpPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 		o.SetDescription(x)
 	}
 
-	o.SetEnabled(d.Get("enabled").(bool))
+	if v, ok := d.GetOkExists("enabled"); ok {
+		x := (v.(bool))
+		o.SetEnabled(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))

@@ -438,12 +438,12 @@ func resourceCapabilityEquipmentPhysicalDefCreate(c context.Context, d *schema.R
 		o.SetHeight(x)
 	}
 
-	if v, ok := d.GetOk("max_power"); ok {
+	if v, ok := d.GetOkExists("max_power"); ok {
 		x := int64(v.(int))
 		o.SetMaxPower(x)
 	}
 
-	if v, ok := d.GetOk("min_power"); ok {
+	if v, ok := d.GetOkExists("min_power"); ok {
 		x := int64(v.(int))
 		o.SetMinPower(x)
 	}
@@ -458,7 +458,7 @@ func resourceCapabilityEquipmentPhysicalDefCreate(c context.Context, d *schema.R
 		o.SetName(x)
 	}
 
-	if v, ok := d.GetOk("nominal_power"); ok {
+	if v, ok := d.GetOkExists("nominal_power"); ok {
 		x := int64(v.(int))
 		o.SetNominalPower(x)
 	}

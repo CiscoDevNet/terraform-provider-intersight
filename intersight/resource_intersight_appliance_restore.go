@@ -601,8 +601,6 @@ func resourceApplianceRestoreCreate(c context.Context, d *schema.ResourceData, m
 		o.SetFilename(x)
 	}
 
-	o.SetIsPasswordSet(d.Get("is_password_set").(bool))
-
 	if v, ok := d.GetOk("messages"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -641,7 +639,7 @@ func resourceApplianceRestoreCreate(c context.Context, d *schema.ResourceData, m
 		o.SetRemotePath(x)
 	}
 
-	if v, ok := d.GetOk("remote_port"); ok {
+	if v, ok := d.GetOkExists("remote_port"); ok {
 		x := int64(v.(int))
 		o.SetRemotePort(x)
 	}

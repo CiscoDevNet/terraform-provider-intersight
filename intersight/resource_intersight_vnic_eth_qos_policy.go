@@ -75,7 +75,7 @@ func resourceVnicEthQosPolicy() *schema.Resource {
 				Description: "The burst traffic, in bytes, allowed on the vNIC.",
 				Type:        schema.TypeInt,
 				Optional:    true,
-				Default:     1024,
+				Default:     10240,
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -457,14 +457,14 @@ func resourceVnicEthQosPolicyCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if v, ok := d.GetOk("burst"); ok {
+	if v, ok := d.GetOkExists("burst"); ok {
 		x := int64(v.(int))
 		o.SetBurst(x)
 	}
 
 	o.SetClassId("vnic.EthQosPolicy")
 
-	if v, ok := d.GetOk("cos"); ok {
+	if v, ok := d.GetOkExists("cos"); ok {
 		x := int64(v.(int))
 		o.SetCos(x)
 	}
@@ -479,7 +479,7 @@ func resourceVnicEthQosPolicyCreate(c context.Context, d *schema.ResourceData, m
 		o.SetMoid(x)
 	}
 
-	if v, ok := d.GetOk("mtu"); ok {
+	if v, ok := d.GetOkExists("mtu"); ok {
 		x := int64(v.(int))
 		o.SetMtu(x)
 	}
@@ -539,7 +539,7 @@ func resourceVnicEthQosPolicyCreate(c context.Context, d *schema.ResourceData, m
 		o.SetPriority(x)
 	}
 
-	if v, ok := d.GetOk("rate_limit"); ok {
+	if v, ok := d.GetOkExists("rate_limit"); ok {
 		x := int64(v.(int))
 		o.SetRateLimit(x)
 	}
@@ -579,7 +579,10 @@ func resourceVnicEthQosPolicyCreate(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	o.SetTrustHostCos(d.Get("trust_host_cos").(bool))
+	if v, ok := d.GetOkExists("trust_host_cos"); ok {
+		x := (v.(bool))
+		o.SetTrustHostCos(x)
+	}
 
 	r := conn.ApiClient.VnicApi.CreateVnicEthQosPolicy(conn.ctx).VnicEthQosPolicy(*o)
 	resultMo, _, responseErr := r.Execute()

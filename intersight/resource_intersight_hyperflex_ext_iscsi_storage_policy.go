@@ -543,7 +543,10 @@ func resourceHyperflexExtIscsiStoragePolicyCreate(c context.Context, d *schema.R
 		}
 	}
 
-	o.SetAdminState(d.Get("admin_state").(bool))
+	if v, ok := d.GetOkExists("admin_state"); ok {
+		x := (v.(bool))
+		o.SetAdminState(x)
+	}
 
 	o.SetClassId("hyperflex.ExtIscsiStoragePolicy")
 

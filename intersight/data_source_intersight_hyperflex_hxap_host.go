@@ -305,7 +305,7 @@ func dataSourceHyperflexHxapHost() *schema.Resource {
 			Optional:    true,
 		},
 		"hypervisor_type": {
-			Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+			Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -690,6 +690,11 @@ func dataSourceHyperflexHxapHost() *schema.Resource {
 		},
 		"status": {
 			Description: "Host health status, as reported by the hypervisor platform.\n* `Unknown` - Entity status is unknown.\n* `Degraded` - State is degraded, and might impact normal operation of the entity.\n* `Critical` - Entity is in a critical state, impacting operations.\n* `Ok` - Entity status is in a stable state, operating normally.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"storage_vm_power_state": {
+			Description: "Is the Storage Controller VM on the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweringOn` - The entity is powering on.\n* `PoweredOn` - The entity is powered on.\n* `PoweringOff` - The entity is powering off.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `Rebooting` - The entity reboot is in progress.\n* `` - The entity's power state is not available.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1135,7 +1140,7 @@ func dataSourceHyperflexHxapHost() *schema.Resource {
 			Optional:    true,
 		},
 		"hypervisor_type": {
-			Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+			Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1523,6 +1528,11 @@ func dataSourceHyperflexHxapHost() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"storage_vm_power_state": {
+			Description: "Is the Storage Controller VM on the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweringOn` - The entity is powering on.\n* `PoweredOn` - The entity is powered on.\n* `PoweringOff` - The entity is powering off.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `Rebooting` - The entity reboot is in progress.\n* `` - The entity's power state is not available.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1691,14 +1701,12 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexHxapHost{}
-	if _, ok := d.GetOk("account_moid"); ok {
-		v := d.Get("account_moid")
+	if v, ok := d.GetOk("account_moid"); ok {
 		x := (v.(string))
 		o.SetAccountMoid(x)
 	}
 
-	if _, ok := d.GetOk("additional_properties"); ok {
-		v := d.Get("additional_properties")
+	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
 		err := json.Unmarshal(x, &x1)
@@ -1707,14 +1715,12 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("age"); ok {
-		v := d.Get("age")
+	if v, ok := d.GetOk("age"); ok {
 		x := (v.(string))
 		o.SetAge(x)
 	}
 
-	if _, ok := d.GetOk("ancestors"); ok {
-		v := d.Get("ancestors")
+	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1754,20 +1760,17 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		o.SetAncestors(x)
 	}
 
-	if _, ok := d.GetOk("chassis_version"); ok {
-		v := d.Get("chassis_version")
+	if v, ok := d.GetOk("chassis_version"); ok {
 		x := (v.(string))
 		o.SetChassisVersion(x)
 	}
 
-	if _, ok := d.GetOk("class_id"); ok {
-		v := d.Get("class_id")
+	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
-	if _, ok := d.GetOk("cluster"); ok {
-		v := d.Get("cluster")
+	if v, ok := d.GetOk("cluster"); ok {
 		p := make([]models.HyperflexHxapClusterRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1810,8 +1813,7 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("cluster_member"); ok {
-		v := d.Get("cluster_member")
+	if v, ok := d.GetOk("cluster_member"); ok {
 		p := make([]models.AssetClusterMemberRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1854,14 +1856,12 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("cluster_uuid"); ok {
-		v := d.Get("cluster_uuid")
+	if v, ok := d.GetOk("cluster_uuid"); ok {
 		x := (v.(string))
 		o.SetClusterUuid(x)
 	}
 
-	if _, ok := d.GetOk("cpu_allocation"); ok {
-		v := d.Get("cpu_allocation")
+	if v, ok := d.GetOk("cpu_allocation"); ok {
 		p := make([]models.VirtualizationCpuAllocation, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1916,8 +1916,7 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("cpu_info"); ok {
-		v := d.Get("cpu_info")
+	if v, ok := d.GetOk("cpu_info"); ok {
 		p := make([]models.VirtualizationCpuInfo, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -1978,26 +1977,22 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("create_time"); ok {
-		v := d.Get("create_time")
+	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCreateTime(x)
 	}
 
-	if _, ok := d.GetOk("domain_group_moid"); ok {
-		v := d.Get("domain_group_moid")
+	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
 	}
 
-	if _, ok := d.GetOk("failure_reason"); ok {
-		v := d.Get("failure_reason")
+	if v, ok := d.GetOk("failure_reason"); ok {
 		x := (v.(string))
 		o.SetFailureReason(x)
 	}
 
-	if _, ok := d.GetOk("hardware_info"); ok {
-		v := d.Get("hardware_info")
+	if v, ok := d.GetOk("hardware_info"); ok {
 		p := make([]models.InfraHardwareInfo, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2046,42 +2041,42 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("hw_power_state"); ok {
-		v := d.Get("hw_power_state")
+	if v, ok := d.GetOk("hw_power_state"); ok {
 		x := (v.(string))
 		o.SetHwPowerState(x)
 	}
 
-	if _, ok := d.GetOk("hypervisor_type"); ok {
-		v := d.Get("hypervisor_type")
+	if v, ok := d.GetOk("hypervisor_type"); ok {
 		x := (v.(string))
 		o.SetHypervisorType(x)
 	}
 
-	if _, ok := d.GetOk("identity"); ok {
-		v := d.Get("identity")
+	if v, ok := d.GetOk("identity"); ok {
 		x := (v.(string))
 		o.SetIdentity(x)
 	}
 
-	if _, ok := d.GetOk("internal_ip_address"); ok {
-		v := d.Get("internal_ip_address")
+	if v, ok := d.GetOk("internal_ip_address"); ok {
 		x := (v.(string))
 		o.SetInternalIpAddress(x)
 	}
 
-	o.SetMaintenanceMode(d.Get("maintenance_mode").(bool))
+	if v, ok := d.GetOkExists("maintenance_mode"); ok {
+		x := (v.(bool))
+		o.SetMaintenanceMode(x)
+	}
 
-	if _, ok := d.GetOk("management_ip_address"); ok {
-		v := d.Get("management_ip_address")
+	if v, ok := d.GetOk("management_ip_address"); ok {
 		x := (v.(string))
 		o.SetManagementIpAddress(x)
 	}
 
-	o.SetMasterRole(d.Get("master_role").(bool))
+	if v, ok := d.GetOkExists("master_role"); ok {
+		x := (v.(bool))
+		o.SetMasterRole(x)
+	}
 
-	if _, ok := d.GetOk("memory_allocation"); ok {
-		v := d.Get("memory_allocation")
+	if v, ok := d.GetOk("memory_allocation"); ok {
 		p := make([]models.VirtualizationMemoryAllocation, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2136,8 +2131,7 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("memory_capacity"); ok {
-		v := d.Get("memory_capacity")
+	if v, ok := d.GetOk("memory_capacity"); ok {
 		p := make([]models.VirtualizationMemoryCapacity, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2186,38 +2180,32 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("mod_time"); ok {
-		v := d.Get("mod_time")
+	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetModTime(x)
 	}
 
-	if _, ok := d.GetOk("model"); ok {
-		v := d.Get("model")
+	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
 		o.SetModel(x)
 	}
 
-	if _, ok := d.GetOk("moid"); ok {
-		v := d.Get("moid")
+	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
 	}
 
-	if _, ok := d.GetOk("name"); ok {
-		v := d.Get("name")
+	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
 	}
 
-	if _, ok := d.GetOk("object_type"); ok {
-		v := d.Get("object_type")
+	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
 
-	if _, ok := d.GetOk("owners"); ok {
-		v := d.Get("owners")
+	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
@@ -2226,8 +2214,7 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		o.SetOwners(x)
 	}
 
-	if _, ok := d.GetOk("parent"); ok {
-		v := d.Get("parent")
+	if v, ok := d.GetOk("parent"); ok {
 		p := make([]models.MoBaseMoRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2270,8 +2257,7 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("permission_resources"); ok {
-		v := d.Get("permission_resources")
+	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2311,8 +2297,7 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		o.SetPermissionResources(x)
 	}
 
-	if _, ok := d.GetOk("physical_server"); ok {
-		v := d.Get("physical_server")
+	if v, ok := d.GetOk("physical_server"); ok {
 		p := make([]models.ComputePhysicalRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2355,8 +2340,7 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("processor_capacity"); ok {
-		v := d.Get("processor_capacity")
+	if v, ok := d.GetOk("processor_capacity"); ok {
 		p := make([]models.VirtualizationComputeCapacity, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2405,8 +2389,7 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("product_info"); ok {
-		v := d.Get("product_info")
+	if v, ok := d.GetOk("product_info"); ok {
 		p := make([]models.VirtualizationProductInfo, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2467,8 +2450,7 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("registered_device"); ok {
-		v := d.Get("registered_device")
+	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2511,26 +2493,27 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if _, ok := d.GetOk("serial"); ok {
-		v := d.Get("serial")
+	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
 	}
 
-	if _, ok := d.GetOk("shared_scope"); ok {
-		v := d.Get("shared_scope")
+	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
 	}
 
-	if _, ok := d.GetOk("status"); ok {
-		v := d.Get("status")
+	if v, ok := d.GetOk("status"); ok {
 		x := (v.(string))
 		o.SetStatus(x)
 	}
 
-	if _, ok := d.GetOk("tags"); ok {
-		v := d.Get("tags")
+	if v, ok := d.GetOk("storage_vm_power_state"); ok {
+		x := (v.(string))
+		o.SetStorageVmPowerState(x)
+	}
+
+	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2563,32 +2546,27 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 		o.SetTags(x)
 	}
 
-	if _, ok := d.GetOk("up_time"); ok {
-		v := d.Get("up_time")
+	if v, ok := d.GetOk("up_time"); ok {
 		x := (v.(string))
 		o.SetUpTime(x)
 	}
 
-	if _, ok := d.GetOk("uuid"); ok {
-		v := d.Get("uuid")
+	if v, ok := d.GetOk("uuid"); ok {
 		x := (v.(string))
 		o.SetUuid(x)
 	}
 
-	if _, ok := d.GetOk("vendor"); ok {
-		v := d.Get("vendor")
+	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
 	}
 
-	if _, ok := d.GetOk("nr_version"); ok {
-		v := d.Get("nr_version")
+	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
 		o.SetVersion(x)
 	}
 
-	if _, ok := d.GetOk("version_context"); ok {
-		v := d.Get("version_context")
+	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
@@ -2660,115 +2638,6 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 			x := p[0]
 			o.SetVersionContext(x)
 		}
-	}
-
-	if v, ok := d.GetOk("account_moid"); ok {
-		x := (v.(string))
-		o.SetAccountMoid(x)
-	}
-	if v, ok := d.GetOk("age"); ok {
-		x := (v.(string))
-		o.SetAge(x)
-	}
-	if v, ok := d.GetOk("chassis_version"); ok {
-		x := (v.(string))
-		o.SetChassisVersion(x)
-	}
-	if v, ok := d.GetOk("class_id"); ok {
-		x := (v.(string))
-		o.SetClassId(x)
-	}
-	if v, ok := d.GetOk("cluster_uuid"); ok {
-		x := (v.(string))
-		o.SetClusterUuid(x)
-	}
-	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetCreateTime(x)
-	}
-	if v, ok := d.GetOk("domain_group_moid"); ok {
-		x := (v.(string))
-		o.SetDomainGroupMoid(x)
-	}
-	if v, ok := d.GetOk("failure_reason"); ok {
-		x := (v.(string))
-		o.SetFailureReason(x)
-	}
-	if v, ok := d.GetOk("hw_power_state"); ok {
-		x := (v.(string))
-		o.SetHwPowerState(x)
-	}
-	if v, ok := d.GetOk("hypervisor_type"); ok {
-		x := (v.(string))
-		o.SetHypervisorType(x)
-	}
-	if v, ok := d.GetOk("identity"); ok {
-		x := (v.(string))
-		o.SetIdentity(x)
-	}
-	if v, ok := d.GetOk("internal_ip_address"); ok {
-		x := (v.(string))
-		o.SetInternalIpAddress(x)
-	}
-	if v, ok := d.GetOk("maintenance_mode"); ok {
-		x := (v.(bool))
-		o.SetMaintenanceMode(x)
-	}
-	if v, ok := d.GetOk("management_ip_address"); ok {
-		x := (v.(string))
-		o.SetManagementIpAddress(x)
-	}
-	if v, ok := d.GetOk("master_role"); ok {
-		x := (v.(bool))
-		o.SetMasterRole(x)
-	}
-	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
-		o.SetModTime(x)
-	}
-	if v, ok := d.GetOk("model"); ok {
-		x := (v.(string))
-		o.SetModel(x)
-	}
-	if v, ok := d.GetOk("moid"); ok {
-		x := (v.(string))
-		o.SetMoid(x)
-	}
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
-	}
-	if v, ok := d.GetOk("object_type"); ok {
-		x := (v.(string))
-		o.SetObjectType(x)
-	}
-	if v, ok := d.GetOk("serial"); ok {
-		x := (v.(string))
-		o.SetSerial(x)
-	}
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-	if v, ok := d.GetOk("status"); ok {
-		x := (v.(string))
-		o.SetStatus(x)
-	}
-	if v, ok := d.GetOk("up_time"); ok {
-		x := (v.(string))
-		o.SetUpTime(x)
-	}
-	if v, ok := d.GetOk("uuid"); ok {
-		x := (v.(string))
-		o.SetUuid(x)
-	}
-	if v, ok := d.GetOk("vendor"); ok {
-		x := (v.(string))
-		o.SetVendor(x)
-	}
-	if v, ok := d.GetOk("nr_version"); ok {
-		x := (v.(string))
-		o.SetVersion(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -2862,6 +2731,7 @@ func dataSourceHyperflexHxapHostRead(c context.Context, d *schema.ResourceData, 
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["status"] = (s.GetStatus())
+				temp["storage_vm_power_state"] = (s.GetStorageVmPowerState())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["up_time"] = (s.GetUpTime())
