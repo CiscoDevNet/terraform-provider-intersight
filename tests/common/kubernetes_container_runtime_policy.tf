@@ -19,6 +19,6 @@ resource "intersight_kubernetes_container_runtime_policy" "kubernetes_container_
   docker_no_proxy = [""]
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization
+    moid        = data.intersight_organization_organization.default.results.0.moid
   }
 }
