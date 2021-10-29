@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **InventoryPath** | Pointer to **string** | Inventory path of the DC. | [optional] 
 **NetworkCount** | Pointer to **int64** | Count of all networks associated with this datacenter (DC). | [optional] 
 **VmCount** | Pointer to **int64** | Count of all virtual machines (VMs) associated with this DC. | [optional] 
+**VmTemplateCount** | Pointer to **int64** | Count of all virtual machines templates associated with this DC. | [optional] 
 **HypervisorManager** | Pointer to [**VirtualizationVmwareVcenterRelationship**](VirtualizationVmwareVcenterRelationship.md) |  | [optional] 
 **ParentFolder** | Pointer to [**VirtualizationVmwareFolderRelationship**](VirtualizationVmwareFolderRelationship.md) |  | [optional] 
 
@@ -223,6 +224,31 @@ SetVmCount sets VmCount field to given value.
 `func (o *VirtualizationVmwareDatacenter) HasVmCount() bool`
 
 HasVmCount returns a boolean if a field has been set.
+
+### GetVmTemplateCount
+
+`func (o *VirtualizationVmwareDatacenter) GetVmTemplateCount() int64`
+
+GetVmTemplateCount returns the VmTemplateCount field if non-nil, zero value otherwise.
+
+### GetVmTemplateCountOk
+
+`func (o *VirtualizationVmwareDatacenter) GetVmTemplateCountOk() (*int64, bool)`
+
+GetVmTemplateCountOk returns a tuple with the VmTemplateCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVmTemplateCount
+
+`func (o *VirtualizationVmwareDatacenter) SetVmTemplateCount(v int64)`
+
+SetVmTemplateCount sets VmTemplateCount field to given value.
+
+### HasVmTemplateCount
+
+`func (o *VirtualizationVmwareDatacenter) HasVmTemplateCount() bool`
+
+HasVmTemplateCount returns a boolean if a field has been set.
 
 ### GetHypervisorManager
 

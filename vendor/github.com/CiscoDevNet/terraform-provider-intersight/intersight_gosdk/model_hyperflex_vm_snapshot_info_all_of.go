@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -22,7 +22,9 @@ type HyperflexVmSnapshotInfoAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType       string                                   `json:"ObjectType"`
 	ClusterIdSnapMap []HyperflexMapClusterIdToStSnapshotPoint `json:"ClusterIdSnapMap,omitempty"`
-	ErrorStack       NullableHyperflexErrorStack              `json:"ErrorStack,omitempty"`
+	// Combined status code from replication and snapshot status to display in the Intersight UI. * `NONE` - Snapshot replication state is none. * `SUCCESS` - Snapshot completed successfully. * `FAILED` - Snapshot failed replication status code. * `PAUSED` - Snapshot replication paused status code. * `IN_USE` - Snapshot replica in use status code. * `STARTING` - Snapshot replication starting. * `REPLICATING` - Snapshot replication in progress.
+	DisplayStatus *string                     `json:"DisplayStatus,omitempty"`
+	Error         NullableHyperflexErrorStack `json:"Error,omitempty"`
 	// The name of the Virtual Machine and the time stamp of the snapshot.
 	Label *string `json:"Label,omitempty"`
 	// Quiesce Mode for snapshot taken on Hyperflex cluster. * `NONE` - The snapshot quiesce mode is none. * `CRASH` - The snapshot quiesce mode is crash. * `VMTOOLS` - The snapshot quiesce mode is VMTOOLS. * `APP_CONSISTENT` - The snapshot quiesce mode is app consistent.
@@ -30,10 +32,18 @@ type HyperflexVmSnapshotInfoAllOf struct {
 	ParentSnapshot NullableHyperflexEntityReference `json:"ParentSnapshot,omitempty"`
 	// Replication status of the least successful target cluster. * `NONE` - Snapshot replication state is none. * `SUCCESS` - Snapshot completed successfully. * `FAILED` - Snapshot failed replication status code. * `PAUSED` - Snapshot replication paused status code. * `IN_USE` - Snapshot replica in use status code. * `STARTING` - Snapshot replication starting. * `REPLICATING` - Snapshot replication in progress.
 	ReplicationStatus *string `json:"ReplicationStatus,omitempty"`
-	// Snapshot status of the source cluster. * `SUCCESS` - This snapshot status code is success. * `FAILED` - This snapshot status code is failed. * `IN_PROGRESS` - This snapshot status code is in progress. * `DELETING` - This snapshot status code is deleting. * `DELETED` - This snapshot status code is deleted. * `NONE` - This snapshot status code is none.
+	// Error message from snapshot creation or replcation if any exist.
+	SnapshotErrorMsg *string `json:"SnapshotErrorMsg,omitempty"`
+	// Snapshot status of the source cluster. * `SUCCESS` - This snapshot status code is success. * `FAILED` - This snapshot status code is failed. * `IN_PROGRESS` - This snapshot status code is in progress. * `DELETING` - This snapshot status code is deleting. * `DELETED` - This snapshot status code is deleted. * `NONE` - This snapshot status code is none. * `INIT` - This snapshot status code is initializing.
 	SnapshotStatus *string `json:"SnapshotStatus,omitempty"`
 	// Timestamp the snapshot was created on the source cluster.
-	SourceTimestamp           *int64                             `json:"SourceTimestamp,omitempty"`
+	SourceTimestamp *int64 `json:"SourceTimestamp,omitempty"`
+	// Name of the cluster this snapshot resides on.
+	SrcClusterName *string `json:"SrcClusterName,omitempty"`
+	// Timestamp the snapshot was finished replicating on the target cluster.
+	TargetCompletionTimestamp *int64 `json:"TargetCompletionTimestamp,omitempty"`
+	// Name of the cluster this snapshot is replicated to.
+	TgtClusterName            *string                            `json:"TgtClusterName,omitempty"`
 	VmEntityReference         NullableHyperflexEntityReference   `json:"VmEntityReference,omitempty"`
 	VmSnapshotEntityReference NullableHyperflexEntityReference   `json:"VmSnapshotEntityReference,omitempty"`
 	SrcCluster                *HyperflexClusterRelationship      `json:"SrcCluster,omitempty"`
@@ -148,47 +158,79 @@ func (o *HyperflexVmSnapshotInfoAllOf) SetClusterIdSnapMap(v []HyperflexMapClust
 	o.ClusterIdSnapMap = v
 }
 
-// GetErrorStack returns the ErrorStack field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HyperflexVmSnapshotInfoAllOf) GetErrorStack() HyperflexErrorStack {
-	if o == nil || o.ErrorStack.Get() == nil {
-		var ret HyperflexErrorStack
+// GetDisplayStatus returns the DisplayStatus field value if set, zero value otherwise.
+func (o *HyperflexVmSnapshotInfoAllOf) GetDisplayStatus() string {
+	if o == nil || o.DisplayStatus == nil {
+		var ret string
 		return ret
 	}
-	return *o.ErrorStack.Get()
+	return *o.DisplayStatus
 }
 
-// GetErrorStackOk returns a tuple with the ErrorStack field value if set, nil otherwise
+// GetDisplayStatusOk returns a tuple with the DisplayStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HyperflexVmSnapshotInfoAllOf) GetErrorStackOk() (*HyperflexErrorStack, bool) {
-	if o == nil {
+func (o *HyperflexVmSnapshotInfoAllOf) GetDisplayStatusOk() (*string, bool) {
+	if o == nil || o.DisplayStatus == nil {
 		return nil, false
 	}
-	return o.ErrorStack.Get(), o.ErrorStack.IsSet()
+	return o.DisplayStatus, true
 }
 
-// HasErrorStack returns a boolean if a field has been set.
-func (o *HyperflexVmSnapshotInfoAllOf) HasErrorStack() bool {
-	if o != nil && o.ErrorStack.IsSet() {
+// HasDisplayStatus returns a boolean if a field has been set.
+func (o *HyperflexVmSnapshotInfoAllOf) HasDisplayStatus() bool {
+	if o != nil && o.DisplayStatus != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetErrorStack gets a reference to the given NullableHyperflexErrorStack and assigns it to the ErrorStack field.
-func (o *HyperflexVmSnapshotInfoAllOf) SetErrorStack(v HyperflexErrorStack) {
-	o.ErrorStack.Set(&v)
+// SetDisplayStatus gets a reference to the given string and assigns it to the DisplayStatus field.
+func (o *HyperflexVmSnapshotInfoAllOf) SetDisplayStatus(v string) {
+	o.DisplayStatus = &v
 }
 
-// SetErrorStackNil sets the value for ErrorStack to be an explicit nil
-func (o *HyperflexVmSnapshotInfoAllOf) SetErrorStackNil() {
-	o.ErrorStack.Set(nil)
+// GetError returns the Error field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexVmSnapshotInfoAllOf) GetError() HyperflexErrorStack {
+	if o == nil || o.Error.Get() == nil {
+		var ret HyperflexErrorStack
+		return ret
+	}
+	return *o.Error.Get()
 }
 
-// UnsetErrorStack ensures that no value is present for ErrorStack, not even an explicit nil
-func (o *HyperflexVmSnapshotInfoAllOf) UnsetErrorStack() {
-	o.ErrorStack.Unset()
+// GetErrorOk returns a tuple with the Error field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexVmSnapshotInfoAllOf) GetErrorOk() (*HyperflexErrorStack, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Error.Get(), o.Error.IsSet()
+}
+
+// HasError returns a boolean if a field has been set.
+func (o *HyperflexVmSnapshotInfoAllOf) HasError() bool {
+	if o != nil && o.Error.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetError gets a reference to the given NullableHyperflexErrorStack and assigns it to the Error field.
+func (o *HyperflexVmSnapshotInfoAllOf) SetError(v HyperflexErrorStack) {
+	o.Error.Set(&v)
+}
+
+// SetErrorNil sets the value for Error to be an explicit nil
+func (o *HyperflexVmSnapshotInfoAllOf) SetErrorNil() {
+	o.Error.Set(nil)
+}
+
+// UnsetError ensures that no value is present for Error, not even an explicit nil
+func (o *HyperflexVmSnapshotInfoAllOf) UnsetError() {
+	o.Error.Unset()
 }
 
 // GetLabel returns the Label field value if set, zero value otherwise.
@@ -330,6 +372,38 @@ func (o *HyperflexVmSnapshotInfoAllOf) SetReplicationStatus(v string) {
 	o.ReplicationStatus = &v
 }
 
+// GetSnapshotErrorMsg returns the SnapshotErrorMsg field value if set, zero value otherwise.
+func (o *HyperflexVmSnapshotInfoAllOf) GetSnapshotErrorMsg() string {
+	if o == nil || o.SnapshotErrorMsg == nil {
+		var ret string
+		return ret
+	}
+	return *o.SnapshotErrorMsg
+}
+
+// GetSnapshotErrorMsgOk returns a tuple with the SnapshotErrorMsg field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexVmSnapshotInfoAllOf) GetSnapshotErrorMsgOk() (*string, bool) {
+	if o == nil || o.SnapshotErrorMsg == nil {
+		return nil, false
+	}
+	return o.SnapshotErrorMsg, true
+}
+
+// HasSnapshotErrorMsg returns a boolean if a field has been set.
+func (o *HyperflexVmSnapshotInfoAllOf) HasSnapshotErrorMsg() bool {
+	if o != nil && o.SnapshotErrorMsg != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSnapshotErrorMsg gets a reference to the given string and assigns it to the SnapshotErrorMsg field.
+func (o *HyperflexVmSnapshotInfoAllOf) SetSnapshotErrorMsg(v string) {
+	o.SnapshotErrorMsg = &v
+}
+
 // GetSnapshotStatus returns the SnapshotStatus field value if set, zero value otherwise.
 func (o *HyperflexVmSnapshotInfoAllOf) GetSnapshotStatus() string {
 	if o == nil || o.SnapshotStatus == nil {
@@ -392,6 +466,102 @@ func (o *HyperflexVmSnapshotInfoAllOf) HasSourceTimestamp() bool {
 // SetSourceTimestamp gets a reference to the given int64 and assigns it to the SourceTimestamp field.
 func (o *HyperflexVmSnapshotInfoAllOf) SetSourceTimestamp(v int64) {
 	o.SourceTimestamp = &v
+}
+
+// GetSrcClusterName returns the SrcClusterName field value if set, zero value otherwise.
+func (o *HyperflexVmSnapshotInfoAllOf) GetSrcClusterName() string {
+	if o == nil || o.SrcClusterName == nil {
+		var ret string
+		return ret
+	}
+	return *o.SrcClusterName
+}
+
+// GetSrcClusterNameOk returns a tuple with the SrcClusterName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexVmSnapshotInfoAllOf) GetSrcClusterNameOk() (*string, bool) {
+	if o == nil || o.SrcClusterName == nil {
+		return nil, false
+	}
+	return o.SrcClusterName, true
+}
+
+// HasSrcClusterName returns a boolean if a field has been set.
+func (o *HyperflexVmSnapshotInfoAllOf) HasSrcClusterName() bool {
+	if o != nil && o.SrcClusterName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcClusterName gets a reference to the given string and assigns it to the SrcClusterName field.
+func (o *HyperflexVmSnapshotInfoAllOf) SetSrcClusterName(v string) {
+	o.SrcClusterName = &v
+}
+
+// GetTargetCompletionTimestamp returns the TargetCompletionTimestamp field value if set, zero value otherwise.
+func (o *HyperflexVmSnapshotInfoAllOf) GetTargetCompletionTimestamp() int64 {
+	if o == nil || o.TargetCompletionTimestamp == nil {
+		var ret int64
+		return ret
+	}
+	return *o.TargetCompletionTimestamp
+}
+
+// GetTargetCompletionTimestampOk returns a tuple with the TargetCompletionTimestamp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexVmSnapshotInfoAllOf) GetTargetCompletionTimestampOk() (*int64, bool) {
+	if o == nil || o.TargetCompletionTimestamp == nil {
+		return nil, false
+	}
+	return o.TargetCompletionTimestamp, true
+}
+
+// HasTargetCompletionTimestamp returns a boolean if a field has been set.
+func (o *HyperflexVmSnapshotInfoAllOf) HasTargetCompletionTimestamp() bool {
+	if o != nil && o.TargetCompletionTimestamp != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetCompletionTimestamp gets a reference to the given int64 and assigns it to the TargetCompletionTimestamp field.
+func (o *HyperflexVmSnapshotInfoAllOf) SetTargetCompletionTimestamp(v int64) {
+	o.TargetCompletionTimestamp = &v
+}
+
+// GetTgtClusterName returns the TgtClusterName field value if set, zero value otherwise.
+func (o *HyperflexVmSnapshotInfoAllOf) GetTgtClusterName() string {
+	if o == nil || o.TgtClusterName == nil {
+		var ret string
+		return ret
+	}
+	return *o.TgtClusterName
+}
+
+// GetTgtClusterNameOk returns a tuple with the TgtClusterName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexVmSnapshotInfoAllOf) GetTgtClusterNameOk() (*string, bool) {
+	if o == nil || o.TgtClusterName == nil {
+		return nil, false
+	}
+	return o.TgtClusterName, true
+}
+
+// HasTgtClusterName returns a boolean if a field has been set.
+func (o *HyperflexVmSnapshotInfoAllOf) HasTgtClusterName() bool {
+	if o != nil && o.TgtClusterName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTgtClusterName gets a reference to the given string and assigns it to the TgtClusterName field.
+func (o *HyperflexVmSnapshotInfoAllOf) SetTgtClusterName(v string) {
+	o.TgtClusterName = &v
 }
 
 // GetVmEntityReference returns the VmEntityReference field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -587,8 +757,11 @@ func (o HyperflexVmSnapshotInfoAllOf) MarshalJSON() ([]byte, error) {
 	if o.ClusterIdSnapMap != nil {
 		toSerialize["ClusterIdSnapMap"] = o.ClusterIdSnapMap
 	}
-	if o.ErrorStack.IsSet() {
-		toSerialize["ErrorStack"] = o.ErrorStack.Get()
+	if o.DisplayStatus != nil {
+		toSerialize["DisplayStatus"] = o.DisplayStatus
+	}
+	if o.Error.IsSet() {
+		toSerialize["Error"] = o.Error.Get()
 	}
 	if o.Label != nil {
 		toSerialize["Label"] = o.Label
@@ -602,11 +775,23 @@ func (o HyperflexVmSnapshotInfoAllOf) MarshalJSON() ([]byte, error) {
 	if o.ReplicationStatus != nil {
 		toSerialize["ReplicationStatus"] = o.ReplicationStatus
 	}
+	if o.SnapshotErrorMsg != nil {
+		toSerialize["SnapshotErrorMsg"] = o.SnapshotErrorMsg
+	}
 	if o.SnapshotStatus != nil {
 		toSerialize["SnapshotStatus"] = o.SnapshotStatus
 	}
 	if o.SourceTimestamp != nil {
 		toSerialize["SourceTimestamp"] = o.SourceTimestamp
+	}
+	if o.SrcClusterName != nil {
+		toSerialize["SrcClusterName"] = o.SrcClusterName
+	}
+	if o.TargetCompletionTimestamp != nil {
+		toSerialize["TargetCompletionTimestamp"] = o.TargetCompletionTimestamp
+	}
+	if o.TgtClusterName != nil {
+		toSerialize["TgtClusterName"] = o.TgtClusterName
 	}
 	if o.VmEntityReference.IsSet() {
 		toSerialize["VmEntityReference"] = o.VmEntityReference.Get()
@@ -644,13 +829,18 @@ func (o *HyperflexVmSnapshotInfoAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterIdSnapMap")
-		delete(additionalProperties, "ErrorStack")
+		delete(additionalProperties, "DisplayStatus")
+		delete(additionalProperties, "Error")
 		delete(additionalProperties, "Label")
 		delete(additionalProperties, "Mode")
 		delete(additionalProperties, "ParentSnapshot")
 		delete(additionalProperties, "ReplicationStatus")
+		delete(additionalProperties, "SnapshotErrorMsg")
 		delete(additionalProperties, "SnapshotStatus")
 		delete(additionalProperties, "SourceTimestamp")
+		delete(additionalProperties, "SrcClusterName")
+		delete(additionalProperties, "TargetCompletionTimestamp")
+		delete(additionalProperties, "TgtClusterName")
 		delete(additionalProperties, "VmEntityReference")
 		delete(additionalProperties, "VmSnapshotEntityReference")
 		delete(additionalProperties, "SrcCluster")

@@ -25,6 +25,36 @@ func dataSourceAssetDeployment() *schema.Resource {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"alarm_info": {
+			Description: "Different alarm types raised for the deployment.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"enabled_alarms": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -561,6 +591,36 @@ func dataSourceAssetDeployment() *schema.Resource {
 			Type:             schema.TypeString,
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
+		},
+		"alarm_info": {
+			Description: "Different alarm types raised for the deployment.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"enabled_alarms": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
@@ -1119,6 +1179,49 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
+	if v, ok := d.GetOk("alarm_info"); ok {
+		p := make([]models.AssetDeploymentAlarmInfo, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.AssetDeploymentAlarmInfo{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("asset.DeploymentAlarmInfo")
+			if v, ok := l["enabled_alarms"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						x = append(x, y.Index(i).Interface().(string))
+					}
+					if len(x) > 0 {
+						o.SetEnabledAlarms(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAlarmInfo(x)
+		}
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1165,7 +1268,7 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1251,7 +1354,7 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("end_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetEndDate(x)
 	}
 
@@ -1266,7 +1369,7 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1378,7 +1481,7 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("start_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetStartDate(x)
 	}
 
@@ -1612,6 +1715,8 @@ func dataSourceAssetDeploymentRead(c context.Context, d *schema.ResourceData, me
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+
+				temp["alarm_info"] = flattenMapAssetDeploymentAlarmInfo(s.GetAlarmInfo(), d)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())

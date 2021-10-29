@@ -445,7 +445,7 @@ func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 							Default:     "hyperflex.ServerFirmwareVersionInfo",
 						},
 						"server_platform": {
-							Description: "The platform type for UCS server.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.",
+							Description: "The platform type for UCS server.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.\n* `M6` - M6 generation of UCS server.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "M5",

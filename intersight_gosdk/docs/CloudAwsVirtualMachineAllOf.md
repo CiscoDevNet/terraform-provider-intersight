@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cloud.AwsVirtualMachine"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cloud.AwsVirtualMachine"]
+**AwsBillingUnit** | Pointer to [**CloudAwsBillingUnitRelationship**](CloudAwsBillingUnitRelationship.md) |  | [optional] 
 **KeyPair** | Pointer to [**CloudAwsKeyPairRelationship**](CloudAwsKeyPairRelationship.md) |  | [optional] 
 **Location** | Pointer to [**CloudAwsVpcRelationship**](CloudAwsVpcRelationship.md) |  | [optional] 
 **SecurityGroups** | Pointer to [**[]CloudAwsSecurityGroupRelationship**](CloudAwsSecurityGroupRelationship.md) | An array of relationships to cloudAwsSecurityGroup resources. | [optional] [readonly] 
@@ -68,6 +69,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAwsBillingUnit
+
+`func (o *CloudAwsVirtualMachineAllOf) GetAwsBillingUnit() CloudAwsBillingUnitRelationship`
+
+GetAwsBillingUnit returns the AwsBillingUnit field if non-nil, zero value otherwise.
+
+### GetAwsBillingUnitOk
+
+`func (o *CloudAwsVirtualMachineAllOf) GetAwsBillingUnitOk() (*CloudAwsBillingUnitRelationship, bool)`
+
+GetAwsBillingUnitOk returns a tuple with the AwsBillingUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAwsBillingUnit
+
+`func (o *CloudAwsVirtualMachineAllOf) SetAwsBillingUnit(v CloudAwsBillingUnitRelationship)`
+
+SetAwsBillingUnit sets AwsBillingUnit field to given value.
+
+### HasAwsBillingUnit
+
+`func (o *CloudAwsVirtualMachineAllOf) HasAwsBillingUnit() bool`
+
+HasAwsBillingUnit returns a boolean if a field has been set.
 
 ### GetKeyPair
 

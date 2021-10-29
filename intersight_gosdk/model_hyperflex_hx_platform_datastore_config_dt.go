@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -35,7 +35,9 @@ type HyperflexHxPlatformDatastoreConfigDt struct {
 	// Provisioned capacity of datastore in bytes.
 	ProvisionedCapacity *int64 `json:"ProvisionedCapacity,omitempty"`
 	// Specifies if this datastore is a system datastore or not.
-	SystemDatastore      *bool `json:"SystemDatastore,omitempty"`
+	SystemDatastore *bool `json:"SystemDatastore,omitempty"`
+	// HyperFlex datastore usage type. * `NFS` - The HyperFlex datastore type is NFS. * `SMB` - The HyperFlex datastore type is SMB. * `ISCSI` - The HyperFlex datastore type is ISCSI. * `UNKNOWN` - The HyperFlex datastore type is unknown.
+	UsageType            *string `json:"UsageType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -304,6 +306,38 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) SetSystemDatastore(v bool) {
 	o.SystemDatastore = &v
 }
 
+// GetUsageType returns the UsageType field value if set, zero value otherwise.
+func (o *HyperflexHxPlatformDatastoreConfigDt) GetUsageType() string {
+	if o == nil || o.UsageType == nil {
+		var ret string
+		return ret
+	}
+	return *o.UsageType
+}
+
+// GetUsageTypeOk returns a tuple with the UsageType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexHxPlatformDatastoreConfigDt) GetUsageTypeOk() (*string, bool) {
+	if o == nil || o.UsageType == nil {
+		return nil, false
+	}
+	return o.UsageType, true
+}
+
+// HasUsageType returns a boolean if a field has been set.
+func (o *HyperflexHxPlatformDatastoreConfigDt) HasUsageType() bool {
+	if o != nil && o.UsageType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUsageType gets a reference to the given string and assigns it to the UsageType field.
+func (o *HyperflexHxPlatformDatastoreConfigDt) SetUsageType(v string) {
+	o.UsageType = &v
+}
+
 func (o HyperflexHxPlatformDatastoreConfigDt) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseComplexType, errMoBaseComplexType := json.Marshal(o.MoBaseComplexType)
@@ -338,6 +372,9 @@ func (o HyperflexHxPlatformDatastoreConfigDt) MarshalJSON() ([]byte, error) {
 	if o.SystemDatastore != nil {
 		toSerialize["SystemDatastore"] = o.SystemDatastore
 	}
+	if o.UsageType != nil {
+		toSerialize["UsageType"] = o.UsageType
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -364,6 +401,8 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) UnmarshalJSON(bytes []byte) (err 
 		ProvisionedCapacity *int64 `json:"ProvisionedCapacity,omitempty"`
 		// Specifies if this datastore is a system datastore or not.
 		SystemDatastore *bool `json:"SystemDatastore,omitempty"`
+		// HyperFlex datastore usage type. * `NFS` - The HyperFlex datastore type is NFS. * `SMB` - The HyperFlex datastore type is SMB. * `ISCSI` - The HyperFlex datastore type is ISCSI. * `UNKNOWN` - The HyperFlex datastore type is unknown.
+		UsageType *string `json:"UsageType,omitempty"`
 	}
 
 	varHyperflexHxPlatformDatastoreConfigDtWithoutEmbeddedStruct := HyperflexHxPlatformDatastoreConfigDtWithoutEmbeddedStruct{}
@@ -379,6 +418,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) UnmarshalJSON(bytes []byte) (err 
 		varHyperflexHxPlatformDatastoreConfigDt.NumStripesForLargeFiles = varHyperflexHxPlatformDatastoreConfigDtWithoutEmbeddedStruct.NumStripesForLargeFiles
 		varHyperflexHxPlatformDatastoreConfigDt.ProvisionedCapacity = varHyperflexHxPlatformDatastoreConfigDtWithoutEmbeddedStruct.ProvisionedCapacity
 		varHyperflexHxPlatformDatastoreConfigDt.SystemDatastore = varHyperflexHxPlatformDatastoreConfigDtWithoutEmbeddedStruct.SystemDatastore
+		varHyperflexHxPlatformDatastoreConfigDt.UsageType = varHyperflexHxPlatformDatastoreConfigDtWithoutEmbeddedStruct.UsageType
 		*o = HyperflexHxPlatformDatastoreConfigDt(varHyperflexHxPlatformDatastoreConfigDt)
 	} else {
 		return err
@@ -404,6 +444,7 @@ func (o *HyperflexHxPlatformDatastoreConfigDt) UnmarshalJSON(bytes []byte) (err 
 		delete(additionalProperties, "NumStripesForLargeFiles")
 		delete(additionalProperties, "ProvisionedCapacity")
 		delete(additionalProperties, "SystemDatastore")
+		delete(additionalProperties, "UsageType")
 
 		// remove fields from embedded structs
 		reflectMoBaseComplexType := reflect.ValueOf(o.MoBaseComplexType)

@@ -974,7 +974,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1004,12 +1004,12 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 	}
 
 	if v, ok := d.GetOk("imported_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetImportedTime(x)
 	}
 
 	if v, ok := d.GetOk("last_access_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastAccessTime(x)
 	}
 
@@ -1024,7 +1024,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1136,7 +1136,7 @@ func dataSourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *s
 	}
 
 	if v, ok := d.GetOk("release_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetReleaseDate(x)
 	}
 

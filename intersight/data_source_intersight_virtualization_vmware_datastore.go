@@ -578,6 +578,11 @@ func dataSourceVirtualizationVmwareDatastore() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"vm_template_count": {
+			Description: "Number of virtual machine templates relying on (using) this datastore.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 	}
 	var model = map[string]*schema.Schema{"accessible": {
 		Description: "Shows if this datastore is accessible.",
@@ -1142,6 +1147,11 @@ func dataSourceVirtualizationVmwareDatastore() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"vm_template_count": {
+			Description: "Number of virtual machine templates relying on (using) this datastore.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 	}
 	model["results"] = &schema.Schema{
 		Type:     schema.TypeList,
@@ -1316,7 +1326,7 @@ func dataSourceVirtualizationVmwareDatastoreRead(c context.Context, d *schema.Re
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1472,7 +1482,7 @@ func dataSourceVirtualizationVmwareDatastoreRead(c context.Context, d *schema.Re
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1773,6 +1783,11 @@ func dataSourceVirtualizationVmwareDatastoreRead(c context.Context, d *schema.Re
 		o.SetVmCount(x)
 	}
 
+	if v, ok := d.GetOkExists("vm_template_count"); ok {
+		x := int64(v.(int))
+		o.SetVmTemplateCount(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of VirtualizationVmwareDatastore object failed with error : %s", err.Error())
@@ -1856,6 +1871,7 @@ func dataSourceVirtualizationVmwareDatastoreRead(c context.Context, d *schema.Re
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vm_count"] = (s.GetVmCount())
+				temp["vm_template_count"] = (s.GetVmTemplateCount())
 				virtualizationVmwareDatastoreResults[j] = temp
 				j += 1
 			}

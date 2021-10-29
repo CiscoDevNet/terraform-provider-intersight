@@ -25,11 +25,12 @@ resource "intersight_recovery_schedule_config_policy" "recovery_schedule_config_
   }
   schedule {
     object_type    = "recovery.BackupSchedule"
-    frequency_unit = "daily"
+    frequency_unit = "Daily"
     hours          = "8"
   }
 }
 ```
+
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

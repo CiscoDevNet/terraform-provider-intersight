@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Er** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
 **PeerInfo** | Pointer to [**NullableHyperflexReplicationPeerInfo**](HyperflexReplicationPeerInfo.md) |  | [optional] 
 **SrcCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**TgtCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -163,6 +164,31 @@ SetSrcCluster sets SrcCluster field to given value.
 `func (o *HyperflexDataProtectionPeerAllOf) HasSrcCluster() bool`
 
 HasSrcCluster returns a boolean if a field has been set.
+
+### GetTgtCluster
+
+`func (o *HyperflexDataProtectionPeerAllOf) GetTgtCluster() HyperflexClusterRelationship`
+
+GetTgtCluster returns the TgtCluster field if non-nil, zero value otherwise.
+
+### GetTgtClusterOk
+
+`func (o *HyperflexDataProtectionPeerAllOf) GetTgtClusterOk() (*HyperflexClusterRelationship, bool)`
+
+GetTgtClusterOk returns a tuple with the TgtCluster field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTgtCluster
+
+`func (o *HyperflexDataProtectionPeerAllOf) SetTgtCluster(v HyperflexClusterRelationship)`
+
+SetTgtCluster sets TgtCluster field to given value.
+
+### HasTgtCluster
+
+`func (o *HyperflexDataProtectionPeerAllOf) HasTgtCluster() bool`
+
+HasTgtCluster returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -248,6 +248,11 @@ func dataSourceHyperflexVmRestoreOperation() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"start_time": {
+			Description: "Start time for the replication.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -683,6 +688,11 @@ func dataSourceHyperflexVmRestoreOperation() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"start_time": {
+			Description: "Start time for the replication.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -961,7 +971,7 @@ func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Reso
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -971,7 +981,7 @@ func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Reso
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1176,6 +1186,11 @@ func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
+	}
+
+	if v, ok := d.GetOkExists("start_time"); ok {
+		x := int64(v.(int))
+		o.SetStartTime(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1431,6 +1446,7 @@ func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Reso
 
 				temp["restore_edge_cluster_moid"] = flattenMapHyperflexClusterRelationship(s.GetRestoreEdgeClusterMoid(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["start_time"] = (s.GetStartTime())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

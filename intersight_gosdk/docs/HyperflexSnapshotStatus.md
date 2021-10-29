@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | Description of this Snapshot Point. | [optional] [readonly] 
 **Error** | Pointer to [**NullableHyperflexErrorStack**](HyperflexErrorStack.md) |  | [optional] 
 **PctComplete** | Pointer to **int64** | Completion percentage for this snapshot. | [optional] [readonly] 
-**Status** | Pointer to **string** | Current snapshot state for this snapshot. * &#x60;SUCCESS&#x60; - This snapshot status code is success. * &#x60;FAILED&#x60; - This snapshot status code is failed. * &#x60;IN_PROGRESS&#x60; - This snapshot status code is in progress. * &#x60;DELETING&#x60; - This snapshot status code is deleting. * &#x60;DELETED&#x60; - This snapshot status code is deleted. * &#x60;NONE&#x60; - This snapshot status code is none. | [optional] [readonly] [default to "SUCCESS"]
+**Status** | Pointer to **string** | Current snapshot state for this snapshot. * &#x60;SUCCESS&#x60; - This snapshot status code is success. * &#x60;FAILED&#x60; - This snapshot status code is failed. * &#x60;IN_PROGRESS&#x60; - This snapshot status code is in progress. * &#x60;DELETING&#x60; - This snapshot status code is deleting. * &#x60;DELETED&#x60; - This snapshot status code is deleted. * &#x60;NONE&#x60; - This snapshot status code is none. * &#x60;INIT&#x60; - This snapshot status code is initializing. | [optional] [readonly] [default to "SUCCESS"]
 **Timestamp** | Pointer to **int64** | Timestamp at which the Snapshot is taken. | [optional] [readonly] 
 **UsedSpace** | Pointer to **int64** | Space Used by this Snapshot Point. | [optional] [readonly] 
 

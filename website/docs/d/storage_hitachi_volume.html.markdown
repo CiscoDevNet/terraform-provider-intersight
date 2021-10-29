@@ -28,7 +28,9 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `naa_id`:(string) NAA id of volume. It is a significant number to identify corresponding lun path in hypervisor. 
 * `name`:(string) Named entity of the volume. 
+* `namespace_id`:(string) Namespace ID registered in NVM Subsystem. 
 * `num_of_paths`:(int) Number of paths set for the volume. 
+* `nvm_subsystem_id`:(string) NVM subsystem ID on storage system. 
 * `pool_id`:(string) ID of the pool with which the volume is associated. 
 * `raid_level`:(string) RAID level for the volume.* `N/A` - RAID level is unknown or multiple RAID levels are being used.* `RAID1` - RAID1.* `RAID5` - RAID5.* `RAID6` - RAID6. 
 * `raid_type`:(string) RAID type drive configuration. 

@@ -78,7 +78,7 @@ This complex property has following sub-properties:
 * `server_firmware_versions`:(Array)
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `server_platform`:(string) The platform type for UCS server.* `M5` - M5 generation of UCS server.* `M3` - M3 generation of UCS server.* `M4` - M4 generation of UCS server. 
+  + `server_platform`:(string) The platform type for UCS server.* `M5` - M5 generation of UCS server.* `M3` - M3 generation of UCS server.* `M4` - M4 generation of UCS server.* `M6` - M6 generation of UCS server. 
   + `nr_version`:(string) The server firmware bundle version. 
 * `shared_scope`:(string)(ReadOnly) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `tags`:(Array)

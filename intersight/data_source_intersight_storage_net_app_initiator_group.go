@@ -340,7 +340,7 @@ func dataSourceStorageNetAppInitiatorGroup() *schema.Resource {
 			},
 		},
 		"uuid": {
-			Description: "UUID of the LUN.",
+			Description: "Universally unique identifier of the LUN.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -778,7 +778,7 @@ func dataSourceStorageNetAppInitiatorGroup() *schema.Resource {
 			},
 		},
 		"uuid": {
-			Description: "UUID of the LUN.",
+			Description: "Universally unique identifier of the LUN.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -967,7 +967,7 @@ func dataSourceStorageNetAppInitiatorGroupRead(c context.Context, d *schema.Reso
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1010,7 +1010,7 @@ func dataSourceStorageNetAppInitiatorGroupRead(c context.Context, d *schema.Reso
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

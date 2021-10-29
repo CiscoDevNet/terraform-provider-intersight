@@ -6,14 +6,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppEthernetPort"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppEthernetPort"]
-**Enabled** | Pointer to **string** | Status of Port to determine if its enabled or not. | [optional] [readonly] 
-**MacAddress** | Pointer to **string** | Macaddress  of the port available in storage array. | [optional] [readonly] 
+**BroadcastDomainName** | Pointer to **string** | Name of the broadcast domain, scoped to its IPspace. | [optional] [readonly] 
+**Enabled** | Pointer to **string** | Status of port to determine if its enabled or not. | [optional] [readonly] 
+**MacAddress** | Pointer to **string** | MAC address of the port available in storage array. | [optional] [readonly] 
 **Mtu** | Pointer to **string** | Maximum transmission unit of the physical port available in storage array. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the port available in storage array. | [optional] [readonly] 
+**NetAppEthernetPortLag** | Pointer to [**NullableStorageNetAppEthernetPortLag**](StorageNetAppEthernetPortLag.md) |  | [optional] 
+**NetAppEthernetPortVlan** | Pointer to [**NullableStorageNetAppEthernetPortVlan**](StorageNetAppEthernetPortVlan.md) |  | [optional] 
 **Speed** | Pointer to **int64** | Operational speed of port measured. | [optional] [readonly] 
 **State** | Pointer to **string** | State of the port available in storage array. * &#x60;down&#x60; - An inactive port is listed as Down. * &#x60;up&#x60; - An active port is listed as Up. * &#x60;present&#x60; - An active port is listed as present. | [optional] [readonly] [default to "down"]
 **Type** | Pointer to **string** | Type of the port available in storage array. * &#x60;LAG&#x60; - Storage port of type lag. * &#x60;physical&#x60; - LIFs can be configured directly on physical ports. * &#x60;VLAN&#x60; - A logical port that receives and sends VLAN-tagged (IEEE 802.1Q standard) traffic. VLAN port characteristics include the VLAN ID for the port. | [optional] [readonly] [default to "LAG"]
-**Uuid** | Pointer to **string** | UUID of physical port. | [optional] [readonly] 
+**Uuid** | Pointer to **string** | Universally unique identifier of the physical port. | [optional] [readonly] 
 **ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
 
 ## Methods
@@ -74,6 +77,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetBroadcastDomainName
+
+`func (o *StorageNetAppEthernetPort) GetBroadcastDomainName() string`
+
+GetBroadcastDomainName returns the BroadcastDomainName field if non-nil, zero value otherwise.
+
+### GetBroadcastDomainNameOk
+
+`func (o *StorageNetAppEthernetPort) GetBroadcastDomainNameOk() (*string, bool)`
+
+GetBroadcastDomainNameOk returns a tuple with the BroadcastDomainName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBroadcastDomainName
+
+`func (o *StorageNetAppEthernetPort) SetBroadcastDomainName(v string)`
+
+SetBroadcastDomainName sets BroadcastDomainName field to given value.
+
+### HasBroadcastDomainName
+
+`func (o *StorageNetAppEthernetPort) HasBroadcastDomainName() bool`
+
+HasBroadcastDomainName returns a boolean if a field has been set.
 
 ### GetEnabled
 
@@ -175,6 +203,76 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetNetAppEthernetPortLag
+
+`func (o *StorageNetAppEthernetPort) GetNetAppEthernetPortLag() StorageNetAppEthernetPortLag`
+
+GetNetAppEthernetPortLag returns the NetAppEthernetPortLag field if non-nil, zero value otherwise.
+
+### GetNetAppEthernetPortLagOk
+
+`func (o *StorageNetAppEthernetPort) GetNetAppEthernetPortLagOk() (*StorageNetAppEthernetPortLag, bool)`
+
+GetNetAppEthernetPortLagOk returns a tuple with the NetAppEthernetPortLag field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetAppEthernetPortLag
+
+`func (o *StorageNetAppEthernetPort) SetNetAppEthernetPortLag(v StorageNetAppEthernetPortLag)`
+
+SetNetAppEthernetPortLag sets NetAppEthernetPortLag field to given value.
+
+### HasNetAppEthernetPortLag
+
+`func (o *StorageNetAppEthernetPort) HasNetAppEthernetPortLag() bool`
+
+HasNetAppEthernetPortLag returns a boolean if a field has been set.
+
+### SetNetAppEthernetPortLagNil
+
+`func (o *StorageNetAppEthernetPort) SetNetAppEthernetPortLagNil(b bool)`
+
+ SetNetAppEthernetPortLagNil sets the value for NetAppEthernetPortLag to be an explicit nil
+
+### UnsetNetAppEthernetPortLag
+`func (o *StorageNetAppEthernetPort) UnsetNetAppEthernetPortLag()`
+
+UnsetNetAppEthernetPortLag ensures that no value is present for NetAppEthernetPortLag, not even an explicit nil
+### GetNetAppEthernetPortVlan
+
+`func (o *StorageNetAppEthernetPort) GetNetAppEthernetPortVlan() StorageNetAppEthernetPortVlan`
+
+GetNetAppEthernetPortVlan returns the NetAppEthernetPortVlan field if non-nil, zero value otherwise.
+
+### GetNetAppEthernetPortVlanOk
+
+`func (o *StorageNetAppEthernetPort) GetNetAppEthernetPortVlanOk() (*StorageNetAppEthernetPortVlan, bool)`
+
+GetNetAppEthernetPortVlanOk returns a tuple with the NetAppEthernetPortVlan field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetAppEthernetPortVlan
+
+`func (o *StorageNetAppEthernetPort) SetNetAppEthernetPortVlan(v StorageNetAppEthernetPortVlan)`
+
+SetNetAppEthernetPortVlan sets NetAppEthernetPortVlan field to given value.
+
+### HasNetAppEthernetPortVlan
+
+`func (o *StorageNetAppEthernetPort) HasNetAppEthernetPortVlan() bool`
+
+HasNetAppEthernetPortVlan returns a boolean if a field has been set.
+
+### SetNetAppEthernetPortVlanNil
+
+`func (o *StorageNetAppEthernetPort) SetNetAppEthernetPortVlanNil(b bool)`
+
+ SetNetAppEthernetPortVlanNil sets the value for NetAppEthernetPortVlan to be an explicit nil
+
+### UnsetNetAppEthernetPortVlan
+`func (o *StorageNetAppEthernetPort) UnsetNetAppEthernetPortVlan()`
+
+UnsetNetAppEthernetPortVlan ensures that no value is present for NetAppEthernetPortVlan, not even an explicit nil
 ### GetSpeed
 
 `func (o *StorageNetAppEthernetPort) GetSpeed() int64`

@@ -71,8 +71,8 @@ This complex property has following sub-properties:
   + `key`:(string) The key for a Kubernetes label for a node. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `value`:(string) The value for a Kubernetes label for a node. 
-* `maxsize`:(int) Maximum number of nodes desired in this node group. 
-* `minsize`:(int) Minimum number of nodes desired in this node group. 
+* `maxsize`:(int) Maximum number of nodes this node group can scale up to during repair, replacement or upgrade operations. 
+* `minsize`:(int) Minimum number of available nodes this node group can scale down to during repair, replacement or upgrade operations. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the profile instance or profile template. 

@@ -60,7 +60,7 @@ func dataSourceFabricVlan() *schema.Resource {
 			},
 		},
 		"auto_allow_on_uplinks": {
-			Description: "Used to determine whether this VLAN will be allowed on all uplink ports and PCs in this FI.",
+			Description: "Enable to automatically allow this VLAN on all uplinks. Disable must be specified for Disjoint Layer 2 VLAN configuration. Default VLAN-1 cannot be configured as Disjoint Layer 2 VLAN.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -435,7 +435,7 @@ func dataSourceFabricVlan() *schema.Resource {
 			},
 		},
 		"auto_allow_on_uplinks": {
-			Description: "Used to determine whether this VLAN will be allowed on all uplink ports and PCs in this FI.",
+			Description: "Enable to automatically allow this VLAN on all uplinks. Disable must be specified for Disjoint Layer 2 VLAN configuration. Default VLAN-1 cannot be configured as Disjoint Layer 2 VLAN.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -846,7 +846,7 @@ func dataSourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta in
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -904,7 +904,7 @@ func dataSourceFabricVlanRead(c context.Context, d *schema.ResourceData, meta in
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -32,7 +32,9 @@ type VirtualizationVmwareDatacenterAllOf struct {
 	// Count of all networks associated with this datacenter (DC).
 	NetworkCount *int64 `json:"NetworkCount,omitempty"`
 	// Count of all virtual machines (VMs) associated with this DC.
-	VmCount              *int64                                   `json:"VmCount,omitempty"`
+	VmCount *int64 `json:"VmCount,omitempty"`
+	// Count of all virtual machines templates associated with this DC.
+	VmTemplateCount      *int64                                   `json:"VmTemplateCount,omitempty"`
 	HypervisorManager    *VirtualizationVmwareVcenterRelationship `json:"HypervisorManager,omitempty"`
 	ParentFolder         *VirtualizationVmwareFolderRelationship  `json:"ParentFolder,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -303,6 +305,38 @@ func (o *VirtualizationVmwareDatacenterAllOf) SetVmCount(v int64) {
 	o.VmCount = &v
 }
 
+// GetVmTemplateCount returns the VmTemplateCount field value if set, zero value otherwise.
+func (o *VirtualizationVmwareDatacenterAllOf) GetVmTemplateCount() int64 {
+	if o == nil || o.VmTemplateCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.VmTemplateCount
+}
+
+// GetVmTemplateCountOk returns a tuple with the VmTemplateCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVmwareDatacenterAllOf) GetVmTemplateCountOk() (*int64, bool) {
+	if o == nil || o.VmTemplateCount == nil {
+		return nil, false
+	}
+	return o.VmTemplateCount, true
+}
+
+// HasVmTemplateCount returns a boolean if a field has been set.
+func (o *VirtualizationVmwareDatacenterAllOf) HasVmTemplateCount() bool {
+	if o != nil && o.VmTemplateCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVmTemplateCount gets a reference to the given int64 and assigns it to the VmTemplateCount field.
+func (o *VirtualizationVmwareDatacenterAllOf) SetVmTemplateCount(v int64) {
+	o.VmTemplateCount = &v
+}
+
 // GetHypervisorManager returns the HypervisorManager field value if set, zero value otherwise.
 func (o *VirtualizationVmwareDatacenterAllOf) GetHypervisorManager() VirtualizationVmwareVcenterRelationship {
 	if o == nil || o.HypervisorManager == nil {
@@ -393,6 +427,9 @@ func (o VirtualizationVmwareDatacenterAllOf) MarshalJSON() ([]byte, error) {
 	if o.VmCount != nil {
 		toSerialize["VmCount"] = o.VmCount
 	}
+	if o.VmTemplateCount != nil {
+		toSerialize["VmTemplateCount"] = o.VmTemplateCount
+	}
 	if o.HypervisorManager != nil {
 		toSerialize["HypervisorManager"] = o.HypervisorManager
 	}
@@ -425,6 +462,7 @@ func (o *VirtualizationVmwareDatacenterAllOf) UnmarshalJSON(bytes []byte) (err e
 		delete(additionalProperties, "InventoryPath")
 		delete(additionalProperties, "NetworkCount")
 		delete(additionalProperties, "VmCount")
+		delete(additionalProperties, "VmTemplateCount")
 		delete(additionalProperties, "HypervisorManager")
 		delete(additionalProperties, "ParentFolder")
 		o.AdditionalProperties = additionalProperties

@@ -59,8 +59,98 @@ func dataSourceStorageNetAppCluster() *schema.Resource {
 				},
 			},
 		},
+		"avg_performance_metrics": {
+			Description: "Average performance metrics for over a period of time.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops": {
+						Description: "Rate of I/O operations observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"latency": {
+						Description: "Latency observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"period": {
+						Description: "Duration of periodic aggregation, in hours.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput": {
+						Description: "Throughput observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cluster_efficiency": {
+			Description: "Cluster storage efficiency savings, ratio, and logical used.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"logical_used": {
+						Description: "The logical space used for the cluster.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ratio": {
+						Description: "Data reduction ratio (logical_used / used).",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"savings": {
+						Description: "Space saved by storage efficiencies (logical_used - used).",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"cluster_health_status": {
+			Description: "The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -79,8 +169,18 @@ func dataSourceStorageNetAppCluster() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"dns_domains": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"key": {
+			Description: "Unique identifier of NetApp Cluster across data center.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -114,6 +214,16 @@ func dataSourceStorageNetAppCluster() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"name_servers": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"ntp_servers": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -529,8 +639,98 @@ func dataSourceStorageNetAppCluster() *schema.Resource {
 				},
 			},
 		},
+		"avg_performance_metrics": {
+			Description: "Average performance metrics for over a period of time.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops": {
+						Description: "Rate of I/O operations observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"latency": {
+						Description: "Latency observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"period": {
+						Description: "Duration of periodic aggregation, in hours.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput": {
+						Description: "Throughput observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cluster_efficiency": {
+			Description: "Cluster storage efficiency savings, ratio, and logical used.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"logical_used": {
+						Description: "The logical space used for the cluster.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ratio": {
+						Description: "Data reduction ratio (logical_used / used).",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"savings": {
+						Description: "Space saved by storage efficiencies (logical_used - used).",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"cluster_health_status": {
+			Description: "The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -549,8 +749,18 @@ func dataSourceStorageNetAppCluster() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"dns_domains": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"key": {
+			Description: "Unique identifier of NetApp Cluster across data center.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -584,6 +794,16 @@ func dataSourceStorageNetAppCluster() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"name_servers": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
+		"ntp_servers": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -1025,13 +1245,80 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("avg_performance_metrics"); ok {
+		p := make([]models.StorageNetAppPerformanceMetricsAverage, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageNetAppPerformanceMetricsAverage{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.NetAppPerformanceMetricsAverage")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAvgPerformanceMetrics(x)
+		}
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOk("cluster_efficiency"); ok {
+		p := make([]models.StorageNetAppStorageClusterEfficiency, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageNetAppStorageClusterEfficiency{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.NetAppStorageClusterEfficiency")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetClusterEfficiency(x)
+		}
+	}
+
+	if v, ok := d.GetOk("cluster_health_status"); ok {
+		x := (v.(string))
+		o.SetClusterHealthStatus(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1045,9 +1332,23 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 		o.SetDn(x)
 	}
 
+	if v, ok := d.GetOk("dns_domains"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetDnsDomains(x)
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOk("key"); ok {
+		x := (v.(string))
+		o.SetKey(x)
 	}
 
 	if v, ok := d.GetOk("location"); ok {
@@ -1061,7 +1362,7 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1078,6 +1379,24 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
+	}
+
+	if v, ok := d.GetOk("name_servers"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetNameServers(x)
+	}
+
+	if v, ok := d.GetOk("ntp_servers"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetNtpServers(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -1481,12 +1800,19 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["avg_performance_metrics"] = flattenMapStorageNetAppPerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
 				temp["class_id"] = (s.GetClassId())
+
+				temp["cluster_efficiency"] = flattenMapStorageNetAppStorageClusterEfficiency(s.GetClusterEfficiency(), d)
+				temp["cluster_health_status"] = (s.GetClusterHealthStatus())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["dn"] = (s.GetDn())
+				temp["dns_domains"] = (s.GetDnsDomains())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["key"] = (s.GetKey())
 				temp["location"] = (s.GetLocation())
 				temp["management_address"] = (s.GetManagementAddress())
 
@@ -1494,6 +1820,8 @@ func dataSourceStorageNetAppClusterRead(c context.Context, d *schema.ResourceDat
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
+				temp["name_servers"] = (s.GetNameServers())
+				temp["ntp_servers"] = (s.GetNtpServers())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

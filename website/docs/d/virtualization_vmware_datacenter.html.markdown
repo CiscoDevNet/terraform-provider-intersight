@@ -28,4 +28,5 @@ The following arguments can be used to get data of already created objects in In
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `uuid`:(string) The uuid of this placement. The uuid is internally generated and not user specified. 
 * `vm_count`:(int) Count of all virtual machines (VMs) associated with this DC. 
+* `vm_template_count`:(int) Count of all virtual machines templates associated with this DC. 
  

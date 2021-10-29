@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -45,6 +45,8 @@ type VirtualizationVmwareVirtualMachineAllOf struct {
 	Folder *string `json:"Folder,omitempty"`
 	// The state of the guest OS running on this VM. Could be running, not running etc. * `Unknown` - Indicates that the guest OS state cannot be determined. * `NotRunning` - Indicates that the guest OS is not running. * `Resetting` - Indicates that the guest OS is resetting. * `Running` - Indicates that the guest OS is running normally. * `ShuttingDown` - Indicates that the guest OS is shutting down. * `Standby` - Indicates that the guest OS is in standby mode.
 	GuestState *string `json:"GuestState,omitempty"`
+	// Minimum host ESXi version required for the virtual machine.
+	HostCompatibility *string `json:"HostCompatibility,omitempty"`
 	// UUID assigned by vCenter to every VM.
 	InstanceUuid *string `json:"InstanceUuid,omitempty"`
 	// Inventory path to the VM. Example - /DC/vm/folder/VMName.
@@ -690,6 +692,38 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) HasGuestState() bool {
 // SetGuestState gets a reference to the given string and assigns it to the GuestState field.
 func (o *VirtualizationVmwareVirtualMachineAllOf) SetGuestState(v string) {
 	o.GuestState = &v
+}
+
+// GetHostCompatibility returns the HostCompatibility field value if set, zero value otherwise.
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetHostCompatibility() string {
+	if o == nil || o.HostCompatibility == nil {
+		var ret string
+		return ret
+	}
+	return *o.HostCompatibility
+}
+
+// GetHostCompatibilityOk returns a tuple with the HostCompatibility field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetHostCompatibilityOk() (*string, bool) {
+	if o == nil || o.HostCompatibility == nil {
+		return nil, false
+	}
+	return o.HostCompatibility, true
+}
+
+// HasHostCompatibility returns a boolean if a field has been set.
+func (o *VirtualizationVmwareVirtualMachineAllOf) HasHostCompatibility() bool {
+	if o != nil && o.HostCompatibility != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHostCompatibility gets a reference to the given string and assigns it to the HostCompatibility field.
+func (o *VirtualizationVmwareVirtualMachineAllOf) SetHostCompatibility(v string) {
+	o.HostCompatibility = &v
 }
 
 // GetInstanceUuid returns the InstanceUuid field value if set, zero value otherwise.
@@ -1733,6 +1767,9 @@ func (o VirtualizationVmwareVirtualMachineAllOf) MarshalJSON() ([]byte, error) {
 	if o.GuestState != nil {
 		toSerialize["GuestState"] = o.GuestState
 	}
+	if o.HostCompatibility != nil {
+		toSerialize["HostCompatibility"] = o.HostCompatibility
+	}
 	if o.InstanceUuid != nil {
 		toSerialize["InstanceUuid"] = o.InstanceUuid
 	}
@@ -1858,6 +1895,7 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) UnmarshalJSON(bytes []byte) (e
 		delete(additionalProperties, "ExtraConfig")
 		delete(additionalProperties, "Folder")
 		delete(additionalProperties, "GuestState")
+		delete(additionalProperties, "HostCompatibility")
 		delete(additionalProperties, "InstanceUuid")
 		delete(additionalProperties, "InventoryPath")
 		delete(additionalProperties, "IsTemplate")

@@ -1215,7 +1215,7 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1285,7 +1285,7 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	if v, ok := d.GetOk("last_backup"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastBackup(x)
 	}
 
@@ -1333,7 +1333,7 @@ func dataSourceIaasUcsdInfoRead(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

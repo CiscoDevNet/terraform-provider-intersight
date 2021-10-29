@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.UplinkPcRole"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.UplinkPcRole"]
 **AdminSpeed** | Pointer to **string** | Admin configured speed for the port. * &#x60;Auto&#x60; - Admin configurable speed AUTO ( default ). * &#x60;1Gbps&#x60; - Admin configurable speed 1Gbps. * &#x60;10Gbps&#x60; - Admin configurable speed 10Gbps. * &#x60;25Gbps&#x60; - Admin configurable speed 25Gbps. * &#x60;40Gbps&#x60; - Admin configurable speed 40Gbps. * &#x60;100Gbps&#x60; - Admin configurable speed 100Gbps. | [optional] [default to "Auto"]
+**EthNetworkGroupPolicy** | Pointer to [**[]FabricEthNetworkGroupPolicyRelationship**](FabricEthNetworkGroupPolicyRelationship.md) | An array of relationships to fabricEthNetworkGroupPolicy resources. | [optional] 
 **FlowControlPolicy** | Pointer to [**FabricFlowControlPolicyRelationship**](FabricFlowControlPolicyRelationship.md) |  | [optional] 
 **LinkAggregationPolicy** | Pointer to [**FabricLinkAggregationPolicyRelationship**](FabricLinkAggregationPolicyRelationship.md) |  | [optional] 
 **LinkControlPolicy** | Pointer to [**FabricLinkControlPolicyRelationship**](FabricLinkControlPolicyRelationship.md) |  | [optional] 
@@ -95,6 +96,41 @@ SetAdminSpeed sets AdminSpeed field to given value.
 
 HasAdminSpeed returns a boolean if a field has been set.
 
+### GetEthNetworkGroupPolicy
+
+`func (o *FabricUplinkPcRole) GetEthNetworkGroupPolicy() []FabricEthNetworkGroupPolicyRelationship`
+
+GetEthNetworkGroupPolicy returns the EthNetworkGroupPolicy field if non-nil, zero value otherwise.
+
+### GetEthNetworkGroupPolicyOk
+
+`func (o *FabricUplinkPcRole) GetEthNetworkGroupPolicyOk() (*[]FabricEthNetworkGroupPolicyRelationship, bool)`
+
+GetEthNetworkGroupPolicyOk returns a tuple with the EthNetworkGroupPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEthNetworkGroupPolicy
+
+`func (o *FabricUplinkPcRole) SetEthNetworkGroupPolicy(v []FabricEthNetworkGroupPolicyRelationship)`
+
+SetEthNetworkGroupPolicy sets EthNetworkGroupPolicy field to given value.
+
+### HasEthNetworkGroupPolicy
+
+`func (o *FabricUplinkPcRole) HasEthNetworkGroupPolicy() bool`
+
+HasEthNetworkGroupPolicy returns a boolean if a field has been set.
+
+### SetEthNetworkGroupPolicyNil
+
+`func (o *FabricUplinkPcRole) SetEthNetworkGroupPolicyNil(b bool)`
+
+ SetEthNetworkGroupPolicyNil sets the value for EthNetworkGroupPolicy to be an explicit nil
+
+### UnsetEthNetworkGroupPolicy
+`func (o *FabricUplinkPcRole) UnsetEthNetworkGroupPolicy()`
+
+UnsetEthNetworkGroupPolicy ensures that no value is present for EthNetworkGroupPolicy, not even an explicit nil
 ### GetFlowControlPolicy
 
 `func (o *FabricUplinkPcRole) GetFlowControlPolicy() FabricFlowControlPolicyRelationship`

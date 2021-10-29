@@ -120,7 +120,7 @@ func dataSourceStorageNetAppLicense() *schema.Resource {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Name of license.",
+			Description: "The name of the licensed package.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -445,7 +445,7 @@ func dataSourceStorageNetAppLicense() *schema.Resource {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Name of license.",
+			Description: "The name of the licensed package.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -784,7 +784,7 @@ func dataSourceStorageNetAppLicenseRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -794,7 +794,7 @@ func dataSourceStorageNetAppLicenseRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

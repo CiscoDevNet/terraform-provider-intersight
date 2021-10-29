@@ -457,7 +457,7 @@ func dataSourceStorageHitachiDisk() *schema.Resource {
 			Optional:    true,
 		},
 		"type_detail": {
-			Description: "Drive type of the Hitachi Disk.\n* `N/A` - Drive Type is not available.\n* `SAS` - SAS.\n* `SSD(MLC)` - SSD (MLC).\n* `SSD(FMC)` - SSD (FMC).\n* `SSD(FMD)` - SSD (FMD).\n* `SSD(SLC)` - SSD (SLC).\n* `SSD` - SSD.\n* `SSD(RI)` - SSD (RI).",
+			Description: "Drive type of the Hitachi Disk.\n* `N/A` - Drive Type is not available.\n* `SAS` - SAS stands for Serial Attached SCSI.\n* `SSD(MLC)` - SSD(MLC) stands for Multiple Level Cell.\n* `SSD(FMC)` - SSD(FMC) stands for Flash Memory Compressed.\n* `SSD(FMD)` - SSD(FMD) stands for Flash Module Drive.\n* `SSD(SLC)` - SSD(SLC) stands for Single Level Cell.\n* `SSD` - SSD stands for Solid-State Drive.\n* `SSD(RI)` - SSD(RI) stands for Read Intensive.\n* `SCM` - SCM stands for Storage Class Memory.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1027,7 +1027,7 @@ func dataSourceStorageHitachiDisk() *schema.Resource {
 			Optional:    true,
 		},
 		"type_detail": {
-			Description: "Drive type of the Hitachi Disk.\n* `N/A` - Drive Type is not available.\n* `SAS` - SAS.\n* `SSD(MLC)` - SSD (MLC).\n* `SSD(FMC)` - SSD (FMC).\n* `SSD(FMD)` - SSD (FMD).\n* `SSD(SLC)` - SSD (SLC).\n* `SSD` - SSD.\n* `SSD(RI)` - SSD (RI).",
+			Description: "Drive type of the Hitachi Disk.\n* `N/A` - Drive Type is not available.\n* `SAS` - SAS stands for Serial Attached SCSI.\n* `SSD(MLC)` - SSD(MLC) stands for Multiple Level Cell.\n* `SSD(FMC)` - SSD(FMC) stands for Flash Memory Compressed.\n* `SSD(FMD)` - SSD(FMD) stands for Flash Module Drive.\n* `SSD(SLC)` - SSD(SLC) stands for Single Level Cell.\n* `SSD` - SSD stands for Solid-State Drive.\n* `SSD(RI)` - SSD(RI) stands for Read Intensive.\n* `SCM` - SCM stands for Storage Class Memory.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1274,7 +1274,7 @@ func dataSourceStorageHitachiDiskRead(c context.Context, d *schema.ResourceData,
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1299,7 +1299,7 @@ func dataSourceStorageHitachiDiskRead(c context.Context, d *schema.ResourceData,
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

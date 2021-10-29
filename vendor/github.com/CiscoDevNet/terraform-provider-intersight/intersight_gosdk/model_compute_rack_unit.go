@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -64,8 +64,10 @@ type ComputeRackUnit struct {
 	// An array of relationships to storageController resources.
 	StorageControllers []StorageControllerRelationship `json:"StorageControllers,omitempty"`
 	// An array of relationships to storageEnclosure resources.
-	StorageEnclosures    []StorageEnclosureRelationship `json:"StorageEnclosures,omitempty"`
-	TopSystem            *TopSystemRelationship         `json:"TopSystem,omitempty"`
+	StorageEnclosures []StorageEnclosureRelationship `json:"StorageEnclosures,omitempty"`
+	TopSystem         *TopSystemRelationship         `json:"TopSystem,omitempty"`
+	// An array of relationships to rackUnitPersonality resources.
+	UnitPersonality      []RackUnitPersonalityRelationship `json:"UnitPersonality,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -991,6 +993,39 @@ func (o *ComputeRackUnit) SetTopSystem(v TopSystemRelationship) {
 	o.TopSystem = &v
 }
 
+// GetUnitPersonality returns the UnitPersonality field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComputeRackUnit) GetUnitPersonality() []RackUnitPersonalityRelationship {
+	if o == nil {
+		var ret []RackUnitPersonalityRelationship
+		return ret
+	}
+	return o.UnitPersonality
+}
+
+// GetUnitPersonalityOk returns a tuple with the UnitPersonality field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputeRackUnit) GetUnitPersonalityOk() (*[]RackUnitPersonalityRelationship, bool) {
+	if o == nil || o.UnitPersonality == nil {
+		return nil, false
+	}
+	return &o.UnitPersonality, true
+}
+
+// HasUnitPersonality returns a boolean if a field has been set.
+func (o *ComputeRackUnit) HasUnitPersonality() bool {
+	if o != nil && o.UnitPersonality != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUnitPersonality gets a reference to the given []RackUnitPersonalityRelationship and assigns it to the UnitPersonality field.
+func (o *ComputeRackUnit) SetUnitPersonality(v []RackUnitPersonalityRelationship) {
+	o.UnitPersonality = v
+}
+
 func (o ComputeRackUnit) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedComputePhysical, errComputePhysical := json.Marshal(o.ComputePhysical)
@@ -1085,6 +1120,9 @@ func (o ComputeRackUnit) MarshalJSON() ([]byte, error) {
 	if o.TopSystem != nil {
 		toSerialize["TopSystem"] = o.TopSystem
 	}
+	if o.UnitPersonality != nil {
+		toSerialize["UnitPersonality"] = o.UnitPersonality
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1141,6 +1179,8 @@ func (o *ComputeRackUnit) UnmarshalJSON(bytes []byte) (err error) {
 		// An array of relationships to storageEnclosure resources.
 		StorageEnclosures []StorageEnclosureRelationship `json:"StorageEnclosures,omitempty"`
 		TopSystem         *TopSystemRelationship         `json:"TopSystem,omitempty"`
+		// An array of relationships to rackUnitPersonality resources.
+		UnitPersonality []RackUnitPersonalityRelationship `json:"UnitPersonality,omitempty"`
 	}
 
 	varComputeRackUnitWithoutEmbeddedStruct := ComputeRackUnitWithoutEmbeddedStruct{}
@@ -1176,6 +1216,7 @@ func (o *ComputeRackUnit) UnmarshalJSON(bytes []byte) (err error) {
 		varComputeRackUnit.StorageControllers = varComputeRackUnitWithoutEmbeddedStruct.StorageControllers
 		varComputeRackUnit.StorageEnclosures = varComputeRackUnitWithoutEmbeddedStruct.StorageEnclosures
 		varComputeRackUnit.TopSystem = varComputeRackUnitWithoutEmbeddedStruct.TopSystem
+		varComputeRackUnit.UnitPersonality = varComputeRackUnitWithoutEmbeddedStruct.UnitPersonality
 		*o = ComputeRackUnit(varComputeRackUnit)
 	} else {
 		return err
@@ -1221,6 +1262,7 @@ func (o *ComputeRackUnit) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "StorageControllers")
 		delete(additionalProperties, "StorageEnclosures")
 		delete(additionalProperties, "TopSystem")
+		delete(additionalProperties, "UnitPersonality")
 
 		// remove fields from embedded structs
 		reflectComputePhysical := reflect.ValueOf(o.ComputePhysical)

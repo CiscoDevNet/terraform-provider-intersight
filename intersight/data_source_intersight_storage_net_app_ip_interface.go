@@ -125,12 +125,12 @@ func dataSourceStorageNetAppIpInterface() *schema.Resource {
 			Optional:    true,
 		},
 		"ip_address": {
-			Description: "IP address of inteface.",
+			Description: "The IP address of interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"ip_family": {
-			Description: "IP address family of inteface.\n* `IPv4` - IPv4 Address type.\n* `IPv6` - IPv6 Address type.",
+			Description: "IP address family of interface.\n* `IPv4` - IP address family type is IPv4.\n* `IPv6` - IP address family type is IP6.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -145,7 +145,7 @@ func dataSourceStorageNetAppIpInterface() *schema.Resource {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Name of IP interface.",
+			Description: "The name of the IP interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -185,7 +185,7 @@ func dataSourceStorageNetAppIpInterface() *schema.Resource {
 			},
 		},
 		"netmask": {
-			Description: "Netmask of Interface.",
+			Description: "The netmask of the interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -269,12 +269,12 @@ func dataSourceStorageNetAppIpInterface() *schema.Resource {
 			},
 		},
 		"service_policy_name": {
-			Description: "Services of IP interface.",
+			Description: "Service policy name of IP interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"service_policy_uuid": {
-			Description: "Services of IP interface.",
+			Description: "Service policy UUID of IP interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -289,7 +289,7 @@ func dataSourceStorageNetAppIpInterface() *schema.Resource {
 			Optional:    true,
 		},
 		"state": {
-			Description: "State of IP interface.\n* `down` - An inactive port is listed as Down.\n* `up` - An active port is listed as Up.\n* `present` - An active port is listed as present.",
+			Description: "The state of the IP interface.\n* `down` - An inactive port is listed as Down.\n* `up` - An active port is listed as Up.\n* `present` - An active port is listed as present.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -575,12 +575,12 @@ func dataSourceStorageNetAppIpInterface() *schema.Resource {
 			Optional:    true,
 		},
 		"ip_address": {
-			Description: "IP address of inteface.",
+			Description: "The IP address of interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"ip_family": {
-			Description: "IP address family of inteface.\n* `IPv4` - IPv4 Address type.\n* `IPv6` - IPv6 Address type.",
+			Description: "IP address family of interface.\n* `IPv4` - IP address family type is IPv4.\n* `IPv6` - IP address family type is IP6.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -595,7 +595,7 @@ func dataSourceStorageNetAppIpInterface() *schema.Resource {
 			Optional:    true,
 		},
 		"name": {
-			Description: "Name of IP interface.",
+			Description: "The name of the IP interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -635,7 +635,7 @@ func dataSourceStorageNetAppIpInterface() *schema.Resource {
 			},
 		},
 		"netmask": {
-			Description: "Netmask of Interface.",
+			Description: "The netmask of the interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -719,12 +719,12 @@ func dataSourceStorageNetAppIpInterface() *schema.Resource {
 			},
 		},
 		"service_policy_name": {
-			Description: "Services of IP interface.",
+			Description: "Service policy name of IP interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"service_policy_uuid": {
-			Description: "Services of IP interface.",
+			Description: "Service policy UUID of IP interface.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -739,7 +739,7 @@ func dataSourceStorageNetAppIpInterface() *schema.Resource {
 			Optional:    true,
 		},
 		"state": {
-			Description: "State of IP interface.\n* `down` - An inactive port is listed as Down.\n* `up` - An active port is listed as Up.\n* `present` - An active port is listed as present.",
+			Description: "The state of the IP interface.\n* `down` - An inactive port is listed as Down.\n* `up` - An active port is listed as Up.\n* `present` - An active port is listed as present.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1034,7 +1034,7 @@ func dataSourceStorageNetAppIpInterfaceRead(c context.Context, d *schema.Resourc
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1069,7 +1069,7 @@ func dataSourceStorageNetAppIpInterfaceRead(c context.Context, d *schema.Resourc
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

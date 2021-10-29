@@ -94,6 +94,51 @@ func dataSourceStorageNetAppNode() *schema.Resource {
 				},
 			},
 		},
+		"avg_performance_metrics": {
+			Description: "Average performance metrics for over a period of time.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops": {
+						Description: "Rate of I/O operations observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"latency": {
+						Description: "Latency observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"period": {
+						Description: "Duration of periodic aggregation, in hours.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput": {
+						Description: "Throughput observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -120,8 +165,63 @@ func dataSourceStorageNetAppNode() *schema.Resource {
 			Optional:    true,
 		},
 		"health": {
-			Description: "Health of NetApp Node. The node is marked healthy when this is set.",
+			Description: "The health of the NetApp Node.",
 			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"high_availability": {
+			Description: "Storage failover and giveback information.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"enabled": {
+						Description: "Specifies whether or not storage failover is enabled.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"giveback_state": {
+						Description: "The state of the node that is giving storage back to its HA partner.\n* `unknown` - Default unknown giveback state.\n* `nothing_to_giveback` - The node has nothing to give back to its HA partner.\n* `not_attempted` - The node has not attempted to give back storage to its HA partner.\n* `in_progress` - The node is in progress of giving back storage to its HA partner.\n* `failed` - The node has failed to give back storage to its HA partner.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"partner_name": {
+						Description: "The partner node name in this node's High Availability (HA) group.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"partner_uuid": {
+						Description: "The partner node uuid in this node's High Availability (HA) group.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"takeover_state": {
+						Description: "The state of the node that is taking over storage from its HA partner.\n* `unknown` - Default unknown takeover state.\n* `not_possible` - It is not possible for the node to take over storage from its HA partner.\n* `not_attempted` - The node has not attempted to take over storage from its HA partner.\n* `in_takeover` - The node has taken over storage from its HA partner.\n* `in_progress` - The node is in progress of taking over storage from its HA partner.\n* `failed` - The node has failed to take over storage from its HA partner.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"key": {
+			Description: "Unique identifier of NetApp Node across data center.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -294,7 +394,7 @@ func dataSourceStorageNetAppNode() *schema.Resource {
 			Optional:    true,
 		},
 		"systemid": {
-			Description: "System id of NetApp Node.",
+			Description: "The system id of the NetApp Node.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -322,7 +422,7 @@ func dataSourceStorageNetAppNode() *schema.Resource {
 			},
 		},
 		"uuid": {
-			Description: "UUID of NetApp Node.",
+			Description: "Universally unique identifier of NetApp Node.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -524,6 +624,51 @@ func dataSourceStorageNetAppNode() *schema.Resource {
 				},
 			},
 		},
+		"avg_performance_metrics": {
+			Description: "Average performance metrics for over a period of time.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops": {
+						Description: "Rate of I/O operations observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"latency": {
+						Description: "Latency observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"period": {
+						Description: "Duration of periodic aggregation, in hours.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput": {
+						Description: "Throughput observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -550,8 +695,63 @@ func dataSourceStorageNetAppNode() *schema.Resource {
 			Optional:    true,
 		},
 		"health": {
-			Description: "Health of NetApp Node. The node is marked healthy when this is set.",
+			Description: "The health of the NetApp Node.",
 			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"high_availability": {
+			Description: "Storage failover and giveback information.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"enabled": {
+						Description: "Specifies whether or not storage failover is enabled.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"giveback_state": {
+						Description: "The state of the node that is giving storage back to its HA partner.\n* `unknown` - Default unknown giveback state.\n* `nothing_to_giveback` - The node has nothing to give back to its HA partner.\n* `not_attempted` - The node has not attempted to give back storage to its HA partner.\n* `in_progress` - The node is in progress of giving back storage to its HA partner.\n* `failed` - The node has failed to give back storage to its HA partner.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"partner_name": {
+						Description: "The partner node name in this node's High Availability (HA) group.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"partner_uuid": {
+						Description: "The partner node uuid in this node's High Availability (HA) group.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"takeover_state": {
+						Description: "The state of the node that is taking over storage from its HA partner.\n* `unknown` - Default unknown takeover state.\n* `not_possible` - It is not possible for the node to take over storage from its HA partner.\n* `not_attempted` - The node has not attempted to take over storage from its HA partner.\n* `in_takeover` - The node has taken over storage from its HA partner.\n* `in_progress` - The node is in progress of taking over storage from its HA partner.\n* `failed` - The node has failed to take over storage from its HA partner.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"key": {
+			Description: "Unique identifier of NetApp Node across data center.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -724,7 +924,7 @@ func dataSourceStorageNetAppNode() *schema.Resource {
 			Optional:    true,
 		},
 		"systemid": {
-			Description: "System id of NetApp Node.",
+			Description: "The system id of the NetApp Node.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -752,7 +952,7 @@ func dataSourceStorageNetAppNode() *schema.Resource {
 			},
 		},
 		"uuid": {
-			Description: "UUID of NetApp Node.",
+			Description: "Universally unique identifier of NetApp Node.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -988,13 +1188,44 @@ func dataSourceStorageNetAppNodeRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOk("avg_performance_metrics"); ok {
+		p := make([]models.StorageNetAppPerformanceMetricsAverage, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageNetAppPerformanceMetricsAverage{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.NetAppPerformanceMetricsAverage")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAvgPerformanceMetrics(x)
+		}
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1018,8 +1249,44 @@ func dataSourceStorageNetAppNodeRead(c context.Context, d *schema.ResourceData, 
 		o.SetHealth(x)
 	}
 
+	if v, ok := d.GetOk("high_availability"); ok {
+		p := make([]models.StorageNetAppHighAvailability, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageNetAppHighAvailability{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.NetAppHighAvailability")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetHighAvailability(x)
+		}
+	}
+
+	if v, ok := d.GetOk("key"); ok {
+		x := (v.(string))
+		o.SetKey(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1382,6 +1649,8 @@ func dataSourceStorageNetAppNodeRead(c context.Context, d *schema.ResourceData, 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["array"] = flattenMapStorageNetAppClusterRelationship(s.GetArray(), d)
+
+				temp["avg_performance_metrics"] = flattenMapStorageNetAppPerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -1389,6 +1658,9 @@ func dataSourceStorageNetAppNodeRead(c context.Context, d *schema.ResourceData, 
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["health"] = (s.GetHealth())
+
+				temp["high_availability"] = flattenMapStorageNetAppHighAvailability(s.GetHighAvailability(), d)
+				temp["key"] = (s.GetKey())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())

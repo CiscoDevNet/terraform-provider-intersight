@@ -1741,6 +1741,40 @@ func dataSourceComputeRackUnit() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"unit_personality": {
+			Description: "An array of relationships to rackUnitPersonality resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"user_label": {
 			Description: "The user defined label assigned to the server.",
 			Type:        schema.TypeString,
@@ -3626,6 +3660,40 @@ func dataSourceComputeRackUnit() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"unit_personality": {
+			Description: "An array of relationships to rackUnitPersonality resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"user_label": {
 			Description: "The user defined label assigned to the server.",
 			Type:        schema.TypeString,
@@ -4750,7 +4818,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -5112,7 +5180,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -5777,6 +5845,46 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		o.SetTotalMemory(x)
 	}
 
+	if v, ok := d.GetOk("unit_personality"); ok {
+		x := make([]models.RackUnitPersonalityRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsRackUnitPersonalityRelationship(o))
+		}
+		o.SetUnitPersonality(x)
+	}
+
 	if v, ok := d.GetOk("user_label"); ok {
 		x := (v.(string))
 		o.SetUserLabel(x)
@@ -6076,6 +6184,8 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				temp["top_system"] = flattenMapTopSystemRelationship(s.GetTopSystem(), d)
 				temp["topology_scan_status"] = (s.GetTopologyScanStatus())
 				temp["total_memory"] = (s.GetTotalMemory())
+
+				temp["unit_personality"] = flattenListRackUnitPersonalityRelationship(s.GetUnitPersonality(), d)
 				temp["user_label"] = (s.GetUserLabel())
 				temp["uuid"] = (s.GetUuid())
 				temp["vendor"] = (s.GetVendor())

@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.StatefulSetStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.StatefulSetStatus"]
-**AvailableReplicas** | Pointer to **int64** | AvailableReplicas indicates the current avaliable replicas running. | [optional] 
-**CollisionCount** | Pointer to **int64** | CollisionCount is the count of hash collisions for the StatefulSet. The StatefulSet controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ControllerRevision. | [optional] 
+**AvailableReplicas** | Pointer to **int64** | AvailableReplicas indicates the current avaliable replicas running. | [optional] [default to 0]
+**CollisionCount** | Pointer to **int64** | CollisionCount is the count of hash collisions for the StatefulSet. The StatefulSet controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ControllerRevision. | [optional] [default to 0]
 **CurrentRevision** | Pointer to **string** | CurrentRevision, if not empty, indicates the version of the StatefulSet used to generate Pods. | [optional] 
-**ObservedGeneration** | Pointer to **int64** | ObservedGeneration is the most recent generation observed for this StatefulSet. It corresponds to the StatefulSet&#39;s generation, which is updated on mutation by the API Server. | [optional] 
-**ReadyReplicas** | Pointer to **int64** | ReadyReplicas is the number of Pods created by the StatefulSet controller that have a Ready Condition. | [optional] 
-**Replicas** | Pointer to **int64** | Number of replicas the statefulset desired to have. | [optional] 
+**ObservedGeneration** | Pointer to **int64** | ObservedGeneration is the most recent generation observed for this StatefulSet. It corresponds to the StatefulSet&#39;s generation, which is updated on mutation by the API Server. | [optional] [default to 0]
+**ReadyReplicas** | Pointer to **int64** | ReadyReplicas is the number of Pods created by the StatefulSet controller that have a Ready Condition. | [optional] [default to 0]
+**Replicas** | Pointer to **int64** | Number of replicas the statefulset desired to have. | [optional] [default to 0]
 **UpdateRevision** | Pointer to **string** | UpdateRevision, if not empty, indicates the version of the StatefulSet used to generate the pods that have yet to be updated, i.e. pod number &lt;replicas&gt; - &lt;updatedReplicas&gt;, until pod number &lt;replicas&gt;. | [optional] 
-**UpdatedReplicas** | Pointer to **int64** | UpdatedReplicas is the number of Pods created by the StatefulSet controller from the StatefulSet version indicated by updateRevision. | [optional] 
+**UpdatedReplicas** | Pointer to **int64** | UpdatedReplicas is the number of Pods created by the StatefulSet controller from the StatefulSet version indicated by updateRevision. | [optional] [default to 0]
 
 ## Methods
 

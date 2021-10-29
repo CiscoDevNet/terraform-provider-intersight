@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **NumStripesForLargeFiles** | Pointer to **int64** | Number of stripes to be used for large files in datastore. | [optional] [readonly] 
 **ProvisionedCapacity** | Pointer to **int64** | Provisioned capacity of datastore in bytes. | [optional] [readonly] 
 **SystemDatastore** | Pointer to **bool** | Specifies if this datastore is a system datastore or not. | [optional] [readonly] 
+**UsageType** | Pointer to **string** | HyperFlex datastore usage type. * &#x60;NFS&#x60; - The HyperFlex datastore type is NFS. * &#x60;SMB&#x60; - The HyperFlex datastore type is SMB. * &#x60;ISCSI&#x60; - The HyperFlex datastore type is ISCSI. * &#x60;UNKNOWN&#x60; - The HyperFlex datastore type is unknown. | [optional] [readonly] [default to "NFS"]
 
 ## Methods
 
@@ -221,6 +222,31 @@ SetSystemDatastore sets SystemDatastore field to given value.
 `func (o *HyperflexHxPlatformDatastoreConfigDt) HasSystemDatastore() bool`
 
 HasSystemDatastore returns a boolean if a field has been set.
+
+### GetUsageType
+
+`func (o *HyperflexHxPlatformDatastoreConfigDt) GetUsageType() string`
+
+GetUsageType returns the UsageType field if non-nil, zero value otherwise.
+
+### GetUsageTypeOk
+
+`func (o *HyperflexHxPlatformDatastoreConfigDt) GetUsageTypeOk() (*string, bool)`
+
+GetUsageTypeOk returns a tuple with the UsageType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsageType
+
+`func (o *HyperflexHxPlatformDatastoreConfigDt) SetUsageType(v string)`
+
+SetUsageType sets UsageType field to given value.
+
+### HasUsageType
+
+`func (o *HyperflexHxPlatformDatastoreConfigDt) HasUsageType() bool`
+
+HasUsageType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

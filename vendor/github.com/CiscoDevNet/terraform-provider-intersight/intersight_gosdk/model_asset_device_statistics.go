@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -24,8 +24,14 @@ type AssetDeviceStatistics struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Deployment type of HyperFlex cluster.
+	ClusterDeploymentType *string `json:"ClusterDeploymentType,omitempty"`
+	// Reference to HyperFlex cluster target device ID.
+	ClusterDeviceMoid *string `json:"ClusterDeviceMoid,omitempty"`
 	// Name of the cluster. It is specified only for HyperFlex based devices.
 	ClusterName *string `json:"ClusterName,omitempty"`
+	// Data replication factor of HyperFlex cluster.
+	ClusterReplicationFactor *int64 `json:"ClusterReplicationFactor,omitempty"`
 	// The status of the persistent connection between the device connector and Intersight, for HyperFlex or UCS device. 1 represents being connected and 0 represents being disconnected.
 	Connected *int64 `json:"Connected,omitempty"`
 	// Defines the average proportion of resources used by the device within the cluster. example in a cluster having 3 nodes, the membershipRatio of each node is 1/3 or 0.33. It is specified only for HyperFlex based devices.
@@ -109,6 +115,70 @@ func (o *AssetDeviceStatistics) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetClusterDeploymentType returns the ClusterDeploymentType field value if set, zero value otherwise.
+func (o *AssetDeviceStatistics) GetClusterDeploymentType() string {
+	if o == nil || o.ClusterDeploymentType == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClusterDeploymentType
+}
+
+// GetClusterDeploymentTypeOk returns a tuple with the ClusterDeploymentType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDeviceStatistics) GetClusterDeploymentTypeOk() (*string, bool) {
+	if o == nil || o.ClusterDeploymentType == nil {
+		return nil, false
+	}
+	return o.ClusterDeploymentType, true
+}
+
+// HasClusterDeploymentType returns a boolean if a field has been set.
+func (o *AssetDeviceStatistics) HasClusterDeploymentType() bool {
+	if o != nil && o.ClusterDeploymentType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterDeploymentType gets a reference to the given string and assigns it to the ClusterDeploymentType field.
+func (o *AssetDeviceStatistics) SetClusterDeploymentType(v string) {
+	o.ClusterDeploymentType = &v
+}
+
+// GetClusterDeviceMoid returns the ClusterDeviceMoid field value if set, zero value otherwise.
+func (o *AssetDeviceStatistics) GetClusterDeviceMoid() string {
+	if o == nil || o.ClusterDeviceMoid == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClusterDeviceMoid
+}
+
+// GetClusterDeviceMoidOk returns a tuple with the ClusterDeviceMoid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDeviceStatistics) GetClusterDeviceMoidOk() (*string, bool) {
+	if o == nil || o.ClusterDeviceMoid == nil {
+		return nil, false
+	}
+	return o.ClusterDeviceMoid, true
+}
+
+// HasClusterDeviceMoid returns a boolean if a field has been set.
+func (o *AssetDeviceStatistics) HasClusterDeviceMoid() bool {
+	if o != nil && o.ClusterDeviceMoid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterDeviceMoid gets a reference to the given string and assigns it to the ClusterDeviceMoid field.
+func (o *AssetDeviceStatistics) SetClusterDeviceMoid(v string) {
+	o.ClusterDeviceMoid = &v
+}
+
 // GetClusterName returns the ClusterName field value if set, zero value otherwise.
 func (o *AssetDeviceStatistics) GetClusterName() string {
 	if o == nil || o.ClusterName == nil {
@@ -139,6 +209,38 @@ func (o *AssetDeviceStatistics) HasClusterName() bool {
 // SetClusterName gets a reference to the given string and assigns it to the ClusterName field.
 func (o *AssetDeviceStatistics) SetClusterName(v string) {
 	o.ClusterName = &v
+}
+
+// GetClusterReplicationFactor returns the ClusterReplicationFactor field value if set, zero value otherwise.
+func (o *AssetDeviceStatistics) GetClusterReplicationFactor() int64 {
+	if o == nil || o.ClusterReplicationFactor == nil {
+		var ret int64
+		return ret
+	}
+	return *o.ClusterReplicationFactor
+}
+
+// GetClusterReplicationFactorOk returns a tuple with the ClusterReplicationFactor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDeviceStatistics) GetClusterReplicationFactorOk() (*int64, bool) {
+	if o == nil || o.ClusterReplicationFactor == nil {
+		return nil, false
+	}
+	return o.ClusterReplicationFactor, true
+}
+
+// HasClusterReplicationFactor returns a boolean if a field has been set.
+func (o *AssetDeviceStatistics) HasClusterReplicationFactor() bool {
+	if o != nil && o.ClusterReplicationFactor != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterReplicationFactor gets a reference to the given int64 and assigns it to the ClusterReplicationFactor field.
+func (o *AssetDeviceStatistics) SetClusterReplicationFactor(v int64) {
+	o.ClusterReplicationFactor = &v
 }
 
 // GetConnected returns the Connected field value if set, zero value otherwise.
@@ -296,8 +398,17 @@ func (o AssetDeviceStatistics) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.ClusterDeploymentType != nil {
+		toSerialize["ClusterDeploymentType"] = o.ClusterDeploymentType
+	}
+	if o.ClusterDeviceMoid != nil {
+		toSerialize["ClusterDeviceMoid"] = o.ClusterDeviceMoid
+	}
 	if o.ClusterName != nil {
 		toSerialize["ClusterName"] = o.ClusterName
+	}
+	if o.ClusterReplicationFactor != nil {
+		toSerialize["ClusterReplicationFactor"] = o.ClusterReplicationFactor
 	}
 	if o.Connected != nil {
 		toSerialize["Connected"] = o.Connected
@@ -325,8 +436,14 @@ func (o *AssetDeviceStatistics) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Deployment type of HyperFlex cluster.
+		ClusterDeploymentType *string `json:"ClusterDeploymentType,omitempty"`
+		// Reference to HyperFlex cluster target device ID.
+		ClusterDeviceMoid *string `json:"ClusterDeviceMoid,omitempty"`
 		// Name of the cluster. It is specified only for HyperFlex based devices.
 		ClusterName *string `json:"ClusterName,omitempty"`
+		// Data replication factor of HyperFlex cluster.
+		ClusterReplicationFactor *int64 `json:"ClusterReplicationFactor,omitempty"`
 		// The status of the persistent connection between the device connector and Intersight, for HyperFlex or UCS device. 1 represents being connected and 0 represents being disconnected.
 		Connected *int64 `json:"Connected,omitempty"`
 		// Defines the average proportion of resources used by the device within the cluster. example in a cluster having 3 nodes, the membershipRatio of each node is 1/3 or 0.33. It is specified only for HyperFlex based devices.
@@ -343,7 +460,10 @@ func (o *AssetDeviceStatistics) UnmarshalJSON(bytes []byte) (err error) {
 		varAssetDeviceStatistics := _AssetDeviceStatistics{}
 		varAssetDeviceStatistics.ClassId = varAssetDeviceStatisticsWithoutEmbeddedStruct.ClassId
 		varAssetDeviceStatistics.ObjectType = varAssetDeviceStatisticsWithoutEmbeddedStruct.ObjectType
+		varAssetDeviceStatistics.ClusterDeploymentType = varAssetDeviceStatisticsWithoutEmbeddedStruct.ClusterDeploymentType
+		varAssetDeviceStatistics.ClusterDeviceMoid = varAssetDeviceStatisticsWithoutEmbeddedStruct.ClusterDeviceMoid
 		varAssetDeviceStatistics.ClusterName = varAssetDeviceStatisticsWithoutEmbeddedStruct.ClusterName
+		varAssetDeviceStatistics.ClusterReplicationFactor = varAssetDeviceStatisticsWithoutEmbeddedStruct.ClusterReplicationFactor
 		varAssetDeviceStatistics.Connected = varAssetDeviceStatisticsWithoutEmbeddedStruct.Connected
 		varAssetDeviceStatistics.MembershipRatio = varAssetDeviceStatisticsWithoutEmbeddedStruct.MembershipRatio
 		varAssetDeviceStatistics.MemoryMirroringFactor = varAssetDeviceStatisticsWithoutEmbeddedStruct.MemoryMirroringFactor
@@ -367,7 +487,10 @@ func (o *AssetDeviceStatistics) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ClusterDeploymentType")
+		delete(additionalProperties, "ClusterDeviceMoid")
 		delete(additionalProperties, "ClusterName")
+		delete(additionalProperties, "ClusterReplicationFactor")
 		delete(additionalProperties, "Connected")
 		delete(additionalProperties, "MembershipRatio")
 		delete(additionalProperties, "MemoryMirroringFactor")

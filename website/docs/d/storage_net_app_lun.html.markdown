@@ -17,6 +17,8 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Short description about the volume. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `key`:(string) Unique identifier of Lun across data center. 
+* `mapped`:(bool) Reports if the LUN is mapped to one or more initiator groups. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `naa_id`:(string) NAA id of volume. It is a significant number to identify corresponding lun path in hypervisor. 
@@ -25,6 +27,6 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) Serial number for the provisioned LUN. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `size`:(int) User provisioned volume size. It is the size exposed to host. 
-* `state`:(string) The administrative state of a LUN.* `offline` - The LUN is administratively offline, or a more detailed offline reason is not available.* `online` - The LUN is online. 
-* `uuid`:(string) UUID of the LUN. 
+* `state`:(string) The administrative state of a LUN.* `offline` - The LUN is administratively offline, or a more detailed offline reason is not available.* `online` - The state of the LUN is online. 
+* `uuid`:(string) Universally unique identifier of the LUN. 
  

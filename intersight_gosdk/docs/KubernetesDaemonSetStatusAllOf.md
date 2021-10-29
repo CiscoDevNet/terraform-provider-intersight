@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.DaemonSetStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.DaemonSetStatus"]
-**CurrentNumberScheduled** | Pointer to **int64** | The number of nodes that are running at least 1 daemon pod and are supposed to run the daemon pod. | [optional] 
-**DesiredNumberScheduled** | Pointer to **int64** | The total number of nodes that should be running the daemon pod (including nodes correctly running the daemon pod). | [optional] 
+**CurrentNumberScheduled** | Pointer to **int64** | The number of nodes that are running at least 1 daemon pod and are supposed to run the daemon pod. | [optional] [default to 0]
+**DesiredNumberScheduled** | Pointer to **int64** | The total number of nodes that should be running the daemon pod (including nodes correctly running the daemon pod). | [optional] [default to 0]
 **NumberAvailable** | Pointer to **string** | The number of nodes that should be running the daemon pod and have one or more of the daemon pod running and available (ready for at least spec.minReadySeconds). | [optional] 
-**NumberMisscheduled** | Pointer to **int64** | The number of nodes that are running the daemon pod, but are not supposed to run the daemon pod. | [optional] 
-**NumberReady** | Pointer to **int64** | The number of nodes that should be running the daemon pod and have one or more of the daemon pod running and ready. | [optional] 
-**ObservedGeneration** | Pointer to **int64** | The most recent generation observed by the daemon set controller. | [optional] 
+**NumberMisscheduled** | Pointer to **int64** | The number of nodes that are running the daemon pod, but are not supposed to run the daemon pod. | [optional] [default to 0]
+**NumberReady** | Pointer to **int64** | The number of nodes that should be running the daemon pod and have one or more of the daemon pod running and ready. | [optional] [default to 0]
+**ObservedGeneration** | Pointer to **int64** | The most recent generation observed by the daemon set controller. | [optional] [default to 0]
 **UpdatedNumberScheduled** | Pointer to **string** | The total number of nodes that are running updated daemon pod. | [optional] 
 
 ## Methods

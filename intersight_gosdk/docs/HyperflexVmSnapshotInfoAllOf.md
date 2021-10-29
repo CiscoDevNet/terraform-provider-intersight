@@ -7,13 +7,18 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.VmSnapshotInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.VmSnapshotInfo"]
 **ClusterIdSnapMap** | Pointer to [**[]HyperflexMapClusterIdToStSnapshotPoint**](HyperflexMapClusterIdToStSnapshotPoint.md) |  | [optional] 
-**ErrorStack** | Pointer to [**NullableHyperflexErrorStack**](HyperflexErrorStack.md) |  | [optional] 
+**DisplayStatus** | Pointer to **string** | Combined status code from replication and snapshot status to display in the Intersight UI. * &#x60;NONE&#x60; - Snapshot replication state is none. * &#x60;SUCCESS&#x60; - Snapshot completed successfully. * &#x60;FAILED&#x60; - Snapshot failed replication status code. * &#x60;PAUSED&#x60; - Snapshot replication paused status code. * &#x60;IN_USE&#x60; - Snapshot replica in use status code. * &#x60;STARTING&#x60; - Snapshot replication starting. * &#x60;REPLICATING&#x60; - Snapshot replication in progress. | [optional] [readonly] [default to "NONE"]
+**Error** | Pointer to [**NullableHyperflexErrorStack**](HyperflexErrorStack.md) |  | [optional] 
 **Label** | Pointer to **string** | The name of the Virtual Machine and the time stamp of the snapshot. | [optional] 
 **Mode** | Pointer to **string** | Quiesce Mode for snapshot taken on Hyperflex cluster. * &#x60;NONE&#x60; - The snapshot quiesce mode is none. * &#x60;CRASH&#x60; - The snapshot quiesce mode is crash. * &#x60;VMTOOLS&#x60; - The snapshot quiesce mode is VMTOOLS. * &#x60;APP_CONSISTENT&#x60; - The snapshot quiesce mode is app consistent. | [optional] [readonly] [default to "NONE"]
 **ParentSnapshot** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
 **ReplicationStatus** | Pointer to **string** | Replication status of the least successful target cluster. * &#x60;NONE&#x60; - Snapshot replication state is none. * &#x60;SUCCESS&#x60; - Snapshot completed successfully. * &#x60;FAILED&#x60; - Snapshot failed replication status code. * &#x60;PAUSED&#x60; - Snapshot replication paused status code. * &#x60;IN_USE&#x60; - Snapshot replica in use status code. * &#x60;STARTING&#x60; - Snapshot replication starting. * &#x60;REPLICATING&#x60; - Snapshot replication in progress. | [optional] [readonly] [default to "NONE"]
-**SnapshotStatus** | Pointer to **string** | Snapshot status of the source cluster. * &#x60;SUCCESS&#x60; - This snapshot status code is success. * &#x60;FAILED&#x60; - This snapshot status code is failed. * &#x60;IN_PROGRESS&#x60; - This snapshot status code is in progress. * &#x60;DELETING&#x60; - This snapshot status code is deleting. * &#x60;DELETED&#x60; - This snapshot status code is deleted. * &#x60;NONE&#x60; - This snapshot status code is none. | [optional] [readonly] [default to "SUCCESS"]
+**SnapshotErrorMsg** | Pointer to **string** | Error message from snapshot creation or replcation if any exist. | [optional] [readonly] 
+**SnapshotStatus** | Pointer to **string** | Snapshot status of the source cluster. * &#x60;SUCCESS&#x60; - This snapshot status code is success. * &#x60;FAILED&#x60; - This snapshot status code is failed. * &#x60;IN_PROGRESS&#x60; - This snapshot status code is in progress. * &#x60;DELETING&#x60; - This snapshot status code is deleting. * &#x60;DELETED&#x60; - This snapshot status code is deleted. * &#x60;NONE&#x60; - This snapshot status code is none. * &#x60;INIT&#x60; - This snapshot status code is initializing. | [optional] [readonly] [default to "SUCCESS"]
 **SourceTimestamp** | Pointer to **int64** | Timestamp the snapshot was created on the source cluster. | [optional] [readonly] 
+**SrcClusterName** | Pointer to **string** | Name of the cluster this snapshot resides on. | [optional] [readonly] 
+**TargetCompletionTimestamp** | Pointer to **int64** | Timestamp the snapshot was finished replicating on the target cluster. | [optional] [readonly] 
+**TgtClusterName** | Pointer to **string** | Name of the cluster this snapshot is replicated to. | [optional] [readonly] 
 **VmEntityReference** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
 **VmSnapshotEntityReference** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
 **SrcCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
@@ -114,41 +119,66 @@ HasClusterIdSnapMap returns a boolean if a field has been set.
 `func (o *HyperflexVmSnapshotInfoAllOf) UnsetClusterIdSnapMap()`
 
 UnsetClusterIdSnapMap ensures that no value is present for ClusterIdSnapMap, not even an explicit nil
-### GetErrorStack
+### GetDisplayStatus
 
-`func (o *HyperflexVmSnapshotInfoAllOf) GetErrorStack() HyperflexErrorStack`
+`func (o *HyperflexVmSnapshotInfoAllOf) GetDisplayStatus() string`
 
-GetErrorStack returns the ErrorStack field if non-nil, zero value otherwise.
+GetDisplayStatus returns the DisplayStatus field if non-nil, zero value otherwise.
 
-### GetErrorStackOk
+### GetDisplayStatusOk
 
-`func (o *HyperflexVmSnapshotInfoAllOf) GetErrorStackOk() (*HyperflexErrorStack, bool)`
+`func (o *HyperflexVmSnapshotInfoAllOf) GetDisplayStatusOk() (*string, bool)`
 
-GetErrorStackOk returns a tuple with the ErrorStack field if it's non-nil, zero value otherwise
+GetDisplayStatusOk returns a tuple with the DisplayStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetErrorStack
+### SetDisplayStatus
 
-`func (o *HyperflexVmSnapshotInfoAllOf) SetErrorStack(v HyperflexErrorStack)`
+`func (o *HyperflexVmSnapshotInfoAllOf) SetDisplayStatus(v string)`
 
-SetErrorStack sets ErrorStack field to given value.
+SetDisplayStatus sets DisplayStatus field to given value.
 
-### HasErrorStack
+### HasDisplayStatus
 
-`func (o *HyperflexVmSnapshotInfoAllOf) HasErrorStack() bool`
+`func (o *HyperflexVmSnapshotInfoAllOf) HasDisplayStatus() bool`
 
-HasErrorStack returns a boolean if a field has been set.
+HasDisplayStatus returns a boolean if a field has been set.
 
-### SetErrorStackNil
+### GetError
 
-`func (o *HyperflexVmSnapshotInfoAllOf) SetErrorStackNil(b bool)`
+`func (o *HyperflexVmSnapshotInfoAllOf) GetError() HyperflexErrorStack`
 
- SetErrorStackNil sets the value for ErrorStack to be an explicit nil
+GetError returns the Error field if non-nil, zero value otherwise.
 
-### UnsetErrorStack
-`func (o *HyperflexVmSnapshotInfoAllOf) UnsetErrorStack()`
+### GetErrorOk
 
-UnsetErrorStack ensures that no value is present for ErrorStack, not even an explicit nil
+`func (o *HyperflexVmSnapshotInfoAllOf) GetErrorOk() (*HyperflexErrorStack, bool)`
+
+GetErrorOk returns a tuple with the Error field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetError
+
+`func (o *HyperflexVmSnapshotInfoAllOf) SetError(v HyperflexErrorStack)`
+
+SetError sets Error field to given value.
+
+### HasError
+
+`func (o *HyperflexVmSnapshotInfoAllOf) HasError() bool`
+
+HasError returns a boolean if a field has been set.
+
+### SetErrorNil
+
+`func (o *HyperflexVmSnapshotInfoAllOf) SetErrorNil(b bool)`
+
+ SetErrorNil sets the value for Error to be an explicit nil
+
+### UnsetError
+`func (o *HyperflexVmSnapshotInfoAllOf) UnsetError()`
+
+UnsetError ensures that no value is present for Error, not even an explicit nil
 ### GetLabel
 
 `func (o *HyperflexVmSnapshotInfoAllOf) GetLabel() string`
@@ -259,6 +289,31 @@ SetReplicationStatus sets ReplicationStatus field to given value.
 
 HasReplicationStatus returns a boolean if a field has been set.
 
+### GetSnapshotErrorMsg
+
+`func (o *HyperflexVmSnapshotInfoAllOf) GetSnapshotErrorMsg() string`
+
+GetSnapshotErrorMsg returns the SnapshotErrorMsg field if non-nil, zero value otherwise.
+
+### GetSnapshotErrorMsgOk
+
+`func (o *HyperflexVmSnapshotInfoAllOf) GetSnapshotErrorMsgOk() (*string, bool)`
+
+GetSnapshotErrorMsgOk returns a tuple with the SnapshotErrorMsg field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnapshotErrorMsg
+
+`func (o *HyperflexVmSnapshotInfoAllOf) SetSnapshotErrorMsg(v string)`
+
+SetSnapshotErrorMsg sets SnapshotErrorMsg field to given value.
+
+### HasSnapshotErrorMsg
+
+`func (o *HyperflexVmSnapshotInfoAllOf) HasSnapshotErrorMsg() bool`
+
+HasSnapshotErrorMsg returns a boolean if a field has been set.
+
 ### GetSnapshotStatus
 
 `func (o *HyperflexVmSnapshotInfoAllOf) GetSnapshotStatus() string`
@@ -308,6 +363,81 @@ SetSourceTimestamp sets SourceTimestamp field to given value.
 `func (o *HyperflexVmSnapshotInfoAllOf) HasSourceTimestamp() bool`
 
 HasSourceTimestamp returns a boolean if a field has been set.
+
+### GetSrcClusterName
+
+`func (o *HyperflexVmSnapshotInfoAllOf) GetSrcClusterName() string`
+
+GetSrcClusterName returns the SrcClusterName field if non-nil, zero value otherwise.
+
+### GetSrcClusterNameOk
+
+`func (o *HyperflexVmSnapshotInfoAllOf) GetSrcClusterNameOk() (*string, bool)`
+
+GetSrcClusterNameOk returns a tuple with the SrcClusterName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSrcClusterName
+
+`func (o *HyperflexVmSnapshotInfoAllOf) SetSrcClusterName(v string)`
+
+SetSrcClusterName sets SrcClusterName field to given value.
+
+### HasSrcClusterName
+
+`func (o *HyperflexVmSnapshotInfoAllOf) HasSrcClusterName() bool`
+
+HasSrcClusterName returns a boolean if a field has been set.
+
+### GetTargetCompletionTimestamp
+
+`func (o *HyperflexVmSnapshotInfoAllOf) GetTargetCompletionTimestamp() int64`
+
+GetTargetCompletionTimestamp returns the TargetCompletionTimestamp field if non-nil, zero value otherwise.
+
+### GetTargetCompletionTimestampOk
+
+`func (o *HyperflexVmSnapshotInfoAllOf) GetTargetCompletionTimestampOk() (*int64, bool)`
+
+GetTargetCompletionTimestampOk returns a tuple with the TargetCompletionTimestamp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetCompletionTimestamp
+
+`func (o *HyperflexVmSnapshotInfoAllOf) SetTargetCompletionTimestamp(v int64)`
+
+SetTargetCompletionTimestamp sets TargetCompletionTimestamp field to given value.
+
+### HasTargetCompletionTimestamp
+
+`func (o *HyperflexVmSnapshotInfoAllOf) HasTargetCompletionTimestamp() bool`
+
+HasTargetCompletionTimestamp returns a boolean if a field has been set.
+
+### GetTgtClusterName
+
+`func (o *HyperflexVmSnapshotInfoAllOf) GetTgtClusterName() string`
+
+GetTgtClusterName returns the TgtClusterName field if non-nil, zero value otherwise.
+
+### GetTgtClusterNameOk
+
+`func (o *HyperflexVmSnapshotInfoAllOf) GetTgtClusterNameOk() (*string, bool)`
+
+GetTgtClusterNameOk returns a tuple with the TgtClusterName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTgtClusterName
+
+`func (o *HyperflexVmSnapshotInfoAllOf) SetTgtClusterName(v string)`
+
+SetTgtClusterName sets TgtClusterName field to given value.
+
+### HasTgtClusterName
+
+`func (o *HyperflexVmSnapshotInfoAllOf) HasTgtClusterName() bool`
+
+HasTgtClusterName returns a boolean if a field has been set.
 
 ### GetVmEntityReference
 

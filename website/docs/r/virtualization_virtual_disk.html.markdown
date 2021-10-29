@@ -43,6 +43,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `billing_unit_id`:(string) Billing rate for this resource. 
 * `capacity`:(string) Disk capacity to be provided with units example - 10Gi. 
 * `cluster`:(HashMap) - A reference to a virtualizationBaseCluster resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
@@ -51,7 +52,10 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `discovered`:(bool)(ReadOnly) Flag to indicate whether the configuration is created from inventory object. 
+* `disk_action`:(string)(ReadOnly) Action to perform on the disk example resize, shrink, defragment etc. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `encryption_key`:(string) Encryption key used if volume is encrypted. 
+* `encryption_type`:(string) Encryption method used to encrypt the volume. 
 * `inventory`:(HashMap) -(ReadOnly) A reference to a virtualizationBaseVirtualDisk resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -102,11 +106,23 @@ This complex property has following sub-properties:
   + `timestamp`:(string)(ReadOnly) The time this versioned Managed Object was created. 
   + `nr_version`:(string)(ReadOnly) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
+* `volume_iops_info`:(HashMap) - Iops (input-output operations per sec) info for the volume. 
+This complex property has following sub-properties:
+  + `iops_read_limit`:(int)(ReadOnly) Number of disk read commands that can be performed per second. 
+  + `iops_write_limit`:(int)(ReadOnly) Number of disk write commands that can be performed per second. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `throughput_read_limit`:(int)(ReadOnly) Data transfer rate limit from the disk, specified in mebibytes (MiB) per second. 
+  + `throughput_write_limit`:(int)(ReadOnly) Data transfer rate limit to the disk, specified in mebibytes (MiB) per second. 
 * `workflow_info`:(HashMap) -(ReadOnly) A reference to a workflowWorkflowInfo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `zone`:(HashMap) - Aws specific availabilty zone in a region. 
+This complex property has following sub-properties:
+  + `name`:(string)(ReadOnly) The name of the availability zone. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `zone_id`:(string)(ReadOnly) The ID of the availability zone. 
 
 ### Custom keywords
 These are

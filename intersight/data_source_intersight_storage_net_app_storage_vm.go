@@ -25,6 +25,11 @@ func dataSourceStorageNetAppStorageVm() *schema.Resource {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"aggregates": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -94,6 +99,51 @@ func dataSourceStorageNetAppStorageVm() *schema.Resource {
 				},
 			},
 		},
+		"avg_performance_metrics": {
+			Description: "Average performance metrics for over a period of time.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops": {
+						Description: "Rate of I/O operations observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"latency": {
+						Description: "Latency observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"period": {
+						Description: "Duration of periodic aggregation, in hours.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput": {
+						Description: "Throughput observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"cifs_enabled": {
 			Description: "Status for Common Internet File System protocol ( CIFS ) allowed to run on Vservers.",
 			Type:        schema.TypeBool,
@@ -143,6 +193,11 @@ func dataSourceStorageNetAppStorageVm() *schema.Resource {
 				},
 			},
 		},
+		"dns_domains": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -153,9 +208,19 @@ func dataSourceStorageNetAppStorageVm() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"ipspace": {
+			Description: "IPspace name. IPspaces are distinct IP address spaces in which storage virtual machines (SVMs) reside.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"iscsi_enabled": {
 			Description: "Status for iSCSI protocol allowed to run on Vservers.",
 			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"key": {
+			Description: "Unique identifier of VServer across data center.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -173,8 +238,28 @@ func dataSourceStorageNetAppStorageVm() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"name_servers": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"nfs_enabled": {
 			Description: "Status for Network File System Protocol ( NFS ) allowed to run on  Vservers.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"nfs_v3_enabled": {
+			Description: "Status for Network File System Protocol ( NFSv3 ) allowed to run on  Vservers.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"nfs_v41_enabled": {
+			Description: "Status for Network File System Protocol ( NFSv4.1 ) allowed to run on  Vservers.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"nfs_v4_enabled": {
+			Description: "Status for Network File System Protocol ( NFSv4 ) allowed to run on  Vservers.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -269,6 +354,11 @@ func dataSourceStorageNetAppStorageVm() *schema.Resource {
 		},
 		"state": {
 			Description: "The state of this tenant.\n* `Unknown` - Component state is not available.\n* `Starting` - Component is being started.\n* `Running` - Component is currently running.\n* `Stopping` - Component is being stopped.\n* `Stopped` - Component has been stopped.\n* `Deleting` - Component deletion is in progress.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"subtype": {
+			Description: "SVM subtype (default, dp_destination, sync_source, or sync_destination). The SVM subtype sync_destination is created automatically when an SVM of subtype sync_source is created on the source MetroCluster cluster.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -419,6 +509,11 @@ func dataSourceStorageNetAppStorageVm() *schema.Resource {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"aggregates": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -488,6 +583,51 @@ func dataSourceStorageNetAppStorageVm() *schema.Resource {
 				},
 			},
 		},
+		"avg_performance_metrics": {
+			Description: "Average performance metrics for over a period of time.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops": {
+						Description: "Rate of I/O operations observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"latency": {
+						Description: "Latency observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"period": {
+						Description: "Duration of periodic aggregation, in hours.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput": {
+						Description: "Throughput observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"cifs_enabled": {
 			Description: "Status for Common Internet File System protocol ( CIFS ) allowed to run on Vservers.",
 			Type:        schema.TypeBool,
@@ -537,6 +677,11 @@ func dataSourceStorageNetAppStorageVm() *schema.Resource {
 				},
 			},
 		},
+		"dns_domains": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -547,9 +692,19 @@ func dataSourceStorageNetAppStorageVm() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"ipspace": {
+			Description: "IPspace name. IPspaces are distinct IP address spaces in which storage virtual machines (SVMs) reside.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"iscsi_enabled": {
 			Description: "Status for iSCSI protocol allowed to run on Vservers.",
 			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"key": {
+			Description: "Unique identifier of VServer across data center.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -567,8 +722,28 @@ func dataSourceStorageNetAppStorageVm() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"name_servers": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"nfs_enabled": {
 			Description: "Status for Network File System Protocol ( NFS ) allowed to run on  Vservers.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"nfs_v3_enabled": {
+			Description: "Status for Network File System Protocol ( NFSv3 ) allowed to run on  Vservers.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"nfs_v41_enabled": {
+			Description: "Status for Network File System Protocol ( NFSv4.1 ) allowed to run on  Vservers.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"nfs_v4_enabled": {
+			Description: "Status for Network File System Protocol ( NFSv4 ) allowed to run on  Vservers.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -663,6 +838,11 @@ func dataSourceStorageNetAppStorageVm() *schema.Resource {
 		},
 		"state": {
 			Description: "The state of this tenant.\n* `Unknown` - Component state is not available.\n* `Starting` - Component is being started.\n* `Running` - Component is currently running.\n* `Stopping` - Component is being stopped.\n* `Stopped` - Component has been stopped.\n* `Deleting` - Component deletion is in progress.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"subtype": {
+			Description: "SVM subtype (default, dp_destination, sync_source, or sync_destination). The SVM subtype sync_destination is created automatically when an SVM of subtype sync_source is created on the source MetroCluster cluster.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -833,6 +1013,15 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
+	if v, ok := d.GetOk("aggregates"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetAggregates(x)
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -916,6 +1105,37 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
+	if v, ok := d.GetOk("avg_performance_metrics"); ok {
+		p := make([]models.StorageNetAppPerformanceMetricsAverage, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageNetAppPerformanceMetricsAverage{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.NetAppPerformanceMetricsAverage")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAvgPerformanceMetrics(x)
+		}
+	}
+
 	if v, ok := d.GetOkExists("cifs_enabled"); ok {
 		x := (v.(bool))
 		o.SetCifsEnabled(x)
@@ -927,7 +1147,7 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -971,6 +1191,15 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 		o.SetDiskPool(x)
 	}
 
+	if v, ok := d.GetOk("dns_domains"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetDnsDomains(x)
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
@@ -981,13 +1210,23 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 		o.SetFcpEnabled(x)
 	}
 
+	if v, ok := d.GetOk("ipspace"); ok {
+		x := (v.(string))
+		o.SetIpspace(x)
+	}
+
 	if v, ok := d.GetOkExists("iscsi_enabled"); ok {
 		x := (v.(bool))
 		o.SetIscsiEnabled(x)
 	}
 
+	if v, ok := d.GetOk("key"); ok {
+		x := (v.(string))
+		o.SetKey(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1001,9 +1240,33 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 		o.SetName(x)
 	}
 
+	if v, ok := d.GetOk("name_servers"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			x = append(x, y.Index(i).Interface().(string))
+		}
+		o.SetNameServers(x)
+	}
+
 	if v, ok := d.GetOkExists("nfs_enabled"); ok {
 		x := (v.(bool))
 		o.SetNfsEnabled(x)
+	}
+
+	if v, ok := d.GetOkExists("nfs_v3_enabled"); ok {
+		x := (v.(bool))
+		o.SetNfsV3Enabled(x)
+	}
+
+	if v, ok := d.GetOkExists("nfs_v41_enabled"); ok {
+		x := (v.(bool))
+		o.SetNfsV41Enabled(x)
+	}
+
+	if v, ok := d.GetOkExists("nfs_v4_enabled"); ok {
+		x := (v.(bool))
+		o.SetNfsV4Enabled(x)
 	}
 
 	if v, ok := d.GetOkExists("nvme_enabled"); ok {
@@ -1116,6 +1379,11 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 	if v, ok := d.GetOk("state"); ok {
 		x := (v.(string))
 		o.SetState(x)
+	}
+
+	if v, ok := d.GetOk("subtype"); ok {
+		x := (v.(string))
+		o.SetSubtype(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1268,24 +1536,34 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["aggregates"] = (s.GetAggregates())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["array"] = flattenMapStorageNetAppClusterRelationship(s.GetArray(), d)
+
+				temp["avg_performance_metrics"] = flattenMapStorageNetAppPerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
 				temp["cifs_enabled"] = (s.GetCifsEnabled())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 
 				temp["disk_pool"] = flattenListStorageNetAppAggregateRelationship(s.GetDiskPool(), d)
+				temp["dns_domains"] = (s.GetDnsDomains())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["fcp_enabled"] = (s.GetFcpEnabled())
+				temp["ipspace"] = (s.GetIpspace())
 				temp["iscsi_enabled"] = (s.GetIscsiEnabled())
+				temp["key"] = (s.GetKey())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
+				temp["name_servers"] = (s.GetNameServers())
 				temp["nfs_enabled"] = (s.GetNfsEnabled())
+				temp["nfs_v3_enabled"] = (s.GetNfsV3Enabled())
+				temp["nfs_v41_enabled"] = (s.GetNfsV41Enabled())
+				temp["nfs_v4_enabled"] = (s.GetNfsV4Enabled())
 				temp["nvme_enabled"] = (s.GetNvmeEnabled())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
@@ -1295,6 +1573,7 @@ func dataSourceStorageNetAppStorageVmRead(c context.Context, d *schema.ResourceD
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["state"] = (s.GetState())
+				temp["subtype"] = (s.GetSubtype())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["uuid"] = (s.GetUuid())

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.DeploymentDevice"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.DeploymentDevice"]
+**AlarmInfo** | Pointer to [**NullableAssetDeploymentDeviceAlarmInfo**](AssetDeploymentDeviceAlarmInfo.md) |  | [optional] 
 **DeviceId** | Pointer to **string** | Unique identifier of the Cisco device. | [optional] [readonly] 
 **DeviceInformation** | Pointer to [**NullableAssetDeploymentDeviceInformation**](AssetDeploymentDeviceInformation.md) |  | [optional] 
 **DevicePid** | Pointer to **string** | Product identifier for the specified Cisco device. It is used to distinguish between HyperFlex and UCS devices. | [optional] [readonly] 
@@ -80,6 +81,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAlarmInfo
+
+`func (o *AssetDeploymentDeviceAllOf) GetAlarmInfo() AssetDeploymentDeviceAlarmInfo`
+
+GetAlarmInfo returns the AlarmInfo field if non-nil, zero value otherwise.
+
+### GetAlarmInfoOk
+
+`func (o *AssetDeploymentDeviceAllOf) GetAlarmInfoOk() (*AssetDeploymentDeviceAlarmInfo, bool)`
+
+GetAlarmInfoOk returns a tuple with the AlarmInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlarmInfo
+
+`func (o *AssetDeploymentDeviceAllOf) SetAlarmInfo(v AssetDeploymentDeviceAlarmInfo)`
+
+SetAlarmInfo sets AlarmInfo field to given value.
+
+### HasAlarmInfo
+
+`func (o *AssetDeploymentDeviceAllOf) HasAlarmInfo() bool`
+
+HasAlarmInfo returns a boolean if a field has been set.
+
+### SetAlarmInfoNil
+
+`func (o *AssetDeploymentDeviceAllOf) SetAlarmInfoNil(b bool)`
+
+ SetAlarmInfoNil sets the value for AlarmInfo to be an explicit nil
+
+### UnsetAlarmInfo
+`func (o *AssetDeploymentDeviceAllOf) UnsetAlarmInfo()`
+
+UnsetAlarmInfo ensures that no value is present for AlarmInfo, not even an explicit nil
 ### GetDeviceId
 
 `func (o *AssetDeploymentDeviceAllOf) GetDeviceId() string`

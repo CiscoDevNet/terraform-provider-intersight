@@ -14,10 +14,14 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_virtualization_virtual_disk.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `billing_unit_id`:(string) Billing rate for this resource. 
 * `capacity`:(string) Disk capacity to be provided with units example - 10Gi. 
 * `create_time`:(string) The time when this managed object was created. 
 * `discovered`:(bool) Flag to indicate whether the configuration is created from inventory object. 
+* `disk_action`:(string) Action to perform on the disk example resize, shrink, defragment etc. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `encryption_key`:(string) Encryption key used if volume is encrypted. 
+* `encryption_type`:(string) Encryption method used to encrypt the volume. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `mode`:(string) File mode of the disk  example - Filesystem, Block.* `Block` - It is a Block virtual disk.* `Filesystem` - It is a File system virtual disk.* `` - Disk mode is either unknown or not supported. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

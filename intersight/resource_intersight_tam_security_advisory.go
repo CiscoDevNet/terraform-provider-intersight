@@ -1013,12 +1013,12 @@ func resourceTamSecurityAdvisoryCreate(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("date_published"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetDatePublished(x)
 	}
 
 	if v, ok := d.GetOk("date_updated"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetDateUpdated(x)
 	}
 
@@ -1655,13 +1655,13 @@ func resourceTamSecurityAdvisoryUpdate(c context.Context, d *schema.ResourceData
 
 	if d.HasChange("date_published") {
 		v := d.Get("date_published")
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetDatePublished(x)
 	}
 
 	if d.HasChange("date_updated") {
 		v := d.Get("date_updated")
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetDateUpdated(x)
 	}
 

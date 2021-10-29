@@ -6,8 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppCluster"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppCluster"]
+**AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
+**ClusterEfficiency** | Pointer to [**NullableStorageNetAppStorageClusterEfficiency**](StorageNetAppStorageClusterEfficiency.md) |  | [optional] 
+**ClusterHealthStatus** | Pointer to **string** | The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable. | [optional] [readonly] 
+**DnsDomains** | Pointer to **[]string** |  | [optional] 
+**Key** | Pointer to **string** | Unique identifier of NetApp Cluster across data center. | [optional] [readonly] 
 **Location** | Pointer to **string** | Location of the storage controller. | [optional] [readonly] 
 **ManagementAddress** | Pointer to **string** | FQDN or IP Address of Storage Cluster. | [optional] [readonly] 
+**NameServers** | Pointer to **[]string** |  | [optional] 
+**NtpServers** | Pointer to **[]string** |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -69,6 +76,151 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAvgPerformanceMetrics
+
+`func (o *StorageNetAppClusterAllOf) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage`
+
+GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field if non-nil, zero value otherwise.
+
+### GetAvgPerformanceMetricsOk
+
+`func (o *StorageNetAppClusterAllOf) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool)`
+
+GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvgPerformanceMetrics
+
+`func (o *StorageNetAppClusterAllOf) SetAvgPerformanceMetrics(v StorageNetAppPerformanceMetricsAverage)`
+
+SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
+
+### HasAvgPerformanceMetrics
+
+`func (o *StorageNetAppClusterAllOf) HasAvgPerformanceMetrics() bool`
+
+HasAvgPerformanceMetrics returns a boolean if a field has been set.
+
+### GetClusterEfficiency
+
+`func (o *StorageNetAppClusterAllOf) GetClusterEfficiency() StorageNetAppStorageClusterEfficiency`
+
+GetClusterEfficiency returns the ClusterEfficiency field if non-nil, zero value otherwise.
+
+### GetClusterEfficiencyOk
+
+`func (o *StorageNetAppClusterAllOf) GetClusterEfficiencyOk() (*StorageNetAppStorageClusterEfficiency, bool)`
+
+GetClusterEfficiencyOk returns a tuple with the ClusterEfficiency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterEfficiency
+
+`func (o *StorageNetAppClusterAllOf) SetClusterEfficiency(v StorageNetAppStorageClusterEfficiency)`
+
+SetClusterEfficiency sets ClusterEfficiency field to given value.
+
+### HasClusterEfficiency
+
+`func (o *StorageNetAppClusterAllOf) HasClusterEfficiency() bool`
+
+HasClusterEfficiency returns a boolean if a field has been set.
+
+### SetClusterEfficiencyNil
+
+`func (o *StorageNetAppClusterAllOf) SetClusterEfficiencyNil(b bool)`
+
+ SetClusterEfficiencyNil sets the value for ClusterEfficiency to be an explicit nil
+
+### UnsetClusterEfficiency
+`func (o *StorageNetAppClusterAllOf) UnsetClusterEfficiency()`
+
+UnsetClusterEfficiency ensures that no value is present for ClusterEfficiency, not even an explicit nil
+### GetClusterHealthStatus
+
+`func (o *StorageNetAppClusterAllOf) GetClusterHealthStatus() string`
+
+GetClusterHealthStatus returns the ClusterHealthStatus field if non-nil, zero value otherwise.
+
+### GetClusterHealthStatusOk
+
+`func (o *StorageNetAppClusterAllOf) GetClusterHealthStatusOk() (*string, bool)`
+
+GetClusterHealthStatusOk returns a tuple with the ClusterHealthStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterHealthStatus
+
+`func (o *StorageNetAppClusterAllOf) SetClusterHealthStatus(v string)`
+
+SetClusterHealthStatus sets ClusterHealthStatus field to given value.
+
+### HasClusterHealthStatus
+
+`func (o *StorageNetAppClusterAllOf) HasClusterHealthStatus() bool`
+
+HasClusterHealthStatus returns a boolean if a field has been set.
+
+### GetDnsDomains
+
+`func (o *StorageNetAppClusterAllOf) GetDnsDomains() []string`
+
+GetDnsDomains returns the DnsDomains field if non-nil, zero value otherwise.
+
+### GetDnsDomainsOk
+
+`func (o *StorageNetAppClusterAllOf) GetDnsDomainsOk() (*[]string, bool)`
+
+GetDnsDomainsOk returns a tuple with the DnsDomains field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDnsDomains
+
+`func (o *StorageNetAppClusterAllOf) SetDnsDomains(v []string)`
+
+SetDnsDomains sets DnsDomains field to given value.
+
+### HasDnsDomains
+
+`func (o *StorageNetAppClusterAllOf) HasDnsDomains() bool`
+
+HasDnsDomains returns a boolean if a field has been set.
+
+### SetDnsDomainsNil
+
+`func (o *StorageNetAppClusterAllOf) SetDnsDomainsNil(b bool)`
+
+ SetDnsDomainsNil sets the value for DnsDomains to be an explicit nil
+
+### UnsetDnsDomains
+`func (o *StorageNetAppClusterAllOf) UnsetDnsDomains()`
+
+UnsetDnsDomains ensures that no value is present for DnsDomains, not even an explicit nil
+### GetKey
+
+`func (o *StorageNetAppClusterAllOf) GetKey() string`
+
+GetKey returns the Key field if non-nil, zero value otherwise.
+
+### GetKeyOk
+
+`func (o *StorageNetAppClusterAllOf) GetKeyOk() (*string, bool)`
+
+GetKeyOk returns a tuple with the Key field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKey
+
+`func (o *StorageNetAppClusterAllOf) SetKey(v string)`
+
+SetKey sets Key field to given value.
+
+### HasKey
+
+`func (o *StorageNetAppClusterAllOf) HasKey() bool`
+
+HasKey returns a boolean if a field has been set.
+
 ### GetLocation
 
 `func (o *StorageNetAppClusterAllOf) GetLocation() string`
@@ -119,6 +271,76 @@ SetManagementAddress sets ManagementAddress field to given value.
 
 HasManagementAddress returns a boolean if a field has been set.
 
+### GetNameServers
+
+`func (o *StorageNetAppClusterAllOf) GetNameServers() []string`
+
+GetNameServers returns the NameServers field if non-nil, zero value otherwise.
+
+### GetNameServersOk
+
+`func (o *StorageNetAppClusterAllOf) GetNameServersOk() (*[]string, bool)`
+
+GetNameServersOk returns a tuple with the NameServers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNameServers
+
+`func (o *StorageNetAppClusterAllOf) SetNameServers(v []string)`
+
+SetNameServers sets NameServers field to given value.
+
+### HasNameServers
+
+`func (o *StorageNetAppClusterAllOf) HasNameServers() bool`
+
+HasNameServers returns a boolean if a field has been set.
+
+### SetNameServersNil
+
+`func (o *StorageNetAppClusterAllOf) SetNameServersNil(b bool)`
+
+ SetNameServersNil sets the value for NameServers to be an explicit nil
+
+### UnsetNameServers
+`func (o *StorageNetAppClusterAllOf) UnsetNameServers()`
+
+UnsetNameServers ensures that no value is present for NameServers, not even an explicit nil
+### GetNtpServers
+
+`func (o *StorageNetAppClusterAllOf) GetNtpServers() []string`
+
+GetNtpServers returns the NtpServers field if non-nil, zero value otherwise.
+
+### GetNtpServersOk
+
+`func (o *StorageNetAppClusterAllOf) GetNtpServersOk() (*[]string, bool)`
+
+GetNtpServersOk returns a tuple with the NtpServers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNtpServers
+
+`func (o *StorageNetAppClusterAllOf) SetNtpServers(v []string)`
+
+SetNtpServers sets NtpServers field to given value.
+
+### HasNtpServers
+
+`func (o *StorageNetAppClusterAllOf) HasNtpServers() bool`
+
+HasNtpServers returns a boolean if a field has been set.
+
+### SetNtpServersNil
+
+`func (o *StorageNetAppClusterAllOf) SetNtpServersNil(b bool)`
+
+ SetNtpServersNil sets the value for NtpServers to be an explicit nil
+
+### UnsetNtpServers
+`func (o *StorageNetAppClusterAllOf) UnsetNtpServers()`
+
+UnsetNtpServers ensures that no value is present for NtpServers, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageNetAppClusterAllOf) GetRegisteredDevice() AssetDeviceRegistrationRelationship`

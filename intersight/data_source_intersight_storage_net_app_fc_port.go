@@ -262,7 +262,7 @@ func dataSourceStorageNetAppFcPort() *schema.Resource {
 			Optional:    true,
 		},
 		"uuid": {
-			Description: "UUID of physical port.",
+			Description: "Universally unique identifier of the FC port.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -637,7 +637,7 @@ func dataSourceStorageNetAppFcPort() *schema.Resource {
 			Optional:    true,
 		},
 		"uuid": {
-			Description: "UUID of physical port.",
+			Description: "Universally unique identifier of the FC port.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -884,7 +884,7 @@ func dataSourceStorageNetAppFcPortRead(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -899,7 +899,7 @@ func dataSourceStorageNetAppFcPortRead(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

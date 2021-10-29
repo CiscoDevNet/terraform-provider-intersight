@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Comments** | Pointer to **string** | Comment for this HyperFlex resource. | [optional] [readonly] 
 **Href** | Pointer to **string** | URI of resource. Target URL for making REST call. | [optional] [readonly] 
 **Method** | Pointer to **string** | HTTP verb that this HyperFlex link DT is referring to. * &#x60;POST&#x60; - HTTP verb POST for this task definition. * &#x60;GET&#x60; - HTTP verb GET for this task definition. * &#x60;PUT&#x60; - HTTP verb PUT for this task definition. * &#x60;DELETE&#x60; - HTTP verb DELETE for this task definition. | [optional] [readonly] [default to "POST"]
-**Rel** | Pointer to **string** | Relationship of link to this resource. | [optional] [readonly] 
+**Rel** | Pointer to **string** | Relationship of  link to this resource. | [optional] [readonly] 
 
 ## Methods
 

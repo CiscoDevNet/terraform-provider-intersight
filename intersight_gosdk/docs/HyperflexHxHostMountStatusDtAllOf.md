@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.HxHostMountStatusDt"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.HxHostMountStatusDt"]
-**Accessibility** | Pointer to **string** | Accessibility of HyperFlex datastore. * &#x60;ACCESSIBLE&#x60; - The HyperFlex datastore accessibility state is accessible. * &#x60;NOT_ACCESSIBLE&#x60; - The HyperFlex datastore accessibility state is not accessible. * &#x60;PARTIALLY_ACCESSIBLE&#x60; - The HyperFlex datastore accessibility state is partially accessible. * &#x60;READONLY&#x60; - The HyperFlex datastore accessibility state is read-only. * &#x60;HOST_NOT_REACHABLE&#x60; - The HyperFlex datastore accessibility state is host not reachable. * &#x60;UNKNOWN&#x60; - The HyperFlex datastore accessibility state is unknown. | [optional] [readonly] [default to "ACCESSIBLE"]
-**HostName** | Pointer to **string** | HyperFlex name of host for this datastore. | [optional] [readonly] 
-**Mounted** | Pointer to **bool** | Is the HyperFlex datastore mounted or not. | [optional] [readonly] 
-**Reason** | Pointer to **string** | Reason for inaccessibility for this datastore. | [optional] [readonly] 
+**Accessibility** | Pointer to **string** | Accessibility of datastore. * &#x60;ACCESSIBLE&#x60; - The HyperFlex datastore accessibility state is accessible. * &#x60;NOT_ACCESSIBLE&#x60; - The HyperFlex datastore accessibility state is not accessible. * &#x60;PARTIALLY_ACCESSIBLE&#x60; - The HyperFlex datastore accessibility state is partially accessible. * &#x60;READONLY&#x60; - The HyperFlex datastore accessibility state is read-only. * &#x60;HOST_NOT_REACHABLE&#x60; - The HyperFlex datastore accessibility state is host not reachable. * &#x60;UNKNOWN&#x60; - The HyperFlex datastore accessibility state is unknown. | [optional] [readonly] [default to "ACCESSIBLE"]
+**HostName** | Pointer to **string** | Name of host for the HyperFlex datastore. | [optional] [readonly] 
+**Mounted** | Pointer to **bool** | Is the datastore mounted or not. | [optional] [readonly] 
+**Reason** | Pointer to **string** | Reason for inaccessibility. | [optional] [readonly] 
 
 ## Methods
 

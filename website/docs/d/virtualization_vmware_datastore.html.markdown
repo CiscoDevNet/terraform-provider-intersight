@@ -32,4 +32,5 @@ The following arguments can be used to get data of already created objects in In
 * `un_committed`:(int) Space uncommitted in this datastore in bytes. 
 * `url`:(string) The URL to access this datastore (example - 'ds:///vmfs/volumes/562a4e8a-0eeb5372-dd61-78baf9cb9afa/'). 
 * `vm_count`:(int) Number of virtual machines relying on (using) this datastore. 
+* `vm_template_count`:(int) Number of virtual machine templates relying on (using) this datastore. 
  

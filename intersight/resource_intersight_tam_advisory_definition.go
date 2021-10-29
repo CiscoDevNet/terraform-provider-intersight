@@ -1130,12 +1130,12 @@ func resourceTamAdvisoryDefinitionCreate(c context.Context, d *schema.ResourceDa
 	o.SetClassId("tam.AdvisoryDefinition")
 
 	if v, ok := d.GetOk("date_published"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetDatePublished(x)
 	}
 
 	if v, ok := d.GetOk("date_updated"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetDateUpdated(x)
 	}
 
@@ -1873,13 +1873,13 @@ func resourceTamAdvisoryDefinitionUpdate(c context.Context, d *schema.ResourceDa
 
 	if d.HasChange("date_published") {
 		v := d.Get("date_published")
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetDatePublished(x)
 	}
 
 	if d.HasChange("date_updated") {
 		v := d.Get("date_updated")
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetDateUpdated(x)
 	}
 

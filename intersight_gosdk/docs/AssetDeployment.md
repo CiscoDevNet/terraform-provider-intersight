@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.Deployment"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.Deployment"]
+**AlarmInfo** | Pointer to [**NullableAssetDeploymentAlarmInfo**](AssetDeploymentAlarmInfo.md) |  | [optional] 
 **DeploymentRefId** | Pointer to **string** | Identifies the consumption-based subscription&#39;s deployment. | [optional] [readonly] 
 **EndCustomer** | Pointer to [**NullableAssetCustomerInformation**](AssetCustomerInformation.md) |  | [optional] 
 **EndDate** | Pointer to **time.Time** | End Date for the consumption-based subscription&#39;s deployment. | [optional] [readonly] 
@@ -77,6 +78,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAlarmInfo
+
+`func (o *AssetDeployment) GetAlarmInfo() AssetDeploymentAlarmInfo`
+
+GetAlarmInfo returns the AlarmInfo field if non-nil, zero value otherwise.
+
+### GetAlarmInfoOk
+
+`func (o *AssetDeployment) GetAlarmInfoOk() (*AssetDeploymentAlarmInfo, bool)`
+
+GetAlarmInfoOk returns a tuple with the AlarmInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlarmInfo
+
+`func (o *AssetDeployment) SetAlarmInfo(v AssetDeploymentAlarmInfo)`
+
+SetAlarmInfo sets AlarmInfo field to given value.
+
+### HasAlarmInfo
+
+`func (o *AssetDeployment) HasAlarmInfo() bool`
+
+HasAlarmInfo returns a boolean if a field has been set.
+
+### SetAlarmInfoNil
+
+`func (o *AssetDeployment) SetAlarmInfoNil(b bool)`
+
+ SetAlarmInfoNil sets the value for AlarmInfo to be an explicit nil
+
+### UnsetAlarmInfo
+`func (o *AssetDeployment) UnsetAlarmInfo()`
+
+UnsetAlarmInfo ensures that no value is present for AlarmInfo, not even an explicit nil
 ### GetDeploymentRefId
 
 `func (o *AssetDeployment) GetDeploymentRefId() string`

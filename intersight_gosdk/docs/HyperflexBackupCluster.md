@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.BackupCluster"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.BackupCluster"]
 **BackupDataStore** | Pointer to **string** | Defines the backup source cluster and its references. | [optional] [readonly] 
+**SrcClusterUuid** | Pointer to **string** | UUID for the cluster to allow lookups across unclaim/reclaim. | [optional] [readonly] 
 **SrcCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 **TgtCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
@@ -93,6 +94,31 @@ SetBackupDataStore sets BackupDataStore field to given value.
 `func (o *HyperflexBackupCluster) HasBackupDataStore() bool`
 
 HasBackupDataStore returns a boolean if a field has been set.
+
+### GetSrcClusterUuid
+
+`func (o *HyperflexBackupCluster) GetSrcClusterUuid() string`
+
+GetSrcClusterUuid returns the SrcClusterUuid field if non-nil, zero value otherwise.
+
+### GetSrcClusterUuidOk
+
+`func (o *HyperflexBackupCluster) GetSrcClusterUuidOk() (*string, bool)`
+
+GetSrcClusterUuidOk returns a tuple with the SrcClusterUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSrcClusterUuid
+
+`func (o *HyperflexBackupCluster) SetSrcClusterUuid(v string)`
+
+SetSrcClusterUuid sets SrcClusterUuid field to given value.
+
+### HasSrcClusterUuid
+
+`func (o *HyperflexBackupCluster) HasSrcClusterUuid() bool`
+
+HasSrcClusterUuid returns a boolean if a field has been set.
 
 ### GetSrcCluster
 

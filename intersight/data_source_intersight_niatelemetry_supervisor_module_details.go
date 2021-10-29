@@ -801,7 +801,7 @@ func dataSourceNiatelemetrySupervisorModuleDetailsRead(c context.Context, d *sch
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -821,7 +821,7 @@ func dataSourceNiatelemetrySupervisorModuleDetailsRead(c context.Context, d *sch
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

@@ -6,13 +6,19 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VirtualDisk"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VirtualDisk"]
+**BillingUnitId** | Pointer to **string** | Billing rate for this resource. | [optional] 
 **Capacity** | Pointer to **string** | Disk capacity to be provided with units example - 10Gi. | [optional] 
 **Discovered** | Pointer to **bool** | Flag to indicate whether the configuration is created from inventory object. | [optional] [readonly] 
+**DiskAction** | Pointer to **string** | Action to perform on the disk example resize, shrink, defragment etc. | [optional] [readonly] 
+**EncryptionKey** | Pointer to **string** | Encryption key used if volume is encrypted. | [optional] 
+**EncryptionType** | Pointer to **string** | Encryption method used to encrypt the volume. | [optional] 
 **Mode** | Pointer to **string** | File mode of the disk  example - Filesystem, Block. * &#x60;Block&#x60; - It is a Block virtual disk. * &#x60;Filesystem&#x60; - It is a File system virtual disk. * &#x60;&#x60; - Disk mode is either unknown or not supported. | [optional] [default to "Block"]
 **Name** | Pointer to **string** | Name of the storage disk. Name must be unique within a Datastore. | [optional] 
 **SourceCerts** | Pointer to **string** | Base64 encoded CA certificates of the https source to check against. | [optional] 
 **SourceDiskToClone** | Pointer to **string** | Source disk from which the content is copied. | [optional] 
 **SourceFilePath** | Pointer to **string** | Image path used to import on the created disk. | [optional] 
+**VolumeIopsInfo** | Pointer to [**NullableCloudVolumeIopsInfo**](CloudVolumeIopsInfo.md) |  | [optional] 
+**Zone** | Pointer to [**NullableCloudAvailabilityZone**](CloudAvailabilityZone.md) |  | [optional] 
 **Cluster** | Pointer to [**VirtualizationBaseClusterRelationship**](VirtualizationBaseClusterRelationship.md) |  | [optional] 
 **Inventory** | Pointer to [**VirtualizationBaseVirtualDiskRelationship**](VirtualizationBaseVirtualDiskRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
@@ -77,6 +83,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetBillingUnitId
+
+`func (o *VirtualizationVirtualDisk) GetBillingUnitId() string`
+
+GetBillingUnitId returns the BillingUnitId field if non-nil, zero value otherwise.
+
+### GetBillingUnitIdOk
+
+`func (o *VirtualizationVirtualDisk) GetBillingUnitIdOk() (*string, bool)`
+
+GetBillingUnitIdOk returns a tuple with the BillingUnitId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBillingUnitId
+
+`func (o *VirtualizationVirtualDisk) SetBillingUnitId(v string)`
+
+SetBillingUnitId sets BillingUnitId field to given value.
+
+### HasBillingUnitId
+
+`func (o *VirtualizationVirtualDisk) HasBillingUnitId() bool`
+
+HasBillingUnitId returns a boolean if a field has been set.
+
 ### GetCapacity
 
 `func (o *VirtualizationVirtualDisk) GetCapacity() string`
@@ -126,6 +157,81 @@ SetDiscovered sets Discovered field to given value.
 `func (o *VirtualizationVirtualDisk) HasDiscovered() bool`
 
 HasDiscovered returns a boolean if a field has been set.
+
+### GetDiskAction
+
+`func (o *VirtualizationVirtualDisk) GetDiskAction() string`
+
+GetDiskAction returns the DiskAction field if non-nil, zero value otherwise.
+
+### GetDiskActionOk
+
+`func (o *VirtualizationVirtualDisk) GetDiskActionOk() (*string, bool)`
+
+GetDiskActionOk returns a tuple with the DiskAction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiskAction
+
+`func (o *VirtualizationVirtualDisk) SetDiskAction(v string)`
+
+SetDiskAction sets DiskAction field to given value.
+
+### HasDiskAction
+
+`func (o *VirtualizationVirtualDisk) HasDiskAction() bool`
+
+HasDiskAction returns a boolean if a field has been set.
+
+### GetEncryptionKey
+
+`func (o *VirtualizationVirtualDisk) GetEncryptionKey() string`
+
+GetEncryptionKey returns the EncryptionKey field if non-nil, zero value otherwise.
+
+### GetEncryptionKeyOk
+
+`func (o *VirtualizationVirtualDisk) GetEncryptionKeyOk() (*string, bool)`
+
+GetEncryptionKeyOk returns a tuple with the EncryptionKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncryptionKey
+
+`func (o *VirtualizationVirtualDisk) SetEncryptionKey(v string)`
+
+SetEncryptionKey sets EncryptionKey field to given value.
+
+### HasEncryptionKey
+
+`func (o *VirtualizationVirtualDisk) HasEncryptionKey() bool`
+
+HasEncryptionKey returns a boolean if a field has been set.
+
+### GetEncryptionType
+
+`func (o *VirtualizationVirtualDisk) GetEncryptionType() string`
+
+GetEncryptionType returns the EncryptionType field if non-nil, zero value otherwise.
+
+### GetEncryptionTypeOk
+
+`func (o *VirtualizationVirtualDisk) GetEncryptionTypeOk() (*string, bool)`
+
+GetEncryptionTypeOk returns a tuple with the EncryptionType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncryptionType
+
+`func (o *VirtualizationVirtualDisk) SetEncryptionType(v string)`
+
+SetEncryptionType sets EncryptionType field to given value.
+
+### HasEncryptionType
+
+`func (o *VirtualizationVirtualDisk) HasEncryptionType() bool`
+
+HasEncryptionType returns a boolean if a field has been set.
 
 ### GetMode
 
@@ -252,6 +358,76 @@ SetSourceFilePath sets SourceFilePath field to given value.
 
 HasSourceFilePath returns a boolean if a field has been set.
 
+### GetVolumeIopsInfo
+
+`func (o *VirtualizationVirtualDisk) GetVolumeIopsInfo() CloudVolumeIopsInfo`
+
+GetVolumeIopsInfo returns the VolumeIopsInfo field if non-nil, zero value otherwise.
+
+### GetVolumeIopsInfoOk
+
+`func (o *VirtualizationVirtualDisk) GetVolumeIopsInfoOk() (*CloudVolumeIopsInfo, bool)`
+
+GetVolumeIopsInfoOk returns a tuple with the VolumeIopsInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolumeIopsInfo
+
+`func (o *VirtualizationVirtualDisk) SetVolumeIopsInfo(v CloudVolumeIopsInfo)`
+
+SetVolumeIopsInfo sets VolumeIopsInfo field to given value.
+
+### HasVolumeIopsInfo
+
+`func (o *VirtualizationVirtualDisk) HasVolumeIopsInfo() bool`
+
+HasVolumeIopsInfo returns a boolean if a field has been set.
+
+### SetVolumeIopsInfoNil
+
+`func (o *VirtualizationVirtualDisk) SetVolumeIopsInfoNil(b bool)`
+
+ SetVolumeIopsInfoNil sets the value for VolumeIopsInfo to be an explicit nil
+
+### UnsetVolumeIopsInfo
+`func (o *VirtualizationVirtualDisk) UnsetVolumeIopsInfo()`
+
+UnsetVolumeIopsInfo ensures that no value is present for VolumeIopsInfo, not even an explicit nil
+### GetZone
+
+`func (o *VirtualizationVirtualDisk) GetZone() CloudAvailabilityZone`
+
+GetZone returns the Zone field if non-nil, zero value otherwise.
+
+### GetZoneOk
+
+`func (o *VirtualizationVirtualDisk) GetZoneOk() (*CloudAvailabilityZone, bool)`
+
+GetZoneOk returns a tuple with the Zone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetZone
+
+`func (o *VirtualizationVirtualDisk) SetZone(v CloudAvailabilityZone)`
+
+SetZone sets Zone field to given value.
+
+### HasZone
+
+`func (o *VirtualizationVirtualDisk) HasZone() bool`
+
+HasZone returns a boolean if a field has been set.
+
+### SetZoneNil
+
+`func (o *VirtualizationVirtualDisk) SetZoneNil(b bool)`
+
+ SetZoneNil sets the value for Zone to be an explicit nil
+
+### UnsetZone
+`func (o *VirtualizationVirtualDisk) UnsetZone()`
+
+UnsetZone ensures that no value is present for Zone, not even an explicit nil
 ### GetCluster
 
 `func (o *VirtualizationVirtualDisk) GetCluster() VirtualizationBaseClusterRelationship`

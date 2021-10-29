@@ -141,6 +141,12 @@ func resourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"data_store_encryption_enabled": {
+				Description: "Whether the datastore is encrypted or not.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+			},
 			"description": {
 				Description: "Description from corresponding ClusterBackupPolicy.",
 				Type:        schema.TypeString,
@@ -155,6 +161,12 @@ func resourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"local_snapshot_retention_count": {
+				Description: "Number of snapshots that will be retained as part of the Multi Point in Time support.",
+				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
 			},
@@ -879,6 +891,10 @@ func resourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *sc
 		return diag.Errorf("error occurred while setting property CreateTime in HyperflexClusterBackupPolicyDeployment object: %s", err.Error())
 	}
 
+	if err := d.Set("data_store_encryption_enabled", (s.GetDataStoreEncryptionEnabled())); err != nil {
+		return diag.Errorf("error occurred while setting property DataStoreEncryptionEnabled in HyperflexClusterBackupPolicyDeployment object: %s", err.Error())
+	}
+
 	if err := d.Set("description", (s.GetDescription())); err != nil {
 		return diag.Errorf("error occurred while setting property Description in HyperflexClusterBackupPolicyDeployment object: %s", err.Error())
 	}
@@ -889,6 +905,10 @@ func resourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *sc
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in HyperflexClusterBackupPolicyDeployment object: %s", err.Error())
+	}
+
+	if err := d.Set("local_snapshot_retention_count", (s.GetLocalSnapshotRetentionCount())); err != nil {
+		return diag.Errorf("error occurred while setting property LocalSnapshotRetentionCount in HyperflexClusterBackupPolicyDeployment object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {

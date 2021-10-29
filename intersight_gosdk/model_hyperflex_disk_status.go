@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -26,7 +26,7 @@ type HyperflexDiskStatus struct {
 	ObjectType string `json:"ObjectType"`
 	// Percentage of download completed.
 	DownloadPercentage *string `json:"DownloadPercentage,omitempty"`
-	// Current state of the virtual disk. * `Unknown` - No details available on the disk state. * `Succeeded` - Last operation on the disk has been successful. * `ImportInProgress` - Import operation on the disk is in progress. * `ImportFailed` - Import operation on the disk has failed. * `CloneInProgress` - Disk clone operation on the disk is in progress. * `CloneFailed` - Clone operation on the disk has failed. * `CloneScheduled` - Clone operation on the disk has been scheduled. * `ImportScheduled` - Import operation on the disk has been scheduled. * `Pending` - Submitted operation on the disk is currently pending. * `` - Disk state is not available.
+	// Current state of the virtual disk. * `Unknown` - No details available on the disk state. * `Succeeded` - Last operation on the disk has been successful. * `ImportInProgress` - Import operation on the disk is in progress. * `ImportFailed` - Import operation on the disk has failed. * `CloneInProgress` - Disk clone operation on the disk is in progress. * `CloneFailed` - Clone operation on the disk has failed. * `CloneScheduled` - Clone operation on the disk has been scheduled. * `ImportScheduled` - Import operation on the disk has been scheduled. * `Pending` - Submitted operation on the disk is currently pending. * `` - Disk state is not available. * `Failed` - Last operation on the disk Failed.
 	State *string `json:"State,omitempty"`
 	// Identity of the Volume associated with virtual machine disk.
 	VolumeHandle *string `json:"VolumeHandle,omitempty"`
@@ -280,7 +280,7 @@ func (o *HyperflexDiskStatus) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// Percentage of download completed.
 		DownloadPercentage *string `json:"DownloadPercentage,omitempty"`
-		// Current state of the virtual disk. * `Unknown` - No details available on the disk state. * `Succeeded` - Last operation on the disk has been successful. * `ImportInProgress` - Import operation on the disk is in progress. * `ImportFailed` - Import operation on the disk has failed. * `CloneInProgress` - Disk clone operation on the disk is in progress. * `CloneFailed` - Clone operation on the disk has failed. * `CloneScheduled` - Clone operation on the disk has been scheduled. * `ImportScheduled` - Import operation on the disk has been scheduled. * `Pending` - Submitted operation on the disk is currently pending. * `` - Disk state is not available.
+		// Current state of the virtual disk. * `Unknown` - No details available on the disk state. * `Succeeded` - Last operation on the disk has been successful. * `ImportInProgress` - Import operation on the disk is in progress. * `ImportFailed` - Import operation on the disk has failed. * `CloneInProgress` - Disk clone operation on the disk is in progress. * `CloneFailed` - Clone operation on the disk has failed. * `CloneScheduled` - Clone operation on the disk has been scheduled. * `ImportScheduled` - Import operation on the disk has been scheduled. * `Pending` - Submitted operation on the disk is currently pending. * `` - Disk state is not available. * `Failed` - Last operation on the disk Failed.
 		State *string `json:"State,omitempty"`
 		// Identity of the Volume associated with virtual machine disk.
 		VolumeHandle *string `json:"VolumeHandle,omitempty"`

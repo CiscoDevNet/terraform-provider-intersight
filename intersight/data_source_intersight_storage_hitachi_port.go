@@ -248,6 +248,11 @@ func dataSourceStorageHitachiPort() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"port_mode": {
+			Description: "Operation mode of the port. Possible values are FC-NVMe, FCP-SCSI, and NOT SUPPORTED.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -693,6 +698,11 @@ func dataSourceStorageHitachiPort() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"port_mode": {
+			Description: "Operation mode of the port. Possible values are FC-NVMe, FCP-SCSI, and NOT SUPPORTED.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1024,7 +1034,7 @@ func dataSourceStorageHitachiPortRead(c context.Context, d *schema.ResourceData,
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1069,7 +1079,7 @@ func dataSourceStorageHitachiPortRead(c context.Context, d *schema.ResourceData,
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1188,6 +1198,11 @@ func dataSourceStorageHitachiPortRead(c context.Context, d *schema.ResourceData,
 	if v, ok := d.GetOkExists("port_lun_security"); ok {
 		x := (v.(bool))
 		o.SetPortLunSecurity(x)
+	}
+
+	if v, ok := d.GetOk("port_mode"); ok {
+		x := (v.(string))
+		o.SetPortMode(x)
 	}
 
 	if v, ok := d.GetOk("registered_device"); ok {
@@ -1450,6 +1465,7 @@ func dataSourceStorageHitachiPortRead(c context.Context, d *schema.ResourceData,
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["port_connection"] = (s.GetPortConnection())
 				temp["port_lun_security"] = (s.GetPortLunSecurity())
+				temp["port_mode"] = (s.GetPortMode())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

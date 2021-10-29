@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **AssetTag** | Pointer to **string** | The user defined asset tag assigned to the server. | [optional] [readonly] 
 **AvailableMemory** | Pointer to **int64** | The amount of memory available on the server. | [optional] [readonly] 
 **BiosPostComplete** | Pointer to **bool** | The BIOS POST completion status of the server. | [optional] [readonly] 
-**ChassisId** | Pointer to **string** | The id of the chassis that the blade is located in. | [optional] [readonly] 
+**ChassisId** | Pointer to **string** | The id of the chassis that the blade is discovered in. | [optional] [readonly] 
 **ConnectionStatus** | Pointer to **string** | Connectivity Status of RackUnit to Switch - A or B or AB. | [optional] [readonly] 
 **CpuCapacity** | Pointer to **float32** | CPU Capacity &#x3D; Number of CPU Sockets x Enabled Cores x Speed (GHz). | [optional] [readonly] 
 **DeviceMoId** | Pointer to **string** | The database identifier of the registered device of an object. | [optional] [readonly] 
@@ -37,6 +37,7 @@ Name | Type | Description | Notes
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | The operational state of the server. | [optional] [readonly] 
 **Operability** | Pointer to **string** | The operability of the server. | [optional] [readonly] 
+**Personality** | Pointer to **string** | The Rack unit software Personality. | [optional] [readonly] 
 **PlatformType** | Pointer to **string** | The platform type of the registered device - whether managed by UCSM or operating in standalone mode. | [optional] [readonly] 
 **Presence** | Pointer to **string** | This field identifies the presence (equipped) or absence of the given component. | [optional] [readonly] 
 **Revision** | Pointer to **string** | This field identifies the revision of the given component. | [optional] [readonly] 
@@ -45,13 +46,14 @@ Name | Type | Description | Notes
 **Serial** | Pointer to **string** | This field identifies the serial of the given component. | [optional] [readonly] 
 **ServerId** | Pointer to **int64** | RackUnit ID that uniquely identifies the server. | [optional] [readonly] 
 **ServiceProfile** | Pointer to **string** | The distinguished name of the service profile to which the server is associated to. It is applicable only for servers which are managed via UCSM. | [optional] [readonly] 
-**SlotId** | Pointer to **int64** | The slot number in the chassis that the blade is located in. | [optional] [readonly] 
+**SlotId** | Pointer to **int64** | The slot number in the chassis that the blade is discovered in. | [optional] [readonly] 
 **SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
 **TopologyScanStatus** | Pointer to **string** | To maintain the Topology workflow run status. | [optional] [readonly] 
 **TotalMemory** | Pointer to **int64** | The total memory available on the server. | [optional] [readonly] 
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The universally unique identity of the server. | [optional] [readonly] 
 **Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
+**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -919,6 +921,31 @@ SetOperability sets Operability field to given value.
 
 HasOperability returns a boolean if a field has been set.
 
+### GetPersonality
+
+`func (o *ComputePhysicalSummary) GetPersonality() string`
+
+GetPersonality returns the Personality field if non-nil, zero value otherwise.
+
+### GetPersonalityOk
+
+`func (o *ComputePhysicalSummary) GetPersonalityOk() (*string, bool)`
+
+GetPersonalityOk returns a tuple with the Personality field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPersonality
+
+`func (o *ComputePhysicalSummary) SetPersonality(v string)`
+
+SetPersonality sets Personality field to given value.
+
+### HasPersonality
+
+`func (o *ComputePhysicalSummary) HasPersonality() bool`
+
+HasPersonality returns a boolean if a field has been set.
+
 ### GetPlatformType
 
 `func (o *ComputePhysicalSummary) GetPlatformType() string`
@@ -1293,6 +1320,31 @@ SetVendor sets Vendor field to given value.
 `func (o *ComputePhysicalSummary) HasVendor() bool`
 
 HasVendor returns a boolean if a field has been set.
+
+### GetEquipmentChassis
+
+`func (o *ComputePhysicalSummary) GetEquipmentChassis() EquipmentChassisRelationship`
+
+GetEquipmentChassis returns the EquipmentChassis field if non-nil, zero value otherwise.
+
+### GetEquipmentChassisOk
+
+`func (o *ComputePhysicalSummary) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool)`
+
+GetEquipmentChassisOk returns a tuple with the EquipmentChassis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentChassis
+
+`func (o *ComputePhysicalSummary) SetEquipmentChassis(v EquipmentChassisRelationship)`
+
+SetEquipmentChassis sets EquipmentChassis field to given value.
+
+### HasEquipmentChassis
+
+`func (o *ComputePhysicalSummary) HasEquipmentChassis() bool`
+
+HasEquipmentChassis returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

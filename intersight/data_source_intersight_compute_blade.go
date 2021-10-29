@@ -802,7 +802,7 @@ func dataSourceComputeBlade() *schema.Resource {
 			},
 		},
 		"chassis_id": {
-			Description: "The id of the chassis that the blade is located in.",
+			Description: "The id of the chassis that the blade is discovered in.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1538,7 +1538,7 @@ func dataSourceComputeBlade() *schema.Resource {
 			Optional:    true,
 		},
 		"slot_id": {
-			Description: "The slot number in the chassis that the blade is located in.",
+			Description: "The slot number in the chassis that the blade is discovered in.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -2619,7 +2619,7 @@ func dataSourceComputeBlade() *schema.Resource {
 			},
 		},
 		"chassis_id": {
-			Description: "The id of the chassis that the blade is located in.",
+			Description: "The id of the chassis that the blade is discovered in.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -3355,7 +3355,7 @@ func dataSourceComputeBlade() *schema.Resource {
 			Optional:    true,
 		},
 		"slot_id": {
-			Description: "The slot number in the chassis that the blade is located in.",
+			Description: "The slot number in the chassis that the blade is discovered in.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -4614,7 +4614,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -5019,7 +5019,7 @@ func dataSourceComputeBladeRead(c context.Context, d *schema.ResourceData, meta 
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

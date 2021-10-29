@@ -18,13 +18,19 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `fcp_enabled`:(bool) Status for Fibre Channel Protocol ( FCP ) allowed to run on Vservers. 
+* `ipspace`:(string) IPspace name. IPspaces are distinct IP address spaces in which storage virtual machines (SVMs) reside. 
 * `iscsi_enabled`:(bool) Status for iSCSI protocol allowed to run on Vservers. 
+* `key`:(string) Unique identifier of VServer across data center. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the tenant in storage array. 
 * `nfs_enabled`:(bool) Status for Network File System Protocol ( NFS ) allowed to run on  Vservers. 
+* `nfs_v3_enabled`:(bool) Status for Network File System Protocol ( NFSv3 ) allowed to run on  Vservers. 
+* `nfs_v41_enabled`:(bool) Status for Network File System Protocol ( NFSv4.1 ) allowed to run on  Vservers. 
+* `nfs_v4_enabled`:(bool) Status for Network File System Protocol ( NFSv4 ) allowed to run on  Vservers. 
 * `nvme_enabled`:(bool) Status for NVME protocol allowed to run on Vservers. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `state`:(string) The state of this tenant.* `Unknown` - Component state is not available.* `Starting` - Component is being started.* `Running` - Component is currently running.* `Stopping` - Component is being stopped.* `Stopped` - Component has been stopped.* `Deleting` - Component deletion is in progress. 
+* `subtype`:(string) SVM subtype (default, dp_destination, sync_source, or sync_destination). The SVM subtype sync_destination is created automatically when an SVM of subtype sync_source is created on the source MetroCluster cluster. 
 * `uuid`:(string) The uuid of this tenant in storage array. 
  

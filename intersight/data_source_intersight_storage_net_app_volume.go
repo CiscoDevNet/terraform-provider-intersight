@@ -99,6 +99,51 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"avg_performance_metrics": {
+			Description: "Average performance metrics for over a period of time.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops": {
+						Description: "Rate of I/O operations observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"latency": {
+						Description: "Latency observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"period": {
+						Description: "Duration of periodic aggregation, in hours.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput": {
+						Description: "Throughput observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -154,7 +199,12 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 			Optional:    true,
 		},
 		"export_policy_name": {
-			Description: "Name of the Export Policy associated with the volume.",
+			Description: "The name of the Export Policy.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"key": {
+			Description: "Unique identifier of NetApp Volume across data center.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -258,17 +308,17 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 			Optional:    true,
 		},
 		"snapshot_policy_name": {
-			Description: "Name of the snapshot policy.",
+			Description: "The name of the Snapshot Policy.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"snapshot_policy_uuid": {
-			Description: "Uuid of the snapshot policy.",
+			Description: "The UUID of the Snapshot Policy.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"snapshot_utilized_capacity": {
-			Description: "The total space used by snapshot copies in the volume represented in bytes.",
+			Description: "The total space used by Snapshot copies in the volume represented in bytes.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -386,12 +436,12 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 			},
 		},
 		"type": {
-			Description: "NetApp volume type. The volume type can be Read-write or Data-protection, Load-sharing, or Data-cache.\n* `data-protection` - Prevents modification of the data on the Volume.\n* `read-write` - Data on the Volume can be modified.\n* `load-sharing` - Load Sharing.",
+			Description: "NetApp volume type. The volume type can be Read-write, Data-protection, or Load-sharing.\n* `data-protection` - Prevents modification of the data on the Volume.\n* `read-write` - Data on the Volume can be modified.\n* `load-sharing` - The volume type is Load Sharing DP.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"uuid": {
-			Description: "UUID of NetApp Volume.",
+			Description: "Universally unique identifier of a NetApp Volume.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -588,6 +638,51 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"avg_performance_metrics": {
+			Description: "Average performance metrics for over a period of time.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops": {
+						Description: "Rate of I/O operations observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"latency": {
+						Description: "Latency observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"period": {
+						Description: "Duration of periodic aggregation, in hours.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput": {
+						Description: "Throughput observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -643,7 +738,12 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 			Optional:    true,
 		},
 		"export_policy_name": {
-			Description: "Name of the Export Policy associated with the volume.",
+			Description: "The name of the Export Policy.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"key": {
+			Description: "Unique identifier of NetApp Volume across data center.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -747,17 +847,17 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 			Optional:    true,
 		},
 		"snapshot_policy_name": {
-			Description: "Name of the snapshot policy.",
+			Description: "The name of the Snapshot Policy.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"snapshot_policy_uuid": {
-			Description: "Uuid of the snapshot policy.",
+			Description: "The UUID of the Snapshot Policy.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"snapshot_utilized_capacity": {
-			Description: "The total space used by snapshot copies in the volume represented in bytes.",
+			Description: "The total space used by Snapshot copies in the volume represented in bytes.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -875,12 +975,12 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 			},
 		},
 		"type": {
-			Description: "NetApp volume type. The volume type can be Read-write or Data-protection, Load-sharing, or Data-cache.\n* `data-protection` - Prevents modification of the data on the Volume.\n* `read-write` - Data on the Volume can be modified.\n* `load-sharing` - Load Sharing.",
+			Description: "NetApp volume type. The volume type can be Read-write, Data-protection, or Load-sharing.\n* `data-protection` - Prevents modification of the data on the Volume.\n* `read-write` - Data on the Volume can be modified.\n* `load-sharing` - The volume type is Load Sharing DP.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"uuid": {
-			Description: "UUID of NetApp Volume.",
+			Description: "Universally unique identifier of a NetApp Volume.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1111,18 +1211,49 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 		o.SetAutosizeMode(x)
 	}
 
+	if v, ok := d.GetOk("avg_performance_metrics"); ok {
+		p := make([]models.StorageNetAppPerformanceMetricsAverage, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageNetAppPerformanceMetricsAverage{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.NetAppPerformanceMetricsAverage")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAvgPerformanceMetrics(x)
+		}
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
 	if v, ok := d.GetOk("created_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreatedTime(x)
 	}
 
@@ -1176,8 +1307,13 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 		o.SetExportPolicyName(x)
 	}
 
+	if v, ok := d.GetOk("key"); ok {
+		x := (v.(string))
+		o.SetKey(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1547,6 +1683,8 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 
 				temp["array"] = flattenMapStorageNetAppClusterRelationship(s.GetArray(), d)
 				temp["autosize_mode"] = (s.GetAutosizeMode())
+
+				temp["avg_performance_metrics"] = flattenMapStorageNetAppPerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -1556,6 +1694,7 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 				temp["disk_pool"] = flattenListStorageNetAppAggregateRelationship(s.GetDiskPool(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["export_policy_name"] = (s.GetExportPolicyName())
+				temp["key"] = (s.GetKey())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

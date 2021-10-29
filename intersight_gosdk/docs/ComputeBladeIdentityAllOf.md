@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.BladeIdentity"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.BladeIdentity"]
 **ChassisId** | Pointer to **int64** | Chassis Identifier of a blade server. | [optional] [readonly] 
+**CurrentChassisId** | Pointer to **int64** | The id of the chassis that the blade is currently located in. | [optional] [readonly] 
+**CurrentSlotId** | Pointer to **int64** | The slot number in the chassis that the blade is currently located in. | [optional] [readonly] 
 **FirmwareSupportability** | Pointer to **string** | Describes whether the running CIMC version supports Intersight managed mode. * &#x60;Unknown&#x60; - The running firmware version is unknown. * &#x60;Supported&#x60; - The running firmware version is known and supports IMM mode. * &#x60;NotSupported&#x60; - The running firmware version is known and does not support IMM mode. | [optional] [readonly] [default to "Unknown"]
 **Presence** | Pointer to **string** | The presence state of the blade server. * &#x60;Unknown&#x60; - The default presence state. * &#x60;Equipped&#x60; - The server is equipped in the slot. * &#x60;EquippedMismatch&#x60; - The slot is equipped, but there is another server currently inventoried in the slot. * &#x60;Missing&#x60; - The server is not present in the given slot. | [optional] [readonly] [default to "Unknown"]
 **SlotId** | Pointer to **int64** | Chassis slot number of a blade server. | [optional] [readonly] 
@@ -94,6 +96,56 @@ SetChassisId sets ChassisId field to given value.
 `func (o *ComputeBladeIdentityAllOf) HasChassisId() bool`
 
 HasChassisId returns a boolean if a field has been set.
+
+### GetCurrentChassisId
+
+`func (o *ComputeBladeIdentityAllOf) GetCurrentChassisId() int64`
+
+GetCurrentChassisId returns the CurrentChassisId field if non-nil, zero value otherwise.
+
+### GetCurrentChassisIdOk
+
+`func (o *ComputeBladeIdentityAllOf) GetCurrentChassisIdOk() (*int64, bool)`
+
+GetCurrentChassisIdOk returns a tuple with the CurrentChassisId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrentChassisId
+
+`func (o *ComputeBladeIdentityAllOf) SetCurrentChassisId(v int64)`
+
+SetCurrentChassisId sets CurrentChassisId field to given value.
+
+### HasCurrentChassisId
+
+`func (o *ComputeBladeIdentityAllOf) HasCurrentChassisId() bool`
+
+HasCurrentChassisId returns a boolean if a field has been set.
+
+### GetCurrentSlotId
+
+`func (o *ComputeBladeIdentityAllOf) GetCurrentSlotId() int64`
+
+GetCurrentSlotId returns the CurrentSlotId field if non-nil, zero value otherwise.
+
+### GetCurrentSlotIdOk
+
+`func (o *ComputeBladeIdentityAllOf) GetCurrentSlotIdOk() (*int64, bool)`
+
+GetCurrentSlotIdOk returns a tuple with the CurrentSlotId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrentSlotId
+
+`func (o *ComputeBladeIdentityAllOf) SetCurrentSlotId(v int64)`
+
+SetCurrentSlotId sets CurrentSlotId field to given value.
+
+### HasCurrentSlotId
+
+`func (o *ComputeBladeIdentityAllOf) HasCurrentSlotId() bool`
+
+HasCurrentSlotId returns a boolean if a field has been set.
 
 ### GetFirmwareSupportability
 

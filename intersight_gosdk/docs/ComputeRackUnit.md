@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **StorageControllers** | Pointer to [**[]StorageControllerRelationship**](StorageControllerRelationship.md) | An array of relationships to storageController resources. | [optional] 
 **StorageEnclosures** | Pointer to [**[]StorageEnclosureRelationship**](StorageEnclosureRelationship.md) | An array of relationships to storageEnclosure resources. | [optional] [readonly] 
 **TopSystem** | Pointer to [**TopSystemRelationship**](TopSystemRelationship.md) |  | [optional] 
+**UnitPersonality** | Pointer to [**[]RackUnitPersonalityRelationship**](RackUnitPersonalityRelationship.md) | An array of relationships to rackUnitPersonality resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -862,6 +863,41 @@ SetTopSystem sets TopSystem field to given value.
 
 HasTopSystem returns a boolean if a field has been set.
 
+### GetUnitPersonality
+
+`func (o *ComputeRackUnit) GetUnitPersonality() []RackUnitPersonalityRelationship`
+
+GetUnitPersonality returns the UnitPersonality field if non-nil, zero value otherwise.
+
+### GetUnitPersonalityOk
+
+`func (o *ComputeRackUnit) GetUnitPersonalityOk() (*[]RackUnitPersonalityRelationship, bool)`
+
+GetUnitPersonalityOk returns a tuple with the UnitPersonality field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnitPersonality
+
+`func (o *ComputeRackUnit) SetUnitPersonality(v []RackUnitPersonalityRelationship)`
+
+SetUnitPersonality sets UnitPersonality field to given value.
+
+### HasUnitPersonality
+
+`func (o *ComputeRackUnit) HasUnitPersonality() bool`
+
+HasUnitPersonality returns a boolean if a field has been set.
+
+### SetUnitPersonalityNil
+
+`func (o *ComputeRackUnit) SetUnitPersonalityNil(b bool)`
+
+ SetUnitPersonalityNil sets the value for UnitPersonality to be an explicit nil
+
+### UnsetUnitPersonality
+`func (o *ComputeRackUnit) UnsetUnitPersonality()`
+
+UnsetUnitPersonality ensures that no value is present for UnitPersonality, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

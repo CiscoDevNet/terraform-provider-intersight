@@ -18,15 +18,16 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `created_time`:(string) Storage container's creation time. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `export_policy_name`:(string) Name of the Export Policy associated with the volume. 
+* `export_policy_name`:(string) The name of the Export Policy. 
+* `key`:(string) Unique identifier of NetApp Volume across data center. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the storage container. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
-* `snapshot_policy_name`:(string) Name of the snapshot policy. 
-* `snapshot_policy_uuid`:(string) Uuid of the snapshot policy. 
-* `snapshot_utilized_capacity`:(int) The total space used by snapshot copies in the volume represented in bytes. 
+* `snapshot_policy_name`:(string) The name of the Snapshot Policy. 
+* `snapshot_policy_uuid`:(string) The UUID of the Snapshot Policy. 
+* `snapshot_utilized_capacity`:(int) The total space used by Snapshot copies in the volume represented in bytes. 
 * `state`:(string) The current state of a NetApp volume.* `offline` - Read and write access to the volume is not allowed.* `online` - Read and write access to the volume is allowed.* `error` - Storage volume state of error type.* `mixed` - The constituents of a FlexGroup volume are not all in the same state. 
-* `type`:(string) NetApp volume type. The volume type can be Read-write or Data-protection, Load-sharing, or Data-cache.* `data-protection` - Prevents modification of the data on the Volume.* `read-write` - Data on the Volume can be modified.* `load-sharing` - Load Sharing. 
-* `uuid`:(string) UUID of NetApp Volume. 
+* `type`:(string) NetApp volume type. The volume type can be Read-write, Data-protection, or Load-sharing.* `data-protection` - Prevents modification of the data on the Volume.* `read-write` - Data on the Volume can be modified.* `load-sharing` - The volume type is Load Sharing DP. 
+* `uuid`:(string) Universally unique identifier of a NetApp Volume. 
  

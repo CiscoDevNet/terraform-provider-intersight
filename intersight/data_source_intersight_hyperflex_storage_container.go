@@ -1193,12 +1193,12 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
 	if v, ok := d.GetOk("created_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreatedTime(x)
 	}
 
@@ -1251,17 +1251,17 @@ func dataSourceHyperflexStorageContainerRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("last_access_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastAccessTime(x)
 	}
 
 	if v, ok := d.GetOk("last_modified_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastModifiedTime(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

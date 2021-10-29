@@ -14,7 +14,9 @@ Name | Type | Description | Notes
 **EmulationType** | Pointer to **string** | The volume emulation type or the volume status information. * &#x60;N/A&#x60; - Not available. * &#x60;NOT DEFINED&#x60; - The volume is not implemented. * &#x60;DEFINING&#x60; - The volume is being created. * &#x60;REMOVING&#x60; - The volume is being removed. * &#x60;OPEN-V&#x60; - To be provided by Hitachi. | [optional] [readonly] [default to "N/A"]
 **IsFullAllocationEnabled** | Pointer to **bool** | Whether pages are reserved by the FullAllocation functionality. | [optional] [readonly] 
 **Label** | Pointer to **string** | Label of the volume, as configured in the storage array. | [optional] [readonly] 
+**NamespaceId** | Pointer to **string** | Namespace ID registered in NVM Subsystem. | [optional] [readonly] 
 **NumOfPaths** | Pointer to **int64** | Number of paths set for the volume. | [optional] [readonly] 
+**NvmSubsystemId** | Pointer to **string** | NVM subsystem ID on storage system. | [optional] [readonly] 
 **ParityGroupIds** | Pointer to **[]string** |  | [optional] 
 **PoolId** | Pointer to **string** | ID of the pool with which the volume is associated. | [optional] [readonly] 
 **RaidLevel** | Pointer to **string** | RAID level for the volume. * &#x60;N/A&#x60; - RAID level is unknown or multiple RAID levels are being used. * &#x60;RAID1&#x60; - RAID1. * &#x60;RAID5&#x60; - RAID5. * &#x60;RAID6&#x60; - RAID6. | [optional] [readonly] [default to "N/A"]
@@ -294,6 +296,31 @@ SetLabel sets Label field to given value.
 
 HasLabel returns a boolean if a field has been set.
 
+### GetNamespaceId
+
+`func (o *StorageHitachiVolumeAllOf) GetNamespaceId() string`
+
+GetNamespaceId returns the NamespaceId field if non-nil, zero value otherwise.
+
+### GetNamespaceIdOk
+
+`func (o *StorageHitachiVolumeAllOf) GetNamespaceIdOk() (*string, bool)`
+
+GetNamespaceIdOk returns a tuple with the NamespaceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNamespaceId
+
+`func (o *StorageHitachiVolumeAllOf) SetNamespaceId(v string)`
+
+SetNamespaceId sets NamespaceId field to given value.
+
+### HasNamespaceId
+
+`func (o *StorageHitachiVolumeAllOf) HasNamespaceId() bool`
+
+HasNamespaceId returns a boolean if a field has been set.
+
 ### GetNumOfPaths
 
 `func (o *StorageHitachiVolumeAllOf) GetNumOfPaths() int64`
@@ -318,6 +345,31 @@ SetNumOfPaths sets NumOfPaths field to given value.
 `func (o *StorageHitachiVolumeAllOf) HasNumOfPaths() bool`
 
 HasNumOfPaths returns a boolean if a field has been set.
+
+### GetNvmSubsystemId
+
+`func (o *StorageHitachiVolumeAllOf) GetNvmSubsystemId() string`
+
+GetNvmSubsystemId returns the NvmSubsystemId field if non-nil, zero value otherwise.
+
+### GetNvmSubsystemIdOk
+
+`func (o *StorageHitachiVolumeAllOf) GetNvmSubsystemIdOk() (*string, bool)`
+
+GetNvmSubsystemIdOk returns a tuple with the NvmSubsystemId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNvmSubsystemId
+
+`func (o *StorageHitachiVolumeAllOf) SetNvmSubsystemId(v string)`
+
+SetNvmSubsystemId sets NvmSubsystemId field to given value.
+
+### HasNvmSubsystemId
+
+`func (o *StorageHitachiVolumeAllOf) HasNvmSubsystemId() bool`
+
+HasNvmSubsystemId returns a boolean if a field has been set.
 
 ### GetParityGroupIds
 

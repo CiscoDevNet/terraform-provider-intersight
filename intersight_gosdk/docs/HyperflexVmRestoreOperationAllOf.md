@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.VmRestoreOperation"]
 **NewName** | Pointer to **string** | New name for the Virtual Machine after recovery. | [optional] 
 **PowerOn** | Pointer to **bool** | Power on the Virtual Machine after recovery. | [optional] [default to true]
+**StartTime** | Pointer to **int64** | Start time for the replication. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **RestoreEdgeClusterMoid** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 **VmBackupInfoMoid** | Pointer to [**HyperflexVmBackupInfoRelationship**](HyperflexVmBackupInfoRelationship.md) |  | [optional] 
@@ -121,6 +122,31 @@ SetPowerOn sets PowerOn field to given value.
 `func (o *HyperflexVmRestoreOperationAllOf) HasPowerOn() bool`
 
 HasPowerOn returns a boolean if a field has been set.
+
+### GetStartTime
+
+`func (o *HyperflexVmRestoreOperationAllOf) GetStartTime() int64`
+
+GetStartTime returns the StartTime field if non-nil, zero value otherwise.
+
+### GetStartTimeOk
+
+`func (o *HyperflexVmRestoreOperationAllOf) GetStartTimeOk() (*int64, bool)`
+
+GetStartTimeOk returns a tuple with the StartTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartTime
+
+`func (o *HyperflexVmRestoreOperationAllOf) SetStartTime(v int64)`
+
+SetStartTime sets StartTime field to given value.
+
+### HasStartTime
+
+`func (o *HyperflexVmRestoreOperationAllOf) HasStartTime() bool`
+
+HasStartTime returns a boolean if a field has been set.
 
 ### GetOrganization
 

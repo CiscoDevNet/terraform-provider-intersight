@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **BackupDataStoreName** | Pointer to **string** | Backup datastore name prefix used during the auto creation of the datastore. All VMs created in this datastore will be automatically backed up. | [optional] [default to "backup-source-ds"]
 **BackupDataStoreSize** | Pointer to **int64** | Replication data store size in backupDataStoreSizeUnit. | [optional] [default to 2]
 **BackupDataStoreSizeUnit** | Pointer to **string** | Replication data store size. | [optional] [default to "TB"]
+**DataStoreEncryptionEnabled** | Pointer to **bool** | Whether the datastore is encrypted or not. | [optional] [default to false]
+**LocalSnapshotRetentionCount** | Pointer to **int64** | Number of snapshots that will be retained as part of the Multi Point in Time support. | [optional] [default to 4]
 **ReplicationPairNamePrefix** | Pointer to **string** | Replication cluster pairing name prefix. | [optional] [default to "backup"]
 **ReplicationSchedule** | Pointer to [**NullableHyperflexReplicationSchedule**](HyperflexReplicationSchedule.md) |  | [optional] 
 **SnapshotRetentionCount** | Pointer to **int64** | Number of snapshots that will be retained as part of the Multi Point in Time support. | [optional] [default to 4]
@@ -149,6 +151,56 @@ SetBackupDataStoreSizeUnit sets BackupDataStoreSizeUnit field to given value.
 `func (o *HyperflexClusterBackupPolicyAllOf) HasBackupDataStoreSizeUnit() bool`
 
 HasBackupDataStoreSizeUnit returns a boolean if a field has been set.
+
+### GetDataStoreEncryptionEnabled
+
+`func (o *HyperflexClusterBackupPolicyAllOf) GetDataStoreEncryptionEnabled() bool`
+
+GetDataStoreEncryptionEnabled returns the DataStoreEncryptionEnabled field if non-nil, zero value otherwise.
+
+### GetDataStoreEncryptionEnabledOk
+
+`func (o *HyperflexClusterBackupPolicyAllOf) GetDataStoreEncryptionEnabledOk() (*bool, bool)`
+
+GetDataStoreEncryptionEnabledOk returns a tuple with the DataStoreEncryptionEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDataStoreEncryptionEnabled
+
+`func (o *HyperflexClusterBackupPolicyAllOf) SetDataStoreEncryptionEnabled(v bool)`
+
+SetDataStoreEncryptionEnabled sets DataStoreEncryptionEnabled field to given value.
+
+### HasDataStoreEncryptionEnabled
+
+`func (o *HyperflexClusterBackupPolicyAllOf) HasDataStoreEncryptionEnabled() bool`
+
+HasDataStoreEncryptionEnabled returns a boolean if a field has been set.
+
+### GetLocalSnapshotRetentionCount
+
+`func (o *HyperflexClusterBackupPolicyAllOf) GetLocalSnapshotRetentionCount() int64`
+
+GetLocalSnapshotRetentionCount returns the LocalSnapshotRetentionCount field if non-nil, zero value otherwise.
+
+### GetLocalSnapshotRetentionCountOk
+
+`func (o *HyperflexClusterBackupPolicyAllOf) GetLocalSnapshotRetentionCountOk() (*int64, bool)`
+
+GetLocalSnapshotRetentionCountOk returns a tuple with the LocalSnapshotRetentionCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocalSnapshotRetentionCount
+
+`func (o *HyperflexClusterBackupPolicyAllOf) SetLocalSnapshotRetentionCount(v int64)`
+
+SetLocalSnapshotRetentionCount sets LocalSnapshotRetentionCount field to given value.
+
+### HasLocalSnapshotRetentionCount
+
+`func (o *HyperflexClusterBackupPolicyAllOf) HasLocalSnapshotRetentionCount() bool`
+
+HasLocalSnapshotRetentionCount returns a boolean if a field has been set.
 
 ### GetReplicationPairNamePrefix
 

@@ -10,9 +10,13 @@ Name | Type | Description | Notes
 **ClusterEntityReference** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
 **ClusterIdProtectionInfoMap** | Pointer to [**[]HyperflexMapClusterIdToProtectionInfo**](HyperflexMapClusterIdToProtectionInfo.md) |  | [optional] 
 **Error** | Pointer to [**NullableHyperflexErrorStack**](HyperflexErrorStack.md) |  | [optional] 
+**LocalSnapshotRetentionCount** | Pointer to **int64** | Retention count from backup policy for local snapshots. | [optional] [readonly] 
 **PowerOn** | Pointer to **bool** | The power state of the Virtual Machine. | [optional] [readonly] 
 **ProtectionStatus** | Pointer to **string** | Description of the protection status of this VmBackupInfo. * &#x60;PREPARE_FAILOVER_STARTED&#x60; - The protection status is prepare failover started. * &#x60;PREPARE_FAILOVER_FAILED&#x60; - The protection status is prepare failover failed. * &#x60;PREPARE_FAILOVER_COMPLETED&#x60; - The protection status is prepaire failover completed. * &#x60;FAILOVER_STARTED&#x60; - The protection status is failover started. * &#x60;FAILOVER_FAILED&#x60; - The protection status is failover failed. * &#x60;FAILOVER_COMPLETED&#x60; - The protection status is failover completed. * &#x60;PREPARE_REVERSEPROTECT_STARTED&#x60; - The protection status is prepare reverse protect started. * &#x60;PREPARE_REVERSEPROTECT_FAILED&#x60; - The protection status is prepare reverse protect failed. * &#x60;PREPARE_REVERSEPROTECT_COMPLETED&#x60; - The protection status is prepair reverse protect completed. * &#x60;REVERSEPROTECT_STARTED&#x60; - The protection status is reverse protect started. * &#x60;REVERSEPROTECT_FAILED&#x60; - The protection status is reverse protect failed. * &#x60;ACTIVE&#x60; - The protection status is active. * &#x60;CREATION_IN_PROGRESS&#x60; - The protection status is failover in progress. * &#x60;CREATION_FAILED&#x60; - The protection status is creation failed. * &#x60;LOCAL_RESTORE_STARTED&#x60; - The protection status is local restore started. * &#x60;LOCAL_RESTORE_FAILED&#x60; - The protection status is local restore failed. | [optional] [readonly] [default to "PREPARE_FAILOVER_STARTED"]
 **Schedule** | Pointer to [**[]HyperflexReplicationClusterReferenceToSchedule**](HyperflexReplicationClusterReferenceToSchedule.md) |  | [optional] 
+**SnapshotRetentionCount** | Pointer to **int64** | Retention count from backup policy for remote snapshots. | [optional] [readonly] 
+**SrcClusterName** | Pointer to **string** | Name for the source cluster this Virtual Machine is residing on. | [optional] [readonly] 
+**TgtClusterName** | Pointer to **string** | Name for the target cluster this Virtual Machine is residing on. | [optional] [readonly] 
 **VmEntityReference** | Pointer to [**NullableHyperflexEntityReference**](HyperflexEntityReference.md) |  | [optional] 
 **VmInfo** | Pointer to [**NullableHyperflexVirtualMachine**](HyperflexVirtualMachine.md) |  | [optional] 
 **SrcBackupCluster** | Pointer to [**HyperflexBackupClusterRelationship**](HyperflexBackupClusterRelationship.md) |  | [optional] 
@@ -208,6 +212,31 @@ HasError returns a boolean if a field has been set.
 `func (o *HyperflexVmBackupInfo) UnsetError()`
 
 UnsetError ensures that no value is present for Error, not even an explicit nil
+### GetLocalSnapshotRetentionCount
+
+`func (o *HyperflexVmBackupInfo) GetLocalSnapshotRetentionCount() int64`
+
+GetLocalSnapshotRetentionCount returns the LocalSnapshotRetentionCount field if non-nil, zero value otherwise.
+
+### GetLocalSnapshotRetentionCountOk
+
+`func (o *HyperflexVmBackupInfo) GetLocalSnapshotRetentionCountOk() (*int64, bool)`
+
+GetLocalSnapshotRetentionCountOk returns a tuple with the LocalSnapshotRetentionCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocalSnapshotRetentionCount
+
+`func (o *HyperflexVmBackupInfo) SetLocalSnapshotRetentionCount(v int64)`
+
+SetLocalSnapshotRetentionCount sets LocalSnapshotRetentionCount field to given value.
+
+### HasLocalSnapshotRetentionCount
+
+`func (o *HyperflexVmBackupInfo) HasLocalSnapshotRetentionCount() bool`
+
+HasLocalSnapshotRetentionCount returns a boolean if a field has been set.
+
 ### GetPowerOn
 
 `func (o *HyperflexVmBackupInfo) GetPowerOn() bool`
@@ -293,6 +322,81 @@ HasSchedule returns a boolean if a field has been set.
 `func (o *HyperflexVmBackupInfo) UnsetSchedule()`
 
 UnsetSchedule ensures that no value is present for Schedule, not even an explicit nil
+### GetSnapshotRetentionCount
+
+`func (o *HyperflexVmBackupInfo) GetSnapshotRetentionCount() int64`
+
+GetSnapshotRetentionCount returns the SnapshotRetentionCount field if non-nil, zero value otherwise.
+
+### GetSnapshotRetentionCountOk
+
+`func (o *HyperflexVmBackupInfo) GetSnapshotRetentionCountOk() (*int64, bool)`
+
+GetSnapshotRetentionCountOk returns a tuple with the SnapshotRetentionCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnapshotRetentionCount
+
+`func (o *HyperflexVmBackupInfo) SetSnapshotRetentionCount(v int64)`
+
+SetSnapshotRetentionCount sets SnapshotRetentionCount field to given value.
+
+### HasSnapshotRetentionCount
+
+`func (o *HyperflexVmBackupInfo) HasSnapshotRetentionCount() bool`
+
+HasSnapshotRetentionCount returns a boolean if a field has been set.
+
+### GetSrcClusterName
+
+`func (o *HyperflexVmBackupInfo) GetSrcClusterName() string`
+
+GetSrcClusterName returns the SrcClusterName field if non-nil, zero value otherwise.
+
+### GetSrcClusterNameOk
+
+`func (o *HyperflexVmBackupInfo) GetSrcClusterNameOk() (*string, bool)`
+
+GetSrcClusterNameOk returns a tuple with the SrcClusterName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSrcClusterName
+
+`func (o *HyperflexVmBackupInfo) SetSrcClusterName(v string)`
+
+SetSrcClusterName sets SrcClusterName field to given value.
+
+### HasSrcClusterName
+
+`func (o *HyperflexVmBackupInfo) HasSrcClusterName() bool`
+
+HasSrcClusterName returns a boolean if a field has been set.
+
+### GetTgtClusterName
+
+`func (o *HyperflexVmBackupInfo) GetTgtClusterName() string`
+
+GetTgtClusterName returns the TgtClusterName field if non-nil, zero value otherwise.
+
+### GetTgtClusterNameOk
+
+`func (o *HyperflexVmBackupInfo) GetTgtClusterNameOk() (*string, bool)`
+
+GetTgtClusterNameOk returns a tuple with the TgtClusterName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTgtClusterName
+
+`func (o *HyperflexVmBackupInfo) SetTgtClusterName(v string)`
+
+SetTgtClusterName sets TgtClusterName field to given value.
+
+### HasTgtClusterName
+
+`func (o *HyperflexVmBackupInfo) HasTgtClusterName() bool`
+
+HasTgtClusterName returns a boolean if a field has been set.
+
 ### GetVmEntityReference
 
 `func (o *HyperflexVmBackupInfo) GetVmEntityReference() HyperflexEntityReference`
