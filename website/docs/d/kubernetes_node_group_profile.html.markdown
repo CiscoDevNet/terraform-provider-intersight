@@ -20,8 +20,8 @@ The following arguments can be used to get data of already created objects in In
 * `description`:(string) Description of the profile. 
 * `desiredsize`:(int) Desired number of nodes in this node group, same as minsize initially and is updated by the auto-scaler. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `maxsize`:(int) Maximum number of nodes desired in this node group. 
-* `minsize`:(int) Minimum number of nodes desired in this node group. 
+* `maxsize`:(int) Maximum number of nodes this node group can scale up to during repair, replacement or upgrade operations. 
+* `minsize`:(int) Minimum number of available nodes this node group can scale down to during repair, replacement or upgrade operations. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the profile instance or profile template. 

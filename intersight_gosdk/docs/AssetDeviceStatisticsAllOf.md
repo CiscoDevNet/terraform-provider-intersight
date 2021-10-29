@@ -6,7 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.DeviceStatistics"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.DeviceStatistics"]
+**ClusterDeploymentType** | Pointer to **string** | Deployment type of HyperFlex cluster. | [optional] [readonly] 
+**ClusterDeviceMoid** | Pointer to **string** | Reference to HyperFlex cluster target device ID. | [optional] [readonly] 
 **ClusterName** | Pointer to **string** | Name of the cluster. It is specified only for HyperFlex based devices. | [optional] [readonly] 
+**ClusterReplicationFactor** | Pointer to **int64** | Data replication factor of HyperFlex cluster. | [optional] [readonly] 
 **Connected** | Pointer to **int64** | The status of the persistent connection between the device connector and Intersight, for HyperFlex or UCS device. 1 represents being connected and 0 represents being disconnected. | [optional] [readonly] 
 **MembershipRatio** | Pointer to **float32** | Defines the average proportion of resources used by the device within the cluster. example in a cluster having 3 nodes, the membershipRatio of each node is 1/3 or 0.33. It is specified only for HyperFlex based devices. | [optional] [readonly] 
 **MemoryMirroringFactor** | Pointer to **float32** | Memory Reliability, availability and serviceability (RAS) factor. | [optional] [readonly] 
@@ -71,6 +74,56 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetClusterDeploymentType
+
+`func (o *AssetDeviceStatisticsAllOf) GetClusterDeploymentType() string`
+
+GetClusterDeploymentType returns the ClusterDeploymentType field if non-nil, zero value otherwise.
+
+### GetClusterDeploymentTypeOk
+
+`func (o *AssetDeviceStatisticsAllOf) GetClusterDeploymentTypeOk() (*string, bool)`
+
+GetClusterDeploymentTypeOk returns a tuple with the ClusterDeploymentType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterDeploymentType
+
+`func (o *AssetDeviceStatisticsAllOf) SetClusterDeploymentType(v string)`
+
+SetClusterDeploymentType sets ClusterDeploymentType field to given value.
+
+### HasClusterDeploymentType
+
+`func (o *AssetDeviceStatisticsAllOf) HasClusterDeploymentType() bool`
+
+HasClusterDeploymentType returns a boolean if a field has been set.
+
+### GetClusterDeviceMoid
+
+`func (o *AssetDeviceStatisticsAllOf) GetClusterDeviceMoid() string`
+
+GetClusterDeviceMoid returns the ClusterDeviceMoid field if non-nil, zero value otherwise.
+
+### GetClusterDeviceMoidOk
+
+`func (o *AssetDeviceStatisticsAllOf) GetClusterDeviceMoidOk() (*string, bool)`
+
+GetClusterDeviceMoidOk returns a tuple with the ClusterDeviceMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterDeviceMoid
+
+`func (o *AssetDeviceStatisticsAllOf) SetClusterDeviceMoid(v string)`
+
+SetClusterDeviceMoid sets ClusterDeviceMoid field to given value.
+
+### HasClusterDeviceMoid
+
+`func (o *AssetDeviceStatisticsAllOf) HasClusterDeviceMoid() bool`
+
+HasClusterDeviceMoid returns a boolean if a field has been set.
+
 ### GetClusterName
 
 `func (o *AssetDeviceStatisticsAllOf) GetClusterName() string`
@@ -95,6 +148,31 @@ SetClusterName sets ClusterName field to given value.
 `func (o *AssetDeviceStatisticsAllOf) HasClusterName() bool`
 
 HasClusterName returns a boolean if a field has been set.
+
+### GetClusterReplicationFactor
+
+`func (o *AssetDeviceStatisticsAllOf) GetClusterReplicationFactor() int64`
+
+GetClusterReplicationFactor returns the ClusterReplicationFactor field if non-nil, zero value otherwise.
+
+### GetClusterReplicationFactorOk
+
+`func (o *AssetDeviceStatisticsAllOf) GetClusterReplicationFactorOk() (*int64, bool)`
+
+GetClusterReplicationFactorOk returns a tuple with the ClusterReplicationFactor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterReplicationFactor
+
+`func (o *AssetDeviceStatisticsAllOf) SetClusterReplicationFactor(v int64)`
+
+SetClusterReplicationFactor sets ClusterReplicationFactor field to given value.
+
+### HasClusterReplicationFactor
+
+`func (o *AssetDeviceStatisticsAllOf) HasClusterReplicationFactor() bool`
+
+HasClusterReplicationFactor returns a boolean if a field has been set.
 
 ### GetConnected
 

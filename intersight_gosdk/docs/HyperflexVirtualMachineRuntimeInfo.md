@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.VirtualMachineRuntimeInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.VirtualMachineRuntimeInfo"]
 **BiosUuid** | Pointer to **string** | BiosUuid of the Protected Virtual Machine. | [optional] [readonly] 
-**ConnectionState** | Pointer to **string** | Connection state of the VM. | [optional] [readonly] 
+**ConnectionState** | Pointer to **string** | Connection state of the Virtual Machine. | [optional] [readonly] 
 **CpuUsage** | Pointer to **int64** | CPU Usage of Virtual Machine. | [optional] [readonly] 
 **Folder** | Pointer to **string** | Folder which VM belongs to. | [optional] [readonly] 
 **GuestFamily** | Pointer to **string** | Guest operating system family, if known. | [optional] [readonly] 

@@ -317,12 +317,12 @@ func dataSourceKubernetesNodeGroupProfile() *schema.Resource {
 			},
 		},
 		"maxsize": {
-			Description: "Maximum number of nodes desired in this node group.",
+			Description: "Maximum number of nodes this node group can scale up to during repair, replacement or upgrade operations.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"minsize": {
-			Description: "Minimum number of nodes desired in this node group.",
+			Description: "Minimum number of available nodes this node group can scale down to during repair, replacement or upgrade operations.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -1010,12 +1010,12 @@ func dataSourceKubernetesNodeGroupProfile() *schema.Resource {
 			},
 		},
 		"maxsize": {
-			Description: "Maximum number of nodes desired in this node group.",
+			Description: "Maximum number of nodes this node group can scale up to during repair, replacement or upgrade operations.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"minsize": {
-			Description: "Minimum number of nodes desired in this node group.",
+			Description: "Minimum number of available nodes this node group can scale down to during repair, replacement or upgrade operations.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -1568,7 +1568,7 @@ func dataSourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1769,7 +1769,7 @@ func dataSourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

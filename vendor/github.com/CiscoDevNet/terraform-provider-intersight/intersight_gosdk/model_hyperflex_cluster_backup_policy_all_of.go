@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -27,6 +27,10 @@ type HyperflexClusterBackupPolicyAllOf struct {
 	BackupDataStoreSize *int64 `json:"BackupDataStoreSize,omitempty"`
 	// Replication data store size.
 	BackupDataStoreSizeUnit *string `json:"BackupDataStoreSizeUnit,omitempty"`
+	// Whether the datastore is encrypted or not.
+	DataStoreEncryptionEnabled *bool `json:"DataStoreEncryptionEnabled,omitempty"`
+	// Number of snapshots that will be retained as part of the Multi Point in Time support.
+	LocalSnapshotRetentionCount *int64 `json:"LocalSnapshotRetentionCount,omitempty"`
 	// Replication cluster pairing name prefix.
 	ReplicationPairNamePrefix *string                              `json:"ReplicationPairNamePrefix,omitempty"`
 	ReplicationSchedule       NullableHyperflexReplicationSchedule `json:"ReplicationSchedule,omitempty"`
@@ -55,6 +59,10 @@ func NewHyperflexClusterBackupPolicyAllOf(classId string, objectType string) *Hy
 	this.BackupDataStoreSize = &backupDataStoreSize
 	var backupDataStoreSizeUnit string = "TB"
 	this.BackupDataStoreSizeUnit = &backupDataStoreSizeUnit
+	var dataStoreEncryptionEnabled bool = false
+	this.DataStoreEncryptionEnabled = &dataStoreEncryptionEnabled
+	var localSnapshotRetentionCount int64 = 4
+	this.LocalSnapshotRetentionCount = &localSnapshotRetentionCount
 	var replicationPairNamePrefix string = "backup"
 	this.ReplicationPairNamePrefix = &replicationPairNamePrefix
 	var snapshotRetentionCount int64 = 4
@@ -77,6 +85,10 @@ func NewHyperflexClusterBackupPolicyAllOfWithDefaults() *HyperflexClusterBackupP
 	this.BackupDataStoreSize = &backupDataStoreSize
 	var backupDataStoreSizeUnit string = "TB"
 	this.BackupDataStoreSizeUnit = &backupDataStoreSizeUnit
+	var dataStoreEncryptionEnabled bool = false
+	this.DataStoreEncryptionEnabled = &dataStoreEncryptionEnabled
+	var localSnapshotRetentionCount int64 = 4
+	this.LocalSnapshotRetentionCount = &localSnapshotRetentionCount
 	var replicationPairNamePrefix string = "backup"
 	this.ReplicationPairNamePrefix = &replicationPairNamePrefix
 	var snapshotRetentionCount int64 = 4
@@ -226,6 +238,70 @@ func (o *HyperflexClusterBackupPolicyAllOf) HasBackupDataStoreSizeUnit() bool {
 // SetBackupDataStoreSizeUnit gets a reference to the given string and assigns it to the BackupDataStoreSizeUnit field.
 func (o *HyperflexClusterBackupPolicyAllOf) SetBackupDataStoreSizeUnit(v string) {
 	o.BackupDataStoreSizeUnit = &v
+}
+
+// GetDataStoreEncryptionEnabled returns the DataStoreEncryptionEnabled field value if set, zero value otherwise.
+func (o *HyperflexClusterBackupPolicyAllOf) GetDataStoreEncryptionEnabled() bool {
+	if o == nil || o.DataStoreEncryptionEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DataStoreEncryptionEnabled
+}
+
+// GetDataStoreEncryptionEnabledOk returns a tuple with the DataStoreEncryptionEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexClusterBackupPolicyAllOf) GetDataStoreEncryptionEnabledOk() (*bool, bool) {
+	if o == nil || o.DataStoreEncryptionEnabled == nil {
+		return nil, false
+	}
+	return o.DataStoreEncryptionEnabled, true
+}
+
+// HasDataStoreEncryptionEnabled returns a boolean if a field has been set.
+func (o *HyperflexClusterBackupPolicyAllOf) HasDataStoreEncryptionEnabled() bool {
+	if o != nil && o.DataStoreEncryptionEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDataStoreEncryptionEnabled gets a reference to the given bool and assigns it to the DataStoreEncryptionEnabled field.
+func (o *HyperflexClusterBackupPolicyAllOf) SetDataStoreEncryptionEnabled(v bool) {
+	o.DataStoreEncryptionEnabled = &v
+}
+
+// GetLocalSnapshotRetentionCount returns the LocalSnapshotRetentionCount field value if set, zero value otherwise.
+func (o *HyperflexClusterBackupPolicyAllOf) GetLocalSnapshotRetentionCount() int64 {
+	if o == nil || o.LocalSnapshotRetentionCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.LocalSnapshotRetentionCount
+}
+
+// GetLocalSnapshotRetentionCountOk returns a tuple with the LocalSnapshotRetentionCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexClusterBackupPolicyAllOf) GetLocalSnapshotRetentionCountOk() (*int64, bool) {
+	if o == nil || o.LocalSnapshotRetentionCount == nil {
+		return nil, false
+	}
+	return o.LocalSnapshotRetentionCount, true
+}
+
+// HasLocalSnapshotRetentionCount returns a boolean if a field has been set.
+func (o *HyperflexClusterBackupPolicyAllOf) HasLocalSnapshotRetentionCount() bool {
+	if o != nil && o.LocalSnapshotRetentionCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLocalSnapshotRetentionCount gets a reference to the given int64 and assigns it to the LocalSnapshotRetentionCount field.
+func (o *HyperflexClusterBackupPolicyAllOf) SetLocalSnapshotRetentionCount(v int64) {
+	o.LocalSnapshotRetentionCount = &v
 }
 
 // GetReplicationPairNamePrefix returns the ReplicationPairNamePrefix field value if set, zero value otherwise.
@@ -449,6 +525,12 @@ func (o HyperflexClusterBackupPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.BackupDataStoreSizeUnit != nil {
 		toSerialize["BackupDataStoreSizeUnit"] = o.BackupDataStoreSizeUnit
 	}
+	if o.DataStoreEncryptionEnabled != nil {
+		toSerialize["DataStoreEncryptionEnabled"] = o.DataStoreEncryptionEnabled
+	}
+	if o.LocalSnapshotRetentionCount != nil {
+		toSerialize["LocalSnapshotRetentionCount"] = o.LocalSnapshotRetentionCount
+	}
 	if o.ReplicationPairNamePrefix != nil {
 		toSerialize["ReplicationPairNamePrefix"] = o.ReplicationPairNamePrefix
 	}
@@ -490,6 +572,8 @@ func (o *HyperflexClusterBackupPolicyAllOf) UnmarshalJSON(bytes []byte) (err err
 		delete(additionalProperties, "BackupDataStoreName")
 		delete(additionalProperties, "BackupDataStoreSize")
 		delete(additionalProperties, "BackupDataStoreSizeUnit")
+		delete(additionalProperties, "DataStoreEncryptionEnabled")
+		delete(additionalProperties, "LocalSnapshotRetentionCount")
 		delete(additionalProperties, "ReplicationPairNamePrefix")
 		delete(additionalProperties, "ReplicationSchedule")
 		delete(additionalProperties, "SnapshotRetentionCount")

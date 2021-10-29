@@ -962,7 +962,7 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 	var de diag.Diagnostics
 	var o = &models.IamOAuthToken{}
 	if v, ok := d.GetOk("access_expiration_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetAccessExpirationTime(x)
 	}
 
@@ -1084,7 +1084,7 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1094,7 +1094,7 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 	}
 
 	if v, ok := d.GetOk("expiration_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetExpirationTime(x)
 	}
 
@@ -1104,12 +1104,12 @@ func dataSourceIamOAuthTokenRead(c context.Context, d *schema.ResourceData, meta
 	}
 
 	if v, ok := d.GetOk("last_login_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastLoginTime(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

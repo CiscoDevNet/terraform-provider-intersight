@@ -6,9 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppNode"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppNode"]
-**Health** | Pointer to **bool** | Health of NetApp Node. The node is marked healthy when this is set. | [optional] [readonly] 
-**Systemid** | Pointer to **string** | System id of NetApp Node. | [optional] [readonly] 
-**Uuid** | Pointer to **string** | UUID of NetApp Node. | [optional] [readonly] 
+**AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
+**Health** | Pointer to **bool** | The health of the NetApp Node. | [optional] [readonly] 
+**HighAvailability** | Pointer to [**NullableStorageNetAppHighAvailability**](StorageNetAppHighAvailability.md) |  | [optional] 
+**Key** | Pointer to **string** | Unique identifier of NetApp Node across data center. | [optional] [readonly] 
+**Systemid** | Pointer to **string** | The system id of the NetApp Node. | [optional] [readonly] 
+**Uuid** | Pointer to **string** | Universally unique identifier of NetApp Node. | [optional] [readonly] 
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 
 ## Methods
@@ -70,6 +73,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAvgPerformanceMetrics
+
+`func (o *StorageNetAppNodeAllOf) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage`
+
+GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field if non-nil, zero value otherwise.
+
+### GetAvgPerformanceMetricsOk
+
+`func (o *StorageNetAppNodeAllOf) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool)`
+
+GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvgPerformanceMetrics
+
+`func (o *StorageNetAppNodeAllOf) SetAvgPerformanceMetrics(v StorageNetAppPerformanceMetricsAverage)`
+
+SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
+
+### HasAvgPerformanceMetrics
+
+`func (o *StorageNetAppNodeAllOf) HasAvgPerformanceMetrics() bool`
+
+HasAvgPerformanceMetrics returns a boolean if a field has been set.
+
 ### GetHealth
 
 `func (o *StorageNetAppNodeAllOf) GetHealth() bool`
@@ -94,6 +122,66 @@ SetHealth sets Health field to given value.
 `func (o *StorageNetAppNodeAllOf) HasHealth() bool`
 
 HasHealth returns a boolean if a field has been set.
+
+### GetHighAvailability
+
+`func (o *StorageNetAppNodeAllOf) GetHighAvailability() StorageNetAppHighAvailability`
+
+GetHighAvailability returns the HighAvailability field if non-nil, zero value otherwise.
+
+### GetHighAvailabilityOk
+
+`func (o *StorageNetAppNodeAllOf) GetHighAvailabilityOk() (*StorageNetAppHighAvailability, bool)`
+
+GetHighAvailabilityOk returns a tuple with the HighAvailability field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHighAvailability
+
+`func (o *StorageNetAppNodeAllOf) SetHighAvailability(v StorageNetAppHighAvailability)`
+
+SetHighAvailability sets HighAvailability field to given value.
+
+### HasHighAvailability
+
+`func (o *StorageNetAppNodeAllOf) HasHighAvailability() bool`
+
+HasHighAvailability returns a boolean if a field has been set.
+
+### SetHighAvailabilityNil
+
+`func (o *StorageNetAppNodeAllOf) SetHighAvailabilityNil(b bool)`
+
+ SetHighAvailabilityNil sets the value for HighAvailability to be an explicit nil
+
+### UnsetHighAvailability
+`func (o *StorageNetAppNodeAllOf) UnsetHighAvailability()`
+
+UnsetHighAvailability ensures that no value is present for HighAvailability, not even an explicit nil
+### GetKey
+
+`func (o *StorageNetAppNodeAllOf) GetKey() string`
+
+GetKey returns the Key field if non-nil, zero value otherwise.
+
+### GetKeyOk
+
+`func (o *StorageNetAppNodeAllOf) GetKeyOk() (*string, bool)`
+
+GetKeyOk returns a tuple with the Key field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKey
+
+`func (o *StorageNetAppNodeAllOf) SetKey(v string)`
+
+SetKey sets Key field to given value.
+
+### HasKey
+
+`func (o *StorageNetAppNodeAllOf) HasKey() bool`
+
+HasKey returns a boolean if a field has been set.
 
 ### GetSystemid
 

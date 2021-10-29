@@ -287,7 +287,7 @@ func dataSourceStorageNetAppVolumeSnapshot() *schema.Resource {
 			},
 		},
 		"uuid": {
-			Description: "UUID of the volume snapshot.",
+			Description: "Universally unique identifier of the volume snapshot.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -672,7 +672,7 @@ func dataSourceStorageNetAppVolumeSnapshot() *schema.Resource {
 			},
 		},
 		"uuid": {
-			Description: "UUID of the volume snapshot.",
+			Description: "Universally unique identifier of the volume snapshot.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -904,12 +904,12 @@ func dataSourceStorageNetAppVolumeSnapshotRead(c context.Context, d *schema.Reso
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
 	if v, ok := d.GetOk("created_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreatedTime(x)
 	}
 
@@ -919,7 +919,7 @@ func dataSourceStorageNetAppVolumeSnapshotRead(c context.Context, d *schema.Reso
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

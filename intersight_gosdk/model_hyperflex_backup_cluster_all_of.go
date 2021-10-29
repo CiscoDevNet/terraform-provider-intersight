@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -22,7 +22,9 @@ type HyperflexBackupClusterAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Defines the backup source cluster and its references.
-	BackupDataStore      *string                       `json:"BackupDataStore,omitempty"`
+	BackupDataStore *string `json:"BackupDataStore,omitempty"`
+	// UUID for the cluster to allow lookups across unclaim/reclaim.
+	SrcClusterUuid       *string                       `json:"SrcClusterUuid,omitempty"`
 	SrcCluster           *HyperflexClusterRelationship `json:"SrcCluster,omitempty"`
 	TgtCluster           *HyperflexClusterRelationship `json:"TgtCluster,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -133,6 +135,38 @@ func (o *HyperflexBackupClusterAllOf) SetBackupDataStore(v string) {
 	o.BackupDataStore = &v
 }
 
+// GetSrcClusterUuid returns the SrcClusterUuid field value if set, zero value otherwise.
+func (o *HyperflexBackupClusterAllOf) GetSrcClusterUuid() string {
+	if o == nil || o.SrcClusterUuid == nil {
+		var ret string
+		return ret
+	}
+	return *o.SrcClusterUuid
+}
+
+// GetSrcClusterUuidOk returns a tuple with the SrcClusterUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexBackupClusterAllOf) GetSrcClusterUuidOk() (*string, bool) {
+	if o == nil || o.SrcClusterUuid == nil {
+		return nil, false
+	}
+	return o.SrcClusterUuid, true
+}
+
+// HasSrcClusterUuid returns a boolean if a field has been set.
+func (o *HyperflexBackupClusterAllOf) HasSrcClusterUuid() bool {
+	if o != nil && o.SrcClusterUuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcClusterUuid gets a reference to the given string and assigns it to the SrcClusterUuid field.
+func (o *HyperflexBackupClusterAllOf) SetSrcClusterUuid(v string) {
+	o.SrcClusterUuid = &v
+}
+
 // GetSrcCluster returns the SrcCluster field value if set, zero value otherwise.
 func (o *HyperflexBackupClusterAllOf) GetSrcCluster() HyperflexClusterRelationship {
 	if o == nil || o.SrcCluster == nil {
@@ -208,6 +242,9 @@ func (o HyperflexBackupClusterAllOf) MarshalJSON() ([]byte, error) {
 	if o.BackupDataStore != nil {
 		toSerialize["BackupDataStore"] = o.BackupDataStore
 	}
+	if o.SrcClusterUuid != nil {
+		toSerialize["SrcClusterUuid"] = o.SrcClusterUuid
+	}
 	if o.SrcCluster != nil {
 		toSerialize["SrcCluster"] = o.SrcCluster
 	}
@@ -235,6 +272,7 @@ func (o *HyperflexBackupClusterAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BackupDataStore")
+		delete(additionalProperties, "SrcClusterUuid")
 		delete(additionalProperties, "SrcCluster")
 		delete(additionalProperties, "TgtCluster")
 		o.AdditionalProperties = additionalProperties

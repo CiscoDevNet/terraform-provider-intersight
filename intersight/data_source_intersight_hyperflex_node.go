@@ -251,7 +251,7 @@ func dataSourceHyperflexNode() *schema.Resource {
 									Optional:    true,
 								},
 								"rel": {
-									Description: "Relationship of link to this resource.",
+									Description: "Relationship of  link to this resource.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -838,7 +838,7 @@ func dataSourceHyperflexNode() *schema.Resource {
 									Optional:    true,
 								},
 								"rel": {
-									Description: "Relationship of link to this resource.",
+									Description: "Relationship of  link to this resource.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -1356,7 +1356,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1519,7 +1519,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

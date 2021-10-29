@@ -249,7 +249,7 @@ func dataSourceHyperflexServerFirmwareVersionEntry() *schema.Resource {
 			},
 		},
 		"server_platform": {
-			Description: "The server platform type that is applicable for the server firmware bundle version.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.",
+			Description: "The server platform type that is applicable for the server firmware bundle version.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.\n* `M6` - M6 generation of UCS server.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -629,7 +629,7 @@ func dataSourceHyperflexServerFirmwareVersionEntry() *schema.Resource {
 			},
 		},
 		"server_platform": {
-			Description: "The server platform type that is applicable for the server firmware bundle version.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.",
+			Description: "The server platform type that is applicable for the server firmware bundle version.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.\n* `M6` - M6 generation of UCS server.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -912,7 +912,7 @@ func dataSourceHyperflexServerFirmwareVersionEntryRead(c context.Context, d *sch
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -922,7 +922,7 @@ func dataSourceHyperflexServerFirmwareVersionEntryRead(c context.Context, d *sch
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

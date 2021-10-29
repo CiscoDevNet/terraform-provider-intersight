@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **VirtualDrive** | Pointer to **string** | The virtual drive corresponding to the physical disk. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageVirtualDrive** | Pointer to [**StorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -273,6 +274,31 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 `func (o *StoragePhysicalDiskUsageAllOf) HasRegisteredDevice() bool`
 
 HasRegisteredDevice returns a boolean if a field has been set.
+
+### GetStorageVirtualDrive
+
+`func (o *StoragePhysicalDiskUsageAllOf) GetStorageVirtualDrive() StorageVirtualDriveRelationship`
+
+GetStorageVirtualDrive returns the StorageVirtualDrive field if non-nil, zero value otherwise.
+
+### GetStorageVirtualDriveOk
+
+`func (o *StoragePhysicalDiskUsageAllOf) GetStorageVirtualDriveOk() (*StorageVirtualDriveRelationship, bool)`
+
+GetStorageVirtualDriveOk returns a tuple with the StorageVirtualDrive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageVirtualDrive
+
+`func (o *StoragePhysicalDiskUsageAllOf) SetStorageVirtualDrive(v StorageVirtualDriveRelationship)`
+
+SetStorageVirtualDrive sets StorageVirtualDrive field to given value.
+
+### HasStorageVirtualDrive
+
+`func (o *StoragePhysicalDiskUsageAllOf) HasStorageVirtualDrive() bool`
+
+HasStorageVirtualDrive returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -114,6 +114,11 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 				},
 			},
 		},
+		"datastore_kind": {
+			Description: "HyperFlex Datastore Kind.\n* `UNKNOWN` - HyperFlex datastore kind is unknown.\n* `USER_CREATED` - HyperFlex datastore kind is user created.\n* `INTERNAL` - HyperFlex datastore kind is internal.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"datastore_status": {
 			Description: "HyperFlex datastore status.\n* `NORMAL` - The HyperFlex datastore status is normal.\n* `ALERT` - The HyperFlex datastore status is alert.\n* `FAILED` - The HyperFlex datastore status is failed.",
 			Type:        schema.TypeString,
@@ -176,6 +181,11 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"usage_type": {
+						Description: "HyperFlex datastore usage type.\n* `NFS` - The HyperFlex datastore type is NFS.\n* `SMB` - The HyperFlex datastore type is SMB.\n* `ISCSI` - The HyperFlex datastore type is ISCSI.\n* `UNKNOWN` - The HyperFlex datastore type is unknown.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 				},
 			},
 		},
@@ -190,7 +200,7 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
 					"accessibility": {
-						Description: "Accessibility of HyperFlex datastore.\n* `ACCESSIBLE` - The HyperFlex datastore accessibility state is accessible.\n* `NOT_ACCESSIBLE` - The HyperFlex datastore accessibility state is not accessible.\n* `PARTIALLY_ACCESSIBLE` - The HyperFlex datastore accessibility state is partially accessible.\n* `READONLY` - The HyperFlex datastore accessibility state is read-only.\n* `HOST_NOT_REACHABLE` - The HyperFlex datastore accessibility state is host not reachable.\n* `UNKNOWN` - The HyperFlex datastore accessibility state is unknown.",
+						Description: "Accessibility of datastore.\n* `ACCESSIBLE` - The HyperFlex datastore accessibility state is accessible.\n* `NOT_ACCESSIBLE` - The HyperFlex datastore accessibility state is not accessible.\n* `PARTIALLY_ACCESSIBLE` - The HyperFlex datastore accessibility state is partially accessible.\n* `READONLY` - The HyperFlex datastore accessibility state is read-only.\n* `HOST_NOT_REACHABLE` - The HyperFlex datastore accessibility state is host not reachable.\n* `UNKNOWN` - The HyperFlex datastore accessibility state is unknown.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -205,12 +215,12 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 						Optional:    true,
 					},
 					"host_name": {
-						Description: "HyperFlex name of host for this datastore.",
+						Description: "Name of host for the HyperFlex datastore.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"mounted": {
-						Description: "Is the HyperFlex datastore mounted or not.",
+						Description: "Is the datastore mounted or not.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
@@ -220,12 +230,17 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 						Optional:    true,
 					},
 					"reason": {
-						Description: "Reason for inaccessibility for this datastore.",
+						Description: "Reason for inaccessibility.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 				},
 			},
+		},
+		"is_encrypted": {
+			Description: "Indicates if the datastore is encrypted or un-encrypted.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"last_access_time": {
 			Description: "Timestamp the datastore object was last accessed.",
@@ -406,6 +421,41 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 				},
 			},
 		},
+		"src_cluster": {
+			Description: "A reference to a hyperflexCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -423,6 +473,41 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 					},
 					"value": {
 						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"tgt_cluster": {
+			Description: "A reference to a hyperflexCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -657,6 +742,11 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 				},
 			},
 		},
+		"datastore_kind": {
+			Description: "HyperFlex Datastore Kind.\n* `UNKNOWN` - HyperFlex datastore kind is unknown.\n* `USER_CREATED` - HyperFlex datastore kind is user created.\n* `INTERNAL` - HyperFlex datastore kind is internal.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"datastore_status": {
 			Description: "HyperFlex datastore status.\n* `NORMAL` - The HyperFlex datastore status is normal.\n* `ALERT` - The HyperFlex datastore status is alert.\n* `FAILED` - The HyperFlex datastore status is failed.",
 			Type:        schema.TypeString,
@@ -719,6 +809,11 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"usage_type": {
+						Description: "HyperFlex datastore usage type.\n* `NFS` - The HyperFlex datastore type is NFS.\n* `SMB` - The HyperFlex datastore type is SMB.\n* `ISCSI` - The HyperFlex datastore type is ISCSI.\n* `UNKNOWN` - The HyperFlex datastore type is unknown.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 				},
 			},
 		},
@@ -733,7 +828,7 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
 					"accessibility": {
-						Description: "Accessibility of HyperFlex datastore.\n* `ACCESSIBLE` - The HyperFlex datastore accessibility state is accessible.\n* `NOT_ACCESSIBLE` - The HyperFlex datastore accessibility state is not accessible.\n* `PARTIALLY_ACCESSIBLE` - The HyperFlex datastore accessibility state is partially accessible.\n* `READONLY` - The HyperFlex datastore accessibility state is read-only.\n* `HOST_NOT_REACHABLE` - The HyperFlex datastore accessibility state is host not reachable.\n* `UNKNOWN` - The HyperFlex datastore accessibility state is unknown.",
+						Description: "Accessibility of datastore.\n* `ACCESSIBLE` - The HyperFlex datastore accessibility state is accessible.\n* `NOT_ACCESSIBLE` - The HyperFlex datastore accessibility state is not accessible.\n* `PARTIALLY_ACCESSIBLE` - The HyperFlex datastore accessibility state is partially accessible.\n* `READONLY` - The HyperFlex datastore accessibility state is read-only.\n* `HOST_NOT_REACHABLE` - The HyperFlex datastore accessibility state is host not reachable.\n* `UNKNOWN` - The HyperFlex datastore accessibility state is unknown.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -748,12 +843,12 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 						Optional:    true,
 					},
 					"host_name": {
-						Description: "HyperFlex name of host for this datastore.",
+						Description: "Name of host for the HyperFlex datastore.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"mounted": {
-						Description: "Is the HyperFlex datastore mounted or not.",
+						Description: "Is the datastore mounted or not.",
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
@@ -763,12 +858,17 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 						Optional:    true,
 					},
 					"reason": {
-						Description: "Reason for inaccessibility for this datastore.",
+						Description: "Reason for inaccessibility.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 				},
 			},
+		},
+		"is_encrypted": {
+			Description: "Indicates if the datastore is encrypted or un-encrypted.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"last_access_time": {
 			Description: "Timestamp the datastore object was last accessed.",
@@ -949,6 +1049,41 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 				},
 			},
 		},
+		"src_cluster": {
+			Description: "A reference to a hyperflexCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -966,6 +1101,41 @@ func dataSourceHyperflexDatastoreStatistic() *schema.Resource {
 					},
 					"value": {
 						Description: "The string representation of a tag value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"tgt_cluster": {
+			Description: "A reference to a hyperflexCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1182,7 +1352,7 @@ func dataSourceHyperflexDatastoreStatisticRead(c context.Context, d *schema.Reso
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1232,6 +1402,11 @@ func dataSourceHyperflexDatastoreStatisticRead(c context.Context, d *schema.Reso
 			x := p[0]
 			o.SetDataProtectionPeer(x)
 		}
+	}
+
+	if v, ok := d.GetOk("datastore_kind"); ok {
+		x := (v.(string))
+		o.SetDatastoreKind(x)
 	}
 
 	if v, ok := d.GetOk("datastore_status"); ok {
@@ -1308,6 +1483,11 @@ func dataSourceHyperflexDatastoreStatisticRead(c context.Context, d *schema.Reso
 		o.SetHostMountStatus(x)
 	}
 
+	if v, ok := d.GetOkExists("is_encrypted"); ok {
+		x := (v.(bool))
+		o.SetIsEncrypted(x)
+	}
+
 	if v, ok := d.GetOk("last_access_time"); ok {
 		x := (v.(string))
 		o.SetLastAccessTime(x)
@@ -1319,7 +1499,7 @@ func dataSourceHyperflexDatastoreStatisticRead(c context.Context, d *schema.Reso
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1471,6 +1651,49 @@ func dataSourceHyperflexDatastoreStatisticRead(c context.Context, d *schema.Reso
 		}
 	}
 
+	if v, ok := d.GetOk("src_cluster"); ok {
+		p := make([]models.HyperflexClusterRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsHyperflexClusterRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSrcCluster(x)
+		}
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1502,6 +1725,49 @@ func dataSourceHyperflexDatastoreStatisticRead(c context.Context, d *schema.Reso
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOk("tgt_cluster"); ok {
+		p := make([]models.HyperflexClusterRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsHyperflexClusterRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetTgtCluster(x)
+		}
 	}
 
 	if v, ok := d.GetOkExists("total_capacity_in_bytes"); ok {
@@ -1645,6 +1911,7 @@ func dataSourceHyperflexDatastoreStatisticRead(c context.Context, d *schema.Reso
 				temp["creation_time"] = (s.GetCreationTime())
 
 				temp["data_protection_peer"] = flattenMapHyperflexDataProtectionPeerRelationship(s.GetDataProtectionPeer(), d)
+				temp["datastore_kind"] = (s.GetDatastoreKind())
 				temp["datastore_status"] = (s.GetDatastoreStatus())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
@@ -1652,6 +1919,7 @@ func dataSourceHyperflexDatastoreStatisticRead(c context.Context, d *schema.Reso
 				temp["free_capacity_in_bytes"] = (s.GetFreeCapacityInBytes())
 
 				temp["host_mount_status"] = flattenListHyperflexHxHostMountStatusDt(s.GetHostMountStatus(), d)
+				temp["is_encrypted"] = (s.GetIsEncrypted())
 				temp["last_access_time"] = (s.GetLastAccessTime())
 				temp["last_modified_time"] = (s.GetLastModifiedTime())
 
@@ -1669,7 +1937,11 @@ func dataSourceHyperflexDatastoreStatisticRead(c context.Context, d *schema.Reso
 
 				temp["site"] = flattenMapHyperflexHxSiteDt(s.GetSite(), d)
 
+				temp["src_cluster"] = flattenMapHyperflexClusterRelationship(s.GetSrcCluster(), d)
+
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+
+				temp["tgt_cluster"] = flattenMapHyperflexClusterRelationship(s.GetTgtCluster(), d)
 				temp["total_capacity_in_bytes"] = (s.GetTotalCapacityInBytes())
 				temp["un_compressed_used_bytes"] = (s.GetUnCompressedUsedBytes())
 				temp["unshared_used_bytes"] = (s.GetUnsharedUsedBytes())

@@ -979,12 +979,12 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 	}
 
 	if v, ok := d.GetOk("blackout_end_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetBlackoutEndDate(x)
 	}
 
 	if v, ok := d.GetOk("blackout_start_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetBlackoutStartDate(x)
 	}
 
@@ -994,7 +994,7 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1014,12 +1014,12 @@ func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceD
 	}
 
 	if v, ok := d.GetOk("manual_installation_start_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetManualInstallationStartTime(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

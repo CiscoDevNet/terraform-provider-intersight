@@ -331,6 +331,12 @@ func resourceHyperflexVmRestoreOperation() *schema.Resource {
 				Computed:    true,
 				ForceNew:    true,
 			},
+			"start_time": {
+				Description: "Start time for the replication.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				ForceNew:    true,
+			},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -721,6 +727,11 @@ func resourceHyperflexVmRestoreOperationCreate(c context.Context, d *schema.Reso
 		}
 	}
 
+	if v, ok := d.GetOkExists("start_time"); ok {
+		x := int64(v.(int))
+		o.SetStartTime(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -944,6 +955,10 @@ func resourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Resour
 
 	if err := d.Set("shared_scope", (s.GetSharedScope())); err != nil {
 		return diag.Errorf("error occurred while setting property SharedScope in HyperflexVmRestoreOperation object: %s", err.Error())
+	}
+
+	if err := d.Set("start_time", (s.GetStartTime())); err != nil {
+		return diag.Errorf("error occurred while setting property StartTime in HyperflexVmRestoreOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {

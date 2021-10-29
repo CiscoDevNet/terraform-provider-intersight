@@ -168,28 +168,18 @@ This complex property has following sub-properties:
   + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
   + `source_file_path`:(string) Source file path on the Intersight connected device. 
 * `message_type`:(string) The type of SSH message to send to the remote server.* `ExecuteCommand` - Execute a SSH command on the remote server.* `NewSession` - Open a new SSH connection to the remote server.* `FileTransfer` - Transfer a file from Intersight connected device to the remote server.* `CloseSession` - Close the SSH connection to the remote server. 
-* `ssh_command`:(HashMap) - SSH command to execute on the remote server. 
-This complex property has following sub-properties:
-  + `command`:(string) SSH command to execute on the remote server. 
-  + `command_type`:(string) SSH command type to execute on the remote server.* `NonInteractiveCmd` - Execute a non-interactive SSH command on the remote server.* `InteractiveCmd` - Execute an interactive SSH command on the remote server. 
-  + `encrypted_aes_key`:(string) The secure properties that have large text content as value can be encrypted using AES key. In these cases, the AES key needs to be encrypted using the device connector public key and passed as the value for this property.The secure properties that are encrypted using the AES key are mapped against the property name with prefix 'AES' in SecureProperties dictionary. 
-  + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not same as device connector's public key, an error reponse with appropriate error message is thrown back. 
-  + `expect_prompts`:(Array)
-This complex property has following sub-properties:
-    + `expect`:(string) The regex of the expect prompt of the interactive command. 
-    + `expect_timeout`:(int) The timeout for the expect prompt while executing interactive command. If timeout is not set a default of 60 seconds will be used. 
-    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-    + `send`:(string) The answer string to the expect prompt. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
-  + `shell_prompt`:(string) Regex of the remote server's shell prompt. 
-  + `shell_prompt_timeout`:(int) Expect timeout value in seconds for the shell prompt. 
+* `ssh_command`:(JSON as string) SSH command to execute on the remote server. 
 * `ssh_configuration`:(HashMap) - Carries the SSH session details for opening a new connection. 
 This complex property has following sub-properties:
   + `encrypted_aes_key`:(string) The secure properties that have large text content as value can be encrypted using AES key. In these cases, the AES key needs to be encrypted using the device connector public key and passed as the value for this property.The secure properties that are encrypted using the AES key are mapped against the property name with prefix 'AES' in SecureProperties dictionary. 
   + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not same as device connector's public key, an error reponse with appropriate error message is thrown back. 
+  + `is_passphrase_set`:(bool)(ReadOnly) Indicates whether the value of the 'passphrase' property has been set. 
+  + `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 
+  + `is_private_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'privateKey' property has been set. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `passphrase`:(string) Optional passphrase if provided while creating the private key. 
   + `password`:(string) Password to use in the SSH connection credentials (If empty then private key will be used). 
+  + `private_key`:(string) PEM encoded private key to use in the SSH connection credentials (Optional if password is given). 
   + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
   + `target`:(string) The remote server to connect to. IPv4 address represented in dot decimal notation. 
   + `user`:(string) Username for the remote SSH connection. 

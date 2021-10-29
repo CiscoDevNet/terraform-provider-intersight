@@ -5,6 +5,7 @@ All URIs are relative to *https://intersight.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateResourcepoolPool**](ResourcepoolApi.md#CreateResourcepoolPool) | **Post** /api/v1/resourcepool/Pools | Create a &#39;resourcepool.Pool&#39; resource.
+[**DeleteResourcepoolLease**](ResourcepoolApi.md#DeleteResourcepoolLease) | **Delete** /api/v1/resourcepool/Leases/{Moid} | Delete a &#39;resourcepool.Lease&#39; resource.
 [**DeleteResourcepoolPool**](ResourcepoolApi.md#DeleteResourcepoolPool) | **Delete** /api/v1/resourcepool/Pools/{Moid} | Delete a &#39;resourcepool.Pool&#39; resource.
 [**GetResourcepoolLeaseByMoid**](ResourcepoolApi.md#GetResourcepoolLeaseByMoid) | **Get** /api/v1/resourcepool/Leases/{Moid} | Read a &#39;resourcepool.Lease&#39; resource.
 [**GetResourcepoolLeaseList**](ResourcepoolApi.md#GetResourcepoolLeaseList) | **Get** /api/v1/resourcepool/Leases | Read a &#39;resourcepool.Lease&#39; resource.
@@ -82,6 +83,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteResourcepoolLease
+
+> DeleteResourcepoolLease(ctx, moid).Execute()
+
+Delete a 'resourcepool.Lease' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ResourcepoolApi.DeleteResourcepoolLease(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ResourcepoolApi.DeleteResourcepoolLease``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteResourcepoolLeaseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

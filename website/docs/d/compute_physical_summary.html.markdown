@@ -18,7 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `asset_tag`:(string) The user defined asset tag assigned to the server. 
 * `available_memory`:(int) The amount of memory available on the server. 
 * `bios_post_complete`:(bool) The BIOS POST completion status of the server. 
-* `chassis_id`:(string) The id of the chassis that the blade is located in. 
+* `chassis_id`:(string) The id of the chassis that the blade is discovered in. 
 * `connection_status`:(string) Connectivity Status of RackUnit to Switch - A or B or AB. 
 * `cpu_capacity`:(float) CPU Capacity = Number of CPU Sockets x Enabled Cores x Speed (GHz). 
 * `create_time`:(string) The time when this managed object was created. 
@@ -46,6 +46,7 @@ The following arguments can be used to get data of already created objects in In
 * `oper_power_state`:(string) The actual power state of the server. 
 * `oper_state`:(string) The operational state of the server. 
 * `operability`:(string) The operability of the server. 
+* `personality`:(string) The Rack unit software Personality. 
 * `platform_type`:(string) The platform type of the registered device - whether managed by UCSM or operating in standalone mode. 
 * `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
@@ -55,7 +56,7 @@ The following arguments can be used to get data of already created objects in In
 * `server_id`:(int) RackUnit ID that uniquely identifies the server. 
 * `service_profile`:(string) The distinguished name of the service profile to which the server is associated to. It is applicable only for servers which are managed via UCSM. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
-* `slot_id`:(int) The slot number in the chassis that the blade is located in. 
+* `slot_id`:(int) The slot number in the chassis that the blade is discovered in. 
 * `source_object_type`:(string) The source object type of this view MO. 
 * `topology_scan_status`:(string) To maintain the Topology workflow run status. 
 * `total_memory`:(int) The total memory available on the server. 

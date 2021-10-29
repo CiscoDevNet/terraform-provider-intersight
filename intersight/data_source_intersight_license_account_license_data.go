@@ -1382,7 +1382,7 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1541,17 +1541,17 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("last_renew"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastRenew(x)
 	}
 
 	if v, ok := d.GetOk("last_sync"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastSync(x)
 	}
 
 	if v, ok := d.GetOk("last_updated_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastUpdatedTime(x)
 	}
 
@@ -1606,7 +1606,7 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

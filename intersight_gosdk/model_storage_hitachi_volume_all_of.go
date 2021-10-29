@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -36,8 +36,12 @@ type StorageHitachiVolumeAllOf struct {
 	IsFullAllocationEnabled *bool `json:"IsFullAllocationEnabled,omitempty"`
 	// Label of the volume, as configured in the storage array.
 	Label *string `json:"Label,omitempty"`
+	// Namespace ID registered in NVM Subsystem.
+	NamespaceId *string `json:"NamespaceId,omitempty"`
 	// Number of paths set for the volume.
-	NumOfPaths     *int64   `json:"NumOfPaths,omitempty"`
+	NumOfPaths *int64 `json:"NumOfPaths,omitempty"`
+	// NVM subsystem ID on storage system.
+	NvmSubsystemId *string  `json:"NvmSubsystemId,omitempty"`
 	ParityGroupIds []string `json:"ParityGroupIds,omitempty"`
 	// ID of the pool with which the volume is associated.
 	PoolId *string `json:"PoolId,omitempty"`
@@ -385,6 +389,38 @@ func (o *StorageHitachiVolumeAllOf) SetLabel(v string) {
 	o.Label = &v
 }
 
+// GetNamespaceId returns the NamespaceId field value if set, zero value otherwise.
+func (o *StorageHitachiVolumeAllOf) GetNamespaceId() string {
+	if o == nil || o.NamespaceId == nil {
+		var ret string
+		return ret
+	}
+	return *o.NamespaceId
+}
+
+// GetNamespaceIdOk returns a tuple with the NamespaceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageHitachiVolumeAllOf) GetNamespaceIdOk() (*string, bool) {
+	if o == nil || o.NamespaceId == nil {
+		return nil, false
+	}
+	return o.NamespaceId, true
+}
+
+// HasNamespaceId returns a boolean if a field has been set.
+func (o *StorageHitachiVolumeAllOf) HasNamespaceId() bool {
+	if o != nil && o.NamespaceId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNamespaceId gets a reference to the given string and assigns it to the NamespaceId field.
+func (o *StorageHitachiVolumeAllOf) SetNamespaceId(v string) {
+	o.NamespaceId = &v
+}
+
 // GetNumOfPaths returns the NumOfPaths field value if set, zero value otherwise.
 func (o *StorageHitachiVolumeAllOf) GetNumOfPaths() int64 {
 	if o == nil || o.NumOfPaths == nil {
@@ -415,6 +451,38 @@ func (o *StorageHitachiVolumeAllOf) HasNumOfPaths() bool {
 // SetNumOfPaths gets a reference to the given int64 and assigns it to the NumOfPaths field.
 func (o *StorageHitachiVolumeAllOf) SetNumOfPaths(v int64) {
 	o.NumOfPaths = &v
+}
+
+// GetNvmSubsystemId returns the NvmSubsystemId field value if set, zero value otherwise.
+func (o *StorageHitachiVolumeAllOf) GetNvmSubsystemId() string {
+	if o == nil || o.NvmSubsystemId == nil {
+		var ret string
+		return ret
+	}
+	return *o.NvmSubsystemId
+}
+
+// GetNvmSubsystemIdOk returns a tuple with the NvmSubsystemId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageHitachiVolumeAllOf) GetNvmSubsystemIdOk() (*string, bool) {
+	if o == nil || o.NvmSubsystemId == nil {
+		return nil, false
+	}
+	return o.NvmSubsystemId, true
+}
+
+// HasNvmSubsystemId returns a boolean if a field has been set.
+func (o *StorageHitachiVolumeAllOf) HasNvmSubsystemId() bool {
+	if o != nil && o.NvmSubsystemId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNvmSubsystemId gets a reference to the given string and assigns it to the NvmSubsystemId field.
+func (o *StorageHitachiVolumeAllOf) SetNvmSubsystemId(v string) {
+	o.NvmSubsystemId = &v
 }
 
 // GetParityGroupIds returns the ParityGroupIds field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -739,8 +807,14 @@ func (o StorageHitachiVolumeAllOf) MarshalJSON() ([]byte, error) {
 	if o.Label != nil {
 		toSerialize["Label"] = o.Label
 	}
+	if o.NamespaceId != nil {
+		toSerialize["NamespaceId"] = o.NamespaceId
+	}
 	if o.NumOfPaths != nil {
 		toSerialize["NumOfPaths"] = o.NumOfPaths
+	}
+	if o.NvmSubsystemId != nil {
+		toSerialize["NvmSubsystemId"] = o.NvmSubsystemId
 	}
 	if o.ParityGroupIds != nil {
 		toSerialize["ParityGroupIds"] = o.ParityGroupIds
@@ -797,7 +871,9 @@ func (o *StorageHitachiVolumeAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "EmulationType")
 		delete(additionalProperties, "IsFullAllocationEnabled")
 		delete(additionalProperties, "Label")
+		delete(additionalProperties, "NamespaceId")
 		delete(additionalProperties, "NumOfPaths")
+		delete(additionalProperties, "NvmSubsystemId")
 		delete(additionalProperties, "ParityGroupIds")
 		delete(additionalProperties, "PoolId")
 		delete(additionalProperties, "RaidLevel")

@@ -436,7 +436,7 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 															Optional:    true,
 														},
 														"status": {
-															Description: "Current snapshot state for this snapshot.\n* `SUCCESS` - This snapshot status code is success.\n* `FAILED` - This snapshot status code is failed.\n* `IN_PROGRESS` - This snapshot status code is in progress.\n* `DELETING` - This snapshot status code is deleting.\n* `DELETED` - This snapshot status code is deleted.\n* `NONE` - This snapshot status code is none.",
+															Description: "Current snapshot state for this snapshot.\n* `SUCCESS` - This snapshot status code is success.\n* `FAILED` - This snapshot status code is failed.\n* `IN_PROGRESS` - This snapshot status code is in progress.\n* `DELETING` - This snapshot status code is deleting.\n* `DELETED` - This snapshot status code is deleted.\n* `NONE` - This snapshot status code is none.\n* `INIT` - This snapshot status code is initializing.",
 															Type:        schema.TypeString,
 															Optional:    true,
 														},
@@ -776,7 +776,7 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 															Optional:    true,
 														},
 														"status": {
-															Description: "Current snapshot state for this snapshot.\n* `SUCCESS` - This snapshot status code is success.\n* `FAILED` - This snapshot status code is failed.\n* `IN_PROGRESS` - This snapshot status code is in progress.\n* `DELETING` - This snapshot status code is deleting.\n* `DELETED` - This snapshot status code is deleted.\n* `NONE` - This snapshot status code is none.",
+															Description: "Current snapshot state for this snapshot.\n* `SUCCESS` - This snapshot status code is success.\n* `FAILED` - This snapshot status code is failed.\n* `IN_PROGRESS` - This snapshot status code is in progress.\n* `DELETING` - This snapshot status code is deleting.\n* `DELETED` - This snapshot status code is deleted.\n* `NONE` - This snapshot status code is none.\n* `INIT` - This snapshot status code is initializing.",
 															Type:        schema.TypeString,
 															Optional:    true,
 														},
@@ -869,7 +869,7 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 												Optional:    true,
 											},
 											"space_usage": {
-												Description: "Space usage of the VM from StDataServiceManager.",
+												Description: "Space usage of the Virtual Machine from StDataServiceManager.",
 												Type:        schema.TypeInt,
 												Optional:    true,
 											},
@@ -926,6 +926,11 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 					},
 				},
 			},
+		},
+		"local_snapshot_retention_count": {
+			Description: "Retention count from backup policy for local snapshots.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -1134,6 +1139,11 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"snapshot_retention_count": {
+			Description: "Retention count from backup policy for remote snapshots.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"src_backup_cluster": {
 			Description: "A reference to a hyperflexBackupCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1204,6 +1214,11 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 				},
 			},
 		},
+		"src_cluster_name": {
+			Description: "Name for the source cluster this Virtual Machine is residing on.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1261,6 +1276,11 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 					},
 				},
 			},
+		},
+		"tgt_cluster_name": {
+			Description: "Name for the target cluster this Virtual Machine is residing on.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -1465,7 +1485,7 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 									Optional:    true,
 								},
 								"connection_state": {
-									Description: "Connection state of the VM.",
+									Description: "Connection state of the Virtual Machine.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -1578,12 +1598,12 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 						},
 					},
 					"status_code": {
-						Description: "Virtual Machine Status Code.\n* `VM_ACCESSIBLE` - This virtual machine is accessible.\n* `VM_INACCESSIBLE` - This virtual machine is not accessible.\n* `VM_NOT_SUPPORTED` - This virtual machine is not supported.\n* `NONE` - This virtual machine does not have a status code.",
+						Description: "Virtual machine status code.\n* `VM_ACCESSIBLE` - This virtual machine is accessible.\n* `VM_INACCESSIBLE` - This virtual machine is not accessible.\n* `VM_NOT_SUPPORTED` - This virtual machine is not supported.\n* `NONE` - This virtual machine does not have a status code.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"uuid": {
-						Description: "Virtual machine unique UUID.",
+						Description: "Virtual machine's current UUID.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -2012,7 +2032,7 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 															Optional:    true,
 														},
 														"status": {
-															Description: "Current snapshot state for this snapshot.\n* `SUCCESS` - This snapshot status code is success.\n* `FAILED` - This snapshot status code is failed.\n* `IN_PROGRESS` - This snapshot status code is in progress.\n* `DELETING` - This snapshot status code is deleting.\n* `DELETED` - This snapshot status code is deleted.\n* `NONE` - This snapshot status code is none.",
+															Description: "Current snapshot state for this snapshot.\n* `SUCCESS` - This snapshot status code is success.\n* `FAILED` - This snapshot status code is failed.\n* `IN_PROGRESS` - This snapshot status code is in progress.\n* `DELETING` - This snapshot status code is deleting.\n* `DELETED` - This snapshot status code is deleted.\n* `NONE` - This snapshot status code is none.\n* `INIT` - This snapshot status code is initializing.",
 															Type:        schema.TypeString,
 															Optional:    true,
 														},
@@ -2352,7 +2372,7 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 															Optional:    true,
 														},
 														"status": {
-															Description: "Current snapshot state for this snapshot.\n* `SUCCESS` - This snapshot status code is success.\n* `FAILED` - This snapshot status code is failed.\n* `IN_PROGRESS` - This snapshot status code is in progress.\n* `DELETING` - This snapshot status code is deleting.\n* `DELETED` - This snapshot status code is deleted.\n* `NONE` - This snapshot status code is none.",
+															Description: "Current snapshot state for this snapshot.\n* `SUCCESS` - This snapshot status code is success.\n* `FAILED` - This snapshot status code is failed.\n* `IN_PROGRESS` - This snapshot status code is in progress.\n* `DELETING` - This snapshot status code is deleting.\n* `DELETED` - This snapshot status code is deleted.\n* `NONE` - This snapshot status code is none.\n* `INIT` - This snapshot status code is initializing.",
 															Type:        schema.TypeString,
 															Optional:    true,
 														},
@@ -2445,7 +2465,7 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 												Optional:    true,
 											},
 											"space_usage": {
-												Description: "Space usage of the VM from StDataServiceManager.",
+												Description: "Space usage of the Virtual Machine from StDataServiceManager.",
 												Type:        schema.TypeInt,
 												Optional:    true,
 											},
@@ -2502,6 +2522,11 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 					},
 				},
 			},
+		},
+		"local_snapshot_retention_count": {
+			Description: "Retention count from backup policy for local snapshots.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -2710,6 +2735,11 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"snapshot_retention_count": {
+			Description: "Retention count from backup policy for remote snapshots.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"src_backup_cluster": {
 			Description: "A reference to a hyperflexBackupCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -2780,6 +2810,11 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 				},
 			},
 		},
+		"src_cluster_name": {
+			Description: "Name for the source cluster this Virtual Machine is residing on.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -2837,6 +2872,11 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 					},
 				},
 			},
+		},
+		"tgt_cluster_name": {
+			Description: "Name for the target cluster this Virtual Machine is residing on.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -3041,7 +3081,7 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 									Optional:    true,
 								},
 								"connection_state": {
-									Description: "Connection state of the VM.",
+									Description: "Connection state of the Virtual Machine.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -3154,12 +3194,12 @@ func dataSourceHyperflexVmBackupInfo() *schema.Resource {
 						},
 					},
 					"status_code": {
-						Description: "Virtual Machine Status Code.\n* `VM_ACCESSIBLE` - This virtual machine is accessible.\n* `VM_INACCESSIBLE` - This virtual machine is not accessible.\n* `VM_NOT_SUPPORTED` - This virtual machine is not supported.\n* `NONE` - This virtual machine does not have a status code.",
+						Description: "Virtual machine status code.\n* `VM_ACCESSIBLE` - This virtual machine is accessible.\n* `VM_INACCESSIBLE` - This virtual machine is not accessible.\n* `VM_NOT_SUPPORTED` - This virtual machine is not supported.\n* `NONE` - This virtual machine does not have a status code.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
 					"uuid": {
-						Description: "Virtual machine unique UUID.",
+						Description: "Virtual machine's current UUID.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -3307,7 +3347,7 @@ func dataSourceHyperflexVmBackupInfoRead(c context.Context, d *schema.ResourceDa
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -3347,8 +3387,13 @@ func dataSourceHyperflexVmBackupInfoRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOkExists("local_snapshot_retention_count"); ok {
+		x := int64(v.(int))
+		o.SetLocalSnapshotRetentionCount(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -3497,6 +3542,11 @@ func dataSourceHyperflexVmBackupInfoRead(c context.Context, d *schema.ResourceDa
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOkExists("snapshot_retention_count"); ok {
+		x := int64(v.(int))
+		o.SetSnapshotRetentionCount(x)
+	}
+
 	if v, ok := d.GetOk("src_backup_cluster"); ok {
 		p := make([]models.HyperflexBackupClusterRelationship, 0, 1)
 		s := v.([]interface{})
@@ -3583,6 +3633,11 @@ func dataSourceHyperflexVmBackupInfoRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOk("src_cluster_name"); ok {
+		x := (v.(string))
+		o.SetSrcClusterName(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -3657,6 +3712,11 @@ func dataSourceHyperflexVmBackupInfoRead(c context.Context, d *schema.ResourceDa
 			x := p[0]
 			o.SetTgtCluster(x)
 		}
+	}
+
+	if v, ok := d.GetOk("tgt_cluster_name"); ok {
+		x := (v.(string))
+		o.SetTgtClusterName(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -3846,6 +3906,7 @@ func dataSourceHyperflexVmBackupInfoRead(c context.Context, d *schema.ResourceDa
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["error"] = flattenMapHyperflexErrorStack(s.GetError(), d)
+				temp["local_snapshot_retention_count"] = (s.GetLocalSnapshotRetentionCount())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -3860,14 +3921,17 @@ func dataSourceHyperflexVmBackupInfoRead(c context.Context, d *schema.ResourceDa
 
 				temp["schedule"] = flattenListHyperflexReplicationClusterReferenceToSchedule(s.GetSchedule(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["snapshot_retention_count"] = (s.GetSnapshotRetentionCount())
 
 				temp["src_backup_cluster"] = flattenMapHyperflexBackupClusterRelationship(s.GetSrcBackupCluster(), d)
 
 				temp["src_cluster"] = flattenMapHyperflexClusterRelationship(s.GetSrcCluster(), d)
+				temp["src_cluster_name"] = (s.GetSrcClusterName())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["tgt_cluster"] = flattenMapHyperflexClusterRelationship(s.GetTgtCluster(), d)
+				temp["tgt_cluster_name"] = (s.GetTgtClusterName())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 

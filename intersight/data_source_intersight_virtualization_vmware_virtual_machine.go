@@ -495,6 +495,11 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				},
 			},
 		},
+		"host_compatibility": {
+			Description: "Minimum host ESXi version required for the virtual machine.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"hypervisor_type": {
 			Description: "Type of hypervisor where the virtual machine is hosted for example ESXi.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 			Type:        schema.TypeString,
@@ -1630,6 +1635,11 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 				},
 			},
 		},
+		"host_compatibility": {
+			Description: "Minimum host ESXi version required for the virtual machine.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"hypervisor_type": {
 			Description: "Type of hypervisor where the virtual machine is hosted for example ESXi.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 			Type:        schema.TypeString,
@@ -2361,7 +2371,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 	}
 
 	if v, ok := d.GetOk("boot_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetBootTime(x)
 	}
 
@@ -2587,7 +2597,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -2877,6 +2887,11 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		}
 	}
 
+	if v, ok := d.GetOk("host_compatibility"); ok {
+		x := (v.(string))
+		o.SetHostCompatibility(x)
+	}
+
 	if v, ok := d.GetOk("hypervisor_type"); ok {
 		x := (v.(string))
 		o.SetHypervisorType(x)
@@ -3035,7 +3050,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -3570,7 +3585,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 	}
 
 	if v, ok := d.GetOk("vm_creation_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetVmCreationTime(x)
 	}
 
@@ -3680,6 +3695,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 				temp["guest_state"] = (s.GetGuestState())
 
 				temp["host"] = flattenMapVirtualizationVmwareHostRelationship(s.GetHost(), d)
+				temp["host_compatibility"] = (s.GetHostCompatibility())
 				temp["hypervisor_type"] = (s.GetHypervisorType())
 				temp["identity"] = (s.GetIdentity())
 				temp["instance_uuid"] = (s.GetInstanceUuid())

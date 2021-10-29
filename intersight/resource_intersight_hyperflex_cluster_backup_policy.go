@@ -183,6 +183,12 @@ func resourceHyperflexClusterBackupPolicy() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"data_store_encryption_enabled": {
+				Description: "Whether the datastore is encrypted or not.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"description": {
 				Description: "Description of the policy.",
 				Type:        schema.TypeString,
@@ -193,6 +199,12 @@ func resourceHyperflexClusterBackupPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"local_snapshot_retention_count": {
+				Description: "Number of snapshots that will be retained as part of the Multi Point in Time support.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Default:     4,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
@@ -671,9 +683,19 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 		}
 	}
 
+	if v, ok := d.GetOkExists("data_store_encryption_enabled"); ok {
+		x := (v.(bool))
+		o.SetDataStoreEncryptionEnabled(x)
+	}
+
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if v, ok := d.GetOkExists("local_snapshot_retention_count"); ok {
+		x := int64(v.(int))
+		o.SetLocalSnapshotRetentionCount(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -889,12 +911,20 @@ func resourceHyperflexClusterBackupPolicyRead(c context.Context, d *schema.Resou
 		return diag.Errorf("error occurred while setting property CreateTime in HyperflexClusterBackupPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("data_store_encryption_enabled", (s.GetDataStoreEncryptionEnabled())); err != nil {
+		return diag.Errorf("error occurred while setting property DataStoreEncryptionEnabled in HyperflexClusterBackupPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("description", (s.GetDescription())); err != nil {
 		return diag.Errorf("error occurred while setting property Description in HyperflexClusterBackupPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in HyperflexClusterBackupPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("local_snapshot_retention_count", (s.GetLocalSnapshotRetentionCount())); err != nil {
+		return diag.Errorf("error occurred while setting property LocalSnapshotRetentionCount in HyperflexClusterBackupPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -1080,10 +1110,22 @@ func resourceHyperflexClusterBackupPolicyUpdate(c context.Context, d *schema.Res
 		o.SetClusterProfiles(x)
 	}
 
+	if d.HasChange("data_store_encryption_enabled") {
+		v := d.Get("data_store_encryption_enabled")
+		x := (v.(bool))
+		o.SetDataStoreEncryptionEnabled(x)
+	}
+
 	if d.HasChange("description") {
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("local_snapshot_retention_count") {
+		v := d.Get("local_snapshot_retention_count")
+		x := int64(v.(int))
+		o.SetLocalSnapshotRetentionCount(x)
 	}
 
 	if d.HasChange("moid") {

@@ -995,7 +995,7 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1005,7 +1005,7 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 	}
 
 	if v, ok := d.GetOk("data_start_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetDataStartDate(x)
 	}
 
@@ -1068,7 +1068,7 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 	}
 
 	if v, ok := d.GetOk("last_model_update_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastModelUpdateTime(x)
 	}
 
@@ -1083,7 +1083,7 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

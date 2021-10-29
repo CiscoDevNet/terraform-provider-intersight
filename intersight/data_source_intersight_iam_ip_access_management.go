@@ -819,7 +819,7 @@ func dataSourceIamIpAccessManagementRead(c context.Context, d *schema.ResourceDa
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -917,12 +917,12 @@ func dataSourceIamIpAccessManagementRead(c context.Context, d *schema.ResourceDa
 	}
 
 	if v, ok := d.GetOk("last_recovery_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastRecoveryTime(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

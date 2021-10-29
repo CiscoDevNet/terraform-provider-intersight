@@ -8,10 +8,12 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.DatastoreStatistic"]
 **AccessibilitySummary** | Pointer to **string** | HyperFlex datastore accessibility summary. * &#x60;ACCESSIBLE&#x60; - The HyperFlex Accessibility Summary is Accessible. * &#x60;NOT_ACCESSIBLE&#x60; - The HyperFlex Accessibility Summary is Not Accessible. * &#x60;PARTIALLY_ACCESSIBLE&#x60; - The HyperFlex Accessibility Summary is Partially Accessible. | [optional] [readonly] [default to "ACCESSIBLE"]
 **CreationTime** | Pointer to **string** | Timestamp the datastore object was created. | [optional] [readonly] 
+**DatastoreKind** | Pointer to **string** | HyperFlex Datastore Kind. * &#x60;UNKNOWN&#x60; - HyperFlex datastore kind is unknown. * &#x60;USER_CREATED&#x60; - HyperFlex datastore kind is user created. * &#x60;INTERNAL&#x60; - HyperFlex datastore kind is internal. | [optional] [readonly] [default to "UNKNOWN"]
 **DatastoreStatus** | Pointer to **string** | HyperFlex datastore status. * &#x60;NORMAL&#x60; - The HyperFlex datastore status is normal. * &#x60;ALERT&#x60; - The HyperFlex datastore status is alert. * &#x60;FAILED&#x60; - The HyperFlex datastore status is failed. | [optional] [readonly] [default to "NORMAL"]
 **Dsconfig** | Pointer to [**NullableHyperflexHxPlatformDatastoreConfigDt**](HyperflexHxPlatformDatastoreConfigDt.md) |  | [optional] 
 **FreeCapacityInBytes** | Pointer to **int64** | Free capacity of the datastore in bytes. | [optional] [readonly] 
 **HostMountStatus** | Pointer to [**[]HyperflexHxHostMountStatusDt**](HyperflexHxHostMountStatusDt.md) |  | [optional] 
+**IsEncrypted** | Pointer to **bool** | Indicates if the datastore is encrypted or un-encrypted. | [optional] [readonly] 
 **LastAccessTime** | Pointer to **string** | Timestamp the datastore object was last accessed. | [optional] [readonly] 
 **LastModifiedTime** | Pointer to **string** | Timestamp the datastore object was last modified. | [optional] [readonly] 
 **MountSummary** | Pointer to **string** | HyperFlex datastore mount summary. * &#x60;MOUNTED&#x60; - The HyperFlex mount summary is mounted. * &#x60;UNMOUNTED&#x60; - The HyperFlex mount summary is unmounted. * &#x60;MOUNT_FAILURE&#x60; - The HyperFlex mount summary is mount failure. * &#x60;UNMOUNT_FAILURE&#x60; - The HyperFlex mount summary is unmount failure. | [optional] [readonly] [default to "MOUNTED"]
@@ -22,6 +24,8 @@ Name | Type | Description | Notes
 **UnsharedUsedBytes** | Pointer to **int64** | Unshared used capacity of the datastore in bytes. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | UUID for the datastore object. | [optional] [readonly] 
 **DataProtectionPeer** | Pointer to [**HyperflexDataProtectionPeerRelationship**](HyperflexDataProtectionPeerRelationship.md) |  | [optional] 
+**SrcCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
+**TgtCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -131,6 +135,31 @@ SetCreationTime sets CreationTime field to given value.
 `func (o *HyperflexDatastoreStatistic) HasCreationTime() bool`
 
 HasCreationTime returns a boolean if a field has been set.
+
+### GetDatastoreKind
+
+`func (o *HyperflexDatastoreStatistic) GetDatastoreKind() string`
+
+GetDatastoreKind returns the DatastoreKind field if non-nil, zero value otherwise.
+
+### GetDatastoreKindOk
+
+`func (o *HyperflexDatastoreStatistic) GetDatastoreKindOk() (*string, bool)`
+
+GetDatastoreKindOk returns a tuple with the DatastoreKind field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDatastoreKind
+
+`func (o *HyperflexDatastoreStatistic) SetDatastoreKind(v string)`
+
+SetDatastoreKind sets DatastoreKind field to given value.
+
+### HasDatastoreKind
+
+`func (o *HyperflexDatastoreStatistic) HasDatastoreKind() bool`
+
+HasDatastoreKind returns a boolean if a field has been set.
 
 ### GetDatastoreStatus
 
@@ -252,6 +281,31 @@ HasHostMountStatus returns a boolean if a field has been set.
 `func (o *HyperflexDatastoreStatistic) UnsetHostMountStatus()`
 
 UnsetHostMountStatus ensures that no value is present for HostMountStatus, not even an explicit nil
+### GetIsEncrypted
+
+`func (o *HyperflexDatastoreStatistic) GetIsEncrypted() bool`
+
+GetIsEncrypted returns the IsEncrypted field if non-nil, zero value otherwise.
+
+### GetIsEncryptedOk
+
+`func (o *HyperflexDatastoreStatistic) GetIsEncryptedOk() (*bool, bool)`
+
+GetIsEncryptedOk returns a tuple with the IsEncrypted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsEncrypted
+
+`func (o *HyperflexDatastoreStatistic) SetIsEncrypted(v bool)`
+
+SetIsEncrypted sets IsEncrypted field to given value.
+
+### HasIsEncrypted
+
+`func (o *HyperflexDatastoreStatistic) HasIsEncrypted() bool`
+
+HasIsEncrypted returns a boolean if a field has been set.
+
 ### GetLastAccessTime
 
 `func (o *HyperflexDatastoreStatistic) GetLastAccessTime() string`
@@ -511,6 +565,56 @@ SetDataProtectionPeer sets DataProtectionPeer field to given value.
 `func (o *HyperflexDatastoreStatistic) HasDataProtectionPeer() bool`
 
 HasDataProtectionPeer returns a boolean if a field has been set.
+
+### GetSrcCluster
+
+`func (o *HyperflexDatastoreStatistic) GetSrcCluster() HyperflexClusterRelationship`
+
+GetSrcCluster returns the SrcCluster field if non-nil, zero value otherwise.
+
+### GetSrcClusterOk
+
+`func (o *HyperflexDatastoreStatistic) GetSrcClusterOk() (*HyperflexClusterRelationship, bool)`
+
+GetSrcClusterOk returns a tuple with the SrcCluster field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSrcCluster
+
+`func (o *HyperflexDatastoreStatistic) SetSrcCluster(v HyperflexClusterRelationship)`
+
+SetSrcCluster sets SrcCluster field to given value.
+
+### HasSrcCluster
+
+`func (o *HyperflexDatastoreStatistic) HasSrcCluster() bool`
+
+HasSrcCluster returns a boolean if a field has been set.
+
+### GetTgtCluster
+
+`func (o *HyperflexDatastoreStatistic) GetTgtCluster() HyperflexClusterRelationship`
+
+GetTgtCluster returns the TgtCluster field if non-nil, zero value otherwise.
+
+### GetTgtClusterOk
+
+`func (o *HyperflexDatastoreStatistic) GetTgtClusterOk() (*HyperflexClusterRelationship, bool)`
+
+GetTgtClusterOk returns a tuple with the TgtCluster field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTgtCluster
+
+`func (o *HyperflexDatastoreStatistic) SetTgtCluster(v HyperflexClusterRelationship)`
+
+SetTgtCluster sets TgtCluster field to given value.
+
+### HasTgtCluster
+
+`func (o *HyperflexDatastoreStatistic) HasTgtCluster() bool`
+
+HasTgtCluster returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

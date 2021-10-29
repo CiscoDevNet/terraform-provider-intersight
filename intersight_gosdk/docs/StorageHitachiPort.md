@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **LoopId** | Pointer to **string** | The value set for the port loop ID (AL_PA). | [optional] [readonly] 
 **PortConnection** | Pointer to **string** | Topology setting for the port. | [optional] [readonly] 
 **PortLunSecurity** | Pointer to **bool** | LUN security setting for the port. | [optional] [readonly] 
+**PortMode** | Pointer to **string** | Operation mode of the port. Possible values are FC-NVMe, FCP-SCSI, and NOT SUPPORTED. | [optional] [readonly] 
 **ShortportId** | Pointer to **string** | Port ID (short) of the port. | [optional] [readonly] 
 **TcpMtu** | Pointer to **int64** | Value of MTU for iSCSI communication. | [optional] [readonly] 
 **Array** | Pointer to [**StorageHitachiArrayRelationship**](StorageHitachiArrayRelationship.md) |  | [optional] 
@@ -277,6 +278,31 @@ SetPortLunSecurity sets PortLunSecurity field to given value.
 `func (o *StorageHitachiPort) HasPortLunSecurity() bool`
 
 HasPortLunSecurity returns a boolean if a field has been set.
+
+### GetPortMode
+
+`func (o *StorageHitachiPort) GetPortMode() string`
+
+GetPortMode returns the PortMode field if non-nil, zero value otherwise.
+
+### GetPortModeOk
+
+`func (o *StorageHitachiPort) GetPortModeOk() (*string, bool)`
+
+GetPortModeOk returns a tuple with the PortMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPortMode
+
+`func (o *StorageHitachiPort) SetPortMode(v string)`
+
+SetPortMode sets PortMode field to given value.
+
+### HasPortMode
+
+`func (o *StorageHitachiPort) HasPortMode() bool`
+
+HasPortMode returns a boolean if a field has been set.
 
 ### GetShortportId
 

@@ -901,7 +901,7 @@ func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("announcement_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetAnnouncementDate(x)
 	}
 
@@ -921,7 +921,7 @@ func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -936,7 +936,7 @@ func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("endof_new_service_attachment_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetEndofNewServiceAttachmentDate(x)
 	}
 
@@ -946,7 +946,7 @@ func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("endof_routine_failure_analysis_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetEndofRoutineFailureAnalysisDate(x)
 	}
 
@@ -956,7 +956,7 @@ func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("endof_sale_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetEndofSaleDate(x)
 	}
 
@@ -966,7 +966,7 @@ func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("endof_security_support"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetEndofSecuritySupport(x)
 	}
 
@@ -976,7 +976,7 @@ func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("endof_service_contract_renewal_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetEndofServiceContractRenewalDate(x)
 	}
 
@@ -986,7 +986,7 @@ func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("endof_sw_maintenance_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetEndofSwMaintenanceDate(x)
 	}
 
@@ -1006,7 +1006,7 @@ func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("last_dateof_support"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastDateofSupport(x)
 	}
 
@@ -1016,7 +1016,7 @@ func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("last_ship_date"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastShipDate(x)
 	}
 
@@ -1031,7 +1031,7 @@ func dataSourceNiaapiApicHweolRead(c context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

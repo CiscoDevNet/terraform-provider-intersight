@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -21,13 +21,16 @@ type StorageNetAppAggregateAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Storage disk type for NetApp aggregate. * `HDD` - Hard Disk Drive. * `Hybrid` - Solid State Hard Disk Drive. * `Hybrid (Flash Pool)` - SSHD in a flash pool. * `SSD` - Solid State Disk. * `SSD (FabricPool)` - SSD in a flash pool. * `VMDisk (SDS)` - Storage disk with Hard disk drive. * `VMDisk (FabricPool)` - Storage disk with Non-volatile random-access memory drives. * `LUN (FlexArray)` - LUN as a disk. * `Not Mapped` - Storage disk is not mapped.
-	AggregateType *string `json:"AggregateType,omitempty"`
+	// Storage disk type for NetApp aggregate. * `HDD` - Hard Disk Drive disk type. * `Hybrid` - Solid State Hard Disk Drive. * `Hybrid (Flash Pool)` - SSHD in a flash pool disk type. * `SSD` - Solid State Disk disk type. * `SSD (FabricPool)` - SSD in a flash pool disk type. * `VMDisk (SDS)` - Storage disk with Hard disk drive. * `VMDisk (FabricPool)` - Storage disk with Non-volatile random-access memory drives. * `LUN (FlexArray)` - LUN (FlexArray) disk type. * `Not Mapped` - Storage disk is not mapped.
+	AggregateType         *string                                 `json:"AggregateType,omitempty"`
+	AvgPerformanceMetrics *StorageNetAppPerformanceMetricsAverage `json:"AvgPerformanceMetrics,omitempty"`
+	// Unique identifier of NetApp Aggregate across data center.
+	Key *string `json:"Key,omitempty"`
 	// Size of the RAID group represented by number of disks in the group.
 	RaidSize *int64 `json:"RaidSize,omitempty"`
 	// The RAID configuration type. * `Unknown` - Default unknown RAID type. * `RAID0` - RAID0 splits (\"stripes\") data evenly across two or more disks, without parity information. * `RAID1` - RAID1 requires a minimum of two disks to work, and provides data redundancy and failover. * `RAID4` - RAID4 stripes block level data and dedicates a disk to parity. * `RAID5` - RAID5  distributes striping and parity at a block level. * `RAID6` - RAID6 level operates like RAID5 with distributed parity and striping. * `RAID10` - RAID10 requires a minimum of four disks in the array. It stripes across disks for higher performance, and mirrors for redundancy. * `RAIDDP` - RAIDDP uses up to two spare disks to replace and reconstruct the data from up to two simultaneously failed disks within the RAID group. * `RAIDTEC` - With RAIDTEC protection, use up to three spare disks to replace and reconstruct the data from up to three simultaneously failed disks within the RAID group.
 	RaidType *string `json:"RaidType,omitempty"`
-	// Current state of the NetApp aggregate. * `Unknown` - Specifies that the aggregate is discovered, but the aggregate information is not yet retrieved by the Unified Manager server. * `Online` - Aggregate is ready and available. * `Onlining` - Transitioning online. * `Offline` - Aggregate is unavailable. * `Offlining` - Transitioning offline. * `Relocating` - The aggregate is being relocated. * `Restricted` - Limited operations (e.g., parity reconstruction) are allowed, but data access is not allowed. * `Failed` - The aggregate cannot be brought online. * `Inconsistent` - The aggregate has been marked corrupted; contact technical support. * `Unmounted` - The aggregate is not mounted.
+	// Current state of the NetApp aggregate. * `Unknown` - Specifies that the aggregate is discovered, but the aggregate information is not yet retrieved by the Unified Manager server. * `Online` - Aggregate is ready and available. * `Onlining` - The state is transitioning online. * `Offline` - Aggregate is unavailable. * `Offlining` - The state is transitioning offline. * `Relocating` - The aggregate is being relocated. * `Restricted` - Limited operations (e.g., parity reconstruction) are allowed, but data access is not allowed. * `Failed` - The aggregate cannot be brought online. * `Inconsistent` - The aggregate has been marked corrupted; contact technical support. * `Unmounted` - The aggregate is not mounted.
 	State *string `json:"State,omitempty"`
 	// Uuid of  NetApp Aggregate.
 	Uuid                 *string                        `json:"Uuid,omitempty"`
@@ -138,6 +141,70 @@ func (o *StorageNetAppAggregateAllOf) HasAggregateType() bool {
 // SetAggregateType gets a reference to the given string and assigns it to the AggregateType field.
 func (o *StorageNetAppAggregateAllOf) SetAggregateType(v string) {
 	o.AggregateType = &v
+}
+
+// GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field value if set, zero value otherwise.
+func (o *StorageNetAppAggregateAllOf) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage {
+	if o == nil || o.AvgPerformanceMetrics == nil {
+		var ret StorageNetAppPerformanceMetricsAverage
+		return ret
+	}
+	return *o.AvgPerformanceMetrics
+}
+
+// GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppAggregateAllOf) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool) {
+	if o == nil || o.AvgPerformanceMetrics == nil {
+		return nil, false
+	}
+	return o.AvgPerformanceMetrics, true
+}
+
+// HasAvgPerformanceMetrics returns a boolean if a field has been set.
+func (o *StorageNetAppAggregateAllOf) HasAvgPerformanceMetrics() bool {
+	if o != nil && o.AvgPerformanceMetrics != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAvgPerformanceMetrics gets a reference to the given StorageNetAppPerformanceMetricsAverage and assigns it to the AvgPerformanceMetrics field.
+func (o *StorageNetAppAggregateAllOf) SetAvgPerformanceMetrics(v StorageNetAppPerformanceMetricsAverage) {
+	o.AvgPerformanceMetrics = &v
+}
+
+// GetKey returns the Key field value if set, zero value otherwise.
+func (o *StorageNetAppAggregateAllOf) GetKey() string {
+	if o == nil || o.Key == nil {
+		var ret string
+		return ret
+	}
+	return *o.Key
+}
+
+// GetKeyOk returns a tuple with the Key field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageNetAppAggregateAllOf) GetKeyOk() (*string, bool) {
+	if o == nil || o.Key == nil {
+		return nil, false
+	}
+	return o.Key, true
+}
+
+// HasKey returns a boolean if a field has been set.
+func (o *StorageNetAppAggregateAllOf) HasKey() bool {
+	if o != nil && o.Key != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetKey gets a reference to the given string and assigns it to the Key field.
+func (o *StorageNetAppAggregateAllOf) SetKey(v string) {
+	o.Key = &v
 }
 
 // GetRaidSize returns the RaidSize field value if set, zero value otherwise.
@@ -311,6 +378,12 @@ func (o StorageNetAppAggregateAllOf) MarshalJSON() ([]byte, error) {
 	if o.AggregateType != nil {
 		toSerialize["AggregateType"] = o.AggregateType
 	}
+	if o.AvgPerformanceMetrics != nil {
+		toSerialize["AvgPerformanceMetrics"] = o.AvgPerformanceMetrics
+	}
+	if o.Key != nil {
+		toSerialize["Key"] = o.Key
+	}
 	if o.RaidSize != nil {
 		toSerialize["RaidSize"] = o.RaidSize
 	}
@@ -347,6 +420,8 @@ func (o *StorageNetAppAggregateAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AggregateType")
+		delete(additionalProperties, "AvgPerformanceMetrics")
+		delete(additionalProperties, "Key")
 		delete(additionalProperties, "RaidSize")
 		delete(additionalProperties, "RaidType")
 		delete(additionalProperties, "State")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -32,12 +32,16 @@ type EquipmentIdentitySummary struct {
 	AdminActionState *string `json:"AdminActionState,omitempty"`
 	// Chassis Identifier of a blade server.
 	ChassisId *int64 `json:"ChassisId,omitempty"`
+	// The id of the chassis that the blade is currently located in.
+	CurrentChassisId *int64 `json:"CurrentChassisId,omitempty"`
+	// The slot number in the chassis that the blade is currently located in.
+	CurrentSlotId *int64 `json:"CurrentSlotId,omitempty"`
 	// Describes whether the running CIMC version supports Intersight managed mode. * `Unknown` - The running firmware version is unknown. * `Supported` - The running firmware version is known and supports IMM mode. * `NotSupported` - The running firmware version is known and does not support IMM mode.
 	FirmwareSupportability *string `json:"FirmwareSupportability,omitempty"`
 	// Numeric Identifier assigned by the management system to the equipment.
 	Identifier         *int64                    `json:"Identifier,omitempty"`
 	IoCardIdentityList []EquipmentIoCardIdentity `json:"IoCardIdentityList,omitempty"`
-	// The equipment's lifecycle status. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DecommissionInProgress` - Decommission Inprogress Lifecycle state. * `RecommissionInProgress` - Recommission Inprogress Lifecycle state. * `OperationFailed` - Failed Operation Lifecycle state. * `ReackInProgress` - ReackInProgress Lifecycle state. * `RemoveInProgress` - RemoveInProgress Lifecycle state. * `Discovered` - Discovered Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `Inactive` - Inactive Lifecycle state. * `ReplaceInProgress` - ReplaceInProgress Lifecycle state.
+	// The equipment's lifecycle status. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DecommissionInProgress` - Decommission Inprogress Lifecycle state. * `RecommissionInProgress` - Recommission Inprogress Lifecycle state. * `OperationFailed` - Failed Operation Lifecycle state. * `ReackInProgress` - ReackInProgress Lifecycle state. * `RemoveInProgress` - RemoveInProgress Lifecycle state. * `Discovered` - Discovered Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `Inactive` - Inactive Lifecycle state. * `ReplaceInProgress` - ReplaceInProgress Lifecycle state. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.
 	Lifecycle *string `json:"Lifecycle,omitempty"`
 	// The vendor provided model name for the equipment.
 	Model *string `json:"Model,omitempty"`
@@ -256,6 +260,70 @@ func (o *EquipmentIdentitySummary) HasChassisId() bool {
 // SetChassisId gets a reference to the given int64 and assigns it to the ChassisId field.
 func (o *EquipmentIdentitySummary) SetChassisId(v int64) {
 	o.ChassisId = &v
+}
+
+// GetCurrentChassisId returns the CurrentChassisId field value if set, zero value otherwise.
+func (o *EquipmentIdentitySummary) GetCurrentChassisId() int64 {
+	if o == nil || o.CurrentChassisId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.CurrentChassisId
+}
+
+// GetCurrentChassisIdOk returns a tuple with the CurrentChassisId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentIdentitySummary) GetCurrentChassisIdOk() (*int64, bool) {
+	if o == nil || o.CurrentChassisId == nil {
+		return nil, false
+	}
+	return o.CurrentChassisId, true
+}
+
+// HasCurrentChassisId returns a boolean if a field has been set.
+func (o *EquipmentIdentitySummary) HasCurrentChassisId() bool {
+	if o != nil && o.CurrentChassisId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrentChassisId gets a reference to the given int64 and assigns it to the CurrentChassisId field.
+func (o *EquipmentIdentitySummary) SetCurrentChassisId(v int64) {
+	o.CurrentChassisId = &v
+}
+
+// GetCurrentSlotId returns the CurrentSlotId field value if set, zero value otherwise.
+func (o *EquipmentIdentitySummary) GetCurrentSlotId() int64 {
+	if o == nil || o.CurrentSlotId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.CurrentSlotId
+}
+
+// GetCurrentSlotIdOk returns a tuple with the CurrentSlotId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentIdentitySummary) GetCurrentSlotIdOk() (*int64, bool) {
+	if o == nil || o.CurrentSlotId == nil {
+		return nil, false
+	}
+	return o.CurrentSlotId, true
+}
+
+// HasCurrentSlotId returns a boolean if a field has been set.
+func (o *EquipmentIdentitySummary) HasCurrentSlotId() bool {
+	if o != nil && o.CurrentSlotId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrentSlotId gets a reference to the given int64 and assigns it to the CurrentSlotId field.
+func (o *EquipmentIdentitySummary) SetCurrentSlotId(v int64) {
+	o.CurrentSlotId = &v
 }
 
 // GetFirmwareSupportability returns the FirmwareSupportability field value if set, zero value otherwise.
@@ -671,6 +739,12 @@ func (o EquipmentIdentitySummary) MarshalJSON() ([]byte, error) {
 	if o.ChassisId != nil {
 		toSerialize["ChassisId"] = o.ChassisId
 	}
+	if o.CurrentChassisId != nil {
+		toSerialize["CurrentChassisId"] = o.CurrentChassisId
+	}
+	if o.CurrentSlotId != nil {
+		toSerialize["CurrentSlotId"] = o.CurrentSlotId
+	}
 	if o.FirmwareSupportability != nil {
 		toSerialize["FirmwareSupportability"] = o.FirmwareSupportability
 	}
@@ -729,12 +803,16 @@ func (o *EquipmentIdentitySummary) UnmarshalJSON(bytes []byte) (err error) {
 		AdminActionState *string `json:"AdminActionState,omitempty"`
 		// Chassis Identifier of a blade server.
 		ChassisId *int64 `json:"ChassisId,omitempty"`
+		// The id of the chassis that the blade is currently located in.
+		CurrentChassisId *int64 `json:"CurrentChassisId,omitempty"`
+		// The slot number in the chassis that the blade is currently located in.
+		CurrentSlotId *int64 `json:"CurrentSlotId,omitempty"`
 		// Describes whether the running CIMC version supports Intersight managed mode. * `Unknown` - The running firmware version is unknown. * `Supported` - The running firmware version is known and supports IMM mode. * `NotSupported` - The running firmware version is known and does not support IMM mode.
 		FirmwareSupportability *string `json:"FirmwareSupportability,omitempty"`
 		// Numeric Identifier assigned by the management system to the equipment.
 		Identifier         *int64                    `json:"Identifier,omitempty"`
 		IoCardIdentityList []EquipmentIoCardIdentity `json:"IoCardIdentityList,omitempty"`
-		// The equipment's lifecycle status. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DecommissionInProgress` - Decommission Inprogress Lifecycle state. * `RecommissionInProgress` - Recommission Inprogress Lifecycle state. * `OperationFailed` - Failed Operation Lifecycle state. * `ReackInProgress` - ReackInProgress Lifecycle state. * `RemoveInProgress` - RemoveInProgress Lifecycle state. * `Discovered` - Discovered Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `Inactive` - Inactive Lifecycle state. * `ReplaceInProgress` - ReplaceInProgress Lifecycle state.
+		// The equipment's lifecycle status. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DecommissionInProgress` - Decommission Inprogress Lifecycle state. * `RecommissionInProgress` - Recommission Inprogress Lifecycle state. * `OperationFailed` - Failed Operation Lifecycle state. * `ReackInProgress` - ReackInProgress Lifecycle state. * `RemoveInProgress` - RemoveInProgress Lifecycle state. * `Discovered` - Discovered Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `Inactive` - Inactive Lifecycle state. * `ReplaceInProgress` - ReplaceInProgress Lifecycle state. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.
 		Lifecycle *string `json:"Lifecycle,omitempty"`
 		// The vendor provided model name for the equipment.
 		Model *string `json:"Model,omitempty"`
@@ -764,6 +842,8 @@ func (o *EquipmentIdentitySummary) UnmarshalJSON(bytes []byte) (err error) {
 		varEquipmentIdentitySummary.AdminAction = varEquipmentIdentitySummaryWithoutEmbeddedStruct.AdminAction
 		varEquipmentIdentitySummary.AdminActionState = varEquipmentIdentitySummaryWithoutEmbeddedStruct.AdminActionState
 		varEquipmentIdentitySummary.ChassisId = varEquipmentIdentitySummaryWithoutEmbeddedStruct.ChassisId
+		varEquipmentIdentitySummary.CurrentChassisId = varEquipmentIdentitySummaryWithoutEmbeddedStruct.CurrentChassisId
+		varEquipmentIdentitySummary.CurrentSlotId = varEquipmentIdentitySummaryWithoutEmbeddedStruct.CurrentSlotId
 		varEquipmentIdentitySummary.FirmwareSupportability = varEquipmentIdentitySummaryWithoutEmbeddedStruct.FirmwareSupportability
 		varEquipmentIdentitySummary.Identifier = varEquipmentIdentitySummaryWithoutEmbeddedStruct.Identifier
 		varEquipmentIdentitySummary.IoCardIdentityList = varEquipmentIdentitySummaryWithoutEmbeddedStruct.IoCardIdentityList
@@ -799,6 +879,8 @@ func (o *EquipmentIdentitySummary) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AdminAction")
 		delete(additionalProperties, "AdminActionState")
 		delete(additionalProperties, "ChassisId")
+		delete(additionalProperties, "CurrentChassisId")
+		delete(additionalProperties, "CurrentSlotId")
 		delete(additionalProperties, "FirmwareSupportability")
 		delete(additionalProperties, "Identifier")
 		delete(additionalProperties, "IoCardIdentityList")

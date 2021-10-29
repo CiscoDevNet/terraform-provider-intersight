@@ -7,13 +7,15 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppVolume"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppVolume"]
 **AutosizeMode** | Pointer to **string** | The autosize mode for NetApp Volume. Modes can be off or grow or grow_shrink. * &#x60;off&#x60; - The volume will not grow or shrink in size in response to the amount of used space. * &#x60;grow&#x60; - The volume will automatically grow when used space in the volume is above the grow threshold. * &#x60;grow_shrink&#x60; - The volume will grow or shrink in size in response to the amount of used space. | [optional] [readonly] [default to "off"]
-**ExportPolicyName** | Pointer to **string** | Name of the Export Policy associated with the volume. | [optional] [readonly] 
-**SnapshotPolicyName** | Pointer to **string** | Name of the snapshot policy. | [optional] [readonly] 
-**SnapshotPolicyUuid** | Pointer to **string** | Uuid of the snapshot policy. | [optional] [readonly] 
-**SnapshotUtilizedCapacity** | Pointer to **int64** | The total space used by snapshot copies in the volume represented in bytes. | [optional] [readonly] 
+**AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
+**ExportPolicyName** | Pointer to **string** | The name of the Export Policy. | [optional] [readonly] 
+**Key** | Pointer to **string** | Unique identifier of NetApp Volume across data center. | [optional] [readonly] 
+**SnapshotPolicyName** | Pointer to **string** | The name of the Snapshot Policy. | [optional] [readonly] 
+**SnapshotPolicyUuid** | Pointer to **string** | The UUID of the Snapshot Policy. | [optional] [readonly] 
+**SnapshotUtilizedCapacity** | Pointer to **int64** | The total space used by Snapshot copies in the volume represented in bytes. | [optional] [readonly] 
 **State** | Pointer to **string** | The current state of a NetApp volume. * &#x60;offline&#x60; - Read and write access to the volume is not allowed. * &#x60;online&#x60; - Read and write access to the volume is allowed. * &#x60;error&#x60; - Storage volume state of error type. * &#x60;mixed&#x60; - The constituents of a FlexGroup volume are not all in the same state. | [optional] [readonly] [default to "offline"]
-**Type** | Pointer to **string** | NetApp volume type. The volume type can be Read-write or Data-protection, Load-sharing, or Data-cache. * &#x60;data-protection&#x60; - Prevents modification of the data on the Volume. * &#x60;read-write&#x60; - Data on the Volume can be modified. * &#x60;load-sharing&#x60; - Load Sharing. | [optional] [readonly] [default to "data-protection"]
-**Uuid** | Pointer to **string** | UUID of NetApp Volume. | [optional] [readonly] 
+**Type** | Pointer to **string** | NetApp volume type. The volume type can be Read-write, Data-protection, or Load-sharing. * &#x60;data-protection&#x60; - Prevents modification of the data on the Volume. * &#x60;read-write&#x60; - Data on the Volume can be modified. * &#x60;load-sharing&#x60; - The volume type is Load Sharing DP. | [optional] [readonly] [default to "data-protection"]
+**Uuid** | Pointer to **string** | Universally unique identifier of a NetApp Volume. | [optional] [readonly] 
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 **DiskPool** | Pointer to [**[]StorageNetAppAggregateRelationship**](StorageNetAppAggregateRelationship.md) | An array of relationships to storageNetAppAggregate resources. | [optional] [readonly] 
 **Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
@@ -102,6 +104,31 @@ SetAutosizeMode sets AutosizeMode field to given value.
 
 HasAutosizeMode returns a boolean if a field has been set.
 
+### GetAvgPerformanceMetrics
+
+`func (o *StorageNetAppVolume) GetAvgPerformanceMetrics() StorageNetAppPerformanceMetricsAverage`
+
+GetAvgPerformanceMetrics returns the AvgPerformanceMetrics field if non-nil, zero value otherwise.
+
+### GetAvgPerformanceMetricsOk
+
+`func (o *StorageNetAppVolume) GetAvgPerformanceMetricsOk() (*StorageNetAppPerformanceMetricsAverage, bool)`
+
+GetAvgPerformanceMetricsOk returns a tuple with the AvgPerformanceMetrics field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvgPerformanceMetrics
+
+`func (o *StorageNetAppVolume) SetAvgPerformanceMetrics(v StorageNetAppPerformanceMetricsAverage)`
+
+SetAvgPerformanceMetrics sets AvgPerformanceMetrics field to given value.
+
+### HasAvgPerformanceMetrics
+
+`func (o *StorageNetAppVolume) HasAvgPerformanceMetrics() bool`
+
+HasAvgPerformanceMetrics returns a boolean if a field has been set.
+
 ### GetExportPolicyName
 
 `func (o *StorageNetAppVolume) GetExportPolicyName() string`
@@ -126,6 +153,31 @@ SetExportPolicyName sets ExportPolicyName field to given value.
 `func (o *StorageNetAppVolume) HasExportPolicyName() bool`
 
 HasExportPolicyName returns a boolean if a field has been set.
+
+### GetKey
+
+`func (o *StorageNetAppVolume) GetKey() string`
+
+GetKey returns the Key field if non-nil, zero value otherwise.
+
+### GetKeyOk
+
+`func (o *StorageNetAppVolume) GetKeyOk() (*string, bool)`
+
+GetKeyOk returns a tuple with the Key field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKey
+
+`func (o *StorageNetAppVolume) SetKey(v string)`
+
+SetKey sets Key field to given value.
+
+### HasKey
+
+`func (o *StorageNetAppVolume) HasKey() bool`
+
+HasKey returns a boolean if a field has been set.
 
 ### GetSnapshotPolicyName
 

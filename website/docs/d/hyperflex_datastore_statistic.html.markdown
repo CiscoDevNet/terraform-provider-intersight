@@ -17,9 +17,11 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
 * `creation_time`:(string) Timestamp the datastore object was created. 
+* `datastore_kind`:(string) HyperFlex Datastore Kind.* `UNKNOWN` - HyperFlex datastore kind is unknown.* `USER_CREATED` - HyperFlex datastore kind is user created.* `INTERNAL` - HyperFlex datastore kind is internal. 
 * `datastore_status`:(string) HyperFlex datastore status.* `NORMAL` - The HyperFlex datastore status is normal.* `ALERT` - The HyperFlex datastore status is alert.* `FAILED` - The HyperFlex datastore status is failed. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `free_capacity_in_bytes`:(int) Free capacity of the datastore in bytes. 
+* `is_encrypted`:(bool) Indicates if the datastore is encrypted or un-encrypted. 
 * `last_access_time`:(string) Timestamp the datastore object was last accessed. 
 * `last_modified_time`:(string) Timestamp the datastore object was last modified. 
 * `mod_time`:(string) The time when this managed object was last modified. 

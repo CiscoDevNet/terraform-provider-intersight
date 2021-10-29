@@ -208,6 +208,11 @@ func dataSourceHyperflexBackupCluster() *schema.Resource {
 				},
 			},
 		},
+		"src_cluster_uuid": {
+			Description: "UUID for the cluster to allow lookups across unclaim/reclaim.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -568,6 +573,11 @@ func dataSourceHyperflexBackupCluster() *schema.Resource {
 				},
 			},
 		},
+		"src_cluster_uuid": {
+			Description: "UUID for the cluster to allow lookups across unclaim/reclaim.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -816,7 +826,7 @@ func dataSourceHyperflexBackupClusterRead(c context.Context, d *schema.ResourceD
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -826,7 +836,7 @@ func dataSourceHyperflexBackupClusterRead(c context.Context, d *schema.ResourceD
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -978,6 +988,11 @@ func dataSourceHyperflexBackupClusterRead(c context.Context, d *schema.ResourceD
 			x := p[0]
 			o.SetSrcCluster(x)
 		}
+	}
+
+	if v, ok := d.GetOk("src_cluster_uuid"); ok {
+		x := (v.(string))
+		o.SetSrcClusterUuid(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1187,6 +1202,7 @@ func dataSourceHyperflexBackupClusterRead(c context.Context, d *schema.ResourceD
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["src_cluster"] = flattenMapHyperflexClusterRelationship(s.GetSrcCluster(), d)
+				temp["src_cluster_uuid"] = (s.GetSrcClusterUuid())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

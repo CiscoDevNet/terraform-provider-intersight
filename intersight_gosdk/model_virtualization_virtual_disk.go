@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -24,10 +24,18 @@ type VirtualizationVirtualDisk struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Billing rate for this resource.
+	BillingUnitId *string `json:"BillingUnitId,omitempty"`
 	// Disk capacity to be provided with units example - 10Gi.
 	Capacity *string `json:"Capacity,omitempty"`
 	// Flag to indicate whether the configuration is created from inventory object.
 	Discovered *bool `json:"Discovered,omitempty"`
+	// Action to perform on the disk example resize, shrink, defragment etc.
+	DiskAction *string `json:"DiskAction,omitempty"`
+	// Encryption key used if volume is encrypted.
+	EncryptionKey *string `json:"EncryptionKey,omitempty"`
+	// Encryption method used to encrypt the volume.
+	EncryptionType *string `json:"EncryptionType,omitempty"`
 	// File mode of the disk  example - Filesystem, Block. * `Block` - It is a Block virtual disk. * `Filesystem` - It is a File system virtual disk. * `` - Disk mode is either unknown or not supported.
 	Mode *string `json:"Mode,omitempty"`
 	// Name of the storage disk. Name must be unique within a Datastore.
@@ -38,6 +46,8 @@ type VirtualizationVirtualDisk struct {
 	SourceDiskToClone *string `json:"SourceDiskToClone,omitempty"`
 	// Image path used to import on the created disk.
 	SourceFilePath       *string                                    `json:"SourceFilePath,omitempty"`
+	VolumeIopsInfo       NullableCloudVolumeIopsInfo                `json:"VolumeIopsInfo,omitempty"`
+	Zone                 NullableCloudAvailabilityZone              `json:"Zone,omitempty"`
 	Cluster              *VirtualizationBaseClusterRelationship     `json:"Cluster,omitempty"`
 	Inventory            *VirtualizationBaseVirtualDiskRelationship `json:"Inventory,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship       `json:"RegisteredDevice,omitempty"`
@@ -122,6 +132,38 @@ func (o *VirtualizationVirtualDisk) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetBillingUnitId returns the BillingUnitId field value if set, zero value otherwise.
+func (o *VirtualizationVirtualDisk) GetBillingUnitId() string {
+	if o == nil || o.BillingUnitId == nil {
+		var ret string
+		return ret
+	}
+	return *o.BillingUnitId
+}
+
+// GetBillingUnitIdOk returns a tuple with the BillingUnitId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVirtualDisk) GetBillingUnitIdOk() (*string, bool) {
+	if o == nil || o.BillingUnitId == nil {
+		return nil, false
+	}
+	return o.BillingUnitId, true
+}
+
+// HasBillingUnitId returns a boolean if a field has been set.
+func (o *VirtualizationVirtualDisk) HasBillingUnitId() bool {
+	if o != nil && o.BillingUnitId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBillingUnitId gets a reference to the given string and assigns it to the BillingUnitId field.
+func (o *VirtualizationVirtualDisk) SetBillingUnitId(v string) {
+	o.BillingUnitId = &v
+}
+
 // GetCapacity returns the Capacity field value if set, zero value otherwise.
 func (o *VirtualizationVirtualDisk) GetCapacity() string {
 	if o == nil || o.Capacity == nil {
@@ -184,6 +226,102 @@ func (o *VirtualizationVirtualDisk) HasDiscovered() bool {
 // SetDiscovered gets a reference to the given bool and assigns it to the Discovered field.
 func (o *VirtualizationVirtualDisk) SetDiscovered(v bool) {
 	o.Discovered = &v
+}
+
+// GetDiskAction returns the DiskAction field value if set, zero value otherwise.
+func (o *VirtualizationVirtualDisk) GetDiskAction() string {
+	if o == nil || o.DiskAction == nil {
+		var ret string
+		return ret
+	}
+	return *o.DiskAction
+}
+
+// GetDiskActionOk returns a tuple with the DiskAction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVirtualDisk) GetDiskActionOk() (*string, bool) {
+	if o == nil || o.DiskAction == nil {
+		return nil, false
+	}
+	return o.DiskAction, true
+}
+
+// HasDiskAction returns a boolean if a field has been set.
+func (o *VirtualizationVirtualDisk) HasDiskAction() bool {
+	if o != nil && o.DiskAction != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDiskAction gets a reference to the given string and assigns it to the DiskAction field.
+func (o *VirtualizationVirtualDisk) SetDiskAction(v string) {
+	o.DiskAction = &v
+}
+
+// GetEncryptionKey returns the EncryptionKey field value if set, zero value otherwise.
+func (o *VirtualizationVirtualDisk) GetEncryptionKey() string {
+	if o == nil || o.EncryptionKey == nil {
+		var ret string
+		return ret
+	}
+	return *o.EncryptionKey
+}
+
+// GetEncryptionKeyOk returns a tuple with the EncryptionKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVirtualDisk) GetEncryptionKeyOk() (*string, bool) {
+	if o == nil || o.EncryptionKey == nil {
+		return nil, false
+	}
+	return o.EncryptionKey, true
+}
+
+// HasEncryptionKey returns a boolean if a field has been set.
+func (o *VirtualizationVirtualDisk) HasEncryptionKey() bool {
+	if o != nil && o.EncryptionKey != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptionKey gets a reference to the given string and assigns it to the EncryptionKey field.
+func (o *VirtualizationVirtualDisk) SetEncryptionKey(v string) {
+	o.EncryptionKey = &v
+}
+
+// GetEncryptionType returns the EncryptionType field value if set, zero value otherwise.
+func (o *VirtualizationVirtualDisk) GetEncryptionType() string {
+	if o == nil || o.EncryptionType == nil {
+		var ret string
+		return ret
+	}
+	return *o.EncryptionType
+}
+
+// GetEncryptionTypeOk returns a tuple with the EncryptionType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVirtualDisk) GetEncryptionTypeOk() (*string, bool) {
+	if o == nil || o.EncryptionType == nil {
+		return nil, false
+	}
+	return o.EncryptionType, true
+}
+
+// HasEncryptionType returns a boolean if a field has been set.
+func (o *VirtualizationVirtualDisk) HasEncryptionType() bool {
+	if o != nil && o.EncryptionType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptionType gets a reference to the given string and assigns it to the EncryptionType field.
+func (o *VirtualizationVirtualDisk) SetEncryptionType(v string) {
+	o.EncryptionType = &v
 }
 
 // GetMode returns the Mode field value if set, zero value otherwise.
@@ -346,6 +484,92 @@ func (o *VirtualizationVirtualDisk) SetSourceFilePath(v string) {
 	o.SourceFilePath = &v
 }
 
+// GetVolumeIopsInfo returns the VolumeIopsInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VirtualizationVirtualDisk) GetVolumeIopsInfo() CloudVolumeIopsInfo {
+	if o == nil || o.VolumeIopsInfo.Get() == nil {
+		var ret CloudVolumeIopsInfo
+		return ret
+	}
+	return *o.VolumeIopsInfo.Get()
+}
+
+// GetVolumeIopsInfoOk returns a tuple with the VolumeIopsInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VirtualizationVirtualDisk) GetVolumeIopsInfoOk() (*CloudVolumeIopsInfo, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VolumeIopsInfo.Get(), o.VolumeIopsInfo.IsSet()
+}
+
+// HasVolumeIopsInfo returns a boolean if a field has been set.
+func (o *VirtualizationVirtualDisk) HasVolumeIopsInfo() bool {
+	if o != nil && o.VolumeIopsInfo.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVolumeIopsInfo gets a reference to the given NullableCloudVolumeIopsInfo and assigns it to the VolumeIopsInfo field.
+func (o *VirtualizationVirtualDisk) SetVolumeIopsInfo(v CloudVolumeIopsInfo) {
+	o.VolumeIopsInfo.Set(&v)
+}
+
+// SetVolumeIopsInfoNil sets the value for VolumeIopsInfo to be an explicit nil
+func (o *VirtualizationVirtualDisk) SetVolumeIopsInfoNil() {
+	o.VolumeIopsInfo.Set(nil)
+}
+
+// UnsetVolumeIopsInfo ensures that no value is present for VolumeIopsInfo, not even an explicit nil
+func (o *VirtualizationVirtualDisk) UnsetVolumeIopsInfo() {
+	o.VolumeIopsInfo.Unset()
+}
+
+// GetZone returns the Zone field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VirtualizationVirtualDisk) GetZone() CloudAvailabilityZone {
+	if o == nil || o.Zone.Get() == nil {
+		var ret CloudAvailabilityZone
+		return ret
+	}
+	return *o.Zone.Get()
+}
+
+// GetZoneOk returns a tuple with the Zone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VirtualizationVirtualDisk) GetZoneOk() (*CloudAvailabilityZone, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Zone.Get(), o.Zone.IsSet()
+}
+
+// HasZone returns a boolean if a field has been set.
+func (o *VirtualizationVirtualDisk) HasZone() bool {
+	if o != nil && o.Zone.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetZone gets a reference to the given NullableCloudAvailabilityZone and assigns it to the Zone field.
+func (o *VirtualizationVirtualDisk) SetZone(v CloudAvailabilityZone) {
+	o.Zone.Set(&v)
+}
+
+// SetZoneNil sets the value for Zone to be an explicit nil
+func (o *VirtualizationVirtualDisk) SetZoneNil() {
+	o.Zone.Set(nil)
+}
+
+// UnsetZone ensures that no value is present for Zone, not even an explicit nil
+func (o *VirtualizationVirtualDisk) UnsetZone() {
+	o.Zone.Unset()
+}
+
 // GetCluster returns the Cluster field value if set, zero value otherwise.
 func (o *VirtualizationVirtualDisk) GetCluster() VirtualizationBaseClusterRelationship {
 	if o == nil || o.Cluster == nil {
@@ -490,11 +714,23 @@ func (o VirtualizationVirtualDisk) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.BillingUnitId != nil {
+		toSerialize["BillingUnitId"] = o.BillingUnitId
+	}
 	if o.Capacity != nil {
 		toSerialize["Capacity"] = o.Capacity
 	}
 	if o.Discovered != nil {
 		toSerialize["Discovered"] = o.Discovered
+	}
+	if o.DiskAction != nil {
+		toSerialize["DiskAction"] = o.DiskAction
+	}
+	if o.EncryptionKey != nil {
+		toSerialize["EncryptionKey"] = o.EncryptionKey
+	}
+	if o.EncryptionType != nil {
+		toSerialize["EncryptionType"] = o.EncryptionType
 	}
 	if o.Mode != nil {
 		toSerialize["Mode"] = o.Mode
@@ -510,6 +746,12 @@ func (o VirtualizationVirtualDisk) MarshalJSON() ([]byte, error) {
 	}
 	if o.SourceFilePath != nil {
 		toSerialize["SourceFilePath"] = o.SourceFilePath
+	}
+	if o.VolumeIopsInfo.IsSet() {
+		toSerialize["VolumeIopsInfo"] = o.VolumeIopsInfo.Get()
+	}
+	if o.Zone.IsSet() {
+		toSerialize["Zone"] = o.Zone.Get()
 	}
 	if o.Cluster != nil {
 		toSerialize["Cluster"] = o.Cluster
@@ -537,10 +779,18 @@ func (o *VirtualizationVirtualDisk) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Billing rate for this resource.
+		BillingUnitId *string `json:"BillingUnitId,omitempty"`
 		// Disk capacity to be provided with units example - 10Gi.
 		Capacity *string `json:"Capacity,omitempty"`
 		// Flag to indicate whether the configuration is created from inventory object.
 		Discovered *bool `json:"Discovered,omitempty"`
+		// Action to perform on the disk example resize, shrink, defragment etc.
+		DiskAction *string `json:"DiskAction,omitempty"`
+		// Encryption key used if volume is encrypted.
+		EncryptionKey *string `json:"EncryptionKey,omitempty"`
+		// Encryption method used to encrypt the volume.
+		EncryptionType *string `json:"EncryptionType,omitempty"`
 		// File mode of the disk  example - Filesystem, Block. * `Block` - It is a Block virtual disk. * `Filesystem` - It is a File system virtual disk. * `` - Disk mode is either unknown or not supported.
 		Mode *string `json:"Mode,omitempty"`
 		// Name of the storage disk. Name must be unique within a Datastore.
@@ -551,6 +801,8 @@ func (o *VirtualizationVirtualDisk) UnmarshalJSON(bytes []byte) (err error) {
 		SourceDiskToClone *string `json:"SourceDiskToClone,omitempty"`
 		// Image path used to import on the created disk.
 		SourceFilePath   *string                                    `json:"SourceFilePath,omitempty"`
+		VolumeIopsInfo   NullableCloudVolumeIopsInfo                `json:"VolumeIopsInfo,omitempty"`
+		Zone             NullableCloudAvailabilityZone              `json:"Zone,omitempty"`
 		Cluster          *VirtualizationBaseClusterRelationship     `json:"Cluster,omitempty"`
 		Inventory        *VirtualizationBaseVirtualDiskRelationship `json:"Inventory,omitempty"`
 		RegisteredDevice *AssetDeviceRegistrationRelationship       `json:"RegisteredDevice,omitempty"`
@@ -564,13 +816,19 @@ func (o *VirtualizationVirtualDisk) UnmarshalJSON(bytes []byte) (err error) {
 		varVirtualizationVirtualDisk := _VirtualizationVirtualDisk{}
 		varVirtualizationVirtualDisk.ClassId = varVirtualizationVirtualDiskWithoutEmbeddedStruct.ClassId
 		varVirtualizationVirtualDisk.ObjectType = varVirtualizationVirtualDiskWithoutEmbeddedStruct.ObjectType
+		varVirtualizationVirtualDisk.BillingUnitId = varVirtualizationVirtualDiskWithoutEmbeddedStruct.BillingUnitId
 		varVirtualizationVirtualDisk.Capacity = varVirtualizationVirtualDiskWithoutEmbeddedStruct.Capacity
 		varVirtualizationVirtualDisk.Discovered = varVirtualizationVirtualDiskWithoutEmbeddedStruct.Discovered
+		varVirtualizationVirtualDisk.DiskAction = varVirtualizationVirtualDiskWithoutEmbeddedStruct.DiskAction
+		varVirtualizationVirtualDisk.EncryptionKey = varVirtualizationVirtualDiskWithoutEmbeddedStruct.EncryptionKey
+		varVirtualizationVirtualDisk.EncryptionType = varVirtualizationVirtualDiskWithoutEmbeddedStruct.EncryptionType
 		varVirtualizationVirtualDisk.Mode = varVirtualizationVirtualDiskWithoutEmbeddedStruct.Mode
 		varVirtualizationVirtualDisk.Name = varVirtualizationVirtualDiskWithoutEmbeddedStruct.Name
 		varVirtualizationVirtualDisk.SourceCerts = varVirtualizationVirtualDiskWithoutEmbeddedStruct.SourceCerts
 		varVirtualizationVirtualDisk.SourceDiskToClone = varVirtualizationVirtualDiskWithoutEmbeddedStruct.SourceDiskToClone
 		varVirtualizationVirtualDisk.SourceFilePath = varVirtualizationVirtualDiskWithoutEmbeddedStruct.SourceFilePath
+		varVirtualizationVirtualDisk.VolumeIopsInfo = varVirtualizationVirtualDiskWithoutEmbeddedStruct.VolumeIopsInfo
+		varVirtualizationVirtualDisk.Zone = varVirtualizationVirtualDiskWithoutEmbeddedStruct.Zone
 		varVirtualizationVirtualDisk.Cluster = varVirtualizationVirtualDiskWithoutEmbeddedStruct.Cluster
 		varVirtualizationVirtualDisk.Inventory = varVirtualizationVirtualDiskWithoutEmbeddedStruct.Inventory
 		varVirtualizationVirtualDisk.RegisteredDevice = varVirtualizationVirtualDiskWithoutEmbeddedStruct.RegisteredDevice
@@ -594,13 +852,19 @@ func (o *VirtualizationVirtualDisk) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "BillingUnitId")
 		delete(additionalProperties, "Capacity")
 		delete(additionalProperties, "Discovered")
+		delete(additionalProperties, "DiskAction")
+		delete(additionalProperties, "EncryptionKey")
+		delete(additionalProperties, "EncryptionType")
 		delete(additionalProperties, "Mode")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "SourceCerts")
 		delete(additionalProperties, "SourceDiskToClone")
 		delete(additionalProperties, "SourceFilePath")
+		delete(additionalProperties, "VolumeIopsInfo")
+		delete(additionalProperties, "Zone")
 		delete(additionalProperties, "Cluster")
 		delete(additionalProperties, "Inventory")
 		delete(additionalProperties, "RegisteredDevice")

@@ -24,5 +24,5 @@ The following arguments can be used to get data of already created objects in In
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `size`:(int) Snapshot size represented in bytes. 
 * `nr_source`:(string) Source object on which the snapshot is created. It is the name of the originating volume. 
-* `uuid`:(string) UUID of the volume snapshot. 
+* `uuid`:(string) Universally unique identifier of the volume snapshot. 
  

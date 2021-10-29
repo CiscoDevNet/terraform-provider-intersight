@@ -26,7 +26,7 @@ func dataSourceStorageNetAppAggregate() *schema.Resource {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"aggregate_type": {
-			Description: "Storage disk type for NetApp aggregate.\n* `HDD` - Hard Disk Drive.\n* `Hybrid` - Solid State Hard Disk Drive.\n* `Hybrid (Flash Pool)` - SSHD in a flash pool.\n* `SSD` - Solid State Disk.\n* `SSD (FabricPool)` - SSD in a flash pool.\n* `VMDisk (SDS)` - Storage disk with Hard disk drive.\n* `VMDisk (FabricPool)` - Storage disk with Non-volatile random-access memory drives.\n* `LUN (FlexArray)` - LUN as a disk.\n* `Not Mapped` - Storage disk is not mapped.",
+			Description: "Storage disk type for NetApp aggregate.\n* `HDD` - Hard Disk Drive disk type.\n* `Hybrid` - Solid State Hard Disk Drive.\n* `Hybrid (Flash Pool)` - SSHD in a flash pool disk type.\n* `SSD` - Solid State Disk disk type.\n* `SSD (FabricPool)` - SSD in a flash pool disk type.\n* `VMDisk (SDS)` - Storage disk with Hard disk drive.\n* `VMDisk (FabricPool)` - Storage disk with Non-volatile random-access memory drives.\n* `LUN (FlexArray)` - LUN (FlexArray) disk type.\n* `Not Mapped` - Storage disk is not mapped.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -99,6 +99,51 @@ func dataSourceStorageNetAppAggregate() *schema.Resource {
 				},
 			},
 		},
+		"avg_performance_metrics": {
+			Description: "Average performance metrics for over a period of time.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops": {
+						Description: "Rate of I/O operations observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"latency": {
+						Description: "Latency observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"period": {
+						Description: "Duration of periodic aggregation, in hours.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput": {
+						Description: "Throughput observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -111,6 +156,11 @@ func dataSourceStorageNetAppAggregate() *schema.Resource {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"key": {
+			Description: "Unique identifier of NetApp Aggregate across data center.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -229,7 +279,7 @@ func dataSourceStorageNetAppAggregate() *schema.Resource {
 			Optional:    true,
 		},
 		"state": {
-			Description: "Current state of the NetApp aggregate.\n* `Unknown` - Specifies that the aggregate is discovered, but the aggregate information is not yet retrieved by the Unified Manager server.\n* `Online` - Aggregate is ready and available.\n* `Onlining` - Transitioning online.\n* `Offline` - Aggregate is unavailable.\n* `Offlining` - Transitioning offline.\n* `Relocating` - The aggregate is being relocated.\n* `Restricted` - Limited operations (e.g., parity reconstruction) are allowed, but data access is not allowed.\n* `Failed` - The aggregate cannot be brought online.\n* `Inconsistent` - The aggregate has been marked corrupted; contact technical support.\n* `Unmounted` - The aggregate is not mounted.",
+			Description: "Current state of the NetApp aggregate.\n* `Unknown` - Specifies that the aggregate is discovered, but the aggregate information is not yet retrieved by the Unified Manager server.\n* `Online` - Aggregate is ready and available.\n* `Onlining` - The state is transitioning online.\n* `Offline` - Aggregate is unavailable.\n* `Offlining` - The state is transitioning offline.\n* `Relocating` - The aggregate is being relocated.\n* `Restricted` - Limited operations (e.g., parity reconstruction) are allowed, but data access is not allowed.\n* `Failed` - The aggregate cannot be brought online.\n* `Inconsistent` - The aggregate has been marked corrupted; contact technical support.\n* `Unmounted` - The aggregate is not mounted.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -441,7 +491,7 @@ func dataSourceStorageNetAppAggregate() *schema.Resource {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"aggregate_type": {
-			Description: "Storage disk type for NetApp aggregate.\n* `HDD` - Hard Disk Drive.\n* `Hybrid` - Solid State Hard Disk Drive.\n* `Hybrid (Flash Pool)` - SSHD in a flash pool.\n* `SSD` - Solid State Disk.\n* `SSD (FabricPool)` - SSD in a flash pool.\n* `VMDisk (SDS)` - Storage disk with Hard disk drive.\n* `VMDisk (FabricPool)` - Storage disk with Non-volatile random-access memory drives.\n* `LUN (FlexArray)` - LUN as a disk.\n* `Not Mapped` - Storage disk is not mapped.",
+			Description: "Storage disk type for NetApp aggregate.\n* `HDD` - Hard Disk Drive disk type.\n* `Hybrid` - Solid State Hard Disk Drive.\n* `Hybrid (Flash Pool)` - SSHD in a flash pool disk type.\n* `SSD` - Solid State Disk disk type.\n* `SSD (FabricPool)` - SSD in a flash pool disk type.\n* `VMDisk (SDS)` - Storage disk with Hard disk drive.\n* `VMDisk (FabricPool)` - Storage disk with Non-volatile random-access memory drives.\n* `LUN (FlexArray)` - LUN (FlexArray) disk type.\n* `Not Mapped` - Storage disk is not mapped.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -514,6 +564,51 @@ func dataSourceStorageNetAppAggregate() *schema.Resource {
 				},
 			},
 		},
+		"avg_performance_metrics": {
+			Description: "Average performance metrics for over a period of time.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops": {
+						Description: "Rate of I/O operations observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"latency": {
+						Description: "Latency observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"period": {
+						Description: "Duration of periodic aggregation, in hours.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput": {
+						Description: "Throughput observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -526,6 +621,11 @@ func dataSourceStorageNetAppAggregate() *schema.Resource {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"key": {
+			Description: "Unique identifier of NetApp Aggregate across data center.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -644,7 +744,7 @@ func dataSourceStorageNetAppAggregate() *schema.Resource {
 			Optional:    true,
 		},
 		"state": {
-			Description: "Current state of the NetApp aggregate.\n* `Unknown` - Specifies that the aggregate is discovered, but the aggregate information is not yet retrieved by the Unified Manager server.\n* `Online` - Aggregate is ready and available.\n* `Onlining` - Transitioning online.\n* `Offline` - Aggregate is unavailable.\n* `Offlining` - Transitioning offline.\n* `Relocating` - The aggregate is being relocated.\n* `Restricted` - Limited operations (e.g., parity reconstruction) are allowed, but data access is not allowed.\n* `Failed` - The aggregate cannot be brought online.\n* `Inconsistent` - The aggregate has been marked corrupted; contact technical support.\n* `Unmounted` - The aggregate is not mounted.",
+			Description: "Current state of the NetApp aggregate.\n* `Unknown` - Specifies that the aggregate is discovered, but the aggregate information is not yet retrieved by the Unified Manager server.\n* `Online` - Aggregate is ready and available.\n* `Onlining` - The state is transitioning online.\n* `Offline` - Aggregate is unavailable.\n* `Offlining` - The state is transitioning offline.\n* `Relocating` - The aggregate is being relocated.\n* `Restricted` - Limited operations (e.g., parity reconstruction) are allowed, but data access is not allowed.\n* `Failed` - The aggregate cannot be brought online.\n* `Inconsistent` - The aggregate has been marked corrupted; contact technical support.\n* `Unmounted` - The aggregate is not mounted.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -963,13 +1063,44 @@ func dataSourceStorageNetAppAggregateRead(c context.Context, d *schema.ResourceD
 		}
 	}
 
+	if v, ok := d.GetOk("avg_performance_metrics"); ok {
+		p := make([]models.StorageNetAppPerformanceMetricsAverage, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageNetAppPerformanceMetricsAverage{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.NetAppPerformanceMetricsAverage")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAvgPerformanceMetrics(x)
+		}
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -978,8 +1109,13 @@ func dataSourceStorageNetAppAggregateRead(c context.Context, d *schema.ResourceD
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("key"); ok {
+		x := (v.(string))
+		o.SetKey(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1311,10 +1447,13 @@ func dataSourceStorageNetAppAggregateRead(c context.Context, d *schema.ResourceD
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["array_controller"] = flattenMapStorageNetAppNodeRelationship(s.GetArrayController(), d)
+
+				temp["avg_performance_metrics"] = flattenMapStorageNetAppPerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["key"] = (s.GetKey())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

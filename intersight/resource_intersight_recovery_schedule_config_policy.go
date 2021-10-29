@@ -630,7 +630,7 @@ func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.Res
 			o.SetClassId("recovery.BackupSchedule")
 			if v, ok := l["execution_time"]; ok {
 				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
+					x, _ := time.Parse(time.RFC1123, v.(string))
 					o.SetExecutionTime(x)
 				}
 			}
@@ -960,7 +960,7 @@ func resourceRecoveryScheduleConfigPolicyUpdate(c context.Context, d *schema.Res
 			o.SetClassId("recovery.BackupSchedule")
 			if v, ok := l["execution_time"]; ok {
 				{
-					x, _ := time.Parse(v.(string), time.RFC1123)
+					x, _ := time.Parse(time.RFC1123, v.(string))
 					o.SetExecutionTime(x)
 				}
 			}

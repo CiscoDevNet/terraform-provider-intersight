@@ -228,6 +228,16 @@ func dataSourceNiatelemetryApicSysLogSrc() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"syslog_remote_dest": {
+			Description: "List of Syslog remote destination for SyslogSrc in APIC.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"syslog_rs_dest_grp": {
+			Description: "Syslog destination grp for SysLogSrc in APIC.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -573,6 +583,16 @@ func dataSourceNiatelemetryApicSysLogSrc() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"syslog_remote_dest": {
+			Description: "List of Syslog remote destination for SyslogSrc in APIC.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"syslog_rs_dest_grp": {
+			Description: "Syslog destination grp for SysLogSrc in APIC.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -781,7 +801,7 @@ func dataSourceNiatelemetryApicSysLogSrcRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -801,7 +821,7 @@ func dataSourceNiatelemetryApicSysLogSrcRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -968,6 +988,16 @@ func dataSourceNiatelemetryApicSysLogSrcRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("site_name"); ok {
 		x := (v.(string))
 		o.SetSiteName(x)
+	}
+
+	if v, ok := d.GetOk("syslog_remote_dest"); ok {
+		x := (v.(string))
+		o.SetSyslogRemoteDest(x)
+	}
+
+	if v, ok := d.GetOk("syslog_rs_dest_grp"); ok {
+		x := (v.(string))
+		o.SetSyslogRsDestGrp(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1138,6 +1168,8 @@ func dataSourceNiatelemetryApicSysLogSrcRead(c context.Context, d *schema.Resour
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["site_name"] = (s.GetSiteName())
+				temp["syslog_remote_dest"] = (s.GetSyslogRemoteDest())
+				temp["syslog_rs_dest_grp"] = (s.GetSyslogRsDestGrp())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 

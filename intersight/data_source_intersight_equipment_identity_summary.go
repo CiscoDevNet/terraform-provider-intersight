@@ -89,6 +89,16 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"current_chassis_id": {
+			Description: "The id of the chassis that the blade is currently located in.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"current_slot_id": {
+			Description: "The slot number in the chassis that the blade is currently located in.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -148,7 +158,7 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 			},
 		},
 		"nr_lifecycle": {
-			Description: "The equipment's lifecycle status.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DecommissionInProgress` - Decommission Inprogress Lifecycle state.\n* `RecommissionInProgress` - Recommission Inprogress Lifecycle state.\n* `OperationFailed` - Failed Operation Lifecycle state.\n* `ReackInProgress` - ReackInProgress Lifecycle state.\n* `RemoveInProgress` - RemoveInProgress Lifecycle state.\n* `Discovered` - Discovered Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `Inactive` - Inactive Lifecycle state.\n* `ReplaceInProgress` - ReplaceInProgress Lifecycle state.",
+			Description: "The equipment's lifecycle status.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DecommissionInProgress` - Decommission Inprogress Lifecycle state.\n* `RecommissionInProgress` - Recommission Inprogress Lifecycle state.\n* `OperationFailed` - Failed Operation Lifecycle state.\n* `ReackInProgress` - ReackInProgress Lifecycle state.\n* `RemoveInProgress` - RemoveInProgress Lifecycle state.\n* `Discovered` - Discovered Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `Inactive` - Inactive Lifecycle state.\n* `ReplaceInProgress` - ReplaceInProgress Lifecycle state.\n* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -522,6 +532,16 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"current_chassis_id": {
+			Description: "The id of the chassis that the blade is currently located in.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"current_slot_id": {
+			Description: "The slot number in the chassis that the blade is currently located in.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -581,7 +601,7 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 			},
 		},
 		"nr_lifecycle": {
-			Description: "The equipment's lifecycle status.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DecommissionInProgress` - Decommission Inprogress Lifecycle state.\n* `RecommissionInProgress` - Recommission Inprogress Lifecycle state.\n* `OperationFailed` - Failed Operation Lifecycle state.\n* `ReackInProgress` - ReackInProgress Lifecycle state.\n* `RemoveInProgress` - RemoveInProgress Lifecycle state.\n* `Discovered` - Discovered Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `Inactive` - Inactive Lifecycle state.\n* `ReplaceInProgress` - ReplaceInProgress Lifecycle state.",
+			Description: "The equipment's lifecycle status.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DecommissionInProgress` - Decommission Inprogress Lifecycle state.\n* `RecommissionInProgress` - Recommission Inprogress Lifecycle state.\n* `OperationFailed` - Failed Operation Lifecycle state.\n* `ReackInProgress` - ReackInProgress Lifecycle state.\n* `RemoveInProgress` - RemoveInProgress Lifecycle state.\n* `Discovered` - Discovered Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `Inactive` - Inactive Lifecycle state.\n* `ReplaceInProgress` - ReplaceInProgress Lifecycle state.\n* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -977,8 +997,18 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
+	}
+
+	if v, ok := d.GetOkExists("current_chassis_id"); ok {
+		x := int64(v.(int))
+		o.SetCurrentChassisId(x)
+	}
+
+	if v, ok := d.GetOkExists("current_slot_id"); ok {
+		x := int64(v.(int))
+		o.SetCurrentSlotId(x)
 	}
 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
@@ -1054,7 +1084,7 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1397,6 +1427,8 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["current_chassis_id"] = (s.GetCurrentChassisId())
+				temp["current_slot_id"] = (s.GetCurrentSlotId())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["firmware_supportability"] = (s.GetFirmwareSupportability())
 				temp["identifier"] = (s.GetIdentifier())

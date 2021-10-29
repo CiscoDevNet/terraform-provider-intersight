@@ -59,6 +59,11 @@ func dataSourceVirtualizationVirtualDisk() *schema.Resource {
 				},
 			},
 		},
+		"billing_unit_id": {
+			Description: "Billing rate for this resource.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"capacity": {
 			Description: "Disk capacity to be provided with units example - 10Gi.",
 			Type:        schema.TypeString,
@@ -114,8 +119,23 @@ func dataSourceVirtualizationVirtualDisk() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"disk_action": {
+			Description: "Action to perform on the disk example resize, shrink, defragment etc.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"encryption_key": {
+			Description: "Encryption key used if volume is encrypted.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"encryption_type": {
+			Description: "Encryption method used to encrypt the volume.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -439,6 +459,51 @@ func dataSourceVirtualizationVirtualDisk() *schema.Resource {
 				},
 			},
 		},
+		"volume_iops_info": {
+			Description: "Iops (input-output operations per sec) info for the volume.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops_read_limit": {
+						Description: "Number of disk read commands that can be performed per second.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"iops_write_limit": {
+						Description: "Number of disk write commands that can be performed per second.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"throughput_read_limit": {
+						Description: "Data transfer rate limit from the disk, specified in mebibytes (MiB) per second.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput_write_limit": {
+						Description: "Data transfer rate limit to the disk, specified in mebibytes (MiB) per second.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"workflow_info": {
 			Description: "A reference to a workflowWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -468,6 +533,41 @@ func dataSourceVirtualizationVirtualDisk() *schema.Resource {
 					},
 					"selector": {
 						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"zone": {
+			Description: "Aws specific availabilty zone in a region.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "The name of the availability zone.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"zone_id": {
+						Description: "The ID of the availability zone.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -519,6 +619,11 @@ func dataSourceVirtualizationVirtualDisk() *schema.Resource {
 				},
 			},
 		},
+		"billing_unit_id": {
+			Description: "Billing rate for this resource.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"capacity": {
 			Description: "Disk capacity to be provided with units example - 10Gi.",
 			Type:        schema.TypeString,
@@ -574,8 +679,23 @@ func dataSourceVirtualizationVirtualDisk() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"disk_action": {
+			Description: "Action to perform on the disk example resize, shrink, defragment etc.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"encryption_key": {
+			Description: "Encryption key used if volume is encrypted.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"encryption_type": {
+			Description: "Encryption method used to encrypt the volume.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -899,6 +1019,51 @@ func dataSourceVirtualizationVirtualDisk() *schema.Resource {
 				},
 			},
 		},
+		"volume_iops_info": {
+			Description: "Iops (input-output operations per sec) info for the volume.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops_read_limit": {
+						Description: "Number of disk read commands that can be performed per second.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"iops_write_limit": {
+						Description: "Number of disk write commands that can be performed per second.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"throughput_read_limit": {
+						Description: "Data transfer rate limit from the disk, specified in mebibytes (MiB) per second.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput_write_limit": {
+						Description: "Data transfer rate limit to the disk, specified in mebibytes (MiB) per second.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"workflow_info": {
 			Description: "A reference to a workflowWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -928,6 +1093,41 @@ func dataSourceVirtualizationVirtualDisk() *schema.Resource {
 					},
 					"selector": {
 						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"zone": {
+			Description: "Aws specific availabilty zone in a region.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "The name of the availability zone.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"zone_id": {
+						Description: "The ID of the availability zone.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1005,6 +1205,11 @@ func dataSourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resour
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("billing_unit_id"); ok {
+		x := (v.(string))
+		o.SetBillingUnitId(x)
+	}
+
 	if v, ok := d.GetOk("capacity"); ok {
 		x := (v.(string))
 		o.SetCapacity(x)
@@ -1059,7 +1264,7 @@ func dataSourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1068,9 +1273,24 @@ func dataSourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resour
 		o.SetDiscovered(x)
 	}
 
+	if v, ok := d.GetOk("disk_action"); ok {
+		x := (v.(string))
+		o.SetDiskAction(x)
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOk("encryption_key"); ok {
+		x := (v.(string))
+		o.SetEncryptionKey(x)
+	}
+
+	if v, ok := d.GetOk("encryption_type"); ok {
+		x := (v.(string))
+		o.SetEncryptionType(x)
 	}
 
 	if v, ok := d.GetOk("inventory"); ok {
@@ -1117,7 +1337,7 @@ func dataSourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1403,6 +1623,37 @@ func dataSourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("volume_iops_info"); ok {
+		p := make([]models.CloudVolumeIopsInfo, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.CloudVolumeIopsInfo{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("cloud.VolumeIopsInfo")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVolumeIopsInfo(x)
+		}
+	}
+
 	if v, ok := d.GetOk("workflow_info"); ok {
 		p := make([]models.WorkflowWorkflowInfoRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1446,6 +1697,37 @@ func dataSourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("zone"); ok {
+		p := make([]models.CloudAvailabilityZone, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.CloudAvailabilityZone{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("cloud.AvailabilityZone")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetZone(x)
+		}
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of VirtualizationVirtualDisk object failed with error : %s", err.Error())
@@ -1486,6 +1768,7 @@ func dataSourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resour
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["billing_unit_id"] = (s.GetBillingUnitId())
 				temp["capacity"] = (s.GetCapacity())
 				temp["class_id"] = (s.GetClassId())
 
@@ -1493,7 +1776,10 @@ func dataSourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resour
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["discovered"] = (s.GetDiscovered())
+				temp["disk_action"] = (s.GetDiskAction())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["encryption_key"] = (s.GetEncryptionKey())
+				temp["encryption_type"] = (s.GetEncryptionType())
 
 				temp["inventory"] = flattenMapVirtualizationBaseVirtualDiskRelationship(s.GetInventory(), d)
 
@@ -1518,7 +1804,11 @@ func dataSourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resour
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
+				temp["volume_iops_info"] = flattenMapCloudVolumeIopsInfo(s.GetVolumeIopsInfo(), d)
+
 				temp["workflow_info"] = flattenMapWorkflowWorkflowInfoRelationship(s.GetWorkflowInfo(), d)
+
+				temp["zone"] = flattenMapCloudAvailabilityZone(s.GetZone(), d)
 				virtualizationVirtualDiskResults[j] = temp
 				j += 1
 			}

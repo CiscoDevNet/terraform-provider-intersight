@@ -94,6 +94,51 @@ func dataSourceStorageNetAppLun() *schema.Resource {
 				},
 			},
 		},
+		"avg_performance_metrics": {
+			Description: "Average performance metrics for over a period of time.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops": {
+						Description: "Rate of I/O operations observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"latency": {
+						Description: "Latency observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"period": {
+						Description: "Duration of periodic aggregation, in hours.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput": {
+						Description: "Throughput observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -147,6 +192,16 @@ func dataSourceStorageNetAppLun() *schema.Resource {
 					},
 				},
 			},
+		},
+		"key": {
+			Description: "Unique identifier of Lun across data center.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mapped": {
+			Description: "Reports if the LUN is mapped to one or more initiator groups.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -268,7 +323,7 @@ func dataSourceStorageNetAppLun() *schema.Resource {
 			Optional:    true,
 		},
 		"state": {
-			Description: "The administrative state of a LUN.\n* `offline` - The LUN is administratively offline, or a more detailed offline reason is not available.\n* `online` - The LUN is online.",
+			Description: "The administrative state of a LUN.\n* `offline` - The LUN is administratively offline, or a more detailed offline reason is not available.\n* `online` - The state of the LUN is online.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -381,7 +436,7 @@ func dataSourceStorageNetAppLun() *schema.Resource {
 			},
 		},
 		"uuid": {
-			Description: "UUID of the LUN.",
+			Description: "Universally unique identifier of the LUN.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -573,6 +628,51 @@ func dataSourceStorageNetAppLun() *schema.Resource {
 				},
 			},
 		},
+		"avg_performance_metrics": {
+			Description: "Average performance metrics for over a period of time.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iops": {
+						Description: "Rate of I/O operations observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"latency": {
+						Description: "Latency observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"period": {
+						Description: "Duration of periodic aggregation, in hours.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"throughput": {
+						Description: "Throughput observed at the storage object.",
+						Type:        schema.TypeFloat,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -626,6 +726,16 @@ func dataSourceStorageNetAppLun() *schema.Resource {
 					},
 				},
 			},
+		},
+		"key": {
+			Description: "Unique identifier of Lun across data center.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mapped": {
+			Description: "Reports if the LUN is mapped to one or more initiator groups.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -747,7 +857,7 @@ func dataSourceStorageNetAppLun() *schema.Resource {
 			Optional:    true,
 		},
 		"state": {
-			Description: "The administrative state of a LUN.\n* `offline` - The LUN is administratively offline, or a more detailed offline reason is not available.\n* `online` - The LUN is online.",
+			Description: "The administrative state of a LUN.\n* `offline` - The LUN is administratively offline, or a more detailed offline reason is not available.\n* `online` - The state of the LUN is online.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -860,7 +970,7 @@ func dataSourceStorageNetAppLun() *schema.Resource {
 			},
 		},
 		"uuid": {
-			Description: "UUID of the LUN.",
+			Description: "Universally unique identifier of the LUN.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1086,13 +1196,44 @@ func dataSourceStorageNetAppLunRead(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
+	if v, ok := d.GetOk("avg_performance_metrics"); ok {
+		p := make([]models.StorageNetAppPerformanceMetricsAverage, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageNetAppPerformanceMetricsAverage{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.NetAppPerformanceMetricsAverage")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAvgPerformanceMetrics(x)
+		}
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1146,8 +1287,18 @@ func dataSourceStorageNetAppLunRead(c context.Context, d *schema.ResourceData, m
 		o.SetHost(x)
 	}
 
+	if v, ok := d.GetOk("key"); ok {
+		x := (v.(string))
+		o.SetKey(x)
+	}
+
+	if v, ok := d.GetOkExists("mapped"); ok {
+		x := (v.(bool))
+		o.SetMapped(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1516,6 +1667,8 @@ func dataSourceStorageNetAppLunRead(c context.Context, d *schema.ResourceData, m
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["array"] = flattenMapStorageNetAppClusterRelationship(s.GetArray(), d)
+
+				temp["avg_performance_metrics"] = flattenMapStorageNetAppPerformanceMetricsAverage(s.GetAvgPerformanceMetrics(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -1523,6 +1676,8 @@ func dataSourceStorageNetAppLunRead(c context.Context, d *schema.ResourceData, m
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["host"] = flattenListStorageNetAppInitiatorGroupRelationship(s.GetHost(), d)
+				temp["key"] = (s.GetKey())
+				temp["mapped"] = (s.GetMapped())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

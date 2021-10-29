@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **ThinProvisioningSupported** | Pointer to **bool** | Indicates if this datastore supports thin provisioning for files. | [optional] 
 **UnCommitted** | Pointer to **int64** | Space uncommitted in this datastore in bytes. | [optional] 
 **Url** | Pointer to **string** | The URL to access this datastore (example - &#39;ds:///vmfs/volumes/562a4e8a-0eeb5372-dd61-78baf9cb9afa/&#39;). | [optional] 
+**VmTemplateCount** | Pointer to **int64** | Number of virtual machine templates relying on (using) this datastore. | [optional] 
 **Cluster** | Pointer to [**VirtualizationVmwareClusterRelationship**](VirtualizationVmwareClusterRelationship.md) |  | [optional] 
 **Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
 **DatastoreCluster** | Pointer to [**VirtualizationVmwareDatastoreClusterRelationship**](VirtualizationVmwareDatastoreClusterRelationship.md) |  | [optional] 
@@ -277,6 +278,31 @@ SetUrl sets Url field to given value.
 `func (o *VirtualizationVmwareDatastore) HasUrl() bool`
 
 HasUrl returns a boolean if a field has been set.
+
+### GetVmTemplateCount
+
+`func (o *VirtualizationVmwareDatastore) GetVmTemplateCount() int64`
+
+GetVmTemplateCount returns the VmTemplateCount field if non-nil, zero value otherwise.
+
+### GetVmTemplateCountOk
+
+`func (o *VirtualizationVmwareDatastore) GetVmTemplateCountOk() (*int64, bool)`
+
+GetVmTemplateCountOk returns a tuple with the VmTemplateCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVmTemplateCount
+
+`func (o *VirtualizationVmwareDatastore) SetVmTemplateCount(v int64)`
+
+SetVmTemplateCount sets VmTemplateCount field to given value.
+
+### HasVmTemplateCount
+
+`func (o *VirtualizationVmwareDatastore) HasVmTemplateCount() bool`
+
+HasVmTemplateCount returns a boolean if a field has been set.
 
 ### GetCluster
 

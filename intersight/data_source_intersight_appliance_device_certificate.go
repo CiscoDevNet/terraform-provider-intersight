@@ -947,12 +947,12 @@ func dataSourceApplianceDeviceCertificateRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("ca_certificate_expiry_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCaCertificateExpiryTime(x)
 	}
 
 	if v, ok := d.GetOk("certificate_renewal_expiry_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCertificateRenewalExpiryTime(x)
 	}
 
@@ -995,7 +995,7 @@ func dataSourceApplianceDeviceCertificateRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1036,12 +1036,12 @@ func dataSourceApplianceDeviceCertificateRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("end_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetEndTime(x)
 	}
 
 	if v, ok := d.GetOk("last_success_poll_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastSuccessPollTime(x)
 	}
 
@@ -1055,7 +1055,7 @@ func dataSourceApplianceDeviceCertificateRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1167,7 +1167,7 @@ func dataSourceApplianceDeviceCertificateRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("start_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetStartTime(x)
 	}
 

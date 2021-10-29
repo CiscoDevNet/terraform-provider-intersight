@@ -44,9 +44,11 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
+* `data_store_encryption_enabled`:(bool)(ReadOnly) Whether the datastore is encrypted or not. 
 * `description`:(string)(ReadOnly) Description from corresponding ClusterBackupPolicy. 
 * `discovered`:(bool) True if record created by discovery on HyperFlex cluster. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `local_snapshot_retention_count`:(int)(ReadOnly) Number of snapshots that will be retained as part of the Multi Point in Time support. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string)(ReadOnly) Name from corresponding ClusterBackupPolicy. 

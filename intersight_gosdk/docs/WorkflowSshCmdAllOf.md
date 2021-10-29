@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.SshCmd"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.SshCmd"]
 **Command** | Pointer to **string** | SSH command to execute on the remote server. | [optional] 
-**CommandType** | Pointer to **string** | SSH command type to execute on the remote server. * &#x60;NonInteractiveCmd&#x60; - Execute a non-interactive SSH command on the remote server. * &#x60;InteractiveCmd&#x60; - Execute an interactive SSH command on the remote server. | [optional] [default to "NonInteractiveCmd"]
-**ExpectPrompts** | Pointer to [**[]ConnectorExpectPrompt**](ConnectorExpectPrompt.md) |  | [optional] 
+**CommandType** | Pointer to **string** | SSH command type to execute on the remote server. | [optional] 
+**ExpectPrompts** | Pointer to **interface{}** | SSH prompts required as part of command execution. It is a collection of ExpectPrompt complex type. | [optional] 
 **ShellPrompt** | Pointer to **string** | Regex of the remote server&#39;s shell prompt. | [optional] 
 **ShellPromptTimeout** | Pointer to **int64** | Expect timeout value in seconds for the shell prompt. | [optional] 
 
@@ -123,20 +123,20 @@ HasCommandType returns a boolean if a field has been set.
 
 ### GetExpectPrompts
 
-`func (o *WorkflowSshCmdAllOf) GetExpectPrompts() []ConnectorExpectPrompt`
+`func (o *WorkflowSshCmdAllOf) GetExpectPrompts() interface{}`
 
 GetExpectPrompts returns the ExpectPrompts field if non-nil, zero value otherwise.
 
 ### GetExpectPromptsOk
 
-`func (o *WorkflowSshCmdAllOf) GetExpectPromptsOk() (*[]ConnectorExpectPrompt, bool)`
+`func (o *WorkflowSshCmdAllOf) GetExpectPromptsOk() (*interface{}, bool)`
 
 GetExpectPromptsOk returns a tuple with the ExpectPrompts field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpectPrompts
 
-`func (o *WorkflowSshCmdAllOf) SetExpectPrompts(v []ConnectorExpectPrompt)`
+`func (o *WorkflowSshCmdAllOf) SetExpectPrompts(v interface{})`
 
 SetExpectPrompts sets ExpectPrompts field to given value.
 

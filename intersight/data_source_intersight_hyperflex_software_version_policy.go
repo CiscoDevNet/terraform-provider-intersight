@@ -383,7 +383,7 @@ func dataSourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 						Optional:    true,
 					},
 					"server_platform": {
-						Description: "The platform type for UCS server.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.",
+						Description: "The platform type for UCS server.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.\n* `M6` - M6 generation of UCS server.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -905,7 +905,7 @@ func dataSourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 						Optional:    true,
 					},
 					"server_platform": {
-						Description: "The platform type for UCS server.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.",
+						Description: "The platform type for UCS server.\n* `M5` - M5 generation of UCS server.\n* `M3` - M3 generation of UCS server.\n* `M4` - M4 generation of UCS server.\n* `M6` - M6 generation of UCS server.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1175,7 +1175,7 @@ func dataSourceHyperflexSoftwareVersionPolicyRead(c context.Context, d *schema.R
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1286,7 +1286,7 @@ func dataSourceHyperflexSoftwareVersionPolicyRead(c context.Context, d *schema.R
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

@@ -1576,7 +1576,7 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1590,12 +1590,12 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("date_published"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetDatePublished(x)
 	}
 
 	if v, ok := d.GetOk("date_updated"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetDateUpdated(x)
 	}
 
@@ -1620,7 +1620,7 @@ func dataSourceTamSecurityAdvisoryRead(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

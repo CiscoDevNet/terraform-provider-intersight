@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.SshSession"]
 **FileTransferToRemote** | Pointer to [**WorkflowFileTransfer**](WorkflowFileTransfer.md) |  | [optional] 
 **MessageType** | Pointer to **string** | The type of SSH message to send to the remote server. * &#x60;ExecuteCommand&#x60; - Execute a SSH command on the remote server. * &#x60;NewSession&#x60; - Open a new SSH connection to the remote server. * &#x60;FileTransfer&#x60; - Transfer a file from Intersight connected device to the remote server. * &#x60;CloseSession&#x60; - Close the SSH connection to the remote server. | [optional] [default to "ExecuteCommand"]
-**SshCommand** | Pointer to [**WorkflowSshCmd**](WorkflowSshCmd.md) |  | [optional] 
+**SshCommand** | Pointer to **interface{}** | SSH command to execute on the remote server. | [optional] 
 **SshConfiguration** | Pointer to [**WorkflowSshConfig**](WorkflowSshConfig.md) |  | [optional] 
 
 ## Methods
@@ -122,20 +122,20 @@ HasMessageType returns a boolean if a field has been set.
 
 ### GetSshCommand
 
-`func (o *WorkflowSshSessionAllOf) GetSshCommand() WorkflowSshCmd`
+`func (o *WorkflowSshSessionAllOf) GetSshCommand() interface{}`
 
 GetSshCommand returns the SshCommand field if non-nil, zero value otherwise.
 
 ### GetSshCommandOk
 
-`func (o *WorkflowSshSessionAllOf) GetSshCommandOk() (*WorkflowSshCmd, bool)`
+`func (o *WorkflowSshSessionAllOf) GetSshCommandOk() (*interface{}, bool)`
 
 GetSshCommandOk returns a tuple with the SshCommand field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSshCommand
 
-`func (o *WorkflowSshSessionAllOf) SetSshCommand(v WorkflowSshCmd)`
+`func (o *WorkflowSshSessionAllOf) SetSshCommand(v interface{})`
 
 SetSshCommand sets SshCommand field to given value.
 
@@ -145,6 +145,16 @@ SetSshCommand sets SshCommand field to given value.
 
 HasSshCommand returns a boolean if a field has been set.
 
+### SetSshCommandNil
+
+`func (o *WorkflowSshSessionAllOf) SetSshCommandNil(b bool)`
+
+ SetSshCommandNil sets the value for SshCommand to be an explicit nil
+
+### UnsetSshCommand
+`func (o *WorkflowSshSessionAllOf) UnsetSshCommand()`
+
+UnsetSshCommand ensures that no value is present for SshCommand, not even an explicit nil
 ### GetSshConfiguration
 
 `func (o *WorkflowSshSessionAllOf) GetSshConfiguration() WorkflowSshConfig`

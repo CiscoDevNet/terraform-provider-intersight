@@ -14,10 +14,12 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_storage_net_app_cluster.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `cluster_health_status`:(string) The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `key`:(string) Unique identifier of NetApp Cluster across data center. 
 * `location`:(string) Location of the storage controller. 
 * `management_address`:(string) FQDN or IP Address of Storage Cluster. 
 * `mod_time`:(string) The time when this managed object was last modified. 

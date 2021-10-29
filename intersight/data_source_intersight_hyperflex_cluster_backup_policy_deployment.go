@@ -119,6 +119,11 @@ func dataSourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"data_store_encryption_enabled": {
+			Description: "Whether the datastore is encrypted or not.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"description": {
 			Description: "Description from corresponding ClusterBackupPolicy.",
 			Type:        schema.TypeString,
@@ -132,6 +137,11 @@ func dataSourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"local_snapshot_retention_count": {
+			Description: "Number of snapshots that will be retained as part of the Multi Point in Time support.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -619,6 +629,11 @@ func dataSourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"data_store_encryption_enabled": {
+			Description: "Whether the datastore is encrypted or not.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"description": {
 			Description: "Description from corresponding ClusterBackupPolicy.",
 			Type:        schema.TypeString,
@@ -632,6 +647,11 @@ func dataSourceHyperflexClusterBackupPolicyDeployment() *schema.Resource {
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"local_snapshot_retention_count": {
+			Description: "Number of snapshots that will be retained as part of the Multi Point in Time support.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -1149,8 +1169,13 @@ func dataSourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
+	}
+
+	if v, ok := d.GetOkExists("data_store_encryption_enabled"); ok {
+		x := (v.(bool))
+		o.SetDataStoreEncryptionEnabled(x)
 	}
 
 	if v, ok := d.GetOk("description"); ok {
@@ -1168,8 +1193,13 @@ func dataSourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("local_snapshot_retention_count"); ok {
+		x := int64(v.(int))
+		o.SetLocalSnapshotRetentionCount(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1613,9 +1643,11 @@ func dataSourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["data_store_encryption_enabled"] = (s.GetDataStoreEncryptionEnabled())
 				temp["description"] = (s.GetDescription())
 				temp["discovered"] = (s.GetDiscovered())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["local_snapshot_retention_count"] = (s.GetLocalSnapshotRetentionCount())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

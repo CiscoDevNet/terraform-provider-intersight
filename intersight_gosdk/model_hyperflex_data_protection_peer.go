@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -27,6 +27,7 @@ type HyperflexDataProtectionPeer struct {
 	Er                   NullableHyperflexEntityReference     `json:"Er,omitempty"`
 	PeerInfo             NullableHyperflexReplicationPeerInfo `json:"PeerInfo,omitempty"`
 	SrcCluster           *HyperflexClusterRelationship        `json:"SrcCluster,omitempty"`
+	TgtCluster           *HyperflexClusterRelationship        `json:"TgtCluster,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -221,6 +222,38 @@ func (o *HyperflexDataProtectionPeer) SetSrcCluster(v HyperflexClusterRelationsh
 	o.SrcCluster = &v
 }
 
+// GetTgtCluster returns the TgtCluster field value if set, zero value otherwise.
+func (o *HyperflexDataProtectionPeer) GetTgtCluster() HyperflexClusterRelationship {
+	if o == nil || o.TgtCluster == nil {
+		var ret HyperflexClusterRelationship
+		return ret
+	}
+	return *o.TgtCluster
+}
+
+// GetTgtClusterOk returns a tuple with the TgtCluster field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexDataProtectionPeer) GetTgtClusterOk() (*HyperflexClusterRelationship, bool) {
+	if o == nil || o.TgtCluster == nil {
+		return nil, false
+	}
+	return o.TgtCluster, true
+}
+
+// HasTgtCluster returns a boolean if a field has been set.
+func (o *HyperflexDataProtectionPeer) HasTgtCluster() bool {
+	if o != nil && o.TgtCluster != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTgtCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the TgtCluster field.
+func (o *HyperflexDataProtectionPeer) SetTgtCluster(v HyperflexClusterRelationship) {
+	o.TgtCluster = &v
+}
+
 func (o HyperflexDataProtectionPeer) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
@@ -246,6 +279,9 @@ func (o HyperflexDataProtectionPeer) MarshalJSON() ([]byte, error) {
 	if o.SrcCluster != nil {
 		toSerialize["SrcCluster"] = o.SrcCluster
 	}
+	if o.TgtCluster != nil {
+		toSerialize["TgtCluster"] = o.TgtCluster
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -263,6 +299,7 @@ func (o *HyperflexDataProtectionPeer) UnmarshalJSON(bytes []byte) (err error) {
 		Er         NullableHyperflexEntityReference     `json:"Er,omitempty"`
 		PeerInfo   NullableHyperflexReplicationPeerInfo `json:"PeerInfo,omitempty"`
 		SrcCluster *HyperflexClusterRelationship        `json:"SrcCluster,omitempty"`
+		TgtCluster *HyperflexClusterRelationship        `json:"TgtCluster,omitempty"`
 	}
 
 	varHyperflexDataProtectionPeerWithoutEmbeddedStruct := HyperflexDataProtectionPeerWithoutEmbeddedStruct{}
@@ -275,6 +312,7 @@ func (o *HyperflexDataProtectionPeer) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexDataProtectionPeer.Er = varHyperflexDataProtectionPeerWithoutEmbeddedStruct.Er
 		varHyperflexDataProtectionPeer.PeerInfo = varHyperflexDataProtectionPeerWithoutEmbeddedStruct.PeerInfo
 		varHyperflexDataProtectionPeer.SrcCluster = varHyperflexDataProtectionPeerWithoutEmbeddedStruct.SrcCluster
+		varHyperflexDataProtectionPeer.TgtCluster = varHyperflexDataProtectionPeerWithoutEmbeddedStruct.TgtCluster
 		*o = HyperflexDataProtectionPeer(varHyperflexDataProtectionPeer)
 	} else {
 		return err
@@ -297,6 +335,7 @@ func (o *HyperflexDataProtectionPeer) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Er")
 		delete(additionalProperties, "PeerInfo")
 		delete(additionalProperties, "SrcCluster")
+		delete(additionalProperties, "TgtCluster")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

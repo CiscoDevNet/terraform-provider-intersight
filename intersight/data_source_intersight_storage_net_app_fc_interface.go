@@ -259,7 +259,7 @@ func dataSourceStorageNetAppFcInterface() *schema.Resource {
 			Optional:    true,
 		},
 		"state": {
-			Description: "State of the FC interface.\n* `down` - An inactive port is listed as Down.\n* `up` - An active port is listed as Up.\n* `present` - An active port is listed as present.",
+			Description: "The state of the FC interface.\n* `down` - An inactive port is listed as Down.\n* `up` - An active port is listed as Up.\n* `present` - An active port is listed as present.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -704,7 +704,7 @@ func dataSourceStorageNetAppFcInterface() *schema.Resource {
 			Optional:    true,
 		},
 		"state": {
-			Description: "State of the FC interface.\n* `down` - An inactive port is listed as Down.\n* `up` - An active port is listed as Up.\n* `present` - An active port is listed as present.",
+			Description: "The state of the FC interface.\n* `down` - An inactive port is listed as Down.\n* `up` - An active port is listed as Up.\n* `present` - An active port is listed as present.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1024,7 +1024,7 @@ func dataSourceStorageNetAppFcInterfaceRead(c context.Context, d *schema.Resourc
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1044,7 +1044,7 @@ func dataSourceStorageNetAppFcInterfaceRead(c context.Context, d *schema.Resourc
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

@@ -449,6 +449,11 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"vm_template_count": {
+			Description: "Count of all virtual machines templates associated with this DC.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 	}
 	var model = map[string]*schema.Schema{"account_moid": {
 		Description: "The Account ID for this managed object.",
@@ -884,6 +889,11 @@ func dataSourceVirtualizationVmwareDatacenter() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"vm_template_count": {
+			Description: "Count of all virtual machines templates associated with this DC.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 	}
 	model["results"] = &schema.Schema{
 		Type:     schema.TypeList,
@@ -966,7 +976,7 @@ func dataSourceVirtualizationVmwareDatacenterRead(c context.Context, d *schema.R
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1039,7 +1049,7 @@ func dataSourceVirtualizationVmwareDatacenterRead(c context.Context, d *schema.R
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1363,6 +1373,11 @@ func dataSourceVirtualizationVmwareDatacenterRead(c context.Context, d *schema.R
 		o.SetVmCount(x)
 	}
 
+	if v, ok := d.GetOkExists("vm_template_count"); ok {
+		x := int64(v.(int))
+		o.SetVmTemplateCount(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of VirtualizationVmwareDatacenter object failed with error : %s", err.Error())
@@ -1436,6 +1451,7 @@ func dataSourceVirtualizationVmwareDatacenterRead(c context.Context, d *schema.R
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vm_count"] = (s.GetVmCount())
+				temp["vm_template_count"] = (s.GetVmTemplateCount())
 				virtualizationVmwareDatacenterResults[j] = temp
 				j += 1
 			}

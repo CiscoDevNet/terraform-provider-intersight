@@ -456,7 +456,7 @@ func resourceHyperflexHealthCheckPackageChecksumCreate(c context.Context, d *sch
 	}
 
 	if v, ok := d.GetOk("timestamp"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetTimestamp(x)
 	}
 
@@ -667,7 +667,7 @@ func resourceHyperflexHealthCheckPackageChecksumUpdate(c context.Context, d *sch
 
 	if d.HasChange("timestamp") {
 		v := d.Get("timestamp")
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetTimestamp(x)
 	}
 

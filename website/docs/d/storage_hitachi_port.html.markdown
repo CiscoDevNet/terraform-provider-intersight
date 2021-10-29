@@ -28,6 +28,7 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) Name of the physical port available in storage array. 
 * `port_connection`:(string) Topology setting for the port. 
 * `port_lun_security`:(bool) LUN security setting for the port. 
+* `port_mode`:(string) Operation mode of the port. Possible values are FC-NVMe, FCP-SCSI, and NOT SUPPORTED. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `shortport_id`:(string) Port ID (short) of the port. 
 * `speed`:(int) Operational speed of physical port measured in Gbps. 

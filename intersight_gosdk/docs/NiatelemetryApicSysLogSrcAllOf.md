@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **SiteName** | Pointer to **string** | Name of the APIC site from which this data is being collected. | [optional] 
+**SyslogRemoteDest** | Pointer to **string** | List of Syslog remote destination for SyslogSrc in APIC. | [optional] 
+**SyslogRsDestGrp** | Pointer to **string** | Syslog destination grp for SysLogSrc in APIC. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -196,6 +198,56 @@ SetSiteName sets SiteName field to given value.
 `func (o *NiatelemetryApicSysLogSrcAllOf) HasSiteName() bool`
 
 HasSiteName returns a boolean if a field has been set.
+
+### GetSyslogRemoteDest
+
+`func (o *NiatelemetryApicSysLogSrcAllOf) GetSyslogRemoteDest() string`
+
+GetSyslogRemoteDest returns the SyslogRemoteDest field if non-nil, zero value otherwise.
+
+### GetSyslogRemoteDestOk
+
+`func (o *NiatelemetryApicSysLogSrcAllOf) GetSyslogRemoteDestOk() (*string, bool)`
+
+GetSyslogRemoteDestOk returns a tuple with the SyslogRemoteDest field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSyslogRemoteDest
+
+`func (o *NiatelemetryApicSysLogSrcAllOf) SetSyslogRemoteDest(v string)`
+
+SetSyslogRemoteDest sets SyslogRemoteDest field to given value.
+
+### HasSyslogRemoteDest
+
+`func (o *NiatelemetryApicSysLogSrcAllOf) HasSyslogRemoteDest() bool`
+
+HasSyslogRemoteDest returns a boolean if a field has been set.
+
+### GetSyslogRsDestGrp
+
+`func (o *NiatelemetryApicSysLogSrcAllOf) GetSyslogRsDestGrp() string`
+
+GetSyslogRsDestGrp returns the SyslogRsDestGrp field if non-nil, zero value otherwise.
+
+### GetSyslogRsDestGrpOk
+
+`func (o *NiatelemetryApicSysLogSrcAllOf) GetSyslogRsDestGrpOk() (*string, bool)`
+
+GetSyslogRsDestGrpOk returns a tuple with the SyslogRsDestGrp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSyslogRsDestGrp
+
+`func (o *NiatelemetryApicSysLogSrcAllOf) SetSyslogRsDestGrp(v string)`
+
+SetSyslogRsDestGrp sets SyslogRsDestGrp field to given value.
+
+### HasSyslogRsDestGrp
+
+`func (o *NiatelemetryApicSysLogSrcAllOf) HasSyslogRsDestGrp() bool`
+
+HasSyslogRsDestGrp returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

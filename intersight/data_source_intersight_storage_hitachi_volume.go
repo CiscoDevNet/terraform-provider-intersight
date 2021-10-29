@@ -174,9 +174,19 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"namespace_id": {
+			Description: "Namespace ID registered in NVM Subsystem.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"num_of_paths": {
 			Description: "Number of paths set for the volume.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"nvm_subsystem_id": {
+			Description: "NVM subsystem ID on storage system.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"object_type": {
@@ -738,9 +748,19 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"namespace_id": {
+			Description: "Namespace ID registered in NVM Subsystem.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"num_of_paths": {
 			Description: "Number of paths set for the volume.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"nvm_subsystem_id": {
+			Description: "NVM subsystem ID on storage system.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"object_type": {
@@ -1276,7 +1296,7 @@ func dataSourceStorageHitachiVolumeRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1321,7 +1341,7 @@ func dataSourceStorageHitachiVolumeRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -1340,9 +1360,19 @@ func dataSourceStorageHitachiVolumeRead(c context.Context, d *schema.ResourceDat
 		o.SetName(x)
 	}
 
+	if v, ok := d.GetOk("namespace_id"); ok {
+		x := (v.(string))
+		o.SetNamespaceId(x)
+	}
+
 	if v, ok := d.GetOkExists("num_of_paths"); ok {
 		x := int64(v.(int))
 		o.SetNumOfPaths(x)
+	}
+
+	if v, ok := d.GetOk("nvm_subsystem_id"); ok {
+		x := (v.(string))
+		o.SetNvmSubsystemId(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -1805,7 +1835,9 @@ func dataSourceStorageHitachiVolumeRead(c context.Context, d *schema.ResourceDat
 				temp["moid"] = (s.GetMoid())
 				temp["naa_id"] = (s.GetNaaId())
 				temp["name"] = (s.GetName())
+				temp["namespace_id"] = (s.GetNamespaceId())
 				temp["num_of_paths"] = (s.GetNumOfPaths())
+				temp["nvm_subsystem_id"] = (s.GetNvmSubsystemId())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

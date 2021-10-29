@@ -6,11 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.DeploymentStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.DeploymentStatus"]
-**AvailableReplicas** | Pointer to **int64** | Total number of available pods (ready for at least minReadySeconds) targeted by this deployment. | [optional] 
-**ObservedGeneration** | Pointer to **int64** | The generation observed by the deployment controller. | [optional] 
-**ReadyReplicas** | Pointer to **int64** | Total number of ready pods targeted by this deployment. | [optional] 
-**Replicas** | Pointer to **int64** | Total number of non-terminated pods targeted by this deployment (their labels match the selector). | [optional] 
-**UpdatedReplicas** | Pointer to **int64** | Total number of non-terminated pods targeted by this deployment that have the desired template spec. | [optional] 
+**AvailableReplicas** | Pointer to **int64** | Total number of available pods (ready for at least minReadySeconds) targeted by this deployment. | [optional] [default to 0]
+**ObservedGeneration** | Pointer to **int64** | The generation observed by the deployment controller. | [optional] [default to 0]
+**ReadyReplicas** | Pointer to **int64** | Total number of ready pods targeted by this deployment. | [optional] [default to 0]
+**Replicas** | Pointer to **int64** | Total number of non-terminated pods targeted by this deployment (their labels match the selector). | [optional] [default to 0]
+**UpdatedReplicas** | Pointer to **int64** | Total number of non-terminated pods targeted by this deployment that have the desired template spec. | [optional] [default to 0]
 
 ## Methods
 

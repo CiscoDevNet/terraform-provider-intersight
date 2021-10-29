@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4663
+API version: 1.0.9-4870
 Contact: intersight@cisco.com
 */
 
@@ -28,12 +28,16 @@ type HyperflexDatastoreStatistic struct {
 	AccessibilitySummary *string `json:"AccessibilitySummary,omitempty"`
 	// Timestamp the datastore object was created.
 	CreationTime *string `json:"CreationTime,omitempty"`
+	// HyperFlex Datastore Kind. * `UNKNOWN` - HyperFlex datastore kind is unknown. * `USER_CREATED` - HyperFlex datastore kind is user created. * `INTERNAL` - HyperFlex datastore kind is internal.
+	DatastoreKind *string `json:"DatastoreKind,omitempty"`
 	// HyperFlex datastore status. * `NORMAL` - The HyperFlex datastore status is normal. * `ALERT` - The HyperFlex datastore status is alert. * `FAILED` - The HyperFlex datastore status is failed.
 	DatastoreStatus *string                                      `json:"DatastoreStatus,omitempty"`
 	Dsconfig        NullableHyperflexHxPlatformDatastoreConfigDt `json:"Dsconfig,omitempty"`
 	// Free capacity of the datastore in bytes.
 	FreeCapacityInBytes *int64                         `json:"FreeCapacityInBytes,omitempty"`
 	HostMountStatus     []HyperflexHxHostMountStatusDt `json:"HostMountStatus,omitempty"`
+	// Indicates if the datastore is encrypted or un-encrypted.
+	IsEncrypted *bool `json:"IsEncrypted,omitempty"`
 	// Timestamp the datastore object was last accessed.
 	LastAccessTime *string `json:"LastAccessTime,omitempty"`
 	// Timestamp the datastore object was last modified.
@@ -52,6 +56,8 @@ type HyperflexDatastoreStatistic struct {
 	// UUID for the datastore object.
 	Uuid                 *string                                  `json:"Uuid,omitempty"`
 	DataProtectionPeer   *HyperflexDataProtectionPeerRelationship `json:"DataProtectionPeer,omitempty"`
+	SrcCluster           *HyperflexClusterRelationship            `json:"SrcCluster,omitempty"`
+	TgtCluster           *HyperflexClusterRelationship            `json:"TgtCluster,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -192,6 +198,38 @@ func (o *HyperflexDatastoreStatistic) SetCreationTime(v string) {
 	o.CreationTime = &v
 }
 
+// GetDatastoreKind returns the DatastoreKind field value if set, zero value otherwise.
+func (o *HyperflexDatastoreStatistic) GetDatastoreKind() string {
+	if o == nil || o.DatastoreKind == nil {
+		var ret string
+		return ret
+	}
+	return *o.DatastoreKind
+}
+
+// GetDatastoreKindOk returns a tuple with the DatastoreKind field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexDatastoreStatistic) GetDatastoreKindOk() (*string, bool) {
+	if o == nil || o.DatastoreKind == nil {
+		return nil, false
+	}
+	return o.DatastoreKind, true
+}
+
+// HasDatastoreKind returns a boolean if a field has been set.
+func (o *HyperflexDatastoreStatistic) HasDatastoreKind() bool {
+	if o != nil && o.DatastoreKind != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDatastoreKind gets a reference to the given string and assigns it to the DatastoreKind field.
+func (o *HyperflexDatastoreStatistic) SetDatastoreKind(v string) {
+	o.DatastoreKind = &v
+}
+
 // GetDatastoreStatus returns the DatastoreStatus field value if set, zero value otherwise.
 func (o *HyperflexDatastoreStatistic) GetDatastoreStatus() string {
 	if o == nil || o.DatastoreStatus == nil {
@@ -330,6 +368,38 @@ func (o *HyperflexDatastoreStatistic) HasHostMountStatus() bool {
 // SetHostMountStatus gets a reference to the given []HyperflexHxHostMountStatusDt and assigns it to the HostMountStatus field.
 func (o *HyperflexDatastoreStatistic) SetHostMountStatus(v []HyperflexHxHostMountStatusDt) {
 	o.HostMountStatus = v
+}
+
+// GetIsEncrypted returns the IsEncrypted field value if set, zero value otherwise.
+func (o *HyperflexDatastoreStatistic) GetIsEncrypted() bool {
+	if o == nil || o.IsEncrypted == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsEncrypted
+}
+
+// GetIsEncryptedOk returns a tuple with the IsEncrypted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexDatastoreStatistic) GetIsEncryptedOk() (*bool, bool) {
+	if o == nil || o.IsEncrypted == nil {
+		return nil, false
+	}
+	return o.IsEncrypted, true
+}
+
+// HasIsEncrypted returns a boolean if a field has been set.
+func (o *HyperflexDatastoreStatistic) HasIsEncrypted() bool {
+	if o != nil && o.IsEncrypted != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsEncrypted gets a reference to the given bool and assigns it to the IsEncrypted field.
+func (o *HyperflexDatastoreStatistic) SetIsEncrypted(v bool) {
+	o.IsEncrypted = &v
 }
 
 // GetLastAccessTime returns the LastAccessTime field value if set, zero value otherwise.
@@ -663,6 +733,70 @@ func (o *HyperflexDatastoreStatistic) SetDataProtectionPeer(v HyperflexDataProte
 	o.DataProtectionPeer = &v
 }
 
+// GetSrcCluster returns the SrcCluster field value if set, zero value otherwise.
+func (o *HyperflexDatastoreStatistic) GetSrcCluster() HyperflexClusterRelationship {
+	if o == nil || o.SrcCluster == nil {
+		var ret HyperflexClusterRelationship
+		return ret
+	}
+	return *o.SrcCluster
+}
+
+// GetSrcClusterOk returns a tuple with the SrcCluster field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexDatastoreStatistic) GetSrcClusterOk() (*HyperflexClusterRelationship, bool) {
+	if o == nil || o.SrcCluster == nil {
+		return nil, false
+	}
+	return o.SrcCluster, true
+}
+
+// HasSrcCluster returns a boolean if a field has been set.
+func (o *HyperflexDatastoreStatistic) HasSrcCluster() bool {
+	if o != nil && o.SrcCluster != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSrcCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the SrcCluster field.
+func (o *HyperflexDatastoreStatistic) SetSrcCluster(v HyperflexClusterRelationship) {
+	o.SrcCluster = &v
+}
+
+// GetTgtCluster returns the TgtCluster field value if set, zero value otherwise.
+func (o *HyperflexDatastoreStatistic) GetTgtCluster() HyperflexClusterRelationship {
+	if o == nil || o.TgtCluster == nil {
+		var ret HyperflexClusterRelationship
+		return ret
+	}
+	return *o.TgtCluster
+}
+
+// GetTgtClusterOk returns a tuple with the TgtCluster field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexDatastoreStatistic) GetTgtClusterOk() (*HyperflexClusterRelationship, bool) {
+	if o == nil || o.TgtCluster == nil {
+		return nil, false
+	}
+	return o.TgtCluster, true
+}
+
+// HasTgtCluster returns a boolean if a field has been set.
+func (o *HyperflexDatastoreStatistic) HasTgtCluster() bool {
+	if o != nil && o.TgtCluster != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTgtCluster gets a reference to the given HyperflexClusterRelationship and assigns it to the TgtCluster field.
+func (o *HyperflexDatastoreStatistic) SetTgtCluster(v HyperflexClusterRelationship) {
+	o.TgtCluster = &v
+}
+
 func (o HyperflexDatastoreStatistic) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
@@ -685,6 +819,9 @@ func (o HyperflexDatastoreStatistic) MarshalJSON() ([]byte, error) {
 	if o.CreationTime != nil {
 		toSerialize["CreationTime"] = o.CreationTime
 	}
+	if o.DatastoreKind != nil {
+		toSerialize["DatastoreKind"] = o.DatastoreKind
+	}
 	if o.DatastoreStatus != nil {
 		toSerialize["DatastoreStatus"] = o.DatastoreStatus
 	}
@@ -696,6 +833,9 @@ func (o HyperflexDatastoreStatistic) MarshalJSON() ([]byte, error) {
 	}
 	if o.HostMountStatus != nil {
 		toSerialize["HostMountStatus"] = o.HostMountStatus
+	}
+	if o.IsEncrypted != nil {
+		toSerialize["IsEncrypted"] = o.IsEncrypted
 	}
 	if o.LastAccessTime != nil {
 		toSerialize["LastAccessTime"] = o.LastAccessTime
@@ -727,6 +867,12 @@ func (o HyperflexDatastoreStatistic) MarshalJSON() ([]byte, error) {
 	if o.DataProtectionPeer != nil {
 		toSerialize["DataProtectionPeer"] = o.DataProtectionPeer
 	}
+	if o.SrcCluster != nil {
+		toSerialize["SrcCluster"] = o.SrcCluster
+	}
+	if o.TgtCluster != nil {
+		toSerialize["TgtCluster"] = o.TgtCluster
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -745,12 +891,16 @@ func (o *HyperflexDatastoreStatistic) UnmarshalJSON(bytes []byte) (err error) {
 		AccessibilitySummary *string `json:"AccessibilitySummary,omitempty"`
 		// Timestamp the datastore object was created.
 		CreationTime *string `json:"CreationTime,omitempty"`
+		// HyperFlex Datastore Kind. * `UNKNOWN` - HyperFlex datastore kind is unknown. * `USER_CREATED` - HyperFlex datastore kind is user created. * `INTERNAL` - HyperFlex datastore kind is internal.
+		DatastoreKind *string `json:"DatastoreKind,omitempty"`
 		// HyperFlex datastore status. * `NORMAL` - The HyperFlex datastore status is normal. * `ALERT` - The HyperFlex datastore status is alert. * `FAILED` - The HyperFlex datastore status is failed.
 		DatastoreStatus *string                                      `json:"DatastoreStatus,omitempty"`
 		Dsconfig        NullableHyperflexHxPlatformDatastoreConfigDt `json:"Dsconfig,omitempty"`
 		// Free capacity of the datastore in bytes.
 		FreeCapacityInBytes *int64                         `json:"FreeCapacityInBytes,omitempty"`
 		HostMountStatus     []HyperflexHxHostMountStatusDt `json:"HostMountStatus,omitempty"`
+		// Indicates if the datastore is encrypted or un-encrypted.
+		IsEncrypted *bool `json:"IsEncrypted,omitempty"`
 		// Timestamp the datastore object was last accessed.
 		LastAccessTime *string `json:"LastAccessTime,omitempty"`
 		// Timestamp the datastore object was last modified.
@@ -769,6 +919,8 @@ func (o *HyperflexDatastoreStatistic) UnmarshalJSON(bytes []byte) (err error) {
 		// UUID for the datastore object.
 		Uuid               *string                                  `json:"Uuid,omitempty"`
 		DataProtectionPeer *HyperflexDataProtectionPeerRelationship `json:"DataProtectionPeer,omitempty"`
+		SrcCluster         *HyperflexClusterRelationship            `json:"SrcCluster,omitempty"`
+		TgtCluster         *HyperflexClusterRelationship            `json:"TgtCluster,omitempty"`
 	}
 
 	varHyperflexDatastoreStatisticWithoutEmbeddedStruct := HyperflexDatastoreStatisticWithoutEmbeddedStruct{}
@@ -780,10 +932,12 @@ func (o *HyperflexDatastoreStatistic) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexDatastoreStatistic.ObjectType = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.ObjectType
 		varHyperflexDatastoreStatistic.AccessibilitySummary = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.AccessibilitySummary
 		varHyperflexDatastoreStatistic.CreationTime = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.CreationTime
+		varHyperflexDatastoreStatistic.DatastoreKind = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.DatastoreKind
 		varHyperflexDatastoreStatistic.DatastoreStatus = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.DatastoreStatus
 		varHyperflexDatastoreStatistic.Dsconfig = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.Dsconfig
 		varHyperflexDatastoreStatistic.FreeCapacityInBytes = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.FreeCapacityInBytes
 		varHyperflexDatastoreStatistic.HostMountStatus = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.HostMountStatus
+		varHyperflexDatastoreStatistic.IsEncrypted = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.IsEncrypted
 		varHyperflexDatastoreStatistic.LastAccessTime = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.LastAccessTime
 		varHyperflexDatastoreStatistic.LastModifiedTime = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.LastModifiedTime
 		varHyperflexDatastoreStatistic.MountSummary = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.MountSummary
@@ -794,6 +948,8 @@ func (o *HyperflexDatastoreStatistic) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexDatastoreStatistic.UnsharedUsedBytes = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.UnsharedUsedBytes
 		varHyperflexDatastoreStatistic.Uuid = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.Uuid
 		varHyperflexDatastoreStatistic.DataProtectionPeer = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.DataProtectionPeer
+		varHyperflexDatastoreStatistic.SrcCluster = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.SrcCluster
+		varHyperflexDatastoreStatistic.TgtCluster = varHyperflexDatastoreStatisticWithoutEmbeddedStruct.TgtCluster
 		*o = HyperflexDatastoreStatistic(varHyperflexDatastoreStatistic)
 	} else {
 		return err
@@ -815,10 +971,12 @@ func (o *HyperflexDatastoreStatistic) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AccessibilitySummary")
 		delete(additionalProperties, "CreationTime")
+		delete(additionalProperties, "DatastoreKind")
 		delete(additionalProperties, "DatastoreStatus")
 		delete(additionalProperties, "Dsconfig")
 		delete(additionalProperties, "FreeCapacityInBytes")
 		delete(additionalProperties, "HostMountStatus")
+		delete(additionalProperties, "IsEncrypted")
 		delete(additionalProperties, "LastAccessTime")
 		delete(additionalProperties, "LastModifiedTime")
 		delete(additionalProperties, "MountSummary")
@@ -829,6 +987,8 @@ func (o *HyperflexDatastoreStatistic) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "UnsharedUsedBytes")
 		delete(additionalProperties, "Uuid")
 		delete(additionalProperties, "DataProtectionPeer")
+		delete(additionalProperties, "SrcCluster")
+		delete(additionalProperties, "TgtCluster")
 
 		// remove fields from embedded structs
 		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)

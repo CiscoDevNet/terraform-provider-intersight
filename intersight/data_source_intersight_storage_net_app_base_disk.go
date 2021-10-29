@@ -130,7 +130,7 @@ func dataSourceStorageNetAppBaseDisk() *schema.Resource {
 			},
 		},
 		"base_disk_model": {
-			Description: "NetApp base disk model.",
+			Description: "The NetApp base disk model.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -140,7 +140,7 @@ func dataSourceStorageNetAppBaseDisk() *schema.Resource {
 			Optional:    true,
 		},
 		"container_type": {
-			Description: "Supported container type for NetApp disk.\n* `Unknown` - Container is currently unknown. This is the default setting.\n* `Aggregate` - Disk is used as a physical disk in an aggregate.\n* `Broken` - Disk is in broken pool.\n* `Label Maintenance` - Disk is in online label maintenance list.\n* `Foreign` - Array LUN has been marked foreign.\n* `Maintenance` - Disk is in maintenance center.\n* `Mediator` - A mediator disk is a disk used on non-shared HA systems hosted by an external node which is used to communicate the viability of the storage failover between non-shared HA nodes.\n* `Shared` - Disk is partitioned or in a storage pool.\n* `Remote` - Disk belongs to a remote cluster.\n* `Spare` - Disk is a spare disk.\n* `Unassigned` - Disk ownership has not been assigned.\n* `Unsupported` - Disk is not supported.",
+			Description: "Supported container type for NetApp disk.\n* `Unknown` - Default container type is currently unknown.\n* `Aggregate` - Disk is used as a physical disk in an aggregate.\n* `Broken` - Disk is in a broken pool.\n* `Label Maintenance` - Disk is in online label maintenance list.\n* `Foreign` - Array LUN has been marked foreign.\n* `Maintenance` - Disk is in maintenance center.\n* `Mediator` - A mediator disk is a disk used on non-shared HA systems hosted by an external node which is used to communicate the viability of the storage failover between non-shared HA nodes.\n* `Shared` - Disk is partitioned or in a storage pool.\n* `Remote` - Disk belongs to a remote cluster.\n* `Spare` - The disk is a spare disk.\n* `Unassigned` - Disk ownership has not been assigned.\n* `Unsupported` - The disk is not supported.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -189,7 +189,7 @@ func dataSourceStorageNetAppBaseDisk() *schema.Resource {
 			},
 		},
 		"disk_type": {
-			Description: "Type of the NetApp disk.\n* `Unknown` - Default unknown disk type.\n* `SSDNVM` - Solid state disk with Non-Volatile Memory Express protocol enabled.\n* `ATA` - Advanced Technology Attachment is a type of disk drive that integrates the drive controller directly on the drive itself.\n* `FCAL` - For the FC-AL disk connection type, disk shelves are connected to the controller in a loop\n* `BSAS` - Bridged SAS-SATA disks with added hardware to enable them to be plugged into a SAS-connected storage shelf.\n* `FSAS` - Near Line SAS. NL-SAS drives are enterprise SATA drives with a SAS interface, head, media, and rotational speed of traditional enterprise-class SATA drives with the fully capable SAS interface typical for classic SAS drives.\n* `LUN` - Logical Unit Number refers to a logical disk.\n* `SAS` - Storage disk with serial attached SCSI.\n* `MSATA` - SATA disk in multi-disk carrier storage shelf.\n* `SSD` - Storage disk with Solid state disk.\n* `VMDISK` - Virtual machine Data Disk.",
+			Description: "The type of the NetApp disk.\n* `Unknown` - Default unknown disk type.\n* `SSDNVM` - Solid state disk with Non-Volatile Memory Express protocol enabled.\n* `ATA` - Advanced Technology Attachment is a type of disk drive that integrates the drive controller directly on the drive itself.\n* `FCAL` - For the FC-AL disk connection type, disk shelves are connected to the controller in a loop.\n* `BSAS` - Bridged SAS-SATA disks with added hardware to enable them to be plugged into a SAS-connected storage shelf.\n* `FSAS` - Near Line SAS. NL-SAS drives are enterprise SATA drives with a SAS interface, head, media, and rotational speed of traditional enterprise-class SATA drives with the fully capable SAS interface typical for classic SAS drives.\n* `LUN` - Logical Unit Number refers to a logical disk.\n* `SAS` - Storage disk with serial attached SCSI.\n* `MSATA` - SATA disk in multi-disk carrier storage shelf.\n* `SSD` - Storage disk with Solid state disk.\n* `VMDISK` - Virtual machine Data Disk.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -466,7 +466,7 @@ func dataSourceStorageNetAppBaseDisk() *schema.Resource {
 			Optional:    true,
 		},
 		"uuid": {
-			Description: "Uuid of  NetApp Disk.",
+			Description: "Universally unique identifier of the NetApp Disk.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -704,7 +704,7 @@ func dataSourceStorageNetAppBaseDisk() *schema.Resource {
 			},
 		},
 		"base_disk_model": {
-			Description: "NetApp base disk model.",
+			Description: "The NetApp base disk model.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -714,7 +714,7 @@ func dataSourceStorageNetAppBaseDisk() *schema.Resource {
 			Optional:    true,
 		},
 		"container_type": {
-			Description: "Supported container type for NetApp disk.\n* `Unknown` - Container is currently unknown. This is the default setting.\n* `Aggregate` - Disk is used as a physical disk in an aggregate.\n* `Broken` - Disk is in broken pool.\n* `Label Maintenance` - Disk is in online label maintenance list.\n* `Foreign` - Array LUN has been marked foreign.\n* `Maintenance` - Disk is in maintenance center.\n* `Mediator` - A mediator disk is a disk used on non-shared HA systems hosted by an external node which is used to communicate the viability of the storage failover between non-shared HA nodes.\n* `Shared` - Disk is partitioned or in a storage pool.\n* `Remote` - Disk belongs to a remote cluster.\n* `Spare` - Disk is a spare disk.\n* `Unassigned` - Disk ownership has not been assigned.\n* `Unsupported` - Disk is not supported.",
+			Description: "Supported container type for NetApp disk.\n* `Unknown` - Default container type is currently unknown.\n* `Aggregate` - Disk is used as a physical disk in an aggregate.\n* `Broken` - Disk is in a broken pool.\n* `Label Maintenance` - Disk is in online label maintenance list.\n* `Foreign` - Array LUN has been marked foreign.\n* `Maintenance` - Disk is in maintenance center.\n* `Mediator` - A mediator disk is a disk used on non-shared HA systems hosted by an external node which is used to communicate the viability of the storage failover between non-shared HA nodes.\n* `Shared` - Disk is partitioned or in a storage pool.\n* `Remote` - Disk belongs to a remote cluster.\n* `Spare` - The disk is a spare disk.\n* `Unassigned` - Disk ownership has not been assigned.\n* `Unsupported` - The disk is not supported.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -763,7 +763,7 @@ func dataSourceStorageNetAppBaseDisk() *schema.Resource {
 			},
 		},
 		"disk_type": {
-			Description: "Type of the NetApp disk.\n* `Unknown` - Default unknown disk type.\n* `SSDNVM` - Solid state disk with Non-Volatile Memory Express protocol enabled.\n* `ATA` - Advanced Technology Attachment is a type of disk drive that integrates the drive controller directly on the drive itself.\n* `FCAL` - For the FC-AL disk connection type, disk shelves are connected to the controller in a loop\n* `BSAS` - Bridged SAS-SATA disks with added hardware to enable them to be plugged into a SAS-connected storage shelf.\n* `FSAS` - Near Line SAS. NL-SAS drives are enterprise SATA drives with a SAS interface, head, media, and rotational speed of traditional enterprise-class SATA drives with the fully capable SAS interface typical for classic SAS drives.\n* `LUN` - Logical Unit Number refers to a logical disk.\n* `SAS` - Storage disk with serial attached SCSI.\n* `MSATA` - SATA disk in multi-disk carrier storage shelf.\n* `SSD` - Storage disk with Solid state disk.\n* `VMDISK` - Virtual machine Data Disk.",
+			Description: "The type of the NetApp disk.\n* `Unknown` - Default unknown disk type.\n* `SSDNVM` - Solid state disk with Non-Volatile Memory Express protocol enabled.\n* `ATA` - Advanced Technology Attachment is a type of disk drive that integrates the drive controller directly on the drive itself.\n* `FCAL` - For the FC-AL disk connection type, disk shelves are connected to the controller in a loop.\n* `BSAS` - Bridged SAS-SATA disks with added hardware to enable them to be plugged into a SAS-connected storage shelf.\n* `FSAS` - Near Line SAS. NL-SAS drives are enterprise SATA drives with a SAS interface, head, media, and rotational speed of traditional enterprise-class SATA drives with the fully capable SAS interface typical for classic SAS drives.\n* `LUN` - Logical Unit Number refers to a logical disk.\n* `SAS` - Storage disk with serial attached SCSI.\n* `MSATA` - SATA disk in multi-disk carrier storage shelf.\n* `SSD` - Storage disk with Solid state disk.\n* `VMDISK` - Virtual machine Data Disk.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1040,7 +1040,7 @@ func dataSourceStorageNetAppBaseDisk() *schema.Resource {
 			Optional:    true,
 		},
 		"uuid": {
-			Description: "Uuid of  NetApp Disk.",
+			Description: "Universally unique identifier of the NetApp Disk.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1335,7 +1335,7 @@ func dataSourceStorageNetAppBaseDiskRead(c context.Context, d *schema.ResourceDa
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -1400,7 +1400,7 @@ func dataSourceStorageNetAppBaseDiskRead(c context.Context, d *schema.ResourceDa
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **ExtraConfig** | Pointer to **interface{}** | Additional custom configuration settings applied to this VM. It is a set of name-value pairs stored as json. | [optional] 
 **Folder** | Pointer to **string** | The folder name associated with this VM. | [optional] 
 **GuestState** | Pointer to **string** | The state of the guest OS running on this VM. Could be running, not running etc. * &#x60;Unknown&#x60; - Indicates that the guest OS state cannot be determined. * &#x60;NotRunning&#x60; - Indicates that the guest OS is not running. * &#x60;Resetting&#x60; - Indicates that the guest OS is resetting. * &#x60;Running&#x60; - Indicates that the guest OS is running normally. * &#x60;ShuttingDown&#x60; - Indicates that the guest OS is shutting down. * &#x60;Standby&#x60; - Indicates that the guest OS is in standby mode. | [optional] [default to "Unknown"]
+**HostCompatibility** | Pointer to **string** | Minimum host ESXi version required for the virtual machine. | [optional] 
 **InstanceUuid** | Pointer to **string** | UUID assigned by vCenter to every VM. | [optional] 
 **InventoryPath** | Pointer to **string** | Inventory path to the VM. Example - /DC/vm/folder/VMName. | [optional] 
 **IsTemplate** | Pointer to **bool** | If true, indicates that the entity refers to a template of a virtual machine and not a real virtual machine. | [optional] 
@@ -555,6 +556,31 @@ SetGuestState sets GuestState field to given value.
 `func (o *VirtualizationVmwareVirtualMachineAllOf) HasGuestState() bool`
 
 HasGuestState returns a boolean if a field has been set.
+
+### GetHostCompatibility
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) GetHostCompatibility() string`
+
+GetHostCompatibility returns the HostCompatibility field if non-nil, zero value otherwise.
+
+### GetHostCompatibilityOk
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) GetHostCompatibilityOk() (*string, bool)`
+
+GetHostCompatibilityOk returns a tuple with the HostCompatibility field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostCompatibility
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) SetHostCompatibility(v string)`
+
+SetHostCompatibility sets HostCompatibility field to given value.
+
+### HasHostCompatibility
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) HasHostCompatibility() bool`
+
+HasHostCompatibility returns a boolean if a field has been set.
 
 ### GetInstanceUuid
 

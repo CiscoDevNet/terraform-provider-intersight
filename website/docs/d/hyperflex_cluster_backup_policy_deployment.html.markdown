@@ -18,9 +18,11 @@ The following arguments can be used to get data of already created objects in In
 * `backup_data_store_size`:(int) Replication data store size in backupDataStoreSizeUnit. 
 * `backup_data_store_size_unit`:(string) Replication data store size. 
 * `create_time`:(string) The time when this managed object was created. 
+* `data_store_encryption_enabled`:(bool) Whether the datastore is encrypted or not. 
 * `description`:(string) Description from corresponding ClusterBackupPolicy. 
 * `discovered`:(bool) True if record created by discovery on HyperFlex cluster. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `local_snapshot_retention_count`:(int) Number of snapshots that will be retained as part of the Multi Point in Time support. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name from corresponding ClusterBackupPolicy. 

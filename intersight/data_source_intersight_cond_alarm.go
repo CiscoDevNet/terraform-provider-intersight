@@ -927,7 +927,7 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 	}
 
 	if v, ok := d.GetOk("acknowledge_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetAcknowledgeTime(x)
 	}
 
@@ -1064,12 +1064,12 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
 	if v, ok := d.GetOk("creation_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreationTime(x)
 	}
 
@@ -1084,12 +1084,12 @@ func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta int
 	}
 
 	if v, ok := d.GetOk("last_transition_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetLastTransitionTime(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 

@@ -94,6 +94,11 @@ func dataSourceStorageNetAppEthernetPort() *schema.Resource {
 				},
 			},
 		},
+		"broadcast_domain_name": {
+			Description: "Name of the broadcast domain, scoped to its IPspace.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -110,12 +115,12 @@ func dataSourceStorageNetAppEthernetPort() *schema.Resource {
 			Optional:    true,
 		},
 		"enabled": {
-			Description: "Status of Port to determine if its enabled or not.",
+			Description: "Status of port to determine if its enabled or not.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"mac_address": {
-			Description: "Macaddress  of the port available in storage array.",
+			Description: "MAC address of the port available in storage array.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -138,6 +143,187 @@ func dataSourceStorageNetAppEthernetPort() *schema.Resource {
 			Description: "Name of the port available in storage array.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"net_app_ethernet_port_lag": {
+			Description: "Storage port of type lag.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"active_ports": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"name": {
+									Description: "Name associated with this port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"node_name": {
+									Description: "Name of the node associated with this port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"uuid": {
+									Description: "Unique identifier of the port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"distribution_policy": {
+						Description: "Policy for mapping flows to ports for outbound packets through a LAG (ifgrp).\n* `none` - Default unknown distribution policy type.\n* `port` - Network traffic is distributed based on the transport layer (TCP/UDP) ports.\n* `ip` - Network traffic is distributed based on IP addresses.\n* `mac` - Network traffic is distributed based on MAC addresses.\n* `sequential` - Network traffic is distributed in round-robin fashion from the list of configured, available ports.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"member_ports": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"name": {
+									Description: "Name associated with this port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"node_name": {
+									Description: "Name of the node associated with this port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"uuid": {
+									Description: "Unique identifier of the port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"mode": {
+						Description: "Determines how the ports interact with the switch.\n* `none` - Default unknown lag mode type.\n* `multimode_lacp` - Bundle multiple member ports of the interface group using Link Aggregation Control Protocol.\n* `multimode` - Bundle multiple member ports of the interface group to act as a single trunked port.\n* `singlemode` - Provide port redundancy using member ports of the interface group for failover.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"net_app_ethernet_port_vlan": {
+			Description: "A logical port that receives and sends VLAN-tagged (IEEE 802.1Q standard) traffic. VLAN port characteristics include the VLAN ID for the port.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"base_port": {
+						Description: "Port UUID along with readable names.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"name": {
+									Description: "Name associated with this port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"node_name": {
+									Description: "Name of the node associated with this port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"uuid": {
+									Description: "Unique identifier of the port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"tag": {
+						Description: "The ID tag of the VLAN for this port.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -262,7 +448,7 @@ func dataSourceStorageNetAppEthernetPort() *schema.Resource {
 			Optional:    true,
 		},
 		"uuid": {
-			Description: "UUID of physical port.",
+			Description: "Universally unique identifier of the physical port.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -454,6 +640,11 @@ func dataSourceStorageNetAppEthernetPort() *schema.Resource {
 				},
 			},
 		},
+		"broadcast_domain_name": {
+			Description: "Name of the broadcast domain, scoped to its IPspace.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -470,12 +661,12 @@ func dataSourceStorageNetAppEthernetPort() *schema.Resource {
 			Optional:    true,
 		},
 		"enabled": {
-			Description: "Status of Port to determine if its enabled or not.",
+			Description: "Status of port to determine if its enabled or not.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"mac_address": {
-			Description: "Macaddress  of the port available in storage array.",
+			Description: "MAC address of the port available in storage array.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -498,6 +689,187 @@ func dataSourceStorageNetAppEthernetPort() *schema.Resource {
 			Description: "Name of the port available in storage array.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"net_app_ethernet_port_lag": {
+			Description: "Storage port of type lag.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"active_ports": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"name": {
+									Description: "Name associated with this port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"node_name": {
+									Description: "Name of the node associated with this port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"uuid": {
+									Description: "Unique identifier of the port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"distribution_policy": {
+						Description: "Policy for mapping flows to ports for outbound packets through a LAG (ifgrp).\n* `none` - Default unknown distribution policy type.\n* `port` - Network traffic is distributed based on the transport layer (TCP/UDP) ports.\n* `ip` - Network traffic is distributed based on IP addresses.\n* `mac` - Network traffic is distributed based on MAC addresses.\n* `sequential` - Network traffic is distributed in round-robin fashion from the list of configured, available ports.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"member_ports": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"name": {
+									Description: "Name associated with this port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"node_name": {
+									Description: "Name of the node associated with this port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"uuid": {
+									Description: "Unique identifier of the port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"mode": {
+						Description: "Determines how the ports interact with the switch.\n* `none` - Default unknown lag mode type.\n* `multimode_lacp` - Bundle multiple member ports of the interface group using Link Aggregation Control Protocol.\n* `multimode` - Bundle multiple member ports of the interface group to act as a single trunked port.\n* `singlemode` - Provide port redundancy using member ports of the interface group for failover.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"net_app_ethernet_port_vlan": {
+			Description: "A logical port that receives and sends VLAN-tagged (IEEE 802.1Q standard) traffic. VLAN port characteristics include the VLAN ID for the port.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"base_port": {
+						Description: "Port UUID along with readable names.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"name": {
+									Description: "Name associated with this port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"node_name": {
+									Description: "Name of the node associated with this port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"uuid": {
+									Description: "Unique identifier of the port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"tag": {
+						Description: "The ID tag of the VLAN for this port.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -622,7 +994,7 @@ func dataSourceStorageNetAppEthernetPort() *schema.Resource {
 			Optional:    true,
 		},
 		"uuid": {
-			Description: "UUID of physical port.",
+			Description: "Universally unique identifier of the physical port.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -848,13 +1220,18 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("broadcast_domain_name"); ok {
+		x := (v.(string))
+		o.SetBroadcastDomainName(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
 	}
 
@@ -874,7 +1251,7 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
-		x, _ := time.Parse(v.(string), time.RFC1123)
+		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
 	}
 
@@ -891,6 +1268,234 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
+	}
+
+	if v, ok := d.GetOk("net_app_ethernet_port_lag"); ok {
+		p := make([]models.StorageNetAppEthernetPortLag, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageNetAppEthernetPortLag{}
+			if v, ok := l["active_ports"]; ok {
+				{
+					x := make([]models.StorageNetAppPort, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewStorageNetAppPortWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("storage.NetAppPort")
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["node_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetNodeName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["uuid"]; ok {
+							{
+								x := (v.(string))
+								o.SetUuid(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetActivePorts(x)
+					}
+				}
+			}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("storage.NetAppEthernetPortLag")
+			if v, ok := l["distribution_policy"]; ok {
+				{
+					x := (v.(string))
+					o.SetDistributionPolicy(x)
+				}
+			}
+			if v, ok := l["member_ports"]; ok {
+				{
+					x := make([]models.StorageNetAppPort, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewStorageNetAppPortWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("storage.NetAppPort")
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["node_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetNodeName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["uuid"]; ok {
+							{
+								x := (v.(string))
+								o.SetUuid(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetMemberPorts(x)
+					}
+				}
+			}
+			if v, ok := l["mode"]; ok {
+				{
+					x := (v.(string))
+					o.SetMode(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetNetAppEthernetPortLag(x)
+		}
+	}
+
+	if v, ok := d.GetOk("net_app_ethernet_port_vlan"); ok {
+		p := make([]models.StorageNetAppEthernetPortVlan, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.StorageNetAppEthernetPortVlan{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["base_port"]; ok {
+				{
+					p := make([]models.StorageNetAppPort, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewStorageNetAppPortWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("storage.NetAppPort")
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["node_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetNodeName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["uuid"]; ok {
+							{
+								x := (v.(string))
+								o.SetUuid(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetBasePort(x)
+					}
+				}
+			}
+			o.SetClassId("storage.NetAppEthernetPortVlan")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["tag"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetTag(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetNetAppEthernetPortVlan(x)
+		}
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -1164,6 +1769,7 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 
 				temp["array_controller"] = flattenMapStorageNetAppNodeRelationship(s.GetArrayController(), d)
+				temp["broadcast_domain_name"] = (s.GetBroadcastDomainName())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -1175,6 +1781,10 @@ func dataSourceStorageNetAppEthernetPortRead(c context.Context, d *schema.Resour
 				temp["moid"] = (s.GetMoid())
 				temp["mtu"] = (s.GetMtu())
 				temp["name"] = (s.GetName())
+
+				temp["net_app_ethernet_port_lag"] = flattenMapStorageNetAppEthernetPortLag(s.GetNetAppEthernetPortLag(), d)
+
+				temp["net_app_ethernet_port_vlan"] = flattenMapStorageNetAppEthernetPortVlan(s.GetNetAppEthernetPortVlan(), d)
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 
