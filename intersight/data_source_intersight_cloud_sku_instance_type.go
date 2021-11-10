@@ -1073,7 +1073,7 @@ func dataSourceCloudSkuInstanceTypeRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("local_storage_size"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetLocalStorageSize(x)
 	}
 
@@ -1083,7 +1083,7 @@ func dataSourceCloudSkuInstanceTypeRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("memory_size"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetMemorySize(x)
 	}
 
@@ -1131,7 +1131,9 @@ func dataSourceCloudSkuInstanceTypeRead(c context.Context, d *schema.ResourceDat
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}

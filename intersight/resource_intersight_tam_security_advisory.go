@@ -995,7 +995,7 @@ func resourceTamSecurityAdvisoryCreate(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("base_score"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetBaseScore(x)
 	}
 
@@ -1005,7 +1005,9 @@ func resourceTamSecurityAdvisoryCreate(c context.Context, d *schema.ResourceData
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		if len(x) > 0 {
 			o.SetCveIds(x)
@@ -1028,7 +1030,7 @@ func resourceTamSecurityAdvisoryCreate(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("environmental_score"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetEnvironmentalScore(x)
 	}
 
@@ -1174,7 +1176,7 @@ func resourceTamSecurityAdvisoryCreate(c context.Context, d *schema.ResourceData
 	}
 
 	if v, ok := d.GetOk("temporal_score"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetTemporalScore(x)
 	}
 
@@ -1637,7 +1639,7 @@ func resourceTamSecurityAdvisoryUpdate(c context.Context, d *schema.ResourceData
 
 	if d.HasChange("base_score") {
 		v := d.Get("base_score")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetBaseScore(x)
 	}
 
@@ -1648,7 +1650,9 @@ func resourceTamSecurityAdvisoryUpdate(c context.Context, d *schema.ResourceData
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetCveIds(x)
 	}
@@ -1673,7 +1677,7 @@ func resourceTamSecurityAdvisoryUpdate(c context.Context, d *schema.ResourceData
 
 	if d.HasChange("environmental_score") {
 		v := d.Get("environmental_score")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetEnvironmentalScore(x)
 	}
 
@@ -1827,7 +1831,7 @@ func resourceTamSecurityAdvisoryUpdate(c context.Context, d *schema.ResourceData
 
 	if d.HasChange("temporal_score") {
 		v := d.Get("temporal_score")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetTemporalScore(x)
 	}
 

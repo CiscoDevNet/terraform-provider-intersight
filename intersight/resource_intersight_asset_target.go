@@ -832,7 +832,9 @@ func resourceAssetTargetCreate(c context.Context, d *schema.ResourceData, meta i
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		if len(x) > 0 {
 			o.SetIpAddress(x)
@@ -860,7 +862,9 @@ func resourceAssetTargetCreate(c context.Context, d *schema.ResourceData, meta i
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		if len(x) > 0 {
 			o.SetProductId(x)
@@ -968,7 +972,9 @@ func resourceAssetTargetCreate(c context.Context, d *schema.ResourceData, meta i
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		if len(x) > 0 {
 			o.SetTargetId(x)
@@ -1321,7 +1327,9 @@ func resourceAssetTargetUpdate(c context.Context, d *schema.ResourceData, meta i
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetIpAddress(x)
 	}
@@ -1351,7 +1359,9 @@ func resourceAssetTargetUpdate(c context.Context, d *schema.ResourceData, meta i
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetProductId(x)
 	}
@@ -1456,7 +1466,9 @@ func resourceAssetTargetUpdate(c context.Context, d *schema.ResourceData, meta i
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetTargetId(x)
 	}

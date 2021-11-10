@@ -1184,7 +1184,9 @@ func dataSourceChassisIomProfileRead(c context.Context, d *schema.ResourceData, 
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetChanges(x)
@@ -1197,7 +1199,9 @@ func dataSourceChassisIomProfileRead(c context.Context, d *schema.ResourceData, 
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetDisruptions(x)
@@ -1348,7 +1352,9 @@ func dataSourceChassisIomProfileRead(c context.Context, d *schema.ResourceData, 
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}

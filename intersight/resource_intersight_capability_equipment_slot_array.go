@@ -474,32 +474,32 @@ func resourceCapabilityEquipmentSlotArrayCreate(c context.Context, d *schema.Res
 	o.SetClassId("capability.EquipmentSlotArray")
 
 	if v, ok := d.GetOk("first_index"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetFirstIndex(x)
 	}
 
 	if v, ok := d.GetOk("height"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetHeight(x)
 	}
 
 	if v, ok := d.GetOk("horizontal_start_offset"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetHorizontalStartOffset(x)
 	}
 
 	if v, ok := d.GetOk("inline_group_separation"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetInlineGroupSeparation(x)
 	}
 
 	if v, ok := d.GetOk("inline_group_size"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetInlineGroupSize(x)
 	}
 
 	if v, ok := d.GetOk("inline_offset"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetInlineOffset(x)
 	}
 
@@ -586,22 +586,22 @@ func resourceCapabilityEquipmentSlotArrayCreate(c context.Context, d *schema.Res
 	}
 
 	if v, ok := d.GetOk("transverse_group_separation"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetTransverseGroupSeparation(x)
 	}
 
 	if v, ok := d.GetOk("transverse_group_size"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetTransverseGroupSize(x)
 	}
 
 	if v, ok := d.GetOk("transverse_offset"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetTransverseOffset(x)
 	}
 
 	if v, ok := d.GetOk("vertical_start_offset"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetVerticalStartOffset(x)
 	}
 
@@ -611,7 +611,7 @@ func resourceCapabilityEquipmentSlotArrayCreate(c context.Context, d *schema.Res
 	}
 
 	if v, ok := d.GetOk("width"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetWidth(x)
 	}
 
@@ -817,37 +817,37 @@ func resourceCapabilityEquipmentSlotArrayUpdate(c context.Context, d *schema.Res
 
 	if d.HasChange("first_index") {
 		v := d.Get("first_index")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetFirstIndex(x)
 	}
 
 	if d.HasChange("height") {
 		v := d.Get("height")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetHeight(x)
 	}
 
 	if d.HasChange("horizontal_start_offset") {
 		v := d.Get("horizontal_start_offset")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetHorizontalStartOffset(x)
 	}
 
 	if d.HasChange("inline_group_separation") {
 		v := d.Get("inline_group_separation")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetInlineGroupSeparation(x)
 	}
 
 	if d.HasChange("inline_group_size") {
 		v := d.Get("inline_group_size")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetInlineGroupSize(x)
 	}
 
 	if d.HasChange("inline_offset") {
 		v := d.Get("inline_offset")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetInlineOffset(x)
 	}
 
@@ -943,25 +943,25 @@ func resourceCapabilityEquipmentSlotArrayUpdate(c context.Context, d *schema.Res
 
 	if d.HasChange("transverse_group_separation") {
 		v := d.Get("transverse_group_separation")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetTransverseGroupSeparation(x)
 	}
 
 	if d.HasChange("transverse_group_size") {
 		v := d.Get("transverse_group_size")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetTransverseGroupSize(x)
 	}
 
 	if d.HasChange("transverse_offset") {
 		v := d.Get("transverse_offset")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetTransverseOffset(x)
 	}
 
 	if d.HasChange("vertical_start_offset") {
 		v := d.Get("vertical_start_offset")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetVerticalStartOffset(x)
 	}
 
@@ -973,7 +973,7 @@ func resourceCapabilityEquipmentSlotArrayUpdate(c context.Context, d *schema.Res
 
 	if d.HasChange("width") {
 		v := d.Get("width")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetWidth(x)
 	}
 

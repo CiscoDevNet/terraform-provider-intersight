@@ -429,12 +429,12 @@ func resourceCapabilityEquipmentPhysicalDefCreate(c context.Context, d *schema.R
 	o.SetClassId("capability.EquipmentPhysicalDef")
 
 	if v, ok := d.GetOk("depth"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetDepth(x)
 	}
 
 	if v, ok := d.GetOk("height"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetHeight(x)
 	}
 
@@ -516,12 +516,12 @@ func resourceCapabilityEquipmentPhysicalDefCreate(c context.Context, d *schema.R
 	}
 
 	if v, ok := d.GetOk("weight"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetWeight(x)
 	}
 
 	if v, ok := d.GetOk("width"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetWidth(x)
 	}
 
@@ -691,13 +691,13 @@ func resourceCapabilityEquipmentPhysicalDefUpdate(c context.Context, d *schema.R
 
 	if d.HasChange("depth") {
 		v := d.Get("depth")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetDepth(x)
 	}
 
 	if d.HasChange("height") {
 		v := d.Get("height")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetHeight(x)
 	}
 
@@ -787,13 +787,13 @@ func resourceCapabilityEquipmentPhysicalDefUpdate(c context.Context, d *schema.R
 
 	if d.HasChange("weight") {
 		v := d.Get("weight")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetWeight(x)
 	}
 
 	if d.HasChange("width") {
 		v := d.Get("width")
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetWidth(x)
 	}
 

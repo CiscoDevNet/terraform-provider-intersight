@@ -2115,7 +2115,9 @@ func dataSourceHyperflexHxapClusterRead(c context.Context, d *schema.ResourceDat
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}
@@ -2359,7 +2361,7 @@ func dataSourceHyperflexHxapClusterRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("storage_utilization"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetStorageUtilization(x)
 	}
 
@@ -2402,12 +2404,12 @@ func dataSourceHyperflexHxapClusterRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("utilization_percentage"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetUtilizationPercentage(x)
 	}
 
 	if v, ok := d.GetOk("utilization_trend_percentage"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetUtilizationTrendPercentage(x)
 	}
 

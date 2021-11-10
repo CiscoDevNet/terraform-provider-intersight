@@ -1235,7 +1235,9 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}
@@ -1403,7 +1405,9 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetCountry(x)
@@ -1415,7 +1419,9 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetLocality(x)
@@ -1433,7 +1439,9 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetOrganization(x)
@@ -1445,7 +1453,9 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetOrganizationalUnit(x)
@@ -1457,7 +1467,9 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetState(x)
@@ -1494,7 +1506,9 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetDnsName(x)
@@ -1506,7 +1520,9 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetEmailAddress(x)
@@ -1518,7 +1534,9 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetIpAddress(x)
@@ -1536,7 +1554,9 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetUri(x)
