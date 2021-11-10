@@ -776,7 +776,7 @@ func dataSourceCapabilityEquipmentPhysicalDefRead(c context.Context, d *schema.R
 	}
 
 	if v, ok := d.GetOk("depth"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetDepth(x)
 	}
 
@@ -786,7 +786,7 @@ func dataSourceCapabilityEquipmentPhysicalDefRead(c context.Context, d *schema.R
 	}
 
 	if v, ok := d.GetOk("height"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetHeight(x)
 	}
 
@@ -829,7 +829,9 @@ func dataSourceCapabilityEquipmentPhysicalDefRead(c context.Context, d *schema.R
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}
@@ -1045,12 +1047,12 @@ func dataSourceCapabilityEquipmentPhysicalDefRead(c context.Context, d *schema.R
 	}
 
 	if v, ok := d.GetOk("weight"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetWeight(x)
 	}
 
 	if v, ok := d.GetOk("width"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetWidth(x)
 	}
 

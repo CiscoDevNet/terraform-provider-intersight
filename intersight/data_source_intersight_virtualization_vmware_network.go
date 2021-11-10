@@ -1144,7 +1144,9 @@ func dataSourceVirtualizationVmwareNetworkRead(c context.Context, d *schema.Reso
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetActiveAdapters(x)
@@ -1203,7 +1205,9 @@ func dataSourceVirtualizationVmwareNetworkRead(c context.Context, d *schema.Reso
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetStandbyAdapters(x)
@@ -1227,7 +1231,9 @@ func dataSourceVirtualizationVmwareNetworkRead(c context.Context, d *schema.Reso
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}

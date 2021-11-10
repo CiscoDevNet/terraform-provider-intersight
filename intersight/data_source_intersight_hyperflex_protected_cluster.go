@@ -1032,7 +1032,9 @@ func dataSourceHyperflexProtectedClusterRead(c context.Context, d *schema.Resour
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}
@@ -1227,7 +1229,7 @@ func dataSourceHyperflexProtectedClusterRead(c context.Context, d *schema.Resour
 	}
 
 	if v, ok := d.GetOk("target_datastore_utilization"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetTargetDatastoreUtilization(x)
 	}
 

@@ -1987,7 +1987,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 	}
 
 	if v, ok := d.GetOk("cpu"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetCpu(x)
 	}
 
@@ -2679,7 +2679,9 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}

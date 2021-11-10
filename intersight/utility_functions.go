@@ -38,7 +38,10 @@ func SuppressDiffAdditionProps(k, old, new string, d *schema.ResourceData) bool 
 	}
 	different := true
 	for k, v := range newJson {
-		different = different && recursiveValueCheck(oldJson, k, v)
+		different = recursiveValueCheck(oldJson, k, v)
+		if different == false {
+			return different
+		}
 	}
 	return different
 }
@@ -93,22 +96,32 @@ func recursiveValueCheck(oldM map[string]interface{}, k string, v interface{}) b
 	if k == "Password" {
 		return true
 	}
-	x := reflect.TypeOf(v).String()
+	y := reflect.TypeOf(v)
+	if y == nil {
+		if oldM[k] != nil {
+			return false
+		}
+		return true
+	}
+	x := y.String()
 	b := true
 	simpleDatatypes := "string int int32 int64 float bool float64"
 	complexDatatypes := "map[string]interface {}"
 	if strings.Contains(simpleDatatypes, x) {
 		if oldM[k] != v {
-			b = false
+			return false
 		}
 	} else if strings.Contains(complexDatatypes, x) {
-		if oldM[k] == nil || v == nil {
-			b = false
+		if (oldM[k] != nil && v == nil) || (oldM[k] == nil && v != nil) {
+			return false
 		} else {
 			oldMap := oldM[k].(map[string]interface{})
 			newMap := v.(map[string]interface{})
 			for k1, v1 := range newMap {
-				b = b && recursiveValueCheck(oldMap, k1, v1)
+				b = recursiveValueCheck(oldMap, k1, v1)
+				if b == false {
+					return b
+				}
 			}
 		}
 	} else {

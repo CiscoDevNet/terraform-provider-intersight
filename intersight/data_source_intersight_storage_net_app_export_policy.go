@@ -1041,7 +1041,9 @@ func dataSourceStorageNetAppExportPolicyRead(c context.Context, d *schema.Resour
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetClientMatch(x)
@@ -1065,7 +1067,9 @@ func dataSourceStorageNetAppExportPolicyRead(c context.Context, d *schema.Resour
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetRoRule(x)
@@ -1077,7 +1081,9 @@ func dataSourceStorageNetAppExportPolicyRead(c context.Context, d *schema.Resour
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetRwRule(x)
@@ -1089,7 +1095,9 @@ func dataSourceStorageNetAppExportPolicyRead(c context.Context, d *schema.Resour
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetSuperUser(x)
@@ -1116,7 +1124,9 @@ func dataSourceStorageNetAppExportPolicyRead(c context.Context, d *schema.Resour
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}

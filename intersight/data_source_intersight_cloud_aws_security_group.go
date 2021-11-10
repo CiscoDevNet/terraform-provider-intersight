@@ -1522,7 +1522,9 @@ func dataSourceCloudAwsSecurityGroupRead(c context.Context, d *schema.ResourceDa
 					x := make([]int64, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(int64))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(int64))
+						}
 					}
 					if len(x) > 0 {
 						o.SetPortList(x)
@@ -1534,7 +1536,9 @@ func dataSourceCloudAwsSecurityGroupRead(c context.Context, d *schema.ResourceDa
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetSourceCidr(x)
@@ -1579,7 +1583,9 @@ func dataSourceCloudAwsSecurityGroupRead(c context.Context, d *schema.ResourceDa
 					x := make([]int64, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(int64))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(int64))
+						}
 					}
 					if len(x) > 0 {
 						o.SetPortList(x)
@@ -1591,7 +1597,9 @@ func dataSourceCloudAwsSecurityGroupRead(c context.Context, d *schema.ResourceDa
 					x := make([]string, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(string))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
 					}
 					if len(x) > 0 {
 						o.SetSourceCidr(x)
@@ -1670,7 +1678,9 @@ func dataSourceCloudAwsSecurityGroupRead(c context.Context, d *schema.ResourceDa
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}

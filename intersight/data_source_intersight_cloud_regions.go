@@ -789,7 +789,9 @@ func dataSourceCloudRegionsRead(c context.Context, d *schema.ResourceData, meta 
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetAlternateNames(x)
 	}
@@ -893,7 +895,9 @@ func dataSourceCloudRegionsRead(c context.Context, d *schema.ResourceData, meta 
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}
@@ -1155,7 +1159,9 @@ func dataSourceCloudRegionsRead(c context.Context, d *schema.ResourceData, meta 
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetZones(x)
 	}

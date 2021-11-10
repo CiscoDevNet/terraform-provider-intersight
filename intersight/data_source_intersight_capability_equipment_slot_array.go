@@ -871,32 +871,32 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 	}
 
 	if v, ok := d.GetOk("first_index"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetFirstIndex(x)
 	}
 
 	if v, ok := d.GetOk("height"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetHeight(x)
 	}
 
 	if v, ok := d.GetOk("horizontal_start_offset"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetHorizontalStartOffset(x)
 	}
 
 	if v, ok := d.GetOk("inline_group_separation"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetInlineGroupSeparation(x)
 	}
 
 	if v, ok := d.GetOk("inline_group_size"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetInlineGroupSize(x)
 	}
 
 	if v, ok := d.GetOk("inline_offset"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetInlineOffset(x)
 	}
 
@@ -939,7 +939,9 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}
@@ -1086,17 +1088,17 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 	}
 
 	if v, ok := d.GetOk("transverse_group_separation"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetTransverseGroupSeparation(x)
 	}
 
 	if v, ok := d.GetOk("transverse_group_size"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetTransverseGroupSize(x)
 	}
 
 	if v, ok := d.GetOk("transverse_offset"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetTransverseOffset(x)
 	}
 
@@ -1175,7 +1177,7 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 	}
 
 	if v, ok := d.GetOk("vertical_start_offset"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetVerticalStartOffset(x)
 	}
 
@@ -1185,7 +1187,7 @@ func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.Res
 	}
 
 	if v, ok := d.GetOk("width"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetWidth(x)
 	}
 

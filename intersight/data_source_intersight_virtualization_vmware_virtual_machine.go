@@ -2592,7 +2592,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 	}
 
 	if v, ok := d.GetOk("cpu_utilization"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetCpuUtilization(x)
 	}
 
@@ -2605,7 +2605,9 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetCustomAttributes(x)
 	}
@@ -2756,7 +2758,9 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetDnsServerList(x)
 	}
@@ -2765,7 +2769,9 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetDnsSuffixList(x)
 	}
@@ -2916,7 +2922,9 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetIpAddress(x)
 	}
@@ -2930,7 +2938,9 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetMacAddress(x)
 	}
@@ -3045,7 +3055,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 	}
 
 	if v, ok := d.GetOk("memory_utilization"); ok {
-		x := v.(float32)
+		x := float32(v.(float64))
 		o.SetMemoryUtilization(x)
 	}
 
@@ -3118,7 +3128,9 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}
@@ -3253,7 +3265,9 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetPortGroups(x)
 	}
@@ -3570,7 +3584,9 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		x := make([]int64, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(int64))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(int64))
+			}
 		}
 		o.SetVirtualDisks(x)
 	}
@@ -3579,7 +3595,9 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		x := make([]int64, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(int64))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(int64))
+			}
 		}
 		o.SetVirtualNetworkInterfaces(x)
 	}

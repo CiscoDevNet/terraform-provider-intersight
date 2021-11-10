@@ -944,7 +944,9 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 		x := make([]float32, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(float32))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(float32))
+			}
 		}
 		o.SetAltModel(x)
 	}
@@ -1095,7 +1097,7 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 			o := &models.ForecastModel{}
 			if v, ok := l["accuracy"]; ok {
 				{
-					x := v.(float32)
+					x := float32(v.(float64))
 					o.SetAccuracy(x)
 				}
 			}
@@ -1115,7 +1117,9 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 					x := make([]float32, 0)
 					y := reflect.ValueOf(v)
 					for i := 0; i < y.Len(); i++ {
-						x = append(x, y.Index(i).Interface().(float32))
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(float32))
+						}
 					}
 					if len(x) > 0 {
 						o.SetModelData(x)
@@ -1156,7 +1160,9 @@ func dataSourceForecastInstanceRead(c context.Context, d *schema.ResourceData, m
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetOwners(x)
 	}

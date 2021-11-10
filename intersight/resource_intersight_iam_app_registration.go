@@ -661,7 +661,9 @@ func resourceIamAppRegistrationCreate(c context.Context, d *schema.ResourceData,
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		if len(x) > 0 {
 			o.SetGrantTypes(x)
@@ -679,7 +681,9 @@ func resourceIamAppRegistrationCreate(c context.Context, d *schema.ResourceData,
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		if len(x) > 0 {
 			o.SetRedirectUris(x)
@@ -695,7 +699,9 @@ func resourceIamAppRegistrationCreate(c context.Context, d *schema.ResourceData,
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		if len(x) > 0 {
 			o.SetResponseTypes(x)
@@ -997,7 +1003,9 @@ func resourceIamAppRegistrationUpdate(c context.Context, d *schema.ResourceData,
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetGrantTypes(x)
 	}
@@ -1015,7 +1023,9 @@ func resourceIamAppRegistrationUpdate(c context.Context, d *schema.ResourceData,
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetRedirectUris(x)
 	}
@@ -1031,7 +1041,9 @@ func resourceIamAppRegistrationUpdate(c context.Context, d *schema.ResourceData,
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
 		for i := 0; i < y.Len(); i++ {
-			x = append(x, y.Index(i).Interface().(string))
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
 		}
 		o.SetResponseTypes(x)
 	}
