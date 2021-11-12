@@ -13,12 +13,12 @@ resource "intersight_snmp_policy" "snmp1" {
   sys_location            = "Karnataka"
   engine_id               = "vvb"
   snmp_users {
-    name             = "demouser"
-    privacy_type     = "AES"
-    auth_password    = var.auth_password
-    privacy_password = var.privacy_password
-    security_level   = "AuthPriv"
-    auth_type        = "SHA"
+    name         = "demouser"
+    privacy_type = "AES"
+    #auth_password    = var.auth_password
+    #privacy_password = var.privacy_password
+    security_level = "AuthPriv"
+    auth_type      = "SHA"
   }
   snmp_traps {
     destination = "10.10.10.1"
@@ -28,13 +28,33 @@ resource "intersight_snmp_policy" "snmp1" {
     user        = "demouser"
     nr_version  = "V3"
   }
-  profiles {
-    moid        = intersight_server_profile.server1.id
-    object_type = "server.Profile"
-  }
+   profiles {
+     moid        = var.profile
+     object_type = "server.Profile"
+   }
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
   }
+}
+
+ variable "auth_password" {
+   type = string
+   description = "value for auth_password"  
+ }
+
+ variable "privacy_password" {
+   type =  string
+   description = "value for privacy password"
+ }
+ 
+ variable "organization" {
+ type = string
+ description = "value for organization"  
+ }
+
+variable "profile"{
+  type = string
+  description = "Moid of server.Profile"
 }
 ```

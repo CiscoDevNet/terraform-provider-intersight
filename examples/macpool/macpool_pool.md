@@ -6,7 +6,7 @@ resource "intersight_macpool_pool" "macpool_pool1" {
   mac_blocks {
     object_type = "macpool.Block"
     from        = "00:25:B5:9d:68:16"
-    to          = "70:DF:2F:87:06:40"
+    to          = "00:25:B5:9d:68:40"
   }
 }
 ```

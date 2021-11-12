@@ -12,4 +12,14 @@ resource "intersight_ipmioverlan_policy" "ipmi1" {
     moid        = var.organization
   }
 }
+
+variable "organization" {
+  type = string
+  description = "value for organization"
+}
+
+variable "encryption_key" {
+  type = string
+  description = "value for encryption key"
+}
 ```

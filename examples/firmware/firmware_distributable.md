@@ -2,19 +2,18 @@
 
 ```hcl
 resource "intersight_firmware_distributable" "firmware_distributable" {
-  catalog {
-    moid        = var.softwarerepository_catalog
-    object_type = "softwarerepository.Catalog"
-  }
   component_meta = [
     {
-      component_label  = "UCS-FI-6454"
-      component_type   = "NXOS"
-      description      = "Cisco UCS 6454 Fabric Interconnect"
-      disruption       = "EndpointReboot"
-      is_oob_supported = false
-      model            = "UCS-FI-6454"
-      object_type      = "firmware.ComponentMeta"
+      image_path            = null
+      additional_properties = ""
+      class_id              = "firmware.ComponentMeta"
+      component_label       = "UCS-FI-6454"
+      component_type        = "NXOS"
+      description           = "Cisco UCS 6454 Fabric Interconnect"
+      disruption            = "EndpointReboot"
+      is_oob_supported      = false
+      model                 = "UCS-FI-6454"
+      object_type           = "firmware.ComponentMeta"
       oob_manageability = [
         "Update",
         "Inventory",
@@ -25,13 +24,16 @@ resource "intersight_firmware_distributable" "firmware_distributable" {
       vendor         = "Cisco Systems Inc."
     },
     {
-      component_label  = "UCS-IOM-2204XP"
-      component_type   = "IOM"
-      description      = "Cisco UCS 2204XP"
-      disruption       = "EndpointReboot"
-      is_oob_supported = false
-      model            = "UCS-IOM-2204XP"
-      object_type      = "firmware.ComponentMeta"
+      image_path            = null
+      additional_properties = ""
+      class_id              = "firmware.ComponentMeta"
+      component_label       = "UCS-IOM-2204XP"
+      component_type        = "IOM"
+      description           = "Cisco UCS 2204XP"
+      disruption            = "EndpointReboot"
+      is_oob_supported      = false
+      model                 = "UCS-IOM-2204XP"
+      object_type           = "firmware.ComponentMeta"
       oob_manageability = [
         "Update",
         "Inventory",
@@ -42,13 +44,7 @@ resource "intersight_firmware_distributable" "firmware_distributable" {
       vendor         = "Cisco Systems Inc."
     }
   ]
-  description = "Cisco Intersight Infrastructure Bundle"
-  distributable_metas = [
-    {
-      moid        = var.firmware_distributable_meta
-      object_type = "firmware.DistributableMeta"
-    }
-  ]
+  description      = "Cisco Intersight Infrastructure Bundle"
   download_count   = 0
   image_category   = "Unknown"
   import_action    = "None"
@@ -60,25 +56,22 @@ resource "intersight_firmware_distributable" "firmware_distributable" {
   mod_time         = "2020-07-03T15:30:39.506Z"
   name             = "ucs-intersight-infra-4gfi.4.1.2S19.gbin"
   origin           = "System"
-  parent {
-    moid        = var.softwarerepository_catalog
-    object_type = "softwarerepository.Catalog"
-  }
-  size = 1355933747
+  size             = 1355933747
   supported_models = [
     "UCS-FI-6454"
   ]
   tags = [
     {
-      key   = "cisco.meta.distributabletype"
-      value = "IMMFABRIC"
+      additional_properties = ""
+      key                   = "cisco.meta.distributabletype"
+      value                 = "IMMFABRIC"
     },
     {
-      key   = "cisco.meta.repositorytype"
-      value = "IntersightCloud"
+      additional_properties = ""
+      key                   = "cisco.meta.repositorytype"
+      value                 = "IntersightCloud"
     }
   ]
-  vendor  = "Cisco"
-  version = "4.1(2S19)"
+  vendor = "Cisco"
 }
 ```

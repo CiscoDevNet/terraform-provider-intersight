@@ -8,8 +8,13 @@ resource "intersight_kubernetes_aci_cni_apic" "kubernetes_aci_cni_apic1" {
     moid        = var.organization
   }
   registered_device {
-    moid        = intersight_registered_device.device1.id
+    moid        = var.asset_device_registration
     object_type = "asset.DeviceRegistrations"
   }
+}
+
+variable "asset_device_registration" {
+  type        = string
+  description = "Moid of asset.DeviceRegistrations Mo"
 }
 ```

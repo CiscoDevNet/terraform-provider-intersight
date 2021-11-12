@@ -7,7 +7,12 @@ resource "intersight_externalsite_authorization" "externalsite_authorization1" {
   user_id         = "user1"
   account {
     object_type = "iam.Account"
-    moid        = intersight_account_iam.iam1.id
+    moid        = var.account
   }
+}
+
+variable "account" {
+  type        = string
+  description = "Moid of iam.Account Mo"
 }
 ```

@@ -7,11 +7,16 @@ resource "intersight_access_policy" "access1" {
   inband_vlan = 19
   inband_ip_pool {
     object_type = "ippool.Pool"
-    moid        = intersight_ip_pool.pool1.id
+    moid        = var.inband_ip_pool
   }
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
   }
+}
+
+variable "inband_ip_pool" {
+  type        = string
+  description = "Moid of ippool.Pool Mo"
 }
 ```

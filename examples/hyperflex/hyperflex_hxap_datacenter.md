@@ -5,11 +5,12 @@ resource "intersight_hyperflex_hxap_datacenter" "hyperflex_hxap_datacenter1" {
   name = "hyperflex_hxap_datacenter1"
   account {
     object_type = "iam.Account"
-    moid        = intersight_iam_account.account1.id
+    moid        = var.iam_account_hxap
   }
-  registered_device {
-    moid        = intersight_registered_device.device1.id
-    object_type = "asset.DeviceRegistrations"
-  }
+}
+
+variable "iam_account_hxap" {
+  type        = string
+  description = "Moid of Iam account"
 }
 ```

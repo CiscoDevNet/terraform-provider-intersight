@@ -18,4 +18,9 @@ resource "intersight_iam_end_point_user_policy" "user_policy1" {
     moid        = var.organization
   }
 }
+
+ variable "organization" {
+   type = string
+   description = "value for organization"
+}
 ```
