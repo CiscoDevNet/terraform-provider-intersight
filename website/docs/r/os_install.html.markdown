@@ -118,6 +118,7 @@ This complex property has following sub-properties:
   + `is_root_password_crypted`:(bool) Enable to indicate Root Password provided is encrypted. 
   + `is_root_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'rootPassword' property has been set. 
   + `nameserver`:(string) IP address of the name server to be configured in the OS. 
+  + `network_device`:(string) Network Device where the IP address must be configured. Network Interface names and MAC address are supported. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `product_key`:(string) The product key to be used for a specific version of Windows installation. 
   + `root_password`:(string) Password configured for the root / administrator user in the OS. You can enter a plain text or an encrypted password.Intersight encrypts the plaintext password. Enable the Encrypted Password option to provide an encrypted password.For more details on encrypting passwords, see Help Center. 

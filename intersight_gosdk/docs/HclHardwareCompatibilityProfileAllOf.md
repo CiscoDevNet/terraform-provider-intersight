@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | Identifier of the hardware compatibility profile. | [optional] 
 **OsVendor** | Pointer to **string** | Vendor of the Operating System running on the server. | [optional] 
 **OsVersion** | Pointer to **string** | Version of the Operating System running on the server. | [optional] 
+**Personality** | Pointer to **string** | Personality indicating the personality with the which the sever is used in a Hyperflex environment. | [optional] 
 **ProcessorModel** | Pointer to **string** | Model of the processor present in the server. | [optional] 
 **Products** | Pointer to [**[]HclProduct**](HclProduct.md) |  | [optional] 
 **ServerModel** | Pointer to **string** | Model of the server as returned by UCSM/CIMC XML API. | [optional] 
@@ -201,6 +202,31 @@ SetOsVersion sets OsVersion field to given value.
 `func (o *HclHardwareCompatibilityProfileAllOf) HasOsVersion() bool`
 
 HasOsVersion returns a boolean if a field has been set.
+
+### GetPersonality
+
+`func (o *HclHardwareCompatibilityProfileAllOf) GetPersonality() string`
+
+GetPersonality returns the Personality field if non-nil, zero value otherwise.
+
+### GetPersonalityOk
+
+`func (o *HclHardwareCompatibilityProfileAllOf) GetPersonalityOk() (*string, bool)`
+
+GetPersonalityOk returns a tuple with the Personality field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPersonality
+
+`func (o *HclHardwareCompatibilityProfileAllOf) SetPersonality(v string)`
+
+SetPersonality sets Personality field to given value.
+
+### HasPersonality
+
+`func (o *HclHardwareCompatibilityProfileAllOf) HasPersonality() bool`
+
+HasPersonality returns a boolean if a field has been set.
 
 ### GetProcessorModel
 

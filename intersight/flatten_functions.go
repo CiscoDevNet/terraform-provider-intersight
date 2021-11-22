@@ -4835,6 +4835,7 @@ func flattenListOsServerConfig(p []models.OsServerConfig, d *schema.ResourceData
 			osanswers["is_root_password_crypted"] = item.GetIsRootPasswordCrypted()
 			osanswers["is_root_password_set"] = item.GetIsRootPasswordSet()
 			osanswers["nameserver"] = item.GetNameserver()
+			osanswers["network_device"] = item.GetNetworkDevice()
 			osanswers["object_type"] = item.GetObjectType()
 			osanswers["product_key"] = item.GetProductKey()
 			root_password_x, exists := d.GetOk("answers")
@@ -4851,6 +4852,21 @@ func flattenListOsServerConfig(p []models.OsServerConfig, d *schema.ResourceData
 		osserverconfig["error_msgs"] = item.GetErrorMsgs()
 		osserverconfig["install_target"] = item.GetInstallTarget()
 		osserverconfig["object_type"] = item.GetObjectType()
+		osserverconfig["operating_system_parameters"] = (func(p models.OsOperatingSystemParameters, d *schema.ResourceData) []map[string]interface{} {
+			var osoperatingsystemparameterss []map[string]interface{}
+			var ret models.OsOperatingSystemParameters
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			osoperatingsystemparameters := make(map[string]interface{})
+			osoperatingsystemparameters["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			osoperatingsystemparameters["class_id"] = item.GetClassId()
+			osoperatingsystemparameters["object_type"] = item.GetObjectType()
+
+			osoperatingsystemparameterss = append(osoperatingsystemparameterss, osoperatingsystemparameters)
+			return osoperatingsystemparameterss
+		})(item.GetOperatingSystemParameters(), d)
 		osserverconfig["processed_install_target"] = (func(p models.OsInstallTarget, d *schema.ResourceData) []map[string]interface{} {
 			var osinstalltargets []map[string]interface{}
 			var ret models.OsInstallTarget
@@ -9515,6 +9531,23 @@ func flattenMapFirmwareDistributableRelationship(p models.FirmwareDistributableR
 	firmwaredistributablerelationships = append(firmwaredistributablerelationships, firmwaredistributablerelationship)
 	return firmwaredistributablerelationships
 }
+func flattenMapFirmwareIncludeComponentListType(p models.FirmwareIncludeComponentListType, d *schema.ResourceData) []map[string]interface{} {
+	var firmwareincludecomponentlisttypes []map[string]interface{}
+	var ret models.FirmwareIncludeComponentListType
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	firmwareincludecomponentlisttype := make(map[string]interface{})
+	firmwareincludecomponentlisttype["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	firmwareincludecomponentlisttype["class_id"] = item.GetClassId()
+	firmwareincludecomponentlisttype["include_local_disk_list"] = item.GetIncludeLocalDiskList()
+	firmwareincludecomponentlisttype["include_storage_controller_list"] = item.GetIncludeStorageControllerList()
+	firmwareincludecomponentlisttype["object_type"] = item.GetObjectType()
+
+	firmwareincludecomponentlisttypes = append(firmwareincludecomponentlisttypes, firmwareincludecomponentlisttype)
+	return firmwareincludecomponentlisttypes
+}
 func flattenMapFirmwareNetworkShare(p models.FirmwareNetworkShare, d *schema.ResourceData) []map[string]interface{} {
 	var firmwarenetworkshares []map[string]interface{}
 	var ret models.FirmwareNetworkShare
@@ -14166,6 +14199,7 @@ func flattenMapOsAnswers(p models.OsAnswers, d *schema.ResourceData) []map[strin
 	osanswers["is_root_password_crypted"] = item.GetIsRootPasswordCrypted()
 	osanswers["is_root_password_set"] = item.GetIsRootPasswordSet()
 	osanswers["nameserver"] = item.GetNameserver()
+	osanswers["network_device"] = item.GetNetworkDevice()
 	osanswers["object_type"] = item.GetObjectType()
 	osanswers["product_key"] = item.GetProductKey()
 	root_password_x, exists := d.GetOk("answers")
@@ -17802,6 +17836,7 @@ func flattenMapWorkflowProperties(p models.WorkflowProperties, d *schema.Resourc
 	workflowproperties["retry_count"] = item.GetRetryCount()
 	workflowproperties["retry_delay"] = item.GetRetryDelay()
 	workflowproperties["retry_policy"] = item.GetRetryPolicy()
+	workflowproperties["starts_workflow"] = item.GetStartsWorkflow()
 	workflowproperties["support_status"] = item.GetSupportStatus()
 	workflowproperties["timeout"] = item.GetTimeout()
 	workflowproperties["timeout_policy"] = item.GetTimeoutPolicy()

@@ -36,6 +36,7 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_capability_port_group_aggregation_def":                   resourceCapabilityPortGroupAggregationDef(),
 		"intersight_capability_psu_descriptor":                               resourceCapabilityPsuDescriptor(),
 		"intersight_capability_psu_manufacturing_def":                        resourceCapabilityPsuManufacturingDef(),
+		"intersight_capability_server_models_capability_def":                 resourceCapabilityServerModelsCapabilityDef(),
 		"intersight_capability_server_schema_descriptor":                     resourceCapabilityServerSchemaDescriptor(),
 		"intersight_capability_sioc_module_capability_def":                   resourceCapabilitySiocModuleCapabilityDef(),
 		"intersight_capability_sioc_module_descriptor":                       resourceCapabilitySiocModuleDescriptor(),

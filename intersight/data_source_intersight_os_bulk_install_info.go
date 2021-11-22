@@ -842,6 +842,11 @@ func dataSourceOsBulkInstallInfo() *schema.Resource {
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
+								"network_device": {
+									Description: "Network Device where the IP address must be configured. Network Interface names and MAC address are supported.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
 								"object_type": {
 									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 									Type:        schema.TypeString,
@@ -884,6 +889,31 @@ func dataSourceOsBulkInstallInfo() *schema.Resource {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
 						Optional:    true,
+					},
+					"operating_system_parameters": {
+						Description: "Parameters specific to selected OS.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
 					},
 					"processed_install_target": {
 						Description: "The target in which OS installation triggered, this is populated after processing the given data.",
@@ -1954,6 +1984,11 @@ func dataSourceOsBulkInstallInfo() *schema.Resource {
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
+								"network_device": {
+									Description: "Network Device where the IP address must be configured. Network Interface names and MAC address are supported.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
 								"object_type": {
 									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 									Type:        schema.TypeString,
@@ -1996,6 +2031,31 @@ func dataSourceOsBulkInstallInfo() *schema.Resource {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
 						Optional:    true,
+					},
+					"operating_system_parameters": {
+						Description: "Parameters specific to selected OS.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
 					},
 					"processed_install_target": {
 						Description: "The target in which OS installation triggered, this is populated after processing the given data.",

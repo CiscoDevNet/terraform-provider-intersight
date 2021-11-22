@@ -230,7 +230,7 @@ func resourceStorageDriveGroup() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "The name of the drive group. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed.",
+				Description: "The name of the drive group. The name can be between 1 and 64 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				ForceNew:    true,

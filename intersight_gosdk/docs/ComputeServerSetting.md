@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **CmosReset** | Pointer to **string** | The allowed actions on the CMOS Reset. * &#x60;Ready&#x60; - CMOS Reset operation is allowed to be done on the server in this state. * &#x60;Pending&#x60; - This indicates that the previous CMOS Reset operation on this server has not completed due to a pending power cycle. CMOS Reset operation cannot be done on the server when in this state. * &#x60;Reset&#x60; - The value that the UI/API needs to provide to trigger a CMOS Reset operation on a server. | [optional] [default to "Ready"]
 **ConfigState** | Pointer to **string** | The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target server. Applying - This state denotes that the settings are being applied in the target server. Failed - This state denotes that the settings could not be applied in the target server. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "Applied"]
 **FrontPanelLockState** | Pointer to **string** | The allowed actions on the Front Panel Lock. * &#x60;Unlock&#x60; - Front Panel of the server is set to Unlocked state. * &#x60;Lock&#x60; - Front Panel of the server is set to Locked state. | [optional] [default to "Unlock"]
+**KvmReset** | Pointer to **string** | The allowed actions on the vKVM Reset. * &#x60;Ready&#x60; - Reset vKVM operation is allowed to be done on the server in this state. * &#x60;Reset&#x60; - The value that the UI/API needs to provide to trigger a Reset vKVM operation on a server. | [optional] [default to "Ready"]
 **Name** | Pointer to **string** | The property used to identify the name of the server it is associated with. | [optional] [readonly] 
 **OneTimeBootDevice** | Pointer to **string** | The name of the device chosen by user for configuring One-Time Boot device. | [optional] 
 **PersistentMemoryOperation** | Pointer to [**NullableComputePersistentMemoryOperation**](ComputePersistentMemoryOperation.md) |  | [optional] 
@@ -242,6 +243,31 @@ SetFrontPanelLockState sets FrontPanelLockState field to given value.
 `func (o *ComputeServerSetting) HasFrontPanelLockState() bool`
 
 HasFrontPanelLockState returns a boolean if a field has been set.
+
+### GetKvmReset
+
+`func (o *ComputeServerSetting) GetKvmReset() string`
+
+GetKvmReset returns the KvmReset field if non-nil, zero value otherwise.
+
+### GetKvmResetOk
+
+`func (o *ComputeServerSetting) GetKvmResetOk() (*string, bool)`
+
+GetKvmResetOk returns a tuple with the KvmReset field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKvmReset
+
+`func (o *ComputeServerSetting) SetKvmReset(v string)`
+
+SetKvmReset sets KvmReset field to given value.
+
+### HasKvmReset
+
+`func (o *ComputeServerSetting) HasKvmReset() bool`
+
+HasKvmReset returns a boolean if a field has been set.
 
 ### GetName
 

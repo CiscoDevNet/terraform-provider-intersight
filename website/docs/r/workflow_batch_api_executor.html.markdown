@@ -41,7 +41,6 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.CliCommand](#workflowCliCommand)
 [workflow.FileOperations](#workflowFileOperations)
-[workflow.SshSession](#workflowSshSession)
 [workflow.WebApi](#workflowWebApi)
 [workflow.XmlApi](#workflowXmlApi)
   + `asset_target_moid`:(string)(ReadOnly) Asset target defines the remote target endpoints which are either managed byIntersight or their service APIs are invoked from Intersight. Generic API executorservice Jasmine can invoke these remote APIs via its executors. Asset targets can beaccessed directly for cloud targets or via an associated Intersight Assist. Prerequisiteto use asset targets is to persist the target details.Asset target MoRef can be given as task input of type TargetDataType. Fusion determinesand populates the target context with the Assist if associated with. It is setinternally at the API level.In case of an associated assist, it is used by Assist to fetch the target detailsand form the API request to send to endpoints. In case of cloud asset targets, Jasminefetched the target details from DB, forms the API request and sends it to the target. 
@@ -154,35 +153,6 @@ This complex property has following sub-properties:
   + `template_file_path`:(string) Path of the template file on the connected device. 
   + `template_values`:(JSON as string) Input values to render text output file from template file. 
 * `operation_type`:(string) File operation type to be executed on the connected endpoint.* `FileDownload` - The API is executed in a remote device connected to the Intersightthrough its device connector. This operation is to download the filefrom specified storage bucket to the specific path on the device.* `FileTemplatize` - Populates data driven template file with input values to generate textual output.Inputs - the path of the template file on the device and json values to populate.An error will be returned if the file does not exists or if there is an error whileexecuting the template. 
-
-### [workflow.SshSession](#argument-reference)
-This models a single SSH session from Intersight connected endpoint to a remote
-server. Multiple SSH operations can be run sequentially over a single SSH session.
-* `file_transfer_to_remote`:(HashMap) - Message to transfer a file from Intersight connected device to remote server. 
-This complex property has following sub-properties:
-  + `destination_file_path`:(string) Destination file path on the target server. 
-  + `encrypted_aes_key`:(string) The secure properties that have large text content as value can be encrypted using AES key. In these cases, the AES key needs to be encrypted using the device connector public key and passed as the value for this property.The secure properties that are encrypted using the AES key are mapped against the property name with prefix 'AES' in SecureProperties dictionary. 
-  + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not same as device connector's public key, an error reponse with appropriate error message is thrown back. 
-  + `file_mode`:(int) File permission to set on the transferred file. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
-  + `source_file_path`:(string) Source file path on the Intersight connected device. 
-* `message_type`:(string) The type of SSH message to send to the remote server.* `ExecuteCommand` - Execute a SSH command on the remote server.* `NewSession` - Open a new SSH connection to the remote server.* `FileTransfer` - Transfer a file from Intersight connected device to the remote server.* `CloseSession` - Close the SSH connection to the remote server. 
-* `ssh_command`:(JSON as string) SSH command to execute on the remote server. 
-* `ssh_configuration`:(HashMap) - Carries the SSH session details for opening a new connection. 
-This complex property has following sub-properties:
-  + `encrypted_aes_key`:(string) The secure properties that have large text content as value can be encrypted using AES key. In these cases, the AES key needs to be encrypted using the device connector public key and passed as the value for this property.The secure properties that are encrypted using the AES key are mapped against the property name with prefix 'AES' in SecureProperties dictionary. 
-  + `encryption_key`:(string) The public key that was used to encrypt the values present in SecureProperties dictionary.If the given public key is not same as device connector's public key, an error reponse with appropriate error message is thrown back. 
-  + `is_passphrase_set`:(bool)(ReadOnly) Indicates whether the value of the 'passphrase' property has been set. 
-  + `is_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'password' property has been set. 
-  + `is_private_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'privateKey' property has been set. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `passphrase`:(string) Optional passphrase if provided while creating the private key. 
-  + `password`:(string) Password to use in the SSH connection credentials (If empty then private key will be used). 
-  + `private_key`:(string) PEM encoded private key to use in the SSH connection credentials (Optional if password is given). 
-  + `secure_properties`:(JSON as string) A dictionary of encrypted secure values mapped against the secure property name. The values that are encrypted using AES key must be mapped against the secure property name with a 'AES' prefixDevice connector expects the message body to be a golang template and the template can use the secure property names as placeholders. 
-  + `target`:(string) The remote server to connect to. IPv4 address represented in dot decimal notation. 
-  + `user`:(string) Username for the remote SSH connection. 
 
 ### [workflow.WebApi](#argument-reference)
 This models a single Web API request within a batch of requests that get

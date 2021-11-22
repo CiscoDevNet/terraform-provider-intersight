@@ -23,6 +23,7 @@ The following arguments can be used to get data of already created objects in In
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `front_panel_lock_state`:(string) The allowed actions on the Front Panel Lock.* `Unlock` - Front Panel of the server is set to Unlocked state.* `Lock` - Front Panel of the server is set to Locked state. 
+* `kvm_reset`:(string) The allowed actions on the vKVM Reset.* `Ready` - Reset vKVM operation is allowed to be done on the server in this state.* `Reset` - The value that the UI/API needs to provide to trigger a Reset vKVM operation on a server. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The property used to identify the name of the server it is associated with. 

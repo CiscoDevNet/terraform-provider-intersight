@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4870
+API version: 1.0.9-4903
 Contact: intersight@cisco.com
 */
 
@@ -36,6 +36,8 @@ type WorkflowProperties struct {
 	RetryDelay *int64 `json:"RetryDelay,omitempty"`
 	// The retry policy for the task. * `Fixed` - The enum specifies the option as Fixed where the task retry happens after fixed time specified by RetryDelay.
 	RetryPolicy *string `json:"RetryPolicy,omitempty"`
+	// Set to true if the task implementation starts another workfow as part of the execution.
+	StartsWorkflow *bool `json:"StartsWorkflow,omitempty"`
 	// Supported status of the definition. * `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported. * `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.
 	SupportStatus *string `json:"SupportStatus,omitempty"`
 	// The timeout value in seconds after which task will be marked as timed out. Max allowed value is 7 days.
@@ -372,6 +374,38 @@ func (o *WorkflowProperties) SetRetryPolicy(v string) {
 	o.RetryPolicy = &v
 }
 
+// GetStartsWorkflow returns the StartsWorkflow field value if set, zero value otherwise.
+func (o *WorkflowProperties) GetStartsWorkflow() bool {
+	if o == nil || o.StartsWorkflow == nil {
+		var ret bool
+		return ret
+	}
+	return *o.StartsWorkflow
+}
+
+// GetStartsWorkflowOk returns a tuple with the StartsWorkflow field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowProperties) GetStartsWorkflowOk() (*bool, bool) {
+	if o == nil || o.StartsWorkflow == nil {
+		return nil, false
+	}
+	return o.StartsWorkflow, true
+}
+
+// HasStartsWorkflow returns a boolean if a field has been set.
+func (o *WorkflowProperties) HasStartsWorkflow() bool {
+	if o != nil && o.StartsWorkflow != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStartsWorkflow gets a reference to the given bool and assigns it to the StartsWorkflow field.
+func (o *WorkflowProperties) SetStartsWorkflow(v bool) {
+	o.StartsWorkflow = &v
+}
+
 // GetSupportStatus returns the SupportStatus field value if set, zero value otherwise.
 func (o *WorkflowProperties) GetSupportStatus() string {
 	if o == nil || o.SupportStatus == nil {
@@ -505,6 +539,9 @@ func (o WorkflowProperties) MarshalJSON() ([]byte, error) {
 	if o.RetryPolicy != nil {
 		toSerialize["RetryPolicy"] = o.RetryPolicy
 	}
+	if o.StartsWorkflow != nil {
+		toSerialize["StartsWorkflow"] = o.StartsWorkflow
+	}
 	if o.SupportStatus != nil {
 		toSerialize["SupportStatus"] = o.SupportStatus
 	}
@@ -540,6 +577,8 @@ func (o *WorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
 		RetryDelay *int64 `json:"RetryDelay,omitempty"`
 		// The retry policy for the task. * `Fixed` - The enum specifies the option as Fixed where the task retry happens after fixed time specified by RetryDelay.
 		RetryPolicy *string `json:"RetryPolicy,omitempty"`
+		// Set to true if the task implementation starts another workfow as part of the execution.
+		StartsWorkflow *bool `json:"StartsWorkflow,omitempty"`
 		// Supported status of the definition. * `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs. * `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported. * `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.
 		SupportStatus *string `json:"SupportStatus,omitempty"`
 		// The timeout value in seconds after which task will be marked as timed out. Max allowed value is 7 days.
@@ -562,6 +601,7 @@ func (o *WorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowProperties.RetryCount = varWorkflowPropertiesWithoutEmbeddedStruct.RetryCount
 		varWorkflowProperties.RetryDelay = varWorkflowPropertiesWithoutEmbeddedStruct.RetryDelay
 		varWorkflowProperties.RetryPolicy = varWorkflowPropertiesWithoutEmbeddedStruct.RetryPolicy
+		varWorkflowProperties.StartsWorkflow = varWorkflowPropertiesWithoutEmbeddedStruct.StartsWorkflow
 		varWorkflowProperties.SupportStatus = varWorkflowPropertiesWithoutEmbeddedStruct.SupportStatus
 		varWorkflowProperties.Timeout = varWorkflowPropertiesWithoutEmbeddedStruct.Timeout
 		varWorkflowProperties.TimeoutPolicy = varWorkflowPropertiesWithoutEmbeddedStruct.TimeoutPolicy
@@ -591,6 +631,7 @@ func (o *WorkflowProperties) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "RetryCount")
 		delete(additionalProperties, "RetryDelay")
 		delete(additionalProperties, "RetryPolicy")
+		delete(additionalProperties, "StartsWorkflow")
 		delete(additionalProperties, "SupportStatus")
 		delete(additionalProperties, "Timeout")
 		delete(additionalProperties, "TimeoutPolicy")
