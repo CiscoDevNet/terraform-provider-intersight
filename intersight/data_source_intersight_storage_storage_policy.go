@@ -136,7 +136,7 @@ func dataSourceStorageStoragePolicy() *schema.Resource {
 						Optional:    true,
 					},
 					"controller_slot": {
-						Description: "Select the M.2 RAID controller slot on which the virtual drive is to be created. For example, MSTOR-RAID-1 means that the virtual drive is to be created on the M.2 RAID controller in the first slot. Select MSTOR-RAID-2 only when there is a M.2 RAID controller in the second slot.\n* `MSTOR-RAID-1` - Virtual drive  will be created on the M.2 RAID controller in the first slot.\n* `MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in the second slot, if available.\n* `MSTOR-RAID-1,MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in both the slots, if available.",
+						Description: "Select the M.2 RAID controller slot on which the virtual drive is to be created. Select 'MSTOR-RAID-1' to create virtual drive on the M.2 RAID controller in the first slot or in the MSTOR-RAID slot, 'MSTOR-RAID-2' for second slot, 'MSTOR-RAID-1, MSTOR-RAID-2' for both slots or either slot.\n* `MSTOR-RAID-1` - Virtual drive  will be created on the M.2 RAID controller in the first slot.\n* `MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in the second slot, if available.\n* `MSTOR-RAID-1,MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in both the slots, if available.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -674,7 +674,7 @@ func dataSourceStorageStoragePolicy() *schema.Resource {
 						Optional:    true,
 					},
 					"controller_slot": {
-						Description: "Select the M.2 RAID controller slot on which the virtual drive is to be created. For example, MSTOR-RAID-1 means that the virtual drive is to be created on the M.2 RAID controller in the first slot. Select MSTOR-RAID-2 only when there is a M.2 RAID controller in the second slot.\n* `MSTOR-RAID-1` - Virtual drive  will be created on the M.2 RAID controller in the first slot.\n* `MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in the second slot, if available.\n* `MSTOR-RAID-1,MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in both the slots, if available.",
+						Description: "Select the M.2 RAID controller slot on which the virtual drive is to be created. Select 'MSTOR-RAID-1' to create virtual drive on the M.2 RAID controller in the first slot or in the MSTOR-RAID slot, 'MSTOR-RAID-2' for second slot, 'MSTOR-RAID-1, MSTOR-RAID-2' for both slots or either slot.\n* `MSTOR-RAID-1` - Virtual drive  will be created on the M.2 RAID controller in the first slot.\n* `MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in the second slot, if available.\n* `MSTOR-RAID-1,MSTOR-RAID-2` - Virtual drive  will be created on the M.2 RAID controller in both the slots, if available.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

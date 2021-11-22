@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.Upgrade"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.Upgrade"]
 **ExcludeComponentList** | Pointer to **[]string** |  | [optional] 
+**IncludeComponentList** | Pointer to [**NullableFirmwareIncludeComponentListType**](FirmwareIncludeComponentListType.md) |  | [optional] 
 **Device** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **Server** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 
@@ -104,6 +105,41 @@ HasExcludeComponentList returns a boolean if a field has been set.
 `func (o *FirmwareUpgradeAllOf) UnsetExcludeComponentList()`
 
 UnsetExcludeComponentList ensures that no value is present for ExcludeComponentList, not even an explicit nil
+### GetIncludeComponentList
+
+`func (o *FirmwareUpgradeAllOf) GetIncludeComponentList() FirmwareIncludeComponentListType`
+
+GetIncludeComponentList returns the IncludeComponentList field if non-nil, zero value otherwise.
+
+### GetIncludeComponentListOk
+
+`func (o *FirmwareUpgradeAllOf) GetIncludeComponentListOk() (*FirmwareIncludeComponentListType, bool)`
+
+GetIncludeComponentListOk returns a tuple with the IncludeComponentList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncludeComponentList
+
+`func (o *FirmwareUpgradeAllOf) SetIncludeComponentList(v FirmwareIncludeComponentListType)`
+
+SetIncludeComponentList sets IncludeComponentList field to given value.
+
+### HasIncludeComponentList
+
+`func (o *FirmwareUpgradeAllOf) HasIncludeComponentList() bool`
+
+HasIncludeComponentList returns a boolean if a field has been set.
+
+### SetIncludeComponentListNil
+
+`func (o *FirmwareUpgradeAllOf) SetIncludeComponentListNil(b bool)`
+
+ SetIncludeComponentListNil sets the value for IncludeComponentList to be an explicit nil
+
+### UnsetIncludeComponentList
+`func (o *FirmwareUpgradeAllOf) UnsetIncludeComponentList()`
+
+UnsetIncludeComponentList ensures that no value is present for IncludeComponentList, not even an explicit nil
 ### GetDevice
 
 `func (o *FirmwareUpgradeAllOf) GetDevice() AssetDeviceRegistrationRelationship`

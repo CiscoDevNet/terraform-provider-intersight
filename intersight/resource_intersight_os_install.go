@@ -622,6 +622,12 @@ func resourceOsInstall() *schema.Resource {
 							Optional:    true,
 							ForceNew:    true,
 						},
+						"network_device": {
+							Description: "Network Device where the IP address must be configured. Network Interface names and MAC address are supported.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
+						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
@@ -1876,6 +1882,12 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 				{
 					x := (v.(string))
 					o.SetNameserver(x)
+				}
+			}
+			if v, ok := l["network_device"]; ok {
+				{
+					x := (v.(string))
+					o.SetNetworkDevice(x)
 				}
 			}
 			if v, ok := l["object_type"]; ok {

@@ -309,6 +309,11 @@ func dataSourceComputeServerSetting() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"kvm_reset": {
+			Description: "The allowed actions on the vKVM Reset.\n* `Ready` - Reset vKVM operation is allowed to be done on the server in this state.\n* `Reset` - The value that the UI/API needs to provide to trigger a Reset vKVM operation on a server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"locator_led": {
 			Description: "A reference to a equipmentLocatorLed resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1253,6 +1258,11 @@ func dataSourceComputeServerSetting() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"kvm_reset": {
+			Description: "The allowed actions on the vKVM Reset.\n* `Ready` - Reset vKVM operation is allowed to be done on the server in this state.\n* `Reset` - The value that the UI/API needs to provide to trigger a Reset vKVM operation on a server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"locator_led": {
 			Description: "A reference to a equipmentLocatorLed resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -2104,6 +2114,11 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		o.SetFrontPanelLockState(x)
 	}
 
+	if v, ok := d.GetOk("kvm_reset"); ok {
+		x := (v.(string))
+		o.SetKvmReset(x)
+	}
+
 	if v, ok := d.GetOk("locator_led"); ok {
 		p := make([]models.EquipmentLocatorLedRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2897,6 +2912,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["front_panel_lock_state"] = (s.GetFrontPanelLockState())
+				temp["kvm_reset"] = (s.GetKvmReset())
 
 				temp["locator_led"] = flattenMapEquipmentLocatorLedRelationship(s.GetLocatorLed(), d)
 

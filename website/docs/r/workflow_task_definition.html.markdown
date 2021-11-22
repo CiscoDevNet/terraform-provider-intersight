@@ -156,6 +156,7 @@ This complex property has following sub-properties:
   + `retry_count`:(int) The number of times a task should be tried before marking as failed. 
   + `retry_delay`:(int) The delay in seconds after which the the task is re-tried. 
   + `retry_policy`:(string) The retry policy for the task.* `Fixed` - The enum specifies the option as Fixed where the task retry happens after fixed time specified by RetryDelay. 
+  + `starts_workflow`:(bool)(ReadOnly) Set to true if the task implementation starts another workfow as part of the execution. 
   + `support_status`:(string) Supported status of the definition.* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added. 
   + `timeout`:(int) The timeout value in seconds after which task will be marked as timed out. Max allowed value is 7 days. 
   + `timeout_policy`:(string) The timeout policy for the task.* `Timeout` - The enum specifies the option as Timeout where task will be timed out after the specified time in Timeout property.* `Retry` - The enum specifies the option as Retry where task will be re-tried. 

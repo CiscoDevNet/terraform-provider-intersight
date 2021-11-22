@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Answers** | Pointer to [**NullableOsAnswers**](OsAnswers.md) |  | [optional] 
 **ErrorMsgs** | Pointer to **[]string** |  | [optional] 
 **InstallTarget** | Pointer to **string** | The target in which OS installation triggered, the value represented is StorageControllerID follwed by PhysicalDisk SerialNumber in case of Physcial disk or VirtualDriveId for virtual drive. | [optional] [readonly] 
+**OperatingSystemParameters** | Pointer to [**NullableOsOperatingSystemParameters**](OsOperatingSystemParameters.md) |  | [optional] 
 **ProcessedInstallTarget** | Pointer to [**NullableOsInstallTarget**](OsInstallTarget.md) |  | [optional] 
 **SerialNumber** | Pointer to **string** | The Serial Number of the server. | [optional] [readonly] 
 
@@ -202,6 +203,41 @@ SetInstallTarget sets InstallTarget field to given value.
 
 HasInstallTarget returns a boolean if a field has been set.
 
+### GetOperatingSystemParameters
+
+`func (o *OsServerConfigAllOf) GetOperatingSystemParameters() OsOperatingSystemParameters`
+
+GetOperatingSystemParameters returns the OperatingSystemParameters field if non-nil, zero value otherwise.
+
+### GetOperatingSystemParametersOk
+
+`func (o *OsServerConfigAllOf) GetOperatingSystemParametersOk() (*OsOperatingSystemParameters, bool)`
+
+GetOperatingSystemParametersOk returns a tuple with the OperatingSystemParameters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperatingSystemParameters
+
+`func (o *OsServerConfigAllOf) SetOperatingSystemParameters(v OsOperatingSystemParameters)`
+
+SetOperatingSystemParameters sets OperatingSystemParameters field to given value.
+
+### HasOperatingSystemParameters
+
+`func (o *OsServerConfigAllOf) HasOperatingSystemParameters() bool`
+
+HasOperatingSystemParameters returns a boolean if a field has been set.
+
+### SetOperatingSystemParametersNil
+
+`func (o *OsServerConfigAllOf) SetOperatingSystemParametersNil(b bool)`
+
+ SetOperatingSystemParametersNil sets the value for OperatingSystemParameters to be an explicit nil
+
+### UnsetOperatingSystemParameters
+`func (o *OsServerConfigAllOf) UnsetOperatingSystemParameters()`
+
+UnsetOperatingSystemParameters ensures that no value is present for OperatingSystemParameters, not even an explicit nil
 ### GetProcessedInstallTarget
 
 `func (o *OsServerConfigAllOf) GetProcessedInstallTarget() OsInstallTarget`

@@ -700,6 +700,11 @@ func dataSourceWorkflowTaskDefinition() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"starts_workflow": {
+						Description: "Set to true if the task implementation starts another workfow as part of the execution.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"support_status": {
 						Description: "Supported status of the definition.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
 						Type:        schema.TypeString,
@@ -1643,6 +1648,11 @@ func dataSourceWorkflowTaskDefinition() *schema.Resource {
 					"retry_policy": {
 						Description: "The retry policy for the task.\n* `Fixed` - The enum specifies the option as Fixed where the task retry happens after fixed time specified by RetryDelay.",
 						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"starts_workflow": {
+						Description: "Set to true if the task implementation starts another workfow as part of the execution.",
+						Type:        schema.TypeBool,
 						Optional:    true,
 					},
 					"support_status": {

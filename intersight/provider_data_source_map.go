@@ -93,6 +93,7 @@ func GetDataSourceMapping() map[string]*schema.Resource {
 		"intersight_capability_port_group_aggregation_def":                   dataSourceCapabilityPortGroupAggregationDef(),
 		"intersight_capability_psu_descriptor":                               dataSourceCapabilityPsuDescriptor(),
 		"intersight_capability_psu_manufacturing_def":                        dataSourceCapabilityPsuManufacturingDef(),
+		"intersight_capability_server_models_capability_def":                 dataSourceCapabilityServerModelsCapabilityDef(),
 		"intersight_capability_server_schema_descriptor":                     dataSourceCapabilityServerSchemaDescriptor(),
 		"intersight_capability_sioc_module_capability_def":                   dataSourceCapabilitySiocModuleCapabilityDef(),
 		"intersight_capability_sioc_module_descriptor":                       dataSourceCapabilitySiocModuleDescriptor(),

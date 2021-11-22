@@ -344,6 +344,55 @@ func resourceFirmwareUpgrade() *schema.Resource {
 				},
 				ForceNew: true,
 			},
+			"include_component_list": {
+				Description: "The components which are not to be excluded for server firmware upgrade.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+							ForceNew:         true,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "firmware.IncludeComponentListType",
+							ForceNew:    true,
+						},
+						"include_local_disk_list": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString}, ForceNew: true,
+						},
+						"include_storage_controller_list": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Schema{
+								Type: schema.TypeString}, ForceNew: true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "firmware.IncludeComponentListType",
+							ForceNew:    true,
+						},
+					},
+				},
+				ForceNew: true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -1300,6 +1349,65 @@ func resourceFirmwareUpgradeCreate(c context.Context, d *schema.ResourceData, me
 		}
 	}
 
+	if v, ok := d.GetOk("include_component_list"); ok {
+		p := make([]models.FirmwareIncludeComponentListType, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewFirmwareIncludeComponentListTypeWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("firmware.IncludeComponentListType")
+			if v, ok := l["include_local_disk_list"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetIncludeLocalDiskList(x)
+					}
+				}
+			}
+			if v, ok := l["include_storage_controller_list"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetIncludeStorageControllerList(x)
+					}
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIncludeComponentList(x)
+		}
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -1708,6 +1816,10 @@ func resourceFirmwareUpgradeRead(c context.Context, d *schema.ResourceData, meta
 
 	if err := d.Set("file_server", flattenMapSoftwarerepositoryFileServer(s.GetFileServer(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property FileServer in FirmwareUpgrade object: %s", err.Error())
+	}
+
+	if err := d.Set("include_component_list", flattenMapFirmwareIncludeComponentListType(s.GetIncludeComponentList(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property IncludeComponentList in FirmwareUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
