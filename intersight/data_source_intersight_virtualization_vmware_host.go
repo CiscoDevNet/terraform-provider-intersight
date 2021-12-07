@@ -233,6 +233,11 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 				},
 			},
 		},
+		"dc_inv_path": {
+			Description: "This field stores the inventory path of a datacenter. Used in host maintenance action.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"distributed_networks": {
 			Description: "An array of relationships to virtualizationVmwareDistributedNetwork resources.",
 			Type:        schema.TypeList,
@@ -301,6 +306,11 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 				},
 			},
 		},
+		"dns_servers": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -396,6 +406,11 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_ssh_enabled": {
+			Description: "True if SSH is enabled in the host, false otherwise.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"maintenance_mode": {
 			Description: "Is this host in maintenance mode. Set to true or false.",
 			Type:        schema.TypeBool,
@@ -466,6 +481,11 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"ntp_servers": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -782,6 +802,11 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 					},
 				},
 			},
+		},
+		"time_zone": {
+			Description: "Time zone this host is in.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"up_time": {
 			Description: "The uptime of the host, stored as Duration (from w3c).",
@@ -1130,6 +1155,11 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 				},
 			},
 		},
+		"dc_inv_path": {
+			Description: "This field stores the inventory path of a datacenter. Used in host maintenance action.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"distributed_networks": {
 			Description: "An array of relationships to virtualizationVmwareDistributedNetwork resources.",
 			Type:        schema.TypeList,
@@ -1198,6 +1228,11 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 				},
 			},
 		},
+		"dns_servers": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -1293,6 +1328,11 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_ssh_enabled": {
+			Description: "True if SSH is enabled in the host, false otherwise.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"maintenance_mode": {
 			Description: "Is this host in maintenance mode. Set to true or false.",
 			Type:        schema.TypeBool,
@@ -1363,6 +1403,11 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"ntp_servers": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -1679,6 +1724,11 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 					},
 				},
 			},
+		},
+		"time_zone": {
+			Description: "Time zone this host is in.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"up_time": {
 			Description: "The uptime of the host, stored as Duration (from w3c).",
@@ -2086,6 +2136,11 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 		o.SetDatastores(x)
 	}
 
+	if v, ok := d.GetOk("dc_inv_path"); ok {
+		x := (v.(string))
+		o.SetDcInvPath(x)
+	}
+
 	if v, ok := d.GetOk("distributed_networks"); ok {
 		x := make([]models.VirtualizationVmwareDistributedNetworkRelationship, 0)
 		s := v.([]interface{})
@@ -2164,6 +2219,17 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 			x = append(x, models.MoMoRefAsVirtualizationVmwareDistributedSwitchRelationship(o))
 		}
 		o.SetDistributedSwitches(x)
+	}
+
+	if v, ok := d.GetOk("dns_servers"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetDnsServers(x)
 	}
 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
@@ -2278,6 +2344,11 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 		o.SetIdentity(x)
 	}
 
+	if v, ok := d.GetOkExists("is_ssh_enabled"); ok {
+		x := (v.(bool))
+		o.SetIsSshEnabled(x)
+	}
+
 	if v, ok := d.GetOkExists("maintenance_mode"); ok {
 		x := (v.(bool))
 		o.SetMaintenanceMode(x)
@@ -2355,6 +2426,17 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOkExists("network_adapter_count"); ok {
 		x := int64(v.(int))
 		o.SetNetworkAdapterCount(x)
+	}
+
+	if v, ok := d.GetOk("ntp_servers"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetNtpServers(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -2748,6 +2830,11 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("time_zone"); ok {
+		x := (v.(string))
+		o.SetTimeZone(x)
+	}
+
 	if v, ok := d.GetOk("up_time"); ok {
 		x := (v.(string))
 		o.SetUpTime(x)
@@ -2896,10 +2983,12 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 				temp["datacenter"] = flattenMapVirtualizationVmwareDatacenterRelationship(s.GetDatacenter(), d)
 
 				temp["datastores"] = flattenListVirtualizationVmwareDatastoreRelationship(s.GetDatastores(), d)
+				temp["dc_inv_path"] = (s.GetDcInvPath())
 
 				temp["distributed_networks"] = flattenListVirtualizationVmwareDistributedNetworkRelationship(s.GetDistributedNetworks(), d)
 
 				temp["distributed_switches"] = flattenListVirtualizationVmwareDistributedSwitchRelationship(s.GetDistributedSwitches(), d)
+				temp["dns_servers"] = (s.GetDnsServers())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["hardware_info"] = flattenMapInfraHardwareInfo(s.GetHardwareInfo(), d)
@@ -2908,6 +2997,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 				temp["hyper_flex_node"] = flattenMapHyperflexNodeRelationship(s.GetHyperFlexNode(), d)
 				temp["hypervisor_type"] = (s.GetHypervisorType())
 				temp["identity"] = (s.GetIdentity())
+				temp["is_ssh_enabled"] = (s.GetIsSshEnabled())
 				temp["maintenance_mode"] = (s.GetMaintenanceMode())
 
 				temp["memory_capacity"] = flattenMapVirtualizationMemoryCapacity(s.GetMemoryCapacity(), d)
@@ -2917,6 +3007,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
 				temp["network_adapter_count"] = (s.GetNetworkAdapterCount())
+				temp["ntp_servers"] = (s.GetNtpServers())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 
@@ -2939,6 +3030,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 				temp["storage_adapter_count"] = (s.GetStorageAdapterCount())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["time_zone"] = (s.GetTimeZone())
 				temp["up_time"] = (s.GetUpTime())
 				temp["uuid"] = (s.GetUuid())
 				temp["vcenter_host_id"] = (s.GetVcenterHostId())

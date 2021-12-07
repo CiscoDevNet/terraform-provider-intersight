@@ -440,7 +440,7 @@ func dataSourceVncConsole() *schema.Resource {
 			},
 		},
 		"virtual_machine": {
-			Description: "A reference to a hyperflexHxapVirtualMachine resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Description: "A reference to a virtualizationIweVirtualMachine resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -900,7 +900,7 @@ func dataSourceVncConsole() *schema.Resource {
 			},
 		},
 		"virtual_machine": {
-			Description: "A reference to a hyperflexHxapVirtualMachine resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Description: "A reference to a virtualizationIweVirtualMachine resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -1406,7 +1406,7 @@ func dataSourceVncConsoleRead(c context.Context, d *schema.ResourceData, meta in
 	}
 
 	if v, ok := d.GetOk("virtual_machine"); ok {
-		p := make([]models.HyperflexHxapVirtualMachineRelationship, 0, 1)
+		p := make([]models.VirtualizationIweVirtualMachineRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -1440,7 +1440,7 @@ func dataSourceVncConsoleRead(c context.Context, d *schema.ResourceData, meta in
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsHyperflexHxapVirtualMachineRelationship(o))
+			p = append(p, models.MoMoRefAsVirtualizationIweVirtualMachineRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
@@ -1521,7 +1521,7 @@ func dataSourceVncConsoleRead(c context.Context, d *schema.ResourceData, meta in
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 
-				temp["virtual_machine"] = flattenMapHyperflexHxapVirtualMachineRelationship(s.GetVirtualMachine(), d)
+				temp["virtual_machine"] = flattenMapVirtualizationIweVirtualMachineRelationship(s.GetVirtualMachine(), d)
 				vncConsoleResults[j] = temp
 				j += 1
 			}

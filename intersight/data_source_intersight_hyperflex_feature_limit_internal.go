@@ -142,7 +142,7 @@ func dataSourceHyperflexFeatureLimitInternal() *schema.Resource {
 									Optional:    true,
 								},
 								"deployment_type": {
-									Description: "The deployment type of the cluster.\n* `NA` - The deployment type of the HyperFlex cluster is not available.\n* `Datacenter` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes on the same site.\n* `Stretched Cluster` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes across different sites.\n* `Edge` - The deployment type of a HyperFlex cluster consisting of 2 or more standalone nodes.",
+									Description: "The deployment type of the cluster.\n* `NA` - The deployment type of the cluster is not available.\n* `Datacenter` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes on the same site.\n* `Stretched Cluster` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes across different sites.\n* `Edge` - The deployment type of a cluster consisting of 2 or more standalone nodes.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -545,7 +545,7 @@ func dataSourceHyperflexFeatureLimitInternal() *schema.Resource {
 									Optional:    true,
 								},
 								"deployment_type": {
-									Description: "The deployment type of the cluster.\n* `NA` - The deployment type of the HyperFlex cluster is not available.\n* `Datacenter` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes on the same site.\n* `Stretched Cluster` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes across different sites.\n* `Edge` - The deployment type of a HyperFlex cluster consisting of 2 or more standalone nodes.",
+									Description: "The deployment type of the cluster.\n* `NA` - The deployment type of the cluster is not available.\n* `Datacenter` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes on the same site.\n* `Stretched Cluster` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes across different sites.\n* `Edge` - The deployment type of a cluster consisting of 2 or more standalone nodes.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},

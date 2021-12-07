@@ -6,9 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.Host"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.Host"]
-**Action** | Pointer to **string** | Action to be performed on a host (Create, PowerState, Migrate, Clone etc). * &#x60;None&#x60; - A place holder for the default value. * &#x60;PowerOffStorageController&#x60; - Power off HyperFlex storage controller node running on selected hypervisor host. * &#x60;PowerOnStorageController&#x60; - Power on HyperFlex storage controller node running on selected hypervisor host. | [optional] [default to "None"]
+**Action** | Pointer to **string** | Action to be performed on a host (Create, PowerState, Migrate, Clone etc). * &#x60;None&#x60; - A place holder for the default value. * &#x60;EnterMaintenanceMode&#x60; - Put a host into maintenance mode. * &#x60;ExitMaintenanceMode&#x60; - Put a host into active mode. * &#x60;PowerOffStorageController&#x60; - Power off HyperFlex storage controller node running on selected hypervisor host. * &#x60;PowerOnStorageController&#x60; - Power on HyperFlex storage controller node running on selected hypervisor host. | [optional] [default to "None"]
+**Discovered** | Pointer to **bool** | Flag to indicate whether the configuration is created from inventory object. | [optional] [readonly] 
+**Evacuate** | Pointer to **bool** | If true, move powered-off and suspended virtual machines to other hosts in the cluster. | [optional] 
+**HostConfig** | Pointer to [**NullableVirtualizationBaseHostConfiguration**](VirtualizationBaseHostConfiguration.md) |  | [optional] 
 **HypervisorType** | Pointer to **string** | Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * &#x60;IWE&#x60; - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [readonly] [default to "ESXi"]
 **Identity** | Pointer to **string** | Unique identifier assigned to the hypervisor host. | [optional] [readonly] 
+**MaintenanceState** | Pointer to **string** | Expected state of host (enter maintenance, exit maintenance). * &#x60;None&#x60; - A place holder for the default value. * &#x60;Enter&#x60; - Power action is performed on the virtual machine. * &#x60;Exit&#x60; - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor. | [optional] [default to "None"]
 **Model** | Pointer to **string** | Commercial model information about this hardware. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the hypervisor host. It must be unique within the target endpoint. | [optional] [readonly] 
 **Serial** | Pointer to **string** | Serial number of this host (internally generated). | [optional] [readonly] 
@@ -101,6 +105,91 @@ SetAction sets Action field to given value.
 
 HasAction returns a boolean if a field has been set.
 
+### GetDiscovered
+
+`func (o *VirtualizationHostAllOf) GetDiscovered() bool`
+
+GetDiscovered returns the Discovered field if non-nil, zero value otherwise.
+
+### GetDiscoveredOk
+
+`func (o *VirtualizationHostAllOf) GetDiscoveredOk() (*bool, bool)`
+
+GetDiscoveredOk returns a tuple with the Discovered field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiscovered
+
+`func (o *VirtualizationHostAllOf) SetDiscovered(v bool)`
+
+SetDiscovered sets Discovered field to given value.
+
+### HasDiscovered
+
+`func (o *VirtualizationHostAllOf) HasDiscovered() bool`
+
+HasDiscovered returns a boolean if a field has been set.
+
+### GetEvacuate
+
+`func (o *VirtualizationHostAllOf) GetEvacuate() bool`
+
+GetEvacuate returns the Evacuate field if non-nil, zero value otherwise.
+
+### GetEvacuateOk
+
+`func (o *VirtualizationHostAllOf) GetEvacuateOk() (*bool, bool)`
+
+GetEvacuateOk returns a tuple with the Evacuate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvacuate
+
+`func (o *VirtualizationHostAllOf) SetEvacuate(v bool)`
+
+SetEvacuate sets Evacuate field to given value.
+
+### HasEvacuate
+
+`func (o *VirtualizationHostAllOf) HasEvacuate() bool`
+
+HasEvacuate returns a boolean if a field has been set.
+
+### GetHostConfig
+
+`func (o *VirtualizationHostAllOf) GetHostConfig() VirtualizationBaseHostConfiguration`
+
+GetHostConfig returns the HostConfig field if non-nil, zero value otherwise.
+
+### GetHostConfigOk
+
+`func (o *VirtualizationHostAllOf) GetHostConfigOk() (*VirtualizationBaseHostConfiguration, bool)`
+
+GetHostConfigOk returns a tuple with the HostConfig field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHostConfig
+
+`func (o *VirtualizationHostAllOf) SetHostConfig(v VirtualizationBaseHostConfiguration)`
+
+SetHostConfig sets HostConfig field to given value.
+
+### HasHostConfig
+
+`func (o *VirtualizationHostAllOf) HasHostConfig() bool`
+
+HasHostConfig returns a boolean if a field has been set.
+
+### SetHostConfigNil
+
+`func (o *VirtualizationHostAllOf) SetHostConfigNil(b bool)`
+
+ SetHostConfigNil sets the value for HostConfig to be an explicit nil
+
+### UnsetHostConfig
+`func (o *VirtualizationHostAllOf) UnsetHostConfig()`
+
+UnsetHostConfig ensures that no value is present for HostConfig, not even an explicit nil
 ### GetHypervisorType
 
 `func (o *VirtualizationHostAllOf) GetHypervisorType() string`
@@ -150,6 +239,31 @@ SetIdentity sets Identity field to given value.
 `func (o *VirtualizationHostAllOf) HasIdentity() bool`
 
 HasIdentity returns a boolean if a field has been set.
+
+### GetMaintenanceState
+
+`func (o *VirtualizationHostAllOf) GetMaintenanceState() string`
+
+GetMaintenanceState returns the MaintenanceState field if non-nil, zero value otherwise.
+
+### GetMaintenanceStateOk
+
+`func (o *VirtualizationHostAllOf) GetMaintenanceStateOk() (*string, bool)`
+
+GetMaintenanceStateOk returns a tuple with the MaintenanceState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaintenanceState
+
+`func (o *VirtualizationHostAllOf) SetMaintenanceState(v string)`
+
+SetMaintenanceState sets MaintenanceState field to given value.
+
+### HasMaintenanceState
+
+`func (o *VirtualizationHostAllOf) HasMaintenanceState() bool`
+
+HasMaintenanceState returns a boolean if a field has been set.
 
 ### GetModel
 

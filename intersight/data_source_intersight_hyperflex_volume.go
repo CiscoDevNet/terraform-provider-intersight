@@ -124,8 +124,8 @@ func dataSourceHyperflexVolume() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"hxap_virtual_disk": {
-			Description: "A reference to a hyperflexHxapVirtualDisk resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		"iwe_virtual_disk": {
+			Description: "A reference to a virtualizationIweVirtualDisk resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -639,8 +639,8 @@ func dataSourceHyperflexVolume() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"hxap_virtual_disk": {
-			Description: "A reference to a hyperflexHxapVirtualDisk resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		"iwe_virtual_disk": {
+			Description: "A reference to a virtualizationIweVirtualDisk resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -1188,8 +1188,8 @@ func dataSourceHyperflexVolumeRead(c context.Context, d *schema.ResourceData, me
 		o.SetDomainGroupMoid(x)
 	}
 
-	if v, ok := d.GetOk("hxap_virtual_disk"); ok {
-		p := make([]models.HyperflexHxapVirtualDiskRelationship, 0, 1)
+	if v, ok := d.GetOk("iwe_virtual_disk"); ok {
+		p := make([]models.VirtualizationIweVirtualDiskRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -1223,11 +1223,11 @@ func dataSourceHyperflexVolumeRead(c context.Context, d *schema.ResourceData, me
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsHyperflexHxapVirtualDiskRelationship(o))
+			p = append(p, models.MoMoRefAsVirtualizationIweVirtualDiskRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
-			o.SetHxapVirtualDisk(x)
+			o.SetIweVirtualDisk(x)
 		}
 	}
 
@@ -1636,7 +1636,7 @@ func dataSourceHyperflexVolumeRead(c context.Context, d *schema.ResourceData, me
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
-				temp["hxap_virtual_disk"] = flattenMapHyperflexHxapVirtualDiskRelationship(s.GetHxapVirtualDisk(), d)
+				temp["iwe_virtual_disk"] = flattenMapVirtualizationIweVirtualDiskRelationship(s.GetIweVirtualDisk(), d)
 				temp["kubernetes_cluster_name"] = (s.GetKubernetesClusterName())
 
 				temp["last_modified_time"] = (s.GetLastModifiedTime()).String()

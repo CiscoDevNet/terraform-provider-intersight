@@ -343,6 +343,11 @@ func dataSourceVirtualizationVmwareKernelNetwork() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"subnet_mask": {
+			Description: "Subnet mask of the kernel network.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -365,6 +370,11 @@ func dataSourceVirtualizationVmwareKernelNetwork() *schema.Resource {
 					},
 				},
 			},
+		},
+		"tcp_ip_stack": {
+			Description: "Type of stack for the kernel network. It can be custom, default, vMotion or provisioning.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -828,6 +838,11 @@ func dataSourceVirtualizationVmwareKernelNetwork() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"subnet_mask": {
+			Description: "Subnet mask of the kernel network.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -850,6 +865,11 @@ func dataSourceVirtualizationVmwareKernelNetwork() *schema.Resource {
 					},
 				},
 			},
+		},
+		"tcp_ip_stack": {
+			Description: "Type of stack for the kernel network. It can be custom, default, vMotion or provisioning.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -1397,6 +1417,11 @@ func dataSourceVirtualizationVmwareKernelNetworkRead(c context.Context, d *schem
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("subnet_mask"); ok {
+		x := (v.(string))
+		o.SetSubnetMask(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1428,6 +1453,11 @@ func dataSourceVirtualizationVmwareKernelNetworkRead(c context.Context, d *schem
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOk("tcp_ip_stack"); ok {
+		x := (v.(string))
+		o.SetTcpIpStack(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -1598,8 +1628,10 @@ func dataSourceVirtualizationVmwareKernelNetworkRead(c context.Context, d *schem
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["subnet_mask"] = (s.GetSubnetMask())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["tcp_ip_stack"] = (s.GetTcpIpStack())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vmotion"] = (s.GetVmotion())

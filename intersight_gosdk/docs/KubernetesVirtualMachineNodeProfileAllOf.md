@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.VirtualMachineNodeProfile"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.VirtualMachineNodeProfile"]
+**Interfaces** | Pointer to [**[]KubernetesEthernet**](KubernetesEthernet.md) |  | [optional] 
 **IpAddresses** | Pointer to [**[]IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) | An array of relationships to ippoolIpLease resources. | [optional] 
 **NodeIp** | Pointer to [**IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
 **VirtualMachine** | Pointer to [**VirtualizationVirtualMachineRelationship**](VirtualizationVirtualMachineRelationship.md) |  | [optional] 
@@ -69,6 +70,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetInterfaces
+
+`func (o *KubernetesVirtualMachineNodeProfileAllOf) GetInterfaces() []KubernetesEthernet`
+
+GetInterfaces returns the Interfaces field if non-nil, zero value otherwise.
+
+### GetInterfacesOk
+
+`func (o *KubernetesVirtualMachineNodeProfileAllOf) GetInterfacesOk() (*[]KubernetesEthernet, bool)`
+
+GetInterfacesOk returns a tuple with the Interfaces field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInterfaces
+
+`func (o *KubernetesVirtualMachineNodeProfileAllOf) SetInterfaces(v []KubernetesEthernet)`
+
+SetInterfaces sets Interfaces field to given value.
+
+### HasInterfaces
+
+`func (o *KubernetesVirtualMachineNodeProfileAllOf) HasInterfaces() bool`
+
+HasInterfaces returns a boolean if a field has been set.
+
+### SetInterfacesNil
+
+`func (o *KubernetesVirtualMachineNodeProfileAllOf) SetInterfacesNil(b bool)`
+
+ SetInterfacesNil sets the value for Interfaces to be an explicit nil
+
+### UnsetInterfaces
+`func (o *KubernetesVirtualMachineNodeProfileAllOf) UnsetInterfaces()`
+
+UnsetInterfaces ensures that no value is present for Interfaces, not even an explicit nil
 ### GetIpAddresses
 
 `func (o *KubernetesVirtualMachineNodeProfileAllOf) GetIpAddresses() []IppoolIpLeaseRelationship`

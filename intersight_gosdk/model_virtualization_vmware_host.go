@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4903
+API version: 1.0.9-4929
 Contact: intersight@cisco.com
 */
 
@@ -29,13 +29,21 @@ type VirtualizationVmwareHost struct {
 	BootTime *time.Time `json:"BootTime,omitempty"`
 	// Indicates if the host is connected to the vCenter. Values are connected, not connected.
 	ConnectionState *string `json:"ConnectionState,omitempty"`
+	// This field stores the inventory path of a datacenter. Used in host maintenance action.
+	DcInvPath  *string  `json:"DcInvPath,omitempty"`
+	DnsServers []string `json:"DnsServers,omitempty"`
 	// Is the host Powered-up or Powered-down. * `Unknown` - The entity's power state is unknown. * `PoweringOn` - The entity is powering on. * `PoweredOn` - The entity is powered on. * `PoweringOff` - The entity is powering off. * `PoweredOff` - The entity is powered down. * `StandBy` - The entity is in standby mode. * `Paused` - The entity is in pause state. * `Rebooting` - The entity reboot is in progress. * `` - The entity's power state is not available.
 	HwPowerState *string `json:"HwPowerState,omitempty"`
+	// True if SSH is enabled in the host, false otherwise.
+	IsSshEnabled *bool `json:"IsSshEnabled,omitempty"`
 	// The count of all network adapters attached to this host.
 	NetworkAdapterCount *int64                                          `json:"NetworkAdapterCount,omitempty"`
+	NtpServers          []string                                        `json:"NtpServers,omitempty"`
 	ResourceConsumed    NullableVirtualizationVmwareResourceConsumption `json:"ResourceConsumed,omitempty"`
 	// The count of all storage adapters attached to this host.
 	StorageAdapterCount *int64 `json:"StorageAdapterCount,omitempty"`
+	// Time zone this host is in.
+	TimeZone *string `json:"TimeZone,omitempty"`
 	// The identity of this host within vCenter (optional).
 	VcenterHostId *string                                     `json:"VcenterHostId,omitempty"`
 	Cluster       *VirtualizationVmwareClusterRelationship    `json:"Cluster,omitempty"`
@@ -196,6 +204,71 @@ func (o *VirtualizationVmwareHost) SetConnectionState(v string) {
 	o.ConnectionState = &v
 }
 
+// GetDcInvPath returns the DcInvPath field value if set, zero value otherwise.
+func (o *VirtualizationVmwareHost) GetDcInvPath() string {
+	if o == nil || o.DcInvPath == nil {
+		var ret string
+		return ret
+	}
+	return *o.DcInvPath
+}
+
+// GetDcInvPathOk returns a tuple with the DcInvPath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVmwareHost) GetDcInvPathOk() (*string, bool) {
+	if o == nil || o.DcInvPath == nil {
+		return nil, false
+	}
+	return o.DcInvPath, true
+}
+
+// HasDcInvPath returns a boolean if a field has been set.
+func (o *VirtualizationVmwareHost) HasDcInvPath() bool {
+	if o != nil && o.DcInvPath != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDcInvPath gets a reference to the given string and assigns it to the DcInvPath field.
+func (o *VirtualizationVmwareHost) SetDcInvPath(v string) {
+	o.DcInvPath = &v
+}
+
+// GetDnsServers returns the DnsServers field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VirtualizationVmwareHost) GetDnsServers() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.DnsServers
+}
+
+// GetDnsServersOk returns a tuple with the DnsServers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VirtualizationVmwareHost) GetDnsServersOk() (*[]string, bool) {
+	if o == nil || o.DnsServers == nil {
+		return nil, false
+	}
+	return &o.DnsServers, true
+}
+
+// HasDnsServers returns a boolean if a field has been set.
+func (o *VirtualizationVmwareHost) HasDnsServers() bool {
+	if o != nil && o.DnsServers != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDnsServers gets a reference to the given []string and assigns it to the DnsServers field.
+func (o *VirtualizationVmwareHost) SetDnsServers(v []string) {
+	o.DnsServers = v
+}
+
 // GetHwPowerState returns the HwPowerState field value if set, zero value otherwise.
 func (o *VirtualizationVmwareHost) GetHwPowerState() string {
 	if o == nil || o.HwPowerState == nil {
@@ -228,6 +301,38 @@ func (o *VirtualizationVmwareHost) SetHwPowerState(v string) {
 	o.HwPowerState = &v
 }
 
+// GetIsSshEnabled returns the IsSshEnabled field value if set, zero value otherwise.
+func (o *VirtualizationVmwareHost) GetIsSshEnabled() bool {
+	if o == nil || o.IsSshEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsSshEnabled
+}
+
+// GetIsSshEnabledOk returns a tuple with the IsSshEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVmwareHost) GetIsSshEnabledOk() (*bool, bool) {
+	if o == nil || o.IsSshEnabled == nil {
+		return nil, false
+	}
+	return o.IsSshEnabled, true
+}
+
+// HasIsSshEnabled returns a boolean if a field has been set.
+func (o *VirtualizationVmwareHost) HasIsSshEnabled() bool {
+	if o != nil && o.IsSshEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsSshEnabled gets a reference to the given bool and assigns it to the IsSshEnabled field.
+func (o *VirtualizationVmwareHost) SetIsSshEnabled(v bool) {
+	o.IsSshEnabled = &v
+}
+
 // GetNetworkAdapterCount returns the NetworkAdapterCount field value if set, zero value otherwise.
 func (o *VirtualizationVmwareHost) GetNetworkAdapterCount() int64 {
 	if o == nil || o.NetworkAdapterCount == nil {
@@ -258,6 +363,39 @@ func (o *VirtualizationVmwareHost) HasNetworkAdapterCount() bool {
 // SetNetworkAdapterCount gets a reference to the given int64 and assigns it to the NetworkAdapterCount field.
 func (o *VirtualizationVmwareHost) SetNetworkAdapterCount(v int64) {
 	o.NetworkAdapterCount = &v
+}
+
+// GetNtpServers returns the NtpServers field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VirtualizationVmwareHost) GetNtpServers() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.NtpServers
+}
+
+// GetNtpServersOk returns a tuple with the NtpServers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VirtualizationVmwareHost) GetNtpServersOk() (*[]string, bool) {
+	if o == nil || o.NtpServers == nil {
+		return nil, false
+	}
+	return &o.NtpServers, true
+}
+
+// HasNtpServers returns a boolean if a field has been set.
+func (o *VirtualizationVmwareHost) HasNtpServers() bool {
+	if o != nil && o.NtpServers != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNtpServers gets a reference to the given []string and assigns it to the NtpServers field.
+func (o *VirtualizationVmwareHost) SetNtpServers(v []string) {
+	o.NtpServers = v
 }
 
 // GetResourceConsumed returns the ResourceConsumed field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -333,6 +471,38 @@ func (o *VirtualizationVmwareHost) HasStorageAdapterCount() bool {
 // SetStorageAdapterCount gets a reference to the given int64 and assigns it to the StorageAdapterCount field.
 func (o *VirtualizationVmwareHost) SetStorageAdapterCount(v int64) {
 	o.StorageAdapterCount = &v
+}
+
+// GetTimeZone returns the TimeZone field value if set, zero value otherwise.
+func (o *VirtualizationVmwareHost) GetTimeZone() string {
+	if o == nil || o.TimeZone == nil {
+		var ret string
+		return ret
+	}
+	return *o.TimeZone
+}
+
+// GetTimeZoneOk returns a tuple with the TimeZone field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVmwareHost) GetTimeZoneOk() (*string, bool) {
+	if o == nil || o.TimeZone == nil {
+		return nil, false
+	}
+	return o.TimeZone, true
+}
+
+// HasTimeZone returns a boolean if a field has been set.
+func (o *VirtualizationVmwareHost) HasTimeZone() bool {
+	if o != nil && o.TimeZone != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeZone gets a reference to the given string and assigns it to the TimeZone field.
+func (o *VirtualizationVmwareHost) SetTimeZone(v string) {
+	o.TimeZone = &v
 }
 
 // GetVcenterHostId returns the VcenterHostId field value if set, zero value otherwise.
@@ -616,17 +786,32 @@ func (o VirtualizationVmwareHost) MarshalJSON() ([]byte, error) {
 	if o.ConnectionState != nil {
 		toSerialize["ConnectionState"] = o.ConnectionState
 	}
+	if o.DcInvPath != nil {
+		toSerialize["DcInvPath"] = o.DcInvPath
+	}
+	if o.DnsServers != nil {
+		toSerialize["DnsServers"] = o.DnsServers
+	}
 	if o.HwPowerState != nil {
 		toSerialize["HwPowerState"] = o.HwPowerState
 	}
+	if o.IsSshEnabled != nil {
+		toSerialize["IsSshEnabled"] = o.IsSshEnabled
+	}
 	if o.NetworkAdapterCount != nil {
 		toSerialize["NetworkAdapterCount"] = o.NetworkAdapterCount
+	}
+	if o.NtpServers != nil {
+		toSerialize["NtpServers"] = o.NtpServers
 	}
 	if o.ResourceConsumed.IsSet() {
 		toSerialize["ResourceConsumed"] = o.ResourceConsumed.Get()
 	}
 	if o.StorageAdapterCount != nil {
 		toSerialize["StorageAdapterCount"] = o.StorageAdapterCount
+	}
+	if o.TimeZone != nil {
+		toSerialize["TimeZone"] = o.TimeZone
 	}
 	if o.VcenterHostId != nil {
 		toSerialize["VcenterHostId"] = o.VcenterHostId
@@ -670,13 +855,21 @@ func (o *VirtualizationVmwareHost) UnmarshalJSON(bytes []byte) (err error) {
 		BootTime *time.Time `json:"BootTime,omitempty"`
 		// Indicates if the host is connected to the vCenter. Values are connected, not connected.
 		ConnectionState *string `json:"ConnectionState,omitempty"`
+		// This field stores the inventory path of a datacenter. Used in host maintenance action.
+		DcInvPath  *string  `json:"DcInvPath,omitempty"`
+		DnsServers []string `json:"DnsServers,omitempty"`
 		// Is the host Powered-up or Powered-down. * `Unknown` - The entity's power state is unknown. * `PoweringOn` - The entity is powering on. * `PoweredOn` - The entity is powered on. * `PoweringOff` - The entity is powering off. * `PoweredOff` - The entity is powered down. * `StandBy` - The entity is in standby mode. * `Paused` - The entity is in pause state. * `Rebooting` - The entity reboot is in progress. * `` - The entity's power state is not available.
 		HwPowerState *string `json:"HwPowerState,omitempty"`
+		// True if SSH is enabled in the host, false otherwise.
+		IsSshEnabled *bool `json:"IsSshEnabled,omitempty"`
 		// The count of all network adapters attached to this host.
 		NetworkAdapterCount *int64                                          `json:"NetworkAdapterCount,omitempty"`
+		NtpServers          []string                                        `json:"NtpServers,omitempty"`
 		ResourceConsumed    NullableVirtualizationVmwareResourceConsumption `json:"ResourceConsumed,omitempty"`
 		// The count of all storage adapters attached to this host.
 		StorageAdapterCount *int64 `json:"StorageAdapterCount,omitempty"`
+		// Time zone this host is in.
+		TimeZone *string `json:"TimeZone,omitempty"`
 		// The identity of this host within vCenter (optional).
 		VcenterHostId *string                                     `json:"VcenterHostId,omitempty"`
 		Cluster       *VirtualizationVmwareClusterRelationship    `json:"Cluster,omitempty"`
@@ -700,10 +893,15 @@ func (o *VirtualizationVmwareHost) UnmarshalJSON(bytes []byte) (err error) {
 		varVirtualizationVmwareHost.ObjectType = varVirtualizationVmwareHostWithoutEmbeddedStruct.ObjectType
 		varVirtualizationVmwareHost.BootTime = varVirtualizationVmwareHostWithoutEmbeddedStruct.BootTime
 		varVirtualizationVmwareHost.ConnectionState = varVirtualizationVmwareHostWithoutEmbeddedStruct.ConnectionState
+		varVirtualizationVmwareHost.DcInvPath = varVirtualizationVmwareHostWithoutEmbeddedStruct.DcInvPath
+		varVirtualizationVmwareHost.DnsServers = varVirtualizationVmwareHostWithoutEmbeddedStruct.DnsServers
 		varVirtualizationVmwareHost.HwPowerState = varVirtualizationVmwareHostWithoutEmbeddedStruct.HwPowerState
+		varVirtualizationVmwareHost.IsSshEnabled = varVirtualizationVmwareHostWithoutEmbeddedStruct.IsSshEnabled
 		varVirtualizationVmwareHost.NetworkAdapterCount = varVirtualizationVmwareHostWithoutEmbeddedStruct.NetworkAdapterCount
+		varVirtualizationVmwareHost.NtpServers = varVirtualizationVmwareHostWithoutEmbeddedStruct.NtpServers
 		varVirtualizationVmwareHost.ResourceConsumed = varVirtualizationVmwareHostWithoutEmbeddedStruct.ResourceConsumed
 		varVirtualizationVmwareHost.StorageAdapterCount = varVirtualizationVmwareHostWithoutEmbeddedStruct.StorageAdapterCount
+		varVirtualizationVmwareHost.TimeZone = varVirtualizationVmwareHostWithoutEmbeddedStruct.TimeZone
 		varVirtualizationVmwareHost.VcenterHostId = varVirtualizationVmwareHostWithoutEmbeddedStruct.VcenterHostId
 		varVirtualizationVmwareHost.Cluster = varVirtualizationVmwareHostWithoutEmbeddedStruct.Cluster
 		varVirtualizationVmwareHost.Datacenter = varVirtualizationVmwareHostWithoutEmbeddedStruct.Datacenter
@@ -733,10 +931,15 @@ func (o *VirtualizationVmwareHost) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "BootTime")
 		delete(additionalProperties, "ConnectionState")
+		delete(additionalProperties, "DcInvPath")
+		delete(additionalProperties, "DnsServers")
 		delete(additionalProperties, "HwPowerState")
+		delete(additionalProperties, "IsSshEnabled")
 		delete(additionalProperties, "NetworkAdapterCount")
+		delete(additionalProperties, "NtpServers")
 		delete(additionalProperties, "ResourceConsumed")
 		delete(additionalProperties, "StorageAdapterCount")
+		delete(additionalProperties, "TimeZone")
 		delete(additionalProperties, "VcenterHostId")
 		delete(additionalProperties, "Cluster")
 		delete(additionalProperties, "Datacenter")

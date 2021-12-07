@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.DeviceConfiguration"]
 **LocalConfigurationLocked** | Pointer to **bool** | Specifies whether configuration through the platforms local management interface has been disabled, with only configuration through the Intersight service enabled. | [optional] 
 **LogLevel** | Pointer to **string** | The log level of the device connector service. | [optional] 
+**TunneledKvm** | Pointer to **bool** | Specifies whether Tunneled vKVM is enabled on the device connector. | [optional] 
 **Device** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -118,6 +119,31 @@ SetLogLevel sets LogLevel field to given value.
 `func (o *AssetDeviceConfigurationAllOf) HasLogLevel() bool`
 
 HasLogLevel returns a boolean if a field has been set.
+
+### GetTunneledKvm
+
+`func (o *AssetDeviceConfigurationAllOf) GetTunneledKvm() bool`
+
+GetTunneledKvm returns the TunneledKvm field if non-nil, zero value otherwise.
+
+### GetTunneledKvmOk
+
+`func (o *AssetDeviceConfigurationAllOf) GetTunneledKvmOk() (*bool, bool)`
+
+GetTunneledKvmOk returns a tuple with the TunneledKvm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTunneledKvm
+
+`func (o *AssetDeviceConfigurationAllOf) SetTunneledKvm(v bool)`
+
+SetTunneledKvm sets TunneledKvm field to given value.
+
+### HasTunneledKvm
+
+`func (o *AssetDeviceConfigurationAllOf) HasTunneledKvm() bool`
+
+HasTunneledKvm returns a boolean if a field has been set.
 
 ### GetDevice
 

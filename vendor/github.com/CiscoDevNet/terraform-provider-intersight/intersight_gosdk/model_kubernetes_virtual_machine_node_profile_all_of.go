@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4903
+API version: 1.0.9-4929
 Contact: intersight@cisco.com
 */
 
@@ -20,8 +20,10 @@ type KubernetesVirtualMachineNodeProfileAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType string               `json:"ObjectType"`
+	Interfaces []KubernetesEthernet `json:"Interfaces,omitempty"`
 	// An array of relationships to ippoolIpLease resources.
+	// Deprecated
 	IpAddresses          []IppoolIpLeaseRelationship               `json:"IpAddresses,omitempty"`
 	NodeIp               *IppoolIpLeaseRelationship                `json:"NodeIp,omitempty"`
 	VirtualMachine       *VirtualizationVirtualMachineRelationship `json:"VirtualMachine,omitempty"`
@@ -101,7 +103,41 @@ func (o *KubernetesVirtualMachineNodeProfileAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetInterfaces returns the Interfaces field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *KubernetesVirtualMachineNodeProfileAllOf) GetInterfaces() []KubernetesEthernet {
+	if o == nil {
+		var ret []KubernetesEthernet
+		return ret
+	}
+	return o.Interfaces
+}
+
+// GetInterfacesOk returns a tuple with the Interfaces field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *KubernetesVirtualMachineNodeProfileAllOf) GetInterfacesOk() (*[]KubernetesEthernet, bool) {
+	if o == nil || o.Interfaces == nil {
+		return nil, false
+	}
+	return &o.Interfaces, true
+}
+
+// HasInterfaces returns a boolean if a field has been set.
+func (o *KubernetesVirtualMachineNodeProfileAllOf) HasInterfaces() bool {
+	if o != nil && o.Interfaces != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInterfaces gets a reference to the given []KubernetesEthernet and assigns it to the Interfaces field.
+func (o *KubernetesVirtualMachineNodeProfileAllOf) SetInterfaces(v []KubernetesEthernet) {
+	o.Interfaces = v
+}
+
 // GetIpAddresses returns the IpAddresses field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *KubernetesVirtualMachineNodeProfileAllOf) GetIpAddresses() []IppoolIpLeaseRelationship {
 	if o == nil {
 		var ret []IppoolIpLeaseRelationship
@@ -113,6 +149,7 @@ func (o *KubernetesVirtualMachineNodeProfileAllOf) GetIpAddresses() []IppoolIpLe
 // GetIpAddressesOk returns a tuple with the IpAddresses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *KubernetesVirtualMachineNodeProfileAllOf) GetIpAddressesOk() (*[]IppoolIpLeaseRelationship, bool) {
 	if o == nil || o.IpAddresses == nil {
 		return nil, false
@@ -130,6 +167,7 @@ func (o *KubernetesVirtualMachineNodeProfileAllOf) HasIpAddresses() bool {
 }
 
 // SetIpAddresses gets a reference to the given []IppoolIpLeaseRelationship and assigns it to the IpAddresses field.
+// Deprecated
 func (o *KubernetesVirtualMachineNodeProfileAllOf) SetIpAddresses(v []IppoolIpLeaseRelationship) {
 	o.IpAddresses = v
 }
@@ -206,6 +244,9 @@ func (o KubernetesVirtualMachineNodeProfileAllOf) MarshalJSON() ([]byte, error) 
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.Interfaces != nil {
+		toSerialize["Interfaces"] = o.Interfaces
+	}
 	if o.IpAddresses != nil {
 		toSerialize["IpAddresses"] = o.IpAddresses
 	}
@@ -235,6 +276,7 @@ func (o *KubernetesVirtualMachineNodeProfileAllOf) UnmarshalJSON(bytes []byte) (
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Interfaces")
 		delete(additionalProperties, "IpAddresses")
 		delete(additionalProperties, "NodeIp")
 		delete(additionalProperties, "VirtualMachine")

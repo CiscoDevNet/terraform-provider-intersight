@@ -21,7 +21,7 @@ func dataSourceVirtualizationHost() *schema.Resource {
 		Optional:    true,
 	},
 		"action": {
-			Description: "Action to be performed on a host (Create, PowerState, Migrate, Clone etc).\n* `None` - A place holder for the default value.\n* `PowerOffStorageController` - Power off HyperFlex storage controller node running on selected hypervisor host.\n* `PowerOnStorageController` - Power on HyperFlex storage controller node running on selected hypervisor host.",
+			Description: "Action to be performed on a host (Create, PowerState, Migrate, Clone etc).\n* `None` - A place holder for the default value.\n* `EnterMaintenanceMode` - Put a host into maintenance mode.\n* `ExitMaintenanceMode` - Put a host into active mode.\n* `PowerOffStorageController` - Power off HyperFlex storage controller node running on selected hypervisor host.\n* `PowerOnStorageController` - Power on HyperFlex storage controller node running on selected hypervisor host.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -74,10 +74,45 @@ func dataSourceVirtualizationHost() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"discovered": {
+			Description: "Flag to indicate whether the configuration is created from inventory object.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"evacuate": {
+			Description: "If true, move powered-off and suspended virtual machines to other hosts in the cluster.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"host_config": {
+			Description: "Virtual machine configuration to provision.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"hypervisor_type": {
 			Description: "Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
@@ -123,6 +158,11 @@ func dataSourceVirtualizationHost() *schema.Resource {
 					},
 				},
 			},
+		},
+		"maintenance_state": {
+			Description: "Expected state of host (enter maintenance, exit maintenance).\n* `None` - A place holder for the default value.\n* `Enter` - Power action is performed on the virtual machine.\n* `Exit` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -446,7 +486,7 @@ func dataSourceVirtualizationHost() *schema.Resource {
 		Optional:    true,
 	},
 		"action": {
-			Description: "Action to be performed on a host (Create, PowerState, Migrate, Clone etc).\n* `None` - A place holder for the default value.\n* `PowerOffStorageController` - Power off HyperFlex storage controller node running on selected hypervisor host.\n* `PowerOnStorageController` - Power on HyperFlex storage controller node running on selected hypervisor host.",
+			Description: "Action to be performed on a host (Create, PowerState, Migrate, Clone etc).\n* `None` - A place holder for the default value.\n* `EnterMaintenanceMode` - Put a host into maintenance mode.\n* `ExitMaintenanceMode` - Put a host into active mode.\n* `PowerOffStorageController` - Power off HyperFlex storage controller node running on selected hypervisor host.\n* `PowerOnStorageController` - Power on HyperFlex storage controller node running on selected hypervisor host.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -499,10 +539,45 @@ func dataSourceVirtualizationHost() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"discovered": {
+			Description: "Flag to indicate whether the configuration is created from inventory object.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"evacuate": {
+			Description: "If true, move powered-off and suspended virtual machines to other hosts in the cluster.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"host_config": {
+			Description: "Virtual machine configuration to provision.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"hypervisor_type": {
 			Description: "Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
@@ -548,6 +623,11 @@ func dataSourceVirtualizationHost() *schema.Resource {
 					},
 				},
 			},
+		},
+		"maintenance_state": {
+			Description: "Expected state of host (enter maintenance, exit maintenance).\n* `None` - A place holder for the default value.\n* `Enter` - Power action is performed on the virtual machine.\n* `Exit` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
@@ -950,9 +1030,50 @@ func dataSourceVirtualizationHostRead(c context.Context, d *schema.ResourceData,
 		o.SetCreateTime(x)
 	}
 
+	if v, ok := d.GetOkExists("discovered"); ok {
+		x := (v.(bool))
+		o.SetDiscovered(x)
+	}
+
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("evacuate"); ok {
+		x := (v.(bool))
+		o.SetEvacuate(x)
+	}
+
+	if v, ok := d.GetOk("host_config"); ok {
+		p := make([]models.VirtualizationBaseHostConfiguration, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.VirtualizationBaseHostConfiguration{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("virtualization.BaseHostConfiguration")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetHostConfig(x)
+		}
 	}
 
 	if v, ok := d.GetOk("hypervisor_type"); ok {
@@ -1006,6 +1127,11 @@ func dataSourceVirtualizationHostRead(c context.Context, d *schema.ResourceData,
 			x := p[0]
 			o.SetInventory(x)
 		}
+	}
+
+	if v, ok := d.GetOk("maintenance_state"); ok {
+		x := (v.(string))
+		o.SetMaintenanceState(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -1379,11 +1505,16 @@ func dataSourceVirtualizationHostRead(c context.Context, d *schema.ResourceData,
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["discovered"] = (s.GetDiscovered())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["evacuate"] = (s.GetEvacuate())
+
+				temp["host_config"] = flattenMapVirtualizationBaseHostConfiguration(s.GetHostConfig(), d)
 				temp["hypervisor_type"] = (s.GetHypervisorType())
 				temp["identity"] = (s.GetIdentity())
 
 				temp["inventory"] = flattenMapVirtualizationBaseHostRelationship(s.GetInventory(), d)
+				temp["maintenance_state"] = (s.GetMaintenanceState())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())

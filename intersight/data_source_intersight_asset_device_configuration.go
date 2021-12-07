@@ -236,6 +236,11 @@ func dataSourceAssetDeviceConfiguration() *schema.Resource {
 				},
 			},
 		},
+		"tunneled_kvm": {
+			Description: "Specifies whether Tunneled vKVM is enabled on the device connector.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -565,6 +570,11 @@ func dataSourceAssetDeviceConfiguration() *schema.Resource {
 					},
 				},
 			},
+		},
+		"tunneled_kvm": {
+			Description: "Specifies whether Tunneled vKVM is enabled on the device connector.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -960,6 +970,11 @@ func dataSourceAssetDeviceConfigurationRead(c context.Context, d *schema.Resourc
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOkExists("tunneled_kvm"); ok {
+		x := (v.(bool))
+		o.SetTunneledKvm(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1094,6 +1109,7 @@ func dataSourceAssetDeviceConfigurationRead(c context.Context, d *schema.Resourc
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["tunneled_kvm"] = (s.GetTunneledKvm())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				assetDeviceConfigurationResults[j] = temp

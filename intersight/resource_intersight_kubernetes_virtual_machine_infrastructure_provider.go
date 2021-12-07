@@ -122,6 +122,126 @@ func resourceKubernetesVirtualMachineInfrastructureProvider() *schema.Resource {
 							Computed:   true,
 							Elem: &schema.Schema{
 								Type: schema.TypeString}},
+						"network_interfaces": {
+							Type:       schema.TypeList,
+							Optional:   true,
+							ConfigMode: schema.SchemaConfigModeAttr,
+							Computed:   true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "kubernetes.NetworkInterfaceSpec",
+									},
+									"mtu": {
+										Description: "The MTU for this Network Interface.  If left blank a default value will apply by the Operating System.",
+										Type:        schema.TypeInt,
+										Optional:    true,
+									},
+									"name": {
+										Description: "NetworkInterfaceSpec is the specification for network interfaces - including configuration of IP Pools and VRF to determine IP configuration, the operating system device settings, and virtual adapter network settings. It can be left empty when used with VirtualMachineInfraConfigPolicy - it will be filled out based on the hypervisor platform type and will match the naming and order of interfaces provided by the hypervisor.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "kubernetes.NetworkInterfaceSpec",
+									},
+									"pools": {
+										Type:       schema.TypeList,
+										Optional:   true,
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "mo.MoRef",
+												},
+												"moid": {
+													Description: "The Moid of the referenced REST resource.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the remote type referred by this relationship.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"selector": {
+													Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+											},
+										},
+									},
+									"provider_name": {
+										Description: "In other words, to which named network from the Instructure Provider will the port be connected.",
+										Type:        schema.TypeString,
+										Optional:    true,
+									},
+									"vrf": {
+										Description: "Allows for reusing IP Pools across disconnected L2 segments for different Kubernetes clusters within an account. If not set, the VRF named (default) will be used.",
+										Type:        schema.TypeList,
+										MaxItems:    1,
+										Optional:    true,
+										ConfigMode:  schema.SchemaConfigModeAttr,
+										Computed:    true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "mo.MoRef",
+												},
+												"moid": {
+													Description: "The Moid of the referenced REST resource.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the remote type referred by this relationship.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"selector": {
+													Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+											},
+										},
+									},
+								},
+							},
+						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
@@ -616,6 +736,142 @@ func resourceKubernetesVirtualMachineInfrastructureProviderCreate(c context.Cont
 					}
 				}
 			}
+			if v, ok := l["network_interfaces"]; ok {
+				{
+					x := make([]models.KubernetesNetworkInterfaceSpec, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewKubernetesNetworkInterfaceSpecWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("kubernetes.NetworkInterfaceSpec")
+						if v, ok := l["mtu"]; ok {
+							{
+								x := int64(v.(int))
+								o.SetMtu(x)
+							}
+						}
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["pools"]; ok {
+							{
+								x := make([]models.MoMoRef, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewMoMoRefWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("mo.MoRef")
+									if v, ok := l["moid"]; ok {
+										{
+											x := (v.(string))
+											o.SetMoid(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["selector"]; ok {
+										{
+											x := (v.(string))
+											o.SetSelector(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetPools(x)
+								}
+							}
+						}
+						if v, ok := l["provider_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetProviderName(x)
+							}
+						}
+						if v, ok := l["vrf"]; ok {
+							{
+								p := make([]models.MoMoRef, 0, 1)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									l := s[i].(map[string]interface{})
+									o := models.NewMoMoRefWithDefaults()
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("mo.MoRef")
+									if v, ok := l["moid"]; ok {
+										{
+											x := (v.(string))
+											o.SetMoid(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["selector"]; ok {
+										{
+											x := (v.(string))
+											o.SetSelector(x)
+										}
+									}
+									p = append(p, *o)
+								}
+								if len(p) > 0 {
+									x := p[0]
+									o.SetVrf(x)
+								}
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetNetworkInterfaces(x)
+					}
+				}
+			}
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1032,6 +1288,142 @@ func resourceKubernetesVirtualMachineInfrastructureProviderUpdate(c context.Cont
 					}
 					if len(x) > 0 {
 						o.SetInterfaces(x)
+					}
+				}
+			}
+			if v, ok := l["network_interfaces"]; ok {
+				{
+					x := make([]models.KubernetesNetworkInterfaceSpec, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewKubernetesNetworkInterfaceSpecWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("kubernetes.NetworkInterfaceSpec")
+						if v, ok := l["mtu"]; ok {
+							{
+								x := int64(v.(int))
+								o.SetMtu(x)
+							}
+						}
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["pools"]; ok {
+							{
+								x := make([]models.MoMoRef, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewMoMoRefWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("mo.MoRef")
+									if v, ok := l["moid"]; ok {
+										{
+											x := (v.(string))
+											o.SetMoid(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["selector"]; ok {
+										{
+											x := (v.(string))
+											o.SetSelector(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetPools(x)
+								}
+							}
+						}
+						if v, ok := l["provider_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetProviderName(x)
+							}
+						}
+						if v, ok := l["vrf"]; ok {
+							{
+								p := make([]models.MoMoRef, 0, 1)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									l := s[i].(map[string]interface{})
+									o := models.NewMoMoRefWithDefaults()
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("mo.MoRef")
+									if v, ok := l["moid"]; ok {
+										{
+											x := (v.(string))
+											o.SetMoid(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["selector"]; ok {
+										{
+											x := (v.(string))
+											o.SetSelector(x)
+										}
+									}
+									p = append(p, *o)
+								}
+								if len(p) > 0 {
+									x := p[0]
+									o.SetVrf(x)
+								}
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetNetworkInterfaces(x)
 					}
 				}
 			}

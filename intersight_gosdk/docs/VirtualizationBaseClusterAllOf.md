@@ -6,12 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**AlarmSummary** | Pointer to [**NullableCondAlarmSummary**](CondAlarmSummary.md) |  | [optional] 
 **HypervisorType** | Pointer to **string** | Identifies the broad type of the underlying hypervisor. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * &#x60;IWE&#x60; - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
-**Identity** | Pointer to **string** | The internally generated identity of this cluster. This entity is not manipulated by users. It aids in uniquely identifying the cluster object. In case of VMware, this is a MOR (managed object reference). | [optional] [readonly] 
+**Identity** | Pointer to **string** | The internally generated identity of this cluster. This entity is not manipulated by users. | [optional] 
 **MemoryCapacity** | Pointer to [**NullableVirtualizationMemoryCapacity**](VirtualizationMemoryCapacity.md) |  | [optional] 
-**Name** | Pointer to **string** | The user-provided name for this cluster to facilitate identification. | [optional] [readonly] 
 **ProcessorCapacity** | Pointer to [**NullableVirtualizationComputeCapacity**](VirtualizationComputeCapacity.md) |  | [optional] 
-**Status** | Pointer to **string** | Cluster health status as reported by the hypervisor platform. * &#x60;Unknown&#x60; - Entity status is unknown. * &#x60;Degraded&#x60; - State is degraded, and might impact normal operation of the entity. * &#x60;Critical&#x60; - Entity is in a critical state, impacting operations. * &#x60;Ok&#x60; - Entity status is in a stable state, operating normally. | [optional] [readonly] [default to "Unknown"]
 **TotalCores** | Pointer to **int64** | Total number of CPU cores in this cluster. It is a cumulative number across all hosts in the cluster. | [optional] 
 
 ## Methods
@@ -73,6 +72,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAlarmSummary
+
+`func (o *VirtualizationBaseClusterAllOf) GetAlarmSummary() CondAlarmSummary`
+
+GetAlarmSummary returns the AlarmSummary field if non-nil, zero value otherwise.
+
+### GetAlarmSummaryOk
+
+`func (o *VirtualizationBaseClusterAllOf) GetAlarmSummaryOk() (*CondAlarmSummary, bool)`
+
+GetAlarmSummaryOk returns a tuple with the AlarmSummary field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAlarmSummary
+
+`func (o *VirtualizationBaseClusterAllOf) SetAlarmSummary(v CondAlarmSummary)`
+
+SetAlarmSummary sets AlarmSummary field to given value.
+
+### HasAlarmSummary
+
+`func (o *VirtualizationBaseClusterAllOf) HasAlarmSummary() bool`
+
+HasAlarmSummary returns a boolean if a field has been set.
+
+### SetAlarmSummaryNil
+
+`func (o *VirtualizationBaseClusterAllOf) SetAlarmSummaryNil(b bool)`
+
+ SetAlarmSummaryNil sets the value for AlarmSummary to be an explicit nil
+
+### UnsetAlarmSummary
+`func (o *VirtualizationBaseClusterAllOf) UnsetAlarmSummary()`
+
+UnsetAlarmSummary ensures that no value is present for AlarmSummary, not even an explicit nil
 ### GetHypervisorType
 
 `func (o *VirtualizationBaseClusterAllOf) GetHypervisorType() string`
@@ -158,31 +192,6 @@ HasMemoryCapacity returns a boolean if a field has been set.
 `func (o *VirtualizationBaseClusterAllOf) UnsetMemoryCapacity()`
 
 UnsetMemoryCapacity ensures that no value is present for MemoryCapacity, not even an explicit nil
-### GetName
-
-`func (o *VirtualizationBaseClusterAllOf) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *VirtualizationBaseClusterAllOf) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *VirtualizationBaseClusterAllOf) SetName(v string)`
-
-SetName sets Name field to given value.
-
-### HasName
-
-`func (o *VirtualizationBaseClusterAllOf) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
 ### GetProcessorCapacity
 
 `func (o *VirtualizationBaseClusterAllOf) GetProcessorCapacity() VirtualizationComputeCapacity`
@@ -218,31 +227,6 @@ HasProcessorCapacity returns a boolean if a field has been set.
 `func (o *VirtualizationBaseClusterAllOf) UnsetProcessorCapacity()`
 
 UnsetProcessorCapacity ensures that no value is present for ProcessorCapacity, not even an explicit nil
-### GetStatus
-
-`func (o *VirtualizationBaseClusterAllOf) GetStatus() string`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *VirtualizationBaseClusterAllOf) GetStatusOk() (*string, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *VirtualizationBaseClusterAllOf) SetStatus(v string)`
-
-SetStatus sets Status field to given value.
-
-### HasStatus
-
-`func (o *VirtualizationBaseClusterAllOf) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
-
 ### GetTotalCores
 
 `func (o *VirtualizationBaseClusterAllOf) GetTotalCores() int64`

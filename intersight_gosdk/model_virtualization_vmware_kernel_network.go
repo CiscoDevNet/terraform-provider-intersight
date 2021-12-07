@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4903
+API version: 1.0.9-4929
 Contact: intersight@cisco.com
 */
 
@@ -33,6 +33,10 @@ type VirtualizationVmwareKernelNetwork struct {
 	Management *bool `json:"Management,omitempty"`
 	// Maximum transmission unit configured on a kernel network.
 	Mtu *int64 `json:"Mtu,omitempty"`
+	// Subnet mask of the kernel network.
+	SubnetMask *string `json:"SubnetMask,omitempty"`
+	// Type of stack for the kernel network. It can be custom, default, vMotion or provisioning.
+	TcpIpStack *string `json:"TcpIpStack,omitempty"`
 	// Indicates that vmotion is enabled on this kernel network.
 	Vmotion *bool `json:"Vmotion,omitempty"`
 	// Indicates that vsan traffic is enabled on this kernel network.
@@ -281,6 +285,70 @@ func (o *VirtualizationVmwareKernelNetwork) HasMtu() bool {
 // SetMtu gets a reference to the given int64 and assigns it to the Mtu field.
 func (o *VirtualizationVmwareKernelNetwork) SetMtu(v int64) {
 	o.Mtu = &v
+}
+
+// GetSubnetMask returns the SubnetMask field value if set, zero value otherwise.
+func (o *VirtualizationVmwareKernelNetwork) GetSubnetMask() string {
+	if o == nil || o.SubnetMask == nil {
+		var ret string
+		return ret
+	}
+	return *o.SubnetMask
+}
+
+// GetSubnetMaskOk returns a tuple with the SubnetMask field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVmwareKernelNetwork) GetSubnetMaskOk() (*string, bool) {
+	if o == nil || o.SubnetMask == nil {
+		return nil, false
+	}
+	return o.SubnetMask, true
+}
+
+// HasSubnetMask returns a boolean if a field has been set.
+func (o *VirtualizationVmwareKernelNetwork) HasSubnetMask() bool {
+	if o != nil && o.SubnetMask != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubnetMask gets a reference to the given string and assigns it to the SubnetMask field.
+func (o *VirtualizationVmwareKernelNetwork) SetSubnetMask(v string) {
+	o.SubnetMask = &v
+}
+
+// GetTcpIpStack returns the TcpIpStack field value if set, zero value otherwise.
+func (o *VirtualizationVmwareKernelNetwork) GetTcpIpStack() string {
+	if o == nil || o.TcpIpStack == nil {
+		var ret string
+		return ret
+	}
+	return *o.TcpIpStack
+}
+
+// GetTcpIpStackOk returns a tuple with the TcpIpStack field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVmwareKernelNetwork) GetTcpIpStackOk() (*string, bool) {
+	if o == nil || o.TcpIpStack == nil {
+		return nil, false
+	}
+	return o.TcpIpStack, true
+}
+
+// HasTcpIpStack returns a boolean if a field has been set.
+func (o *VirtualizationVmwareKernelNetwork) HasTcpIpStack() bool {
+	if o != nil && o.TcpIpStack != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTcpIpStack gets a reference to the given string and assigns it to the TcpIpStack field.
+func (o *VirtualizationVmwareKernelNetwork) SetTcpIpStack(v string) {
+	o.TcpIpStack = &v
 }
 
 // GetVmotion returns the Vmotion field value if set, zero value otherwise.
@@ -570,6 +638,12 @@ func (o VirtualizationVmwareKernelNetwork) MarshalJSON() ([]byte, error) {
 	if o.Mtu != nil {
 		toSerialize["Mtu"] = o.Mtu
 	}
+	if o.SubnetMask != nil {
+		toSerialize["SubnetMask"] = o.SubnetMask
+	}
+	if o.TcpIpStack != nil {
+		toSerialize["TcpIpStack"] = o.TcpIpStack
+	}
 	if o.Vmotion != nil {
 		toSerialize["Vmotion"] = o.Vmotion
 	}
@@ -617,6 +691,10 @@ func (o *VirtualizationVmwareKernelNetwork) UnmarshalJSON(bytes []byte) (err err
 		Management *bool `json:"Management,omitempty"`
 		// Maximum transmission unit configured on a kernel network.
 		Mtu *int64 `json:"Mtu,omitempty"`
+		// Subnet mask of the kernel network.
+		SubnetMask *string `json:"SubnetMask,omitempty"`
+		// Type of stack for the kernel network. It can be custom, default, vMotion or provisioning.
+		TcpIpStack *string `json:"TcpIpStack,omitempty"`
 		// Indicates that vmotion is enabled on this kernel network.
 		Vmotion *bool `json:"Vmotion,omitempty"`
 		// Indicates that vsan traffic is enabled on this kernel network.
@@ -644,6 +722,8 @@ func (o *VirtualizationVmwareKernelNetwork) UnmarshalJSON(bytes []byte) (err err
 		varVirtualizationVmwareKernelNetwork.MacAddress = varVirtualizationVmwareKernelNetworkWithoutEmbeddedStruct.MacAddress
 		varVirtualizationVmwareKernelNetwork.Management = varVirtualizationVmwareKernelNetworkWithoutEmbeddedStruct.Management
 		varVirtualizationVmwareKernelNetwork.Mtu = varVirtualizationVmwareKernelNetworkWithoutEmbeddedStruct.Mtu
+		varVirtualizationVmwareKernelNetwork.SubnetMask = varVirtualizationVmwareKernelNetworkWithoutEmbeddedStruct.SubnetMask
+		varVirtualizationVmwareKernelNetwork.TcpIpStack = varVirtualizationVmwareKernelNetworkWithoutEmbeddedStruct.TcpIpStack
 		varVirtualizationVmwareKernelNetwork.Vmotion = varVirtualizationVmwareKernelNetworkWithoutEmbeddedStruct.Vmotion
 		varVirtualizationVmwareKernelNetwork.Vsan = varVirtualizationVmwareKernelNetworkWithoutEmbeddedStruct.Vsan
 		varVirtualizationVmwareKernelNetwork.VsphereProvisioning = varVirtualizationVmwareKernelNetworkWithoutEmbeddedStruct.VsphereProvisioning
@@ -676,6 +756,8 @@ func (o *VirtualizationVmwareKernelNetwork) UnmarshalJSON(bytes []byte) (err err
 		delete(additionalProperties, "MacAddress")
 		delete(additionalProperties, "Management")
 		delete(additionalProperties, "Mtu")
+		delete(additionalProperties, "SubnetMask")
+		delete(additionalProperties, "TcpIpStack")
 		delete(additionalProperties, "Vmotion")
 		delete(additionalProperties, "Vsan")
 		delete(additionalProperties, "VsphereProvisioning")

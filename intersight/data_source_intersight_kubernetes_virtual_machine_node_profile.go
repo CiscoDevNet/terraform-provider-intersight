@@ -174,6 +174,185 @@ func dataSourceKubernetesVirtualMachineNodeProfile() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"interfaces": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"addresses": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"gateway": {
+						Description: "Deprecated. This will add a default route as long as the first default route in Routes is not different. If is different, Gateway will be replaced with that default route. If there is no default Route and this is set, then Routes will be updated with the first entry as a default with this default gateway. If there is only one default Route and this gateway becomes empty, then the default routes will all be removed. Do not set if using Ip Pools, as the gateway is configured in the pool. This will be removed in the future.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ip_v4_configs": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"ip": {
+									Description: "IPv4 Address in CIDR format.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"lease": {
+									Description: "The IP Lease if allocated from a Pool. It can include gateway information.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"moid": {
+												Description: "The Moid of the referenced REST resource.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the remote type referred by this relationship.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"selector": {
+												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"matcher": {
+						Description: "The matcher to be used to find the physical network interface represented by this ethernet device.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"type": {
+									Description: "Which property we should use to find the ethernet interface.\n* `Name` - A network interface name, e.g. eth0, eno9.\n* `MacAddress` - A network interface Mac Address.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"value": {
+									Description: "The value to match for the property specified by type.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"mtu": {
+						Description: "The MTU to assign to this Network Interface.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Name for this network interface.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"provider_name": {
+						Description: "If the infrastructure network is selectable, this indicates which network to attach to the port.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"routes": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"to": {
+									Description: "The destination subnet, if set to 0.0.0.0/0 then the Route is considered a default route.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"via": {
+									Description: "Via is the gateway for traffic destined for the subnet in the To property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+				},
+			},
+		},
 		"ip_addresses": {
 			Description: "An array of relationships to ippoolIpLease resources.",
 			Type:        schema.TypeList,
@@ -846,6 +1025,185 @@ func dataSourceKubernetesVirtualMachineNodeProfile() *schema.Resource {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"interfaces": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"addresses": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"gateway": {
+						Description: "Deprecated. This will add a default route as long as the first default route in Routes is not different. If is different, Gateway will be replaced with that default route. If there is no default Route and this is set, then Routes will be updated with the first entry as a default with this default gateway. If there is only one default Route and this gateway becomes empty, then the default routes will all be removed. Do not set if using Ip Pools, as the gateway is configured in the pool. This will be removed in the future.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ip_v4_configs": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"ip": {
+									Description: "IPv4 Address in CIDR format.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"lease": {
+									Description: "The IP Lease if allocated from a Pool. It can include gateway information.",
+									Type:        schema.TypeList,
+									MaxItems:    1,
+									Optional:    true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"moid": {
+												Description: "The Moid of the referenced REST resource.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the remote type referred by this relationship.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"selector": {
+												Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"matcher": {
+						Description: "The matcher to be used to find the physical network interface represented by this ethernet device.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"type": {
+									Description: "Which property we should use to find the ethernet interface.\n* `Name` - A network interface name, e.g. eth0, eno9.\n* `MacAddress` - A network interface Mac Address.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"value": {
+									Description: "The value to match for the property specified by type.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"mtu": {
+						Description: "The MTU to assign to this Network Interface.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Name for this network interface.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"provider_name": {
+						Description: "If the infrastructure network is selectable, this indicates which network to attach to the port.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"routes": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"to": {
+									Description: "The destination subnet, if set to 0.0.0.0/0 then the Route is considered a default route.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"via": {
+									Description: "Via is the gateway for traffic destined for the subnet in the To property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+				},
+			},
 		},
 		"ip_addresses": {
 			Description: "An array of relationships to ippoolIpLease resources.",
@@ -1547,6 +1905,196 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("interfaces"); ok {
+		x := make([]models.KubernetesEthernet, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.KubernetesEthernet{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["addresses"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetAddresses(x)
+					}
+				}
+			}
+			o.SetClassId("kubernetes.Ethernet")
+			if v, ok := l["gateway"]; ok {
+				{
+					x := (v.(string))
+					o.SetGateway(x)
+				}
+			}
+			if v, ok := l["ip_v4_configs"]; ok {
+				{
+					x := make([]models.KubernetesIpV4Config, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewKubernetesIpV4ConfigWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("kubernetes.IpV4Config")
+						if v, ok := l["ip"]; ok {
+							{
+								x := (v.(string))
+								o.SetIp(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetIpV4Configs(x)
+					}
+				}
+			}
+			if v, ok := l["matcher"]; ok {
+				{
+					p := make([]models.KubernetesEthernetMatcher, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewKubernetesEthernetMatcherWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("kubernetes.EthernetMatcher")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["type"]; ok {
+							{
+								x := (v.(string))
+								o.SetType(x)
+							}
+						}
+						if v, ok := l["value"]; ok {
+							{
+								x := (v.(string))
+								o.SetValue(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetMatcher(x)
+					}
+				}
+			}
+			if v, ok := l["mtu"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMtu(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["provider_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetProviderName(x)
+				}
+			}
+			if v, ok := l["routes"]; ok {
+				{
+					x := make([]models.KubernetesRoute, 0)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						o := models.NewKubernetesRouteWithDefaults()
+						l := s[i].(map[string]interface{})
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("kubernetes.Route")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["to"]; ok {
+							{
+								x := (v.(string))
+								o.SetTo(x)
+							}
+						}
+						if v, ok := l["via"]; ok {
+							{
+								x := (v.(string))
+								o.SetVia(x)
+							}
+						}
+						x = append(x, *o)
+					}
+					if len(x) > 0 {
+						o.SetRoutes(x)
+					}
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetInterfaces(x)
+	}
+
 	if v, ok := d.GetOk("ip_addresses"); ok {
 		x := make([]models.IppoolIpLeaseRelationship, 0)
 		s := v.([]interface{})
@@ -2167,6 +2715,8 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["interfaces"] = flattenListKubernetesEthernet(s.GetInterfaces(), d)
 
 				temp["ip_addresses"] = flattenListIppoolIpLeaseRelationship(s.GetIpAddresses(), d)
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4903
+API version: 1.0.9-4929
 Contact: intersight@cisco.com
 */
 
@@ -46,10 +46,10 @@ type HyperflexVolume struct {
 	// The mode of the HyperFlex volume. * `Block` - It is a Block virtual disk. * `Filesystem` - It is a File system virtual disk. * `` - Disk mode is either unknown or not supported.
 	VolumeMode *string `json:"VolumeMode,omitempty"`
 	// The type of the HyperFlex volume.
-	VolumeType           *string                                `json:"VolumeType,omitempty"`
-	Cluster              *HyperflexClusterRelationship          `json:"Cluster,omitempty"`
-	HxapVirtualDisk      *HyperflexHxapVirtualDiskRelationship  `json:"HxapVirtualDisk,omitempty"`
-	StorageContainer     *HyperflexStorageContainerRelationship `json:"StorageContainer,omitempty"`
+	VolumeType           *string                                   `json:"VolumeType,omitempty"`
+	Cluster              *HyperflexClusterRelationship             `json:"Cluster,omitempty"`
+	IweVirtualDisk       *VirtualizationIweVirtualDiskRelationship `json:"IweVirtualDisk,omitempty"`
+	StorageContainer     *HyperflexStorageContainerRelationship    `json:"StorageContainer,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -510,36 +510,36 @@ func (o *HyperflexVolume) SetCluster(v HyperflexClusterRelationship) {
 	o.Cluster = &v
 }
 
-// GetHxapVirtualDisk returns the HxapVirtualDisk field value if set, zero value otherwise.
-func (o *HyperflexVolume) GetHxapVirtualDisk() HyperflexHxapVirtualDiskRelationship {
-	if o == nil || o.HxapVirtualDisk == nil {
-		var ret HyperflexHxapVirtualDiskRelationship
+// GetIweVirtualDisk returns the IweVirtualDisk field value if set, zero value otherwise.
+func (o *HyperflexVolume) GetIweVirtualDisk() VirtualizationIweVirtualDiskRelationship {
+	if o == nil || o.IweVirtualDisk == nil {
+		var ret VirtualizationIweVirtualDiskRelationship
 		return ret
 	}
-	return *o.HxapVirtualDisk
+	return *o.IweVirtualDisk
 }
 
-// GetHxapVirtualDiskOk returns a tuple with the HxapVirtualDisk field value if set, nil otherwise
+// GetIweVirtualDiskOk returns a tuple with the IweVirtualDisk field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HyperflexVolume) GetHxapVirtualDiskOk() (*HyperflexHxapVirtualDiskRelationship, bool) {
-	if o == nil || o.HxapVirtualDisk == nil {
+func (o *HyperflexVolume) GetIweVirtualDiskOk() (*VirtualizationIweVirtualDiskRelationship, bool) {
+	if o == nil || o.IweVirtualDisk == nil {
 		return nil, false
 	}
-	return o.HxapVirtualDisk, true
+	return o.IweVirtualDisk, true
 }
 
-// HasHxapVirtualDisk returns a boolean if a field has been set.
-func (o *HyperflexVolume) HasHxapVirtualDisk() bool {
-	if o != nil && o.HxapVirtualDisk != nil {
+// HasIweVirtualDisk returns a boolean if a field has been set.
+func (o *HyperflexVolume) HasIweVirtualDisk() bool {
+	if o != nil && o.IweVirtualDisk != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetHxapVirtualDisk gets a reference to the given HyperflexHxapVirtualDiskRelationship and assigns it to the HxapVirtualDisk field.
-func (o *HyperflexVolume) SetHxapVirtualDisk(v HyperflexHxapVirtualDiskRelationship) {
-	o.HxapVirtualDisk = &v
+// SetIweVirtualDisk gets a reference to the given VirtualizationIweVirtualDiskRelationship and assigns it to the IweVirtualDisk field.
+func (o *HyperflexVolume) SetIweVirtualDisk(v VirtualizationIweVirtualDiskRelationship) {
+	o.IweVirtualDisk = &v
 }
 
 // GetStorageContainer returns the StorageContainer field value if set, zero value otherwise.
@@ -626,8 +626,8 @@ func (o HyperflexVolume) MarshalJSON() ([]byte, error) {
 	if o.Cluster != nil {
 		toSerialize["Cluster"] = o.Cluster
 	}
-	if o.HxapVirtualDisk != nil {
-		toSerialize["HxapVirtualDisk"] = o.HxapVirtualDisk
+	if o.IweVirtualDisk != nil {
+		toSerialize["IweVirtualDisk"] = o.IweVirtualDisk
 	}
 	if o.StorageContainer != nil {
 		toSerialize["StorageContainer"] = o.StorageContainer
@@ -667,10 +667,10 @@ func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
 		// The mode of the HyperFlex volume. * `Block` - It is a Block virtual disk. * `Filesystem` - It is a File system virtual disk. * `` - Disk mode is either unknown or not supported.
 		VolumeMode *string `json:"VolumeMode,omitempty"`
 		// The type of the HyperFlex volume.
-		VolumeType       *string                                `json:"VolumeType,omitempty"`
-		Cluster          *HyperflexClusterRelationship          `json:"Cluster,omitempty"`
-		HxapVirtualDisk  *HyperflexHxapVirtualDiskRelationship  `json:"HxapVirtualDisk,omitempty"`
-		StorageContainer *HyperflexStorageContainerRelationship `json:"StorageContainer,omitempty"`
+		VolumeType       *string                                   `json:"VolumeType,omitempty"`
+		Cluster          *HyperflexClusterRelationship             `json:"Cluster,omitempty"`
+		IweVirtualDisk   *VirtualizationIweVirtualDiskRelationship `json:"IweVirtualDisk,omitempty"`
+		StorageContainer *HyperflexStorageContainerRelationship    `json:"StorageContainer,omitempty"`
 	}
 
 	varHyperflexVolumeWithoutEmbeddedStruct := HyperflexVolumeWithoutEmbeddedStruct{}
@@ -692,7 +692,7 @@ func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexVolume.VolumeMode = varHyperflexVolumeWithoutEmbeddedStruct.VolumeMode
 		varHyperflexVolume.VolumeType = varHyperflexVolumeWithoutEmbeddedStruct.VolumeType
 		varHyperflexVolume.Cluster = varHyperflexVolumeWithoutEmbeddedStruct.Cluster
-		varHyperflexVolume.HxapVirtualDisk = varHyperflexVolumeWithoutEmbeddedStruct.HxapVirtualDisk
+		varHyperflexVolume.IweVirtualDisk = varHyperflexVolumeWithoutEmbeddedStruct.IweVirtualDisk
 		varHyperflexVolume.StorageContainer = varHyperflexVolumeWithoutEmbeddedStruct.StorageContainer
 		*o = HyperflexVolume(varHyperflexVolume)
 	} else {
@@ -725,7 +725,7 @@ func (o *HyperflexVolume) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "VolumeMode")
 		delete(additionalProperties, "VolumeType")
 		delete(additionalProperties, "Cluster")
-		delete(additionalProperties, "HxapVirtualDisk")
+		delete(additionalProperties, "IweVirtualDisk")
 		delete(additionalProperties, "StorageContainer")
 
 		// remove fields from embedded structs

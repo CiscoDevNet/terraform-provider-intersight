@@ -208,6 +208,11 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				},
 			},
 		},
+		"pci_link": {
+			Description: "Indicates PCI Link status of adapter.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -586,6 +591,11 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 					},
 				},
 			},
+		},
+		"pci_link": {
+			Description: "Indicates PCI Link status of adapter.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
@@ -1012,6 +1022,11 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 		}
 	}
 
+	if v, ok := d.GetOkExists("pci_link"); ok {
+		x := int64(v.(int))
+		o.SetPciLink(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1241,6 +1256,7 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["pci_link"] = (s.GetPciLink())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["prom_card_type"] = (s.GetPromCardType())

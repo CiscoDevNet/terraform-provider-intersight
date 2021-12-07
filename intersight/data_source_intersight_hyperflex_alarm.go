@@ -46,7 +46,7 @@ func dataSourceHyperflexAlarm() *schema.Resource {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"ancestor_mos": {
-			Description: "An array of relationships to hyperflexBaseCluster resources.",
+			Description: "An array of relationships to infraBaseCluster resources.",
 			Type:        schema.TypeList,
 			Optional:    true,
 			Elem: &schema.Resource{
@@ -475,7 +475,7 @@ func dataSourceHyperflexAlarm() *schema.Resource {
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
 		"ancestor_mos": {
-			Description: "An array of relationships to hyperflexBaseCluster resources.",
+			Description: "An array of relationships to infraBaseCluster resources.",
 			Type:        schema.TypeList,
 			Optional:    true,
 			Elem: &schema.Resource{
@@ -924,7 +924,7 @@ func dataSourceHyperflexAlarmRead(c context.Context, d *schema.ResourceData, met
 	}
 
 	if v, ok := d.GetOk("ancestor_mos"); ok {
-		x := make([]models.HyperflexBaseClusterRelationship, 0)
+		x := make([]models.InfraBaseClusterRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			o := &models.MoMoRef{}
@@ -958,7 +958,7 @@ func dataSourceHyperflexAlarmRead(c context.Context, d *schema.ResourceData, met
 					o.SetSelector(x)
 				}
 			}
-			x = append(x, models.MoMoRefAsHyperflexBaseClusterRelationship(o))
+			x = append(x, models.MoMoRefAsInfraBaseClusterRelationship(o))
 		}
 		o.SetAncestorMos(x)
 	}
@@ -1380,7 +1380,7 @@ func dataSourceHyperflexAlarmRead(c context.Context, d *schema.ResourceData, met
 				temp["acknowledged_time_as_utc"] = (s.GetAcknowledgedTimeAsUtc())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
-				temp["ancestor_mos"] = flattenListHyperflexBaseClusterRelationship(s.GetAncestorMos(), d)
+				temp["ancestor_mos"] = flattenListInfraBaseClusterRelationship(s.GetAncestorMos(), d)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())

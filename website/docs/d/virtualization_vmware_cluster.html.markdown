@@ -19,7 +19,7 @@ The following arguments can be used to get data of already created objects in In
 * `datastore_count`:(int) Count of all datastores associated with this cluster. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `hypervisor_type`:(string) Identifies the broad type of the underlying hypervisor.* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
-* `identity`:(string) The internally generated identity of this cluster. This entity is not manipulated by users. It aids in uniquely identifying the cluster object. In case of VMware, this is a MOR (managed object reference). 
+* `identity`:(string) The internally generated identity of this cluster. This entity is not manipulated by users. 
 * `inventory_path`:(string) Inventory path of the cluster. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

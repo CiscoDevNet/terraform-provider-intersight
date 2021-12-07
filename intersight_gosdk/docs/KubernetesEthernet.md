@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kubernetes.Ethernet"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kubernetes.Ethernet"]
 **Matcher** | Pointer to [**NullableKubernetesEthernetMatcher**](KubernetesEthernetMatcher.md) |  | [optional] 
+**ProviderName** | Pointer to **string** | If the infrastructure network is selectable, this indicates which network to attach to the port. | [optional] 
 
 ## Methods
 
@@ -102,6 +103,31 @@ HasMatcher returns a boolean if a field has been set.
 `func (o *KubernetesEthernet) UnsetMatcher()`
 
 UnsetMatcher ensures that no value is present for Matcher, not even an explicit nil
+### GetProviderName
+
+`func (o *KubernetesEthernet) GetProviderName() string`
+
+GetProviderName returns the ProviderName field if non-nil, zero value otherwise.
+
+### GetProviderNameOk
+
+`func (o *KubernetesEthernet) GetProviderNameOk() (*string, bool)`
+
+GetProviderNameOk returns a tuple with the ProviderName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProviderName
+
+`func (o *KubernetesEthernet) SetProviderName(v string)`
+
+SetProviderName sets ProviderName field to given value.
+
+### HasProviderName
+
+`func (o *KubernetesEthernet) HasProviderName() bool`
+
+HasProviderName returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

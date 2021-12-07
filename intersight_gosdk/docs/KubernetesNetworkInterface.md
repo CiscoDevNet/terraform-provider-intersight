@@ -7,9 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Addresses** | Pointer to **[]string** |  | [optional] 
-**Gateway** | Pointer to **string** | The Network Gateway for the Network Interface. | [optional] 
+**Gateway** | Pointer to **string** | Deprecated. This will add a default route as long as the first default route in Routes is not different. If is different, Gateway will be replaced with that default route. If there is no default Route and this is set, then Routes will be updated with the first entry as a default with this default gateway. If there is only one default Route and this gateway becomes empty, then the default routes will all be removed. Do not set if using Ip Pools, as the gateway is configured in the pool. This will be removed in the future. | [optional] 
+**IpV4Configs** | Pointer to [**[]KubernetesIpV4Config**](KubernetesIpV4Config.md) |  | [optional] 
 **Mtu** | Pointer to **int64** | The MTU to assign to this Network Interface. | [optional] 
 **Name** | Pointer to **string** | Name for this network interface. | [optional] 
+**Routes** | Pointer to [**[]KubernetesRoute**](KubernetesRoute.md) |  | [optional] 
 
 ## Methods
 
@@ -130,6 +132,41 @@ SetGateway sets Gateway field to given value.
 
 HasGateway returns a boolean if a field has been set.
 
+### GetIpV4Configs
+
+`func (o *KubernetesNetworkInterface) GetIpV4Configs() []KubernetesIpV4Config`
+
+GetIpV4Configs returns the IpV4Configs field if non-nil, zero value otherwise.
+
+### GetIpV4ConfigsOk
+
+`func (o *KubernetesNetworkInterface) GetIpV4ConfigsOk() (*[]KubernetesIpV4Config, bool)`
+
+GetIpV4ConfigsOk returns a tuple with the IpV4Configs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpV4Configs
+
+`func (o *KubernetesNetworkInterface) SetIpV4Configs(v []KubernetesIpV4Config)`
+
+SetIpV4Configs sets IpV4Configs field to given value.
+
+### HasIpV4Configs
+
+`func (o *KubernetesNetworkInterface) HasIpV4Configs() bool`
+
+HasIpV4Configs returns a boolean if a field has been set.
+
+### SetIpV4ConfigsNil
+
+`func (o *KubernetesNetworkInterface) SetIpV4ConfigsNil(b bool)`
+
+ SetIpV4ConfigsNil sets the value for IpV4Configs to be an explicit nil
+
+### UnsetIpV4Configs
+`func (o *KubernetesNetworkInterface) UnsetIpV4Configs()`
+
+UnsetIpV4Configs ensures that no value is present for IpV4Configs, not even an explicit nil
 ### GetMtu
 
 `func (o *KubernetesNetworkInterface) GetMtu() int64`
@@ -180,6 +217,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetRoutes
+
+`func (o *KubernetesNetworkInterface) GetRoutes() []KubernetesRoute`
+
+GetRoutes returns the Routes field if non-nil, zero value otherwise.
+
+### GetRoutesOk
+
+`func (o *KubernetesNetworkInterface) GetRoutesOk() (*[]KubernetesRoute, bool)`
+
+GetRoutesOk returns a tuple with the Routes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRoutes
+
+`func (o *KubernetesNetworkInterface) SetRoutes(v []KubernetesRoute)`
+
+SetRoutes sets Routes field to given value.
+
+### HasRoutes
+
+`func (o *KubernetesNetworkInterface) HasRoutes() bool`
+
+HasRoutes returns a boolean if a field has been set.
+
+### SetRoutesNil
+
+`func (o *KubernetesNetworkInterface) SetRoutesNil(b bool)`
+
+ SetRoutesNil sets the value for Routes to be an explicit nil
+
+### UnsetRoutes
+`func (o *KubernetesNetworkInterface) UnsetRoutes()`
+
+UnsetRoutes ensures that no value is present for Routes, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

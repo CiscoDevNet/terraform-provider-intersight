@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **IsPrivateKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;privateKey&#39; property has been set. | [optional] [readonly] [default to false]
 **Passphrase** | Pointer to **string** | The passphrase associated with the private key - Optional. | [optional] 
 **PrivateKey** | Pointer to **string** | The private key used to authenticate with a managed target. The corresponding public key needs to be added in the auth list of the remote endpoint. | [optional] 
+**Username** | Pointer to **string** | The username used to authenticate with a managed target. | [optional] 
 
 ## Methods
 
@@ -169,6 +170,31 @@ SetPrivateKey sets PrivateKey field to given value.
 `func (o *AssetPrivateKeyCredentialAllOf) HasPrivateKey() bool`
 
 HasPrivateKey returns a boolean if a field has been set.
+
+### GetUsername
+
+`func (o *AssetPrivateKeyCredentialAllOf) GetUsername() string`
+
+GetUsername returns the Username field if non-nil, zero value otherwise.
+
+### GetUsernameOk
+
+`func (o *AssetPrivateKeyCredentialAllOf) GetUsernameOk() (*string, bool)`
+
+GetUsernameOk returns a tuple with the Username field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsername
+
+`func (o *AssetPrivateKeyCredentialAllOf) SetUsername(v string)`
+
+SetUsername sets Username field to given value.
+
+### HasUsername
+
+`func (o *AssetPrivateKeyCredentialAllOf) HasUsername() bool`
+
+HasUsername returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

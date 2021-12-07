@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **StorageType** | Pointer to **string** | The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party). * &#x60;HyperFlexDp&#x60; - The type of storage is HyperFlex Data Platform. * &#x60;ThirdParty&#x60; - The type of storage is 3rd Party Storage (PureStorage, etc..). | [optional] [default to "HyperFlexDp"]
 **WwxnPrefix** | Pointer to **string** | The WWxN prefix in the form of 20:00:00:25:B5:XX. | [optional] 
 **AssociatedCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**AssociatedComputeCluster** | Pointer to [**HyperflexHxapClusterRelationship**](HyperflexHxapClusterRelationship.md) |  | [optional] 
+**AssociatedComputeCluster** | Pointer to [**VirtualizationIweClusterRelationship**](VirtualizationIweClusterRelationship.md) |  | [optional] 
 **AutoSupport** | Pointer to [**HyperflexAutoSupportPolicyRelationship**](HyperflexAutoSupportPolicyRelationship.md) |  | [optional] 
 **ClusterNetwork** | Pointer to [**HyperflexClusterNetworkPolicyRelationship**](HyperflexClusterNetworkPolicyRelationship.md) |  | [optional] 
 **ClusterStorage** | Pointer to [**HyperflexClusterStoragePolicyRelationship**](HyperflexClusterStoragePolicyRelationship.md) |  | [optional] 
@@ -558,20 +558,20 @@ HasAssociatedCluster returns a boolean if a field has been set.
 
 ### GetAssociatedComputeCluster
 
-`func (o *HyperflexClusterProfileAllOf) GetAssociatedComputeCluster() HyperflexHxapClusterRelationship`
+`func (o *HyperflexClusterProfileAllOf) GetAssociatedComputeCluster() VirtualizationIweClusterRelationship`
 
 GetAssociatedComputeCluster returns the AssociatedComputeCluster field if non-nil, zero value otherwise.
 
 ### GetAssociatedComputeClusterOk
 
-`func (o *HyperflexClusterProfileAllOf) GetAssociatedComputeClusterOk() (*HyperflexHxapClusterRelationship, bool)`
+`func (o *HyperflexClusterProfileAllOf) GetAssociatedComputeClusterOk() (*VirtualizationIweClusterRelationship, bool)`
 
 GetAssociatedComputeClusterOk returns a tuple with the AssociatedComputeCluster field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAssociatedComputeCluster
 
-`func (o *HyperflexClusterProfileAllOf) SetAssociatedComputeCluster(v HyperflexHxapClusterRelationship)`
+`func (o *HyperflexClusterProfileAllOf) SetAssociatedComputeCluster(v VirtualizationIweClusterRelationship)`
 
 SetAssociatedComputeCluster sets AssociatedComputeCluster field to given value.
 

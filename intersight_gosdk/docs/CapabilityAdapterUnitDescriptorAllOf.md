@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **IsAzureQosSupported** | Pointer to **bool** | Indicates that the Azure Stack Host QoS feature is supported by this adapter. | [optional] [default to true]
 **IsGeneveSupported** | Pointer to **bool** | Indicates that the GENEVE offload feature is supported by this adapter. | [optional] [default to true]
 **NumDcePorts** | Pointer to **int64** | Number of Dce Ports for the adapter. | [optional] 
+**PciLink** | Pointer to **int64** | Indicates PCI Link status of adapter. | [optional] [default to 0]
 **PromCardType** | Pointer to **string** | Prom card type for the adapter. | [optional] 
 
 ## Methods
@@ -248,6 +249,31 @@ SetNumDcePorts sets NumDcePorts field to given value.
 `func (o *CapabilityAdapterUnitDescriptorAllOf) HasNumDcePorts() bool`
 
 HasNumDcePorts returns a boolean if a field has been set.
+
+### GetPciLink
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) GetPciLink() int64`
+
+GetPciLink returns the PciLink field if non-nil, zero value otherwise.
+
+### GetPciLinkOk
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) GetPciLinkOk() (*int64, bool)`
+
+GetPciLinkOk returns a tuple with the PciLink field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciLink
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) SetPciLink(v int64)`
+
+SetPciLink sets PciLink field to given value.
+
+### HasPciLink
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) HasPciLink() bool`
+
+HasPciLink returns a boolean if a field has been set.
 
 ### GetPromCardType
 

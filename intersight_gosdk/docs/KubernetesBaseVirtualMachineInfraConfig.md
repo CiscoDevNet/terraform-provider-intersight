@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Interfaces** | Pointer to **[]string** |  | [optional] 
+**NetworkInterfaces** | Pointer to [**[]KubernetesNetworkInterfaceSpec**](KubernetesNetworkInterfaceSpec.md) |  | [optional] 
 
 ## Methods
 
@@ -102,6 +103,41 @@ HasInterfaces returns a boolean if a field has been set.
 `func (o *KubernetesBaseVirtualMachineInfraConfig) UnsetInterfaces()`
 
 UnsetInterfaces ensures that no value is present for Interfaces, not even an explicit nil
+### GetNetworkInterfaces
+
+`func (o *KubernetesBaseVirtualMachineInfraConfig) GetNetworkInterfaces() []KubernetesNetworkInterfaceSpec`
+
+GetNetworkInterfaces returns the NetworkInterfaces field if non-nil, zero value otherwise.
+
+### GetNetworkInterfacesOk
+
+`func (o *KubernetesBaseVirtualMachineInfraConfig) GetNetworkInterfacesOk() (*[]KubernetesNetworkInterfaceSpec, bool)`
+
+GetNetworkInterfacesOk returns a tuple with the NetworkInterfaces field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkInterfaces
+
+`func (o *KubernetesBaseVirtualMachineInfraConfig) SetNetworkInterfaces(v []KubernetesNetworkInterfaceSpec)`
+
+SetNetworkInterfaces sets NetworkInterfaces field to given value.
+
+### HasNetworkInterfaces
+
+`func (o *KubernetesBaseVirtualMachineInfraConfig) HasNetworkInterfaces() bool`
+
+HasNetworkInterfaces returns a boolean if a field has been set.
+
+### SetNetworkInterfacesNil
+
+`func (o *KubernetesBaseVirtualMachineInfraConfig) SetNetworkInterfacesNil(b bool)`
+
+ SetNetworkInterfacesNil sets the value for NetworkInterfaces to be an explicit nil
+
+### UnsetNetworkInterfaces
+`func (o *KubernetesBaseVirtualMachineInfraConfig) UnsetNetworkInterfaces()`
+
+UnsetNetworkInterfaces ensures that no value is present for NetworkInterfaces, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

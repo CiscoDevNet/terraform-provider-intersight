@@ -4,26 +4,26 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
-**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "hyperflex.Cluster"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "hyperflex.Cluster"]
 **AlarmSummary** | Pointer to [**NullableHyperflexAlarmSummary**](HyperflexAlarmSummary.md) |  | [optional] 
 **CapacityRunway** | Pointer to **int64** | The number of days remaining before the cluster&#39;s storage utilization reaches the recommended capacity limit of 76%. Default value is math.MaxInt32 to indicate that the capacity runway is \&quot;Unknown\&quot; for a cluster that is not connected or with not sufficient data. | [optional] [readonly] [default to 2147483647]
 **ClusterName** | Pointer to **string** | The name of this HyperFlex cluster. | [optional] [readonly] 
 **ClusterPurpose** | Pointer to **string** | This can be a Storage or Compute cluster. A storage cluster contains storage nodes that are used to persist data. A compute cluster contains compute nodes that are used for executing business logic. * &#x60;Storage&#x60; - Cluster of storage nodes used to persist data. * &#x60;Compute&#x60; - Cluster of compute nodes used to execute business logic. * &#x60;Unknown&#x60; - This cluster type is Unknown. Expect Compute or Storage as valid values. | [optional] [default to "Storage"]
 **ComputeNodeCount** | Pointer to **int64** | The number of compute nodes that belong to this cluster. | [optional] [readonly] 
 **ConvergedNodeCount** | Pointer to **int64** | The number of converged nodes that belong to this cluster. | [optional] [readonly] 
-**DeploymentType** | Pointer to **string** | The deployment type of the HyperFlex cluster. The cluster can have one of the following configurations: 1. Datacenter: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes on a single site. 2. Stretched Cluster: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes distributed across multiple sites. 3. Edge: The HyperFlex cluster consists of 2-4 standalone nodes. If the cluster is running a HyperFlex Data Platform version less than 4.0 or if the deployment type cannot be determined, the deployment type is set as &#39;NA&#39; (not available). * &#x60;NA&#x60; - The deployment type of the HyperFlex cluster is not available. * &#x60;Datacenter&#x60; - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes on the same site. * &#x60;Stretched Cluster&#x60; - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes across different sites. * &#x60;Edge&#x60; - The deployment type of a HyperFlex cluster consisting of 2 or more standalone nodes. | [optional] [readonly] [default to "NA"]
-**DriveType** | Pointer to **string** | The type of the drives used for storage in this cluster. * &#x60;NA&#x60; - The drive type of the HyperFlex cluster is not available. * &#x60;All-Flash&#x60; - Indicates that this HyperFlex cluster contains flash drives only. * &#x60;Hybrid&#x60; - Indicates that this HyperFlex cluster contains both flash and hard disk drives. | [optional] [readonly] [default to "NA"]
+**DeploymentType** | Pointer to **string** | The deployment type of the HyperFlex cluster. The cluster can have one of the following configurations: 1. Datacenter: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes on a single site. 2. Stretched Cluster: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes distributed across multiple sites. 3. Edge: The HyperFlex cluster consists of 2-4 standalone nodes. If the cluster is running a HyperFlex Data Platform version less than 4.0 or if the deployment type cannot be determined, the deployment type is set as &#39;NA&#39; (not available). * &#x60;NA&#x60; - The deployment type of the cluster is not available. * &#x60;Datacenter&#x60; - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes on the same site. * &#x60;Stretched Cluster&#x60; - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes across different sites. * &#x60;Edge&#x60; - The deployment type of a cluster consisting of 2 or more standalone nodes. | [optional] [readonly] [default to "NA"]
+**DriveType** | Pointer to **string** | The type of the drives used for storage in this cluster. * &#x60;NA&#x60; - The drive type of the cluster is not available. * &#x60;All-Flash&#x60; - Indicates that this cluster contains flash drives only. * &#x60;Hybrid&#x60; - Indicates that this cluster contains both flash and hard disk drives. | [optional] [readonly] [default to "NA"]
 **HxVersion** | Pointer to **string** | The HyperFlex Data or Application Platform version of this cluster. | [optional] [readonly] 
+**HypervisorType** | Pointer to **string** | Identifies the broad type of the underlying hypervisor. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * &#x60;IWE&#x60; - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
 **HypervisorVersion** | Pointer to **string** | The version of hypervisor running on this cluster. | [optional] [readonly] 
-**StorageCapacity** | Pointer to **int64** | The storage capacity in this cluster. | [optional] [readonly] 
+**Identity** | Pointer to **string** | The internally generated identity of this cluster.  This entity is not manipulated by users. It aids in uniquely identifying  the cluster object. In case of VMware, this is a MOR (managed object reference). | [optional] [readonly] 
 **StorageNodeCount** | Pointer to **int64** | The number of storage nodes that belong to this cluster. | [optional] [readonly] 
 **StorageUtilization** | Pointer to **float32** | The storage utilization is computed based on total capacity and current capacity utilization. | [optional] [readonly] 
 **UtilizationPercentage** | Pointer to **float32** | The storage utilization percentage is computed based on total capacity and current capacity utilization. | [optional] [readonly] 
 **UtilizationTrendPercentage** | Pointer to **float32** | The storage utilization trend percentage represents the trend in percentage computed using the first and last point from historical data. | [optional] [readonly] 
 **AssociatedProfile** | Pointer to [**PolicyAbstractProfileRelationship**](PolicyAbstractProfileRelationship.md) |  | [optional] 
 **ChildClusters** | Pointer to [**[]HyperflexBaseClusterRelationship**](HyperflexBaseClusterRelationship.md) | An array of relationships to hyperflexBaseCluster resources. | [optional] 
-**ParentCluster** | Pointer to [**HyperflexBaseClusterRelationship**](HyperflexBaseClusterRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -319,6 +319,31 @@ SetHxVersion sets HxVersion field to given value.
 
 HasHxVersion returns a boolean if a field has been set.
 
+### GetHypervisorType
+
+`func (o *HyperflexBaseCluster) GetHypervisorType() string`
+
+GetHypervisorType returns the HypervisorType field if non-nil, zero value otherwise.
+
+### GetHypervisorTypeOk
+
+`func (o *HyperflexBaseCluster) GetHypervisorTypeOk() (*string, bool)`
+
+GetHypervisorTypeOk returns a tuple with the HypervisorType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHypervisorType
+
+`func (o *HyperflexBaseCluster) SetHypervisorType(v string)`
+
+SetHypervisorType sets HypervisorType field to given value.
+
+### HasHypervisorType
+
+`func (o *HyperflexBaseCluster) HasHypervisorType() bool`
+
+HasHypervisorType returns a boolean if a field has been set.
+
 ### GetHypervisorVersion
 
 `func (o *HyperflexBaseCluster) GetHypervisorVersion() string`
@@ -344,30 +369,30 @@ SetHypervisorVersion sets HypervisorVersion field to given value.
 
 HasHypervisorVersion returns a boolean if a field has been set.
 
-### GetStorageCapacity
+### GetIdentity
 
-`func (o *HyperflexBaseCluster) GetStorageCapacity() int64`
+`func (o *HyperflexBaseCluster) GetIdentity() string`
 
-GetStorageCapacity returns the StorageCapacity field if non-nil, zero value otherwise.
+GetIdentity returns the Identity field if non-nil, zero value otherwise.
 
-### GetStorageCapacityOk
+### GetIdentityOk
 
-`func (o *HyperflexBaseCluster) GetStorageCapacityOk() (*int64, bool)`
+`func (o *HyperflexBaseCluster) GetIdentityOk() (*string, bool)`
 
-GetStorageCapacityOk returns a tuple with the StorageCapacity field if it's non-nil, zero value otherwise
+GetIdentityOk returns a tuple with the Identity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStorageCapacity
+### SetIdentity
 
-`func (o *HyperflexBaseCluster) SetStorageCapacity(v int64)`
+`func (o *HyperflexBaseCluster) SetIdentity(v string)`
 
-SetStorageCapacity sets StorageCapacity field to given value.
+SetIdentity sets Identity field to given value.
 
-### HasStorageCapacity
+### HasIdentity
 
-`func (o *HyperflexBaseCluster) HasStorageCapacity() bool`
+`func (o *HyperflexBaseCluster) HasIdentity() bool`
 
-HasStorageCapacity returns a boolean if a field has been set.
+HasIdentity returns a boolean if a field has been set.
 
 ### GetStorageNodeCount
 
@@ -529,31 +554,6 @@ HasChildClusters returns a boolean if a field has been set.
 `func (o *HyperflexBaseCluster) UnsetChildClusters()`
 
 UnsetChildClusters ensures that no value is present for ChildClusters, not even an explicit nil
-### GetParentCluster
-
-`func (o *HyperflexBaseCluster) GetParentCluster() HyperflexBaseClusterRelationship`
-
-GetParentCluster returns the ParentCluster field if non-nil, zero value otherwise.
-
-### GetParentClusterOk
-
-`func (o *HyperflexBaseCluster) GetParentClusterOk() (*HyperflexBaseClusterRelationship, bool)`
-
-GetParentClusterOk returns a tuple with the ParentCluster field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetParentCluster
-
-`func (o *HyperflexBaseCluster) SetParentCluster(v HyperflexBaseClusterRelationship)`
-
-SetParentCluster sets ParentCluster field to given value.
-
-### HasParentCluster
-
-`func (o *HyperflexBaseCluster) HasParentCluster() bool`
-
-HasParentCluster returns a boolean if a field has been set.
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

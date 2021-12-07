@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **VolumeMode** | Pointer to **string** | The mode of the HyperFlex volume. * &#x60;Block&#x60; - It is a Block virtual disk. * &#x60;Filesystem&#x60; - It is a File system virtual disk. * &#x60;&#x60; - Disk mode is either unknown or not supported. | [optional] [readonly] [default to "Block"]
 **VolumeType** | Pointer to **string** | The type of the HyperFlex volume. | [optional] [readonly] 
 **Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
-**HxapVirtualDisk** | Pointer to [**HyperflexHxapVirtualDiskRelationship**](HyperflexHxapVirtualDiskRelationship.md) |  | [optional] 
+**IweVirtualDisk** | Pointer to [**VirtualizationIweVirtualDiskRelationship**](VirtualizationIweVirtualDiskRelationship.md) |  | [optional] 
 **StorageContainer** | Pointer to [**HyperflexStorageContainerRelationship**](HyperflexStorageContainerRelationship.md) |  | [optional] 
 
 ## Methods
@@ -380,30 +380,30 @@ SetCluster sets Cluster field to given value.
 
 HasCluster returns a boolean if a field has been set.
 
-### GetHxapVirtualDisk
+### GetIweVirtualDisk
 
-`func (o *HyperflexVolume) GetHxapVirtualDisk() HyperflexHxapVirtualDiskRelationship`
+`func (o *HyperflexVolume) GetIweVirtualDisk() VirtualizationIweVirtualDiskRelationship`
 
-GetHxapVirtualDisk returns the HxapVirtualDisk field if non-nil, zero value otherwise.
+GetIweVirtualDisk returns the IweVirtualDisk field if non-nil, zero value otherwise.
 
-### GetHxapVirtualDiskOk
+### GetIweVirtualDiskOk
 
-`func (o *HyperflexVolume) GetHxapVirtualDiskOk() (*HyperflexHxapVirtualDiskRelationship, bool)`
+`func (o *HyperflexVolume) GetIweVirtualDiskOk() (*VirtualizationIweVirtualDiskRelationship, bool)`
 
-GetHxapVirtualDiskOk returns a tuple with the HxapVirtualDisk field if it's non-nil, zero value otherwise
+GetIweVirtualDiskOk returns a tuple with the IweVirtualDisk field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHxapVirtualDisk
+### SetIweVirtualDisk
 
-`func (o *HyperflexVolume) SetHxapVirtualDisk(v HyperflexHxapVirtualDiskRelationship)`
+`func (o *HyperflexVolume) SetIweVirtualDisk(v VirtualizationIweVirtualDiskRelationship)`
 
-SetHxapVirtualDisk sets HxapVirtualDisk field to given value.
+SetIweVirtualDisk sets IweVirtualDisk field to given value.
 
-### HasHxapVirtualDisk
+### HasIweVirtualDisk
 
-`func (o *HyperflexVolume) HasHxapVirtualDisk() bool`
+`func (o *HyperflexVolume) HasIweVirtualDisk() bool`
 
-HasHxapVirtualDisk returns a boolean if a field has been set.
+HasIweVirtualDisk returns a boolean if a field has been set.
 
 ### GetStorageContainer
 
