@@ -243,7 +243,7 @@ func dataSourceHyperflexCluster() *schema.Resource {
 			Optional:    true,
 		},
 		"deployment_type": {
-			Description: "The deployment type of the HyperFlex cluster.\nThe cluster can have one of the following configurations:\n1. Datacenter: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes on a single site.\n2. Stretched Cluster: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes distributed across multiple sites.\n3. Edge: The HyperFlex cluster consists of 2-4 standalone nodes.\nIf the cluster is running a HyperFlex Data Platform version less than 4.0 or if the deployment type cannot be determined,\nthe deployment type is set as 'NA' (not available).\n* `NA` - The deployment type of the HyperFlex cluster is not available.\n* `Datacenter` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes on the same site.\n* `Stretched Cluster` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes across different sites.\n* `Edge` - The deployment type of a HyperFlex cluster consisting of 2 or more standalone nodes.",
+			Description: "The deployment type of the HyperFlex cluster.\nThe cluster can have one of the following configurations:\n1. Datacenter: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes on a single site.\n2. Stretched Cluster: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes distributed across multiple sites.\n3. Edge: The HyperFlex cluster consists of 2-4 standalone nodes.\nIf the cluster is running a HyperFlex Data Platform version less than 4.0 or if the deployment type cannot be determined,\nthe deployment type is set as 'NA' (not available).\n* `NA` - The deployment type of the cluster is not available.\n* `Datacenter` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes on the same site.\n* `Stretched Cluster` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes across different sites.\n* `Edge` - The deployment type of a cluster consisting of 2 or more standalone nodes.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -263,7 +263,7 @@ func dataSourceHyperflexCluster() *schema.Resource {
 			Optional:    true,
 		},
 		"drive_type": {
-			Description: "The type of the drives used for storage in this cluster.\n* `NA` - The drive type of the HyperFlex cluster is not available.\n* `All-Flash` - Indicates that this HyperFlex cluster contains flash drives only.\n* `Hybrid` - Indicates that this HyperFlex cluster contains both flash and hard disk drives.",
+			Description: "The type of the drives used for storage in this cluster.\n* `NA` - The drive type of the cluster is not available.\n* `All-Flash` - Indicates that this cluster contains flash drives only.\n* `Hybrid` - Indicates that this cluster contains both flash and hard disk drives.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -328,7 +328,7 @@ func dataSourceHyperflexCluster() *schema.Resource {
 			Optional:    true,
 		},
 		"identity": {
-			Description: "The internally generated identity of this cluster. This entity is not manipulated by users. It aids in uniquely identifying the cluster object. In case of VMware, this is a MOR (managed object reference).",
+			Description: "The internally generated identity of this cluster. \nThis entity is not manipulated by users. It aids in uniquely identifying \nthe cluster object. In case of VMware, this is a MOR (managed object reference).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -362,46 +362,6 @@ func dataSourceHyperflexCluster() *schema.Resource {
 					"selector": {
 						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"memory_capacity": {
-			Description: "The capacity and usage information for memory on this cluster.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"capacity": {
-						Description: "The total memory capacity of the entity in bytes.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"free": {
-						Description: "Free memory (bytes) that is unused and available for allocation, as a point-in-time snapshot. The available memory capacity is reported for an entity (such as Host or Cluster) when inventory data is collected for that entity. As part of the inventory data, a snapshot of the free and used memory capacity is also reported.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"used": {
-						Description: "Memory (bytes) that has been already used up, as a point-in-time snapshot.",
-						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 				},
@@ -507,7 +467,7 @@ func dataSourceHyperflexCluster() *schema.Resource {
 			},
 		},
 		"parent_cluster": {
-			Description: "A reference to a hyperflexBaseCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Description: "A reference to a computeBaseCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -575,46 +535,6 @@ func dataSourceHyperflexCluster() *schema.Resource {
 				},
 			},
 		},
-		"processor_capacity": {
-			Description: "The capacity and usage information for CPU power on this cluster.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"capacity": {
-						Description: "Total capacity of the entity in MHz.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"free": {
-						Description: "Free CPU capacity in MHz, as a point-in-time snapshot. The available CPU capacity is reported for an entity (such as Host or Cluster) when inventory data is collected for that entity. As part of the inventory data, a snapshot of the free and used CPU capacity is also reported.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"used": {
-						Description: "Used CPU capacity of the entity in MHz, as a point-in-time snapshot.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-				},
-			},
-		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -664,6 +584,75 @@ func dataSourceHyperflexCluster() *schema.Resource {
 			Description: "The storage capacity in this cluster.",
 			Type:        schema.TypeInt,
 			Optional:    true,
+		},
+		"storage_client_ip_pools": {
+			Description: "An array of relationships to ippoolPool resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"storage_client_vrf": {
+			Description: "A reference to a vrfVrf resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"storage_containers": {
 			Description: "An array of relationships to storageHyperFlexStorageContainer resources.",
@@ -972,11 +961,6 @@ func dataSourceHyperflexCluster() *schema.Resource {
 					},
 				},
 			},
-		},
-		"total_cores": {
-			Description: "Total number of CPU cores in this cluster. It is a cumulative number across all hosts in the cluster.",
-			Type:        schema.TypeInt,
-			Optional:    true,
 		},
 		"upgrade_status": {
 			Description: "The upgrade status of the HyperFlex cluster.\n* `Unknown` - The upgrade status of the HyperFlex cluster could not be determined.\n* `Ok` - The upgrade of the HyperFlex cluster is complete.\n* `InProgress` - The upgrade of the HyperFlex cluster is in-progress.\n* `Failed` - The upgrade of the HyperFlex cluster has failed.\n* `Waiting` - The upgrade of the HyperFlex cluster is waiting to continue execution.",
@@ -1369,7 +1353,7 @@ func dataSourceHyperflexCluster() *schema.Resource {
 			Optional:    true,
 		},
 		"deployment_type": {
-			Description: "The deployment type of the HyperFlex cluster.\nThe cluster can have one of the following configurations:\n1. Datacenter: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes on a single site.\n2. Stretched Cluster: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes distributed across multiple sites.\n3. Edge: The HyperFlex cluster consists of 2-4 standalone nodes.\nIf the cluster is running a HyperFlex Data Platform version less than 4.0 or if the deployment type cannot be determined,\nthe deployment type is set as 'NA' (not available).\n* `NA` - The deployment type of the HyperFlex cluster is not available.\n* `Datacenter` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes on the same site.\n* `Stretched Cluster` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes across different sites.\n* `Edge` - The deployment type of a HyperFlex cluster consisting of 2 or more standalone nodes.",
+			Description: "The deployment type of the HyperFlex cluster.\nThe cluster can have one of the following configurations:\n1. Datacenter: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes on a single site.\n2. Stretched Cluster: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes distributed across multiple sites.\n3. Edge: The HyperFlex cluster consists of 2-4 standalone nodes.\nIf the cluster is running a HyperFlex Data Platform version less than 4.0 or if the deployment type cannot be determined,\nthe deployment type is set as 'NA' (not available).\n* `NA` - The deployment type of the cluster is not available.\n* `Datacenter` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes on the same site.\n* `Stretched Cluster` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes across different sites.\n* `Edge` - The deployment type of a cluster consisting of 2 or more standalone nodes.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1389,7 +1373,7 @@ func dataSourceHyperflexCluster() *schema.Resource {
 			Optional:    true,
 		},
 		"drive_type": {
-			Description: "The type of the drives used for storage in this cluster.\n* `NA` - The drive type of the HyperFlex cluster is not available.\n* `All-Flash` - Indicates that this HyperFlex cluster contains flash drives only.\n* `Hybrid` - Indicates that this HyperFlex cluster contains both flash and hard disk drives.",
+			Description: "The type of the drives used for storage in this cluster.\n* `NA` - The drive type of the cluster is not available.\n* `All-Flash` - Indicates that this cluster contains flash drives only.\n* `Hybrid` - Indicates that this cluster contains both flash and hard disk drives.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1454,7 +1438,7 @@ func dataSourceHyperflexCluster() *schema.Resource {
 			Optional:    true,
 		},
 		"identity": {
-			Description: "The internally generated identity of this cluster. This entity is not manipulated by users. It aids in uniquely identifying the cluster object. In case of VMware, this is a MOR (managed object reference).",
+			Description: "The internally generated identity of this cluster. \nThis entity is not manipulated by users. It aids in uniquely identifying \nthe cluster object. In case of VMware, this is a MOR (managed object reference).",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1488,46 +1472,6 @@ func dataSourceHyperflexCluster() *schema.Resource {
 					"selector": {
 						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
-		"memory_capacity": {
-			Description: "The capacity and usage information for memory on this cluster.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"capacity": {
-						Description: "The total memory capacity of the entity in bytes.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"free": {
-						Description: "Free memory (bytes) that is unused and available for allocation, as a point-in-time snapshot. The available memory capacity is reported for an entity (such as Host or Cluster) when inventory data is collected for that entity. As part of the inventory data, a snapshot of the free and used memory capacity is also reported.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"used": {
-						Description: "Memory (bytes) that has been already used up, as a point-in-time snapshot.",
-						Type:        schema.TypeInt,
 						Optional:    true,
 					},
 				},
@@ -1633,7 +1577,7 @@ func dataSourceHyperflexCluster() *schema.Resource {
 			},
 		},
 		"parent_cluster": {
-			Description: "A reference to a hyperflexBaseCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Description: "A reference to a computeBaseCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -1701,46 +1645,6 @@ func dataSourceHyperflexCluster() *schema.Resource {
 				},
 			},
 		},
-		"processor_capacity": {
-			Description: "The capacity and usage information for CPU power on this cluster.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"capacity": {
-						Description: "Total capacity of the entity in MHz.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"free": {
-						Description: "Free CPU capacity in MHz, as a point-in-time snapshot. The available CPU capacity is reported for an entity (such as Host or Cluster) when inventory data is collected for that entity. As part of the inventory data, a snapshot of the free and used CPU capacity is also reported.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"used": {
-						Description: "Used CPU capacity of the entity in MHz, as a point-in-time snapshot.",
-						Type:        schema.TypeInt,
-						Optional:    true,
-					},
-				},
-			},
-		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1790,6 +1694,75 @@ func dataSourceHyperflexCluster() *schema.Resource {
 			Description: "The storage capacity in this cluster.",
 			Type:        schema.TypeInt,
 			Optional:    true,
+		},
+		"storage_client_ip_pools": {
+			Description: "An array of relationships to ippoolPool resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"storage_client_vrf": {
+			Description: "A reference to a vrfVrf resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"storage_containers": {
 			Description: "An array of relationships to storageHyperFlexStorageContainer resources.",
@@ -2098,11 +2071,6 @@ func dataSourceHyperflexCluster() *schema.Resource {
 					},
 				},
 			},
-		},
-		"total_cores": {
-			Description: "Total number of CPU cores in this cluster. It is a cumulative number across all hosts in the cluster.",
-			Type:        schema.TypeInt,
-			Optional:    true,
 		},
 		"upgrade_status": {
 			Description: "The upgrade status of the HyperFlex cluster.\n* `Unknown` - The upgrade status of the HyperFlex cluster could not be determined.\n* `Ok` - The upgrade of the HyperFlex cluster is complete.\n* `InProgress` - The upgrade of the HyperFlex cluster is in-progress.\n* `Failed` - The upgrade of the HyperFlex cluster has failed.\n* `Waiting` - The upgrade of the HyperFlex cluster is waiting to continue execution.",
@@ -2695,55 +2663,6 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 		}
 	}
 
-	if v, ok := d.GetOk("memory_capacity"); ok {
-		p := make([]models.VirtualizationMemoryCapacity, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.VirtualizationMemoryCapacity{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			if v, ok := l["capacity"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetCapacity(x)
-				}
-			}
-			o.SetClassId("virtualization.MemoryCapacity")
-			if v, ok := l["free"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetFree(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["used"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetUsed(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetMemoryCapacity(x)
-		}
-	}
-
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -2870,7 +2789,7 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 	}
 
 	if v, ok := d.GetOk("parent_cluster"); ok {
-		p := make([]models.HyperflexBaseClusterRelationship, 0, 1)
+		p := make([]models.ComputeBaseClusterRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -2904,7 +2823,7 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsHyperflexBaseClusterRelationship(o))
+			p = append(p, models.MoMoRefAsComputeBaseClusterRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
@@ -2950,55 +2869,6 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
-	}
-
-	if v, ok := d.GetOk("processor_capacity"); ok {
-		p := make([]models.VirtualizationComputeCapacity, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.VirtualizationComputeCapacity{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			if v, ok := l["capacity"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetCapacity(x)
-				}
-			}
-			o.SetClassId("virtualization.ComputeCapacity")
-			if v, ok := l["free"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetFree(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["used"]; ok {
-				{
-					x := int64(v.(int))
-					o.SetUsed(x)
-				}
-			}
-			p = append(p, *o)
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetProcessorCapacity(x)
-		}
 	}
 
 	if v, ok := d.GetOk("registered_device"); ok {
@@ -3057,6 +2927,89 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOkExists("storage_capacity"); ok {
 		x := int64(v.(int))
 		o.SetStorageCapacity(x)
+	}
+
+	if v, ok := d.GetOk("storage_client_ip_pools"); ok {
+		x := make([]models.IppoolPoolRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsIppoolPoolRelationship(o))
+		}
+		o.SetStorageClientIpPools(x)
+	}
+
+	if v, ok := d.GetOk("storage_client_vrf"); ok {
+		p := make([]models.VrfVrfRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsVrfVrfRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStorageClientVrf(x)
+		}
 	}
 
 	if v, ok := d.GetOk("storage_containers"); ok {
@@ -3171,11 +3124,6 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 			x = append(x, *o)
 		}
 		o.SetTags(x)
-	}
-
-	if v, ok := d.GetOkExists("total_cores"); ok {
-		x := int64(v.(int))
-		o.SetTotalCores(x)
 	}
 
 	if v, ok := d.GetOk("upgrade_status"); ok {
@@ -3386,8 +3334,6 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 
 				temp["license"] = flattenMapHyperflexLicenseRelationship(s.GetLicense(), d)
 
-				temp["memory_capacity"] = flattenMapVirtualizationMemoryCapacity(s.GetMemoryCapacity(), d)
-
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["name"] = (s.GetName())
@@ -3399,16 +3345,18 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
-				temp["parent_cluster"] = flattenMapHyperflexBaseClusterRelationship(s.GetParentCluster(), d)
+				temp["parent_cluster"] = flattenMapComputeBaseClusterRelationship(s.GetParentCluster(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
-
-				temp["processor_capacity"] = flattenMapVirtualizationComputeCapacity(s.GetProcessorCapacity(), d)
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["status"] = (s.GetStatus())
 				temp["storage_capacity"] = (s.GetStorageCapacity())
+
+				temp["storage_client_ip_pools"] = flattenListIppoolPoolRelationship(s.GetStorageClientIpPools(), d)
+
+				temp["storage_client_vrf"] = flattenMapVrfVrfRelationship(s.GetStorageClientVrf(), d)
 
 				temp["storage_containers"] = flattenListStorageHyperFlexStorageContainerRelationship(s.GetStorageContainers(), d)
 				temp["storage_node_count"] = (s.GetStorageNodeCount())
@@ -3417,7 +3365,6 @@ func dataSourceHyperflexClusterRead(c context.Context, d *schema.ResourceData, m
 				temp["summary"] = flattenMapHyperflexSummary(s.GetSummary(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
-				temp["total_cores"] = (s.GetTotalCores())
 				temp["upgrade_status"] = (s.GetUpgradeStatus())
 				temp["utilization_percentage"] = (s.GetUtilizationPercentage())
 				temp["utilization_trend_percentage"] = (s.GetUtilizationTrendPercentage())

@@ -118,7 +118,7 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				},
 			},
 			"associated_compute_cluster": {
-				Description: "A reference to a hyperflexHxapCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Description: "A reference to a virtualizationIweCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -2667,7 +2667,7 @@ func resourceHyperflexClusterProfileRead(c context.Context, d *schema.ResourceDa
 		return diag.Errorf("error occurred while setting property AssociatedCluster in HyperflexClusterProfile object: %s", err.Error())
 	}
 
-	if err := d.Set("associated_compute_cluster", flattenMapHyperflexHxapClusterRelationship(s.GetAssociatedComputeCluster(), d)); err != nil {
+	if err := d.Set("associated_compute_cluster", flattenMapVirtualizationIweClusterRelationship(s.GetAssociatedComputeCluster(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property AssociatedComputeCluster in HyperflexClusterProfile object: %s", err.Error())
 	}
 

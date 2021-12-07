@@ -133,6 +133,11 @@ func dataSourceHyperflexLocalCredentialPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_deployment_private_key_set": {
+			Description: "Indicates whether the value of the 'deploymentPrivateKey' property has been set.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_hxdp_root_pwd_set": {
 			Description: "Indicates whether the value of the 'hxdpRootPwd' property has been set.",
 			Type:        schema.TypeBool,
@@ -525,6 +530,11 @@ func dataSourceHyperflexLocalCredentialPolicy() *schema.Resource {
 		"hypervisor_admin_pwd": {
 			Description: "The Hypervisor root password. For HyperFlex Data Platform 3.0 or later, if the factory default password was not manually changed, you must set a new custom password. If the password was manually changed, you must not enable the factory default password property and provide the current hypervisor password. Note - All HyperFlex nodes require the same hypervisor password for installation. For HyperFlex Data Platform prior to 3.0, use the default password \"Cisco123\" for newly manufactured HyperFlex servers. A custom password should only be entered if hypervisor credentials were manually changed prior to deployment.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"is_deployment_private_key_set": {
+			Description: "Indicates whether the value of the 'deploymentPrivateKey' property has been set.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"is_hxdp_root_pwd_set": {
@@ -953,6 +963,11 @@ func dataSourceHyperflexLocalCredentialPolicyRead(c context.Context, d *schema.R
 		o.SetHypervisorAdminPwd(x)
 	}
 
+	if v, ok := d.GetOkExists("is_deployment_private_key_set"); ok {
+		x := (v.(bool))
+		o.SetIsDeploymentPrivateKeySet(x)
+	}
+
 	if v, ok := d.GetOkExists("is_hxdp_root_pwd_set"); ok {
 		x := (v.(bool))
 		o.SetIsHxdpRootPwdSet(x)
@@ -1281,6 +1296,7 @@ func dataSourceHyperflexLocalCredentialPolicyRead(c context.Context, d *schema.R
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["factory_hypervisor_password"] = (s.GetFactoryHypervisorPassword())
 				temp["hypervisor_admin"] = (s.GetHypervisorAdmin())
+				temp["is_deployment_private_key_set"] = (s.GetIsDeploymentPrivateKeySet())
 				temp["is_hxdp_root_pwd_set"] = (s.GetIsHxdpRootPwdSet())
 				temp["is_hypervisor_admin_pwd_set"] = (s.GetIsHypervisorAdminPwdSet())
 

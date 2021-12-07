@@ -8,10 +8,15 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareHost"]
 **BootTime** | Pointer to **time.Time** | The time when this host booted up. | [optional] 
 **ConnectionState** | Pointer to **string** | Indicates if the host is connected to the vCenter. Values are connected, not connected. | [optional] 
+**DcInvPath** | Pointer to **string** | This field stores the inventory path of a datacenter. Used in host maintenance action. | [optional] 
+**DnsServers** | Pointer to **[]string** |  | [optional] 
 **HwPowerState** | Pointer to **string** | Is the host Powered-up or Powered-down. * &#x60;Unknown&#x60; - The entity&#39;s power state is unknown. * &#x60;PoweringOn&#x60; - The entity is powering on. * &#x60;PoweredOn&#x60; - The entity is powered on. * &#x60;PoweringOff&#x60; - The entity is powering off. * &#x60;PoweredOff&#x60; - The entity is powered down. * &#x60;StandBy&#x60; - The entity is in standby mode. * &#x60;Paused&#x60; - The entity is in pause state. * &#x60;Rebooting&#x60; - The entity reboot is in progress. * &#x60;&#x60; - The entity&#39;s power state is not available. | [optional] [default to "Unknown"]
+**IsSshEnabled** | Pointer to **bool** | True if SSH is enabled in the host, false otherwise. | [optional] 
 **NetworkAdapterCount** | Pointer to **int64** | The count of all network adapters attached to this host. | [optional] 
+**NtpServers** | Pointer to **[]string** |  | [optional] 
 **ResourceConsumed** | Pointer to [**NullableVirtualizationVmwareResourceConsumption**](VirtualizationVmwareResourceConsumption.md) |  | [optional] 
 **StorageAdapterCount** | Pointer to **int64** | The count of all storage adapters attached to this host. | [optional] 
+**TimeZone** | Pointer to **string** | Time zone this host is in. | [optional] 
 **VcenterHostId** | Pointer to **string** | The identity of this host within vCenter (optional). | [optional] 
 **Cluster** | Pointer to [**VirtualizationVmwareClusterRelationship**](VirtualizationVmwareClusterRelationship.md) |  | [optional] 
 **Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](VirtualizationVmwareDatacenterRelationship.md) |  | [optional] 
@@ -130,6 +135,66 @@ SetConnectionState sets ConnectionState field to given value.
 
 HasConnectionState returns a boolean if a field has been set.
 
+### GetDcInvPath
+
+`func (o *VirtualizationVmwareHost) GetDcInvPath() string`
+
+GetDcInvPath returns the DcInvPath field if non-nil, zero value otherwise.
+
+### GetDcInvPathOk
+
+`func (o *VirtualizationVmwareHost) GetDcInvPathOk() (*string, bool)`
+
+GetDcInvPathOk returns a tuple with the DcInvPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDcInvPath
+
+`func (o *VirtualizationVmwareHost) SetDcInvPath(v string)`
+
+SetDcInvPath sets DcInvPath field to given value.
+
+### HasDcInvPath
+
+`func (o *VirtualizationVmwareHost) HasDcInvPath() bool`
+
+HasDcInvPath returns a boolean if a field has been set.
+
+### GetDnsServers
+
+`func (o *VirtualizationVmwareHost) GetDnsServers() []string`
+
+GetDnsServers returns the DnsServers field if non-nil, zero value otherwise.
+
+### GetDnsServersOk
+
+`func (o *VirtualizationVmwareHost) GetDnsServersOk() (*[]string, bool)`
+
+GetDnsServersOk returns a tuple with the DnsServers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDnsServers
+
+`func (o *VirtualizationVmwareHost) SetDnsServers(v []string)`
+
+SetDnsServers sets DnsServers field to given value.
+
+### HasDnsServers
+
+`func (o *VirtualizationVmwareHost) HasDnsServers() bool`
+
+HasDnsServers returns a boolean if a field has been set.
+
+### SetDnsServersNil
+
+`func (o *VirtualizationVmwareHost) SetDnsServersNil(b bool)`
+
+ SetDnsServersNil sets the value for DnsServers to be an explicit nil
+
+### UnsetDnsServers
+`func (o *VirtualizationVmwareHost) UnsetDnsServers()`
+
+UnsetDnsServers ensures that no value is present for DnsServers, not even an explicit nil
 ### GetHwPowerState
 
 `func (o *VirtualizationVmwareHost) GetHwPowerState() string`
@@ -154,6 +219,31 @@ SetHwPowerState sets HwPowerState field to given value.
 `func (o *VirtualizationVmwareHost) HasHwPowerState() bool`
 
 HasHwPowerState returns a boolean if a field has been set.
+
+### GetIsSshEnabled
+
+`func (o *VirtualizationVmwareHost) GetIsSshEnabled() bool`
+
+GetIsSshEnabled returns the IsSshEnabled field if non-nil, zero value otherwise.
+
+### GetIsSshEnabledOk
+
+`func (o *VirtualizationVmwareHost) GetIsSshEnabledOk() (*bool, bool)`
+
+GetIsSshEnabledOk returns a tuple with the IsSshEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSshEnabled
+
+`func (o *VirtualizationVmwareHost) SetIsSshEnabled(v bool)`
+
+SetIsSshEnabled sets IsSshEnabled field to given value.
+
+### HasIsSshEnabled
+
+`func (o *VirtualizationVmwareHost) HasIsSshEnabled() bool`
+
+HasIsSshEnabled returns a boolean if a field has been set.
 
 ### GetNetworkAdapterCount
 
@@ -180,6 +270,41 @@ SetNetworkAdapterCount sets NetworkAdapterCount field to given value.
 
 HasNetworkAdapterCount returns a boolean if a field has been set.
 
+### GetNtpServers
+
+`func (o *VirtualizationVmwareHost) GetNtpServers() []string`
+
+GetNtpServers returns the NtpServers field if non-nil, zero value otherwise.
+
+### GetNtpServersOk
+
+`func (o *VirtualizationVmwareHost) GetNtpServersOk() (*[]string, bool)`
+
+GetNtpServersOk returns a tuple with the NtpServers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNtpServers
+
+`func (o *VirtualizationVmwareHost) SetNtpServers(v []string)`
+
+SetNtpServers sets NtpServers field to given value.
+
+### HasNtpServers
+
+`func (o *VirtualizationVmwareHost) HasNtpServers() bool`
+
+HasNtpServers returns a boolean if a field has been set.
+
+### SetNtpServersNil
+
+`func (o *VirtualizationVmwareHost) SetNtpServersNil(b bool)`
+
+ SetNtpServersNil sets the value for NtpServers to be an explicit nil
+
+### UnsetNtpServers
+`func (o *VirtualizationVmwareHost) UnsetNtpServers()`
+
+UnsetNtpServers ensures that no value is present for NtpServers, not even an explicit nil
 ### GetResourceConsumed
 
 `func (o *VirtualizationVmwareHost) GetResourceConsumed() VirtualizationVmwareResourceConsumption`
@@ -239,6 +364,31 @@ SetStorageAdapterCount sets StorageAdapterCount field to given value.
 `func (o *VirtualizationVmwareHost) HasStorageAdapterCount() bool`
 
 HasStorageAdapterCount returns a boolean if a field has been set.
+
+### GetTimeZone
+
+`func (o *VirtualizationVmwareHost) GetTimeZone() string`
+
+GetTimeZone returns the TimeZone field if non-nil, zero value otherwise.
+
+### GetTimeZoneOk
+
+`func (o *VirtualizationVmwareHost) GetTimeZoneOk() (*string, bool)`
+
+GetTimeZoneOk returns a tuple with the TimeZone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeZone
+
+`func (o *VirtualizationVmwareHost) SetTimeZone(v string)`
+
+SetTimeZone sets TimeZone field to given value.
+
+### HasTimeZone
+
+`func (o *VirtualizationVmwareHost) HasTimeZone() bool`
+
+HasTimeZone returns a boolean if a field has been set.
 
 ### GetVcenterHostId
 

@@ -232,9 +232,72 @@ func dataSourceKubernetesBaremetalNodeProfile() *schema.Resource {
 									Optional:    true,
 								},
 								"gateway": {
-									Description: "The Network Gateway for the Network Interface.",
+									Description: "Deprecated. This will add a default route as long as the first default route in Routes is not different. If is different, Gateway will be replaced with that default route. If there is no default Route and this is set, then Routes will be updated with the first entry as a default with this default gateway. If there is only one default Route and this gateway becomes empty, then the default routes will all be removed. Do not set if using Ip Pools, as the gateway is configured in the pool. This will be removed in the future.",
 									Type:        schema.TypeString,
 									Optional:    true,
+								},
+								"ip_v4_configs": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"ip": {
+												Description: "IPv4 Address in CIDR format.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"lease": {
+												Description: "The IP Lease if allocated from a Pool. It can include gateway information.",
+												Type:        schema.TypeList,
+												MaxItems:    1,
+												Optional:    true,
+												Elem: &schema.Resource{
+													Schema: map[string]*schema.Schema{
+														"additional_properties": {
+															Type:             schema.TypeString,
+															Optional:         true,
+															DiffSuppressFunc: SuppressDiffAdditionProps,
+														},
+														"class_id": {
+															Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"moid": {
+															Description: "The Moid of the referenced REST resource.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"object_type": {
+															Description: "The fully-qualified name of the remote type referred by this relationship.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"selector": {
+															Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+													},
+												},
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
 								},
 								"matcher": {
 									Description: "The matcher to be used to find the physical network interface represented by this ethernet device.",
@@ -286,6 +349,44 @@ func dataSourceKubernetesBaremetalNodeProfile() *schema.Resource {
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
+								"provider_name": {
+									Description: "If the infrastructure network is selectable, this indicates which network to attach to the port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"routes": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"to": {
+												Description: "The destination subnet, if set to 0.0.0.0/0 then the Route is considered a default route.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"via": {
+												Description: "Via is the gateway for traffic destined for the subnet in the To property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+								},
 							},
 						},
 					},
@@ -315,7 +416,7 @@ func dataSourceKubernetesBaremetalNodeProfile() *schema.Resource {
 									Optional:    true,
 								},
 								"gateway": {
-									Description: "The Network Gateway for the Network Interface.",
+									Description: "Deprecated. This will add a default route as long as the first default route in Routes is not different. If is different, Gateway will be replaced with that default route. If there is no default Route and this is set, then Routes will be updated with the first entry as a default with this default gateway. If there is only one default Route and this gateway becomes empty, then the default routes will all be removed. Do not set if using Ip Pools, as the gateway is configured in the pool. This will be removed in the future.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -324,6 +425,69 @@ func dataSourceKubernetesBaremetalNodeProfile() *schema.Resource {
 									Optional: true,
 									Elem: &schema.Schema{
 										Type: schema.TypeString}},
+								"ip_v4_configs": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"ip": {
+												Description: "IPv4 Address in CIDR format.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"lease": {
+												Description: "The IP Lease if allocated from a Pool. It can include gateway information.",
+												Type:        schema.TypeList,
+												MaxItems:    1,
+												Optional:    true,
+												Elem: &schema.Resource{
+													Schema: map[string]*schema.Schema{
+														"additional_properties": {
+															Type:             schema.TypeString,
+															Optional:         true,
+															DiffSuppressFunc: SuppressDiffAdditionProps,
+														},
+														"class_id": {
+															Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"moid": {
+															Description: "The Moid of the referenced REST resource.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"object_type": {
+															Description: "The fully-qualified name of the remote type referred by this relationship.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"selector": {
+															Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+													},
+												},
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+								},
 								"mtu": {
 									Description: "The MTU to assign to this Network Interface.",
 									Type:        schema.TypeInt,
@@ -338,6 +502,39 @@ func dataSourceKubernetesBaremetalNodeProfile() *schema.Resource {
 									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 									Type:        schema.TypeString,
 									Optional:    true,
+								},
+								"routes": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"to": {
+												Description: "The destination subnet, if set to 0.0.0.0/0 then the Route is considered a default route.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"via": {
+												Description: "Via is the gateway for traffic destined for the subnet in the To property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
 								},
 								"vlan": {
 									Description: "Native VLAN for to use for the bond.",
@@ -997,9 +1194,72 @@ func dataSourceKubernetesBaremetalNodeProfile() *schema.Resource {
 									Optional:    true,
 								},
 								"gateway": {
-									Description: "The Network Gateway for the Network Interface.",
+									Description: "Deprecated. This will add a default route as long as the first default route in Routes is not different. If is different, Gateway will be replaced with that default route. If there is no default Route and this is set, then Routes will be updated with the first entry as a default with this default gateway. If there is only one default Route and this gateway becomes empty, then the default routes will all be removed. Do not set if using Ip Pools, as the gateway is configured in the pool. This will be removed in the future.",
 									Type:        schema.TypeString,
 									Optional:    true,
+								},
+								"ip_v4_configs": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"ip": {
+												Description: "IPv4 Address in CIDR format.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"lease": {
+												Description: "The IP Lease if allocated from a Pool. It can include gateway information.",
+												Type:        schema.TypeList,
+												MaxItems:    1,
+												Optional:    true,
+												Elem: &schema.Resource{
+													Schema: map[string]*schema.Schema{
+														"additional_properties": {
+															Type:             schema.TypeString,
+															Optional:         true,
+															DiffSuppressFunc: SuppressDiffAdditionProps,
+														},
+														"class_id": {
+															Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"moid": {
+															Description: "The Moid of the referenced REST resource.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"object_type": {
+															Description: "The fully-qualified name of the remote type referred by this relationship.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"selector": {
+															Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+													},
+												},
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
 								},
 								"matcher": {
 									Description: "The matcher to be used to find the physical network interface represented by this ethernet device.",
@@ -1051,6 +1311,44 @@ func dataSourceKubernetesBaremetalNodeProfile() *schema.Resource {
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
+								"provider_name": {
+									Description: "If the infrastructure network is selectable, this indicates which network to attach to the port.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"routes": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"to": {
+												Description: "The destination subnet, if set to 0.0.0.0/0 then the Route is considered a default route.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"via": {
+												Description: "Via is the gateway for traffic destined for the subnet in the To property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+								},
 							},
 						},
 					},
@@ -1080,7 +1378,7 @@ func dataSourceKubernetesBaremetalNodeProfile() *schema.Resource {
 									Optional:    true,
 								},
 								"gateway": {
-									Description: "The Network Gateway for the Network Interface.",
+									Description: "Deprecated. This will add a default route as long as the first default route in Routes is not different. If is different, Gateway will be replaced with that default route. If there is no default Route and this is set, then Routes will be updated with the first entry as a default with this default gateway. If there is only one default Route and this gateway becomes empty, then the default routes will all be removed. Do not set if using Ip Pools, as the gateway is configured in the pool. This will be removed in the future.",
 									Type:        schema.TypeString,
 									Optional:    true,
 								},
@@ -1089,6 +1387,69 @@ func dataSourceKubernetesBaremetalNodeProfile() *schema.Resource {
 									Optional: true,
 									Elem: &schema.Schema{
 										Type: schema.TypeString}},
+								"ip_v4_configs": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"ip": {
+												Description: "IPv4 Address in CIDR format.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"lease": {
+												Description: "The IP Lease if allocated from a Pool. It can include gateway information.",
+												Type:        schema.TypeList,
+												MaxItems:    1,
+												Optional:    true,
+												Elem: &schema.Resource{
+													Schema: map[string]*schema.Schema{
+														"additional_properties": {
+															Type:             schema.TypeString,
+															Optional:         true,
+															DiffSuppressFunc: SuppressDiffAdditionProps,
+														},
+														"class_id": {
+															Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"moid": {
+															Description: "The Moid of the referenced REST resource.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"object_type": {
+															Description: "The fully-qualified name of the remote type referred by this relationship.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+														"selector": {
+															Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+															Type:        schema.TypeString,
+															Optional:    true,
+														},
+													},
+												},
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
+								},
 								"mtu": {
 									Description: "The MTU to assign to this Network Interface.",
 									Type:        schema.TypeInt,
@@ -1103,6 +1464,39 @@ func dataSourceKubernetesBaremetalNodeProfile() *schema.Resource {
 									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 									Type:        schema.TypeString,
 									Optional:    true,
+								},
+								"routes": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Resource{
+										Schema: map[string]*schema.Schema{
+											"additional_properties": {
+												Type:             schema.TypeString,
+												Optional:         true,
+												DiffSuppressFunc: SuppressDiffAdditionProps,
+											},
+											"class_id": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"object_type": {
+												Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"to": {
+												Description: "The destination subnet, if set to 0.0.0.0/0 then the Route is considered a default route.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"via": {
+												Description: "Via is the gateway for traffic destined for the subnet in the To property.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+										},
+									},
 								},
 								"vlan": {
 									Description: "Native VLAN for to use for the bond.",
@@ -1806,6 +2200,43 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 								o.SetGateway(x)
 							}
 						}
+						if v, ok := l["ip_v4_configs"]; ok {
+							{
+								x := make([]models.KubernetesIpV4Config, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewKubernetesIpV4ConfigWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("kubernetes.IpV4Config")
+									if v, ok := l["ip"]; ok {
+										{
+											x := (v.(string))
+											o.SetIp(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetIpV4Configs(x)
+								}
+							}
+						}
 						if v, ok := l["matcher"]; ok {
 							{
 								p := make([]models.KubernetesEthernetMatcher, 0, 1)
@@ -1866,6 +2297,55 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 							{
 								x := (v.(string))
 								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["provider_name"]; ok {
+							{
+								x := (v.(string))
+								o.SetProviderName(x)
+							}
+						}
+						if v, ok := l["routes"]; ok {
+							{
+								x := make([]models.KubernetesRoute, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewKubernetesRouteWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("kubernetes.Route")
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["to"]; ok {
+										{
+											x := (v.(string))
+											o.SetTo(x)
+										}
+									}
+									if v, ok := l["via"]; ok {
+										{
+											x := (v.(string))
+											o.SetVia(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetRoutes(x)
+								}
 							}
 						}
 						x = append(x, *o)
@@ -1933,6 +2413,43 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 								}
 							}
 						}
+						if v, ok := l["ip_v4_configs"]; ok {
+							{
+								x := make([]models.KubernetesIpV4Config, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewKubernetesIpV4ConfigWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("kubernetes.IpV4Config")
+									if v, ok := l["ip"]; ok {
+										{
+											x := (v.(string))
+											o.SetIp(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetIpV4Configs(x)
+								}
+							}
+						}
 						if v, ok := l["mtu"]; ok {
 							{
 								x := int64(v.(int))
@@ -1949,6 +2466,49 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 							{
 								x := (v.(string))
 								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["routes"]; ok {
+							{
+								x := make([]models.KubernetesRoute, 0)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									o := models.NewKubernetesRouteWithDefaults()
+									l := s[i].(map[string]interface{})
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("kubernetes.Route")
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["to"]; ok {
+										{
+											x := (v.(string))
+											o.SetTo(x)
+										}
+									}
+									if v, ok := l["via"]; ok {
+										{
+											x := (v.(string))
+											o.SetVia(x)
+										}
+									}
+									x = append(x, *o)
+								}
+								if len(x) > 0 {
+									o.SetRoutes(x)
+								}
 							}
 						}
 						if v, ok := l["vlan"]; ok {

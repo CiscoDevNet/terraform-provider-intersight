@@ -241,6 +241,12 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 					},
 				},
 			},
+			"pci_link": {
+				Description: "Indicates PCI Link status of adapter.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Default:     0,
+			},
 			"permission_resources": {
 				Description: "An array of relationships to moBaseMo resources.",
 				Type:        schema.TypeList,
@@ -567,6 +573,11 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 
 	o.SetObjectType("capability.AdapterUnitDescriptor")
 
+	if v, ok := d.GetOkExists("pci_link"); ok {
+		x := int64(v.(int))
+		o.SetPciLink(x)
+	}
+
 	if v, ok := d.GetOk("prom_card_type"); ok {
 		x := (v.(string))
 		o.SetPromCardType(x)
@@ -737,6 +748,10 @@ func resourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.Re
 		return diag.Errorf("error occurred while setting property Parent in CapabilityAdapterUnitDescriptor object: %s", err.Error())
 	}
 
+	if err := d.Set("pci_link", (s.GetPciLink())); err != nil {
+		return diag.Errorf("error occurred while setting property PciLink in CapabilityAdapterUnitDescriptor object: %s", err.Error())
+	}
+
 	if err := d.Set("permission_resources", flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property PermissionResources in CapabilityAdapterUnitDescriptor object: %s", err.Error())
 	}
@@ -891,6 +906,12 @@ func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.
 	}
 
 	o.SetObjectType("capability.AdapterUnitDescriptor")
+
+	if d.HasChange("pci_link") {
+		v := d.Get("pci_link")
+		x := int64(v.(int))
+		o.SetPciLink(x)
+	}
 
 	if d.HasChange("prom_card_type") {
 		v := d.Get("prom_card_type")

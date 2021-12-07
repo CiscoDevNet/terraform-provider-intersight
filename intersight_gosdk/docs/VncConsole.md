@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnc.Console"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnc.Console"]
-**VirtualMachine** | Pointer to [**HyperflexHxapVirtualMachineRelationship**](HyperflexHxapVirtualMachineRelationship.md) |  | [optional] 
+**VirtualMachine** | Pointer to [**VirtualizationIweVirtualMachineRelationship**](VirtualizationIweVirtualMachineRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -69,20 +69,20 @@ SetObjectType sets ObjectType field to given value.
 
 ### GetVirtualMachine
 
-`func (o *VncConsole) GetVirtualMachine() HyperflexHxapVirtualMachineRelationship`
+`func (o *VncConsole) GetVirtualMachine() VirtualizationIweVirtualMachineRelationship`
 
 GetVirtualMachine returns the VirtualMachine field if non-nil, zero value otherwise.
 
 ### GetVirtualMachineOk
 
-`func (o *VncConsole) GetVirtualMachineOk() (*HyperflexHxapVirtualMachineRelationship, bool)`
+`func (o *VncConsole) GetVirtualMachineOk() (*VirtualizationIweVirtualMachineRelationship, bool)`
 
 GetVirtualMachineOk returns a tuple with the VirtualMachine field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVirtualMachine
 
-`func (o *VncConsole) SetVirtualMachine(v HyperflexHxapVirtualMachineRelationship)`
+`func (o *VncConsole) SetVirtualMachine(v VirtualizationIweVirtualMachineRelationship)`
 
 SetVirtualMachine sets VirtualMachine field to given value.
 

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4903
+API version: 1.0.9-4929
 Contact: intersight@cisco.com
 */
 
@@ -20,17 +20,14 @@ type VirtualizationBaseClusterAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
-	ObjectType string `json:"ObjectType"`
+	ObjectType   string                   `json:"ObjectType"`
+	AlarmSummary NullableCondAlarmSummary `json:"AlarmSummary,omitempty"`
 	// Identifies the broad type of the underlying hypervisor. * `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * `Unknown` - The hypervisor running on the HyperFlex cluster is not known.
 	HypervisorType *string `json:"HypervisorType,omitempty"`
-	// The internally generated identity of this cluster. This entity is not manipulated by users. It aids in uniquely identifying the cluster object. In case of VMware, this is a MOR (managed object reference).
-	Identity       *string                              `json:"Identity,omitempty"`
-	MemoryCapacity NullableVirtualizationMemoryCapacity `json:"MemoryCapacity,omitempty"`
-	// The user-provided name for this cluster to facilitate identification.
-	Name              *string                               `json:"Name,omitempty"`
+	// The internally generated identity of this cluster. This entity is not manipulated by users.
+	Identity          *string                               `json:"Identity,omitempty"`
+	MemoryCapacity    NullableVirtualizationMemoryCapacity  `json:"MemoryCapacity,omitempty"`
 	ProcessorCapacity NullableVirtualizationComputeCapacity `json:"ProcessorCapacity,omitempty"`
-	// Cluster health status as reported by the hypervisor platform. * `Unknown` - Entity status is unknown. * `Degraded` - State is degraded, and might impact normal operation of the entity. * `Critical` - Entity is in a critical state, impacting operations. * `Ok` - Entity status is in a stable state, operating normally.
-	Status *string `json:"Status,omitempty"`
 	// Total number of CPU cores in this cluster. It is a cumulative number across all hosts in the cluster.
 	TotalCores           *int64 `json:"TotalCores,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -107,6 +104,49 @@ func (o *VirtualizationBaseClusterAllOf) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *VirtualizationBaseClusterAllOf) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetAlarmSummary returns the AlarmSummary field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VirtualizationBaseClusterAllOf) GetAlarmSummary() CondAlarmSummary {
+	if o == nil || o.AlarmSummary.Get() == nil {
+		var ret CondAlarmSummary
+		return ret
+	}
+	return *o.AlarmSummary.Get()
+}
+
+// GetAlarmSummaryOk returns a tuple with the AlarmSummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VirtualizationBaseClusterAllOf) GetAlarmSummaryOk() (*CondAlarmSummary, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AlarmSummary.Get(), o.AlarmSummary.IsSet()
+}
+
+// HasAlarmSummary returns a boolean if a field has been set.
+func (o *VirtualizationBaseClusterAllOf) HasAlarmSummary() bool {
+	if o != nil && o.AlarmSummary.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAlarmSummary gets a reference to the given NullableCondAlarmSummary and assigns it to the AlarmSummary field.
+func (o *VirtualizationBaseClusterAllOf) SetAlarmSummary(v CondAlarmSummary) {
+	o.AlarmSummary.Set(&v)
+}
+
+// SetAlarmSummaryNil sets the value for AlarmSummary to be an explicit nil
+func (o *VirtualizationBaseClusterAllOf) SetAlarmSummaryNil() {
+	o.AlarmSummary.Set(nil)
+}
+
+// UnsetAlarmSummary ensures that no value is present for AlarmSummary, not even an explicit nil
+func (o *VirtualizationBaseClusterAllOf) UnsetAlarmSummary() {
+	o.AlarmSummary.Unset()
 }
 
 // GetHypervisorType returns the HypervisorType field value if set, zero value otherwise.
@@ -216,38 +256,6 @@ func (o *VirtualizationBaseClusterAllOf) UnsetMemoryCapacity() {
 	o.MemoryCapacity.Unset()
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *VirtualizationBaseClusterAllOf) GetName() string {
-	if o == nil || o.Name == nil {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationBaseClusterAllOf) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *VirtualizationBaseClusterAllOf) HasName() bool {
-	if o != nil && o.Name != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *VirtualizationBaseClusterAllOf) SetName(v string) {
-	o.Name = &v
-}
-
 // GetProcessorCapacity returns the ProcessorCapacity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VirtualizationBaseClusterAllOf) GetProcessorCapacity() VirtualizationComputeCapacity {
 	if o == nil || o.ProcessorCapacity.Get() == nil {
@@ -291,38 +299,6 @@ func (o *VirtualizationBaseClusterAllOf) UnsetProcessorCapacity() {
 	o.ProcessorCapacity.Unset()
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise.
-func (o *VirtualizationBaseClusterAllOf) GetStatus() string {
-	if o == nil || o.Status == nil {
-		var ret string
-		return ret
-	}
-	return *o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationBaseClusterAllOf) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
-		return nil, false
-	}
-	return o.Status, true
-}
-
-// HasStatus returns a boolean if a field has been set.
-func (o *VirtualizationBaseClusterAllOf) HasStatus() bool {
-	if o != nil && o.Status != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *VirtualizationBaseClusterAllOf) SetStatus(v string) {
-	o.Status = &v
-}
-
 // GetTotalCores returns the TotalCores field value if set, zero value otherwise.
 func (o *VirtualizationBaseClusterAllOf) GetTotalCores() int64 {
 	if o == nil || o.TotalCores == nil {
@@ -363,6 +339,9 @@ func (o VirtualizationBaseClusterAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.AlarmSummary.IsSet() {
+		toSerialize["AlarmSummary"] = o.AlarmSummary.Get()
+	}
 	if o.HypervisorType != nil {
 		toSerialize["HypervisorType"] = o.HypervisorType
 	}
@@ -372,14 +351,8 @@ func (o VirtualizationBaseClusterAllOf) MarshalJSON() ([]byte, error) {
 	if o.MemoryCapacity.IsSet() {
 		toSerialize["MemoryCapacity"] = o.MemoryCapacity.Get()
 	}
-	if o.Name != nil {
-		toSerialize["Name"] = o.Name
-	}
 	if o.ProcessorCapacity.IsSet() {
 		toSerialize["ProcessorCapacity"] = o.ProcessorCapacity.Get()
-	}
-	if o.Status != nil {
-		toSerialize["Status"] = o.Status
 	}
 	if o.TotalCores != nil {
 		toSerialize["TotalCores"] = o.TotalCores
@@ -404,12 +377,11 @@ func (o *VirtualizationBaseClusterAllOf) UnmarshalJSON(bytes []byte) (err error)
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AlarmSummary")
 		delete(additionalProperties, "HypervisorType")
 		delete(additionalProperties, "Identity")
 		delete(additionalProperties, "MemoryCapacity")
-		delete(additionalProperties, "Name")
 		delete(additionalProperties, "ProcessorCapacity")
-		delete(additionalProperties, "Status")
 		delete(additionalProperties, "TotalCores")
 		o.AdditionalProperties = additionalProperties
 	}

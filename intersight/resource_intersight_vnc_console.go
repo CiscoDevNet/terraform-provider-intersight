@@ -513,7 +513,7 @@ func resourceVncConsole() *schema.Resource {
 				},
 			},
 			"virtual_machine": {
-				Description: "A reference to a hyperflexHxapVirtualMachine resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Description: "A reference to a virtualizationIweVirtualMachine resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -622,7 +622,7 @@ func resourceVncConsoleCreate(c context.Context, d *schema.ResourceData, meta in
 	}
 
 	if v, ok := d.GetOk("virtual_machine"); ok {
-		p := make([]models.HyperflexHxapVirtualMachineRelationship, 0, 1)
+		p := make([]models.VirtualizationIweVirtualMachineRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -656,7 +656,7 @@ func resourceVncConsoleCreate(c context.Context, d *schema.ResourceData, meta in
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsHyperflexHxapVirtualMachineRelationship(o))
+			p = append(p, models.MoMoRefAsVirtualizationIweVirtualMachineRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
@@ -800,7 +800,7 @@ func resourceVncConsoleRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property VersionContext in VncConsole object: %s", err.Error())
 	}
 
-	if err := d.Set("virtual_machine", flattenMapHyperflexHxapVirtualMachineRelationship(s.GetVirtualMachine(), d)); err != nil {
+	if err := d.Set("virtual_machine", flattenMapVirtualizationIweVirtualMachineRelationship(s.GetVirtualMachine(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property VirtualMachine in VncConsole object: %s", err.Error())
 	}
 
@@ -878,7 +878,7 @@ func resourceVncConsoleUpdate(c context.Context, d *schema.ResourceData, meta in
 
 	if d.HasChange("virtual_machine") {
 		v := d.Get("virtual_machine")
-		p := make([]models.HyperflexHxapVirtualMachineRelationship, 0, 1)
+		p := make([]models.VirtualizationIweVirtualMachineRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -912,7 +912,7 @@ func resourceVncConsoleUpdate(c context.Context, d *schema.ResourceData, meta in
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsHyperflexHxapVirtualMachineRelationship(o))
+			p = append(p, models.MoMoRefAsVirtualizationIweVirtualMachineRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]

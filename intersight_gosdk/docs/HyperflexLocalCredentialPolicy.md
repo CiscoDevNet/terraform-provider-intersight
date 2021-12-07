@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **HxdpRootPwd** | Pointer to **string** | HyperFlex storage controller VM password must contain a minimum of 10 characters, with at least 1 lowercase, 1 uppercase, 1 numeric, and 1 of these -_@#$%^&amp;*! special characters. | [optional] 
 **HypervisorAdmin** | Pointer to **string** | Hypervisor administrator username must contain only alphanumeric characters. | [optional] 
 **HypervisorAdminPwd** | Pointer to **string** | The Hypervisor root password. For HyperFlex Data Platform 3.0 or later, if the factory default password was not manually changed, you must set a new custom password. If the password was manually changed, you must not enable the factory default password property and provide the current hypervisor password. Note - All HyperFlex nodes require the same hypervisor password for installation. For HyperFlex Data Platform prior to 3.0, use the default password \&quot;Cisco123\&quot; for newly manufactured HyperFlex servers. A custom password should only be entered if hypervisor credentials were manually changed prior to deployment. | [optional] 
+**IsDeploymentPrivateKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;deploymentPrivateKey&#39; property has been set. | [optional] [readonly] [default to false]
 **IsHxdpRootPwdSet** | Pointer to **bool** | Indicates whether the value of the &#39;hxdpRootPwd&#39; property has been set. | [optional] [readonly] [default to false]
 **IsHypervisorAdminPwdSet** | Pointer to **bool** | Indicates whether the value of the &#39;hypervisorAdminPwd&#39; property has been set. | [optional] [readonly] [default to false]
 **ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
@@ -173,6 +174,31 @@ SetHypervisorAdminPwd sets HypervisorAdminPwd field to given value.
 `func (o *HyperflexLocalCredentialPolicy) HasHypervisorAdminPwd() bool`
 
 HasHypervisorAdminPwd returns a boolean if a field has been set.
+
+### GetIsDeploymentPrivateKeySet
+
+`func (o *HyperflexLocalCredentialPolicy) GetIsDeploymentPrivateKeySet() bool`
+
+GetIsDeploymentPrivateKeySet returns the IsDeploymentPrivateKeySet field if non-nil, zero value otherwise.
+
+### GetIsDeploymentPrivateKeySetOk
+
+`func (o *HyperflexLocalCredentialPolicy) GetIsDeploymentPrivateKeySetOk() (*bool, bool)`
+
+GetIsDeploymentPrivateKeySetOk returns a tuple with the IsDeploymentPrivateKeySet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDeploymentPrivateKeySet
+
+`func (o *HyperflexLocalCredentialPolicy) SetIsDeploymentPrivateKeySet(v bool)`
+
+SetIsDeploymentPrivateKeySet sets IsDeploymentPrivateKeySet field to given value.
+
+### HasIsDeploymentPrivateKeySet
+
+`func (o *HyperflexLocalCredentialPolicy) HasIsDeploymentPrivateKeySet() bool`
+
+HasIsDeploymentPrivateKeySet returns a boolean if a field has been set.
 
 ### GetIsHxdpRootPwdSet
 

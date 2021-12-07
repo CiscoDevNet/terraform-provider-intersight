@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **License** | Pointer to [**HyperflexLicenseRelationship**](HyperflexLicenseRelationship.md) |  | [optional] 
 **Nodes** | Pointer to [**[]HyperflexNodeRelationship**](HyperflexNodeRelationship.md) | An array of relationships to hyperflexNode resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
+**StorageClientIpPools** | Pointer to [**[]IppoolPoolRelationship**](IppoolPoolRelationship.md) | An array of relationships to ippoolPool resources. | [optional] [readonly] 
+**StorageClientVrf** | Pointer to [**VrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
 **StorageContainers** | Pointer to [**[]StorageHyperFlexStorageContainerRelationship**](StorageHyperFlexStorageContainerRelationship.md) | An array of relationships to storageHyperFlexStorageContainer resources. | [optional] [readonly] 
 **Volumes** | Pointer to [**[]StorageHyperFlexVolumeRelationship**](StorageHyperFlexVolumeRelationship.md) | An array of relationships to storageHyperFlexVolume resources. | [optional] [readonly] 
 
@@ -507,6 +509,66 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 `func (o *HyperflexClusterAllOf) HasRegisteredDevice() bool`
 
 HasRegisteredDevice returns a boolean if a field has been set.
+
+### GetStorageClientIpPools
+
+`func (o *HyperflexClusterAllOf) GetStorageClientIpPools() []IppoolPoolRelationship`
+
+GetStorageClientIpPools returns the StorageClientIpPools field if non-nil, zero value otherwise.
+
+### GetStorageClientIpPoolsOk
+
+`func (o *HyperflexClusterAllOf) GetStorageClientIpPoolsOk() (*[]IppoolPoolRelationship, bool)`
+
+GetStorageClientIpPoolsOk returns a tuple with the StorageClientIpPools field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageClientIpPools
+
+`func (o *HyperflexClusterAllOf) SetStorageClientIpPools(v []IppoolPoolRelationship)`
+
+SetStorageClientIpPools sets StorageClientIpPools field to given value.
+
+### HasStorageClientIpPools
+
+`func (o *HyperflexClusterAllOf) HasStorageClientIpPools() bool`
+
+HasStorageClientIpPools returns a boolean if a field has been set.
+
+### SetStorageClientIpPoolsNil
+
+`func (o *HyperflexClusterAllOf) SetStorageClientIpPoolsNil(b bool)`
+
+ SetStorageClientIpPoolsNil sets the value for StorageClientIpPools to be an explicit nil
+
+### UnsetStorageClientIpPools
+`func (o *HyperflexClusterAllOf) UnsetStorageClientIpPools()`
+
+UnsetStorageClientIpPools ensures that no value is present for StorageClientIpPools, not even an explicit nil
+### GetStorageClientVrf
+
+`func (o *HyperflexClusterAllOf) GetStorageClientVrf() VrfVrfRelationship`
+
+GetStorageClientVrf returns the StorageClientVrf field if non-nil, zero value otherwise.
+
+### GetStorageClientVrfOk
+
+`func (o *HyperflexClusterAllOf) GetStorageClientVrfOk() (*VrfVrfRelationship, bool)`
+
+GetStorageClientVrfOk returns a tuple with the StorageClientVrf field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageClientVrf
+
+`func (o *HyperflexClusterAllOf) SetStorageClientVrf(v VrfVrfRelationship)`
+
+SetStorageClientVrf sets StorageClientVrf field to given value.
+
+### HasStorageClientVrf
+
+`func (o *HyperflexClusterAllOf) HasStorageClientVrf() bool`
+
+HasStorageClientVrf returns a boolean if a field has been set.
 
 ### GetStorageContainers
 

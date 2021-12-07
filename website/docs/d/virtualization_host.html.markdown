@@ -14,11 +14,14 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_virtualization_host.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
-* `action`:(string) Action to be performed on a host (Create, PowerState, Migrate, Clone etc).* `None` - A place holder for the default value.* `PowerOffStorageController` - Power off HyperFlex storage controller node running on selected hypervisor host.* `PowerOnStorageController` - Power on HyperFlex storage controller node running on selected hypervisor host. 
+* `action`:(string) Action to be performed on a host (Create, PowerState, Migrate, Clone etc).* `None` - A place holder for the default value.* `EnterMaintenanceMode` - Put a host into maintenance mode.* `ExitMaintenanceMode` - Put a host into active mode.* `PowerOffStorageController` - Power off HyperFlex storage controller node running on selected hypervisor host.* `PowerOnStorageController` - Power on HyperFlex storage controller node running on selected hypervisor host. 
 * `create_time`:(string) The time when this managed object was created. 
+* `discovered`:(bool) Flag to indicate whether the configuration is created from inventory object. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `evacuate`:(bool) If true, move powered-off and suspended virtual machines to other hosts in the cluster. 
 * `hypervisor_type`:(string) Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with.* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
 * `identity`:(string) Unique identifier assigned to the hypervisor host. 
+* `maintenance_state`:(string) Expected state of host (enter maintenance, exit maintenance).* `None` - A place holder for the default value.* `Enter` - Power action is performed on the virtual machine.* `Exit` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) Commercial model information about this hardware. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

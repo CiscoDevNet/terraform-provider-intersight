@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4903
+API version: 1.0.9-4929
 Contact: intersight@cisco.com
 */
 
@@ -19,7 +19,7 @@ import (
 
 // HyperflexBaseCluster A Base HyperFlex cluster with common attributes of a Hyperflex compute cluster and storage cluster with parent & child relationships. A cluster is a grouping of resources such as hosts, compute nodes or storage nodes.
 type HyperflexBaseCluster struct {
-	VirtualizationBaseCluster
+	StorageBaseCluster
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
@@ -35,16 +35,18 @@ type HyperflexBaseCluster struct {
 	ComputeNodeCount *int64 `json:"ComputeNodeCount,omitempty"`
 	// The number of converged nodes that belong to this cluster.
 	ConvergedNodeCount *int64 `json:"ConvergedNodeCount,omitempty"`
-	// The deployment type of the HyperFlex cluster. The cluster can have one of the following configurations: 1. Datacenter: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes on a single site. 2. Stretched Cluster: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes distributed across multiple sites. 3. Edge: The HyperFlex cluster consists of 2-4 standalone nodes. If the cluster is running a HyperFlex Data Platform version less than 4.0 or if the deployment type cannot be determined, the deployment type is set as 'NA' (not available). * `NA` - The deployment type of the HyperFlex cluster is not available. * `Datacenter` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes on the same site. * `Stretched Cluster` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes across different sites. * `Edge` - The deployment type of a HyperFlex cluster consisting of 2 or more standalone nodes.
+	// The deployment type of the HyperFlex cluster. The cluster can have one of the following configurations: 1. Datacenter: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes on a single site. 2. Stretched Cluster: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes distributed across multiple sites. 3. Edge: The HyperFlex cluster consists of 2-4 standalone nodes. If the cluster is running a HyperFlex Data Platform version less than 4.0 or if the deployment type cannot be determined, the deployment type is set as 'NA' (not available). * `NA` - The deployment type of the cluster is not available. * `Datacenter` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes on the same site. * `Stretched Cluster` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes across different sites. * `Edge` - The deployment type of a cluster consisting of 2 or more standalone nodes.
 	DeploymentType *string `json:"DeploymentType,omitempty"`
-	// The type of the drives used for storage in this cluster. * `NA` - The drive type of the HyperFlex cluster is not available. * `All-Flash` - Indicates that this HyperFlex cluster contains flash drives only. * `Hybrid` - Indicates that this HyperFlex cluster contains both flash and hard disk drives.
+	// The type of the drives used for storage in this cluster. * `NA` - The drive type of the cluster is not available. * `All-Flash` - Indicates that this cluster contains flash drives only. * `Hybrid` - Indicates that this cluster contains both flash and hard disk drives.
 	DriveType *string `json:"DriveType,omitempty"`
 	// The HyperFlex Data or Application Platform version of this cluster.
 	HxVersion *string `json:"HxVersion,omitempty"`
+	// Identifies the broad type of the underlying hypervisor. * `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * `Unknown` - The hypervisor running on the HyperFlex cluster is not known.
+	HypervisorType *string `json:"HypervisorType,omitempty"`
 	// The version of hypervisor running on this cluster.
 	HypervisorVersion *string `json:"HypervisorVersion,omitempty"`
-	// The storage capacity in this cluster.
-	StorageCapacity *int64 `json:"StorageCapacity,omitempty"`
+	// The internally generated identity of this cluster.  This entity is not manipulated by users. It aids in uniquely identifying  the cluster object. In case of VMware, this is a MOR (managed object reference).
+	Identity *string `json:"Identity,omitempty"`
 	// The number of storage nodes that belong to this cluster.
 	StorageNodeCount *int64 `json:"StorageNodeCount,omitempty"`
 	// The storage utilization is computed based on total capacity and current capacity utilization.
@@ -56,7 +58,6 @@ type HyperflexBaseCluster struct {
 	AssociatedProfile          *PolicyAbstractProfileRelationship `json:"AssociatedProfile,omitempty"`
 	// An array of relationships to hyperflexBaseCluster resources.
 	ChildClusters        []HyperflexBaseClusterRelationship `json:"ChildClusters,omitempty"`
-	ParentCluster        *HyperflexBaseClusterRelationship  `json:"ParentCluster,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,10 +71,10 @@ func NewHyperflexBaseCluster(classId string, objectType string) *HyperflexBaseCl
 	this := HyperflexBaseCluster{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var hypervisorType string = "ESXi"
-	this.HypervisorType = &hypervisorType
 	var clusterPurpose string = "Storage"
 	this.ClusterPurpose = &clusterPurpose
+	var hypervisorType string = "ESXi"
+	this.HypervisorType = &hypervisorType
 	return &this
 }
 
@@ -82,8 +83,14 @@ func NewHyperflexBaseCluster(classId string, objectType string) *HyperflexBaseCl
 // but it doesn't guarantee that properties required by API are set
 func NewHyperflexBaseClusterWithDefaults() *HyperflexBaseCluster {
 	this := HyperflexBaseCluster{}
+	var classId string = "hyperflex.Cluster"
+	this.ClassId = classId
+	var objectType string = "hyperflex.Cluster"
+	this.ObjectType = objectType
 	var clusterPurpose string = "Storage"
 	this.ClusterPurpose = &clusterPurpose
+	var hypervisorType string = "ESXi"
+	this.HypervisorType = &hypervisorType
 	return &this
 }
 
@@ -434,6 +441,38 @@ func (o *HyperflexBaseCluster) SetHxVersion(v string) {
 	o.HxVersion = &v
 }
 
+// GetHypervisorType returns the HypervisorType field value if set, zero value otherwise.
+func (o *HyperflexBaseCluster) GetHypervisorType() string {
+	if o == nil || o.HypervisorType == nil {
+		var ret string
+		return ret
+	}
+	return *o.HypervisorType
+}
+
+// GetHypervisorTypeOk returns a tuple with the HypervisorType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexBaseCluster) GetHypervisorTypeOk() (*string, bool) {
+	if o == nil || o.HypervisorType == nil {
+		return nil, false
+	}
+	return o.HypervisorType, true
+}
+
+// HasHypervisorType returns a boolean if a field has been set.
+func (o *HyperflexBaseCluster) HasHypervisorType() bool {
+	if o != nil && o.HypervisorType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHypervisorType gets a reference to the given string and assigns it to the HypervisorType field.
+func (o *HyperflexBaseCluster) SetHypervisorType(v string) {
+	o.HypervisorType = &v
+}
+
 // GetHypervisorVersion returns the HypervisorVersion field value if set, zero value otherwise.
 func (o *HyperflexBaseCluster) GetHypervisorVersion() string {
 	if o == nil || o.HypervisorVersion == nil {
@@ -466,36 +505,36 @@ func (o *HyperflexBaseCluster) SetHypervisorVersion(v string) {
 	o.HypervisorVersion = &v
 }
 
-// GetStorageCapacity returns the StorageCapacity field value if set, zero value otherwise.
-func (o *HyperflexBaseCluster) GetStorageCapacity() int64 {
-	if o == nil || o.StorageCapacity == nil {
-		var ret int64
+// GetIdentity returns the Identity field value if set, zero value otherwise.
+func (o *HyperflexBaseCluster) GetIdentity() string {
+	if o == nil || o.Identity == nil {
+		var ret string
 		return ret
 	}
-	return *o.StorageCapacity
+	return *o.Identity
 }
 
-// GetStorageCapacityOk returns a tuple with the StorageCapacity field value if set, nil otherwise
+// GetIdentityOk returns a tuple with the Identity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HyperflexBaseCluster) GetStorageCapacityOk() (*int64, bool) {
-	if o == nil || o.StorageCapacity == nil {
+func (o *HyperflexBaseCluster) GetIdentityOk() (*string, bool) {
+	if o == nil || o.Identity == nil {
 		return nil, false
 	}
-	return o.StorageCapacity, true
+	return o.Identity, true
 }
 
-// HasStorageCapacity returns a boolean if a field has been set.
-func (o *HyperflexBaseCluster) HasStorageCapacity() bool {
-	if o != nil && o.StorageCapacity != nil {
+// HasIdentity returns a boolean if a field has been set.
+func (o *HyperflexBaseCluster) HasIdentity() bool {
+	if o != nil && o.Identity != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageCapacity gets a reference to the given int64 and assigns it to the StorageCapacity field.
-func (o *HyperflexBaseCluster) SetStorageCapacity(v int64) {
-	o.StorageCapacity = &v
+// SetIdentity gets a reference to the given string and assigns it to the Identity field.
+func (o *HyperflexBaseCluster) SetIdentity(v string) {
+	o.Identity = &v
 }
 
 // GetStorageNodeCount returns the StorageNodeCount field value if set, zero value otherwise.
@@ -691,47 +730,15 @@ func (o *HyperflexBaseCluster) SetChildClusters(v []HyperflexBaseClusterRelation
 	o.ChildClusters = v
 }
 
-// GetParentCluster returns the ParentCluster field value if set, zero value otherwise.
-func (o *HyperflexBaseCluster) GetParentCluster() HyperflexBaseClusterRelationship {
-	if o == nil || o.ParentCluster == nil {
-		var ret HyperflexBaseClusterRelationship
-		return ret
-	}
-	return *o.ParentCluster
-}
-
-// GetParentClusterOk returns a tuple with the ParentCluster field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HyperflexBaseCluster) GetParentClusterOk() (*HyperflexBaseClusterRelationship, bool) {
-	if o == nil || o.ParentCluster == nil {
-		return nil, false
-	}
-	return o.ParentCluster, true
-}
-
-// HasParentCluster returns a boolean if a field has been set.
-func (o *HyperflexBaseCluster) HasParentCluster() bool {
-	if o != nil && o.ParentCluster != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetParentCluster gets a reference to the given HyperflexBaseClusterRelationship and assigns it to the ParentCluster field.
-func (o *HyperflexBaseCluster) SetParentCluster(v HyperflexBaseClusterRelationship) {
-	o.ParentCluster = &v
-}
-
 func (o HyperflexBaseCluster) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	serializedVirtualizationBaseCluster, errVirtualizationBaseCluster := json.Marshal(o.VirtualizationBaseCluster)
-	if errVirtualizationBaseCluster != nil {
-		return []byte{}, errVirtualizationBaseCluster
+	serializedStorageBaseCluster, errStorageBaseCluster := json.Marshal(o.StorageBaseCluster)
+	if errStorageBaseCluster != nil {
+		return []byte{}, errStorageBaseCluster
 	}
-	errVirtualizationBaseCluster = json.Unmarshal([]byte(serializedVirtualizationBaseCluster), &toSerialize)
-	if errVirtualizationBaseCluster != nil {
-		return []byte{}, errVirtualizationBaseCluster
+	errStorageBaseCluster = json.Unmarshal([]byte(serializedStorageBaseCluster), &toSerialize)
+	if errStorageBaseCluster != nil {
+		return []byte{}, errStorageBaseCluster
 	}
 	if true {
 		toSerialize["ClassId"] = o.ClassId
@@ -766,11 +773,14 @@ func (o HyperflexBaseCluster) MarshalJSON() ([]byte, error) {
 	if o.HxVersion != nil {
 		toSerialize["HxVersion"] = o.HxVersion
 	}
+	if o.HypervisorType != nil {
+		toSerialize["HypervisorType"] = o.HypervisorType
+	}
 	if o.HypervisorVersion != nil {
 		toSerialize["HypervisorVersion"] = o.HypervisorVersion
 	}
-	if o.StorageCapacity != nil {
-		toSerialize["StorageCapacity"] = o.StorageCapacity
+	if o.Identity != nil {
+		toSerialize["Identity"] = o.Identity
 	}
 	if o.StorageNodeCount != nil {
 		toSerialize["StorageNodeCount"] = o.StorageNodeCount
@@ -789,9 +799,6 @@ func (o HyperflexBaseCluster) MarshalJSON() ([]byte, error) {
 	}
 	if o.ChildClusters != nil {
 		toSerialize["ChildClusters"] = o.ChildClusters
-	}
-	if o.ParentCluster != nil {
-		toSerialize["ParentCluster"] = o.ParentCluster
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -818,16 +825,18 @@ func (o *HyperflexBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
 		ComputeNodeCount *int64 `json:"ComputeNodeCount,omitempty"`
 		// The number of converged nodes that belong to this cluster.
 		ConvergedNodeCount *int64 `json:"ConvergedNodeCount,omitempty"`
-		// The deployment type of the HyperFlex cluster. The cluster can have one of the following configurations: 1. Datacenter: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes on a single site. 2. Stretched Cluster: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes distributed across multiple sites. 3. Edge: The HyperFlex cluster consists of 2-4 standalone nodes. If the cluster is running a HyperFlex Data Platform version less than 4.0 or if the deployment type cannot be determined, the deployment type is set as 'NA' (not available). * `NA` - The deployment type of the HyperFlex cluster is not available. * `Datacenter` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes on the same site. * `Stretched Cluster` - The deployment type of a HyperFlex cluster consisting of UCS Fabric Interconnect-attached nodes across different sites. * `Edge` - The deployment type of a HyperFlex cluster consisting of 2 or more standalone nodes.
+		// The deployment type of the HyperFlex cluster. The cluster can have one of the following configurations: 1. Datacenter: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes on a single site. 2. Stretched Cluster: The HyperFlex cluster consists of UCS Fabric Interconnect-attached nodes distributed across multiple sites. 3. Edge: The HyperFlex cluster consists of 2-4 standalone nodes. If the cluster is running a HyperFlex Data Platform version less than 4.0 or if the deployment type cannot be determined, the deployment type is set as 'NA' (not available). * `NA` - The deployment type of the cluster is not available. * `Datacenter` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes on the same site. * `Stretched Cluster` - The deployment type of a cluster consisting of UCS Fabric Interconnect-attached nodes across different sites. * `Edge` - The deployment type of a cluster consisting of 2 or more standalone nodes.
 		DeploymentType *string `json:"DeploymentType,omitempty"`
-		// The type of the drives used for storage in this cluster. * `NA` - The drive type of the HyperFlex cluster is not available. * `All-Flash` - Indicates that this HyperFlex cluster contains flash drives only. * `Hybrid` - Indicates that this HyperFlex cluster contains both flash and hard disk drives.
+		// The type of the drives used for storage in this cluster. * `NA` - The drive type of the cluster is not available. * `All-Flash` - Indicates that this cluster contains flash drives only. * `Hybrid` - Indicates that this cluster contains both flash and hard disk drives.
 		DriveType *string `json:"DriveType,omitempty"`
 		// The HyperFlex Data or Application Platform version of this cluster.
 		HxVersion *string `json:"HxVersion,omitempty"`
+		// Identifies the broad type of the underlying hypervisor. * `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * `Unknown` - The hypervisor running on the HyperFlex cluster is not known.
+		HypervisorType *string `json:"HypervisorType,omitempty"`
 		// The version of hypervisor running on this cluster.
 		HypervisorVersion *string `json:"HypervisorVersion,omitempty"`
-		// The storage capacity in this cluster.
-		StorageCapacity *int64 `json:"StorageCapacity,omitempty"`
+		// The internally generated identity of this cluster.  This entity is not manipulated by users. It aids in uniquely identifying  the cluster object. In case of VMware, this is a MOR (managed object reference).
+		Identity *string `json:"Identity,omitempty"`
 		// The number of storage nodes that belong to this cluster.
 		StorageNodeCount *int64 `json:"StorageNodeCount,omitempty"`
 		// The storage utilization is computed based on total capacity and current capacity utilization.
@@ -839,7 +848,6 @@ func (o *HyperflexBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
 		AssociatedProfile          *PolicyAbstractProfileRelationship `json:"AssociatedProfile,omitempty"`
 		// An array of relationships to hyperflexBaseCluster resources.
 		ChildClusters []HyperflexBaseClusterRelationship `json:"ChildClusters,omitempty"`
-		ParentCluster *HyperflexBaseClusterRelationship  `json:"ParentCluster,omitempty"`
 	}
 
 	varHyperflexBaseClusterWithoutEmbeddedStruct := HyperflexBaseClusterWithoutEmbeddedStruct{}
@@ -858,15 +866,15 @@ func (o *HyperflexBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexBaseCluster.DeploymentType = varHyperflexBaseClusterWithoutEmbeddedStruct.DeploymentType
 		varHyperflexBaseCluster.DriveType = varHyperflexBaseClusterWithoutEmbeddedStruct.DriveType
 		varHyperflexBaseCluster.HxVersion = varHyperflexBaseClusterWithoutEmbeddedStruct.HxVersion
+		varHyperflexBaseCluster.HypervisorType = varHyperflexBaseClusterWithoutEmbeddedStruct.HypervisorType
 		varHyperflexBaseCluster.HypervisorVersion = varHyperflexBaseClusterWithoutEmbeddedStruct.HypervisorVersion
-		varHyperflexBaseCluster.StorageCapacity = varHyperflexBaseClusterWithoutEmbeddedStruct.StorageCapacity
+		varHyperflexBaseCluster.Identity = varHyperflexBaseClusterWithoutEmbeddedStruct.Identity
 		varHyperflexBaseCluster.StorageNodeCount = varHyperflexBaseClusterWithoutEmbeddedStruct.StorageNodeCount
 		varHyperflexBaseCluster.StorageUtilization = varHyperflexBaseClusterWithoutEmbeddedStruct.StorageUtilization
 		varHyperflexBaseCluster.UtilizationPercentage = varHyperflexBaseClusterWithoutEmbeddedStruct.UtilizationPercentage
 		varHyperflexBaseCluster.UtilizationTrendPercentage = varHyperflexBaseClusterWithoutEmbeddedStruct.UtilizationTrendPercentage
 		varHyperflexBaseCluster.AssociatedProfile = varHyperflexBaseClusterWithoutEmbeddedStruct.AssociatedProfile
 		varHyperflexBaseCluster.ChildClusters = varHyperflexBaseClusterWithoutEmbeddedStruct.ChildClusters
-		varHyperflexBaseCluster.ParentCluster = varHyperflexBaseClusterWithoutEmbeddedStruct.ParentCluster
 		*o = HyperflexBaseCluster(varHyperflexBaseCluster)
 	} else {
 		return err
@@ -876,7 +884,7 @@ func (o *HyperflexBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
 
 	err = json.Unmarshal(bytes, &varHyperflexBaseCluster)
 	if err == nil {
-		o.VirtualizationBaseCluster = varHyperflexBaseCluster.VirtualizationBaseCluster
+		o.StorageBaseCluster = varHyperflexBaseCluster.StorageBaseCluster
 	} else {
 		return err
 	}
@@ -895,20 +903,20 @@ func (o *HyperflexBaseCluster) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "DeploymentType")
 		delete(additionalProperties, "DriveType")
 		delete(additionalProperties, "HxVersion")
+		delete(additionalProperties, "HypervisorType")
 		delete(additionalProperties, "HypervisorVersion")
-		delete(additionalProperties, "StorageCapacity")
+		delete(additionalProperties, "Identity")
 		delete(additionalProperties, "StorageNodeCount")
 		delete(additionalProperties, "StorageUtilization")
 		delete(additionalProperties, "UtilizationPercentage")
 		delete(additionalProperties, "UtilizationTrendPercentage")
 		delete(additionalProperties, "AssociatedProfile")
 		delete(additionalProperties, "ChildClusters")
-		delete(additionalProperties, "ParentCluster")
 
 		// remove fields from embedded structs
-		reflectVirtualizationBaseCluster := reflect.ValueOf(o.VirtualizationBaseCluster)
-		for i := 0; i < reflectVirtualizationBaseCluster.Type().NumField(); i++ {
-			t := reflectVirtualizationBaseCluster.Type().Field(i)
+		reflectStorageBaseCluster := reflect.ValueOf(o.StorageBaseCluster)
+		for i := 0; i < reflectStorageBaseCluster.Type().NumField(); i++ {
+			t := reflectStorageBaseCluster.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

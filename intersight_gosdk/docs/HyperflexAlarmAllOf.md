@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **TriggeredTime** | Pointer to **int64** | The time when alarm was triggered as a Unix timestamp. | [optional] [readonly] 
 **TriggeredTimeAsUtc** | Pointer to **string** | The time when alarm was triggered in ISO 6801 UTC format. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The unique identifier for this alarm instance. | [optional] [readonly] 
-**AncestorMos** | Pointer to [**[]HyperflexBaseClusterRelationship**](HyperflexBaseClusterRelationship.md) | An array of relationships to hyperflexBaseCluster resources. | [optional] [readonly] 
+**AncestorMos** | Pointer to [**[]InfraBaseClusterRelationship**](InfraBaseClusterRelationship.md) | An array of relationships to infraBaseCluster resources. | [optional] [readonly] 
 **Cluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 
 ## Methods
@@ -460,20 +460,20 @@ HasUuid returns a boolean if a field has been set.
 
 ### GetAncestorMos
 
-`func (o *HyperflexAlarmAllOf) GetAncestorMos() []HyperflexBaseClusterRelationship`
+`func (o *HyperflexAlarmAllOf) GetAncestorMos() []InfraBaseClusterRelationship`
 
 GetAncestorMos returns the AncestorMos field if non-nil, zero value otherwise.
 
 ### GetAncestorMosOk
 
-`func (o *HyperflexAlarmAllOf) GetAncestorMosOk() (*[]HyperflexBaseClusterRelationship, bool)`
+`func (o *HyperflexAlarmAllOf) GetAncestorMosOk() (*[]InfraBaseClusterRelationship, bool)`
 
 GetAncestorMosOk returns a tuple with the AncestorMos field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAncestorMos
 
-`func (o *HyperflexAlarmAllOf) SetAncestorMos(v []HyperflexBaseClusterRelationship)`
+`func (o *HyperflexAlarmAllOf) SetAncestorMos(v []InfraBaseClusterRelationship)`
 
 SetAncestorMos sets AncestorMos field to given value.
 

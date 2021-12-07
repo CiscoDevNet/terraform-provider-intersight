@@ -44,8 +44,17 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
     + `addresses`:
                 (Array of schema.TypeString) -
-    + `gateway`:(string) The Network Gateway for the Network Interface. 
-    + `matcher`:(HashMap) - The matcher to be used to find the physical network interface represented by this ethernet device. 
+    + `gateway`:(string) Deprecated. This will add a default route as long as the first default route in Routes is not different. If is different, Gateway will be replaced with that default route. If there is no default Route and this is set, then Routes will be updated with the first entry as a default with this default gateway. If there is only one default Route and this gateway becomes empty, then the default routes will all be removed. Do not set if using Ip Pools, as the gateway is configured in the pool. This will be removed in the future. 
+    + `ip_v4_configs`:(Array)
+This complex property has following sub-properties:
+    + `ip`:(string) IPv4 Address in CIDR format. 
+    + `lease`:(HashMap) -(ReadOnly) The IP Lease if allocated from a Pool. It can include gateway information. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `matcher`:(HashMap) - The matcher to be used to find the physical network interface represented by this ethernet device. 
 This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `type`:(string) Which property we should use to find the ethernet interface.* `Name` - A network interface name, e.g. eth0, eno9.* `MacAddress` - A network interface Mac Address. 
@@ -53,18 +62,38 @@ This complex property has following sub-properties:
   + `mtu`:(int) The MTU to assign to this Network Interface. 
   + `name`:(string) Name for this network interface. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `provider_name`:(string) If the infrastructure network is selectable, this indicates which network to attach to the port. 
+  + `routes`:(Array)
+This complex property has following sub-properties:
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `to`:(string) The destination subnet, if set to 0.0.0.0/0 then the Route is considered a default route. 
+    + `via`:(string) Via is the gateway for traffic destined for the subnet in the To property. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `ovsbonds`:(Array)
 This complex property has following sub-properties:
     + `addresses`:
                 (Array of schema.TypeString) -
-    + `gateway`:(string) The Network Gateway for the Network Interface. 
+    + `gateway`:(string) Deprecated. This will add a default route as long as the first default route in Routes is not different. If is different, Gateway will be replaced with that default route. If there is no default Route and this is set, then Routes will be updated with the first entry as a default with this default gateway. If there is only one default Route and this gateway becomes empty, then the default routes will all be removed. Do not set if using Ip Pools, as the gateway is configured in the pool. This will be removed in the future. 
     + `interfaces`:
                 (Array of schema.TypeString) -
-    + `mtu`:(int) The MTU to assign to this Network Interface. 
-    + `name`:(string) Name for this network interface. 
+    + `ip_v4_configs`:(Array)
+This complex property has following sub-properties:
+    + `ip`:(string) IPv4 Address in CIDR format. 
+    + `lease`:(HashMap) -(ReadOnly) The IP Lease if allocated from a Pool. It can include gateway information. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `mtu`:(int) The MTU to assign to this Network Interface. 
+  + `name`:(string) Name for this network interface. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `routes`:(Array)
+This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-    + `vlan`:(int) Native VLAN for to use for the bond. 
+    + `to`:(string) The destination subnet, if set to 0.0.0.0/0 then the Route is considered a default route. 
+    + `via`:(string) Via is the gateway for traffic destined for the subnet in the To property. 
+  + `vlan`:(int) Native VLAN for to use for the bond. 
 * `node_group`:(HashMap) - A reference to a kubernetesNodeGroupProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **MacAddress** | Pointer to **string** | Standard MAC address assigned to this kernel network. | [optional] 
 **Management** | Pointer to **bool** | Indicates that management traffic is enabled on this kernel network. | [optional] 
 **Mtu** | Pointer to **int64** | Maximum transmission unit configured on a kernel network. | [optional] 
+**SubnetMask** | Pointer to **string** | Subnet mask of the kernel network. | [optional] 
+**TcpIpStack** | Pointer to **string** | Type of stack for the kernel network. It can be custom, default, vMotion or provisioning. | [optional] 
 **Vmotion** | Pointer to **bool** | Indicates that vmotion is enabled on this kernel network. | [optional] 
 **Vsan** | Pointer to **bool** | Indicates that vsan traffic is enabled on this kernel network. | [optional] 
 **VsphereProvisioning** | Pointer to **bool** | Indicates that vsphere provisioning traffic is enabled on this kernel network. | [optional] 
@@ -213,6 +215,56 @@ SetMtu sets Mtu field to given value.
 `func (o *VirtualizationVmwareKernelNetwork) HasMtu() bool`
 
 HasMtu returns a boolean if a field has been set.
+
+### GetSubnetMask
+
+`func (o *VirtualizationVmwareKernelNetwork) GetSubnetMask() string`
+
+GetSubnetMask returns the SubnetMask field if non-nil, zero value otherwise.
+
+### GetSubnetMaskOk
+
+`func (o *VirtualizationVmwareKernelNetwork) GetSubnetMaskOk() (*string, bool)`
+
+GetSubnetMaskOk returns a tuple with the SubnetMask field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubnetMask
+
+`func (o *VirtualizationVmwareKernelNetwork) SetSubnetMask(v string)`
+
+SetSubnetMask sets SubnetMask field to given value.
+
+### HasSubnetMask
+
+`func (o *VirtualizationVmwareKernelNetwork) HasSubnetMask() bool`
+
+HasSubnetMask returns a boolean if a field has been set.
+
+### GetTcpIpStack
+
+`func (o *VirtualizationVmwareKernelNetwork) GetTcpIpStack() string`
+
+GetTcpIpStack returns the TcpIpStack field if non-nil, zero value otherwise.
+
+### GetTcpIpStackOk
+
+`func (o *VirtualizationVmwareKernelNetwork) GetTcpIpStackOk() (*string, bool)`
+
+GetTcpIpStackOk returns a tuple with the TcpIpStack field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTcpIpStack
+
+`func (o *VirtualizationVmwareKernelNetwork) SetTcpIpStack(v string)`
+
+SetTcpIpStack sets TcpIpStack field to given value.
+
+### HasTcpIpStack
+
+`func (o *VirtualizationVmwareKernelNetwork) HasTcpIpStack() bool`
+
+HasTcpIpStack returns a boolean if a field has been set.
 
 ### GetVmotion
 

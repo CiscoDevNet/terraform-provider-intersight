@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4903
+API version: 1.0.9-4929
 Contact: intersight@cisco.com
 */
 
@@ -21,12 +21,19 @@ type VirtualizationHostAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Action to be performed on a host (Create, PowerState, Migrate, Clone etc). * `None` - A place holder for the default value. * `PowerOffStorageController` - Power off HyperFlex storage controller node running on selected hypervisor host. * `PowerOnStorageController` - Power on HyperFlex storage controller node running on selected hypervisor host.
+	// Action to be performed on a host (Create, PowerState, Migrate, Clone etc). * `None` - A place holder for the default value. * `EnterMaintenanceMode` - Put a host into maintenance mode. * `ExitMaintenanceMode` - Put a host into active mode. * `PowerOffStorageController` - Power off HyperFlex storage controller node running on selected hypervisor host. * `PowerOnStorageController` - Power on HyperFlex storage controller node running on selected hypervisor host.
 	Action *string `json:"Action,omitempty"`
+	// Flag to indicate whether the configuration is created from inventory object.
+	Discovered *bool `json:"Discovered,omitempty"`
+	// If true, move powered-off and suspended virtual machines to other hosts in the cluster.
+	Evacuate   *bool                                       `json:"Evacuate,omitempty"`
+	HostConfig NullableVirtualizationBaseHostConfiguration `json:"HostConfig,omitempty"`
 	// Identifies the broad product type of the hypervisor but without any version information. It is here to easily identify the type of the virtual machine. There are other entities (Host, Cluster, etc.) that can be indirectly used to determine the hypervisor but a direct attribute makes it easier to work with. * `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * `Unknown` - The hypervisor running on the HyperFlex cluster is not known.
 	HypervisorType *string `json:"HypervisorType,omitempty"`
 	// Unique identifier assigned to the hypervisor host.
 	Identity *string `json:"Identity,omitempty"`
+	// Expected state of host (enter maintenance, exit maintenance). * `None` - A place holder for the default value. * `Enter` - Power action is performed on the virtual machine. * `Exit` - The virtual machine will be migrated from existing node to a different node in cluster. The behavior depends on the underlying hypervisor.
+	MaintenanceState *string `json:"MaintenanceState,omitempty"`
 	// Commercial model information about this hardware.
 	Model *string `json:"Model,omitempty"`
 	// Name of the hypervisor host. It must be unique within the target endpoint.
@@ -53,6 +60,8 @@ func NewVirtualizationHostAllOf(classId string, objectType string) *Virtualizati
 	this.ObjectType = objectType
 	var action string = "None"
 	this.Action = &action
+	var maintenanceState string = "None"
+	this.MaintenanceState = &maintenanceState
 	return &this
 }
 
@@ -67,6 +76,8 @@ func NewVirtualizationHostAllOfWithDefaults() *VirtualizationHostAllOf {
 	this.ObjectType = objectType
 	var action string = "None"
 	this.Action = &action
+	var maintenanceState string = "None"
+	this.MaintenanceState = &maintenanceState
 	return &this
 }
 
@@ -150,6 +161,113 @@ func (o *VirtualizationHostAllOf) SetAction(v string) {
 	o.Action = &v
 }
 
+// GetDiscovered returns the Discovered field value if set, zero value otherwise.
+func (o *VirtualizationHostAllOf) GetDiscovered() bool {
+	if o == nil || o.Discovered == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Discovered
+}
+
+// GetDiscoveredOk returns a tuple with the Discovered field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationHostAllOf) GetDiscoveredOk() (*bool, bool) {
+	if o == nil || o.Discovered == nil {
+		return nil, false
+	}
+	return o.Discovered, true
+}
+
+// HasDiscovered returns a boolean if a field has been set.
+func (o *VirtualizationHostAllOf) HasDiscovered() bool {
+	if o != nil && o.Discovered != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDiscovered gets a reference to the given bool and assigns it to the Discovered field.
+func (o *VirtualizationHostAllOf) SetDiscovered(v bool) {
+	o.Discovered = &v
+}
+
+// GetEvacuate returns the Evacuate field value if set, zero value otherwise.
+func (o *VirtualizationHostAllOf) GetEvacuate() bool {
+	if o == nil || o.Evacuate == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Evacuate
+}
+
+// GetEvacuateOk returns a tuple with the Evacuate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationHostAllOf) GetEvacuateOk() (*bool, bool) {
+	if o == nil || o.Evacuate == nil {
+		return nil, false
+	}
+	return o.Evacuate, true
+}
+
+// HasEvacuate returns a boolean if a field has been set.
+func (o *VirtualizationHostAllOf) HasEvacuate() bool {
+	if o != nil && o.Evacuate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEvacuate gets a reference to the given bool and assigns it to the Evacuate field.
+func (o *VirtualizationHostAllOf) SetEvacuate(v bool) {
+	o.Evacuate = &v
+}
+
+// GetHostConfig returns the HostConfig field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VirtualizationHostAllOf) GetHostConfig() VirtualizationBaseHostConfiguration {
+	if o == nil || o.HostConfig.Get() == nil {
+		var ret VirtualizationBaseHostConfiguration
+		return ret
+	}
+	return *o.HostConfig.Get()
+}
+
+// GetHostConfigOk returns a tuple with the HostConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VirtualizationHostAllOf) GetHostConfigOk() (*VirtualizationBaseHostConfiguration, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.HostConfig.Get(), o.HostConfig.IsSet()
+}
+
+// HasHostConfig returns a boolean if a field has been set.
+func (o *VirtualizationHostAllOf) HasHostConfig() bool {
+	if o != nil && o.HostConfig.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetHostConfig gets a reference to the given NullableVirtualizationBaseHostConfiguration and assigns it to the HostConfig field.
+func (o *VirtualizationHostAllOf) SetHostConfig(v VirtualizationBaseHostConfiguration) {
+	o.HostConfig.Set(&v)
+}
+
+// SetHostConfigNil sets the value for HostConfig to be an explicit nil
+func (o *VirtualizationHostAllOf) SetHostConfigNil() {
+	o.HostConfig.Set(nil)
+}
+
+// UnsetHostConfig ensures that no value is present for HostConfig, not even an explicit nil
+func (o *VirtualizationHostAllOf) UnsetHostConfig() {
+	o.HostConfig.Unset()
+}
+
 // GetHypervisorType returns the HypervisorType field value if set, zero value otherwise.
 func (o *VirtualizationHostAllOf) GetHypervisorType() string {
 	if o == nil || o.HypervisorType == nil {
@@ -212,6 +330,38 @@ func (o *VirtualizationHostAllOf) HasIdentity() bool {
 // SetIdentity gets a reference to the given string and assigns it to the Identity field.
 func (o *VirtualizationHostAllOf) SetIdentity(v string) {
 	o.Identity = &v
+}
+
+// GetMaintenanceState returns the MaintenanceState field value if set, zero value otherwise.
+func (o *VirtualizationHostAllOf) GetMaintenanceState() string {
+	if o == nil || o.MaintenanceState == nil {
+		var ret string
+		return ret
+	}
+	return *o.MaintenanceState
+}
+
+// GetMaintenanceStateOk returns a tuple with the MaintenanceState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationHostAllOf) GetMaintenanceStateOk() (*string, bool) {
+	if o == nil || o.MaintenanceState == nil {
+		return nil, false
+	}
+	return o.MaintenanceState, true
+}
+
+// HasMaintenanceState returns a boolean if a field has been set.
+func (o *VirtualizationHostAllOf) HasMaintenanceState() bool {
+	if o != nil && o.MaintenanceState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMaintenanceState gets a reference to the given string and assigns it to the MaintenanceState field.
+func (o *VirtualizationHostAllOf) SetMaintenanceState(v string) {
+	o.MaintenanceState = &v
 }
 
 // GetModel returns the Model field value if set, zero value otherwise.
@@ -449,11 +599,23 @@ func (o VirtualizationHostAllOf) MarshalJSON() ([]byte, error) {
 	if o.Action != nil {
 		toSerialize["Action"] = o.Action
 	}
+	if o.Discovered != nil {
+		toSerialize["Discovered"] = o.Discovered
+	}
+	if o.Evacuate != nil {
+		toSerialize["Evacuate"] = o.Evacuate
+	}
+	if o.HostConfig.IsSet() {
+		toSerialize["HostConfig"] = o.HostConfig.Get()
+	}
 	if o.HypervisorType != nil {
 		toSerialize["HypervisorType"] = o.HypervisorType
 	}
 	if o.Identity != nil {
 		toSerialize["Identity"] = o.Identity
+	}
+	if o.MaintenanceState != nil {
+		toSerialize["MaintenanceState"] = o.MaintenanceState
 	}
 	if o.Model != nil {
 		toSerialize["Model"] = o.Model
@@ -497,8 +659,12 @@ func (o *VirtualizationHostAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")
+		delete(additionalProperties, "Discovered")
+		delete(additionalProperties, "Evacuate")
+		delete(additionalProperties, "HostConfig")
 		delete(additionalProperties, "HypervisorType")
 		delete(additionalProperties, "Identity")
+		delete(additionalProperties, "MaintenanceState")
 		delete(additionalProperties, "Model")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Serial")

@@ -100,7 +100,7 @@ func dataSourceHyperflexClusterProfile() *schema.Resource {
 			},
 		},
 		"associated_compute_cluster": {
-			Description: "A reference to a hyperflexHxapCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Description: "A reference to a virtualizationIweCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -1362,7 +1362,7 @@ func dataSourceHyperflexClusterProfile() *schema.Resource {
 			},
 		},
 		"associated_compute_cluster": {
-			Description: "A reference to a hyperflexHxapCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Description: "A reference to a virtualizationIweCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -2658,7 +2658,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 	}
 
 	if v, ok := d.GetOk("associated_compute_cluster"); ok {
-		p := make([]models.HyperflexHxapClusterRelationship, 0, 1)
+		p := make([]models.VirtualizationIweClusterRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -2692,7 +2692,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsHyperflexHxapClusterRelationship(o))
+			p = append(p, models.MoMoRefAsVirtualizationIweClusterRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
@@ -4046,7 +4046,7 @@ func dataSourceHyperflexClusterProfileRead(c context.Context, d *schema.Resource
 
 				temp["associated_cluster"] = flattenMapHyperflexClusterRelationship(s.GetAssociatedCluster(), d)
 
-				temp["associated_compute_cluster"] = flattenMapHyperflexHxapClusterRelationship(s.GetAssociatedComputeCluster(), d)
+				temp["associated_compute_cluster"] = flattenMapVirtualizationIweClusterRelationship(s.GetAssociatedComputeCluster(), d)
 
 				temp["auto_support"] = flattenMapHyperflexAutoSupportPolicyRelationship(s.GetAutoSupport(), d)
 				temp["class_id"] = (s.GetClassId())

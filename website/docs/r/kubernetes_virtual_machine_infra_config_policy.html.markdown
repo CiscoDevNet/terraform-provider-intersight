@@ -76,6 +76,22 @@ This complex property has following sub-properties:
 [kubernetes.HyperFlexApVirtualMachineInfraConfig](#kubernetesHyperFlexApVirtualMachineInfraConfig)
   + `interfaces`:
                 (Array of schema.TypeString) -
+  + `network_interfaces`:(Array)
+This complex property has following sub-properties:
+    + `mtu`:(int) The MTU for this Network Interface.  If left blank a default value will apply by the Operating System. 
+    + `name`:(string) NetworkInterfaceSpec is the specification for network interfaces - including configuration of IP Pools and VRF to determine IP configuration, the operating system device settings, and virtual adapter network settings. It can be left empty when used with VirtualMachineInfraConfigPolicy - it will be filled out based on the hypervisor platform type and will match the naming and order of interfaces provided by the hypervisor. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `pools`:(Array)
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+  + `provider_name`:(string) In other words, to which named network from the Instructure Provider will the port be connected. 
+  + `vrf`:(HashMap) - Allows for reusing IP Pools across disconnected L2 segments for different Kubernetes clusters within an account. If not set, the VRF named (default) will be used. 
+This complex property has following sub-properties:
+    + `moid`:(string) The Moid of the referenced REST resource. 
+    + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+    + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 
 

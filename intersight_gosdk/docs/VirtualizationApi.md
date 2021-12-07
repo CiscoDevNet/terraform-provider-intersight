@@ -4,14 +4,43 @@ All URIs are relative to *https://intersight.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateVirtualizationCiscoHypervisorManager**](VirtualizationApi.md#CreateVirtualizationCiscoHypervisorManager) | **Post** /api/v1/virtualization/CiscoHypervisorManagers | Create a &#39;virtualization.CiscoHypervisorManager&#39; resource.
+[**CreateVirtualizationIweDatacenter**](VirtualizationApi.md#CreateVirtualizationIweDatacenter) | **Post** /api/v1/virtualization/IweDatacenters | Create a &#39;virtualization.IweDatacenter&#39; resource.
 [**CreateVirtualizationVirtualDisk**](VirtualizationApi.md#CreateVirtualizationVirtualDisk) | **Post** /api/v1/virtualization/VirtualDisks | Create a &#39;virtualization.VirtualDisk&#39; resource.
 [**CreateVirtualizationVirtualMachine**](VirtualizationApi.md#CreateVirtualizationVirtualMachine) | **Post** /api/v1/virtualization/VirtualMachines | Create a &#39;virtualization.VirtualMachine&#39; resource.
 [**CreateVirtualizationVirtualNetwork**](VirtualizationApi.md#CreateVirtualizationVirtualNetwork) | **Post** /api/v1/virtualization/VirtualNetworks | Create a &#39;virtualization.VirtualNetwork&#39; resource.
+[**DeleteVirtualizationIweCluster**](VirtualizationApi.md#DeleteVirtualizationIweCluster) | **Delete** /api/v1/virtualization/IweClusters/{Moid} | Delete a &#39;virtualization.IweCluster&#39; resource.
+[**DeleteVirtualizationIweDatacenter**](VirtualizationApi.md#DeleteVirtualizationIweDatacenter) | **Delete** /api/v1/virtualization/IweDatacenters/{Moid} | Delete a &#39;virtualization.IweDatacenter&#39; resource.
+[**DeleteVirtualizationIweVirtualMachineNetworkInterface**](VirtualizationApi.md#DeleteVirtualizationIweVirtualMachineNetworkInterface) | **Delete** /api/v1/virtualization/IweVirtualMachineNetworkInterfaces/{Moid} | Delete a &#39;virtualization.IweVirtualMachineNetworkInterface&#39; resource.
 [**DeleteVirtualizationVirtualDisk**](VirtualizationApi.md#DeleteVirtualizationVirtualDisk) | **Delete** /api/v1/virtualization/VirtualDisks/{Moid} | Delete a &#39;virtualization.VirtualDisk&#39; resource.
 [**DeleteVirtualizationVirtualMachine**](VirtualizationApi.md#DeleteVirtualizationVirtualMachine) | **Delete** /api/v1/virtualization/VirtualMachines/{Moid} | Delete a &#39;virtualization.VirtualMachine&#39; resource.
 [**DeleteVirtualizationVirtualNetwork**](VirtualizationApi.md#DeleteVirtualizationVirtualNetwork) | **Delete** /api/v1/virtualization/VirtualNetworks/{Moid} | Delete a &#39;virtualization.VirtualNetwork&#39; resource.
+[**GetVirtualizationCiscoHypervisorManagerByMoid**](VirtualizationApi.md#GetVirtualizationCiscoHypervisorManagerByMoid) | **Get** /api/v1/virtualization/CiscoHypervisorManagers/{Moid} | Read a &#39;virtualization.CiscoHypervisorManager&#39; resource.
+[**GetVirtualizationCiscoHypervisorManagerList**](VirtualizationApi.md#GetVirtualizationCiscoHypervisorManagerList) | **Get** /api/v1/virtualization/CiscoHypervisorManagers | Read a &#39;virtualization.CiscoHypervisorManager&#39; resource.
 [**GetVirtualizationHostByMoid**](VirtualizationApi.md#GetVirtualizationHostByMoid) | **Get** /api/v1/virtualization/Hosts/{Moid} | Read a &#39;virtualization.Host&#39; resource.
 [**GetVirtualizationHostList**](VirtualizationApi.md#GetVirtualizationHostList) | **Get** /api/v1/virtualization/Hosts | Read a &#39;virtualization.Host&#39; resource.
+[**GetVirtualizationIweClusterByMoid**](VirtualizationApi.md#GetVirtualizationIweClusterByMoid) | **Get** /api/v1/virtualization/IweClusters/{Moid} | Read a &#39;virtualization.IweCluster&#39; resource.
+[**GetVirtualizationIweClusterList**](VirtualizationApi.md#GetVirtualizationIweClusterList) | **Get** /api/v1/virtualization/IweClusters | Read a &#39;virtualization.IweCluster&#39; resource.
+[**GetVirtualizationIweDatacenterByMoid**](VirtualizationApi.md#GetVirtualizationIweDatacenterByMoid) | **Get** /api/v1/virtualization/IweDatacenters/{Moid} | Read a &#39;virtualization.IweDatacenter&#39; resource.
+[**GetVirtualizationIweDatacenterList**](VirtualizationApi.md#GetVirtualizationIweDatacenterList) | **Get** /api/v1/virtualization/IweDatacenters | Read a &#39;virtualization.IweDatacenter&#39; resource.
+[**GetVirtualizationIweDvUplinkByMoid**](VirtualizationApi.md#GetVirtualizationIweDvUplinkByMoid) | **Get** /api/v1/virtualization/IweDvUplinks/{Moid} | Read a &#39;virtualization.IweDvUplink&#39; resource.
+[**GetVirtualizationIweDvUplinkList**](VirtualizationApi.md#GetVirtualizationIweDvUplinkList) | **Get** /api/v1/virtualization/IweDvUplinks | Read a &#39;virtualization.IweDvUplink&#39; resource.
+[**GetVirtualizationIweDvswitchByMoid**](VirtualizationApi.md#GetVirtualizationIweDvswitchByMoid) | **Get** /api/v1/virtualization/IweDvswitches/{Moid} | Read a &#39;virtualization.IweDvswitch&#39; resource.
+[**GetVirtualizationIweDvswitchList**](VirtualizationApi.md#GetVirtualizationIweDvswitchList) | **Get** /api/v1/virtualization/IweDvswitches | Read a &#39;virtualization.IweDvswitch&#39; resource.
+[**GetVirtualizationIweHostByMoid**](VirtualizationApi.md#GetVirtualizationIweHostByMoid) | **Get** /api/v1/virtualization/IweHosts/{Moid} | Read a &#39;virtualization.IweHost&#39; resource.
+[**GetVirtualizationIweHostInterfaceByMoid**](VirtualizationApi.md#GetVirtualizationIweHostInterfaceByMoid) | **Get** /api/v1/virtualization/IweHostInterfaces/{Moid} | Read a &#39;virtualization.IweHostInterface&#39; resource.
+[**GetVirtualizationIweHostInterfaceList**](VirtualizationApi.md#GetVirtualizationIweHostInterfaceList) | **Get** /api/v1/virtualization/IweHostInterfaces | Read a &#39;virtualization.IweHostInterface&#39; resource.
+[**GetVirtualizationIweHostList**](VirtualizationApi.md#GetVirtualizationIweHostList) | **Get** /api/v1/virtualization/IweHosts | Read a &#39;virtualization.IweHost&#39; resource.
+[**GetVirtualizationIweHostVswitchByMoid**](VirtualizationApi.md#GetVirtualizationIweHostVswitchByMoid) | **Get** /api/v1/virtualization/IweHostVswitches/{Moid} | Read a &#39;virtualization.IweHostVswitch&#39; resource.
+[**GetVirtualizationIweHostVswitchList**](VirtualizationApi.md#GetVirtualizationIweHostVswitchList) | **Get** /api/v1/virtualization/IweHostVswitches | Read a &#39;virtualization.IweHostVswitch&#39; resource.
+[**GetVirtualizationIweNetworkByMoid**](VirtualizationApi.md#GetVirtualizationIweNetworkByMoid) | **Get** /api/v1/virtualization/IweNetworks/{Moid} | Read a &#39;virtualization.IweNetwork&#39; resource.
+[**GetVirtualizationIweNetworkList**](VirtualizationApi.md#GetVirtualizationIweNetworkList) | **Get** /api/v1/virtualization/IweNetworks | Read a &#39;virtualization.IweNetwork&#39; resource.
+[**GetVirtualizationIweVirtualDiskByMoid**](VirtualizationApi.md#GetVirtualizationIweVirtualDiskByMoid) | **Get** /api/v1/virtualization/IweVirtualDisks/{Moid} | Read a &#39;virtualization.IweVirtualDisk&#39; resource.
+[**GetVirtualizationIweVirtualDiskList**](VirtualizationApi.md#GetVirtualizationIweVirtualDiskList) | **Get** /api/v1/virtualization/IweVirtualDisks | Read a &#39;virtualization.IweVirtualDisk&#39; resource.
+[**GetVirtualizationIweVirtualMachineByMoid**](VirtualizationApi.md#GetVirtualizationIweVirtualMachineByMoid) | **Get** /api/v1/virtualization/IweVirtualMachines/{Moid} | Read a &#39;virtualization.IweVirtualMachine&#39; resource.
+[**GetVirtualizationIweVirtualMachineList**](VirtualizationApi.md#GetVirtualizationIweVirtualMachineList) | **Get** /api/v1/virtualization/IweVirtualMachines | Read a &#39;virtualization.IweVirtualMachine&#39; resource.
+[**GetVirtualizationIweVirtualMachineNetworkInterfaceByMoid**](VirtualizationApi.md#GetVirtualizationIweVirtualMachineNetworkInterfaceByMoid) | **Get** /api/v1/virtualization/IweVirtualMachineNetworkInterfaces/{Moid} | Read a &#39;virtualization.IweVirtualMachineNetworkInterface&#39; resource.
+[**GetVirtualizationIweVirtualMachineNetworkInterfaceList**](VirtualizationApi.md#GetVirtualizationIweVirtualMachineNetworkInterfaceList) | **Get** /api/v1/virtualization/IweVirtualMachineNetworkInterfaces | Read a &#39;virtualization.IweVirtualMachineNetworkInterface&#39; resource.
 [**GetVirtualizationVirtualDiskByMoid**](VirtualizationApi.md#GetVirtualizationVirtualDiskByMoid) | **Get** /api/v1/virtualization/VirtualDisks/{Moid} | Read a &#39;virtualization.VirtualDisk&#39; resource.
 [**GetVirtualizationVirtualDiskList**](VirtualizationApi.md#GetVirtualizationVirtualDiskList) | **Get** /api/v1/virtualization/VirtualDisks | Read a &#39;virtualization.VirtualDisk&#39; resource.
 [**GetVirtualizationVirtualMachineByMoid**](VirtualizationApi.md#GetVirtualizationVirtualMachineByMoid) | **Get** /api/v1/virtualization/VirtualMachines/{Moid} | Read a &#39;virtualization.VirtualMachine&#39; resource.
@@ -54,7 +83,14 @@ Method | HTTP request | Description
 [**GetVirtualizationVmwareVirtualNetworkInterfaceList**](VirtualizationApi.md#GetVirtualizationVmwareVirtualNetworkInterfaceList) | **Get** /api/v1/virtualization/VmwareVirtualNetworkInterfaces | Read a &#39;virtualization.VmwareVirtualNetworkInterface&#39; resource.
 [**GetVirtualizationVmwareVirtualSwitchByMoid**](VirtualizationApi.md#GetVirtualizationVmwareVirtualSwitchByMoid) | **Get** /api/v1/virtualization/VmwareVirtualSwitches/{Moid} | Read a &#39;virtualization.VmwareVirtualSwitch&#39; resource.
 [**GetVirtualizationVmwareVirtualSwitchList**](VirtualizationApi.md#GetVirtualizationVmwareVirtualSwitchList) | **Get** /api/v1/virtualization/VmwareVirtualSwitches | Read a &#39;virtualization.VmwareVirtualSwitch&#39; resource.
+[**PatchVirtualizationCiscoHypervisorManager**](VirtualizationApi.md#PatchVirtualizationCiscoHypervisorManager) | **Patch** /api/v1/virtualization/CiscoHypervisorManagers/{Moid} | Update a &#39;virtualization.CiscoHypervisorManager&#39; resource.
 [**PatchVirtualizationHost**](VirtualizationApi.md#PatchVirtualizationHost) | **Patch** /api/v1/virtualization/Hosts/{Moid} | Update a &#39;virtualization.Host&#39; resource.
+[**PatchVirtualizationIweCluster**](VirtualizationApi.md#PatchVirtualizationIweCluster) | **Patch** /api/v1/virtualization/IweClusters/{Moid} | Update a &#39;virtualization.IweCluster&#39; resource.
+[**PatchVirtualizationIweDatacenter**](VirtualizationApi.md#PatchVirtualizationIweDatacenter) | **Patch** /api/v1/virtualization/IweDatacenters/{Moid} | Update a &#39;virtualization.IweDatacenter&#39; resource.
+[**PatchVirtualizationIweHost**](VirtualizationApi.md#PatchVirtualizationIweHost) | **Patch** /api/v1/virtualization/IweHosts/{Moid} | Update a &#39;virtualization.IweHost&#39; resource.
+[**PatchVirtualizationIweNetwork**](VirtualizationApi.md#PatchVirtualizationIweNetwork) | **Patch** /api/v1/virtualization/IweNetworks/{Moid} | Update a &#39;virtualization.IweNetwork&#39; resource.
+[**PatchVirtualizationIweVirtualDisk**](VirtualizationApi.md#PatchVirtualizationIweVirtualDisk) | **Patch** /api/v1/virtualization/IweVirtualDisks/{Moid} | Update a &#39;virtualization.IweVirtualDisk&#39; resource.
+[**PatchVirtualizationIweVirtualMachine**](VirtualizationApi.md#PatchVirtualizationIweVirtualMachine) | **Patch** /api/v1/virtualization/IweVirtualMachines/{Moid} | Update a &#39;virtualization.IweVirtualMachine&#39; resource.
 [**PatchVirtualizationVirtualDisk**](VirtualizationApi.md#PatchVirtualizationVirtualDisk) | **Patch** /api/v1/virtualization/VirtualDisks/{Moid} | Update a &#39;virtualization.VirtualDisk&#39; resource.
 [**PatchVirtualizationVirtualMachine**](VirtualizationApi.md#PatchVirtualizationVirtualMachine) | **Patch** /api/v1/virtualization/VirtualMachines/{Moid} | Update a &#39;virtualization.VirtualMachine&#39; resource.
 [**PatchVirtualizationVirtualNetwork**](VirtualizationApi.md#PatchVirtualizationVirtualNetwork) | **Patch** /api/v1/virtualization/VirtualNetworks/{Moid} | Update a &#39;virtualization.VirtualNetwork&#39; resource.
@@ -75,7 +111,14 @@ Method | HTTP request | Description
 [**PatchVirtualizationVmwareVirtualMachineSnapshot**](VirtualizationApi.md#PatchVirtualizationVmwareVirtualMachineSnapshot) | **Patch** /api/v1/virtualization/VmwareVirtualMachineSnapshots/{Moid} | Update a &#39;virtualization.VmwareVirtualMachineSnapshot&#39; resource.
 [**PatchVirtualizationVmwareVirtualNetworkInterface**](VirtualizationApi.md#PatchVirtualizationVmwareVirtualNetworkInterface) | **Patch** /api/v1/virtualization/VmwareVirtualNetworkInterfaces/{Moid} | Update a &#39;virtualization.VmwareVirtualNetworkInterface&#39; resource.
 [**PatchVirtualizationVmwareVirtualSwitch**](VirtualizationApi.md#PatchVirtualizationVmwareVirtualSwitch) | **Patch** /api/v1/virtualization/VmwareVirtualSwitches/{Moid} | Update a &#39;virtualization.VmwareVirtualSwitch&#39; resource.
+[**UpdateVirtualizationCiscoHypervisorManager**](VirtualizationApi.md#UpdateVirtualizationCiscoHypervisorManager) | **Post** /api/v1/virtualization/CiscoHypervisorManagers/{Moid} | Update a &#39;virtualization.CiscoHypervisorManager&#39; resource.
 [**UpdateVirtualizationHost**](VirtualizationApi.md#UpdateVirtualizationHost) | **Post** /api/v1/virtualization/Hosts/{Moid} | Update a &#39;virtualization.Host&#39; resource.
+[**UpdateVirtualizationIweCluster**](VirtualizationApi.md#UpdateVirtualizationIweCluster) | **Post** /api/v1/virtualization/IweClusters/{Moid} | Update a &#39;virtualization.IweCluster&#39; resource.
+[**UpdateVirtualizationIweDatacenter**](VirtualizationApi.md#UpdateVirtualizationIweDatacenter) | **Post** /api/v1/virtualization/IweDatacenters/{Moid} | Update a &#39;virtualization.IweDatacenter&#39; resource.
+[**UpdateVirtualizationIweHost**](VirtualizationApi.md#UpdateVirtualizationIweHost) | **Post** /api/v1/virtualization/IweHosts/{Moid} | Update a &#39;virtualization.IweHost&#39; resource.
+[**UpdateVirtualizationIweNetwork**](VirtualizationApi.md#UpdateVirtualizationIweNetwork) | **Post** /api/v1/virtualization/IweNetworks/{Moid} | Update a &#39;virtualization.IweNetwork&#39; resource.
+[**UpdateVirtualizationIweVirtualDisk**](VirtualizationApi.md#UpdateVirtualizationIweVirtualDisk) | **Post** /api/v1/virtualization/IweVirtualDisks/{Moid} | Update a &#39;virtualization.IweVirtualDisk&#39; resource.
+[**UpdateVirtualizationIweVirtualMachine**](VirtualizationApi.md#UpdateVirtualizationIweVirtualMachine) | **Post** /api/v1/virtualization/IweVirtualMachines/{Moid} | Update a &#39;virtualization.IweVirtualMachine&#39; resource.
 [**UpdateVirtualizationVirtualDisk**](VirtualizationApi.md#UpdateVirtualizationVirtualDisk) | **Post** /api/v1/virtualization/VirtualDisks/{Moid} | Update a &#39;virtualization.VirtualDisk&#39; resource.
 [**UpdateVirtualizationVirtualMachine**](VirtualizationApi.md#UpdateVirtualizationVirtualMachine) | **Post** /api/v1/virtualization/VirtualMachines/{Moid} | Update a &#39;virtualization.VirtualMachine&#39; resource.
 [**UpdateVirtualizationVirtualNetwork**](VirtualizationApi.md#UpdateVirtualizationVirtualNetwork) | **Post** /api/v1/virtualization/VirtualNetworks/{Moid} | Update a &#39;virtualization.VirtualNetwork&#39; resource.
@@ -97,6 +140,142 @@ Method | HTTP request | Description
 [**UpdateVirtualizationVmwareVirtualNetworkInterface**](VirtualizationApi.md#UpdateVirtualizationVmwareVirtualNetworkInterface) | **Post** /api/v1/virtualization/VmwareVirtualNetworkInterfaces/{Moid} | Update a &#39;virtualization.VmwareVirtualNetworkInterface&#39; resource.
 [**UpdateVirtualizationVmwareVirtualSwitch**](VirtualizationApi.md#UpdateVirtualizationVmwareVirtualSwitch) | **Post** /api/v1/virtualization/VmwareVirtualSwitches/{Moid} | Update a &#39;virtualization.VmwareVirtualSwitch&#39; resource.
 
+
+
+## CreateVirtualizationCiscoHypervisorManager
+
+> VirtualizationCiscoHypervisorManager CreateVirtualizationCiscoHypervisorManager(ctx).VirtualizationCiscoHypervisorManager(virtualizationCiscoHypervisorManager).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'virtualization.CiscoHypervisorManager' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    virtualizationCiscoHypervisorManager := *openapiclient.NewVirtualizationCiscoHypervisorManager("ClassId_example", "ObjectType_example") // VirtualizationCiscoHypervisorManager | The 'virtualization.CiscoHypervisorManager' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.CreateVirtualizationCiscoHypervisorManager(context.Background()).VirtualizationCiscoHypervisorManager(virtualizationCiscoHypervisorManager).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.CreateVirtualizationCiscoHypervisorManager``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateVirtualizationCiscoHypervisorManager`: VirtualizationCiscoHypervisorManager
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.CreateVirtualizationCiscoHypervisorManager`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateVirtualizationCiscoHypervisorManagerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **virtualizationCiscoHypervisorManager** | [**VirtualizationCiscoHypervisorManager**](VirtualizationCiscoHypervisorManager.md) | The &#39;virtualization.CiscoHypervisorManager&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**VirtualizationCiscoHypervisorManager**](VirtualizationCiscoHypervisorManager.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateVirtualizationIweDatacenter
+
+> VirtualizationIweDatacenter CreateVirtualizationIweDatacenter(ctx).VirtualizationIweDatacenter(virtualizationIweDatacenter).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'virtualization.IweDatacenter' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    virtualizationIweDatacenter := *openapiclient.NewVirtualizationIweDatacenter("ClassId_example", "ObjectType_example") // VirtualizationIweDatacenter | The 'virtualization.IweDatacenter' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.CreateVirtualizationIweDatacenter(context.Background()).VirtualizationIweDatacenter(virtualizationIweDatacenter).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.CreateVirtualizationIweDatacenter``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateVirtualizationIweDatacenter`: VirtualizationIweDatacenter
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.CreateVirtualizationIweDatacenter`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateVirtualizationIweDatacenterRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **virtualizationIweDatacenter** | [**VirtualizationIweDatacenter**](VirtualizationIweDatacenter.md) | The &#39;virtualization.IweDatacenter&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**VirtualizationIweDatacenter**](VirtualizationIweDatacenter.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CreateVirtualizationVirtualDisk
@@ -303,6 +482,204 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteVirtualizationIweCluster
+
+> DeleteVirtualizationIweCluster(ctx, moid).Execute()
+
+Delete a 'virtualization.IweCluster' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.DeleteVirtualizationIweCluster(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.DeleteVirtualizationIweCluster``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteVirtualizationIweClusterRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteVirtualizationIweDatacenter
+
+> DeleteVirtualizationIweDatacenter(ctx, moid).Execute()
+
+Delete a 'virtualization.IweDatacenter' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.DeleteVirtualizationIweDatacenter(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.DeleteVirtualizationIweDatacenter``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteVirtualizationIweDatacenterRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteVirtualizationIweVirtualMachineNetworkInterface
+
+> DeleteVirtualizationIweVirtualMachineNetworkInterface(ctx, moid).Execute()
+
+Delete a 'virtualization.IweVirtualMachineNetworkInterface' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.DeleteVirtualizationIweVirtualMachineNetworkInterface(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.DeleteVirtualizationIweVirtualMachineNetworkInterface``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteVirtualizationIweVirtualMachineNetworkInterfaceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteVirtualizationVirtualDisk
 
 > DeleteVirtualizationVirtualDisk(ctx, moid).Execute()
@@ -501,6 +878,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetVirtualizationCiscoHypervisorManagerByMoid
+
+> VirtualizationCiscoHypervisorManager GetVirtualizationCiscoHypervisorManagerByMoid(ctx, moid).Execute()
+
+Read a 'virtualization.CiscoHypervisorManager' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationCiscoHypervisorManagerByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationCiscoHypervisorManagerByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationCiscoHypervisorManagerByMoid`: VirtualizationCiscoHypervisorManager
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationCiscoHypervisorManagerByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationCiscoHypervisorManagerByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VirtualizationCiscoHypervisorManager**](VirtualizationCiscoHypervisorManager.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationCiscoHypervisorManagerList
+
+> VirtualizationCiscoHypervisorManagerResponse GetVirtualizationCiscoHypervisorManagerList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'virtualization.CiscoHypervisorManager' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationCiscoHypervisorManagerList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationCiscoHypervisorManagerList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationCiscoHypervisorManagerList`: VirtualizationCiscoHypervisorManagerResponse
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationCiscoHypervisorManagerList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationCiscoHypervisorManagerListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VirtualizationCiscoHypervisorManagerResponse**](VirtualizationCiscoHypervisorManagerResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetVirtualizationHostByMoid
 
 > VirtualizationHost GetVirtualizationHostByMoid(ctx, moid).Execute()
@@ -638,6 +1167,1678 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**VirtualizationHostResponse**](VirtualizationHostResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweClusterByMoid
+
+> VirtualizationIweCluster GetVirtualizationIweClusterByMoid(ctx, moid).Execute()
+
+Read a 'virtualization.IweCluster' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweClusterByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweClusterByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweClusterByMoid`: VirtualizationIweCluster
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweClusterByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweClusterByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VirtualizationIweCluster**](VirtualizationIweCluster.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweClusterList
+
+> VirtualizationIweClusterResponse GetVirtualizationIweClusterList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'virtualization.IweCluster' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweClusterList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweClusterList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweClusterList`: VirtualizationIweClusterResponse
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweClusterList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweClusterListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VirtualizationIweClusterResponse**](VirtualizationIweClusterResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweDatacenterByMoid
+
+> VirtualizationIweDatacenter GetVirtualizationIweDatacenterByMoid(ctx, moid).Execute()
+
+Read a 'virtualization.IweDatacenter' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweDatacenterByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweDatacenterByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweDatacenterByMoid`: VirtualizationIweDatacenter
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweDatacenterByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweDatacenterByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VirtualizationIweDatacenter**](VirtualizationIweDatacenter.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweDatacenterList
+
+> VirtualizationIweDatacenterResponse GetVirtualizationIweDatacenterList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'virtualization.IweDatacenter' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweDatacenterList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweDatacenterList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweDatacenterList`: VirtualizationIweDatacenterResponse
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweDatacenterList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweDatacenterListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VirtualizationIweDatacenterResponse**](VirtualizationIweDatacenterResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweDvUplinkByMoid
+
+> VirtualizationIweDvUplink GetVirtualizationIweDvUplinkByMoid(ctx, moid).Execute()
+
+Read a 'virtualization.IweDvUplink' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweDvUplinkByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweDvUplinkByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweDvUplinkByMoid`: VirtualizationIweDvUplink
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweDvUplinkByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweDvUplinkByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VirtualizationIweDvUplink**](VirtualizationIweDvUplink.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweDvUplinkList
+
+> VirtualizationIweDvUplinkResponse GetVirtualizationIweDvUplinkList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'virtualization.IweDvUplink' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweDvUplinkList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweDvUplinkList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweDvUplinkList`: VirtualizationIweDvUplinkResponse
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweDvUplinkList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweDvUplinkListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VirtualizationIweDvUplinkResponse**](VirtualizationIweDvUplinkResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweDvswitchByMoid
+
+> VirtualizationIweDvswitch GetVirtualizationIweDvswitchByMoid(ctx, moid).Execute()
+
+Read a 'virtualization.IweDvswitch' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweDvswitchByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweDvswitchByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweDvswitchByMoid`: VirtualizationIweDvswitch
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweDvswitchByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweDvswitchByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VirtualizationIweDvswitch**](VirtualizationIweDvswitch.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweDvswitchList
+
+> VirtualizationIweDvswitchResponse GetVirtualizationIweDvswitchList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'virtualization.IweDvswitch' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweDvswitchList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweDvswitchList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweDvswitchList`: VirtualizationIweDvswitchResponse
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweDvswitchList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweDvswitchListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VirtualizationIweDvswitchResponse**](VirtualizationIweDvswitchResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweHostByMoid
+
+> VirtualizationIweHost GetVirtualizationIweHostByMoid(ctx, moid).Execute()
+
+Read a 'virtualization.IweHost' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweHostByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweHostByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweHostByMoid`: VirtualizationIweHost
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweHostByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweHostByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VirtualizationIweHost**](VirtualizationIweHost.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweHostInterfaceByMoid
+
+> VirtualizationIweHostInterface GetVirtualizationIweHostInterfaceByMoid(ctx, moid).Execute()
+
+Read a 'virtualization.IweHostInterface' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweHostInterfaceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweHostInterfaceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweHostInterfaceByMoid`: VirtualizationIweHostInterface
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweHostInterfaceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweHostInterfaceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VirtualizationIweHostInterface**](VirtualizationIweHostInterface.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweHostInterfaceList
+
+> VirtualizationIweHostInterfaceResponse GetVirtualizationIweHostInterfaceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'virtualization.IweHostInterface' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweHostInterfaceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweHostInterfaceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweHostInterfaceList`: VirtualizationIweHostInterfaceResponse
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweHostInterfaceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweHostInterfaceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VirtualizationIweHostInterfaceResponse**](VirtualizationIweHostInterfaceResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweHostList
+
+> VirtualizationIweHostResponse GetVirtualizationIweHostList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'virtualization.IweHost' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweHostList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweHostList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweHostList`: VirtualizationIweHostResponse
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweHostList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweHostListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VirtualizationIweHostResponse**](VirtualizationIweHostResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweHostVswitchByMoid
+
+> VirtualizationIweHostVswitch GetVirtualizationIweHostVswitchByMoid(ctx, moid).Execute()
+
+Read a 'virtualization.IweHostVswitch' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweHostVswitchByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweHostVswitchByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweHostVswitchByMoid`: VirtualizationIweHostVswitch
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweHostVswitchByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweHostVswitchByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VirtualizationIweHostVswitch**](VirtualizationIweHostVswitch.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweHostVswitchList
+
+> VirtualizationIweHostVswitchResponse GetVirtualizationIweHostVswitchList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'virtualization.IweHostVswitch' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweHostVswitchList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweHostVswitchList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweHostVswitchList`: VirtualizationIweHostVswitchResponse
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweHostVswitchList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweHostVswitchListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VirtualizationIweHostVswitchResponse**](VirtualizationIweHostVswitchResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweNetworkByMoid
+
+> VirtualizationIweNetwork GetVirtualizationIweNetworkByMoid(ctx, moid).Execute()
+
+Read a 'virtualization.IweNetwork' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweNetworkByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweNetworkByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweNetworkByMoid`: VirtualizationIweNetwork
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweNetworkByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweNetworkByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VirtualizationIweNetwork**](VirtualizationIweNetwork.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweNetworkList
+
+> VirtualizationIweNetworkResponse GetVirtualizationIweNetworkList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'virtualization.IweNetwork' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweNetworkList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweNetworkList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweNetworkList`: VirtualizationIweNetworkResponse
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweNetworkList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweNetworkListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VirtualizationIweNetworkResponse**](VirtualizationIweNetworkResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweVirtualDiskByMoid
+
+> VirtualizationIweVirtualDisk GetVirtualizationIweVirtualDiskByMoid(ctx, moid).Execute()
+
+Read a 'virtualization.IweVirtualDisk' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweVirtualDiskByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweVirtualDiskByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweVirtualDiskByMoid`: VirtualizationIweVirtualDisk
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweVirtualDiskByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweVirtualDiskByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VirtualizationIweVirtualDisk**](VirtualizationIweVirtualDisk.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweVirtualDiskList
+
+> VirtualizationIweVirtualDiskResponse GetVirtualizationIweVirtualDiskList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'virtualization.IweVirtualDisk' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweVirtualDiskList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweVirtualDiskList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweVirtualDiskList`: VirtualizationIweVirtualDiskResponse
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweVirtualDiskList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweVirtualDiskListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VirtualizationIweVirtualDiskResponse**](VirtualizationIweVirtualDiskResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweVirtualMachineByMoid
+
+> VirtualizationIweVirtualMachine GetVirtualizationIweVirtualMachineByMoid(ctx, moid).Execute()
+
+Read a 'virtualization.IweVirtualMachine' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweVirtualMachineByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweVirtualMachineByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweVirtualMachineByMoid`: VirtualizationIweVirtualMachine
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweVirtualMachineByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweVirtualMachineByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VirtualizationIweVirtualMachine**](VirtualizationIweVirtualMachine.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweVirtualMachineList
+
+> VirtualizationIweVirtualMachineResponse GetVirtualizationIweVirtualMachineList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'virtualization.IweVirtualMachine' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweVirtualMachineList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweVirtualMachineList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweVirtualMachineList`: VirtualizationIweVirtualMachineResponse
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweVirtualMachineList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweVirtualMachineListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VirtualizationIweVirtualMachineResponse**](VirtualizationIweVirtualMachineResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweVirtualMachineNetworkInterfaceByMoid
+
+> VirtualizationIweVirtualMachineNetworkInterface GetVirtualizationIweVirtualMachineNetworkInterfaceByMoid(ctx, moid).Execute()
+
+Read a 'virtualization.IweVirtualMachineNetworkInterface' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweVirtualMachineNetworkInterfaceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweVirtualMachineNetworkInterfaceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweVirtualMachineNetworkInterfaceByMoid`: VirtualizationIweVirtualMachineNetworkInterface
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweVirtualMachineNetworkInterfaceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweVirtualMachineNetworkInterfaceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**VirtualizationIweVirtualMachineNetworkInterface**](VirtualizationIweVirtualMachineNetworkInterface.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetVirtualizationIweVirtualMachineNetworkInterfaceList
+
+> VirtualizationIweVirtualMachineNetworkInterfaceResponse GetVirtualizationIweVirtualMachineNetworkInterfaceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'virtualization.IweVirtualMachineNetworkInterface' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.GetVirtualizationIweVirtualMachineNetworkInterfaceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.GetVirtualizationIweVirtualMachineNetworkInterfaceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetVirtualizationIweVirtualMachineNetworkInterfaceList`: VirtualizationIweVirtualMachineNetworkInterfaceResponse
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.GetVirtualizationIweVirtualMachineNetworkInterfaceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetVirtualizationIweVirtualMachineNetworkInterfaceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**VirtualizationIweVirtualMachineNetworkInterfaceResponse**](VirtualizationIweVirtualMachineNetworkInterfaceResponse.md)
 
 ### Authorization
 
@@ -3845,6 +6046,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchVirtualizationCiscoHypervisorManager
+
+> VirtualizationCiscoHypervisorManager PatchVirtualizationCiscoHypervisorManager(ctx, moid).VirtualizationCiscoHypervisorManager(virtualizationCiscoHypervisorManager).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.CiscoHypervisorManager' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationCiscoHypervisorManager := *openapiclient.NewVirtualizationCiscoHypervisorManager("ClassId_example", "ObjectType_example") // VirtualizationCiscoHypervisorManager | The 'virtualization.CiscoHypervisorManager' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.PatchVirtualizationCiscoHypervisorManager(context.Background(), moid).VirtualizationCiscoHypervisorManager(virtualizationCiscoHypervisorManager).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.PatchVirtualizationCiscoHypervisorManager``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchVirtualizationCiscoHypervisorManager`: VirtualizationCiscoHypervisorManager
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.PatchVirtualizationCiscoHypervisorManager`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchVirtualizationCiscoHypervisorManagerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationCiscoHypervisorManager** | [**VirtualizationCiscoHypervisorManager**](VirtualizationCiscoHypervisorManager.md) | The &#39;virtualization.CiscoHypervisorManager&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationCiscoHypervisorManager**](VirtualizationCiscoHypervisorManager.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchVirtualizationHost
 
 > VirtualizationHost PatchVirtualizationHost(ctx, moid).VirtualizationHost(virtualizationHost).IfMatch(ifMatch).Execute()
@@ -3902,6 +6175,438 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**VirtualizationHost**](VirtualizationHost.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchVirtualizationIweCluster
+
+> VirtualizationIweCluster PatchVirtualizationIweCluster(ctx, moid).VirtualizationIweCluster(virtualizationIweCluster).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.IweCluster' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationIweCluster := *openapiclient.NewVirtualizationIweCluster("ClassId_example", "ObjectType_example") // VirtualizationIweCluster | The 'virtualization.IweCluster' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.PatchVirtualizationIweCluster(context.Background(), moid).VirtualizationIweCluster(virtualizationIweCluster).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.PatchVirtualizationIweCluster``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchVirtualizationIweCluster`: VirtualizationIweCluster
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.PatchVirtualizationIweCluster`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchVirtualizationIweClusterRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationIweCluster** | [**VirtualizationIweCluster**](VirtualizationIweCluster.md) | The &#39;virtualization.IweCluster&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationIweCluster**](VirtualizationIweCluster.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchVirtualizationIweDatacenter
+
+> VirtualizationIweDatacenter PatchVirtualizationIweDatacenter(ctx, moid).VirtualizationIweDatacenter(virtualizationIweDatacenter).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.IweDatacenter' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationIweDatacenter := *openapiclient.NewVirtualizationIweDatacenter("ClassId_example", "ObjectType_example") // VirtualizationIweDatacenter | The 'virtualization.IweDatacenter' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.PatchVirtualizationIweDatacenter(context.Background(), moid).VirtualizationIweDatacenter(virtualizationIweDatacenter).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.PatchVirtualizationIweDatacenter``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchVirtualizationIweDatacenter`: VirtualizationIweDatacenter
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.PatchVirtualizationIweDatacenter`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchVirtualizationIweDatacenterRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationIweDatacenter** | [**VirtualizationIweDatacenter**](VirtualizationIweDatacenter.md) | The &#39;virtualization.IweDatacenter&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationIweDatacenter**](VirtualizationIweDatacenter.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchVirtualizationIweHost
+
+> VirtualizationIweHost PatchVirtualizationIweHost(ctx, moid).VirtualizationIweHost(virtualizationIweHost).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.IweHost' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationIweHost := *openapiclient.NewVirtualizationIweHost("ClassId_example", "ObjectType_example") // VirtualizationIweHost | The 'virtualization.IweHost' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.PatchVirtualizationIweHost(context.Background(), moid).VirtualizationIweHost(virtualizationIweHost).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.PatchVirtualizationIweHost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchVirtualizationIweHost`: VirtualizationIweHost
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.PatchVirtualizationIweHost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchVirtualizationIweHostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationIweHost** | [**VirtualizationIweHost**](VirtualizationIweHost.md) | The &#39;virtualization.IweHost&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationIweHost**](VirtualizationIweHost.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchVirtualizationIweNetwork
+
+> VirtualizationIweNetwork PatchVirtualizationIweNetwork(ctx, moid).VirtualizationIweNetwork(virtualizationIweNetwork).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.IweNetwork' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationIweNetwork := *openapiclient.NewVirtualizationIweNetwork("ClassId_example", "ObjectType_example") // VirtualizationIweNetwork | The 'virtualization.IweNetwork' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.PatchVirtualizationIweNetwork(context.Background(), moid).VirtualizationIweNetwork(virtualizationIweNetwork).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.PatchVirtualizationIweNetwork``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchVirtualizationIweNetwork`: VirtualizationIweNetwork
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.PatchVirtualizationIweNetwork`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchVirtualizationIweNetworkRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationIweNetwork** | [**VirtualizationIweNetwork**](VirtualizationIweNetwork.md) | The &#39;virtualization.IweNetwork&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationIweNetwork**](VirtualizationIweNetwork.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchVirtualizationIweVirtualDisk
+
+> VirtualizationIweVirtualDisk PatchVirtualizationIweVirtualDisk(ctx, moid).VirtualizationIweVirtualDisk(virtualizationIweVirtualDisk).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.IweVirtualDisk' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationIweVirtualDisk := *openapiclient.NewVirtualizationIweVirtualDisk("ClassId_example", "ObjectType_example") // VirtualizationIweVirtualDisk | The 'virtualization.IweVirtualDisk' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.PatchVirtualizationIweVirtualDisk(context.Background(), moid).VirtualizationIweVirtualDisk(virtualizationIweVirtualDisk).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.PatchVirtualizationIweVirtualDisk``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchVirtualizationIweVirtualDisk`: VirtualizationIweVirtualDisk
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.PatchVirtualizationIweVirtualDisk`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchVirtualizationIweVirtualDiskRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationIweVirtualDisk** | [**VirtualizationIweVirtualDisk**](VirtualizationIweVirtualDisk.md) | The &#39;virtualization.IweVirtualDisk&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationIweVirtualDisk**](VirtualizationIweVirtualDisk.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchVirtualizationIweVirtualMachine
+
+> VirtualizationIweVirtualMachine PatchVirtualizationIweVirtualMachine(ctx, moid).VirtualizationIweVirtualMachine(virtualizationIweVirtualMachine).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.IweVirtualMachine' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationIweVirtualMachine := *openapiclient.NewVirtualizationIweVirtualMachine("ClassId_example", "ObjectType_example") // VirtualizationIweVirtualMachine | The 'virtualization.IweVirtualMachine' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.PatchVirtualizationIweVirtualMachine(context.Background(), moid).VirtualizationIweVirtualMachine(virtualizationIweVirtualMachine).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.PatchVirtualizationIweVirtualMachine``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchVirtualizationIweVirtualMachine`: VirtualizationIweVirtualMachine
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.PatchVirtualizationIweVirtualMachine`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchVirtualizationIweVirtualMachineRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationIweVirtualMachine** | [**VirtualizationIweVirtualMachine**](VirtualizationIweVirtualMachine.md) | The &#39;virtualization.IweVirtualMachine&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationIweVirtualMachine**](VirtualizationIweVirtualMachine.md)
 
 ### Authorization
 
@@ -5357,6 +8062,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateVirtualizationCiscoHypervisorManager
+
+> VirtualizationCiscoHypervisorManager UpdateVirtualizationCiscoHypervisorManager(ctx, moid).VirtualizationCiscoHypervisorManager(virtualizationCiscoHypervisorManager).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.CiscoHypervisorManager' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationCiscoHypervisorManager := *openapiclient.NewVirtualizationCiscoHypervisorManager("ClassId_example", "ObjectType_example") // VirtualizationCiscoHypervisorManager | The 'virtualization.CiscoHypervisorManager' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.UpdateVirtualizationCiscoHypervisorManager(context.Background(), moid).VirtualizationCiscoHypervisorManager(virtualizationCiscoHypervisorManager).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.UpdateVirtualizationCiscoHypervisorManager``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateVirtualizationCiscoHypervisorManager`: VirtualizationCiscoHypervisorManager
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.UpdateVirtualizationCiscoHypervisorManager`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateVirtualizationCiscoHypervisorManagerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationCiscoHypervisorManager** | [**VirtualizationCiscoHypervisorManager**](VirtualizationCiscoHypervisorManager.md) | The &#39;virtualization.CiscoHypervisorManager&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationCiscoHypervisorManager**](VirtualizationCiscoHypervisorManager.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateVirtualizationHost
 
 > VirtualizationHost UpdateVirtualizationHost(ctx, moid).VirtualizationHost(virtualizationHost).IfMatch(ifMatch).Execute()
@@ -5414,6 +8191,438 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**VirtualizationHost**](VirtualizationHost.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateVirtualizationIweCluster
+
+> VirtualizationIweCluster UpdateVirtualizationIweCluster(ctx, moid).VirtualizationIweCluster(virtualizationIweCluster).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.IweCluster' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationIweCluster := *openapiclient.NewVirtualizationIweCluster("ClassId_example", "ObjectType_example") // VirtualizationIweCluster | The 'virtualization.IweCluster' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.UpdateVirtualizationIweCluster(context.Background(), moid).VirtualizationIweCluster(virtualizationIweCluster).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.UpdateVirtualizationIweCluster``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateVirtualizationIweCluster`: VirtualizationIweCluster
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.UpdateVirtualizationIweCluster`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateVirtualizationIweClusterRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationIweCluster** | [**VirtualizationIweCluster**](VirtualizationIweCluster.md) | The &#39;virtualization.IweCluster&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationIweCluster**](VirtualizationIweCluster.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateVirtualizationIweDatacenter
+
+> VirtualizationIweDatacenter UpdateVirtualizationIweDatacenter(ctx, moid).VirtualizationIweDatacenter(virtualizationIweDatacenter).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.IweDatacenter' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationIweDatacenter := *openapiclient.NewVirtualizationIweDatacenter("ClassId_example", "ObjectType_example") // VirtualizationIweDatacenter | The 'virtualization.IweDatacenter' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.UpdateVirtualizationIweDatacenter(context.Background(), moid).VirtualizationIweDatacenter(virtualizationIweDatacenter).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.UpdateVirtualizationIweDatacenter``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateVirtualizationIweDatacenter`: VirtualizationIweDatacenter
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.UpdateVirtualizationIweDatacenter`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateVirtualizationIweDatacenterRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationIweDatacenter** | [**VirtualizationIweDatacenter**](VirtualizationIweDatacenter.md) | The &#39;virtualization.IweDatacenter&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationIweDatacenter**](VirtualizationIweDatacenter.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateVirtualizationIweHost
+
+> VirtualizationIweHost UpdateVirtualizationIweHost(ctx, moid).VirtualizationIweHost(virtualizationIweHost).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.IweHost' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationIweHost := *openapiclient.NewVirtualizationIweHost("ClassId_example", "ObjectType_example") // VirtualizationIweHost | The 'virtualization.IweHost' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.UpdateVirtualizationIweHost(context.Background(), moid).VirtualizationIweHost(virtualizationIweHost).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.UpdateVirtualizationIweHost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateVirtualizationIweHost`: VirtualizationIweHost
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.UpdateVirtualizationIweHost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateVirtualizationIweHostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationIweHost** | [**VirtualizationIweHost**](VirtualizationIweHost.md) | The &#39;virtualization.IweHost&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationIweHost**](VirtualizationIweHost.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateVirtualizationIweNetwork
+
+> VirtualizationIweNetwork UpdateVirtualizationIweNetwork(ctx, moid).VirtualizationIweNetwork(virtualizationIweNetwork).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.IweNetwork' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationIweNetwork := *openapiclient.NewVirtualizationIweNetwork("ClassId_example", "ObjectType_example") // VirtualizationIweNetwork | The 'virtualization.IweNetwork' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.UpdateVirtualizationIweNetwork(context.Background(), moid).VirtualizationIweNetwork(virtualizationIweNetwork).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.UpdateVirtualizationIweNetwork``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateVirtualizationIweNetwork`: VirtualizationIweNetwork
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.UpdateVirtualizationIweNetwork`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateVirtualizationIweNetworkRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationIweNetwork** | [**VirtualizationIweNetwork**](VirtualizationIweNetwork.md) | The &#39;virtualization.IweNetwork&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationIweNetwork**](VirtualizationIweNetwork.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateVirtualizationIweVirtualDisk
+
+> VirtualizationIweVirtualDisk UpdateVirtualizationIweVirtualDisk(ctx, moid).VirtualizationIweVirtualDisk(virtualizationIweVirtualDisk).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.IweVirtualDisk' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationIweVirtualDisk := *openapiclient.NewVirtualizationIweVirtualDisk("ClassId_example", "ObjectType_example") // VirtualizationIweVirtualDisk | The 'virtualization.IweVirtualDisk' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.UpdateVirtualizationIweVirtualDisk(context.Background(), moid).VirtualizationIweVirtualDisk(virtualizationIweVirtualDisk).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.UpdateVirtualizationIweVirtualDisk``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateVirtualizationIweVirtualDisk`: VirtualizationIweVirtualDisk
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.UpdateVirtualizationIweVirtualDisk`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateVirtualizationIweVirtualDiskRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationIweVirtualDisk** | [**VirtualizationIweVirtualDisk**](VirtualizationIweVirtualDisk.md) | The &#39;virtualization.IweVirtualDisk&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationIweVirtualDisk**](VirtualizationIweVirtualDisk.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateVirtualizationIweVirtualMachine
+
+> VirtualizationIweVirtualMachine UpdateVirtualizationIweVirtualMachine(ctx, moid).VirtualizationIweVirtualMachine(virtualizationIweVirtualMachine).IfMatch(ifMatch).Execute()
+
+Update a 'virtualization.IweVirtualMachine' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    virtualizationIweVirtualMachine := *openapiclient.NewVirtualizationIweVirtualMachine("ClassId_example", "ObjectType_example") // VirtualizationIweVirtualMachine | The 'virtualization.IweVirtualMachine' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.VirtualizationApi.UpdateVirtualizationIweVirtualMachine(context.Background(), moid).VirtualizationIweVirtualMachine(virtualizationIweVirtualMachine).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `VirtualizationApi.UpdateVirtualizationIweVirtualMachine``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateVirtualizationIweVirtualMachine`: VirtualizationIweVirtualMachine
+    fmt.Fprintf(os.Stdout, "Response from `VirtualizationApi.UpdateVirtualizationIweVirtualMachine`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateVirtualizationIweVirtualMachineRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **virtualizationIweVirtualMachine** | [**VirtualizationIweVirtualMachine**](VirtualizationIweVirtualMachine.md) | The &#39;virtualization.IweVirtualMachine&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**VirtualizationIweVirtualMachine**](VirtualizationIweVirtualMachine.md)
 
 ### Authorization
 

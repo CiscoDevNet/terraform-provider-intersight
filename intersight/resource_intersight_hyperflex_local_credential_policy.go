@@ -154,6 +154,12 @@ func resourceHyperflexLocalCredentialPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"is_deployment_private_key_set": {
+				Description: "Indicates whether the value of the 'deploymentPrivateKey' property has been set.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
+			},
 			"is_hxdp_root_pwd_set": {
 				Description: "Indicates whether the value of the 'hxdpRootPwd' property has been set.",
 				Type:        schema.TypeBool,
@@ -726,6 +732,10 @@ func resourceHyperflexLocalCredentialPolicyRead(c context.Context, d *schema.Res
 
 	if err := d.Set("hypervisor_admin", (s.GetHypervisorAdmin())); err != nil {
 		return diag.Errorf("error occurred while setting property HypervisorAdmin in HyperflexLocalCredentialPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("is_deployment_private_key_set", (s.GetIsDeploymentPrivateKeySet())); err != nil {
+		return diag.Errorf("error occurred while setting property IsDeploymentPrivateKeySet in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("is_hxdp_root_pwd_set", (s.GetIsHxdpRootPwdSet())); err != nil {

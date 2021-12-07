@@ -44,6 +44,7 @@ This complex property has following sub-properties:
 * `hxdp_root_pwd`:(string) HyperFlex storage controller VM password must contain a minimum of 10 characters, with at least 1 lowercase, 1 uppercase, 1 numeric, and 1 of these -_@#$%^&*! special characters. 
 * `hypervisor_admin`:(string) Hypervisor administrator username must contain only alphanumeric characters. 
 * `hypervisor_admin_pwd`:(string) The Hypervisor root password. For HyperFlex Data Platform 3.0 or later, if the factory default password was not manually changed, you must set a new custom password. If the password was manually changed, you must not enable the factory default password property and provide the current hypervisor password. Note - All HyperFlex nodes require the same hypervisor password for installation. For HyperFlex Data Platform prior to 3.0, use the default password \ Cisco123\  for newly manufactured HyperFlex servers. A custom password should only be entered if hypervisor credentials were manually changed prior to deployment. 
+* `is_deployment_private_key_set`:(bool)(ReadOnly) Indicates whether the value of the 'deploymentPrivateKey' property has been set. 
 * `is_hxdp_root_pwd_set`:(bool)(ReadOnly) Indicates whether the value of the 'hxdpRootPwd' property has been set. 
 * `is_hypervisor_admin_pwd_set`:(bool)(ReadOnly) Indicates whether the value of the 'hypervisorAdminPwd' property has been set. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 

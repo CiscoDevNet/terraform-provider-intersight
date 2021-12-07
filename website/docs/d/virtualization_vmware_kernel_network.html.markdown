@@ -25,6 +25,8 @@ The following arguments can be used to get data of already created objects in In
 * `mtu`:(int) Maximum transmission unit configured on a kernel network. 
 * `name`:(string) User-provided name to identify the portgroup. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `subnet_mask`:(string) Subnet mask of the kernel network. 
+* `tcp_ip_stack`:(string) Type of stack for the kernel network. It can be custom, default, vMotion or provisioning. 
 * `vmotion`:(bool) Indicates that vmotion is enabled on this kernel network. 
 * `vsan`:(bool) Indicates that vsan traffic is enabled on this kernel network. 
 * `vsphere_provisioning`:(bool) Indicates that vsphere provisioning traffic is enabled on this kernel network. 

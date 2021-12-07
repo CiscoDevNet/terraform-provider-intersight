@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4903
+API version: 1.0.9-4929
 Contact: intersight@cisco.com
 */
 
@@ -47,6 +47,9 @@ type HyperflexClusterAllOf struct {
 	// An array of relationships to hyperflexNode resources.
 	Nodes            []HyperflexNodeRelationship          `json:"Nodes,omitempty"`
 	RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	// An array of relationships to ippoolPool resources.
+	StorageClientIpPools []IppoolPoolRelationship `json:"StorageClientIpPools,omitempty"`
+	StorageClientVrf     *VrfVrfRelationship      `json:"StorageClientVrf,omitempty"`
 	// An array of relationships to storageHyperFlexStorageContainer resources.
 	StorageContainers []StorageHyperFlexStorageContainerRelationship `json:"StorageContainers,omitempty"`
 	// An array of relationships to storageHyperFlexVolume resources.
@@ -628,6 +631,71 @@ func (o *HyperflexClusterAllOf) SetRegisteredDevice(v AssetDeviceRegistrationRel
 	o.RegisteredDevice = &v
 }
 
+// GetStorageClientIpPools returns the StorageClientIpPools field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexClusterAllOf) GetStorageClientIpPools() []IppoolPoolRelationship {
+	if o == nil {
+		var ret []IppoolPoolRelationship
+		return ret
+	}
+	return o.StorageClientIpPools
+}
+
+// GetStorageClientIpPoolsOk returns a tuple with the StorageClientIpPools field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexClusterAllOf) GetStorageClientIpPoolsOk() (*[]IppoolPoolRelationship, bool) {
+	if o == nil || o.StorageClientIpPools == nil {
+		return nil, false
+	}
+	return &o.StorageClientIpPools, true
+}
+
+// HasStorageClientIpPools returns a boolean if a field has been set.
+func (o *HyperflexClusterAllOf) HasStorageClientIpPools() bool {
+	if o != nil && o.StorageClientIpPools != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageClientIpPools gets a reference to the given []IppoolPoolRelationship and assigns it to the StorageClientIpPools field.
+func (o *HyperflexClusterAllOf) SetStorageClientIpPools(v []IppoolPoolRelationship) {
+	o.StorageClientIpPools = v
+}
+
+// GetStorageClientVrf returns the StorageClientVrf field value if set, zero value otherwise.
+func (o *HyperflexClusterAllOf) GetStorageClientVrf() VrfVrfRelationship {
+	if o == nil || o.StorageClientVrf == nil {
+		var ret VrfVrfRelationship
+		return ret
+	}
+	return *o.StorageClientVrf
+}
+
+// GetStorageClientVrfOk returns a tuple with the StorageClientVrf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexClusterAllOf) GetStorageClientVrfOk() (*VrfVrfRelationship, bool) {
+	if o == nil || o.StorageClientVrf == nil {
+		return nil, false
+	}
+	return o.StorageClientVrf, true
+}
+
+// HasStorageClientVrf returns a boolean if a field has been set.
+func (o *HyperflexClusterAllOf) HasStorageClientVrf() bool {
+	if o != nil && o.StorageClientVrf != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageClientVrf gets a reference to the given VrfVrfRelationship and assigns it to the StorageClientVrf field.
+func (o *HyperflexClusterAllOf) SetStorageClientVrf(v VrfVrfRelationship) {
+	o.StorageClientVrf = &v
+}
+
 // GetStorageContainers returns the StorageContainers field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexClusterAllOf) GetStorageContainers() []StorageHyperFlexStorageContainerRelationship {
 	if o == nil {
@@ -747,6 +815,12 @@ func (o HyperflexClusterAllOf) MarshalJSON() ([]byte, error) {
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
 	}
+	if o.StorageClientIpPools != nil {
+		toSerialize["StorageClientIpPools"] = o.StorageClientIpPools
+	}
+	if o.StorageClientVrf != nil {
+		toSerialize["StorageClientVrf"] = o.StorageClientVrf
+	}
 	if o.StorageContainers != nil {
 		toSerialize["StorageContainers"] = o.StorageContainers
 	}
@@ -788,6 +862,8 @@ func (o *HyperflexClusterAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "License")
 		delete(additionalProperties, "Nodes")
 		delete(additionalProperties, "RegisteredDevice")
+		delete(additionalProperties, "StorageClientIpPools")
+		delete(additionalProperties, "StorageClientVrf")
 		delete(additionalProperties, "StorageContainers")
 		delete(additionalProperties, "Volumes")
 		o.AdditionalProperties = additionalProperties
