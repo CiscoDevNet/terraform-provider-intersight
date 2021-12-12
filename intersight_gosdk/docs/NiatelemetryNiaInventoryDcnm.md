@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.NiaInventoryDcnm"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.NiaInventoryDcnm"]
+**ControllerHealth** | Pointer to **int64** | Health of controller on DCNM. | [optional] 
 **Dev** | Pointer to **bool** | Returns the value of the dev Field. | [optional] 
 **EpldImageCount** | Pointer to **int64** | Number of EPLD images uploaded to DCNM. | [optional] 
 **HaEnabled** | Pointer to **bool** | Returns the value of the haEnabled field. | [optional] 
@@ -23,11 +24,12 @@ Name | Type | Description | Notes
 **NumTrmEnabledCount** | Pointer to **int64** | Returns the number of links where TRM is enabled. | [optional] 
 **NumUpgUsers** | Pointer to **int64** | Number of users who have upgrade privileges excluding the admin. | [optional] 
 **NxosImageCount** | Pointer to **int64** | Number of NXOS images uploaded to DCNM. | [optional] 
+**OutofbandIp** | Pointer to **string** | Out of band IP of controller on DCNM. | [optional] 
 **Serial** | Pointer to **string** | Serial number of device being inventoried. The serial number is unique per device. | [optional] 
 **SiteName** | Pointer to **string** | Name of fabric domain of the controller. | [optional] 
 **UnderlayPeeringActiveLinksCount** | Pointer to **int64** | Returns the number of underlay peering active links. | [optional] 
 **UpgJobCount** | Pointer to **int64** | Number of upgrade jobs configured on DCNM. | [optional] 
-**UpgStatus** | Pointer to **string** | Upgrade status of jobs created on DCNM. | [optional] 
+**UpgStatus** | Pointer to [**[]NiatelemetryJobDetail**](NiatelemetryJobDetail.md) |  | [optional] 
 **Version** | Pointer to **string** | Returns the value of the version field. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -89,6 +91,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetControllerHealth
+
+`func (o *NiatelemetryNiaInventoryDcnm) GetControllerHealth() int64`
+
+GetControllerHealth returns the ControllerHealth field if non-nil, zero value otherwise.
+
+### GetControllerHealthOk
+
+`func (o *NiatelemetryNiaInventoryDcnm) GetControllerHealthOk() (*int64, bool)`
+
+GetControllerHealthOk returns a tuple with the ControllerHealth field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetControllerHealth
+
+`func (o *NiatelemetryNiaInventoryDcnm) SetControllerHealth(v int64)`
+
+SetControllerHealth sets ControllerHealth field to given value.
+
+### HasControllerHealth
+
+`func (o *NiatelemetryNiaInventoryDcnm) HasControllerHealth() bool`
+
+HasControllerHealth returns a boolean if a field has been set.
 
 ### GetDev
 
@@ -515,6 +542,31 @@ SetNxosImageCount sets NxosImageCount field to given value.
 
 HasNxosImageCount returns a boolean if a field has been set.
 
+### GetOutofbandIp
+
+`func (o *NiatelemetryNiaInventoryDcnm) GetOutofbandIp() string`
+
+GetOutofbandIp returns the OutofbandIp field if non-nil, zero value otherwise.
+
+### GetOutofbandIpOk
+
+`func (o *NiatelemetryNiaInventoryDcnm) GetOutofbandIpOk() (*string, bool)`
+
+GetOutofbandIpOk returns a tuple with the OutofbandIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutofbandIp
+
+`func (o *NiatelemetryNiaInventoryDcnm) SetOutofbandIp(v string)`
+
+SetOutofbandIp sets OutofbandIp field to given value.
+
+### HasOutofbandIp
+
+`func (o *NiatelemetryNiaInventoryDcnm) HasOutofbandIp() bool`
+
+HasOutofbandIp returns a boolean if a field has been set.
+
 ### GetSerial
 
 `func (o *NiatelemetryNiaInventoryDcnm) GetSerial() string`
@@ -617,20 +669,20 @@ HasUpgJobCount returns a boolean if a field has been set.
 
 ### GetUpgStatus
 
-`func (o *NiatelemetryNiaInventoryDcnm) GetUpgStatus() string`
+`func (o *NiatelemetryNiaInventoryDcnm) GetUpgStatus() []NiatelemetryJobDetail`
 
 GetUpgStatus returns the UpgStatus field if non-nil, zero value otherwise.
 
 ### GetUpgStatusOk
 
-`func (o *NiatelemetryNiaInventoryDcnm) GetUpgStatusOk() (*string, bool)`
+`func (o *NiatelemetryNiaInventoryDcnm) GetUpgStatusOk() (*[]NiatelemetryJobDetail, bool)`
 
 GetUpgStatusOk returns a tuple with the UpgStatus field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpgStatus
 
-`func (o *NiatelemetryNiaInventoryDcnm) SetUpgStatus(v string)`
+`func (o *NiatelemetryNiaInventoryDcnm) SetUpgStatus(v []NiatelemetryJobDetail)`
 
 SetUpgStatus sets UpgStatus field to given value.
 
@@ -640,6 +692,16 @@ SetUpgStatus sets UpgStatus field to given value.
 
 HasUpgStatus returns a boolean if a field has been set.
 
+### SetUpgStatusNil
+
+`func (o *NiatelemetryNiaInventoryDcnm) SetUpgStatusNil(b bool)`
+
+ SetUpgStatusNil sets the value for UpgStatus to be an explicit nil
+
+### UnsetUpgStatus
+`func (o *NiatelemetryNiaInventoryDcnm) UnsetUpgStatus()`
+
+UnsetUpgStatus ensures that no value is present for UpgStatus, not even an explicit nil
 ### GetVersion
 
 `func (o *NiatelemetryNiaInventoryDcnm) GetVersion() string`

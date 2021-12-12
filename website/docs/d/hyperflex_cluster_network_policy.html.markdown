@@ -17,7 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `jumbo_frame`:(bool) Enable or disable jumbo frames. 
+* `jumbo_frame`:(bool) Enable or disable Jumbo Frames (MTU=9000). Jumbo Frames are used by Storage Network, VM Migration Network. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 

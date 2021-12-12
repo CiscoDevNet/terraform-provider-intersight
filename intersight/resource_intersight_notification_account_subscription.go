@@ -202,7 +202,7 @@ func resourceNotificationAccountSubscription() *schema.Resource {
 				ForceNew:    true,
 			},
 			"name": {
-				Description: "The subscription name.",
+				Description: "The name of the subscription.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

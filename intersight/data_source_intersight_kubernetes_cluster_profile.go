@@ -100,6 +100,39 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 				},
 			},
 		},
+		"action_params": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "The action parameter identifier.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "The action parameter value.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -1326,6 +1359,39 @@ func dataSourceKubernetesClusterProfile() *schema.Resource {
 					},
 					"status": {
 						Description: "No longer maintained and will be removed soon.\n* `None` - A place holder for the default value.\n* `InProgress` - Action triggered on the resource is still running.\n* `Success` - Action triggered on the resource is completed successfully.\n* `Failure` - Action triggered on the resource is failed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"action_params": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "The action parameter identifier.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"value": {
+						Description: "The action parameter value.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -2583,6 +2649,46 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 			x := p[0]
 			o.SetActionInfo(x)
 		}
+	}
+
+	if v, ok := d.GetOk("action_params"); ok {
+		x := make([]models.PolicyActionParam, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.PolicyActionParam{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("policy.ActionParam")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["value"]; ok {
+				{
+					x := (v.(string))
+					o.SetValue(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetActionParams(x)
 	}
 
 	if v, ok := d.GetOk("additional_properties"); ok {
@@ -3954,6 +4060,8 @@ func dataSourceKubernetesClusterProfileRead(c context.Context, d *schema.Resourc
 				temp["action"] = (s.GetAction())
 
 				temp["action_info"] = flattenMapKubernetesActionInfo(s.GetActionInfo(), d)
+
+				temp["action_params"] = flattenListPolicyActionParam(s.GetActionParams(), d)
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)

@@ -64,6 +64,11 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"controller_health": {
+			Description: "Health of controller on DCNM.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -171,6 +176,11 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"outofband_ip": {
+			Description: "Out of band IP of controller on DCNM.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -332,9 +342,37 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 			Optional:    true,
 		},
 		"upg_status": {
-			Description: "Upgrade status of jobs created on DCNM.",
-			Type:        schema.TypeString,
-			Optional:    true,
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"job_id": {
+						Description: "Returns the id of the job.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"upg_status": {
+						Description: "Returns the status of the job.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"nr_version": {
 			Description: "Returns the value of the version field.",
@@ -499,6 +537,11 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"controller_health": {
+			Description: "Health of controller on DCNM.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -606,6 +649,11 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"outofband_ip": {
+			Description: "Out of band IP of controller on DCNM.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -767,9 +815,37 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 			Optional:    true,
 		},
 		"upg_status": {
-			Description: "Upgrade status of jobs created on DCNM.",
-			Type:        schema.TypeString,
-			Optional:    true,
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"job_id": {
+						Description: "Returns the id of the job.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"upg_status": {
+						Description: "Returns the status of the job.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"nr_version": {
 			Description: "Returns the value of the version field.",
@@ -960,6 +1036,11 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOkExists("controller_health"); ok {
+		x := int64(v.(int))
+		o.SetControllerHealth(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -1068,6 +1149,11 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+
+	if v, ok := d.GetOk("outofband_ip"); ok {
+		x := (v.(string))
+		o.SetOutofbandIp(x)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -1266,7 +1352,42 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 	}
 
 	if v, ok := d.GetOk("upg_status"); ok {
-		x := (v.(string))
+		x := make([]models.NiatelemetryJobDetail, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NiatelemetryJobDetail{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.JobDetail")
+			if v, ok := l["job_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetJobId(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["upg_status"]; ok {
+				{
+					x := (v.(string))
+					o.SetUpgStatus(x)
+				}
+			}
+			x = append(x, *o)
+		}
 		o.SetUpgStatus(x)
 	}
 
@@ -1390,6 +1511,7 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["controller_health"] = (s.GetControllerHealth())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["dev"] = (s.GetDev())
@@ -1414,6 +1536,7 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 				temp["num_upg_users"] = (s.GetNumUpgUsers())
 				temp["nxos_image_count"] = (s.GetNxosImageCount())
 				temp["object_type"] = (s.GetObjectType())
+				temp["outofband_ip"] = (s.GetOutofbandIp())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
@@ -1428,7 +1551,8 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["underlay_peering_active_links_count"] = (s.GetUnderlayPeeringActiveLinksCount())
 				temp["upg_job_count"] = (s.GetUpgJobCount())
-				temp["upg_status"] = (s.GetUpgStatus())
+
+				temp["upg_status"] = flattenListNiatelemetryJobDetail(s.GetUpgStatus(), d)
 				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

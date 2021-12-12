@@ -359,6 +359,11 @@ func dataSourceFabricVsan() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"vsan_scope": {
+			Description: "Used to indicate whether the VSAN Id is defined for storage or uplink or both traffics in FI.\n* `Uplink` - Vsan associated with uplink network.\n* `Storage` - Vsan associated with storage network.\n* `Common` - Vsan that is common for uplink and storage network.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 	}
 	var model = map[string]*schema.Schema{"account_moid": {
 		Description: "The Account ID for this managed object.",
@@ -702,6 +707,11 @@ func dataSourceFabricVsan() *schema.Resource {
 		"vsan_id": {
 			Description: "Virtual San Identifier in the switch.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"vsan_scope": {
+			Description: "Used to indicate whether the VSAN Id is defined for storage or uplink or both traffics in FI.\n* `Uplink` - Vsan associated with uplink network.\n* `Storage` - Vsan associated with storage network.\n* `Common` - Vsan that is common for uplink and storage network.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 	}
@@ -1079,6 +1089,11 @@ func dataSourceFabricVsanRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetVsanId(x)
 	}
 
+	if v, ok := d.GetOk("vsan_scope"); ok {
+		x := (v.(string))
+		o.SetVsanScope(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of FabricVsan object failed with error : %s", err.Error())
@@ -1144,6 +1159,7 @@ func dataSourceFabricVsanRead(c context.Context, d *schema.ResourceData, meta in
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vsan_id"] = (s.GetVsanId())
+				temp["vsan_scope"] = (s.GetVsanScope())
 				fabricVsanResults[j] = temp
 				j += 1
 			}

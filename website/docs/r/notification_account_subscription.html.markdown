@@ -34,7 +34,7 @@ This complex property has following sub-properties:
 * `enabled`:(bool) Subscription can be switched on/off with out necessity to change the subscriptionsettings: notification methods, conditions etc.Ex.: Subscription MO can be configured, but switched off. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `name`:(string) The subscription name. 
+* `name`:(string) The name of the subscription. 
 * `owners`:
                 (Array of schema.TypeString) -(ReadOnly)
 * `parent`:(HashMap) -(ReadOnly) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

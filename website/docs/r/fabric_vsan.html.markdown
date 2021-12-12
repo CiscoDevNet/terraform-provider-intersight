@@ -75,6 +75,7 @@ This complex property has following sub-properties:
   + `nr_version`:(string)(ReadOnly) The version of the Managed Object, e.g. an incrementing number or a hash id. 
   + `version_type`:(string)(ReadOnly) Specifies type of version. Currently the only supported value is \ Configured\ that is used to keep track of snapshots of policies and profiles that are intendedto be configured to target endpoints.* `Modified` - Version created every time an object is modified.* `Configured` - Version created every time an object is configured to the service profile.* `Deployed` - Version created for objects related to a service profile when it is deployed. 
 * `vsan_id`:(int) Virtual San Identifier in the switch. 
+* `vsan_scope`:(string) Used to indicate whether the VSAN Id is defined for storage or uplink or both traffics in FI.* `Uplink` - Vsan associated with uplink network.* `Storage` - Vsan associated with storage network.* `Common` - Vsan that is common for uplink and storage network. 
 
 
 ## Import

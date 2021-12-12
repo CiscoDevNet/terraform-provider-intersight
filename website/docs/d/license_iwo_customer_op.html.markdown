@@ -15,7 +15,7 @@ To access the ith object of the results obtained, use `data.intersight_license_i
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `active_admin`:(bool) The workload optimizer license administrative state.Set this property to 'true' to activate the workload optimizer license entitlements. 
-* `active_license_type`:(string) Active workload optimizer license tier set by user.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
+* `active_license_type`:(string) Active workload optimizer license tier set by user.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type.* `IKS-Advantage` - IKS-Advantage as a License type. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `enable_trial`:(bool) Enable trial for Intersight licensing. 

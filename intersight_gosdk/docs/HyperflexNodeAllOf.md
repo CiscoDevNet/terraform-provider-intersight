@@ -9,11 +9,17 @@ Name | Type | Description | Notes
 **BuildNumber** | Pointer to **string** | The build number of the hypervisor running on the host. | [optional] [readonly] 
 **DisplayVersion** | Pointer to **string** | The user-friendly string representation of the hypervisor version of the host. | [optional] [readonly] 
 **HostName** | Pointer to **string** | The hostname configured for the hypervisor running on the host. | [optional] [readonly] 
+**HxdpDataIp** | Pointer to [**NullableHyperflexHxNetworkAddressDt**](HyperflexHxNetworkAddressDt.md) |  | [optional] 
+**HxdpMmgtIp** | Pointer to [**NullableHyperflexHxNetworkAddressDt**](HyperflexHxNetworkAddressDt.md) |  | [optional] 
 **Hypervisor** | Pointer to **string** | The type of hypervisor running on the host. | [optional] [readonly] 
+**HypervisorDataIp** | Pointer to [**NullableHyperflexHxNetworkAddressDt**](HyperflexHxNetworkAddressDt.md) |  | [optional] 
 **Identity** | Pointer to [**NullableHyperflexHxUuIdDt**](HyperflexHxUuIdDt.md) |  | [optional] 
 **Ip** | Pointer to [**NullableHyperflexHxNetworkAddressDt**](HyperflexHxNetworkAddressDt.md) |  | [optional] 
 **Lockdown** | Pointer to **bool** | The admin state of lockdown mode on the host. If &#39;true&#39;, lockdown mode is enabled. | [optional] [readonly] 
 **ModelNumber** | Pointer to **string** | The model of the host server. | [optional] [readonly] 
+**NodeMaintenanceMode** | Pointer to **string** | The status of maintenance mode on the HyperFlex node. * &#x60;Unknown&#x60; - The maintenance mode status could not be determined. * &#x60;InMaintenanceMode&#x60; - The node has maintenance mode enabled. The node has been temporarily been relinquished from the cluster to allow for maintenance operations. * &#x60;NotInMaintenanceMode&#x60; - The node does not have maintenance mode enabled. | [optional] [readonly] [default to "Unknown"]
+**NodeStatus** | Pointer to **string** | The operational status of the HyperFlex node. * &#x60;Unknown&#x60; - The default operational status of a HyperFlex node. * &#x60;Invalid&#x60; - The status of the node cannot be determined by the storage platform. * &#x60;Ready&#x60; - The platform node has been acknowledged by the cluster. * &#x60;Unpublished&#x60; - The node is not yet added to the storage cluster. * &#x60;Deleted&#x60; - The node has been removed from the cluster. * &#x60;Blocked&#x60; - The node is blocked from being added to the cluster. * &#x60;Blacklisted&#x60; - The deprecated value for &#39;Blocked&#39;. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a). * &#x60;Allowed&#x60; - The node is allowd to be added to the cluster. * &#x60;Whitelisted&#x60; - The deprecated value for &#39;Allowed&#39;. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a). * &#x60;InMaintenance&#x60; - The node is in maintenance mode. It has been temporarily relinquished from the cluster to allow for maintenance operations such as software upgrades. * &#x60;Online&#x60; - The node is participating in the storage cluster and is available for storage operations. * &#x60;Offline&#x60; - The node is part of the storage cluster, but is not available for storage operations. | [optional] [readonly] [default to "Unknown"]
+**NodeUuid** | Pointer to **string** | The unique identifier of the HyperFlex node. | [optional] [readonly] 
 **Role** | Pointer to **string** | The role of the host in the HyperFlex cluster. Specifies whether this host is used for compute or for both compute and storage. * &#x60;UNKNOWN&#x60; - The role of the HyperFlex cluster node is not known. * &#x60;STORAGE&#x60; - The HyperFlex cluster node provides both storage and compute resources for the cluster. * &#x60;COMPUTE&#x60; - The HyperFlex cluster node provides compute resources for the cluster. | [optional] [readonly] [default to "UNKNOWN"]
 **SerialNumber** | Pointer to **string** | The serial of the host server. | [optional] [readonly] 
 **Status** | Pointer to **string** | The status of the host. Indicates whether the hypervisor is online. * &#x60;UNKNOWN&#x60; - The host status cannot be determined. * &#x60;ONLINE&#x60; - The host is online and operational. * &#x60;OFFLINE&#x60; - The host is offline and is currently not participating in the HyperFlex cluster. * &#x60;INMAINTENANCE&#x60; - The host is not participating in the HyperFlex cluster because of a maintenance operation, such as firmware or data platform upgrade. * &#x60;DEGRADED&#x60; - The host is degraded and may not be performing in its full operational capacity. | [optional] [readonly] [default to "UNKNOWN"]
@@ -157,6 +163,76 @@ SetHostName sets HostName field to given value.
 
 HasHostName returns a boolean if a field has been set.
 
+### GetHxdpDataIp
+
+`func (o *HyperflexNodeAllOf) GetHxdpDataIp() HyperflexHxNetworkAddressDt`
+
+GetHxdpDataIp returns the HxdpDataIp field if non-nil, zero value otherwise.
+
+### GetHxdpDataIpOk
+
+`func (o *HyperflexNodeAllOf) GetHxdpDataIpOk() (*HyperflexHxNetworkAddressDt, bool)`
+
+GetHxdpDataIpOk returns a tuple with the HxdpDataIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHxdpDataIp
+
+`func (o *HyperflexNodeAllOf) SetHxdpDataIp(v HyperflexHxNetworkAddressDt)`
+
+SetHxdpDataIp sets HxdpDataIp field to given value.
+
+### HasHxdpDataIp
+
+`func (o *HyperflexNodeAllOf) HasHxdpDataIp() bool`
+
+HasHxdpDataIp returns a boolean if a field has been set.
+
+### SetHxdpDataIpNil
+
+`func (o *HyperflexNodeAllOf) SetHxdpDataIpNil(b bool)`
+
+ SetHxdpDataIpNil sets the value for HxdpDataIp to be an explicit nil
+
+### UnsetHxdpDataIp
+`func (o *HyperflexNodeAllOf) UnsetHxdpDataIp()`
+
+UnsetHxdpDataIp ensures that no value is present for HxdpDataIp, not even an explicit nil
+### GetHxdpMmgtIp
+
+`func (o *HyperflexNodeAllOf) GetHxdpMmgtIp() HyperflexHxNetworkAddressDt`
+
+GetHxdpMmgtIp returns the HxdpMmgtIp field if non-nil, zero value otherwise.
+
+### GetHxdpMmgtIpOk
+
+`func (o *HyperflexNodeAllOf) GetHxdpMmgtIpOk() (*HyperflexHxNetworkAddressDt, bool)`
+
+GetHxdpMmgtIpOk returns a tuple with the HxdpMmgtIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHxdpMmgtIp
+
+`func (o *HyperflexNodeAllOf) SetHxdpMmgtIp(v HyperflexHxNetworkAddressDt)`
+
+SetHxdpMmgtIp sets HxdpMmgtIp field to given value.
+
+### HasHxdpMmgtIp
+
+`func (o *HyperflexNodeAllOf) HasHxdpMmgtIp() bool`
+
+HasHxdpMmgtIp returns a boolean if a field has been set.
+
+### SetHxdpMmgtIpNil
+
+`func (o *HyperflexNodeAllOf) SetHxdpMmgtIpNil(b bool)`
+
+ SetHxdpMmgtIpNil sets the value for HxdpMmgtIp to be an explicit nil
+
+### UnsetHxdpMmgtIp
+`func (o *HyperflexNodeAllOf) UnsetHxdpMmgtIp()`
+
+UnsetHxdpMmgtIp ensures that no value is present for HxdpMmgtIp, not even an explicit nil
 ### GetHypervisor
 
 `func (o *HyperflexNodeAllOf) GetHypervisor() string`
@@ -182,6 +258,41 @@ SetHypervisor sets Hypervisor field to given value.
 
 HasHypervisor returns a boolean if a field has been set.
 
+### GetHypervisorDataIp
+
+`func (o *HyperflexNodeAllOf) GetHypervisorDataIp() HyperflexHxNetworkAddressDt`
+
+GetHypervisorDataIp returns the HypervisorDataIp field if non-nil, zero value otherwise.
+
+### GetHypervisorDataIpOk
+
+`func (o *HyperflexNodeAllOf) GetHypervisorDataIpOk() (*HyperflexHxNetworkAddressDt, bool)`
+
+GetHypervisorDataIpOk returns a tuple with the HypervisorDataIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHypervisorDataIp
+
+`func (o *HyperflexNodeAllOf) SetHypervisorDataIp(v HyperflexHxNetworkAddressDt)`
+
+SetHypervisorDataIp sets HypervisorDataIp field to given value.
+
+### HasHypervisorDataIp
+
+`func (o *HyperflexNodeAllOf) HasHypervisorDataIp() bool`
+
+HasHypervisorDataIp returns a boolean if a field has been set.
+
+### SetHypervisorDataIpNil
+
+`func (o *HyperflexNodeAllOf) SetHypervisorDataIpNil(b bool)`
+
+ SetHypervisorDataIpNil sets the value for HypervisorDataIp to be an explicit nil
+
+### UnsetHypervisorDataIp
+`func (o *HyperflexNodeAllOf) UnsetHypervisorDataIp()`
+
+UnsetHypervisorDataIp ensures that no value is present for HypervisorDataIp, not even an explicit nil
 ### GetIdentity
 
 `func (o *HyperflexNodeAllOf) GetIdentity() HyperflexHxUuIdDt`
@@ -301,6 +412,81 @@ SetModelNumber sets ModelNumber field to given value.
 `func (o *HyperflexNodeAllOf) HasModelNumber() bool`
 
 HasModelNumber returns a boolean if a field has been set.
+
+### GetNodeMaintenanceMode
+
+`func (o *HyperflexNodeAllOf) GetNodeMaintenanceMode() string`
+
+GetNodeMaintenanceMode returns the NodeMaintenanceMode field if non-nil, zero value otherwise.
+
+### GetNodeMaintenanceModeOk
+
+`func (o *HyperflexNodeAllOf) GetNodeMaintenanceModeOk() (*string, bool)`
+
+GetNodeMaintenanceModeOk returns a tuple with the NodeMaintenanceMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeMaintenanceMode
+
+`func (o *HyperflexNodeAllOf) SetNodeMaintenanceMode(v string)`
+
+SetNodeMaintenanceMode sets NodeMaintenanceMode field to given value.
+
+### HasNodeMaintenanceMode
+
+`func (o *HyperflexNodeAllOf) HasNodeMaintenanceMode() bool`
+
+HasNodeMaintenanceMode returns a boolean if a field has been set.
+
+### GetNodeStatus
+
+`func (o *HyperflexNodeAllOf) GetNodeStatus() string`
+
+GetNodeStatus returns the NodeStatus field if non-nil, zero value otherwise.
+
+### GetNodeStatusOk
+
+`func (o *HyperflexNodeAllOf) GetNodeStatusOk() (*string, bool)`
+
+GetNodeStatusOk returns a tuple with the NodeStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeStatus
+
+`func (o *HyperflexNodeAllOf) SetNodeStatus(v string)`
+
+SetNodeStatus sets NodeStatus field to given value.
+
+### HasNodeStatus
+
+`func (o *HyperflexNodeAllOf) HasNodeStatus() bool`
+
+HasNodeStatus returns a boolean if a field has been set.
+
+### GetNodeUuid
+
+`func (o *HyperflexNodeAllOf) GetNodeUuid() string`
+
+GetNodeUuid returns the NodeUuid field if non-nil, zero value otherwise.
+
+### GetNodeUuidOk
+
+`func (o *HyperflexNodeAllOf) GetNodeUuidOk() (*string, bool)`
+
+GetNodeUuidOk returns a tuple with the NodeUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNodeUuid
+
+`func (o *HyperflexNodeAllOf) SetNodeUuid(v string)`
+
+SetNodeUuid sets NodeUuid field to given value.
+
+### HasNodeUuid
+
+`func (o *HyperflexNodeAllOf) HasNodeUuid() bool`
+
+HasNodeUuid returns a boolean if a field has been set.
 
 ### GetRole
 

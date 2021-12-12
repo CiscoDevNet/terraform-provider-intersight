@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **FcoeVlan** | Pointer to **int64** | FCOE Vlan associated to the VSAN configuration. | [optional] 
 **Name** | Pointer to **string** | User given name for the VSAN configuration. | [optional] 
 **VsanId** | Pointer to **int64** | Virtual San Identifier in the switch. | [optional] 
+**VsanScope** | Pointer to **string** | Used to indicate whether the VSAN Id is defined for storage or uplink or both traffics in FI. * &#x60;Uplink&#x60; - Vsan associated with uplink network. * &#x60;Storage&#x60; - Vsan associated with storage network. * &#x60;Common&#x60; - Vsan that is common for uplink and storage network. | [optional] [default to "Uplink"]
 **FcNetworkPolicy** | Pointer to [**FabricFcNetworkPolicyRelationship**](FabricFcNetworkPolicyRelationship.md) |  | [optional] 
 
 ## Methods
@@ -196,6 +197,31 @@ SetVsanId sets VsanId field to given value.
 `func (o *FabricVsanAllOf) HasVsanId() bool`
 
 HasVsanId returns a boolean if a field has been set.
+
+### GetVsanScope
+
+`func (o *FabricVsanAllOf) GetVsanScope() string`
+
+GetVsanScope returns the VsanScope field if non-nil, zero value otherwise.
+
+### GetVsanScopeOk
+
+`func (o *FabricVsanAllOf) GetVsanScopeOk() (*string, bool)`
+
+GetVsanScopeOk returns a tuple with the VsanScope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVsanScope
+
+`func (o *FabricVsanAllOf) SetVsanScope(v string)`
+
+SetVsanScope sets VsanScope field to given value.
+
+### HasVsanScope
+
+`func (o *FabricVsanAllOf) HasVsanScope() bool`
+
+HasVsanScope returns a boolean if a field has been set.
 
 ### GetFcNetworkPolicy
 

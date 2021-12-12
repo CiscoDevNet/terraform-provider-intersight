@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Action** | Pointer to **string** | User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign. | [optional] [default to "No-op"]
+**ActionParams** | Pointer to [**[]PolicyActionParam**](PolicyActionParam.md) |  | [optional] 
 **ConfigContext** | Pointer to [**NullablePolicyConfigContext**](PolicyConfigContext.md) |  | [optional] 
 **PolicyBucket** | Pointer to [**[]PolicyAbstractPolicyRelationship**](PolicyAbstractPolicyRelationship.md) | An array of relationships to policyAbstractPolicy resources. | [optional] 
 
@@ -94,6 +95,41 @@ SetAction sets Action field to given value.
 
 HasAction returns a boolean if a field has been set.
 
+### GetActionParams
+
+`func (o *PolicyAbstractConfigProfile) GetActionParams() []PolicyActionParam`
+
+GetActionParams returns the ActionParams field if non-nil, zero value otherwise.
+
+### GetActionParamsOk
+
+`func (o *PolicyAbstractConfigProfile) GetActionParamsOk() (*[]PolicyActionParam, bool)`
+
+GetActionParamsOk returns a tuple with the ActionParams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActionParams
+
+`func (o *PolicyAbstractConfigProfile) SetActionParams(v []PolicyActionParam)`
+
+SetActionParams sets ActionParams field to given value.
+
+### HasActionParams
+
+`func (o *PolicyAbstractConfigProfile) HasActionParams() bool`
+
+HasActionParams returns a boolean if a field has been set.
+
+### SetActionParamsNil
+
+`func (o *PolicyAbstractConfigProfile) SetActionParamsNil(b bool)`
+
+ SetActionParamsNil sets the value for ActionParams to be an explicit nil
+
+### UnsetActionParams
+`func (o *PolicyAbstractConfigProfile) UnsetActionParams()`
+
+UnsetActionParams ensures that no value is present for ActionParams, not even an explicit nil
 ### GetConfigContext
 
 `func (o *PolicyAbstractConfigProfile) GetConfigContext() PolicyConfigContext`

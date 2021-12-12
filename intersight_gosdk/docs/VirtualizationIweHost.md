@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **ManagementIpAddress** | Pointer to **string** | Management IP Address of the Host. | [optional] 
 **MasterRole** | Pointer to **bool** | Is the role of this host is master in the cluster? true or false. | [optional] 
 **MemoryAllocation** | Pointer to [**NullableVirtualizationMemoryAllocation**](VirtualizationMemoryAllocation.md) |  | [optional] 
+**StorageCapacity** | Pointer to [**NullableVirtualizationStorageCapacity**](VirtualizationStorageCapacity.md) |  | [optional] 
 **StorageVmPowerState** | Pointer to **string** | Is the Storage Controller VM on the host Powered-up or Powered-down. * &#x60;Unknown&#x60; - The entity&#39;s power state is unknown. * &#x60;PoweringOn&#x60; - The entity is powering on. * &#x60;PoweredOn&#x60; - The entity is powered on. * &#x60;PoweringOff&#x60; - The entity is powering off. * &#x60;PoweredOff&#x60; - The entity is powered down. * &#x60;StandBy&#x60; - The entity is in standby mode. * &#x60;Paused&#x60; - The entity is in pause state. * &#x60;Rebooting&#x60; - The entity reboot is in progress. * &#x60;&#x60; - The entity&#39;s power state is not available. | [optional] [default to "Unknown"]
 **Version** | Pointer to **string** | Product version of the Host. | [optional] 
 **Cluster** | Pointer to [**VirtualizationIweClusterRelationship**](VirtualizationIweClusterRelationship.md) |  | [optional] 
@@ -351,6 +352,41 @@ HasMemoryAllocation returns a boolean if a field has been set.
 `func (o *VirtualizationIweHost) UnsetMemoryAllocation()`
 
 UnsetMemoryAllocation ensures that no value is present for MemoryAllocation, not even an explicit nil
+### GetStorageCapacity
+
+`func (o *VirtualizationIweHost) GetStorageCapacity() VirtualizationStorageCapacity`
+
+GetStorageCapacity returns the StorageCapacity field if non-nil, zero value otherwise.
+
+### GetStorageCapacityOk
+
+`func (o *VirtualizationIweHost) GetStorageCapacityOk() (*VirtualizationStorageCapacity, bool)`
+
+GetStorageCapacityOk returns a tuple with the StorageCapacity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageCapacity
+
+`func (o *VirtualizationIweHost) SetStorageCapacity(v VirtualizationStorageCapacity)`
+
+SetStorageCapacity sets StorageCapacity field to given value.
+
+### HasStorageCapacity
+
+`func (o *VirtualizationIweHost) HasStorageCapacity() bool`
+
+HasStorageCapacity returns a boolean if a field has been set.
+
+### SetStorageCapacityNil
+
+`func (o *VirtualizationIweHost) SetStorageCapacityNil(b bool)`
+
+ SetStorageCapacityNil sets the value for StorageCapacity to be an explicit nil
+
+### UnsetStorageCapacity
+`func (o *VirtualizationIweHost) UnsetStorageCapacity()`
+
+UnsetStorageCapacity ensures that no value is present for StorageCapacity, not even an explicit nil
 ### GetStorageVmPowerState
 
 `func (o *VirtualizationIweHost) GetStorageVmPowerState() string`

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4929
+API version: 1.0.9-4950
 Contact: intersight@cisco.com
 */
 
@@ -37,14 +37,16 @@ type LicenseAccountLicenseData struct {
 	AuthNextTime *string `json:"AuthNextTime,omitempty"`
 	// Account license data category name.
 	Category *string `json:"Category,omitempty"`
-	// Default license tier set by user. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type.
+	// Default license tier set by user. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type.
 	DefaultLicenseType *string `json:"DefaultLicenseType,omitempty"`
 	// The detailed error message when there is any error related to license sync of this account.
 	ErrorDesc *string `json:"ErrorDesc,omitempty"`
 	// Account license data group name.
 	Group *string `json:"Group,omitempty"`
-	// The highest license tier which is in compliant of this account. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type.
+	// The highest license tier which is in compliant of this account. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type.
 	HighestCompliantLicenseTier *string `json:"HighestCompliantLicenseTier,omitempty"`
+	// Specifies last sync time with CSSM.
+	LastCssmSync *time.Time `json:"LastCssmSync,omitempty"`
 	// Specifies last certificate renew time with SA.
 	LastRenew *time.Time `json:"LastRenew,omitempty"`
 	// Specifies last sync time with SA.
@@ -67,12 +69,18 @@ type LicenseAccountLicenseData struct {
 	RenewFailureString *string `json:"RenewFailureString,omitempty"`
 	// Name of the smart account.
 	SmartAccount *string `json:"SmartAccount,omitempty"`
+	// Domain Name of the smart account.
+	SmartAccountDomain *string `json:"SmartAccountDomain,omitempty"`
+	// Indicate whether API integration is enabled.
+	SmartApiEnabled *bool `json:"SmartApiEnabled,omitempty"`
 	// Current sync status for the account.
 	SyncStatus *string `json:"SyncStatus,omitempty"`
 	// Name of the virtual account.
 	VirtualAccount  *string                             `json:"VirtualAccount,omitempty"`
 	Account         *IamAccountRelationship             `json:"Account,omitempty"`
 	CustomerOp      *LicenseCustomerOpRelationship      `json:"CustomerOp,omitempty"`
+	IksCustomerOp   *LicenseIksCustomerOpRelationship   `json:"IksCustomerOp,omitempty"`
+	IksLicenseCount *LicenseIksLicenseCountRelationship `json:"IksLicenseCount,omitempty"`
 	IwoCustomerOp   *LicenseIwoCustomerOpRelationship   `json:"IwoCustomerOp,omitempty"`
 	IwoLicenseCount *LicenseIwoLicenseCountRelationship `json:"IwoLicenseCount,omitempty"`
 	// An array of relationships to licenseLicenseInfo resources.
@@ -478,6 +486,38 @@ func (o *LicenseAccountLicenseData) SetHighestCompliantLicenseTier(v string) {
 	o.HighestCompliantLicenseTier = &v
 }
 
+// GetLastCssmSync returns the LastCssmSync field value if set, zero value otherwise.
+func (o *LicenseAccountLicenseData) GetLastCssmSync() time.Time {
+	if o == nil || o.LastCssmSync == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastCssmSync
+}
+
+// GetLastCssmSyncOk returns a tuple with the LastCssmSync field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseAccountLicenseData) GetLastCssmSyncOk() (*time.Time, bool) {
+	if o == nil || o.LastCssmSync == nil {
+		return nil, false
+	}
+	return o.LastCssmSync, true
+}
+
+// HasLastCssmSync returns a boolean if a field has been set.
+func (o *LicenseAccountLicenseData) HasLastCssmSync() bool {
+	if o != nil && o.LastCssmSync != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastCssmSync gets a reference to the given time.Time and assigns it to the LastCssmSync field.
+func (o *LicenseAccountLicenseData) SetLastCssmSync(v time.Time) {
+	o.LastCssmSync = &v
+}
+
 // GetLastRenew returns the LastRenew field value if set, zero value otherwise.
 func (o *LicenseAccountLicenseData) GetLastRenew() time.Time {
 	if o == nil || o.LastRenew == nil {
@@ -830,6 +870,70 @@ func (o *LicenseAccountLicenseData) SetSmartAccount(v string) {
 	o.SmartAccount = &v
 }
 
+// GetSmartAccountDomain returns the SmartAccountDomain field value if set, zero value otherwise.
+func (o *LicenseAccountLicenseData) GetSmartAccountDomain() string {
+	if o == nil || o.SmartAccountDomain == nil {
+		var ret string
+		return ret
+	}
+	return *o.SmartAccountDomain
+}
+
+// GetSmartAccountDomainOk returns a tuple with the SmartAccountDomain field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseAccountLicenseData) GetSmartAccountDomainOk() (*string, bool) {
+	if o == nil || o.SmartAccountDomain == nil {
+		return nil, false
+	}
+	return o.SmartAccountDomain, true
+}
+
+// HasSmartAccountDomain returns a boolean if a field has been set.
+func (o *LicenseAccountLicenseData) HasSmartAccountDomain() bool {
+	if o != nil && o.SmartAccountDomain != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSmartAccountDomain gets a reference to the given string and assigns it to the SmartAccountDomain field.
+func (o *LicenseAccountLicenseData) SetSmartAccountDomain(v string) {
+	o.SmartAccountDomain = &v
+}
+
+// GetSmartApiEnabled returns the SmartApiEnabled field value if set, zero value otherwise.
+func (o *LicenseAccountLicenseData) GetSmartApiEnabled() bool {
+	if o == nil || o.SmartApiEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SmartApiEnabled
+}
+
+// GetSmartApiEnabledOk returns a tuple with the SmartApiEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseAccountLicenseData) GetSmartApiEnabledOk() (*bool, bool) {
+	if o == nil || o.SmartApiEnabled == nil {
+		return nil, false
+	}
+	return o.SmartApiEnabled, true
+}
+
+// HasSmartApiEnabled returns a boolean if a field has been set.
+func (o *LicenseAccountLicenseData) HasSmartApiEnabled() bool {
+	if o != nil && o.SmartApiEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSmartApiEnabled gets a reference to the given bool and assigns it to the SmartApiEnabled field.
+func (o *LicenseAccountLicenseData) SetSmartApiEnabled(v bool) {
+	o.SmartApiEnabled = &v
+}
+
 // GetSyncStatus returns the SyncStatus field value if set, zero value otherwise.
 func (o *LicenseAccountLicenseData) GetSyncStatus() string {
 	if o == nil || o.SyncStatus == nil {
@@ -956,6 +1060,70 @@ func (o *LicenseAccountLicenseData) HasCustomerOp() bool {
 // SetCustomerOp gets a reference to the given LicenseCustomerOpRelationship and assigns it to the CustomerOp field.
 func (o *LicenseAccountLicenseData) SetCustomerOp(v LicenseCustomerOpRelationship) {
 	o.CustomerOp = &v
+}
+
+// GetIksCustomerOp returns the IksCustomerOp field value if set, zero value otherwise.
+func (o *LicenseAccountLicenseData) GetIksCustomerOp() LicenseIksCustomerOpRelationship {
+	if o == nil || o.IksCustomerOp == nil {
+		var ret LicenseIksCustomerOpRelationship
+		return ret
+	}
+	return *o.IksCustomerOp
+}
+
+// GetIksCustomerOpOk returns a tuple with the IksCustomerOp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseAccountLicenseData) GetIksCustomerOpOk() (*LicenseIksCustomerOpRelationship, bool) {
+	if o == nil || o.IksCustomerOp == nil {
+		return nil, false
+	}
+	return o.IksCustomerOp, true
+}
+
+// HasIksCustomerOp returns a boolean if a field has been set.
+func (o *LicenseAccountLicenseData) HasIksCustomerOp() bool {
+	if o != nil && o.IksCustomerOp != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIksCustomerOp gets a reference to the given LicenseIksCustomerOpRelationship and assigns it to the IksCustomerOp field.
+func (o *LicenseAccountLicenseData) SetIksCustomerOp(v LicenseIksCustomerOpRelationship) {
+	o.IksCustomerOp = &v
+}
+
+// GetIksLicenseCount returns the IksLicenseCount field value if set, zero value otherwise.
+func (o *LicenseAccountLicenseData) GetIksLicenseCount() LicenseIksLicenseCountRelationship {
+	if o == nil || o.IksLicenseCount == nil {
+		var ret LicenseIksLicenseCountRelationship
+		return ret
+	}
+	return *o.IksLicenseCount
+}
+
+// GetIksLicenseCountOk returns a tuple with the IksLicenseCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseAccountLicenseData) GetIksLicenseCountOk() (*LicenseIksLicenseCountRelationship, bool) {
+	if o == nil || o.IksLicenseCount == nil {
+		return nil, false
+	}
+	return o.IksLicenseCount, true
+}
+
+// HasIksLicenseCount returns a boolean if a field has been set.
+func (o *LicenseAccountLicenseData) HasIksLicenseCount() bool {
+	if o != nil && o.IksLicenseCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIksLicenseCount gets a reference to the given LicenseIksLicenseCountRelationship and assigns it to the IksLicenseCount field.
+func (o *LicenseAccountLicenseData) SetIksLicenseCount(v LicenseIksLicenseCountRelationship) {
+	o.IksLicenseCount = &v
 }
 
 // GetIwoCustomerOp returns the IwoCustomerOp field value if set, zero value otherwise.
@@ -1133,6 +1301,9 @@ func (o LicenseAccountLicenseData) MarshalJSON() ([]byte, error) {
 	if o.HighestCompliantLicenseTier != nil {
 		toSerialize["HighestCompliantLicenseTier"] = o.HighestCompliantLicenseTier
 	}
+	if o.LastCssmSync != nil {
+		toSerialize["LastCssmSync"] = o.LastCssmSync
+	}
 	if o.LastRenew != nil {
 		toSerialize["LastRenew"] = o.LastRenew
 	}
@@ -1166,6 +1337,12 @@ func (o LicenseAccountLicenseData) MarshalJSON() ([]byte, error) {
 	if o.SmartAccount != nil {
 		toSerialize["SmartAccount"] = o.SmartAccount
 	}
+	if o.SmartAccountDomain != nil {
+		toSerialize["SmartAccountDomain"] = o.SmartAccountDomain
+	}
+	if o.SmartApiEnabled != nil {
+		toSerialize["SmartApiEnabled"] = o.SmartApiEnabled
+	}
 	if o.SyncStatus != nil {
 		toSerialize["SyncStatus"] = o.SyncStatus
 	}
@@ -1177,6 +1354,12 @@ func (o LicenseAccountLicenseData) MarshalJSON() ([]byte, error) {
 	}
 	if o.CustomerOp != nil {
 		toSerialize["CustomerOp"] = o.CustomerOp
+	}
+	if o.IksCustomerOp != nil {
+		toSerialize["IksCustomerOp"] = o.IksCustomerOp
+	}
+	if o.IksLicenseCount != nil {
+		toSerialize["IksLicenseCount"] = o.IksLicenseCount
 	}
 	if o.IwoCustomerOp != nil {
 		toSerialize["IwoCustomerOp"] = o.IwoCustomerOp
@@ -1216,14 +1399,16 @@ func (o *LicenseAccountLicenseData) UnmarshalJSON(bytes []byte) (err error) {
 		AuthNextTime *string `json:"AuthNextTime,omitempty"`
 		// Account license data category name.
 		Category *string `json:"Category,omitempty"`
-		// Default license tier set by user. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type.
+		// Default license tier set by user. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type.
 		DefaultLicenseType *string `json:"DefaultLicenseType,omitempty"`
 		// The detailed error message when there is any error related to license sync of this account.
 		ErrorDesc *string `json:"ErrorDesc,omitempty"`
 		// Account license data group name.
 		Group *string `json:"Group,omitempty"`
-		// The highest license tier which is in compliant of this account. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type.
+		// The highest license tier which is in compliant of this account. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type.
 		HighestCompliantLicenseTier *string `json:"HighestCompliantLicenseTier,omitempty"`
+		// Specifies last sync time with CSSM.
+		LastCssmSync *time.Time `json:"LastCssmSync,omitempty"`
 		// Specifies last certificate renew time with SA.
 		LastRenew *time.Time `json:"LastRenew,omitempty"`
 		// Specifies last sync time with SA.
@@ -1246,12 +1431,18 @@ func (o *LicenseAccountLicenseData) UnmarshalJSON(bytes []byte) (err error) {
 		RenewFailureString *string `json:"RenewFailureString,omitempty"`
 		// Name of the smart account.
 		SmartAccount *string `json:"SmartAccount,omitempty"`
+		// Domain Name of the smart account.
+		SmartAccountDomain *string `json:"SmartAccountDomain,omitempty"`
+		// Indicate whether API integration is enabled.
+		SmartApiEnabled *bool `json:"SmartApiEnabled,omitempty"`
 		// Current sync status for the account.
 		SyncStatus *string `json:"SyncStatus,omitempty"`
 		// Name of the virtual account.
 		VirtualAccount  *string                             `json:"VirtualAccount,omitempty"`
 		Account         *IamAccountRelationship             `json:"Account,omitempty"`
 		CustomerOp      *LicenseCustomerOpRelationship      `json:"CustomerOp,omitempty"`
+		IksCustomerOp   *LicenseIksCustomerOpRelationship   `json:"IksCustomerOp,omitempty"`
+		IksLicenseCount *LicenseIksLicenseCountRelationship `json:"IksLicenseCount,omitempty"`
 		IwoCustomerOp   *LicenseIwoCustomerOpRelationship   `json:"IwoCustomerOp,omitempty"`
 		IwoLicenseCount *LicenseIwoLicenseCountRelationship `json:"IwoLicenseCount,omitempty"`
 		// An array of relationships to licenseLicenseInfo resources.
@@ -1276,6 +1467,7 @@ func (o *LicenseAccountLicenseData) UnmarshalJSON(bytes []byte) (err error) {
 		varLicenseAccountLicenseData.ErrorDesc = varLicenseAccountLicenseDataWithoutEmbeddedStruct.ErrorDesc
 		varLicenseAccountLicenseData.Group = varLicenseAccountLicenseDataWithoutEmbeddedStruct.Group
 		varLicenseAccountLicenseData.HighestCompliantLicenseTier = varLicenseAccountLicenseDataWithoutEmbeddedStruct.HighestCompliantLicenseTier
+		varLicenseAccountLicenseData.LastCssmSync = varLicenseAccountLicenseDataWithoutEmbeddedStruct.LastCssmSync
 		varLicenseAccountLicenseData.LastRenew = varLicenseAccountLicenseDataWithoutEmbeddedStruct.LastRenew
 		varLicenseAccountLicenseData.LastSync = varLicenseAccountLicenseDataWithoutEmbeddedStruct.LastSync
 		varLicenseAccountLicenseData.LastUpdatedTime = varLicenseAccountLicenseDataWithoutEmbeddedStruct.LastUpdatedTime
@@ -1287,10 +1479,14 @@ func (o *LicenseAccountLicenseData) UnmarshalJSON(bytes []byte) (err error) {
 		varLicenseAccountLicenseData.RegistrationStatus = varLicenseAccountLicenseDataWithoutEmbeddedStruct.RegistrationStatus
 		varLicenseAccountLicenseData.RenewFailureString = varLicenseAccountLicenseDataWithoutEmbeddedStruct.RenewFailureString
 		varLicenseAccountLicenseData.SmartAccount = varLicenseAccountLicenseDataWithoutEmbeddedStruct.SmartAccount
+		varLicenseAccountLicenseData.SmartAccountDomain = varLicenseAccountLicenseDataWithoutEmbeddedStruct.SmartAccountDomain
+		varLicenseAccountLicenseData.SmartApiEnabled = varLicenseAccountLicenseDataWithoutEmbeddedStruct.SmartApiEnabled
 		varLicenseAccountLicenseData.SyncStatus = varLicenseAccountLicenseDataWithoutEmbeddedStruct.SyncStatus
 		varLicenseAccountLicenseData.VirtualAccount = varLicenseAccountLicenseDataWithoutEmbeddedStruct.VirtualAccount
 		varLicenseAccountLicenseData.Account = varLicenseAccountLicenseDataWithoutEmbeddedStruct.Account
 		varLicenseAccountLicenseData.CustomerOp = varLicenseAccountLicenseDataWithoutEmbeddedStruct.CustomerOp
+		varLicenseAccountLicenseData.IksCustomerOp = varLicenseAccountLicenseDataWithoutEmbeddedStruct.IksCustomerOp
+		varLicenseAccountLicenseData.IksLicenseCount = varLicenseAccountLicenseDataWithoutEmbeddedStruct.IksLicenseCount
 		varLicenseAccountLicenseData.IwoCustomerOp = varLicenseAccountLicenseDataWithoutEmbeddedStruct.IwoCustomerOp
 		varLicenseAccountLicenseData.IwoLicenseCount = varLicenseAccountLicenseDataWithoutEmbeddedStruct.IwoLicenseCount
 		varLicenseAccountLicenseData.Licenseinfos = varLicenseAccountLicenseDataWithoutEmbeddedStruct.Licenseinfos
@@ -1324,6 +1520,7 @@ func (o *LicenseAccountLicenseData) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ErrorDesc")
 		delete(additionalProperties, "Group")
 		delete(additionalProperties, "HighestCompliantLicenseTier")
+		delete(additionalProperties, "LastCssmSync")
 		delete(additionalProperties, "LastRenew")
 		delete(additionalProperties, "LastSync")
 		delete(additionalProperties, "LastUpdatedTime")
@@ -1335,10 +1532,14 @@ func (o *LicenseAccountLicenseData) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "RegistrationStatus")
 		delete(additionalProperties, "RenewFailureString")
 		delete(additionalProperties, "SmartAccount")
+		delete(additionalProperties, "SmartAccountDomain")
+		delete(additionalProperties, "SmartApiEnabled")
 		delete(additionalProperties, "SyncStatus")
 		delete(additionalProperties, "VirtualAccount")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "CustomerOp")
+		delete(additionalProperties, "IksCustomerOp")
+		delete(additionalProperties, "IksLicenseCount")
 		delete(additionalProperties, "IwoCustomerOp")
 		delete(additionalProperties, "IwoLicenseCount")
 		delete(additionalProperties, "Licenseinfos")

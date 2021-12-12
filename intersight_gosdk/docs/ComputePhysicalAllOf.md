@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **ManagementMode** | Pointer to **string** | The management mode of the server. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [default to "IntersightStandalone"]
 **MemorySpeed** | Pointer to **string** | The maximum memory speed in MHz available on the server. | [optional] [readonly] 
 **MgmtIpAddress** | Pointer to **string** | Management address of the server. | [optional] 
+**Name** | Pointer to **string** | The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id. | [optional] 
 **NumAdaptors** | Pointer to **int64** | The total number of network adapters present on the server. | [optional] [readonly] 
 **NumCpuCores** | Pointer to **int64** | The total number of CPU cores present on the server. | [optional] [readonly] 
 **NumCpuCoresEnabled** | Pointer to **int64** | The total number of CPU cores enabled on the server. | [optional] [readonly] 
@@ -401,6 +402,31 @@ SetMgmtIpAddress sets MgmtIpAddress field to given value.
 `func (o *ComputePhysicalAllOf) HasMgmtIpAddress() bool`
 
 HasMgmtIpAddress returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *ComputePhysicalAllOf) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *ComputePhysicalAllOf) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *ComputePhysicalAllOf) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *ComputePhysicalAllOf) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetNumAdaptors
 

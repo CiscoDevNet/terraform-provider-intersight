@@ -21,11 +21,12 @@ The following arguments can be used to get data of already created objects in In
 * `auth_next_time`:(string) Next time for the authorization. 
 * `category`:(string) Account license data category name. 
 * `create_time`:(string) The time when this managed object was created. 
-* `default_license_type`:(string) Default license tier set by user.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
+* `default_license_type`:(string) Default license tier set by user.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type.* `IKS-Advantage` - IKS-Advantage as a License type. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `error_desc`:(string) The detailed error message when there is any error related to license sync of this account. 
 * `group`:(string) Account license data group name. 
-* `highest_compliant_license_tier`:(string) The highest license tier which is in compliant of this account.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
+* `highest_compliant_license_tier`:(string) The highest license tier which is in compliant of this account.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type.* `IKS-Advantage` - IKS-Advantage as a License type. 
+* `last_cssm_sync`:(string) Specifies last sync time with CSSM. 
 * `last_renew`:(string) Specifies last certificate renew time with SA. 
 * `last_sync`:(string) Specifies last sync time with SA. 
 * `last_updated_time`:(string) Record's last update datetime. 
@@ -40,6 +41,8 @@ The following arguments can be used to get data of already created objects in In
 * `renew_failure_string`:(string) License renewal failure message. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `smart_account`:(string) Name of the smart account. 
+* `smart_account_domain`:(string) Domain Name of the smart account. 
+* `smart_api_enabled`:(bool) Indicate whether API integration is enabled. 
 * `sync_status`:(string) Current sync status for the account. 
 * `virtual_account`:(string) Name of the virtual account. 
  

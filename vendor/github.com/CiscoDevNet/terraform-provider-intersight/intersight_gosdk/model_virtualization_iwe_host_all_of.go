@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4929
+API version: 1.0.9-4950
 Contact: intersight@cisco.com
 */
 
@@ -39,6 +39,7 @@ type VirtualizationIweHostAllOf struct {
 	// Is the role of this host is master in the cluster? true or false.
 	MasterRole       *bool                                  `json:"MasterRole,omitempty"`
 	MemoryAllocation NullableVirtualizationMemoryAllocation `json:"MemoryAllocation,omitempty"`
+	StorageCapacity  NullableVirtualizationStorageCapacity  `json:"StorageCapacity,omitempty"`
 	// Is the Storage Controller VM on the host Powered-up or Powered-down. * `Unknown` - The entity's power state is unknown. * `PoweringOn` - The entity is powering on. * `PoweredOn` - The entity is powered on. * `PoweringOff` - The entity is powering off. * `PoweredOff` - The entity is powered down. * `StandBy` - The entity is in standby mode. * `Paused` - The entity is in pause state. * `Rebooting` - The entity reboot is in progress. * `` - The entity's power state is not available.
 	StorageVmPowerState *string `json:"StorageVmPowerState,omitempty"`
 	// Product version of the Host.
@@ -472,6 +473,49 @@ func (o *VirtualizationIweHostAllOf) UnsetMemoryAllocation() {
 	o.MemoryAllocation.Unset()
 }
 
+// GetStorageCapacity returns the StorageCapacity field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *VirtualizationIweHostAllOf) GetStorageCapacity() VirtualizationStorageCapacity {
+	if o == nil || o.StorageCapacity.Get() == nil {
+		var ret VirtualizationStorageCapacity
+		return ret
+	}
+	return *o.StorageCapacity.Get()
+}
+
+// GetStorageCapacityOk returns a tuple with the StorageCapacity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VirtualizationIweHostAllOf) GetStorageCapacityOk() (*VirtualizationStorageCapacity, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StorageCapacity.Get(), o.StorageCapacity.IsSet()
+}
+
+// HasStorageCapacity returns a boolean if a field has been set.
+func (o *VirtualizationIweHostAllOf) HasStorageCapacity() bool {
+	if o != nil && o.StorageCapacity.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageCapacity gets a reference to the given NullableVirtualizationStorageCapacity and assigns it to the StorageCapacity field.
+func (o *VirtualizationIweHostAllOf) SetStorageCapacity(v VirtualizationStorageCapacity) {
+	o.StorageCapacity.Set(&v)
+}
+
+// SetStorageCapacityNil sets the value for StorageCapacity to be an explicit nil
+func (o *VirtualizationIweHostAllOf) SetStorageCapacityNil() {
+	o.StorageCapacity.Set(nil)
+}
+
+// UnsetStorageCapacity ensures that no value is present for StorageCapacity, not even an explicit nil
+func (o *VirtualizationIweHostAllOf) UnsetStorageCapacity() {
+	o.StorageCapacity.Unset()
+}
+
 // GetStorageVmPowerState returns the StorageVmPowerState field value if set, zero value otherwise.
 func (o *VirtualizationIweHostAllOf) GetStorageVmPowerState() string {
 	if o == nil || o.StorageVmPowerState == nil {
@@ -670,6 +714,9 @@ func (o VirtualizationIweHostAllOf) MarshalJSON() ([]byte, error) {
 	if o.MemoryAllocation.IsSet() {
 		toSerialize["MemoryAllocation"] = o.MemoryAllocation.Get()
 	}
+	if o.StorageCapacity.IsSet() {
+		toSerialize["StorageCapacity"] = o.StorageCapacity.Get()
+	}
 	if o.StorageVmPowerState != nil {
 		toSerialize["StorageVmPowerState"] = o.StorageVmPowerState
 	}
@@ -715,6 +762,7 @@ func (o *VirtualizationIweHostAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ManagementIpAddress")
 		delete(additionalProperties, "MasterRole")
 		delete(additionalProperties, "MemoryAllocation")
+		delete(additionalProperties, "StorageCapacity")
 		delete(additionalProperties, "StorageVmPowerState")
 		delete(additionalProperties, "Version")
 		delete(additionalProperties, "Cluster")

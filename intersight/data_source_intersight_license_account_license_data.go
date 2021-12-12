@@ -170,7 +170,7 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 			},
 		},
 		"default_license_type": {
-			Description: "Default license tier set by user.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.",
+			Description: "Default license tier set by user.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.\n* `IKS-Advantage` - IKS-Advantage as a License type.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -190,9 +190,79 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 			Optional:    true,
 		},
 		"highest_compliant_license_tier": {
-			Description: "The highest license tier which is in compliant of this account.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.",
+			Description: "The highest license tier which is in compliant of this account.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.\n* `IKS-Advantage` - IKS-Advantage as a License type.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"iks_customer_op": {
+			Description: "A reference to a licenseIksCustomerOp resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"iks_license_count": {
+			Description: "A reference to a licenseIksLicenseCount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"iwo_customer_op": {
 			Description: "A reference to a licenseIwoCustomerOp resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -263,6 +333,11 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 					},
 				},
 			},
+		},
+		"last_cssm_sync": {
+			Description: "Specifies last sync time with CSSM.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"last_renew": {
 			Description: "Specifies last certificate renew time with SA.",
@@ -445,6 +520,16 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 		"smart_account": {
 			Description: "Name of the smart account.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"smart_account_domain": {
+			Description: "Domain Name of the smart account.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"smart_api_enabled": {
+			Description: "Indicate whether API integration is enabled.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"smartlicense_token": {
@@ -779,7 +864,7 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 			},
 		},
 		"default_license_type": {
-			Description: "Default license tier set by user.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.",
+			Description: "Default license tier set by user.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.\n* `IKS-Advantage` - IKS-Advantage as a License type.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -799,9 +884,79 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 			Optional:    true,
 		},
 		"highest_compliant_license_tier": {
-			Description: "The highest license tier which is in compliant of this account.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.",
+			Description: "The highest license tier which is in compliant of this account.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.\n* `IKS-Advantage` - IKS-Advantage as a License type.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"iks_customer_op": {
+			Description: "A reference to a licenseIksCustomerOp resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"iks_license_count": {
+			Description: "A reference to a licenseIksLicenseCount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"iwo_customer_op": {
 			Description: "A reference to a licenseIwoCustomerOp resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -872,6 +1027,11 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 					},
 				},
 			},
+		},
+		"last_cssm_sync": {
+			Description: "Specifies last sync time with CSSM.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"last_renew": {
 			Description: "Specifies last certificate renew time with SA.",
@@ -1054,6 +1214,16 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 		"smart_account": {
 			Description: "Name of the smart account.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"smart_account_domain": {
+			Description: "Domain Name of the smart account.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"smart_api_enabled": {
+			Description: "Indicate whether API integration is enabled.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"smartlicense_token": {
@@ -1454,6 +1624,92 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		o.SetHighestCompliantLicenseTier(x)
 	}
 
+	if v, ok := d.GetOk("iks_customer_op"); ok {
+		p := make([]models.LicenseIksCustomerOpRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsLicenseIksCustomerOpRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIksCustomerOp(x)
+		}
+	}
+
+	if v, ok := d.GetOk("iks_license_count"); ok {
+		p := make([]models.LicenseIksLicenseCountRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsLicenseIksLicenseCountRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIksLicenseCount(x)
+		}
+	}
+
 	if v, ok := d.GetOk("iwo_customer_op"); ok {
 		p := make([]models.LicenseIwoCustomerOpRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1538,6 +1794,11 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 			x := p[0]
 			o.SetIwoLicenseCount(x)
 		}
+	}
+
+	if v, ok := d.GetOk("last_cssm_sync"); ok {
+		x, _ := time.Parse(time.RFC1123, v.(string))
+		o.SetLastCssmSync(x)
 	}
 
 	if v, ok := d.GetOk("last_renew"); ok {
@@ -1747,6 +2008,16 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("smart_account"); ok {
 		x := (v.(string))
 		o.SetSmartAccount(x)
+	}
+
+	if v, ok := d.GetOk("smart_account_domain"); ok {
+		x := (v.(string))
+		o.SetSmartAccountDomain(x)
+	}
+
+	if v, ok := d.GetOkExists("smart_api_enabled"); ok {
+		x := (v.(bool))
+		o.SetSmartApiEnabled(x)
 	}
 
 	if v, ok := d.GetOk("smartlicense_token"); ok {
@@ -1968,9 +2239,15 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 				temp["group"] = (s.GetGroup())
 				temp["highest_compliant_license_tier"] = (s.GetHighestCompliantLicenseTier())
 
+				temp["iks_customer_op"] = flattenMapLicenseIksCustomerOpRelationship(s.GetIksCustomerOp(), d)
+
+				temp["iks_license_count"] = flattenMapLicenseIksLicenseCountRelationship(s.GetIksLicenseCount(), d)
+
 				temp["iwo_customer_op"] = flattenMapLicenseIwoCustomerOpRelationship(s.GetIwoCustomerOp(), d)
 
 				temp["iwo_license_count"] = flattenMapLicenseIwoLicenseCountRelationship(s.GetIwoLicenseCount(), d)
+
+				temp["last_cssm_sync"] = (s.GetLastCssmSync()).String()
 
 				temp["last_renew"] = (s.GetLastRenew()).String()
 
@@ -1997,6 +2274,8 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 				temp["renew_failure_string"] = (s.GetRenewFailureString())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["smart_account"] = (s.GetSmartAccount())
+				temp["smart_account_domain"] = (s.GetSmartAccountDomain())
+				temp["smart_api_enabled"] = (s.GetSmartApiEnabled())
 
 				temp["smartlicense_token"] = flattenMapLicenseSmartlicenseTokenRelationship(s.GetSmartlicenseToken(), d)
 				temp["sync_status"] = (s.GetSyncStatus())

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4929
+API version: 1.0.9-4950
 Contact: intersight@cisco.com
 */
 
@@ -27,21 +27,21 @@ type TamAdvisoryDefinition struct {
 	ObjectType      string                         `json:"ObjectType"`
 	Actions         []TamAction                    `json:"Actions,omitempty"`
 	AdvisoryDetails NullableTamBaseAdvisoryDetails `json:"AdvisoryDetails,omitempty"`
-	// Cisco generated identifier for the published security advisory.
+	// Cisco generated identifier for the published security/field-notice/end-of-life advisory.
 	AdvisoryId     *string            `json:"AdvisoryId,omitempty"`
 	ApiDataSources []TamApiDataSource `json:"ApiDataSources,omitempty"`
-	// Date when the security advisory was first published by Cisco.
+	// Date when the security/field-notice/end-of-life advisory was first published by Cisco.
 	DatePublished *time.Time `json:"DatePublished,omitempty"`
-	// Date when the security advisory was last updated by Cisco.
+	// Date when the security/field-notice/end-of-life advisory was last updated by Cisco.
 	DateUpdated *time.Time `json:"DateUpdated,omitempty"`
 	// A link to an external URL describing security Advisory in more details.
 	ExternalUrl *string `json:"ExternalUrl,omitempty"`
 	// Recommended action to resolve the security advisory.
 	Recommendation *string           `json:"Recommendation,omitempty"`
 	S3DataSources  []TamS3DataSource `json:"S3DataSources,omitempty"`
-	// The type (field notice, security advisory etc.) of Intersight advisory. * `securityAdvisory` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x). * `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html).
+	// The type (field notice, security advisory, end-of-life milestone advisory etc.) of Intersight advisory. * `securityAdvisory` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x). * `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html). * `eolAdvisory` - Represents product End of Life (EOL) type (https://www.cisco.com/c/en/us/products/eos-eol-policy.html).
 	Type *string `json:"Type,omitempty"`
-	// Cisco assigned advisory version after latest revision.
+	// Cisco assigned advisory/field-notice/end-of-life version after latest revision.
 	Version *string `json:"Version,omitempty"`
 	// Workarounds available for the advisory.
 	Workaround           *string                               `json:"Workaround,omitempty"`
@@ -629,21 +629,21 @@ func (o *TamAdvisoryDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType      string                         `json:"ObjectType"`
 		Actions         []TamAction                    `json:"Actions,omitempty"`
 		AdvisoryDetails NullableTamBaseAdvisoryDetails `json:"AdvisoryDetails,omitempty"`
-		// Cisco generated identifier for the published security advisory.
+		// Cisco generated identifier for the published security/field-notice/end-of-life advisory.
 		AdvisoryId     *string            `json:"AdvisoryId,omitempty"`
 		ApiDataSources []TamApiDataSource `json:"ApiDataSources,omitempty"`
-		// Date when the security advisory was first published by Cisco.
+		// Date when the security/field-notice/end-of-life advisory was first published by Cisco.
 		DatePublished *time.Time `json:"DatePublished,omitempty"`
-		// Date when the security advisory was last updated by Cisco.
+		// Date when the security/field-notice/end-of-life advisory was last updated by Cisco.
 		DateUpdated *time.Time `json:"DateUpdated,omitempty"`
 		// A link to an external URL describing security Advisory in more details.
 		ExternalUrl *string `json:"ExternalUrl,omitempty"`
 		// Recommended action to resolve the security advisory.
 		Recommendation *string           `json:"Recommendation,omitempty"`
 		S3DataSources  []TamS3DataSource `json:"S3DataSources,omitempty"`
-		// The type (field notice, security advisory etc.) of Intersight advisory. * `securityAdvisory` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x). * `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html).
+		// The type (field notice, security advisory, end-of-life milestone advisory etc.) of Intersight advisory. * `securityAdvisory` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x). * `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html). * `eolAdvisory` - Represents product End of Life (EOL) type (https://www.cisco.com/c/en/us/products/eos-eol-policy.html).
 		Type *string `json:"Type,omitempty"`
-		// Cisco assigned advisory version after latest revision.
+		// Cisco assigned advisory/field-notice/end-of-life version after latest revision.
 		Version *string `json:"Version,omitempty"`
 		// Workarounds available for the advisory.
 		Workaround   *string                               `json:"Workaround,omitempty"`

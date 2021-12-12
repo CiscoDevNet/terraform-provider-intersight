@@ -21,6 +21,6 @@ The following arguments can be used to get data of already created objects in In
 * `enabled`:(bool) Subscription can be switched on/off with out necessity to change the subscriptionsettings: notification methods, conditions etc.Ex.: Subscription MO can be configured, but switched off. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `name`:(string) The subscription name. 
+* `name`:(string) The name of the subscription. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
  

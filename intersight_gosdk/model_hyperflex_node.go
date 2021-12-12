@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4929
+API version: 1.0.9-4950
 Contact: intersight@cisco.com
 */
 
@@ -29,15 +29,24 @@ type HyperflexNode struct {
 	// The user-friendly string representation of the hypervisor version of the host.
 	DisplayVersion *string `json:"DisplayVersion,omitempty"`
 	// The hostname configured for the hypervisor running on the host.
-	HostName *string `json:"HostName,omitempty"`
+	HostName   *string                             `json:"HostName,omitempty"`
+	HxdpDataIp NullableHyperflexHxNetworkAddressDt `json:"HxdpDataIp,omitempty"`
+	HxdpMmgtIp NullableHyperflexHxNetworkAddressDt `json:"HxdpMmgtIp,omitempty"`
 	// The type of hypervisor running on the host.
-	Hypervisor *string                             `json:"Hypervisor,omitempty"`
-	Identity   NullableHyperflexHxUuIdDt           `json:"Identity,omitempty"`
-	Ip         NullableHyperflexHxNetworkAddressDt `json:"Ip,omitempty"`
+	Hypervisor       *string                             `json:"Hypervisor,omitempty"`
+	HypervisorDataIp NullableHyperflexHxNetworkAddressDt `json:"HypervisorDataIp,omitempty"`
+	Identity         NullableHyperflexHxUuIdDt           `json:"Identity,omitempty"`
+	Ip               NullableHyperflexHxNetworkAddressDt `json:"Ip,omitempty"`
 	// The admin state of lockdown mode on the host. If 'true', lockdown mode is enabled.
 	Lockdown *bool `json:"Lockdown,omitempty"`
 	// The model of the host server.
 	ModelNumber *string `json:"ModelNumber,omitempty"`
+	// The status of maintenance mode on the HyperFlex node. * `Unknown` - The maintenance mode status could not be determined. * `InMaintenanceMode` - The node has maintenance mode enabled. The node has been temporarily been relinquished from the cluster to allow for maintenance operations. * `NotInMaintenanceMode` - The node does not have maintenance mode enabled.
+	NodeMaintenanceMode *string `json:"NodeMaintenanceMode,omitempty"`
+	// The operational status of the HyperFlex node. * `Unknown` - The default operational status of a HyperFlex node. * `Invalid` - The status of the node cannot be determined by the storage platform. * `Ready` - The platform node has been acknowledged by the cluster. * `Unpublished` - The node is not yet added to the storage cluster. * `Deleted` - The node has been removed from the cluster. * `Blocked` - The node is blocked from being added to the cluster. * `Blacklisted` - The deprecated value for 'Blocked'. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a). * `Allowed` - The node is allowd to be added to the cluster. * `Whitelisted` - The deprecated value for 'Allowed'. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a). * `InMaintenance` - The node is in maintenance mode. It has been temporarily relinquished from the cluster to allow for maintenance operations such as software upgrades. * `Online` - The node is participating in the storage cluster and is available for storage operations. * `Offline` - The node is part of the storage cluster, but is not available for storage operations.
+	NodeStatus *string `json:"NodeStatus,omitempty"`
+	// The unique identifier of the HyperFlex node.
+	NodeUuid *string `json:"NodeUuid,omitempty"`
 	// The role of the host in the HyperFlex cluster. Specifies whether this host is used for compute or for both compute and storage. * `UNKNOWN` - The role of the HyperFlex cluster node is not known. * `STORAGE` - The HyperFlex cluster node provides both storage and compute resources for the cluster. * `COMPUTE` - The HyperFlex cluster node provides compute resources for the cluster.
 	Role *string `json:"Role,omitempty"`
 	// The serial of the host server.
@@ -223,6 +232,92 @@ func (o *HyperflexNode) SetHostName(v string) {
 	o.HostName = &v
 }
 
+// GetHxdpDataIp returns the HxdpDataIp field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexNode) GetHxdpDataIp() HyperflexHxNetworkAddressDt {
+	if o == nil || o.HxdpDataIp.Get() == nil {
+		var ret HyperflexHxNetworkAddressDt
+		return ret
+	}
+	return *o.HxdpDataIp.Get()
+}
+
+// GetHxdpDataIpOk returns a tuple with the HxdpDataIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexNode) GetHxdpDataIpOk() (*HyperflexHxNetworkAddressDt, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.HxdpDataIp.Get(), o.HxdpDataIp.IsSet()
+}
+
+// HasHxdpDataIp returns a boolean if a field has been set.
+func (o *HyperflexNode) HasHxdpDataIp() bool {
+	if o != nil && o.HxdpDataIp.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetHxdpDataIp gets a reference to the given NullableHyperflexHxNetworkAddressDt and assigns it to the HxdpDataIp field.
+func (o *HyperflexNode) SetHxdpDataIp(v HyperflexHxNetworkAddressDt) {
+	o.HxdpDataIp.Set(&v)
+}
+
+// SetHxdpDataIpNil sets the value for HxdpDataIp to be an explicit nil
+func (o *HyperflexNode) SetHxdpDataIpNil() {
+	o.HxdpDataIp.Set(nil)
+}
+
+// UnsetHxdpDataIp ensures that no value is present for HxdpDataIp, not even an explicit nil
+func (o *HyperflexNode) UnsetHxdpDataIp() {
+	o.HxdpDataIp.Unset()
+}
+
+// GetHxdpMmgtIp returns the HxdpMmgtIp field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexNode) GetHxdpMmgtIp() HyperflexHxNetworkAddressDt {
+	if o == nil || o.HxdpMmgtIp.Get() == nil {
+		var ret HyperflexHxNetworkAddressDt
+		return ret
+	}
+	return *o.HxdpMmgtIp.Get()
+}
+
+// GetHxdpMmgtIpOk returns a tuple with the HxdpMmgtIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexNode) GetHxdpMmgtIpOk() (*HyperflexHxNetworkAddressDt, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.HxdpMmgtIp.Get(), o.HxdpMmgtIp.IsSet()
+}
+
+// HasHxdpMmgtIp returns a boolean if a field has been set.
+func (o *HyperflexNode) HasHxdpMmgtIp() bool {
+	if o != nil && o.HxdpMmgtIp.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetHxdpMmgtIp gets a reference to the given NullableHyperflexHxNetworkAddressDt and assigns it to the HxdpMmgtIp field.
+func (o *HyperflexNode) SetHxdpMmgtIp(v HyperflexHxNetworkAddressDt) {
+	o.HxdpMmgtIp.Set(&v)
+}
+
+// SetHxdpMmgtIpNil sets the value for HxdpMmgtIp to be an explicit nil
+func (o *HyperflexNode) SetHxdpMmgtIpNil() {
+	o.HxdpMmgtIp.Set(nil)
+}
+
+// UnsetHxdpMmgtIp ensures that no value is present for HxdpMmgtIp, not even an explicit nil
+func (o *HyperflexNode) UnsetHxdpMmgtIp() {
+	o.HxdpMmgtIp.Unset()
+}
+
 // GetHypervisor returns the Hypervisor field value if set, zero value otherwise.
 func (o *HyperflexNode) GetHypervisor() string {
 	if o == nil || o.Hypervisor == nil {
@@ -253,6 +348,49 @@ func (o *HyperflexNode) HasHypervisor() bool {
 // SetHypervisor gets a reference to the given string and assigns it to the Hypervisor field.
 func (o *HyperflexNode) SetHypervisor(v string) {
 	o.Hypervisor = &v
+}
+
+// GetHypervisorDataIp returns the HypervisorDataIp field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexNode) GetHypervisorDataIp() HyperflexHxNetworkAddressDt {
+	if o == nil || o.HypervisorDataIp.Get() == nil {
+		var ret HyperflexHxNetworkAddressDt
+		return ret
+	}
+	return *o.HypervisorDataIp.Get()
+}
+
+// GetHypervisorDataIpOk returns a tuple with the HypervisorDataIp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexNode) GetHypervisorDataIpOk() (*HyperflexHxNetworkAddressDt, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.HypervisorDataIp.Get(), o.HypervisorDataIp.IsSet()
+}
+
+// HasHypervisorDataIp returns a boolean if a field has been set.
+func (o *HyperflexNode) HasHypervisorDataIp() bool {
+	if o != nil && o.HypervisorDataIp.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetHypervisorDataIp gets a reference to the given NullableHyperflexHxNetworkAddressDt and assigns it to the HypervisorDataIp field.
+func (o *HyperflexNode) SetHypervisorDataIp(v HyperflexHxNetworkAddressDt) {
+	o.HypervisorDataIp.Set(&v)
+}
+
+// SetHypervisorDataIpNil sets the value for HypervisorDataIp to be an explicit nil
+func (o *HyperflexNode) SetHypervisorDataIpNil() {
+	o.HypervisorDataIp.Set(nil)
+}
+
+// UnsetHypervisorDataIp ensures that no value is present for HypervisorDataIp, not even an explicit nil
+func (o *HyperflexNode) UnsetHypervisorDataIp() {
+	o.HypervisorDataIp.Unset()
 }
 
 // GetIdentity returns the Identity field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -403,6 +541,102 @@ func (o *HyperflexNode) HasModelNumber() bool {
 // SetModelNumber gets a reference to the given string and assigns it to the ModelNumber field.
 func (o *HyperflexNode) SetModelNumber(v string) {
 	o.ModelNumber = &v
+}
+
+// GetNodeMaintenanceMode returns the NodeMaintenanceMode field value if set, zero value otherwise.
+func (o *HyperflexNode) GetNodeMaintenanceMode() string {
+	if o == nil || o.NodeMaintenanceMode == nil {
+		var ret string
+		return ret
+	}
+	return *o.NodeMaintenanceMode
+}
+
+// GetNodeMaintenanceModeOk returns a tuple with the NodeMaintenanceMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexNode) GetNodeMaintenanceModeOk() (*string, bool) {
+	if o == nil || o.NodeMaintenanceMode == nil {
+		return nil, false
+	}
+	return o.NodeMaintenanceMode, true
+}
+
+// HasNodeMaintenanceMode returns a boolean if a field has been set.
+func (o *HyperflexNode) HasNodeMaintenanceMode() bool {
+	if o != nil && o.NodeMaintenanceMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeMaintenanceMode gets a reference to the given string and assigns it to the NodeMaintenanceMode field.
+func (o *HyperflexNode) SetNodeMaintenanceMode(v string) {
+	o.NodeMaintenanceMode = &v
+}
+
+// GetNodeStatus returns the NodeStatus field value if set, zero value otherwise.
+func (o *HyperflexNode) GetNodeStatus() string {
+	if o == nil || o.NodeStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.NodeStatus
+}
+
+// GetNodeStatusOk returns a tuple with the NodeStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexNode) GetNodeStatusOk() (*string, bool) {
+	if o == nil || o.NodeStatus == nil {
+		return nil, false
+	}
+	return o.NodeStatus, true
+}
+
+// HasNodeStatus returns a boolean if a field has been set.
+func (o *HyperflexNode) HasNodeStatus() bool {
+	if o != nil && o.NodeStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeStatus gets a reference to the given string and assigns it to the NodeStatus field.
+func (o *HyperflexNode) SetNodeStatus(v string) {
+	o.NodeStatus = &v
+}
+
+// GetNodeUuid returns the NodeUuid field value if set, zero value otherwise.
+func (o *HyperflexNode) GetNodeUuid() string {
+	if o == nil || o.NodeUuid == nil {
+		var ret string
+		return ret
+	}
+	return *o.NodeUuid
+}
+
+// GetNodeUuidOk returns a tuple with the NodeUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexNode) GetNodeUuidOk() (*string, bool) {
+	if o == nil || o.NodeUuid == nil {
+		return nil, false
+	}
+	return o.NodeUuid, true
+}
+
+// HasNodeUuid returns a boolean if a field has been set.
+func (o *HyperflexNode) HasNodeUuid() bool {
+	if o != nil && o.NodeUuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNodeUuid gets a reference to the given string and assigns it to the NodeUuid field.
+func (o *HyperflexNode) SetNodeUuid(v string) {
+	o.NodeUuid = &v
 }
 
 // GetRole returns the Role field value if set, zero value otherwise.
@@ -687,8 +921,17 @@ func (o HyperflexNode) MarshalJSON() ([]byte, error) {
 	if o.HostName != nil {
 		toSerialize["HostName"] = o.HostName
 	}
+	if o.HxdpDataIp.IsSet() {
+		toSerialize["HxdpDataIp"] = o.HxdpDataIp.Get()
+	}
+	if o.HxdpMmgtIp.IsSet() {
+		toSerialize["HxdpMmgtIp"] = o.HxdpMmgtIp.Get()
+	}
 	if o.Hypervisor != nil {
 		toSerialize["Hypervisor"] = o.Hypervisor
+	}
+	if o.HypervisorDataIp.IsSet() {
+		toSerialize["HypervisorDataIp"] = o.HypervisorDataIp.Get()
 	}
 	if o.Identity.IsSet() {
 		toSerialize["Identity"] = o.Identity.Get()
@@ -701,6 +944,15 @@ func (o HyperflexNode) MarshalJSON() ([]byte, error) {
 	}
 	if o.ModelNumber != nil {
 		toSerialize["ModelNumber"] = o.ModelNumber
+	}
+	if o.NodeMaintenanceMode != nil {
+		toSerialize["NodeMaintenanceMode"] = o.NodeMaintenanceMode
+	}
+	if o.NodeStatus != nil {
+		toSerialize["NodeStatus"] = o.NodeStatus
+	}
+	if o.NodeUuid != nil {
+		toSerialize["NodeUuid"] = o.NodeUuid
 	}
 	if o.Role != nil {
 		toSerialize["Role"] = o.Role
@@ -745,15 +997,24 @@ func (o *HyperflexNode) UnmarshalJSON(bytes []byte) (err error) {
 		// The user-friendly string representation of the hypervisor version of the host.
 		DisplayVersion *string `json:"DisplayVersion,omitempty"`
 		// The hostname configured for the hypervisor running on the host.
-		HostName *string `json:"HostName,omitempty"`
+		HostName   *string                             `json:"HostName,omitempty"`
+		HxdpDataIp NullableHyperflexHxNetworkAddressDt `json:"HxdpDataIp,omitempty"`
+		HxdpMmgtIp NullableHyperflexHxNetworkAddressDt `json:"HxdpMmgtIp,omitempty"`
 		// The type of hypervisor running on the host.
-		Hypervisor *string                             `json:"Hypervisor,omitempty"`
-		Identity   NullableHyperflexHxUuIdDt           `json:"Identity,omitempty"`
-		Ip         NullableHyperflexHxNetworkAddressDt `json:"Ip,omitempty"`
+		Hypervisor       *string                             `json:"Hypervisor,omitempty"`
+		HypervisorDataIp NullableHyperflexHxNetworkAddressDt `json:"HypervisorDataIp,omitempty"`
+		Identity         NullableHyperflexHxUuIdDt           `json:"Identity,omitempty"`
+		Ip               NullableHyperflexHxNetworkAddressDt `json:"Ip,omitempty"`
 		// The admin state of lockdown mode on the host. If 'true', lockdown mode is enabled.
 		Lockdown *bool `json:"Lockdown,omitempty"`
 		// The model of the host server.
 		ModelNumber *string `json:"ModelNumber,omitempty"`
+		// The status of maintenance mode on the HyperFlex node. * `Unknown` - The maintenance mode status could not be determined. * `InMaintenanceMode` - The node has maintenance mode enabled. The node has been temporarily been relinquished from the cluster to allow for maintenance operations. * `NotInMaintenanceMode` - The node does not have maintenance mode enabled.
+		NodeMaintenanceMode *string `json:"NodeMaintenanceMode,omitempty"`
+		// The operational status of the HyperFlex node. * `Unknown` - The default operational status of a HyperFlex node. * `Invalid` - The status of the node cannot be determined by the storage platform. * `Ready` - The platform node has been acknowledged by the cluster. * `Unpublished` - The node is not yet added to the storage cluster. * `Deleted` - The node has been removed from the cluster. * `Blocked` - The node is blocked from being added to the cluster. * `Blacklisted` - The deprecated value for 'Blocked'. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a). * `Allowed` - The node is allowd to be added to the cluster. * `Whitelisted` - The deprecated value for 'Allowed'. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a). * `InMaintenance` - The node is in maintenance mode. It has been temporarily relinquished from the cluster to allow for maintenance operations such as software upgrades. * `Online` - The node is participating in the storage cluster and is available for storage operations. * `Offline` - The node is part of the storage cluster, but is not available for storage operations.
+		NodeStatus *string `json:"NodeStatus,omitempty"`
+		// The unique identifier of the HyperFlex node.
+		NodeUuid *string `json:"NodeUuid,omitempty"`
 		// The role of the host in the HyperFlex cluster. Specifies whether this host is used for compute or for both compute and storage. * `UNKNOWN` - The role of the HyperFlex cluster node is not known. * `STORAGE` - The HyperFlex cluster node provides both storage and compute resources for the cluster. * `COMPUTE` - The HyperFlex cluster node provides compute resources for the cluster.
 		Role *string `json:"Role,omitempty"`
 		// The serial of the host server.
@@ -779,11 +1040,17 @@ func (o *HyperflexNode) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexNode.BuildNumber = varHyperflexNodeWithoutEmbeddedStruct.BuildNumber
 		varHyperflexNode.DisplayVersion = varHyperflexNodeWithoutEmbeddedStruct.DisplayVersion
 		varHyperflexNode.HostName = varHyperflexNodeWithoutEmbeddedStruct.HostName
+		varHyperflexNode.HxdpDataIp = varHyperflexNodeWithoutEmbeddedStruct.HxdpDataIp
+		varHyperflexNode.HxdpMmgtIp = varHyperflexNodeWithoutEmbeddedStruct.HxdpMmgtIp
 		varHyperflexNode.Hypervisor = varHyperflexNodeWithoutEmbeddedStruct.Hypervisor
+		varHyperflexNode.HypervisorDataIp = varHyperflexNodeWithoutEmbeddedStruct.HypervisorDataIp
 		varHyperflexNode.Identity = varHyperflexNodeWithoutEmbeddedStruct.Identity
 		varHyperflexNode.Ip = varHyperflexNodeWithoutEmbeddedStruct.Ip
 		varHyperflexNode.Lockdown = varHyperflexNodeWithoutEmbeddedStruct.Lockdown
 		varHyperflexNode.ModelNumber = varHyperflexNodeWithoutEmbeddedStruct.ModelNumber
+		varHyperflexNode.NodeMaintenanceMode = varHyperflexNodeWithoutEmbeddedStruct.NodeMaintenanceMode
+		varHyperflexNode.NodeStatus = varHyperflexNodeWithoutEmbeddedStruct.NodeStatus
+		varHyperflexNode.NodeUuid = varHyperflexNodeWithoutEmbeddedStruct.NodeUuid
 		varHyperflexNode.Role = varHyperflexNodeWithoutEmbeddedStruct.Role
 		varHyperflexNode.SerialNumber = varHyperflexNodeWithoutEmbeddedStruct.SerialNumber
 		varHyperflexNode.Status = varHyperflexNodeWithoutEmbeddedStruct.Status
@@ -814,11 +1081,17 @@ func (o *HyperflexNode) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "BuildNumber")
 		delete(additionalProperties, "DisplayVersion")
 		delete(additionalProperties, "HostName")
+		delete(additionalProperties, "HxdpDataIp")
+		delete(additionalProperties, "HxdpMmgtIp")
 		delete(additionalProperties, "Hypervisor")
+		delete(additionalProperties, "HypervisorDataIp")
 		delete(additionalProperties, "Identity")
 		delete(additionalProperties, "Ip")
 		delete(additionalProperties, "Lockdown")
 		delete(additionalProperties, "ModelNumber")
+		delete(additionalProperties, "NodeMaintenanceMode")
+		delete(additionalProperties, "NodeStatus")
+		delete(additionalProperties, "NodeUuid")
 		delete(additionalProperties, "Role")
 		delete(additionalProperties, "SerialNumber")
 		delete(additionalProperties, "Status")

@@ -416,6 +416,12 @@ func resourceFabricVsan() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"vsan_scope": {
+				Description: "Used to indicate whether the VSAN Id is defined for storage or uplink or both traffics in FI.\n* `Uplink` - Vsan associated with uplink network.\n* `Storage` - Vsan associated with storage network.\n* `Common` - Vsan that is common for uplink and storage network.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "Uplink",
+			},
 		},
 	}
 }
@@ -548,6 +554,11 @@ func resourceFabricVsanCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetVsanId(x)
 	}
 
+	if v, ok := d.GetOk("vsan_scope"); ok {
+		x := (v.(string))
+		o.SetVsanScope(x)
+	}
+
 	r := conn.ApiClient.FabricApi.CreateFabricVsan(conn.ctx).FabricVsan(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -666,6 +677,10 @@ func resourceFabricVsanRead(c context.Context, d *schema.ResourceData, meta inte
 
 	if err := d.Set("vsan_id", (s.GetVsanId())); err != nil {
 		return diag.Errorf("error occurred while setting property VsanId in FabricVsan object: %s", err.Error())
+	}
+
+	if err := d.Set("vsan_scope", (s.GetVsanScope())); err != nil {
+		return diag.Errorf("error occurred while setting property VsanScope in FabricVsan object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
@@ -806,6 +821,12 @@ func resourceFabricVsanUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("vsan_id")
 		x := int64(v.(int))
 		o.SetVsanId(x)
+	}
+
+	if d.HasChange("vsan_scope") {
+		v := d.Get("vsan_scope")
+		x := (v.(string))
+		o.SetVsanScope(x)
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricVsan(conn.ctx, d.Id()).FabricVsan(*o)

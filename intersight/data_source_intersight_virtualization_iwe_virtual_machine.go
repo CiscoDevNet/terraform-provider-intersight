@@ -344,6 +344,11 @@ func dataSourceVirtualizationIweVirtualMachine() *schema.Resource {
 												Type:        schema.TypeString,
 												Optional:    true,
 											},
+											"reason": {
+												Description: "Reason for virtual disk download failure.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
 											"state": {
 												Description: "Current state of the virtual disk.\n* `Unknown` - No details available on the disk state.\n* `Succeeded` - Last operation on the disk has been successful.\n* `ImportInProgress` - Import operation on the disk is in progress.\n* `ImportFailed` - Import operation on the disk has failed.\n* `CloneInProgress` - Disk clone operation on the disk is in progress.\n* `CloneFailed` - Clone operation on the disk has failed.\n* `CloneScheduled` - Clone operation on the disk has been scheduled.\n* `ImportScheduled` - Import operation on the disk has been scheduled.\n* `Pending` - Submitted operation on the disk is currently pending.\n* `` - Disk state is not available.\n* `Failed` - Last operation on the disk Failed.",
 												Type:        schema.TypeString,
@@ -356,6 +361,11 @@ func dataSourceVirtualizationIweVirtualMachine() *schema.Resource {
 											},
 											"volume_name": {
 												Description: "Name of the Volume associated with virtual machine disk.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"volume_vendor": {
+												Description: "Name of the Volume Vendor associated with virtual machine disk.",
 												Type:        schema.TypeString,
 												Optional:    true,
 											},
@@ -809,7 +819,7 @@ func dataSourceVirtualizationIweVirtualMachine() *schema.Resource {
 			Optional:    true,
 		},
 		"status": {
-			Description: "Status of virtual machine.\n* `Unknown` - Virtual machine state is not available.\n* `Running` - Virtual machine is running normally.\n* `Stopped` - Virtual machine has been stopped.\n* `WaitForLaunch` - Virtual machine is wating to be launched.\n* `Paused` - Virtual machine is currently paused.\n* `ImportInProgress` - Virtual machine image is being imported into the platform.\n* `ImportFailed` - Virtual machine image import operation failed.\n* `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress.\n* `DiskCloneFailed` - Disk clone operation for the virtual machine failed.\n* `DiskCreateInProgress` - Disk create operation for the virtual machine is in progress.\n* `DiskCreateFailed` - Disk create operation for the virtual machine failed.\n* `Processing` - Virtual machine is being created.\n* `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications.\n* `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation.\n* `` - Virtual machine status is not available.",
+			Description: "Status of virtual machine.\n* `Unknown` - Virtual machine state is not available.\n* `Running` - Virtual machine is running normally.\n* `Stopped` - Virtual machine has been stopped.\n* `WaitForLaunch` - Virtual machine is wating to be launched.\n* `Paused` - Virtual machine is currently paused.\n* `ImportInProgress` - Virtual machine image is being imported into the platform.\n* `ImportFailed` - Virtual machine image import operation failed.\n* `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress.\n* `DiskCloneFailed` - Disk clone operation for the virtual machine failed.\n* `DiskCreateInProgress` - Disk create operation for the virtual machine is in progress.\n* `DiskCreateFailed` - Disk create operation for the virtual machine failed.\n* `Processing` - Virtual machine is being created.\n* `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications.\n* `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation.\n* `Warning` - CPU/Memory utilisation for the virtual machine has crossed the threshold value.\n* `` - Virtual machine status is not available.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1284,6 +1294,11 @@ func dataSourceVirtualizationIweVirtualMachine() *schema.Resource {
 												Type:        schema.TypeString,
 												Optional:    true,
 											},
+											"reason": {
+												Description: "Reason for virtual disk download failure.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
 											"state": {
 												Description: "Current state of the virtual disk.\n* `Unknown` - No details available on the disk state.\n* `Succeeded` - Last operation on the disk has been successful.\n* `ImportInProgress` - Import operation on the disk is in progress.\n* `ImportFailed` - Import operation on the disk has failed.\n* `CloneInProgress` - Disk clone operation on the disk is in progress.\n* `CloneFailed` - Clone operation on the disk has failed.\n* `CloneScheduled` - Clone operation on the disk has been scheduled.\n* `ImportScheduled` - Import operation on the disk has been scheduled.\n* `Pending` - Submitted operation on the disk is currently pending.\n* `` - Disk state is not available.\n* `Failed` - Last operation on the disk Failed.",
 												Type:        schema.TypeString,
@@ -1296,6 +1311,11 @@ func dataSourceVirtualizationIweVirtualMachine() *schema.Resource {
 											},
 											"volume_name": {
 												Description: "Name of the Volume associated with virtual machine disk.",
+												Type:        schema.TypeString,
+												Optional:    true,
+											},
+											"volume_vendor": {
+												Description: "Name of the Volume Vendor associated with virtual machine disk.",
 												Type:        schema.TypeString,
 												Optional:    true,
 											},
@@ -1749,7 +1769,7 @@ func dataSourceVirtualizationIweVirtualMachine() *schema.Resource {
 			Optional:    true,
 		},
 		"status": {
-			Description: "Status of virtual machine.\n* `Unknown` - Virtual machine state is not available.\n* `Running` - Virtual machine is running normally.\n* `Stopped` - Virtual machine has been stopped.\n* `WaitForLaunch` - Virtual machine is wating to be launched.\n* `Paused` - Virtual machine is currently paused.\n* `ImportInProgress` - Virtual machine image is being imported into the platform.\n* `ImportFailed` - Virtual machine image import operation failed.\n* `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress.\n* `DiskCloneFailed` - Disk clone operation for the virtual machine failed.\n* `DiskCreateInProgress` - Disk create operation for the virtual machine is in progress.\n* `DiskCreateFailed` - Disk create operation for the virtual machine failed.\n* `Processing` - Virtual machine is being created.\n* `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications.\n* `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation.\n* `` - Virtual machine status is not available.",
+			Description: "Status of virtual machine.\n* `Unknown` - Virtual machine state is not available.\n* `Running` - Virtual machine is running normally.\n* `Stopped` - Virtual machine has been stopped.\n* `WaitForLaunch` - Virtual machine is wating to be launched.\n* `Paused` - Virtual machine is currently paused.\n* `ImportInProgress` - Virtual machine image is being imported into the platform.\n* `ImportFailed` - Virtual machine image import operation failed.\n* `DiskCloneInProgress` - Disk clone operation for the virtual machine is in progress.\n* `DiskCloneFailed` - Disk clone operation for the virtual machine failed.\n* `DiskCreateInProgress` - Disk create operation for the virtual machine is in progress.\n* `DiskCreateFailed` - Disk create operation for the virtual machine failed.\n* `Processing` - Virtual machine is being created.\n* `UnSchedulable` - Virtual machine cannot be scheduled to run, either due to insufficient resources or failure to match affinity specifications.\n* `Failed` - Some virtual machine operation has failed. More information is available as part of the results of the operation.\n* `Warning` - CPU/Memory utilisation for the virtual machine has crossed the threshold value.\n* `` - Virtual machine status is not available.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

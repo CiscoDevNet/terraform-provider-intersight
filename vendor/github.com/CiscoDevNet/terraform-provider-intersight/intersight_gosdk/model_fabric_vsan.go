@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4929
+API version: 1.0.9-4950
 Contact: intersight@cisco.com
 */
 
@@ -33,7 +33,9 @@ type FabricVsan struct {
 	// User given name for the VSAN configuration.
 	Name *string `json:"Name,omitempty"`
 	// Virtual San Identifier in the switch.
-	VsanId               *int64                             `json:"VsanId,omitempty"`
+	VsanId *int64 `json:"VsanId,omitempty"`
+	// Used to indicate whether the VSAN Id is defined for storage or uplink or both traffics in FI. * `Uplink` - Vsan associated with uplink network. * `Storage` - Vsan associated with storage network. * `Common` - Vsan that is common for uplink and storage network.
+	VsanScope            *string                            `json:"VsanScope,omitempty"`
 	FcNetworkPolicy      *FabricFcNetworkPolicyRelationship `json:"FcNetworkPolicy,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -50,6 +52,8 @@ func NewFabricVsan(classId string, objectType string) *FabricVsan {
 	this.ObjectType = objectType
 	var defaultZoning string = "Enabled"
 	this.DefaultZoning = &defaultZoning
+	var vsanScope string = "Uplink"
+	this.VsanScope = &vsanScope
 	return &this
 }
 
@@ -64,6 +68,8 @@ func NewFabricVsanWithDefaults() *FabricVsan {
 	this.ObjectType = objectType
 	var defaultZoning string = "Enabled"
 	this.DefaultZoning = &defaultZoning
+	var vsanScope string = "Uplink"
+	this.VsanScope = &vsanScope
 	return &this
 }
 
@@ -275,6 +281,38 @@ func (o *FabricVsan) SetVsanId(v int64) {
 	o.VsanId = &v
 }
 
+// GetVsanScope returns the VsanScope field value if set, zero value otherwise.
+func (o *FabricVsan) GetVsanScope() string {
+	if o == nil || o.VsanScope == nil {
+		var ret string
+		return ret
+	}
+	return *o.VsanScope
+}
+
+// GetVsanScopeOk returns a tuple with the VsanScope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FabricVsan) GetVsanScopeOk() (*string, bool) {
+	if o == nil || o.VsanScope == nil {
+		return nil, false
+	}
+	return o.VsanScope, true
+}
+
+// HasVsanScope returns a boolean if a field has been set.
+func (o *FabricVsan) HasVsanScope() bool {
+	if o != nil && o.VsanScope != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVsanScope gets a reference to the given string and assigns it to the VsanScope field.
+func (o *FabricVsan) SetVsanScope(v string) {
+	o.VsanScope = &v
+}
+
 // GetFcNetworkPolicy returns the FcNetworkPolicy field value if set, zero value otherwise.
 func (o *FabricVsan) GetFcNetworkPolicy() FabricFcNetworkPolicyRelationship {
 	if o == nil || o.FcNetworkPolicy == nil {
@@ -338,6 +376,9 @@ func (o FabricVsan) MarshalJSON() ([]byte, error) {
 	if o.VsanId != nil {
 		toSerialize["VsanId"] = o.VsanId
 	}
+	if o.VsanScope != nil {
+		toSerialize["VsanScope"] = o.VsanScope
+	}
 	if o.FcNetworkPolicy != nil {
 		toSerialize["FcNetworkPolicy"] = o.FcNetworkPolicy
 	}
@@ -364,7 +405,9 @@ func (o *FabricVsan) UnmarshalJSON(bytes []byte) (err error) {
 		// User given name for the VSAN configuration.
 		Name *string `json:"Name,omitempty"`
 		// Virtual San Identifier in the switch.
-		VsanId          *int64                             `json:"VsanId,omitempty"`
+		VsanId *int64 `json:"VsanId,omitempty"`
+		// Used to indicate whether the VSAN Id is defined for storage or uplink or both traffics in FI. * `Uplink` - Vsan associated with uplink network. * `Storage` - Vsan associated with storage network. * `Common` - Vsan that is common for uplink and storage network.
+		VsanScope       *string                            `json:"VsanScope,omitempty"`
 		FcNetworkPolicy *FabricFcNetworkPolicyRelationship `json:"FcNetworkPolicy,omitempty"`
 	}
 
@@ -380,6 +423,7 @@ func (o *FabricVsan) UnmarshalJSON(bytes []byte) (err error) {
 		varFabricVsan.FcoeVlan = varFabricVsanWithoutEmbeddedStruct.FcoeVlan
 		varFabricVsan.Name = varFabricVsanWithoutEmbeddedStruct.Name
 		varFabricVsan.VsanId = varFabricVsanWithoutEmbeddedStruct.VsanId
+		varFabricVsan.VsanScope = varFabricVsanWithoutEmbeddedStruct.VsanScope
 		varFabricVsan.FcNetworkPolicy = varFabricVsanWithoutEmbeddedStruct.FcNetworkPolicy
 		*o = FabricVsan(varFabricVsan)
 	} else {
@@ -405,6 +449,7 @@ func (o *FabricVsan) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "FcoeVlan")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "VsanId")
+		delete(additionalProperties, "VsanScope")
 		delete(additionalProperties, "FcNetworkPolicy")
 
 		// remove fields from embedded structs

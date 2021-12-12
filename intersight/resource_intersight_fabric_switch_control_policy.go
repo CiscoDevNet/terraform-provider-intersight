@@ -94,6 +94,18 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"ethernet_switching_mode": {
+				Description: "Enable or Disable Ethernet End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "end-host",
+			},
+			"fc_switching_mode": {
+				Description: "Enable or Disable FC End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "end-host",
+			},
 			"mac_aging_settings": {
 				Description: "This specifies the MAC aging option and time settings.",
 				Type:        schema.TypeList,
@@ -555,6 +567,16 @@ func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.Resour
 		o.SetDescription(x)
 	}
 
+	if v, ok := d.GetOk("ethernet_switching_mode"); ok {
+		x := (v.(string))
+		o.SetEthernetSwitchingMode(x)
+	}
+
+	if v, ok := d.GetOk("fc_switching_mode"); ok {
+		x := (v.(string))
+		o.SetFcSwitchingMode(x)
+	}
+
 	if v, ok := d.GetOk("mac_aging_settings"); ok {
 		p := make([]models.FabricMacAgingSettings, 0, 1)
 		s := v.([]interface{})
@@ -842,6 +864,14 @@ func resourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("ethernet_switching_mode", (s.GetEthernetSwitchingMode())); err != nil {
+		return diag.Errorf("error occurred while setting property EthernetSwitchingMode in FabricSwitchControlPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("fc_switching_mode", (s.GetFcSwitchingMode())); err != nil {
+		return diag.Errorf("error occurred while setting property FcSwitchingMode in FabricSwitchControlPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("mac_aging_settings", flattenMapFabricMacAgingSettings(s.GetMacAgingSettings(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property MacAgingSettings in FabricSwitchControlPolicy object: %s", err.Error())
 	}
@@ -930,6 +960,18 @@ func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.Resour
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("ethernet_switching_mode") {
+		v := d.Get("ethernet_switching_mode")
+		x := (v.(string))
+		o.SetEthernetSwitchingMode(x)
+	}
+
+	if d.HasChange("fc_switching_mode") {
+		v := d.Get("fc_switching_mode")
+		x := (v.(string))
+		o.SetFcSwitchingMode(x)
 	}
 
 	if d.HasChange("mac_aging_settings") {

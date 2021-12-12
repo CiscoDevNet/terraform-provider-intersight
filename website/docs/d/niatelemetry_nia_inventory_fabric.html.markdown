@@ -27,12 +27,14 @@ The following arguments can be used to get data of already created objects in In
 * `ebgp_evpn_link_up_count`:(int) Count number of ebgp evpn active interfaces. 
 * `fabric_id`:(string) Uniquely identifies a fabric. 
 * `fabric_name`:(string) Returns the value of the Name of a fabric. 
+* `fabric_parent`:(string) Parent of the fabric on DCNM. 
 * `is_bgw_present`:(bool) Checks if border gateway is present in the fabric inventory. 
 * `is_ngoam_enabled`:(bool) Returns if ngoam is enabled. 
 * `is_scheduled_back_up_enabled`:(bool) Returns if the scheduled backup is enabled. 
 * `leaf_count`:(int) Returns total number of leafs in the fabric. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `network_deployment_count`:(int) No of networks deployed on a fabric. 
 * `nxos_vni_bw_sites_count`:(int) Returns the count of vnis between sites. 
 * `nxos_vrf_bw_sites_count`:(int) Returns the count of vrfs between sites. 
 * `nxos_vrf_count`:(int) Returns the value of the nxosVrfCount field. 
@@ -40,6 +42,9 @@ The following arguments can be used to get data of already created objects in In
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `site_name`:(string) Name of fabric domain of the controller. 
 * `spine_count`:(int) Returns total number of spines in the fabric. 
+* `syslog_server_ip_list`:(string) Syslog server IP list on DCNM. 
+* `template_name`:(string) Template name of the fabric on DCNM. 
 * `vlan_vni_mappings`:(string) VLAN to VNI mappings configured in the DCNM. 
 * `vni_ip_count`:(int) Count number of IP addresses configured in the DCNM networks. 
+* `vrf_deployment_count`:(int) No of vrfs deployed on a fabric. 
  

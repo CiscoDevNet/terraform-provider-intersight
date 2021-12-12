@@ -79,6 +79,16 @@ func dataSourceFabricSwitchControlPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"ethernet_switching_mode": {
+			Description: "Enable or Disable Ethernet End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"fc_switching_mode": {
+			Description: "Enable or Disable FC End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mac_aging_settings": {
 			Description: "This specifies the MAC aging option and time settings.",
 			Type:        schema.TypeList,
@@ -515,6 +525,16 @@ func dataSourceFabricSwitchControlPolicy() *schema.Resource {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"ethernet_switching_mode": {
+			Description: "Enable or Disable Ethernet End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"fc_switching_mode": {
+			Description: "Enable or Disable FC End Host Switching Mode.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -983,6 +1003,16 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("ethernet_switching_mode"); ok {
+		x := (v.(string))
+		o.SetEthernetSwitchingMode(x)
+	}
+
+	if v, ok := d.GetOk("fc_switching_mode"); ok {
+		x := (v.(string))
+		o.SetFcSwitchingMode(x)
+	}
+
 	if v, ok := d.GetOk("mac_aging_settings"); ok {
 		p := make([]models.FabricMacAgingSettings, 0, 1)
 		s := v.([]interface{})
@@ -1428,6 +1458,8 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["ethernet_switching_mode"] = (s.GetEthernetSwitchingMode())
+				temp["fc_switching_mode"] = (s.GetFcSwitchingMode())
 
 				temp["mac_aging_settings"] = flattenMapFabricMacAgingSettings(s.GetMacAgingSettings(), d)
 

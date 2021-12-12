@@ -16,7 +16,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `license_type`:(string) Type of licensing defined for this resource group. Used for licensing group.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
+* `license_type`:(string) Type of licensing defined for this resource group. Used for licensing group.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type.* `IKS-Advantage` - IKS-Advantage as a License type. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `resource_count`:(int) The number of resource belongs to this licensing tier. 

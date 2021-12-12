@@ -171,7 +171,7 @@ func dataSourceNotificationAccountSubscription() *schema.Resource {
 			Optional:    true,
 		},
 		"name": {
-			Description: "The subscription name.",
+			Description: "The name of the subscription.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -547,7 +547,7 @@ func dataSourceNotificationAccountSubscription() *schema.Resource {
 			Optional:    true,
 		},
 		"name": {
-			Description: "The subscription name.",
+			Description: "The name of the subscription.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

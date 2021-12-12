@@ -46,7 +46,7 @@ func resourceTamAdvisoryDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"alert_type": {
-							Description: "Alert type is used to denote the category of an Intersight alert (FieldNotice, equipment Fault etc.).\n* `psirt` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x).\n* `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html).",
+							Description: "Alert type is used to denote the category of an Intersight alert (FieldNotice, equipment Fault etc.).\n* `psirt` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x).\n* `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html).\n* `eolAdvisory` - Represents product End of Life (EOL) type (https://www.cisco.com/c/en/us/products/eos-eol-policy.html).",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Default:     "psirt",
@@ -168,7 +168,7 @@ func resourceTamAdvisoryDefinition() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"advisory_details": {
-				Description: "Additional details for the advisory definition. For e.g. if the definition corresponds to a security advisory, the details\nregarding CVE ids and CVSS score would be available here.",
+				Description: "Additional details for the advisory definition. For e.g. if the definition corresponds to a security advisory, the details regarding CVE ids and CVSS score would be available here. If the definition is for an end-of-life milestone, the details about the specific milestone will be included.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -185,7 +185,7 @@ func resourceTamAdvisoryDefinition() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "tam.SecurityAdvisoryDetails",
+							Computed:    true,
 						},
 						"description": {
 							Description: "Brief description of details specified for an advisory type.",
@@ -196,13 +196,13 @@ func resourceTamAdvisoryDefinition() *schema.Resource {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Default:     "tam.SecurityAdvisoryDetails",
+							Computed:    true,
 						},
 					},
 				},
 			},
 			"advisory_id": {
-				Description: "Cisco generated identifier for the published security advisory.",
+				Description: "Cisco generated identifier for the published security/field-notice/end-of-life advisory.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -343,12 +343,12 @@ func resourceTamAdvisoryDefinition() *schema.Resource {
 				Computed:    true,
 			},
 			"date_published": {
-				Description: "Date when the security advisory was first published by Cisco.",
+				Description: "Date when the security/field-notice/end-of-life advisory was first published by Cisco.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"date_updated": {
-				Description: "Date when the security advisory was last updated by Cisco.",
+				Description: "Date when the security/field-notice/end-of-life advisory was last updated by Cisco.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -676,13 +676,13 @@ func resourceTamAdvisoryDefinition() *schema.Resource {
 				},
 			},
 			"type": {
-				Description: "The type (field notice, security advisory etc.) of Intersight advisory.\n* `securityAdvisory` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x).\n* `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html).",
+				Description: "The type (field notice, security advisory, end-of-life milestone advisory etc.) of Intersight advisory.\n* `securityAdvisory` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x).\n* `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html).\n* `eolAdvisory` - Represents product End of Life (EOL) type (https://www.cisco.com/c/en/us/products/eos-eol-policy.html).",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "securityAdvisory",
 			},
 			"nr_version": {
-				Description: "Cisco assigned advisory version after latest revision.",
+				Description: "Cisco assigned advisory/field-notice/end-of-life version after latest revision.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

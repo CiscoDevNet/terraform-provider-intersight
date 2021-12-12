@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4929
+API version: 1.0.9-4950
 Contact: intersight@cisco.com
 */
 
@@ -37,13 +37,17 @@ type LicenseLicenseInfo struct {
 	ErrorDesc *string `json:"ErrorDesc,omitempty"`
 	// The default Trial or Grace period customer is entitled to.
 	EvaluationPeriod *int64 `json:"EvaluationPeriod,omitempty"`
+	// The date and time when the next expiration time of license subscription.
+	ExpireTime *time.Time `json:"ExpireTime,omitempty"`
 	// The number of days the trial Trial or Grace period is extended. The trial or grace period can be extended once.
 	ExtraEvaluation *int64 `json:"ExtraEvaluation,omitempty"`
-	// The total number of devices claimed in the Intersight account.
+	// The total number of license consumed in the Intersight account.
 	LicenseCount *int64 `json:"LicenseCount,omitempty"`
+	// The total number of license purchased from cisco.
+	LicenseCountPurchased *int64 `json:"LicenseCountPurchased,omitempty"`
 	// The license state defined by Intersight. The value may be one of NotLicensed, TrialPeriod, OutOfCompliance, Compliance, GraceExpired, or TrialExpired. * `NotLicensed` - The license token is neither activated nor registered. * `GraceExpired` - The license grace period has expired. * `TrialPeriod` - The 90 days of trial period. * `OutOfCompliance` - The license is out of compliance. * `Compliance` - The license is in compliance. * `TrialExpired` - The trial period of 90 days has expired.
 	LicenseState *string `json:"LicenseState,omitempty"`
-	// The name of the Intersight license entitlement. For example, this property may be set to 'Essential'. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type.
+	// The name of the Intersight license entitlement. For example, this property may be set to 'Essential'. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type.
 	LicenseType *string `json:"LicenseType,omitempty"`
 	// The date and time when the licenseState entered the TrialPeriod or OutOfCompliance state.
 	StartTime *time.Time `json:"StartTime,omitempty"`
@@ -318,6 +322,38 @@ func (o *LicenseLicenseInfo) SetEvaluationPeriod(v int64) {
 	o.EvaluationPeriod = &v
 }
 
+// GetExpireTime returns the ExpireTime field value if set, zero value otherwise.
+func (o *LicenseLicenseInfo) GetExpireTime() time.Time {
+	if o == nil || o.ExpireTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.ExpireTime
+}
+
+// GetExpireTimeOk returns a tuple with the ExpireTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseLicenseInfo) GetExpireTimeOk() (*time.Time, bool) {
+	if o == nil || o.ExpireTime == nil {
+		return nil, false
+	}
+	return o.ExpireTime, true
+}
+
+// HasExpireTime returns a boolean if a field has been set.
+func (o *LicenseLicenseInfo) HasExpireTime() bool {
+	if o != nil && o.ExpireTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpireTime gets a reference to the given time.Time and assigns it to the ExpireTime field.
+func (o *LicenseLicenseInfo) SetExpireTime(v time.Time) {
+	o.ExpireTime = &v
+}
+
 // GetExtraEvaluation returns the ExtraEvaluation field value if set, zero value otherwise.
 func (o *LicenseLicenseInfo) GetExtraEvaluation() int64 {
 	if o == nil || o.ExtraEvaluation == nil {
@@ -380,6 +416,38 @@ func (o *LicenseLicenseInfo) HasLicenseCount() bool {
 // SetLicenseCount gets a reference to the given int64 and assigns it to the LicenseCount field.
 func (o *LicenseLicenseInfo) SetLicenseCount(v int64) {
 	o.LicenseCount = &v
+}
+
+// GetLicenseCountPurchased returns the LicenseCountPurchased field value if set, zero value otherwise.
+func (o *LicenseLicenseInfo) GetLicenseCountPurchased() int64 {
+	if o == nil || o.LicenseCountPurchased == nil {
+		var ret int64
+		return ret
+	}
+	return *o.LicenseCountPurchased
+}
+
+// GetLicenseCountPurchasedOk returns a tuple with the LicenseCountPurchased field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LicenseLicenseInfo) GetLicenseCountPurchasedOk() (*int64, bool) {
+	if o == nil || o.LicenseCountPurchased == nil {
+		return nil, false
+	}
+	return o.LicenseCountPurchased, true
+}
+
+// HasLicenseCountPurchased returns a boolean if a field has been set.
+func (o *LicenseLicenseInfo) HasLicenseCountPurchased() bool {
+	if o != nil && o.LicenseCountPurchased != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLicenseCountPurchased gets a reference to the given int64 and assigns it to the LicenseCountPurchased field.
+func (o *LicenseLicenseInfo) SetLicenseCountPurchased(v int64) {
+	o.LicenseCountPurchased = &v
 }
 
 // GetLicenseState returns the LicenseState field value if set, zero value otherwise.
@@ -576,11 +644,17 @@ func (o LicenseLicenseInfo) MarshalJSON() ([]byte, error) {
 	if o.EvaluationPeriod != nil {
 		toSerialize["EvaluationPeriod"] = o.EvaluationPeriod
 	}
+	if o.ExpireTime != nil {
+		toSerialize["ExpireTime"] = o.ExpireTime
+	}
 	if o.ExtraEvaluation != nil {
 		toSerialize["ExtraEvaluation"] = o.ExtraEvaluation
 	}
 	if o.LicenseCount != nil {
 		toSerialize["LicenseCount"] = o.LicenseCount
+	}
+	if o.LicenseCountPurchased != nil {
+		toSerialize["LicenseCountPurchased"] = o.LicenseCountPurchased
 	}
 	if o.LicenseState != nil {
 		toSerialize["LicenseState"] = o.LicenseState
@@ -623,13 +697,17 @@ func (o *LicenseLicenseInfo) UnmarshalJSON(bytes []byte) (err error) {
 		ErrorDesc *string `json:"ErrorDesc,omitempty"`
 		// The default Trial or Grace period customer is entitled to.
 		EvaluationPeriod *int64 `json:"EvaluationPeriod,omitempty"`
+		// The date and time when the next expiration time of license subscription.
+		ExpireTime *time.Time `json:"ExpireTime,omitempty"`
 		// The number of days the trial Trial or Grace period is extended. The trial or grace period can be extended once.
 		ExtraEvaluation *int64 `json:"ExtraEvaluation,omitempty"`
-		// The total number of devices claimed in the Intersight account.
+		// The total number of license consumed in the Intersight account.
 		LicenseCount *int64 `json:"LicenseCount,omitempty"`
+		// The total number of license purchased from cisco.
+		LicenseCountPurchased *int64 `json:"LicenseCountPurchased,omitempty"`
 		// The license state defined by Intersight. The value may be one of NotLicensed, TrialPeriod, OutOfCompliance, Compliance, GraceExpired, or TrialExpired. * `NotLicensed` - The license token is neither activated nor registered. * `GraceExpired` - The license grace period has expired. * `TrialPeriod` - The 90 days of trial period. * `OutOfCompliance` - The license is out of compliance. * `Compliance` - The license is in compliance. * `TrialExpired` - The trial period of 90 days has expired.
 		LicenseState *string `json:"LicenseState,omitempty"`
-		// The name of the Intersight license entitlement. For example, this property may be set to 'Essential'. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type.
+		// The name of the Intersight license entitlement. For example, this property may be set to 'Essential'. * `Base` - Base as a License type. It is default license type. * `Essential` - Essential as a License type. * `Standard` - Standard as a License type. * `Advantage` - Advantage as a License type. * `Premier` - Premier as a License type. * `IWO-Essential` - IWO-Essential as a License type. * `IWO-Advantage` - IWO-Advantage as a License type. * `IWO-Premier` - IWO-Premier as a License type. * `IKS-Advantage` - IKS-Advantage as a License type.
 		LicenseType *string `json:"LicenseType,omitempty"`
 		// The date and time when the licenseState entered the TrialPeriod or OutOfCompliance state.
 		StartTime *time.Time `json:"StartTime,omitempty"`
@@ -651,8 +729,10 @@ func (o *LicenseLicenseInfo) UnmarshalJSON(bytes []byte) (err error) {
 		varLicenseLicenseInfo.EnforceMode = varLicenseLicenseInfoWithoutEmbeddedStruct.EnforceMode
 		varLicenseLicenseInfo.ErrorDesc = varLicenseLicenseInfoWithoutEmbeddedStruct.ErrorDesc
 		varLicenseLicenseInfo.EvaluationPeriod = varLicenseLicenseInfoWithoutEmbeddedStruct.EvaluationPeriod
+		varLicenseLicenseInfo.ExpireTime = varLicenseLicenseInfoWithoutEmbeddedStruct.ExpireTime
 		varLicenseLicenseInfo.ExtraEvaluation = varLicenseLicenseInfoWithoutEmbeddedStruct.ExtraEvaluation
 		varLicenseLicenseInfo.LicenseCount = varLicenseLicenseInfoWithoutEmbeddedStruct.LicenseCount
+		varLicenseLicenseInfo.LicenseCountPurchased = varLicenseLicenseInfoWithoutEmbeddedStruct.LicenseCountPurchased
 		varLicenseLicenseInfo.LicenseState = varLicenseLicenseInfoWithoutEmbeddedStruct.LicenseState
 		varLicenseLicenseInfo.LicenseType = varLicenseLicenseInfoWithoutEmbeddedStruct.LicenseType
 		varLicenseLicenseInfo.StartTime = varLicenseLicenseInfoWithoutEmbeddedStruct.StartTime
@@ -683,8 +763,10 @@ func (o *LicenseLicenseInfo) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "EnforceMode")
 		delete(additionalProperties, "ErrorDesc")
 		delete(additionalProperties, "EvaluationPeriod")
+		delete(additionalProperties, "ExpireTime")
 		delete(additionalProperties, "ExtraEvaluation")
 		delete(additionalProperties, "LicenseCount")
+		delete(additionalProperties, "LicenseCountPurchased")
 		delete(additionalProperties, "LicenseState")
 		delete(additionalProperties, "LicenseType")
 		delete(additionalProperties, "StartTime")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4929
+API version: 1.0.9-4950
 Contact: intersight@cisco.com
 */
 
@@ -115,6 +115,7 @@ type NiatelemetryNiaInventoryAllOf struct {
 	SystemUpTime *string `json:"SystemUpTime,omitempty"`
 	// Software version of device being inventoried. The various software version values for each device are available on cisco.com.
 	Version              *string                                  `json:"Version,omitempty"`
+	VniStatus            []NiatelemetryVniStatus                  `json:"VniStatus,omitempty"`
 	LicenseState         *NiatelemetryNiaLicenseStateRelationship `json:"LicenseState,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship     `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -1903,6 +1904,39 @@ func (o *NiatelemetryNiaInventoryAllOf) SetVersion(v string) {
 	o.Version = &v
 }
 
+// GetVniStatus returns the VniStatus field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNiaInventoryAllOf) GetVniStatus() []NiatelemetryVniStatus {
+	if o == nil {
+		var ret []NiatelemetryVniStatus
+		return ret
+	}
+	return o.VniStatus
+}
+
+// GetVniStatusOk returns a tuple with the VniStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNiaInventoryAllOf) GetVniStatusOk() (*[]NiatelemetryVniStatus, bool) {
+	if o == nil || o.VniStatus == nil {
+		return nil, false
+	}
+	return &o.VniStatus, true
+}
+
+// HasVniStatus returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasVniStatus() bool {
+	if o != nil && o.VniStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVniStatus gets a reference to the given []NiatelemetryVniStatus and assigns it to the VniStatus field.
+func (o *NiatelemetryNiaInventoryAllOf) SetVniStatus(v []NiatelemetryVniStatus) {
+	o.VniStatus = v
+}
+
 // GetLicenseState returns the LicenseState field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryAllOf) GetLicenseState() NiatelemetryNiaLicenseStateRelationship {
 	if o == nil || o.LicenseState == nil {
@@ -2128,6 +2162,9 @@ func (o NiatelemetryNiaInventoryAllOf) MarshalJSON() ([]byte, error) {
 	if o.Version != nil {
 		toSerialize["Version"] = o.Version
 	}
+	if o.VniStatus != nil {
+		toSerialize["VniStatus"] = o.VniStatus
+	}
 	if o.LicenseState != nil {
 		toSerialize["LicenseState"] = o.LicenseState
 	}
@@ -2205,6 +2242,7 @@ func (o *NiatelemetryNiaInventoryAllOf) UnmarshalJSON(bytes []byte) (err error) 
 		delete(additionalProperties, "SoftwareDownload")
 		delete(additionalProperties, "SystemUpTime")
 		delete(additionalProperties, "Version")
+		delete(additionalProperties, "VniStatus")
 		delete(additionalProperties, "LicenseState")
 		delete(additionalProperties, "RegisteredDevice")
 		o.AdditionalProperties = additionalProperties
