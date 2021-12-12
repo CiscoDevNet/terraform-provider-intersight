@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.DeviceConfiguration"]
 **LocalConfigurationLocked** | Pointer to **bool** | Specifies whether configuration through the platforms local management interface has been disabled, with only configuration through the Intersight service enabled. | [optional] 
 **LogLevel** | Pointer to **string** | The log level of the device connector service. | [optional] 
-**TunneledKvm** | Pointer to **bool** | Specifies whether Tunneled vKVM is enabled on the device connector. | [optional] 
+**TunneledKvm** | Pointer to **bool** | Specifies whether Tunneled vKVM is enabled on the device connector. | [optional] [readonly] 
 **Device** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods

@@ -134,7 +134,7 @@ func resourceHyperflexClusterNetworkPolicy() *schema.Resource {
 				Computed:    true,
 			},
 			"jumbo_frame": {
-				Description: "Enable or disable jumbo frames.",
+				Description: "Enable or disable Jumbo Frames (MTU=9000). Jumbo Frames are used by Storage Network, VM Migration Network.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},

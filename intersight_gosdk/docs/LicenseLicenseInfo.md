@@ -12,10 +12,12 @@ Name | Type | Description | Notes
 **EnforceMode** | Pointer to **string** | The entitlement mode reported by Cisco Smart Software Manager. | [optional] [readonly] 
 **ErrorDesc** | Pointer to **string** | The detailed error message when there is any error related to this licensing entitlement. | [optional] [readonly] 
 **EvaluationPeriod** | Pointer to **int64** | The default Trial or Grace period customer is entitled to. | [optional] 
+**ExpireTime** | Pointer to **time.Time** | The date and time when the next expiration time of license subscription. | [optional] [readonly] 
 **ExtraEvaluation** | Pointer to **int64** | The number of days the trial Trial or Grace period is extended. The trial or grace period can be extended once. | [optional] 
-**LicenseCount** | Pointer to **int64** | The total number of devices claimed in the Intersight account. | [optional] [readonly] 
+**LicenseCount** | Pointer to **int64** | The total number of license consumed in the Intersight account. | [optional] [readonly] 
+**LicenseCountPurchased** | Pointer to **int64** | The total number of license purchased from cisco. | [optional] [readonly] 
 **LicenseState** | Pointer to **string** | The license state defined by Intersight. The value may be one of NotLicensed, TrialPeriod, OutOfCompliance, Compliance, GraceExpired, or TrialExpired. * &#x60;NotLicensed&#x60; - The license token is neither activated nor registered. * &#x60;GraceExpired&#x60; - The license grace period has expired. * &#x60;TrialPeriod&#x60; - The 90 days of trial period. * &#x60;OutOfCompliance&#x60; - The license is out of compliance. * &#x60;Compliance&#x60; - The license is in compliance. * &#x60;TrialExpired&#x60; - The trial period of 90 days has expired. | [optional] [readonly] [default to "NotLicensed"]
-**LicenseType** | Pointer to **string** | The name of the Intersight license entitlement. For example, this property may be set to &#39;Essential&#39;. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. | [optional] [readonly] [default to "Base"]
+**LicenseType** | Pointer to **string** | The name of the Intersight license entitlement. For example, this property may be set to &#39;Essential&#39;. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. * &#x60;IKS-Advantage&#x60; - IKS-Advantage as a License type. | [optional] [readonly] [default to "Base"]
 **StartTime** | Pointer to **time.Time** | The date and time when the licenseState entered the TrialPeriod or OutOfCompliance state. | [optional] [readonly] 
 **TrialAdmin** | Pointer to **bool** | The administrative state of the trial license. When the LicenseState is set to &#39;NotLicensed&#39;, &#39;trialAdmin&#39; can be set to true to start the trial period, i.e. licenseState is set to be TrialPeriod. | [optional] [readonly] 
 **AccountLicenseData** | Pointer to [**LicenseAccountLicenseDataRelationship**](LicenseAccountLicenseDataRelationship.md) |  | [optional] 
@@ -229,6 +231,31 @@ SetEvaluationPeriod sets EvaluationPeriod field to given value.
 
 HasEvaluationPeriod returns a boolean if a field has been set.
 
+### GetExpireTime
+
+`func (o *LicenseLicenseInfo) GetExpireTime() time.Time`
+
+GetExpireTime returns the ExpireTime field if non-nil, zero value otherwise.
+
+### GetExpireTimeOk
+
+`func (o *LicenseLicenseInfo) GetExpireTimeOk() (*time.Time, bool)`
+
+GetExpireTimeOk returns a tuple with the ExpireTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpireTime
+
+`func (o *LicenseLicenseInfo) SetExpireTime(v time.Time)`
+
+SetExpireTime sets ExpireTime field to given value.
+
+### HasExpireTime
+
+`func (o *LicenseLicenseInfo) HasExpireTime() bool`
+
+HasExpireTime returns a boolean if a field has been set.
+
 ### GetExtraEvaluation
 
 `func (o *LicenseLicenseInfo) GetExtraEvaluation() int64`
@@ -278,6 +305,31 @@ SetLicenseCount sets LicenseCount field to given value.
 `func (o *LicenseLicenseInfo) HasLicenseCount() bool`
 
 HasLicenseCount returns a boolean if a field has been set.
+
+### GetLicenseCountPurchased
+
+`func (o *LicenseLicenseInfo) GetLicenseCountPurchased() int64`
+
+GetLicenseCountPurchased returns the LicenseCountPurchased field if non-nil, zero value otherwise.
+
+### GetLicenseCountPurchasedOk
+
+`func (o *LicenseLicenseInfo) GetLicenseCountPurchasedOk() (*int64, bool)`
+
+GetLicenseCountPurchasedOk returns a tuple with the LicenseCountPurchased field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLicenseCountPurchased
+
+`func (o *LicenseLicenseInfo) SetLicenseCountPurchased(v int64)`
+
+SetLicenseCountPurchased sets LicenseCountPurchased field to given value.
+
+### HasLicenseCountPurchased
+
+`func (o *LicenseLicenseInfo) HasLicenseCountPurchased() bool`
+
+HasLicenseCountPurchased returns a boolean if a field has been set.
 
 ### GetLicenseState
 

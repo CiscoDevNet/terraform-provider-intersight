@@ -193,10 +193,130 @@ func dataSourceHyperflexNode() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"hxdp_data_ip": {
+			Description: "The storage controller data IP address. This can be a FQDN or IP address.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"address": {
+						Description: "The network address as an FQDN or IPv4 address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"fqdn": {
+						Description: "The fully qualified domain name for the network address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ip": {
+						Description: "The network address as an IPv4 address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"hxdp_mmgt_ip": {
+			Description: "The storage controller management IP address. This can be a FQDN or IP address.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"address": {
+						Description: "The network address as an FQDN or IPv4 address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"fqdn": {
+						Description: "The fully qualified domain name for the network address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ip": {
+						Description: "The network address as an IPv4 address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"hypervisor": {
 			Description: "The type of hypervisor running on the host.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"hypervisor_data_ip": {
+			Description: "The hypervisor data IP address. This can be a FQDN or IP address.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"address": {
+						Description: "The network address as an FQDN or IPv4 address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"fqdn": {
+						Description: "The fully qualified domain name for the network address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ip": {
+						Description: "The network address as an IPv4 address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"identity": {
 			Description: "The unique identifier of the host.",
@@ -328,6 +448,21 @@ func dataSourceHyperflexNode() *schema.Resource {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"node_maintenance_mode": {
+			Description: "The status of maintenance mode on the HyperFlex node.\n* `Unknown` - The maintenance mode status could not be determined.\n* `InMaintenanceMode` - The node has maintenance mode enabled. The node has been temporarily been relinquished from the cluster to allow for maintenance operations.\n* `NotInMaintenanceMode` - The node does not have maintenance mode enabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"node_status": {
+			Description: "The operational status of the HyperFlex node.\n* `Unknown` - The default operational status of a HyperFlex node.\n* `Invalid` - The status of the node cannot be determined by the storage platform.\n* `Ready` - The platform node has been acknowledged by the cluster.\n* `Unpublished` - The node is not yet added to the storage cluster.\n* `Deleted` - The node has been removed from the cluster.\n* `Blocked` - The node is blocked from being added to the cluster.\n* `Blacklisted` - The deprecated value for 'Blocked'. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a).\n* `Allowed` - The node is allowd to be added to the cluster.\n* `Whitelisted` - The deprecated value for 'Allowed'. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a).\n* `InMaintenance` - The node is in maintenance mode. It has been temporarily relinquished from the cluster to allow for maintenance operations such as software upgrades.\n* `Online` - The node is participating in the storage cluster and is available for storage operations.\n* `Offline` - The node is part of the storage cluster, but is not available for storage operations.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"node_uuid": {
+			Description: "The unique identifier of the HyperFlex node.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -780,10 +915,130 @@ func dataSourceHyperflexNode() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"hxdp_data_ip": {
+			Description: "The storage controller data IP address. This can be a FQDN or IP address.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"address": {
+						Description: "The network address as an FQDN or IPv4 address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"fqdn": {
+						Description: "The fully qualified domain name for the network address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ip": {
+						Description: "The network address as an IPv4 address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"hxdp_mmgt_ip": {
+			Description: "The storage controller management IP address. This can be a FQDN or IP address.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"address": {
+						Description: "The network address as an FQDN or IPv4 address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"fqdn": {
+						Description: "The fully qualified domain name for the network address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ip": {
+						Description: "The network address as an IPv4 address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"hypervisor": {
 			Description: "The type of hypervisor running on the host.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"hypervisor_data_ip": {
+			Description: "The hypervisor data IP address. This can be a FQDN or IP address.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"address": {
+						Description: "The network address as an FQDN or IPv4 address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"fqdn": {
+						Description: "The fully qualified domain name for the network address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"ip": {
+						Description: "The network address as an IPv4 address.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"identity": {
 			Description: "The unique identifier of the host.",
@@ -915,6 +1170,21 @@ func dataSourceHyperflexNode() *schema.Resource {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"node_maintenance_mode": {
+			Description: "The status of maintenance mode on the HyperFlex node.\n* `Unknown` - The maintenance mode status could not be determined.\n* `InMaintenanceMode` - The node has maintenance mode enabled. The node has been temporarily been relinquished from the cluster to allow for maintenance operations.\n* `NotInMaintenanceMode` - The node does not have maintenance mode enabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"node_status": {
+			Description: "The operational status of the HyperFlex node.\n* `Unknown` - The default operational status of a HyperFlex node.\n* `Invalid` - The status of the node cannot be determined by the storage platform.\n* `Ready` - The platform node has been acknowledged by the cluster.\n* `Unpublished` - The node is not yet added to the storage cluster.\n* `Deleted` - The node has been removed from the cluster.\n* `Blocked` - The node is blocked from being added to the cluster.\n* `Blacklisted` - The deprecated value for 'Blocked'. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a).\n* `Allowed` - The node is allowd to be added to the cluster.\n* `Whitelisted` - The deprecated value for 'Allowed'. It is included to maintain backwards compatibility with clusters running a HyperFlex Data Platform version older than 5.0(1a).\n* `InMaintenance` - The node is in maintenance mode. It has been temporarily relinquished from the cluster to allow for maintenance operations such as software upgrades.\n* `Online` - The node is participating in the storage cluster and is available for storage operations.\n* `Offline` - The node is part of the storage cluster, but is not available for storage operations.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"node_uuid": {
+			Description: "The unique identifier of the HyperFlex node.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1415,9 +1685,102 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 		o.SetHostName(x)
 	}
 
+	if v, ok := d.GetOk("hxdp_data_ip"); ok {
+		p := make([]models.HyperflexHxNetworkAddressDt, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.HyperflexHxNetworkAddressDt{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.HxNetworkAddressDt")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetHxdpDataIp(x)
+		}
+	}
+
+	if v, ok := d.GetOk("hxdp_mmgt_ip"); ok {
+		p := make([]models.HyperflexHxNetworkAddressDt, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.HyperflexHxNetworkAddressDt{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.HxNetworkAddressDt")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetHxdpMmgtIp(x)
+		}
+	}
+
 	if v, ok := d.GetOk("hypervisor"); ok {
 		x := (v.(string))
 		o.SetHypervisor(x)
+	}
+
+	if v, ok := d.GetOk("hypervisor_data_ip"); ok {
+		p := make([]models.HyperflexHxNetworkAddressDt, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.HyperflexHxNetworkAddressDt{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.HxNetworkAddressDt")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetHypervisorDataIp(x)
+		}
 	}
 
 	if v, ok := d.GetOk("identity"); ok {
@@ -1531,6 +1894,21 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("node_maintenance_mode"); ok {
+		x := (v.(string))
+		o.SetNodeMaintenanceMode(x)
+	}
+
+	if v, ok := d.GetOk("node_status"); ok {
+		x := (v.(string))
+		o.SetNodeStatus(x)
+	}
+
+	if v, ok := d.GetOk("node_uuid"); ok {
+		x := (v.(string))
+		o.SetNodeUuid(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -1860,7 +2238,13 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 
 				temp["drives"] = flattenListHyperflexDriveRelationship(s.GetDrives(), d)
 				temp["host_name"] = (s.GetHostName())
+
+				temp["hxdp_data_ip"] = flattenMapHyperflexHxNetworkAddressDt(s.GetHxdpDataIp(), d)
+
+				temp["hxdp_mmgt_ip"] = flattenMapHyperflexHxNetworkAddressDt(s.GetHxdpMmgtIp(), d)
 				temp["hypervisor"] = (s.GetHypervisor())
+
+				temp["hypervisor_data_ip"] = flattenMapHyperflexHxNetworkAddressDt(s.GetHypervisorDataIp(), d)
 
 				temp["identity"] = flattenMapHyperflexHxUuIdDt(s.GetIdentity(), d)
 
@@ -1870,6 +2254,9 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model_number"] = (s.GetModelNumber())
 				temp["moid"] = (s.GetMoid())
+				temp["node_maintenance_mode"] = (s.GetNodeMaintenanceMode())
+				temp["node_status"] = (s.GetNodeStatus())
+				temp["node_uuid"] = (s.GetNodeUuid())
 				temp["object_type"] = (s.GetObjectType())
 				temp["owners"] = (s.GetOwners())
 

@@ -46,7 +46,7 @@ This complex property has following sub-properties:
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `jumbo_frame`:(bool) Enable or disable jumbo frames. 
+* `jumbo_frame`:(bool) Enable or disable Jumbo Frames (MTU=9000). Jumbo Frames are used by Storage Network, VM Migration Network. 
 * `kvm_ip_range`:(HashMap) - The Out-of-band KVM IP range.Configures the service profiles to use IP addresses within this range for setting the KVM IP of a server. 
 This complex property has following sub-properties:
   + `end_addr`:(string) The end IPv4 address of the range. 

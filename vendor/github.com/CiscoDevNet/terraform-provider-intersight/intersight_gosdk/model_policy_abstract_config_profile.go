@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4929
+API version: 1.0.9-4950
 Contact: intersight@cisco.com
 */
 
@@ -26,6 +26,7 @@ type PolicyAbstractConfigProfile struct {
 	ObjectType string `json:"ObjectType"`
 	// User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.
 	Action        *string                     `json:"Action,omitempty"`
+	ActionParams  []PolicyActionParam         `json:"ActionParams,omitempty"`
 	ConfigContext NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
 	// An array of relationships to policyAbstractPolicy resources.
 	PolicyBucket         []PolicyAbstractPolicyRelationship `json:"PolicyBucket,omitempty"`
@@ -139,6 +140,39 @@ func (o *PolicyAbstractConfigProfile) SetAction(v string) {
 	o.Action = &v
 }
 
+// GetActionParams returns the ActionParams field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PolicyAbstractConfigProfile) GetActionParams() []PolicyActionParam {
+	if o == nil {
+		var ret []PolicyActionParam
+		return ret
+	}
+	return o.ActionParams
+}
+
+// GetActionParamsOk returns a tuple with the ActionParams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PolicyAbstractConfigProfile) GetActionParamsOk() (*[]PolicyActionParam, bool) {
+	if o == nil || o.ActionParams == nil {
+		return nil, false
+	}
+	return &o.ActionParams, true
+}
+
+// HasActionParams returns a boolean if a field has been set.
+func (o *PolicyAbstractConfigProfile) HasActionParams() bool {
+	if o != nil && o.ActionParams != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetActionParams gets a reference to the given []PolicyActionParam and assigns it to the ActionParams field.
+func (o *PolicyAbstractConfigProfile) SetActionParams(v []PolicyActionParam) {
+	o.ActionParams = v
+}
+
 // GetConfigContext returns the ConfigContext field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PolicyAbstractConfigProfile) GetConfigContext() PolicyConfigContext {
 	if o == nil || o.ConfigContext.Get() == nil {
@@ -234,6 +268,9 @@ func (o PolicyAbstractConfigProfile) MarshalJSON() ([]byte, error) {
 	if o.Action != nil {
 		toSerialize["Action"] = o.Action
 	}
+	if o.ActionParams != nil {
+		toSerialize["ActionParams"] = o.ActionParams
+	}
 	if o.ConfigContext.IsSet() {
 		toSerialize["ConfigContext"] = o.ConfigContext.Get()
 	}
@@ -256,6 +293,7 @@ func (o *PolicyAbstractConfigProfile) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.
 		Action        *string                     `json:"Action,omitempty"`
+		ActionParams  []PolicyActionParam         `json:"ActionParams,omitempty"`
 		ConfigContext NullablePolicyConfigContext `json:"ConfigContext,omitempty"`
 		// An array of relationships to policyAbstractPolicy resources.
 		PolicyBucket []PolicyAbstractPolicyRelationship `json:"PolicyBucket,omitempty"`
@@ -269,6 +307,7 @@ func (o *PolicyAbstractConfigProfile) UnmarshalJSON(bytes []byte) (err error) {
 		varPolicyAbstractConfigProfile.ClassId = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.ClassId
 		varPolicyAbstractConfigProfile.ObjectType = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.ObjectType
 		varPolicyAbstractConfigProfile.Action = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.Action
+		varPolicyAbstractConfigProfile.ActionParams = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.ActionParams
 		varPolicyAbstractConfigProfile.ConfigContext = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.ConfigContext
 		varPolicyAbstractConfigProfile.PolicyBucket = varPolicyAbstractConfigProfileWithoutEmbeddedStruct.PolicyBucket
 		*o = PolicyAbstractConfigProfile(varPolicyAbstractConfigProfile)
@@ -291,6 +330,7 @@ func (o *PolicyAbstractConfigProfile) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Action")
+		delete(additionalProperties, "ActionParams")
 		delete(additionalProperties, "ConfigContext")
 		delete(additionalProperties, "PolicyBucket")
 

@@ -275,7 +275,7 @@ func dataSourceComputeServerSetting() *schema.Resource {
 			Optional:    true,
 		},
 		"cmos_reset": {
-			Description: "The allowed actions on the CMOS Reset.\n* `Ready` - CMOS Reset operation is allowed to be done on the server in this state.\n* `Pending` - This indicates that the previous CMOS Reset operation on this server has not completed due to a pending power cycle. CMOS Reset operation cannot be done on the server when in this state.\n* `Reset` - The value that the UI/API needs to provide to trigger a CMOS Reset operation on a server.",
+			Description: "The allowed actions on the CMOS Reset.\n* `Ready` - CMOS Reset operation is allowed to be done on the server in this state.\n* `Pending` - The identifier to state that the previous CMOS Reset operation on this server has not completed due to a pending power cycle. CMOS Reset operation cannot be done on the server when in this state.\n* `Reset` - The value that the UI/API needs to provide to trigger a CMOS Reset operation on a server.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -660,6 +660,39 @@ func dataSourceComputeServerSetting() *schema.Resource {
 					},
 					"user_label": {
 						Description: "User defined description of the server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"server_op_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"config_state": {
+						Description: "The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - The state denotes that the settings are applied successfully in the target server. Applying - The state denotes that the settings are being applied in the target server. Failed - The state denotes that the settings could not be applied in the target server.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"workflow_type": {
+						Description: "The workflow type being started. The workflow name to distinguish workflow by type.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1224,7 +1257,7 @@ func dataSourceComputeServerSetting() *schema.Resource {
 			Optional:    true,
 		},
 		"cmos_reset": {
-			Description: "The allowed actions on the CMOS Reset.\n* `Ready` - CMOS Reset operation is allowed to be done on the server in this state.\n* `Pending` - This indicates that the previous CMOS Reset operation on this server has not completed due to a pending power cycle. CMOS Reset operation cannot be done on the server when in this state.\n* `Reset` - The value that the UI/API needs to provide to trigger a CMOS Reset operation on a server.",
+			Description: "The allowed actions on the CMOS Reset.\n* `Ready` - CMOS Reset operation is allowed to be done on the server in this state.\n* `Pending` - The identifier to state that the previous CMOS Reset operation on this server has not completed due to a pending power cycle. CMOS Reset operation cannot be done on the server when in this state.\n* `Reset` - The value that the UI/API needs to provide to trigger a CMOS Reset operation on a server.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1609,6 +1642,39 @@ func dataSourceComputeServerSetting() *schema.Resource {
 					},
 					"user_label": {
 						Description: "User defined description of the server.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"server_op_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"config_state": {
+						Description: "The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - The state denotes that the settings are applied successfully in the target server. Applying - The state denotes that the settings are being applied in the target server. Failed - The state denotes that the settings could not be applied in the target server.\n* `Applied` - User configured settings are in applied state.\n* `Applying` - User settings are being applied on the target server.\n* `Failed` - User configured settings could not be applied.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"workflow_type": {
+						Description: "The workflow type being started. The workflow name to distinguish workflow by type.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -2544,6 +2610,46 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("server_op_status"); ok {
+		x := make([]models.ComputeServerOpStatus, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.ComputeServerOpStatus{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("compute.ServerOpStatus")
+			if v, ok := l["config_state"]; ok {
+				{
+					x := (v.(string))
+					o.SetConfigState(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["workflow_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetWorkflowType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetServerOpStatus(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -2937,6 +3043,8 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 				temp["server"] = flattenMapComputePhysicalRelationship(s.GetServer(), d)
 
 				temp["server_config"] = flattenMapComputeServerConfig(s.GetServerConfig(), d)
+
+				temp["server_op_status"] = flattenListComputeServerOpStatus(s.GetServerOpStatus(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["storage_controller_operation"] = flattenMapComputeStorageControllerOperation(s.GetStorageControllerOperation(), d)

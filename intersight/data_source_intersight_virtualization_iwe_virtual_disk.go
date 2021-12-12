@@ -295,6 +295,11 @@ func dataSourceVirtualizationIweVirtualDisk() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"reason": {
+						Description: "Reason for virtual disk download failure.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"state": {
 						Description: "Current state of the virtual disk.\n* `Unknown` - No details available on the disk state.\n* `Succeeded` - Last operation on the disk has been successful.\n* `ImportInProgress` - Import operation on the disk is in progress.\n* `ImportFailed` - Import operation on the disk has failed.\n* `CloneInProgress` - Disk clone operation on the disk is in progress.\n* `CloneFailed` - Clone operation on the disk has failed.\n* `CloneScheduled` - Clone operation on the disk has been scheduled.\n* `ImportScheduled` - Import operation on the disk has been scheduled.\n* `Pending` - Submitted operation on the disk is currently pending.\n* `` - Disk state is not available.\n* `Failed` - Last operation on the disk Failed.",
 						Type:        schema.TypeString,
@@ -307,6 +312,11 @@ func dataSourceVirtualizationIweVirtualDisk() *schema.Resource {
 					},
 					"volume_name": {
 						Description: "Name of the Volume associated with virtual machine disk.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"volume_vendor": {
+						Description: "Name of the Volume Vendor associated with virtual machine disk.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -765,6 +775,11 @@ func dataSourceVirtualizationIweVirtualDisk() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"reason": {
+						Description: "Reason for virtual disk download failure.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
 					"state": {
 						Description: "Current state of the virtual disk.\n* `Unknown` - No details available on the disk state.\n* `Succeeded` - Last operation on the disk has been successful.\n* `ImportInProgress` - Import operation on the disk is in progress.\n* `ImportFailed` - Import operation on the disk has failed.\n* `CloneInProgress` - Disk clone operation on the disk is in progress.\n* `CloneFailed` - Clone operation on the disk has failed.\n* `CloneScheduled` - Clone operation on the disk has been scheduled.\n* `ImportScheduled` - Import operation on the disk has been scheduled.\n* `Pending` - Submitted operation on the disk is currently pending.\n* `` - Disk state is not available.\n* `Failed` - Last operation on the disk Failed.",
 						Type:        schema.TypeString,
@@ -777,6 +792,11 @@ func dataSourceVirtualizationIweVirtualDisk() *schema.Resource {
 					},
 					"volume_name": {
 						Description: "Name of the Volume associated with virtual machine disk.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"volume_vendor": {
+						Description: "Name of the Volume Vendor associated with virtual machine disk.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},

@@ -962,6 +962,44 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				},
 			},
 		},
+		"vni_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vni": {
+						Description: "Returns the vni id of the vni.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vni_state": {
+						Description: "Returns the vni state of the vni.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vni_type": {
+						Description: "Returns the vni type of the vni.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 	}
 	var model = map[string]*schema.Schema{"account_moid": {
 		Description: "The Account ID for this managed object.",
@@ -1904,6 +1942,44 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 					},
 					"version_type": {
 						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"vni_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vni": {
+						Description: "Returns the vni id of the vni.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vni_state": {
+						Description: "Returns the vni state of the vni.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"vni_type": {
+						Description: "Returns the vni type of the vni.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -2979,6 +3055,52 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if v, ok := d.GetOk("vni_status"); ok {
+		x := make([]models.NiatelemetryVniStatus, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NiatelemetryVniStatus{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.VniStatus")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["vni"]; ok {
+				{
+					x := (v.(string))
+					o.SetVni(x)
+				}
+			}
+			if v, ok := l["vni_state"]; ok {
+				{
+					x := (v.(string))
+					o.SetVniState(x)
+				}
+			}
+			if v, ok := l["vni_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetVniType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetVniStatus(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of NiatelemetryNiaInventory object failed with error : %s", err.Error())
@@ -3100,6 +3222,8 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+
+				temp["vni_status"] = flattenListNiatelemetryVniStatus(s.GetVniStatus(), d)
 				niatelemetryNiaInventoryResults[j] = temp
 				j += 1
 			}

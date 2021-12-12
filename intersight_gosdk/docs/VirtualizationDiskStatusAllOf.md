@@ -7,9 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.DiskStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.DiskStatus"]
 **DownloadPercentage** | Pointer to **string** | Percentage of download completed. | [optional] [readonly] 
+**Reason** | Pointer to **string** | Reason for virtual disk download failure. | [optional] [readonly] 
 **State** | Pointer to **string** | Current state of the virtual disk. * &#x60;Unknown&#x60; - No details available on the disk state. * &#x60;Succeeded&#x60; - Last operation on the disk has been successful. * &#x60;ImportInProgress&#x60; - Import operation on the disk is in progress. * &#x60;ImportFailed&#x60; - Import operation on the disk has failed. * &#x60;CloneInProgress&#x60; - Disk clone operation on the disk is in progress. * &#x60;CloneFailed&#x60; - Clone operation on the disk has failed. * &#x60;CloneScheduled&#x60; - Clone operation on the disk has been scheduled. * &#x60;ImportScheduled&#x60; - Import operation on the disk has been scheduled. * &#x60;Pending&#x60; - Submitted operation on the disk is currently pending. * &#x60;&#x60; - Disk state is not available. * &#x60;Failed&#x60; - Last operation on the disk Failed. | [optional] [readonly] [default to "Unknown"]
 **VolumeHandle** | Pointer to **string** | Identity of the Volume associated with virtual machine disk. | [optional] [readonly] 
 **VolumeName** | Pointer to **string** | Name of the Volume associated with virtual machine disk. | [optional] [readonly] 
+**VolumeVendor** | Pointer to **string** | Name of the Volume Vendor associated with virtual machine disk. | [optional] [readonly] 
 
 ## Methods
 
@@ -95,6 +97,31 @@ SetDownloadPercentage sets DownloadPercentage field to given value.
 
 HasDownloadPercentage returns a boolean if a field has been set.
 
+### GetReason
+
+`func (o *VirtualizationDiskStatusAllOf) GetReason() string`
+
+GetReason returns the Reason field if non-nil, zero value otherwise.
+
+### GetReasonOk
+
+`func (o *VirtualizationDiskStatusAllOf) GetReasonOk() (*string, bool)`
+
+GetReasonOk returns a tuple with the Reason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReason
+
+`func (o *VirtualizationDiskStatusAllOf) SetReason(v string)`
+
+SetReason sets Reason field to given value.
+
+### HasReason
+
+`func (o *VirtualizationDiskStatusAllOf) HasReason() bool`
+
+HasReason returns a boolean if a field has been set.
+
 ### GetState
 
 `func (o *VirtualizationDiskStatusAllOf) GetState() string`
@@ -169,6 +196,31 @@ SetVolumeName sets VolumeName field to given value.
 `func (o *VirtualizationDiskStatusAllOf) HasVolumeName() bool`
 
 HasVolumeName returns a boolean if a field has been set.
+
+### GetVolumeVendor
+
+`func (o *VirtualizationDiskStatusAllOf) GetVolumeVendor() string`
+
+GetVolumeVendor returns the VolumeVendor field if non-nil, zero value otherwise.
+
+### GetVolumeVendorOk
+
+`func (o *VirtualizationDiskStatusAllOf) GetVolumeVendorOk() (*string, bool)`
+
+GetVolumeVendorOk returns a tuple with the VolumeVendor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolumeVendor
+
+`func (o *VirtualizationDiskStatusAllOf) SetVolumeVendor(v string)`
+
+SetVolumeVendor sets VolumeVendor field to given value.
+
+### HasVolumeVendor
+
+`func (o *VirtualizationDiskStatusAllOf) HasVolumeVendor() bool`
+
+HasVolumeVendor returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

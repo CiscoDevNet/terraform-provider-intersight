@@ -12,10 +12,11 @@ Name | Type | Description | Notes
 **AuthInitialTime** | Pointer to **string** | Intial authorization time. | [optional] [readonly] 
 **AuthNextTime** | Pointer to **string** | Next time for the authorization. | [optional] [readonly] 
 **Category** | Pointer to **string** | Account license data category name. | [optional] [readonly] 
-**DefaultLicenseType** | Pointer to **string** | Default license tier set by user. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. | [optional] [default to "Base"]
+**DefaultLicenseType** | Pointer to **string** | Default license tier set by user. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. * &#x60;IKS-Advantage&#x60; - IKS-Advantage as a License type. | [optional] [default to "Base"]
 **ErrorDesc** | Pointer to **string** | The detailed error message when there is any error related to license sync of this account. | [optional] [readonly] 
 **Group** | Pointer to **string** | Account license data group name. | [optional] [readonly] 
-**HighestCompliantLicenseTier** | Pointer to **string** | The highest license tier which is in compliant of this account. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. | [optional] [readonly] [default to "Base"]
+**HighestCompliantLicenseTier** | Pointer to **string** | The highest license tier which is in compliant of this account. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. * &#x60;IKS-Advantage&#x60; - IKS-Advantage as a License type. | [optional] [readonly] [default to "Base"]
+**LastCssmSync** | Pointer to **time.Time** | Specifies last sync time with CSSM. | [optional] [readonly] 
 **LastRenew** | Pointer to **time.Time** | Specifies last certificate renew time with SA. | [optional] [readonly] 
 **LastSync** | Pointer to **time.Time** | Specifies last sync time with SA. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to **time.Time** | Record&#39;s last update datetime. | [optional] [readonly] 
@@ -27,10 +28,14 @@ Name | Type | Description | Notes
 **RegistrationStatus** | Pointer to **string** | Registration status of a smart-agent. | [optional] [readonly] 
 **RenewFailureString** | Pointer to **string** | License renewal failure message. | [optional] [readonly] 
 **SmartAccount** | Pointer to **string** | Name of the smart account. | [optional] [readonly] 
+**SmartAccountDomain** | Pointer to **string** | Domain Name of the smart account. | [optional] [readonly] 
+**SmartApiEnabled** | Pointer to **bool** | Indicate whether API integration is enabled. | [optional] [readonly] 
 **SyncStatus** | Pointer to **string** | Current sync status for the account. | [optional] [readonly] 
 **VirtualAccount** | Pointer to **string** | Name of the virtual account. | [optional] [readonly] 
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 **CustomerOp** | Pointer to [**LicenseCustomerOpRelationship**](LicenseCustomerOpRelationship.md) |  | [optional] 
+**IksCustomerOp** | Pointer to [**LicenseIksCustomerOpRelationship**](LicenseIksCustomerOpRelationship.md) |  | [optional] 
+**IksLicenseCount** | Pointer to [**LicenseIksLicenseCountRelationship**](LicenseIksLicenseCountRelationship.md) |  | [optional] 
 **IwoCustomerOp** | Pointer to [**LicenseIwoCustomerOpRelationship**](LicenseIwoCustomerOpRelationship.md) |  | [optional] 
 **IwoLicenseCount** | Pointer to [**LicenseIwoLicenseCountRelationship**](LicenseIwoLicenseCountRelationship.md) |  | [optional] 
 **Licenseinfos** | Pointer to [**[]LicenseLicenseInfoRelationship**](LicenseLicenseInfoRelationship.md) | An array of relationships to licenseLicenseInfo resources. | [optional] 
@@ -345,6 +350,31 @@ SetHighestCompliantLicenseTier sets HighestCompliantLicenseTier field to given v
 
 HasHighestCompliantLicenseTier returns a boolean if a field has been set.
 
+### GetLastCssmSync
+
+`func (o *LicenseAccountLicenseData) GetLastCssmSync() time.Time`
+
+GetLastCssmSync returns the LastCssmSync field if non-nil, zero value otherwise.
+
+### GetLastCssmSyncOk
+
+`func (o *LicenseAccountLicenseData) GetLastCssmSyncOk() (*time.Time, bool)`
+
+GetLastCssmSyncOk returns a tuple with the LastCssmSync field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastCssmSync
+
+`func (o *LicenseAccountLicenseData) SetLastCssmSync(v time.Time)`
+
+SetLastCssmSync sets LastCssmSync field to given value.
+
+### HasLastCssmSync
+
+`func (o *LicenseAccountLicenseData) HasLastCssmSync() bool`
+
+HasLastCssmSync returns a boolean if a field has been set.
+
 ### GetLastRenew
 
 `func (o *LicenseAccountLicenseData) GetLastRenew() time.Time`
@@ -620,6 +650,56 @@ SetSmartAccount sets SmartAccount field to given value.
 
 HasSmartAccount returns a boolean if a field has been set.
 
+### GetSmartAccountDomain
+
+`func (o *LicenseAccountLicenseData) GetSmartAccountDomain() string`
+
+GetSmartAccountDomain returns the SmartAccountDomain field if non-nil, zero value otherwise.
+
+### GetSmartAccountDomainOk
+
+`func (o *LicenseAccountLicenseData) GetSmartAccountDomainOk() (*string, bool)`
+
+GetSmartAccountDomainOk returns a tuple with the SmartAccountDomain field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSmartAccountDomain
+
+`func (o *LicenseAccountLicenseData) SetSmartAccountDomain(v string)`
+
+SetSmartAccountDomain sets SmartAccountDomain field to given value.
+
+### HasSmartAccountDomain
+
+`func (o *LicenseAccountLicenseData) HasSmartAccountDomain() bool`
+
+HasSmartAccountDomain returns a boolean if a field has been set.
+
+### GetSmartApiEnabled
+
+`func (o *LicenseAccountLicenseData) GetSmartApiEnabled() bool`
+
+GetSmartApiEnabled returns the SmartApiEnabled field if non-nil, zero value otherwise.
+
+### GetSmartApiEnabledOk
+
+`func (o *LicenseAccountLicenseData) GetSmartApiEnabledOk() (*bool, bool)`
+
+GetSmartApiEnabledOk returns a tuple with the SmartApiEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSmartApiEnabled
+
+`func (o *LicenseAccountLicenseData) SetSmartApiEnabled(v bool)`
+
+SetSmartApiEnabled sets SmartApiEnabled field to given value.
+
+### HasSmartApiEnabled
+
+`func (o *LicenseAccountLicenseData) HasSmartApiEnabled() bool`
+
+HasSmartApiEnabled returns a boolean if a field has been set.
+
 ### GetSyncStatus
 
 `func (o *LicenseAccountLicenseData) GetSyncStatus() string`
@@ -719,6 +799,56 @@ SetCustomerOp sets CustomerOp field to given value.
 `func (o *LicenseAccountLicenseData) HasCustomerOp() bool`
 
 HasCustomerOp returns a boolean if a field has been set.
+
+### GetIksCustomerOp
+
+`func (o *LicenseAccountLicenseData) GetIksCustomerOp() LicenseIksCustomerOpRelationship`
+
+GetIksCustomerOp returns the IksCustomerOp field if non-nil, zero value otherwise.
+
+### GetIksCustomerOpOk
+
+`func (o *LicenseAccountLicenseData) GetIksCustomerOpOk() (*LicenseIksCustomerOpRelationship, bool)`
+
+GetIksCustomerOpOk returns a tuple with the IksCustomerOp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIksCustomerOp
+
+`func (o *LicenseAccountLicenseData) SetIksCustomerOp(v LicenseIksCustomerOpRelationship)`
+
+SetIksCustomerOp sets IksCustomerOp field to given value.
+
+### HasIksCustomerOp
+
+`func (o *LicenseAccountLicenseData) HasIksCustomerOp() bool`
+
+HasIksCustomerOp returns a boolean if a field has been set.
+
+### GetIksLicenseCount
+
+`func (o *LicenseAccountLicenseData) GetIksLicenseCount() LicenseIksLicenseCountRelationship`
+
+GetIksLicenseCount returns the IksLicenseCount field if non-nil, zero value otherwise.
+
+### GetIksLicenseCountOk
+
+`func (o *LicenseAccountLicenseData) GetIksLicenseCountOk() (*LicenseIksLicenseCountRelationship, bool)`
+
+GetIksLicenseCountOk returns a tuple with the IksLicenseCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIksLicenseCount
+
+`func (o *LicenseAccountLicenseData) SetIksLicenseCount(v LicenseIksLicenseCountRelationship)`
+
+SetIksLicenseCount sets IksLicenseCount field to given value.
+
+### HasIksLicenseCount
+
+`func (o *LicenseAccountLicenseData) HasIksLicenseCount() bool`
+
+HasIksLicenseCount returns a boolean if a field has been set.
 
 ### GetIwoCustomerOp
 

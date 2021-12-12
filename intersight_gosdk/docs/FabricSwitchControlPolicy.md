@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.SwitchControlPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SwitchControlPolicy"]
+**EthernetSwitchingMode** | Pointer to **string** | Enable or Disable Ethernet End Host Switching Mode. * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [default to "end-host"]
+**FcSwitchingMode** | Pointer to **string** | Enable or Disable FC End Host Switching Mode. * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [default to "end-host"]
 **MacAgingSettings** | Pointer to [**NullableFabricMacAgingSettings**](FabricMacAgingSettings.md) |  | [optional] 
 **UdldSettings** | Pointer to [**NullableFabricUdldGlobalSettings**](FabricUdldGlobalSettings.md) |  | [optional] 
 **VlanPortOptimizationEnabled** | Pointer to **bool** | To enable or disable the VLAN port count optimization. | [optional] [default to false]
@@ -70,6 +72,56 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetEthernetSwitchingMode
+
+`func (o *FabricSwitchControlPolicy) GetEthernetSwitchingMode() string`
+
+GetEthernetSwitchingMode returns the EthernetSwitchingMode field if non-nil, zero value otherwise.
+
+### GetEthernetSwitchingModeOk
+
+`func (o *FabricSwitchControlPolicy) GetEthernetSwitchingModeOk() (*string, bool)`
+
+GetEthernetSwitchingModeOk returns a tuple with the EthernetSwitchingMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEthernetSwitchingMode
+
+`func (o *FabricSwitchControlPolicy) SetEthernetSwitchingMode(v string)`
+
+SetEthernetSwitchingMode sets EthernetSwitchingMode field to given value.
+
+### HasEthernetSwitchingMode
+
+`func (o *FabricSwitchControlPolicy) HasEthernetSwitchingMode() bool`
+
+HasEthernetSwitchingMode returns a boolean if a field has been set.
+
+### GetFcSwitchingMode
+
+`func (o *FabricSwitchControlPolicy) GetFcSwitchingMode() string`
+
+GetFcSwitchingMode returns the FcSwitchingMode field if non-nil, zero value otherwise.
+
+### GetFcSwitchingModeOk
+
+`func (o *FabricSwitchControlPolicy) GetFcSwitchingModeOk() (*string, bool)`
+
+GetFcSwitchingModeOk returns a tuple with the FcSwitchingMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFcSwitchingMode
+
+`func (o *FabricSwitchControlPolicy) SetFcSwitchingMode(v string)`
+
+SetFcSwitchingMode sets FcSwitchingMode field to given value.
+
+### HasFcSwitchingMode
+
+`func (o *FabricSwitchControlPolicy) HasFcSwitchingMode() bool`
+
+HasFcSwitchingMode returns a boolean if a field has been set.
 
 ### GetMacAgingSettings
 

@@ -1112,6 +1112,22 @@ func flattenListComputeRackUnitRelationship(p []models.ComputeRackUnitRelationsh
 	}
 	return computerackunitrelationships
 }
+func flattenListComputeServerOpStatus(p []models.ComputeServerOpStatus, d *schema.ResourceData) []map[string]interface{} {
+	var computeserveropstatuss []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		computeserveropstatus := make(map[string]interface{})
+		computeserveropstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		computeserveropstatus["class_id"] = item.GetClassId()
+		computeserveropstatus["config_state"] = item.GetConfigState()
+		computeserveropstatus["object_type"] = item.GetObjectType()
+		computeserveropstatus["workflow_type"] = item.GetWorkflowType()
+		computeserveropstatuss = append(computeserveropstatuss, computeserveropstatus)
+	}
+	return computeserveropstatuss
+}
 func flattenListCondHclStatusDetailRelationship(p []models.CondHclStatusDetailRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var condhclstatusdetailrelationships []map[string]interface{}
 	if len(p) == 0 {
@@ -4231,6 +4247,23 @@ func flattenListNiaapiRevisionInfo(p []models.NiaapiRevisionInfo, d *schema.Reso
 	}
 	return niaapirevisioninfos
 }
+func flattenListNiatelemetryDeploymentStatus(p []models.NiatelemetryDeploymentStatus, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetrydeploymentstatuss []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		niatelemetrydeploymentstatus := make(map[string]interface{})
+		niatelemetrydeploymentstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		niatelemetrydeploymentstatus["class_id"] = item.GetClassId()
+		niatelemetrydeploymentstatus["id"] = item.GetId()
+		niatelemetrydeploymentstatus["name"] = item.GetName()
+		niatelemetrydeploymentstatus["object_type"] = item.GetObjectType()
+		niatelemetrydeploymentstatus["status"] = item.GetStatus()
+		niatelemetrydeploymentstatuss = append(niatelemetrydeploymentstatuss, niatelemetrydeploymentstatus)
+	}
+	return niatelemetrydeploymentstatuss
+}
 func flattenListNiatelemetryInterfaceElement(p []models.NiatelemetryInterfaceElement, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetryinterfaceelements []map[string]interface{}
 	if len(p) == 0 {
@@ -4247,6 +4280,22 @@ func flattenListNiatelemetryInterfaceElement(p []models.NiatelemetryInterfaceEle
 		niatelemetryinterfaceelements = append(niatelemetryinterfaceelements, niatelemetryinterfaceelement)
 	}
 	return niatelemetryinterfaceelements
+}
+func flattenListNiatelemetryJobDetail(p []models.NiatelemetryJobDetail, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetryjobdetails []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		niatelemetryjobdetail := make(map[string]interface{})
+		niatelemetryjobdetail["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		niatelemetryjobdetail["class_id"] = item.GetClassId()
+		niatelemetryjobdetail["job_id"] = item.GetJobId()
+		niatelemetryjobdetail["object_type"] = item.GetObjectType()
+		niatelemetryjobdetail["upg_status"] = item.GetUpgStatus()
+		niatelemetryjobdetails = append(niatelemetryjobdetails, niatelemetryjobdetail)
+	}
+	return niatelemetryjobdetails
 }
 func flattenListNiatelemetryLogicalLink(p []models.NiatelemetryLogicalLink, d *schema.ResourceData) []map[string]interface{} {
 	var niatelemetrylogicallinks []map[string]interface{}
@@ -4268,6 +4317,23 @@ func flattenListNiatelemetryLogicalLink(p []models.NiatelemetryLogicalLink, d *s
 		niatelemetrylogicallinks = append(niatelemetrylogicallinks, niatelemetrylogicallink)
 	}
 	return niatelemetrylogicallinks
+}
+func flattenListNiatelemetryVniStatus(p []models.NiatelemetryVniStatus, d *schema.ResourceData) []map[string]interface{} {
+	var niatelemetryvnistatuss []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		niatelemetryvnistatus := make(map[string]interface{})
+		niatelemetryvnistatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		niatelemetryvnistatus["class_id"] = item.GetClassId()
+		niatelemetryvnistatus["object_type"] = item.GetObjectType()
+		niatelemetryvnistatus["vni"] = item.GetVni()
+		niatelemetryvnistatus["vni_state"] = item.GetVniState()
+		niatelemetryvnistatus["vni_type"] = item.GetVniType()
+		niatelemetryvnistatuss = append(niatelemetryvnistatuss, niatelemetryvnistatus)
+	}
+	return niatelemetryvnistatuss
 }
 func flattenListNotificationAbstractCondition(p []models.NotificationAbstractCondition, d *schema.ResourceData) []map[string]interface{} {
 	var notificationabstractconditions []map[string]interface{}
@@ -4920,6 +4986,22 @@ func flattenListPolicyAbstractPolicyRelationship(p []models.PolicyAbstractPolicy
 		policyabstractpolicyrelationships = append(policyabstractpolicyrelationships, policyabstractpolicyrelationship)
 	}
 	return policyabstractpolicyrelationships
+}
+func flattenListPolicyActionParam(p []models.PolicyActionParam, d *schema.ResourceData) []map[string]interface{} {
+	var policyactionparams []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		policyactionparam := make(map[string]interface{})
+		policyactionparam["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		policyactionparam["class_id"] = item.GetClassId()
+		policyactionparam["name"] = item.GetName()
+		policyactionparam["object_type"] = item.GetObjectType()
+		policyactionparam["value"] = item.GetValue()
+		policyactionparams = append(policyactionparams, policyactionparam)
+	}
+	return policyactionparams
 }
 func flattenListPolicyinventoryJobInfo(p []models.PolicyinventoryJobInfo, d *schema.ResourceData) []map[string]interface{} {
 	var policyinventoryjobinfos []map[string]interface{}
@@ -6265,9 +6347,11 @@ func flattenListVirtualizationVmDisk(p []models.VirtualizationVmDisk, d *schema.
 				virtualizationdiskstatus["class_id"] = item.GetClassId()
 				virtualizationdiskstatus["download_percentage"] = item.GetDownloadPercentage()
 				virtualizationdiskstatus["object_type"] = item.GetObjectType()
+				virtualizationdiskstatus["reason"] = item.GetReason()
 				virtualizationdiskstatus["state"] = item.GetState()
 				virtualizationdiskstatus["volume_handle"] = item.GetVolumeHandle()
 				virtualizationdiskstatus["volume_name"] = item.GetVolumeName()
+				virtualizationdiskstatus["volume_vendor"] = item.GetVolumeVendor()
 
 				virtualizationdiskstatuss = append(virtualizationdiskstatuss, virtualizationdiskstatus)
 				return virtualizationdiskstatuss
@@ -13298,6 +13382,42 @@ func flattenMapLicenseCustomerOpRelationship(p models.LicenseCustomerOpRelations
 	licensecustomeroprelationships = append(licensecustomeroprelationships, licensecustomeroprelationship)
 	return licensecustomeroprelationships
 }
+func flattenMapLicenseIksCustomerOpRelationship(p models.LicenseIksCustomerOpRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var licenseikscustomeroprelationships []map[string]interface{}
+	var ret models.LicenseIksCustomerOpRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	licenseikscustomeroprelationship := make(map[string]interface{})
+	licenseikscustomeroprelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	licenseikscustomeroprelationship["class_id"] = item.GetClassId()
+	licenseikscustomeroprelationship["moid"] = item.GetMoid()
+	licenseikscustomeroprelationship["object_type"] = item.GetObjectType()
+	licenseikscustomeroprelationship["selector"] = item.GetSelector()
+
+	licenseikscustomeroprelationships = append(licenseikscustomeroprelationships, licenseikscustomeroprelationship)
+	return licenseikscustomeroprelationships
+}
+func flattenMapLicenseIksLicenseCountRelationship(p models.LicenseIksLicenseCountRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var licenseikslicensecountrelationships []map[string]interface{}
+	var ret models.LicenseIksLicenseCountRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	licenseikslicensecountrelationship := make(map[string]interface{})
+	licenseikslicensecountrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	licenseikslicensecountrelationship["class_id"] = item.GetClassId()
+	licenseikslicensecountrelationship["moid"] = item.GetMoid()
+	licenseikslicensecountrelationship["object_type"] = item.GetObjectType()
+	licenseikslicensecountrelationship["selector"] = item.GetSelector()
+
+	licenseikslicensecountrelationships = append(licenseikslicensecountrelationships, licenseikslicensecountrelationship)
+	return licenseikslicensecountrelationships
+}
 func flattenMapLicenseIwoCustomerOpRelationship(p models.LicenseIwoCustomerOpRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var licenseiwocustomeroprelationships []map[string]interface{}
 	var ret models.LicenseIwoCustomerOpRelationship
@@ -14175,6 +14295,24 @@ func flattenMapNiatelemetrySmartLicense(p models.NiatelemetrySmartLicense, d *sc
 
 	niatelemetrysmartlicenses = append(niatelemetrysmartlicenses, niatelemetrysmartlicense)
 	return niatelemetrysmartlicenses
+}
+func flattenMapOauthAccessTokenRelationship(p models.OauthAccessTokenRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var oauthaccesstokenrelationships []map[string]interface{}
+	var ret models.OauthAccessTokenRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	oauthaccesstokenrelationship := make(map[string]interface{})
+	oauthaccesstokenrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	oauthaccesstokenrelationship["class_id"] = item.GetClassId()
+	oauthaccesstokenrelationship["moid"] = item.GetMoid()
+	oauthaccesstokenrelationship["object_type"] = item.GetObjectType()
+	oauthaccesstokenrelationship["selector"] = item.GetSelector()
+
+	oauthaccesstokenrelationships = append(oauthaccesstokenrelationships, oauthaccesstokenrelationship)
+	return oauthaccesstokenrelationships
 }
 func flattenMapOnpremSchedule(p models.OnpremSchedule, d *schema.ResourceData) []map[string]interface{} {
 	var onpremschedules []map[string]interface{}
@@ -16547,9 +16685,11 @@ func flattenMapVirtualizationDiskStatus(p models.VirtualizationDiskStatus, d *sc
 	virtualizationdiskstatus["class_id"] = item.GetClassId()
 	virtualizationdiskstatus["download_percentage"] = item.GetDownloadPercentage()
 	virtualizationdiskstatus["object_type"] = item.GetObjectType()
+	virtualizationdiskstatus["reason"] = item.GetReason()
 	virtualizationdiskstatus["state"] = item.GetState()
 	virtualizationdiskstatus["volume_handle"] = item.GetVolumeHandle()
 	virtualizationdiskstatus["volume_name"] = item.GetVolumeName()
+	virtualizationdiskstatus["volume_vendor"] = item.GetVolumeVendor()
 
 	virtualizationdiskstatuss = append(virtualizationdiskstatuss, virtualizationdiskstatus)
 	return virtualizationdiskstatuss

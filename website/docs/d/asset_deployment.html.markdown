@@ -18,7 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `deployment_ref_id`:(string) Identifies the consumption-based subscription's deployment. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `end_date`:(string) End Date for the consumption-based subscription's deployment. 
-* `license_type`:(string) Active license tier for the purchased Cisco device's deployment.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
+* `license_type`:(string) Active license tier for the purchased Cisco device's deployment.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type.* `IKS-Advantage` - IKS-Advantage as a License type. 
 * `mlb_offer_type`:(string) Identifier for consumption based pricing. MLB refers to MultiLine Bundle. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

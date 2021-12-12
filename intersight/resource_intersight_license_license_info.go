@@ -164,13 +164,25 @@ func resourceLicenseLicenseInfo() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"expire_time": {
+				Description: "The date and time when the next expiration time of license subscription.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"extra_evaluation": {
 				Description: "The number of days the trial Trial or Grace period is extended.\nThe trial or grace period can be extended once.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"license_count": {
-				Description: "The total number of devices claimed in the Intersight account.",
+				Description: "The total number of license consumed in the Intersight account.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+			},
+			"license_count_purchased": {
+				Description: "The total number of license purchased from cisco.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
@@ -182,7 +194,7 @@ func resourceLicenseLicenseInfo() *schema.Resource {
 				Computed:    true,
 			},
 			"license_type": {
-				Description: "The name of the Intersight license entitlement.\nFor example, this property may be set to 'Essential'.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.",
+				Description: "The name of the Intersight license entitlement.\nFor example, this property may be set to 'Essential'.\n* `Base` - Base as a License type. It is default license type.\n* `Essential` - Essential as a License type.\n* `Standard` - Standard as a License type.\n* `Advantage` - Advantage as a License type.\n* `Premier` - Premier as a License type.\n* `IWO-Essential` - IWO-Essential as a License type.\n* `IWO-Advantage` - IWO-Advantage as a License type.\n* `IWO-Premier` - IWO-Premier as a License type.\n* `IKS-Advantage` - IKS-Advantage as a License type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -664,12 +676,20 @@ func resourceLicenseLicenseInfoRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("error occurred while setting property EvaluationPeriod in LicenseLicenseInfo object: %s", err.Error())
 	}
 
+	if err := d.Set("expire_time", (s.GetExpireTime()).String()); err != nil {
+		return diag.Errorf("error occurred while setting property ExpireTime in LicenseLicenseInfo object: %s", err.Error())
+	}
+
 	if err := d.Set("extra_evaluation", (s.GetExtraEvaluation())); err != nil {
 		return diag.Errorf("error occurred while setting property ExtraEvaluation in LicenseLicenseInfo object: %s", err.Error())
 	}
 
 	if err := d.Set("license_count", (s.GetLicenseCount())); err != nil {
 		return diag.Errorf("error occurred while setting property LicenseCount in LicenseLicenseInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("license_count_purchased", (s.GetLicenseCountPurchased())); err != nil {
+		return diag.Errorf("error occurred while setting property LicenseCountPurchased in LicenseLicenseInfo object: %s", err.Error())
 	}
 
 	if err := d.Set("license_state", (s.GetLicenseState())); err != nil {

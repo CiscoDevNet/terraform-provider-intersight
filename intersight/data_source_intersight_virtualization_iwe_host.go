@@ -693,6 +693,46 @@ func dataSourceVirtualizationIweHost() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"storage_capacity": {
+			Description: "Storage capacity details of the host.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"capacity": {
+						Description: "The total capacity of the entity (bytes).",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"free": {
+						Description: "Free storage space remaining in the entity (bytes) as a point-in-time snapshot. The available space is reported for an entity (such as Host or Cluster) when inventory data is collected for that entity. As part of the inventory data, a snapshot of the free and used storage capacity is also reported.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"used": {
+						Description: "Spaced already used by this entity (bytes), as a point-in-time snapshot.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"storage_vm_power_state": {
 			Description: "Is the Storage Controller VM on the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweringOn` - The entity is powering on.\n* `PoweredOn` - The entity is powered on.\n* `PoweringOff` - The entity is powering off.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `Rebooting` - The entity reboot is in progress.\n* `` - The entity's power state is not available.",
 			Type:        schema.TypeString,
@@ -1527,6 +1567,46 @@ func dataSourceVirtualizationIweHost() *schema.Resource {
 			Description: "Host health status, as reported by the hypervisor platform.\n* `Unknown` - Entity status is unknown.\n* `Degraded` - State is degraded, and might impact normal operation of the entity.\n* `Critical` - Entity is in a critical state, impacting operations.\n* `Ok` - Entity status is in a stable state, operating normally.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"storage_capacity": {
+			Description: "Storage capacity details of the host.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"capacity": {
+						Description: "The total capacity of the entity (bytes).",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"free": {
+						Description: "Free storage space remaining in the entity (bytes) as a point-in-time snapshot. The available space is reported for an entity (such as Host or Cluster) when inventory data is collected for that entity. As part of the inventory data, a snapshot of the free and used storage capacity is also reported.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"used": {
+						Description: "Spaced already used by this entity (bytes), as a point-in-time snapshot.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"storage_vm_power_state": {
 			Description: "Is the Storage Controller VM on the host Powered-up or Powered-down.\n* `Unknown` - The entity's power state is unknown.\n* `PoweringOn` - The entity is powering on.\n* `PoweredOn` - The entity is powered on.\n* `PoweringOff` - The entity is powering off.\n* `PoweredOff` - The entity is powered down.\n* `StandBy` - The entity is in standby mode.\n* `Paused` - The entity is in pause state.\n* `Rebooting` - The entity reboot is in progress.\n* `` - The entity's power state is not available.",
@@ -2510,6 +2590,55 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 		o.SetStatus(x)
 	}
 
+	if v, ok := d.GetOk("storage_capacity"); ok {
+		p := make([]models.VirtualizationStorageCapacity, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.VirtualizationStorageCapacity{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["capacity"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetCapacity(x)
+				}
+			}
+			o.SetClassId("virtualization.StorageCapacity")
+			if v, ok := l["free"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetFree(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["used"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetUsed(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStorageCapacity(x)
+		}
+	}
+
 	if v, ok := d.GetOk("storage_vm_power_state"); ok {
 		x := (v.(string))
 		o.SetStorageVmPowerState(x)
@@ -2733,6 +2862,8 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["status"] = (s.GetStatus())
+
+				temp["storage_capacity"] = flattenMapVirtualizationStorageCapacity(s.GetStorageCapacity(), d)
 				temp["storage_vm_power_state"] = (s.GetStorageVmPowerState())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

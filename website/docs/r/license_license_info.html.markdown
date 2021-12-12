@@ -46,10 +46,12 @@ This complex property has following sub-properties:
 * `enforce_mode`:(string)(ReadOnly) The entitlement mode reported by Cisco Smart Software Manager. 
 * `error_desc`:(string)(ReadOnly) The detailed error message when there is any error related to this licensing entitlement. 
 * `evaluation_period`:(int) The default Trial or Grace period customer is entitled to. 
+* `expire_time`:(string)(ReadOnly) The date and time when the next expiration time of license subscription. 
 * `extra_evaluation`:(int) The number of days the trial Trial or Grace period is extended.The trial or grace period can be extended once. 
-* `license_count`:(int)(ReadOnly) The total number of devices claimed in the Intersight account. 
+* `license_count`:(int)(ReadOnly) The total number of license consumed in the Intersight account. 
+* `license_count_purchased`:(int)(ReadOnly) The total number of license purchased from cisco. 
 * `license_state`:(string)(ReadOnly) The license state defined by Intersight.The value may be one of NotLicensed, TrialPeriod, OutOfCompliance, Compliance, GraceExpired, or TrialExpired.* `NotLicensed` - The license token is neither activated nor registered.* `GraceExpired` - The license grace period has expired.* `TrialPeriod` - The 90 days of trial period.* `OutOfCompliance` - The license is out of compliance.* `Compliance` - The license is in compliance.* `TrialExpired` - The trial period of 90 days has expired. 
-* `license_type`:(string)(ReadOnly) The name of the Intersight license entitlement.For example, this property may be set to 'Essential'.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
+* `license_type`:(string)(ReadOnly) The name of the Intersight license entitlement.For example, this property may be set to 'Essential'.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type.* `IKS-Advantage` - IKS-Advantage as a License type. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `owners`:

@@ -48,6 +48,11 @@ This complex property has following sub-properties:
   + `name`:(string)(ReadOnly) Name of the Action performed on a resource like VM, Disk etc. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `status`:(string) No longer maintained and will be removed soon.* `None` - A place holder for the default value.* `InProgress` - Action triggered on the resource is still running.* `Success` - Action triggered on the resource is completed successfully.* `Failure` - Action triggered on the resource is failed. 
+* `action_params`:(Array)
+This complex property has following sub-properties:
+  + `name`:(string) The action parameter identifier. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `value`:(string) The action parameter value. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

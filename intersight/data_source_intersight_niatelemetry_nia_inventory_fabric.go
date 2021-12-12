@@ -129,6 +129,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"fabric_parent": {
+			Description: "Parent of the fabric on DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"is_bgw_present": {
 			Description: "Checks if border gateway is present in the fabric inventory.",
 			Type:        schema.TypeBool,
@@ -216,6 +221,49 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Description: "The unique identifier of this Managed Object instance.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"network_deployment_count": {
+			Description: "No of networks deployed on a fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"network_deployment_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"id": {
+						Description: "Returns the id of network/vrf.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Returns the name of network/vrf.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"status": {
+						Description: "Returns the deployment status of network/vrf.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"nxos_vni_bw_sites_count": {
 			Description: "Returns the count of vnis between sites.",
@@ -366,6 +414,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"syslog_server_ip_list": {
+			Description: "Syslog server IP list on DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -388,6 +441,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 					},
 				},
 			},
+		},
+		"template_name": {
+			Description: "Template name of the fabric on DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -506,6 +564,49 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Description: "Count number of IP addresses configured in the DCNM networks.",
 			Type:        schema.TypeInt,
 			Optional:    true,
+		},
+		"vrf_deployment_count": {
+			Description: "No of vrfs deployed on a fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"vrf_deployment_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"id": {
+						Description: "Returns the id of network/vrf.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Returns the name of network/vrf.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"status": {
+						Description: "Returns the deployment status of network/vrf.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 	}
 	var model = map[string]*schema.Schema{"account_moid": {
@@ -622,6 +723,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"fabric_parent": {
+			Description: "Parent of the fabric on DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"is_bgw_present": {
 			Description: "Checks if border gateway is present in the fabric inventory.",
 			Type:        schema.TypeBool,
@@ -709,6 +815,49 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Description: "The unique identifier of this Managed Object instance.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"network_deployment_count": {
+			Description: "No of networks deployed on a fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"network_deployment_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"id": {
+						Description: "Returns the id of network/vrf.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Returns the name of network/vrf.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"status": {
+						Description: "Returns the deployment status of network/vrf.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"nxos_vni_bw_sites_count": {
 			Description: "Returns the count of vnis between sites.",
@@ -859,6 +1008,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"syslog_server_ip_list": {
+			Description: "Syslog server IP list on DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -881,6 +1035,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 					},
 				},
 			},
+		},
+		"template_name": {
+			Description: "Template name of the fabric on DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -999,6 +1158,49 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Description: "Count number of IP addresses configured in the DCNM networks.",
 			Type:        schema.TypeInt,
 			Optional:    true,
+		},
+		"vrf_deployment_count": {
+			Description: "No of vrfs deployed on a fabric.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"vrf_deployment_status": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"id": {
+						Description: "Returns the id of network/vrf.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Returns the name of network/vrf.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"status": {
+						Description: "Returns the deployment status of network/vrf.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 	}
 	model["results"] = &schema.Schema{
@@ -1141,6 +1343,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetFabricName(x)
 	}
 
+	if v, ok := d.GetOk("fabric_parent"); ok {
+		x := (v.(string))
+		o.SetFabricParent(x)
+	}
+
 	if v, ok := d.GetOkExists("is_bgw_present"); ok {
 		x := (v.(bool))
 		o.SetIsBgwPresent(x)
@@ -1239,6 +1446,57 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOkExists("network_deployment_count"); ok {
+		x := int64(v.(int))
+		o.SetNetworkDeploymentCount(x)
+	}
+
+	if v, ok := d.GetOk("network_deployment_status"); ok {
+		x := make([]models.NiatelemetryDeploymentStatus, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NiatelemetryDeploymentStatus{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.DeploymentStatus")
+			if v, ok := l["id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetId(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["status"]; ok {
+				{
+					x := (v.(string))
+					o.SetStatus(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetNetworkDeploymentStatus(x)
 	}
 
 	if v, ok := d.GetOkExists("nxos_vni_bw_sites_count"); ok {
@@ -1418,6 +1676,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetSpineCount(x)
 	}
 
+	if v, ok := d.GetOk("syslog_server_ip_list"); ok {
+		x := (v.(string))
+		o.SetSyslogServerIpList(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1449,6 +1712,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if v, ok := d.GetOk("template_name"); ok {
+		x := (v.(string))
+		o.SetTemplateName(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -1535,6 +1803,57 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetVniIpCount(x)
 	}
 
+	if v, ok := d.GetOkExists("vrf_deployment_count"); ok {
+		x := int64(v.(int))
+		o.SetVrfDeploymentCount(x)
+	}
+
+	if v, ok := d.GetOk("vrf_deployment_status"); ok {
+		x := make([]models.NiatelemetryDeploymentStatus, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NiatelemetryDeploymentStatus{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.DeploymentStatus")
+			if v, ok := l["id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetId(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["status"]; ok {
+				{
+					x := (v.(string))
+					o.SetStatus(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetVrfDeploymentStatus(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of NiatelemetryNiaInventoryFabric object failed with error : %s", err.Error())
@@ -1590,6 +1909,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				temp["ebgp_evpn_link_up_count"] = (s.GetEbgpEvpnLinkUpCount())
 				temp["fabric_id"] = (s.GetFabricId())
 				temp["fabric_name"] = (s.GetFabricName())
+				temp["fabric_parent"] = (s.GetFabricParent())
 				temp["is_bgw_present"] = (s.GetIsBgwPresent())
 				temp["is_ngoam_enabled"] = (s.GetIsNgoamEnabled())
 				temp["is_scheduled_back_up_enabled"] = (s.GetIsScheduledBackUpEnabled())
@@ -1599,6 +1919,9 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
+				temp["network_deployment_count"] = (s.GetNetworkDeploymentCount())
+
+				temp["network_deployment_status"] = flattenListNiatelemetryDeploymentStatus(s.GetNetworkDeploymentStatus(), d)
 				temp["nxos_vni_bw_sites_count"] = (s.GetNxosVniBwSitesCount())
 				temp["nxos_vrf_bw_sites_count"] = (s.GetNxosVrfBwSitesCount())
 				temp["nxos_vrf_count"] = (s.GetNxosVrfCount())
@@ -1614,12 +1937,17 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["site_name"] = (s.GetSiteName())
 				temp["spine_count"] = (s.GetSpineCount())
+				temp["syslog_server_ip_list"] = (s.GetSyslogServerIpList())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["template_name"] = (s.GetTemplateName())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vlan_vni_mappings"] = (s.GetVlanVniMappings())
 				temp["vni_ip_count"] = (s.GetVniIpCount())
+				temp["vrf_deployment_count"] = (s.GetVrfDeploymentCount())
+
+				temp["vrf_deployment_status"] = flattenListNiatelemetryDeploymentStatus(s.GetVrfDeploymentStatus(), d)
 				niatelemetryNiaInventoryFabricResults[j] = temp
 				j += 1
 			}
