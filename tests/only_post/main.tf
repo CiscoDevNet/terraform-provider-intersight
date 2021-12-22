@@ -34,6 +34,20 @@ data "intersight_organization_organization" "default" {
 #  request_type = "CheckCompatibility"
 #}
 
-resource "intersight_os_os_support" "os_support"{
-  os_version = "Ubuntu Server 18.04 LTS"
+#resource "intersight_os_os_support" "os_support"{
+#  os_version = "Ubuntu Server 18.04 LTS"
+#}
+
+resource "intersight_bulk_mo_cloner" "clone_server"{
+       sources = [{
+               moid = "61c344db77696e2d314cc684"
+               object_type = "server.ProfileTemplate"
+       }]
+       targets = [{
+               name = "demotesting_DERIVED-2"
+               object_type = "server.Profile"
+               description = ""
+               tags = []
+       }]
 }
+
