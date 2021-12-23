@@ -38,26 +38,26 @@ data "intersight_organization_organization" "default" {
 #  os_version = "Ubuntu Server 18.04 LTS"
 #}
 
-#resource "intersight_bulk_mo_cloner" "clone_server"{
-#       sources = [{
-#               moid = "61c344db77696e2d314cc684"
-#               object_type = "server.ProfileTemplate"
-#       }]
-#       targets = [{
-#               name = "demotesting_DERIVED-2"
-#               object_type = "server.Profile"
-#               description = ""
-#               tags = []
-#       }]
-#}
-
-resource "intersight_feedback_feedback_post" "feedback1"{
-	feedback_data {
-		account_name = "merajash"
-		comment = "Testing feedback"
-		email = "merajash@cisco.com"
-		evaluation = "Good"
-		follow_up = "false"
-		type = "Evaluation"
-	}
+resource "intersight_bulk_mo_cloner" "clone_server"{
+       sources {
+               moid = "61c344db77696e2d314cc684"
+               object_type = "server.ProfileTemplate"
+       }
+       targets {
+               name = "demotesting_DERIVED-3"
+               object_type = "server.Profile"
+               description = ""
+               tags = []
+       }
 }
+
+#resource "intersight_feedback_feedback_post" "feedback1"{
+#	feedback_data {
+#		account_name = "merajash"
+#		comment = "Testing feedback"
+#		email = "merajash@cisco.com"
+#		evaluation = "Good"
+#		follow_up = "false"
+#		type = "Evaluation"
+#	}
+#}
