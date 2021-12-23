@@ -51,7 +51,7 @@ data "intersight_organization_organization" "default" {
 #       }]
 #}
 
-resource "itersight_feedback_feedback_post" "feedback1"{
+resource "intersight_feedback_feedback_post" "feedback1"{
 	feedback_data {
 		account_name = "merajash"
 		comment = "Testing feedback"
