@@ -38,16 +38,16 @@ data "intersight_organization_organization" "default" {
 #  os_version = "Ubuntu Server 18.04 LTS"
 #}
 
-resource "intersight_bulk_mo_cloner" "clone_server"{
+resource "intersight_bulk_mo_cloner" "clone_server1"{
        sources {
-               moid = "61c344db77696e2d314cc684"
                class_id = "server.ProfileTemplate"
                object_type = "server.ProfileTemplate"
+               moid = "61c344db77696e2d314cc684"
        }
        targets {
-               name = "demotesting_DERIVED-4"
-               object_type = "server.Profile"
                class_id = "server.Profile"
+               object_type = "server.Profile"
+               name = "demotesting_DERIVED-4"
                description = "Sample description"
                tags = []
        }
