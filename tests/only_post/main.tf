@@ -41,12 +41,14 @@ data "intersight_organization_organization" "default" {
 resource "intersight_bulk_mo_cloner" "clone_server"{
        sources {
                moid = "61c344db77696e2d314cc684"
+               class_id = "server.ProfileTemplate"
                object_type = "server.ProfileTemplate"
        }
        targets {
-               name = "demotesting_DERIVED-3"
+               name = "demotesting_DERIVED-4"
                object_type = "server.Profile"
-               description = ""
+               class_id = "server.Profile"
+               description = "Sample description"
                tags = []
        }
 }
