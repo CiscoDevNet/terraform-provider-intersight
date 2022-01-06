@@ -47,8 +47,8 @@ resource "intersight_bulk_mo_cloner" "clone_server1"{
        targets {
                class_id = "server.Profile"
                object_type = "server.Profile"
-               name = "demotesting_DERIVED-4"
-               description = "Sample description"
+               #name = "demotesting_DERIVED-4"
+               #description = "Sample description"
                tags = []
        }
 }
