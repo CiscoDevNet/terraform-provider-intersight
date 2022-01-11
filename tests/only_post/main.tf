@@ -30,7 +30,7 @@ resource "intersight_bulk_mo_cloner" "clone_server1"{
        sources {
                class_id = "server.ProfileTemplate"
                object_type = "server.ProfileTemplate"
-               moid = "61c344db77696e2d314cc684"
+               moid = "61dd4d1477696e2d315f374f"
        }
        targets {
                class_id = "server.Profile"
