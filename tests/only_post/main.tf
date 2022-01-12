@@ -26,7 +26,7 @@ resource "intersight_boot_precision_policy" "boot_precision1" {
   enforce_uefi_secure_boot = false
   organization {
     object_type = "organization.Organization"
-    moid        = intersight_organization_organization.default.moid
+    moid        = data.intersight_organization_organization.default.results.0.moid
   }
   boot_devices {
     enabled     = true
@@ -73,7 +73,7 @@ resource "intersight_server_profile_template" "template1" {
   target_platform = "FIAttached"
    organization {
      object_type = "organization.Organization"
-     moid        = intersight_organization_organization.default.moid
+     moid        = data.intersight_organization_organization.default.results.0.moid
    }
    policy_bucket {
      moid        = intersight_boot_precision_policy.boot_precision1.moid
