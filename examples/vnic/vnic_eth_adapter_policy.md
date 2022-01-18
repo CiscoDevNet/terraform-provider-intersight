@@ -46,4 +46,9 @@ resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
     tx_checksum   = true
   }
 }
+
+variable "organization" {
+   type = string
+   description = "<value for organization>"
+ }
 ```

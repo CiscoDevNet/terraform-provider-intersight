@@ -25,4 +25,9 @@ resource "intersight_firmware_server_configuration_utility_distributable" "scu1"
     moid = var.catalog
   }
 }
+
+variable "catalog" {
+  type        = string
+  description = "Moid of catalog for firmware_server_configuration_utility_distributable"
+}
 ```

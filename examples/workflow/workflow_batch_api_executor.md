@@ -9,4 +9,9 @@ resource "intersight_workflow_batch_api_executor" "workflow_batch_api_executor1"
     moid        = var.workflow_task_definition
   }
 }
+
+variable "workflow_task_definition" {
+  type =  string
+  description = "moid for workflow task definition"
+}
 ```

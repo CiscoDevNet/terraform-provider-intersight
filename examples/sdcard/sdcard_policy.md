@@ -21,4 +21,9 @@ resource "intersight_sdcard_policy" "sdcard1" {
     }
   }
 }
+
+ variable "organization" {
+   type = string
+   description = "value for organization"
+ }
 ```

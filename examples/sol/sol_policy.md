@@ -13,4 +13,8 @@ resource "intersight_sol_policy" "sol1" {
     moid        = var.organization
   }
 }
+variable "organization" {
+   type = string
+   description = "<value for organization>"
+ }
 ```

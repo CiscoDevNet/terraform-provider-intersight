@@ -1,7 +1,7 @@
 ### Resource Creation
 
 ```hcl
-resource "intersight_softwarerepository_operating_system_file" "osf1" {
+resource "intersight_softwarerepository_operating_system_file" "osf11" {
   nr_version  = "ESXi 6.7 U2"
   description = "ESXi6.7U2 without answers"
   name        = "ESXi6.7 w/o cifs 21"
@@ -19,8 +19,13 @@ resource "intersight_softwarerepository_operating_system_file" "osf1" {
     object_type = "softwarerepository.CifsServer"
   }
   vendor = "VMware"
-  catalog {
-    moid = var.catalog
-  }
+   catalog {
+     moid = var.catalog
+   }
 }
+
+ variable "catalog" {
+   type = string
+   description = "value for moid"
+ }
 ```

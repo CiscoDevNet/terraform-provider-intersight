@@ -21,4 +21,9 @@ resource "intersight_kubernetes_cluster_profile" "kubernetes_cluster_profile1" {
     moid        = var.workflow_workflow_info
   }
 }
+
+variable "workflow_workflow_info" {
+  type        = string
+  description = "Moid of the workflow.WorkflowInfo "
+}
 ```

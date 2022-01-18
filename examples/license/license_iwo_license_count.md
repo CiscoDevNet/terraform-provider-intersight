@@ -2,10 +2,14 @@
 
 ```hcl
 resource "intersight_license_iwo_license_count" "license_iwo_license_count1" {
-  active_admin        = true
-  active_license_type = "Base"
-  enable_trial        = true
-  evaluation_period   = 30
-  extra_evaluation    = 15
+  account_license_data {
+    moid        = var.account_license_moid
+    object_type = "license.AccountLicenseData"
+  }
+}
+
+variable "account_license_moid" {
+  type        = string
+  description = "Moid of account_license_data"
 }
 ```

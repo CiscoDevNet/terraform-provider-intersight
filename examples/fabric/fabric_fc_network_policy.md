@@ -7,7 +7,7 @@ resource "intersight_fabric_fc_network_policy" "fabric_fc_network_policy1" {
   enable_trunking = true
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
 }
 ```

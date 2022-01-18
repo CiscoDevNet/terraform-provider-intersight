@@ -9,13 +9,9 @@ resource "intersight_kubernetes_addon_policy" "kubernetes_addon_policy1" {
     release_name     = "helm-release-3"
     upgrade_strategy = "UpgradeOnly"
   }
-  addon_definintion {
-    chart_url                = "/path/to/chart/url"
-    default_install_strategy = "Always"
-    default_namespace        = "iks"
-    default_upgrade_strategy = "UpgradeOnly"
-    description              = "A docker registry"
-    digest                   = "e8b9e7e3aeddc98f480af2b47785d4fe41734571a67ffcadc92d0148c5b6305a"
+  addon_definition {
+    moid        = intersight_kubernetes_addon_definition.kubernetes_addon_definition1.moid
+    object_type = "kubernetes.AddonDefinition"
   }
   organization {
     object_type = "organization.Organization"

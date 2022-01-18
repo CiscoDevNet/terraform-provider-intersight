@@ -18,8 +18,18 @@ resource "intersight_smtp_policy" "smtp1" {
     moid        = var.organization
   }
   profiles {
-    moid        = intersight_server_profile.server1.id
+    moid        = var.profile
     object_type = "server.Profile"
   }
+}
+
+variable "organization" {
+   type = string
+   description = "<value for organization>"
+ }
+
+variable "profile"{
+  type = string
+  description = "Moid of server.Profile"
 }
 ```

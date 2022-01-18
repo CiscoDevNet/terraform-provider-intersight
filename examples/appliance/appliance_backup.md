@@ -2,8 +2,6 @@
 
 ```hcl
 resource "intersight_appliance_backup" "appliance_backup1" {
-  name        = "appliance_backup1"
-  description = "test interface"
   filename    = "default_filename1"
   protocol    = "scp"
   remote_host = "host.remote"
@@ -13,8 +11,12 @@ resource "intersight_appliance_backup" "appliance_backup1" {
   password    = "ChangeMe"
   account {
     object_type = "iam.Account"
-    moid        = intersight_account_iam.iam1.id
+    moid        = var.account
   }
+}
 
+variable "account" {
+  type        = string
+  description = "Moid of iam.Account Mo"
 }
 ```
