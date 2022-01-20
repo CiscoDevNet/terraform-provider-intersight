@@ -109,9 +109,9 @@ resource "intersight_bulk_mo_cloner" "clone_server1"{
 
 resource "intersight_feedback_feedback_post" "feedback1"{
 	feedback_data {
-		account_name = "merajash"
+		account_name = "testing_tf"
 		comment = "Testing feedback"
-		email = "merajash@cisco.com"
+		email = "testing_tf@cisco.com"
 		evaluation = "Good"
 		follow_up = "false"
 		type = "Evaluation"
