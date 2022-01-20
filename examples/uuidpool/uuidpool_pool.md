@@ -13,7 +13,6 @@ resource "intersight_uuidpool_pool" "uuidpool_pool1" {
     object_type = "uuidpool.UuidBlock"
     from        = "123e4567-e89b-42d3"
     to          = "123e4567-e89b-84e6"
-    size        = 4
   }]
   organization {
     object_type = "organization.Organization"
