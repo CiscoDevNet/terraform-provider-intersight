@@ -13,7 +13,7 @@ A profile specifying configuration settings for a HyperFlex cluster.
 
 ```hcl
 resource "intersight_hyperflex_cluster_profile" "hyperflex_cluster_profile1" {
-  storage_data_vlan = {
+  storage_data_vlan {
     name    = "hx-storage-data"
     vlan_id = 27
   }
