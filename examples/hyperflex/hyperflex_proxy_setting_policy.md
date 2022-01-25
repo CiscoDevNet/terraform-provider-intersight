@@ -13,7 +13,7 @@ resource "intersight_hyperflex_proxy_setting_policy" "hyperflex_proxy_setting_po
   }
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
   name = "hyperflex_proxy_setting_policy1"
 }

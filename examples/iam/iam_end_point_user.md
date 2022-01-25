@@ -11,4 +11,9 @@ resource "intersight_iam_end_point_user" "iam_end_point_user1" {
     object_type = "organization.Organization"
   }
 }
+
+variable "organization_organization" {
+  type = string
+  description = "value for organization organization"
+}
 ```

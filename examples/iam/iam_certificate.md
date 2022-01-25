@@ -3,9 +3,14 @@
 ```hcl
 resource "intersight_iam_certificate" "iam_certificate1" {
   certificate {
-    moid        = intersight_certificate_iam.iam1.id
-    object_type = "x509.Certificate"
-    enabled     = true
-  }
+      pem_certificate = var.pemcertificate1
+	}
+}
+
+
+variable "pemcertificate1" {
+  type        = string
+  sensitive   = true
+  description = "Pem certificate base64 encoded value"
 }
 ```

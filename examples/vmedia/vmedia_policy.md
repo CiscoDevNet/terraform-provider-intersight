@@ -30,4 +30,9 @@ resource "intersight_vmedia_policy" "vmedia1" {
     volume_name             = "IMC_DVD"
   }]
 }
+
+variable "organization" {
+   type = string
+   description = "<value for organization>"
+ }
 ```

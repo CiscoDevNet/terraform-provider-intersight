@@ -14,7 +14,7 @@ resource "intersight_chassis_profile" "chassis_profile1" {
   }
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
 }
 ```

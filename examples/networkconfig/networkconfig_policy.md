@@ -18,4 +18,8 @@ resource "intersight_networkconfig_policy" "network_config1" {
     moid        = var.organization
   }
 }
+variable "organization" {
+   type = string
+   description = "value for organization"
+ }
 ```

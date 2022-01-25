@@ -4,22 +4,39 @@
 resource "intersight_asset_target" "asset_target1" {
   account {
     object_type = "iam.Account"
-    moid        = intersight_account_iam.iam1.id
+    moid        = var.account
   }
-  assist = None
+  assist = []
   connections = [
     {
-      credential  = None
-      object_type = "asset.IntersightDeviceConnectorConnection"
+      credential            = []
+      object_type           = "asset.IntersightDeviceConnectorConnection"
+      additional_properties = ""
+      class_id              = "asset.IntersightDeviceConnectorConnection"
     }
   ]
   moid = var.asset_target1
   name = "C240-WZP21330QS5"
   registered_device {
-    moid        = intersight_registered_device.device1.id
+    moid        = var.registered_device
     object_type = "asset.DeviceRegistrations"
   }
-  status      = NotConnected
+  status      = "NotConnected"
   target_type = "IMCM5"
+}
+
+variable "registered_device" {
+  type        = string
+  description = "Moid of registered device"
+}
+
+variable "asset_target1" {
+  type        = string
+  description = "Moid of asset.Target Mo"
+}
+
+variable "account" {
+  type        = string
+  description = "Moid of iam.Account Mo"
 }
 ```

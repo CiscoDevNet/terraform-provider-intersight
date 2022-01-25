@@ -15,4 +15,8 @@ resource "intersight_vnic_eth_qos_policy" "v_eth_qos1" {
     moid        = var.organization
   }
 }
+variable "organization" {
+   type = string
+   description = "<value for organization>"
+ }
 ```

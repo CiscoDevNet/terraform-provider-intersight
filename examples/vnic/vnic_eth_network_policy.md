@@ -13,4 +13,8 @@ resource "intersight_vnic_eth_network_policy" "v_eth_network1" {
     mode         = "ACCESS"
   }
 }
+variable "organization" {
+   type = string
+   description = "<value for organization>"
+ }
 ```

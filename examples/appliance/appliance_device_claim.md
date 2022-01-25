@@ -2,7 +2,6 @@
 
 ```hcl
 resource "intersight_appliance_device_claim" "appliance_device_claim1" {
-  name           = "appliance_device_claim1"
   device_id      = "WZP23350KMU"
   hostname       = "10.106.233.221"
   message        = "Endpoint claimed successfully"
@@ -13,7 +12,12 @@ resource "intersight_appliance_device_claim" "appliance_device_claim1" {
   username       = "admin"
   account {
     object_type = "iam.Account"
-    moid        = intersight_account_iam.iam1.id
+    moid        = var.account
   }
+}
+
+variable "account" {
+  type        = string
+  description = "Moid of iam.Account Mo"
 }
 ```

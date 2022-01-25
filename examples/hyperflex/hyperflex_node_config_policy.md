@@ -17,7 +17,7 @@ resource "intersight_hyperflex_node_config_policy" "hyperflex_node_config_policy
   node_name_prefix = "EdgeM4"
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
   name = "hyperflex_node_config_policy1"
 }

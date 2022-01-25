@@ -6,6 +6,6 @@ resource "intersight_fabric_fc_uplink_role" "fabric_fc_uplink_role1" {
   slot_id           = 4
   admin_speed       = "Auto"
   fill_pattern      = "Idle"
-  vsan_id            = 10
+  vsan_id           = 10
 }
 ```

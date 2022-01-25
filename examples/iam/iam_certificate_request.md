@@ -7,12 +7,21 @@ resource "intersight_iam_certificate_request" "iam_certificate_request1" {
   self_signed   = false
   account {
     object_type = "iam.Account"
-    moid        = intersight_iam_account.account1.id
+    moid        = var.intersight_iam_account
   }
   certificate {
-    moid        = intersight_certificate_iam.iam1.id
+    moid        = var.iam_certificate1
     object_type = "x509.Certificate"
-    enabled     = true
   }
+}
+
+variable "intersight_iam_account" {
+   type = string
+   description = "MOID value for intersight_iam_account"
+ }
+
+ variable "iam_certificate1" {
+   type = string
+   description = "value for iam_certificate1"
 }
 ```

@@ -7,7 +7,7 @@ resource "intersight_chassis_config_import" "chassis_config_import1" {
   profile_name  = "server_profile_import1"
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
 }
 ```
