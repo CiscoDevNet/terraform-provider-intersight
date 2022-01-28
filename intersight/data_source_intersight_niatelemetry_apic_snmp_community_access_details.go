@@ -842,7 +842,7 @@ func dataSourceNiatelemetryApicSnmpCommunityAccessDetailsRead(c context.Context,
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -935,7 +935,7 @@ func dataSourceNiatelemetryApicSnmpCommunityAccessDetailsRead(c context.Context,
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1021,7 +1021,7 @@ func dataSourceNiatelemetryApicSnmpCommunityAccessDetailsRead(c context.Context,
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

@@ -873,7 +873,7 @@ func dataSourceHyperflexSoftwareDistributionComponentRead(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -961,7 +961,7 @@ func dataSourceHyperflexSoftwareDistributionComponentRead(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1042,7 +1042,7 @@ func dataSourceHyperflexSoftwareDistributionComponentRead(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

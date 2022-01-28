@@ -332,6 +332,46 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"nxos_bgp_evpn": {
+			Description: "Returns Nxos EVPN BGP details.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nxos_evpn_mac_count": {
+						Description: "Returns the EVPN mac count.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"total_networks": {
+						Description: "Returns the BGP EVPN total networks.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"total_paths": {
+						Description: "Returns the BGP EVPN total paths.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"nxos_bgp_mvpn": {
 			Description: "Returns the value of the nxosTrmConfigs field.",
 			Type:        schema.TypeList,
@@ -1318,6 +1358,46 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"nxos_bgp_evpn": {
+			Description: "Returns Nxos EVPN BGP details.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nxos_evpn_mac_count": {
+						Description: "Returns the EVPN mac count.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"total_networks": {
+						Description: "Returns the BGP EVPN total networks.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"total_paths": {
+						Description: "Returns the BGP EVPN total paths.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"nxos_bgp_mvpn": {
 			Description: "Returns the value of the nxosTrmConfigs field.",
 			Type:        schema.TypeList,
@@ -2133,7 +2213,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("niatelemetry.Diskinfo")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -2279,7 +2359,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2356,6 +2436,55 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		o.SetNodeId(x)
 	}
 
+	if v, ok := d.GetOk("nxos_bgp_evpn"); ok {
+		p := make([]models.NiatelemetryNxosBgpEvpn, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.NiatelemetryNxosBgpEvpn{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("")
+			if v, ok := l["nxos_evpn_mac_count"]; ok {
+				{
+					x := (v.(string))
+					o.SetNxosEvpnMacCount(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["total_networks"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetTotalNetworks(x)
+				}
+			}
+			if v, ok := l["total_paths"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetTotalPaths(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetNxosBgpEvpn(x)
+		}
+	}
+
 	if v, ok := d.GetOk("nxos_bgp_mvpn"); ok {
 		p := make([]models.NiatelemetryNxosBgpMvpn, 0, 1)
 		s := v.([]interface{})
@@ -2378,7 +2507,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 					o.SetCapablePeers(x)
 				}
 			}
-			o.SetClassId("niatelemetry.NxosBgpMvpn")
+			o.SetClassId("")
 			if v, ok := l["configured_peers"]; ok {
 				{
 					x := int64(v.(int))
@@ -2451,7 +2580,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("niatelemetry.BootflashDetails")
+			o.SetClassId("")
 			if v, ok := l["fw_rev"]; ok {
 				{
 					x := (v.(string))
@@ -2505,7 +2634,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("niatelemetry.Interface")
+			o.SetClassId("")
 			if v, ok := l["interface_down_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2553,7 +2682,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("niatelemetry.NvePacketCounters")
+			o.SetClassId("")
 			if v, ok := l["mcast_inpkts"]; ok {
 				{
 					x := int64(v.(int))
@@ -2608,7 +2737,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("niatelemetry.NveVni")
+			o.SetClassId("")
 			if v, ok := l["cp_vni_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2695,7 +2824,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("niatelemetry.NxosVtp")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2778,7 +2907,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2871,7 +3000,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2997,7 +3126,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -3180,6 +3309,8 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["node_id"] = (s.GetNodeId())
+
+				temp["nxos_bgp_evpn"] = flattenMapNiatelemetryNxosBgpEvpn(s.GetNxosBgpEvpn(), d)
 
 				temp["nxos_bgp_mvpn"] = flattenMapNiatelemetryNxosBgpMvpn(s.GetNxosBgpMvpn(), d)
 

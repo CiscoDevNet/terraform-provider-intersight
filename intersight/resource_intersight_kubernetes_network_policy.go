@@ -575,7 +575,7 @@ func resourceKubernetesNetworkPolicyCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("kubernetes.CniConfig")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -640,7 +640,7 @@ func resourceKubernetesNetworkPolicyCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -730,8 +730,8 @@ func resourceKubernetesNetworkPolicyCreate(c context.Context, d *schema.Resource
 func resourceKubernetesNetworkPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesNetworkPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -922,7 +922,7 @@ func resourceKubernetesNetworkPolicyUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("kubernetes.CniConfig")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -992,7 +992,7 @@ func resourceKubernetesNetworkPolicyUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

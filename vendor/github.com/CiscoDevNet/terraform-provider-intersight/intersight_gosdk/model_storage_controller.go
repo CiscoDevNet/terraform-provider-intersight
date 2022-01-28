@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -24,12 +24,18 @@ type StorageController struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Storage controller is connected to SAS expander.
+	ConnectedSasExpander *bool `json:"ConnectedSasExpander,omitempty"`
 	// The flags for the storage controller.
 	ControllerFlags *string `json:"ControllerFlags,omitempty"`
 	// The Id of the storage controller.
 	ControllerId *string `json:"ControllerId,omitempty"`
 	// The current status of controller.
 	ControllerStatus *string `json:"ControllerStatus,omitempty"`
+	// Auto configuration mode for the newly inserted physical drives.
+	DefaultDriveMode *string `json:"DefaultDriveMode,omitempty"`
+	// The ECC bucket leak rate for the Storage Controller in minutes.
+	EccBucketLeakRate *int64 `json:"EccBucketLeakRate,omitempty"`
 	// Storage controller has detected disks in foreign config.
 	ForeignConfigPresent *bool `json:"ForeignConfigPresent,omitempty"`
 	// The hardware revision of controller.
@@ -38,6 +44,10 @@ type StorageController struct {
 	InterfaceType *string `json:"InterfaceType,omitempty"`
 	// Maximum virtual drives that can be created on this Storage Controller.
 	MaxVolumesSupported *int64 `json:"MaxVolumesSupported,omitempty"`
+	// The number of memory correctable errors reported by the Storage Controller.
+	MemoryCorrectableErrors *int64 `json:"MemoryCorrectableErrors,omitempty"`
+	// Name of the Storage Controller.
+	Name *string `json:"Name,omitempty"`
 	// The CIMC support for out-of-band configuration of controller.
 	OobInterfaceSupported *string `json:"OobInterfaceSupported,omitempty"`
 	// The current operational state of controller.
@@ -48,12 +58,24 @@ type StorageController struct {
 	PciAddr *string `json:"PciAddr,omitempty"`
 	// The pci slot name for the controller.
 	PciSlot *string `json:"PciSlot,omitempty"`
+	// The portion of the cache memory that is persistent, measured in MiB.
+	PersistentCacheSize *int64 `json:"PersistentCacheSize,omitempty"`
+	// The pinned cache state of the Storage Controller.
+	PinnedCacheState *int64 `json:"PinnedCacheState,omitempty"`
 	// The RAID levels supported by controller.
 	RaidSupport *string `json:"RaidSupport,omitempty"`
 	// Logical volume or RAID rebuild rate of Storage Controller.
 	RebuildRate *string `json:"RebuildRate,omitempty"`
+	// Logical volume or RAID rebuild rate of Storage Controller.
+	RebuildRatePercent *int64 `json:"RebuildRatePercent,omitempty"`
 	// Storage controller disk self encryption state.
 	SelfEncryptEnabled *string `json:"SelfEncryptEnabled,omitempty"`
+	// The Sub OEM identifier of the Storage Controller.
+	SubOemId *string `json:"SubOemId,omitempty"`
+	// The strip sizes in KiB supported by the Storage Controller.
+	SupportedStripSizes *string `json:"SupportedStripSizes,omitempty"`
+	// The total configured cache memory, measured in MiB.
+	TotalCacheSize *int64 `json:"TotalCacheSize,omitempty"`
 	// Controller types are Raid, FlexFlash.
 	Type            *string                      `json:"Type,omitempty"`
 	ComputeBlade    *ComputeBladeRelationship    `json:"ComputeBlade,omitempty"`
@@ -151,6 +173,38 @@ func (o *StorageController) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetConnectedSasExpander returns the ConnectedSasExpander field value if set, zero value otherwise.
+func (o *StorageController) GetConnectedSasExpander() bool {
+	if o == nil || o.ConnectedSasExpander == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ConnectedSasExpander
+}
+
+// GetConnectedSasExpanderOk returns a tuple with the ConnectedSasExpander field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageController) GetConnectedSasExpanderOk() (*bool, bool) {
+	if o == nil || o.ConnectedSasExpander == nil {
+		return nil, false
+	}
+	return o.ConnectedSasExpander, true
+}
+
+// HasConnectedSasExpander returns a boolean if a field has been set.
+func (o *StorageController) HasConnectedSasExpander() bool {
+	if o != nil && o.ConnectedSasExpander != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectedSasExpander gets a reference to the given bool and assigns it to the ConnectedSasExpander field.
+func (o *StorageController) SetConnectedSasExpander(v bool) {
+	o.ConnectedSasExpander = &v
+}
+
 // GetControllerFlags returns the ControllerFlags field value if set, zero value otherwise.
 func (o *StorageController) GetControllerFlags() string {
 	if o == nil || o.ControllerFlags == nil {
@@ -245,6 +299,70 @@ func (o *StorageController) HasControllerStatus() bool {
 // SetControllerStatus gets a reference to the given string and assigns it to the ControllerStatus field.
 func (o *StorageController) SetControllerStatus(v string) {
 	o.ControllerStatus = &v
+}
+
+// GetDefaultDriveMode returns the DefaultDriveMode field value if set, zero value otherwise.
+func (o *StorageController) GetDefaultDriveMode() string {
+	if o == nil || o.DefaultDriveMode == nil {
+		var ret string
+		return ret
+	}
+	return *o.DefaultDriveMode
+}
+
+// GetDefaultDriveModeOk returns a tuple with the DefaultDriveMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageController) GetDefaultDriveModeOk() (*string, bool) {
+	if o == nil || o.DefaultDriveMode == nil {
+		return nil, false
+	}
+	return o.DefaultDriveMode, true
+}
+
+// HasDefaultDriveMode returns a boolean if a field has been set.
+func (o *StorageController) HasDefaultDriveMode() bool {
+	if o != nil && o.DefaultDriveMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultDriveMode gets a reference to the given string and assigns it to the DefaultDriveMode field.
+func (o *StorageController) SetDefaultDriveMode(v string) {
+	o.DefaultDriveMode = &v
+}
+
+// GetEccBucketLeakRate returns the EccBucketLeakRate field value if set, zero value otherwise.
+func (o *StorageController) GetEccBucketLeakRate() int64 {
+	if o == nil || o.EccBucketLeakRate == nil {
+		var ret int64
+		return ret
+	}
+	return *o.EccBucketLeakRate
+}
+
+// GetEccBucketLeakRateOk returns a tuple with the EccBucketLeakRate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageController) GetEccBucketLeakRateOk() (*int64, bool) {
+	if o == nil || o.EccBucketLeakRate == nil {
+		return nil, false
+	}
+	return o.EccBucketLeakRate, true
+}
+
+// HasEccBucketLeakRate returns a boolean if a field has been set.
+func (o *StorageController) HasEccBucketLeakRate() bool {
+	if o != nil && o.EccBucketLeakRate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEccBucketLeakRate gets a reference to the given int64 and assigns it to the EccBucketLeakRate field.
+func (o *StorageController) SetEccBucketLeakRate(v int64) {
+	o.EccBucketLeakRate = &v
 }
 
 // GetForeignConfigPresent returns the ForeignConfigPresent field value if set, zero value otherwise.
@@ -373,6 +491,70 @@ func (o *StorageController) HasMaxVolumesSupported() bool {
 // SetMaxVolumesSupported gets a reference to the given int64 and assigns it to the MaxVolumesSupported field.
 func (o *StorageController) SetMaxVolumesSupported(v int64) {
 	o.MaxVolumesSupported = &v
+}
+
+// GetMemoryCorrectableErrors returns the MemoryCorrectableErrors field value if set, zero value otherwise.
+func (o *StorageController) GetMemoryCorrectableErrors() int64 {
+	if o == nil || o.MemoryCorrectableErrors == nil {
+		var ret int64
+		return ret
+	}
+	return *o.MemoryCorrectableErrors
+}
+
+// GetMemoryCorrectableErrorsOk returns a tuple with the MemoryCorrectableErrors field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageController) GetMemoryCorrectableErrorsOk() (*int64, bool) {
+	if o == nil || o.MemoryCorrectableErrors == nil {
+		return nil, false
+	}
+	return o.MemoryCorrectableErrors, true
+}
+
+// HasMemoryCorrectableErrors returns a boolean if a field has been set.
+func (o *StorageController) HasMemoryCorrectableErrors() bool {
+	if o != nil && o.MemoryCorrectableErrors != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMemoryCorrectableErrors gets a reference to the given int64 and assigns it to the MemoryCorrectableErrors field.
+func (o *StorageController) SetMemoryCorrectableErrors(v int64) {
+	o.MemoryCorrectableErrors = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *StorageController) GetName() string {
+	if o == nil || o.Name == nil {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageController) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *StorageController) HasName() bool {
+	if o != nil && o.Name != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *StorageController) SetName(v string) {
+	o.Name = &v
 }
 
 // GetOobInterfaceSupported returns the OobInterfaceSupported field value if set, zero value otherwise.
@@ -535,6 +717,70 @@ func (o *StorageController) SetPciSlot(v string) {
 	o.PciSlot = &v
 }
 
+// GetPersistentCacheSize returns the PersistentCacheSize field value if set, zero value otherwise.
+func (o *StorageController) GetPersistentCacheSize() int64 {
+	if o == nil || o.PersistentCacheSize == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PersistentCacheSize
+}
+
+// GetPersistentCacheSizeOk returns a tuple with the PersistentCacheSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageController) GetPersistentCacheSizeOk() (*int64, bool) {
+	if o == nil || o.PersistentCacheSize == nil {
+		return nil, false
+	}
+	return o.PersistentCacheSize, true
+}
+
+// HasPersistentCacheSize returns a boolean if a field has been set.
+func (o *StorageController) HasPersistentCacheSize() bool {
+	if o != nil && o.PersistentCacheSize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPersistentCacheSize gets a reference to the given int64 and assigns it to the PersistentCacheSize field.
+func (o *StorageController) SetPersistentCacheSize(v int64) {
+	o.PersistentCacheSize = &v
+}
+
+// GetPinnedCacheState returns the PinnedCacheState field value if set, zero value otherwise.
+func (o *StorageController) GetPinnedCacheState() int64 {
+	if o == nil || o.PinnedCacheState == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PinnedCacheState
+}
+
+// GetPinnedCacheStateOk returns a tuple with the PinnedCacheState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageController) GetPinnedCacheStateOk() (*int64, bool) {
+	if o == nil || o.PinnedCacheState == nil {
+		return nil, false
+	}
+	return o.PinnedCacheState, true
+}
+
+// HasPinnedCacheState returns a boolean if a field has been set.
+func (o *StorageController) HasPinnedCacheState() bool {
+	if o != nil && o.PinnedCacheState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPinnedCacheState gets a reference to the given int64 and assigns it to the PinnedCacheState field.
+func (o *StorageController) SetPinnedCacheState(v int64) {
+	o.PinnedCacheState = &v
+}
+
 // GetRaidSupport returns the RaidSupport field value if set, zero value otherwise.
 func (o *StorageController) GetRaidSupport() string {
 	if o == nil || o.RaidSupport == nil {
@@ -599,6 +845,38 @@ func (o *StorageController) SetRebuildRate(v string) {
 	o.RebuildRate = &v
 }
 
+// GetRebuildRatePercent returns the RebuildRatePercent field value if set, zero value otherwise.
+func (o *StorageController) GetRebuildRatePercent() int64 {
+	if o == nil || o.RebuildRatePercent == nil {
+		var ret int64
+		return ret
+	}
+	return *o.RebuildRatePercent
+}
+
+// GetRebuildRatePercentOk returns a tuple with the RebuildRatePercent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageController) GetRebuildRatePercentOk() (*int64, bool) {
+	if o == nil || o.RebuildRatePercent == nil {
+		return nil, false
+	}
+	return o.RebuildRatePercent, true
+}
+
+// HasRebuildRatePercent returns a boolean if a field has been set.
+func (o *StorageController) HasRebuildRatePercent() bool {
+	if o != nil && o.RebuildRatePercent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRebuildRatePercent gets a reference to the given int64 and assigns it to the RebuildRatePercent field.
+func (o *StorageController) SetRebuildRatePercent(v int64) {
+	o.RebuildRatePercent = &v
+}
+
 // GetSelfEncryptEnabled returns the SelfEncryptEnabled field value if set, zero value otherwise.
 func (o *StorageController) GetSelfEncryptEnabled() string {
 	if o == nil || o.SelfEncryptEnabled == nil {
@@ -629,6 +907,102 @@ func (o *StorageController) HasSelfEncryptEnabled() bool {
 // SetSelfEncryptEnabled gets a reference to the given string and assigns it to the SelfEncryptEnabled field.
 func (o *StorageController) SetSelfEncryptEnabled(v string) {
 	o.SelfEncryptEnabled = &v
+}
+
+// GetSubOemId returns the SubOemId field value if set, zero value otherwise.
+func (o *StorageController) GetSubOemId() string {
+	if o == nil || o.SubOemId == nil {
+		var ret string
+		return ret
+	}
+	return *o.SubOemId
+}
+
+// GetSubOemIdOk returns a tuple with the SubOemId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageController) GetSubOemIdOk() (*string, bool) {
+	if o == nil || o.SubOemId == nil {
+		return nil, false
+	}
+	return o.SubOemId, true
+}
+
+// HasSubOemId returns a boolean if a field has been set.
+func (o *StorageController) HasSubOemId() bool {
+	if o != nil && o.SubOemId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubOemId gets a reference to the given string and assigns it to the SubOemId field.
+func (o *StorageController) SetSubOemId(v string) {
+	o.SubOemId = &v
+}
+
+// GetSupportedStripSizes returns the SupportedStripSizes field value if set, zero value otherwise.
+func (o *StorageController) GetSupportedStripSizes() string {
+	if o == nil || o.SupportedStripSizes == nil {
+		var ret string
+		return ret
+	}
+	return *o.SupportedStripSizes
+}
+
+// GetSupportedStripSizesOk returns a tuple with the SupportedStripSizes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageController) GetSupportedStripSizesOk() (*string, bool) {
+	if o == nil || o.SupportedStripSizes == nil {
+		return nil, false
+	}
+	return o.SupportedStripSizes, true
+}
+
+// HasSupportedStripSizes returns a boolean if a field has been set.
+func (o *StorageController) HasSupportedStripSizes() bool {
+	if o != nil && o.SupportedStripSizes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSupportedStripSizes gets a reference to the given string and assigns it to the SupportedStripSizes field.
+func (o *StorageController) SetSupportedStripSizes(v string) {
+	o.SupportedStripSizes = &v
+}
+
+// GetTotalCacheSize returns the TotalCacheSize field value if set, zero value otherwise.
+func (o *StorageController) GetTotalCacheSize() int64 {
+	if o == nil || o.TotalCacheSize == nil {
+		var ret int64
+		return ret
+	}
+	return *o.TotalCacheSize
+}
+
+// GetTotalCacheSizeOk returns a tuple with the TotalCacheSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageController) GetTotalCacheSizeOk() (*int64, bool) {
+	if o == nil || o.TotalCacheSize == nil {
+		return nil, false
+	}
+	return o.TotalCacheSize, true
+}
+
+// HasTotalCacheSize returns a boolean if a field has been set.
+func (o *StorageController) HasTotalCacheSize() bool {
+	if o != nil && o.TotalCacheSize != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalCacheSize gets a reference to the given int64 and assigns it to the TotalCacheSize field.
+func (o *StorageController) SetTotalCacheSize(v int64) {
+	o.TotalCacheSize = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -1070,6 +1444,9 @@ func (o StorageController) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.ConnectedSasExpander != nil {
+		toSerialize["ConnectedSasExpander"] = o.ConnectedSasExpander
+	}
 	if o.ControllerFlags != nil {
 		toSerialize["ControllerFlags"] = o.ControllerFlags
 	}
@@ -1078,6 +1455,12 @@ func (o StorageController) MarshalJSON() ([]byte, error) {
 	}
 	if o.ControllerStatus != nil {
 		toSerialize["ControllerStatus"] = o.ControllerStatus
+	}
+	if o.DefaultDriveMode != nil {
+		toSerialize["DefaultDriveMode"] = o.DefaultDriveMode
+	}
+	if o.EccBucketLeakRate != nil {
+		toSerialize["EccBucketLeakRate"] = o.EccBucketLeakRate
 	}
 	if o.ForeignConfigPresent != nil {
 		toSerialize["ForeignConfigPresent"] = o.ForeignConfigPresent
@@ -1090,6 +1473,12 @@ func (o StorageController) MarshalJSON() ([]byte, error) {
 	}
 	if o.MaxVolumesSupported != nil {
 		toSerialize["MaxVolumesSupported"] = o.MaxVolumesSupported
+	}
+	if o.MemoryCorrectableErrors != nil {
+		toSerialize["MemoryCorrectableErrors"] = o.MemoryCorrectableErrors
+	}
+	if o.Name != nil {
+		toSerialize["Name"] = o.Name
 	}
 	if o.OobInterfaceSupported != nil {
 		toSerialize["OobInterfaceSupported"] = o.OobInterfaceSupported
@@ -1106,14 +1495,32 @@ func (o StorageController) MarshalJSON() ([]byte, error) {
 	if o.PciSlot != nil {
 		toSerialize["PciSlot"] = o.PciSlot
 	}
+	if o.PersistentCacheSize != nil {
+		toSerialize["PersistentCacheSize"] = o.PersistentCacheSize
+	}
+	if o.PinnedCacheState != nil {
+		toSerialize["PinnedCacheState"] = o.PinnedCacheState
+	}
 	if o.RaidSupport != nil {
 		toSerialize["RaidSupport"] = o.RaidSupport
 	}
 	if o.RebuildRate != nil {
 		toSerialize["RebuildRate"] = o.RebuildRate
 	}
+	if o.RebuildRatePercent != nil {
+		toSerialize["RebuildRatePercent"] = o.RebuildRatePercent
+	}
 	if o.SelfEncryptEnabled != nil {
 		toSerialize["SelfEncryptEnabled"] = o.SelfEncryptEnabled
+	}
+	if o.SubOemId != nil {
+		toSerialize["SubOemId"] = o.SubOemId
+	}
+	if o.SupportedStripSizes != nil {
+		toSerialize["SupportedStripSizes"] = o.SupportedStripSizes
+	}
+	if o.TotalCacheSize != nil {
+		toSerialize["TotalCacheSize"] = o.TotalCacheSize
 	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
@@ -1168,12 +1575,18 @@ func (o *StorageController) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// Storage controller is connected to SAS expander.
+		ConnectedSasExpander *bool `json:"ConnectedSasExpander,omitempty"`
 		// The flags for the storage controller.
 		ControllerFlags *string `json:"ControllerFlags,omitempty"`
 		// The Id of the storage controller.
 		ControllerId *string `json:"ControllerId,omitempty"`
 		// The current status of controller.
 		ControllerStatus *string `json:"ControllerStatus,omitempty"`
+		// Auto configuration mode for the newly inserted physical drives.
+		DefaultDriveMode *string `json:"DefaultDriveMode,omitempty"`
+		// The ECC bucket leak rate for the Storage Controller in minutes.
+		EccBucketLeakRate *int64 `json:"EccBucketLeakRate,omitempty"`
 		// Storage controller has detected disks in foreign config.
 		ForeignConfigPresent *bool `json:"ForeignConfigPresent,omitempty"`
 		// The hardware revision of controller.
@@ -1182,6 +1595,10 @@ func (o *StorageController) UnmarshalJSON(bytes []byte) (err error) {
 		InterfaceType *string `json:"InterfaceType,omitempty"`
 		// Maximum virtual drives that can be created on this Storage Controller.
 		MaxVolumesSupported *int64 `json:"MaxVolumesSupported,omitempty"`
+		// The number of memory correctable errors reported by the Storage Controller.
+		MemoryCorrectableErrors *int64 `json:"MemoryCorrectableErrors,omitempty"`
+		// Name of the Storage Controller.
+		Name *string `json:"Name,omitempty"`
 		// The CIMC support for out-of-band configuration of controller.
 		OobInterfaceSupported *string `json:"OobInterfaceSupported,omitempty"`
 		// The current operational state of controller.
@@ -1192,12 +1609,24 @@ func (o *StorageController) UnmarshalJSON(bytes []byte) (err error) {
 		PciAddr *string `json:"PciAddr,omitempty"`
 		// The pci slot name for the controller.
 		PciSlot *string `json:"PciSlot,omitempty"`
+		// The portion of the cache memory that is persistent, measured in MiB.
+		PersistentCacheSize *int64 `json:"PersistentCacheSize,omitempty"`
+		// The pinned cache state of the Storage Controller.
+		PinnedCacheState *int64 `json:"PinnedCacheState,omitempty"`
 		// The RAID levels supported by controller.
 		RaidSupport *string `json:"RaidSupport,omitempty"`
 		// Logical volume or RAID rebuild rate of Storage Controller.
 		RebuildRate *string `json:"RebuildRate,omitempty"`
+		// Logical volume or RAID rebuild rate of Storage Controller.
+		RebuildRatePercent *int64 `json:"RebuildRatePercent,omitempty"`
 		// Storage controller disk self encryption state.
 		SelfEncryptEnabled *string `json:"SelfEncryptEnabled,omitempty"`
+		// The Sub OEM identifier of the Storage Controller.
+		SubOemId *string `json:"SubOemId,omitempty"`
+		// The strip sizes in KiB supported by the Storage Controller.
+		SupportedStripSizes *string `json:"SupportedStripSizes,omitempty"`
+		// The total configured cache memory, measured in MiB.
+		TotalCacheSize *int64 `json:"TotalCacheSize,omitempty"`
 		// Controller types are Raid, FlexFlash.
 		Type            *string                      `json:"Type,omitempty"`
 		ComputeBlade    *ComputeBladeRelationship    `json:"ComputeBlade,omitempty"`
@@ -1228,21 +1657,32 @@ func (o *StorageController) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageController := _StorageController{}
 		varStorageController.ClassId = varStorageControllerWithoutEmbeddedStruct.ClassId
 		varStorageController.ObjectType = varStorageControllerWithoutEmbeddedStruct.ObjectType
+		varStorageController.ConnectedSasExpander = varStorageControllerWithoutEmbeddedStruct.ConnectedSasExpander
 		varStorageController.ControllerFlags = varStorageControllerWithoutEmbeddedStruct.ControllerFlags
 		varStorageController.ControllerId = varStorageControllerWithoutEmbeddedStruct.ControllerId
 		varStorageController.ControllerStatus = varStorageControllerWithoutEmbeddedStruct.ControllerStatus
+		varStorageController.DefaultDriveMode = varStorageControllerWithoutEmbeddedStruct.DefaultDriveMode
+		varStorageController.EccBucketLeakRate = varStorageControllerWithoutEmbeddedStruct.EccBucketLeakRate
 		varStorageController.ForeignConfigPresent = varStorageControllerWithoutEmbeddedStruct.ForeignConfigPresent
 		varStorageController.HwRevision = varStorageControllerWithoutEmbeddedStruct.HwRevision
 		varStorageController.InterfaceType = varStorageControllerWithoutEmbeddedStruct.InterfaceType
 		varStorageController.MaxVolumesSupported = varStorageControllerWithoutEmbeddedStruct.MaxVolumesSupported
+		varStorageController.MemoryCorrectableErrors = varStorageControllerWithoutEmbeddedStruct.MemoryCorrectableErrors
+		varStorageController.Name = varStorageControllerWithoutEmbeddedStruct.Name
 		varStorageController.OobInterfaceSupported = varStorageControllerWithoutEmbeddedStruct.OobInterfaceSupported
 		varStorageController.OperState = varStorageControllerWithoutEmbeddedStruct.OperState
 		varStorageController.Operability = varStorageControllerWithoutEmbeddedStruct.Operability
 		varStorageController.PciAddr = varStorageControllerWithoutEmbeddedStruct.PciAddr
 		varStorageController.PciSlot = varStorageControllerWithoutEmbeddedStruct.PciSlot
+		varStorageController.PersistentCacheSize = varStorageControllerWithoutEmbeddedStruct.PersistentCacheSize
+		varStorageController.PinnedCacheState = varStorageControllerWithoutEmbeddedStruct.PinnedCacheState
 		varStorageController.RaidSupport = varStorageControllerWithoutEmbeddedStruct.RaidSupport
 		varStorageController.RebuildRate = varStorageControllerWithoutEmbeddedStruct.RebuildRate
+		varStorageController.RebuildRatePercent = varStorageControllerWithoutEmbeddedStruct.RebuildRatePercent
 		varStorageController.SelfEncryptEnabled = varStorageControllerWithoutEmbeddedStruct.SelfEncryptEnabled
+		varStorageController.SubOemId = varStorageControllerWithoutEmbeddedStruct.SubOemId
+		varStorageController.SupportedStripSizes = varStorageControllerWithoutEmbeddedStruct.SupportedStripSizes
+		varStorageController.TotalCacheSize = varStorageControllerWithoutEmbeddedStruct.TotalCacheSize
 		varStorageController.Type = varStorageControllerWithoutEmbeddedStruct.Type
 		varStorageController.ComputeBlade = varStorageControllerWithoutEmbeddedStruct.ComputeBlade
 		varStorageController.ComputeBoard = varStorageControllerWithoutEmbeddedStruct.ComputeBoard
@@ -1275,21 +1715,32 @@ func (o *StorageController) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "ConnectedSasExpander")
 		delete(additionalProperties, "ControllerFlags")
 		delete(additionalProperties, "ControllerId")
 		delete(additionalProperties, "ControllerStatus")
+		delete(additionalProperties, "DefaultDriveMode")
+		delete(additionalProperties, "EccBucketLeakRate")
 		delete(additionalProperties, "ForeignConfigPresent")
 		delete(additionalProperties, "HwRevision")
 		delete(additionalProperties, "InterfaceType")
 		delete(additionalProperties, "MaxVolumesSupported")
+		delete(additionalProperties, "MemoryCorrectableErrors")
+		delete(additionalProperties, "Name")
 		delete(additionalProperties, "OobInterfaceSupported")
 		delete(additionalProperties, "OperState")
 		delete(additionalProperties, "Operability")
 		delete(additionalProperties, "PciAddr")
 		delete(additionalProperties, "PciSlot")
+		delete(additionalProperties, "PersistentCacheSize")
+		delete(additionalProperties, "PinnedCacheState")
 		delete(additionalProperties, "RaidSupport")
 		delete(additionalProperties, "RebuildRate")
+		delete(additionalProperties, "RebuildRatePercent")
 		delete(additionalProperties, "SelfEncryptEnabled")
+		delete(additionalProperties, "SubOemId")
+		delete(additionalProperties, "SupportedStripSizes")
+		delete(additionalProperties, "TotalCacheSize")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "ComputeBlade")
 		delete(additionalProperties, "ComputeBoard")

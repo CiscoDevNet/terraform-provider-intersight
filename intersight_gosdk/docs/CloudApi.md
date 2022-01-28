@@ -43,7 +43,9 @@ Method | HTTP request | Description
 [**GetCloudTfcOrganizationList**](CloudApi.md#GetCloudTfcOrganizationList) | **Get** /api/v1/cloud/TfcOrganizations | Read a &#39;cloud.TfcOrganization&#39; resource.
 [**GetCloudTfcWorkspaceByMoid**](CloudApi.md#GetCloudTfcWorkspaceByMoid) | **Get** /api/v1/cloud/TfcWorkspaces/{Moid} | Read a &#39;cloud.TfcWorkspace&#39; resource.
 [**GetCloudTfcWorkspaceList**](CloudApi.md#GetCloudTfcWorkspaceList) | **Get** /api/v1/cloud/TfcWorkspaces | Read a &#39;cloud.TfcWorkspace&#39; resource.
+[**PatchCloudAwsVirtualMachine**](CloudApi.md#PatchCloudAwsVirtualMachine) | **Patch** /api/v1/cloud/AwsVirtualMachines/{Moid} | Update a &#39;cloud.AwsVirtualMachine&#39; resource.
 [**PatchCloudRegions**](CloudApi.md#PatchCloudRegions) | **Patch** /api/v1/cloud/Regions/{Moid} | Update a &#39;cloud.Regions&#39; resource.
+[**UpdateCloudAwsVirtualMachine**](CloudApi.md#UpdateCloudAwsVirtualMachine) | **Post** /api/v1/cloud/AwsVirtualMachines/{Moid} | Update a &#39;cloud.AwsVirtualMachine&#39; resource.
 [**UpdateCloudRegions**](CloudApi.md#UpdateCloudRegions) | **Post** /api/v1/cloud/Regions/{Moid} | Update a &#39;cloud.Regions&#39; resource.
 
 
@@ -3004,6 +3006,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchCloudAwsVirtualMachine
+
+> CloudAwsVirtualMachine PatchCloudAwsVirtualMachine(ctx, moid).CloudAwsVirtualMachine(cloudAwsVirtualMachine).IfMatch(ifMatch).Execute()
+
+Update a 'cloud.AwsVirtualMachine' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    cloudAwsVirtualMachine := *openapiclient.NewCloudAwsVirtualMachine("ClassId_example", "ObjectType_example") // CloudAwsVirtualMachine | The 'cloud.AwsVirtualMachine' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CloudApi.PatchCloudAwsVirtualMachine(context.Background(), moid).CloudAwsVirtualMachine(cloudAwsVirtualMachine).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CloudApi.PatchCloudAwsVirtualMachine``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchCloudAwsVirtualMachine`: CloudAwsVirtualMachine
+    fmt.Fprintf(os.Stdout, "Response from `CloudApi.PatchCloudAwsVirtualMachine`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchCloudAwsVirtualMachineRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **cloudAwsVirtualMachine** | [**CloudAwsVirtualMachine**](CloudAwsVirtualMachine.md) | The &#39;cloud.AwsVirtualMachine&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**CloudAwsVirtualMachine**](CloudAwsVirtualMachine.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchCloudRegions
 
 > CloudRegions PatchCloudRegions(ctx, moid).CloudRegions(cloudRegions).IfMatch(ifMatch).Execute()
@@ -3061,6 +3135,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CloudRegions**](CloudRegions.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateCloudAwsVirtualMachine
+
+> CloudAwsVirtualMachine UpdateCloudAwsVirtualMachine(ctx, moid).CloudAwsVirtualMachine(cloudAwsVirtualMachine).IfMatch(ifMatch).Execute()
+
+Update a 'cloud.AwsVirtualMachine' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    cloudAwsVirtualMachine := *openapiclient.NewCloudAwsVirtualMachine("ClassId_example", "ObjectType_example") // CloudAwsVirtualMachine | The 'cloud.AwsVirtualMachine' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CloudApi.UpdateCloudAwsVirtualMachine(context.Background(), moid).CloudAwsVirtualMachine(cloudAwsVirtualMachine).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CloudApi.UpdateCloudAwsVirtualMachine``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateCloudAwsVirtualMachine`: CloudAwsVirtualMachine
+    fmt.Fprintf(os.Stdout, "Response from `CloudApi.UpdateCloudAwsVirtualMachine`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateCloudAwsVirtualMachineRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **cloudAwsVirtualMachine** | [**CloudAwsVirtualMachine**](CloudAwsVirtualMachine.md) | The &#39;cloud.AwsVirtualMachine&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**CloudAwsVirtualMachine**](CloudAwsVirtualMachine.md)
 
 ### Authorization
 

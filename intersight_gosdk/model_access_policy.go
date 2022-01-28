@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -23,13 +23,16 @@ type AccessPolicy struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType  string                    `json:"ObjectType"`
-	AddressType NullableAccessAddressType `json:"AddressType,omitempty"`
+	ObjectType        string                          `json:"ObjectType"`
+	AddressType       NullableAccessAddressType       `json:"AddressType,omitempty"`
+	ConfigurationType NullableAccessConfigurationType `json:"ConfigurationType,omitempty"`
 	// VLAN to be used for server access over Inband network.
-	InbandVlan   *int64                                `json:"InbandVlan,omitempty"`
-	InbandIpPool *IppoolPoolRelationship               `json:"InbandIpPool,omitempty"`
-	InbandVrf    *VrfVrfRelationship                   `json:"InbandVrf,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	InbandVlan      *int64                                `json:"InbandVlan,omitempty"`
+	InbandIpPool    *IppoolPoolRelationship               `json:"InbandIpPool,omitempty"`
+	InbandVrf       *VrfVrfRelationship                   `json:"InbandVrf,omitempty"`
+	Organization    *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	OutOfBandIpPool *IppoolPoolRelationship               `json:"OutOfBandIpPool,omitempty"`
+	OutOfBandVrf    *VrfVrfRelationship                   `json:"OutOfBandVrf,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -149,6 +152,49 @@ func (o *AccessPolicy) SetAddressTypeNil() {
 // UnsetAddressType ensures that no value is present for AddressType, not even an explicit nil
 func (o *AccessPolicy) UnsetAddressType() {
 	o.AddressType.Unset()
+}
+
+// GetConfigurationType returns the ConfigurationType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccessPolicy) GetConfigurationType() AccessConfigurationType {
+	if o == nil || o.ConfigurationType.Get() == nil {
+		var ret AccessConfigurationType
+		return ret
+	}
+	return *o.ConfigurationType.Get()
+}
+
+// GetConfigurationTypeOk returns a tuple with the ConfigurationType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccessPolicy) GetConfigurationTypeOk() (*AccessConfigurationType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ConfigurationType.Get(), o.ConfigurationType.IsSet()
+}
+
+// HasConfigurationType returns a boolean if a field has been set.
+func (o *AccessPolicy) HasConfigurationType() bool {
+	if o != nil && o.ConfigurationType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigurationType gets a reference to the given NullableAccessConfigurationType and assigns it to the ConfigurationType field.
+func (o *AccessPolicy) SetConfigurationType(v AccessConfigurationType) {
+	o.ConfigurationType.Set(&v)
+}
+
+// SetConfigurationTypeNil sets the value for ConfigurationType to be an explicit nil
+func (o *AccessPolicy) SetConfigurationTypeNil() {
+	o.ConfigurationType.Set(nil)
+}
+
+// UnsetConfigurationType ensures that no value is present for ConfigurationType, not even an explicit nil
+func (o *AccessPolicy) UnsetConfigurationType() {
+	o.ConfigurationType.Unset()
 }
 
 // GetInbandVlan returns the InbandVlan field value if set, zero value otherwise.
@@ -279,6 +325,70 @@ func (o *AccessPolicy) SetOrganization(v OrganizationOrganizationRelationship) {
 	o.Organization = &v
 }
 
+// GetOutOfBandIpPool returns the OutOfBandIpPool field value if set, zero value otherwise.
+func (o *AccessPolicy) GetOutOfBandIpPool() IppoolPoolRelationship {
+	if o == nil || o.OutOfBandIpPool == nil {
+		var ret IppoolPoolRelationship
+		return ret
+	}
+	return *o.OutOfBandIpPool
+}
+
+// GetOutOfBandIpPoolOk returns a tuple with the OutOfBandIpPool field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessPolicy) GetOutOfBandIpPoolOk() (*IppoolPoolRelationship, bool) {
+	if o == nil || o.OutOfBandIpPool == nil {
+		return nil, false
+	}
+	return o.OutOfBandIpPool, true
+}
+
+// HasOutOfBandIpPool returns a boolean if a field has been set.
+func (o *AccessPolicy) HasOutOfBandIpPool() bool {
+	if o != nil && o.OutOfBandIpPool != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOutOfBandIpPool gets a reference to the given IppoolPoolRelationship and assigns it to the OutOfBandIpPool field.
+func (o *AccessPolicy) SetOutOfBandIpPool(v IppoolPoolRelationship) {
+	o.OutOfBandIpPool = &v
+}
+
+// GetOutOfBandVrf returns the OutOfBandVrf field value if set, zero value otherwise.
+func (o *AccessPolicy) GetOutOfBandVrf() VrfVrfRelationship {
+	if o == nil || o.OutOfBandVrf == nil {
+		var ret VrfVrfRelationship
+		return ret
+	}
+	return *o.OutOfBandVrf
+}
+
+// GetOutOfBandVrfOk returns a tuple with the OutOfBandVrf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccessPolicy) GetOutOfBandVrfOk() (*VrfVrfRelationship, bool) {
+	if o == nil || o.OutOfBandVrf == nil {
+		return nil, false
+	}
+	return o.OutOfBandVrf, true
+}
+
+// HasOutOfBandVrf returns a boolean if a field has been set.
+func (o *AccessPolicy) HasOutOfBandVrf() bool {
+	if o != nil && o.OutOfBandVrf != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOutOfBandVrf gets a reference to the given VrfVrfRelationship and assigns it to the OutOfBandVrf field.
+func (o *AccessPolicy) SetOutOfBandVrf(v VrfVrfRelationship) {
+	o.OutOfBandVrf = &v
+}
+
 // GetProfiles returns the Profiles field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccessPolicy) GetProfiles() []PolicyAbstractConfigProfileRelationship {
 	if o == nil {
@@ -331,6 +441,9 @@ func (o AccessPolicy) MarshalJSON() ([]byte, error) {
 	if o.AddressType.IsSet() {
 		toSerialize["AddressType"] = o.AddressType.Get()
 	}
+	if o.ConfigurationType.IsSet() {
+		toSerialize["ConfigurationType"] = o.ConfigurationType.Get()
+	}
 	if o.InbandVlan != nil {
 		toSerialize["InbandVlan"] = o.InbandVlan
 	}
@@ -342,6 +455,12 @@ func (o AccessPolicy) MarshalJSON() ([]byte, error) {
 	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
+	}
+	if o.OutOfBandIpPool != nil {
+		toSerialize["OutOfBandIpPool"] = o.OutOfBandIpPool
+	}
+	if o.OutOfBandVrf != nil {
+		toSerialize["OutOfBandVrf"] = o.OutOfBandVrf
 	}
 	if o.Profiles != nil {
 		toSerialize["Profiles"] = o.Profiles
@@ -359,13 +478,16 @@ func (o *AccessPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType  string                    `json:"ObjectType"`
-		AddressType NullableAccessAddressType `json:"AddressType,omitempty"`
+		ObjectType        string                          `json:"ObjectType"`
+		AddressType       NullableAccessAddressType       `json:"AddressType,omitempty"`
+		ConfigurationType NullableAccessConfigurationType `json:"ConfigurationType,omitempty"`
 		// VLAN to be used for server access over Inband network.
-		InbandVlan   *int64                                `json:"InbandVlan,omitempty"`
-		InbandIpPool *IppoolPoolRelationship               `json:"InbandIpPool,omitempty"`
-		InbandVrf    *VrfVrfRelationship                   `json:"InbandVrf,omitempty"`
-		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		InbandVlan      *int64                                `json:"InbandVlan,omitempty"`
+		InbandIpPool    *IppoolPoolRelationship               `json:"InbandIpPool,omitempty"`
+		InbandVrf       *VrfVrfRelationship                   `json:"InbandVrf,omitempty"`
+		Organization    *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+		OutOfBandIpPool *IppoolPoolRelationship               `json:"OutOfBandIpPool,omitempty"`
+		OutOfBandVrf    *VrfVrfRelationship                   `json:"OutOfBandVrf,omitempty"`
 		// An array of relationships to policyAbstractConfigProfile resources.
 		Profiles []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	}
@@ -378,10 +500,13 @@ func (o *AccessPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		varAccessPolicy.ClassId = varAccessPolicyWithoutEmbeddedStruct.ClassId
 		varAccessPolicy.ObjectType = varAccessPolicyWithoutEmbeddedStruct.ObjectType
 		varAccessPolicy.AddressType = varAccessPolicyWithoutEmbeddedStruct.AddressType
+		varAccessPolicy.ConfigurationType = varAccessPolicyWithoutEmbeddedStruct.ConfigurationType
 		varAccessPolicy.InbandVlan = varAccessPolicyWithoutEmbeddedStruct.InbandVlan
 		varAccessPolicy.InbandIpPool = varAccessPolicyWithoutEmbeddedStruct.InbandIpPool
 		varAccessPolicy.InbandVrf = varAccessPolicyWithoutEmbeddedStruct.InbandVrf
 		varAccessPolicy.Organization = varAccessPolicyWithoutEmbeddedStruct.Organization
+		varAccessPolicy.OutOfBandIpPool = varAccessPolicyWithoutEmbeddedStruct.OutOfBandIpPool
+		varAccessPolicy.OutOfBandVrf = varAccessPolicyWithoutEmbeddedStruct.OutOfBandVrf
 		varAccessPolicy.Profiles = varAccessPolicyWithoutEmbeddedStruct.Profiles
 		*o = AccessPolicy(varAccessPolicy)
 	} else {
@@ -403,10 +528,13 @@ func (o *AccessPolicy) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AddressType")
+		delete(additionalProperties, "ConfigurationType")
 		delete(additionalProperties, "InbandVlan")
 		delete(additionalProperties, "InbandIpPool")
 		delete(additionalProperties, "InbandVrf")
 		delete(additionalProperties, "Organization")
+		delete(additionalProperties, "OutOfBandIpPool")
+		delete(additionalProperties, "OutOfBandVrf")
 		delete(additionalProperties, "Profiles")
 
 		// remove fields from embedded structs

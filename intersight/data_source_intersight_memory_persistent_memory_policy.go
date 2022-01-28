@@ -1167,7 +1167,7 @@ func dataSourceMemoryPersistentMemoryPolicyRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("memory.PersistentMemoryLocalSecurity")
+			o.SetClassId("")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1293,7 +1293,7 @@ func dataSourceMemoryPersistentMemoryPolicyRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1347,7 +1347,7 @@ func dataSourceMemoryPersistentMemoryPolicyRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1513,7 +1513,7 @@ func dataSourceMemoryPersistentMemoryPolicyRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

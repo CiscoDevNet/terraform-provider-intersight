@@ -647,7 +647,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentCreate(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -704,7 +704,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentCreate(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -747,7 +747,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentCreate(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -837,8 +837,8 @@ func resourceHyperflexClusterBackupPolicyDeploymentCreate(c context.Context, d *
 func resourceHyperflexClusterBackupPolicyDeploymentRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexClusterBackupPolicyDeploymentByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1042,7 +1042,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentUpdate(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1102,7 +1102,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentUpdate(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1146,7 +1146,7 @@ func resourceHyperflexClusterBackupPolicyDeploymentUpdate(c context.Context, d *
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

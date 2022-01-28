@@ -2001,7 +2001,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2049,7 +2049,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2152,7 +2152,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2195,7 +2195,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("workflow.InternalProperties")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2267,7 +2267,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2350,7 +2350,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("workflow.Properties")
+			o.SetClassId("")
 			if v, ok := l["external_meta"]; ok {
 				{
 					x := (v.(bool))
@@ -2392,7 +2392,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 											}
 										}
 									}
-									o.SetClassId("workflow.DefaultValue")
+									o.SetClassId("")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -2441,7 +2441,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 											}
 										}
 									}
-									o.SetClassId("workflow.DisplayMeta")
+									o.SetClassId("")
 									if v, ok := l["inventory_selector"]; ok {
 										{
 											x := (v.(bool))
@@ -2545,7 +2545,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 											}
 										}
 									}
-									o.SetClassId("workflow.DefaultValue")
+									o.SetClassId("")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -2594,7 +2594,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 											}
 										}
 									}
-									o.SetClassId("workflow.DisplayMeta")
+									o.SetClassId("")
 									if v, ok := l["inventory_selector"]; ok {
 										{
 											x := (v.(bool))
@@ -2823,7 +2823,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2871,7 +2871,7 @@ func dataSourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

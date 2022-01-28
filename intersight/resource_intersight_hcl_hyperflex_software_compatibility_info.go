@@ -182,6 +182,11 @@ func resourceHclHyperflexSoftwareCompatibilityInfo() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"is_mgmt_build": {
+				Description: "Type of the HXDP bundle mgmt or full.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -484,7 +489,7 @@ func resourceHclHyperflexSoftwareCompatibilityInfoCreate(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -570,6 +575,11 @@ func resourceHclHyperflexSoftwareCompatibilityInfoCreate(c context.Context, d *s
 		o.SetHypervisorVersion(x)
 	}
 
+	if v, ok := d.GetOk("is_mgmt_build"); ok {
+		x := (v.(string))
+		o.SetIsMgmtBuild(x)
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -635,8 +645,8 @@ func resourceHclHyperflexSoftwareCompatibilityInfoCreate(c context.Context, d *s
 func resourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.HclApi.GetHclHyperflexSoftwareCompatibilityInfoByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -695,6 +705,10 @@ func resourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *sch
 
 	if err := d.Set("hypervisor_version", (s.GetHypervisorVersion())); err != nil {
 		return diag.Errorf("error occurred while setting property HypervisorVersion in HclHyperflexSoftwareCompatibilityInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("is_mgmt_build", (s.GetIsMgmtBuild())); err != nil {
+		return diag.Errorf("error occurred while setting property IsMgmtBuild in HclHyperflexSoftwareCompatibilityInfo object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -776,7 +790,7 @@ func resourceHclHyperflexSoftwareCompatibilityInfoUpdate(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -862,6 +876,12 @@ func resourceHclHyperflexSoftwareCompatibilityInfoUpdate(c context.Context, d *s
 		v := d.Get("hypervisor_version")
 		x := (v.(string))
 		o.SetHypervisorVersion(x)
+	}
+
+	if d.HasChange("is_mgmt_build") {
+		v := d.Get("is_mgmt_build")
+		x := (v.(string))
+		o.SetIsMgmtBuild(x)
 	}
 
 	if d.HasChange("moid") {

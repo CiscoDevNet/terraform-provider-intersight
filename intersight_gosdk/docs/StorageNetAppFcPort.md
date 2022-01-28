@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **State** | Pointer to **string** | State of the port available in storage array. * &#x60;Unknown&#x60; - Default unknown port state. * &#x60;StartUp&#x60; - The port in the storage array is booting up. * &#x60;LinkNotConnected&#x60; - The port has finished initialization, but a link with the fabric is not established. * &#x60;Online&#x60; - The port is initialized and a link with the fabric has been established. * &#x60;LinkDisconnected&#x60; - The link on this port is currently not established. * &#x60;OfflineUser&#x60; - The port is administratively disabled. * &#x60;OfflineSystem&#x60; - The port is set to offline by the system. This happens when the port encounters too many errors. * &#x60;NodeOffline&#x60; - The state information for the port cannot be retrieved. The node is offline or inaccessible. | [optional] [readonly] [default to "Unknown"]
 **Uuid** | Pointer to **string** | Universally unique identifier of the FC port. | [optional] [readonly] 
 **ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
+**Events** | Pointer to [**[]StorageNetAppFcPortEventRelationship**](StorageNetAppFcPortEventRelationship.md) | An array of relationships to storageNetAppFcPortEvent resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -170,6 +171,41 @@ SetArrayController sets ArrayController field to given value.
 
 HasArrayController returns a boolean if a field has been set.
 
+### GetEvents
+
+`func (o *StorageNetAppFcPort) GetEvents() []StorageNetAppFcPortEventRelationship`
+
+GetEvents returns the Events field if non-nil, zero value otherwise.
+
+### GetEventsOk
+
+`func (o *StorageNetAppFcPort) GetEventsOk() (*[]StorageNetAppFcPortEventRelationship, bool)`
+
+GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvents
+
+`func (o *StorageNetAppFcPort) SetEvents(v []StorageNetAppFcPortEventRelationship)`
+
+SetEvents sets Events field to given value.
+
+### HasEvents
+
+`func (o *StorageNetAppFcPort) HasEvents() bool`
+
+HasEvents returns a boolean if a field has been set.
+
+### SetEventsNil
+
+`func (o *StorageNetAppFcPort) SetEventsNil(b bool)`
+
+ SetEventsNil sets the value for Events to be an explicit nil
+
+### UnsetEvents
+`func (o *StorageNetAppFcPort) UnsetEvents()`
+
+UnsetEvents ensures that no value is present for Events, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

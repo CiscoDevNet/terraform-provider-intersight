@@ -895,7 +895,7 @@ func dataSourceChassisConfigResultEntryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -938,7 +938,7 @@ func dataSourceChassisConfigResultEntryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigResultContext")
+			o.SetClassId("")
 			if v, ok := l["entity_data"]; ok {
 				{
 					o.SetEntityData(v)
@@ -1038,7 +1038,7 @@ func dataSourceChassisConfigResultEntryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1169,7 +1169,7 @@ func dataSourceChassisConfigResultEntryRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

@@ -583,8 +583,8 @@ func resourceFirmwarePcieDescriptorCreate(c context.Context, d *schema.ResourceD
 func resourceFirmwarePcieDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.FirmwareApi.GetFirmwarePcieDescriptorByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {

@@ -717,7 +717,7 @@ func dataSourceComputeServerSetting() *schema.Resource {
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
 					"admin_action": {
-						Description: "Administrative actions that can be performed on the Storage Controller.\n* `None` - No action on the selected Storage Controller.\n* `Import` - Import Foreign config action on the selected Storage Controller.\n* `Clear` - Clear Foreign config action on the selected Storage Controller.",
+						Description: "Administrative actions that can be performed on the Storage Controller.\n* `None` - No action on the selected Storage Controller.\n* `Import` - Import Foreign config action on the selected Storage Controller.\n* `Clear` - Clear Foreign config action on the selected Storage Controller.\n* `ClearConfig` - Clear Config action on the selected Storage Controller.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1699,7 +1699,7 @@ func dataSourceComputeServerSetting() *schema.Resource {
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
 					"admin_action": {
-						Description: "Administrative actions that can be performed on the Storage Controller.\n* `None` - No action on the selected Storage Controller.\n* `Import` - Import Foreign config action on the selected Storage Controller.\n* `Clear` - Clear Foreign config action on the selected Storage Controller.",
+						Description: "Administrative actions that can be performed on the Storage Controller.\n* `None` - No action on the selected Storage Controller.\n* `Import` - Import Foreign config action on the selected Storage Controller.\n* `Clear` - Clear Foreign config action on the selected Storage Controller.\n* `ClearConfig` - Clear Config action on the selected Storage Controller.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -2092,7 +2092,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 								}
 							}
 						}
-						o.SetClassId("x509.Certificate")
+						o.SetClassId("")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2113,7 +2113,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("certificatemanagement.CertificateBase")
+			o.SetClassId("")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -2201,7 +2201,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2280,7 +2280,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2369,7 +2369,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					o.SetAdminAction(x)
 				}
 			}
-			o.SetClassId("compute.PersistentMemoryOperation")
+			o.SetClassId("")
 			if v, ok := l["modules"]; ok {
 				{
 					x := make([]models.ComputePersistentMemoryModule, 0)
@@ -2449,7 +2449,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2497,7 +2497,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2540,7 +2540,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2589,7 +2589,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					o.SetAssetTag(x)
 				}
 			}
-			o.SetClassId("compute.ServerConfig")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2677,7 +2677,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					o.SetAdminAction(x)
 				}
 			}
-			o.SetClassId("compute.StorageControllerOperation")
+			o.SetClassId("")
 			if v, ok := l["controller_id"]; ok {
 				{
 					x := (v.(string))
@@ -2720,7 +2720,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					o.SetAdminAction(x)
 				}
 			}
-			o.SetClassId("compute.StoragePhysicalDriveOperation")
+			o.SetClassId("")
 			if v, ok := l["controller_id"]; ok {
 				{
 					x := (v.(string))
@@ -2800,7 +2800,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					o.SetAdminAction(x)
 				}
 			}
-			o.SetClassId("compute.StorageVirtualDriveOperation")
+			o.SetClassId("")
 			if v, ok := l["controller_id"]; ok {
 				{
 					x := (v.(string))
@@ -2907,7 +2907,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

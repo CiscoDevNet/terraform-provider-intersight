@@ -508,7 +508,7 @@ func resourceVnicEthNetworkPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -597,7 +597,7 @@ func resourceVnicEthNetworkPolicyCreate(c context.Context, d *schema.ResourceDat
 					o.SetAllowedVlans(x)
 				}
 			}
-			o.SetClassId("vnic.VlanSettings")
+			o.SetClassId("")
 			if v, ok := l["default_vlan"]; ok {
 				{
 					x := int64(v.(int))
@@ -642,8 +642,8 @@ func resourceVnicEthNetworkPolicyCreate(c context.Context, d *schema.ResourceDat
 func resourceVnicEthNetworkPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.VnicApi.GetVnicEthNetworkPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -801,7 +801,7 @@ func resourceVnicEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -891,7 +891,7 @@ func resourceVnicEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceDat
 					o.SetAllowedVlans(x)
 				}
 			}
-			o.SetClassId("vnic.VlanSettings")
+			o.SetClassId("")
 			if v, ok := l["default_vlan"]; ok {
 				{
 					x := int64(v.(int))

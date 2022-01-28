@@ -21,7 +21,7 @@ resource "intersight_comm_http_proxy_policy" "comm_http_proxy_policy1" {
   username    = "admin"
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
 }
 ```

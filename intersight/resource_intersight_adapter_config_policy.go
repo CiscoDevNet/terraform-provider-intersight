@@ -670,7 +670,7 @@ func resourceAdapterConfigPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -816,7 +816,7 @@ func resourceAdapterConfigPolicyCreate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("adapter.EthSettings")
+						o.SetClassId("")
 						if v, ok := l["lldp_enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -854,7 +854,7 @@ func resourceAdapterConfigPolicyCreate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("adapter.FcSettings")
+						o.SetClassId("")
 						if v, ok := l["fip_enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -898,7 +898,7 @@ func resourceAdapterConfigPolicyCreate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("adapter.PortChannelSettings")
+						o.SetClassId("")
 						if v, ok := l["enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -1007,8 +1007,8 @@ func detachAdapterConfigPolicyProfiles(d *schema.ResourceData, meta interface{})
 func resourceAdapterConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.AdapterApi.GetAdapterConfigPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1166,7 +1166,7 @@ func resourceAdapterConfigPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1312,7 +1312,7 @@ func resourceAdapterConfigPolicyUpdate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("adapter.EthSettings")
+						o.SetClassId("")
 						if v, ok := l["lldp_enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -1350,7 +1350,7 @@ func resourceAdapterConfigPolicyUpdate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("adapter.FcSettings")
+						o.SetClassId("")
 						if v, ok := l["fip_enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -1394,7 +1394,7 @@ func resourceAdapterConfigPolicyUpdate(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("adapter.PortChannelSettings")
+						o.SetClassId("")
 						if v, ok := l["enabled"]; ok {
 							{
 								x := (v.(bool))

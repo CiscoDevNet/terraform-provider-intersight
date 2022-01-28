@@ -169,6 +169,11 @@ func dataSourceStorageController() *schema.Resource {
 				},
 			},
 		},
+		"connected_sas_expander": {
+			Description: "Storage controller is connected to SAS expander.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"controller_flags": {
 			Description: "The flags for the storage controller.",
 			Type:        schema.TypeString,
@@ -186,6 +191,11 @@ func dataSourceStorageController() *schema.Resource {
 		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"default_drive_mode": {
+			Description: "Auto configuration mode for the newly inserted physical drives.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -272,6 +282,11 @@ func dataSourceStorageController() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"ecc_bucket_leak_rate": {
+			Description: "The ECC bucket leak rate for the Storage Controller in minutes.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"foreign_config_present": {
 			Description: "Storage controller has detected disks in foreign config.",
 			Type:        schema.TypeBool,
@@ -327,6 +342,11 @@ func dataSourceStorageController() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"memory_correctable_errors": {
+			Description: "The number of memory correctable errors reported by the Storage Controller.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -339,6 +359,11 @@ func dataSourceStorageController() *schema.Resource {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "Name of the Storage Controller.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -446,6 +471,11 @@ func dataSourceStorageController() *schema.Resource {
 				},
 			},
 		},
+		"persistent_cache_size": {
+			Description: "The portion of the cache memory that is persistent, measured in MiB.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"physical_disk_extensions": {
 			Description: "An array of relationships to storagePhysicalDiskExtension resources.",
 			Type:        schema.TypeList,
@@ -514,6 +544,11 @@ func dataSourceStorageController() *schema.Resource {
 				},
 			},
 		},
+		"pinned_cache_state": {
+			Description: "The pinned cache state of the Storage Controller.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"presence": {
 			Description: "This field identifies the presence (equipped) or absence of the given component.",
 			Type:        schema.TypeString,
@@ -562,6 +597,11 @@ func dataSourceStorageController() *schema.Resource {
 		"rebuild_rate": {
 			Description: "Logical volume or RAID rebuild rate of Storage Controller.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"rebuild_rate_percent": {
+			Description: "Logical volume or RAID rebuild rate of Storage Controller.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"registered_device": {
@@ -658,6 +698,16 @@ func dataSourceStorageController() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"sub_oem_id": {
+			Description: "The Sub OEM identifier of the Storage Controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"supported_strip_sizes": {
+			Description: "The strip sizes in KiB supported by the Storage Controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -680,6 +730,11 @@ func dataSourceStorageController() *schema.Resource {
 					},
 				},
 			},
+		},
+		"total_cache_size": {
+			Description: "The total configured cache memory, measured in MiB.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"type": {
 			Description: "Controller types are Raid, FlexFlash.",
@@ -1022,6 +1077,11 @@ func dataSourceStorageController() *schema.Resource {
 				},
 			},
 		},
+		"connected_sas_expander": {
+			Description: "Storage controller is connected to SAS expander.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"controller_flags": {
 			Description: "The flags for the storage controller.",
 			Type:        schema.TypeString,
@@ -1039,6 +1099,11 @@ func dataSourceStorageController() *schema.Resource {
 		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"default_drive_mode": {
+			Description: "Auto configuration mode for the newly inserted physical drives.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1125,6 +1190,11 @@ func dataSourceStorageController() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"ecc_bucket_leak_rate": {
+			Description: "The ECC bucket leak rate for the Storage Controller in minutes.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"foreign_config_present": {
 			Description: "Storage controller has detected disks in foreign config.",
 			Type:        schema.TypeBool,
@@ -1180,6 +1250,11 @@ func dataSourceStorageController() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"memory_correctable_errors": {
+			Description: "The number of memory correctable errors reported by the Storage Controller.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -1192,6 +1267,11 @@ func dataSourceStorageController() *schema.Resource {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "Name of the Storage Controller.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1299,6 +1379,11 @@ func dataSourceStorageController() *schema.Resource {
 				},
 			},
 		},
+		"persistent_cache_size": {
+			Description: "The portion of the cache memory that is persistent, measured in MiB.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"physical_disk_extensions": {
 			Description: "An array of relationships to storagePhysicalDiskExtension resources.",
 			Type:        schema.TypeList,
@@ -1367,6 +1452,11 @@ func dataSourceStorageController() *schema.Resource {
 				},
 			},
 		},
+		"pinned_cache_state": {
+			Description: "The pinned cache state of the Storage Controller.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"presence": {
 			Description: "This field identifies the presence (equipped) or absence of the given component.",
 			Type:        schema.TypeString,
@@ -1415,6 +1505,11 @@ func dataSourceStorageController() *schema.Resource {
 		"rebuild_rate": {
 			Description: "Logical volume or RAID rebuild rate of Storage Controller.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"rebuild_rate_percent": {
+			Description: "Logical volume or RAID rebuild rate of Storage Controller.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"registered_device": {
@@ -1511,6 +1606,16 @@ func dataSourceStorageController() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"sub_oem_id": {
+			Description: "The Sub OEM identifier of the Storage Controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"supported_strip_sizes": {
+			Description: "The strip sizes in KiB supported by the Storage Controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1533,6 +1638,11 @@ func dataSourceStorageController() *schema.Resource {
 					},
 				},
 			},
+		},
+		"total_cache_size": {
+			Description: "The total configured cache memory, measured in MiB.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"type": {
 			Description: "Controller types are Raid, FlexFlash.",
@@ -1812,7 +1922,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1855,7 +1965,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1898,7 +2008,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1925,6 +2035,11 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
+	if v, ok := d.GetOkExists("connected_sas_expander"); ok {
+		x := (v.(bool))
+		o.SetConnectedSasExpander(x)
+	}
+
 	if v, ok := d.GetOk("controller_flags"); ok {
 		x := (v.(string))
 		o.SetControllerFlags(x)
@@ -1943,6 +2058,11 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
+	}
+
+	if v, ok := d.GetOk("default_drive_mode"); ok {
+		x := (v.(string))
+		o.SetDefaultDriveMode(x)
 	}
 
 	if v, ok := d.GetOk("device_mo_id"); ok {
@@ -2040,6 +2160,11 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("ecc_bucket_leak_rate"); ok {
+		x := int64(v.(int))
+		o.SetEccBucketLeakRate(x)
+	}
+
 	if v, ok := d.GetOkExists("foreign_config_present"); ok {
 		x := (v.(bool))
 		o.SetForeignConfigPresent(x)
@@ -2071,7 +2196,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2103,6 +2228,11 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 		o.SetMaxVolumesSupported(x)
 	}
 
+	if v, ok := d.GetOkExists("memory_correctable_errors"); ok {
+		x := int64(v.(int))
+		o.SetMemoryCorrectableErrors(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -2116,6 +2246,11 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -2165,7 +2300,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2240,6 +2375,11 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 			x = append(x, models.MoMoRefAsMoBaseMoRelationship(o))
 		}
 		o.SetPermissionResources(x)
+	}
+
+	if v, ok := d.GetOkExists("persistent_cache_size"); ok {
+		x := int64(v.(int))
+		o.SetPersistentCacheSize(x)
 	}
 
 	if v, ok := d.GetOk("physical_disk_extensions"); ok {
@@ -2322,6 +2462,11 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 		o.SetPhysicalDisks(x)
 	}
 
+	if v, ok := d.GetOkExists("pinned_cache_state"); ok {
+		x := int64(v.(int))
+		o.SetPinnedCacheState(x)
+	}
+
 	if v, ok := d.GetOk("presence"); ok {
 		x := (v.(string))
 		o.SetPresence(x)
@@ -2343,7 +2488,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2380,6 +2525,11 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 		o.SetRebuildRate(x)
 	}
 
+	if v, ok := d.GetOkExists("rebuild_rate_percent"); ok {
+		x := int64(v.(int))
+		o.SetRebuildRatePercent(x)
+	}
+
 	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2396,7 +2546,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2488,6 +2638,16 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("sub_oem_id"); ok {
+		x := (v.(string))
+		o.SetSubOemId(x)
+	}
+
+	if v, ok := d.GetOk("supported_strip_sizes"); ok {
+		x := (v.(string))
+		o.SetSupportedStripSizes(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -2521,6 +2681,11 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOkExists("total_cache_size"); ok {
+		x := int64(v.(int))
+		o.SetTotalCacheSize(x)
+	}
+
 	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
@@ -2547,7 +2712,7 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2732,11 +2897,13 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 				temp["compute_board"] = flattenMapComputeBoardRelationship(s.GetComputeBoard(), d)
 
 				temp["compute_rack_unit"] = flattenMapComputeRackUnitRelationship(s.GetComputeRackUnit(), d)
+				temp["connected_sas_expander"] = (s.GetConnectedSasExpander())
 				temp["controller_flags"] = (s.GetControllerFlags())
 				temp["controller_id"] = (s.GetControllerId())
 				temp["controller_status"] = (s.GetControllerStatus())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
+				temp["default_drive_mode"] = (s.GetDefaultDriveMode())
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 
 				temp["disk_group"] = flattenListStorageDiskGroupRelationship(s.GetDiskGroup(), d)
@@ -2744,16 +2911,19 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 				temp["disk_slot"] = flattenListStorageDiskSlotRelationship(s.GetDiskSlot(), d)
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["ecc_bucket_leak_rate"] = (s.GetEccBucketLeakRate())
 				temp["foreign_config_present"] = (s.GetForeignConfigPresent())
 				temp["hw_revision"] = (s.GetHwRevision())
 				temp["interface_type"] = (s.GetInterfaceType())
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 				temp["max_volumes_supported"] = (s.GetMaxVolumesSupported())
+				temp["memory_correctable_errors"] = (s.GetMemoryCorrectableErrors())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["oob_interface_supported"] = (s.GetOobInterfaceSupported())
 				temp["oper_state"] = (s.GetOperState())
@@ -2765,15 +2935,18 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 				temp["pci_slot"] = (s.GetPciSlot())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["persistent_cache_size"] = (s.GetPersistentCacheSize())
 
 				temp["physical_disk_extensions"] = flattenListStoragePhysicalDiskExtensionRelationship(s.GetPhysicalDiskExtensions(), d)
 
 				temp["physical_disks"] = flattenListStoragePhysicalDiskRelationship(s.GetPhysicalDisks(), d)
+				temp["pinned_cache_state"] = (s.GetPinnedCacheState())
 				temp["presence"] = (s.GetPresence())
 
 				temp["previous_fru"] = flattenMapEquipmentFruRelationship(s.GetPreviousFru(), d)
 				temp["raid_support"] = (s.GetRaidSupport())
 				temp["rebuild_rate"] = (s.GetRebuildRate())
+				temp["rebuild_rate_percent"] = (s.GetRebuildRatePercent())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["revision"] = (s.GetRevision())
@@ -2783,8 +2956,11 @@ func dataSourceStorageControllerRead(c context.Context, d *schema.ResourceData, 
 				temp["self_encrypt_enabled"] = (s.GetSelfEncryptEnabled())
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["sub_oem_id"] = (s.GetSubOemId())
+				temp["supported_strip_sizes"] = (s.GetSupportedStripSizes())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["total_cache_size"] = (s.GetTotalCacheSize())
 				temp["type"] = (s.GetType())
 				temp["vendor"] = (s.GetVendor())
 

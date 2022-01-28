@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -26,8 +26,10 @@ type StorageNetAppFcPortAllOf struct {
 	// State of the port available in storage array. * `Unknown` - Default unknown port state. * `StartUp` - The port in the storage array is booting up. * `LinkNotConnected` - The port has finished initialization, but a link with the fabric is not established. * `Online` - The port is initialized and a link with the fabric has been established. * `LinkDisconnected` - The link on this port is currently not established. * `OfflineUser` - The port is administratively disabled. * `OfflineSystem` - The port is set to offline by the system. This happens when the port encounters too many errors. * `NodeOffline` - The state information for the port cannot be retrieved. The node is offline or inaccessible.
 	State *string `json:"State,omitempty"`
 	// Universally unique identifier of the FC port.
-	Uuid                 *string                        `json:"Uuid,omitempty"`
-	ArrayController      *StorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
+	Uuid            *string                        `json:"Uuid,omitempty"`
+	ArrayController *StorageNetAppNodeRelationship `json:"ArrayController,omitempty"`
+	// An array of relationships to storageNetAppFcPortEvent resources.
+	Events               []StorageNetAppFcPortEventRelationship `json:"Events,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -232,6 +234,39 @@ func (o *StorageNetAppFcPortAllOf) SetArrayController(v StorageNetAppNodeRelatio
 	o.ArrayController = &v
 }
 
+// GetEvents returns the Events field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StorageNetAppFcPortAllOf) GetEvents() []StorageNetAppFcPortEventRelationship {
+	if o == nil {
+		var ret []StorageNetAppFcPortEventRelationship
+		return ret
+	}
+	return o.Events
+}
+
+// GetEventsOk returns a tuple with the Events field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StorageNetAppFcPortAllOf) GetEventsOk() (*[]StorageNetAppFcPortEventRelationship, bool) {
+	if o == nil || o.Events == nil {
+		return nil, false
+	}
+	return &o.Events, true
+}
+
+// HasEvents returns a boolean if a field has been set.
+func (o *StorageNetAppFcPortAllOf) HasEvents() bool {
+	if o != nil && o.Events != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEvents gets a reference to the given []StorageNetAppFcPortEventRelationship and assigns it to the Events field.
+func (o *StorageNetAppFcPortAllOf) SetEvents(v []StorageNetAppFcPortEventRelationship) {
+	o.Events = v
+}
+
 func (o StorageNetAppFcPortAllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -251,6 +286,9 @@ func (o StorageNetAppFcPortAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.ArrayController != nil {
 		toSerialize["ArrayController"] = o.ArrayController
+	}
+	if o.Events != nil {
+		toSerialize["Events"] = o.Events
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -276,6 +314,7 @@ func (o *StorageNetAppFcPortAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "State")
 		delete(additionalProperties, "Uuid")
 		delete(additionalProperties, "ArrayController")
+		delete(additionalProperties, "Events")
 		o.AdditionalProperties = additionalProperties
 	}
 

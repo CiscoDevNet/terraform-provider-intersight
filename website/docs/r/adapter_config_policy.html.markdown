@@ -44,11 +44,17 @@ resource "intersight_adapter_config_policy" "adapter_config1" {
     }
   }
   profiles {
-    moid        = intersight_server_profile.server1.id
+    moid        = server.moid
     object_type = "server.Profile"
   }
 }
+
+variable "server" {
+  type = string
+  description = "Moid of server.Profile"
+}
 ```
+
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

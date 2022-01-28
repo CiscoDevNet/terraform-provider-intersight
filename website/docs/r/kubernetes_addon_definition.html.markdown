@@ -13,10 +13,6 @@ An addon that can be added to any Kubernetes cluster.
 
 ```hcl
 resource "intersight_kubernetes_addon_definition" "kubernetes_addon_definition1" {
-  catalog {
-    moid        = var.kubernetes_catalog
-    object_type = "kubernetes.Catalog"
-  }
   chart_url                = "/path/to/chart/url"
   default_install_strategy = "Always"
   default_namespace        = "iks"
@@ -28,11 +24,6 @@ resource "intersight_kubernetes_addon_definition" "kubernetes_addon_definition1"
     object_type = "organization.Organization"
     moid        = var.organization
   }
-  parent {
-    moid        = var.kubernetes_catalog
-    object_type = "kubernetes.Catalog"
-  }
-  version = "1.8.3-cisco10-helm3"
 }
 ```
 ## Argument Reference

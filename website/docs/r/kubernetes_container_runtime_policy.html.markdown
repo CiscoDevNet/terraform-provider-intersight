@@ -29,7 +29,7 @@ resource "intersight_kubernetes_container_runtime_policy" "kubernetes_container_
     protocol = "https"
     username = "admin1"
   }
-  docker_no_Proxy = [
+  docker_no_proxy = [
     "*.test.example.com",
     ".example2.com",
     "127.0.0.0/8"

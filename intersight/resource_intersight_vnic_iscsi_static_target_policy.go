@@ -509,7 +509,7 @@ func resourceVnicIscsiStaticTargetPolicyCreate(c context.Context, d *schema.Reso
 					o.SetBootable(x)
 				}
 			}
-			o.SetClassId("vnic.Lun")
+			o.SetClassId("")
 			if v, ok := l["lun_id"]; ok {
 				{
 					x := int64(v.(int))
@@ -558,7 +558,7 @@ func resourceVnicIscsiStaticTargetPolicyCreate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -648,8 +648,8 @@ func resourceVnicIscsiStaticTargetPolicyCreate(c context.Context, d *schema.Reso
 func resourceVnicIscsiStaticTargetPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.VnicApi.GetVnicIscsiStaticTargetPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -813,7 +813,7 @@ func resourceVnicIscsiStaticTargetPolicyUpdate(c context.Context, d *schema.Reso
 					o.SetBootable(x)
 				}
 			}
-			o.SetClassId("vnic.Lun")
+			o.SetClassId("")
 			if v, ok := l["lun_id"]; ok {
 				{
 					x := int64(v.(int))
@@ -865,7 +865,7 @@ func resourceVnicIscsiStaticTargetPolicyUpdate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

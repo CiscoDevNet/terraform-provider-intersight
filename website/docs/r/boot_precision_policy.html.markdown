@@ -207,7 +207,7 @@ This complex property has following sub-properties:
 * `interface_name`:(string) The name of the underlying vHBA interface to be used by the SAN boot device. 
 * `lun`:(int) The Logical Unit Number (LUN) of the device. 
 * `slot`:(string) Slot ID of the device. Supported values are ( 1 - 255, \ MLOM\ , \ L1\ , \ L2\  ). 
-* `wwpn`:(string) The WWPN Address of the underlying fiber channel interface used by the SAN boot device. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. 
+* `wwpn`:(string) The WWPN Address of the underlying fibre channel interface used by the SAN boot device. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. 
 
 ### [boot.SdCard](#argument-reference)
 Device type used when booting from SD Card device.

@@ -514,7 +514,7 @@ func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -599,8 +599,8 @@ func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, m
 func resourceIamSessionLimitsRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamSessionLimitsByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -768,7 +768,7 @@ func resourceIamSessionLimitsUpdate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

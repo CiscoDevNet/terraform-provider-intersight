@@ -610,7 +610,7 @@ func resourceVirtualizationVirtualNetworkCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -685,7 +685,7 @@ func resourceVirtualizationVirtualNetworkCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -837,8 +837,8 @@ func resourceVirtualizationVirtualNetworkCreate(c context.Context, d *schema.Res
 func resourceVirtualizationVirtualNetworkRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualNetworkByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1008,7 +1008,7 @@ func resourceVirtualizationVirtualNetworkUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1090,7 +1090,7 @@ func resourceVirtualizationVirtualNetworkUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

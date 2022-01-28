@@ -29,9 +29,19 @@ resource "intersight_smtp_policy" "smtp1" {
     moid        = var.organization
   }
   profiles {
-    moid        = intersight_server_profile.server1.id
+    moid        = var.profile
     object_type = "server.Profile"
   }
+}
+
+variable "organization" {
+   type = string
+   description = "<value for organization>"
+ }
+
+variable "profile"{
+  type = string
+  description = "Moid of server.Profile"
 }
 ```
 ## Argument Reference
@@ -42,10 +52,24 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `appliance_account`:(HashMap) - A reference to a iamAccount resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `auth_password`:(string) Authorization password for the process. 
+* `certificate`:(HashMap) - A reference to a iamTrustPoint resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
+* `enable_auth`:(bool) If enabled, lets user input username and password. 
+* `enable_tls`:(bool) If enabled, lets user input valid CA certificates for authorization. 
 * `enabled`:(bool) If enabled, controls the state of the SMTP client service on the managed device. 
+* `is_auth_password_set`:(bool)(ReadOnly) Indicates whether the value of the 'authPassword' property has been set. 
 * `min_severity`:(string) Minimum fault severity level to receive email notifications. Email notifications are sent for all faults whose severity is equal to or greater than the chosen level.* `critical` - Minimum severity to report is critical.* `condition` - Minimum severity to report is informational.* `warning` - Minimum severity to report is warning.* `minor` - Minimum severity to report is minor.* `major` - Minimum severity to report is major. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -82,6 +106,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `user_name`:(string) SMTP username from which email notification is sent. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

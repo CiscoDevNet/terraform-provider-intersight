@@ -19,7 +19,7 @@ resource "intersight_hyperflex_sys_config_policy" "hyperflex_sys_config_policy1"
   dns_domain_name = "cisco.com"
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
   name = "hyperflex_sys_config_policy1"
 }

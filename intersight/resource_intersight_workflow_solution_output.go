@@ -455,7 +455,7 @@ func resourceWorkflowSolutionOutputCreate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -535,8 +535,8 @@ func resourceWorkflowSolutionOutputCreate(c context.Context, d *schema.ResourceD
 func resourceWorkflowSolutionOutputRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.WorkflowApi.GetWorkflowSolutionOutputByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -685,7 +685,7 @@ func resourceWorkflowSolutionOutputUpdate(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

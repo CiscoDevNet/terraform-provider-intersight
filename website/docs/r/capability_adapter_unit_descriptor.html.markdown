@@ -17,17 +17,26 @@ resource "intersight_capability_adapter_unit_descriptor" "capability_adapter_uni
   model       = "Cisco Systems Inc"
   capabilities = [
     {
-      moid        = var.capability_adapter_unit_descriptor
-      object_type = "capability.AdapterUnitDescriptor"
+      moid                  = var.capability_adapter_unit_descriptor
+      object_type           = "capability.AdapterUnitDescriptor"
+      class_id              = "capability.AdapterUnitDescriptor"
+      additional_properties = ""
+      selector              = ""
     }
   ]
   connectivity_order  = "sequential"
   ethernet_port_speed = 40
 }
+
+variable "capability_adapter_unit_descriptor" {
+  type        = string
+  description = "Moid of capability.AdapterUnitDescriptor Mo"
+}
 ```
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 
+* `adapter_generation`:(int) Generation of the adapter.* `4` - Fourth generation adapters (14xx). The PIDs of these adapters end with the string 04.* `2` - Second generation VIC adapters (12xx). The PIDs of these adapters end with the string 02.* `3` - Third generation adapters (13xx). The PIDs of these adapters end with the string 03.* `5` - Fifth generation adapters (15xx). The PIDs of these adapters contain the V5 string. 
 * `ancestors`:(Array)(ReadOnly) An array of relationships to moBaseMo resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
@@ -43,10 +52,22 @@ This complex property has following sub-properties:
 * `description`:(string) Detailed information about the endpoint. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `ethernet_port_speed`:(int) The port speed for ethernet ports in Mbps. 
+* `features`:(Array)
+This complex property has following sub-properties:
+  + `feature_name`:(string) Name of the feature that identifies the specific adapter configuration.* `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2.* `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1.* `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature.* `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature.* `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature.* `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature.* `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature.* `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature. 
+  + `min_fw_version`:(string) Firmware version from which support for this feature is available. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `supported_fw_versions`:
+                (Array of schema.TypeString) -
+  + `supported_in_adapters`:
+                (Array of schema.TypeString) -
+  + `supported_in_generations`:
+                (Array of schema.TypeInt) -
 * `fibre_channel_port_speed`:(int) The port speed for fibre channel ports in Mbps. 
 * `fibre_channel_scsi_ioq_limit`:(int) The number of SCSI I/O Queue resources to allocate. 
 * `is_azure_qos_supported`:(bool) Indicates that the Azure Stack Host QoS feature is supported by this adapter. 
 * `is_geneve_supported`:(bool) Indicates that the GENEVE offload feature is supported by this adapter. 
+* `max_rocev2_interfaces`:(int) Maximum number of vNIC interfaces that can be RoCEv2 enabled. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

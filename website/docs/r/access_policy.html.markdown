@@ -18,12 +18,17 @@ resource "intersight_access_policy" "access1" {
   inband_vlan = 19
   inband_ip_pool {
     object_type = "ippool.Pool"
-    moid        = intersight_ip_pool.pool1.id
+    moid        = var.inband_ip_pool
   }
   organization {
     object_type = "organization.Organization"
     moid        = var.organization
   }
+}
+
+variable "inband_ip_pool" {
+  type        = string
+  description = "Moid of ippool.Pool Mo"
 }
 ```
 ## Argument Reference
@@ -39,6 +44,11 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `configuration_type`:(HashMap) - The type of configuration, In-Band and/or Out-Of-Band to be configured on the CIMC. 
+This complex property has following sub-properties:
+  + `configure_inband`:(bool) This flag enables the use of In-Band configuration for end-point access. 
+  + `configure_out_of_band`:(bool) This flag enables the use of Out-Of-Band configuration for end-point access. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `description`:(string) Description of the policy. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
@@ -57,6 +67,16 @@ This complex property has following sub-properties:
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
 * `organization`:(HashMap) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `out_of_band_ip_pool`:(HashMap) - A reference to a ippoolPool resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `out_of_band_vrf`:(HashMap) - A reference to a vrfVrf resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 

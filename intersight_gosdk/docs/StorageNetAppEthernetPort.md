@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | Type of the port available in storage array. * &#x60;LAG&#x60; - Storage port of type lag. * &#x60;physical&#x60; - LIFs can be configured directly on physical ports. * &#x60;VLAN&#x60; - A logical port that receives and sends VLAN-tagged (IEEE 802.1Q standard) traffic. VLAN port characteristics include the VLAN ID for the port. | [optional] [readonly] [default to "LAG"]
 **Uuid** | Pointer to **string** | Universally unique identifier of the physical port. | [optional] [readonly] 
 **ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
+**Events** | Pointer to [**[]StorageNetAppEthernetPortEventRelationship**](StorageNetAppEthernetPortEventRelationship.md) | An array of relationships to storageNetAppEthernetPortEvent resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -398,6 +399,41 @@ SetArrayController sets ArrayController field to given value.
 
 HasArrayController returns a boolean if a field has been set.
 
+### GetEvents
+
+`func (o *StorageNetAppEthernetPort) GetEvents() []StorageNetAppEthernetPortEventRelationship`
+
+GetEvents returns the Events field if non-nil, zero value otherwise.
+
+### GetEventsOk
+
+`func (o *StorageNetAppEthernetPort) GetEventsOk() (*[]StorageNetAppEthernetPortEventRelationship, bool)`
+
+GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvents
+
+`func (o *StorageNetAppEthernetPort) SetEvents(v []StorageNetAppEthernetPortEventRelationship)`
+
+SetEvents sets Events field to given value.
+
+### HasEvents
+
+`func (o *StorageNetAppEthernetPort) HasEvents() bool`
+
+HasEvents returns a boolean if a field has been set.
+
+### SetEventsNil
+
+`func (o *StorageNetAppEthernetPort) SetEventsNil(b bool)`
+
+ SetEventsNil sets the value for Events to be an explicit nil
+
+### UnsetEvents
+`func (o *StorageNetAppEthernetPort) UnsetEvents()`
+
+UnsetEvents ensures that no value is present for Events, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

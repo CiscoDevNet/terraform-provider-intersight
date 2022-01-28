@@ -6,12 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.AdapterUnitDescriptor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.AdapterUnitDescriptor"]
+**AdapterGeneration** | Pointer to **int32** | Generation of the adapter. * &#x60;4&#x60; - Fourth generation adapters (14xx). The PIDs of these adapters end with the string 04. * &#x60;2&#x60; - Second generation VIC adapters (12xx). The PIDs of these adapters end with the string 02. * &#x60;3&#x60; - Third generation adapters (13xx). The PIDs of these adapters end with the string 03. * &#x60;5&#x60; - Fifth generation adapters (15xx). The PIDs of these adapters contain the V5 string. | [optional] [default to 4]
 **ConnectivityOrder** | Pointer to **string** | Order in which the ports are connected; sequential or cyclic. | [optional] 
 **EthernetPortSpeed** | Pointer to **int64** | The port speed for ethernet ports in Mbps. | [optional] 
+**Features** | Pointer to [**[]CapabilityFeatureConfig**](CapabilityFeatureConfig.md) |  | [optional] 
 **FibreChannelPortSpeed** | Pointer to **int64** | The port speed for fibre channel ports in Mbps. | [optional] 
 **FibreChannelScsiIoqLimit** | Pointer to **int64** | The number of SCSI I/O Queue resources to allocate. | [optional] 
 **IsAzureQosSupported** | Pointer to **bool** | Indicates that the Azure Stack Host QoS feature is supported by this adapter. | [optional] [default to true]
 **IsGeneveSupported** | Pointer to **bool** | Indicates that the GENEVE offload feature is supported by this adapter. | [optional] [default to true]
+**MaxRocev2Interfaces** | Pointer to **int64** | Maximum number of vNIC interfaces that can be RoCEv2 enabled. | [optional] [default to 2]
 **NumDcePorts** | Pointer to **int64** | Number of Dce Ports for the adapter. | [optional] 
 **PciLink** | Pointer to **int64** | Indicates PCI Link status of adapter. | [optional] [default to 0]
 **PromCardType** | Pointer to **string** | Prom card type for the adapter. | [optional] 
@@ -75,6 +78,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetAdapterGeneration
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) GetAdapterGeneration() int32`
+
+GetAdapterGeneration returns the AdapterGeneration field if non-nil, zero value otherwise.
+
+### GetAdapterGenerationOk
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) GetAdapterGenerationOk() (*int32, bool)`
+
+GetAdapterGenerationOk returns a tuple with the AdapterGeneration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdapterGeneration
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) SetAdapterGeneration(v int32)`
+
+SetAdapterGeneration sets AdapterGeneration field to given value.
+
+### HasAdapterGeneration
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) HasAdapterGeneration() bool`
+
+HasAdapterGeneration returns a boolean if a field has been set.
+
 ### GetConnectivityOrder
 
 `func (o *CapabilityAdapterUnitDescriptorAllOf) GetConnectivityOrder() string`
@@ -125,6 +153,41 @@ SetEthernetPortSpeed sets EthernetPortSpeed field to given value.
 
 HasEthernetPortSpeed returns a boolean if a field has been set.
 
+### GetFeatures
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) GetFeatures() []CapabilityFeatureConfig`
+
+GetFeatures returns the Features field if non-nil, zero value otherwise.
+
+### GetFeaturesOk
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) GetFeaturesOk() (*[]CapabilityFeatureConfig, bool)`
+
+GetFeaturesOk returns a tuple with the Features field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFeatures
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) SetFeatures(v []CapabilityFeatureConfig)`
+
+SetFeatures sets Features field to given value.
+
+### HasFeatures
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) HasFeatures() bool`
+
+HasFeatures returns a boolean if a field has been set.
+
+### SetFeaturesNil
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) SetFeaturesNil(b bool)`
+
+ SetFeaturesNil sets the value for Features to be an explicit nil
+
+### UnsetFeatures
+`func (o *CapabilityAdapterUnitDescriptorAllOf) UnsetFeatures()`
+
+UnsetFeatures ensures that no value is present for Features, not even an explicit nil
 ### GetFibreChannelPortSpeed
 
 `func (o *CapabilityAdapterUnitDescriptorAllOf) GetFibreChannelPortSpeed() int64`
@@ -224,6 +287,31 @@ SetIsGeneveSupported sets IsGeneveSupported field to given value.
 `func (o *CapabilityAdapterUnitDescriptorAllOf) HasIsGeneveSupported() bool`
 
 HasIsGeneveSupported returns a boolean if a field has been set.
+
+### GetMaxRocev2Interfaces
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) GetMaxRocev2Interfaces() int64`
+
+GetMaxRocev2Interfaces returns the MaxRocev2Interfaces field if non-nil, zero value otherwise.
+
+### GetMaxRocev2InterfacesOk
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) GetMaxRocev2InterfacesOk() (*int64, bool)`
+
+GetMaxRocev2InterfacesOk returns a tuple with the MaxRocev2Interfaces field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxRocev2Interfaces
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) SetMaxRocev2Interfaces(v int64)`
+
+SetMaxRocev2Interfaces sets MaxRocev2Interfaces field to given value.
+
+### HasMaxRocev2Interfaces
+
+`func (o *CapabilityAdapterUnitDescriptorAllOf) HasMaxRocev2Interfaces() bool`
+
+HasMaxRocev2Interfaces returns a boolean if a field has been set.
 
 ### GetNumDcePorts
 

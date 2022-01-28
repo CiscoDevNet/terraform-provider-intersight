@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Model** | Pointer to **string** | The model information of the Network Element. | [optional] [readonly] 
 **Serial** | Pointer to **string** | The serial number for the Network Element. | [optional] [readonly] 
 **SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
+**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
+**EquipmentFex** | Pointer to [**EquipmentFexRelationship**](EquipmentFexRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -171,6 +173,56 @@ SetSourceObjectType sets SourceObjectType field to given value.
 `func (o *EquipmentDeviceSummary) HasSourceObjectType() bool`
 
 HasSourceObjectType returns a boolean if a field has been set.
+
+### GetComputeBlade
+
+`func (o *EquipmentDeviceSummary) GetComputeBlade() ComputeBladeRelationship`
+
+GetComputeBlade returns the ComputeBlade field if non-nil, zero value otherwise.
+
+### GetComputeBladeOk
+
+`func (o *EquipmentDeviceSummary) GetComputeBladeOk() (*ComputeBladeRelationship, bool)`
+
+GetComputeBladeOk returns a tuple with the ComputeBlade field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComputeBlade
+
+`func (o *EquipmentDeviceSummary) SetComputeBlade(v ComputeBladeRelationship)`
+
+SetComputeBlade sets ComputeBlade field to given value.
+
+### HasComputeBlade
+
+`func (o *EquipmentDeviceSummary) HasComputeBlade() bool`
+
+HasComputeBlade returns a boolean if a field has been set.
+
+### GetEquipmentFex
+
+`func (o *EquipmentDeviceSummary) GetEquipmentFex() EquipmentFexRelationship`
+
+GetEquipmentFex returns the EquipmentFex field if non-nil, zero value otherwise.
+
+### GetEquipmentFexOk
+
+`func (o *EquipmentDeviceSummary) GetEquipmentFexOk() (*EquipmentFexRelationship, bool)`
+
+GetEquipmentFexOk returns a tuple with the EquipmentFex field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentFex
+
+`func (o *EquipmentDeviceSummary) SetEquipmentFex(v EquipmentFexRelationship)`
+
+SetEquipmentFex sets EquipmentFex field to given value.
+
+### HasEquipmentFex
+
+`func (o *EquipmentDeviceSummary) HasEquipmentFex() bool`
+
+HasEquipmentFex returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

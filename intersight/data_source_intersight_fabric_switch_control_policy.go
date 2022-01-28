@@ -1029,7 +1029,7 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("fabric.MacAgingSettings")
+			o.SetClassId("")
 			if v, ok := l["mac_aging_option"]; ok {
 				{
 					x := (v.(string))
@@ -1092,7 +1092,7 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1146,7 +1146,7 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1307,7 +1307,7 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("fabric.UdldGlobalSettings")
+			o.SetClassId("")
 			if v, ok := l["message_interval"]; ok {
 				{
 					x := int64(v.(int))
@@ -1350,7 +1350,7 @@ func dataSourceFabricSwitchControlPolicyRead(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

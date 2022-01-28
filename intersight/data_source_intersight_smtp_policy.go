@@ -59,6 +59,81 @@ func dataSourceSmtpPolicy() *schema.Resource {
 				},
 			},
 		},
+		"appliance_account": {
+			Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"auth_password": {
+			Description: "Authorization password for the process.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"certificate": {
+			Description: "A reference to a iamTrustPoint resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -79,8 +154,23 @@ func dataSourceSmtpPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"enable_auth": {
+			Description: "If enabled, lets user input username and password.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"enable_tls": {
+			Description: "If enabled, lets user input valid CA certificates for authorization.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"enabled": {
 			Description: "If enabled, controls the state of the SMTP client service on the managed device.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_auth_password_set": {
+			Description: "Indicates whether the value of the 'authPassword' property has been set.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -299,6 +389,11 @@ func dataSourceSmtpPolicy() *schema.Resource {
 					},
 				},
 			},
+		},
+		"user_name": {
+			Description: "SMTP username from which email notification is sent.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -453,6 +548,81 @@ func dataSourceSmtpPolicy() *schema.Resource {
 				},
 			},
 		},
+		"appliance_account": {
+			Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"auth_password": {
+			Description: "Authorization password for the process.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"certificate": {
+			Description: "A reference to a iamTrustPoint resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -473,8 +643,23 @@ func dataSourceSmtpPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"enable_auth": {
+			Description: "If enabled, lets user input username and password.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"enable_tls": {
+			Description: "If enabled, lets user input valid CA certificates for authorization.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"enabled": {
 			Description: "If enabled, controls the state of the SMTP client service on the managed device.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_auth_password_set": {
+			Description: "Indicates whether the value of the 'authPassword' property has been set.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -693,6 +878,11 @@ func dataSourceSmtpPolicy() *schema.Resource {
 					},
 				},
 			},
+		},
+		"user_name": {
+			Description: "SMTP username from which email notification is sent.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -873,6 +1063,97 @@ func dataSourceSmtpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("appliance_account"); ok {
+		p := make([]models.IamAccountRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamAccountRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetApplianceAccount(x)
+		}
+	}
+
+	if v, ok := d.GetOk("auth_password"); ok {
+		x := (v.(string))
+		o.SetAuthPassword(x)
+	}
+
+	if v, ok := d.GetOk("certificate"); ok {
+		p := make([]models.IamTrustPointRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIamTrustPointRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetCertificate(x)
+		}
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -893,9 +1174,24 @@ func dataSourceSmtpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("enable_auth"); ok {
+		x := (v.(bool))
+		o.SetEnableAuth(x)
+	}
+
+	if v, ok := d.GetOkExists("enable_tls"); ok {
+		x := (v.(bool))
+		o.SetEnableTls(x)
+	}
+
 	if v, ok := d.GetOkExists("enabled"); ok {
 		x := (v.(bool))
 		o.SetEnabled(x)
+	}
+
+	if v, ok := d.GetOkExists("is_auth_password_set"); ok {
+		x := (v.(bool))
+		o.SetIsAuthPasswordSet(x)
 	}
 
 	if v, ok := d.GetOk("min_severity"); ok {
@@ -939,7 +1235,7 @@ func dataSourceSmtpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -993,7 +1289,7 @@ func dataSourceSmtpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1164,6 +1460,11 @@ func dataSourceSmtpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("user_name"); ok {
+		x := (v.(string))
+		o.SetUserName(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1180,7 +1481,7 @@ func dataSourceSmtpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1278,12 +1579,19 @@ func dataSourceSmtpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+
+				temp["appliance_account"] = flattenMapIamAccountRelationship(s.GetApplianceAccount(), d)
+
+				temp["certificate"] = flattenMapIamTrustPointRelationship(s.GetCertificate(), d)
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["enable_auth"] = (s.GetEnableAuth())
+				temp["enable_tls"] = (s.GetEnableTls())
 				temp["enabled"] = (s.GetEnabled())
+				temp["is_auth_password_set"] = (s.GetIsAuthPasswordSet())
 				temp["min_severity"] = (s.GetMinSeverity())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -1306,6 +1614,7 @@ func dataSourceSmtpPolicyRead(c context.Context, d *schema.ResourceData, meta in
 				temp["smtp_server"] = (s.GetSmtpServer())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["user_name"] = (s.GetUserName())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				smtpPolicyResults[j] = temp

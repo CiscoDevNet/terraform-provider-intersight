@@ -754,7 +754,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -821,7 +821,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 					o.SetBindMethod(x)
 				}
 			}
-			o.SetClassId("iam.LdapBaseProperties")
+			o.SetClassId("")
 			if v, ok := l["domain"]; ok {
 				{
 					x := (v.(string))
@@ -907,7 +907,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("iam.LdapDnsParameters")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1020,7 +1020,7 @@ func resourceIamLdapPolicyCreate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1211,8 +1211,8 @@ func detachIamLdapPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.
 func resourceIamLdapPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamLdapPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1376,7 +1376,7 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1444,7 +1444,7 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 					o.SetBindMethod(x)
 				}
 			}
-			o.SetClassId("iam.LdapBaseProperties")
+			o.SetClassId("")
 			if v, ok := l["domain"]; ok {
 				{
 					x := (v.(string))
@@ -1532,7 +1532,7 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("iam.LdapDnsParameters")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1649,7 +1649,7 @@ func resourceIamLdapPolicyUpdate(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

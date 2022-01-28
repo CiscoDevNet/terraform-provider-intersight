@@ -59,6 +59,11 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 				},
 			},
 		},
+		"background_operations": {
+			Description: "List of background operations underway.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"block_size": {
 			Description: "The block size of the physical disk in bytes.",
 			Type:        schema.TypeString,
@@ -92,6 +97,11 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 		"device_mo_id": {
 			Description: "The database identifier of the registered device of an object.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"disabled_for_removal": {
+			Description: "The physical disk is disabled for removal.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"discovered_path": {
@@ -129,6 +139,16 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"encryption_status": {
+			Description: "Encryption status of the physical disk.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"failure_predicted": {
+			Description: "Possibility of physical disk failure.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"fde_capable": {
 			Description: "Full-Disk Encryption capability parameter of the physical disk.",
 			Type:        schema.TypeString,
@@ -136,6 +156,11 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 		},
 		"hot_spare_type": {
 			Description: "Type of hotspare configured on the physical disk.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"indicator_led": {
+			Description: "Status of the locator LED corresponding to the physical disk.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -219,6 +244,16 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 				},
 			},
 		},
+		"maximum_operating_temperature": {
+			Description: "Maximum operating temperature of drive in Celsius.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"media_error_count": {
+			Description: "Media error count on the physical disk.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -232,6 +267,16 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "Detailed name of the physical disk.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"non_coerced_size_bytes": {
+			Description: "Physical disk non-coerced size in bytes.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"num_blocks": {
@@ -257,6 +302,11 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 		"operability": {
 			Description: "This field identifies the disk operability of the disk.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"operating_temperature": {
+			Description: "Operating temperature of drive in Celsius.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"owners": {
@@ -298,6 +348,21 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 					},
 				},
 			},
+		},
+		"percent_life_left": {
+			Description: "Percentage of write cycles remaining in a solid state drive (SSD).",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"percent_reserved_capacity_consumed": {
+			Description: "Percentage of reserve capacity consumed.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"performance_percent": {
+			Description: "Performance at which the device operating expressed in percentage.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
@@ -377,6 +442,26 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"power_cycle_count": {
+			Description: "Number of powercycles the drive has undergone.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"power_on_hours": {
+			Description: "Number of hours the drive has been powered on.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"predicted_media_life_left_percent": {
+			Description: "Predicted physical disk life left in percentage.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"predictive_failure_count": {
+			Description: "Error count on the physical disk.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"presence": {
 			Description: "This field identifies the presence (equipped) or absence of the given component.",
 			Type:        schema.TypeString,
@@ -425,6 +510,16 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 		"raw_size": {
 			Description: "The raw size of the physical disk in MB.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"read_error_count_threshold": {
+			Description: "The number of read errors that are permitted while accessing the drive/card.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"read_io_error_count": {
+			Description: "Number of IO Errors that occured while reading data from the disk.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"registered_device": {
@@ -658,6 +753,11 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"threshold_operating_temperature": {
+			Description: "Rated threshold operating temperature in Celsius.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"type": {
 			Description: "This field identifies the type of the physical disk.",
 			Type:        schema.TypeString,
@@ -780,6 +880,21 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 					},
 				},
 			},
+		},
+		"wear_status_in_days": {
+			Description: "The number of days an SSD has gone through with the write cycles.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"write_error_count_threshold": {
+			Description: "The number of write errors that are permitted while accessing the drive/card.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"write_io_error_count": {
+			Description: "Number of IO Errors that occured while writing data to the disk.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 	}
 	var model = map[string]*schema.Schema{"account_moid": {
@@ -826,6 +941,11 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 				},
 			},
 		},
+		"background_operations": {
+			Description: "List of background operations underway.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"block_size": {
 			Description: "The block size of the physical disk in bytes.",
 			Type:        schema.TypeString,
@@ -859,6 +979,11 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 		"device_mo_id": {
 			Description: "The database identifier of the registered device of an object.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"disabled_for_removal": {
+			Description: "The physical disk is disabled for removal.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"discovered_path": {
@@ -896,6 +1021,16 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"encryption_status": {
+			Description: "Encryption status of the physical disk.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"failure_predicted": {
+			Description: "Possibility of physical disk failure.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"fde_capable": {
 			Description: "Full-Disk Encryption capability parameter of the physical disk.",
 			Type:        schema.TypeString,
@@ -903,6 +1038,11 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 		},
 		"hot_spare_type": {
 			Description: "Type of hotspare configured on the physical disk.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"indicator_led": {
+			Description: "Status of the locator LED corresponding to the physical disk.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -986,6 +1126,16 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 				},
 			},
 		},
+		"maximum_operating_temperature": {
+			Description: "Maximum operating temperature of drive in Celsius.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"media_error_count": {
+			Description: "Media error count on the physical disk.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -999,6 +1149,16 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "Detailed name of the physical disk.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"non_coerced_size_bytes": {
+			Description: "Physical disk non-coerced size in bytes.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"num_blocks": {
@@ -1024,6 +1184,11 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 		"operability": {
 			Description: "This field identifies the disk operability of the disk.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"operating_temperature": {
+			Description: "Operating temperature of drive in Celsius.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"owners": {
@@ -1065,6 +1230,21 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 					},
 				},
 			},
+		},
+		"percent_life_left": {
+			Description: "Percentage of write cycles remaining in a solid state drive (SSD).",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"percent_reserved_capacity_consumed": {
+			Description: "Percentage of reserve capacity consumed.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"performance_percent": {
+			Description: "Performance at which the device operating expressed in percentage.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
@@ -1144,6 +1324,26 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"power_cycle_count": {
+			Description: "Number of powercycles the drive has undergone.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"power_on_hours": {
+			Description: "Number of hours the drive has been powered on.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"predicted_media_life_left_percent": {
+			Description: "Predicted physical disk life left in percentage.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"predictive_failure_count": {
+			Description: "Error count on the physical disk.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"presence": {
 			Description: "This field identifies the presence (equipped) or absence of the given component.",
 			Type:        schema.TypeString,
@@ -1192,6 +1392,16 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 		"raw_size": {
 			Description: "The raw size of the physical disk in MB.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"read_error_count_threshold": {
+			Description: "The number of read errors that are permitted while accessing the drive/card.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"read_io_error_count": {
+			Description: "Number of IO Errors that occured while reading data from the disk.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"registered_device": {
@@ -1425,6 +1635,11 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"threshold_operating_temperature": {
+			Description: "Rated threshold operating temperature in Celsius.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"type": {
 			Description: "This field identifies the type of the physical disk.",
 			Type:        schema.TypeString,
@@ -1547,6 +1762,21 @@ func dataSourceStoragePhysicalDisk() *schema.Resource {
 					},
 				},
 			},
+		},
+		"wear_status_in_days": {
+			Description: "The number of days an SSD has gone through with the write cycles.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"write_error_count_threshold": {
+			Description: "The number of write errors that are permitted while accessing the drive/card.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"write_io_error_count": {
+			Description: "Number of IO Errors that occured while writing data to the disk.",
+			Type:        schema.TypeInt,
+			Optional:    true,
 		},
 	}
 	model["results"] = &schema.Schema{
@@ -1619,6 +1849,11 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("background_operations"); ok {
+		x := (v.(string))
+		o.SetBackgroundOperations(x)
+	}
+
 	if v, ok := d.GetOk("block_size"); ok {
 		x := (v.(string))
 		o.SetBlockSize(x)
@@ -1652,6 +1887,11 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("device_mo_id"); ok {
 		x := (v.(string))
 		o.SetDeviceMoId(x)
+	}
+
+	if v, ok := d.GetOkExists("disabled_for_removal"); ok {
+		x := (v.(bool))
+		o.SetDisabledForRemoval(x)
 	}
 
 	if v, ok := d.GetOk("discovered_path"); ok {
@@ -1689,6 +1929,16 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetDriveState(x)
 	}
 
+	if v, ok := d.GetOk("encryption_status"); ok {
+		x := (v.(string))
+		o.SetEncryptionStatus(x)
+	}
+
+	if v, ok := d.GetOkExists("failure_predicted"); ok {
+		x := (v.(bool))
+		o.SetFailurePredicted(x)
+	}
+
 	if v, ok := d.GetOk("fde_capable"); ok {
 		x := (v.(string))
 		o.SetFdeCapable(x)
@@ -1697,6 +1947,11 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("hot_spare_type"); ok {
 		x := (v.(string))
 		o.SetHotSpareType(x)
+	}
+
+	if v, ok := d.GetOk("indicator_led"); ok {
+		x := (v.(string))
+		o.SetIndicatorLed(x)
 	}
 
 	if v, ok := d.GetOk("inventory_device_info"); ok {
@@ -1715,7 +1970,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1768,7 +2023,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1795,6 +2050,16 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
+	if v, ok := d.GetOkExists("maximum_operating_temperature"); ok {
+		x := int64(v.(int))
+		o.SetMaximumOperatingTemperature(x)
+	}
+
+	if v, ok := d.GetOkExists("media_error_count"); ok {
+		x := int64(v.(int))
+		o.SetMediaErrorCount(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1808,6 +2073,16 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
+	}
+
+	if v, ok := d.GetOkExists("non_coerced_size_bytes"); ok {
+		x := int64(v.(int))
+		o.SetNonCoercedSizeBytes(x)
 	}
 
 	if v, ok := d.GetOk("num_blocks"); ok {
@@ -1833,6 +2108,11 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("operability"); ok {
 		x := (v.(string))
 		o.SetOperability(x)
+	}
+
+	if v, ok := d.GetOkExists("operating_temperature"); ok {
+		x := int64(v.(int))
+		o.SetOperatingTemperature(x)
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -1862,7 +2142,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1887,6 +2167,21 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetParent(x)
 		}
+	}
+
+	if v, ok := d.GetOkExists("percent_life_left"); ok {
+		x := int64(v.(int))
+		o.SetPercentLifeLeft(x)
+	}
+
+	if v, ok := d.GetOkExists("percent_reserved_capacity_consumed"); ok {
+		x := int64(v.(int))
+		o.SetPercentReservedCapacityConsumed(x)
+	}
+
+	if v, ok := d.GetOkExists("performance_percent"); ok {
+		x := int64(v.(int))
+		o.SetPerformancePercent(x)
 	}
 
 	if v, ok := d.GetOk("permission_resources"); ok {
@@ -1979,6 +2274,26 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetPid(x)
 	}
 
+	if v, ok := d.GetOkExists("power_cycle_count"); ok {
+		x := int64(v.(int))
+		o.SetPowerCycleCount(x)
+	}
+
+	if v, ok := d.GetOkExists("power_on_hours"); ok {
+		x := int64(v.(int))
+		o.SetPowerOnHours(x)
+	}
+
+	if v, ok := d.GetOkExists("predicted_media_life_left_percent"); ok {
+		x := int64(v.(int))
+		o.SetPredictedMediaLifeLeftPercent(x)
+	}
+
+	if v, ok := d.GetOkExists("predictive_failure_count"); ok {
+		x := int64(v.(int))
+		o.SetPredictiveFailureCount(x)
+	}
+
 	if v, ok := d.GetOk("presence"); ok {
 		x := (v.(string))
 		o.SetPresence(x)
@@ -2000,7 +2315,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2037,6 +2352,16 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetRawSize(x)
 	}
 
+	if v, ok := d.GetOkExists("read_error_count_threshold"); ok {
+		x := int64(v.(int))
+		o.SetReadErrorCountThreshold(x)
+	}
+
+	if v, ok := d.GetOkExists("read_io_error_count"); ok {
+		x := int64(v.(int))
+		o.SetReadIoErrorCount(x)
+	}
+
 	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2053,7 +2378,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2206,7 +2531,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2249,7 +2574,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2314,6 +2639,11 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		o.SetThermal(x)
 	}
 
+	if v, ok := d.GetOkExists("threshold_operating_temperature"); ok {
+		x := int64(v.(int))
+		o.SetThresholdOperatingTemperature(x)
+	}
+
 	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
@@ -2345,7 +2675,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2403,6 +2733,21 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 		}
 	}
 
+	if v, ok := d.GetOkExists("wear_status_in_days"); ok {
+		x := int64(v.(int))
+		o.SetWearStatusInDays(x)
+	}
+
+	if v, ok := d.GetOkExists("write_error_count_threshold"); ok {
+		x := int64(v.(int))
+		o.SetWriteErrorCountThreshold(x)
+	}
+
+	if v, ok := d.GetOkExists("write_io_error_count"); ok {
+		x := int64(v.(int))
+		o.SetWriteIoErrorCount(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of StoragePhysicalDisk object failed with error : %s", err.Error())
@@ -2443,6 +2788,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["background_operations"] = (s.GetBackgroundOperations())
 				temp["block_size"] = (s.GetBlockSize())
 				temp["bootable"] = (s.GetBootable())
 				temp["class_id"] = (s.GetClassId())
@@ -2451,6 +2797,7 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["device_mo_id"] = (s.GetDeviceMoId())
+				temp["disabled_for_removal"] = (s.GetDisabledForRemoval())
 				temp["discovered_path"] = (s.GetDiscoveredPath())
 				temp["disk_id"] = (s.GetDiskId())
 				temp["disk_state"] = (s.GetDiskState())
@@ -2458,37 +2805,54 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["drive_firmware"] = (s.GetDriveFirmware())
 				temp["drive_state"] = (s.GetDriveState())
+				temp["encryption_status"] = (s.GetEncryptionStatus())
+				temp["failure_predicted"] = (s.GetFailurePredicted())
 				temp["fde_capable"] = (s.GetFdeCapable())
 				temp["hot_spare_type"] = (s.GetHotSpareType())
+				temp["indicator_led"] = (s.GetIndicatorLed())
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 				temp["link_speed"] = (s.GetLinkSpeed())
 				temp["link_state"] = (s.GetLinkState())
 
 				temp["locator_led"] = flattenMapEquipmentLocatorLedRelationship(s.GetLocatorLed(), d)
+				temp["maximum_operating_temperature"] = (s.GetMaximumOperatingTemperature())
+				temp["media_error_count"] = (s.GetMediaErrorCount())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
+				temp["non_coerced_size_bytes"] = (s.GetNonCoercedSizeBytes())
 				temp["num_blocks"] = (s.GetNumBlocks())
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_power_state"] = (s.GetOperPowerState())
 				temp["oper_qualifier_reason"] = (s.GetOperQualifierReason())
 				temp["operability"] = (s.GetOperability())
+				temp["operating_temperature"] = (s.GetOperatingTemperature())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["percent_life_left"] = (s.GetPercentLifeLeft())
+				temp["percent_reserved_capacity_consumed"] = (s.GetPercentReservedCapacityConsumed())
+				temp["performance_percent"] = (s.GetPerformancePercent())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["physical_block_size"] = (s.GetPhysicalBlockSize())
 
 				temp["physical_disk_extensions"] = flattenListStoragePhysicalDiskExtensionRelationship(s.GetPhysicalDiskExtensions(), d)
 				temp["pid"] = (s.GetPid())
+				temp["power_cycle_count"] = (s.GetPowerCycleCount())
+				temp["power_on_hours"] = (s.GetPowerOnHours())
+				temp["predicted_media_life_left_percent"] = (s.GetPredictedMediaLifeLeftPercent())
+				temp["predictive_failure_count"] = (s.GetPredictiveFailureCount())
 				temp["presence"] = (s.GetPresence())
 
 				temp["previous_fru"] = flattenMapEquipmentFruRelationship(s.GetPreviousFru(), d)
 				temp["protocol"] = (s.GetProtocol())
 				temp["raw_size"] = (s.GetRawSize())
+				temp["read_error_count_threshold"] = (s.GetReadErrorCountThreshold())
+				temp["read_io_error_count"] = (s.GetReadIoErrorCount())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["revision"] = (s.GetRevision())
@@ -2508,11 +2872,15 @@ func dataSourceStoragePhysicalDiskRead(c context.Context, d *schema.ResourceData
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["thermal"] = (s.GetThermal())
+				temp["threshold_operating_temperature"] = (s.GetThresholdOperatingTemperature())
 				temp["type"] = (s.GetType())
 				temp["variant_type"] = (s.GetVariantType())
 				temp["vendor"] = (s.GetVendor())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+				temp["wear_status_in_days"] = (s.GetWearStatusInDays())
+				temp["write_error_count_threshold"] = (s.GetWriteErrorCountThreshold())
+				temp["write_io_error_count"] = (s.GetWriteIoErrorCount())
 				storagePhysicalDiskResults[j] = temp
 				j += 1
 			}

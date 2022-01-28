@@ -109,6 +109,41 @@ func dataSourceVirtualizationVmwareDistributedSwitch() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"discovery_protocol": {
+			Description: "Discovery protocol helps to determine which port of the physical switch connected to standard switch or distributed switch.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"operation": {
+						Description: "Operational mode of the ESXI hosts connected to the distributed virtual switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"type": {
+						Description: "Discovery protocol type enabled on the distributed virtual switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -176,6 +211,11 @@ func dataSourceVirtualizationVmwareDistributedSwitch() *schema.Resource {
 		"name": {
 			Description: "User-provided name to identify the switch.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"network_io_control": {
+			Description: "If network io control is enabled, will set the value as true.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"nic_teaming_and_failover": {
@@ -366,6 +406,54 @@ func dataSourceVirtualizationVmwareDistributedSwitch() *schema.Resource {
 					},
 					"selector": {
 						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"resource_allocation_system_traffic": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"limit": {
+						Description: "The maximum allowed usage for a traffic class belonging to this resource pool per host physical NIC. The utilization of a traffic class will not exceed the specified limit even if there are available network resources. If this value is unset or set to -1 in an update operation, then there is no limit on the network resource usage (only bounded by available resource and shares). Units are in Mbits/sec.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"reservation": {
+						Description: "Amount of bandwidth resource that is guaranteed available to the host infrastructure traffic class. If the utilization is less than the reservation, the extra bandwidth is used for other host infrastructure traffic class types.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"shares": {
+						Description: "Network share. The value is used as a relative weight in competing for shared bandwidth, in case of resource contention.\n* `low` - Share of the traffic in the overall flow through a physical adapter.\n* `high` - Share of the traffic in the overall flow through a physical adapter.\n* `normal` - Share of the traffic in the overall flow through a physical adapter.\n* `custom` - Share of the traffic in the overall flow through a physical adapter.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"shares_value": {
+						Description: "The number of shares allocated. Used to determine resource allocation in case of resource contention. Shares value is only set if level is set to custom. If level is not set to custom, this value is ignored. Therefore, only shares with custom values can be compared.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"traffic_type": {
+						Description: "Key of the host infrastructure resource.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -653,6 +741,41 @@ func dataSourceVirtualizationVmwareDistributedSwitch() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"discovery_protocol": {
+			Description: "Discovery protocol helps to determine which port of the physical switch connected to standard switch or distributed switch.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"operation": {
+						Description: "Operational mode of the ESXI hosts connected to the distributed virtual switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"type": {
+						Description: "Discovery protocol type enabled on the distributed virtual switch.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
@@ -720,6 +843,11 @@ func dataSourceVirtualizationVmwareDistributedSwitch() *schema.Resource {
 		"name": {
 			Description: "User-provided name to identify the switch.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"network_io_control": {
+			Description: "If network io control is enabled, will set the value as true.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"nic_teaming_and_failover": {
@@ -910,6 +1038,54 @@ func dataSourceVirtualizationVmwareDistributedSwitch() *schema.Resource {
 					},
 					"selector": {
 						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"resource_allocation_system_traffic": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"limit": {
+						Description: "The maximum allowed usage for a traffic class belonging to this resource pool per host physical NIC. The utilization of a traffic class will not exceed the specified limit even if there are available network resources. If this value is unset or set to -1 in an update operation, then there is no limit on the network resource usage (only bounded by available resource and shares). Units are in Mbits/sec.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"reservation": {
+						Description: "Amount of bandwidth resource that is guaranteed available to the host infrastructure traffic class. If the utilization is less than the reservation, the extra bandwidth is used for other host infrastructure traffic class types.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"shares": {
+						Description: "Network share. The value is used as a relative weight in competing for shared bandwidth, in case of resource contention.\n* `low` - Share of the traffic in the overall flow through a physical adapter.\n* `high` - Share of the traffic in the overall flow through a physical adapter.\n* `normal` - Share of the traffic in the overall flow through a physical adapter.\n* `custom` - Share of the traffic in the overall flow through a physical adapter.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"shares_value": {
+						Description: "The number of shares allocated. Used to determine resource allocation in case of resource contention. Shares value is only set if level is set to custom. If level is not set to custom, this value is ignored. Therefore, only shares with custom values can be compared.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"traffic_type": {
+						Description: "Key of the host infrastructure resource.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1199,7 +1375,7 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1229,6 +1405,49 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if v, ok := d.GetOk("discovery_protocol"); ok {
+		p := make([]models.VirtualizationVmwareDiscoveryProtocol, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.VirtualizationVmwareDiscoveryProtocol{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["operation"]; ok {
+				{
+					x := (v.(string))
+					o.SetOperation(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					x := (v.(string))
+					o.SetType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetDiscoveryProtocol(x)
+		}
 	}
 
 	if v, ok := d.GetOk("domain_group_moid"); ok {
@@ -1306,6 +1525,11 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 		o.SetName(x)
 	}
 
+	if v, ok := d.GetOkExists("network_io_control"); ok {
+		x := (v.(bool))
+		o.SetNetworkIoControl(x)
+	}
+
 	if v, ok := d.GetOk("nic_teaming_and_failover"); ok {
 		p := make([]models.VirtualizationVmwareTeamingAndFailover, 0, 1)
 		s := v.([]interface{})
@@ -1336,7 +1560,7 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("virtualization.VmwareTeamingAndFailover")
+			o.SetClassId("")
 			if v, ok := l["failback"]; ok {
 				{
 					x := (v.(bool))
@@ -1447,7 +1671,7 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1530,7 +1754,7 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1555,6 +1779,64 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 			x := p[0]
 			o.SetRegisteredDevice(x)
 		}
+	}
+
+	if v, ok := d.GetOk("resource_allocation_system_traffic"); ok {
+		x := make([]models.VirtualizationVmwareResourceAllocationSystemTrafficTypes, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.VirtualizationVmwareResourceAllocationSystemTrafficTypes{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("virtualization.VmwareResourceAllocationSystemTrafficTypes")
+			if v, ok := l["limit"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetLimit(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["reservation"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetReservation(x)
+				}
+			}
+			if v, ok := l["shares"]; ok {
+				{
+					x := (v.(string))
+					o.SetShares(x)
+				}
+			}
+			if v, ok := l["shares_value"]; ok {
+				{
+					x := int32(v.(int))
+					o.SetSharesValue(x)
+				}
+			}
+			if v, ok := l["traffic_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetTrafficType(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetResourceAllocationSystemTraffic(x)
 	}
 
 	if v, ok := d.GetOk("shared_scope"); ok {
@@ -1584,7 +1866,7 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.StorageCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -1670,7 +1952,7 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1774,6 +2056,8 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 
 				temp["datacenter"] = flattenMapVirtualizationVmwareDatacenterRelationship(s.GetDatacenter(), d)
 				temp["description"] = (s.GetDescription())
+
+				temp["discovery_protocol"] = flattenMapVirtualizationVmwareDiscoveryProtocol(s.GetDiscoveryProtocol(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["hosts"] = flattenListVirtualizationVmwareHostRelationship(s.GetHosts(), d)
@@ -1784,6 +2068,7 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 				temp["moid"] = (s.GetMoid())
 				temp["mtu"] = (s.GetMtu())
 				temp["name"] = (s.GetName())
+				temp["network_io_control"] = (s.GetNetworkIoControl())
 
 				temp["nic_teaming_and_failover"] = flattenMapVirtualizationVmwareTeamingAndFailover(s.GetNicTeamingAndFailover(), d)
 				temp["num_hosts"] = (s.GetNumHosts())
@@ -1798,6 +2083,8 @@ func dataSourceVirtualizationVmwareDistributedSwitchRead(c context.Context, d *s
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+
+				temp["resource_allocation_system_traffic"] = flattenListVirtualizationVmwareResourceAllocationSystemTrafficTypes(s.GetResourceAllocationSystemTraffic(), d)
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["switch_capacity"] = flattenMapVirtualizationStorageCapacity(s.GetSwitchCapacity(), d)

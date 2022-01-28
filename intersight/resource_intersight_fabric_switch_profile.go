@@ -915,7 +915,7 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -974,7 +974,7 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigChange")
+			o.SetClassId("")
 			if v, ok := l["disruptions"]; ok {
 				{
 					x := make([]string, 0)
@@ -1019,7 +1019,7 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1121,7 +1121,7 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1164,7 +1164,7 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1298,8 +1298,8 @@ func resourceFabricSwitchProfileCreate(c context.Context, d *schema.ResourceData
 func resourceFabricSwitchProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.FabricApi.GetFabricSwitchProfileByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1522,7 +1522,7 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1582,7 +1582,7 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigChange")
+			o.SetClassId("")
 			if v, ok := l["disruptions"]; ok {
 				{
 					x := make([]string, 0)
@@ -1628,7 +1628,7 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1733,7 +1733,7 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1777,7 +1777,7 @@ func resourceFabricSwitchProfileUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

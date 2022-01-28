@@ -36,7 +36,7 @@ resource "intersight_syslog_policy" "syslog1" {
     object_type  = "syslog.RemoteLoggingClient"
   }
   profiles {
-    moid        = intersight_server_profile.server1.id
+    moid        = var.profile
     object_type = "server.Profile"
   }
   organization {
@@ -44,6 +44,16 @@ resource "intersight_syslog_policy" "syslog1" {
     moid        = var.organization
   }
 }
+
+variable "organization" {
+   type = string
+   description = "<value for organization>"
+ }
+
+ variable "profile"{
+   type = string
+   description = "Moid of server.Profile"
+ }
 ```
 ## Argument Reference
 The following arguments are supported:

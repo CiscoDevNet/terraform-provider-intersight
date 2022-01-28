@@ -27,6 +27,11 @@ resource "intersight_recovery_backup_config_policy" "recovery_backup_config_poli
   }
   user_name = "backup_server_name"
 }
+
+ variable "organization" {
+   type = string
+   description = "value for organization"
+ }
 ```
 ## Argument Reference
 The following arguments are supported:

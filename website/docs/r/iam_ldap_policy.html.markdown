@@ -41,6 +41,11 @@ resource "intersight_iam_ldap_policy" "ldap1" {
     search_domain = "abc"
   }
 }
+
+variable "organization" {
+  type = string
+  description = "value for organization organization"
+}
 ```
 ## Argument Reference
 The following arguments are supported:

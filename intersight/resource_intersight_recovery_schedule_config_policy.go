@@ -584,7 +584,7 @@ func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -627,7 +627,7 @@ func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("recovery.BackupSchedule")
+			o.SetClassId("")
 			if v, ok := l["execution_time"]; ok {
 				{
 					x, _ := time.Parse(time.RFC1123, v.(string))
@@ -713,8 +713,8 @@ func resourceRecoveryScheduleConfigPolicyCreate(c context.Context, d *schema.Res
 func resourceRecoveryScheduleConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.RecoveryApi.GetRecoveryScheduleConfigPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -913,7 +913,7 @@ func resourceRecoveryScheduleConfigPolicyUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -957,7 +957,7 @@ func resourceRecoveryScheduleConfigPolicyUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("recovery.BackupSchedule")
+			o.SetClassId("")
 			if v, ok := l["execution_time"]; ok {
 				{
 					x, _ := time.Parse(time.RFC1123, v.(string))

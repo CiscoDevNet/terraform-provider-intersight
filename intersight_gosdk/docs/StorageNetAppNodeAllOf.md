@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Systemid** | Pointer to **string** | The system id of the NetApp Node. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Universally unique identifier of NetApp Node. | [optional] [readonly] 
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
+**Events** | Pointer to [**[]StorageNetAppNodeEventRelationship**](StorageNetAppNodeEventRelationship.md) | An array of relationships to storageNetAppNodeEvent resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -258,6 +259,41 @@ SetArray sets Array field to given value.
 
 HasArray returns a boolean if a field has been set.
 
+### GetEvents
+
+`func (o *StorageNetAppNodeAllOf) GetEvents() []StorageNetAppNodeEventRelationship`
+
+GetEvents returns the Events field if non-nil, zero value otherwise.
+
+### GetEventsOk
+
+`func (o *StorageNetAppNodeAllOf) GetEventsOk() (*[]StorageNetAppNodeEventRelationship, bool)`
+
+GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvents
+
+`func (o *StorageNetAppNodeAllOf) SetEvents(v []StorageNetAppNodeEventRelationship)`
+
+SetEvents sets Events field to given value.
+
+### HasEvents
+
+`func (o *StorageNetAppNodeAllOf) HasEvents() bool`
+
+HasEvents returns a boolean if a field has been set.
+
+### SetEventsNil
+
+`func (o *StorageNetAppNodeAllOf) SetEventsNil(b bool)`
+
+ SetEventsNil sets the value for Events to be an explicit nil
+
+### UnsetEvents
+`func (o *StorageNetAppNodeAllOf) UnsetEvents()`
+
+UnsetEvents ensures that no value is present for Events, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

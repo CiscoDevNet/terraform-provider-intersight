@@ -737,7 +737,7 @@ func dataSourceNiaapiNibFileDownloaderRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -863,7 +863,7 @@ func dataSourceNiaapiNibFileDownloaderRead(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

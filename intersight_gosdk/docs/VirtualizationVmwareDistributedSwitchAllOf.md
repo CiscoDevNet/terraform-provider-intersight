@@ -7,13 +7,16 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareDistributedSwitch"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareDistributedSwitch"]
 **Description** | Pointer to **string** | Switch description (user provided), if any. | [optional] 
+**DiscoveryProtocol** | Pointer to [**NullableVirtualizationVmwareDiscoveryProtocol**](VirtualizationVmwareDiscoveryProtocol.md) |  | [optional] 
 **MaxPort** | Pointer to **int64** | Maximum number of ports allowed on this distributed virtual switch. | [optional] 
 **Mtu** | Pointer to **int64** | Maximum transmission unit configured on a distributed virtual switch. | [optional] 
+**NetworkIoControl** | Pointer to **bool** | If network io control is enabled, will set the value as true. | [optional] 
 **NicTeamingAndFailover** | Pointer to [**NullableVirtualizationVmwareTeamingAndFailover**](VirtualizationVmwareTeamingAndFailover.md) |  | [optional] 
 **NumHosts** | Pointer to **int64** | The total number of hosts attached to the distributed virtual switch. | [optional] 
 **NumNetworks** | Pointer to **int64** | The total number of distributed networks in the distributed virtual switch. | [optional] 
 **NumStandAlonePorts** | Pointer to **int64** | Number of stand-alone ports in use. | [optional] 
 **NumUplinks** | Pointer to **int64** | Number of uplinks configured in this distributed virtual switch. | [optional] 
+**ResourceAllocationSystemTraffic** | Pointer to [**[]VirtualizationVmwareResourceAllocationSystemTrafficTypes**](VirtualizationVmwareResourceAllocationSystemTrafficTypes.md) |  | [optional] 
 **SwitchCapacity** | Pointer to [**NullableVirtualizationStorageCapacity**](VirtualizationStorageCapacity.md) |  | [optional] 
 **Uuid** | Pointer to **string** | Universally Unique Id of this distributed virtual switch. | [optional] 
 **Version** | Pointer to **string** | The running config&#39;s version details are represented. | [optional] 
@@ -104,6 +107,41 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### GetDiscoveryProtocol
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) GetDiscoveryProtocol() VirtualizationVmwareDiscoveryProtocol`
+
+GetDiscoveryProtocol returns the DiscoveryProtocol field if non-nil, zero value otherwise.
+
+### GetDiscoveryProtocolOk
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) GetDiscoveryProtocolOk() (*VirtualizationVmwareDiscoveryProtocol, bool)`
+
+GetDiscoveryProtocolOk returns a tuple with the DiscoveryProtocol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiscoveryProtocol
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) SetDiscoveryProtocol(v VirtualizationVmwareDiscoveryProtocol)`
+
+SetDiscoveryProtocol sets DiscoveryProtocol field to given value.
+
+### HasDiscoveryProtocol
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) HasDiscoveryProtocol() bool`
+
+HasDiscoveryProtocol returns a boolean if a field has been set.
+
+### SetDiscoveryProtocolNil
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) SetDiscoveryProtocolNil(b bool)`
+
+ SetDiscoveryProtocolNil sets the value for DiscoveryProtocol to be an explicit nil
+
+### UnsetDiscoveryProtocol
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) UnsetDiscoveryProtocol()`
+
+UnsetDiscoveryProtocol ensures that no value is present for DiscoveryProtocol, not even an explicit nil
 ### GetMaxPort
 
 `func (o *VirtualizationVmwareDistributedSwitchAllOf) GetMaxPort() int64`
@@ -153,6 +191,31 @@ SetMtu sets Mtu field to given value.
 `func (o *VirtualizationVmwareDistributedSwitchAllOf) HasMtu() bool`
 
 HasMtu returns a boolean if a field has been set.
+
+### GetNetworkIoControl
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) GetNetworkIoControl() bool`
+
+GetNetworkIoControl returns the NetworkIoControl field if non-nil, zero value otherwise.
+
+### GetNetworkIoControlOk
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) GetNetworkIoControlOk() (*bool, bool)`
+
+GetNetworkIoControlOk returns a tuple with the NetworkIoControl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkIoControl
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) SetNetworkIoControl(v bool)`
+
+SetNetworkIoControl sets NetworkIoControl field to given value.
+
+### HasNetworkIoControl
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) HasNetworkIoControl() bool`
+
+HasNetworkIoControl returns a boolean if a field has been set.
 
 ### GetNicTeamingAndFailover
 
@@ -289,6 +352,41 @@ SetNumUplinks sets NumUplinks field to given value.
 
 HasNumUplinks returns a boolean if a field has been set.
 
+### GetResourceAllocationSystemTraffic
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) GetResourceAllocationSystemTraffic() []VirtualizationVmwareResourceAllocationSystemTrafficTypes`
+
+GetResourceAllocationSystemTraffic returns the ResourceAllocationSystemTraffic field if non-nil, zero value otherwise.
+
+### GetResourceAllocationSystemTrafficOk
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) GetResourceAllocationSystemTrafficOk() (*[]VirtualizationVmwareResourceAllocationSystemTrafficTypes, bool)`
+
+GetResourceAllocationSystemTrafficOk returns a tuple with the ResourceAllocationSystemTraffic field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceAllocationSystemTraffic
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) SetResourceAllocationSystemTraffic(v []VirtualizationVmwareResourceAllocationSystemTrafficTypes)`
+
+SetResourceAllocationSystemTraffic sets ResourceAllocationSystemTraffic field to given value.
+
+### HasResourceAllocationSystemTraffic
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) HasResourceAllocationSystemTraffic() bool`
+
+HasResourceAllocationSystemTraffic returns a boolean if a field has been set.
+
+### SetResourceAllocationSystemTrafficNil
+
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) SetResourceAllocationSystemTrafficNil(b bool)`
+
+ SetResourceAllocationSystemTrafficNil sets the value for ResourceAllocationSystemTraffic to be an explicit nil
+
+### UnsetResourceAllocationSystemTraffic
+`func (o *VirtualizationVmwareDistributedSwitchAllOf) UnsetResourceAllocationSystemTraffic()`
+
+UnsetResourceAllocationSystemTraffic ensures that no value is present for ResourceAllocationSystemTraffic, not even an explicit nil
 ### GetSwitchCapacity
 
 `func (o *VirtualizationVmwareDistributedSwitchAllOf) GetSwitchCapacity() VirtualizationStorageCapacity`

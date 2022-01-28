@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **ClusterUuid** | Pointer to **string** | The unique identifier for this HyperFlex cluster. | [optional] [readonly] 
 **DeviceId** | Pointer to **string** | The unique identifier of the device registration that represents this HyperFlex cluster&#39;s connection to Intersight. | [optional] [readonly] 
 **DnsServers** | Pointer to **[]string** |  | [optional] 
+**EncryptionStatus** | Pointer to **string** | This captures the encryption status for a HyperFlex cluster. Currently it will have the status if HXA-CLU-0020 alarm is raised. In the future it can capture other details. | [optional] 
 **FltAggr** | Pointer to **int64** | The number of yellow (warning) and red (critical) alarms stored as an aggregate. The first 16 bits indicate the number of red alarms, and the last 16 bits contain the number of yellow alarms. | [optional] [readonly] 
 **HxdpBuildVersion** | Pointer to **string** | The version and build number of the HyperFlex Data Platform for this cluster. After a cluster upgrade, this version string will be updated on the next inventory cycle to reflect the newly installed version. | [optional] [readonly] 
 **NtpServers** | Pointer to **[]string** |  | [optional] 
@@ -17,6 +18,7 @@ Name | Type | Description | Notes
 **UpgradeStatus** | Pointer to **string** | The upgrade status of the HyperFlex cluster. * &#x60;Unknown&#x60; - The upgrade status of the HyperFlex cluster could not be determined. * &#x60;Ok&#x60; - The upgrade of the HyperFlex cluster is complete. * &#x60;InProgress&#x60; - The upgrade of the HyperFlex cluster is in-progress. * &#x60;Failed&#x60; - The upgrade of the HyperFlex cluster has failed. * &#x60;Waiting&#x60; - The upgrade of the HyperFlex cluster is waiting to continue execution. | [optional] [readonly] [default to "Unknown"]
 **VmCount** | Pointer to **int64** | The number of virtual machines present on this cluster. | [optional] [readonly] 
 **Alarm** | Pointer to [**[]HyperflexAlarmRelationship**](HyperflexAlarmRelationship.md) | An array of relationships to hyperflexAlarm resources. | [optional] [readonly] 
+**Encryption** | Pointer to [**HyperflexEncryptionRelationship**](HyperflexEncryptionRelationship.md) |  | [optional] 
 **Health** | Pointer to [**HyperflexHealthRelationship**](HyperflexHealthRelationship.md) |  | [optional] 
 **License** | Pointer to [**HyperflexLicenseRelationship**](HyperflexLicenseRelationship.md) |  | [optional] 
 **Nodes** | Pointer to [**[]HyperflexNodeRelationship**](HyperflexNodeRelationship.md) | An array of relationships to hyperflexNode resources. | [optional] [readonly] 
@@ -195,6 +197,31 @@ HasDnsServers returns a boolean if a field has been set.
 `func (o *HyperflexClusterAllOf) UnsetDnsServers()`
 
 UnsetDnsServers ensures that no value is present for DnsServers, not even an explicit nil
+### GetEncryptionStatus
+
+`func (o *HyperflexClusterAllOf) GetEncryptionStatus() string`
+
+GetEncryptionStatus returns the EncryptionStatus field if non-nil, zero value otherwise.
+
+### GetEncryptionStatusOk
+
+`func (o *HyperflexClusterAllOf) GetEncryptionStatusOk() (*string, bool)`
+
+GetEncryptionStatusOk returns a tuple with the EncryptionStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncryptionStatus
+
+`func (o *HyperflexClusterAllOf) SetEncryptionStatus(v string)`
+
+SetEncryptionStatus sets EncryptionStatus field to given value.
+
+### HasEncryptionStatus
+
+`func (o *HyperflexClusterAllOf) HasEncryptionStatus() bool`
+
+HasEncryptionStatus returns a boolean if a field has been set.
+
 ### GetFltAggr
 
 `func (o *HyperflexClusterAllOf) GetFltAggr() int64`
@@ -400,6 +427,31 @@ HasAlarm returns a boolean if a field has been set.
 `func (o *HyperflexClusterAllOf) UnsetAlarm()`
 
 UnsetAlarm ensures that no value is present for Alarm, not even an explicit nil
+### GetEncryption
+
+`func (o *HyperflexClusterAllOf) GetEncryption() HyperflexEncryptionRelationship`
+
+GetEncryption returns the Encryption field if non-nil, zero value otherwise.
+
+### GetEncryptionOk
+
+`func (o *HyperflexClusterAllOf) GetEncryptionOk() (*HyperflexEncryptionRelationship, bool)`
+
+GetEncryptionOk returns a tuple with the Encryption field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEncryption
+
+`func (o *HyperflexClusterAllOf) SetEncryption(v HyperflexEncryptionRelationship)`
+
+SetEncryption sets Encryption field to given value.
+
+### HasEncryption
+
+`func (o *HyperflexClusterAllOf) HasEncryption() bool`
+
+HasEncryption returns a boolean if a field has been set.
+
 ### GetHealth
 
 `func (o *HyperflexClusterAllOf) GetHealth() HyperflexHealthRelationship`

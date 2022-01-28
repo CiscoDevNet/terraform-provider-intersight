@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | A name for the pending dynamic workflow. | [optional] 
 **PendingServices** | Pointer to **[]string** |  | [optional] 
 **Src** | Pointer to **string** | The src is workflow owner service. | [optional] 
-**Status** | Pointer to **string** | The current status of the PendingDynamicWorkflowInfo. * &#x60;GatheringTasks&#x60; - Dynamic workflow is gathering tasks before workflow can start execution. * &#x60;Waiting&#x60; - Dynamic workflow is in waiting state and not yet started execution. | [optional] [default to "GatheringTasks"]
+**Status** | Pointer to **string** | The current status of the PendingDynamicWorkflowInfo. * &#x60;GatheringTasks&#x60; - Dynamic workflow is gathering tasks before workflow can start execution. * &#x60;Waiting&#x60; - Dynamic workflow is in waiting state and not yet started execution. * &#x60;RateLimit&#x60; - Dynamic workflow is rate limited and hasn&#39;t started execution. | [optional] [default to "GatheringTasks"]
 **WaitOnDuplicate** | Pointer to **bool** | When set to true workflow engine will wait for a duplicate to finish before starting a new one. | [optional] 
 **WorkflowActionTaskLists** | Pointer to [**[]WorkflowDynamicWorkflowActionTaskList**](WorkflowDynamicWorkflowActionTaskList.md) |  | [optional] 
 **WorkflowCtx** | Pointer to [**NullableWorkflowWorkflowCtx**](WorkflowWorkflowCtx.md) |  | [optional] 

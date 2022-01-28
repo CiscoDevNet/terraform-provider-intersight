@@ -22,6 +22,15 @@ resource "intersight_kubernetes_node_group_profile" "kubernetes_node_group_profi
     error_state    = "Pre-config-error"
   }
   node_type = "Worker"
+  cluster_profile {
+    moid        = var.kubernetes_cluster_profile
+    object_type = "kubernetes.ClusterProfile"
+  }
+}
+
+variable "kubernetes_cluster_profile" {
+  type        = string
+  description = "Moid of kubernetes.ClusterProfile"
 }
 ```
 ## Argument Reference

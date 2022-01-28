@@ -15,13 +15,12 @@ A HyperFlex Data Platform version.
 resource "intersight_hyperflex_hxdp_version" "hyperflex_hxdp_version1" {
   app_catalog {
     object_type = "hyperflex.AppCatalog"
-    moid        = "hyperflex_app_catalog"
+    moid        = "6115d0746973682d31fe8d13"
   }
   parent {
     object_type = "hyperflex.AppCatalog"
-    moid        = var.hyperflex_app_catalog
+    moid        = "6115d0746973682d31fe8d13"
   }
-  version = "4.0(2e)"
 }
 ```
 ## Argument Reference

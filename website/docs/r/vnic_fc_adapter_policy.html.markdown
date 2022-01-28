@@ -62,6 +62,11 @@ resource "intersight_vnic_fc_adapter_policy" "v_fc_adapter1" {
   }
 
 }
+
+variable "organization" {
+   type = string
+   description = "<value for organization>"
+ }
 ```
 ## Argument Reference
 The following arguments are supported:

@@ -496,7 +496,7 @@ func resourceHyperflexServerFirmwareVersionEntryCreate(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("hyperflex.AppSettingConstraint")
+			o.SetClassId("")
 			if v, ok := l["deployment_type"]; ok {
 				{
 					x := (v.(string))
@@ -564,7 +564,7 @@ func resourceHyperflexServerFirmwareVersionEntryCreate(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -654,8 +654,8 @@ func resourceHyperflexServerFirmwareVersionEntryCreate(c context.Context, d *sch
 func resourceHyperflexServerFirmwareVersionEntryRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexServerFirmwareVersionEntryByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -789,7 +789,7 @@ func resourceHyperflexServerFirmwareVersionEntryUpdate(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("hyperflex.AppSettingConstraint")
+			o.SetClassId("")
 			if v, ok := l["deployment_type"]; ok {
 				{
 					x := (v.(string))
@@ -859,7 +859,7 @@ func resourceHyperflexServerFirmwareVersionEntryUpdate(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

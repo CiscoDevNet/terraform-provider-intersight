@@ -932,7 +932,7 @@ func dataSourceAdapterUnitExpanderRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1080,7 +1080,7 @@ func dataSourceAdapterUnitExpanderRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1173,7 +1173,7 @@ func dataSourceAdapterUnitExpanderRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1216,7 +1216,7 @@ func dataSourceAdapterUnitExpanderRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1317,7 +1317,7 @@ func dataSourceAdapterUnitExpanderRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

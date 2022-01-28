@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -26,7 +26,7 @@ type StorageNetAppCluster struct {
 	ObjectType            string                                        `json:"ObjectType"`
 	AvgPerformanceMetrics *StorageNetAppPerformanceMetricsAverage       `json:"AvgPerformanceMetrics,omitempty"`
 	ClusterEfficiency     NullableStorageNetAppStorageClusterEfficiency `json:"ClusterEfficiency,omitempty"`
-	// The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable.
+	// The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable. * `Unreachable` - Cluster status is unreachable. * `OK` - Cluster status is either ok or ok-with-suppressed. * `Degraded` - Cluster status is degraded.
 	ClusterHealthStatus *string  `json:"ClusterHealthStatus,omitempty"`
 	DnsDomains          []string `json:"DnsDomains,omitempty"`
 	// Unique identifier of NetApp Cluster across data center.
@@ -34,10 +34,12 @@ type StorageNetAppCluster struct {
 	// Location of the storage controller.
 	Location *string `json:"Location,omitempty"`
 	// FQDN or IP Address of Storage Cluster.
-	ManagementAddress    *string                              `json:"ManagementAddress,omitempty"`
-	NameServers          []string                             `json:"NameServers,omitempty"`
-	NtpServers           []string                             `json:"NtpServers,omitempty"`
-	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+	ManagementAddress *string  `json:"ManagementAddress,omitempty"`
+	NameServers       []string `json:"NameServers,omitempty"`
+	NtpServers        []string `json:"NtpServers,omitempty"`
+	// An array of relationships to storageNetAppClusterEvent resources.
+	Events               []StorageNetAppClusterEventRelationship `json:"Events,omitempty"`
+	RegisteredDevice     *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -416,6 +418,39 @@ func (o *StorageNetAppCluster) SetNtpServers(v []string) {
 	o.NtpServers = v
 }
 
+// GetEvents returns the Events field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StorageNetAppCluster) GetEvents() []StorageNetAppClusterEventRelationship {
+	if o == nil {
+		var ret []StorageNetAppClusterEventRelationship
+		return ret
+	}
+	return o.Events
+}
+
+// GetEventsOk returns a tuple with the Events field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StorageNetAppCluster) GetEventsOk() (*[]StorageNetAppClusterEventRelationship, bool) {
+	if o == nil || o.Events == nil {
+		return nil, false
+	}
+	return &o.Events, true
+}
+
+// HasEvents returns a boolean if a field has been set.
+func (o *StorageNetAppCluster) HasEvents() bool {
+	if o != nil && o.Events != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEvents gets a reference to the given []StorageNetAppClusterEventRelationship and assigns it to the Events field.
+func (o *StorageNetAppCluster) SetEvents(v []StorageNetAppClusterEventRelationship) {
+	o.Events = v
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
 func (o *StorageNetAppCluster) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || o.RegisteredDevice == nil {
@@ -491,6 +526,9 @@ func (o StorageNetAppCluster) MarshalJSON() ([]byte, error) {
 	if o.NtpServers != nil {
 		toSerialize["NtpServers"] = o.NtpServers
 	}
+	if o.Events != nil {
+		toSerialize["Events"] = o.Events
+	}
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
 	}
@@ -510,7 +548,7 @@ func (o *StorageNetAppCluster) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType            string                                        `json:"ObjectType"`
 		AvgPerformanceMetrics *StorageNetAppPerformanceMetricsAverage       `json:"AvgPerformanceMetrics,omitempty"`
 		ClusterEfficiency     NullableStorageNetAppStorageClusterEfficiency `json:"ClusterEfficiency,omitempty"`
-		// The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable.
+		// The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable. * `Unreachable` - Cluster status is unreachable. * `OK` - Cluster status is either ok or ok-with-suppressed. * `Degraded` - Cluster status is degraded.
 		ClusterHealthStatus *string  `json:"ClusterHealthStatus,omitempty"`
 		DnsDomains          []string `json:"DnsDomains,omitempty"`
 		// Unique identifier of NetApp Cluster across data center.
@@ -518,10 +556,12 @@ func (o *StorageNetAppCluster) UnmarshalJSON(bytes []byte) (err error) {
 		// Location of the storage controller.
 		Location *string `json:"Location,omitempty"`
 		// FQDN or IP Address of Storage Cluster.
-		ManagementAddress *string                              `json:"ManagementAddress,omitempty"`
-		NameServers       []string                             `json:"NameServers,omitempty"`
-		NtpServers        []string                             `json:"NtpServers,omitempty"`
-		RegisteredDevice  *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
+		ManagementAddress *string  `json:"ManagementAddress,omitempty"`
+		NameServers       []string `json:"NameServers,omitempty"`
+		NtpServers        []string `json:"NtpServers,omitempty"`
+		// An array of relationships to storageNetAppClusterEvent resources.
+		Events           []StorageNetAppClusterEventRelationship `json:"Events,omitempty"`
+		RegisteredDevice *AssetDeviceRegistrationRelationship    `json:"RegisteredDevice,omitempty"`
 	}
 
 	varStorageNetAppClusterWithoutEmbeddedStruct := StorageNetAppClusterWithoutEmbeddedStruct{}
@@ -540,6 +580,7 @@ func (o *StorageNetAppCluster) UnmarshalJSON(bytes []byte) (err error) {
 		varStorageNetAppCluster.ManagementAddress = varStorageNetAppClusterWithoutEmbeddedStruct.ManagementAddress
 		varStorageNetAppCluster.NameServers = varStorageNetAppClusterWithoutEmbeddedStruct.NameServers
 		varStorageNetAppCluster.NtpServers = varStorageNetAppClusterWithoutEmbeddedStruct.NtpServers
+		varStorageNetAppCluster.Events = varStorageNetAppClusterWithoutEmbeddedStruct.Events
 		varStorageNetAppCluster.RegisteredDevice = varStorageNetAppClusterWithoutEmbeddedStruct.RegisteredDevice
 		*o = StorageNetAppCluster(varStorageNetAppCluster)
 	} else {
@@ -569,6 +610,7 @@ func (o *StorageNetAppCluster) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ManagementAddress")
 		delete(additionalProperties, "NameServers")
 		delete(additionalProperties, "NtpServers")
+		delete(additionalProperties, "Events")
 		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs

@@ -1249,7 +1249,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1312,7 +1312,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("kubernetes.BaremetalNetworkInfo")
+			o.SetClassId("")
 			if v, ok := l["ethernets"]; ok {
 				{
 					x := make([]models.KubernetesEthernet, 0)
@@ -1405,7 +1405,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 											}
 										}
 									}
-									o.SetClassId("kubernetes.EthernetMatcher")
+									o.SetClassId("")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -1699,7 +1699,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1786,7 +1786,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1829,7 +1829,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1907,7 +1907,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1957,8 +1957,8 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 func resourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesBaremetalNodeProfileByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -2193,7 +2193,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -2261,7 +2261,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("kubernetes.BaremetalNetworkInfo")
+			o.SetClassId("")
 			if v, ok := l["ethernets"]; ok {
 				{
 					x := make([]models.KubernetesEthernet, 0)
@@ -2354,7 +2354,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 											}
 										}
 									}
-									o.SetClassId("kubernetes.EthernetMatcher")
+									o.SetClassId("")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -2649,7 +2649,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2736,7 +2736,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2780,7 +2780,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2858,7 +2858,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

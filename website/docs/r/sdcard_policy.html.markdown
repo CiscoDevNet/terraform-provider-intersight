@@ -32,6 +32,11 @@ resource "intersight_sdcard_policy" "sdcard1" {
     }
   }
 }
+
+ variable "organization" {
+   type = string
+   description = "value for organization"
+ }
 ```
 ## Argument Reference
 The following arguments are supported:

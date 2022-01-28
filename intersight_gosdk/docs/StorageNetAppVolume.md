@@ -12,12 +12,14 @@ Name | Type | Description | Notes
 **Key** | Pointer to **string** | Unique identifier of NetApp Volume across data center. | [optional] [readonly] 
 **SnapshotPolicyName** | Pointer to **string** | The name of the Snapshot Policy. | [optional] [readonly] 
 **SnapshotPolicyUuid** | Pointer to **string** | The UUID of the Snapshot Policy. | [optional] [readonly] 
-**SnapshotUtilizedCapacity** | Pointer to **int64** | The total space used by Snapshot copies in the volume represented in bytes. | [optional] [readonly] 
+**SnapshotReservePercent** | Pointer to **int64** | The space that has been set aside as a reserve for Snapshot copy usage represented as a percent. | [optional] [readonly] 
+**SnapshotUsed** | Pointer to **float64** | The total space used by Snapshot copies in the volume represented in bytes. | [optional] [readonly] 
 **State** | Pointer to **string** | The current state of a NetApp volume. * &#x60;offline&#x60; - Read and write access to the volume is not allowed. * &#x60;online&#x60; - Read and write access to the volume is allowed. * &#x60;error&#x60; - Storage volume state of error type. * &#x60;mixed&#x60; - The constituents of a FlexGroup volume are not all in the same state. | [optional] [readonly] [default to "offline"]
 **Type** | Pointer to **string** | NetApp volume type. The volume type can be Read-write, Data-protection, or Load-sharing. * &#x60;data-protection&#x60; - Prevents modification of the data on the Volume. * &#x60;read-write&#x60; - Data on the Volume can be modified. * &#x60;load-sharing&#x60; - The volume type is Load Sharing DP. | [optional] [readonly] [default to "data-protection"]
 **Uuid** | Pointer to **string** | Universally unique identifier of a NetApp Volume. | [optional] [readonly] 
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 **DiskPool** | Pointer to [**[]StorageNetAppAggregateRelationship**](StorageNetAppAggregateRelationship.md) | An array of relationships to storageNetAppAggregate resources. | [optional] [readonly] 
+**Events** | Pointer to [**[]StorageNetAppVolumeEventRelationship**](StorageNetAppVolumeEventRelationship.md) | An array of relationships to storageNetAppVolumeEvent resources. | [optional] [readonly] 
 **Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
 
 ## Methods
@@ -229,30 +231,55 @@ SetSnapshotPolicyUuid sets SnapshotPolicyUuid field to given value.
 
 HasSnapshotPolicyUuid returns a boolean if a field has been set.
 
-### GetSnapshotUtilizedCapacity
+### GetSnapshotReservePercent
 
-`func (o *StorageNetAppVolume) GetSnapshotUtilizedCapacity() int64`
+`func (o *StorageNetAppVolume) GetSnapshotReservePercent() int64`
 
-GetSnapshotUtilizedCapacity returns the SnapshotUtilizedCapacity field if non-nil, zero value otherwise.
+GetSnapshotReservePercent returns the SnapshotReservePercent field if non-nil, zero value otherwise.
 
-### GetSnapshotUtilizedCapacityOk
+### GetSnapshotReservePercentOk
 
-`func (o *StorageNetAppVolume) GetSnapshotUtilizedCapacityOk() (*int64, bool)`
+`func (o *StorageNetAppVolume) GetSnapshotReservePercentOk() (*int64, bool)`
 
-GetSnapshotUtilizedCapacityOk returns a tuple with the SnapshotUtilizedCapacity field if it's non-nil, zero value otherwise
+GetSnapshotReservePercentOk returns a tuple with the SnapshotReservePercent field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSnapshotUtilizedCapacity
+### SetSnapshotReservePercent
 
-`func (o *StorageNetAppVolume) SetSnapshotUtilizedCapacity(v int64)`
+`func (o *StorageNetAppVolume) SetSnapshotReservePercent(v int64)`
 
-SetSnapshotUtilizedCapacity sets SnapshotUtilizedCapacity field to given value.
+SetSnapshotReservePercent sets SnapshotReservePercent field to given value.
 
-### HasSnapshotUtilizedCapacity
+### HasSnapshotReservePercent
 
-`func (o *StorageNetAppVolume) HasSnapshotUtilizedCapacity() bool`
+`func (o *StorageNetAppVolume) HasSnapshotReservePercent() bool`
 
-HasSnapshotUtilizedCapacity returns a boolean if a field has been set.
+HasSnapshotReservePercent returns a boolean if a field has been set.
+
+### GetSnapshotUsed
+
+`func (o *StorageNetAppVolume) GetSnapshotUsed() float64`
+
+GetSnapshotUsed returns the SnapshotUsed field if non-nil, zero value otherwise.
+
+### GetSnapshotUsedOk
+
+`func (o *StorageNetAppVolume) GetSnapshotUsedOk() (*float64, bool)`
+
+GetSnapshotUsedOk returns a tuple with the SnapshotUsed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnapshotUsed
+
+`func (o *StorageNetAppVolume) SetSnapshotUsed(v float64)`
+
+SetSnapshotUsed sets SnapshotUsed field to given value.
+
+### HasSnapshotUsed
+
+`func (o *StorageNetAppVolume) HasSnapshotUsed() bool`
+
+HasSnapshotUsed returns a boolean if a field has been set.
 
 ### GetState
 
@@ -389,6 +416,41 @@ HasDiskPool returns a boolean if a field has been set.
 `func (o *StorageNetAppVolume) UnsetDiskPool()`
 
 UnsetDiskPool ensures that no value is present for DiskPool, not even an explicit nil
+### GetEvents
+
+`func (o *StorageNetAppVolume) GetEvents() []StorageNetAppVolumeEventRelationship`
+
+GetEvents returns the Events field if non-nil, zero value otherwise.
+
+### GetEventsOk
+
+`func (o *StorageNetAppVolume) GetEventsOk() (*[]StorageNetAppVolumeEventRelationship, bool)`
+
+GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvents
+
+`func (o *StorageNetAppVolume) SetEvents(v []StorageNetAppVolumeEventRelationship)`
+
+SetEvents sets Events field to given value.
+
+### HasEvents
+
+`func (o *StorageNetAppVolume) HasEvents() bool`
+
+HasEvents returns a boolean if a field has been set.
+
+### SetEventsNil
+
+`func (o *StorageNetAppVolume) SetEventsNil(b bool)`
+
+ SetEventsNil sets the value for Events to be an explicit nil
+
+### UnsetEvents
+`func (o *StorageNetAppVolume) UnsetEvents()`
+
+UnsetEvents ensures that no value is present for Events, not even an explicit nil
 ### GetTenant
 
 `func (o *StorageNetAppVolume) GetTenant() StorageNetAppStorageVmRelationship`

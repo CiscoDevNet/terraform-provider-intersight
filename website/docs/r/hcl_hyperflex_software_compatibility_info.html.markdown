@@ -14,21 +14,23 @@ Lists software compatibility information between different HperFlex component ve
 ```hcl
 resource "intersight_hcl_hyperflex_software_compatibility_info" "hcl_hyperflex_software_compatibility_info1" {
   app_catalog {
-    moid        = var.hyperflex_catalog
+    moid        = "6115d0746973682d31fe8d13"
     object_type = "hyperflex.AppCatalog"
   }
   constraints = [
     {
-      constraint_name  = "supportedOperations"
-      constraint_value = "UPGRADE"
-      object_type      = "hcl.Constraint"
+      constraint_name       = "supportedOperations"
+      constraint_value      = "UPGRADE"
+      object_type           = "hcl.Constraint"
+      additional_properties = ""
+      class_id              = "hcl.Constraint"
     }
   ]
   hxdp_version       = "4.5(1a)-39020"
   hypervisor_type    = "ESXi"
   hypervisor_version = "HX-ESXi-7.0U1-17325551-Cisco-Custom-7.1.0.4"
   parent {
-    moid        = var.hyperflex_catalog
+    moid        = "6115d0746973682d31fe8d13"
     object_type = "hyperflex.AppCatalog"
   }
   server_fw_version = "4.0(1a)"
@@ -57,6 +59,7 @@ This complex property has following sub-properties:
 * `hxdp_version`:(string) HXDP component software version. 
 * `hypervisor_type`:(string) Type fo Hypervisor the HyperFlex components versions are compatible with. For example ESX, Hyperv or KVM.* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
 * `hypervisor_version`:(string) Hypervisor component software version. 
+* `is_mgmt_build`:(string) Type of the HXDP bundle mgmt or full. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `owners`:

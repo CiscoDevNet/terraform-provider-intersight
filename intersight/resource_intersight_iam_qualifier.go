@@ -484,7 +484,7 @@ func resourceIamQualifierCreate(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -542,8 +542,8 @@ func resourceIamQualifierCreate(c context.Context, d *schema.ResourceData, meta 
 func resourceIamQualifierRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamQualifierByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -715,7 +715,7 @@ func resourceIamQualifierUpdate(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

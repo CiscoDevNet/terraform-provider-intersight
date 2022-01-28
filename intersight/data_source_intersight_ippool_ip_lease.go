@@ -1316,7 +1316,7 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1359,7 +1359,7 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1427,7 +1427,7 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("ippool.IpV4Config")
+			o.SetClassId("")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -1487,7 +1487,7 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("ippool.IpV6Config")
+			o.SetClassId("")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -1568,7 +1568,7 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1651,7 +1651,7 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1694,7 +1694,7 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1775,7 +1775,7 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1818,7 +1818,7 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1892,7 +1892,7 @@ func dataSourceIppoolIpLeaseRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

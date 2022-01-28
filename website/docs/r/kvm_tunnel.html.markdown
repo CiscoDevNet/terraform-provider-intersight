@@ -16,13 +16,23 @@ This must be specified while creating the vKVM session to gain tunneled access.
 ```hcl
 resource "intersight_kvm_tunnel" "kvm_tunnel1" {
   device {
-    moid        = var.asset_device_registration
+    moid        = var.device_registration
     object_type = "asset.DeviceRegistration"
   }
   server {
-    moid        = var.compute_rack_unit
+    moid        = var.compute_rack_unit_moid
     object_type = "compute.RackUnit"
   }
+}
+
+variable "device_registration" {
+  type        = string
+  description = "Moid of asset_device_registration"
+}
+
+variable "compute_rack_unit_moid" {
+  type        = string
+  description = "Moid of compute_rack_unit"
 }
 ```
 ## Argument Reference

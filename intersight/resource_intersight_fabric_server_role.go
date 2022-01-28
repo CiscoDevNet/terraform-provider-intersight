@@ -460,7 +460,7 @@ func resourceFabricServerRoleCreate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -545,8 +545,8 @@ func resourceFabricServerRoleCreate(c context.Context, d *schema.ResourceData, m
 func resourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.FabricApi.GetFabricServerRoleByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -700,7 +700,7 @@ func resourceFabricServerRoleUpdate(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

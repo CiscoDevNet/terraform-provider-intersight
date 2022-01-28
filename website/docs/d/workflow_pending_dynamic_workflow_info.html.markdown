@@ -21,7 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) A name for the pending dynamic workflow. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `src`:(string) The src is workflow owner service. 
-* `status`:(string) The current status of the PendingDynamicWorkflowInfo.* `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution.* `Waiting` - Dynamic workflow is in waiting state and not yet started execution. 
+* `status`:(string) The current status of the PendingDynamicWorkflowInfo.* `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution.* `Waiting` - Dynamic workflow is in waiting state and not yet started execution.* `RateLimit` - Dynamic workflow is rate limited and hasn't started execution. 
 * `wait_on_duplicate`:(bool) When set to true workflow engine will wait for a duplicate to finish before starting a new one. 
 * `workflow_key`:(string) This key contains workflow, initiator and target name. Workflow engine uses the key to do workflow dedup. 
  

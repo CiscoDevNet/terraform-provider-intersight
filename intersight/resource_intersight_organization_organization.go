@@ -573,8 +573,8 @@ func resourceOrganizationOrganizationCreate(c context.Context, d *schema.Resourc
 func resourceOrganizationOrganizationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.OrganizationApi.GetOrganizationOrganizationByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {

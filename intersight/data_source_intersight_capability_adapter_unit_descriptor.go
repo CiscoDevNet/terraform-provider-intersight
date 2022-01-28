@@ -20,6 +20,11 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 		Type:        schema.TypeString,
 		Optional:    true,
 	},
+		"adapter_generation": {
+			Description: "Generation of the adapter.\n* `4` - Fourth generation adapters (14xx). The PIDs of these adapters end with the string 04.\n* `2` - Second generation VIC adapters (12xx). The PIDs of these adapters end with the string 02.\n* `3` - Third generation adapters (13xx). The PIDs of these adapters end with the string 03.\n* `5` - Fifth generation adapters (15xx). The PIDs of these adapters contain the V5 string.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -123,6 +128,54 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"features": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"feature_name": {
+						Description: "Name of the feature that identifies the specific adapter configuration.\n* `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2.\n* `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1.\n* `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature.\n* `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature.\n* `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature.\n* `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature.\n* `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature.\n* `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"min_fw_version": {
+						Description: "Firmware version from which support for this feature is available.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"supported_fw_versions": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"supported_in_adapters": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"supported_in_generations": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeInt}},
+				},
+			},
+		},
 		"fibre_channel_port_speed": {
 			Description: "The port speed for fibre channel ports in Mbps.",
 			Type:        schema.TypeInt,
@@ -141,6 +194,11 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 		"is_geneve_supported": {
 			Description: "Indicates that the GENEVE offload feature is supported by this adapter.",
 			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"max_rocev2_interfaces": {
+			Description: "Maximum number of vNIC interfaces that can be RoCEv2 enabled.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -404,6 +462,11 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 		Type:        schema.TypeString,
 		Optional:    true,
 	},
+		"adapter_generation": {
+			Description: "Generation of the adapter.\n* `4` - Fourth generation adapters (14xx). The PIDs of these adapters end with the string 04.\n* `2` - Second generation VIC adapters (12xx). The PIDs of these adapters end with the string 02.\n* `3` - Third generation adapters (13xx). The PIDs of these adapters end with the string 03.\n* `5` - Fifth generation adapters (15xx). The PIDs of these adapters contain the V5 string.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"additional_properties": {
 			Type:             schema.TypeString,
 			Optional:         true,
@@ -507,6 +570,54 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"features": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"feature_name": {
+						Description: "Name of the feature that identifies the specific adapter configuration.\n* `RoCEv2` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 2.\n* `RoCEv1` - Capability indicator of the RDMA over Converged Ethernet (RoCE) feature version 1.\n* `VMQ` - Capability indicator of the Virtual Machine Queue (VMQ) feature.\n* `VMMQ` - Capability indicator of the Virtual Machine Multi-Queue (VMMQ) feature.\n* `VMQInterrupts` - Capability indicator of the Virtual Machine Queue (VMQ) Interrupts feature.\n* `NVGRE` - Capability indicator of the Network Virtualization using Generic Routing Encapsulation (NVGRE) feature.\n* `ARFS` - Capability indicator of the Accelerated Receive Flow Steering (ARFS) feature.\n* `VXLAN` - Capability indicator of the Virtual Extensible LAN (VXLAN) feature.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"min_fw_version": {
+						Description: "Firmware version from which support for this feature is available.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"supported_fw_versions": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"supported_in_adapters": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeString}},
+					"supported_in_generations": {
+						Type:     schema.TypeList,
+						Optional: true,
+						Elem: &schema.Schema{
+							Type: schema.TypeInt}},
+				},
+			},
+		},
 		"fibre_channel_port_speed": {
 			Description: "The port speed for fibre channel ports in Mbps.",
 			Type:        schema.TypeInt,
@@ -525,6 +636,11 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 		"is_geneve_supported": {
 			Description: "Indicates that the GENEVE offload feature is supported by this adapter.",
 			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"max_rocev2_interfaces": {
+			Description: "Maximum number of vNIC interfaces that can be RoCEv2 enabled.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"mod_time": {
@@ -804,6 +920,11 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 		o.SetAccountMoid(x)
 	}
 
+	if v, ok := d.GetOkExists("adapter_generation"); ok {
+		x := int32(v.(int))
+		o.SetAdapterGeneration(x)
+	}
+
 	if v, ok := d.GetOk("additional_properties"); ok {
 		x := []byte(v.(string))
 		var x1 interface{}
@@ -923,6 +1044,88 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 		o.SetEthernetPortSpeed(x)
 	}
 
+	if v, ok := d.GetOk("features"); ok {
+		x := make([]models.CapabilityFeatureConfig, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.CapabilityFeatureConfig{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.FeatureConfig")
+			if v, ok := l["feature_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetFeatureName(x)
+				}
+			}
+			if v, ok := l["min_fw_version"]; ok {
+				{
+					x := (v.(string))
+					o.SetMinFwVersion(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["supported_fw_versions"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetSupportedFwVersions(x)
+					}
+				}
+			}
+			if v, ok := l["supported_in_adapters"]; ok {
+				{
+					x := make([]string, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(string))
+						}
+					}
+					if len(x) > 0 {
+						o.SetSupportedInAdapters(x)
+					}
+				}
+			}
+			if v, ok := l["supported_in_generations"]; ok {
+				{
+					x := make([]int32, 0)
+					y := reflect.ValueOf(v)
+					for i := 0; i < y.Len(); i++ {
+						if y.Index(i).Interface() != nil {
+							x = append(x, y.Index(i).Interface().(int32))
+						}
+					}
+					if len(x) > 0 {
+						o.SetSupportedInGenerations(x)
+					}
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetFeatures(x)
+	}
+
 	if v, ok := d.GetOkExists("fibre_channel_port_speed"); ok {
 		x := int64(v.(int))
 		o.SetFibreChannelPortSpeed(x)
@@ -941,6 +1144,11 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 	if v, ok := d.GetOkExists("is_geneve_supported"); ok {
 		x := (v.(bool))
 		o.SetIsGeneveSupported(x)
+	}
+
+	if v, ok := d.GetOkExists("max_rocev2_interfaces"); ok {
+		x := int64(v.(int))
+		o.SetMaxRocev2Interfaces(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -995,7 +1203,7 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1136,7 +1344,7 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1231,6 +1439,7 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 				var s = results[i]
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
+				temp["adapter_generation"] = (s.GetAdapterGeneration())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
@@ -1243,10 +1452,13 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["ethernet_port_speed"] = (s.GetEthernetPortSpeed())
+
+				temp["features"] = flattenListCapabilityFeatureConfig(s.GetFeatures(), d)
 				temp["fibre_channel_port_speed"] = (s.GetFibreChannelPortSpeed())
 				temp["fibre_channel_scsi_ioq_limit"] = (s.GetFibreChannelScsiIoqLimit())
 				temp["is_azure_qos_supported"] = (s.GetIsAzureQosSupported())
 				temp["is_geneve_supported"] = (s.GetIsGeneveSupported())
+				temp["max_rocev2_interfaces"] = (s.GetMaxRocev2Interfaces())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())

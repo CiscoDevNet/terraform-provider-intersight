@@ -6,21 +6,32 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.Controller"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.Controller"]
+**ConnectedSasExpander** | Pointer to **bool** | Storage controller is connected to SAS expander. | [optional] 
 **ControllerFlags** | Pointer to **string** | The flags for the storage controller. | [optional] [readonly] 
 **ControllerId** | Pointer to **string** | The Id of the storage controller. | [optional] [readonly] 
 **ControllerStatus** | Pointer to **string** | The current status of controller. | [optional] [readonly] 
+**DefaultDriveMode** | Pointer to **string** | Auto configuration mode for the newly inserted physical drives. | [optional] 
+**EccBucketLeakRate** | Pointer to **int64** | The ECC bucket leak rate for the Storage Controller in minutes. | [optional] 
 **ForeignConfigPresent** | Pointer to **bool** | Storage controller has detected disks in foreign config. | [optional] 
 **HwRevision** | Pointer to **string** | The hardware revision of controller. | [optional] [readonly] 
 **InterfaceType** | Pointer to **string** | Interface types are Sas, Sata, PCH. | [optional] 
 **MaxVolumesSupported** | Pointer to **int64** | Maximum virtual drives that can be created on this Storage Controller. | [optional] 
+**MemoryCorrectableErrors** | Pointer to **int64** | The number of memory correctable errors reported by the Storage Controller. | [optional] 
+**Name** | Pointer to **string** | Name of the Storage Controller. | [optional] 
 **OobInterfaceSupported** | Pointer to **string** | The CIMC support for out-of-band configuration of controller. | [optional] [readonly] 
 **OperState** | Pointer to **string** | The current operational state of controller. | [optional] [readonly] 
 **Operability** | Pointer to **string** | Operability state of the storage controller. | [optional] [readonly] 
 **PciAddr** | Pointer to **string** | The current pci address of controller. | [optional] [readonly] 
 **PciSlot** | Pointer to **string** | The pci slot name for the controller. | [optional] [readonly] 
+**PersistentCacheSize** | Pointer to **int64** | The portion of the cache memory that is persistent, measured in MiB. | [optional] 
+**PinnedCacheState** | Pointer to **int64** | The pinned cache state of the Storage Controller. | [optional] 
 **RaidSupport** | Pointer to **string** | The RAID levels supported by controller. | [optional] [readonly] 
 **RebuildRate** | Pointer to **string** | Logical volume or RAID rebuild rate of Storage Controller. | [optional] [readonly] 
+**RebuildRatePercent** | Pointer to **int64** | Logical volume or RAID rebuild rate of Storage Controller. | [optional] 
 **SelfEncryptEnabled** | Pointer to **string** | Storage controller disk self encryption state. | [optional] 
+**SubOemId** | Pointer to **string** | The Sub OEM identifier of the Storage Controller. | [optional] 
+**SupportedStripSizes** | Pointer to **string** | The strip sizes in KiB supported by the Storage Controller. | [optional] 
+**TotalCacheSize** | Pointer to **int64** | The total configured cache memory, measured in MiB. | [optional] 
 **Type** | Pointer to **string** | Controller types are Raid, FlexFlash. | [optional] [readonly] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
 **ComputeBoard** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
@@ -93,6 +104,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetConnectedSasExpander
+
+`func (o *StorageControllerAllOf) GetConnectedSasExpander() bool`
+
+GetConnectedSasExpander returns the ConnectedSasExpander field if non-nil, zero value otherwise.
+
+### GetConnectedSasExpanderOk
+
+`func (o *StorageControllerAllOf) GetConnectedSasExpanderOk() (*bool, bool)`
+
+GetConnectedSasExpanderOk returns a tuple with the ConnectedSasExpander field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectedSasExpander
+
+`func (o *StorageControllerAllOf) SetConnectedSasExpander(v bool)`
+
+SetConnectedSasExpander sets ConnectedSasExpander field to given value.
+
+### HasConnectedSasExpander
+
+`func (o *StorageControllerAllOf) HasConnectedSasExpander() bool`
+
+HasConnectedSasExpander returns a boolean if a field has been set.
 
 ### GetControllerFlags
 
@@ -168,6 +204,56 @@ SetControllerStatus sets ControllerStatus field to given value.
 `func (o *StorageControllerAllOf) HasControllerStatus() bool`
 
 HasControllerStatus returns a boolean if a field has been set.
+
+### GetDefaultDriveMode
+
+`func (o *StorageControllerAllOf) GetDefaultDriveMode() string`
+
+GetDefaultDriveMode returns the DefaultDriveMode field if non-nil, zero value otherwise.
+
+### GetDefaultDriveModeOk
+
+`func (o *StorageControllerAllOf) GetDefaultDriveModeOk() (*string, bool)`
+
+GetDefaultDriveModeOk returns a tuple with the DefaultDriveMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultDriveMode
+
+`func (o *StorageControllerAllOf) SetDefaultDriveMode(v string)`
+
+SetDefaultDriveMode sets DefaultDriveMode field to given value.
+
+### HasDefaultDriveMode
+
+`func (o *StorageControllerAllOf) HasDefaultDriveMode() bool`
+
+HasDefaultDriveMode returns a boolean if a field has been set.
+
+### GetEccBucketLeakRate
+
+`func (o *StorageControllerAllOf) GetEccBucketLeakRate() int64`
+
+GetEccBucketLeakRate returns the EccBucketLeakRate field if non-nil, zero value otherwise.
+
+### GetEccBucketLeakRateOk
+
+`func (o *StorageControllerAllOf) GetEccBucketLeakRateOk() (*int64, bool)`
+
+GetEccBucketLeakRateOk returns a tuple with the EccBucketLeakRate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEccBucketLeakRate
+
+`func (o *StorageControllerAllOf) SetEccBucketLeakRate(v int64)`
+
+SetEccBucketLeakRate sets EccBucketLeakRate field to given value.
+
+### HasEccBucketLeakRate
+
+`func (o *StorageControllerAllOf) HasEccBucketLeakRate() bool`
+
+HasEccBucketLeakRate returns a boolean if a field has been set.
 
 ### GetForeignConfigPresent
 
@@ -268,6 +354,56 @@ SetMaxVolumesSupported sets MaxVolumesSupported field to given value.
 `func (o *StorageControllerAllOf) HasMaxVolumesSupported() bool`
 
 HasMaxVolumesSupported returns a boolean if a field has been set.
+
+### GetMemoryCorrectableErrors
+
+`func (o *StorageControllerAllOf) GetMemoryCorrectableErrors() int64`
+
+GetMemoryCorrectableErrors returns the MemoryCorrectableErrors field if non-nil, zero value otherwise.
+
+### GetMemoryCorrectableErrorsOk
+
+`func (o *StorageControllerAllOf) GetMemoryCorrectableErrorsOk() (*int64, bool)`
+
+GetMemoryCorrectableErrorsOk returns a tuple with the MemoryCorrectableErrors field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMemoryCorrectableErrors
+
+`func (o *StorageControllerAllOf) SetMemoryCorrectableErrors(v int64)`
+
+SetMemoryCorrectableErrors sets MemoryCorrectableErrors field to given value.
+
+### HasMemoryCorrectableErrors
+
+`func (o *StorageControllerAllOf) HasMemoryCorrectableErrors() bool`
+
+HasMemoryCorrectableErrors returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *StorageControllerAllOf) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *StorageControllerAllOf) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *StorageControllerAllOf) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *StorageControllerAllOf) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetOobInterfaceSupported
 
@@ -394,6 +530,56 @@ SetPciSlot sets PciSlot field to given value.
 
 HasPciSlot returns a boolean if a field has been set.
 
+### GetPersistentCacheSize
+
+`func (o *StorageControllerAllOf) GetPersistentCacheSize() int64`
+
+GetPersistentCacheSize returns the PersistentCacheSize field if non-nil, zero value otherwise.
+
+### GetPersistentCacheSizeOk
+
+`func (o *StorageControllerAllOf) GetPersistentCacheSizeOk() (*int64, bool)`
+
+GetPersistentCacheSizeOk returns a tuple with the PersistentCacheSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPersistentCacheSize
+
+`func (o *StorageControllerAllOf) SetPersistentCacheSize(v int64)`
+
+SetPersistentCacheSize sets PersistentCacheSize field to given value.
+
+### HasPersistentCacheSize
+
+`func (o *StorageControllerAllOf) HasPersistentCacheSize() bool`
+
+HasPersistentCacheSize returns a boolean if a field has been set.
+
+### GetPinnedCacheState
+
+`func (o *StorageControllerAllOf) GetPinnedCacheState() int64`
+
+GetPinnedCacheState returns the PinnedCacheState field if non-nil, zero value otherwise.
+
+### GetPinnedCacheStateOk
+
+`func (o *StorageControllerAllOf) GetPinnedCacheStateOk() (*int64, bool)`
+
+GetPinnedCacheStateOk returns a tuple with the PinnedCacheState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPinnedCacheState
+
+`func (o *StorageControllerAllOf) SetPinnedCacheState(v int64)`
+
+SetPinnedCacheState sets PinnedCacheState field to given value.
+
+### HasPinnedCacheState
+
+`func (o *StorageControllerAllOf) HasPinnedCacheState() bool`
+
+HasPinnedCacheState returns a boolean if a field has been set.
+
 ### GetRaidSupport
 
 `func (o *StorageControllerAllOf) GetRaidSupport() string`
@@ -444,6 +630,31 @@ SetRebuildRate sets RebuildRate field to given value.
 
 HasRebuildRate returns a boolean if a field has been set.
 
+### GetRebuildRatePercent
+
+`func (o *StorageControllerAllOf) GetRebuildRatePercent() int64`
+
+GetRebuildRatePercent returns the RebuildRatePercent field if non-nil, zero value otherwise.
+
+### GetRebuildRatePercentOk
+
+`func (o *StorageControllerAllOf) GetRebuildRatePercentOk() (*int64, bool)`
+
+GetRebuildRatePercentOk returns a tuple with the RebuildRatePercent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRebuildRatePercent
+
+`func (o *StorageControllerAllOf) SetRebuildRatePercent(v int64)`
+
+SetRebuildRatePercent sets RebuildRatePercent field to given value.
+
+### HasRebuildRatePercent
+
+`func (o *StorageControllerAllOf) HasRebuildRatePercent() bool`
+
+HasRebuildRatePercent returns a boolean if a field has been set.
+
 ### GetSelfEncryptEnabled
 
 `func (o *StorageControllerAllOf) GetSelfEncryptEnabled() string`
@@ -468,6 +679,81 @@ SetSelfEncryptEnabled sets SelfEncryptEnabled field to given value.
 `func (o *StorageControllerAllOf) HasSelfEncryptEnabled() bool`
 
 HasSelfEncryptEnabled returns a boolean if a field has been set.
+
+### GetSubOemId
+
+`func (o *StorageControllerAllOf) GetSubOemId() string`
+
+GetSubOemId returns the SubOemId field if non-nil, zero value otherwise.
+
+### GetSubOemIdOk
+
+`func (o *StorageControllerAllOf) GetSubOemIdOk() (*string, bool)`
+
+GetSubOemIdOk returns a tuple with the SubOemId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubOemId
+
+`func (o *StorageControllerAllOf) SetSubOemId(v string)`
+
+SetSubOemId sets SubOemId field to given value.
+
+### HasSubOemId
+
+`func (o *StorageControllerAllOf) HasSubOemId() bool`
+
+HasSubOemId returns a boolean if a field has been set.
+
+### GetSupportedStripSizes
+
+`func (o *StorageControllerAllOf) GetSupportedStripSizes() string`
+
+GetSupportedStripSizes returns the SupportedStripSizes field if non-nil, zero value otherwise.
+
+### GetSupportedStripSizesOk
+
+`func (o *StorageControllerAllOf) GetSupportedStripSizesOk() (*string, bool)`
+
+GetSupportedStripSizesOk returns a tuple with the SupportedStripSizes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSupportedStripSizes
+
+`func (o *StorageControllerAllOf) SetSupportedStripSizes(v string)`
+
+SetSupportedStripSizes sets SupportedStripSizes field to given value.
+
+### HasSupportedStripSizes
+
+`func (o *StorageControllerAllOf) HasSupportedStripSizes() bool`
+
+HasSupportedStripSizes returns a boolean if a field has been set.
+
+### GetTotalCacheSize
+
+`func (o *StorageControllerAllOf) GetTotalCacheSize() int64`
+
+GetTotalCacheSize returns the TotalCacheSize field if non-nil, zero value otherwise.
+
+### GetTotalCacheSizeOk
+
+`func (o *StorageControllerAllOf) GetTotalCacheSizeOk() (*int64, bool)`
+
+GetTotalCacheSizeOk returns a tuple with the TotalCacheSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalCacheSize
+
+`func (o *StorageControllerAllOf) SetTotalCacheSize(v int64)`
+
+SetTotalCacheSize sets TotalCacheSize field to given value.
+
+### HasTotalCacheSize
+
+`func (o *StorageControllerAllOf) HasTotalCacheSize() bool`
+
+HasTotalCacheSize returns a boolean if a field has been set.
 
 ### GetType
 

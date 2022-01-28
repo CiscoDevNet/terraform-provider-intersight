@@ -582,7 +582,7 @@ func resourceHyperflexClusterStoragePolicyCreate(c context.Context, d *schema.Re
 					o.SetAutoConfig(x)
 				}
 			}
-			o.SetClassId("hyperflex.LogicalAvailabilityZone")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -625,7 +625,7 @@ func resourceHyperflexClusterStoragePolicyCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -710,8 +710,8 @@ func resourceHyperflexClusterStoragePolicyCreate(c context.Context, d *schema.Re
 func resourceHyperflexClusterStoragePolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexClusterStoragePolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -916,7 +916,7 @@ func resourceHyperflexClusterStoragePolicyUpdate(c context.Context, d *schema.Re
 					o.SetAutoConfig(x)
 				}
 			}
-			o.SetClassId("hyperflex.LogicalAvailabilityZone")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -962,7 +962,7 @@ func resourceHyperflexClusterStoragePolicyUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

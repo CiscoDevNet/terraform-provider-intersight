@@ -801,7 +801,7 @@ func resourceSoftwareUcsdBundleDistributableCreate(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1044,7 +1044,7 @@ func resourceSoftwareUcsdBundleDistributableCreate(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1107,7 +1107,7 @@ func resourceSoftwareUcsdBundleDistributableCreate(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("softwarerepository.FileServer")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1198,8 +1198,8 @@ func resourceSoftwareUcsdBundleDistributableCreate(c context.Context, d *schema.
 func resourceSoftwareUcsdBundleDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.SoftwareApi.GetSoftwareUcsdBundleDistributableByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1439,7 +1439,7 @@ func resourceSoftwareUcsdBundleDistributableUpdate(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1691,7 +1691,7 @@ func resourceSoftwareUcsdBundleDistributableUpdate(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1759,7 +1759,7 @@ func resourceSoftwareUcsdBundleDistributableUpdate(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("softwarerepository.FileServer")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

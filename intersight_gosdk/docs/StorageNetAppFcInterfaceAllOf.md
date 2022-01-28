@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **State** | Pointer to **string** | The state of the FC interface. * &#x60;down&#x60; - An inactive port is listed as Down. * &#x60;up&#x60; - An active port is listed as Up. * &#x60;present&#x60; - An active port is listed as present. | [optional] [readonly] [default to "down"]
 **Uuid** | Pointer to **string** | Uuid of  NetApp FC Interface. | [optional] [readonly] 
 **ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
+**Events** | Pointer to [**[]StorageNetAppFcInterfaceEventRelationship**](StorageNetAppFcInterfaceEventRelationship.md) | An array of relationships to storageNetAppFcInterfaceEvent resources. | [optional] [readonly] 
 **PhysicalPort** | Pointer to [**StorageNetAppFcPortRelationship**](StorageNetAppFcPortRelationship.md) |  | [optional] 
 **Tenant** | Pointer to [**StorageNetAppStorageVmRelationship**](StorageNetAppStorageVmRelationship.md) |  | [optional] 
 
@@ -172,6 +173,41 @@ SetArrayController sets ArrayController field to given value.
 
 HasArrayController returns a boolean if a field has been set.
 
+### GetEvents
+
+`func (o *StorageNetAppFcInterfaceAllOf) GetEvents() []StorageNetAppFcInterfaceEventRelationship`
+
+GetEvents returns the Events field if non-nil, zero value otherwise.
+
+### GetEventsOk
+
+`func (o *StorageNetAppFcInterfaceAllOf) GetEventsOk() (*[]StorageNetAppFcInterfaceEventRelationship, bool)`
+
+GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvents
+
+`func (o *StorageNetAppFcInterfaceAllOf) SetEvents(v []StorageNetAppFcInterfaceEventRelationship)`
+
+SetEvents sets Events field to given value.
+
+### HasEvents
+
+`func (o *StorageNetAppFcInterfaceAllOf) HasEvents() bool`
+
+HasEvents returns a boolean if a field has been set.
+
+### SetEventsNil
+
+`func (o *StorageNetAppFcInterfaceAllOf) SetEventsNil(b bool)`
+
+ SetEventsNil sets the value for Events to be an explicit nil
+
+### UnsetEvents
+`func (o *StorageNetAppFcInterfaceAllOf) UnsetEvents()`
+
+UnsetEvents ensures that no value is present for Events, not even an explicit nil
 ### GetPhysicalPort
 
 `func (o *StorageNetAppFcInterfaceAllOf) GetPhysicalPort() StorageNetAppFcPortRelationship`

@@ -17,16 +17,26 @@ It can be a root CA or an trust chain that leads to a root CA.
 
 ```hcl
 resource "intersight_iam_trust_point" "iam_trust_point1" {
-  account {
-    object_type = "iam.Account"
-    moid        = intersight_iam_account.account1.id
-  }
-  certificates = [{
-    moid        = intersight_certificate_iam.iam1.id
-    object_type = "x509.Certificate"
-    enabled     = true
-  }]
+   account {
+     object_type = "iam.Account"
+     moid        = var.iam_account
+   }
+   certificates = [{
+     moid        = var.certificate_iam
+     object_type = "x509.Certificate"
+     enabled     = true
+   }]
 }
+
+ variable "iam_account" {
+   type = string
+   description = "value for iam_account"
+ }
+
+  variable "certificate_iam" {
+   type = string
+   description = "value for certificate_iam"
+ }
 ```
 ## Argument Reference
 The following arguments are supported:

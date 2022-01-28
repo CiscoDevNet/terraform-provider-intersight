@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **DeviceStatistics** | Pointer to [**NullableAssetDeviceStatistics**](AssetDeviceStatistics.md) |  | [optional] 
 **ProductSubgroup** | Pointer to **string** | Product Subgroup type helps to determine if device subgroup within Product type has to be billed using consumption metering. example \&quot;N9300 Series\&quot; in Product type \&quot;SWITCH\&quot;. | [optional] [readonly] 
 **ProductType** | Pointer to **string** | Product type helps to determine if device has to be billed using consumption metering. example \&quot;SERVER\&quot;. | [optional] [readonly] 
+**RegisteredDeviceMoid** | Pointer to **string** | String reference to the device connector. | [optional] [readonly] 
 **UnitOfMeasure** | Pointer to [**[]AssetMeteringType**](AssetMeteringType.md) |  | [optional] 
 **VirtualizationPlatform** | Pointer to **string** | Virtualization platform is used to identify the hypervisor type. example \&quot;ESXi\&quot;. | [optional] [readonly] 
 **Workload** | Pointer to **string** | Workload/Usecase running on the device. | [optional] [readonly] 
@@ -285,6 +286,31 @@ SetProductType sets ProductType field to given value.
 `func (o *AssetDeploymentDevice) HasProductType() bool`
 
 HasProductType returns a boolean if a field has been set.
+
+### GetRegisteredDeviceMoid
+
+`func (o *AssetDeploymentDevice) GetRegisteredDeviceMoid() string`
+
+GetRegisteredDeviceMoid returns the RegisteredDeviceMoid field if non-nil, zero value otherwise.
+
+### GetRegisteredDeviceMoidOk
+
+`func (o *AssetDeploymentDevice) GetRegisteredDeviceMoidOk() (*string, bool)`
+
+GetRegisteredDeviceMoidOk returns a tuple with the RegisteredDeviceMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegisteredDeviceMoid
+
+`func (o *AssetDeploymentDevice) SetRegisteredDeviceMoid(v string)`
+
+SetRegisteredDeviceMoid sets RegisteredDeviceMoid field to given value.
+
+### HasRegisteredDeviceMoid
+
+`func (o *AssetDeploymentDevice) HasRegisteredDeviceMoid() bool`
+
+HasRegisteredDeviceMoid returns a boolean if a field has been set.
 
 ### GetUnitOfMeasure
 

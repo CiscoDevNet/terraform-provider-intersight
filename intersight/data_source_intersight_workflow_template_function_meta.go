@@ -1274,7 +1274,7 @@ func dataSourceWorkflowTemplateFunctionMetaRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("workflow.Comments")
+			o.SetClassId("")
 			if v, ok := l["description"]; ok {
 				{
 					x := (v.(string))
@@ -1353,7 +1353,7 @@ func dataSourceWorkflowTemplateFunctionMetaRead(c context.Context, d *schema.Res
 								}
 							}
 						}
-						o.SetClassId("workflow.DefaultValue")
+						o.SetClassId("")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -1402,7 +1402,7 @@ func dataSourceWorkflowTemplateFunctionMetaRead(c context.Context, d *schema.Res
 								}
 							}
 						}
-						o.SetClassId("workflow.DisplayMeta")
+						o.SetClassId("")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -1522,7 +1522,7 @@ func dataSourceWorkflowTemplateFunctionMetaRead(c context.Context, d *schema.Res
 								}
 							}
 						}
-						o.SetClassId("workflow.DefaultValue")
+						o.SetClassId("")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -1571,7 +1571,7 @@ func dataSourceWorkflowTemplateFunctionMetaRead(c context.Context, d *schema.Res
 								}
 							}
 						}
-						o.SetClassId("workflow.DisplayMeta")
+						o.SetClassId("")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -1659,7 +1659,7 @@ func dataSourceWorkflowTemplateFunctionMetaRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1780,7 +1780,7 @@ func dataSourceWorkflowTemplateFunctionMetaRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

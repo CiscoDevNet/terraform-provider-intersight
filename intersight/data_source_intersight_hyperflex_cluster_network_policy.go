@@ -1346,7 +1346,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("hyperflex.IpAddrRange")
+			o.SetClassId("")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -1444,7 +1444,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("hyperflex.MacAddrPrefixRange")
+			o.SetClassId("")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -1487,7 +1487,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVlan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -1550,7 +1550,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1604,7 +1604,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1730,7 +1730,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1804,7 +1804,7 @@ func dataSourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVlan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))

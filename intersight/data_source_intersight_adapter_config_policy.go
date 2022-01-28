@@ -1171,7 +1171,7 @@ func dataSourceAdapterConfigPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1225,7 +1225,7 @@ func dataSourceAdapterConfigPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1409,7 +1409,7 @@ func dataSourceAdapterConfigPolicyRead(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("adapter.EthSettings")
+						o.SetClassId("")
 						if v, ok := l["lldp_enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -1447,7 +1447,7 @@ func dataSourceAdapterConfigPolicyRead(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("adapter.FcSettings")
+						o.SetClassId("")
 						if v, ok := l["fip_enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -1491,7 +1491,7 @@ func dataSourceAdapterConfigPolicyRead(c context.Context, d *schema.ResourceData
 								}
 							}
 						}
-						o.SetClassId("adapter.PortChannelSettings")
+						o.SetClassId("")
 						if v, ok := l["enabled"]; ok {
 							{
 								x := (v.(bool))
@@ -1577,7 +1577,7 @@ func dataSourceAdapterConfigPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

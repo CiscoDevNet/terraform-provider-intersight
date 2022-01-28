@@ -1233,7 +1233,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("virtualization.CloudInitConfig")
+			o.SetClassId("")
 			if v, ok := l["config_type"]; ok {
 				{
 					x := (v.(string))
@@ -1294,7 +1294,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1401,7 +1401,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 								o.SetCapacity(x)
 							}
 						}
-						o.SetClassId("virtualization.VirtualDiskConfig")
+						o.SetClassId("")
 						if v, ok := l["mode"]; ok {
 							{
 								x := (v.(string))
@@ -1479,7 +1479,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1761,7 +1761,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1839,7 +1839,7 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("virtualization.BaseVmConfiguration")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1921,8 +1921,8 @@ func resourceVirtualizationVirtualMachineCreate(c context.Context, d *schema.Res
 func resourceVirtualizationVirtualMachineRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualMachineByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -2204,7 +2204,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("virtualization.CloudInitConfig")
+			o.SetClassId("")
 			if v, ok := l["config_type"]; ok {
 				{
 					x := (v.(string))
@@ -2266,7 +2266,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2376,7 +2376,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 								o.SetCapacity(x)
 							}
 						}
-						o.SetClassId("virtualization.VirtualDiskConfig")
+						o.SetClassId("")
 						if v, ok := l["mode"]; ok {
 							{
 								x := (v.(string))
@@ -2455,7 +2455,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2742,7 +2742,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2820,7 +2820,7 @@ func resourceVirtualizationVirtualMachineUpdate(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("virtualization.BaseVmConfiguration")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

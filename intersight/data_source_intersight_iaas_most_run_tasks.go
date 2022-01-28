@@ -796,7 +796,7 @@ func dataSourceIaasMostRunTasksRead(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -865,7 +865,7 @@ func dataSourceIaasMostRunTasksRead(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1006,7 +1006,7 @@ func dataSourceIaasMostRunTasksRead(c context.Context, d *schema.ResourceData, m
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

@@ -1325,7 +1325,7 @@ func dataSourceIamLdapPolicyRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1392,7 +1392,7 @@ func dataSourceIamLdapPolicyRead(c context.Context, d *schema.ResourceData, meta
 					o.SetBindMethod(x)
 				}
 			}
-			o.SetClassId("iam.LdapBaseProperties")
+			o.SetClassId("")
 			if v, ok := l["domain"]; ok {
 				{
 					x := (v.(string))
@@ -1486,7 +1486,7 @@ func dataSourceIamLdapPolicyRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("iam.LdapDnsParameters")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1610,7 +1610,7 @@ func dataSourceIamLdapPolicyRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1664,7 +1664,7 @@ func dataSourceIamLdapPolicyRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1870,7 +1870,7 @@ func dataSourceIamLdapPolicyRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

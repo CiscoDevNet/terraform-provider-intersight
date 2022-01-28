@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -34,8 +34,10 @@ type AssetDeploymentDevice struct {
 	// Product Subgroup type helps to determine if device subgroup within Product type has to be billed using consumption metering. example \"N9300 Series\" in Product type \"SWITCH\".
 	ProductSubgroup *string `json:"ProductSubgroup,omitempty"`
 	// Product type helps to determine if device has to be billed using consumption metering. example \"SERVER\".
-	ProductType   *string             `json:"ProductType,omitempty"`
-	UnitOfMeasure []AssetMeteringType `json:"UnitOfMeasure,omitempty"`
+	ProductType *string `json:"ProductType,omitempty"`
+	// String reference to the device connector.
+	RegisteredDeviceMoid *string             `json:"RegisteredDeviceMoid,omitempty"`
+	UnitOfMeasure        []AssetMeteringType `json:"UnitOfMeasure,omitempty"`
 	// Virtualization platform is used to identify the hypervisor type. example \"ESXi\".
 	VirtualizationPlatform *string `json:"VirtualizationPlatform,omitempty"`
 	// Workload/Usecase running on the device.
@@ -378,6 +380,38 @@ func (o *AssetDeploymentDevice) SetProductType(v string) {
 	o.ProductType = &v
 }
 
+// GetRegisteredDeviceMoid returns the RegisteredDeviceMoid field value if set, zero value otherwise.
+func (o *AssetDeploymentDevice) GetRegisteredDeviceMoid() string {
+	if o == nil || o.RegisteredDeviceMoid == nil {
+		var ret string
+		return ret
+	}
+	return *o.RegisteredDeviceMoid
+}
+
+// GetRegisteredDeviceMoidOk returns a tuple with the RegisteredDeviceMoid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDeploymentDevice) GetRegisteredDeviceMoidOk() (*string, bool) {
+	if o == nil || o.RegisteredDeviceMoid == nil {
+		return nil, false
+	}
+	return o.RegisteredDeviceMoid, true
+}
+
+// HasRegisteredDeviceMoid returns a boolean if a field has been set.
+func (o *AssetDeploymentDevice) HasRegisteredDeviceMoid() bool {
+	if o != nil && o.RegisteredDeviceMoid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRegisteredDeviceMoid gets a reference to the given string and assigns it to the RegisteredDeviceMoid field.
+func (o *AssetDeploymentDevice) SetRegisteredDeviceMoid(v string) {
+	o.RegisteredDeviceMoid = &v
+}
+
 // GetUnitOfMeasure returns the UnitOfMeasure field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AssetDeploymentDevice) GetUnitOfMeasure() []AssetMeteringType {
 	if o == nil {
@@ -672,6 +706,9 @@ func (o AssetDeploymentDevice) MarshalJSON() ([]byte, error) {
 	if o.ProductType != nil {
 		toSerialize["ProductType"] = o.ProductType
 	}
+	if o.RegisteredDeviceMoid != nil {
+		toSerialize["RegisteredDeviceMoid"] = o.RegisteredDeviceMoid
+	}
 	if o.UnitOfMeasure != nil {
 		toSerialize["UnitOfMeasure"] = o.UnitOfMeasure
 	}
@@ -720,8 +757,10 @@ func (o *AssetDeploymentDevice) UnmarshalJSON(bytes []byte) (err error) {
 		// Product Subgroup type helps to determine if device subgroup within Product type has to be billed using consumption metering. example \"N9300 Series\" in Product type \"SWITCH\".
 		ProductSubgroup *string `json:"ProductSubgroup,omitempty"`
 		// Product type helps to determine if device has to be billed using consumption metering. example \"SERVER\".
-		ProductType   *string             `json:"ProductType,omitempty"`
-		UnitOfMeasure []AssetMeteringType `json:"UnitOfMeasure,omitempty"`
+		ProductType *string `json:"ProductType,omitempty"`
+		// String reference to the device connector.
+		RegisteredDeviceMoid *string             `json:"RegisteredDeviceMoid,omitempty"`
+		UnitOfMeasure        []AssetMeteringType `json:"UnitOfMeasure,omitempty"`
 		// Virtualization platform is used to identify the hypervisor type. example \"ESXi\".
 		VirtualizationPlatform *string `json:"VirtualizationPlatform,omitempty"`
 		// Workload/Usecase running on the device.
@@ -747,6 +786,7 @@ func (o *AssetDeploymentDevice) UnmarshalJSON(bytes []byte) (err error) {
 		varAssetDeploymentDevice.DeviceStatistics = varAssetDeploymentDeviceWithoutEmbeddedStruct.DeviceStatistics
 		varAssetDeploymentDevice.ProductSubgroup = varAssetDeploymentDeviceWithoutEmbeddedStruct.ProductSubgroup
 		varAssetDeploymentDevice.ProductType = varAssetDeploymentDeviceWithoutEmbeddedStruct.ProductType
+		varAssetDeploymentDevice.RegisteredDeviceMoid = varAssetDeploymentDeviceWithoutEmbeddedStruct.RegisteredDeviceMoid
 		varAssetDeploymentDevice.UnitOfMeasure = varAssetDeploymentDeviceWithoutEmbeddedStruct.UnitOfMeasure
 		varAssetDeploymentDevice.VirtualizationPlatform = varAssetDeploymentDeviceWithoutEmbeddedStruct.VirtualizationPlatform
 		varAssetDeploymentDevice.Workload = varAssetDeploymentDeviceWithoutEmbeddedStruct.Workload
@@ -781,6 +821,7 @@ func (o *AssetDeploymentDevice) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "DeviceStatistics")
 		delete(additionalProperties, "ProductSubgroup")
 		delete(additionalProperties, "ProductType")
+		delete(additionalProperties, "RegisteredDeviceMoid")
 		delete(additionalProperties, "UnitOfMeasure")
 		delete(additionalProperties, "VirtualizationPlatform")
 		delete(additionalProperties, "Workload")

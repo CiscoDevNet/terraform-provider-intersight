@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -29,6 +29,8 @@ type HyperflexClusterAllOf struct {
 	// The unique identifier of the device registration that represents this HyperFlex cluster's connection to Intersight.
 	DeviceId   *string  `json:"DeviceId,omitempty"`
 	DnsServers []string `json:"DnsServers,omitempty"`
+	// This captures the encryption status for a HyperFlex cluster. Currently it will have the status if HXA-CLU-0020 alarm is raised. In the future it can capture other details.
+	EncryptionStatus *string `json:"EncryptionStatus,omitempty"`
 	// The number of yellow (warning) and red (critical) alarms stored as an aggregate. The first 16 bits indicate the number of red alarms, and the last 16 bits contain the number of yellow alarms.
 	// Deprecated
 	FltAggr *int64 `json:"FltAggr,omitempty"`
@@ -41,9 +43,10 @@ type HyperflexClusterAllOf struct {
 	// The number of virtual machines present on this cluster.
 	VmCount *int64 `json:"VmCount,omitempty"`
 	// An array of relationships to hyperflexAlarm resources.
-	Alarm   []HyperflexAlarmRelationship  `json:"Alarm,omitempty"`
-	Health  *HyperflexHealthRelationship  `json:"Health,omitempty"`
-	License *HyperflexLicenseRelationship `json:"License,omitempty"`
+	Alarm      []HyperflexAlarmRelationship     `json:"Alarm,omitempty"`
+	Encryption *HyperflexEncryptionRelationship `json:"Encryption,omitempty"`
+	Health     *HyperflexHealthRelationship     `json:"Health,omitempty"`
+	License    *HyperflexLicenseRelationship    `json:"License,omitempty"`
 	// An array of relationships to hyperflexNode resources.
 	Nodes            []HyperflexNodeRelationship          `json:"Nodes,omitempty"`
 	RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -260,6 +263,38 @@ func (o *HyperflexClusterAllOf) HasDnsServers() bool {
 // SetDnsServers gets a reference to the given []string and assigns it to the DnsServers field.
 func (o *HyperflexClusterAllOf) SetDnsServers(v []string) {
 	o.DnsServers = v
+}
+
+// GetEncryptionStatus returns the EncryptionStatus field value if set, zero value otherwise.
+func (o *HyperflexClusterAllOf) GetEncryptionStatus() string {
+	if o == nil || o.EncryptionStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.EncryptionStatus
+}
+
+// GetEncryptionStatusOk returns a tuple with the EncryptionStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexClusterAllOf) GetEncryptionStatusOk() (*string, bool) {
+	if o == nil || o.EncryptionStatus == nil {
+		return nil, false
+	}
+	return o.EncryptionStatus, true
+}
+
+// HasEncryptionStatus returns a boolean if a field has been set.
+func (o *HyperflexClusterAllOf) HasEncryptionStatus() bool {
+	if o != nil && o.EncryptionStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptionStatus gets a reference to the given string and assigns it to the EncryptionStatus field.
+func (o *HyperflexClusterAllOf) SetEncryptionStatus(v string) {
+	o.EncryptionStatus = &v
 }
 
 // GetFltAggr returns the FltAggr field value if set, zero value otherwise.
@@ -500,6 +535,38 @@ func (o *HyperflexClusterAllOf) HasAlarm() bool {
 // SetAlarm gets a reference to the given []HyperflexAlarmRelationship and assigns it to the Alarm field.
 func (o *HyperflexClusterAllOf) SetAlarm(v []HyperflexAlarmRelationship) {
 	o.Alarm = v
+}
+
+// GetEncryption returns the Encryption field value if set, zero value otherwise.
+func (o *HyperflexClusterAllOf) GetEncryption() HyperflexEncryptionRelationship {
+	if o == nil || o.Encryption == nil {
+		var ret HyperflexEncryptionRelationship
+		return ret
+	}
+	return *o.Encryption
+}
+
+// GetEncryptionOk returns a tuple with the Encryption field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexClusterAllOf) GetEncryptionOk() (*HyperflexEncryptionRelationship, bool) {
+	if o == nil || o.Encryption == nil {
+		return nil, false
+	}
+	return o.Encryption, true
+}
+
+// HasEncryption returns a boolean if a field has been set.
+func (o *HyperflexClusterAllOf) HasEncryption() bool {
+	if o != nil && o.Encryption != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryption gets a reference to the given HyperflexEncryptionRelationship and assigns it to the Encryption field.
+func (o *HyperflexClusterAllOf) SetEncryption(v HyperflexEncryptionRelationship) {
+	o.Encryption = &v
 }
 
 // GetHealth returns the Health field value if set, zero value otherwise.
@@ -782,6 +849,9 @@ func (o HyperflexClusterAllOf) MarshalJSON() ([]byte, error) {
 	if o.DnsServers != nil {
 		toSerialize["DnsServers"] = o.DnsServers
 	}
+	if o.EncryptionStatus != nil {
+		toSerialize["EncryptionStatus"] = o.EncryptionStatus
+	}
 	if o.FltAggr != nil {
 		toSerialize["FltAggr"] = o.FltAggr
 	}
@@ -802,6 +872,9 @@ func (o HyperflexClusterAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.Alarm != nil {
 		toSerialize["Alarm"] = o.Alarm
+	}
+	if o.Encryption != nil {
+		toSerialize["Encryption"] = o.Encryption
 	}
 	if o.Health != nil {
 		toSerialize["Health"] = o.Health
@@ -851,6 +924,7 @@ func (o *HyperflexClusterAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClusterUuid")
 		delete(additionalProperties, "DeviceId")
 		delete(additionalProperties, "DnsServers")
+		delete(additionalProperties, "EncryptionStatus")
 		delete(additionalProperties, "FltAggr")
 		delete(additionalProperties, "HxdpBuildVersion")
 		delete(additionalProperties, "NtpServers")
@@ -858,6 +932,7 @@ func (o *HyperflexClusterAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "UpgradeStatus")
 		delete(additionalProperties, "VmCount")
 		delete(additionalProperties, "Alarm")
+		delete(additionalProperties, "Encryption")
 		delete(additionalProperties, "Health")
 		delete(additionalProperties, "License")
 		delete(additionalProperties, "Nodes")

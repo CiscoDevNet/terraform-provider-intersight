@@ -545,7 +545,7 @@ func resourceKvmPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -694,8 +694,8 @@ func detachKvmPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diag
 func resourceKvmPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.KvmApi.GetKvmPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -893,7 +893,7 @@ func resourceKvmPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

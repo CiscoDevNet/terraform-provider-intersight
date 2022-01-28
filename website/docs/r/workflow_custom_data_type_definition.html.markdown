@@ -21,6 +21,8 @@ resource "intersight_workflow_custom_data_type_definition" "workflow_custom_data
     moid        = var.workflow_catalog
   }
   parameter_set = [{
+    additional_properties = ""
+    class_id = "workflow.ParameterSet"
     object_type       = "workflow.ParameterSet"
     name              = "show-netapp"
     condition         = "eq"
@@ -31,6 +33,11 @@ resource "intersight_workflow_custom_data_type_definition" "workflow_custom_data
     value = "storage.NetAppCluster"
 
   }]
+}
+
+variable "workflow_catalog" {
+  type = string
+  description = "moid for workflow catalog"
 }
 ```
 ## Argument Reference

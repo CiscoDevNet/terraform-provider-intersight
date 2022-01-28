@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.Node"]
 **BuildNumber** | Pointer to **string** | The build number of the hypervisor running on the host. | [optional] [readonly] 
 **DisplayVersion** | Pointer to **string** | The user-friendly string representation of the hypervisor version of the host. | [optional] [readonly] 
+**EmptySlotsList** | Pointer to **[]string** |  | [optional] 
 **HostName** | Pointer to **string** | The hostname configured for the hypervisor running on the host. | [optional] [readonly] 
 **HxdpDataIp** | Pointer to [**NullableHyperflexHxNetworkAddressDt**](HyperflexHxNetworkAddressDt.md) |  | [optional] 
 **HxdpMmgtIp** | Pointer to [**NullableHyperflexHxNetworkAddressDt**](HyperflexHxNetworkAddressDt.md) |  | [optional] 
@@ -138,6 +139,41 @@ SetDisplayVersion sets DisplayVersion field to given value.
 
 HasDisplayVersion returns a boolean if a field has been set.
 
+### GetEmptySlotsList
+
+`func (o *HyperflexNode) GetEmptySlotsList() []string`
+
+GetEmptySlotsList returns the EmptySlotsList field if non-nil, zero value otherwise.
+
+### GetEmptySlotsListOk
+
+`func (o *HyperflexNode) GetEmptySlotsListOk() (*[]string, bool)`
+
+GetEmptySlotsListOk returns a tuple with the EmptySlotsList field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEmptySlotsList
+
+`func (o *HyperflexNode) SetEmptySlotsList(v []string)`
+
+SetEmptySlotsList sets EmptySlotsList field to given value.
+
+### HasEmptySlotsList
+
+`func (o *HyperflexNode) HasEmptySlotsList() bool`
+
+HasEmptySlotsList returns a boolean if a field has been set.
+
+### SetEmptySlotsListNil
+
+`func (o *HyperflexNode) SetEmptySlotsListNil(b bool)`
+
+ SetEmptySlotsListNil sets the value for EmptySlotsList to be an explicit nil
+
+### UnsetEmptySlotsList
+`func (o *HyperflexNode) UnsetEmptySlotsList()`
+
+UnsetEmptySlotsList ensures that no value is present for EmptySlotsList, not even an explicit nil
 ### GetHostName
 
 `func (o *HyperflexNode) GetHostName() string`

@@ -2146,7 +2146,7 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -2189,7 +2189,7 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2267,7 +2267,7 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("kubernetes.BaremetalNetworkInfo")
+			o.SetClassId("")
 			if v, ok := l["ethernets"]; ok {
 				{
 					x := make([]models.KubernetesEthernet, 0)
@@ -2360,7 +2360,7 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 											}
 										}
 									}
-									o.SetClassId("kubernetes.EthernetMatcher")
+									o.SetClassId("")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -2654,7 +2654,7 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2713,7 +2713,7 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2836,7 +2836,7 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2884,7 +2884,7 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2960,7 +2960,7 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3008,7 +3008,7 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3051,7 +3051,7 @@ func dataSourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

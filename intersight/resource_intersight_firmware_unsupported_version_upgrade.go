@@ -563,7 +563,7 @@ func resourceFirmwareUnsupportedVersionUpgradeCreate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("connector.FileChecksum")
+			o.SetClassId("")
 			if v, ok := l["hash_algorithm"]; ok {
 				{
 					x := (v.(string))
@@ -602,7 +602,7 @@ func resourceFirmwareUnsupportedVersionUpgradeCreate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -667,7 +667,7 @@ func resourceFirmwareUnsupportedVersionUpgradeCreate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -752,8 +752,8 @@ func resourceFirmwareUnsupportedVersionUpgradeCreate(c context.Context, d *schem
 func resourceFirmwareUnsupportedVersionUpgradeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.FirmwareApi.GetFirmwareUnsupportedVersionUpgradeByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -901,7 +901,7 @@ func resourceFirmwareUnsupportedVersionUpgradeUpdate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("connector.FileChecksum")
+			o.SetClassId("")
 			if v, ok := l["hash_algorithm"]; ok {
 				{
 					x := (v.(string))
@@ -941,7 +941,7 @@ func resourceFirmwareUnsupportedVersionUpgradeUpdate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1011,7 +1011,7 @@ func resourceFirmwareUnsupportedVersionUpgradeUpdate(c context.Context, d *schem
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

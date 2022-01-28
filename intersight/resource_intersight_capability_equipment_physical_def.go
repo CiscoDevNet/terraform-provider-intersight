@@ -543,8 +543,8 @@ func resourceCapabilityEquipmentPhysicalDefCreate(c context.Context, d *schema.R
 func resourceCapabilityEquipmentPhysicalDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityEquipmentPhysicalDefByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {

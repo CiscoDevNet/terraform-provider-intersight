@@ -520,7 +520,7 @@ func resourceHyperflexFeatureLimitInternalCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -583,7 +583,7 @@ func resourceHyperflexFeatureLimitInternalCreate(c context.Context, d *schema.Re
 								}
 							}
 						}
-						o.SetClassId("hyperflex.AppSettingConstraint")
+						o.SetClassId("")
 						if v, ok := l["deployment_type"]; ok {
 							{
 								x := (v.(string))
@@ -713,8 +713,8 @@ func resourceHyperflexFeatureLimitInternalCreate(c context.Context, d *schema.Re
 func resourceHyperflexFeatureLimitInternalRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexFeatureLimitInternalByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -838,7 +838,7 @@ func resourceHyperflexFeatureLimitInternalUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -902,7 +902,7 @@ func resourceHyperflexFeatureLimitInternalUpdate(c context.Context, d *schema.Re
 								}
 							}
 						}
-						o.SetClassId("hyperflex.AppSettingConstraint")
+						o.SetClassId("")
 						if v, ok := l["deployment_type"]; ok {
 							{
 								x := (v.(string))

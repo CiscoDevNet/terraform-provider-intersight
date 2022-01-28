@@ -300,7 +300,6 @@ func resourceUuidpoolPool() *schema.Resource {
 				Description: "The UUID prefix must be in hexadecimal format xxxxxxxx-xxxx-xxxx.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				ForceNew:    true,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -566,7 +565,7 @@ func resourceUuidpoolPoolCreate(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -699,8 +698,8 @@ func resourceUuidpoolPoolCreate(c context.Context, d *schema.ResourceData, meta 
 func resourceUuidpoolPoolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.UuidpoolApi.GetUuidpoolPoolByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -880,7 +879,7 @@ func resourceUuidpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -17,7 +17,6 @@ managed objects will be in terminal states.
 
 ```hcl
 resource "intersight_appliance_restore" "appliance_restore1" {
-  name        = "appliance_restore1"
   filename    = "name_of_the_file.txt"
   protocol    = "SFTP"
   remote_host = "appliance-remote.hostname.com"
@@ -25,13 +24,18 @@ resource "intersight_appliance_restore" "appliance_restore1" {
   remote_port = 22
   username    = "authenicate_user"
   password    = "ChangeMe"
-  message = [
+  messages = [
     "Message generated during restore process"
   ]
   account {
     object_type = "iam.Account"
-    moid        = intersight_account_iam.iam1.id
+    moid        = var.account
   }
+}
+
+variable "account" {
+  type        = string
+  description = "Moid of iam.Account Mo"
 }
 ```
 ## Argument Reference

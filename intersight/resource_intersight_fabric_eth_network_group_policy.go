@@ -496,7 +496,7 @@ func resourceFabricEthNetworkGroupPolicyCreate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -580,7 +580,7 @@ func resourceFabricEthNetworkGroupPolicyCreate(c context.Context, d *schema.Reso
 					o.SetAllowedVlans(x)
 				}
 			}
-			o.SetClassId("fabric.VlanSettings")
+			o.SetClassId("")
 			if v, ok := l["native_vlan"]; ok {
 				{
 					x := int64(v.(int))
@@ -619,8 +619,8 @@ func resourceFabricEthNetworkGroupPolicyCreate(c context.Context, d *schema.Reso
 func resourceFabricEthNetworkGroupPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.FabricApi.GetFabricEthNetworkGroupPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -774,7 +774,7 @@ func resourceFabricEthNetworkGroupPolicyUpdate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -858,7 +858,7 @@ func resourceFabricEthNetworkGroupPolicyUpdate(c context.Context, d *schema.Reso
 					o.SetAllowedVlans(x)
 				}
 			}
-			o.SetClassId("fabric.VlanSettings")
+			o.SetClassId("")
 			if v, ok := l["native_vlan"]; ok {
 				{
 					x := int64(v.(int))

@@ -1081,7 +1081,7 @@ func dataSourceCloudAwsKeyPairRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1124,7 +1124,7 @@ func dataSourceCloudAwsKeyPairRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("cloud.BillingUnit")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1216,7 +1216,7 @@ func dataSourceCloudAwsKeyPairRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1304,7 +1304,7 @@ func dataSourceCloudAwsKeyPairRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("cloud.CloudRegion")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1335,7 +1335,7 @@ func dataSourceCloudAwsKeyPairRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1421,7 +1421,7 @@ func dataSourceCloudAwsKeyPairRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1495,7 +1495,7 @@ func dataSourceCloudAwsKeyPairRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("cloud.AvailabilityZone")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

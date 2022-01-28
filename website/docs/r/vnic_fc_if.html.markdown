@@ -22,18 +22,38 @@ resource "intersight_vnic_fc_if" "fc1" {
   }
   persistent_bindings = true
   san_connectivity_policy {
-    moid        = intersight_vnic_san_connectivity_policy.vnic_san1.id
+    moid        = var.vnic_san1
     object_type = "vnic.SanConnectivityPolicy"
   }
   fc_network_policy {
-    moid = intersight_vnic_fc_network_policy.v_fc_network1.id
+    moid = var.v_fc_network1
   }
   fc_adapter_policy {
-    moid = intersight_vnic_fc_adapter_policy.v_fc_adapter1.id
+    moid = var.v_fc_adapter1
   }
   fc_qos_policy {
-    moid = intersight_vnic_fc_qos_policy.v_fc_qos1.id
+    moid = var.v_fc_qos1
   }
+}
+
+variable "vnic_san1"{
+  type = string
+  description = "Moid of vnic.SanConnectivityPolicy"
+}
+
+variable "v_fc_network1"{
+  type = string
+  description = "Moid of vnic.FcNetworkPolicy"
+}
+
+variable "v_fc_adapter1"{
+  type = string
+  description = "Moid of vnic.FcAdapterPolicy"
+}
+
+variable "v_fc_qos1"{
+  type = string
+  description = "Moid of vnic.FcQosPolicy"
 }
 ```
 ## Argument Reference

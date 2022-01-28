@@ -539,7 +539,7 @@ func resourceSoftwarerepositoryOperatingSystemFileCreate(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -631,7 +631,7 @@ func resourceSoftwarerepositoryOperatingSystemFileCreate(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("softwarerepository.FileServer")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -709,8 +709,8 @@ func resourceSoftwarerepositoryOperatingSystemFileCreate(c context.Context, d *s
 func resourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryOperatingSystemFileByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -894,7 +894,7 @@ func resourceSoftwarerepositoryOperatingSystemFileUpdate(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -996,7 +996,7 @@ func resourceSoftwarerepositoryOperatingSystemFileUpdate(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("softwarerepository.FileServer")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

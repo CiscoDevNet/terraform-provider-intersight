@@ -763,7 +763,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("vnic.IscsiAuthProfile")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -813,7 +813,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -866,7 +866,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("ippool.IpV4Config")
+			o.SetClassId("")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -921,7 +921,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -969,7 +969,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("vnic.IscsiAuthProfile")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1019,7 +1019,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1062,7 +1062,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1105,7 +1105,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1190,8 +1190,8 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 func resourceVnicIscsiBootPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.VnicApi.GetVnicIscsiBootPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1369,7 +1369,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("vnic.IscsiAuthProfile")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1421,7 +1421,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1477,7 +1477,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("ippool.IpV4Config")
+			o.SetClassId("")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -1533,7 +1533,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1583,7 +1583,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("vnic.IscsiAuthProfile")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1635,7 +1635,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1679,7 +1679,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1723,7 +1723,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **Subtype** | Pointer to **string** | SVM subtype (default, dp_destination, sync_source, or sync_destination). The SVM subtype sync_destination is created automatically when an SVM of subtype sync_source is created on the source MetroCluster cluster. | [optional] [readonly] 
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 **DiskPool** | Pointer to [**[]StorageNetAppAggregateRelationship**](StorageNetAppAggregateRelationship.md) | An array of relationships to storageNetAppAggregate resources. | [optional] [readonly] 
+**Events** | Pointer to [**[]StorageNetAppSvmEventRelationship**](StorageNetAppSvmEventRelationship.md) | An array of relationships to storageNetAppSvmEvent resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -548,6 +549,41 @@ HasDiskPool returns a boolean if a field has been set.
 `func (o *StorageNetAppStorageVmAllOf) UnsetDiskPool()`
 
 UnsetDiskPool ensures that no value is present for DiskPool, not even an explicit nil
+### GetEvents
+
+`func (o *StorageNetAppStorageVmAllOf) GetEvents() []StorageNetAppSvmEventRelationship`
+
+GetEvents returns the Events field if non-nil, zero value otherwise.
+
+### GetEventsOk
+
+`func (o *StorageNetAppStorageVmAllOf) GetEventsOk() (*[]StorageNetAppSvmEventRelationship, bool)`
+
+GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvents
+
+`func (o *StorageNetAppStorageVmAllOf) SetEvents(v []StorageNetAppSvmEventRelationship)`
+
+SetEvents sets Events field to given value.
+
+### HasEvents
+
+`func (o *StorageNetAppStorageVmAllOf) HasEvents() bool`
+
+HasEvents returns a boolean if a field has been set.
+
+### SetEventsNil
+
+`func (o *StorageNetAppStorageVmAllOf) SetEventsNil(b bool)`
+
+ SetEventsNil sets the value for Events to be an explicit nil
+
+### UnsetEvents
+`func (o *StorageNetAppStorageVmAllOf) UnsetEvents()`
+
+UnsetEvents ensures that no value is present for Events, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

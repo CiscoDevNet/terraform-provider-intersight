@@ -379,6 +379,13 @@ func dataSourceWorkflowSshBatchExecutor() *schema.Resource {
 				},
 			},
 		},
+		"ui_rendering_data": {
+			Description: "This will hold the data needed for task to be rendered in the user interface.",
+			Type:        schema.TypeMap,
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			}, Optional: true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -852,6 +859,13 @@ func dataSourceWorkflowSshBatchExecutor() *schema.Resource {
 				},
 			},
 		},
+		"ui_rendering_data": {
+			Description: "This will hold the data needed for task to be rendered in the user interface.",
+			Type:        schema.TypeMap,
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			}, Optional: true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -1144,7 +1158,7 @@ func dataSourceWorkflowSshBatchExecutorRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("workflow.TaskConstraints")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1234,7 +1248,7 @@ func dataSourceWorkflowSshBatchExecutorRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1365,7 +1379,7 @@ func dataSourceWorkflowSshBatchExecutorRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1392,6 +1406,10 @@ func dataSourceWorkflowSshBatchExecutorRead(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if v, ok := d.GetOk("ui_rendering_data"); ok {
+		o.SetUiRenderingData(v)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1408,7 +1426,7 @@ func dataSourceWorkflowSshBatchExecutorRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

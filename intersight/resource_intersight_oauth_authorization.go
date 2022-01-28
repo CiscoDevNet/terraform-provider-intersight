@@ -555,8 +555,8 @@ func resourceOauthAuthorizationCreate(c context.Context, d *schema.ResourceData,
 func resourceOauthAuthorizationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.OauthApi.GetOauthAuthorizationByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {

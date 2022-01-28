@@ -32,6 +32,11 @@ resource "intersight_kubernetes_cluster_profile" "kubernetes_cluster_profile1" {
     moid        = var.workflow_workflow_info
   }
 }
+
+variable "workflow_workflow_info" {
+  type        = string
+  description = "Moid of the workflow.WorkflowInfo "
+}
 ```
 ## Argument Reference
 The following arguments are supported:
@@ -123,6 +128,11 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `kube_config`:(string)(ReadOnly) Kubernetes configuration to connect to the cluster as an system administrator. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `loadbalancer_block_ip_leases`:(Array) An array of relationships to ippoolBlockLease resources. 
+This complex property has following sub-properties:
+  + `moid`:(string) The Moid of the referenced REST resource. 
+  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
+  + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `loadbalancer_ip_leases`:(Array) An array of relationships to ippoolIpLease resources. 
 This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 

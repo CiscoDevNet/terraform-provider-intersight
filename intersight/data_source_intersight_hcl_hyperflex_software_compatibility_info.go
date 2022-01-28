@@ -157,6 +157,11 @@ func dataSourceHclHyperflexSoftwareCompatibilityInfo() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_mgmt_build": {
+			Description: "Type of the HXDP bundle mgmt or full.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -530,6 +535,11 @@ func dataSourceHclHyperflexSoftwareCompatibilityInfo() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"is_mgmt_build": {
+			Description: "Type of the HXDP bundle mgmt or full.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -847,7 +857,7 @@ func dataSourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -944,6 +954,11 @@ func dataSourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *s
 		o.SetHypervisorVersion(x)
 	}
 
+	if v, ok := d.GetOk("is_mgmt_build"); ok {
+		x := (v.(string))
+		o.SetIsMgmtBuild(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -986,7 +1001,7 @@ func dataSourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1112,7 +1127,7 @@ func dataSourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *s
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1221,6 +1236,7 @@ func dataSourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *s
 				temp["hxdp_version"] = (s.GetHxdpVersion())
 				temp["hypervisor_type"] = (s.GetHypervisorType())
 				temp["hypervisor_version"] = (s.GetHypervisorVersion())
+				temp["is_mgmt_build"] = (s.GetIsMgmtBuild())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

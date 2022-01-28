@@ -1866,7 +1866,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1909,7 +1909,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1957,7 +1957,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("virtualization.CpuAllocation")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -2012,7 +2012,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("virtualization.CpuInfo")
+			o.SetClassId("")
 			if v, ok := l["cores"]; ok {
 				{
 					x := int64(v.(int))
@@ -2088,7 +2088,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("infra.HardwareInfo")
+			o.SetClassId("")
 			if v, ok := l["cpu_cores"]; ok {
 				{
 					x := int64(v.(int))
@@ -2172,7 +2172,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("virtualization.MemoryAllocation")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -2233,7 +2233,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.MemoryCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -2312,7 +2312,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2395,7 +2395,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2444,7 +2444,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.ComputeCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -2493,7 +2493,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					o.SetBuild(x)
 				}
 			}
-			o.SetClassId("virtualization.ProductInfo")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2548,7 +2548,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2612,7 +2612,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.StorageCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -2713,7 +2713,7 @@ func dataSourceVirtualizationIweHostRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

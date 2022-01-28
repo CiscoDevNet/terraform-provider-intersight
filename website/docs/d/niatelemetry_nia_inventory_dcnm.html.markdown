@@ -22,10 +22,13 @@ The following arguments can be used to get data of already created objects in In
 * `ha_enabled`:(bool) Returns the value of the haEnabled field. 
 * `ha_replication_status`:(string) Returns the value of the haReplicationStatus field. 
 * `install`:(string) Returns the value of the install field. 
+* `installation_type`:(string) Installation type of controller on DCNM. 
+* `installation_type_description`:(string) Installation type description of controller on DCNM. 
 * `is_isn_configured`:(bool) Returns true if ISN is configured. 
 * `is_media_controller`:(bool) Returns the value of the isMediaController field. 
 * `is_smart_license_enabled`:(bool) Returns true if the Smart license is enabled and is in use. 
 * `mod_time`:(string) The time when this managed object was last modified. 
+* `mode`:(string) Mode of controller on DCNM. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_fabrics`:(int) Returns total number of fabrics in DCNM set-up. 
 * `num_fabrics_in_msd`:(int) Returns the number of fabrics in msd. 

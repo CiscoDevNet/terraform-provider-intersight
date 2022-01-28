@@ -318,7 +318,7 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 			Optional:    true,
 		},
 		"name": {
-			Description: "The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id.",
+			Description: "The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC).\nWhen this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect.\nWhen this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1011,7 +1011,7 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 			Optional:    true,
 		},
 		"name": {
-			Description: "The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id.",
+			Description: "The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC).\nWhen this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect.\nWhen this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1452,7 +1452,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("compute.AlarmSummary")
+			o.SetClassId("")
 			if v, ok := l["critical"]; ok {
 				{
 					x := int64(v.(int))
@@ -1605,7 +1605,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1793,7 +1793,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1891,7 +1891,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2037,7 +2037,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

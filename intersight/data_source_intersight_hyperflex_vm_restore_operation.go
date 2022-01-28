@@ -1016,7 +1016,7 @@ func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1070,7 +1070,7 @@ func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1158,7 +1158,7 @@ func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1244,7 +1244,7 @@ func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1318,7 +1318,7 @@ func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1361,7 +1361,7 @@ func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

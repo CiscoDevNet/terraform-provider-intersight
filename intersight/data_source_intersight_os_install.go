@@ -2126,7 +2126,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 								}
 							}
 						}
-						o.SetClassId("workflow.PrimitiveDataType")
+						o.SetClassId("")
 						if v, ok := l["default"]; ok {
 							{
 								p := make([]models.WorkflowDefaultValue, 0, 1)
@@ -2144,7 +2144,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 											}
 										}
 									}
-									o.SetClassId("workflow.DefaultValue")
+									o.SetClassId("")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -2193,7 +2193,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 											}
 										}
 									}
-									o.SetClassId("workflow.DisplayMeta")
+									o.SetClassId("")
 									if v, ok := l["inventory_selector"]; ok {
 										{
 											x := (v.(bool))
@@ -2260,7 +2260,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 											}
 										}
 									}
-									o.SetClassId("workflow.PrimitiveDataProperty")
+									o.SetClassId("")
 									if v, ok := l["constraints"]; ok {
 										{
 											p := make([]models.WorkflowConstraints, 0, 1)
@@ -2278,7 +2278,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 														}
 													}
 												}
-												o.SetClassId("workflow.Constraints")
+												o.SetClassId("")
 												if v, ok := l["enum_list"]; ok {
 													{
 														x := make([]models.WorkflowEnumEntry, 0)
@@ -2420,7 +2420,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 																	o.SetBody(v)
 																}
 															}
-															o.SetClassId("workflow.SelectorProperty")
+															o.SetClassId("")
 															if v, ok := l["method"]; ok {
 																{
 																	x := (v.(string))
@@ -2575,7 +2575,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					o.SetAnswerFile(x)
 				}
 			}
-			o.SetClassId("os.Answers")
+			o.SetClassId("")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -2605,7 +2605,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 								}
 							}
 						}
-						o.SetClassId("os.IpConfiguration")
+						o.SetClassId("")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2691,7 +2691,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2754,7 +2754,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2802,7 +2802,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("os.InstallTarget")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2858,7 +2858,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("os.OperatingSystemParameters")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2889,7 +2889,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2932,7 +2932,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2986,7 +2986,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3069,7 +3069,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3150,7 +3150,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -3224,7 +3224,7 @@ func dataSourceOsInstallRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -1126,7 +1126,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1199,7 +1199,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("workflow.DefaultValue")
+						o.SetClassId("")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -1248,7 +1248,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("workflow.DisplayMeta")
+						o.SetClassId("")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -1430,7 +1430,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("workflow.DefaultValue")
+						o.SetClassId("")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -1479,7 +1479,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("workflow.DisplayMeta")
+						o.SetClassId("")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -1562,7 +1562,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("workflow.WorkflowProperties")
+			o.SetClassId("")
 			if v, ok := l["enable_debug"]; ok {
 				{
 					x := (v.(bool))
@@ -1765,7 +1765,7 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1810,8 +1810,8 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 func resourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowDefinitionByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -2007,7 +2007,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2083,7 +2083,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("workflow.DefaultValue")
+						o.SetClassId("")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2132,7 +2132,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("workflow.DisplayMeta")
+						o.SetClassId("")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -2315,7 +2315,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("workflow.DefaultValue")
+						o.SetClassId("")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2364,7 +2364,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("workflow.DisplayMeta")
+						o.SetClassId("")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -2447,7 +2447,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("workflow.WorkflowProperties")
+			o.SetClassId("")
 			if v, ok := l["enable_debug"]; ok {
 				{
 					x := (v.(bool))
@@ -2650,7 +2650,7 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

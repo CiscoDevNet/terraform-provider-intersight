@@ -652,7 +652,7 @@ func resourceHyperflexExtFcStoragePolicyCreate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVsan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -695,7 +695,7 @@ func resourceHyperflexExtFcStoragePolicyCreate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVsan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -750,7 +750,7 @@ func resourceHyperflexExtFcStoragePolicyCreate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -828,7 +828,7 @@ func resourceHyperflexExtFcStoragePolicyCreate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("hyperflex.WwxnPrefixRange")
+			o.SetClassId("")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -873,8 +873,8 @@ func resourceHyperflexExtFcStoragePolicyCreate(c context.Context, d *schema.Reso
 func resourceHyperflexExtFcStoragePolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexExtFcStoragePolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1077,7 +1077,7 @@ func resourceHyperflexExtFcStoragePolicyUpdate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVsan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -1121,7 +1121,7 @@ func resourceHyperflexExtFcStoragePolicyUpdate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVsan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -1179,7 +1179,7 @@ func resourceHyperflexExtFcStoragePolicyUpdate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1257,7 +1257,7 @@ func resourceHyperflexExtFcStoragePolicyUpdate(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("hyperflex.WwxnPrefixRange")
+			o.SetClassId("")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))

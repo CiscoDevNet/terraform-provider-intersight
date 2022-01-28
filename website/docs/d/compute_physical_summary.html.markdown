@@ -35,7 +35,7 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `name`:(string) The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id. 
+* `name`:(string) The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC).When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect.When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. 
 * `num_adaptors`:(int) The total number of network adapters present on the server. 
 * `num_cpu_cores`:(int) The total number of CPU cores present on the server. 
 * `num_cpu_cores_enabled`:(int) The total number of CPU cores enabled on the server. 
