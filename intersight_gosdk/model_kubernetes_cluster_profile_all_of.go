@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -36,6 +36,8 @@ type KubernetesClusterProfileAllOf struct {
 	// An array of relationships to ippoolPool resources.
 	ClusterIpPools         []IppoolPoolRelationship                      `json:"ClusterIpPools,omitempty"`
 	ContainerRuntimeConfig *KubernetesContainerRuntimePolicyRelationship `json:"ContainerRuntimeConfig,omitempty"`
+	// An array of relationships to ippoolBlockLease resources.
+	LoadbalancerBlockIpLeases []IppoolBlockLeaseRelationship `json:"LoadbalancerBlockIpLeases,omitempty"`
 	// An array of relationships to ippoolIpLease resources.
 	LoadbalancerIpLeases []IppoolIpLeaseRelationship          `json:"LoadbalancerIpLeases,omitempty"`
 	MasterVipLease       *IppoolIpLeaseRelationship           `json:"MasterVipLease,omitempty"`
@@ -532,6 +534,39 @@ func (o *KubernetesClusterProfileAllOf) SetContainerRuntimeConfig(v KubernetesCo
 	o.ContainerRuntimeConfig = &v
 }
 
+// GetLoadbalancerBlockIpLeases returns the LoadbalancerBlockIpLeases field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *KubernetesClusterProfileAllOf) GetLoadbalancerBlockIpLeases() []IppoolBlockLeaseRelationship {
+	if o == nil {
+		var ret []IppoolBlockLeaseRelationship
+		return ret
+	}
+	return o.LoadbalancerBlockIpLeases
+}
+
+// GetLoadbalancerBlockIpLeasesOk returns a tuple with the LoadbalancerBlockIpLeases field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *KubernetesClusterProfileAllOf) GetLoadbalancerBlockIpLeasesOk() (*[]IppoolBlockLeaseRelationship, bool) {
+	if o == nil || o.LoadbalancerBlockIpLeases == nil {
+		return nil, false
+	}
+	return &o.LoadbalancerBlockIpLeases, true
+}
+
+// HasLoadbalancerBlockIpLeases returns a boolean if a field has been set.
+func (o *KubernetesClusterProfileAllOf) HasLoadbalancerBlockIpLeases() bool {
+	if o != nil && o.LoadbalancerBlockIpLeases != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLoadbalancerBlockIpLeases gets a reference to the given []IppoolBlockLeaseRelationship and assigns it to the LoadbalancerBlockIpLeases field.
+func (o *KubernetesClusterProfileAllOf) SetLoadbalancerBlockIpLeases(v []IppoolBlockLeaseRelationship) {
+	o.LoadbalancerBlockIpLeases = v
+}
+
 // GetLoadbalancerIpLeases returns the LoadbalancerIpLeases field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *KubernetesClusterProfileAllOf) GetLoadbalancerIpLeases() []IppoolIpLeaseRelationship {
 	if o == nil {
@@ -863,6 +898,9 @@ func (o KubernetesClusterProfileAllOf) MarshalJSON() ([]byte, error) {
 	if o.ContainerRuntimeConfig != nil {
 		toSerialize["ContainerRuntimeConfig"] = o.ContainerRuntimeConfig
 	}
+	if o.LoadbalancerBlockIpLeases != nil {
+		toSerialize["LoadbalancerBlockIpLeases"] = o.LoadbalancerBlockIpLeases
+	}
 	if o.LoadbalancerIpLeases != nil {
 		toSerialize["LoadbalancerIpLeases"] = o.LoadbalancerIpLeases
 	}
@@ -921,6 +959,7 @@ func (o *KubernetesClusterProfileAllOf) UnmarshalJSON(bytes []byte) (err error) 
 		delete(additionalProperties, "AssociatedCluster")
 		delete(additionalProperties, "ClusterIpPools")
 		delete(additionalProperties, "ContainerRuntimeConfig")
+		delete(additionalProperties, "LoadbalancerBlockIpLeases")
 		delete(additionalProperties, "LoadbalancerIpLeases")
 		delete(additionalProperties, "MasterVipLease")
 		delete(additionalProperties, "NetConfig")

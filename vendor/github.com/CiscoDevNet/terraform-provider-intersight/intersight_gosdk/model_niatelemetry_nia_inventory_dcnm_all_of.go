@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -26,19 +26,27 @@ type NiatelemetryNiaInventoryDcnmAllOf struct {
 	// Returns the value of the dev Field.
 	Dev *bool `json:"Dev,omitempty"`
 	// Number of EPLD images uploaded to DCNM.
-	EpldImageCount *int64 `json:"EpldImageCount,omitempty"`
+	EpldImageCount     *int64                    `json:"EpldImageCount,omitempty"`
+	GoldenImageDetails []NiatelemetryImageDetail `json:"GoldenImageDetails,omitempty"`
 	// Returns the value of the haEnabled field.
 	HaEnabled *bool `json:"HaEnabled,omitempty"`
 	// Returns the value of the haReplicationStatus field.
 	HaReplicationStatus *string `json:"HaReplicationStatus,omitempty"`
 	// Returns the value of the install field.
 	Install *string `json:"Install,omitempty"`
+	// Installation type of controller on DCNM.
+	InstallationType *string `json:"InstallationType,omitempty"`
+	// Installation type description of controller on DCNM.
+	InstallationTypeDescription *string `json:"InstallationTypeDescription,omitempty"`
 	// Returns true if ISN is configured.
 	IsIsnConfigured *bool `json:"IsIsnConfigured,omitempty"`
 	// Returns the value of the isMediaController field.
 	IsMediaController *bool `json:"IsMediaController,omitempty"`
 	// Returns true if the Smart license is enabled and is in use.
 	IsSmartLicenseEnabled *bool `json:"IsSmartLicenseEnabled,omitempty"`
+	// Mode of controller on DCNM.
+	Mode        *string                         `json:"Mode,omitempty"`
+	NetworkInfo NullableNiatelemetryNetworkInfo `json:"NetworkInfo,omitempty"`
 	// Returns total number of fabrics in DCNM set-up.
 	NumFabrics *int64 `json:"NumFabrics,omitempty"`
 	// Returns the number of fabrics in msd.
@@ -243,6 +251,39 @@ func (o *NiatelemetryNiaInventoryDcnmAllOf) SetEpldImageCount(v int64) {
 	o.EpldImageCount = &v
 }
 
+// GetGoldenImageDetails returns the GoldenImageDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNiaInventoryDcnmAllOf) GetGoldenImageDetails() []NiatelemetryImageDetail {
+	if o == nil {
+		var ret []NiatelemetryImageDetail
+		return ret
+	}
+	return o.GoldenImageDetails
+}
+
+// GetGoldenImageDetailsOk returns a tuple with the GoldenImageDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNiaInventoryDcnmAllOf) GetGoldenImageDetailsOk() (*[]NiatelemetryImageDetail, bool) {
+	if o == nil || o.GoldenImageDetails == nil {
+		return nil, false
+	}
+	return &o.GoldenImageDetails, true
+}
+
+// HasGoldenImageDetails returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) HasGoldenImageDetails() bool {
+	if o != nil && o.GoldenImageDetails != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGoldenImageDetails gets a reference to the given []NiatelemetryImageDetail and assigns it to the GoldenImageDetails field.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) SetGoldenImageDetails(v []NiatelemetryImageDetail) {
+	o.GoldenImageDetails = v
+}
+
 // GetHaEnabled returns the HaEnabled field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryDcnmAllOf) GetHaEnabled() bool {
 	if o == nil || o.HaEnabled == nil {
@@ -339,6 +380,70 @@ func (o *NiatelemetryNiaInventoryDcnmAllOf) SetInstall(v string) {
 	o.Install = &v
 }
 
+// GetInstallationType returns the InstallationType field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) GetInstallationType() string {
+	if o == nil || o.InstallationType == nil {
+		var ret string
+		return ret
+	}
+	return *o.InstallationType
+}
+
+// GetInstallationTypeOk returns a tuple with the InstallationType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) GetInstallationTypeOk() (*string, bool) {
+	if o == nil || o.InstallationType == nil {
+		return nil, false
+	}
+	return o.InstallationType, true
+}
+
+// HasInstallationType returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) HasInstallationType() bool {
+	if o != nil && o.InstallationType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInstallationType gets a reference to the given string and assigns it to the InstallationType field.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) SetInstallationType(v string) {
+	o.InstallationType = &v
+}
+
+// GetInstallationTypeDescription returns the InstallationTypeDescription field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) GetInstallationTypeDescription() string {
+	if o == nil || o.InstallationTypeDescription == nil {
+		var ret string
+		return ret
+	}
+	return *o.InstallationTypeDescription
+}
+
+// GetInstallationTypeDescriptionOk returns a tuple with the InstallationTypeDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) GetInstallationTypeDescriptionOk() (*string, bool) {
+	if o == nil || o.InstallationTypeDescription == nil {
+		return nil, false
+	}
+	return o.InstallationTypeDescription, true
+}
+
+// HasInstallationTypeDescription returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) HasInstallationTypeDescription() bool {
+	if o != nil && o.InstallationTypeDescription != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInstallationTypeDescription gets a reference to the given string and assigns it to the InstallationTypeDescription field.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) SetInstallationTypeDescription(v string) {
+	o.InstallationTypeDescription = &v
+}
+
 // GetIsIsnConfigured returns the IsIsnConfigured field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryDcnmAllOf) GetIsIsnConfigured() bool {
 	if o == nil || o.IsIsnConfigured == nil {
@@ -433,6 +538,81 @@ func (o *NiatelemetryNiaInventoryDcnmAllOf) HasIsSmartLicenseEnabled() bool {
 // SetIsSmartLicenseEnabled gets a reference to the given bool and assigns it to the IsSmartLicenseEnabled field.
 func (o *NiatelemetryNiaInventoryDcnmAllOf) SetIsSmartLicenseEnabled(v bool) {
 	o.IsSmartLicenseEnabled = &v
+}
+
+// GetMode returns the Mode field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) GetMode() string {
+	if o == nil || o.Mode == nil {
+		var ret string
+		return ret
+	}
+	return *o.Mode
+}
+
+// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) GetModeOk() (*string, bool) {
+	if o == nil || o.Mode == nil {
+		return nil, false
+	}
+	return o.Mode, true
+}
+
+// HasMode returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) HasMode() bool {
+	if o != nil && o.Mode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMode gets a reference to the given string and assigns it to the Mode field.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) SetMode(v string) {
+	o.Mode = &v
+}
+
+// GetNetworkInfo returns the NetworkInfo field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNiaInventoryDcnmAllOf) GetNetworkInfo() NiatelemetryNetworkInfo {
+	if o == nil || o.NetworkInfo.Get() == nil {
+		var ret NiatelemetryNetworkInfo
+		return ret
+	}
+	return *o.NetworkInfo.Get()
+}
+
+// GetNetworkInfoOk returns a tuple with the NetworkInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNiaInventoryDcnmAllOf) GetNetworkInfoOk() (*NiatelemetryNetworkInfo, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.NetworkInfo.Get(), o.NetworkInfo.IsSet()
+}
+
+// HasNetworkInfo returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) HasNetworkInfo() bool {
+	if o != nil && o.NetworkInfo.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkInfo gets a reference to the given NullableNiatelemetryNetworkInfo and assigns it to the NetworkInfo field.
+func (o *NiatelemetryNiaInventoryDcnmAllOf) SetNetworkInfo(v NiatelemetryNetworkInfo) {
+	o.NetworkInfo.Set(&v)
+}
+
+// SetNetworkInfoNil sets the value for NetworkInfo to be an explicit nil
+func (o *NiatelemetryNiaInventoryDcnmAllOf) SetNetworkInfoNil() {
+	o.NetworkInfo.Set(nil)
+}
+
+// UnsetNetworkInfo ensures that no value is present for NetworkInfo, not even an explicit nil
+func (o *NiatelemetryNiaInventoryDcnmAllOf) UnsetNetworkInfo() {
+	o.NetworkInfo.Unset()
 }
 
 // GetNumFabrics returns the NumFabrics field value if set, zero value otherwise.
@@ -997,6 +1177,9 @@ func (o NiatelemetryNiaInventoryDcnmAllOf) MarshalJSON() ([]byte, error) {
 	if o.EpldImageCount != nil {
 		toSerialize["EpldImageCount"] = o.EpldImageCount
 	}
+	if o.GoldenImageDetails != nil {
+		toSerialize["GoldenImageDetails"] = o.GoldenImageDetails
+	}
 	if o.HaEnabled != nil {
 		toSerialize["HaEnabled"] = o.HaEnabled
 	}
@@ -1006,6 +1189,12 @@ func (o NiatelemetryNiaInventoryDcnmAllOf) MarshalJSON() ([]byte, error) {
 	if o.Install != nil {
 		toSerialize["Install"] = o.Install
 	}
+	if o.InstallationType != nil {
+		toSerialize["InstallationType"] = o.InstallationType
+	}
+	if o.InstallationTypeDescription != nil {
+		toSerialize["InstallationTypeDescription"] = o.InstallationTypeDescription
+	}
 	if o.IsIsnConfigured != nil {
 		toSerialize["IsIsnConfigured"] = o.IsIsnConfigured
 	}
@@ -1014,6 +1203,12 @@ func (o NiatelemetryNiaInventoryDcnmAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.IsSmartLicenseEnabled != nil {
 		toSerialize["IsSmartLicenseEnabled"] = o.IsSmartLicenseEnabled
+	}
+	if o.Mode != nil {
+		toSerialize["Mode"] = o.Mode
+	}
+	if o.NetworkInfo.IsSet() {
+		toSerialize["NetworkInfo"] = o.NetworkInfo.Get()
 	}
 	if o.NumFabrics != nil {
 		toSerialize["NumFabrics"] = o.NumFabrics
@@ -1089,12 +1284,17 @@ func (o *NiatelemetryNiaInventoryDcnmAllOf) UnmarshalJSON(bytes []byte) (err err
 		delete(additionalProperties, "ControllerHealth")
 		delete(additionalProperties, "Dev")
 		delete(additionalProperties, "EpldImageCount")
+		delete(additionalProperties, "GoldenImageDetails")
 		delete(additionalProperties, "HaEnabled")
 		delete(additionalProperties, "HaReplicationStatus")
 		delete(additionalProperties, "Install")
+		delete(additionalProperties, "InstallationType")
+		delete(additionalProperties, "InstallationTypeDescription")
 		delete(additionalProperties, "IsIsnConfigured")
 		delete(additionalProperties, "IsMediaController")
 		delete(additionalProperties, "IsSmartLicenseEnabled")
+		delete(additionalProperties, "Mode")
+		delete(additionalProperties, "NetworkInfo")
 		delete(additionalProperties, "NumFabrics")
 		delete(additionalProperties, "NumFabricsInMsd")
 		delete(additionalProperties, "NumIngressReplicationFabrics")

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -24,6 +24,8 @@ type StoragePhysicalDisk struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// List of background operations underway.
+	BackgroundOperations *string `json:"BackgroundOperations,omitempty"`
 	// The block size of the physical disk in bytes.
 	BlockSize *string `json:"BlockSize,omitempty"`
 	// This field identifies the disk drive as bootable if set to true.
@@ -32,6 +34,8 @@ type StoragePhysicalDisk struct {
 	ConfigurationCheckpoint *string `json:"ConfigurationCheckpoint,omitempty"`
 	// The current configuration state of the physical disk.
 	ConfigurationState *string `json:"ConfigurationState,omitempty"`
+	// The physical disk is disabled for removal.
+	DisabledForRemoval *bool `json:"DisabledForRemoval,omitempty"`
 	// The discovered path of the physical disk.
 	DiscoveredPath *string `json:"DiscoveredPath,omitempty"`
 	// This field identifies the ID assigned to physical disks.
@@ -42,14 +46,28 @@ type StoragePhysicalDisk struct {
 	DriveFirmware *string `json:"DriveFirmware,omitempty"`
 	// The drive state as reported by the controller.
 	DriveState *string `json:"DriveState,omitempty"`
+	// Encryption status of the physical disk.
+	EncryptionStatus *string `json:"EncryptionStatus,omitempty"`
+	// Possibility of physical disk failure.
+	FailurePredicted *bool `json:"FailurePredicted,omitempty"`
 	// Full-Disk Encryption capability parameter of the physical disk.
 	FdeCapable *string `json:"FdeCapable,omitempty"`
 	// Type of hotspare configured on the physical disk.
 	HotSpareType *string `json:"HotSpareType,omitempty"`
+	// Status of the locator LED corresponding to the physical disk.
+	IndicatorLed *string `json:"IndicatorLed,omitempty"`
 	// The speed of the link between the drive and the controller.
 	LinkSpeed *string `json:"LinkSpeed,omitempty"`
 	// The current link state of the physical disk.
 	LinkState *string `json:"LinkState,omitempty"`
+	// Maximum operating temperature of drive in Celsius.
+	MaximumOperatingTemperature *int64 `json:"MaximumOperatingTemperature,omitempty"`
+	// Media error count on the physical disk.
+	MediaErrorCount *int64 `json:"MediaErrorCount,omitempty"`
+	// Detailed name of the physical disk.
+	Name *string `json:"Name,omitempty"`
+	// Physical disk non-coerced size in bytes.
+	NonCoercedSizeBytes *int64 `json:"NonCoercedSizeBytes,omitempty"`
 	// The number of blocks present on the physical disk.
 	NumBlocks *string `json:"NumBlocks,omitempty"`
 	// Operational power of the physical disk.
@@ -58,24 +76,52 @@ type StoragePhysicalDisk struct {
 	OperQualifierReason *string `json:"OperQualifierReason,omitempty"`
 	// This field identifies the disk operability of the disk.
 	Operability *string `json:"Operability,omitempty"`
+	// Operating temperature of drive in Celsius.
+	OperatingTemperature *int64 `json:"OperatingTemperature,omitempty"`
+	// Percentage of write cycles remaining in a solid state drive (SSD).
+	PercentLifeLeft *int64 `json:"PercentLifeLeft,omitempty"`
+	// Percentage of reserve capacity consumed.
+	PercentReservedCapacityConsumed *int64 `json:"PercentReservedCapacityConsumed,omitempty"`
+	// Performance at which the device operating expressed in percentage.
+	PerformancePercent *int64 `json:"PerformancePercent,omitempty"`
 	// The block size of the installed physical disk.
 	PhysicalBlockSize *string `json:"PhysicalBlockSize,omitempty"`
 	// This field identifies the Product ID for physicalDisk.
 	Pid *string `json:"Pid,omitempty"`
+	// Number of powercycles the drive has undergone.
+	PowerCycleCount *int64 `json:"PowerCycleCount,omitempty"`
+	// Number of hours the drive has been powered on.
+	PowerOnHours *int64 `json:"PowerOnHours,omitempty"`
+	// Predicted physical disk life left in percentage.
+	PredictedMediaLifeLeftPercent *int64 `json:"PredictedMediaLifeLeftPercent,omitempty"`
+	// Error count on the physical disk.
+	PredictiveFailureCount *int64 `json:"PredictiveFailureCount,omitempty"`
 	// This field identifies the disk protocol used for communication.
 	Protocol *string `json:"Protocol,omitempty"`
 	// The raw size of the physical disk in MB.
 	RawSize *string `json:"RawSize,omitempty"`
+	// The number of read errors that are permitted while accessing the drive/card.
+	ReadErrorCountThreshold *int64 `json:"ReadErrorCountThreshold,omitempty"`
+	// Number of IO Errors that occured while reading data from the disk.
+	ReadIoErrorCount *int64 `json:"ReadIoErrorCount,omitempty"`
 	// This field identifies whether the disk is encrypted.
 	Secured *string `json:"Secured,omitempty"`
 	// The size of the physical disk in MB.
 	Size *string `json:"Size,omitempty"`
 	// Thermal state of the physical disk.
 	Thermal *string `json:"Thermal,omitempty"`
+	// Rated threshold operating temperature in Celsius.
+	ThresholdOperatingTemperature *int64 `json:"ThresholdOperatingTemperature,omitempty"`
 	// This field identifies the type of the physical disk.
 	Type *string `json:"Type,omitempty"`
 	// The variant type of the physical disk.
-	VariantType         *string                          `json:"VariantType,omitempty"`
+	VariantType *string `json:"VariantType,omitempty"`
+	// The number of days an SSD has gone through with the write cycles.
+	WearStatusInDays *int64 `json:"WearStatusInDays,omitempty"`
+	// The number of write errors that are permitted while accessing the drive/card.
+	WriteErrorCountThreshold *int64 `json:"WriteErrorCountThreshold,omitempty"`
+	// Number of IO Errors that occured while writing data to the disk.
+	WriteIoErrorCount   *int64                           `json:"WriteIoErrorCount,omitempty"`
 	InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 	LocatorLed          *EquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
 	// An array of relationships to storagePhysicalDiskExtension resources.
@@ -161,6 +207,38 @@ func (o *StoragePhysicalDisk) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *StoragePhysicalDisk) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetBackgroundOperations returns the BackgroundOperations field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetBackgroundOperations() string {
+	if o == nil || o.BackgroundOperations == nil {
+		var ret string
+		return ret
+	}
+	return *o.BackgroundOperations
+}
+
+// GetBackgroundOperationsOk returns a tuple with the BackgroundOperations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetBackgroundOperationsOk() (*string, bool) {
+	if o == nil || o.BackgroundOperations == nil {
+		return nil, false
+	}
+	return o.BackgroundOperations, true
+}
+
+// HasBackgroundOperations returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasBackgroundOperations() bool {
+	if o != nil && o.BackgroundOperations != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBackgroundOperations gets a reference to the given string and assigns it to the BackgroundOperations field.
+func (o *StoragePhysicalDisk) SetBackgroundOperations(v string) {
+	o.BackgroundOperations = &v
 }
 
 // GetBlockSize returns the BlockSize field value if set, zero value otherwise.
@@ -289,6 +367,38 @@ func (o *StoragePhysicalDisk) HasConfigurationState() bool {
 // SetConfigurationState gets a reference to the given string and assigns it to the ConfigurationState field.
 func (o *StoragePhysicalDisk) SetConfigurationState(v string) {
 	o.ConfigurationState = &v
+}
+
+// GetDisabledForRemoval returns the DisabledForRemoval field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetDisabledForRemoval() bool {
+	if o == nil || o.DisabledForRemoval == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DisabledForRemoval
+}
+
+// GetDisabledForRemovalOk returns a tuple with the DisabledForRemoval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetDisabledForRemovalOk() (*bool, bool) {
+	if o == nil || o.DisabledForRemoval == nil {
+		return nil, false
+	}
+	return o.DisabledForRemoval, true
+}
+
+// HasDisabledForRemoval returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasDisabledForRemoval() bool {
+	if o != nil && o.DisabledForRemoval != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDisabledForRemoval gets a reference to the given bool and assigns it to the DisabledForRemoval field.
+func (o *StoragePhysicalDisk) SetDisabledForRemoval(v bool) {
+	o.DisabledForRemoval = &v
 }
 
 // GetDiscoveredPath returns the DiscoveredPath field value if set, zero value otherwise.
@@ -451,6 +561,70 @@ func (o *StoragePhysicalDisk) SetDriveState(v string) {
 	o.DriveState = &v
 }
 
+// GetEncryptionStatus returns the EncryptionStatus field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetEncryptionStatus() string {
+	if o == nil || o.EncryptionStatus == nil {
+		var ret string
+		return ret
+	}
+	return *o.EncryptionStatus
+}
+
+// GetEncryptionStatusOk returns a tuple with the EncryptionStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetEncryptionStatusOk() (*string, bool) {
+	if o == nil || o.EncryptionStatus == nil {
+		return nil, false
+	}
+	return o.EncryptionStatus, true
+}
+
+// HasEncryptionStatus returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasEncryptionStatus() bool {
+	if o != nil && o.EncryptionStatus != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEncryptionStatus gets a reference to the given string and assigns it to the EncryptionStatus field.
+func (o *StoragePhysicalDisk) SetEncryptionStatus(v string) {
+	o.EncryptionStatus = &v
+}
+
+// GetFailurePredicted returns the FailurePredicted field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetFailurePredicted() bool {
+	if o == nil || o.FailurePredicted == nil {
+		var ret bool
+		return ret
+	}
+	return *o.FailurePredicted
+}
+
+// GetFailurePredictedOk returns a tuple with the FailurePredicted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetFailurePredictedOk() (*bool, bool) {
+	if o == nil || o.FailurePredicted == nil {
+		return nil, false
+	}
+	return o.FailurePredicted, true
+}
+
+// HasFailurePredicted returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasFailurePredicted() bool {
+	if o != nil && o.FailurePredicted != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFailurePredicted gets a reference to the given bool and assigns it to the FailurePredicted field.
+func (o *StoragePhysicalDisk) SetFailurePredicted(v bool) {
+	o.FailurePredicted = &v
+}
+
 // GetFdeCapable returns the FdeCapable field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetFdeCapable() string {
 	if o == nil || o.FdeCapable == nil {
@@ -515,6 +689,38 @@ func (o *StoragePhysicalDisk) SetHotSpareType(v string) {
 	o.HotSpareType = &v
 }
 
+// GetIndicatorLed returns the IndicatorLed field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetIndicatorLed() string {
+	if o == nil || o.IndicatorLed == nil {
+		var ret string
+		return ret
+	}
+	return *o.IndicatorLed
+}
+
+// GetIndicatorLedOk returns a tuple with the IndicatorLed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetIndicatorLedOk() (*string, bool) {
+	if o == nil || o.IndicatorLed == nil {
+		return nil, false
+	}
+	return o.IndicatorLed, true
+}
+
+// HasIndicatorLed returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasIndicatorLed() bool {
+	if o != nil && o.IndicatorLed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIndicatorLed gets a reference to the given string and assigns it to the IndicatorLed field.
+func (o *StoragePhysicalDisk) SetIndicatorLed(v string) {
+	o.IndicatorLed = &v
+}
+
 // GetLinkSpeed returns the LinkSpeed field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetLinkSpeed() string {
 	if o == nil || o.LinkSpeed == nil {
@@ -577,6 +783,134 @@ func (o *StoragePhysicalDisk) HasLinkState() bool {
 // SetLinkState gets a reference to the given string and assigns it to the LinkState field.
 func (o *StoragePhysicalDisk) SetLinkState(v string) {
 	o.LinkState = &v
+}
+
+// GetMaximumOperatingTemperature returns the MaximumOperatingTemperature field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetMaximumOperatingTemperature() int64 {
+	if o == nil || o.MaximumOperatingTemperature == nil {
+		var ret int64
+		return ret
+	}
+	return *o.MaximumOperatingTemperature
+}
+
+// GetMaximumOperatingTemperatureOk returns a tuple with the MaximumOperatingTemperature field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetMaximumOperatingTemperatureOk() (*int64, bool) {
+	if o == nil || o.MaximumOperatingTemperature == nil {
+		return nil, false
+	}
+	return o.MaximumOperatingTemperature, true
+}
+
+// HasMaximumOperatingTemperature returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasMaximumOperatingTemperature() bool {
+	if o != nil && o.MaximumOperatingTemperature != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMaximumOperatingTemperature gets a reference to the given int64 and assigns it to the MaximumOperatingTemperature field.
+func (o *StoragePhysicalDisk) SetMaximumOperatingTemperature(v int64) {
+	o.MaximumOperatingTemperature = &v
+}
+
+// GetMediaErrorCount returns the MediaErrorCount field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetMediaErrorCount() int64 {
+	if o == nil || o.MediaErrorCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.MediaErrorCount
+}
+
+// GetMediaErrorCountOk returns a tuple with the MediaErrorCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetMediaErrorCountOk() (*int64, bool) {
+	if o == nil || o.MediaErrorCount == nil {
+		return nil, false
+	}
+	return o.MediaErrorCount, true
+}
+
+// HasMediaErrorCount returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasMediaErrorCount() bool {
+	if o != nil && o.MediaErrorCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMediaErrorCount gets a reference to the given int64 and assigns it to the MediaErrorCount field.
+func (o *StoragePhysicalDisk) SetMediaErrorCount(v int64) {
+	o.MediaErrorCount = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetName() string {
+	if o == nil || o.Name == nil {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasName() bool {
+	if o != nil && o.Name != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *StoragePhysicalDisk) SetName(v string) {
+	o.Name = &v
+}
+
+// GetNonCoercedSizeBytes returns the NonCoercedSizeBytes field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetNonCoercedSizeBytes() int64 {
+	if o == nil || o.NonCoercedSizeBytes == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NonCoercedSizeBytes
+}
+
+// GetNonCoercedSizeBytesOk returns a tuple with the NonCoercedSizeBytes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetNonCoercedSizeBytesOk() (*int64, bool) {
+	if o == nil || o.NonCoercedSizeBytes == nil {
+		return nil, false
+	}
+	return o.NonCoercedSizeBytes, true
+}
+
+// HasNonCoercedSizeBytes returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasNonCoercedSizeBytes() bool {
+	if o != nil && o.NonCoercedSizeBytes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNonCoercedSizeBytes gets a reference to the given int64 and assigns it to the NonCoercedSizeBytes field.
+func (o *StoragePhysicalDisk) SetNonCoercedSizeBytes(v int64) {
+	o.NonCoercedSizeBytes = &v
 }
 
 // GetNumBlocks returns the NumBlocks field value if set, zero value otherwise.
@@ -707,6 +1041,134 @@ func (o *StoragePhysicalDisk) SetOperability(v string) {
 	o.Operability = &v
 }
 
+// GetOperatingTemperature returns the OperatingTemperature field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetOperatingTemperature() int64 {
+	if o == nil || o.OperatingTemperature == nil {
+		var ret int64
+		return ret
+	}
+	return *o.OperatingTemperature
+}
+
+// GetOperatingTemperatureOk returns a tuple with the OperatingTemperature field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetOperatingTemperatureOk() (*int64, bool) {
+	if o == nil || o.OperatingTemperature == nil {
+		return nil, false
+	}
+	return o.OperatingTemperature, true
+}
+
+// HasOperatingTemperature returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasOperatingTemperature() bool {
+	if o != nil && o.OperatingTemperature != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOperatingTemperature gets a reference to the given int64 and assigns it to the OperatingTemperature field.
+func (o *StoragePhysicalDisk) SetOperatingTemperature(v int64) {
+	o.OperatingTemperature = &v
+}
+
+// GetPercentLifeLeft returns the PercentLifeLeft field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetPercentLifeLeft() int64 {
+	if o == nil || o.PercentLifeLeft == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PercentLifeLeft
+}
+
+// GetPercentLifeLeftOk returns a tuple with the PercentLifeLeft field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetPercentLifeLeftOk() (*int64, bool) {
+	if o == nil || o.PercentLifeLeft == nil {
+		return nil, false
+	}
+	return o.PercentLifeLeft, true
+}
+
+// HasPercentLifeLeft returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasPercentLifeLeft() bool {
+	if o != nil && o.PercentLifeLeft != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPercentLifeLeft gets a reference to the given int64 and assigns it to the PercentLifeLeft field.
+func (o *StoragePhysicalDisk) SetPercentLifeLeft(v int64) {
+	o.PercentLifeLeft = &v
+}
+
+// GetPercentReservedCapacityConsumed returns the PercentReservedCapacityConsumed field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetPercentReservedCapacityConsumed() int64 {
+	if o == nil || o.PercentReservedCapacityConsumed == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PercentReservedCapacityConsumed
+}
+
+// GetPercentReservedCapacityConsumedOk returns a tuple with the PercentReservedCapacityConsumed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetPercentReservedCapacityConsumedOk() (*int64, bool) {
+	if o == nil || o.PercentReservedCapacityConsumed == nil {
+		return nil, false
+	}
+	return o.PercentReservedCapacityConsumed, true
+}
+
+// HasPercentReservedCapacityConsumed returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasPercentReservedCapacityConsumed() bool {
+	if o != nil && o.PercentReservedCapacityConsumed != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPercentReservedCapacityConsumed gets a reference to the given int64 and assigns it to the PercentReservedCapacityConsumed field.
+func (o *StoragePhysicalDisk) SetPercentReservedCapacityConsumed(v int64) {
+	o.PercentReservedCapacityConsumed = &v
+}
+
+// GetPerformancePercent returns the PerformancePercent field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetPerformancePercent() int64 {
+	if o == nil || o.PerformancePercent == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PerformancePercent
+}
+
+// GetPerformancePercentOk returns a tuple with the PerformancePercent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetPerformancePercentOk() (*int64, bool) {
+	if o == nil || o.PerformancePercent == nil {
+		return nil, false
+	}
+	return o.PerformancePercent, true
+}
+
+// HasPerformancePercent returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasPerformancePercent() bool {
+	if o != nil && o.PerformancePercent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPerformancePercent gets a reference to the given int64 and assigns it to the PerformancePercent field.
+func (o *StoragePhysicalDisk) SetPerformancePercent(v int64) {
+	o.PerformancePercent = &v
+}
+
 // GetPhysicalBlockSize returns the PhysicalBlockSize field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetPhysicalBlockSize() string {
 	if o == nil || o.PhysicalBlockSize == nil {
@@ -771,6 +1233,134 @@ func (o *StoragePhysicalDisk) SetPid(v string) {
 	o.Pid = &v
 }
 
+// GetPowerCycleCount returns the PowerCycleCount field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetPowerCycleCount() int64 {
+	if o == nil || o.PowerCycleCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PowerCycleCount
+}
+
+// GetPowerCycleCountOk returns a tuple with the PowerCycleCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetPowerCycleCountOk() (*int64, bool) {
+	if o == nil || o.PowerCycleCount == nil {
+		return nil, false
+	}
+	return o.PowerCycleCount, true
+}
+
+// HasPowerCycleCount returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasPowerCycleCount() bool {
+	if o != nil && o.PowerCycleCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPowerCycleCount gets a reference to the given int64 and assigns it to the PowerCycleCount field.
+func (o *StoragePhysicalDisk) SetPowerCycleCount(v int64) {
+	o.PowerCycleCount = &v
+}
+
+// GetPowerOnHours returns the PowerOnHours field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetPowerOnHours() int64 {
+	if o == nil || o.PowerOnHours == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PowerOnHours
+}
+
+// GetPowerOnHoursOk returns a tuple with the PowerOnHours field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetPowerOnHoursOk() (*int64, bool) {
+	if o == nil || o.PowerOnHours == nil {
+		return nil, false
+	}
+	return o.PowerOnHours, true
+}
+
+// HasPowerOnHours returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasPowerOnHours() bool {
+	if o != nil && o.PowerOnHours != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPowerOnHours gets a reference to the given int64 and assigns it to the PowerOnHours field.
+func (o *StoragePhysicalDisk) SetPowerOnHours(v int64) {
+	o.PowerOnHours = &v
+}
+
+// GetPredictedMediaLifeLeftPercent returns the PredictedMediaLifeLeftPercent field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetPredictedMediaLifeLeftPercent() int64 {
+	if o == nil || o.PredictedMediaLifeLeftPercent == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PredictedMediaLifeLeftPercent
+}
+
+// GetPredictedMediaLifeLeftPercentOk returns a tuple with the PredictedMediaLifeLeftPercent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetPredictedMediaLifeLeftPercentOk() (*int64, bool) {
+	if o == nil || o.PredictedMediaLifeLeftPercent == nil {
+		return nil, false
+	}
+	return o.PredictedMediaLifeLeftPercent, true
+}
+
+// HasPredictedMediaLifeLeftPercent returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasPredictedMediaLifeLeftPercent() bool {
+	if o != nil && o.PredictedMediaLifeLeftPercent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPredictedMediaLifeLeftPercent gets a reference to the given int64 and assigns it to the PredictedMediaLifeLeftPercent field.
+func (o *StoragePhysicalDisk) SetPredictedMediaLifeLeftPercent(v int64) {
+	o.PredictedMediaLifeLeftPercent = &v
+}
+
+// GetPredictiveFailureCount returns the PredictiveFailureCount field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetPredictiveFailureCount() int64 {
+	if o == nil || o.PredictiveFailureCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.PredictiveFailureCount
+}
+
+// GetPredictiveFailureCountOk returns a tuple with the PredictiveFailureCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetPredictiveFailureCountOk() (*int64, bool) {
+	if o == nil || o.PredictiveFailureCount == nil {
+		return nil, false
+	}
+	return o.PredictiveFailureCount, true
+}
+
+// HasPredictiveFailureCount returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasPredictiveFailureCount() bool {
+	if o != nil && o.PredictiveFailureCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPredictiveFailureCount gets a reference to the given int64 and assigns it to the PredictiveFailureCount field.
+func (o *StoragePhysicalDisk) SetPredictiveFailureCount(v int64) {
+	o.PredictiveFailureCount = &v
+}
+
 // GetProtocol returns the Protocol field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetProtocol() string {
 	if o == nil || o.Protocol == nil {
@@ -833,6 +1423,70 @@ func (o *StoragePhysicalDisk) HasRawSize() bool {
 // SetRawSize gets a reference to the given string and assigns it to the RawSize field.
 func (o *StoragePhysicalDisk) SetRawSize(v string) {
 	o.RawSize = &v
+}
+
+// GetReadErrorCountThreshold returns the ReadErrorCountThreshold field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetReadErrorCountThreshold() int64 {
+	if o == nil || o.ReadErrorCountThreshold == nil {
+		var ret int64
+		return ret
+	}
+	return *o.ReadErrorCountThreshold
+}
+
+// GetReadErrorCountThresholdOk returns a tuple with the ReadErrorCountThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetReadErrorCountThresholdOk() (*int64, bool) {
+	if o == nil || o.ReadErrorCountThreshold == nil {
+		return nil, false
+	}
+	return o.ReadErrorCountThreshold, true
+}
+
+// HasReadErrorCountThreshold returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasReadErrorCountThreshold() bool {
+	if o != nil && o.ReadErrorCountThreshold != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReadErrorCountThreshold gets a reference to the given int64 and assigns it to the ReadErrorCountThreshold field.
+func (o *StoragePhysicalDisk) SetReadErrorCountThreshold(v int64) {
+	o.ReadErrorCountThreshold = &v
+}
+
+// GetReadIoErrorCount returns the ReadIoErrorCount field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetReadIoErrorCount() int64 {
+	if o == nil || o.ReadIoErrorCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.ReadIoErrorCount
+}
+
+// GetReadIoErrorCountOk returns a tuple with the ReadIoErrorCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetReadIoErrorCountOk() (*int64, bool) {
+	if o == nil || o.ReadIoErrorCount == nil {
+		return nil, false
+	}
+	return o.ReadIoErrorCount, true
+}
+
+// HasReadIoErrorCount returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasReadIoErrorCount() bool {
+	if o != nil && o.ReadIoErrorCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReadIoErrorCount gets a reference to the given int64 and assigns it to the ReadIoErrorCount field.
+func (o *StoragePhysicalDisk) SetReadIoErrorCount(v int64) {
+	o.ReadIoErrorCount = &v
 }
 
 // GetSecured returns the Secured field value if set, zero value otherwise.
@@ -931,6 +1585,38 @@ func (o *StoragePhysicalDisk) SetThermal(v string) {
 	o.Thermal = &v
 }
 
+// GetThresholdOperatingTemperature returns the ThresholdOperatingTemperature field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetThresholdOperatingTemperature() int64 {
+	if o == nil || o.ThresholdOperatingTemperature == nil {
+		var ret int64
+		return ret
+	}
+	return *o.ThresholdOperatingTemperature
+}
+
+// GetThresholdOperatingTemperatureOk returns a tuple with the ThresholdOperatingTemperature field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetThresholdOperatingTemperatureOk() (*int64, bool) {
+	if o == nil || o.ThresholdOperatingTemperature == nil {
+		return nil, false
+	}
+	return o.ThresholdOperatingTemperature, true
+}
+
+// HasThresholdOperatingTemperature returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasThresholdOperatingTemperature() bool {
+	if o != nil && o.ThresholdOperatingTemperature != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetThresholdOperatingTemperature gets a reference to the given int64 and assigns it to the ThresholdOperatingTemperature field.
+func (o *StoragePhysicalDisk) SetThresholdOperatingTemperature(v int64) {
+	o.ThresholdOperatingTemperature = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *StoragePhysicalDisk) GetType() string {
 	if o == nil || o.Type == nil {
@@ -993,6 +1679,102 @@ func (o *StoragePhysicalDisk) HasVariantType() bool {
 // SetVariantType gets a reference to the given string and assigns it to the VariantType field.
 func (o *StoragePhysicalDisk) SetVariantType(v string) {
 	o.VariantType = &v
+}
+
+// GetWearStatusInDays returns the WearStatusInDays field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetWearStatusInDays() int64 {
+	if o == nil || o.WearStatusInDays == nil {
+		var ret int64
+		return ret
+	}
+	return *o.WearStatusInDays
+}
+
+// GetWearStatusInDaysOk returns a tuple with the WearStatusInDays field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetWearStatusInDaysOk() (*int64, bool) {
+	if o == nil || o.WearStatusInDays == nil {
+		return nil, false
+	}
+	return o.WearStatusInDays, true
+}
+
+// HasWearStatusInDays returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasWearStatusInDays() bool {
+	if o != nil && o.WearStatusInDays != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWearStatusInDays gets a reference to the given int64 and assigns it to the WearStatusInDays field.
+func (o *StoragePhysicalDisk) SetWearStatusInDays(v int64) {
+	o.WearStatusInDays = &v
+}
+
+// GetWriteErrorCountThreshold returns the WriteErrorCountThreshold field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetWriteErrorCountThreshold() int64 {
+	if o == nil || o.WriteErrorCountThreshold == nil {
+		var ret int64
+		return ret
+	}
+	return *o.WriteErrorCountThreshold
+}
+
+// GetWriteErrorCountThresholdOk returns a tuple with the WriteErrorCountThreshold field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetWriteErrorCountThresholdOk() (*int64, bool) {
+	if o == nil || o.WriteErrorCountThreshold == nil {
+		return nil, false
+	}
+	return o.WriteErrorCountThreshold, true
+}
+
+// HasWriteErrorCountThreshold returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasWriteErrorCountThreshold() bool {
+	if o != nil && o.WriteErrorCountThreshold != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWriteErrorCountThreshold gets a reference to the given int64 and assigns it to the WriteErrorCountThreshold field.
+func (o *StoragePhysicalDisk) SetWriteErrorCountThreshold(v int64) {
+	o.WriteErrorCountThreshold = &v
+}
+
+// GetWriteIoErrorCount returns the WriteIoErrorCount field value if set, zero value otherwise.
+func (o *StoragePhysicalDisk) GetWriteIoErrorCount() int64 {
+	if o == nil || o.WriteIoErrorCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.WriteIoErrorCount
+}
+
+// GetWriteIoErrorCountOk returns a tuple with the WriteIoErrorCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StoragePhysicalDisk) GetWriteIoErrorCountOk() (*int64, bool) {
+	if o == nil || o.WriteIoErrorCount == nil {
+		return nil, false
+	}
+	return o.WriteIoErrorCount, true
+}
+
+// HasWriteIoErrorCount returns a boolean if a field has been set.
+func (o *StoragePhysicalDisk) HasWriteIoErrorCount() bool {
+	if o != nil && o.WriteIoErrorCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWriteIoErrorCount gets a reference to the given int64 and assigns it to the WriteIoErrorCount field.
+func (o *StoragePhysicalDisk) SetWriteIoErrorCount(v int64) {
+	o.WriteIoErrorCount = &v
 }
 
 // GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
@@ -1270,6 +2052,9 @@ func (o StoragePhysicalDisk) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.BackgroundOperations != nil {
+		toSerialize["BackgroundOperations"] = o.BackgroundOperations
+	}
 	if o.BlockSize != nil {
 		toSerialize["BlockSize"] = o.BlockSize
 	}
@@ -1281,6 +2066,9 @@ func (o StoragePhysicalDisk) MarshalJSON() ([]byte, error) {
 	}
 	if o.ConfigurationState != nil {
 		toSerialize["ConfigurationState"] = o.ConfigurationState
+	}
+	if o.DisabledForRemoval != nil {
+		toSerialize["DisabledForRemoval"] = o.DisabledForRemoval
 	}
 	if o.DiscoveredPath != nil {
 		toSerialize["DiscoveredPath"] = o.DiscoveredPath
@@ -1297,17 +2085,38 @@ func (o StoragePhysicalDisk) MarshalJSON() ([]byte, error) {
 	if o.DriveState != nil {
 		toSerialize["DriveState"] = o.DriveState
 	}
+	if o.EncryptionStatus != nil {
+		toSerialize["EncryptionStatus"] = o.EncryptionStatus
+	}
+	if o.FailurePredicted != nil {
+		toSerialize["FailurePredicted"] = o.FailurePredicted
+	}
 	if o.FdeCapable != nil {
 		toSerialize["FdeCapable"] = o.FdeCapable
 	}
 	if o.HotSpareType != nil {
 		toSerialize["HotSpareType"] = o.HotSpareType
 	}
+	if o.IndicatorLed != nil {
+		toSerialize["IndicatorLed"] = o.IndicatorLed
+	}
 	if o.LinkSpeed != nil {
 		toSerialize["LinkSpeed"] = o.LinkSpeed
 	}
 	if o.LinkState != nil {
 		toSerialize["LinkState"] = o.LinkState
+	}
+	if o.MaximumOperatingTemperature != nil {
+		toSerialize["MaximumOperatingTemperature"] = o.MaximumOperatingTemperature
+	}
+	if o.MediaErrorCount != nil {
+		toSerialize["MediaErrorCount"] = o.MediaErrorCount
+	}
+	if o.Name != nil {
+		toSerialize["Name"] = o.Name
+	}
+	if o.NonCoercedSizeBytes != nil {
+		toSerialize["NonCoercedSizeBytes"] = o.NonCoercedSizeBytes
 	}
 	if o.NumBlocks != nil {
 		toSerialize["NumBlocks"] = o.NumBlocks
@@ -1321,17 +2130,47 @@ func (o StoragePhysicalDisk) MarshalJSON() ([]byte, error) {
 	if o.Operability != nil {
 		toSerialize["Operability"] = o.Operability
 	}
+	if o.OperatingTemperature != nil {
+		toSerialize["OperatingTemperature"] = o.OperatingTemperature
+	}
+	if o.PercentLifeLeft != nil {
+		toSerialize["PercentLifeLeft"] = o.PercentLifeLeft
+	}
+	if o.PercentReservedCapacityConsumed != nil {
+		toSerialize["PercentReservedCapacityConsumed"] = o.PercentReservedCapacityConsumed
+	}
+	if o.PerformancePercent != nil {
+		toSerialize["PerformancePercent"] = o.PerformancePercent
+	}
 	if o.PhysicalBlockSize != nil {
 		toSerialize["PhysicalBlockSize"] = o.PhysicalBlockSize
 	}
 	if o.Pid != nil {
 		toSerialize["Pid"] = o.Pid
 	}
+	if o.PowerCycleCount != nil {
+		toSerialize["PowerCycleCount"] = o.PowerCycleCount
+	}
+	if o.PowerOnHours != nil {
+		toSerialize["PowerOnHours"] = o.PowerOnHours
+	}
+	if o.PredictedMediaLifeLeftPercent != nil {
+		toSerialize["PredictedMediaLifeLeftPercent"] = o.PredictedMediaLifeLeftPercent
+	}
+	if o.PredictiveFailureCount != nil {
+		toSerialize["PredictiveFailureCount"] = o.PredictiveFailureCount
+	}
 	if o.Protocol != nil {
 		toSerialize["Protocol"] = o.Protocol
 	}
 	if o.RawSize != nil {
 		toSerialize["RawSize"] = o.RawSize
+	}
+	if o.ReadErrorCountThreshold != nil {
+		toSerialize["ReadErrorCountThreshold"] = o.ReadErrorCountThreshold
+	}
+	if o.ReadIoErrorCount != nil {
+		toSerialize["ReadIoErrorCount"] = o.ReadIoErrorCount
 	}
 	if o.Secured != nil {
 		toSerialize["Secured"] = o.Secured
@@ -1342,11 +2181,23 @@ func (o StoragePhysicalDisk) MarshalJSON() ([]byte, error) {
 	if o.Thermal != nil {
 		toSerialize["Thermal"] = o.Thermal
 	}
+	if o.ThresholdOperatingTemperature != nil {
+		toSerialize["ThresholdOperatingTemperature"] = o.ThresholdOperatingTemperature
+	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
 	}
 	if o.VariantType != nil {
 		toSerialize["VariantType"] = o.VariantType
+	}
+	if o.WearStatusInDays != nil {
+		toSerialize["WearStatusInDays"] = o.WearStatusInDays
+	}
+	if o.WriteErrorCountThreshold != nil {
+		toSerialize["WriteErrorCountThreshold"] = o.WriteErrorCountThreshold
+	}
+	if o.WriteIoErrorCount != nil {
+		toSerialize["WriteIoErrorCount"] = o.WriteIoErrorCount
 	}
 	if o.InventoryDeviceInfo != nil {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
@@ -1386,6 +2237,8 @@ func (o *StoragePhysicalDisk) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// List of background operations underway.
+		BackgroundOperations *string `json:"BackgroundOperations,omitempty"`
 		// The block size of the physical disk in bytes.
 		BlockSize *string `json:"BlockSize,omitempty"`
 		// This field identifies the disk drive as bootable if set to true.
@@ -1394,6 +2247,8 @@ func (o *StoragePhysicalDisk) UnmarshalJSON(bytes []byte) (err error) {
 		ConfigurationCheckpoint *string `json:"ConfigurationCheckpoint,omitempty"`
 		// The current configuration state of the physical disk.
 		ConfigurationState *string `json:"ConfigurationState,omitempty"`
+		// The physical disk is disabled for removal.
+		DisabledForRemoval *bool `json:"DisabledForRemoval,omitempty"`
 		// The discovered path of the physical disk.
 		DiscoveredPath *string `json:"DiscoveredPath,omitempty"`
 		// This field identifies the ID assigned to physical disks.
@@ -1404,14 +2259,28 @@ func (o *StoragePhysicalDisk) UnmarshalJSON(bytes []byte) (err error) {
 		DriveFirmware *string `json:"DriveFirmware,omitempty"`
 		// The drive state as reported by the controller.
 		DriveState *string `json:"DriveState,omitempty"`
+		// Encryption status of the physical disk.
+		EncryptionStatus *string `json:"EncryptionStatus,omitempty"`
+		// Possibility of physical disk failure.
+		FailurePredicted *bool `json:"FailurePredicted,omitempty"`
 		// Full-Disk Encryption capability parameter of the physical disk.
 		FdeCapable *string `json:"FdeCapable,omitempty"`
 		// Type of hotspare configured on the physical disk.
 		HotSpareType *string `json:"HotSpareType,omitempty"`
+		// Status of the locator LED corresponding to the physical disk.
+		IndicatorLed *string `json:"IndicatorLed,omitempty"`
 		// The speed of the link between the drive and the controller.
 		LinkSpeed *string `json:"LinkSpeed,omitempty"`
 		// The current link state of the physical disk.
 		LinkState *string `json:"LinkState,omitempty"`
+		// Maximum operating temperature of drive in Celsius.
+		MaximumOperatingTemperature *int64 `json:"MaximumOperatingTemperature,omitempty"`
+		// Media error count on the physical disk.
+		MediaErrorCount *int64 `json:"MediaErrorCount,omitempty"`
+		// Detailed name of the physical disk.
+		Name *string `json:"Name,omitempty"`
+		// Physical disk non-coerced size in bytes.
+		NonCoercedSizeBytes *int64 `json:"NonCoercedSizeBytes,omitempty"`
 		// The number of blocks present on the physical disk.
 		NumBlocks *string `json:"NumBlocks,omitempty"`
 		// Operational power of the physical disk.
@@ -1420,24 +2289,52 @@ func (o *StoragePhysicalDisk) UnmarshalJSON(bytes []byte) (err error) {
 		OperQualifierReason *string `json:"OperQualifierReason,omitempty"`
 		// This field identifies the disk operability of the disk.
 		Operability *string `json:"Operability,omitempty"`
+		// Operating temperature of drive in Celsius.
+		OperatingTemperature *int64 `json:"OperatingTemperature,omitempty"`
+		// Percentage of write cycles remaining in a solid state drive (SSD).
+		PercentLifeLeft *int64 `json:"PercentLifeLeft,omitempty"`
+		// Percentage of reserve capacity consumed.
+		PercentReservedCapacityConsumed *int64 `json:"PercentReservedCapacityConsumed,omitempty"`
+		// Performance at which the device operating expressed in percentage.
+		PerformancePercent *int64 `json:"PerformancePercent,omitempty"`
 		// The block size of the installed physical disk.
 		PhysicalBlockSize *string `json:"PhysicalBlockSize,omitempty"`
 		// This field identifies the Product ID for physicalDisk.
 		Pid *string `json:"Pid,omitempty"`
+		// Number of powercycles the drive has undergone.
+		PowerCycleCount *int64 `json:"PowerCycleCount,omitempty"`
+		// Number of hours the drive has been powered on.
+		PowerOnHours *int64 `json:"PowerOnHours,omitempty"`
+		// Predicted physical disk life left in percentage.
+		PredictedMediaLifeLeftPercent *int64 `json:"PredictedMediaLifeLeftPercent,omitempty"`
+		// Error count on the physical disk.
+		PredictiveFailureCount *int64 `json:"PredictiveFailureCount,omitempty"`
 		// This field identifies the disk protocol used for communication.
 		Protocol *string `json:"Protocol,omitempty"`
 		// The raw size of the physical disk in MB.
 		RawSize *string `json:"RawSize,omitempty"`
+		// The number of read errors that are permitted while accessing the drive/card.
+		ReadErrorCountThreshold *int64 `json:"ReadErrorCountThreshold,omitempty"`
+		// Number of IO Errors that occured while reading data from the disk.
+		ReadIoErrorCount *int64 `json:"ReadIoErrorCount,omitempty"`
 		// This field identifies whether the disk is encrypted.
 		Secured *string `json:"Secured,omitempty"`
 		// The size of the physical disk in MB.
 		Size *string `json:"Size,omitempty"`
 		// Thermal state of the physical disk.
 		Thermal *string `json:"Thermal,omitempty"`
+		// Rated threshold operating temperature in Celsius.
+		ThresholdOperatingTemperature *int64 `json:"ThresholdOperatingTemperature,omitempty"`
 		// This field identifies the type of the physical disk.
 		Type *string `json:"Type,omitempty"`
 		// The variant type of the physical disk.
-		VariantType         *string                          `json:"VariantType,omitempty"`
+		VariantType *string `json:"VariantType,omitempty"`
+		// The number of days an SSD has gone through with the write cycles.
+		WearStatusInDays *int64 `json:"WearStatusInDays,omitempty"`
+		// The number of write errors that are permitted while accessing the drive/card.
+		WriteErrorCountThreshold *int64 `json:"WriteErrorCountThreshold,omitempty"`
+		// Number of IO Errors that occured while writing data to the disk.
+		WriteIoErrorCount   *int64                           `json:"WriteIoErrorCount,omitempty"`
 		InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 		LocatorLed          *EquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
 		// An array of relationships to storagePhysicalDiskExtension resources.
@@ -1458,32 +2355,55 @@ func (o *StoragePhysicalDisk) UnmarshalJSON(bytes []byte) (err error) {
 		varStoragePhysicalDisk := _StoragePhysicalDisk{}
 		varStoragePhysicalDisk.ClassId = varStoragePhysicalDiskWithoutEmbeddedStruct.ClassId
 		varStoragePhysicalDisk.ObjectType = varStoragePhysicalDiskWithoutEmbeddedStruct.ObjectType
+		varStoragePhysicalDisk.BackgroundOperations = varStoragePhysicalDiskWithoutEmbeddedStruct.BackgroundOperations
 		varStoragePhysicalDisk.BlockSize = varStoragePhysicalDiskWithoutEmbeddedStruct.BlockSize
 		varStoragePhysicalDisk.Bootable = varStoragePhysicalDiskWithoutEmbeddedStruct.Bootable
 		varStoragePhysicalDisk.ConfigurationCheckpoint = varStoragePhysicalDiskWithoutEmbeddedStruct.ConfigurationCheckpoint
 		varStoragePhysicalDisk.ConfigurationState = varStoragePhysicalDiskWithoutEmbeddedStruct.ConfigurationState
+		varStoragePhysicalDisk.DisabledForRemoval = varStoragePhysicalDiskWithoutEmbeddedStruct.DisabledForRemoval
 		varStoragePhysicalDisk.DiscoveredPath = varStoragePhysicalDiskWithoutEmbeddedStruct.DiscoveredPath
 		varStoragePhysicalDisk.DiskId = varStoragePhysicalDiskWithoutEmbeddedStruct.DiskId
 		varStoragePhysicalDisk.DiskState = varStoragePhysicalDiskWithoutEmbeddedStruct.DiskState
 		varStoragePhysicalDisk.DriveFirmware = varStoragePhysicalDiskWithoutEmbeddedStruct.DriveFirmware
 		varStoragePhysicalDisk.DriveState = varStoragePhysicalDiskWithoutEmbeddedStruct.DriveState
+		varStoragePhysicalDisk.EncryptionStatus = varStoragePhysicalDiskWithoutEmbeddedStruct.EncryptionStatus
+		varStoragePhysicalDisk.FailurePredicted = varStoragePhysicalDiskWithoutEmbeddedStruct.FailurePredicted
 		varStoragePhysicalDisk.FdeCapable = varStoragePhysicalDiskWithoutEmbeddedStruct.FdeCapable
 		varStoragePhysicalDisk.HotSpareType = varStoragePhysicalDiskWithoutEmbeddedStruct.HotSpareType
+		varStoragePhysicalDisk.IndicatorLed = varStoragePhysicalDiskWithoutEmbeddedStruct.IndicatorLed
 		varStoragePhysicalDisk.LinkSpeed = varStoragePhysicalDiskWithoutEmbeddedStruct.LinkSpeed
 		varStoragePhysicalDisk.LinkState = varStoragePhysicalDiskWithoutEmbeddedStruct.LinkState
+		varStoragePhysicalDisk.MaximumOperatingTemperature = varStoragePhysicalDiskWithoutEmbeddedStruct.MaximumOperatingTemperature
+		varStoragePhysicalDisk.MediaErrorCount = varStoragePhysicalDiskWithoutEmbeddedStruct.MediaErrorCount
+		varStoragePhysicalDisk.Name = varStoragePhysicalDiskWithoutEmbeddedStruct.Name
+		varStoragePhysicalDisk.NonCoercedSizeBytes = varStoragePhysicalDiskWithoutEmbeddedStruct.NonCoercedSizeBytes
 		varStoragePhysicalDisk.NumBlocks = varStoragePhysicalDiskWithoutEmbeddedStruct.NumBlocks
 		varStoragePhysicalDisk.OperPowerState = varStoragePhysicalDiskWithoutEmbeddedStruct.OperPowerState
 		varStoragePhysicalDisk.OperQualifierReason = varStoragePhysicalDiskWithoutEmbeddedStruct.OperQualifierReason
 		varStoragePhysicalDisk.Operability = varStoragePhysicalDiskWithoutEmbeddedStruct.Operability
+		varStoragePhysicalDisk.OperatingTemperature = varStoragePhysicalDiskWithoutEmbeddedStruct.OperatingTemperature
+		varStoragePhysicalDisk.PercentLifeLeft = varStoragePhysicalDiskWithoutEmbeddedStruct.PercentLifeLeft
+		varStoragePhysicalDisk.PercentReservedCapacityConsumed = varStoragePhysicalDiskWithoutEmbeddedStruct.PercentReservedCapacityConsumed
+		varStoragePhysicalDisk.PerformancePercent = varStoragePhysicalDiskWithoutEmbeddedStruct.PerformancePercent
 		varStoragePhysicalDisk.PhysicalBlockSize = varStoragePhysicalDiskWithoutEmbeddedStruct.PhysicalBlockSize
 		varStoragePhysicalDisk.Pid = varStoragePhysicalDiskWithoutEmbeddedStruct.Pid
+		varStoragePhysicalDisk.PowerCycleCount = varStoragePhysicalDiskWithoutEmbeddedStruct.PowerCycleCount
+		varStoragePhysicalDisk.PowerOnHours = varStoragePhysicalDiskWithoutEmbeddedStruct.PowerOnHours
+		varStoragePhysicalDisk.PredictedMediaLifeLeftPercent = varStoragePhysicalDiskWithoutEmbeddedStruct.PredictedMediaLifeLeftPercent
+		varStoragePhysicalDisk.PredictiveFailureCount = varStoragePhysicalDiskWithoutEmbeddedStruct.PredictiveFailureCount
 		varStoragePhysicalDisk.Protocol = varStoragePhysicalDiskWithoutEmbeddedStruct.Protocol
 		varStoragePhysicalDisk.RawSize = varStoragePhysicalDiskWithoutEmbeddedStruct.RawSize
+		varStoragePhysicalDisk.ReadErrorCountThreshold = varStoragePhysicalDiskWithoutEmbeddedStruct.ReadErrorCountThreshold
+		varStoragePhysicalDisk.ReadIoErrorCount = varStoragePhysicalDiskWithoutEmbeddedStruct.ReadIoErrorCount
 		varStoragePhysicalDisk.Secured = varStoragePhysicalDiskWithoutEmbeddedStruct.Secured
 		varStoragePhysicalDisk.Size = varStoragePhysicalDiskWithoutEmbeddedStruct.Size
 		varStoragePhysicalDisk.Thermal = varStoragePhysicalDiskWithoutEmbeddedStruct.Thermal
+		varStoragePhysicalDisk.ThresholdOperatingTemperature = varStoragePhysicalDiskWithoutEmbeddedStruct.ThresholdOperatingTemperature
 		varStoragePhysicalDisk.Type = varStoragePhysicalDiskWithoutEmbeddedStruct.Type
 		varStoragePhysicalDisk.VariantType = varStoragePhysicalDiskWithoutEmbeddedStruct.VariantType
+		varStoragePhysicalDisk.WearStatusInDays = varStoragePhysicalDiskWithoutEmbeddedStruct.WearStatusInDays
+		varStoragePhysicalDisk.WriteErrorCountThreshold = varStoragePhysicalDiskWithoutEmbeddedStruct.WriteErrorCountThreshold
+		varStoragePhysicalDisk.WriteIoErrorCount = varStoragePhysicalDiskWithoutEmbeddedStruct.WriteIoErrorCount
 		varStoragePhysicalDisk.InventoryDeviceInfo = varStoragePhysicalDiskWithoutEmbeddedStruct.InventoryDeviceInfo
 		varStoragePhysicalDisk.LocatorLed = varStoragePhysicalDiskWithoutEmbeddedStruct.LocatorLed
 		varStoragePhysicalDisk.PhysicalDiskExtensions = varStoragePhysicalDiskWithoutEmbeddedStruct.PhysicalDiskExtensions
@@ -1511,32 +2431,55 @@ func (o *StoragePhysicalDisk) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "BackgroundOperations")
 		delete(additionalProperties, "BlockSize")
 		delete(additionalProperties, "Bootable")
 		delete(additionalProperties, "ConfigurationCheckpoint")
 		delete(additionalProperties, "ConfigurationState")
+		delete(additionalProperties, "DisabledForRemoval")
 		delete(additionalProperties, "DiscoveredPath")
 		delete(additionalProperties, "DiskId")
 		delete(additionalProperties, "DiskState")
 		delete(additionalProperties, "DriveFirmware")
 		delete(additionalProperties, "DriveState")
+		delete(additionalProperties, "EncryptionStatus")
+		delete(additionalProperties, "FailurePredicted")
 		delete(additionalProperties, "FdeCapable")
 		delete(additionalProperties, "HotSpareType")
+		delete(additionalProperties, "IndicatorLed")
 		delete(additionalProperties, "LinkSpeed")
 		delete(additionalProperties, "LinkState")
+		delete(additionalProperties, "MaximumOperatingTemperature")
+		delete(additionalProperties, "MediaErrorCount")
+		delete(additionalProperties, "Name")
+		delete(additionalProperties, "NonCoercedSizeBytes")
 		delete(additionalProperties, "NumBlocks")
 		delete(additionalProperties, "OperPowerState")
 		delete(additionalProperties, "OperQualifierReason")
 		delete(additionalProperties, "Operability")
+		delete(additionalProperties, "OperatingTemperature")
+		delete(additionalProperties, "PercentLifeLeft")
+		delete(additionalProperties, "PercentReservedCapacityConsumed")
+		delete(additionalProperties, "PerformancePercent")
 		delete(additionalProperties, "PhysicalBlockSize")
 		delete(additionalProperties, "Pid")
+		delete(additionalProperties, "PowerCycleCount")
+		delete(additionalProperties, "PowerOnHours")
+		delete(additionalProperties, "PredictedMediaLifeLeftPercent")
+		delete(additionalProperties, "PredictiveFailureCount")
 		delete(additionalProperties, "Protocol")
 		delete(additionalProperties, "RawSize")
+		delete(additionalProperties, "ReadErrorCountThreshold")
+		delete(additionalProperties, "ReadIoErrorCount")
 		delete(additionalProperties, "Secured")
 		delete(additionalProperties, "Size")
 		delete(additionalProperties, "Thermal")
+		delete(additionalProperties, "ThresholdOperatingTemperature")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "VariantType")
+		delete(additionalProperties, "WearStatusInDays")
+		delete(additionalProperties, "WriteErrorCountThreshold")
+		delete(additionalProperties, "WriteIoErrorCount")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "LocatorLed")
 		delete(additionalProperties, "PhysicalDiskExtensions")

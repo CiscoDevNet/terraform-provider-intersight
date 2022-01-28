@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **State** | Pointer to **string** | Current state of the NetApp aggregate. * &#x60;Unknown&#x60; - Specifies that the aggregate is discovered, but the aggregate information is not yet retrieved by the Unified Manager server. * &#x60;Online&#x60; - Aggregate is ready and available. * &#x60;Onlining&#x60; - The state is transitioning online. * &#x60;Offline&#x60; - Aggregate is unavailable. * &#x60;Offlining&#x60; - The state is transitioning offline. * &#x60;Relocating&#x60; - The aggregate is being relocated. * &#x60;Restricted&#x60; - Limited operations (e.g., parity reconstruction) are allowed, but data access is not allowed. * &#x60;Failed&#x60; - The aggregate cannot be brought online. * &#x60;Inconsistent&#x60; - The aggregate has been marked corrupted; contact technical support. * &#x60;Unmounted&#x60; - The aggregate is not mounted. | [optional] [readonly] [default to "Unknown"]
 **Uuid** | Pointer to **string** | Uuid of  NetApp Aggregate. | [optional] [readonly] 
 **ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
+**Events** | Pointer to [**[]StorageNetAppAggregateEventRelationship**](StorageNetAppAggregateEventRelationship.md) | An array of relationships to storageNetAppAggregateEvent resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -274,6 +275,41 @@ SetArrayController sets ArrayController field to given value.
 
 HasArrayController returns a boolean if a field has been set.
 
+### GetEvents
+
+`func (o *StorageNetAppAggregate) GetEvents() []StorageNetAppAggregateEventRelationship`
+
+GetEvents returns the Events field if non-nil, zero value otherwise.
+
+### GetEventsOk
+
+`func (o *StorageNetAppAggregate) GetEventsOk() (*[]StorageNetAppAggregateEventRelationship, bool)`
+
+GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvents
+
+`func (o *StorageNetAppAggregate) SetEvents(v []StorageNetAppAggregateEventRelationship)`
+
+SetEvents sets Events field to given value.
+
+### HasEvents
+
+`func (o *StorageNetAppAggregate) HasEvents() bool`
+
+HasEvents returns a boolean if a field has been set.
+
+### SetEventsNil
+
+`func (o *StorageNetAppAggregate) SetEventsNil(b bool)`
+
+ SetEventsNil sets the value for Events to be an explicit nil
+
+### UnsetEvents
+`func (o *StorageNetAppAggregate) UnsetEvents()`
+
+UnsetEvents ensures that no value is present for Events, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -1015,7 +1015,7 @@ func dataSourceApplianceDeviceCertificateRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("appliance.CertRenewalPhase")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1098,7 +1098,7 @@ func dataSourceApplianceDeviceCertificateRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1229,7 +1229,7 @@ func dataSourceApplianceDeviceCertificateRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

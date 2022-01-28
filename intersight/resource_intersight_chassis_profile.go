@@ -961,7 +961,7 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1020,7 +1020,7 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigChange")
+			o.SetClassId("")
 			if v, ok := l["disruptions"]; ok {
 				{
 					x := make([]string, 0)
@@ -1065,7 +1065,7 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1125,7 +1125,7 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1210,7 +1210,7 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1349,8 +1349,8 @@ func resourceChassisProfileCreate(c context.Context, d *schema.ResourceData, met
 func resourceChassisProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.ChassisApi.GetChassisProfileByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1581,7 +1581,7 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1641,7 +1641,7 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigChange")
+			o.SetClassId("")
 			if v, ok := l["disruptions"]; ok {
 				{
 					x := make([]string, 0)
@@ -1687,7 +1687,7 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1751,7 +1751,7 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1836,7 +1836,7 @@ func resourceChassisProfileUpdate(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -21,7 +21,7 @@ resource "intersight_fabric_eth_network_group_policy" "fabric_eth_network_group_
   }
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
 }
 ```

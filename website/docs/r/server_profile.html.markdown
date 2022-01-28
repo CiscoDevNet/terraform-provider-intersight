@@ -24,6 +24,11 @@ resource "intersight_server_profile" "server1" {
     moid        = var.organization
   }
 }
+
+variable "organization" {
+   type = string
+   description = "<value for organization>"
+ }
 ```
 ## Argument Reference
 The following arguments are supported:

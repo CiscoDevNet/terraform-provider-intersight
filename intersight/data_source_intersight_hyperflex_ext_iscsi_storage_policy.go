@@ -1044,7 +1044,7 @@ func dataSourceHyperflexExtIscsiStoragePolicyRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVlan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -1087,7 +1087,7 @@ func dataSourceHyperflexExtIscsiStoragePolicyRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVlan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -1150,7 +1150,7 @@ func dataSourceHyperflexExtIscsiStoragePolicyRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1204,7 +1204,7 @@ func dataSourceHyperflexExtIscsiStoragePolicyRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1325,7 +1325,7 @@ func dataSourceHyperflexExtIscsiStoragePolicyRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

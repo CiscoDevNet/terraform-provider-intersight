@@ -692,7 +692,7 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyCreate(c context.Context, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -812,7 +812,7 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyCreate(c context.Context, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -855,7 +855,7 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyCreate(c context.Context, 
 					}
 				}
 			}
-			o.SetClassId("kubernetes.BaseVirtualMachineInfraConfig")
+			o.SetClassId("")
 			if v, ok := l["interfaces"]; ok {
 				{
 					x := make([]string, 0)
@@ -972,7 +972,7 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyCreate(c context.Context, 
 											}
 										}
 									}
-									o.SetClassId("mo.MoRef")
+									o.SetClassId("")
 									if v, ok := l["moid"]; ok {
 										{
 											x := (v.(string))
@@ -1038,8 +1038,8 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyCreate(c context.Context, 
 func resourceKubernetesVirtualMachineInfraConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesVirtualMachineInfraConfigPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1201,7 +1201,7 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyUpdate(c context.Context, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1320,7 +1320,7 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyUpdate(c context.Context, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1364,7 +1364,7 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyUpdate(c context.Context, 
 					}
 				}
 			}
-			o.SetClassId("kubernetes.BaseVirtualMachineInfraConfig")
+			o.SetClassId("")
 			if v, ok := l["interfaces"]; ok {
 				{
 					x := make([]string, 0)
@@ -1481,7 +1481,7 @@ func resourceKubernetesVirtualMachineInfraConfigPolicyUpdate(c context.Context, 
 											}
 										}
 									}
-									o.SetClassId("mo.MoRef")
+									o.SetClassId("")
 									if v, ok := l["moid"]; ok {
 										{
 											x := (v.(string))

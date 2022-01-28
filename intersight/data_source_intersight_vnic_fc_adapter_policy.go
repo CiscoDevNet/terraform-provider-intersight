@@ -1346,7 +1346,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("vnic.FcErrorRecoverySettings")
+			o.SetClassId("")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1407,7 +1407,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("vnic.FlogiSettings")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1450,7 +1450,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("vnic.FcInterruptSettings")
+			o.SetClassId("")
 			if v, ok := l["mode"]; ok {
 				{
 					x := (v.(string))
@@ -1522,7 +1522,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1576,7 +1576,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1659,7 +1659,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("vnic.PlogiSettings")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1707,7 +1707,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("vnic.FcQueueSettings")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1744,7 +1744,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("vnic.ScsiQueueSettings")
+			o.SetClassId("")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1825,7 +1825,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("vnic.FcQueueSettings")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1862,7 +1862,7 @@ func dataSourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

@@ -729,7 +729,7 @@ func resourceServerProfileTemplateCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -789,7 +789,7 @@ func resourceServerProfileTemplateCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -874,7 +874,7 @@ func resourceServerProfileTemplateCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -967,7 +967,7 @@ func resourceServerProfileTemplateCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1012,8 +1012,8 @@ func resourceServerProfileTemplateCreate(c context.Context, d *schema.ResourceDa
 func resourceServerProfileTemplateRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.ServerApi.GetServerProfileTemplateByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1230,7 +1230,7 @@ func resourceServerProfileTemplateUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1294,7 +1294,7 @@ func resourceServerProfileTemplateUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1379,7 +1379,7 @@ func resourceServerProfileTemplateUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1475,7 +1475,7 @@ func resourceServerProfileTemplateUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

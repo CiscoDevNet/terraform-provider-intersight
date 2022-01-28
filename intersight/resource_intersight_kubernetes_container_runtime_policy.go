@@ -663,7 +663,7 @@ func resourceKubernetesContainerRuntimePolicyCreate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("kubernetes.ProxyConfig")
+			o.SetClassId("")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -724,7 +724,7 @@ func resourceKubernetesContainerRuntimePolicyCreate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("kubernetes.ProxyConfig")
+			o.SetClassId("")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -810,7 +810,7 @@ func resourceKubernetesContainerRuntimePolicyCreate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -890,8 +890,8 @@ func resourceKubernetesContainerRuntimePolicyCreate(c context.Context, d *schema
 func resourceKubernetesContainerRuntimePolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesContainerRuntimePolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1094,7 +1094,7 @@ func resourceKubernetesContainerRuntimePolicyUpdate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("kubernetes.ProxyConfig")
+			o.SetClassId("")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -1156,7 +1156,7 @@ func resourceKubernetesContainerRuntimePolicyUpdate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("kubernetes.ProxyConfig")
+			o.SetClassId("")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -1244,7 +1244,7 @@ func resourceKubernetesContainerRuntimePolicyUpdate(c context.Context, d *schema
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

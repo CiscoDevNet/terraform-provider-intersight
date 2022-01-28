@@ -15,8 +15,13 @@ End User License Agreement (EULA) acceptance status for an account to access cis
 resource "intersight_firmware_eula" "firmware_eula1" {
   account {
     object_type = "iam.Account"
-    moid        = intersight_account_iam.iam1.id
+    moid        = var.iam_account_moid
   }
+}
+
+variable "iam_account_moid" {
+  type        = string
+  description = "Moid of iam_account"
 }
 ```
 ## Argument Reference

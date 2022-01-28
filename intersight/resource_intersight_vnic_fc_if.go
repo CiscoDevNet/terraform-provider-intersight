@@ -842,7 +842,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -885,7 +885,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -928,7 +928,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -993,7 +993,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("vnic.PlacementSettings")
+			o.SetClassId("")
 			if v, ok := l["id"]; ok {
 				{
 					x := (v.(string))
@@ -1048,7 +1048,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1091,7 +1091,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1134,7 +1134,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1269,7 +1269,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1312,7 +1312,7 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1379,8 +1379,8 @@ func detachVnicFcIfProfiles(d *schema.ResourceData, meta interface{}) diag.Diagn
 func resourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.VnicApi.GetVnicFcIfByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1570,7 +1570,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1614,7 +1614,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1658,7 +1658,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1728,7 +1728,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("vnic.PlacementSettings")
+			o.SetClassId("")
 			if v, ok := l["id"]; ok {
 				{
 					x := (v.(string))
@@ -1784,7 +1784,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1828,7 +1828,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1872,7 +1872,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2009,7 +2009,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2053,7 +2053,7 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

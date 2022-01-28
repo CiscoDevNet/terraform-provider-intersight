@@ -778,7 +778,7 @@ func resourceFirmwareDistributableCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1036,7 +1036,7 @@ func resourceFirmwareDistributableCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1099,7 +1099,7 @@ func resourceFirmwareDistributableCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("softwarerepository.FileServer")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1190,8 +1190,8 @@ func resourceFirmwareDistributableCreate(c context.Context, d *schema.ResourceDa
 func resourceFirmwareDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.FirmwareApi.GetFirmwareDistributableByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1439,7 +1439,7 @@ func resourceFirmwareDistributableUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1709,7 +1709,7 @@ func resourceFirmwareDistributableUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1777,7 +1777,7 @@ func resourceFirmwareDistributableUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("softwarerepository.FileServer")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

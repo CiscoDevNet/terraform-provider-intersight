@@ -936,7 +936,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -979,7 +979,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1032,7 +1032,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1117,7 +1117,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1313,7 +1313,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1446,8 +1446,8 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 func resourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesNodeGroupProfileByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1692,7 +1692,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1736,7 +1736,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1792,7 +1792,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1877,7 +1877,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2076,7 +2076,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

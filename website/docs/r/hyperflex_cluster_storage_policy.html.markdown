@@ -15,12 +15,12 @@ A policy specifying HyperFlex cluster storage settings (optional).
 resource "intersight_hyperflex_cluster_storage_policy" "hyperflex_cluster_storage_policy1" {
   disk_partition_cleanup = true
   vdi_optimization       = true
-  logical_avalability_zone_config = {
+  logical_avalability_zone_config {
     auto_config = false
   }
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
   name = "hyperflex_cluster_storage_policy1"
 }

@@ -1242,7 +1242,7 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("storage.M2VirtualDriveConfig")
+			o.SetClassId("")
 			if v, ok := l["controller_slot"]; ok {
 				{
 					x := (v.(string))
@@ -1305,7 +1305,7 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1359,7 +1359,7 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1482,7 +1482,7 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("storage.R0Drive")
+			o.SetClassId("")
 			if v, ok := l["drive_slots"]; ok {
 				{
 					x := (v.(string))
@@ -1524,7 +1524,7 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 								}
 							}
 						}
-						o.SetClassId("storage.VirtualDrivePolicy")
+						o.SetClassId("")
 						if v, ok := l["drive_cache"]; ok {
 							{
 								x := (v.(string))
@@ -1635,7 +1635,7 @@ func dataSourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

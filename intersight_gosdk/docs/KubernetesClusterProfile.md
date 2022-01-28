@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **AssociatedCluster** | Pointer to [**KubernetesClusterRelationship**](KubernetesClusterRelationship.md) |  | [optional] 
 **ClusterIpPools** | Pointer to [**[]IppoolPoolRelationship**](IppoolPoolRelationship.md) | An array of relationships to ippoolPool resources. | [optional] 
 **ContainerRuntimeConfig** | Pointer to [**KubernetesContainerRuntimePolicyRelationship**](KubernetesContainerRuntimePolicyRelationship.md) |  | [optional] 
+**LoadbalancerBlockIpLeases** | Pointer to [**[]IppoolBlockLeaseRelationship**](IppoolBlockLeaseRelationship.md) | An array of relationships to ippoolBlockLease resources. | [optional] 
 **LoadbalancerIpLeases** | Pointer to [**[]IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) | An array of relationships to ippoolIpLease resources. | [optional] 
 **MasterVipLease** | Pointer to [**IppoolIpLeaseRelationship**](IppoolIpLeaseRelationship.md) |  | [optional] 
 **NetConfig** | Pointer to [**KubernetesNetworkPolicyRelationship**](KubernetesNetworkPolicyRelationship.md) |  | [optional] 
@@ -421,6 +422,41 @@ SetContainerRuntimeConfig sets ContainerRuntimeConfig field to given value.
 
 HasContainerRuntimeConfig returns a boolean if a field has been set.
 
+### GetLoadbalancerBlockIpLeases
+
+`func (o *KubernetesClusterProfile) GetLoadbalancerBlockIpLeases() []IppoolBlockLeaseRelationship`
+
+GetLoadbalancerBlockIpLeases returns the LoadbalancerBlockIpLeases field if non-nil, zero value otherwise.
+
+### GetLoadbalancerBlockIpLeasesOk
+
+`func (o *KubernetesClusterProfile) GetLoadbalancerBlockIpLeasesOk() (*[]IppoolBlockLeaseRelationship, bool)`
+
+GetLoadbalancerBlockIpLeasesOk returns a tuple with the LoadbalancerBlockIpLeases field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoadbalancerBlockIpLeases
+
+`func (o *KubernetesClusterProfile) SetLoadbalancerBlockIpLeases(v []IppoolBlockLeaseRelationship)`
+
+SetLoadbalancerBlockIpLeases sets LoadbalancerBlockIpLeases field to given value.
+
+### HasLoadbalancerBlockIpLeases
+
+`func (o *KubernetesClusterProfile) HasLoadbalancerBlockIpLeases() bool`
+
+HasLoadbalancerBlockIpLeases returns a boolean if a field has been set.
+
+### SetLoadbalancerBlockIpLeasesNil
+
+`func (o *KubernetesClusterProfile) SetLoadbalancerBlockIpLeasesNil(b bool)`
+
+ SetLoadbalancerBlockIpLeasesNil sets the value for LoadbalancerBlockIpLeases to be an explicit nil
+
+### UnsetLoadbalancerBlockIpLeases
+`func (o *KubernetesClusterProfile) UnsetLoadbalancerBlockIpLeases()`
+
+UnsetLoadbalancerBlockIpLeases ensures that no value is present for LoadbalancerBlockIpLeases, not even an explicit nil
 ### GetLoadbalancerIpLeases
 
 `func (o *KubernetesClusterProfile) GetLoadbalancerIpLeases() []IppoolIpLeaseRelationship`

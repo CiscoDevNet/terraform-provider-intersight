@@ -527,8 +527,8 @@ func resourceIamIpAccessManagementCreate(c context.Context, d *schema.ResourceDa
 func resourceIamIpAccessManagementRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamIpAccessManagementByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {

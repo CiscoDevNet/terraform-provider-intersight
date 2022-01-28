@@ -13,10 +13,9 @@ Object sent by user to configure a fc uplink port-channel on the collection of p
 
 ```hcl
 resource "intersight_fabric_fc_uplink_pc_role" "fabric_fc_uplink_pc_role1" {
-  pcid         = 100
   admin_speed  = "Auto"
   fill_pattern = "Idle"
-  vsanid       = 10
+  vsan_id      = 10
 }
 ```
 ## Argument Reference

@@ -89,6 +89,44 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"golden_image_details": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"image_name": {
+						Description: "Returns name of the image on controller.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Returns name of the image on controller.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nr_version": {
+						Description: "Returns version of the image on controller.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"ha_enabled": {
 			Description: "Returns the value of the haEnabled field.",
 			Type:        schema.TypeBool,
@@ -101,6 +139,16 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 		},
 		"install": {
 			Description: "Returns the value of the install field.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"installation_type": {
+			Description: "Installation type of controller on DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"installation_type_description": {
+			Description: "Installation type description of controller on DCNM.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -124,10 +172,135 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"mode": {
+			Description: "Mode of controller on DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"network_info": {
+			Description: "Installation type description of controller on DCNM.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"active_node": {
+						Description: "Returns details of active node.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"hostname": {
+									Description: "Returns hostname of the node.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"managementt_ip": {
+									Description: "Returns management IP of the node.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"outofband_ip": {
+									Description: "Returns out of band IP of the node.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"hostname": {
+						Description: "Returns hostname of the network.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"managementt_ip": {
+						Description: "Returns management IP of the network.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"outofband_ip": {
+						Description: "Returns out of band IP of the network.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"standby_node": {
+						Description: "Returns details of standby node.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"hostname": {
+									Description: "Returns hostname of the node.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"managementt_ip": {
+									Description: "Returns management IP of the node.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"outofband_ip": {
+									Description: "Returns out of band IP of the node.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+				},
+			},
 		},
 		"num_fabrics": {
 			Description: "Returns total number of fabrics in DCNM set-up.",
@@ -562,6 +735,44 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"golden_image_details": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"image_name": {
+						Description: "Returns name of the image on controller.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Returns name of the image on controller.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"nr_version": {
+						Description: "Returns version of the image on controller.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"ha_enabled": {
 			Description: "Returns the value of the haEnabled field.",
 			Type:        schema.TypeBool,
@@ -574,6 +785,16 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 		},
 		"install": {
 			Description: "Returns the value of the install field.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"installation_type": {
+			Description: "Installation type of controller on DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"installation_type_description": {
+			Description: "Installation type description of controller on DCNM.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -597,10 +818,135 @@ func dataSourceNiatelemetryNiaInventoryDcnm() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"mode": {
+			Description: "Mode of controller on DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"network_info": {
+			Description: "Installation type description of controller on DCNM.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"active_node": {
+						Description: "Returns details of active node.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"hostname": {
+									Description: "Returns hostname of the node.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"managementt_ip": {
+									Description: "Returns management IP of the node.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"outofband_ip": {
+									Description: "Returns out of band IP of the node.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"hostname": {
+						Description: "Returns hostname of the network.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"managementt_ip": {
+						Description: "Returns management IP of the network.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"outofband_ip": {
+						Description: "Returns out of band IP of the network.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"standby_node": {
+						Description: "Returns details of standby node.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"hostname": {
+									Description: "Returns hostname of the node.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"managementt_ip": {
+									Description: "Returns management IP of the node.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"outofband_ip": {
+									Description: "Returns out of band IP of the node.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
+				},
+			},
 		},
 		"num_fabrics": {
 			Description: "Returns total number of fabrics in DCNM set-up.",
@@ -1061,6 +1407,52 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		o.SetEpldImageCount(x)
 	}
 
+	if v, ok := d.GetOk("golden_image_details"); ok {
+		x := make([]models.NiatelemetryImageDetail, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NiatelemetryImageDetail{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.ImageDetail")
+			if v, ok := l["image_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetImageName(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["nr_version"]; ok {
+				{
+					x := (v.(string))
+					o.SetVersion(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetGoldenImageDetails(x)
+	}
+
 	if v, ok := d.GetOkExists("ha_enabled"); ok {
 		x := (v.(bool))
 		o.SetHaEnabled(x)
@@ -1074,6 +1466,16 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 	if v, ok := d.GetOk("install"); ok {
 		x := (v.(string))
 		o.SetInstall(x)
+	}
+
+	if v, ok := d.GetOk("installation_type"); ok {
+		x := (v.(string))
+		o.SetInstallationType(x)
+	}
+
+	if v, ok := d.GetOk("installation_type_description"); ok {
+		x := (v.(string))
+		o.SetInstallationTypeDescription(x)
 	}
 
 	if v, ok := d.GetOkExists("is_isn_configured"); ok {
@@ -1096,9 +1498,163 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 		o.SetModTime(x)
 	}
 
+	if v, ok := d.GetOk("mode"); ok {
+		x := (v.(string))
+		o.SetMode(x)
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("network_info"); ok {
+		p := make([]models.NiatelemetryNetworkInfo, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.NiatelemetryNetworkInfo{}
+			if v, ok := l["active_node"]; ok {
+				{
+					p := make([]models.NiatelemetryNode, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewNiatelemetryNodeWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("")
+						if v, ok := l["hostname"]; ok {
+							{
+								x := (v.(string))
+								o.SetHostname(x)
+							}
+						}
+						if v, ok := l["managementt_ip"]; ok {
+							{
+								x := (v.(string))
+								o.SetManagementtIp(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["outofband_ip"]; ok {
+							{
+								x := (v.(string))
+								o.SetOutofbandIp(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetActiveNode(x)
+					}
+				}
+			}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("")
+			if v, ok := l["hostname"]; ok {
+				{
+					x := (v.(string))
+					o.SetHostname(x)
+				}
+			}
+			if v, ok := l["managementt_ip"]; ok {
+				{
+					x := (v.(string))
+					o.SetManagementtIp(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["outofband_ip"]; ok {
+				{
+					x := (v.(string))
+					o.SetOutofbandIp(x)
+				}
+			}
+			if v, ok := l["standby_node"]; ok {
+				{
+					p := make([]models.NiatelemetryNode, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewNiatelemetryNodeWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("")
+						if v, ok := l["hostname"]; ok {
+							{
+								x := (v.(string))
+								o.SetHostname(x)
+							}
+						}
+						if v, ok := l["managementt_ip"]; ok {
+							{
+								x := (v.(string))
+								o.SetManagementtIp(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["outofband_ip"]; ok {
+							{
+								x := (v.(string))
+								o.SetOutofbandIp(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetStandbyNode(x)
+					}
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetNetworkInfo(x)
+		}
 	}
 
 	if v, ok := d.GetOkExists("num_fabrics"); ok {
@@ -1183,7 +1739,7 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1266,7 +1822,7 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1412,7 +1968,7 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1517,15 +2073,22 @@ func dataSourceNiatelemetryNiaInventoryDcnmRead(c context.Context, d *schema.Res
 				temp["dev"] = (s.GetDev())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["epld_image_count"] = (s.GetEpldImageCount())
+
+				temp["golden_image_details"] = flattenListNiatelemetryImageDetail(s.GetGoldenImageDetails(), d)
 				temp["ha_enabled"] = (s.GetHaEnabled())
 				temp["ha_replication_status"] = (s.GetHaReplicationStatus())
 				temp["install"] = (s.GetInstall())
+				temp["installation_type"] = (s.GetInstallationType())
+				temp["installation_type_description"] = (s.GetInstallationTypeDescription())
 				temp["is_isn_configured"] = (s.GetIsIsnConfigured())
 				temp["is_media_controller"] = (s.GetIsMediaController())
 				temp["is_smart_license_enabled"] = (s.GetIsSmartLicenseEnabled())
 
 				temp["mod_time"] = (s.GetModTime()).String()
+				temp["mode"] = (s.GetMode())
 				temp["moid"] = (s.GetMoid())
+
+				temp["network_info"] = flattenMapNiatelemetryNetworkInfo(s.GetNetworkInfo(), d)
 				temp["num_fabrics"] = (s.GetNumFabrics())
 				temp["num_fabrics_in_msd"] = (s.GetNumFabricsInMsd())
 				temp["num_ingress_replication_fabrics"] = (s.GetNumIngressReplicationFabrics())

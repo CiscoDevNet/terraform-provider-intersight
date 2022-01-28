@@ -289,7 +289,7 @@ func dataSourceHyperflexDrive() *schema.Resource {
 			Optional:    true,
 		},
 		"status": {
-			Description: "Disk inventory state as determined by storfs inventory module.\nShould be one of values defined in enum.\n* `UNKNOWN` - The state of the disk is unknown.\n* `CLAIMED` - The state of the disk is claimed by storfs and has a valid storfs format.\n* `AVAILABLE` - The disk is available but not claimed by storfs.\n* `IGNORED` - The disk ash been ignored by storfs.\n* `BLACKLISTED` - The disk has been blacklisted by storfs.\n* `SECUREERASED` - The disk has been secure erased.",
+			Description: "Disk inventory state as determined by storfs inventory module.\nShould be one of values defined in enum.\n* `UNKNOWN` - The state of the disk is unknown.\n* `CLAIMED` - The state of the disk is claimed by storfs and has a valid storfs format.\n* `AVAILABLE` - The disk is available but not claimed by storfs.\n* `IGNORED` - The disk ash been ignored by storfs.\n* `BLACKLISTED` - The disk has been blacklisted by storfs.\n* `SECUREERASED` - The disk has been secure erased.\n* `BLOCKED` - The disk has been blocked by storfs.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -724,7 +724,7 @@ func dataSourceHyperflexDrive() *schema.Resource {
 			Optional:    true,
 		},
 		"status": {
-			Description: "Disk inventory state as determined by storfs inventory module.\nShould be one of values defined in enum.\n* `UNKNOWN` - The state of the disk is unknown.\n* `CLAIMED` - The state of the disk is claimed by storfs and has a valid storfs format.\n* `AVAILABLE` - The disk is available but not claimed by storfs.\n* `IGNORED` - The disk ash been ignored by storfs.\n* `BLACKLISTED` - The disk has been blacklisted by storfs.\n* `SECUREERASED` - The disk has been secure erased.",
+			Description: "Disk inventory state as determined by storfs inventory module.\nShould be one of values defined in enum.\n* `UNKNOWN` - The state of the disk is unknown.\n* `CLAIMED` - The state of the disk is claimed by storfs and has a valid storfs format.\n* `AVAILABLE` - The disk is available but not claimed by storfs.\n* `IGNORED` - The disk ash been ignored by storfs.\n* `BLACKLISTED` - The disk has been blacklisted by storfs.\n* `SECUREERASED` - The disk has been secure erased.\n* `BLOCKED` - The disk has been blocked by storfs.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1006,7 +1006,7 @@ func dataSourceHyperflexDriveRead(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1064,7 +1064,7 @@ func dataSourceHyperflexDriveRead(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1128,7 +1128,7 @@ func dataSourceHyperflexDriveRead(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1299,7 +1299,7 @@ func dataSourceHyperflexDriveRead(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

@@ -1256,7 +1256,7 @@ func dataSourceCloudAwsNetworkInterfaceRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1299,7 +1299,7 @@ func dataSourceCloudAwsNetworkInterfaceRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("cloud.BillingUnit")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1360,7 +1360,7 @@ func dataSourceCloudAwsNetworkInterfaceRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("cloud.NetworkInstanceAttachment")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1432,7 +1432,7 @@ func dataSourceCloudAwsNetworkInterfaceRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1547,7 +1547,7 @@ func dataSourceCloudAwsNetworkInterfaceRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("cloud.CloudRegion")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1578,7 +1578,7 @@ func dataSourceCloudAwsNetworkInterfaceRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1675,7 +1675,7 @@ func dataSourceCloudAwsNetworkInterfaceRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1749,7 +1749,7 @@ func dataSourceCloudAwsNetworkInterfaceRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("cloud.AvailabilityZone")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

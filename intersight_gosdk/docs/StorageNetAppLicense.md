@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.NetAppLicense"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppLicense"]
+**ClusterUuid** | Pointer to **string** | Unique identity of the device. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the licensed package. | [optional] [readonly] 
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 
@@ -67,6 +68,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetClusterUuid
+
+`func (o *StorageNetAppLicense) GetClusterUuid() string`
+
+GetClusterUuid returns the ClusterUuid field if non-nil, zero value otherwise.
+
+### GetClusterUuidOk
+
+`func (o *StorageNetAppLicense) GetClusterUuidOk() (*string, bool)`
+
+GetClusterUuidOk returns a tuple with the ClusterUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterUuid
+
+`func (o *StorageNetAppLicense) SetClusterUuid(v string)`
+
+SetClusterUuid sets ClusterUuid field to given value.
+
+### HasClusterUuid
+
+`func (o *StorageNetAppLicense) HasClusterUuid() bool`
+
+HasClusterUuid returns a boolean if a field has been set.
 
 ### GetName
 

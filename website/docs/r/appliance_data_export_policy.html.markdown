@@ -36,8 +36,13 @@ resource "intersight_appliance_data_export_policy" "appliance_data_export_policy
   name = "appliance_data_export1"
   account {
     object_type = "iam.Account"
-    moid        = intersight_account_iam.iam1.id
+    moid        = var.account
   }
+}
+
+variable "account" {
+  type        = string
+  description = "Moid of iam.Account Mo"
 }
 ```
 ## Argument Reference

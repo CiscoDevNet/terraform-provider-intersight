@@ -1310,7 +1310,7 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("capability.SwitchNetworkLimits")
+			o.SetClassId("")
 			if v, ok := l["max_compressed_port_vlan_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1934,7 +1934,7 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("capability.SwitchStorageLimits")
+			o.SetClassId("")
 			if v, ok := l["maximum_user_zone_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2037,7 +2037,7 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("capability.SwitchSystemLimits")
+			o.SetClassId("")
 			if v, ok := l["maximum_chassis_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2187,8 +2187,8 @@ func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.Resou
 func resourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilitySwitchCapabilityByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -2525,7 +2525,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("capability.SwitchNetworkLimits")
+			o.SetClassId("")
 			if v, ok := l["max_compressed_port_vlan_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -3144,7 +3144,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("capability.SwitchStorageLimits")
+			o.SetClassId("")
 			if v, ok := l["maximum_user_zone_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -3247,7 +3247,7 @@ func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("capability.SwitchSystemLimits")
+			o.SetClassId("")
 			if v, ok := l["maximum_chassis_count"]; ok {
 				{
 					x := int64(v.(int))

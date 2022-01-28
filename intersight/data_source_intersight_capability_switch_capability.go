@@ -2310,7 +2310,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("capability.SwitchNetworkLimits")
+			o.SetClassId("")
 			if v, ok := l["max_compressed_port_vlan_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2447,7 +2447,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3018,7 +3018,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("capability.SwitchStorageLimits")
+			o.SetClassId("")
 			if v, ok := l["maximum_user_zone_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -3119,7 +3119,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("capability.SwitchSystemLimits")
+			o.SetClassId("")
 			if v, ok := l["maximum_chassis_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -3258,7 +3258,7 @@ func dataSourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

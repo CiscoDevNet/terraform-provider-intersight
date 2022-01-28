@@ -23,6 +23,7 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `mtu`:(int) Maximum transmission unit configured on a distributed virtual switch. 
 * `name`:(string) User-provided name to identify the switch. 
+* `network_io_control`:(bool) If network io control is enabled, will set the value as true. 
 * `num_hosts`:(int) The total number of hosts attached to the distributed virtual switch. 
 * `num_networks`:(int) The total number of distributed networks in the distributed virtual switch. 
 * `num_stand_alone_ports`:(int) Number of stand-alone ports in use. 

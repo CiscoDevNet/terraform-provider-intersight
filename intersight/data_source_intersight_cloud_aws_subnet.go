@@ -1202,7 +1202,7 @@ func dataSourceCloudAwsSubnetRead(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1245,7 +1245,7 @@ func dataSourceCloudAwsSubnetRead(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("cloud.BillingUnit")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1347,7 +1347,7 @@ func dataSourceCloudAwsSubnetRead(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1430,7 +1430,7 @@ func dataSourceCloudAwsSubnetRead(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("cloud.CloudRegion")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1461,7 +1461,7 @@ func dataSourceCloudAwsSubnetRead(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1575,7 +1575,7 @@ func dataSourceCloudAwsSubnetRead(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1649,7 +1649,7 @@ func dataSourceCloudAwsSubnetRead(c context.Context, d *schema.ResourceData, met
 					}
 				}
 			}
-			o.SetClassId("cloud.AvailabilityZone")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

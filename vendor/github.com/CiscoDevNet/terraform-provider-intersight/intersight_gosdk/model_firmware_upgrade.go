@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -23,12 +23,12 @@ type FirmwareUpgrade struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                                   `json:"ObjectType"`
-	ExcludeComponentList []string                                 `json:"ExcludeComponentList,omitempty"`
-	IncludeComponentList NullableFirmwareIncludeComponentListType `json:"IncludeComponentList,omitempty"`
-	Device               *AssetDeviceRegistrationRelationship     `json:"Device,omitempty"`
-	Server               *ComputePhysicalRelationship             `json:"Server,omitempty"`
-	AdditionalProperties map[string]interface{}
+	ObjectType              string                                      `json:"ObjectType"`
+	ExcludeComponentList    []string                                    `json:"ExcludeComponentList,omitempty"`
+	ExcludeComponentPidList NullableFirmwareExcludeComponentPidListType `json:"ExcludeComponentPidList,omitempty"`
+	Device                  *AssetDeviceRegistrationRelationship        `json:"Device,omitempty"`
+	Server                  *ComputePhysicalRelationship                `json:"Server,omitempty"`
+	AdditionalProperties    map[string]interface{}
 }
 
 type _FirmwareUpgrade FirmwareUpgrade
@@ -141,47 +141,47 @@ func (o *FirmwareUpgrade) SetExcludeComponentList(v []string) {
 	o.ExcludeComponentList = v
 }
 
-// GetIncludeComponentList returns the IncludeComponentList field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *FirmwareUpgrade) GetIncludeComponentList() FirmwareIncludeComponentListType {
-	if o == nil || o.IncludeComponentList.Get() == nil {
-		var ret FirmwareIncludeComponentListType
+// GetExcludeComponentPidList returns the ExcludeComponentPidList field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *FirmwareUpgrade) GetExcludeComponentPidList() FirmwareExcludeComponentPidListType {
+	if o == nil || o.ExcludeComponentPidList.Get() == nil {
+		var ret FirmwareExcludeComponentPidListType
 		return ret
 	}
-	return *o.IncludeComponentList.Get()
+	return *o.ExcludeComponentPidList.Get()
 }
 
-// GetIncludeComponentListOk returns a tuple with the IncludeComponentList field value if set, nil otherwise
+// GetExcludeComponentPidListOk returns a tuple with the ExcludeComponentPidList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *FirmwareUpgrade) GetIncludeComponentListOk() (*FirmwareIncludeComponentListType, bool) {
+func (o *FirmwareUpgrade) GetExcludeComponentPidListOk() (*FirmwareExcludeComponentPidListType, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.IncludeComponentList.Get(), o.IncludeComponentList.IsSet()
+	return o.ExcludeComponentPidList.Get(), o.ExcludeComponentPidList.IsSet()
 }
 
-// HasIncludeComponentList returns a boolean if a field has been set.
-func (o *FirmwareUpgrade) HasIncludeComponentList() bool {
-	if o != nil && o.IncludeComponentList.IsSet() {
+// HasExcludeComponentPidList returns a boolean if a field has been set.
+func (o *FirmwareUpgrade) HasExcludeComponentPidList() bool {
+	if o != nil && o.ExcludeComponentPidList.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIncludeComponentList gets a reference to the given NullableFirmwareIncludeComponentListType and assigns it to the IncludeComponentList field.
-func (o *FirmwareUpgrade) SetIncludeComponentList(v FirmwareIncludeComponentListType) {
-	o.IncludeComponentList.Set(&v)
+// SetExcludeComponentPidList gets a reference to the given NullableFirmwareExcludeComponentPidListType and assigns it to the ExcludeComponentPidList field.
+func (o *FirmwareUpgrade) SetExcludeComponentPidList(v FirmwareExcludeComponentPidListType) {
+	o.ExcludeComponentPidList.Set(&v)
 }
 
-// SetIncludeComponentListNil sets the value for IncludeComponentList to be an explicit nil
-func (o *FirmwareUpgrade) SetIncludeComponentListNil() {
-	o.IncludeComponentList.Set(nil)
+// SetExcludeComponentPidListNil sets the value for ExcludeComponentPidList to be an explicit nil
+func (o *FirmwareUpgrade) SetExcludeComponentPidListNil() {
+	o.ExcludeComponentPidList.Set(nil)
 }
 
-// UnsetIncludeComponentList ensures that no value is present for IncludeComponentList, not even an explicit nil
-func (o *FirmwareUpgrade) UnsetIncludeComponentList() {
-	o.IncludeComponentList.Unset()
+// UnsetExcludeComponentPidList ensures that no value is present for ExcludeComponentPidList, not even an explicit nil
+func (o *FirmwareUpgrade) UnsetExcludeComponentPidList() {
+	o.ExcludeComponentPidList.Unset()
 }
 
 // GetDevice returns the Device field value if set, zero value otherwise.
@@ -267,8 +267,8 @@ func (o FirmwareUpgrade) MarshalJSON() ([]byte, error) {
 	if o.ExcludeComponentList != nil {
 		toSerialize["ExcludeComponentList"] = o.ExcludeComponentList
 	}
-	if o.IncludeComponentList.IsSet() {
-		toSerialize["IncludeComponentList"] = o.IncludeComponentList.Get()
+	if o.ExcludeComponentPidList.IsSet() {
+		toSerialize["ExcludeComponentPidList"] = o.ExcludeComponentPidList.Get()
 	}
 	if o.Device != nil {
 		toSerialize["Device"] = o.Device
@@ -289,11 +289,11 @@ func (o *FirmwareUpgrade) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType           string                                   `json:"ObjectType"`
-		ExcludeComponentList []string                                 `json:"ExcludeComponentList,omitempty"`
-		IncludeComponentList NullableFirmwareIncludeComponentListType `json:"IncludeComponentList,omitempty"`
-		Device               *AssetDeviceRegistrationRelationship     `json:"Device,omitempty"`
-		Server               *ComputePhysicalRelationship             `json:"Server,omitempty"`
+		ObjectType              string                                      `json:"ObjectType"`
+		ExcludeComponentList    []string                                    `json:"ExcludeComponentList,omitempty"`
+		ExcludeComponentPidList NullableFirmwareExcludeComponentPidListType `json:"ExcludeComponentPidList,omitempty"`
+		Device                  *AssetDeviceRegistrationRelationship        `json:"Device,omitempty"`
+		Server                  *ComputePhysicalRelationship                `json:"Server,omitempty"`
 	}
 
 	varFirmwareUpgradeWithoutEmbeddedStruct := FirmwareUpgradeWithoutEmbeddedStruct{}
@@ -304,7 +304,7 @@ func (o *FirmwareUpgrade) UnmarshalJSON(bytes []byte) (err error) {
 		varFirmwareUpgrade.ClassId = varFirmwareUpgradeWithoutEmbeddedStruct.ClassId
 		varFirmwareUpgrade.ObjectType = varFirmwareUpgradeWithoutEmbeddedStruct.ObjectType
 		varFirmwareUpgrade.ExcludeComponentList = varFirmwareUpgradeWithoutEmbeddedStruct.ExcludeComponentList
-		varFirmwareUpgrade.IncludeComponentList = varFirmwareUpgradeWithoutEmbeddedStruct.IncludeComponentList
+		varFirmwareUpgrade.ExcludeComponentPidList = varFirmwareUpgradeWithoutEmbeddedStruct.ExcludeComponentPidList
 		varFirmwareUpgrade.Device = varFirmwareUpgradeWithoutEmbeddedStruct.Device
 		varFirmwareUpgrade.Server = varFirmwareUpgradeWithoutEmbeddedStruct.Server
 		*o = FirmwareUpgrade(varFirmwareUpgrade)
@@ -327,7 +327,7 @@ func (o *FirmwareUpgrade) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ExcludeComponentList")
-		delete(additionalProperties, "IncludeComponentList")
+		delete(additionalProperties, "ExcludeComponentPidList")
 		delete(additionalProperties, "Device")
 		delete(additionalProperties, "Server")
 

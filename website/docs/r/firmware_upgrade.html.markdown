@@ -70,16 +70,16 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `exclude_component_list`:
                 (Array of schema.TypeString) -
+* `exclude_component_pid_list`:(HashMap) - The components PIDs which are to be excluded for server firmware upgrade. 
+This complex property has following sub-properties:
+  + `exclude_local_disk_list`:
+                (Array of schema.TypeString) -
+  + `exclude_storage_controller_list`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `file_server`:(HashMap) - Location of the image in user software repository. 
 This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-* `include_component_list`:(HashMap) - The components which are not to be excluded for server firmware upgrade. 
-This complex property has following sub-properties:
-  + `include_local_disk_list`:
-                (Array of schema.TypeString) -
-  + `include_storage_controller_list`:
-                (Array of schema.TypeString) -
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `network_share`:(HashMap) - Deprecated (Use 'fileServer' property). Network share options in case of the upgradeType is network share based upgrade. 

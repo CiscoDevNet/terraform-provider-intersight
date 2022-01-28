@@ -1183,7 +1183,7 @@ func dataSourceStorageDriveGroupRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("storage.AutomaticDriveGroup")
+			o.SetClassId("")
 			if v, ok := l["drive_type"]; ok {
 				{
 					x := (v.(string))
@@ -1265,7 +1265,7 @@ func dataSourceStorageDriveGroupRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("storage.ManualDriveGroup")
+			o.SetClassId("")
 			if v, ok := l["dedicated_hot_spares"]; ok {
 				{
 					x := (v.(string))
@@ -1370,7 +1370,7 @@ func dataSourceStorageDriveGroupRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1463,7 +1463,7 @@ func dataSourceStorageDriveGroupRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1544,7 +1544,7 @@ func dataSourceStorageDriveGroupRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1672,7 +1672,7 @@ func dataSourceStorageDriveGroupRead(c context.Context, d *schema.ResourceData, 
 								}
 							}
 						}
-						o.SetClassId("storage.VirtualDrivePolicy")
+						o.SetClassId("")
 						if v, ok := l["drive_cache"]; ok {
 							{
 								x := (v.(string))

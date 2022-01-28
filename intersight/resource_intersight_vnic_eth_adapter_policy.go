@@ -947,7 +947,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.ArfsSettings")
+			o.SetClassId("")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -986,7 +986,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.CompletionQueueSettings")
+			o.SetClassId("")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1038,7 +1038,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.EthInterruptSettings")
+			o.SetClassId("")
 			if v, ok := l["coalescing_time"]; ok {
 				{
 					x := int64(v.(int))
@@ -1103,7 +1103,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.NvgreSettings")
+			o.SetClassId("")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1142,7 +1142,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1185,7 +1185,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.RoceSettings")
+			o.SetClassId("")
 			if v, ok := l["class_of_service"]; ok {
 				{
 					x := int32(v.(int))
@@ -1252,7 +1252,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.RssHashSettings")
+			o.SetClassId("")
 			if v, ok := l["ipv4_hash"]; ok {
 				{
 					x := (v.(bool))
@@ -1336,7 +1336,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.EthRxQueueSettings")
+			o.SetClassId("")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1414,7 +1414,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.TcpOffloadSettings")
+			o.SetClassId("")
 			if v, ok := l["large_receive"]; ok {
 				{
 					x := (v.(bool))
@@ -1469,7 +1469,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.EthTxQueueSettings")
+			o.SetClassId("")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1517,7 +1517,7 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.VxlanSettings")
+			o.SetClassId("")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1556,8 +1556,8 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 func resourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.VnicApi.GetVnicEthAdapterPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1751,7 +1751,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.ArfsSettings")
+			o.SetClassId("")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1791,7 +1791,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.CompletionQueueSettings")
+			o.SetClassId("")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1847,7 +1847,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.EthInterruptSettings")
+			o.SetClassId("")
 			if v, ok := l["coalescing_time"]; ok {
 				{
 					x := int64(v.(int))
@@ -1915,7 +1915,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.NvgreSettings")
+			o.SetClassId("")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))
@@ -1955,7 +1955,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1999,7 +1999,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.RoceSettings")
+			o.SetClassId("")
 			if v, ok := l["class_of_service"]; ok {
 				{
 					x := int32(v.(int))
@@ -2067,7 +2067,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.RssHashSettings")
+			o.SetClassId("")
 			if v, ok := l["ipv4_hash"]; ok {
 				{
 					x := (v.(bool))
@@ -2153,7 +2153,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.EthRxQueueSettings")
+			o.SetClassId("")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2231,7 +2231,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.TcpOffloadSettings")
+			o.SetClassId("")
 			if v, ok := l["large_receive"]; ok {
 				{
 					x := (v.(bool))
@@ -2287,7 +2287,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.EthTxQueueSettings")
+			o.SetClassId("")
 			if v, ok := l["nr_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -2337,7 +2337,7 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("vnic.VxlanSettings")
+			o.SetClassId("")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))

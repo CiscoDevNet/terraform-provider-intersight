@@ -658,7 +658,7 @@ func resourceIamCertificateRequestCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -720,7 +720,7 @@ func resourceIamCertificateRequestCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -768,7 +768,7 @@ func resourceIamCertificateRequestCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("pkix.DistinguishedName")
+			o.SetClassId("")
 			if v, ok := l["country"]; ok {
 				{
 					x := make([]string, 0)
@@ -869,7 +869,7 @@ func resourceIamCertificateRequestCreate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("pkix.SubjectAlternateName")
+			o.SetClassId("")
 			if v, ok := l["dns_name"]; ok {
 				{
 					x := make([]string, 0)
@@ -993,8 +993,8 @@ func resourceIamCertificateRequestCreate(c context.Context, d *schema.ResourceDa
 func resourceIamCertificateRequestRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamCertificateRequestByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1146,7 +1146,7 @@ func resourceIamCertificateRequestUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1212,7 +1212,7 @@ func resourceIamCertificateRequestUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1262,7 +1262,7 @@ func resourceIamCertificateRequestUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("pkix.DistinguishedName")
+			o.SetClassId("")
 			if v, ok := l["country"]; ok {
 				{
 					x := make([]string, 0)
@@ -1364,7 +1364,7 @@ func resourceIamCertificateRequestUpdate(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("pkix.SubjectAlternateName")
+			o.SetClassId("")
 			if v, ok := l["dns_name"]; ok {
 				{
 					x := make([]string, 0)

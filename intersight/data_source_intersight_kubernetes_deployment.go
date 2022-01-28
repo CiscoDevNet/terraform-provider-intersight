@@ -976,7 +976,7 @@ func dataSourceKubernetesDeploymentRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("kubernetes.ObjectMeta")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1044,7 +1044,7 @@ func dataSourceKubernetesDeploymentRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1127,7 +1127,7 @@ func dataSourceKubernetesDeploymentRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1181,7 +1181,7 @@ func dataSourceKubernetesDeploymentRead(c context.Context, d *schema.ResourceDat
 					o.SetAvailableReplicas(x)
 				}
 			}
-			o.SetClassId("kubernetes.DeploymentStatus")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1274,7 +1274,7 @@ func dataSourceKubernetesDeploymentRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

@@ -22,7 +22,7 @@ resource "intersight_fabric_switch_control_policy" "fabric_switch_control_policy
   vlan_port_optimization_enabled = true
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
 }
 ```

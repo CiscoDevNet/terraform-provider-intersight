@@ -25,7 +25,7 @@ resource "intersight_hyperflex_cluster_network_policy" "hyperflex_cluster_networ
   }
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
   name = "hyperflex_cluster_network_policy1"
 }

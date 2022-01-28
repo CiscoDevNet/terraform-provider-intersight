@@ -20,18 +20,16 @@ resource "intersight_hyperflex_server_firmware_version_entry" "hyperflex_server_
     object_type     = "hyperflex.AppSettingConstraint"
     server_model    = "HX.*M5.*$"
   }
-  server_firmware_version_entries = [
-    {
-      object_type = "hyperflex.ServerFirmwareVersionEntry"
-      moid        = var.hyperflex_server_firmware_version_entry
-    }
-  ]
   parent {
     object_type = "hyperflex.ServerFirmwareVersion"
     moid        = var.hyperflex_server_firmware_version
   }
   server_platform = "M5"
-  version         = "4.1(2f)"
+}
+
+variable "hyperflex_server_firmware_version" {
+  type        = string
+  description = "Moid of hyperflex_server_firmware_version"
 }
 ```
 ## Argument Reference

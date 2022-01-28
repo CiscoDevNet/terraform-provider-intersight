@@ -17,12 +17,17 @@ resource "intersight_iqnpool_pool" "iqnpool_pool1" {
   description      = "ippool pool"
   assignment_order = "sequential"
   prefix           = "iqn1.alpha.com"
-  iqn_suffix_blocks {
-    moid        = var.iqn_suffix_blocks
-    object_type = "iqn.SuffixBlocks"
-    suffix      = "alphadc-1"
-  }
+   iqn_suffix_blocks {
+     moid        = var.iqn_suffix_blocks
+     object_type = "iqn.SuffixBlocks"
+     suffix      = "alphadc-1"
+   }
 }
+
+ variable "iqn_suffix_blocks" {
+   type = string
+   description = "value of iqn_suffix_blocks"
+ }
 ```
 ## Argument Reference
 The following arguments are supported:
@@ -47,7 +52,7 @@ This complex property has following sub-properties:
   + `from`:(int) The first suffix number in the block. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `size`:(int) Number of identifiers this block can hold. 
-  + `suffix`:(string) The suffix for this bock of IQNs. 
+  + `suffix`:(string) The suffix for this block of IQNs. 
   + `to`:(int) The last suffix number in the block. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

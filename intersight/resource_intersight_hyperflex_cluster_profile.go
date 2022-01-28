@@ -1583,7 +1583,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1626,7 +1626,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1671,7 +1671,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("comm.IpV4Interface")
+			o.SetClassId("")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -1720,7 +1720,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1763,7 +1763,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1806,7 +1806,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1859,7 +1859,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1902,7 +1902,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1950,7 +1950,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2003,7 +2003,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2071,7 +2071,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2158,7 +2158,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2243,7 +2243,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2291,7 +2291,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2334,7 +2334,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2387,7 +2387,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVlan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -2435,7 +2435,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVlan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -2483,7 +2483,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2566,7 +2566,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2609,7 +2609,7 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2708,8 +2708,8 @@ func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.Resource
 func resourceHyperflexClusterProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexClusterProfileByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -3044,7 +3044,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3088,7 +3088,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3134,7 +3134,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("comm.IpV4Interface")
+			o.SetClassId("")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -3184,7 +3184,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3228,7 +3228,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3272,7 +3272,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -3328,7 +3328,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3372,7 +3372,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3422,7 +3422,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3478,7 +3478,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3552,7 +3552,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3639,7 +3639,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3724,7 +3724,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3774,7 +3774,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3818,7 +3818,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3874,7 +3874,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVlan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -3924,7 +3924,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVlan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -3974,7 +3974,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4058,7 +4058,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4102,7 +4102,7 @@ func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.Resource
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

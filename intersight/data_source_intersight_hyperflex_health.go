@@ -1097,7 +1097,7 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1181,7 +1181,7 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1264,7 +1264,7 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("hyperflex.HxResiliencyInfoDt")
+			o.SetClassId("")
 			if v, ok := l["messages"]; ok {
 				{
 					x := make([]string, 0)
@@ -1357,7 +1357,7 @@ func dataSourceHyperflexHealthRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

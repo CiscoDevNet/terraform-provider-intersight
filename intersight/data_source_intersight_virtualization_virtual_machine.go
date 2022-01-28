@@ -1993,7 +1993,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("virtualization.ActionInfo")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2134,7 +2134,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("virtualization.CloudInitConfig")
+			o.SetClassId("")
 			if v, ok := l["config_type"]; ok {
 				{
 					x := (v.(string))
@@ -2195,7 +2195,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2312,7 +2312,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 								o.SetCapacity(x)
 							}
 						}
-						o.SetClassId("virtualization.VirtualDiskConfig")
+						o.SetClassId("")
 						if v, ok := l["mode"]; ok {
 							{
 								x := (v.(string))
@@ -2393,7 +2393,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2621,7 +2621,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2728,7 +2728,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2821,7 +2821,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2902,7 +2902,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2976,7 +2976,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("virtualization.BaseVmConfiguration")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -3007,7 +3007,7 @@ func dataSourceVirtualizationVirtualMachineRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

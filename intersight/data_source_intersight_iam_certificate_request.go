@@ -1067,7 +1067,7 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1164,7 +1164,7 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1258,7 +1258,7 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1341,7 +1341,7 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1399,7 +1399,7 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("pkix.DistinguishedName")
+			o.SetClassId("")
 			if v, ok := l["country"]; ok {
 				{
 					x := make([]string, 0)
@@ -1500,7 +1500,7 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("pkix.SubjectAlternateName")
+			o.SetClassId("")
 			if v, ok := l["dns_name"]; ok {
 				{
 					x := make([]string, 0)
@@ -1620,7 +1620,7 @@ func dataSourceIamCertificateRequestRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

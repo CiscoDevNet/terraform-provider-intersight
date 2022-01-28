@@ -1071,7 +1071,7 @@ func dataSourceVirtualizationIweVirtualDiskRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1160,7 +1160,7 @@ func dataSourceVirtualizationIweVirtualDiskRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1243,7 +1243,7 @@ func dataSourceVirtualizationIweVirtualDiskRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1306,7 +1306,7 @@ func dataSourceVirtualizationIweVirtualDiskRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("virtualization.DiskStatus")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1375,7 +1375,7 @@ func dataSourceVirtualizationIweVirtualDiskRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1449,7 +1449,7 @@ func dataSourceVirtualizationIweVirtualDiskRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

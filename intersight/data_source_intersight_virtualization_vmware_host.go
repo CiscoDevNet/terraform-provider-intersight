@@ -1955,7 +1955,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2003,7 +2003,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("virtualization.CpuInfo")
+			o.SetClassId("")
 			if v, ok := l["cores"]; ok {
 				{
 					x := int64(v.(int))
@@ -2069,7 +2069,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2253,7 +2253,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("infra.HardwareInfo")
+			o.SetClassId("")
 			if v, ok := l["cpu_cores"]; ok {
 				{
 					x := int64(v.(int))
@@ -2307,7 +2307,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2376,7 +2376,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.MemoryCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -2471,7 +2471,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2560,7 +2560,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.ComputeCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -2609,7 +2609,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					o.SetBuild(x)
 				}
 			}
-			o.SetClassId("virtualization.ProductInfo")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2664,7 +2664,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2707,7 +2707,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("virtualization.VmwareResourceConsumption")
+			o.SetClassId("")
 			if v, ok := l["cpu_consumed"]; ok {
 				{
 					x := int64(v.(int))
@@ -2755,7 +2755,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2871,7 +2871,7 @@ func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

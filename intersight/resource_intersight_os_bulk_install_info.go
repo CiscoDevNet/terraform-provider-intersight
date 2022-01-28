@@ -1558,7 +1558,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1618,7 +1618,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1661,7 +1661,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1704,7 +1704,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1784,7 +1784,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 											}
 										}
 									}
-									o.SetClassId("workflow.PrimitiveDataType")
+									o.SetClassId("")
 									if v, ok := l["default"]; ok {
 										{
 											p := make([]models.WorkflowDefaultValue, 0, 1)
@@ -1802,7 +1802,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 														}
 													}
 												}
-												o.SetClassId("workflow.DefaultValue")
+												o.SetClassId("")
 												if v, ok := l["object_type"]; ok {
 													{
 														x := (v.(string))
@@ -1851,7 +1851,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 														}
 													}
 												}
-												o.SetClassId("workflow.DisplayMeta")
+												o.SetClassId("")
 												if v, ok := l["inventory_selector"]; ok {
 													{
 														x := (v.(bool))
@@ -1918,7 +1918,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 														}
 													}
 												}
-												o.SetClassId("workflow.PrimitiveDataProperty")
+												o.SetClassId("")
 												if v, ok := l["constraints"]; ok {
 													{
 														p := make([]models.WorkflowConstraints, 0, 1)
@@ -1936,7 +1936,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 																	}
 																}
 															}
-															o.SetClassId("workflow.Constraints")
+															o.SetClassId("")
 															if v, ok := l["enum_list"]; ok {
 																{
 																	x := make([]models.WorkflowEnumEntry, 0)
@@ -2078,7 +2078,7 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 																				o.SetBody(v)
 																			}
 																		}
-																		o.SetClassId("workflow.SelectorProperty")
+																		o.SetClassId("")
 																		if v, ok := l["method"]; ok {
 																			{
 																				x := (v.(string))
@@ -2327,8 +2327,8 @@ func resourceOsBulkInstallInfoCreate(c context.Context, d *schema.ResourceData, 
 func resourceOsBulkInstallInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.OsApi.GetOsBulkInstallInfoByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {

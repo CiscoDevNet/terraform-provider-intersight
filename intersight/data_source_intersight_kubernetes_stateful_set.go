@@ -1006,7 +1006,7 @@ func dataSourceKubernetesStatefulSetRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("kubernetes.ObjectMeta")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1074,7 +1074,7 @@ func dataSourceKubernetesStatefulSetRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1157,7 +1157,7 @@ func dataSourceKubernetesStatefulSetRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1211,7 +1211,7 @@ func dataSourceKubernetesStatefulSetRead(c context.Context, d *schema.ResourceDa
 					o.SetAvailableReplicas(x)
 				}
 			}
-			o.SetClassId("kubernetes.StatefulSetStatus")
+			o.SetClassId("")
 			if v, ok := l["collision_count"]; ok {
 				{
 					x := int64(v.(int))
@@ -1322,7 +1322,7 @@ func dataSourceKubernetesStatefulSetRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

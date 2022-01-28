@@ -731,7 +731,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("storage.M2VirtualDriveConfig")
+			o.SetClassId("")
 			if v, ok := l["controller_slot"]; ok {
 				{
 					x := (v.(string))
@@ -786,7 +786,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -871,7 +871,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("storage.R0Drive")
+			o.SetClassId("")
 			if v, ok := l["drive_slots"]; ok {
 				{
 					x := (v.(string))
@@ -913,7 +913,7 @@ func resourceStorageStoragePolicyCreate(c context.Context, d *schema.ResourceDat
 								}
 							}
 						}
-						o.SetClassId("storage.VirtualDrivePolicy")
+						o.SetClassId("")
 						if v, ok := l["drive_cache"]; ok {
 							{
 								x := (v.(string))
@@ -1045,8 +1045,8 @@ func detachStorageStoragePolicyProfiles(d *schema.ResourceData, meta interface{}
 func resourceStorageStoragePolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.StorageApi.GetStorageStoragePolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1257,7 +1257,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("storage.M2VirtualDriveConfig")
+			o.SetClassId("")
 			if v, ok := l["controller_slot"]; ok {
 				{
 					x := (v.(string))
@@ -1315,7 +1315,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1400,7 +1400,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("storage.R0Drive")
+			o.SetClassId("")
 			if v, ok := l["drive_slots"]; ok {
 				{
 					x := (v.(string))
@@ -1442,7 +1442,7 @@ func resourceStorageStoragePolicyUpdate(c context.Context, d *schema.ResourceDat
 								}
 							}
 						}
-						o.SetClassId("storage.VirtualDrivePolicy")
+						o.SetClassId("")
 						if v, ok := l["drive_cache"]; ok {
 							{
 								x := (v.(string))

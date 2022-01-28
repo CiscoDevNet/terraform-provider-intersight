@@ -866,7 +866,7 @@ func dataSourceHyperflexServerFirmwareVersionEntryRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("hyperflex.AppSettingConstraint")
+			o.SetClassId("")
 			if v, ok := l["deployment_type"]; ok {
 				{
 					x := (v.(string))
@@ -963,7 +963,7 @@ func dataSourceHyperflexServerFirmwareVersionEntryRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1046,7 +1046,7 @@ func dataSourceHyperflexServerFirmwareVersionEntryRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1137,7 +1137,7 @@ func dataSourceHyperflexServerFirmwareVersionEntryRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

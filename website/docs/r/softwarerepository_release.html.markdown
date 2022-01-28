@@ -14,11 +14,16 @@ A Cisco release containing one or more firmware images. Cisco releases images fo
 ```hcl
 resource "intersight_softwarerepository_release" "softwarerepository_release1" {
   type = "FabricSwitch"
-  catalog {
-    object_type = "softwarerepository.Catalog"
-    moid        = var.softwarerepository_catalog
-  }
+   catalog {
+     object_type = "softwarerepository.Catalog"
+     moid        = var.softwarerepository_catalog
+   }
 }
+
+ variable "softwarerepository_catalog" {
+   type = string
+   description = "value for moid"
+ }
 ```
 ## Argument Reference
 The following arguments are supported:

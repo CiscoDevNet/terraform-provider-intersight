@@ -20,7 +20,7 @@ resource "intersight_fabric_multicast_policy" "fabric_multicast_policy1" {
   snooping_state     = "Enabled"
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
 }
 ```

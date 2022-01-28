@@ -19,8 +19,6 @@ in the manual backup mode.
 
 ```hcl
 resource "intersight_appliance_backup_policy" "appliance_backup_policies1" {
-  name          = "appliance_backup_policies1"
-  description   = "test interface"
   filename      = "default_filename1"
   protocol      = "scp"
   remote_host   = "host.remote"
@@ -40,9 +38,14 @@ resource "intersight_appliance_backup_policy" "appliance_backup_policies1" {
   }
   account {
     object_type = "iam.Account"
-    moid        = intersight_account_iam.iam1.id
+    moid        = var.account
   }
 
+}
+
+variable "account" {
+  type        = string
+  description = "Moid of iam.Account Mo"
 }
 ```
 ## Argument Reference

@@ -15,8 +15,11 @@ Descriptor that uniquely identifies an chassis enclosure.
 resource "intersight_capability_chassis_descriptor" "capability_chassis_descriptor1" {
   capabilities = [
     {
-      moid        = var.capability_chassis_manufacturing_def
-      object_type = "capability.ChassisManufacturingDef"
+      moid                  = var.capability_chassis_manufacturing_def
+      object_type           = "capability.ChassisManufacturingDef"
+      class_id              = "capability.ChassisManufacturingDef"
+      additional_properties = ""
+      selector              = ""
     }
   ]
   description  = "capability chassis descriptor"
@@ -24,7 +27,11 @@ resource "intersight_capability_chassis_descriptor" "capability_chassis_descript
   revision     = "0"
   shared_scope = "shared"
   vendor       = "Cisco Systems Inc"
-  version      = "ge 4.2(2.1)"
+}
+
+variable "capability_chassis_manufacturing_def" {
+  type        = string
+  description = "Moid of capability.ChassisManufacturingDef Mo"
 }
 ```
 ## Argument Reference

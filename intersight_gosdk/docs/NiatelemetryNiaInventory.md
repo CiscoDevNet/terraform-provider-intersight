@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **MacsecTotalCount** | Pointer to **int64** | Number of total Macsec configured interfaces for all nodes. | [optional] 
 **Memory** | Pointer to **int64** | Memory usage of device being inventoried. This determines the percentage of memory resources used. | [optional] 
 **NodeId** | Pointer to **string** | The ID of the device being inventoried. | [optional] 
+**NxosBgpEvpn** | Pointer to [**NullableNiatelemetryNxosBgpEvpn**](NiatelemetryNxosBgpEvpn.md) |  | [optional] 
 **NxosBgpMvpn** | Pointer to [**NullableNiatelemetryNxosBgpMvpn**](NiatelemetryNxosBgpMvpn.md) |  | [optional] 
 **NxosBootflashDetails** | Pointer to [**NullableNiatelemetryBootflashDetails**](NiatelemetryBootflashDetails.md) |  | [optional] 
 **NxosDciInterfaceStatus** | Pointer to **string** | Returns the status of dci interface configured. | [optional] 
@@ -840,6 +841,41 @@ SetNodeId sets NodeId field to given value.
 
 HasNodeId returns a boolean if a field has been set.
 
+### GetNxosBgpEvpn
+
+`func (o *NiatelemetryNiaInventory) GetNxosBgpEvpn() NiatelemetryNxosBgpEvpn`
+
+GetNxosBgpEvpn returns the NxosBgpEvpn field if non-nil, zero value otherwise.
+
+### GetNxosBgpEvpnOk
+
+`func (o *NiatelemetryNiaInventory) GetNxosBgpEvpnOk() (*NiatelemetryNxosBgpEvpn, bool)`
+
+GetNxosBgpEvpnOk returns a tuple with the NxosBgpEvpn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNxosBgpEvpn
+
+`func (o *NiatelemetryNiaInventory) SetNxosBgpEvpn(v NiatelemetryNxosBgpEvpn)`
+
+SetNxosBgpEvpn sets NxosBgpEvpn field to given value.
+
+### HasNxosBgpEvpn
+
+`func (o *NiatelemetryNiaInventory) HasNxosBgpEvpn() bool`
+
+HasNxosBgpEvpn returns a boolean if a field has been set.
+
+### SetNxosBgpEvpnNil
+
+`func (o *NiatelemetryNiaInventory) SetNxosBgpEvpnNil(b bool)`
+
+ SetNxosBgpEvpnNil sets the value for NxosBgpEvpn to be an explicit nil
+
+### UnsetNxosBgpEvpn
+`func (o *NiatelemetryNiaInventory) UnsetNxosBgpEvpn()`
+
+UnsetNxosBgpEvpn ensures that no value is present for NxosBgpEvpn, not even an explicit nil
 ### GetNxosBgpMvpn
 
 `func (o *NiatelemetryNiaInventory) GetNxosBgpMvpn() NiatelemetryNxosBgpMvpn`

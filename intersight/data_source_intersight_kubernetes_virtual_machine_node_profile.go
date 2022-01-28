@@ -1926,7 +1926,7 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("policy.ConfigContext")
+			o.SetClassId("")
 			if v, ok := l["control_action"]; ok {
 				{
 					x := (v.(string))
@@ -1969,7 +1969,7 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2102,7 +2102,7 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 								}
 							}
 						}
-						o.SetClassId("kubernetes.EthernetMatcher")
+						o.SetClassId("")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2272,7 +2272,7 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2315,7 +2315,7 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2374,7 +2374,7 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2502,7 +2502,7 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2578,7 +2578,7 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2626,7 +2626,7 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2669,7 +2669,7 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2743,7 +2743,7 @@ func dataSourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *sch
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

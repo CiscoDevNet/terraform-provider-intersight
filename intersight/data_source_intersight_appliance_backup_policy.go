@@ -907,7 +907,7 @@ func dataSourceApplianceBackupPolicyRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1065,7 +1065,7 @@ func dataSourceApplianceBackupPolicyRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1173,7 +1173,7 @@ func dataSourceApplianceBackupPolicyRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("onprem.Schedule")
+			o.SetClassId("")
 			if v, ok := l["day_of_month"]; ok {
 				{
 					x := int64(v.(int))
@@ -1289,7 +1289,7 @@ func dataSourceApplianceBackupPolicyRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

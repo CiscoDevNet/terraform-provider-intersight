@@ -154,7 +154,7 @@ func dataSourceIqnpoolPool() *schema.Resource {
 						Optional:    true,
 					},
 					"suffix": {
-						Description: "The suffix for this bock of IQNs.",
+						Description: "The suffix for this block of IQNs.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -581,7 +581,7 @@ func dataSourceIqnpoolPool() *schema.Resource {
 						Optional:    true,
 					},
 					"suffix": {
-						Description: "The suffix for this bock of IQNs.",
+						Description: "The suffix for this block of IQNs.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1097,7 +1097,7 @@ func dataSourceIqnpoolPoolRead(c context.Context, d *schema.ResourceData, meta i
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1151,7 +1151,7 @@ func dataSourceIqnpoolPoolRead(c context.Context, d *schema.ResourceData, meta i
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1282,7 +1282,7 @@ func dataSourceIqnpoolPoolRead(c context.Context, d *schema.ResourceData, meta i
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

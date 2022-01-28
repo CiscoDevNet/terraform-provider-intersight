@@ -871,7 +871,7 @@ func dataSourceFabricEthNetworkGroupPolicyRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -925,7 +925,7 @@ func dataSourceFabricEthNetworkGroupPolicyRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1046,7 +1046,7 @@ func dataSourceFabricEthNetworkGroupPolicyRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1126,7 +1126,7 @@ func dataSourceFabricEthNetworkGroupPolicyRead(c context.Context, d *schema.Reso
 					o.SetAllowedVlans(x)
 				}
 			}
-			o.SetClassId("fabric.VlanSettings")
+			o.SetClassId("")
 			if v, ok := l["native_vlan"]; ok {
 				{
 					x := int64(v.(int))

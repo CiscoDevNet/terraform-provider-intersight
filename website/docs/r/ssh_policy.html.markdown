@@ -23,10 +23,20 @@ resource "intersight_ssh_policy" "ssh_policy1" {
     moid        = var.organization
   }
   profiles {
-    moid        = intersight_server_profile.server1.id
+    moid        = var.profile
     object_type = "server.Profile"
   }
 }
+
+variable "organization" {
+   type = string
+   description = "<value for organization>"
+ }
+
+ variable "profile"{
+    type = string
+    description = "Moid of server.Profile"
+ }
 ```
 ## Argument Reference
 The following arguments are supported:

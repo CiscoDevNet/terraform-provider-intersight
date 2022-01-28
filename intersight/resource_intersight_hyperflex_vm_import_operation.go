@@ -529,7 +529,7 @@ func resourceHyperflexVmImportOperationCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -579,7 +579,7 @@ func resourceHyperflexVmImportOperationCreate(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -659,8 +659,8 @@ func resourceHyperflexVmImportOperationCreate(c context.Context, d *schema.Resou
 func resourceHyperflexVmImportOperationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexVmImportOperationByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {

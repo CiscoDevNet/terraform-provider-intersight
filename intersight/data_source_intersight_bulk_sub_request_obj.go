@@ -1489,7 +1489,7 @@ func dataSourceBulkSubRequestObjRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.BaseMo")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1623,7 +1623,7 @@ func dataSourceBulkSubRequestObjRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1706,7 +1706,7 @@ func dataSourceBulkSubRequestObjRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1749,7 +1749,7 @@ func dataSourceBulkSubRequestObjRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("bulk.ApiResult")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1848,7 +1848,7 @@ func dataSourceBulkSubRequestObjRead(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

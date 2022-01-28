@@ -1190,11 +1190,6 @@ func dataSourceComputeRackUnit() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"name": {
-			Description: "The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
 		"num_adaptors": {
 			Description: "The total number of network adapters present on the server.",
 			Type:        schema.TypeInt,
@@ -3114,11 +3109,6 @@ func dataSourceComputeRackUnit() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"name": {
-			Description: "The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
 		"num_adaptors": {
 			Description: "The total number of network adapters present on the server.",
 			Type:        schema.TypeInt,
@@ -3954,7 +3944,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("compute.AlarmSummary")
+			o.SetClassId("")
 			if v, ok := l["critical"]; ok {
 				{
 					x := int64(v.(int))
@@ -4047,7 +4037,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4095,7 +4085,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4138,7 +4128,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4221,7 +4211,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4264,7 +4254,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4347,7 +4337,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4390,7 +4380,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -4993,7 +4983,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -5064,7 +5054,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -5157,7 +5147,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -5202,11 +5192,6 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
-	}
-
-	if v, ok := d.GetOk("name"); ok {
-		x := (v.(string))
-		o.SetName(x)
 	}
 
 	if v, ok := d.GetOkExists("num_adaptors"); ok {
@@ -5302,7 +5287,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -5435,7 +5420,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -5558,7 +5543,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -5601,7 +5586,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -5827,7 +5812,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -5935,7 +5920,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -6009,7 +5994,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -6154,7 +6139,6 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
-				temp["name"] = (s.GetName())
 				temp["num_adaptors"] = (s.GetNumAdaptors())
 				temp["num_cpu_cores"] = (s.GetNumCpuCores())
 				temp["num_cpu_cores_enabled"] = (s.GetNumCpuCoresEnabled())

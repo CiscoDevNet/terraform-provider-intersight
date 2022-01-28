@@ -697,7 +697,7 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("x509.Certificate")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -734,7 +734,7 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -796,7 +796,7 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -886,8 +886,8 @@ func resourceKubernetesAddonRepositoryCreate(c context.Context, d *schema.Resour
 func resourceKubernetesAddonRepositoryRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesAddonRepositoryByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1039,7 +1039,7 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("x509.Certificate")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1077,7 +1077,7 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1143,7 +1143,7 @@ func resourceKubernetesAddonRepositoryUpdate(c context.Context, d *schema.Resour
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

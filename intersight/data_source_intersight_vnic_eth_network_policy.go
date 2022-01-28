@@ -891,7 +891,7 @@ func dataSourceVnicEthNetworkPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -945,7 +945,7 @@ func dataSourceVnicEthNetworkPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1071,7 +1071,7 @@ func dataSourceVnicEthNetworkPolicyRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1151,7 +1151,7 @@ func dataSourceVnicEthNetworkPolicyRead(c context.Context, d *schema.ResourceDat
 					o.SetAllowedVlans(x)
 				}
 			}
-			o.SetClassId("vnic.VlanSettings")
+			o.SetClassId("")
 			if v, ok := l["default_vlan"]; ok {
 				{
 					x := int64(v.(int))

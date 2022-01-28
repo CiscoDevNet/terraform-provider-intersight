@@ -99,6 +99,11 @@ func dataSourceStorageNetAppLicense() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cluster_uuid": {
+			Description: "Unique identity of the device.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -421,6 +426,11 @@ func dataSourceStorageNetAppLicense() *schema.Resource {
 		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"cluster_uuid": {
+			Description: "Unique identity of the device.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -751,7 +761,7 @@ func dataSourceStorageNetAppLicenseRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -781,6 +791,11 @@ func dataSourceStorageNetAppLicenseRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+
+	if v, ok := d.GetOk("cluster_uuid"); ok {
+		x := (v.(string))
+		o.SetClusterUuid(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
@@ -840,7 +855,7 @@ func dataSourceStorageNetAppLicenseRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -961,7 +976,7 @@ func dataSourceStorageNetAppLicenseRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1062,6 +1077,7 @@ func dataSourceStorageNetAppLicenseRead(c context.Context, d *schema.ResourceDat
 
 				temp["array"] = flattenMapStorageNetAppClusterRelationship(s.GetArray(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["cluster_uuid"] = (s.GetClusterUuid())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())

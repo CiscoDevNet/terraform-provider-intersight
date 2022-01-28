@@ -13,13 +13,13 @@ A policy specifying credentials for HyperFlex cluster such as controller VM pass
 
 ```hcl
 resource "intersight_hyperflex_local_credential_policy" "hyperflex_local_credential_policy1" {
-  hxdp_root_pwd               = "ChangeMe"
+  hxdp_root_pwd               = "ChangeMe@123"
   hypervisor_admin            = "admin"
   hypervisor_admin_pwd        = "ChangeMe"
   factory_hypervisor_password = false
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
   name = "hyperflex_local_credential_policy1"
 }

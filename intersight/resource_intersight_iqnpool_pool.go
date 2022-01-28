@@ -180,7 +180,7 @@ func resourceIqnpoolPool() *schema.Resource {
 							Optional:    true,
 						},
 						"suffix": {
-							Description: "The suffix for this bock of IQNs.",
+							Description: "The suffix for this block of IQNs.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -347,7 +347,6 @@ func resourceIqnpoolPool() *schema.Resource {
 				Description: "The prefix for any IQN blocks created for this pool. IQN Prefix must have the following format \"iqn.yyyy-mm.naming-authority\", where naming-authority is usually the reverse syntax of the Internet domain name of the naming authority.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				ForceNew:    true,
 			},
 			"shared_scope": {
 				Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
@@ -625,7 +624,7 @@ func resourceIqnpoolPoolCreate(c context.Context, d *schema.ResourceData, meta i
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -710,8 +709,8 @@ func resourceIqnpoolPoolCreate(c context.Context, d *schema.ResourceData, meta i
 func resourceIqnpoolPoolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.IqnpoolApi.GetIqnpoolPoolByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -944,7 +943,7 @@ func resourceIqnpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta i
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

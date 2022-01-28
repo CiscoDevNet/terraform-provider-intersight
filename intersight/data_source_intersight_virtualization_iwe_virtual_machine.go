@@ -2067,7 +2067,7 @@ func dataSourceVirtualizationIweVirtualMachineRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("infra.HardwareInfo")
+			o.SetClassId("")
 			if v, ok := l["cpu_cores"]; ok {
 				{
 					x := int64(v.(int))
@@ -2121,7 +2121,7 @@ func dataSourceVirtualizationIweVirtualMachineRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2212,7 +2212,7 @@ func dataSourceVirtualizationIweVirtualMachineRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("virtualization.GuestInfo")
+			o.SetClassId("")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -2267,7 +2267,7 @@ func dataSourceVirtualizationIweVirtualMachineRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2413,7 +2413,7 @@ func dataSourceVirtualizationIweVirtualMachineRead(c context.Context, d *schema.
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.MemoryCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -2497,7 +2497,7 @@ func dataSourceVirtualizationIweVirtualMachineRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2591,7 +2591,7 @@ func dataSourceVirtualizationIweVirtualMachineRead(c context.Context, d *schema.
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.ComputeCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -2639,7 +2639,7 @@ func dataSourceVirtualizationIweVirtualMachineRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2740,7 +2740,7 @@ func dataSourceVirtualizationIweVirtualMachineRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

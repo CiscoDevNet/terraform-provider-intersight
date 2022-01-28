@@ -1041,7 +1041,7 @@ func dataSourceVirtualizationIweVirtualMachineNetworkInterfaceRead(c context.Con
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1130,7 +1130,7 @@ func dataSourceVirtualizationIweVirtualMachineNetworkInterfaceRead(c context.Con
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1189,7 +1189,7 @@ func dataSourceVirtualizationIweVirtualMachineNetworkInterfaceRead(c context.Con
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1277,7 +1277,7 @@ func dataSourceVirtualizationIweVirtualMachineNetworkInterfaceRead(c context.Con
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1363,7 +1363,7 @@ func dataSourceVirtualizationIweVirtualMachineNetworkInterfaceRead(c context.Con
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1437,7 +1437,7 @@ func dataSourceVirtualizationIweVirtualMachineNetworkInterfaceRead(c context.Con
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

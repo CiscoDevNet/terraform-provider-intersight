@@ -23,8 +23,9 @@ resource "intersight_hyperflex_ucsm_config_policy" "hyperflex_ucsm_config_policy
   }
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
+  server_firmware_version = "3.5(2h)"
 }
 ```
 ## Argument Reference

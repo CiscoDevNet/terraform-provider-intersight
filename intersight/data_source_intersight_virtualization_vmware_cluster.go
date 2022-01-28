@@ -1149,7 +1149,7 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("cond.AlarmSummary")
+			o.SetClassId("")
 			if v, ok := l["critical"]; ok {
 				{
 					x := int64(v.(int))
@@ -1247,7 +1247,7 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1321,7 +1321,7 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.MemoryCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -1395,7 +1395,7 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1484,7 +1484,7 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.ComputeCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -1527,7 +1527,7 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1658,7 +1658,7 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

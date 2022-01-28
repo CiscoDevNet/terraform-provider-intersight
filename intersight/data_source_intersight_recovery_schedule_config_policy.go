@@ -989,7 +989,7 @@ func dataSourceRecoveryScheduleConfigPolicyRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1043,7 +1043,7 @@ func dataSourceRecoveryScheduleConfigPolicyRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1126,7 +1126,7 @@ func dataSourceRecoveryScheduleConfigPolicyRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("recovery.BackupSchedule")
+			o.SetClassId("")
 			if v, ok := l["execution_time"]; ok {
 				{
 					x, _ := time.Parse(time.RFC1123, v.(string))
@@ -1213,7 +1213,7 @@ func dataSourceRecoveryScheduleConfigPolicyRead(c context.Context, d *schema.Res
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

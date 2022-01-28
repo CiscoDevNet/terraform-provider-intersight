@@ -2117,7 +2117,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("vnic.Cdn")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2175,7 +2175,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2218,7 +2218,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2261,7 +2261,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2304,7 +2304,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2392,7 +2392,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2435,7 +2435,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2483,7 +2483,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("ippool.IpV4Config")
+			o.SetClassId("")
 			if v, ok := l["gateway"]; ok {
 				{
 					x := (v.(string))
@@ -2543,7 +2543,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2586,7 +2586,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2639,7 +2639,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2682,7 +2682,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2761,7 +2761,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2844,7 +2844,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("vnic.PlacementSettings")
+			o.SetClassId("")
 			if v, ok := l["id"]; ok {
 				{
 					x := (v.(string))
@@ -2899,7 +2899,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3030,7 +3030,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("vnic.UsnicSettings")
+			o.SetClassId("")
 			if v, ok := l["cos"]; ok {
 				{
 					x := int64(v.(int))
@@ -3079,7 +3079,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -3158,7 +3158,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("vnic.VmqSettings")
+			o.SetClassId("")
 			if v, ok := l["enabled"]; ok {
 				{
 					x := (v.(bool))

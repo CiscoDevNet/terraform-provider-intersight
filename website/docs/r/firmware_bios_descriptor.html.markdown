@@ -15,11 +15,11 @@ Descriptor to uniquely identify a BIOS.
 resource "intersight_firmware_bios_descriptor" "firmware_bios_descriptor1" {
   description = "firmware bios descriptor"
   model       = "N20-B6620-1"
-  version     = "S5500.86B.01.00.0036-191.0.2020091126"
   vendor      = "Cisco Systems Inc"
   revision    = "0"
 }
 ```
+
 ## Argument Reference
 The following arguments are supported:
 * `account_moid`:(string)(ReadOnly) The Account ID for this managed object. 

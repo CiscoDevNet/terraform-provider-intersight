@@ -35,18 +35,38 @@ resource "intersight_vnic_eth_if" "eth1" {
     num_vmqs            = 1
   }
   lan_connectivity_policy {
-    moid        = intersight_vnic_lan_connectivity_policy.vnic_lan1.id
+    moid        = var.vnic_lan1
     object_type = "vnic.LanConnectivityPolicy"
   }
   eth_network_policy {
-    moid = intersight_vnic_eth_network_policy.v_eth_network1.id
+    moid = var.v_eth_network1
   }
   eth_adapter_policy {
-    moid = intersight_vnic_eth_adapter_policy.v_eth_adapter1.id
+    moid = var.v_eth_adapter1
   }
   eth_qos_policy {
-    moid = intersight_vnic_eth_qos_policy.v_eth_qos1.id
+    moid = var.v_eth_qos1
   }
+}
+
+variable "vnic_lan1"{
+  type = string
+  description = "Moid of vnic.LanConnectivityPolicy"
+}
+
+variable "v_eth_network1"{
+  type = string
+  description = "Moid of vnic.EthNetworkPolicy"
+}
+
+variable "v_eth_adapter1"{
+  type = string
+  description = "Moid of vnic.EthAdapterPolicy"
+}
+
+variable "v_eth_qos1"{
+  type = string
+  description = "Moid of vnic.EthQosPolicy"
 }
 ```
 ## Argument Reference

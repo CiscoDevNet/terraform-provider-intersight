@@ -18,7 +18,7 @@ resource "intersight_fabric_port_policy" "fabric_port_policy1" {
   device_model = "UCS-FI-6454"
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
 }
 ```

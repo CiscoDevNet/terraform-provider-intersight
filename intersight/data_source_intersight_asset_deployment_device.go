@@ -556,6 +556,11 @@ func dataSourceAssetDeploymentDevice() *schema.Resource {
 				},
 			},
 		},
+		"registered_device_moid": {
+			Description: "String reference to the device connector.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -1347,6 +1352,11 @@ func dataSourceAssetDeploymentDevice() *schema.Resource {
 				},
 			},
 		},
+		"registered_device_moid": {
+			Description: "String reference to the device connector.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
@@ -1643,7 +1653,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("asset.DeploymentDeviceAlarmInfo")
+			o.SetClassId("")
 			if v, ok := l["enabled_alarms"]; ok {
 				{
 					x := make([]string, 0)
@@ -1738,7 +1748,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1781,7 +1791,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1829,7 +1839,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("asset.DeploymentDeviceInformation")
+			o.SetClassId("")
 			if v, ok := l["device_transactions"]; ok {
 				{
 					x := make([]models.AssetDeviceTransaction, 0)
@@ -1896,7 +1906,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("asset.DeviceStatistics")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1958,7 +1968,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2051,7 +2061,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2078,6 +2088,11 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOk("registered_device_moid"); ok {
+		x := (v.(string))
+		o.SetRegisteredDeviceMoid(x)
+	}
+
 	if v, ok := d.GetOk("shared_scope"); ok {
 		x := (v.(string))
 		o.SetSharedScope(x)
@@ -2099,7 +2114,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2142,7 +2157,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2246,7 +2261,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2383,6 +2398,7 @@ func dataSourceAssetDeploymentDeviceRead(c context.Context, d *schema.ResourceDa
 				temp["product_type"] = (s.GetProductType())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+				temp["registered_device_moid"] = (s.GetRegisteredDeviceMoid())
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["subscription"] = flattenMapAssetSubscriptionRelationship(s.GetSubscription(), d)

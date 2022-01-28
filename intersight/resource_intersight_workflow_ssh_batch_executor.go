@@ -418,6 +418,11 @@ func resourceWorkflowSshBatchExecutor() *schema.Resource {
 				},
 				ForceNew: true,
 			},
+			"ui_rendering_data": {
+				Description:      "This will hold the data needed for task to be rendered in the user interface.",
+				Type:             schema.TypeString,
+				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -675,7 +680,7 @@ func resourceWorkflowSshBatchExecutorCreate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("workflow.TaskConstraints")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -781,7 +786,7 @@ func resourceWorkflowSshBatchExecutorCreate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -808,6 +813,10 @@ func resourceWorkflowSshBatchExecutorCreate(c context.Context, d *schema.Resourc
 		}
 	}
 
+	if v, ok := d.GetOk("ui_rendering_data"); ok {
+		o.SetUiRenderingData(v)
+	}
+
 	r := conn.ApiClient.WorkflowApi.CreateWorkflowSshBatchExecutor(conn.ctx).WorkflowSshBatchExecutor(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -826,8 +835,8 @@ func resourceWorkflowSshBatchExecutorCreate(c context.Context, d *schema.Resourc
 func resourceWorkflowSshBatchExecutorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.WorkflowApi.GetWorkflowSshBatchExecutorByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -934,6 +943,10 @@ func resourceWorkflowSshBatchExecutorRead(c context.Context, d *schema.ResourceD
 
 	if err := d.Set("task_definition", flattenMapWorkflowTaskDefinitionRelationship(s.GetTaskDefinition(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property TaskDefinition in WorkflowSshBatchExecutor object: %s", err.Error())
+	}
+
+	if err := d.Set("ui_rendering_data", flattenAdditionalProperties(s.GetUiRenderingData())); err != nil {
+		return diag.Errorf("error occurred while setting property UiRenderingData in WorkflowSshBatchExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -1074,7 +1087,7 @@ func resourceWorkflowSshBatchExecutorUpdate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("workflow.TaskConstraints")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1187,7 +1200,7 @@ func resourceWorkflowSshBatchExecutorUpdate(c context.Context, d *schema.Resourc
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1212,6 +1225,11 @@ func resourceWorkflowSshBatchExecutorUpdate(c context.Context, d *schema.Resourc
 			x := p[0]
 			o.SetTaskDefinition(x)
 		}
+	}
+
+	if d.HasChange("ui_rendering_data") {
+		v := d.Get("ui_rendering_data")
+		o.SetUiRenderingData(v)
 	}
 
 	r := conn.ApiClient.WorkflowApi.UpdateWorkflowSshBatchExecutor(conn.ctx, d.Id()).WorkflowSshBatchExecutor(*o)

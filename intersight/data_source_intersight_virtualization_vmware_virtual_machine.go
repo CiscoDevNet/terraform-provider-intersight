@@ -2391,7 +2391,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("infra.HardwareInfo")
+			o.SetClassId("")
 			if v, ok := l["cpu_cores"]; ok {
 				{
 					x := int64(v.(int))
@@ -2445,7 +2445,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2503,7 +2503,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("virtualization.VmwareVmCpuShareInfo")
+			o.SetClassId("")
 			if v, ok := l["cpu_limit"]; ok {
 				{
 					x := int64(v.(int))
@@ -2558,7 +2558,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("virtualization.VmwareVmCpuSocketInfo")
+			o.SetClassId("")
 			if v, ok := l["cores_per_socket"]; ok {
 				{
 					x := int64(v.(int))
@@ -2628,7 +2628,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2721,7 +2721,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("virtualization.VmwareVmDiskCommitInfo")
+			o.SetClassId("")
 			if v, ok := l["committed_disk"]; ok {
 				{
 					x := int64(v.(int))
@@ -2806,7 +2806,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("virtualization.GuestInfo")
+			o.SetClassId("")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -2866,7 +2866,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2961,7 +2961,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("virtualization.VmwareVmMemoryShareInfo")
+			o.SetClassId("")
 			if v, ok := l["mem_limit"]; ok {
 				{
 					x := int64(v.(int))
@@ -3022,7 +3022,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.MemoryCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -3151,7 +3151,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3194,7 +3194,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3299,7 +3299,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.ComputeCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -3352,7 +3352,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3395,7 +3395,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("virtualization.VmwareRemoteDisplayInfo")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -3522,7 +3522,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

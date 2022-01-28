@@ -1991,7 +1991,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2039,7 +2039,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2120,7 +2120,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("workflow.DefaultValue")
+						o.SetClassId("")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2169,7 +2169,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("workflow.DisplayMeta")
+						o.SetClassId("")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -2370,7 +2370,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("workflow.DefaultValue")
+						o.SetClassId("")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -2419,7 +2419,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 								}
 							}
 						}
-						o.SetClassId("workflow.DisplayMeta")
+						o.SetClassId("")
 						if v, ok := l["inventory_selector"]; ok {
 							{
 								x := (v.(bool))
@@ -2511,7 +2511,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2594,7 +2594,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("workflow.WorkflowProperties")
+			o.SetClassId("")
 			if v, ok := l["enable_debug"]; ok {
 				{
 					x := (v.(bool))
@@ -2791,7 +2791,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("workflow.ValidationInformation")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2858,7 +2858,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2932,7 +2932,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

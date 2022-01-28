@@ -513,8 +513,8 @@ func resourceCapabilitySwitchManufacturingDefCreate(c context.Context, d *schema
 func resourceCapabilitySwitchManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilitySwitchManufacturingDefByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {

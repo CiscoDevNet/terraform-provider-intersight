@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -39,10 +39,11 @@ type HyperflexProtectedCluster struct {
 	// Name of the target datastore.
 	TargetDatastoreName *string `json:"TargetDatastoreName,omitempty"`
 	// Percent usage of the datastore.
-	TargetDatastoreUtilization *float32                                 `json:"TargetDatastoreUtilization,omitempty"`
-	DatastoreStatistic         *HyperflexDatastoreStatisticRelationship `json:"DatastoreStatistic,omitempty"`
-	SrcCluster                 *HyperflexClusterRelationship            `json:"SrcCluster,omitempty"`
-	TgtCluster                 *HyperflexClusterRelationship            `json:"TgtCluster,omitempty"`
+	TargetDatastoreUtilization *float32                                           `json:"TargetDatastoreUtilization,omitempty"`
+	BackupPolicy               *HyperflexClusterBackupPolicyInventoryRelationship `json:"BackupPolicy,omitempty"`
+	DatastoreStatistic         *HyperflexDatastoreStatisticRelationship           `json:"DatastoreStatistic,omitempty"`
+	SrcCluster                 *HyperflexClusterRelationship                      `json:"SrcCluster,omitempty"`
+	TgtCluster                 *HyperflexClusterRelationship                      `json:"TgtCluster,omitempty"`
 	AdditionalProperties       map[string]interface{}
 }
 
@@ -375,6 +376,38 @@ func (o *HyperflexProtectedCluster) SetTargetDatastoreUtilization(v float32) {
 	o.TargetDatastoreUtilization = &v
 }
 
+// GetBackupPolicy returns the BackupPolicy field value if set, zero value otherwise.
+func (o *HyperflexProtectedCluster) GetBackupPolicy() HyperflexClusterBackupPolicyInventoryRelationship {
+	if o == nil || o.BackupPolicy == nil {
+		var ret HyperflexClusterBackupPolicyInventoryRelationship
+		return ret
+	}
+	return *o.BackupPolicy
+}
+
+// GetBackupPolicyOk returns a tuple with the BackupPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HyperflexProtectedCluster) GetBackupPolicyOk() (*HyperflexClusterBackupPolicyInventoryRelationship, bool) {
+	if o == nil || o.BackupPolicy == nil {
+		return nil, false
+	}
+	return o.BackupPolicy, true
+}
+
+// HasBackupPolicy returns a boolean if a field has been set.
+func (o *HyperflexProtectedCluster) HasBackupPolicy() bool {
+	if o != nil && o.BackupPolicy != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBackupPolicy gets a reference to the given HyperflexClusterBackupPolicyInventoryRelationship and assigns it to the BackupPolicy field.
+func (o *HyperflexProtectedCluster) SetBackupPolicy(v HyperflexClusterBackupPolicyInventoryRelationship) {
+	o.BackupPolicy = &v
+}
+
 // GetDatastoreStatistic returns the DatastoreStatistic field value if set, zero value otherwise.
 func (o *HyperflexProtectedCluster) GetDatastoreStatistic() HyperflexDatastoreStatisticRelationship {
 	if o == nil || o.DatastoreStatistic == nil {
@@ -511,6 +544,9 @@ func (o HyperflexProtectedCluster) MarshalJSON() ([]byte, error) {
 	if o.TargetDatastoreUtilization != nil {
 		toSerialize["TargetDatastoreUtilization"] = o.TargetDatastoreUtilization
 	}
+	if o.BackupPolicy != nil {
+		toSerialize["BackupPolicy"] = o.BackupPolicy
+	}
 	if o.DatastoreStatistic != nil {
 		toSerialize["DatastoreStatistic"] = o.DatastoreStatistic
 	}
@@ -549,10 +585,11 @@ func (o *HyperflexProtectedCluster) UnmarshalJSON(bytes []byte) (err error) {
 		// Name of the target datastore.
 		TargetDatastoreName *string `json:"TargetDatastoreName,omitempty"`
 		// Percent usage of the datastore.
-		TargetDatastoreUtilization *float32                                 `json:"TargetDatastoreUtilization,omitempty"`
-		DatastoreStatistic         *HyperflexDatastoreStatisticRelationship `json:"DatastoreStatistic,omitempty"`
-		SrcCluster                 *HyperflexClusterRelationship            `json:"SrcCluster,omitempty"`
-		TgtCluster                 *HyperflexClusterRelationship            `json:"TgtCluster,omitempty"`
+		TargetDatastoreUtilization *float32                                           `json:"TargetDatastoreUtilization,omitempty"`
+		BackupPolicy               *HyperflexClusterBackupPolicyInventoryRelationship `json:"BackupPolicy,omitempty"`
+		DatastoreStatistic         *HyperflexDatastoreStatisticRelationship           `json:"DatastoreStatistic,omitempty"`
+		SrcCluster                 *HyperflexClusterRelationship                      `json:"SrcCluster,omitempty"`
+		TgtCluster                 *HyperflexClusterRelationship                      `json:"TgtCluster,omitempty"`
 	}
 
 	varHyperflexProtectedClusterWithoutEmbeddedStruct := HyperflexProtectedClusterWithoutEmbeddedStruct{}
@@ -570,6 +607,7 @@ func (o *HyperflexProtectedCluster) UnmarshalJSON(bytes []byte) (err error) {
 		varHyperflexProtectedCluster.TargetClusterName = varHyperflexProtectedClusterWithoutEmbeddedStruct.TargetClusterName
 		varHyperflexProtectedCluster.TargetDatastoreName = varHyperflexProtectedClusterWithoutEmbeddedStruct.TargetDatastoreName
 		varHyperflexProtectedCluster.TargetDatastoreUtilization = varHyperflexProtectedClusterWithoutEmbeddedStruct.TargetDatastoreUtilization
+		varHyperflexProtectedCluster.BackupPolicy = varHyperflexProtectedClusterWithoutEmbeddedStruct.BackupPolicy
 		varHyperflexProtectedCluster.DatastoreStatistic = varHyperflexProtectedClusterWithoutEmbeddedStruct.DatastoreStatistic
 		varHyperflexProtectedCluster.SrcCluster = varHyperflexProtectedClusterWithoutEmbeddedStruct.SrcCluster
 		varHyperflexProtectedCluster.TgtCluster = varHyperflexProtectedClusterWithoutEmbeddedStruct.TgtCluster
@@ -600,6 +638,7 @@ func (o *HyperflexProtectedCluster) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "TargetClusterName")
 		delete(additionalProperties, "TargetDatastoreName")
 		delete(additionalProperties, "TargetDatastoreUtilization")
+		delete(additionalProperties, "BackupPolicy")
 		delete(additionalProperties, "DatastoreStatistic")
 		delete(additionalProperties, "SrcCluster")
 		delete(additionalProperties, "TgtCluster")

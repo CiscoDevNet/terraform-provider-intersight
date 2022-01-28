@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -21,8 +21,16 @@ type SmtpPolicyAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Authorization password for the process.
+	AuthPassword *string `json:"AuthPassword,omitempty"`
+	// If enabled, lets user input username and password.
+	EnableAuth *bool `json:"EnableAuth,omitempty"`
+	// If enabled, lets user input valid CA certificates for authorization.
+	EnableTls *bool `json:"EnableTls,omitempty"`
 	// If enabled, controls the state of the SMTP client service on the managed device.
 	Enabled *bool `json:"Enabled,omitempty"`
+	// Indicates whether the value of the 'authPassword' property has been set.
+	IsAuthPasswordSet *bool `json:"IsAuthPasswordSet,omitempty"`
 	// Minimum fault severity level to receive email notifications. Email notifications are sent for all faults whose severity is equal to or greater than the chosen level. * `critical` - Minimum severity to report is critical. * `condition` - Minimum severity to report is informational. * `warning` - Minimum severity to report is warning. * `minor` - Minimum severity to report is minor. * `major` - Minimum severity to report is major.
 	MinSeverity *string `json:"MinSeverity,omitempty"`
 	// The email address entered here will be displayed as the from address (mail received from address) of all the SMTP mail alerts that are received. If not configured, the hostname of the server is used in the from address field.
@@ -31,8 +39,12 @@ type SmtpPolicyAllOf struct {
 	SmtpPort       *int64   `json:"SmtpPort,omitempty"`
 	SmtpRecipients []string `json:"SmtpRecipients,omitempty"`
 	// IP address or hostname of the SMTP server. The SMTP server is used by the managed device to send email notifications.
-	SmtpServer   *string                               `json:"SmtpServer,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	SmtpServer *string `json:"SmtpServer,omitempty"`
+	// SMTP username from which email notification is sent.
+	UserName         *string                               `json:"UserName,omitempty"`
+	ApplianceAccount *IamAccountRelationship               `json:"ApplianceAccount,omitempty"`
+	Certificate      *IamTrustPointRelationship            `json:"Certificate,omitempty"`
+	Organization     *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -48,6 +60,10 @@ func NewSmtpPolicyAllOf(classId string, objectType string) *SmtpPolicyAllOf {
 	this := SmtpPolicyAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var enableAuth bool = false
+	this.EnableAuth = &enableAuth
+	var enableTls bool = false
+	this.EnableTls = &enableTls
 	var enabled bool = true
 	this.Enabled = &enabled
 	var minSeverity string = "critical"
@@ -66,6 +82,10 @@ func NewSmtpPolicyAllOfWithDefaults() *SmtpPolicyAllOf {
 	this.ClassId = classId
 	var objectType string = "smtp.Policy"
 	this.ObjectType = objectType
+	var enableAuth bool = false
+	this.EnableAuth = &enableAuth
+	var enableTls bool = false
+	this.EnableTls = &enableTls
 	var enabled bool = true
 	this.Enabled = &enabled
 	var minSeverity string = "critical"
@@ -123,6 +143,102 @@ func (o *SmtpPolicyAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetAuthPassword returns the AuthPassword field value if set, zero value otherwise.
+func (o *SmtpPolicyAllOf) GetAuthPassword() string {
+	if o == nil || o.AuthPassword == nil {
+		var ret string
+		return ret
+	}
+	return *o.AuthPassword
+}
+
+// GetAuthPasswordOk returns a tuple with the AuthPassword field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SmtpPolicyAllOf) GetAuthPasswordOk() (*string, bool) {
+	if o == nil || o.AuthPassword == nil {
+		return nil, false
+	}
+	return o.AuthPassword, true
+}
+
+// HasAuthPassword returns a boolean if a field has been set.
+func (o *SmtpPolicyAllOf) HasAuthPassword() bool {
+	if o != nil && o.AuthPassword != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthPassword gets a reference to the given string and assigns it to the AuthPassword field.
+func (o *SmtpPolicyAllOf) SetAuthPassword(v string) {
+	o.AuthPassword = &v
+}
+
+// GetEnableAuth returns the EnableAuth field value if set, zero value otherwise.
+func (o *SmtpPolicyAllOf) GetEnableAuth() bool {
+	if o == nil || o.EnableAuth == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableAuth
+}
+
+// GetEnableAuthOk returns a tuple with the EnableAuth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SmtpPolicyAllOf) GetEnableAuthOk() (*bool, bool) {
+	if o == nil || o.EnableAuth == nil {
+		return nil, false
+	}
+	return o.EnableAuth, true
+}
+
+// HasEnableAuth returns a boolean if a field has been set.
+func (o *SmtpPolicyAllOf) HasEnableAuth() bool {
+	if o != nil && o.EnableAuth != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableAuth gets a reference to the given bool and assigns it to the EnableAuth field.
+func (o *SmtpPolicyAllOf) SetEnableAuth(v bool) {
+	o.EnableAuth = &v
+}
+
+// GetEnableTls returns the EnableTls field value if set, zero value otherwise.
+func (o *SmtpPolicyAllOf) GetEnableTls() bool {
+	if o == nil || o.EnableTls == nil {
+		var ret bool
+		return ret
+	}
+	return *o.EnableTls
+}
+
+// GetEnableTlsOk returns a tuple with the EnableTls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SmtpPolicyAllOf) GetEnableTlsOk() (*bool, bool) {
+	if o == nil || o.EnableTls == nil {
+		return nil, false
+	}
+	return o.EnableTls, true
+}
+
+// HasEnableTls returns a boolean if a field has been set.
+func (o *SmtpPolicyAllOf) HasEnableTls() bool {
+	if o != nil && o.EnableTls != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEnableTls gets a reference to the given bool and assigns it to the EnableTls field.
+func (o *SmtpPolicyAllOf) SetEnableTls(v bool) {
+	o.EnableTls = &v
+}
+
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *SmtpPolicyAllOf) GetEnabled() bool {
 	if o == nil || o.Enabled == nil {
@@ -153,6 +269,38 @@ func (o *SmtpPolicyAllOf) HasEnabled() bool {
 // SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
 func (o *SmtpPolicyAllOf) SetEnabled(v bool) {
 	o.Enabled = &v
+}
+
+// GetIsAuthPasswordSet returns the IsAuthPasswordSet field value if set, zero value otherwise.
+func (o *SmtpPolicyAllOf) GetIsAuthPasswordSet() bool {
+	if o == nil || o.IsAuthPasswordSet == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsAuthPasswordSet
+}
+
+// GetIsAuthPasswordSetOk returns a tuple with the IsAuthPasswordSet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SmtpPolicyAllOf) GetIsAuthPasswordSetOk() (*bool, bool) {
+	if o == nil || o.IsAuthPasswordSet == nil {
+		return nil, false
+	}
+	return o.IsAuthPasswordSet, true
+}
+
+// HasIsAuthPasswordSet returns a boolean if a field has been set.
+func (o *SmtpPolicyAllOf) HasIsAuthPasswordSet() bool {
+	if o != nil && o.IsAuthPasswordSet != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsAuthPasswordSet gets a reference to the given bool and assigns it to the IsAuthPasswordSet field.
+func (o *SmtpPolicyAllOf) SetIsAuthPasswordSet(v bool) {
+	o.IsAuthPasswordSet = &v
 }
 
 // GetMinSeverity returns the MinSeverity field value if set, zero value otherwise.
@@ -316,6 +464,102 @@ func (o *SmtpPolicyAllOf) SetSmtpServer(v string) {
 	o.SmtpServer = &v
 }
 
+// GetUserName returns the UserName field value if set, zero value otherwise.
+func (o *SmtpPolicyAllOf) GetUserName() string {
+	if o == nil || o.UserName == nil {
+		var ret string
+		return ret
+	}
+	return *o.UserName
+}
+
+// GetUserNameOk returns a tuple with the UserName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SmtpPolicyAllOf) GetUserNameOk() (*string, bool) {
+	if o == nil || o.UserName == nil {
+		return nil, false
+	}
+	return o.UserName, true
+}
+
+// HasUserName returns a boolean if a field has been set.
+func (o *SmtpPolicyAllOf) HasUserName() bool {
+	if o != nil && o.UserName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserName gets a reference to the given string and assigns it to the UserName field.
+func (o *SmtpPolicyAllOf) SetUserName(v string) {
+	o.UserName = &v
+}
+
+// GetApplianceAccount returns the ApplianceAccount field value if set, zero value otherwise.
+func (o *SmtpPolicyAllOf) GetApplianceAccount() IamAccountRelationship {
+	if o == nil || o.ApplianceAccount == nil {
+		var ret IamAccountRelationship
+		return ret
+	}
+	return *o.ApplianceAccount
+}
+
+// GetApplianceAccountOk returns a tuple with the ApplianceAccount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SmtpPolicyAllOf) GetApplianceAccountOk() (*IamAccountRelationship, bool) {
+	if o == nil || o.ApplianceAccount == nil {
+		return nil, false
+	}
+	return o.ApplianceAccount, true
+}
+
+// HasApplianceAccount returns a boolean if a field has been set.
+func (o *SmtpPolicyAllOf) HasApplianceAccount() bool {
+	if o != nil && o.ApplianceAccount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetApplianceAccount gets a reference to the given IamAccountRelationship and assigns it to the ApplianceAccount field.
+func (o *SmtpPolicyAllOf) SetApplianceAccount(v IamAccountRelationship) {
+	o.ApplianceAccount = &v
+}
+
+// GetCertificate returns the Certificate field value if set, zero value otherwise.
+func (o *SmtpPolicyAllOf) GetCertificate() IamTrustPointRelationship {
+	if o == nil || o.Certificate == nil {
+		var ret IamTrustPointRelationship
+		return ret
+	}
+	return *o.Certificate
+}
+
+// GetCertificateOk returns a tuple with the Certificate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SmtpPolicyAllOf) GetCertificateOk() (*IamTrustPointRelationship, bool) {
+	if o == nil || o.Certificate == nil {
+		return nil, false
+	}
+	return o.Certificate, true
+}
+
+// HasCertificate returns a boolean if a field has been set.
+func (o *SmtpPolicyAllOf) HasCertificate() bool {
+	if o != nil && o.Certificate != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCertificate gets a reference to the given IamTrustPointRelationship and assigns it to the Certificate field.
+func (o *SmtpPolicyAllOf) SetCertificate(v IamTrustPointRelationship) {
+	o.Certificate = &v
+}
+
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *SmtpPolicyAllOf) GetOrganization() OrganizationOrganizationRelationship {
 	if o == nil || o.Organization == nil {
@@ -389,8 +633,20 @@ func (o SmtpPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.AuthPassword != nil {
+		toSerialize["AuthPassword"] = o.AuthPassword
+	}
+	if o.EnableAuth != nil {
+		toSerialize["EnableAuth"] = o.EnableAuth
+	}
+	if o.EnableTls != nil {
+		toSerialize["EnableTls"] = o.EnableTls
+	}
 	if o.Enabled != nil {
 		toSerialize["Enabled"] = o.Enabled
+	}
+	if o.IsAuthPasswordSet != nil {
+		toSerialize["IsAuthPasswordSet"] = o.IsAuthPasswordSet
 	}
 	if o.MinSeverity != nil {
 		toSerialize["MinSeverity"] = o.MinSeverity
@@ -406,6 +662,15 @@ func (o SmtpPolicyAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.SmtpServer != nil {
 		toSerialize["SmtpServer"] = o.SmtpServer
+	}
+	if o.UserName != nil {
+		toSerialize["UserName"] = o.UserName
+	}
+	if o.ApplianceAccount != nil {
+		toSerialize["ApplianceAccount"] = o.ApplianceAccount
+	}
+	if o.Certificate != nil {
+		toSerialize["Certificate"] = o.Certificate
 	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
@@ -433,12 +698,19 @@ func (o *SmtpPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AuthPassword")
+		delete(additionalProperties, "EnableAuth")
+		delete(additionalProperties, "EnableTls")
 		delete(additionalProperties, "Enabled")
+		delete(additionalProperties, "IsAuthPasswordSet")
 		delete(additionalProperties, "MinSeverity")
 		delete(additionalProperties, "SenderEmail")
 		delete(additionalProperties, "SmtpPort")
 		delete(additionalProperties, "SmtpRecipients")
 		delete(additionalProperties, "SmtpServer")
+		delete(additionalProperties, "UserName")
+		delete(additionalProperties, "ApplianceAccount")
+		delete(additionalProperties, "Certificate")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Profiles")
 		o.AdditionalProperties = additionalProperties

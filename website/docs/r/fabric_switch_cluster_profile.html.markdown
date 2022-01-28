@@ -18,7 +18,7 @@ resource "intersight_fabric_switch_cluster_profile" "fabric_switch_cluster_profi
   type        = "instance"
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
 }
 ```

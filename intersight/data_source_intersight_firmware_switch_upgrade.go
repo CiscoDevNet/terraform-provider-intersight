@@ -1729,7 +1729,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1772,7 +1772,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("firmware.DirectDownload")
+			o.SetClassId("")
 			if v, ok := l["http_server"]; ok {
 				{
 					p := make([]models.FirmwareHttpServer, 0, 1)
@@ -1790,7 +1790,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 								}
 							}
 						}
-						o.SetClassId("firmware.HttpServer")
+						o.SetClassId("")
 						if v, ok := l["location_link"]; ok {
 							{
 								x := (v.(string))
@@ -1871,7 +1871,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1924,7 +1924,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("softwarerepository.FileServer")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2022,7 +2022,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 								}
 							}
 						}
-						o.SetClassId("firmware.CifsServer")
+						o.SetClassId("")
 						if v, ok := l["file_location"]; ok {
 							{
 								x := (v.(string))
@@ -2049,7 +2049,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("firmware.NetworkShare")
+			o.SetClassId("")
 			if v, ok := l["http_server"]; ok {
 				{
 					p := make([]models.FirmwareHttpServer, 0, 1)
@@ -2067,7 +2067,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 								}
 							}
 						}
-						o.SetClassId("firmware.HttpServer")
+						o.SetClassId("")
 						if v, ok := l["location_link"]; ok {
 							{
 								x := (v.(string))
@@ -2117,7 +2117,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 								}
 							}
 						}
-						o.SetClassId("firmware.NfsServer")
+						o.SetClassId("")
 						if v, ok := l["file_location"]; ok {
 							{
 								x := (v.(string))
@@ -2208,7 +2208,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2291,7 +2291,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2382,7 +2382,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2425,7 +2425,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2473,7 +2473,7 @@ func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceDa
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

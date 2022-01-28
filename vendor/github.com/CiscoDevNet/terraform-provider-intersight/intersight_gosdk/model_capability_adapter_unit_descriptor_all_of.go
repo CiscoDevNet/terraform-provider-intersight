@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-4950
+API version: 1.0.9-5208
 Contact: intersight@cisco.com
 */
 
@@ -21,10 +21,13 @@ type CapabilityAdapterUnitDescriptorAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// Generation of the adapter. * `4` - Fourth generation adapters (14xx). The PIDs of these adapters end with the string 04. * `2` - Second generation VIC adapters (12xx). The PIDs of these adapters end with the string 02. * `3` - Third generation adapters (13xx). The PIDs of these adapters end with the string 03. * `5` - Fifth generation adapters (15xx). The PIDs of these adapters contain the V5 string.
+	AdapterGeneration *int32 `json:"AdapterGeneration,omitempty"`
 	// Order in which the ports are connected; sequential or cyclic.
 	ConnectivityOrder *string `json:"ConnectivityOrder,omitempty"`
 	// The port speed for ethernet ports in Mbps.
-	EthernetPortSpeed *int64 `json:"EthernetPortSpeed,omitempty"`
+	EthernetPortSpeed *int64                    `json:"EthernetPortSpeed,omitempty"`
+	Features          []CapabilityFeatureConfig `json:"Features,omitempty"`
 	// The port speed for fibre channel ports in Mbps.
 	FibreChannelPortSpeed *int64 `json:"FibreChannelPortSpeed,omitempty"`
 	// The number of SCSI I/O Queue resources to allocate.
@@ -33,6 +36,8 @@ type CapabilityAdapterUnitDescriptorAllOf struct {
 	IsAzureQosSupported *bool `json:"IsAzureQosSupported,omitempty"`
 	// Indicates that the GENEVE offload feature is supported by this adapter.
 	IsGeneveSupported *bool `json:"IsGeneveSupported,omitempty"`
+	// Maximum number of vNIC interfaces that can be RoCEv2 enabled.
+	MaxRocev2Interfaces *int64 `json:"MaxRocev2Interfaces,omitempty"`
 	// Number of Dce Ports for the adapter.
 	NumDcePorts *int64 `json:"NumDcePorts,omitempty"`
 	// Indicates PCI Link status of adapter.
@@ -52,10 +57,14 @@ func NewCapabilityAdapterUnitDescriptorAllOf(classId string, objectType string) 
 	this := CapabilityAdapterUnitDescriptorAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var adapterGeneration int32 = 4
+	this.AdapterGeneration = &adapterGeneration
 	var isAzureQosSupported bool = true
 	this.IsAzureQosSupported = &isAzureQosSupported
 	var isGeneveSupported bool = true
 	this.IsGeneveSupported = &isGeneveSupported
+	var maxRocev2Interfaces int64 = 2
+	this.MaxRocev2Interfaces = &maxRocev2Interfaces
 	var pciLink int64 = 0
 	this.PciLink = &pciLink
 	return &this
@@ -70,10 +79,14 @@ func NewCapabilityAdapterUnitDescriptorAllOfWithDefaults() *CapabilityAdapterUni
 	this.ClassId = classId
 	var objectType string = "capability.AdapterUnitDescriptor"
 	this.ObjectType = objectType
+	var adapterGeneration int32 = 4
+	this.AdapterGeneration = &adapterGeneration
 	var isAzureQosSupported bool = true
 	this.IsAzureQosSupported = &isAzureQosSupported
 	var isGeneveSupported bool = true
 	this.IsGeneveSupported = &isGeneveSupported
+	var maxRocev2Interfaces int64 = 2
+	this.MaxRocev2Interfaces = &maxRocev2Interfaces
 	var pciLink int64 = 0
 	this.PciLink = &pciLink
 	return &this
@@ -125,6 +138,38 @@ func (o *CapabilityAdapterUnitDescriptorAllOf) GetObjectTypeOk() (*string, bool)
 // SetObjectType sets field value
 func (o *CapabilityAdapterUnitDescriptorAllOf) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetAdapterGeneration returns the AdapterGeneration field value if set, zero value otherwise.
+func (o *CapabilityAdapterUnitDescriptorAllOf) GetAdapterGeneration() int32 {
+	if o == nil || o.AdapterGeneration == nil {
+		var ret int32
+		return ret
+	}
+	return *o.AdapterGeneration
+}
+
+// GetAdapterGenerationOk returns a tuple with the AdapterGeneration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilityAdapterUnitDescriptorAllOf) GetAdapterGenerationOk() (*int32, bool) {
+	if o == nil || o.AdapterGeneration == nil {
+		return nil, false
+	}
+	return o.AdapterGeneration, true
+}
+
+// HasAdapterGeneration returns a boolean if a field has been set.
+func (o *CapabilityAdapterUnitDescriptorAllOf) HasAdapterGeneration() bool {
+	if o != nil && o.AdapterGeneration != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAdapterGeneration gets a reference to the given int32 and assigns it to the AdapterGeneration field.
+func (o *CapabilityAdapterUnitDescriptorAllOf) SetAdapterGeneration(v int32) {
+	o.AdapterGeneration = &v
 }
 
 // GetConnectivityOrder returns the ConnectivityOrder field value if set, zero value otherwise.
@@ -189,6 +234,39 @@ func (o *CapabilityAdapterUnitDescriptorAllOf) HasEthernetPortSpeed() bool {
 // SetEthernetPortSpeed gets a reference to the given int64 and assigns it to the EthernetPortSpeed field.
 func (o *CapabilityAdapterUnitDescriptorAllOf) SetEthernetPortSpeed(v int64) {
 	o.EthernetPortSpeed = &v
+}
+
+// GetFeatures returns the Features field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CapabilityAdapterUnitDescriptorAllOf) GetFeatures() []CapabilityFeatureConfig {
+	if o == nil {
+		var ret []CapabilityFeatureConfig
+		return ret
+	}
+	return o.Features
+}
+
+// GetFeaturesOk returns a tuple with the Features field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CapabilityAdapterUnitDescriptorAllOf) GetFeaturesOk() (*[]CapabilityFeatureConfig, bool) {
+	if o == nil || o.Features == nil {
+		return nil, false
+	}
+	return &o.Features, true
+}
+
+// HasFeatures returns a boolean if a field has been set.
+func (o *CapabilityAdapterUnitDescriptorAllOf) HasFeatures() bool {
+	if o != nil && o.Features != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFeatures gets a reference to the given []CapabilityFeatureConfig and assigns it to the Features field.
+func (o *CapabilityAdapterUnitDescriptorAllOf) SetFeatures(v []CapabilityFeatureConfig) {
+	o.Features = v
 }
 
 // GetFibreChannelPortSpeed returns the FibreChannelPortSpeed field value if set, zero value otherwise.
@@ -319,6 +397,38 @@ func (o *CapabilityAdapterUnitDescriptorAllOf) SetIsGeneveSupported(v bool) {
 	o.IsGeneveSupported = &v
 }
 
+// GetMaxRocev2Interfaces returns the MaxRocev2Interfaces field value if set, zero value otherwise.
+func (o *CapabilityAdapterUnitDescriptorAllOf) GetMaxRocev2Interfaces() int64 {
+	if o == nil || o.MaxRocev2Interfaces == nil {
+		var ret int64
+		return ret
+	}
+	return *o.MaxRocev2Interfaces
+}
+
+// GetMaxRocev2InterfacesOk returns a tuple with the MaxRocev2Interfaces field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CapabilityAdapterUnitDescriptorAllOf) GetMaxRocev2InterfacesOk() (*int64, bool) {
+	if o == nil || o.MaxRocev2Interfaces == nil {
+		return nil, false
+	}
+	return o.MaxRocev2Interfaces, true
+}
+
+// HasMaxRocev2Interfaces returns a boolean if a field has been set.
+func (o *CapabilityAdapterUnitDescriptorAllOf) HasMaxRocev2Interfaces() bool {
+	if o != nil && o.MaxRocev2Interfaces != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxRocev2Interfaces gets a reference to the given int64 and assigns it to the MaxRocev2Interfaces field.
+func (o *CapabilityAdapterUnitDescriptorAllOf) SetMaxRocev2Interfaces(v int64) {
+	o.MaxRocev2Interfaces = &v
+}
+
 // GetNumDcePorts returns the NumDcePorts field value if set, zero value otherwise.
 func (o *CapabilityAdapterUnitDescriptorAllOf) GetNumDcePorts() int64 {
 	if o == nil || o.NumDcePorts == nil {
@@ -423,11 +533,17 @@ func (o CapabilityAdapterUnitDescriptorAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.AdapterGeneration != nil {
+		toSerialize["AdapterGeneration"] = o.AdapterGeneration
+	}
 	if o.ConnectivityOrder != nil {
 		toSerialize["ConnectivityOrder"] = o.ConnectivityOrder
 	}
 	if o.EthernetPortSpeed != nil {
 		toSerialize["EthernetPortSpeed"] = o.EthernetPortSpeed
+	}
+	if o.Features != nil {
+		toSerialize["Features"] = o.Features
 	}
 	if o.FibreChannelPortSpeed != nil {
 		toSerialize["FibreChannelPortSpeed"] = o.FibreChannelPortSpeed
@@ -440,6 +556,9 @@ func (o CapabilityAdapterUnitDescriptorAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.IsGeneveSupported != nil {
 		toSerialize["IsGeneveSupported"] = o.IsGeneveSupported
+	}
+	if o.MaxRocev2Interfaces != nil {
+		toSerialize["MaxRocev2Interfaces"] = o.MaxRocev2Interfaces
 	}
 	if o.NumDcePorts != nil {
 		toSerialize["NumDcePorts"] = o.NumDcePorts
@@ -470,12 +589,15 @@ func (o *CapabilityAdapterUnitDescriptorAllOf) UnmarshalJSON(bytes []byte) (err 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AdapterGeneration")
 		delete(additionalProperties, "ConnectivityOrder")
 		delete(additionalProperties, "EthernetPortSpeed")
+		delete(additionalProperties, "Features")
 		delete(additionalProperties, "FibreChannelPortSpeed")
 		delete(additionalProperties, "FibreChannelScsiIoqLimit")
 		delete(additionalProperties, "IsAzureQosSupported")
 		delete(additionalProperties, "IsGeneveSupported")
+		delete(additionalProperties, "MaxRocev2Interfaces")
 		delete(additionalProperties, "NumDcePorts")
 		delete(additionalProperties, "PciLink")
 		delete(additionalProperties, "PromCardType")

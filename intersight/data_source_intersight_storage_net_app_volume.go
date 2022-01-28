@@ -198,6 +198,40 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"events": {
+			Description: "An array of relationships to storageNetAppVolumeEvent resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"export_policy_name": {
 			Description: "The name of the Export Policy.",
 			Type:        schema.TypeString,
@@ -317,9 +351,14 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"snapshot_utilized_capacity": {
-			Description: "The total space used by Snapshot copies in the volume represented in bytes.",
+		"snapshot_reserve_percent": {
+			Description: "The space that has been set aside as a reserve for Snapshot copy usage represented as a percent.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"snapshot_used": {
+			Description: "The total space used by Snapshot copies in the volume represented in bytes.",
+			Type:        schema.TypeFloat,
 			Optional:    true,
 		},
 		"state": {
@@ -737,6 +776,40 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"events": {
+			Description: "An array of relationships to storageNetAppVolumeEvent resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"export_policy_name": {
 			Description: "The name of the Export Policy.",
 			Type:        schema.TypeString,
@@ -856,9 +929,14 @@ func dataSourceStorageNetAppVolume() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"snapshot_utilized_capacity": {
-			Description: "The total space used by Snapshot copies in the volume represented in bytes.",
+		"snapshot_reserve_percent": {
+			Description: "The space that has been set aside as a reserve for Snapshot copy usage represented as a percent.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"snapshot_used": {
+			Description: "The total space used by Snapshot copies in the volume represented in bytes.",
+			Type:        schema.TypeFloat,
 			Optional:    true,
 		},
 		"state": {
@@ -1179,7 +1257,7 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1227,7 +1305,7 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("storage.NetAppPerformanceMetricsAverage")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1302,6 +1380,46 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("events"); ok {
+		x := make([]models.StorageNetAppVolumeEventRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsStorageNetAppVolumeEventRelationship(o))
+		}
+		o.SetEvents(x)
+	}
+
 	if v, ok := d.GetOk("export_policy_name"); ok {
 		x := (v.(string))
 		o.SetExportPolicyName(x)
@@ -1359,7 +1477,7 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1441,9 +1559,14 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 		o.SetSnapshotPolicyUuid(x)
 	}
 
-	if v, ok := d.GetOkExists("snapshot_utilized_capacity"); ok {
+	if v, ok := d.GetOkExists("snapshot_reserve_percent"); ok {
 		x := int64(v.(int))
-		o.SetSnapshotUtilizedCapacity(x)
+		o.SetSnapshotReservePercent(x)
+	}
+
+	if v, ok := d.GetOk("snapshot_used"); ok {
+		x := v.(float64)
+		o.SetSnapshotUsed(x)
 	}
 
 	if v, ok := d.GetOk("state"); ok {
@@ -1467,7 +1590,7 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("storage.BaseCapacity")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1531,7 +1654,7 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1584,7 +1707,7 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1695,6 +1818,8 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 
 				temp["disk_pool"] = flattenListStorageNetAppAggregateRelationship(s.GetDiskPool(), d)
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+
+				temp["events"] = flattenListStorageNetAppVolumeEventRelationship(s.GetEvents(), d)
 				temp["export_policy_name"] = (s.GetExportPolicyName())
 				temp["key"] = (s.GetKey())
 
@@ -1710,7 +1835,8 @@ func dataSourceStorageNetAppVolumeRead(c context.Context, d *schema.ResourceData
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["snapshot_policy_name"] = (s.GetSnapshotPolicyName())
 				temp["snapshot_policy_uuid"] = (s.GetSnapshotPolicyUuid())
-				temp["snapshot_utilized_capacity"] = (s.GetSnapshotUtilizedCapacity())
+				temp["snapshot_reserve_percent"] = (s.GetSnapshotReservePercent())
+				temp["snapshot_used"] = (s.GetSnapshotUsed())
 				temp["state"] = (s.GetState())
 
 				temp["storage_utilization"] = flattenMapStorageBaseCapacity(s.GetStorageUtilization(), d)

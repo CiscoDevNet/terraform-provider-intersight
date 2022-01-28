@@ -17,14 +17,17 @@ resource "intersight_fcpool_pool" "fcpool_pool1" {
   description      = "fcpool pool"
   assignment_order = "sequential"
   id_blocks = [{
-    object_type = "fcpool.Block"
-    from        = "50:00:00:00:00:00:00:00"
-    to          = "5F:FF:FF:FF:FF:FF:FF:FF"
+    object_type           = "fcpool.Block"
+    from                  = "50:00:00:00:00:00:00:00"
+    to                    = "50:50:00:00:00:00:00:00"
+    additional_properties = ""
+    class_id              = "fcpool.Block"
+    size                  = null
   }]
-  pool_purpose = "To create fcpool"
+  pool_purpose = "WWPN"
   organization {
     object_type = "organization.Organization"
-    moid        = var.organization_organization
+    moid        = var.organization
   }
 }
 ```

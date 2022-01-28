@@ -1408,7 +1408,7 @@ func dataSourceSoftwareUcsdBundleDistributableRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1739,7 +1739,7 @@ func dataSourceSoftwareUcsdBundleDistributableRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1832,7 +1832,7 @@ func dataSourceSoftwareUcsdBundleDistributableRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1910,7 +1910,7 @@ func dataSourceSoftwareUcsdBundleDistributableRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("softwarerepository.FileServer")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1995,7 +1995,7 @@ func dataSourceSoftwareUcsdBundleDistributableRead(c context.Context, d *schema.
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

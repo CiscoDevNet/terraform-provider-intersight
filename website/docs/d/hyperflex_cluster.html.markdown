@@ -28,6 +28,7 @@ The following arguments can be used to get data of already created objects in In
 * `device_id`:(string) The unique identifier of the device registration that represents this HyperFlex cluster's connection to Intersight. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `drive_type`:(string) The type of the drives used for storage in this cluster.* `NA` - The drive type of the cluster is not available.* `All-Flash` - Indicates that this cluster contains flash drives only.* `Hybrid` - Indicates that this cluster contains both flash and hard disk drives. 
+* `encryption_status`:(string) This captures the encryption status for a HyperFlex cluster.Currently it will have the status if HXA-CLU-0020 alarm is raised. In the future it can capture other details. 
 * `flt_aggr`:(int) The number of yellow (warning) and red (critical) alarms stored as an aggregate.The first 16 bits indicate the number of red alarms, and the last 16 bits contain the number of yellow alarms. 
 * `hx_version`:(string) The HyperFlex Data or Application Platform version of this cluster. 
 * `hxdp_build_version`:(string) The version and build number of the HyperFlex Data Platform for this cluster.After a cluster upgrade, this version string will be updated on the next inventory cycle to reflectthe newly installed version. 

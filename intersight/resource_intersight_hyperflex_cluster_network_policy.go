@@ -781,7 +781,7 @@ func resourceHyperflexClusterNetworkPolicyCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("hyperflex.IpAddrRange")
+			o.SetClassId("")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -879,7 +879,7 @@ func resourceHyperflexClusterNetworkPolicyCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("hyperflex.MacAddrPrefixRange")
+			o.SetClassId("")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -922,7 +922,7 @@ func resourceHyperflexClusterNetworkPolicyCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVlan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -977,7 +977,7 @@ func resourceHyperflexClusterNetworkPolicyCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1060,7 +1060,7 @@ func resourceHyperflexClusterNetworkPolicyCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVlan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -1147,8 +1147,8 @@ func resourceHyperflexClusterNetworkPolicyCreate(c context.Context, d *schema.Re
 func resourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexClusterNetworkPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1363,7 +1363,7 @@ func resourceHyperflexClusterNetworkPolicyUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("hyperflex.IpAddrRange")
+			o.SetClassId("")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -1462,7 +1462,7 @@ func resourceHyperflexClusterNetworkPolicyUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("hyperflex.MacAddrPrefixRange")
+			o.SetClassId("")
 			if v, ok := l["end_addr"]; ok {
 				{
 					x := (v.(string))
@@ -1506,7 +1506,7 @@ func resourceHyperflexClusterNetworkPolicyUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVlan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))
@@ -1564,7 +1564,7 @@ func resourceHyperflexClusterNetworkPolicyUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1648,7 +1648,7 @@ func resourceHyperflexClusterNetworkPolicyUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("hyperflex.NamedVlan")
+			o.SetClassId("")
 			if v, ok := l["name"]; ok {
 				{
 					x := (v.(string))

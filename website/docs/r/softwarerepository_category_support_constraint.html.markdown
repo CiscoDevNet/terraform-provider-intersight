@@ -17,9 +17,13 @@ resource "intersight_softwarerepository_category_support_constraint" "softwarere
   parse_from_image_name = true
   filtered_models = [
     {
-      object_type = "softwarerepository.ConstraintModels"
-      name        = "softwarerepository_constraint_models1"
-      min_version = "12.1(5)E2"
+      object_type           = "softwarerepository.ConstraintModels"
+      name                  = "softwarerepository_constraint_models1"
+      min_version           = "12.1(5)E2"
+      additional_properties = ""
+      class_id              = ""
+      platform_regex        = ""
+      supported_models      = []
     }
   ]
 }

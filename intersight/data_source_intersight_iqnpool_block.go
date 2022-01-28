@@ -112,7 +112,7 @@ func dataSourceIqnpoolBlock() *schema.Resource {
 						Optional:    true,
 					},
 					"suffix": {
-						Description: "The suffix for this bock of IQNs.",
+						Description: "The suffix for this block of IQNs.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -487,7 +487,7 @@ func dataSourceIqnpoolBlock() *schema.Resource {
 						Optional:    true,
 					},
 					"suffix": {
-						Description: "The suffix for this bock of IQNs.",
+						Description: "The suffix for this block of IQNs.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -871,7 +871,7 @@ func dataSourceIqnpoolBlockRead(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("iqnpool.IqnSuffixBlock")
+			o.SetClassId("")
 			if v, ok := l["from"]; ok {
 				{
 					x := int64(v.(int))
@@ -957,7 +957,7 @@ func dataSourceIqnpoolBlockRead(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1040,7 +1040,7 @@ func dataSourceIqnpoolBlockRead(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1121,7 +1121,7 @@ func dataSourceIqnpoolBlockRead(c context.Context, d *schema.ResourceData, meta 
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

@@ -188,6 +188,11 @@ func dataSourceHyperflexNode() *schema.Resource {
 				},
 			},
 		},
+		"empty_slots_list": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"host_name": {
 			Description: "The hostname configured for the hypervisor running on the host.",
 			Type:        schema.TypeString,
@@ -910,6 +915,11 @@ func dataSourceHyperflexNode() *schema.Resource {
 				},
 			},
 		},
+		"empty_slots_list": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"host_name": {
 			Description: "The hostname configured for the hypervisor running on the host.",
 			Type:        schema.TypeString,
@@ -1555,7 +1565,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1598,7 +1608,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1680,6 +1690,17 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 		o.SetDrives(x)
 	}
 
+	if v, ok := d.GetOk("empty_slots_list"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetEmptySlotsList(x)
+	}
+
 	if v, ok := d.GetOk("host_name"); ok {
 		x := (v.(string))
 		o.SetHostName(x)
@@ -1701,7 +1722,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("hyperflex.HxNetworkAddressDt")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1732,7 +1753,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("hyperflex.HxNetworkAddressDt")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1768,7 +1789,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("hyperflex.HxNetworkAddressDt")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1799,7 +1820,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("hyperflex.HxUuIdDt")
+			o.SetClassId("")
 			if v, ok := l["links"]; ok {
 				{
 					x := make([]models.HyperflexHxLinkDt, 0)
@@ -1861,7 +1882,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("hyperflex.HxNetworkAddressDt")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1943,7 +1964,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2026,7 +2047,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2127,7 +2148,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2237,6 +2258,7 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
 				temp["drives"] = flattenListHyperflexDriveRelationship(s.GetDrives(), d)
+				temp["empty_slots_list"] = (s.GetEmptySlotsList())
 				temp["host_name"] = (s.GetHostName())
 
 				temp["hxdp_data_ip"] = flattenMapHyperflexHxNetworkAddressDt(s.GetHxdpDataIp(), d)

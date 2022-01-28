@@ -8,13 +8,14 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.NetAppCluster"]
 **AvgPerformanceMetrics** | Pointer to [**StorageNetAppPerformanceMetricsAverage**](StorageNetAppPerformanceMetricsAverage.md) |  | [optional] 
 **ClusterEfficiency** | Pointer to [**NullableStorageNetAppStorageClusterEfficiency**](StorageNetAppStorageClusterEfficiency.md) |  | [optional] 
-**ClusterHealthStatus** | Pointer to **string** | The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable. | [optional] [readonly] 
+**ClusterHealthStatus** | Pointer to **string** | The health status of the cluster. Possible states are ok, ok-with-suppressed, degraded, and unreachable. * &#x60;Unreachable&#x60; - Cluster status is unreachable. * &#x60;OK&#x60; - Cluster status is either ok or ok-with-suppressed. * &#x60;Degraded&#x60; - Cluster status is degraded. | [optional] [readonly] [default to "Unreachable"]
 **DnsDomains** | Pointer to **[]string** |  | [optional] 
 **Key** | Pointer to **string** | Unique identifier of NetApp Cluster across data center. | [optional] [readonly] 
 **Location** | Pointer to **string** | Location of the storage controller. | [optional] [readonly] 
 **ManagementAddress** | Pointer to **string** | FQDN or IP Address of Storage Cluster. | [optional] [readonly] 
 **NameServers** | Pointer to **[]string** |  | [optional] 
 **NtpServers** | Pointer to **[]string** |  | [optional] 
+**Events** | Pointer to [**[]StorageNetAppClusterEventRelationship**](StorageNetAppClusterEventRelationship.md) | An array of relationships to storageNetAppClusterEvent resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -341,6 +342,41 @@ HasNtpServers returns a boolean if a field has been set.
 `func (o *StorageNetAppClusterAllOf) UnsetNtpServers()`
 
 UnsetNtpServers ensures that no value is present for NtpServers, not even an explicit nil
+### GetEvents
+
+`func (o *StorageNetAppClusterAllOf) GetEvents() []StorageNetAppClusterEventRelationship`
+
+GetEvents returns the Events field if non-nil, zero value otherwise.
+
+### GetEventsOk
+
+`func (o *StorageNetAppClusterAllOf) GetEventsOk() (*[]StorageNetAppClusterEventRelationship, bool)`
+
+GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvents
+
+`func (o *StorageNetAppClusterAllOf) SetEvents(v []StorageNetAppClusterEventRelationship)`
+
+SetEvents sets Events field to given value.
+
+### HasEvents
+
+`func (o *StorageNetAppClusterAllOf) HasEvents() bool`
+
+HasEvents returns a boolean if a field has been set.
+
+### SetEventsNil
+
+`func (o *StorageNetAppClusterAllOf) SetEventsNil(b bool)`
+
+ SetEventsNil sets the value for Events to be an explicit nil
+
+### UnsetEvents
+`func (o *StorageNetAppClusterAllOf) UnsetEvents()`
+
+UnsetEvents ensures that no value is present for Events, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *StorageNetAppClusterAllOf) GetRegisteredDevice() AssetDeviceRegistrationRelationship`

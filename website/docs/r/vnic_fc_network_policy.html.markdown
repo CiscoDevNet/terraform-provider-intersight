@@ -22,6 +22,11 @@ resource "intersight_vnic_fc_network_policy" "v_fc_network1" {
     moid        = var.organization
   }
 }
+
+variable "organization" {
+   type = string
+   description = "<value for organization>"
+ }
 ```
 ## Argument Reference
 The following arguments are supported:

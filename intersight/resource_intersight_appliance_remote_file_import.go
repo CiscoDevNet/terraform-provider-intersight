@@ -612,8 +612,8 @@ func resourceApplianceRemoteFileImportCreate(c context.Context, d *schema.Resour
 func resourceApplianceRemoteFileImportRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.ApplianceApi.GetApplianceRemoteFileImportByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {

@@ -28,6 +28,11 @@ resource "intersight_workflow_batch_api_executor" "workflow_batch_api_executor1"
     moid        = var.workflow_task_definition
   }
 }
+
+variable "workflow_task_definition" {
+  type =  string
+  description = "moid for workflow task definition"
+}
 ```
 ## Argument Reference
 The following arguments are supported:
@@ -39,7 +44,8 @@ This complex property has following sub-properties:
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `batch`:(Array)
 This complex property has following sub-properties:
-  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.CliCommand](#workflowCliCommand)
+  + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.AnsiblePlaySession](#workflowAnsiblePlaySession)
+[workflow.CliCommand](#workflowCliCommand)
 [workflow.FileOperations](#workflowFileOperations)
 [workflow.SshSession](#workflowSshSession)
 [workflow.WebApi](#workflowWebApi)
@@ -98,6 +104,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `ui_rendering_data`:(JSON as string) This will hold the data needed for task to be rendered in the user interface. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)
@@ -123,6 +130,13 @@ $ terraform import intersight_workflow_batch_api_executor.example 12345678909876
 ```
 ## Allowed Types in `AdditionalProperties`
  
+### [workflow.AnsiblePlaySession](#argument-reference)
+This models a single Ansible playbook execution session on the Ansible Control node. While execution of the respective Ansible task, the below provided property values are used to construct the SSH Batch executor, which gets executed on the endpoint.
+* `command_line_arguments`:(string) The command line arguments for running the Ansible playbook against the given endpoint. Escape character backslash needs to be used when the command line arguments contain double quotes in them. 
+* `host_inventory`:(string) The path of the host inventory file that resides on the Ansible Endpoint target or the comma separated list of hosts on which the Ansible playbook is to be run. Make sure to suffix a comma when the list of hosts is provided as input, even if the list has only one value. 
+* `playbook_path`:(string) The path of the Ansible playbook that resides on the Ansible Endpoint target. 
+* `ssh_op_timeout`:(string) SSH operation timeout value in seconds. Value provided should be string representation of an interger. 
+
 ### [workflow.CliCommand](#argument-reference)
 This models a single CLI command that can be executed on the end point.
 * `command`:(string) The command to run on the device connector. 

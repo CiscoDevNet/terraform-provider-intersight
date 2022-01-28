@@ -2525,7 +2525,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2568,7 +2568,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("cloud.BillingUnit")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2604,7 +2604,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("infra.HardwareInfo")
+			o.SetClassId("")
 			if v, ok := l["cpu_cores"]; ok {
 				{
 					x := int64(v.(int))
@@ -2673,7 +2673,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("virtualization.GuestInfo")
+			o.SetClassId("")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -2738,7 +2738,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("cloud.ImageReference")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2769,7 +2769,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("cloud.InstanceType")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2811,7 +2811,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2854,7 +2854,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2903,7 +2903,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.MemoryCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -3086,7 +3086,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3185,7 +3185,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					o.SetCapacity(x)
 				}
 			}
-			o.SetClassId("virtualization.ComputeCapacity")
+			o.SetClassId("")
 			if v, ok := l["free"]; ok {
 				{
 					x := int64(v.(int))
@@ -3238,7 +3238,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("cloud.CloudRegion")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -3269,7 +3269,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -3410,7 +3410,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -3551,7 +3551,7 @@ func dataSourceCloudAwsVirtualMachineRead(c context.Context, d *schema.ResourceD
 					}
 				}
 			}
-			o.SetClassId("cloud.AvailabilityZone")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

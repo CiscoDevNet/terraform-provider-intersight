@@ -89,6 +89,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cloudsec_autoconfig": {
+			Description: "Cloudsec autoconfig details on the fabric.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -134,8 +139,28 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"fabric_technology": {
+			Description: "Fabric Technology details on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"feature_ptp": {
+			Description: "PTP feature details on the fabric.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_bgw_present": {
 			Description: "Checks if border gateway is present in the fabric inventory.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_enable_nxapi_http": {
+			Description: "Check if NXAPI HTTP is enable or not on the fabric.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_enable_real_time_backup": {
+			Description: "Check if real time backup is enable or not on the fabric.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -152,6 +177,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 		"leaf_count": {
 			Description: "Returns total number of leafs in the fabric.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"link_state_routing": {
+			Description: "Link state routing details on the fabric.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"logical_links": {
@@ -264,6 +294,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 					},
 				},
 			},
+		},
+		"ntp_server_ip_list": {
+			Description: "NTP server IP List on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"nxos_vni_bw_sites_count": {
 			Description: "Returns the count of vnis between sites.",
@@ -394,6 +429,16 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 				},
 			},
 		},
+		"replication_mode": {
+			Description: "Replication mode details on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"rp_mode": {
+			Description: "RP Mode details on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"serial": {
 			Description: "Serial number of device being inventoried. The serial number is unique per device.",
 			Type:        schema.TypeString,
@@ -409,6 +454,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"software_image": {
+			Description: "Software image details on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"spine_count": {
 			Description: "Returns total number of spines in the fabric.",
 			Type:        schema.TypeInt,
@@ -416,6 +466,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 		},
 		"syslog_server_ip_list": {
 			Description: "Syslog server IP list on DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"syslog_sev": {
+			Description: "Syslog sev details on the fabric.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -564,6 +619,44 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Description: "Count number of IP addresses configured in the DCNM networks.",
 			Type:        schema.TypeInt,
 			Optional:    true,
+		},
+		"vpc_details": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"is_vpc_configured": {
+						Description: "Returns boolean if VPC is configured on switch or not.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"peer_switch_db_id": {
+						Description: "Returns peer switch id if VPC configured.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"switch_db_id": {
+						Description: "Returns the switch id of the switch.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"vrf_deployment_count": {
 			Description: "No of vrfs deployed on a fabric.",
@@ -683,6 +776,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cloudsec_autoconfig": {
+			Description: "Cloudsec autoconfig details on the fabric.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -728,8 +826,28 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"fabric_technology": {
+			Description: "Fabric Technology details on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"feature_ptp": {
+			Description: "PTP feature details on the fabric.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"is_bgw_present": {
 			Description: "Checks if border gateway is present in the fabric inventory.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_enable_nxapi_http": {
+			Description: "Check if NXAPI HTTP is enable or not on the fabric.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"is_enable_real_time_backup": {
+			Description: "Check if real time backup is enable or not on the fabric.",
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
@@ -746,6 +864,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 		"leaf_count": {
 			Description: "Returns total number of leafs in the fabric.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"link_state_routing": {
+			Description: "Link state routing details on the fabric.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"logical_links": {
@@ -858,6 +981,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 					},
 				},
 			},
+		},
+		"ntp_server_ip_list": {
+			Description: "NTP server IP List on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"nxos_vni_bw_sites_count": {
 			Description: "Returns the count of vnis between sites.",
@@ -988,6 +1116,16 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 				},
 			},
 		},
+		"replication_mode": {
+			Description: "Replication mode details on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"rp_mode": {
+			Description: "RP Mode details on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"serial": {
 			Description: "Serial number of device being inventoried. The serial number is unique per device.",
 			Type:        schema.TypeString,
@@ -1003,6 +1141,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"software_image": {
+			Description: "Software image details on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"spine_count": {
 			Description: "Returns total number of spines in the fabric.",
 			Type:        schema.TypeInt,
@@ -1010,6 +1153,11 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 		},
 		"syslog_server_ip_list": {
 			Description: "Syslog server IP list on DCNM.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"syslog_sev": {
+			Description: "Syslog sev details on the fabric.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1158,6 +1306,44 @@ func dataSourceNiatelemetryNiaInventoryFabric() *schema.Resource {
 			Description: "Count number of IP addresses configured in the DCNM networks.",
 			Type:        schema.TypeInt,
 			Optional:    true,
+		},
+		"vpc_details": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"is_vpc_configured": {
+						Description: "Returns boolean if VPC is configured on switch or not.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"peer_switch_db_id": {
+						Description: "Returns peer switch id if VPC configured.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"switch_db_id": {
+						Description: "Returns the switch id of the switch.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"vrf_deployment_count": {
 			Description: "No of vrfs deployed on a fabric.",
@@ -1303,6 +1489,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOkExists("cloudsec_autoconfig"); ok {
+		x := (v.(bool))
+		o.SetCloudsecAutoconfig(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -1348,9 +1539,29 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetFabricParent(x)
 	}
 
+	if v, ok := d.GetOk("fabric_technology"); ok {
+		x := (v.(string))
+		o.SetFabricTechnology(x)
+	}
+
+	if v, ok := d.GetOkExists("feature_ptp"); ok {
+		x := (v.(bool))
+		o.SetFeaturePtp(x)
+	}
+
 	if v, ok := d.GetOkExists("is_bgw_present"); ok {
 		x := (v.(bool))
 		o.SetIsBgwPresent(x)
+	}
+
+	if v, ok := d.GetOkExists("is_enable_nxapi_http"); ok {
+		x := (v.(bool))
+		o.SetIsEnableNxapiHttp(x)
+	}
+
+	if v, ok := d.GetOkExists("is_enable_real_time_backup"); ok {
+		x := (v.(bool))
+		o.SetIsEnableRealTimeBackup(x)
 	}
 
 	if v, ok := d.GetOkExists("is_ngoam_enabled"); ok {
@@ -1366,6 +1577,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 	if v, ok := d.GetOkExists("leaf_count"); ok {
 		x := int64(v.(int))
 		o.SetLeafCount(x)
+	}
+
+	if v, ok := d.GetOk("link_state_routing"); ok {
+		x := (v.(string))
+		o.SetLinkStateRouting(x)
 	}
 
 	if v, ok := d.GetOk("logical_links"); ok {
@@ -1499,6 +1715,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetNetworkDeploymentStatus(x)
 	}
 
+	if v, ok := d.GetOk("ntp_server_ip_list"); ok {
+		x := (v.(string))
+		o.SetNtpServerIpList(x)
+	}
+
 	if v, ok := d.GetOkExists("nxos_vni_bw_sites_count"); ok {
 		x := int64(v.(int))
 		o.SetNxosVniBwSitesCount(x)
@@ -1546,7 +1767,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1629,7 +1850,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1656,6 +1877,16 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		}
 	}
 
+	if v, ok := d.GetOk("replication_mode"); ok {
+		x := (v.(string))
+		o.SetReplicationMode(x)
+	}
+
+	if v, ok := d.GetOk("rp_mode"); ok {
+		x := (v.(string))
+		o.SetRpMode(x)
+	}
+
 	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
 		o.SetSerial(x)
@@ -1671,6 +1902,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 		o.SetSiteName(x)
 	}
 
+	if v, ok := d.GetOk("software_image"); ok {
+		x := (v.(string))
+		o.SetSoftwareImage(x)
+	}
+
 	if v, ok := d.GetOkExists("spine_count"); ok {
 		x := int64(v.(int))
 		o.SetSpineCount(x)
@@ -1679,6 +1915,11 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 	if v, ok := d.GetOk("syslog_server_ip_list"); ok {
 		x := (v.(string))
 		o.SetSyslogServerIpList(x)
+	}
+
+	if v, ok := d.GetOk("syslog_sev"); ok {
+		x := (v.(string))
+		o.SetSyslogSev(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1735,7 +1976,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1801,6 +2042,52 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 	if v, ok := d.GetOkExists("vni_ip_count"); ok {
 		x := int64(v.(int))
 		o.SetVniIpCount(x)
+	}
+
+	if v, ok := d.GetOk("vpc_details"); ok {
+		x := make([]models.NiatelemetryVpcDetails, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NiatelemetryVpcDetails{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.VpcDetails")
+			if v, ok := l["is_vpc_configured"]; ok {
+				{
+					x := (v.(bool))
+					o.SetIsVpcConfigured(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["peer_switch_db_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetPeerSwitchDbId(x)
+				}
+			}
+			if v, ok := l["switch_db_id"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetSwitchDbId(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetVpcDetails(x)
 	}
 
 	if v, ok := d.GetOkExists("vrf_deployment_count"); ok {
@@ -1900,6 +2187,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				temp["border_gateway_spine_count"] = (s.GetBorderGatewaySpineCount())
 				temp["border_leaf_count"] = (s.GetBorderLeafCount())
 				temp["class_id"] = (s.GetClassId())
+				temp["cloudsec_autoconfig"] = (s.GetCloudsecAutoconfig())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["dci_subnet_range"] = (s.GetDciSubnetRange())
@@ -1910,10 +2198,15 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				temp["fabric_id"] = (s.GetFabricId())
 				temp["fabric_name"] = (s.GetFabricName())
 				temp["fabric_parent"] = (s.GetFabricParent())
+				temp["fabric_technology"] = (s.GetFabricTechnology())
+				temp["feature_ptp"] = (s.GetFeaturePtp())
 				temp["is_bgw_present"] = (s.GetIsBgwPresent())
+				temp["is_enable_nxapi_http"] = (s.GetIsEnableNxapiHttp())
+				temp["is_enable_real_time_backup"] = (s.GetIsEnableRealTimeBackup())
 				temp["is_ngoam_enabled"] = (s.GetIsNgoamEnabled())
 				temp["is_scheduled_back_up_enabled"] = (s.GetIsScheduledBackUpEnabled())
 				temp["leaf_count"] = (s.GetLeafCount())
+				temp["link_state_routing"] = (s.GetLinkStateRouting())
 
 				temp["logical_links"] = flattenListNiatelemetryLogicalLink(s.GetLogicalLinks(), d)
 
@@ -1922,6 +2215,7 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				temp["network_deployment_count"] = (s.GetNetworkDeploymentCount())
 
 				temp["network_deployment_status"] = flattenListNiatelemetryDeploymentStatus(s.GetNetworkDeploymentStatus(), d)
+				temp["ntp_server_ip_list"] = (s.GetNtpServerIpList())
 				temp["nxos_vni_bw_sites_count"] = (s.GetNxosVniBwSitesCount())
 				temp["nxos_vrf_bw_sites_count"] = (s.GetNxosVrfBwSitesCount())
 				temp["nxos_vrf_count"] = (s.GetNxosVrfCount())
@@ -1933,11 +2227,15 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
+				temp["replication_mode"] = (s.GetReplicationMode())
+				temp["rp_mode"] = (s.GetRpMode())
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["site_name"] = (s.GetSiteName())
+				temp["software_image"] = (s.GetSoftwareImage())
 				temp["spine_count"] = (s.GetSpineCount())
 				temp["syslog_server_ip_list"] = (s.GetSyslogServerIpList())
+				temp["syslog_sev"] = (s.GetSyslogSev())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["template_name"] = (s.GetTemplateName())
@@ -1945,6 +2243,8 @@ func dataSourceNiatelemetryNiaInventoryFabricRead(c context.Context, d *schema.R
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vlan_vni_mappings"] = (s.GetVlanVniMappings())
 				temp["vni_ip_count"] = (s.GetVniIpCount())
+
+				temp["vpc_details"] = flattenListNiatelemetryVpcDetails(s.GetVpcDetails(), d)
 				temp["vrf_deployment_count"] = (s.GetVrfDeploymentCount())
 
 				temp["vrf_deployment_status"] = flattenListNiatelemetryDeploymentStatus(s.GetVrfDeploymentStatus(), d)

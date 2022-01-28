@@ -677,7 +677,7 @@ func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("storage.AutomaticDriveGroup")
+			o.SetClassId("")
 			if v, ok := l["drive_type"]; ok {
 				{
 					x := (v.(string))
@@ -746,7 +746,7 @@ func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("storage.ManualDriveGroup")
+			o.SetClassId("")
 			if v, ok := l["dedicated_hot_spares"]; ok {
 				{
 					x := (v.(string))
@@ -837,7 +837,7 @@ func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -969,7 +969,7 @@ func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, 
 								}
 							}
 						}
-						o.SetClassId("storage.VirtualDrivePolicy")
+						o.SetClassId("")
 						if v, ok := l["drive_cache"]; ok {
 							{
 								x := (v.(string))
@@ -1033,8 +1033,8 @@ func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, 
 func resourceStorageDriveGroupRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.StorageApi.GetStorageDriveGroupByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1178,7 +1178,7 @@ func resourceStorageDriveGroupUpdate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("storage.AutomaticDriveGroup")
+			o.SetClassId("")
 			if v, ok := l["drive_type"]; ok {
 				{
 					x := (v.(string))
@@ -1248,7 +1248,7 @@ func resourceStorageDriveGroupUpdate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("storage.ManualDriveGroup")
+			o.SetClassId("")
 			if v, ok := l["dedicated_hot_spares"]; ok {
 				{
 					x := (v.(string))
@@ -1343,7 +1343,7 @@ func resourceStorageDriveGroupUpdate(c context.Context, d *schema.ResourceData, 
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1475,7 +1475,7 @@ func resourceStorageDriveGroupUpdate(c context.Context, d *schema.ResourceData, 
 								}
 							}
 						}
-						o.SetClassId("storage.VirtualDrivePolicy")
+						o.SetClassId("")
 						if v, ok := l["drive_cache"]; ok {
 							{
 								x := (v.(string))

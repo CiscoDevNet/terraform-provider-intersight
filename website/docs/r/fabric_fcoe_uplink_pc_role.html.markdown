@@ -13,9 +13,7 @@ Object sent by user to configure a fcoe uplink port-channel on the collection of
 
 ```hcl
 resource "intersight_fabric_fcoe_uplink_pc_role" "fabric_fcoe_uplink_pc_role1" {
-  pcid              = 100
-  admin_speed       = "Auto"
-  ud_ld_admin_state = true
+  admin_speed = "Auto"
 }
 ```
 ## Argument Reference

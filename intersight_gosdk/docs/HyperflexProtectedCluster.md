@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **TargetClusterName** | Pointer to **string** | Name of the target cluster. | [optional] [readonly] 
 **TargetDatastoreName** | Pointer to **string** | Name of the target datastore. | [optional] [readonly] 
 **TargetDatastoreUtilization** | Pointer to **float32** | Percent usage of the datastore. | [optional] [readonly] 
+**BackupPolicy** | Pointer to [**HyperflexClusterBackupPolicyInventoryRelationship**](HyperflexClusterBackupPolicyInventoryRelationship.md) |  | [optional] 
 **DatastoreStatistic** | Pointer to [**HyperflexDatastoreStatisticRelationship**](HyperflexDatastoreStatisticRelationship.md) |  | [optional] 
 **SrcCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
 **TgtCluster** | Pointer to [**HyperflexClusterRelationship**](HyperflexClusterRelationship.md) |  | [optional] 
@@ -276,6 +277,31 @@ SetTargetDatastoreUtilization sets TargetDatastoreUtilization field to given val
 `func (o *HyperflexProtectedCluster) HasTargetDatastoreUtilization() bool`
 
 HasTargetDatastoreUtilization returns a boolean if a field has been set.
+
+### GetBackupPolicy
+
+`func (o *HyperflexProtectedCluster) GetBackupPolicy() HyperflexClusterBackupPolicyInventoryRelationship`
+
+GetBackupPolicy returns the BackupPolicy field if non-nil, zero value otherwise.
+
+### GetBackupPolicyOk
+
+`func (o *HyperflexProtectedCluster) GetBackupPolicyOk() (*HyperflexClusterBackupPolicyInventoryRelationship, bool)`
+
+GetBackupPolicyOk returns a tuple with the BackupPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBackupPolicy
+
+`func (o *HyperflexProtectedCluster) SetBackupPolicy(v HyperflexClusterBackupPolicyInventoryRelationship)`
+
+SetBackupPolicy sets BackupPolicy field to given value.
+
+### HasBackupPolicy
+
+`func (o *HyperflexProtectedCluster) HasBackupPolicy() bool`
+
+HasBackupPolicy returns a boolean if a field has been set.
 
 ### GetDatastoreStatistic
 

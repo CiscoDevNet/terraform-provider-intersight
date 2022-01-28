@@ -7,10 +7,13 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "access.Policy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "access.Policy"]
 **AddressType** | Pointer to [**NullableAccessAddressType**](AccessAddressType.md) |  | [optional] 
+**ConfigurationType** | Pointer to [**NullableAccessConfigurationType**](AccessConfigurationType.md) |  | [optional] 
 **InbandVlan** | Pointer to **int64** | VLAN to be used for server access over Inband network. | [optional] 
 **InbandIpPool** | Pointer to [**IppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
 **InbandVrf** | Pointer to [**VrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**OutOfBandIpPool** | Pointer to [**IppoolPoolRelationship**](IppoolPoolRelationship.md) |  | [optional] 
+**OutOfBandVrf** | Pointer to [**VrfVrfRelationship**](VrfVrfRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
 ## Methods
@@ -107,6 +110,41 @@ HasAddressType returns a boolean if a field has been set.
 `func (o *AccessPolicy) UnsetAddressType()`
 
 UnsetAddressType ensures that no value is present for AddressType, not even an explicit nil
+### GetConfigurationType
+
+`func (o *AccessPolicy) GetConfigurationType() AccessConfigurationType`
+
+GetConfigurationType returns the ConfigurationType field if non-nil, zero value otherwise.
+
+### GetConfigurationTypeOk
+
+`func (o *AccessPolicy) GetConfigurationTypeOk() (*AccessConfigurationType, bool)`
+
+GetConfigurationTypeOk returns a tuple with the ConfigurationType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigurationType
+
+`func (o *AccessPolicy) SetConfigurationType(v AccessConfigurationType)`
+
+SetConfigurationType sets ConfigurationType field to given value.
+
+### HasConfigurationType
+
+`func (o *AccessPolicy) HasConfigurationType() bool`
+
+HasConfigurationType returns a boolean if a field has been set.
+
+### SetConfigurationTypeNil
+
+`func (o *AccessPolicy) SetConfigurationTypeNil(b bool)`
+
+ SetConfigurationTypeNil sets the value for ConfigurationType to be an explicit nil
+
+### UnsetConfigurationType
+`func (o *AccessPolicy) UnsetConfigurationType()`
+
+UnsetConfigurationType ensures that no value is present for ConfigurationType, not even an explicit nil
 ### GetInbandVlan
 
 `func (o *AccessPolicy) GetInbandVlan() int64`
@@ -206,6 +244,56 @@ SetOrganization sets Organization field to given value.
 `func (o *AccessPolicy) HasOrganization() bool`
 
 HasOrganization returns a boolean if a field has been set.
+
+### GetOutOfBandIpPool
+
+`func (o *AccessPolicy) GetOutOfBandIpPool() IppoolPoolRelationship`
+
+GetOutOfBandIpPool returns the OutOfBandIpPool field if non-nil, zero value otherwise.
+
+### GetOutOfBandIpPoolOk
+
+`func (o *AccessPolicy) GetOutOfBandIpPoolOk() (*IppoolPoolRelationship, bool)`
+
+GetOutOfBandIpPoolOk returns a tuple with the OutOfBandIpPool field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutOfBandIpPool
+
+`func (o *AccessPolicy) SetOutOfBandIpPool(v IppoolPoolRelationship)`
+
+SetOutOfBandIpPool sets OutOfBandIpPool field to given value.
+
+### HasOutOfBandIpPool
+
+`func (o *AccessPolicy) HasOutOfBandIpPool() bool`
+
+HasOutOfBandIpPool returns a boolean if a field has been set.
+
+### GetOutOfBandVrf
+
+`func (o *AccessPolicy) GetOutOfBandVrf() VrfVrfRelationship`
+
+GetOutOfBandVrf returns the OutOfBandVrf field if non-nil, zero value otherwise.
+
+### GetOutOfBandVrfOk
+
+`func (o *AccessPolicy) GetOutOfBandVrfOk() (*VrfVrfRelationship, bool)`
+
+GetOutOfBandVrfOk returns a tuple with the OutOfBandVrf field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutOfBandVrf
+
+`func (o *AccessPolicy) SetOutOfBandVrf(v VrfVrfRelationship)`
+
+SetOutOfBandVrf sets OutOfBandVrf field to given value.
+
+### HasOutOfBandVrf
+
+`func (o *AccessPolicy) HasOutOfBandVrf() bool`
+
+HasOutOfBandVrf returns a boolean if a field has been set.
 
 ### GetProfiles
 

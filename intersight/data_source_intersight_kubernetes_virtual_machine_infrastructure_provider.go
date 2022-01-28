@@ -1263,7 +1263,7 @@ func dataSourceKubernetesVirtualMachineInfrastructureProviderRead(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("kubernetes.BaseVirtualMachineInfraConfig")
+			o.SetClassId("")
 			if v, ok := l["interfaces"]; ok {
 				{
 					x := make([]string, 0)
@@ -1380,7 +1380,7 @@ func dataSourceKubernetesVirtualMachineInfrastructureProviderRead(c context.Cont
 											}
 										}
 									}
-									o.SetClassId("mo.MoRef")
+									o.SetClassId("")
 									if v, ok := l["moid"]; ok {
 										{
 											x := (v.(string))
@@ -1444,7 +1444,7 @@ func dataSourceKubernetesVirtualMachineInfrastructureProviderRead(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1487,7 +1487,7 @@ func dataSourceKubernetesVirtualMachineInfrastructureProviderRead(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1545,7 +1545,7 @@ func dataSourceKubernetesVirtualMachineInfrastructureProviderRead(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1604,7 +1604,7 @@ func dataSourceKubernetesVirtualMachineInfrastructureProviderRead(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1725,7 +1725,7 @@ func dataSourceKubernetesVirtualMachineInfrastructureProviderRead(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1768,7 +1768,7 @@ func dataSourceKubernetesVirtualMachineInfrastructureProviderRead(c context.Cont
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)

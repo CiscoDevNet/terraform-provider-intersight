@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **HxdpVersion** | Pointer to **string** | HXDP component software version. | [optional] 
 **HypervisorType** | Pointer to **string** | Type fo Hypervisor the HyperFlex components versions are compatible with. For example ESX, Hyperv or KVM. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * &#x60;IWE&#x60; - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
 **HypervisorVersion** | Pointer to **string** | Hypervisor component software version. | [optional] 
+**IsMgmtBuild** | Pointer to **string** | Type of the HXDP bundle mgmt or full. | [optional] 
 **ServerFwVersion** | Pointer to **string** | UCS Server Firmware component software version. | [optional] 
 **AppCatalog** | Pointer to [**HyperflexAppCatalogRelationship**](HyperflexAppCatalogRelationship.md) |  | [optional] 
 
@@ -181,6 +182,31 @@ SetHypervisorVersion sets HypervisorVersion field to given value.
 `func (o *HclHyperflexSoftwareCompatibilityInfo) HasHypervisorVersion() bool`
 
 HasHypervisorVersion returns a boolean if a field has been set.
+
+### GetIsMgmtBuild
+
+`func (o *HclHyperflexSoftwareCompatibilityInfo) GetIsMgmtBuild() string`
+
+GetIsMgmtBuild returns the IsMgmtBuild field if non-nil, zero value otherwise.
+
+### GetIsMgmtBuildOk
+
+`func (o *HclHyperflexSoftwareCompatibilityInfo) GetIsMgmtBuildOk() (*string, bool)`
+
+GetIsMgmtBuildOk returns a tuple with the IsMgmtBuild field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMgmtBuild
+
+`func (o *HclHyperflexSoftwareCompatibilityInfo) SetIsMgmtBuild(v string)`
+
+SetIsMgmtBuild sets IsMgmtBuild field to given value.
+
+### HasIsMgmtBuild
+
+`func (o *HclHyperflexSoftwareCompatibilityInfo) HasIsMgmtBuild() bool`
+
+HasIsMgmtBuild returns a boolean if a field has been set.
 
 ### GetServerFwVersion
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.StorageControllerOperation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.StorageControllerOperation"]
-**AdminAction** | Pointer to **string** | Administrative actions that can be performed on the Storage Controller. * &#x60;None&#x60; - No action on the selected Storage Controller. * &#x60;Import&#x60; - Import Foreign config action on the selected Storage Controller. * &#x60;Clear&#x60; - Clear Foreign config action on the selected Storage Controller. | [optional] [default to "None"]
+**AdminAction** | Pointer to **string** | Administrative actions that can be performed on the Storage Controller. * &#x60;None&#x60; - No action on the selected Storage Controller. * &#x60;Import&#x60; - Import Foreign config action on the selected Storage Controller. * &#x60;Clear&#x60; - Clear Foreign config action on the selected Storage Controller. * &#x60;ClearConfig&#x60; - Clear Config action on the selected Storage Controller. | [optional] [default to "None"]
 **ControllerId** | Pointer to **string** | Storage Controller Id of the server. | [optional] 
 
 ## Methods

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **Array** | Pointer to [**StorageNetAppClusterRelationship**](StorageNetAppClusterRelationship.md) |  | [optional] 
 **ArrayController** | Pointer to [**StorageNetAppNodeRelationship**](StorageNetAppNodeRelationship.md) |  | [optional] 
 **DiskPool** | Pointer to [**[]StorageNetAppAggregateRelationship**](StorageNetAppAggregateRelationship.md) | An array of relationships to storageNetAppAggregate resources. | [optional] [readonly] 
+**Events** | Pointer to [**[]StorageNetAppDiskEventRelationship**](StorageNetAppDiskEventRelationship.md) | An array of relationships to storageNetAppDiskEvent resources. | [optional] [readonly] 
 
 ## Methods
 
@@ -284,6 +285,41 @@ HasDiskPool returns a boolean if a field has been set.
 `func (o *StorageNetAppBaseDisk) UnsetDiskPool()`
 
 UnsetDiskPool ensures that no value is present for DiskPool, not even an explicit nil
+### GetEvents
+
+`func (o *StorageNetAppBaseDisk) GetEvents() []StorageNetAppDiskEventRelationship`
+
+GetEvents returns the Events field if non-nil, zero value otherwise.
+
+### GetEventsOk
+
+`func (o *StorageNetAppBaseDisk) GetEventsOk() (*[]StorageNetAppDiskEventRelationship, bool)`
+
+GetEventsOk returns a tuple with the Events field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEvents
+
+`func (o *StorageNetAppBaseDisk) SetEvents(v []StorageNetAppDiskEventRelationship)`
+
+SetEvents sets Events field to given value.
+
+### HasEvents
+
+`func (o *StorageNetAppBaseDisk) HasEvents() bool`
+
+HasEvents returns a boolean if a field has been set.
+
+### SetEventsNil
+
+`func (o *StorageNetAppBaseDisk) SetEventsNil(b bool)`
+
+ SetEventsNil sets the value for Events to be an explicit nil
+
+### UnsetEvents
+`func (o *StorageNetAppBaseDisk) UnsetEvents()`
+
+UnsetEvents ensures that no value is present for Events, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

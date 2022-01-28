@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **Output** | Pointer to **interface{}** | Intersight Orchestrator allows the extraction of required values from API responses using the API response grammar. These extracted values can be mapped to task output parameters defined in task definition. The mapping of API output parameters to the task output parameters is provided as JSON in this property. | [optional] 
 **RetryFromFailedApi** | Pointer to **bool** | When an execution of a nth API in the Batch fails, Retry from falied API flag indicates if the execution should start from the nth API or the first API during task retry. By default the value is set to false. | [optional] 
 **SkipOnCondition** | Pointer to **string** | The skip expression, if provided, allows the batch API executor to skip the task execution when the given expression evaluates to true. The expression is given as such a golang template that has to be evaluated to a final content true/false. The expression is an optional and in case not provided, the API will always be executed. | [optional] 
+**UiRenderingData** | Pointer to **interface{}** | This will hold the data needed for task to be rendered in the user interface. | [optional] 
 
 ## Methods
 
@@ -314,6 +315,41 @@ SetSkipOnCondition sets SkipOnCondition field to given value.
 
 HasSkipOnCondition returns a boolean if a field has been set.
 
+### GetUiRenderingData
+
+`func (o *WorkflowBatchExecutorAllOf) GetUiRenderingData() interface{}`
+
+GetUiRenderingData returns the UiRenderingData field if non-nil, zero value otherwise.
+
+### GetUiRenderingDataOk
+
+`func (o *WorkflowBatchExecutorAllOf) GetUiRenderingDataOk() (*interface{}, bool)`
+
+GetUiRenderingDataOk returns a tuple with the UiRenderingData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUiRenderingData
+
+`func (o *WorkflowBatchExecutorAllOf) SetUiRenderingData(v interface{})`
+
+SetUiRenderingData sets UiRenderingData field to given value.
+
+### HasUiRenderingData
+
+`func (o *WorkflowBatchExecutorAllOf) HasUiRenderingData() bool`
+
+HasUiRenderingData returns a boolean if a field has been set.
+
+### SetUiRenderingDataNil
+
+`func (o *WorkflowBatchExecutorAllOf) SetUiRenderingDataNil(b bool)`
+
+ SetUiRenderingDataNil sets the value for UiRenderingData to be an explicit nil
+
+### UnsetUiRenderingData
+`func (o *WorkflowBatchExecutorAllOf) UnsetUiRenderingData()`
+
+UnsetUiRenderingData ensures that no value is present for UiRenderingData, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

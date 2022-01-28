@@ -1825,7 +1825,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1927,7 +1927,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2089,7 +2089,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2147,7 +2147,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2190,7 +2190,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2238,7 +2238,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2281,7 +2281,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2369,7 +2369,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("workflow.WorkflowInfoProperties")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2529,7 +2529,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -2608,7 +2608,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("workflow.WorkflowCtx")
+			o.SetClassId("")
 			if v, ok := l["initiator_ctx"]; ok {
 				{
 					p := make([]models.WorkflowInitiatorContext, 0, 1)
@@ -2626,7 +2626,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 								}
 							}
 						}
-						o.SetClassId("workflow.InitiatorContext")
+						o.SetClassId("")
 						if v, ok := l["initiator_moid"]; ok {
 							{
 								x := (v.(string))
@@ -2756,7 +2756,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

@@ -191,7 +191,7 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 			Optional:    true,
 		},
 		"status": {
-			Description: "The current status of the PendingDynamicWorkflowInfo.\n* `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution.\n* `Waiting` - Dynamic workflow is in waiting state and not yet started execution.",
+			Description: "The current status of the PendingDynamicWorkflowInfo.\n* `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution.\n* `Waiting` - Dynamic workflow is in waiting state and not yet started execution.\n* `RateLimit` - Dynamic workflow is rate limited and hasn't started execution.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -708,7 +708,7 @@ func dataSourceWorkflowPendingDynamicWorkflowInfo() *schema.Resource {
 			Optional:    true,
 		},
 		"status": {
-			Description: "The current status of the PendingDynamicWorkflowInfo.\n* `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution.\n* `Waiting` - Dynamic workflow is in waiting state and not yet started execution.",
+			Description: "The current status of the PendingDynamicWorkflowInfo.\n* `GatheringTasks` - Dynamic workflow is gathering tasks before workflow can start execution.\n* `Waiting` - Dynamic workflow is in waiting state and not yet started execution.\n* `RateLimit` - Dynamic workflow is rate limited and hasn't started execution.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1185,7 +1185,7 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1327,7 +1327,7 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("mo.VersionContext")
+			o.SetClassId("")
 			if v, ok := l["interested_mos"]; ok {
 				{
 					x := make([]models.MoMoRef, 0)
@@ -1445,7 +1445,7 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("workflow.WorkflowCtx")
+			o.SetClassId("")
 			if v, ok := l["initiator_ctx"]; ok {
 				{
 					p := make([]models.WorkflowInitiatorContext, 0, 1)
@@ -1463,7 +1463,7 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 								}
 							}
 						}
-						o.SetClassId("workflow.InitiatorContext")
+						o.SetClassId("")
 						if v, ok := l["initiator_moid"]; ok {
 							{
 								x := (v.(string))
@@ -1593,7 +1593,7 @@ func dataSourceWorkflowPendingDynamicWorkflowInfoRead(c context.Context, d *sche
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))

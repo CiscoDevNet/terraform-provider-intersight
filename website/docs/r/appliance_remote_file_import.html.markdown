@@ -22,8 +22,13 @@ resource "intersight_appliance_remote_file_import" "appliance_remote_file_import
   username = "admin"
   account {
     object_type = "iam.Account"
-    moid        = intersight_account_iam.iam1.id
+    moid        = var.account
   }
+}
+
+variable "account" {
+  type        = string
+  description = "Moid of iam.Account Mo"
 }
 ```
 ## Argument Reference

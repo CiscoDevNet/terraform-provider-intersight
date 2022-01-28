@@ -1416,7 +1416,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 								}
 							}
 						}
-						o.SetClassId("workflow.PrimitiveDataType")
+						o.SetClassId("")
 						if v, ok := l["default"]; ok {
 							{
 								p := make([]models.WorkflowDefaultValue, 0, 1)
@@ -1434,7 +1434,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 											}
 										}
 									}
-									o.SetClassId("workflow.DefaultValue")
+									o.SetClassId("")
 									if v, ok := l["object_type"]; ok {
 										{
 											x := (v.(string))
@@ -1483,7 +1483,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 											}
 										}
 									}
-									o.SetClassId("workflow.DisplayMeta")
+									o.SetClassId("")
 									if v, ok := l["inventory_selector"]; ok {
 										{
 											x := (v.(bool))
@@ -1550,7 +1550,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 											}
 										}
 									}
-									o.SetClassId("workflow.PrimitiveDataProperty")
+									o.SetClassId("")
 									if v, ok := l["constraints"]; ok {
 										{
 											p := make([]models.WorkflowConstraints, 0, 1)
@@ -1568,7 +1568,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 														}
 													}
 												}
-												o.SetClassId("workflow.Constraints")
+												o.SetClassId("")
 												if v, ok := l["enum_list"]; ok {
 													{
 														x := make([]models.WorkflowEnumEntry, 0)
@@ -1710,7 +1710,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 																	o.SetBody(v)
 																}
 															}
-															o.SetClassId("workflow.SelectorProperty")
+															o.SetClassId("")
 															if v, ok := l["method"]; ok {
 																{
 																	x := (v.(string))
@@ -1827,7 +1827,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 					o.SetAnswerFile(x)
 				}
 			}
-			o.SetClassId("os.Answers")
+			o.SetClassId("")
 			if v, ok := l["hostname"]; ok {
 				{
 					x := (v.(string))
@@ -1857,7 +1857,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 								}
 							}
 						}
-						o.SetClassId("os.IpConfiguration")
+						o.SetClassId("")
 						if v, ok := l["object_type"]; ok {
 							{
 								x := (v.(string))
@@ -1940,7 +1940,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1988,7 +1988,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2036,7 +2036,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("os.InstallTarget")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2079,7 +2079,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("os.OperatingSystemParameters")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -2110,7 +2110,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2153,7 +2153,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2196,7 +2196,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2274,7 +2274,7 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -2368,8 +2368,8 @@ func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta int
 func resourceOsInstallRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.OsApi.GetOsInstallByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {

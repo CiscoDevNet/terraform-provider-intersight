@@ -779,7 +779,7 @@ func resourceSoftwareSolutionDistributableCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1022,7 +1022,7 @@ func resourceSoftwareSolutionDistributableCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1090,7 +1090,7 @@ func resourceSoftwareSolutionDistributableCreate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("softwarerepository.FileServer")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))
@@ -1186,8 +1186,8 @@ func resourceSoftwareSolutionDistributableCreate(c context.Context, d *schema.Re
 func resourceSoftwareSolutionDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
-	conn := meta.(*Config)
 	var de diag.Diagnostics
+	conn := meta.(*Config)
 	r := conn.ApiClient.SoftwareApi.GetSoftwareSolutionDistributableByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1435,7 +1435,7 @@ func resourceSoftwareSolutionDistributableUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1687,7 +1687,7 @@ func resourceSoftwareSolutionDistributableUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("mo.MoRef")
+			o.SetClassId("")
 			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
@@ -1761,7 +1761,7 @@ func resourceSoftwareSolutionDistributableUpdate(c context.Context, d *schema.Re
 					}
 				}
 			}
-			o.SetClassId("softwarerepository.FileServer")
+			o.SetClassId("")
 			if v, ok := l["object_type"]; ok {
 				{
 					x := (v.(string))

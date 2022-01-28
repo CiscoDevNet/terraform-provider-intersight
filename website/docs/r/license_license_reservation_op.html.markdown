@@ -17,8 +17,13 @@ resource "intersight_license_license_reservation_op" "license_license_reservatio
   generate_return_code  = true
   account {
     object_type = "iam.Account"
-    moid        = intersight_iam_account.account1.id
+    moid        = var.iam_account
   }
+}
+
+variable "iam_account" {
+  type        = string
+  description = "Moid of iam account"
 }
 ```
 ## Argument Reference
