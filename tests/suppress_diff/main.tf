@@ -64,9 +64,6 @@ resource "intersight_vnic_eth_adapter_policy" "vnic_eth_adapter_policy_1" {
     object_type = "organization.Organization"
     moid        = data.intersight_organization_organization.default.results.0.moid
   }
-  vxlan_settings {
-    enabled = false
-  }
 
   nvgre_settings {
     enabled = true
