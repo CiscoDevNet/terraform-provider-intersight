@@ -22,6 +22,7 @@ resource "intersight_hyperflex_cluster_profile" "hyperflex_cluster_profile1" {
     name    = "hx-storage-data"
     vlan_id = 27
   }
+  replication = 3 
   mgmt_ip_address    = "10.225.68.237"
   mac_address_prefix = "00:25:B5:D5"
   mgmt_platform      = "EDGE"
@@ -56,7 +57,7 @@ resource "intersight_networkconfig_policy" "network_config1" {
 }
 
 resource "intersight_vnic_eth_adapter_policy" "vnic_eth_adapter_policy_1" {
-  name                    = "v_eth_adapter1"
+  name                    = "vnic_eth_adapter_policy_11"
   rss_settings            = true
   uplink_failback_timeout = 5
   organization {
