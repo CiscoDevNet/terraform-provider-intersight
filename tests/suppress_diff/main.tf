@@ -76,10 +76,6 @@ resource "intersight_vnic_eth_adapter_policy" "vnic_eth_adapter_policy_1" {
     enabled = true
   }
 
-  roce_settings {
-	enabled = false
-  }
-
   interrupt_settings {
     coalescing_time = 125
     coalescing_type = "MIN"
