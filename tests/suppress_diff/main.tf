@@ -17,25 +17,6 @@ data "intersight_organization_organization" "default" {
   name = "default"
 }
 
-resource "intersight_hyperflex_cluster_profile" "hyperflex_cluster_profile1" {
-  storage_data_vlan {
-    name    = "hx-storage-data"
-    vlan_id = 27
-  }
-  mgmt_ip_address    = "10.225.68.237"
-  mac_address_prefix = "00:25:B5:D5"
-  mgmt_platform      = "EDGE"
-  description        = "This is hyperflex cluster profile"
-  tags {
-    key   = "test"
-    value = "ucsback-10G-3nodehx-cluster-"
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.default.results.0.moid
-  }
-  name = "hyperflex_cluster_profile1"
-}
 
 resource "intersight_networkconfig_policy" "network_config1" {
   name                     = "network_config1"
@@ -121,24 +102,6 @@ resource "intersight_kubernetes_virtual_machine_infra_config_policy" "vm_infra_c
 }
 
 
-resource "intersight_access_policy" "access1" {
-  name        = "access1"
-  description = "demo imc access policy"
-  organization {
-    object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.default.results.0.moid
-  }
-  configuration_type{
-	configure_inband = false
-	configure_out_of_band = true
-  }
-  out_of_band_ip_pool {
-	object_type = "ippool.Pool"
-	moid = "61e90cf96962752d31a40826"
-  }
-}
-
-
 resource "intersight_hyperflex_proxy_setting_policy" "hyperflex_proxy_setting_policy1" {
   hostname    = "10.10.10.1"
   port        = 32628
@@ -149,7 +112,6 @@ resource "intersight_hyperflex_proxy_setting_policy" "hyperflex_proxy_setting_po
     key   = "test"
     value = "autoProxy"
   }
-  is_password_set = false
   organization {
     object_type = "organization.Organization"
     moid        = data.intersight_organization_organization.default.results.0.moid
