@@ -137,3 +137,50 @@ resource "intersight_access_policy" "access1" {
 	moid = "61e90cf96962752d31a40826"
   }
 }
+
+resource "intersight_resource_group" "resource_group1" {
+  name = "resource_group1"
+  per_type_combined_selector = [{
+    additional_properties = ""
+    class_id              = "resource.PerTypeCombinedSelector"
+    combined_selector     = "( Tags/any(tt/Key eq \"Intersight.LicenseTier\" and t/Value eq Essential) )"
+    empty_filter          = false
+    object_type           = "resource.PerTypeCombinedSelector"
+    selector_object_type  = "compute.Blade"
+  }]
+  qualifier = "Allow-Selectors"
+  selectors = [{
+    object_type           = "resource.Selector"
+    additional_properties = ""
+    class_id              = "resource.Selector"
+    selector              = "/api/v1/asset/DeviceRegistrations?$filter=Moid in(\"intersight_asset_device_registrations_registeration1.id\")"
+  }]
+  account {
+    object_type = "iam.Account"
+    moid        = "60599c447564612d33d47a77"
+  }
+  organizations {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+}
+
+
+
+resource "intersight_hyperflex_proxy_setting_policy" "hyperflex_proxy_setting_policy1" {
+  hostname    = "10.10.10.1"
+  port        = 32628
+  username    = ""
+  password    = "ChangeMe"
+  description = "This is autoProxy"
+  tags {
+    key   = "test"
+    value = "autoProxy"
+  }
+  is_password_set = false
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+  name = "hyperflex_proxy_setting_policy1"
+}
