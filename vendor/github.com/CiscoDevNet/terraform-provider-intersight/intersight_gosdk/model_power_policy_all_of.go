@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5208
+API version: 1.0.9-5313
 Contact: intersight@cisco.com
 */
 
@@ -23,10 +23,16 @@ type PowerPolicyAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// Sets the Allocated Power Budget of the System (in Watts). This field is only supported for Cisco UCS X series Chassis.
 	AllocatedBudget *int64 `json:"AllocatedBudget,omitempty"`
+	// Sets the Dynamic Power Rebalancing of the System. This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	DynamicRebalancing *string `json:"DynamicRebalancing,omitempty"`
+	// Sets the Power Priority of the System. This field is only supported for Cisco UCS X series servers. * `Low` - Set the Power Priority to Low. * `Medium` - Set the Power Priority to Medium. * `High` - Set the Power Priority to High.
+	PowerPriority *string `json:"PowerPriority,omitempty"`
 	// Sets the Power Profiling of the Server. This field is only supported for Cisco UCS X series servers. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
 	PowerProfiling *string `json:"PowerProfiling,omitempty"`
 	// Sets the Power Restore State of the Server. This field is only supported for Cisco UCS X series servers. * `AlwaysOff` - Set the Power Restore Mode to Off. * `AlwaysOn` - Set the Power Restore Mode to On. * `LastState` - Set the Power Restore Mode to LastState.
 	PowerRestoreState *string `json:"PowerRestoreState,omitempty"`
+	// Sets the Power Save mode of the System. This option is only supported for Cisco UCS X series Chassis. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	PowerSaveMode *string `json:"PowerSaveMode,omitempty"`
 	// Sets the Power Redundancy of the System. N+2 mode is only supported for Cisco UCS X series Chassis. * `Grid` - Grid Mode requires two power sources. If one source fails, the surviving PSUs connected to the other source provides power to the chassis. * `NotRedundant` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements. No Redundant PSUs are maintained. * `N+1` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus one additional PSU for redundancy. * `N+2` - Power Manager turns on the minimum number of PSUs required to support chassis power requirements plus two additional PSU for redundancy. This Mode is only supported for UCS X series Chassis.
 	RedundancyMode *string                               `json:"RedundancyMode,omitempty"`
 	Organization   *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -47,10 +53,16 @@ func NewPowerPolicyAllOf(classId string, objectType string) *PowerPolicyAllOf {
 	this.ObjectType = objectType
 	var allocatedBudget int64 = 0
 	this.AllocatedBudget = &allocatedBudget
+	var dynamicRebalancing string = "Enabled"
+	this.DynamicRebalancing = &dynamicRebalancing
+	var powerPriority string = "Low"
+	this.PowerPriority = &powerPriority
 	var powerProfiling string = "Enabled"
 	this.PowerProfiling = &powerProfiling
 	var powerRestoreState string = "AlwaysOff"
 	this.PowerRestoreState = &powerRestoreState
+	var powerSaveMode string = "Enabled"
+	this.PowerSaveMode = &powerSaveMode
 	var redundancyMode string = "Grid"
 	this.RedundancyMode = &redundancyMode
 	return &this
@@ -67,10 +79,16 @@ func NewPowerPolicyAllOfWithDefaults() *PowerPolicyAllOf {
 	this.ObjectType = objectType
 	var allocatedBudget int64 = 0
 	this.AllocatedBudget = &allocatedBudget
+	var dynamicRebalancing string = "Enabled"
+	this.DynamicRebalancing = &dynamicRebalancing
+	var powerPriority string = "Low"
+	this.PowerPriority = &powerPriority
 	var powerProfiling string = "Enabled"
 	this.PowerProfiling = &powerProfiling
 	var powerRestoreState string = "AlwaysOff"
 	this.PowerRestoreState = &powerRestoreState
+	var powerSaveMode string = "Enabled"
+	this.PowerSaveMode = &powerSaveMode
 	var redundancyMode string = "Grid"
 	this.RedundancyMode = &redundancyMode
 	return &this
@@ -156,6 +174,70 @@ func (o *PowerPolicyAllOf) SetAllocatedBudget(v int64) {
 	o.AllocatedBudget = &v
 }
 
+// GetDynamicRebalancing returns the DynamicRebalancing field value if set, zero value otherwise.
+func (o *PowerPolicyAllOf) GetDynamicRebalancing() string {
+	if o == nil || o.DynamicRebalancing == nil {
+		var ret string
+		return ret
+	}
+	return *o.DynamicRebalancing
+}
+
+// GetDynamicRebalancingOk returns a tuple with the DynamicRebalancing field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PowerPolicyAllOf) GetDynamicRebalancingOk() (*string, bool) {
+	if o == nil || o.DynamicRebalancing == nil {
+		return nil, false
+	}
+	return o.DynamicRebalancing, true
+}
+
+// HasDynamicRebalancing returns a boolean if a field has been set.
+func (o *PowerPolicyAllOf) HasDynamicRebalancing() bool {
+	if o != nil && o.DynamicRebalancing != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDynamicRebalancing gets a reference to the given string and assigns it to the DynamicRebalancing field.
+func (o *PowerPolicyAllOf) SetDynamicRebalancing(v string) {
+	o.DynamicRebalancing = &v
+}
+
+// GetPowerPriority returns the PowerPriority field value if set, zero value otherwise.
+func (o *PowerPolicyAllOf) GetPowerPriority() string {
+	if o == nil || o.PowerPriority == nil {
+		var ret string
+		return ret
+	}
+	return *o.PowerPriority
+}
+
+// GetPowerPriorityOk returns a tuple with the PowerPriority field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PowerPolicyAllOf) GetPowerPriorityOk() (*string, bool) {
+	if o == nil || o.PowerPriority == nil {
+		return nil, false
+	}
+	return o.PowerPriority, true
+}
+
+// HasPowerPriority returns a boolean if a field has been set.
+func (o *PowerPolicyAllOf) HasPowerPriority() bool {
+	if o != nil && o.PowerPriority != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPowerPriority gets a reference to the given string and assigns it to the PowerPriority field.
+func (o *PowerPolicyAllOf) SetPowerPriority(v string) {
+	o.PowerPriority = &v
+}
+
 // GetPowerProfiling returns the PowerProfiling field value if set, zero value otherwise.
 func (o *PowerPolicyAllOf) GetPowerProfiling() string {
 	if o == nil || o.PowerProfiling == nil {
@@ -218,6 +300,38 @@ func (o *PowerPolicyAllOf) HasPowerRestoreState() bool {
 // SetPowerRestoreState gets a reference to the given string and assigns it to the PowerRestoreState field.
 func (o *PowerPolicyAllOf) SetPowerRestoreState(v string) {
 	o.PowerRestoreState = &v
+}
+
+// GetPowerSaveMode returns the PowerSaveMode field value if set, zero value otherwise.
+func (o *PowerPolicyAllOf) GetPowerSaveMode() string {
+	if o == nil || o.PowerSaveMode == nil {
+		var ret string
+		return ret
+	}
+	return *o.PowerSaveMode
+}
+
+// GetPowerSaveModeOk returns a tuple with the PowerSaveMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PowerPolicyAllOf) GetPowerSaveModeOk() (*string, bool) {
+	if o == nil || o.PowerSaveMode == nil {
+		return nil, false
+	}
+	return o.PowerSaveMode, true
+}
+
+// HasPowerSaveMode returns a boolean if a field has been set.
+func (o *PowerPolicyAllOf) HasPowerSaveMode() bool {
+	if o != nil && o.PowerSaveMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPowerSaveMode gets a reference to the given string and assigns it to the PowerSaveMode field.
+func (o *PowerPolicyAllOf) SetPowerSaveMode(v string) {
+	o.PowerSaveMode = &v
 }
 
 // GetRedundancyMode returns the RedundancyMode field value if set, zero value otherwise.
@@ -328,11 +442,20 @@ func (o PowerPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.AllocatedBudget != nil {
 		toSerialize["AllocatedBudget"] = o.AllocatedBudget
 	}
+	if o.DynamicRebalancing != nil {
+		toSerialize["DynamicRebalancing"] = o.DynamicRebalancing
+	}
+	if o.PowerPriority != nil {
+		toSerialize["PowerPriority"] = o.PowerPriority
+	}
 	if o.PowerProfiling != nil {
 		toSerialize["PowerProfiling"] = o.PowerProfiling
 	}
 	if o.PowerRestoreState != nil {
 		toSerialize["PowerRestoreState"] = o.PowerRestoreState
+	}
+	if o.PowerSaveMode != nil {
+		toSerialize["PowerSaveMode"] = o.PowerSaveMode
 	}
 	if o.RedundancyMode != nil {
 		toSerialize["RedundancyMode"] = o.RedundancyMode
@@ -364,8 +487,11 @@ func (o *PowerPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AllocatedBudget")
+		delete(additionalProperties, "DynamicRebalancing")
+		delete(additionalProperties, "PowerPriority")
 		delete(additionalProperties, "PowerProfiling")
 		delete(additionalProperties, "PowerRestoreState")
+		delete(additionalProperties, "PowerSaveMode")
 		delete(additionalProperties, "RedundancyMode")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Profiles")

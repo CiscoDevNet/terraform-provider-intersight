@@ -420,6 +420,7 @@ func GetDataSourceMapping() map[string]*schema.Resource {
 		"intersight_kvm_policy":                                              dataSourceKvmPolicy(),
 		"intersight_kvm_session":                                             dataSourceKvmSession(),
 		"intersight_kvm_tunnel":                                              dataSourceKvmTunnel(),
+		"intersight_kvm_tunneled_kvm_policy":                                 dataSourceKvmTunneledKvmPolicy(),
 		"intersight_license_account_license_data":                            dataSourceLicenseAccountLicenseData(),
 		"intersight_license_customer_op":                                     dataSourceLicenseCustomerOp(),
 		"intersight_license_iks_customer_op":                                 dataSourceLicenseIksCustomerOp(),

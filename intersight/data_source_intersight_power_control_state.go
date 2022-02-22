@@ -233,6 +233,16 @@ func dataSourcePowerControlState() *schema.Resource {
 				},
 			},
 		},
+		"power_rebalancing": {
+			Description: "The status of power rebalancing mode of the chassis power state.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"power_save_mode": {
+			Description: "The status of power save mode of the chassis power state.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -622,6 +632,16 @@ func dataSourcePowerControlState() *schema.Resource {
 					},
 				},
 			},
+		},
+		"power_rebalancing": {
+			Description: "The status of power rebalancing mode of the chassis power state.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"power_save_mode": {
+			Description: "The status of power save mode of the chassis power state.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"registered_device": {
 			Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1067,6 +1087,16 @@ func dataSourcePowerControlStateRead(c context.Context, d *schema.ResourceData, 
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("power_rebalancing"); ok {
+		x := (v.(string))
+		o.SetPowerRebalancing(x)
+	}
+
+	if v, ok := d.GetOk("power_save_mode"); ok {
+		x := (v.(string))
+		o.SetPowerSaveMode(x)
+	}
+
 	if v, ok := d.GetOk("registered_device"); ok {
 		p := make([]models.AssetDeviceRegistrationRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1284,6 +1314,8 @@ func dataSourcePowerControlStateRead(c context.Context, d *schema.ResourceData, 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["power_rebalancing"] = (s.GetPowerRebalancing())
+				temp["power_save_mode"] = (s.GetPowerSaveMode())
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["shared_scope"] = (s.GetSharedScope())

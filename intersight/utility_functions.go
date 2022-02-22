@@ -93,7 +93,7 @@ func getRequestParams(in []byte) string {
 }
 
 func recursiveValueCheck(oldM map[string]interface{}, k string, v interface{}) bool {
-	if k == "Password" {
+	if k == "Password" || k == "Passphrase" {
 		return true
 	}
 	y := reflect.TypeOf(v)

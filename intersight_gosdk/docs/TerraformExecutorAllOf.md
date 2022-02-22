@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "terraform.Executor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "terraform.Executor"]
 **CloudResource** | Pointer to [**[]TerraformCloudResource**](TerraformCloudResource.md) |  | [optional] 
+**Command** | Pointer to **string** | Command to be executed during update operation. | [optional] 
 **Operation** | Pointer to **string** | Enum indicates what operation is being done. * &#x60;Create&#x60; - Creating a Terraform resource. * &#x60;Update&#x60; - Updating a Terraform resource. * &#x60;Delete&#x60; - Deleting a Terraform resource. | [optional] [default to "Create"]
 **Output** | Pointer to **interface{}** | Terraform output of the entire execution. | [optional] 
 **PlatformType** | Pointer to **string** | The Platform type used in conjunction with &#39;sourceFolderPath&#39; and &#39;sourceFolderName&#39; determines unique path for a Terraform workflow. | [optional] 
@@ -117,6 +118,31 @@ HasCloudResource returns a boolean if a field has been set.
 `func (o *TerraformExecutorAllOf) UnsetCloudResource()`
 
 UnsetCloudResource ensures that no value is present for CloudResource, not even an explicit nil
+### GetCommand
+
+`func (o *TerraformExecutorAllOf) GetCommand() string`
+
+GetCommand returns the Command field if non-nil, zero value otherwise.
+
+### GetCommandOk
+
+`func (o *TerraformExecutorAllOf) GetCommandOk() (*string, bool)`
+
+GetCommandOk returns a tuple with the Command field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCommand
+
+`func (o *TerraformExecutorAllOf) SetCommand(v string)`
+
+SetCommand sets Command field to given value.
+
+### HasCommand
+
+`func (o *TerraformExecutorAllOf) HasCommand() bool`
+
+HasCommand returns a boolean if a field has been set.
+
 ### GetOperation
 
 `func (o *TerraformExecutorAllOf) GetOperation() string`
