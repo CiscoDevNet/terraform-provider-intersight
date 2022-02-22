@@ -123,7 +123,7 @@ resource "intersight_kubernetes_cluster_profile" "kcp1" {
   name = "dummy_kcp_tf"
   organization {
     object_type = "organization.Organization"
-    moid = var.organization
+    moid = data.intersight_organization_organization.default.results.0.moid
   }
   management_config {
     ssh_user = "Testing_TF"	
