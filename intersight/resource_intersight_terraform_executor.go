@@ -66,7 +66,12 @@ func resourceTerraformExecutor() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"additional_properties": {
 				Type:             schema.TypeString,
 				Optional:         true,
@@ -159,24 +164,44 @@ func resourceTerraformExecutor() *schema.Resource {
 					},
 				},
 			},
+			"command": {
+				Description: "Command to be executed during update operation.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -375,7 +400,12 @@ func resourceTerraformExecutor() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"source_folder_name": {
 				Description: "Folder Name where Terraform workflows are stored.",
 				Type:        schema.TypeString,
@@ -550,19 +580,34 @@ func resourceTerraformExecutor() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"nr_version": {
 							Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"version_type": {
 							Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 					},
 				},
 			},
@@ -721,6 +766,11 @@ func resourceTerraformExecutorCreate(c context.Context, d *schema.ResourceData, 
 		if len(x) > 0 {
 			o.SetCloudResource(x)
 		}
+	}
+
+	if v, ok := d.GetOk("command"); ok {
+		x := (v.(string))
+		o.SetCommand(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -1010,6 +1060,10 @@ func resourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, me
 		return diag.Errorf("error occurred while setting property CloudResource in TerraformExecutor object: %s", err.Error())
 	}
 
+	if err := d.Set("command", (s.GetCommand())); err != nil {
+		return diag.Errorf("error occurred while setting property Command in TerraformExecutor object: %s", err.Error())
+	}
+
 	if err := d.Set("create_time", (s.GetCreateTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property CreateTime in TerraformExecutor object: %s", err.Error())
 	}
@@ -1222,6 +1276,12 @@ func resourceTerraformExecutorUpdate(c context.Context, d *schema.ResourceData, 
 			x = append(x, *o)
 		}
 		o.SetCloudResource(x)
+	}
+
+	if d.HasChange("command") {
+		v := d.Get("command")
+		x := (v.(string))
+		o.SetCommand(x)
 	}
 
 	if d.HasChange("moid") {

@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **N1MaxPower** | Pointer to **int64** | This field identifies the available power when PSUs are in N+1 mode in Watts. | [optional] [readonly] 
 **N2MaxPower** | Pointer to **int64** | This field identifies the available power when PSUs are in N+2 mode in Watts. | [optional] [readonly] 
 **NonRedundantMaxPower** | Pointer to **int64** | This field identifies the available power when PSUs are in non-redundant mode in Watts. | [optional] [readonly] 
+**PowerRebalancing** | Pointer to **string** | The status of power rebalancing mode of the chassis power state. * &#x60;Enabled&#x60; - Set the value to Enabled. * &#x60;Disabled&#x60; - Set the value to Disabled. | [optional] [readonly] [default to "Enabled"]
+**PowerSaveMode** | Pointer to **string** | The status of power save mode of the chassis power state. * &#x60;Enabled&#x60; - Set the value to Enabled. * &#x60;Disabled&#x60; - Set the value to Disabled. | [optional] [readonly] [default to "Enabled"]
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -249,6 +251,56 @@ SetNonRedundantMaxPower sets NonRedundantMaxPower field to given value.
 `func (o *PowerControlState) HasNonRedundantMaxPower() bool`
 
 HasNonRedundantMaxPower returns a boolean if a field has been set.
+
+### GetPowerRebalancing
+
+`func (o *PowerControlState) GetPowerRebalancing() string`
+
+GetPowerRebalancing returns the PowerRebalancing field if non-nil, zero value otherwise.
+
+### GetPowerRebalancingOk
+
+`func (o *PowerControlState) GetPowerRebalancingOk() (*string, bool)`
+
+GetPowerRebalancingOk returns a tuple with the PowerRebalancing field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPowerRebalancing
+
+`func (o *PowerControlState) SetPowerRebalancing(v string)`
+
+SetPowerRebalancing sets PowerRebalancing field to given value.
+
+### HasPowerRebalancing
+
+`func (o *PowerControlState) HasPowerRebalancing() bool`
+
+HasPowerRebalancing returns a boolean if a field has been set.
+
+### GetPowerSaveMode
+
+`func (o *PowerControlState) GetPowerSaveMode() string`
+
+GetPowerSaveMode returns the PowerSaveMode field if non-nil, zero value otherwise.
+
+### GetPowerSaveModeOk
+
+`func (o *PowerControlState) GetPowerSaveModeOk() (*string, bool)`
+
+GetPowerSaveModeOk returns a tuple with the PowerSaveMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPowerSaveMode
+
+`func (o *PowerControlState) SetPowerSaveMode(v string)`
+
+SetPowerSaveMode sets PowerSaveMode field to given value.
+
+### HasPowerSaveMode
+
+`func (o *PowerControlState) HasPowerSaveMode() bool`
+
+HasPowerSaveMode returns a boolean if a field has been set.
 
 ### GetEquipmentChassis
 

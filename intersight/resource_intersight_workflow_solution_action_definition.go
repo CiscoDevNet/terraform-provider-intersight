@@ -27,7 +27,12 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"action_type": {
 				Description: "Type of actionDefinition which decides on how to trigger the action.\n* `External` - External actions definition can be triggered by enduser to perform actions on the solution. Once action is completed successfully (eg. create/deploy), user cannot re-trigger that action again.\n* `Internal` - Internal action definition is used to trigger periodic actions on the solution instance.\n* `Repetitive` - Repetitive action definition is an external action that can be triggered by enduser to perform repetitive actions (eg. Edit/Update/Perform health check) on the created solution.",
 				Type:        schema.TypeString,
@@ -158,7 +163,12 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"description": {
 				Description: "The description for this action which provides information on what are the pre-requisites to use this action on the solution and what features are supported by this action.",
 				Type:        schema.TypeString,
@@ -169,7 +179,12 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"input_definition": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -213,7 +228,12 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 										Type:        schema.TypeBool,
 										Optional:    true,
 										Computed:    true,
-									},
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
@@ -318,7 +338,12 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -563,7 +588,12 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"solution_definition": {
 				Description: "A reference to a workflowSolutionDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -723,7 +753,12 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"validation_error": {
 							Type:       schema.TypeList,
 							Optional:   true,
@@ -747,13 +782,23 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
-									},
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
 									"field": {
 										Description: "When populated this refers to the input or output field within the workflow or task.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
-									},
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
@@ -765,13 +810,23 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
-									},
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
 									"transition_name": {
 										Description: "When populated this refers to the transition connection that has a problem. When this field has value OnSuccess it means the transition connection OnSuccess for the task has an issue.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
-									},
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
 								},
 							},
 						},
@@ -949,19 +1004,34 @@ func resourceWorkflowSolutionActionDefinition() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"nr_version": {
 							Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"version_type": {
 							Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 					},
 				},
 			},

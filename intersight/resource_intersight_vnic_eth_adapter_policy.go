@@ -26,7 +26,12 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"additional_properties": {
 				Type:             schema.TypeString,
 				Optional:         true,
@@ -155,7 +160,12 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 					},
 				},
 			},
@@ -164,7 +174,12 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"description": {
 				Description: "Description of the policy.",
 				Type:        schema.TypeString,
@@ -175,7 +190,12 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"geneve_enabled": {
 				Description: "GENEVE offload protocol allows you to create logical networks that span physical network boundaries by allowing any information to be encoded in a packet and passed between tunnel endpoints.",
 				Type:        schema.TypeBool,
@@ -246,7 +266,12 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -462,7 +487,13 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "The number of memory regions per adapter. Recommended value = integer power of 2.",
 							Type:        schema.TypeInt,
 							Optional:    true,
-							Default:     131072,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								if v := d.Get("roce_settings.0.enabled").(bool); v == false {
+									return true
+								}
+								return false
+							},
+							Default: 131072,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -474,13 +505,25 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "The number of queue pairs per adapter. Recommended value = integer power of 2.",
 							Type:        schema.TypeInt,
 							Optional:    true,
-							Default:     256,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								if v := d.Get("roce_settings.0.enabled").(bool); v == false {
+									return true
+								}
+								return false
+							},
+							Default: 256,
 						},
 						"resource_groups": {
 							Description: "The number of resource groups per adapter. Recommended value = be an integer power of 2 greater than or equal to the number of CPU cores on the system for optimum performance.",
 							Type:        schema.TypeInt,
 							Optional:    true,
-							Default:     4,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								if v := d.Get("roce_settings.0.enabled").(bool); v == false {
+									return true
+								}
+								return false
+							},
+							Default: 4,
 						},
 						"nr_version": {
 							Description: "Configure RDMA over Converged Ethernet (RoCE) version on the virtual interface. Only RoCEv1 is supported on Cisco VIC 13xx series adapters and only RoCEv2 is supported on Cisco VIC 14xx series adapters.\n* `1` - RDMA over Converged Ethernet Protocol Version 1.\n* `2` - RDMA over Converged Ethernet Protocol Version 2.",
@@ -620,7 +663,12 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -855,19 +903,34 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"nr_version": {
 							Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"version_type": {
 							Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 					},
 				},
 			},

@@ -26,7 +26,12 @@ func resourceWorkflowSolutionActionInstance() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"action": {
 				Description: "Name of the action that needs to be performed on the solution instance.\n* `None` - No action is set, this is the default value for action field.\n* `Validate` - Validation the action instance inputs and run the validation workflows.\n* `Start` - Start a new execution of the action instance.\n* `Retry` - Retry the solution action instance from the beginning.\n* `RetryFailed` - Retry the workflow that has failed from the failure point.\n* `Cancel` - Cancel the core workflow that is in running or waiting state. This action can be used when the workflows are stuck and not progressing.\n* `Stop` - Stop the action instance which is in progress and didn't complete successfully. Use this action to clear the state and then delete the action instance. A completed action cannot be stopped.",
 				Type:        schema.TypeString,
@@ -128,19 +133,34 @@ func resourceWorkflowSolutionActionInstance() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"end_time": {
 				Description: "The time when the action was stopped or completed execution last time.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"input": {
 				Description:      "Inputs for a solution action and the format is specified by input definition of the solution action definition.",
 				Type:             schema.TypeString,
@@ -151,13 +171,23 @@ func resourceWorkflowSolutionActionInstance() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -170,7 +200,12 @@ func resourceWorkflowSolutionActionInstance() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
@@ -268,7 +303,12 @@ func resourceWorkflowSolutionActionInstance() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"solution_action_definition": {
 				Description: "A reference to a workflowSolutionActionDefinition resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -396,13 +436,23 @@ func resourceWorkflowSolutionActionInstance() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"status": {
 				Description: "State of the solution action instance.\n* `NotStarted` - Solution action is not yet started and it is in a draft mode. A solution action instance can be deleted in this state.\n* `Validating` - A validate action has been triggered on the action and until it completes the start action cannot be issued.\n* `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started.\n* `Failed` - The action on the solution failed and can be retried.\n* `Completed` - The action on the solution completed successfully.\n* `Stopping` - The stop action is running on the action instance.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"stop_workflow_info": {
 				Description: "A reference to a workflowWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -617,19 +667,34 @@ func resourceWorkflowSolutionActionInstance() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"nr_version": {
 							Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"version_type": {
 							Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 					},
 				},
 			},

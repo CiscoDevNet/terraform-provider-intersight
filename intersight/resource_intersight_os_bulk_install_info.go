@@ -26,7 +26,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -137,14 +142,24 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"domain_group_moid": {
 				Description: "The DomainGroup ID for this managed object.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"file_content": {
 				Description: "The content of the entire CSV file is stored as value. The content can hold complete OS install parameters in two sections.\nThe first section holds generic information about the OS Install like OS Image, SCU Image etc. The second section holds\nparameters which are specific to each server level data.",
@@ -179,28 +194,48 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"configuration_source": {
 							Description: "Configuration source for the OS Installation.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"install_method": {
 							Description: "The install method to be used for OS installation - vMedia, iPXE.\nOnly vMedia is supported as of now.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"install_target_type": {
 							Description: "The Prefill install Target Name.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -247,21 +282,36 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"scu_image_name": {
 							Description: "The name of the Server Configuration Utilities Image.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"windows_edition": {
 							Description: "The Windows OS edition, this property required only for Windows server.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 					},
 				},
@@ -272,14 +322,24 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -306,7 +366,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"organization": {
 				Description: "A reference to a organizationOrganization resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -635,7 +700,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 																Type:        schema.TypeBool,
 																Optional:    true,
 																Computed:    true,
-																ForceNew:    true,
+																ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+																	if val != nil {
+																		warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+																	}
+																	return
+																}, ForceNew: true,
 															},
 															"object_type": {
 																Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1080,7 +1150,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 										Type:        schema.TypeBool,
 										Optional:    true,
 										Computed:    true,
-										ForceNew:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}, ForceNew: true,
 									},
 									"is_root_password_crypted": {
 										Description: "Enable to indicate Root Password provided is encrypted.",
@@ -1093,7 +1168,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 										Type:        schema.TypeBool,
 										Optional:    true,
 										Computed:    true,
-										ForceNew:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}, ForceNew: true,
 									},
 									"nameserver": {
 										Description: "IP address of the name server to be configured in the OS.",
@@ -1157,7 +1237,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1237,7 +1322,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 					},
 				},
@@ -1293,7 +1383,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -1349,7 +1444,12 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -1363,14 +1463,24 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"step_name": {
 							Description: "The validation step name.\n* `OS Install Schema Validation` - The step to validate the CSV file schema.\n* `OS Image Validation` - The Operating System Image parameter validation step.\n* `SCU Image Validation` - The SCU Image parameter validation step.\n* `Configuration source and file validation` - The Configuration Source and Configuration file validation step.\n* `Server level data validation` - The server level parameters validation.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 					},
 				},
@@ -1500,21 +1610,36 @@ func resourceOsBulkInstallInfo() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"nr_version": {
 							Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"version_type": {
 							Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 					},
 				},

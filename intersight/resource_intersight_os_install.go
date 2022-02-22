@@ -26,7 +26,12 @@ func resourceOsInstall() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"additional_parameters": {
 				Type:       schema.TypeList,
@@ -111,7 +116,12 @@ func resourceOsInstall() *schema.Resource {
 													Type:        schema.TypeBool,
 													Optional:    true,
 													Computed:    true,
-													ForceNew:    true,
+													ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+														if val != nil {
+															warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+														}
+														return
+													}, ForceNew: true,
 												},
 												"object_type": {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -601,7 +611,12 @@ func resourceOsInstall() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"is_root_password_crypted": {
 							Description: "Enable to indicate Root Password provided is encrypted.",
@@ -614,7 +629,12 @@ func resourceOsInstall() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"nameserver": {
 							Description: "IP address of the name server to be configured in the OS.",
@@ -716,7 +736,12 @@ func resourceOsInstall() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"description": {
 				Description: "User provided description about the OS install configuration.",
@@ -729,14 +754,24 @@ func resourceOsInstall() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"error_msg": {
 				Description: "The failure message of the API.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"image": {
 				Description: "A reference to a softwarerepositoryOperatingSystemFile resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -829,7 +864,12 @@ func resourceOsInstall() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -856,7 +896,12 @@ func resourceOsInstall() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"operating_system_parameters": {
 				Description: "Parameters specific to selected OS.",
@@ -1133,7 +1178,12 @@ func resourceOsInstall() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}, ForceNew: true,
 			},
 			"tags": {
 				Type:       schema.TypeList,
@@ -1288,21 +1338,36 @@ func resourceOsInstall() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"nr_version": {
 							Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 						"version_type": {
 							Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}, ForceNew: true,
 						},
 					},
 				},

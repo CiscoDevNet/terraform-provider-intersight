@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5208
+API version: 1.0.9-5313
 Contact: intersight@cisco.com
 */
 
@@ -34,7 +34,11 @@ type PowerControlStateAllOf struct {
 	// This field identifies the available power when PSUs are in N+2 mode in Watts.
 	N2MaxPower *int64 `json:"N2MaxPower,omitempty"`
 	// This field identifies the available power when PSUs are in non-redundant mode in Watts.
-	NonRedundantMaxPower *int64                               `json:"NonRedundantMaxPower,omitempty"`
+	NonRedundantMaxPower *int64 `json:"NonRedundantMaxPower,omitempty"`
+	// The status of power rebalancing mode of the chassis power state. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	PowerRebalancing *string `json:"PowerRebalancing,omitempty"`
+	// The status of power save mode of the chassis power state. * `Enabled` - Set the value to Enabled. * `Disabled` - Set the value to Disabled.
+	PowerSaveMode        *string                              `json:"PowerSaveMode,omitempty"`
 	EquipmentChassis     *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -337,6 +341,70 @@ func (o *PowerControlStateAllOf) SetNonRedundantMaxPower(v int64) {
 	o.NonRedundantMaxPower = &v
 }
 
+// GetPowerRebalancing returns the PowerRebalancing field value if set, zero value otherwise.
+func (o *PowerControlStateAllOf) GetPowerRebalancing() string {
+	if o == nil || o.PowerRebalancing == nil {
+		var ret string
+		return ret
+	}
+	return *o.PowerRebalancing
+}
+
+// GetPowerRebalancingOk returns a tuple with the PowerRebalancing field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PowerControlStateAllOf) GetPowerRebalancingOk() (*string, bool) {
+	if o == nil || o.PowerRebalancing == nil {
+		return nil, false
+	}
+	return o.PowerRebalancing, true
+}
+
+// HasPowerRebalancing returns a boolean if a field has been set.
+func (o *PowerControlStateAllOf) HasPowerRebalancing() bool {
+	if o != nil && o.PowerRebalancing != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPowerRebalancing gets a reference to the given string and assigns it to the PowerRebalancing field.
+func (o *PowerControlStateAllOf) SetPowerRebalancing(v string) {
+	o.PowerRebalancing = &v
+}
+
+// GetPowerSaveMode returns the PowerSaveMode field value if set, zero value otherwise.
+func (o *PowerControlStateAllOf) GetPowerSaveMode() string {
+	if o == nil || o.PowerSaveMode == nil {
+		var ret string
+		return ret
+	}
+	return *o.PowerSaveMode
+}
+
+// GetPowerSaveModeOk returns a tuple with the PowerSaveMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PowerControlStateAllOf) GetPowerSaveModeOk() (*string, bool) {
+	if o == nil || o.PowerSaveMode == nil {
+		return nil, false
+	}
+	return o.PowerSaveMode, true
+}
+
+// HasPowerSaveMode returns a boolean if a field has been set.
+func (o *PowerControlStateAllOf) HasPowerSaveMode() bool {
+	if o != nil && o.PowerSaveMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPowerSaveMode gets a reference to the given string and assigns it to the PowerSaveMode field.
+func (o *PowerControlStateAllOf) SetPowerSaveMode(v string) {
+	o.PowerSaveMode = &v
+}
+
 // GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise.
 func (o *PowerControlStateAllOf) GetEquipmentChassis() EquipmentChassisRelationship {
 	if o == nil || o.EquipmentChassis == nil {
@@ -430,6 +498,12 @@ func (o PowerControlStateAllOf) MarshalJSON() ([]byte, error) {
 	if o.NonRedundantMaxPower != nil {
 		toSerialize["NonRedundantMaxPower"] = o.NonRedundantMaxPower
 	}
+	if o.PowerRebalancing != nil {
+		toSerialize["PowerRebalancing"] = o.PowerRebalancing
+	}
+	if o.PowerSaveMode != nil {
+		toSerialize["PowerSaveMode"] = o.PowerSaveMode
+	}
 	if o.EquipmentChassis != nil {
 		toSerialize["EquipmentChassis"] = o.EquipmentChassis
 	}
@@ -463,6 +537,8 @@ func (o *PowerControlStateAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "N1MaxPower")
 		delete(additionalProperties, "N2MaxPower")
 		delete(additionalProperties, "NonRedundantMaxPower")
+		delete(additionalProperties, "PowerRebalancing")
+		delete(additionalProperties, "PowerSaveMode")
 		delete(additionalProperties, "EquipmentChassis")
 		delete(additionalProperties, "RegisteredDevice")
 		o.AdditionalProperties = additionalProperties

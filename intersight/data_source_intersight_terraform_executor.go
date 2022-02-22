@@ -137,6 +137,11 @@ func dataSourceTerraformExecutor() *schema.Resource {
 				},
 			},
 		},
+		"command": {
+			Description: "Command to be executed during update operation.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -660,6 +665,11 @@ func dataSourceTerraformExecutor() *schema.Resource {
 					},
 				},
 			},
+		},
+		"command": {
+			Description: "Command to be executed during update operation.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
@@ -1227,6 +1237,11 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 		o.SetCloudResource(x)
 	}
 
+	if v, ok := d.GetOk("command"); ok {
+		x := (v.(string))
+		o.SetCommand(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -1680,6 +1695,7 @@ func dataSourceTerraformExecutorRead(c context.Context, d *schema.ResourceData, 
 				temp["class_id"] = (s.GetClassId())
 
 				temp["cloud_resource"] = flattenListTerraformCloudResource(s.GetCloudResource(), d)
+				temp["command"] = (s.GetCommand())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())

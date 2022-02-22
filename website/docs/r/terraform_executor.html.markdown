@@ -27,6 +27,7 @@ This complex property has following sub-properties:
   + `desired_status`:(string) Desiredstatus of the resource if applicable on the cloud. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `resource_id`:(string) Unique id of the resource from the cloud provider. 
+* `command`:(string) Command to be executed during update operation. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 

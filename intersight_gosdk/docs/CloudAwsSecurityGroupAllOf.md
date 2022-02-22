@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **EgressRules** | Pointer to [**[]CloudSecurityGroupRule**](CloudSecurityGroupRule.md) |  | [optional] 
 **IngressRules** | Pointer to [**[]CloudSecurityGroupRule**](CloudSecurityGroupRule.md) |  | [optional] 
 **SecurityGroupTags** | Pointer to [**[]CloudCloudTag**](CloudCloudTag.md) |  | [optional] 
+**AwsBillingUnit** | Pointer to [**CloudAwsBillingUnitRelationship**](CloudAwsBillingUnitRelationship.md) |  | [optional] 
 **Location** | Pointer to [**CloudAwsVpcRelationship**](CloudAwsVpcRelationship.md) |  | [optional] 
 
 ## Methods
@@ -175,6 +176,31 @@ HasSecurityGroupTags returns a boolean if a field has been set.
 `func (o *CloudAwsSecurityGroupAllOf) UnsetSecurityGroupTags()`
 
 UnsetSecurityGroupTags ensures that no value is present for SecurityGroupTags, not even an explicit nil
+### GetAwsBillingUnit
+
+`func (o *CloudAwsSecurityGroupAllOf) GetAwsBillingUnit() CloudAwsBillingUnitRelationship`
+
+GetAwsBillingUnit returns the AwsBillingUnit field if non-nil, zero value otherwise.
+
+### GetAwsBillingUnitOk
+
+`func (o *CloudAwsSecurityGroupAllOf) GetAwsBillingUnitOk() (*CloudAwsBillingUnitRelationship, bool)`
+
+GetAwsBillingUnitOk returns a tuple with the AwsBillingUnit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAwsBillingUnit
+
+`func (o *CloudAwsSecurityGroupAllOf) SetAwsBillingUnit(v CloudAwsBillingUnitRelationship)`
+
+SetAwsBillingUnit sets AwsBillingUnit field to given value.
+
+### HasAwsBillingUnit
+
+`func (o *CloudAwsSecurityGroupAllOf) HasAwsBillingUnit() bool`
+
+HasAwsBillingUnit returns a boolean if a field has been set.
+
 ### GetLocation
 
 `func (o *CloudAwsSecurityGroupAllOf) GetLocation() CloudAwsVpcRelationship`

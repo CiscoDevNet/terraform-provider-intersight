@@ -64,8 +64,8 @@ func dataSourceEquipmentDeviceSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"compute_blade": {
-			Description: "A reference to a computeBlade resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		"compute_rack_unit": {
+			Description: "A reference to a computeRackUnit resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -114,8 +114,8 @@ func dataSourceEquipmentDeviceSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"equipment_fex": {
-			Description: "A reference to a equipmentFex resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		"equipment_chassis": {
+			Description: "A reference to a equipmentChassis resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -509,8 +509,8 @@ func dataSourceEquipmentDeviceSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"compute_blade": {
-			Description: "A reference to a computeBlade resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		"compute_rack_unit": {
+			Description: "A reference to a computeRackUnit resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -559,8 +559,8 @@ func dataSourceEquipmentDeviceSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"equipment_fex": {
-			Description: "A reference to a equipmentFex resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		"equipment_chassis": {
+			Description: "A reference to a equipmentChassis resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -980,8 +980,8 @@ func dataSourceEquipmentDeviceSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetClassId(x)
 	}
 
-	if v, ok := d.GetOk("compute_blade"); ok {
-		p := make([]models.ComputeBladeRelationship, 0, 1)
+	if v, ok := d.GetOk("compute_rack_unit"); ok {
+		p := make([]models.ComputeRackUnitRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -1015,11 +1015,11 @@ func dataSourceEquipmentDeviceSummaryRead(c context.Context, d *schema.ResourceD
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsComputeBladeRelationship(o))
+			p = append(p, models.MoMoRefAsComputeRackUnitRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
-			o.SetComputeBlade(x)
+			o.SetComputeRackUnit(x)
 		}
 	}
 
@@ -1038,8 +1038,8 @@ func dataSourceEquipmentDeviceSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetDomainGroupMoid(x)
 	}
 
-	if v, ok := d.GetOk("equipment_fex"); ok {
-		p := make([]models.EquipmentFexRelationship, 0, 1)
+	if v, ok := d.GetOk("equipment_chassis"); ok {
+		p := make([]models.EquipmentChassisRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -1073,11 +1073,11 @@ func dataSourceEquipmentDeviceSummaryRead(c context.Context, d *schema.ResourceD
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsEquipmentFexRelationship(o))
+			p = append(p, models.MoMoRefAsEquipmentChassisRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
-			o.SetEquipmentFex(x)
+			o.SetEquipmentChassis(x)
 		}
 	}
 
@@ -1445,13 +1445,13 @@ func dataSourceEquipmentDeviceSummaryRead(c context.Context, d *schema.ResourceD
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 
-				temp["compute_blade"] = flattenMapComputeBladeRelationship(s.GetComputeBlade(), d)
+				temp["compute_rack_unit"] = flattenMapComputeRackUnitRelationship(s.GetComputeRackUnit(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
-				temp["equipment_fex"] = flattenMapEquipmentFexRelationship(s.GetEquipmentFex(), d)
+				temp["equipment_chassis"] = flattenMapEquipmentChassisRelationship(s.GetEquipmentChassis(), d)
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 

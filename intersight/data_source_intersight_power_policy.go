@@ -84,6 +84,11 @@ func dataSourcePowerPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"dynamic_rebalancing": {
+			Description: "Sets the Dynamic Power Rebalancing of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -213,6 +218,11 @@ func dataSourcePowerPolicy() *schema.Resource {
 				},
 			},
 		},
+		"power_priority": {
+			Description: "Sets the Power Priority of the System. This field is only supported for Cisco UCS X series servers.\n* `Low` - Set the Power Priority to Low.\n* `Medium` - Set the Power Priority to Medium.\n* `High` - Set the Power Priority to High.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"power_profiling": {
 			Description: "Sets the Power Profiling of the Server. This field is only supported for Cisco UCS X series servers.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
@@ -220,6 +230,11 @@ func dataSourcePowerPolicy() *schema.Resource {
 		},
 		"power_restore_state": {
 			Description: "Sets the Power Restore State of the Server. This field is only supported for Cisco UCS X series servers.\n* `AlwaysOff` - Set the Power Restore Mode to Off.\n* `AlwaysOn` - Set the Power Restore Mode to On.\n* `LastState` - Set the Power Restore Mode to LastState.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"power_save_mode": {
+			Description: "Sets the Power Save mode of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -468,6 +483,11 @@ func dataSourcePowerPolicy() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"dynamic_rebalancing": {
+			Description: "Sets the Dynamic Power Rebalancing of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -597,6 +617,11 @@ func dataSourcePowerPolicy() *schema.Resource {
 				},
 			},
 		},
+		"power_priority": {
+			Description: "Sets the Power Priority of the System. This field is only supported for Cisco UCS X series servers.\n* `Low` - Set the Power Priority to Low.\n* `Medium` - Set the Power Priority to Medium.\n* `High` - Set the Power Priority to High.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"power_profiling": {
 			Description: "Sets the Power Profiling of the Server. This field is only supported for Cisco UCS X series servers.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
@@ -604,6 +629,11 @@ func dataSourcePowerPolicy() *schema.Resource {
 		},
 		"power_restore_state": {
 			Description: "Sets the Power Restore State of the Server. This field is only supported for Cisco UCS X series servers.\n* `AlwaysOff` - Set the Power Restore Mode to Off.\n* `AlwaysOn` - Set the Power Restore Mode to On.\n* `LastState` - Set the Power Restore Mode to LastState.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"power_save_mode": {
+			Description: "Sets the Power Save mode of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -878,6 +908,11 @@ func dataSourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta i
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("dynamic_rebalancing"); ok {
+		x := (v.(string))
+		o.SetDynamicRebalancing(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1035,6 +1070,11 @@ func dataSourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta i
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("power_priority"); ok {
+		x := (v.(string))
+		o.SetPowerPriority(x)
+	}
+
 	if v, ok := d.GetOk("power_profiling"); ok {
 		x := (v.(string))
 		o.SetPowerProfiling(x)
@@ -1043,6 +1083,11 @@ func dataSourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta i
 	if v, ok := d.GetOk("power_restore_state"); ok {
 		x := (v.(string))
 		o.SetPowerRestoreState(x)
+	}
+
+	if v, ok := d.GetOk("power_save_mode"); ok {
+		x := (v.(string))
+		o.SetPowerSaveMode(x)
 	}
 
 	if v, ok := d.GetOk("profiles"); ok {
@@ -1248,6 +1293,7 @@ func dataSourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta i
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["dynamic_rebalancing"] = (s.GetDynamicRebalancing())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
@@ -1260,8 +1306,10 @@ func dataSourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta i
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["power_priority"] = (s.GetPowerPriority())
 				temp["power_profiling"] = (s.GetPowerProfiling())
 				temp["power_restore_state"] = (s.GetPowerRestoreState())
+				temp["power_save_mode"] = (s.GetPowerSaveMode())
 
 				temp["profiles"] = flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)
 				temp["redundancy_mode"] = (s.GetRedundancyMode())

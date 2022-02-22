@@ -201,6 +201,7 @@ func GetResourceMapping() map[string]*schema.Resource {
 		"intersight_kvm_policy":                                              resourceKvmPolicy(),
 		"intersight_kvm_session":                                             resourceKvmSession(),
 		"intersight_kvm_tunnel":                                              resourceKvmTunnel(),
+		"intersight_kvm_tunneled_kvm_policy":                                 resourceKvmTunneledKvmPolicy(),
 		"intersight_license_iks_license_count":                               resourceLicenseIksLicenseCount(),
 		"intersight_license_iwo_license_count":                               resourceLicenseIwoLicenseCount(),
 		"intersight_license_license_info":                                    resourceLicenseLicenseInfo(),

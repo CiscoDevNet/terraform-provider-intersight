@@ -3175,6 +3175,11 @@ docs/KvmTunnelList.md
 docs/KvmTunnelListAllOf.md
 docs/KvmTunnelRelationship.md
 docs/KvmTunnelResponse.md
+docs/KvmTunneledKvmPolicy.md
+docs/KvmTunneledKvmPolicyAllOf.md
+docs/KvmTunneledKvmPolicyList.md
+docs/KvmTunneledKvmPolicyListAllOf.md
+docs/KvmTunneledKvmPolicyResponse.md
 docs/LicenseAccountLicenseData.md
 docs/LicenseAccountLicenseDataAllOf.md
 docs/LicenseAccountLicenseDataList.md
@@ -9244,6 +9249,11 @@ model_kvm_tunnel_list.go
 model_kvm_tunnel_list_all_of.go
 model_kvm_tunnel_relationship.go
 model_kvm_tunnel_response.go
+model_kvm_tunneled_kvm_policy.go
+model_kvm_tunneled_kvm_policy_all_of.go
+model_kvm_tunneled_kvm_policy_list.go
+model_kvm_tunneled_kvm_policy_list_all_of.go
+model_kvm_tunneled_kvm_policy_response.go
 model_license_account_license_data.go
 model_license_account_license_data_all_of.go
 model_license_account_license_data_list.go

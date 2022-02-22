@@ -26,7 +26,12 @@ func resourcePowerPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"additional_properties": {
 				Type:             schema.TypeString,
 				Optional:         true,
@@ -88,7 +93,12 @@ func resourcePowerPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"description": {
 				Description: "Description of the policy.",
 				Type:        schema.TypeString,
@@ -99,13 +109,29 @@ func resourcePowerPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
+			"dynamic_rebalancing": {
+				Description: "Sets the Dynamic Power Rebalancing of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "Enabled",
 			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -251,6 +277,12 @@ func resourcePowerPolicy() *schema.Resource {
 					},
 				},
 			},
+			"power_priority": {
+				Description: "Sets the Power Priority of the System. This field is only supported for Cisco UCS X series servers.\n* `Low` - Set the Power Priority to Low.\n* `Medium` - Set the Power Priority to Medium.\n* `High` - Set the Power Priority to High.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "Low",
+			},
 			"power_profiling": {
 				Description: "Sets the Power Profiling of the Server. This field is only supported for Cisco UCS X series servers.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
 				Type:        schema.TypeString,
@@ -262,6 +294,12 @@ func resourcePowerPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "AlwaysOff",
+			},
+			"power_save_mode": {
+				Description: "Sets the Power Save mode of the System. This option is only supported for Cisco UCS X series Chassis.\n* `Enabled` - Set the value to Enabled.\n* `Disabled` - Set the value to Disabled.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "Enabled",
 			},
 			"profiles": {
 				Description: "An array of relationships to policyAbstractConfigProfile resources.",
@@ -313,7 +351,12 @@ func resourcePowerPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"tags": {
 				Type:       schema.TypeList,
 				Optional:   true,
@@ -448,19 +491,34 @@ func resourcePowerPolicy() *schema.Resource {
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"nr_version": {
 							Description: "The version of the Managed Object, e.g. an incrementing number or a hash id.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 						"version_type": {
 							Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-						},
+							ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+								if val != nil {
+									warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+								}
+								return
+							}},
 					},
 				},
 			},
@@ -494,6 +552,11 @@ func resourcePowerPolicyCreate(c context.Context, d *schema.ResourceData, meta i
 	if v, ok := d.GetOk("description"); ok {
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if v, ok := d.GetOk("dynamic_rebalancing"); ok {
+		x := (v.(string))
+		o.SetDynamicRebalancing(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -551,6 +614,11 @@ func resourcePowerPolicyCreate(c context.Context, d *schema.ResourceData, meta i
 		}
 	}
 
+	if v, ok := d.GetOk("power_priority"); ok {
+		x := (v.(string))
+		o.SetPowerPriority(x)
+	}
+
 	if v, ok := d.GetOk("power_profiling"); ok {
 		x := (v.(string))
 		o.SetPowerProfiling(x)
@@ -559,6 +627,11 @@ func resourcePowerPolicyCreate(c context.Context, d *schema.ResourceData, meta i
 	if v, ok := d.GetOk("power_restore_state"); ok {
 		x := (v.(string))
 		o.SetPowerRestoreState(x)
+	}
+
+	if v, ok := d.GetOk("power_save_mode"); ok {
+		x := (v.(string))
+		o.SetPowerSaveMode(x)
 	}
 
 	if v, ok := d.GetOk("profiles"); ok {
@@ -733,6 +806,10 @@ func resourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta int
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in PowerPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("dynamic_rebalancing", (s.GetDynamicRebalancing())); err != nil {
+		return diag.Errorf("error occurred while setting property DynamicRebalancing in PowerPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in PowerPolicy object: %s", err.Error())
 	}
@@ -765,12 +842,20 @@ func resourcePowerPolicyRead(c context.Context, d *schema.ResourceData, meta int
 		return diag.Errorf("error occurred while setting property PermissionResources in PowerPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("power_priority", (s.GetPowerPriority())); err != nil {
+		return diag.Errorf("error occurred while setting property PowerPriority in PowerPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("power_profiling", (s.GetPowerProfiling())); err != nil {
 		return diag.Errorf("error occurred while setting property PowerProfiling in PowerPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("power_restore_state", (s.GetPowerRestoreState())); err != nil {
 		return diag.Errorf("error occurred while setting property PowerRestoreState in PowerPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("power_save_mode", (s.GetPowerSaveMode())); err != nil {
+		return diag.Errorf("error occurred while setting property PowerSaveMode in PowerPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
@@ -827,6 +912,12 @@ func resourcePowerPolicyUpdate(c context.Context, d *schema.ResourceData, meta i
 		v := d.Get("description")
 		x := (v.(string))
 		o.SetDescription(x)
+	}
+
+	if d.HasChange("dynamic_rebalancing") {
+		v := d.Get("dynamic_rebalancing")
+		x := (v.(string))
+		o.SetDynamicRebalancing(x)
 	}
 
 	if d.HasChange("moid") {
@@ -887,6 +978,12 @@ func resourcePowerPolicyUpdate(c context.Context, d *schema.ResourceData, meta i
 		}
 	}
 
+	if d.HasChange("power_priority") {
+		v := d.Get("power_priority")
+		x := (v.(string))
+		o.SetPowerPriority(x)
+	}
+
 	if d.HasChange("power_profiling") {
 		v := d.Get("power_profiling")
 		x := (v.(string))
@@ -897,6 +994,12 @@ func resourcePowerPolicyUpdate(c context.Context, d *schema.ResourceData, meta i
 		v := d.Get("power_restore_state")
 		x := (v.(string))
 		o.SetPowerRestoreState(x)
+	}
+
+	if d.HasChange("power_save_mode") {
+		v := d.Get("power_save_mode")
+		x := (v.(string))
+		o.SetPowerSaveMode(x)
 	}
 
 	if d.HasChange("profiles") {
