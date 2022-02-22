@@ -118,3 +118,15 @@ resource "intersight_hyperflex_proxy_setting_policy" "hyperflex_proxy_setting_po
   }
   name = "hyperflex_proxy_setting_policy1"
 }
+
+resource "intersight_kubernetes_cluster_profile" "kcp1" {
+  name = "dummy_kcp_tf"
+  organization {
+    object_type = "organization.Organization"
+    moid = var.organization
+  }
+  management_config {
+    ssh_user = "Testing_TF"	
+  }
+}
+
