@@ -130,3 +130,30 @@ resource "intersight_kubernetes_cluster_profile" "kcp1" {
   }
 }
 
+
+resource "intersight_uuidpool_pool" "uuidpool_pool_test" {
+  name             = "uuidpool_pool_test"
+  description      = "uuidpool_pool"
+  assignment_order = "default"
+  prefix           = "123E4567-E89B-42D3"
+  uuid_suffix_blocks {
+    additional_properties = null
+    class_id              = "uuidpool.UuidBlock"
+    object_type           = "uuidpool.UuidBlock"
+    from                  = "E456-1234E89B42AA"
+    #size                  = 100
+    to = "E456-1234E89B430D"
+  }
+    uuid_suffix_blocks {
+    additional_properties = null
+    class_id              = "uuidpool.UuidBlock"
+    object_type           = "uuidpool.UuidBlock"
+    from                  = "E456-1234E89B430E"
+    size                  = 100
+    #to = "E456-1234E89B4371"
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+}
