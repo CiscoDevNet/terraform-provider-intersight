@@ -1223,11 +1223,6 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 	var de diag.Diagnostics
 	var o = models.NewServerProfileWithDefaults()
 
-	if v, ok := d.GetOk("action"); ok {
-		x := (v.(string))
-		o.SetAction(x)
-	}
-
 	if v, ok := d.GetOk("action_params"); ok {
 		x := make([]models.PolicyActionParam, 0)
 		s := v.([]interface{})
@@ -1808,6 +1803,16 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	var deploy_flag bool
+	if v, ok := d.GetOk("action"); ok {
+		x := (v.(string))
+		if x == "Deploy" {
+			deploy_flag = true
+		} else {
+			o.SetAction(x)
+		}
+
+	}
 	r := conn.ApiClient.ServerApi.CreateServerProfile(conn.ctx).ServerProfile(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1817,6 +1822,19 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 			return diag.Errorf("error occurred while creating ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating ServerProfile: %s", responseErr.Error())
+	}
+	if deploy_flag {
+		o.SetAction("Deploy")
+		r := conn.ApiClient.ServerApi.UpdateServerProfile(conn.ctx, d.Id()).ServerProfile(*o)
+		result, _, responseErr := r.Execute()
+		if responseErr != nil {
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while updating ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while updating ServerProfile: %s", responseErr.Error())
+		}
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
