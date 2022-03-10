@@ -1823,6 +1823,8 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		}
 		return diag.Errorf("error occurred while creating ServerProfile: %s", responseErr.Error())
 	}
+	d.SetId(resultMo.GetMoid())
+	log.Printf("Moid: %s", resultMo.GetMoid())
 	if deploy_flag {
 		o.SetAction("Deploy")
 		r := conn.ApiClient.ServerApi.UpdateServerProfile(conn.ctx, d.Id()).ServerProfile(*o)
@@ -1837,8 +1839,6 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		}
 		log.Printf("Moid: %s", result.GetMoid())
 	}
-	log.Printf("Moid: %s", resultMo.GetMoid())
-	d.SetId(resultMo.GetMoid())
 	var waitForCompletion bool
 	if v, ok := d.GetOk("wait_for_completion"); ok {
 		waitForCompletion = v.(bool)
