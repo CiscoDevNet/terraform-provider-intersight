@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **StorageControllerOperation** | Pointer to [**NullableComputeStorageControllerOperation**](ComputeStorageControllerOperation.md) |  | [optional] 
 **StoragePhysicalDriveOperation** | Pointer to [**NullableComputeStoragePhysicalDriveOperation**](ComputeStoragePhysicalDriveOperation.md) |  | [optional] 
 **StorageVirtualDriveOperation** | Pointer to [**NullableComputeStorageVirtualDriveOperation**](ComputeStorageVirtualDriveOperation.md) |  | [optional] 
+**TunneledKvmState** | Pointer to **string** | By default, the tunneled vKVM property appears in Ready state. The property can be configured by performing allowed actions. Once the property is configured, it reverts to Ready state. * &#x60;Ready&#x60; - Tunneled vKVM is ready to be configured on the server. * &#x60;Enable&#x60; - Tunneled vKVM is enabled for the server. * &#x60;Disable&#x60; - Tunneled vKVM is disabled for the server. | [optional] [default to "Ready"]
 **LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **RunningWorkflow** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
@@ -530,6 +531,31 @@ HasStorageVirtualDriveOperation returns a boolean if a field has been set.
 `func (o *ComputeServerSettingAllOf) UnsetStorageVirtualDriveOperation()`
 
 UnsetStorageVirtualDriveOperation ensures that no value is present for StorageVirtualDriveOperation, not even an explicit nil
+### GetTunneledKvmState
+
+`func (o *ComputeServerSettingAllOf) GetTunneledKvmState() string`
+
+GetTunneledKvmState returns the TunneledKvmState field if non-nil, zero value otherwise.
+
+### GetTunneledKvmStateOk
+
+`func (o *ComputeServerSettingAllOf) GetTunneledKvmStateOk() (*string, bool)`
+
+GetTunneledKvmStateOk returns a tuple with the TunneledKvmState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTunneledKvmState
+
+`func (o *ComputeServerSettingAllOf) SetTunneledKvmState(v string)`
+
+SetTunneledKvmState sets TunneledKvmState field to given value.
+
+### HasTunneledKvmState
+
+`func (o *ComputeServerSettingAllOf) HasTunneledKvmState() bool`
+
+HasTunneledKvmState returns a boolean if a field has been set.
+
 ### GetLocatorLed
 
 `func (o *ComputeServerSettingAllOf) GetLocatorLed() EquipmentLocatorLedRelationship`

@@ -154,41 +154,6 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"equipment_chassis": {
-			Description: "A reference to a equipmentChassis resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
 		"fault_summary": {
 			Description: "The fault summary for the server.",
 			Type:        schema.TypeInt,
@@ -353,7 +318,7 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 			Optional:    true,
 		},
 		"name": {
-			Description: "The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC).\nWhen this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect.\nWhen this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller.",
+			Description: "The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -617,6 +582,11 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 		"total_memory": {
 			Description: "The total memory available on the server.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"tunneled_kvm": {
+			Description: "The Tunneled vKVM status of the server.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"user_label": {
@@ -882,41 +852,6 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
-		"equipment_chassis": {
-			Description: "A reference to a equipmentChassis resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-			Type:        schema.TypeList,
-			MaxItems:    1,
-			Optional:    true,
-			Elem: &schema.Resource{
-				Schema: map[string]*schema.Schema{
-					"additional_properties": {
-						Type:             schema.TypeString,
-						Optional:         true,
-						DiffSuppressFunc: SuppressDiffAdditionProps,
-					},
-					"class_id": {
-						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"moid": {
-						Description: "The Moid of the referenced REST resource.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"object_type": {
-						Description: "The fully-qualified name of the remote type referred by this relationship.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-					"selector": {
-						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-						Type:        schema.TypeString,
-						Optional:    true,
-					},
-				},
-			},
-		},
 		"fault_summary": {
 			Description: "The fault summary for the server.",
 			Type:        schema.TypeInt,
@@ -1081,7 +1016,7 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 			Optional:    true,
 		},
 		"name": {
-			Description: "The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC).\nWhen this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect.\nWhen this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller.",
+			Description: "The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1345,6 +1280,11 @@ func dataSourceComputePhysicalSummary() *schema.Resource {
 		"total_memory": {
 			Description: "The total memory available on the server.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"tunneled_kvm": {
+			Description: "The Tunneled vKVM status of the server.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"user_label": {
@@ -1642,49 +1582,6 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
-	}
-
-	if v, ok := d.GetOk("equipment_chassis"); ok {
-		p := make([]models.EquipmentChassisRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsEquipmentChassisRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetEquipmentChassis(x)
-		}
 	}
 
 	if v, ok := d.GetOkExists("fault_summary"); ok {
@@ -2119,6 +2016,11 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 		o.SetTotalMemory(x)
 	}
 
+	if v, ok := d.GetOkExists("tunneled_kvm"); ok {
+		x := (v.(bool))
+		o.SetTunneledKvm(x)
+	}
+
 	if v, ok := d.GetOk("user_label"); ok {
 		x := (v.(string))
 		o.SetUserLabel(x)
@@ -2263,8 +2165,6 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
-
-				temp["equipment_chassis"] = flattenMapEquipmentChassisRelationship(s.GetEquipmentChassis(), d)
 				temp["fault_summary"] = (s.GetFaultSummary())
 				temp["firmware"] = (s.GetFirmware())
 				temp["hardware_uuid"] = (s.GetHardwareUuid())
@@ -2316,6 +2216,7 @@ func dataSourceComputePhysicalSummaryRead(c context.Context, d *schema.ResourceD
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["topology_scan_status"] = (s.GetTopologyScanStatus())
 				temp["total_memory"] = (s.GetTotalMemory())
+				temp["tunneled_kvm"] = (s.GetTunneledKvm())
 				temp["user_label"] = (s.GetUserLabel())
 				temp["uuid"] = (s.GetUuid())
 				temp["vendor"] = (s.GetVendor())

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "kvm.Session"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "kvm.Session"]
 **KvmLaunchUrlPath** | Pointer to **string** | One time URL that is used to launch the KVM console. | [optional] 
+**KvmSessionId** | Pointer to **string** | Unique ID of the KVM Session URI. | [optional] 
 **OneTimePassword** | Pointer to **string** | Temporary one-time password for vKVM access. | [optional] 
 **SsoSupported** | Pointer to **bool** | Indicates if vKVM SSO is supported on the server. | [optional] [readonly] 
 **Username** | Pointer to **string** | Username used for vKVM access. | [optional] 
@@ -97,6 +98,31 @@ SetKvmLaunchUrlPath sets KvmLaunchUrlPath field to given value.
 `func (o *KvmSessionAllOf) HasKvmLaunchUrlPath() bool`
 
 HasKvmLaunchUrlPath returns a boolean if a field has been set.
+
+### GetKvmSessionId
+
+`func (o *KvmSessionAllOf) GetKvmSessionId() string`
+
+GetKvmSessionId returns the KvmSessionId field if non-nil, zero value otherwise.
+
+### GetKvmSessionIdOk
+
+`func (o *KvmSessionAllOf) GetKvmSessionIdOk() (*string, bool)`
+
+GetKvmSessionIdOk returns a tuple with the KvmSessionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKvmSessionId
+
+`func (o *KvmSessionAllOf) SetKvmSessionId(v string)`
+
+SetKvmSessionId sets KvmSessionId field to given value.
+
+### HasKvmSessionId
+
+`func (o *KvmSessionAllOf) HasKvmSessionId() bool`
+
+HasKvmSessionId returns a boolean if a field has been set.
 
 ### GetOneTimePassword
 

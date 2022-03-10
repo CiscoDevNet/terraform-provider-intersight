@@ -18,7 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Short description about the host. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
-* `host_group_id`:(string) ID of the host group. 
+* `host_group_id`:(string) ID of the host group for this host. 
 * `host_group_number`:(int) Host group number for this host. 
 * `is_chap_mutual`:(bool) Mutual CHAP setting that is Enabled or Disabled. 
 * `iscsi_name`:(string) IQN (iSCSI qualified name). Can be up to 255 characters long. 

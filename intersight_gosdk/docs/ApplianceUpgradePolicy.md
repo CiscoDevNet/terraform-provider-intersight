@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **IsSynced** | Pointer to **bool** | Flag to indicate software upgrade setting is synchronized with Intersight SaaS. | [optional] [readonly] 
 **ManualInstallationStartTime** | Pointer to **time.Time** | Intersight Appliance manual upgrade start time. | [optional] 
 **Schedule** | Pointer to [**NullableOnpremSchedule**](OnpremSchedule.md) |  | [optional] 
-**SoftwareDownloadType** | Pointer to **string** | SoftwareDownloadType is used to indicate the kind of software download. * &#x60;connected&#x60; - Indicates if the upgrade service is set to upload software to latest version automatically. * &#x60;manual&#x60; - Indicates if the upgrade service is set to upload software to user picked verison manually . | [optional] [default to "connected"]
+**SoftwareDownloadType** | Pointer to **string** | SoftwareDownloadType is used to indicate the kind of software download. * &#x60;unknown&#x60; - Indicates user setting of upgrade service to unknown. * &#x60;connected&#x60; - Indicates if the upgrade service is set to upload software to latest version automatically. * &#x60;manual&#x60; - Indicates if the upgrade service is set to upload software to user picked verison manually. | [optional] [default to "unknown"]
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
 
 ## Methods

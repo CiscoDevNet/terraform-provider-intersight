@@ -84,6 +84,16 @@ func dataSourceNiatelemetryHttpsAclContractDetails() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"mgmt_instp_dn": {
+			Description: "Mgmt Inst Dn of the HTTPS ACL contract children MOs for APIC.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mgmt_subnet_addresses": {
+			Description: "Mgmt subnet address of the HTTPS ACL contract children MOs for APIC.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -431,6 +441,16 @@ func dataSourceNiatelemetryHttpsAclContractDetails() *schema.Resource {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mgmt_instp_dn": {
+			Description: "Mgmt Inst Dn of the HTTPS ACL contract children MOs for APIC.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"mgmt_subnet_addresses": {
+			Description: "Mgmt subnet address of the HTTPS ACL contract children MOs for APIC.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -810,6 +830,16 @@ func dataSourceNiatelemetryHttpsAclContractDetailsRead(c context.Context, d *sch
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("mgmt_instp_dn"); ok {
+		x := (v.(string))
+		o.SetMgmtInstpDn(x)
+	}
+
+	if v, ok := d.GetOk("mgmt_subnet_addresses"); ok {
+		x := (v.(string))
+		o.SetMgmtSubnetAddresses(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1140,6 +1170,8 @@ func dataSourceNiatelemetryHttpsAclContractDetailsRead(c context.Context, d *sch
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["mgmt_instp_dn"] = (s.GetMgmtInstpDn())
+				temp["mgmt_subnet_addresses"] = (s.GetMgmtSubnetAddresses())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

@@ -24,6 +24,8 @@ The following arguments can be used to get data of already created objects in In
 * `fibre_channel_scsi_ioq_limit`:(int) The number of SCSI I/O Queue resources to allocate. 
 * `is_azure_qos_supported`:(bool) Indicates that the Azure Stack Host QoS feature is supported by this adapter. 
 * `is_geneve_supported`:(bool) Indicates that the GENEVE offload feature is supported by this adapter. 
+* `max_eth_rx_ring_size`:(int) Maximum Ring Size value for vNIC Receive Queue. 
+* `max_eth_tx_ring_size`:(int) Maximum Ring Size value for vNIC Transmit Queue. 
 * `max_rocev2_interfaces`:(int) Maximum number of vNIC interfaces that can be RoCEv2 enabled. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 

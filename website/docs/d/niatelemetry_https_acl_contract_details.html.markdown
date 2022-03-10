@@ -18,6 +18,8 @@ The following arguments can be used to get data of already created objects in In
 * `contract_name`:(string) Name of HTTPS ACL contract for APIC. 
 * `create_time`:(string) The time when this managed object was created. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `mgmt_instp_dn`:(string) Mgmt Inst Dn of the HTTPS ACL contract children MOs for APIC. 
+* `mgmt_subnet_addresses`:(string) Mgmt subnet address of the HTTPS ACL contract children MOs for APIC. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `provider_dn`:(string) Provider dn of the HTTPS ACL contract children MOs for APIC. 

@@ -429,6 +429,8 @@ docs/AssetPrivateKeyCredential.md
 docs/AssetPrivateKeyCredentialAllOf.md
 docs/AssetProductInformation.md
 docs/AssetProductInformationAllOf.md
+docs/AssetScopedTargetConnection.md
+docs/AssetScopedTargetConnectionAllOf.md
 docs/AssetService.md
 docs/AssetServiceAllOf.md
 docs/AssetServiceNowCredential.md
@@ -491,6 +493,8 @@ docs/AssetWorkloadOptimizerMicrosoftAzureEnterpriseAgreementOptions.md
 docs/AssetWorkloadOptimizerMicrosoftAzureEnterpriseAgreementOptionsAllOf.md
 docs/AssetWorkloadOptimizerMicrosoftAzureServicePrincipalOptions.md
 docs/AssetWorkloadOptimizerMicrosoftAzureServicePrincipalOptionsAllOf.md
+docs/AssetWorkloadOptimizerMicrosoftSqlServerOptions.md
+docs/AssetWorkloadOptimizerMicrosoftSqlServerOptionsAllOf.md
 docs/AssetWorkloadOptimizerNewRelicOptions.md
 docs/AssetWorkloadOptimizerNewRelicOptionsAllOf.md
 docs/AssetWorkloadOptimizerOpenStackOptions.md
@@ -1197,6 +1201,7 @@ docs/ConnectorStreamAcknowledgeAllOf.md
 docs/ConnectorStreamInput.md
 docs/ConnectorStreamInputAllOf.md
 docs/ConnectorStreamKeepalive.md
+docs/ConnectorStreamKeepaliveAllOf.md
 docs/ConnectorStreamMessage.md
 docs/ConnectorStreamMessageAllOf.md
 docs/ConnectorTargetChangeMessage.md
@@ -3680,6 +3685,11 @@ docs/NiatelemetryFabricModuleDetailsAllOf.md
 docs/NiatelemetryFabricModuleDetailsList.md
 docs/NiatelemetryFabricModuleDetailsListAllOf.md
 docs/NiatelemetryFabricModuleDetailsResponse.md
+docs/NiatelemetryFabricNodeControlDetails.md
+docs/NiatelemetryFabricNodeControlDetailsAllOf.md
+docs/NiatelemetryFabricNodeControlDetailsList.md
+docs/NiatelemetryFabricNodeControlDetailsListAllOf.md
+docs/NiatelemetryFabricNodeControlDetailsResponse.md
 docs/NiatelemetryFabricPodProfile.md
 docs/NiatelemetryFabricPodProfileAllOf.md
 docs/NiatelemetryFabricPodProfileList.md
@@ -3722,6 +3732,11 @@ docs/NiatelemetryHttpsAclFilterDetailsListAllOf.md
 docs/NiatelemetryHttpsAclFilterDetailsResponse.md
 docs/NiatelemetryImageDetail.md
 docs/NiatelemetryImageDetailAllOf.md
+docs/NiatelemetryInsightGroupDetails.md
+docs/NiatelemetryInsightGroupDetailsAllOf.md
+docs/NiatelemetryInsightGroupDetailsList.md
+docs/NiatelemetryInsightGroupDetailsListAllOf.md
+docs/NiatelemetryInsightGroupDetailsResponse.md
 docs/NiatelemetryInterface.md
 docs/NiatelemetryInterfaceAllOf.md
 docs/NiatelemetryInterfaceElement.md
@@ -5897,6 +5912,8 @@ docs/VnicPlacementSettings.md
 docs/VnicPlacementSettingsAllOf.md
 docs/VnicPlogiSettings.md
 docs/VnicPlogiSettingsAllOf.md
+docs/VnicPtpSettings.md
+docs/VnicPtpSettingsAllOf.md
 docs/VnicRoceSettings.md
 docs/VnicRoceSettingsAllOf.md
 docs/VnicRssHashSettings.md
@@ -5935,6 +5952,8 @@ docs/VrfVrfList.md
 docs/VrfVrfListAllOf.md
 docs/VrfVrfRelationship.md
 docs/VrfVrfResponse.md
+docs/WorkflowAbstractLoopTask.md
+docs/WorkflowAbstractLoopTaskAllOf.md
 docs/WorkflowAbstractWorkerTask.md
 docs/WorkflowAbstractWorkerTaskAllOf.md
 docs/WorkflowActionWorkflowDefinition.md
@@ -6076,6 +6095,8 @@ docs/WorkflowRollbackWorkflowTask.md
 docs/WorkflowRollbackWorkflowTaskAllOf.md
 docs/WorkflowSelectorProperty.md
 docs/WorkflowSelectorPropertyAllOf.md
+docs/WorkflowSerialLoopTask.md
+docs/WorkflowSerialLoopTaskAllOf.md
 docs/WorkflowSolutionActionDefinition.md
 docs/WorkflowSolutionActionDefinitionAllOf.md
 docs/WorkflowSolutionActionDefinitionList.md
@@ -6145,6 +6166,8 @@ docs/WorkflowTaskInfoList.md
 docs/WorkflowTaskInfoListAllOf.md
 docs/WorkflowTaskInfoRelationship.md
 docs/WorkflowTaskInfoResponse.md
+docs/WorkflowTaskLoopInfo.md
+docs/WorkflowTaskLoopInfoAllOf.md
 docs/WorkflowTaskMetadata.md
 docs/WorkflowTaskMetadataAllOf.md
 docs/WorkflowTaskMetadataList.md
@@ -6539,6 +6562,8 @@ model_asset_private_key_credential.go
 model_asset_private_key_credential_all_of.go
 model_asset_product_information.go
 model_asset_product_information_all_of.go
+model_asset_scoped_target_connection.go
+model_asset_scoped_target_connection_all_of.go
 model_asset_service.go
 model_asset_service_all_of.go
 model_asset_service_now_credential.go
@@ -6601,6 +6626,8 @@ model_asset_workload_optimizer_microsoft_azure_enterprise_agreement_options.go
 model_asset_workload_optimizer_microsoft_azure_enterprise_agreement_options_all_of.go
 model_asset_workload_optimizer_microsoft_azure_service_principal_options.go
 model_asset_workload_optimizer_microsoft_azure_service_principal_options_all_of.go
+model_asset_workload_optimizer_microsoft_sql_server_options.go
+model_asset_workload_optimizer_microsoft_sql_server_options_all_of.go
 model_asset_workload_optimizer_new_relic_options.go
 model_asset_workload_optimizer_new_relic_options_all_of.go
 model_asset_workload_optimizer_open_stack_options.go
@@ -7297,6 +7324,7 @@ model_connector_stream_acknowledge_all_of.go
 model_connector_stream_input.go
 model_connector_stream_input_all_of.go
 model_connector_stream_keepalive.go
+model_connector_stream_keepalive_all_of.go
 model_connector_stream_message.go
 model_connector_stream_message_all_of.go
 model_connector_target_change_message.go
@@ -9744,6 +9772,11 @@ model_niatelemetry_fabric_module_details_all_of.go
 model_niatelemetry_fabric_module_details_list.go
 model_niatelemetry_fabric_module_details_list_all_of.go
 model_niatelemetry_fabric_module_details_response.go
+model_niatelemetry_fabric_node_control_details.go
+model_niatelemetry_fabric_node_control_details_all_of.go
+model_niatelemetry_fabric_node_control_details_list.go
+model_niatelemetry_fabric_node_control_details_list_all_of.go
+model_niatelemetry_fabric_node_control_details_response.go
 model_niatelemetry_fabric_pod_profile.go
 model_niatelemetry_fabric_pod_profile_all_of.go
 model_niatelemetry_fabric_pod_profile_list.go
@@ -9786,6 +9819,11 @@ model_niatelemetry_https_acl_filter_details_list_all_of.go
 model_niatelemetry_https_acl_filter_details_response.go
 model_niatelemetry_image_detail.go
 model_niatelemetry_image_detail_all_of.go
+model_niatelemetry_insight_group_details.go
+model_niatelemetry_insight_group_details_all_of.go
+model_niatelemetry_insight_group_details_list.go
+model_niatelemetry_insight_group_details_list_all_of.go
+model_niatelemetry_insight_group_details_response.go
 model_niatelemetry_interface.go
 model_niatelemetry_interface_all_of.go
 model_niatelemetry_interface_element.go
@@ -11918,6 +11956,8 @@ model_vnic_placement_settings.go
 model_vnic_placement_settings_all_of.go
 model_vnic_plogi_settings.go
 model_vnic_plogi_settings_all_of.go
+model_vnic_ptp_settings.go
+model_vnic_ptp_settings_all_of.go
 model_vnic_roce_settings.go
 model_vnic_roce_settings_all_of.go
 model_vnic_rss_hash_settings.go
@@ -11955,6 +11995,8 @@ model_vrf_vrf_list.go
 model_vrf_vrf_list_all_of.go
 model_vrf_vrf_relationship.go
 model_vrf_vrf_response.go
+model_workflow_abstract_loop_task.go
+model_workflow_abstract_loop_task_all_of.go
 model_workflow_abstract_worker_task.go
 model_workflow_abstract_worker_task_all_of.go
 model_workflow_action_workflow_definition.go
@@ -12095,6 +12137,8 @@ model_workflow_rollback_workflow_task.go
 model_workflow_rollback_workflow_task_all_of.go
 model_workflow_selector_property.go
 model_workflow_selector_property_all_of.go
+model_workflow_serial_loop_task.go
+model_workflow_serial_loop_task_all_of.go
 model_workflow_solution_action_definition.go
 model_workflow_solution_action_definition_all_of.go
 model_workflow_solution_action_definition_list.go
@@ -12164,6 +12208,8 @@ model_workflow_task_info_list.go
 model_workflow_task_info_list_all_of.go
 model_workflow_task_info_relationship.go
 model_workflow_task_info_response.go
+model_workflow_task_loop_info.go
+model_workflow_task_loop_info_all_of.go
 model_workflow_task_metadata.go
 model_workflow_task_metadata_all_of.go
 model_workflow_task_metadata_list.go

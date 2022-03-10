@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5313
+API version: 1.0.9-5517
 Contact: intersight@cisco.com
 */
 
@@ -70,6 +70,8 @@ type WorkflowWorkflowInfoAllOf struct {
 	UserActionRequired *bool `json:"UserActionRequired,omitempty"`
 	// The user identifier which indicates the user that started this workflow.
 	UserId *string `json:"UserId,omitempty"`
+	// All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.
+	Variable interface{} `json:"Variable,omitempty"`
 	// Denotes the reason workflow is in waiting status. * `None` - Wait reason is none, which indicates there is no reason for the waiting state. * `GatherTasks` - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * `Duplicate` - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * `RateLimit` - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * `WaitTask` - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * `PendingRetryFailed` - Wait reason when the workflow is pending a RetryFailed action. * `WaitingToStart` - Workflow is waiting to start on workflow engine.
 	WaitReason  *string                     `json:"WaitReason,omitempty"`
 	WorkflowCtx NullableWorkflowWorkflowCtx `json:"WorkflowCtx,omitempty"`
@@ -1002,6 +1004,39 @@ func (o *WorkflowWorkflowInfoAllOf) SetUserId(v string) {
 	o.UserId = &v
 }
 
+// GetVariable returns the Variable field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowWorkflowInfoAllOf) GetVariable() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.Variable
+}
+
+// GetVariableOk returns a tuple with the Variable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowWorkflowInfoAllOf) GetVariableOk() (*interface{}, bool) {
+	if o == nil || o.Variable == nil {
+		return nil, false
+	}
+	return &o.Variable, true
+}
+
+// HasVariable returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfoAllOf) HasVariable() bool {
+	if o != nil && o.Variable != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVariable gets a reference to the given interface{} and assigns it to the Variable field.
+func (o *WorkflowWorkflowInfoAllOf) SetVariable(v interface{}) {
+	o.Variable = v
+}
+
 // GetWaitReason returns the WaitReason field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfoAllOf) GetWaitReason() string {
 	if o == nil || o.WaitReason == nil {
@@ -1513,6 +1548,9 @@ func (o WorkflowWorkflowInfoAllOf) MarshalJSON() ([]byte, error) {
 	if o.UserId != nil {
 		toSerialize["UserId"] = o.UserId
 	}
+	if o.Variable != nil {
+		toSerialize["Variable"] = o.Variable
+	}
 	if o.WaitReason != nil {
 		toSerialize["WaitReason"] = o.WaitReason
 	}
@@ -1597,6 +1635,7 @@ func (o *WorkflowWorkflowInfoAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "UserActionRequired")
 		delete(additionalProperties, "UserId")
+		delete(additionalProperties, "Variable")
 		delete(additionalProperties, "WaitReason")
 		delete(additionalProperties, "WorkflowCtx")
 		delete(additionalProperties, "WorkflowMetaType")

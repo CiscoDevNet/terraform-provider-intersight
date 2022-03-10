@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5313
+API version: 1.0.9-5517
 Contact: intersight@cisco.com
 */
 
@@ -23,6 +23,8 @@ type NiatelemetryNexusDashboardsAllOf struct {
 	ObjectType string `json:"ObjectType"`
 	// Nexus Dashboard can onboard multiple APIC clusters/sites.
 	ClusterName *string `json:"ClusterName,omitempty"`
+	// UUID of the Nexus Dashboard cluster.
+	ClusterUuid *string `json:"ClusterUuid,omitempty"`
 	// Dn of the objects present for Nexus Dashboard devices.
 	Dn *string `json:"Dn,omitempty"`
 	// Health of Nexus Dashboard cluster.
@@ -35,6 +37,10 @@ type NiatelemetryNexusDashboardsAllOf struct {
 	NdVersion *string `json:"NdVersion,omitempty"`
 	// Number of applications installed in the Nexus Dashboard.
 	NumberOfApps *int64 `json:"NumberOfApps,omitempty"`
+	// Number of total insight groups in ND.
+	NumberOfInsightGroups *int64 `json:"NumberOfInsightGroups,omitempty"`
+	// Number of total NIR dashboards in ND.
+	NumberOfNirDashboards *int64 `json:"NumberOfNirDashboards,omitempty"`
 	// Number of total schemas in Multi-Site Orchestrator.
 	NumberOfSchemasInMso *int64 `json:"NumberOfSchemasInMso,omitempty"`
 	// Number of sites in Multi-Site Orchestrator.
@@ -154,6 +160,38 @@ func (o *NiatelemetryNexusDashboardsAllOf) HasClusterName() bool {
 // SetClusterName gets a reference to the given string and assigns it to the ClusterName field.
 func (o *NiatelemetryNexusDashboardsAllOf) SetClusterName(v string) {
 	o.ClusterName = &v
+}
+
+// GetClusterUuid returns the ClusterUuid field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboardsAllOf) GetClusterUuid() string {
+	if o == nil || o.ClusterUuid == nil {
+		var ret string
+		return ret
+	}
+	return *o.ClusterUuid
+}
+
+// GetClusterUuidOk returns a tuple with the ClusterUuid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboardsAllOf) GetClusterUuidOk() (*string, bool) {
+	if o == nil || o.ClusterUuid == nil {
+		return nil, false
+	}
+	return o.ClusterUuid, true
+}
+
+// HasClusterUuid returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboardsAllOf) HasClusterUuid() bool {
+	if o != nil && o.ClusterUuid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClusterUuid gets a reference to the given string and assigns it to the ClusterUuid field.
+func (o *NiatelemetryNexusDashboardsAllOf) SetClusterUuid(v string) {
+	o.ClusterUuid = &v
 }
 
 // GetDn returns the Dn field value if set, zero value otherwise.
@@ -346,6 +384,70 @@ func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfApps() bool {
 // SetNumberOfApps gets a reference to the given int64 and assigns it to the NumberOfApps field.
 func (o *NiatelemetryNexusDashboardsAllOf) SetNumberOfApps(v int64) {
 	o.NumberOfApps = &v
+}
+
+// GetNumberOfInsightGroups returns the NumberOfInsightGroups field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfInsightGroups() int64 {
+	if o == nil || o.NumberOfInsightGroups == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NumberOfInsightGroups
+}
+
+// GetNumberOfInsightGroupsOk returns a tuple with the NumberOfInsightGroups field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfInsightGroupsOk() (*int64, bool) {
+	if o == nil || o.NumberOfInsightGroups == nil {
+		return nil, false
+	}
+	return o.NumberOfInsightGroups, true
+}
+
+// HasNumberOfInsightGroups returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfInsightGroups() bool {
+	if o != nil && o.NumberOfInsightGroups != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNumberOfInsightGroups gets a reference to the given int64 and assigns it to the NumberOfInsightGroups field.
+func (o *NiatelemetryNexusDashboardsAllOf) SetNumberOfInsightGroups(v int64) {
+	o.NumberOfInsightGroups = &v
+}
+
+// GetNumberOfNirDashboards returns the NumberOfNirDashboards field value if set, zero value otherwise.
+func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfNirDashboards() int64 {
+	if o == nil || o.NumberOfNirDashboards == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NumberOfNirDashboards
+}
+
+// GetNumberOfNirDashboardsOk returns a tuple with the NumberOfNirDashboards field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfNirDashboardsOk() (*int64, bool) {
+	if o == nil || o.NumberOfNirDashboards == nil {
+		return nil, false
+	}
+	return o.NumberOfNirDashboards, true
+}
+
+// HasNumberOfNirDashboards returns a boolean if a field has been set.
+func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfNirDashboards() bool {
+	if o != nil && o.NumberOfNirDashboards != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNumberOfNirDashboards gets a reference to the given int64 and assigns it to the NumberOfNirDashboards field.
+func (o *NiatelemetryNexusDashboardsAllOf) SetNumberOfNirDashboards(v int64) {
+	o.NumberOfNirDashboards = &v
 }
 
 // GetNumberOfSchemasInMso returns the NumberOfSchemasInMso field value if set, zero value otherwise.
@@ -583,6 +685,9 @@ func (o NiatelemetryNexusDashboardsAllOf) MarshalJSON() ([]byte, error) {
 	if o.ClusterName != nil {
 		toSerialize["ClusterName"] = o.ClusterName
 	}
+	if o.ClusterUuid != nil {
+		toSerialize["ClusterUuid"] = o.ClusterUuid
+	}
 	if o.Dn != nil {
 		toSerialize["Dn"] = o.Dn
 	}
@@ -600,6 +705,12 @@ func (o NiatelemetryNexusDashboardsAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.NumberOfApps != nil {
 		toSerialize["NumberOfApps"] = o.NumberOfApps
+	}
+	if o.NumberOfInsightGroups != nil {
+		toSerialize["NumberOfInsightGroups"] = o.NumberOfInsightGroups
+	}
+	if o.NumberOfNirDashboards != nil {
+		toSerialize["NumberOfNirDashboards"] = o.NumberOfNirDashboards
 	}
 	if o.NumberOfSchemasInMso != nil {
 		toSerialize["NumberOfSchemasInMso"] = o.NumberOfSchemasInMso
@@ -643,12 +754,15 @@ func (o *NiatelemetryNexusDashboardsAllOf) UnmarshalJSON(bytes []byte) (err erro
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "ClusterName")
+		delete(additionalProperties, "ClusterUuid")
 		delete(additionalProperties, "Dn")
 		delete(additionalProperties, "IsClusterHealthy")
 		delete(additionalProperties, "NdClusterSize")
 		delete(additionalProperties, "NdType")
 		delete(additionalProperties, "NdVersion")
 		delete(additionalProperties, "NumberOfApps")
+		delete(additionalProperties, "NumberOfInsightGroups")
+		delete(additionalProperties, "NumberOfNirDashboards")
 		delete(additionalProperties, "NumberOfSchemasInMso")
 		delete(additionalProperties, "NumberOfSitesInMso")
 		delete(additionalProperties, "NumberOfSitesServiced")

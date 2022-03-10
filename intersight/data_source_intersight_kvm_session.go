@@ -124,6 +124,11 @@ func dataSourceKvmSession() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"kvm_session_id": {
+			Description: "Unique ID of the KVM Session URI.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -666,6 +671,11 @@ func dataSourceKvmSession() *schema.Resource {
 		},
 		"kvm_launch_url_path": {
 			Description: "One time URL that is used to launch the KVM console.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"kvm_session_id": {
+			Description: "Unique ID of the KVM Session URI.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1248,6 +1258,11 @@ func dataSourceKvmSessionRead(c context.Context, d *schema.ResourceData, meta in
 		o.SetKvmLaunchUrlPath(x)
 	}
 
+	if v, ok := d.GetOk("kvm_session_id"); ok {
+		x := (v.(string))
+		o.SetKvmSessionId(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1769,6 +1784,7 @@ func dataSourceKvmSessionRead(c context.Context, d *schema.ResourceData, meta in
 
 				temp["end_time"] = (s.GetEndTime()).String()
 				temp["kvm_launch_url_path"] = (s.GetKvmLaunchUrlPath())
+				temp["kvm_session_id"] = (s.GetKvmSessionId())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

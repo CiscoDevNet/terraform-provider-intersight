@@ -452,6 +452,41 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 					},
 				},
 			},
+			"ptp_settings": {
+				Description: "Settings for Precision Time Protocol which can provide precise time of day information and time-stampted inputs, as well as scheduled and/or synchronized outputs for a variety of systems.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				ConfigMode:  schema.SchemaConfigModeAttr,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "vnic.PtpSettings",
+						},
+						"enabled": {
+							Description: "Status of Precision Time Protocol (PTP) on the virtual ethernet interface. PTP can be enabled only on one vNIC on an adapter.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+							Default:     false,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "vnic.PtpSettings",
+						},
+					},
+				},
+			},
 			"roce_settings": {
 				Description: "Settings for RDMA over Converged Ethernet.",
 				Type:        schema.TypeList,
@@ -1232,6 +1267,43 @@ func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("ptp_settings"); ok {
+		p := make([]models.VnicPtpSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewVnicPtpSettingsWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("")
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetPtpSettings(x)
+		}
+	}
+
 	if v, ok := d.GetOk("roce_settings"); ok {
 		p := make([]models.VnicRoceSettings, 0, 1)
 		s := v.([]interface{})
@@ -1725,6 +1797,10 @@ func resourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("error occurred while setting property PermissionResources in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("ptp_settings", flattenMapVnicPtpSettings(s.GetPtpSettings(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property PtpSettings in VnicEthAdapterPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("roce_settings", flattenMapVnicRoceSettings(s.GetRoceSettings(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property RoceSettings in VnicEthAdapterPolicy object: %s", err.Error())
 	}
@@ -2042,6 +2118,44 @@ func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceDat
 		if len(p) > 0 {
 			x := p[0]
 			o.SetOrganization(x)
+		}
+	}
+
+	if d.HasChange("ptp_settings") {
+		v := d.Get("ptp_settings")
+		p := make([]models.VnicPtpSettings, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.VnicPtpSettings{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("")
+			if v, ok := l["enabled"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnabled(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetPtpSettings(x)
 		}
 	}
 

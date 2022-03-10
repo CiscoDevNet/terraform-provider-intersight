@@ -117,6 +117,10 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+* `ptp_settings`:(HashMap) - Settings for Precision Time Protocol which can provide precise time of day information and time-stampted inputs, as well as scheduled and/or synchronized outputs for a variety of systems. 
+This complex property has following sub-properties:
+  + `enabled`:(bool) Status of Precision Time Protocol (PTP) on the virtual ethernet interface. PTP can be enabled only on one vNIC on an adapter. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `roce_settings`:(HashMap) - Settings for RDMA over Converged Ethernet. 
 This complex property has following sub-properties:
   + `class_of_service`:(int) The Class of Service for RoCE on this virtual interface.* `5` - RDMA CoS Service Level 5.* `1` - RDMA CoS Service Level 1.* `2` - RDMA CoS Service Level 2.* `4` - RDMA CoS Service Level 4.* `6` - RDMA CoS Service Level 6. 

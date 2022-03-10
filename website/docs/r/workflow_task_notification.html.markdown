@@ -21,6 +21,8 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `end_time`:(string) The end time of the scheduled task. 
 * `input`:(string) The input of the scheduled task. 
+* `iteration`:(int) The iteration count of task which runs inside loop. 
+* `loop_over_task`:(bool) True, if task runs inside loop. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `output`:(string) The output of the scheduled task. 

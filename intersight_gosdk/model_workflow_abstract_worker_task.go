@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5313
+API version: 1.0.9-5517
 Contact: intersight@cisco.com
 */
 
@@ -24,7 +24,7 @@ type WorkflowAbstractWorkerTask struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ObjectType string `json:"ObjectType"`
-	// JSON formatted map that defines the input given to the task. JSONPath is used for chaining output from previous tasks as inputs into the current task. The format to specify the mapping is '${Source.input/output.JsonPath}'. 'Source' can be either workflow or the name of the task within the workflow. You can map the task input to either a workflow input or a task output. Following this is JSON path expression to extract JSON fragment from source's input/output.
+	// JSON formatted key-value pairs that define the inputs given to the task. Mapping for task inputs can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of an earlier task within the workflow. You can map the task input to either a workflow input, a task output or a variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \"InputParameters\":{ \"input1\":\"${workflow.variable.var1}\", \"input2\":\"prefixStr_{{.global.workflow.input.input1}}\" } where task input1 is mapped directly to variable var1 and task input2 is using a template to prefix a string to workflow input1 and then assign that value.
 	InputParameters interface{} `json:"InputParameters,omitempty"`
 	// This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node.
 	OnFailure *string `json:"OnFailure,omitempty"`
@@ -33,7 +33,9 @@ type WorkflowAbstractWorkerTask struct {
 	// The task is disabled/enabled for rollback operation in this workflow if the task has rollback support.
 	RollbackDisabled *bool `json:"RollbackDisabled,omitempty"`
 	// UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution.
-	UseDefault           *bool `json:"UseDefault,omitempty"`
+	UseDefault *bool `json:"UseDefault,omitempty"`
+	// JSON formatted key-value pairs that perform variable update at the end of the task execution. Mapping for variables can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of the current or an earlier task within the workflow. You can map the variable to either a workflow input, a task output or another variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \"VariableParameters\":{ \"var1\":\"${task1.output.output1}\", \"var2\":\"{{ Itoa .global.workflow.variable.varInt}}\" } where variable var1 is mapped directly to output1 of task1 and variable var2 is using a template to convert another variable varInt to string and assign that value.
+	VariableParameters   interface{} `json:"VariableParameters,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -275,6 +277,39 @@ func (o *WorkflowAbstractWorkerTask) SetUseDefault(v bool) {
 	o.UseDefault = &v
 }
 
+// GetVariableParameters returns the VariableParameters field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowAbstractWorkerTask) GetVariableParameters() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.VariableParameters
+}
+
+// GetVariableParametersOk returns a tuple with the VariableParameters field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowAbstractWorkerTask) GetVariableParametersOk() (*interface{}, bool) {
+	if o == nil || o.VariableParameters == nil {
+		return nil, false
+	}
+	return &o.VariableParameters, true
+}
+
+// HasVariableParameters returns a boolean if a field has been set.
+func (o *WorkflowAbstractWorkerTask) HasVariableParameters() bool {
+	if o != nil && o.VariableParameters != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVariableParameters gets a reference to the given interface{} and assigns it to the VariableParameters field.
+func (o *WorkflowAbstractWorkerTask) SetVariableParameters(v interface{}) {
+	o.VariableParameters = v
+}
+
 func (o WorkflowAbstractWorkerTask) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedWorkflowWorkflowTask, errWorkflowWorkflowTask := json.Marshal(o.WorkflowWorkflowTask)
@@ -306,6 +341,9 @@ func (o WorkflowAbstractWorkerTask) MarshalJSON() ([]byte, error) {
 	if o.UseDefault != nil {
 		toSerialize["UseDefault"] = o.UseDefault
 	}
+	if o.VariableParameters != nil {
+		toSerialize["VariableParameters"] = o.VariableParameters
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -320,7 +358,7 @@ func (o *WorkflowAbstractWorkerTask) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 		ObjectType string `json:"ObjectType"`
-		// JSON formatted map that defines the input given to the task. JSONPath is used for chaining output from previous tasks as inputs into the current task. The format to specify the mapping is '${Source.input/output.JsonPath}'. 'Source' can be either workflow or the name of the task within the workflow. You can map the task input to either a workflow input or a task output. Following this is JSON path expression to extract JSON fragment from source's input/output.
+		// JSON formatted key-value pairs that define the inputs given to the task. Mapping for task inputs can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of an earlier task within the workflow. You can map the task input to either a workflow input, a task output or a variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \"InputParameters\":{ \"input1\":\"${workflow.variable.var1}\", \"input2\":\"prefixStr_{{.global.workflow.input.input1}}\" } where task input1 is mapped directly to variable var1 and task input2 is using a template to prefix a string to workflow input1 and then assign that value.
 		InputParameters interface{} `json:"InputParameters,omitempty"`
 		// This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node.
 		OnFailure *string `json:"OnFailure,omitempty"`
@@ -330,6 +368,8 @@ func (o *WorkflowAbstractWorkerTask) UnmarshalJSON(bytes []byte) (err error) {
 		RollbackDisabled *bool `json:"RollbackDisabled,omitempty"`
 		// UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution.
 		UseDefault *bool `json:"UseDefault,omitempty"`
+		// JSON formatted key-value pairs that perform variable update at the end of the task execution. Mapping for variables can be provided as either static values, direct mapping or advanced mapping using templates. The direct mapping can be specified as '${Source.< input | output | variable>.<JSONPath>}'. 'Source' can be either workflow or the name of the current or an earlier task within the workflow. You can map the variable to either a workflow input, a task output or another variable. Golang template syntax is supported for advanced mapping. A simple flattened example is \"VariableParameters\":{ \"var1\":\"${task1.output.output1}\", \"var2\":\"{{ Itoa .global.workflow.variable.varInt}}\" } where variable var1 is mapped directly to output1 of task1 and variable var2 is using a template to convert another variable varInt to string and assign that value.
+		VariableParameters interface{} `json:"VariableParameters,omitempty"`
 	}
 
 	varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct := WorkflowAbstractWorkerTaskWithoutEmbeddedStruct{}
@@ -344,6 +384,7 @@ func (o *WorkflowAbstractWorkerTask) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowAbstractWorkerTask.OnSuccess = varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct.OnSuccess
 		varWorkflowAbstractWorkerTask.RollbackDisabled = varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct.RollbackDisabled
 		varWorkflowAbstractWorkerTask.UseDefault = varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct.UseDefault
+		varWorkflowAbstractWorkerTask.VariableParameters = varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct.VariableParameters
 		*o = WorkflowAbstractWorkerTask(varWorkflowAbstractWorkerTask)
 	} else {
 		return err
@@ -368,6 +409,7 @@ func (o *WorkflowAbstractWorkerTask) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OnSuccess")
 		delete(additionalProperties, "RollbackDisabled")
 		delete(additionalProperties, "UseDefault")
+		delete(additionalProperties, "VariableParameters")
 
 		// remove fields from embedded structs
 		reflectWorkflowWorkflowTask := reflect.ValueOf(o.WorkflowWorkflowTask)

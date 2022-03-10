@@ -134,6 +134,18 @@ func resourceWorkflowTaskNotification() *schema.Resource {
 				Optional:    true,
 				ForceNew:    true,
 			},
+			"iteration": {
+				Description: "The iteration count of task which runs inside loop.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				ForceNew:    true,
+			},
+			"loop_over_task": {
+				Description: "True, if task runs inside loop.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				ForceNew:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -584,6 +596,16 @@ func resourceWorkflowTaskNotificationCreate(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("input"); ok {
 		x := (v.(string))
 		o.SetInput(x)
+	}
+
+	if v, ok := d.GetOkExists("iteration"); ok {
+		x := int64(v.(int))
+		o.SetIteration(x)
+	}
+
+	if v, ok := d.GetOkExists("loop_over_task"); ok {
+		x := (v.(bool))
+		o.SetLoopOverTask(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {

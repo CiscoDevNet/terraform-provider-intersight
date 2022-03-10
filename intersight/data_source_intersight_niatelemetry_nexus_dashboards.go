@@ -69,6 +69,11 @@ func dataSourceNiatelemetryNexusDashboards() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cluster_uuid": {
+			Description: "UUID of the Nexus Dashboard cluster.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -116,6 +121,16 @@ func dataSourceNiatelemetryNexusDashboards() *schema.Resource {
 		},
 		"number_of_apps": {
 			Description: "Number of applications installed in the Nexus Dashboard.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"number_of_insight_groups": {
+			Description: "Number of total insight groups in ND.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"number_of_nir_dashboards": {
+			Description: "Number of total NIR dashboards in ND.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -454,6 +469,11 @@ func dataSourceNiatelemetryNexusDashboards() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"cluster_uuid": {
+			Description: "UUID of the Nexus Dashboard cluster.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -501,6 +521,16 @@ func dataSourceNiatelemetryNexusDashboards() *schema.Resource {
 		},
 		"number_of_apps": {
 			Description: "Number of applications installed in the Nexus Dashboard.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"number_of_insight_groups": {
+			Description: "Number of total insight groups in ND.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"number_of_nir_dashboards": {
+			Description: "Number of total NIR dashboards in ND.",
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
@@ -865,6 +895,11 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		o.SetClusterName(x)
 	}
 
+	if v, ok := d.GetOk("cluster_uuid"); ok {
+		x := (v.(string))
+		o.SetClusterUuid(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -913,6 +948,16 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 	if v, ok := d.GetOkExists("number_of_apps"); ok {
 		x := int64(v.(int))
 		o.SetNumberOfApps(x)
+	}
+
+	if v, ok := d.GetOkExists("number_of_insight_groups"); ok {
+		x := int64(v.(int))
+		o.SetNumberOfInsightGroups(x)
+	}
+
+	if v, ok := d.GetOkExists("number_of_nir_dashboards"); ok {
+		x := int64(v.(int))
+		o.SetNumberOfNirDashboards(x)
 	}
 
 	if v, ok := d.GetOkExists("number_of_schemas_in_mso"); ok {
@@ -1241,6 +1286,7 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
 				temp["cluster_name"] = (s.GetClusterName())
+				temp["cluster_uuid"] = (s.GetClusterUuid())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["dn"] = (s.GetDn())
@@ -1253,6 +1299,8 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 				temp["nd_type"] = (s.GetNdType())
 				temp["nd_version"] = (s.GetNdVersion())
 				temp["number_of_apps"] = (s.GetNumberOfApps())
+				temp["number_of_insight_groups"] = (s.GetNumberOfInsightGroups())
+				temp["number_of_nir_dashboards"] = (s.GetNumberOfNirDashboards())
 				temp["number_of_schemas_in_mso"] = (s.GetNumberOfSchemasInMso())
 				temp["number_of_sites_in_mso"] = (s.GetNumberOfSitesInMso())
 				temp["number_of_sites_serviced"] = (s.GetNumberOfSitesServiced())

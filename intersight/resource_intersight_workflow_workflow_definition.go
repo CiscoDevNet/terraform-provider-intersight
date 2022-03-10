@@ -998,6 +998,149 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 					},
 				},
 			},
+			"variable_definition": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"default": {
+							Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "workflow.DefaultValue",
+									},
+									"is_value_set": {
+										Description: "A flag that indicates whether a default value is given or not. This flag will be useful in case of the secure parameter where the value will be filtered out in API responses.",
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Computed:    true,
+										ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+											if val != nil {
+												warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+											}
+											return
+										}},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "workflow.DefaultValue",
+									},
+									"override": {
+										Description: "Override the default value provided for the data type. When true, allow the user to enter value for the data type.",
+										Type:        schema.TypeBool,
+										Optional:    true,
+									},
+									"value": {
+										Description:      "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
+										Type:             schema.TypeString,
+										DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+									},
+								},
+							},
+						},
+						"description": {
+							Description: "Provide a detailed description of the data type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"display_meta": {
+							Description: "Captures the meta data needed for displaying workflow data types in Intersight User Interface.",
+							Type:        schema.TypeList,
+							MaxItems:    1,
+							Optional:    true,
+							ConfigMode:  schema.SchemaConfigModeAttr,
+							Computed:    true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"additional_properties": {
+										Type:             schema.TypeString,
+										Optional:         true,
+										DiffSuppressFunc: SuppressDiffAdditionProps,
+									},
+									"class_id": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "workflow.DisplayMeta",
+									},
+									"inventory_selector": {
+										Description: "Inventory selector specified for primitive data property should be used in Intersight User Interface.",
+										Type:        schema.TypeBool,
+										Optional:    true,
+										Default:     true,
+									},
+									"object_type": {
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "workflow.DisplayMeta",
+									},
+									"widget_type": {
+										Description: "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Default:     "None",
+									},
+								},
+							},
+						},
+						"input_parameters": {
+							Description:      "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
+							Type:             schema.TypeString,
+							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+						},
+						"label": {
+							Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"name": {
+							Description: "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"required": {
+							Description: "Specifies whether this parameter is required. The field is applicable for task and workflow.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+					},
+				},
+			},
 			"nr_version": {
 				Description: "The version of the workflow to support multiple versions.",
 				Type:        schema.TypeInt,
@@ -1839,6 +1982,152 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 		o.SetUiRenderingData(v)
 	}
 
+	if v, ok := d.GetOk("variable_definition"); ok {
+		x := make([]models.WorkflowBaseDataType, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewWorkflowBaseDataTypeWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workflow.BaseDataType")
+			if v, ok := l["default"]; ok {
+				{
+					p := make([]models.WorkflowDefaultValue, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewWorkflowDefaultValueWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["override"]; ok {
+							{
+								x := (v.(bool))
+								o.SetOverride(x)
+							}
+						}
+						if v, ok := l["value"]; ok {
+							{
+								o.SetValue(v)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetDefault(x)
+					}
+				}
+			}
+			if v, ok := l["description"]; ok {
+				{
+					x := (v.(string))
+					o.SetDescription(x)
+				}
+			}
+			if v, ok := l["display_meta"]; ok {
+				{
+					p := make([]models.WorkflowDisplayMeta, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewWorkflowDisplayMetaWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("")
+						if v, ok := l["inventory_selector"]; ok {
+							{
+								x := (v.(bool))
+								o.SetInventorySelector(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["widget_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetWidgetType(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetDisplayMeta(x)
+					}
+				}
+			}
+			if v, ok := l["input_parameters"]; ok {
+				{
+					o.SetInputParameters(v)
+				}
+			}
+			if v, ok := l["label"]; ok {
+				{
+					x := (v.(string))
+					o.SetLabel(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["required"]; ok {
+				{
+					x := (v.(bool))
+					o.SetRequired(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetVariableDefinition(x)
+		}
+	}
+
 	if v, ok := d.GetOkExists("nr_version"); ok {
 		x := int64(v.(int))
 		o.SetVersion(x)
@@ -2049,6 +2338,10 @@ func resourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resourc
 
 	if err := d.Set("validation_information", flattenMapWorkflowValidationInformation(s.GetValidationInformation(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property ValidationInformation in WorkflowWorkflowDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("variable_definition", flattenListWorkflowBaseDataType(s.GetVariableDefinition(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property VariableDefinition in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("nr_version", (s.GetVersion())); err != nil {
@@ -2720,6 +3013,151 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 	if d.HasChange("ui_rendering_data") {
 		v := d.Get("ui_rendering_data")
 		o.SetUiRenderingData(v)
+	}
+
+	if d.HasChange("variable_definition") {
+		v := d.Get("variable_definition")
+		x := make([]models.WorkflowBaseDataType, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.WorkflowBaseDataType{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("workflow.BaseDataType")
+			if v, ok := l["default"]; ok {
+				{
+					p := make([]models.WorkflowDefaultValue, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewWorkflowDefaultValueWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("")
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["override"]; ok {
+							{
+								x := (v.(bool))
+								o.SetOverride(x)
+							}
+						}
+						if v, ok := l["value"]; ok {
+							{
+								o.SetValue(v)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetDefault(x)
+					}
+				}
+			}
+			if v, ok := l["description"]; ok {
+				{
+					x := (v.(string))
+					o.SetDescription(x)
+				}
+			}
+			if v, ok := l["display_meta"]; ok {
+				{
+					p := make([]models.WorkflowDisplayMeta, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewWorkflowDisplayMetaWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("")
+						if v, ok := l["inventory_selector"]; ok {
+							{
+								x := (v.(bool))
+								o.SetInventorySelector(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["widget_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetWidgetType(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetDisplayMeta(x)
+					}
+				}
+			}
+			if v, ok := l["input_parameters"]; ok {
+				{
+					o.SetInputParameters(v)
+				}
+			}
+			if v, ok := l["label"]; ok {
+				{
+					x := (v.(string))
+					o.SetLabel(x)
+				}
+			}
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["required"]; ok {
+				{
+					x := (v.(bool))
+					o.SetRequired(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetVariableDefinition(x)
 	}
 
 	if d.HasChange("nr_version") {

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5313
+API version: 1.0.9-5517
 Contact: intersight@cisco.com
 */
 
@@ -30,8 +30,10 @@ type KvmPolicyAllOf struct {
 	// The maximum number of concurrent KVM sessions allowed.
 	MaximumSessions *int64 `json:"MaximumSessions,omitempty"`
 	// The port used for KVM communication.
-	RemotePort   *int64                                `json:"RemotePort,omitempty"`
-	Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
+	RemotePort *int64 `json:"RemotePort,omitempty"`
+	// Enables Tunneled vKVM on the endpoint. Applicable only for Device Connectors that support Tunneled vKVM.
+	TunneledKvmEnabled *bool                                 `json:"TunneledKvmEnabled,omitempty"`
+	Organization       *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
 	// An array of relationships to policyAbstractConfigProfile resources.
 	Profiles             []PolicyAbstractConfigProfileRelationship `json:"Profiles,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -57,6 +59,8 @@ func NewKvmPolicyAllOf(classId string, objectType string) *KvmPolicyAllOf {
 	this.MaximumSessions = &maximumSessions
 	var remotePort int64 = 2068
 	this.RemotePort = &remotePort
+	var tunneledKvmEnabled bool = false
+	this.TunneledKvmEnabled = &tunneledKvmEnabled
 	return &this
 }
 
@@ -79,6 +83,8 @@ func NewKvmPolicyAllOfWithDefaults() *KvmPolicyAllOf {
 	this.MaximumSessions = &maximumSessions
 	var remotePort int64 = 2068
 	this.RemotePort = &remotePort
+	var tunneledKvmEnabled bool = false
+	this.TunneledKvmEnabled = &tunneledKvmEnabled
 	return &this
 }
 
@@ -290,6 +296,38 @@ func (o *KvmPolicyAllOf) SetRemotePort(v int64) {
 	o.RemotePort = &v
 }
 
+// GetTunneledKvmEnabled returns the TunneledKvmEnabled field value if set, zero value otherwise.
+func (o *KvmPolicyAllOf) GetTunneledKvmEnabled() bool {
+	if o == nil || o.TunneledKvmEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.TunneledKvmEnabled
+}
+
+// GetTunneledKvmEnabledOk returns a tuple with the TunneledKvmEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *KvmPolicyAllOf) GetTunneledKvmEnabledOk() (*bool, bool) {
+	if o == nil || o.TunneledKvmEnabled == nil {
+		return nil, false
+	}
+	return o.TunneledKvmEnabled, true
+}
+
+// HasTunneledKvmEnabled returns a boolean if a field has been set.
+func (o *KvmPolicyAllOf) HasTunneledKvmEnabled() bool {
+	if o != nil && o.TunneledKvmEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTunneledKvmEnabled gets a reference to the given bool and assigns it to the TunneledKvmEnabled field.
+func (o *KvmPolicyAllOf) SetTunneledKvmEnabled(v bool) {
+	o.TunneledKvmEnabled = &v
+}
+
 // GetOrganization returns the Organization field value if set, zero value otherwise.
 func (o *KvmPolicyAllOf) GetOrganization() OrganizationOrganizationRelationship {
 	if o == nil || o.Organization == nil {
@@ -378,6 +416,9 @@ func (o KvmPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.RemotePort != nil {
 		toSerialize["RemotePort"] = o.RemotePort
 	}
+	if o.TunneledKvmEnabled != nil {
+		toSerialize["TunneledKvmEnabled"] = o.TunneledKvmEnabled
+	}
 	if o.Organization != nil {
 		toSerialize["Organization"] = o.Organization
 	}
@@ -409,6 +450,7 @@ func (o *KvmPolicyAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Enabled")
 		delete(additionalProperties, "MaximumSessions")
 		delete(additionalProperties, "RemotePort")
+		delete(additionalProperties, "TunneledKvmEnabled")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "Profiles")
 		o.AdditionalProperties = additionalProperties

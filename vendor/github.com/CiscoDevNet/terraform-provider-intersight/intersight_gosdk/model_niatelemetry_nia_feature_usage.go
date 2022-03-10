@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5313
+API version: 1.0.9-5517
 Contact: intersight@cisco.com
 */
 
@@ -124,6 +124,8 @@ type NiatelemetryNiaFeatureUsage struct {
 	IsisCount *int64 `json:"IsisCount,omitempty"`
 	// L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric.
 	L2Multicast *string `json:"L2Multicast,omitempty"`
+	// Returns the Latency ptp mode for the controller.
+	LatencyPtpMode *string `json:"LatencyPtpMode,omitempty"`
 	// Number of Leafs. This determines the total number of Leaf switches in the fabric.
 	LeafCount *int64 `json:"LeafCount,omitempty"`
 	// Returns count of local users.
@@ -1916,6 +1918,38 @@ func (o *NiatelemetryNiaFeatureUsage) HasL2Multicast() bool {
 // SetL2Multicast gets a reference to the given string and assigns it to the L2Multicast field.
 func (o *NiatelemetryNiaFeatureUsage) SetL2Multicast(v string) {
 	o.L2Multicast = &v
+}
+
+// GetLatencyPtpMode returns the LatencyPtpMode field value if set, zero value otherwise.
+func (o *NiatelemetryNiaFeatureUsage) GetLatencyPtpMode() string {
+	if o == nil || o.LatencyPtpMode == nil {
+		var ret string
+		return ret
+	}
+	return *o.LatencyPtpMode
+}
+
+// GetLatencyPtpModeOk returns a tuple with the LatencyPtpMode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaFeatureUsage) GetLatencyPtpModeOk() (*string, bool) {
+	if o == nil || o.LatencyPtpMode == nil {
+		return nil, false
+	}
+	return o.LatencyPtpMode, true
+}
+
+// HasLatencyPtpMode returns a boolean if a field has been set.
+func (o *NiatelemetryNiaFeatureUsage) HasLatencyPtpMode() bool {
+	if o != nil && o.LatencyPtpMode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLatencyPtpMode gets a reference to the given string and assigns it to the LatencyPtpMode field.
+func (o *NiatelemetryNiaFeatureUsage) SetLatencyPtpMode(v string) {
+	o.LatencyPtpMode = &v
 }
 
 // GetLeafCount returns the LeafCount field value if set, zero value otherwise.
@@ -4015,6 +4049,9 @@ func (o NiatelemetryNiaFeatureUsage) MarshalJSON() ([]byte, error) {
 	if o.L2Multicast != nil {
 		toSerialize["L2Multicast"] = o.L2Multicast
 	}
+	if o.LatencyPtpMode != nil {
+		toSerialize["LatencyPtpMode"] = o.LatencyPtpMode
+	}
 	if o.LeafCount != nil {
 		toSerialize["LeafCount"] = o.LeafCount
 	}
@@ -4309,6 +4346,8 @@ func (o *NiatelemetryNiaFeatureUsage) UnmarshalJSON(bytes []byte) (err error) {
 		IsisCount *int64 `json:"IsisCount,omitempty"`
 		// L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric.
 		L2Multicast *string `json:"L2Multicast,omitempty"`
+		// Returns the Latency ptp mode for the controller.
+		LatencyPtpMode *string `json:"LatencyPtpMode,omitempty"`
 		// Number of Leafs. This determines the total number of Leaf switches in the fabric.
 		LeafCount *int64 `json:"LeafCount,omitempty"`
 		// Returns count of local users.
@@ -4486,6 +4525,7 @@ func (o *NiatelemetryNiaFeatureUsage) UnmarshalJSON(bytes []byte) (err error) {
 		varNiatelemetryNiaFeatureUsage.IsVrfsFeatureUsed = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.IsVrfsFeatureUsed
 		varNiatelemetryNiaFeatureUsage.IsisCount = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.IsisCount
 		varNiatelemetryNiaFeatureUsage.L2Multicast = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.L2Multicast
+		varNiatelemetryNiaFeatureUsage.LatencyPtpMode = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.LatencyPtpMode
 		varNiatelemetryNiaFeatureUsage.LeafCount = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.LeafCount
 		varNiatelemetryNiaFeatureUsage.LocalUsernameCount = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.LocalUsernameCount
 		varNiatelemetryNiaFeatureUsage.LoginBlockDuration = varNiatelemetryNiaFeatureUsageWithoutEmbeddedStruct.LoginBlockDuration
@@ -4615,6 +4655,7 @@ func (o *NiatelemetryNiaFeatureUsage) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "IsVrfsFeatureUsed")
 		delete(additionalProperties, "IsisCount")
 		delete(additionalProperties, "L2Multicast")
+		delete(additionalProperties, "LatencyPtpMode")
 		delete(additionalProperties, "LeafCount")
 		delete(additionalProperties, "LocalUsernameCount")
 		delete(additionalProperties, "LoginBlockDuration")

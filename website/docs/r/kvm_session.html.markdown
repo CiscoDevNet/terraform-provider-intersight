@@ -60,6 +60,7 @@ This complex property has following sub-properties:
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
 * `end_time`:(string)(ReadOnly) The time at which the session ended. 
 * `kvm_launch_url_path`:(string) One time URL that is used to launch the KVM console. 
+* `kvm_session_id`:(string) Unique ID of the KVM Session URI. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `one_time_password`:(string) Temporary one-time password for vKVM access. 

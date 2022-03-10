@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "license.CustomerOp"]
 **ActiveAdmin** | Pointer to **bool** | The license administrative state. Set this property to &#39;true&#39; to activate the license entitlements. | [optional] 
 **AllDevicesToDefaultTier** | Pointer to **bool** | Move all licensed devices to default license tier. | [optional] 
+**ClearApiSyncStatus** | Pointer to **bool** | Clear the status of smart API sync. | [optional] 
 **DeregisterDevice** | Pointer to **bool** | Trigger de-registration/disable. | [optional] 
 **EnableTrial** | Pointer to **bool** | Enable trial for Intersight licensing. | [optional] 
 **EvaluationPeriod** | Pointer to **int64** | The default Trial or Grace period customer is entitled to. | [optional] 
@@ -125,6 +126,31 @@ SetAllDevicesToDefaultTier sets AllDevicesToDefaultTier field to given value.
 `func (o *LicenseCustomerOpAllOf) HasAllDevicesToDefaultTier() bool`
 
 HasAllDevicesToDefaultTier returns a boolean if a field has been set.
+
+### GetClearApiSyncStatus
+
+`func (o *LicenseCustomerOpAllOf) GetClearApiSyncStatus() bool`
+
+GetClearApiSyncStatus returns the ClearApiSyncStatus field if non-nil, zero value otherwise.
+
+### GetClearApiSyncStatusOk
+
+`func (o *LicenseCustomerOpAllOf) GetClearApiSyncStatusOk() (*bool, bool)`
+
+GetClearApiSyncStatusOk returns a tuple with the ClearApiSyncStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClearApiSyncStatus
+
+`func (o *LicenseCustomerOpAllOf) SetClearApiSyncStatus(v bool)`
+
+SetClearApiSyncStatus sets ClearApiSyncStatus field to given value.
+
+### HasClearApiSyncStatus
+
+`func (o *LicenseCustomerOpAllOf) HasClearApiSyncStatus() bool`
+
+HasClearApiSyncStatus returns a boolean if a field has been set.
 
 ### GetDeregisterDevice
 

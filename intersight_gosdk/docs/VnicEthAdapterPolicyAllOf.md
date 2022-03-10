@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **InterruptScaling** | Pointer to **bool** | Enables Interrupt Scaling on the interface. | [optional] [default to false]
 **InterruptSettings** | Pointer to [**NullableVnicEthInterruptSettings**](VnicEthInterruptSettings.md) |  | [optional] 
 **NvgreSettings** | Pointer to [**NullableVnicNvgreSettings**](VnicNvgreSettings.md) |  | [optional] 
+**PtpSettings** | Pointer to [**NullableVnicPtpSettings**](VnicPtpSettings.md) |  | [optional] 
 **RoceSettings** | Pointer to [**NullableVnicRoceSettings**](VnicRoceSettings.md) |  | [optional] 
 **RssHashSettings** | Pointer to [**NullableVnicRssHashSettings**](VnicRssHashSettings.md) |  | [optional] 
 **RssSettings** | Pointer to **bool** | Receive Side Scaling allows the incoming traffic to be spread across multiple CPU cores. | [optional] [default to true]
@@ -297,6 +298,41 @@ HasNvgreSettings returns a boolean if a field has been set.
 `func (o *VnicEthAdapterPolicyAllOf) UnsetNvgreSettings()`
 
 UnsetNvgreSettings ensures that no value is present for NvgreSettings, not even an explicit nil
+### GetPtpSettings
+
+`func (o *VnicEthAdapterPolicyAllOf) GetPtpSettings() VnicPtpSettings`
+
+GetPtpSettings returns the PtpSettings field if non-nil, zero value otherwise.
+
+### GetPtpSettingsOk
+
+`func (o *VnicEthAdapterPolicyAllOf) GetPtpSettingsOk() (*VnicPtpSettings, bool)`
+
+GetPtpSettingsOk returns a tuple with the PtpSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPtpSettings
+
+`func (o *VnicEthAdapterPolicyAllOf) SetPtpSettings(v VnicPtpSettings)`
+
+SetPtpSettings sets PtpSettings field to given value.
+
+### HasPtpSettings
+
+`func (o *VnicEthAdapterPolicyAllOf) HasPtpSettings() bool`
+
+HasPtpSettings returns a boolean if a field has been set.
+
+### SetPtpSettingsNil
+
+`func (o *VnicEthAdapterPolicyAllOf) SetPtpSettingsNil(b bool)`
+
+ SetPtpSettingsNil sets the value for PtpSettings to be an explicit nil
+
+### UnsetPtpSettings
+`func (o *VnicEthAdapterPolicyAllOf) UnsetPtpSettings()`
+
+UnsetPtpSettings ensures that no value is present for PtpSettings, not even an explicit nil
 ### GetRoceSettings
 
 `func (o *VnicEthAdapterPolicyAllOf) GetRoceSettings() VnicRoceSettings`

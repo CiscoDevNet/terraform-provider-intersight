@@ -532,6 +532,11 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"smart_api_sync_status": {
+			Description: "The detailed error message when there is any smart API sync error related to this account.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"smartlicense_token": {
 			Description: "A reference to a licenseSmartlicenseToken resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -1224,6 +1229,11 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 		"smart_api_enabled": {
 			Description: "Indicate whether API integration is enabled.",
 			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"smart_api_sync_status": {
+			Description: "The detailed error message when there is any smart API sync error related to this account.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"smartlicense_token": {
@@ -2020,6 +2030,11 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 		o.SetSmartApiEnabled(x)
 	}
 
+	if v, ok := d.GetOk("smart_api_sync_status"); ok {
+		x := (v.(string))
+		o.SetSmartApiSyncStatus(x)
+	}
+
 	if v, ok := d.GetOk("smartlicense_token"); ok {
 		p := make([]models.LicenseSmartlicenseTokenRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2276,6 +2291,7 @@ func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.Resour
 				temp["smart_account"] = (s.GetSmartAccount())
 				temp["smart_account_domain"] = (s.GetSmartAccountDomain())
 				temp["smart_api_enabled"] = (s.GetSmartApiEnabled())
+				temp["smart_api_sync_status"] = (s.GetSmartApiSyncStatus())
 
 				temp["smartlicense_token"] = flattenMapLicenseSmartlicenseTokenRelationship(s.GetSmartlicenseToken(), d)
 				temp["sync_status"] = (s.GetSyncStatus())

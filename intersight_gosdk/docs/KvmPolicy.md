@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Enabled** | Pointer to **bool** | State of the vKVM service on the endpoint. | [optional] [default to true]
 **MaximumSessions** | Pointer to **int64** | The maximum number of concurrent KVM sessions allowed. | [optional] [default to 4]
 **RemotePort** | Pointer to **int64** | The port used for KVM communication. | [optional] [default to 2068]
+**TunneledKvmEnabled** | Pointer to **bool** | Enables Tunneled vKVM on the endpoint. Applicable only for Device Connectors that support Tunneled vKVM. | [optional] [default to false]
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
@@ -197,6 +198,31 @@ SetRemotePort sets RemotePort field to given value.
 `func (o *KvmPolicy) HasRemotePort() bool`
 
 HasRemotePort returns a boolean if a field has been set.
+
+### GetTunneledKvmEnabled
+
+`func (o *KvmPolicy) GetTunneledKvmEnabled() bool`
+
+GetTunneledKvmEnabled returns the TunneledKvmEnabled field if non-nil, zero value otherwise.
+
+### GetTunneledKvmEnabledOk
+
+`func (o *KvmPolicy) GetTunneledKvmEnabledOk() (*bool, bool)`
+
+GetTunneledKvmEnabledOk returns a tuple with the TunneledKvmEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTunneledKvmEnabled
+
+`func (o *KvmPolicy) SetTunneledKvmEnabled(v bool)`
+
+SetTunneledKvmEnabled sets TunneledKvmEnabled field to given value.
+
+### HasTunneledKvmEnabled
+
+`func (o *KvmPolicy) HasTunneledKvmEnabled() bool`
+
+HasTunneledKvmEnabled returns a boolean if a field has been set.
 
 ### GetOrganization
 

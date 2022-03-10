@@ -109,6 +109,11 @@ func dataSourceLicenseCustomerOp() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"clear_api_sync_status": {
+			Description: "Clear the status of smart API sync.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
 			Type:        schema.TypeString,
@@ -472,6 +477,11 @@ func dataSourceLicenseCustomerOp() *schema.Resource {
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"clear_api_sync_status": {
+			Description: "Clear the status of smart API sync.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"create_time": {
@@ -873,6 +883,11 @@ func dataSourceLicenseCustomerOpRead(c context.Context, d *schema.ResourceData, 
 		o.SetClassId(x)
 	}
 
+	if v, ok := d.GetOkExists("clear_api_sync_status"); ok {
+		x := (v.(bool))
+		o.SetClearApiSyncStatus(x)
+	}
+
 	if v, ok := d.GetOk("create_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetCreateTime(x)
@@ -1184,6 +1199,7 @@ func dataSourceLicenseCustomerOpRead(c context.Context, d *schema.ResourceData, 
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["clear_api_sync_status"] = (s.GetClearApiSyncStatus())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["deregister_device"] = (s.GetDeregisterDevice())
