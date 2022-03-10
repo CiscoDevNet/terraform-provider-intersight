@@ -1835,7 +1835,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 			}
 			return diag.Errorf("error occurred while updating ServerProfile: %s", responseErr.Error())
 		}
-		log.Printf("Moid: %s", resultMo.GetMoid())
+		log.Printf("Moid: %s", result.GetMoid())
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
