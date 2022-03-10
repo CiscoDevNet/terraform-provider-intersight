@@ -622,6 +622,13 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"variable": {
+			Description: "All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.",
+			Type:        schema.TypeMap,
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			}, Optional: true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -1510,6 +1517,13 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 			Description: "The user identifier which indicates the user that started this workflow.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"variable": {
+			Description: "All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.",
+			Type:        schema.TypeMap,
+			Elem: &schema.Schema{
+				Type: schema.TypeString,
+			}, Optional: true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -2511,6 +2525,10 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("user_id"); ok {
 		x := (v.(string))
 		o.SetUserId(x)
+	}
+
+	if v, ok := d.GetOk("variable"); ok {
+		o.SetVariable(v)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {

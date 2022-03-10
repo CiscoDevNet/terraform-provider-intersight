@@ -888,6 +888,11 @@ func dataSourceComputeServerSetting() *schema.Resource {
 				},
 			},
 		},
+		"tunneled_kvm_state": {
+			Description: "By default, the tunneled vKVM property appears in Ready state. The property can be configured by performing allowed actions. Once the property is configured, it reverts to Ready state.\n* `Ready` - Tunneled vKVM is ready to be configured on the server.\n* `Enable` - Tunneled vKVM is enabled for the server.\n* `Disable` - Tunneled vKVM is disabled for the server.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -1869,6 +1874,11 @@ func dataSourceComputeServerSetting() *schema.Resource {
 					},
 				},
 			},
+		},
+		"tunneled_kvm_state": {
+			Description: "By default, the tunneled vKVM property appears in Ready state. The property can be configured by performing allowed actions. Once the property is configured, it reverts to Ready state.\n* `Ready` - Tunneled vKVM is ready to be configured on the server.\n* `Enable` - Tunneled vKVM is enabled for the server.\n* `Disable` - Tunneled vKVM is disabled for the server.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -2891,6 +2901,11 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("tunneled_kvm_state"); ok {
+		x := (v.(string))
+		o.SetTunneledKvmState(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -3054,6 +3069,7 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 				temp["storage_virtual_drive_operation"] = flattenMapComputeStorageVirtualDriveOperation(s.GetStorageVirtualDriveOperation(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["tunneled_kvm_state"] = (s.GetTunneledKvmState())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				computeServerSettingResults[j] = temp

@@ -56,6 +56,7 @@ Name | Type | Description | Notes
 **IsVrfsFeatureUsed** | Pointer to **bool** | VRF feature usage on APIC controller. | [optional] 
 **IsisCount** | Pointer to **int64** | Isis feature usage. This determines the total number of ISIS sessions across the fabric. | [optional] 
 **L2Multicast** | Pointer to **string** | L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric. | [optional] 
+**LatencyPtpMode** | Pointer to **string** | Returns the Latency ptp mode for the controller. | [optional] 
 **LeafCount** | Pointer to **int64** | Number of Leafs. This determines the total number of Leaf switches in the fabric. | [optional] 
 **LocalUsernameCount** | Pointer to **int64** | Returns count of local users. | [optional] 
 **LoginBlockDuration** | Pointer to **int64** | Returns login block duration value. | [optional] 
@@ -1425,6 +1426,31 @@ SetL2Multicast sets L2Multicast field to given value.
 `func (o *NiatelemetryNiaFeatureUsage) HasL2Multicast() bool`
 
 HasL2Multicast returns a boolean if a field has been set.
+
+### GetLatencyPtpMode
+
+`func (o *NiatelemetryNiaFeatureUsage) GetLatencyPtpMode() string`
+
+GetLatencyPtpMode returns the LatencyPtpMode field if non-nil, zero value otherwise.
+
+### GetLatencyPtpModeOk
+
+`func (o *NiatelemetryNiaFeatureUsage) GetLatencyPtpModeOk() (*string, bool)`
+
+GetLatencyPtpModeOk returns a tuple with the LatencyPtpMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLatencyPtpMode
+
+`func (o *NiatelemetryNiaFeatureUsage) SetLatencyPtpMode(v string)`
+
+SetLatencyPtpMode sets LatencyPtpMode field to given value.
+
+### HasLatencyPtpMode
+
+`func (o *NiatelemetryNiaFeatureUsage) HasLatencyPtpMode() bool`
+
+HasLatencyPtpMode returns a boolean if a field has been set.
 
 ### GetLeafCount
 

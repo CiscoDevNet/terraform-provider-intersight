@@ -14,6 +14,7 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_niatelemetry_nia_inventory.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `controller_ip_address`:(string) Returns controller's IP address details. 
 * `cpu`:(float) CPU usage of device being inventoried. This determines the percentage of CPU resources used. 
 * `crash_reset_logs`:(string) Last crash reset reason of device being inventoried. This determines the last reason for a device's restart due to crash of the system. 
 * `create_time`:(string) The time when this managed object was created. 

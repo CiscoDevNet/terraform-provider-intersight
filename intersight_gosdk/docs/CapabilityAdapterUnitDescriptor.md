@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **FibreChannelScsiIoqLimit** | Pointer to **int64** | The number of SCSI I/O Queue resources to allocate. | [optional] 
 **IsAzureQosSupported** | Pointer to **bool** | Indicates that the Azure Stack Host QoS feature is supported by this adapter. | [optional] [default to true]
 **IsGeneveSupported** | Pointer to **bool** | Indicates that the GENEVE offload feature is supported by this adapter. | [optional] [default to true]
+**MaxEthRxRingSize** | Pointer to **int64** | Maximum Ring Size value for vNIC Receive Queue. | [optional] [default to 4096]
+**MaxEthTxRingSize** | Pointer to **int64** | Maximum Ring Size value for vNIC Transmit Queue. | [optional] [default to 4096]
 **MaxRocev2Interfaces** | Pointer to **int64** | Maximum number of vNIC interfaces that can be RoCEv2 enabled. | [optional] [default to 2]
 **NumDcePorts** | Pointer to **int64** | Number of Dce Ports for the adapter. | [optional] 
 **PciLink** | Pointer to **int64** | Indicates PCI Link status of adapter. | [optional] [default to 0]
@@ -287,6 +289,56 @@ SetIsGeneveSupported sets IsGeneveSupported field to given value.
 `func (o *CapabilityAdapterUnitDescriptor) HasIsGeneveSupported() bool`
 
 HasIsGeneveSupported returns a boolean if a field has been set.
+
+### GetMaxEthRxRingSize
+
+`func (o *CapabilityAdapterUnitDescriptor) GetMaxEthRxRingSize() int64`
+
+GetMaxEthRxRingSize returns the MaxEthRxRingSize field if non-nil, zero value otherwise.
+
+### GetMaxEthRxRingSizeOk
+
+`func (o *CapabilityAdapterUnitDescriptor) GetMaxEthRxRingSizeOk() (*int64, bool)`
+
+GetMaxEthRxRingSizeOk returns a tuple with the MaxEthRxRingSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxEthRxRingSize
+
+`func (o *CapabilityAdapterUnitDescriptor) SetMaxEthRxRingSize(v int64)`
+
+SetMaxEthRxRingSize sets MaxEthRxRingSize field to given value.
+
+### HasMaxEthRxRingSize
+
+`func (o *CapabilityAdapterUnitDescriptor) HasMaxEthRxRingSize() bool`
+
+HasMaxEthRxRingSize returns a boolean if a field has been set.
+
+### GetMaxEthTxRingSize
+
+`func (o *CapabilityAdapterUnitDescriptor) GetMaxEthTxRingSize() int64`
+
+GetMaxEthTxRingSize returns the MaxEthTxRingSize field if non-nil, zero value otherwise.
+
+### GetMaxEthTxRingSizeOk
+
+`func (o *CapabilityAdapterUnitDescriptor) GetMaxEthTxRingSizeOk() (*int64, bool)`
+
+GetMaxEthTxRingSizeOk returns a tuple with the MaxEthTxRingSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaxEthTxRingSize
+
+`func (o *CapabilityAdapterUnitDescriptor) SetMaxEthTxRingSize(v int64)`
+
+SetMaxEthTxRingSize sets MaxEthTxRingSize field to given value.
+
+### HasMaxEthTxRingSize
+
+`func (o *CapabilityAdapterUnitDescriptor) HasMaxEthTxRingSize() bool`
+
+HasMaxEthTxRingSize returns a boolean if a field has been set.
 
 ### GetMaxRocev2Interfaces
 

@@ -10,8 +10,6 @@ Name | Type | Description | Notes
 **Model** | Pointer to **string** | The model information of the Network Element. | [optional] [readonly] 
 **Serial** | Pointer to **string** | The serial number for the Network Element. | [optional] [readonly] 
 **SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
-**ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
-**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -173,56 +171,6 @@ SetSourceObjectType sets SourceObjectType field to given value.
 `func (o *EquipmentDeviceSummaryAllOf) HasSourceObjectType() bool`
 
 HasSourceObjectType returns a boolean if a field has been set.
-
-### GetComputeRackUnit
-
-`func (o *EquipmentDeviceSummaryAllOf) GetComputeRackUnit() ComputeRackUnitRelationship`
-
-GetComputeRackUnit returns the ComputeRackUnit field if non-nil, zero value otherwise.
-
-### GetComputeRackUnitOk
-
-`func (o *EquipmentDeviceSummaryAllOf) GetComputeRackUnitOk() (*ComputeRackUnitRelationship, bool)`
-
-GetComputeRackUnitOk returns a tuple with the ComputeRackUnit field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetComputeRackUnit
-
-`func (o *EquipmentDeviceSummaryAllOf) SetComputeRackUnit(v ComputeRackUnitRelationship)`
-
-SetComputeRackUnit sets ComputeRackUnit field to given value.
-
-### HasComputeRackUnit
-
-`func (o *EquipmentDeviceSummaryAllOf) HasComputeRackUnit() bool`
-
-HasComputeRackUnit returns a boolean if a field has been set.
-
-### GetEquipmentChassis
-
-`func (o *EquipmentDeviceSummaryAllOf) GetEquipmentChassis() EquipmentChassisRelationship`
-
-GetEquipmentChassis returns the EquipmentChassis field if non-nil, zero value otherwise.
-
-### GetEquipmentChassisOk
-
-`func (o *EquipmentDeviceSummaryAllOf) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool)`
-
-GetEquipmentChassisOk returns a tuple with the EquipmentChassis field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEquipmentChassis
-
-`func (o *EquipmentDeviceSummaryAllOf) SetEquipmentChassis(v EquipmentChassisRelationship)`
-
-SetEquipmentChassis sets EquipmentChassis field to given value.
-
-### HasEquipmentChassis
-
-`func (o *EquipmentDeviceSummaryAllOf) HasEquipmentChassis() bool`
-
-HasEquipmentChassis returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

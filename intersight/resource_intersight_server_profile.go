@@ -1898,6 +1898,12 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 		}
 	}
 
+	var deploy_flag bool
+	if o.Action != nil && *o.Action == "Deploy" && len(o.PolicyBucket) > 0 {
+		o.SetAction("No-op")
+		deploy_flag = true
+	}
+
 	r := conn.ApiClient.ServerApi.CreateServerProfile(conn.ctx).ServerProfile(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -1910,6 +1916,21 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
+	if deploy_flag {
+		o.SetAction("Deploy")
+		r := conn.ApiClient.ServerApi.UpdateServerProfile(conn.ctx, d.Id()).ServerProfile(*o)
+		result, _, responseErr := r.Execute()
+		if responseErr != nil {
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while updating ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while updating ServerProfile: %s", responseErr.Error())
+		}
+		log.Printf("Moid: %s", result.GetMoid())
+		d.SetId(result.GetMoid())
+	}
 	var waitForCompletion bool
 	if v, ok := d.GetOk("wait_for_completion"); ok {
 		waitForCompletion = v.(bool)

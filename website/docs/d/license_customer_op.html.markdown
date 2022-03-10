@@ -16,6 +16,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `active_admin`:(bool) The license administrative state.Set this property to 'true' to activate the license entitlements. 
 * `all_devices_to_default_tier`:(bool) Move all licensed devices to default license tier. 
+* `clear_api_sync_status`:(bool) Clear the status of smart API sync. 
 * `create_time`:(string) The time when this managed object was created. 
 * `deregister_device`:(bool) Trigger de-registration/disable. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 

@@ -295,6 +295,11 @@ func dataSourceKvmPolicy() *schema.Resource {
 				},
 			},
 		},
+		"tunneled_kvm_enabled": {
+			Description: "Enables Tunneled vKVM on the endpoint. Applicable only for Device Connectors that support Tunneled vKVM.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -683,6 +688,11 @@ func dataSourceKvmPolicy() *schema.Resource {
 					},
 				},
 			},
+		},
+		"tunneled_kvm_enabled": {
+			Description: "Enables Tunneled vKVM on the endpoint. Applicable only for Device Connectors that support Tunneled vKVM.",
+			Type:        schema.TypeBool,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -1143,6 +1153,11 @@ func dataSourceKvmPolicyRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOkExists("tunneled_kvm_enabled"); ok {
+		x := (v.(bool))
+		o.SetTunneledKvmEnabled(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1284,6 +1299,7 @@ func dataSourceKvmPolicyRead(c context.Context, d *schema.ResourceData, meta int
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["tunneled_kvm_enabled"] = (s.GetTunneledKvmEnabled())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				kvmPolicyResults[j] = temp

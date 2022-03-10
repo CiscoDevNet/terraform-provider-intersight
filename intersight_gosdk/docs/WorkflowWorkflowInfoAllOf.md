@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | A type of the workflow (serverconfig, ansible_monitoring). | [optional] [readonly] 
 **UserActionRequired** | Pointer to **bool** | Property will be set when an user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully. | [optional] [readonly] [default to false]
 **UserId** | Pointer to **string** | The user identifier which indicates the user that started this workflow. | [optional] [readonly] 
+**Variable** | Pointer to **interface{}** | All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution. | [optional] [readonly] 
 **WaitReason** | Pointer to **string** | Denotes the reason workflow is in waiting status. * &#x60;None&#x60; - Wait reason is none, which indicates there is no reason for the waiting state. * &#x60;GatherTasks&#x60; - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * &#x60;Duplicate&#x60; - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * &#x60;RateLimit&#x60; - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * &#x60;WaitTask&#x60; - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * &#x60;PendingRetryFailed&#x60; - Wait reason when the workflow is pending a RetryFailed action. * &#x60;WaitingToStart&#x60; - Workflow is waiting to start on workflow engine. | [optional] [default to "None"]
 **WorkflowCtx** | Pointer to [**NullableWorkflowWorkflowCtx**](WorkflowWorkflowCtx.md) |  | [optional] 
 **WorkflowMetaType** | Pointer to **string** | The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance. * &#x60;SystemDefined&#x60; - System defined workflow definition. * &#x60;UserDefined&#x60; - User defined workflow definition. * &#x60;Dynamic&#x60; - Dynamically defined workflow definition. | [optional] [default to "SystemDefined"]
@@ -769,6 +770,41 @@ SetUserId sets UserId field to given value.
 
 HasUserId returns a boolean if a field has been set.
 
+### GetVariable
+
+`func (o *WorkflowWorkflowInfoAllOf) GetVariable() interface{}`
+
+GetVariable returns the Variable field if non-nil, zero value otherwise.
+
+### GetVariableOk
+
+`func (o *WorkflowWorkflowInfoAllOf) GetVariableOk() (*interface{}, bool)`
+
+GetVariableOk returns a tuple with the Variable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVariable
+
+`func (o *WorkflowWorkflowInfoAllOf) SetVariable(v interface{})`
+
+SetVariable sets Variable field to given value.
+
+### HasVariable
+
+`func (o *WorkflowWorkflowInfoAllOf) HasVariable() bool`
+
+HasVariable returns a boolean if a field has been set.
+
+### SetVariableNil
+
+`func (o *WorkflowWorkflowInfoAllOf) SetVariableNil(b bool)`
+
+ SetVariableNil sets the value for Variable to be an explicit nil
+
+### UnsetVariable
+`func (o *WorkflowWorkflowInfoAllOf) UnsetVariable()`
+
+UnsetVariable ensures that no value is present for Variable, not even an explicit nil
 ### GetWaitReason
 
 `func (o *WorkflowWorkflowInfoAllOf) GetWaitReason() string`

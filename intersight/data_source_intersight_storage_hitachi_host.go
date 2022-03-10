@@ -120,7 +120,7 @@ func dataSourceStorageHitachiHost() *schema.Resource {
 			Optional:    true,
 		},
 		"host_group_id": {
-			Description: "ID of the host group.",
+			Description: "ID of the host group for this host.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -633,7 +633,7 @@ func dataSourceStorageHitachiHost() *schema.Resource {
 			Optional:    true,
 		},
 		"host_group_id": {
-			Description: "ID of the host group.",
+			Description: "ID of the host group for this host.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

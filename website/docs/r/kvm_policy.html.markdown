@@ -72,6 +72,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `tunneled_kvm_enabled`:(bool) Enables Tunneled vKVM on the endpoint. Applicable only for Device Connectors that support Tunneled vKVM. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

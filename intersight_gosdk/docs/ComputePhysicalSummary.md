@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 **MemorySpeed** | Pointer to **string** | The maximum memory speed in MHz available on the server. | [optional] [readonly] 
 **MgmtIpAddress** | Pointer to **string** | Management address of the server. | [optional] [readonly] 
 **Model** | Pointer to **string** | This field identifies the model of the given component. | [optional] [readonly] 
-**Name** | Pointer to **string** | The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. | [optional] [readonly] 
+**Name** | Pointer to **string** | The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id. | [optional] [readonly] 
 **NumAdaptors** | Pointer to **int64** | The total number of network adapters present on the server. | [optional] [readonly] 
 **NumCpuCores** | Pointer to **int64** | The total number of CPU cores present on the server. | [optional] [readonly] 
 **NumCpuCoresEnabled** | Pointer to **int64** | The total number of CPU cores enabled on the server. | [optional] [readonly] 
@@ -50,10 +50,10 @@ Name | Type | Description | Notes
 **SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
 **TopologyScanStatus** | Pointer to **string** | To maintain the Topology workflow run status. | [optional] [readonly] 
 **TotalMemory** | Pointer to **int64** | The total memory available on the server. | [optional] [readonly] 
+**TunneledKvm** | Pointer to **bool** | The Tunneled vKVM status of the server. | [optional] [readonly] 
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The universally unique identity of the server. | [optional] [readonly] 
 **Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
-**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](EquipmentChassisRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -1246,6 +1246,31 @@ SetTotalMemory sets TotalMemory field to given value.
 
 HasTotalMemory returns a boolean if a field has been set.
 
+### GetTunneledKvm
+
+`func (o *ComputePhysicalSummary) GetTunneledKvm() bool`
+
+GetTunneledKvm returns the TunneledKvm field if non-nil, zero value otherwise.
+
+### GetTunneledKvmOk
+
+`func (o *ComputePhysicalSummary) GetTunneledKvmOk() (*bool, bool)`
+
+GetTunneledKvmOk returns a tuple with the TunneledKvm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTunneledKvm
+
+`func (o *ComputePhysicalSummary) SetTunneledKvm(v bool)`
+
+SetTunneledKvm sets TunneledKvm field to given value.
+
+### HasTunneledKvm
+
+`func (o *ComputePhysicalSummary) HasTunneledKvm() bool`
+
+HasTunneledKvm returns a boolean if a field has been set.
+
 ### GetUserLabel
 
 `func (o *ComputePhysicalSummary) GetUserLabel() string`
@@ -1320,31 +1345,6 @@ SetVendor sets Vendor field to given value.
 `func (o *ComputePhysicalSummary) HasVendor() bool`
 
 HasVendor returns a boolean if a field has been set.
-
-### GetEquipmentChassis
-
-`func (o *ComputePhysicalSummary) GetEquipmentChassis() EquipmentChassisRelationship`
-
-GetEquipmentChassis returns the EquipmentChassis field if non-nil, zero value otherwise.
-
-### GetEquipmentChassisOk
-
-`func (o *ComputePhysicalSummary) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool)`
-
-GetEquipmentChassisOk returns a tuple with the EquipmentChassis field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEquipmentChassis
-
-`func (o *ComputePhysicalSummary) SetEquipmentChassis(v EquipmentChassisRelationship)`
-
-SetEquipmentChassis sets EquipmentChassis field to given value.
-
-### HasEquipmentChassis
-
-`func (o *ComputePhysicalSummary) HasEquipmentChassis() bool`
-
-HasEquipmentChassis returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

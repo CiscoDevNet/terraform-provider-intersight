@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **StartTime** | Pointer to **time.Time** | The time stamp when the task started execution. | [optional] [readonly] 
 **Status** | Pointer to **string** | The status of the task and this will specify if the task is running or has reached a final state. | [optional] 
 **TaskInstIdList** | Pointer to [**[]WorkflowTaskRetryInfo**](WorkflowTaskRetryInfo.md) |  | [optional] 
+**TaskLoopInfo** | Pointer to [**NullableWorkflowTaskLoopInfo**](WorkflowTaskLoopInfo.md) |  | [optional] 
 **SubWorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 **TaskDefinition** | Pointer to [**WorkflowTaskDefinitionRelationship**](WorkflowTaskDefinitionRelationship.md) |  | [optional] 
 **WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
@@ -551,6 +552,41 @@ HasTaskInstIdList returns a boolean if a field has been set.
 `func (o *WorkflowTaskInfoAllOf) UnsetTaskInstIdList()`
 
 UnsetTaskInstIdList ensures that no value is present for TaskInstIdList, not even an explicit nil
+### GetTaskLoopInfo
+
+`func (o *WorkflowTaskInfoAllOf) GetTaskLoopInfo() WorkflowTaskLoopInfo`
+
+GetTaskLoopInfo returns the TaskLoopInfo field if non-nil, zero value otherwise.
+
+### GetTaskLoopInfoOk
+
+`func (o *WorkflowTaskInfoAllOf) GetTaskLoopInfoOk() (*WorkflowTaskLoopInfo, bool)`
+
+GetTaskLoopInfoOk returns a tuple with the TaskLoopInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskLoopInfo
+
+`func (o *WorkflowTaskInfoAllOf) SetTaskLoopInfo(v WorkflowTaskLoopInfo)`
+
+SetTaskLoopInfo sets TaskLoopInfo field to given value.
+
+### HasTaskLoopInfo
+
+`func (o *WorkflowTaskInfoAllOf) HasTaskLoopInfo() bool`
+
+HasTaskLoopInfo returns a boolean if a field has been set.
+
+### SetTaskLoopInfoNil
+
+`func (o *WorkflowTaskInfoAllOf) SetTaskLoopInfoNil(b bool)`
+
+ SetTaskLoopInfoNil sets the value for TaskLoopInfo to be an explicit nil
+
+### UnsetTaskLoopInfo
+`func (o *WorkflowTaskInfoAllOf) UnsetTaskLoopInfo()`
+
+UnsetTaskLoopInfo ensures that no value is present for TaskLoopInfo, not even an explicit nil
 ### GetSubWorkflowInfo
 
 `func (o *WorkflowTaskInfoAllOf) GetSubWorkflowInfo() WorkflowWorkflowInfoRelationship`

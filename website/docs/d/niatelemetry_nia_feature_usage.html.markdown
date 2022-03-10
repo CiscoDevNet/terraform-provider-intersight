@@ -66,6 +66,7 @@ The following arguments can be used to get data of already created objects in In
 * `is_vrfs_feature_used`:(bool) VRF feature usage on APIC controller. 
 * `isis_count`:(int) Isis feature usage. This determines the total number of ISIS sessions across the fabric. 
 * `l2_multicast`:(string) L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric. 
+* `latency_ptp_mode`:(string) Returns the Latency ptp mode for the controller. 
 * `leaf_count`:(int) Number of Leafs. This determines the total number of Leaf switches in the fabric. 
 * `local_username_count`:(int) Returns count of local users. 
 * `login_block_duration`:(int) Returns login block duration value. 

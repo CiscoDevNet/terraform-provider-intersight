@@ -294,7 +294,7 @@ func dataSourceApplianceDeviceUpgradePolicy() *schema.Resource {
 			Optional:    true,
 		},
 		"software_download_type": {
-			Description: "UpgradeType is used to indicate the kink of software upload to upgrade.\n* `connected` - Indicates if the upgrade service is set to upload software to latest version automatically.\n* `manual` - Indicates if the upgrade service is set to upload software to user picked verison manually .",
+			Description: "UpgradeType is used to indicate the kink of software upload to upgrade.\n* `unknown` - Indicates user setting of upgrade service to unknown.\n* `connected` - Indicates if the upgrade service is set to upload software to latest version automatically.\n* `manual` - Indicates if the upgrade service is set to upload software to user picked verison manually.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -709,7 +709,7 @@ func dataSourceApplianceDeviceUpgradePolicy() *schema.Resource {
 			Optional:    true,
 		},
 		"software_download_type": {
-			Description: "UpgradeType is used to indicate the kink of software upload to upgrade.\n* `connected` - Indicates if the upgrade service is set to upload software to latest version automatically.\n* `manual` - Indicates if the upgrade service is set to upload software to user picked verison manually .",
+			Description: "UpgradeType is used to indicate the kink of software upload to upgrade.\n* `unknown` - Indicates user setting of upgrade service to unknown.\n* `connected` - Indicates if the upgrade service is set to upload software to latest version automatically.\n* `manual` - Indicates if the upgrade service is set to upload software to user picked verison manually.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

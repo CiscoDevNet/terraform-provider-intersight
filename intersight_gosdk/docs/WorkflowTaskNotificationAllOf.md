@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **CorrelationId** | Pointer to **string** | The correlation id of the scheduled task. | [optional] 
 **EndTime** | Pointer to **string** | The end time of the scheduled task. | [optional] 
 **Input** | Pointer to **string** | The input of the scheduled task. | [optional] 
+**Iteration** | Pointer to **int64** | The iteration count of task which runs inside loop. | [optional] 
+**LoopOverTask** | Pointer to **bool** | True, if task runs inside loop. | [optional] 
 **Output** | Pointer to **string** | The output of the scheduled task. | [optional] 
 **ReasonForIncompletion** | Pointer to **string** | The reason for incompletion status of the task. | [optional] 
 **ReferenceTaskName** | Pointer to **string** | The task reference name of the scheduled task. | [optional] 
@@ -158,6 +160,56 @@ SetInput sets Input field to given value.
 `func (o *WorkflowTaskNotificationAllOf) HasInput() bool`
 
 HasInput returns a boolean if a field has been set.
+
+### GetIteration
+
+`func (o *WorkflowTaskNotificationAllOf) GetIteration() int64`
+
+GetIteration returns the Iteration field if non-nil, zero value otherwise.
+
+### GetIterationOk
+
+`func (o *WorkflowTaskNotificationAllOf) GetIterationOk() (*int64, bool)`
+
+GetIterationOk returns a tuple with the Iteration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIteration
+
+`func (o *WorkflowTaskNotificationAllOf) SetIteration(v int64)`
+
+SetIteration sets Iteration field to given value.
+
+### HasIteration
+
+`func (o *WorkflowTaskNotificationAllOf) HasIteration() bool`
+
+HasIteration returns a boolean if a field has been set.
+
+### GetLoopOverTask
+
+`func (o *WorkflowTaskNotificationAllOf) GetLoopOverTask() bool`
+
+GetLoopOverTask returns the LoopOverTask field if non-nil, zero value otherwise.
+
+### GetLoopOverTaskOk
+
+`func (o *WorkflowTaskNotificationAllOf) GetLoopOverTaskOk() (*bool, bool)`
+
+GetLoopOverTaskOk returns a tuple with the LoopOverTask field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoopOverTask
+
+`func (o *WorkflowTaskNotificationAllOf) SetLoopOverTask(v bool)`
+
+SetLoopOverTask sets LoopOverTask field to given value.
+
+### HasLoopOverTask
+
+`func (o *WorkflowTaskNotificationAllOf) HasLoopOverTask() bool`
+
+HasLoopOverTask returns a boolean if a field has been set.
 
 ### GetOutput
 

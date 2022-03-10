@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **ManagementMode** | Pointer to **string** | The management mode of the server. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [default to "IntersightStandalone"]
 **MemorySpeed** | Pointer to **string** | The maximum memory speed in MHz available on the server. | [optional] [readonly] 
 **MgmtIpAddress** | Pointer to **string** | Management address of the server. | [optional] 
+**Name** | Pointer to **string** | The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id. | [optional] 
 **NumAdaptors** | Pointer to **int64** | The total number of network adapters present on the server. | [optional] [readonly] 
 **NumCpuCores** | Pointer to **int64** | The total number of CPU cores present on the server. | [optional] [readonly] 
 **NumCpuCoresEnabled** | Pointer to **int64** | The total number of CPU cores enabled on the server. | [optional] [readonly] 
@@ -31,6 +32,7 @@ Name | Type | Description | Notes
 **PlatformType** | Pointer to **string** | The platform type of the registered device - whether managed by UCSM or operating in standalone mode. | [optional] 
 **ServiceProfile** | Pointer to **string** | The distinguished name of the service profile to which the server is associated to. It is applicable only for servers which are managed via UCSM. | [optional] [readonly] 
 **TotalMemory** | Pointer to **int64** | The total memory available on the server. | [optional] [readonly] 
+**TunneledKvm** | Pointer to **bool** | The Tunneled vKVM status of the server. | [optional] 
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The universally unique identity of the server. | [optional] [readonly] 
 **BootCddDevices** | Pointer to [**[]BootCddDeviceRelationship**](BootCddDeviceRelationship.md) | An array of relationships to bootCddDevice resources. | [optional] 
@@ -402,6 +404,31 @@ SetMgmtIpAddress sets MgmtIpAddress field to given value.
 
 HasMgmtIpAddress returns a boolean if a field has been set.
 
+### GetName
+
+`func (o *ComputePhysical) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *ComputePhysical) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *ComputePhysical) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *ComputePhysical) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
 ### GetNumAdaptors
 
 `func (o *ComputePhysical) GetNumAdaptors() int64`
@@ -761,6 +788,31 @@ SetTotalMemory sets TotalMemory field to given value.
 `func (o *ComputePhysical) HasTotalMemory() bool`
 
 HasTotalMemory returns a boolean if a field has been set.
+
+### GetTunneledKvm
+
+`func (o *ComputePhysical) GetTunneledKvm() bool`
+
+GetTunneledKvm returns the TunneledKvm field if non-nil, zero value otherwise.
+
+### GetTunneledKvmOk
+
+`func (o *ComputePhysical) GetTunneledKvmOk() (*bool, bool)`
+
+GetTunneledKvmOk returns a tuple with the TunneledKvm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTunneledKvm
+
+`func (o *ComputePhysical) SetTunneledKvm(v bool)`
+
+SetTunneledKvm sets TunneledKvm field to given value.
+
+### HasTunneledKvm
+
+`func (o *ComputePhysical) HasTunneledKvm() bool`
+
+HasTunneledKvm returns a boolean if a field has been set.
 
 ### GetUserLabel
 

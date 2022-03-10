@@ -246,6 +246,18 @@ func resourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 				Optional:    true,
 				Default:     true,
 			},
+			"max_eth_rx_ring_size": {
+				Description: "Maximum Ring Size value for vNIC Receive Queue.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Default:     4096,
+			},
+			"max_eth_tx_ring_size": {
+				Description: "Maximum Ring Size value for vNIC Transmit Queue.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Default:     4096,
+			},
 			"max_rocev2_interfaces": {
 				Description: "Maximum number of vNIC interfaces that can be RoCEv2 enabled.",
 				Type:        schema.TypeInt,
@@ -757,6 +769,16 @@ func resourceCapabilityAdapterUnitDescriptorCreate(c context.Context, d *schema.
 		o.SetIsGeneveSupported(x)
 	}
 
+	if v, ok := d.GetOkExists("max_eth_rx_ring_size"); ok {
+		x := int64(v.(int))
+		o.SetMaxEthRxRingSize(x)
+	}
+
+	if v, ok := d.GetOkExists("max_eth_tx_ring_size"); ok {
+		x := int64(v.(int))
+		o.SetMaxEthTxRingSize(x)
+	}
+
 	if v, ok := d.GetOkExists("max_rocev2_interfaces"); ok {
 		x := int64(v.(int))
 		o.SetMaxRocev2Interfaces(x)
@@ -932,6 +954,14 @@ func resourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.Re
 
 	if err := d.Set("is_geneve_supported", (s.GetIsGeneveSupported())); err != nil {
 		return diag.Errorf("error occurred while setting property IsGeneveSupported in CapabilityAdapterUnitDescriptor object: %s", err.Error())
+	}
+
+	if err := d.Set("max_eth_rx_ring_size", (s.GetMaxEthRxRingSize())); err != nil {
+		return diag.Errorf("error occurred while setting property MaxEthRxRingSize in CapabilityAdapterUnitDescriptor object: %s", err.Error())
+	}
+
+	if err := d.Set("max_eth_tx_ring_size", (s.GetMaxEthTxRingSize())); err != nil {
+		return diag.Errorf("error occurred while setting property MaxEthTxRingSize in CapabilityAdapterUnitDescriptor object: %s", err.Error())
 	}
 
 	if err := d.Set("max_rocev2_interfaces", (s.GetMaxRocev2Interfaces())); err != nil {
@@ -1192,6 +1222,18 @@ func resourceCapabilityAdapterUnitDescriptorUpdate(c context.Context, d *schema.
 		v := d.Get("is_geneve_supported")
 		x := (v.(bool))
 		o.SetIsGeneveSupported(x)
+	}
+
+	if d.HasChange("max_eth_rx_ring_size") {
+		v := d.Get("max_eth_rx_ring_size")
+		x := int64(v.(int))
+		o.SetMaxEthRxRingSize(x)
+	}
+
+	if d.HasChange("max_eth_tx_ring_size") {
+		v := d.Get("max_eth_tx_ring_size")
+		x := int64(v.(int))
+		o.SetMaxEthTxRingSize(x)
 	}
 
 	if d.HasChange("max_rocev2_interfaces") {

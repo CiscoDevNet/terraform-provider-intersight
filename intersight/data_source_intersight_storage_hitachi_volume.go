@@ -140,7 +140,7 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 			Optional:    true,
 		},
 		"emulation_type": {
-			Description: "The volume emulation type or the volume status information.\n* `N/A` - Not available.\n* `NOT DEFINED` - The volume is not implemented.\n* `DEFINING` - The volume is being created.\n* `REMOVING` - The volume is being removed.\n* `OPEN-V` - To be provided by Hitachi.",
+			Description: "The volume emulation type or the volume status information.\n* `N/A` - The emulation type is not available.\n* `NOT DEFINED` - The volume is not implemented.\n* `DEFINING` - The volume is being created.\n* `REMOVING` - The volume is being removed.\n* `OPEN-V` - To be provided by Hitachi.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -348,7 +348,7 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 			Optional:    true,
 		},
 		"raid_level": {
-			Description: "RAID level for the volume.\n* `N/A` - RAID level is unknown or multiple RAID levels are being used.\n* `RAID1` - RAID1.\n* `RAID5` - RAID5.\n* `RAID6` - RAID6.",
+			Description: "RAID level for the volume.\n* `N/A` - RAID level is unknown or multiple RAID levels are being used.\n* `RAID1` - RAID level of the given drives is RAID1.\n* `RAID5` - RAID level of the given drives is RAID5.\n* `RAID6` - RAID level of the given drives is RAID6.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -714,7 +714,7 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 			Optional:    true,
 		},
 		"emulation_type": {
-			Description: "The volume emulation type or the volume status information.\n* `N/A` - Not available.\n* `NOT DEFINED` - The volume is not implemented.\n* `DEFINING` - The volume is being created.\n* `REMOVING` - The volume is being removed.\n* `OPEN-V` - To be provided by Hitachi.",
+			Description: "The volume emulation type or the volume status information.\n* `N/A` - The emulation type is not available.\n* `NOT DEFINED` - The volume is not implemented.\n* `DEFINING` - The volume is being created.\n* `REMOVING` - The volume is being removed.\n* `OPEN-V` - To be provided by Hitachi.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -922,7 +922,7 @@ func dataSourceStorageHitachiVolume() *schema.Resource {
 			Optional:    true,
 		},
 		"raid_level": {
-			Description: "RAID level for the volume.\n* `N/A` - RAID level is unknown or multiple RAID levels are being used.\n* `RAID1` - RAID1.\n* `RAID5` - RAID5.\n* `RAID6` - RAID6.",
+			Description: "RAID level for the volume.\n* `N/A` - RAID level is unknown or multiple RAID levels are being used.\n* `RAID1` - RAID level of the given drives is RAID1.\n* `RAID5` - RAID level of the given drives is RAID5.\n* `RAID6` - RAID level of the given drives is RAID6.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

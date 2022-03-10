@@ -236,7 +236,7 @@ func resourceAccessPolicy() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-					if v := d.Get("configuration_type.0.configure_inband").(bool); v == false {
+					if new == "0" || new == "0.0" {
 						return true
 					}
 					return false

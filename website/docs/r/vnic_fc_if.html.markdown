@@ -102,7 +102,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `id`:(string) PCIe Slot where the VIC adapter is installed. Supported values are (1-15) and MLOM. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `pci_link`:(int) The PCI Link used as transport for the virtual interface. All VIC adapters have a single PCI link except VIC 1385 which has two. 
+  + `pci_link`:(int) The PCI Link used as transport for the virtual interface. This field is applicable only for VIC 1385 model (UCSC-PCIE-C40Q-03) which support two PCI links. The value, if specified, for any other VIC model will be ignored. 
   + `switch_id`:(string) The fabric port to which the vNICs will be associated.* `None` - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value 'None' should be used.* `A` - Fabric A of the FI cluster.* `B` - Fabric B of the FI cluster. 
   + `uplink`:(int) Adapter port on which the virtual interface will be created. 
 * `profile`:(HashMap) - A reference to a policyAbstractConfigProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

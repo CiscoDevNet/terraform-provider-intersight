@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.NiaInventory"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.NiaInventory"]
+**ControllerIpAddress** | Pointer to **string** | Returns controller&#39;s IP address details. | [optional] 
 **Cpu** | Pointer to **float32** | CPU usage of device being inventoried. This determines the percentage of CPU resources used. | [optional] 
 **CrashResetLogs** | Pointer to **string** | Last crash reset reason of device being inventoried. This determines the last reason for a device&#39;s restart due to crash of the system. | [optional] 
 **CustomerDeviceConnector** | Pointer to **string** | Returns the value of the customerDeviceConnector field. | [optional] 
@@ -120,6 +121,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetControllerIpAddress
+
+`func (o *NiatelemetryNiaInventory) GetControllerIpAddress() string`
+
+GetControllerIpAddress returns the ControllerIpAddress field if non-nil, zero value otherwise.
+
+### GetControllerIpAddressOk
+
+`func (o *NiatelemetryNiaInventory) GetControllerIpAddressOk() (*string, bool)`
+
+GetControllerIpAddressOk returns a tuple with the ControllerIpAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetControllerIpAddress
+
+`func (o *NiatelemetryNiaInventory) SetControllerIpAddress(v string)`
+
+SetControllerIpAddress sets ControllerIpAddress field to given value.
+
+### HasControllerIpAddress
+
+`func (o *NiatelemetryNiaInventory) HasControllerIpAddress() bool`
+
+HasControllerIpAddress returns a boolean if a field has been set.
 
 ### GetCpu
 

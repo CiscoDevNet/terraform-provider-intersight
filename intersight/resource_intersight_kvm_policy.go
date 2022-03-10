@@ -370,6 +370,12 @@ func resourceKvmPolicy() *schema.Resource {
 					},
 				},
 			},
+			"tunneled_kvm_enabled": {
+				Description: "Enables Tunneled vKVM on the endpoint. Applicable only for Device Connectors that support Tunneled vKVM.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -694,6 +700,11 @@ func resourceKvmPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
+	if v, ok := d.GetOkExists("tunneled_kvm_enabled"); ok {
+		x := (v.(bool))
+		o.SetTunneledKvmEnabled(x)
+	}
+
 	r := conn.ApiClient.KvmApi.CreateKvmPolicy(conn.ctx).KvmPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
@@ -842,6 +853,10 @@ func resourceKvmPolicyRead(c context.Context, d *schema.ResourceData, meta inter
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in KvmPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("tunneled_kvm_enabled", (s.GetTunneledKvmEnabled())); err != nil {
+		return diag.Errorf("error occurred while setting property TunneledKvmEnabled in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
@@ -1039,6 +1054,12 @@ func resourceKvmPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 			x = append(x, *o)
 		}
 		o.SetTags(x)
+	}
+
+	if d.HasChange("tunneled_kvm_enabled") {
+		v := d.Get("tunneled_kvm_enabled")
+		x := (v.(bool))
+		o.SetTunneledKvmEnabled(x)
 	}
 
 	r := conn.ApiClient.KvmApi.UpdateKvmPolicy(conn.ctx, d.Id()).KvmPolicy(*o)

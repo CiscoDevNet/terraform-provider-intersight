@@ -18162,6 +18162,22 @@ func flattenMapVnicPlogiSettings(p models.VnicPlogiSettings, d *schema.ResourceD
 	vnicplogisettingss = append(vnicplogisettingss, vnicplogisettings)
 	return vnicplogisettingss
 }
+func flattenMapVnicPtpSettings(p models.VnicPtpSettings, d *schema.ResourceData) []map[string]interface{} {
+	var vnicptpsettingss []map[string]interface{}
+	var ret models.VnicPtpSettings
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	vnicptpsettings := make(map[string]interface{})
+	vnicptpsettings["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	vnicptpsettings["class_id"] = item.GetClassId()
+	vnicptpsettings["enabled"] = item.GetEnabled()
+	vnicptpsettings["object_type"] = item.GetObjectType()
+
+	vnicptpsettingss = append(vnicptpsettingss, vnicptpsettings)
+	return vnicptpsettingss
+}
 func flattenMapVnicRoceSettings(p models.VnicRoceSettings, d *schema.ResourceData) []map[string]interface{} {
 	var vnicrocesettingss []map[string]interface{}
 	var ret models.VnicRoceSettings
@@ -18745,6 +18761,25 @@ func flattenMapWorkflowTaskInfoRelationship(p models.WorkflowTaskInfoRelationshi
 
 	workflowtaskinforelationships = append(workflowtaskinforelationships, workflowtaskinforelationship)
 	return workflowtaskinforelationships
+}
+func flattenMapWorkflowTaskLoopInfo(p models.WorkflowTaskLoopInfo, d *schema.ResourceData) []map[string]interface{} {
+	var workflowtaskloopinfos []map[string]interface{}
+	var ret models.WorkflowTaskLoopInfo
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	workflowtaskloopinfo := make(map[string]interface{})
+	workflowtaskloopinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	workflowtaskloopinfo["class_id"] = item.GetClassId()
+	workflowtaskloopinfo["iteration"] = item.GetIteration()
+	workflowtaskloopinfo["loop_task_label"] = item.GetLoopTaskLabel()
+	workflowtaskloopinfo["loop_task_name"] = item.GetLoopTaskName()
+	workflowtaskloopinfo["loop_type"] = item.GetLoopType()
+	workflowtaskloopinfo["object_type"] = item.GetObjectType()
+
+	workflowtaskloopinfos = append(workflowtaskloopinfos, workflowtaskloopinfo)
+	return workflowtaskloopinfos
 }
 func flattenMapWorkflowTaskMetadataRelationship(p models.WorkflowTaskMetadataRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var workflowtaskmetadatarelationships []map[string]interface{}

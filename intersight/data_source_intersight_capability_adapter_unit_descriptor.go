@@ -196,6 +196,16 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"max_eth_rx_ring_size": {
+			Description: "Maximum Ring Size value for vNIC Receive Queue.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"max_eth_tx_ring_size": {
+			Description: "Maximum Ring Size value for vNIC Transmit Queue.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"max_rocev2_interfaces": {
 			Description: "Maximum number of vNIC interfaces that can be RoCEv2 enabled.",
 			Type:        schema.TypeInt,
@@ -636,6 +646,16 @@ func dataSourceCapabilityAdapterUnitDescriptor() *schema.Resource {
 		"is_geneve_supported": {
 			Description: "Indicates that the GENEVE offload feature is supported by this adapter.",
 			Type:        schema.TypeBool,
+			Optional:    true,
+		},
+		"max_eth_rx_ring_size": {
+			Description: "Maximum Ring Size value for vNIC Receive Queue.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"max_eth_tx_ring_size": {
+			Description: "Maximum Ring Size value for vNIC Transmit Queue.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"max_rocev2_interfaces": {
@@ -1146,6 +1166,16 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 		o.SetIsGeneveSupported(x)
 	}
 
+	if v, ok := d.GetOkExists("max_eth_rx_ring_size"); ok {
+		x := int64(v.(int))
+		o.SetMaxEthRxRingSize(x)
+	}
+
+	if v, ok := d.GetOkExists("max_eth_tx_ring_size"); ok {
+		x := int64(v.(int))
+		o.SetMaxEthTxRingSize(x)
+	}
+
 	if v, ok := d.GetOkExists("max_rocev2_interfaces"); ok {
 		x := int64(v.(int))
 		o.SetMaxRocev2Interfaces(x)
@@ -1458,6 +1488,8 @@ func dataSourceCapabilityAdapterUnitDescriptorRead(c context.Context, d *schema.
 				temp["fibre_channel_scsi_ioq_limit"] = (s.GetFibreChannelScsiIoqLimit())
 				temp["is_azure_qos_supported"] = (s.GetIsAzureQosSupported())
 				temp["is_geneve_supported"] = (s.GetIsGeneveSupported())
+				temp["max_eth_rx_ring_size"] = (s.GetMaxEthRxRingSize())
+				temp["max_eth_tx_ring_size"] = (s.GetMaxEthTxRingSize())
 				temp["max_rocev2_interfaces"] = (s.GetMaxRocev2Interfaces())
 
 				temp["mod_time"] = (s.GetModTime()).String()

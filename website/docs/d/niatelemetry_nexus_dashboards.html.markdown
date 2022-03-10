@@ -15,6 +15,7 @@ To access the ith object of the results obtained, use `data.intersight_niateleme
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `cluster_name`:(string) Nexus Dashboard can onboard multiple APIC clusters/sites. 
+* `cluster_uuid`:(string) UUID of the Nexus Dashboard cluster. 
 * `create_time`:(string) The time when this managed object was created. 
 * `dn`:(string) Dn of the objects present for Nexus Dashboard devices. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
@@ -25,6 +26,8 @@ The following arguments can be used to get data of already created objects in In
 * `nd_type`:(string) Node type in Nexus Dashboard cluster. 
 * `nd_version`:(string) Version running on Nexus Dashboard. 
 * `number_of_apps`:(int) Number of applications installed in the Nexus Dashboard. 
+* `number_of_insight_groups`:(int) Number of total insight groups in ND. 
+* `number_of_nir_dashboards`:(int) Number of total NIR dashboards in ND. 
 * `number_of_schemas_in_mso`:(int) Number of total schemas in Multi-Site Orchestrator. 
 * `number_of_sites_in_mso`:(int) Number of sites in Multi-Site Orchestrator. 
 * `number_of_sites_serviced`:(int) Number of sites serviced by ND. 

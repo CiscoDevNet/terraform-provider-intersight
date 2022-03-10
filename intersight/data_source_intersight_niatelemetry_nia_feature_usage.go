@@ -324,6 +324,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"latency_ptp_mode": {
+			Description: "Returns the Latency ptp mode for the controller.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"leaf_count": {
 			Description: "Number of Leafs. This determines the total number of Leaf switches in the fabric.",
 			Type:        schema.TypeInt,
@@ -1226,6 +1231,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 		},
 		"l2_multicast": {
 			Description: "L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"latency_ptp_mode": {
+			Description: "Returns the Latency ptp mode for the controller.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -2160,6 +2170,11 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 		o.SetL2Multicast(x)
 	}
 
+	if v, ok := d.GetOk("latency_ptp_mode"); ok {
+		x := (v.(string))
+		o.SetLatencyPtpMode(x)
+	}
+
 	if v, ok := d.GetOkExists("leaf_count"); ok {
 		x := int64(v.(int))
 		o.SetLeafCount(x)
@@ -2863,6 +2878,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(c context.Context, d *schema.Reso
 				temp["is_vrfs_feature_used"] = (s.GetIsVrfsFeatureUsed())
 				temp["isis_count"] = (s.GetIsisCount())
 				temp["l2_multicast"] = (s.GetL2Multicast())
+				temp["latency_ptp_mode"] = (s.GetLatencyPtpMode())
 				temp["leaf_count"] = (s.GetLeafCount())
 				temp["local_username_count"] = (s.GetLocalUsernameCount())
 				temp["login_block_duration"] = (s.GetLoginBlockDuration())

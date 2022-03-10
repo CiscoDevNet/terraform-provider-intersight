@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **EnableMetaDataSync** | Pointer to **bool** | Indicates if the updated metadata files should be synced immediately or at the next upgrade. | [optional] [default to true]
 **Schedule** | Pointer to [**NullableOnpremSchedule**](OnpremSchedule.md) |  | [optional] 
 **SerialId** | Pointer to **string** | SerialId of the Intersight Appliance. SerialId is generated when the Intersight Appliance is setup. It is a unique UUID string, and serialId will not change for the life time of the Intersight Appliance. | [optional] [readonly] 
-**SoftwareDownloadType** | Pointer to **string** | UpgradeType is used to indicate the kink of software upload to upgrade. * &#x60;connected&#x60; - Indicates if the upgrade service is set to upload software to latest version automatically. * &#x60;manual&#x60; - Indicates if the upgrade service is set to upload software to user picked verison manually . | [optional] [default to "connected"]
+**SoftwareDownloadType** | Pointer to **string** | UpgradeType is used to indicate the kink of software upload to upgrade. * &#x60;unknown&#x60; - Indicates user setting of upgrade service to unknown. * &#x60;connected&#x60; - Indicates if the upgrade service is set to upload software to latest version automatically. * &#x60;manual&#x60; - Indicates if the upgrade service is set to upload software to user picked verison manually. | [optional] [default to "unknown"]
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods

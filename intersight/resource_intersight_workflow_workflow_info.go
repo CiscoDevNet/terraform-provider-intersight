@@ -825,6 +825,17 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 					}
 					return
 				}},
+			"variable": {
+				Description:      "All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.",
+				Type:             schema.TypeString,
+				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
+				Computed: true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -1911,6 +1922,10 @@ func resourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceData,
 
 	if err := d.Set("user_id", (s.GetUserId())); err != nil {
 		return diag.Errorf("error occurred while setting property UserId in WorkflowWorkflowInfo object: %s", err.Error())
+	}
+
+	if err := d.Set("variable", flattenAdditionalProperties(s.GetVariable())); err != nil {
+		return diag.Errorf("error occurred while setting property Variable in WorkflowWorkflowInfo object: %s", err.Error())
 	}
 
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {

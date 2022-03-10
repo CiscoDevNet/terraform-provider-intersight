@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **SmartAccount** | Pointer to **string** | Name of the smart account. | [optional] [readonly] 
 **SmartAccountDomain** | Pointer to **string** | Domain Name of the smart account. | [optional] [readonly] 
 **SmartApiEnabled** | Pointer to **bool** | Indicate whether API integration is enabled. | [optional] [readonly] 
+**SmartApiSyncStatus** | Pointer to **string** | The detailed error message when there is any smart API sync error related to this account. | [optional] [readonly] 
 **SyncStatus** | Pointer to **string** | Current sync status for the account. | [optional] [readonly] 
 **VirtualAccount** | Pointer to **string** | Name of the virtual account. | [optional] [readonly] 
 **Account** | Pointer to [**IamAccountRelationship**](IamAccountRelationship.md) |  | [optional] 
@@ -699,6 +700,31 @@ SetSmartApiEnabled sets SmartApiEnabled field to given value.
 `func (o *LicenseAccountLicenseDataAllOf) HasSmartApiEnabled() bool`
 
 HasSmartApiEnabled returns a boolean if a field has been set.
+
+### GetSmartApiSyncStatus
+
+`func (o *LicenseAccountLicenseDataAllOf) GetSmartApiSyncStatus() string`
+
+GetSmartApiSyncStatus returns the SmartApiSyncStatus field if non-nil, zero value otherwise.
+
+### GetSmartApiSyncStatusOk
+
+`func (o *LicenseAccountLicenseDataAllOf) GetSmartApiSyncStatusOk() (*string, bool)`
+
+GetSmartApiSyncStatusOk returns a tuple with the SmartApiSyncStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSmartApiSyncStatus
+
+`func (o *LicenseAccountLicenseDataAllOf) SetSmartApiSyncStatus(v string)`
+
+SetSmartApiSyncStatus sets SmartApiSyncStatus field to given value.
+
+### HasSmartApiSyncStatus
+
+`func (o *LicenseAccountLicenseDataAllOf) HasSmartApiSyncStatus() bool`
+
+HasSmartApiSyncStatus returns a boolean if a field has been set.
 
 ### GetSyncStatus
 

@@ -1190,6 +1190,11 @@ func dataSourceComputeRackUnit() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"name": {
+			Description: "The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"num_adaptors": {
 			Description: "The total number of network adapters present on the server.",
 			Type:        schema.TypeInt,
@@ -1739,6 +1744,11 @@ func dataSourceComputeRackUnit() *schema.Resource {
 		"total_memory": {
 			Description: "The total memory available on the server.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"tunneled_kvm": {
+			Description: "The Tunneled vKVM status of the server.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"unit_personality": {
@@ -3109,6 +3119,11 @@ func dataSourceComputeRackUnit() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"name": {
+			Description: "The name of the UCS Fabric Interconnect cluster or Cisco Integrated Management Controller (CIMC). When this server is attached to a UCS Fabric Interconnect, the value of this property is the name of the UCS Fabric Interconnect along with chassis/server Id. When this server configured in standalone mode, the value of this property is the name of the Cisco Integrated Management Controller. when this server is configired in IMM mode, the value of this property contains model and chassis/server Id.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"num_adaptors": {
 			Description: "The total number of network adapters present on the server.",
 			Type:        schema.TypeInt,
@@ -3658,6 +3673,11 @@ func dataSourceComputeRackUnit() *schema.Resource {
 		"total_memory": {
 			Description: "The total memory available on the server.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"tunneled_kvm": {
+			Description: "The Tunneled vKVM status of the server.",
+			Type:        schema.TypeBool,
 			Optional:    true,
 		},
 		"unit_personality": {
@@ -5194,6 +5214,11 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
+	}
+
 	if v, ok := d.GetOkExists("num_adaptors"); ok {
 		x := int64(v.(int))
 		o.SetNumAdaptors(x)
@@ -5849,6 +5874,11 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 		o.SetTotalMemory(x)
 	}
 
+	if v, ok := d.GetOkExists("tunneled_kvm"); ok {
+		x := (v.(bool))
+		o.SetTunneledKvm(x)
+	}
+
 	if v, ok := d.GetOk("unit_personality"); ok {
 		x := make([]models.RackUnitPersonalityRelationship, 0)
 		s := v.([]interface{})
@@ -6139,6 +6169,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 				temp["num_adaptors"] = (s.GetNumAdaptors())
 				temp["num_cpu_cores"] = (s.GetNumCpuCores())
 				temp["num_cpu_cores_enabled"] = (s.GetNumCpuCoresEnabled())
@@ -6188,6 +6219,7 @@ func dataSourceComputeRackUnitRead(c context.Context, d *schema.ResourceData, me
 				temp["top_system"] = flattenMapTopSystemRelationship(s.GetTopSystem(), d)
 				temp["topology_scan_status"] = (s.GetTopologyScanStatus())
 				temp["total_memory"] = (s.GetTotalMemory())
+				temp["tunneled_kvm"] = (s.GetTunneledKvm())
 
 				temp["unit_personality"] = flattenListRackUnitPersonalityRelationship(s.GetUnitPersonality(), d)
 				temp["user_label"] = (s.GetUserLabel())

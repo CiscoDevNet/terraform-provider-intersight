@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **UiInputFilters** | Pointer to [**[]WorkflowUiInputFilter**](WorkflowUiInputFilter.md) |  | [optional] 
 **UiRenderingData** | Pointer to **interface{}** | This will hold the data needed for workflow to be rendered in the user interface. | [optional] 
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
+**VariableDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
 **Version** | Pointer to **int64** | The version of the workflow to support multiple versions. | [optional] [default to 1]
 **Catalog** | Pointer to [**WorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
 **ClonedFrom** | Pointer to [**WorkflowWorkflowDefinitionRelationship**](WorkflowWorkflowDefinitionRelationship.md) |  | [optional] 
@@ -576,6 +577,41 @@ HasValidationInformation returns a boolean if a field has been set.
 `func (o *WorkflowWorkflowDefinitionAllOf) UnsetValidationInformation()`
 
 UnsetValidationInformation ensures that no value is present for ValidationInformation, not even an explicit nil
+### GetVariableDefinition
+
+`func (o *WorkflowWorkflowDefinitionAllOf) GetVariableDefinition() []WorkflowBaseDataType`
+
+GetVariableDefinition returns the VariableDefinition field if non-nil, zero value otherwise.
+
+### GetVariableDefinitionOk
+
+`func (o *WorkflowWorkflowDefinitionAllOf) GetVariableDefinitionOk() (*[]WorkflowBaseDataType, bool)`
+
+GetVariableDefinitionOk returns a tuple with the VariableDefinition field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVariableDefinition
+
+`func (o *WorkflowWorkflowDefinitionAllOf) SetVariableDefinition(v []WorkflowBaseDataType)`
+
+SetVariableDefinition sets VariableDefinition field to given value.
+
+### HasVariableDefinition
+
+`func (o *WorkflowWorkflowDefinitionAllOf) HasVariableDefinition() bool`
+
+HasVariableDefinition returns a boolean if a field has been set.
+
+### SetVariableDefinitionNil
+
+`func (o *WorkflowWorkflowDefinitionAllOf) SetVariableDefinitionNil(b bool)`
+
+ SetVariableDefinitionNil sets the value for VariableDefinition to be an explicit nil
+
+### UnsetVariableDefinition
+`func (o *WorkflowWorkflowDefinitionAllOf) UnsetVariableDefinition()`
+
+UnsetVariableDefinition ensures that no value is present for VariableDefinition, not even an explicit nil
 ### GetVersion
 
 `func (o *WorkflowWorkflowDefinitionAllOf) GetVersion() int64`

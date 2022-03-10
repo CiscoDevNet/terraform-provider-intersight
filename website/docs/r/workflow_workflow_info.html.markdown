@@ -136,6 +136,7 @@ This complex property has following sub-properties:
 * `type`:(string)(ReadOnly) A type of the workflow (serverconfig, ansible_monitoring). 
 * `user_action_required`:(bool)(ReadOnly) Property will be set when an user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully. 
 * `user_id`:(string)(ReadOnly) The user identifier which indicates the user that started this workflow. 
+* `variable`:(JSON as string)(ReadOnly) All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

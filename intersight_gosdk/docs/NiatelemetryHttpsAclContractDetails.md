@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.HttpsAclContractDetails"]
 **ConsumerDn** | Pointer to **string** | Consumer Dn of the HTTPS ACL contract children MOs for APIC. | [optional] 
 **ContractName** | Pointer to **string** | Name of HTTPS ACL contract for APIC. | [optional] 
+**MgmtInstpDn** | Pointer to **string** | Mgmt Inst Dn of the HTTPS ACL contract children MOs for APIC. | [optional] 
+**MgmtSubnetAddresses** | Pointer to **string** | Mgmt subnet address of the HTTPS ACL contract children MOs for APIC. | [optional] 
 **ProviderDn** | Pointer to **string** | Provider dn of the HTTPS ACL contract children MOs for APIC. | [optional] 
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
@@ -122,6 +124,56 @@ SetContractName sets ContractName field to given value.
 `func (o *NiatelemetryHttpsAclContractDetails) HasContractName() bool`
 
 HasContractName returns a boolean if a field has been set.
+
+### GetMgmtInstpDn
+
+`func (o *NiatelemetryHttpsAclContractDetails) GetMgmtInstpDn() string`
+
+GetMgmtInstpDn returns the MgmtInstpDn field if non-nil, zero value otherwise.
+
+### GetMgmtInstpDnOk
+
+`func (o *NiatelemetryHttpsAclContractDetails) GetMgmtInstpDnOk() (*string, bool)`
+
+GetMgmtInstpDnOk returns a tuple with the MgmtInstpDn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMgmtInstpDn
+
+`func (o *NiatelemetryHttpsAclContractDetails) SetMgmtInstpDn(v string)`
+
+SetMgmtInstpDn sets MgmtInstpDn field to given value.
+
+### HasMgmtInstpDn
+
+`func (o *NiatelemetryHttpsAclContractDetails) HasMgmtInstpDn() bool`
+
+HasMgmtInstpDn returns a boolean if a field has been set.
+
+### GetMgmtSubnetAddresses
+
+`func (o *NiatelemetryHttpsAclContractDetails) GetMgmtSubnetAddresses() string`
+
+GetMgmtSubnetAddresses returns the MgmtSubnetAddresses field if non-nil, zero value otherwise.
+
+### GetMgmtSubnetAddressesOk
+
+`func (o *NiatelemetryHttpsAclContractDetails) GetMgmtSubnetAddressesOk() (*string, bool)`
+
+GetMgmtSubnetAddressesOk returns a tuple with the MgmtSubnetAddresses field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMgmtSubnetAddresses
+
+`func (o *NiatelemetryHttpsAclContractDetails) SetMgmtSubnetAddresses(v string)`
+
+SetMgmtSubnetAddresses sets MgmtSubnetAddresses field to given value.
+
+### HasMgmtSubnetAddresses
+
+`func (o *NiatelemetryHttpsAclContractDetails) HasMgmtSubnetAddresses() bool`
+
+HasMgmtSubnetAddresses returns a boolean if a field has been set.
 
 ### GetProviderDn
 

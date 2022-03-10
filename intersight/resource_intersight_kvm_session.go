@@ -171,6 +171,11 @@ func resourceKvmSession() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"kvm_session_id": {
+				Description: "Unique ID of the KVM Session URI.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -746,6 +751,11 @@ func resourceKvmSessionCreate(c context.Context, d *schema.ResourceData, meta in
 		o.SetKvmLaunchUrlPath(x)
 	}
 
+	if v, ok := d.GetOk("kvm_session_id"); ok {
+		x := (v.(string))
+		o.SetKvmSessionId(x)
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -965,6 +975,10 @@ func resourceKvmSessionRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while setting property KvmLaunchUrlPath in KvmSession object: %s", err.Error())
 	}
 
+	if err := d.Set("kvm_session_id", (s.GetKvmSessionId())); err != nil {
+		return diag.Errorf("error occurred while setting property KvmSessionId in KvmSession object: %s", err.Error())
+	}
+
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
 		return diag.Errorf("error occurred while setting property ModTime in KvmSession object: %s", err.Error())
 	}
@@ -1077,6 +1091,12 @@ func resourceKvmSessionUpdate(c context.Context, d *schema.ResourceData, meta in
 		v := d.Get("kvm_launch_url_path")
 		x := (v.(string))
 		o.SetKvmLaunchUrlPath(x)
+	}
+
+	if d.HasChange("kvm_session_id") {
+		v := d.Get("kvm_session_id")
+		x := (v.(string))
+		o.SetKvmSessionId(x)
 	}
 
 	if d.HasChange("moid") {

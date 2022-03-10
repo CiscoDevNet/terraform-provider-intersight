@@ -7,12 +7,15 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.NexusDashboards"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.NexusDashboards"]
 **ClusterName** | Pointer to **string** | Nexus Dashboard can onboard multiple APIC clusters/sites. | [optional] 
+**ClusterUuid** | Pointer to **string** | UUID of the Nexus Dashboard cluster. | [optional] 
 **Dn** | Pointer to **string** | Dn of the objects present for Nexus Dashboard devices. | [optional] 
 **IsClusterHealthy** | Pointer to **string** | Health of Nexus Dashboard cluster. | [optional] 
 **NdClusterSize** | Pointer to **int64** | Number of nodes in Nexus Dashboard cluster. | [optional] 
 **NdType** | Pointer to **string** | Node type in Nexus Dashboard cluster. | [optional] 
 **NdVersion** | Pointer to **string** | Version running on Nexus Dashboard. | [optional] 
 **NumberOfApps** | Pointer to **int64** | Number of applications installed in the Nexus Dashboard. | [optional] 
+**NumberOfInsightGroups** | Pointer to **int64** | Number of total insight groups in ND. | [optional] 
+**NumberOfNirDashboards** | Pointer to **int64** | Number of total NIR dashboards in ND. | [optional] 
 **NumberOfSchemasInMso** | Pointer to **int64** | Number of total schemas in Multi-Site Orchestrator. | [optional] 
 **NumberOfSitesInMso** | Pointer to **int64** | Number of sites in Multi-Site Orchestrator. | [optional] 
 **NumberOfSitesServiced** | Pointer to **int64** | Number of sites serviced by ND. | [optional] 
@@ -104,6 +107,31 @@ SetClusterName sets ClusterName field to given value.
 `func (o *NiatelemetryNexusDashboardsAllOf) HasClusterName() bool`
 
 HasClusterName returns a boolean if a field has been set.
+
+### GetClusterUuid
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetClusterUuid() string`
+
+GetClusterUuid returns the ClusterUuid field if non-nil, zero value otherwise.
+
+### GetClusterUuidOk
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetClusterUuidOk() (*string, bool)`
+
+GetClusterUuidOk returns a tuple with the ClusterUuid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClusterUuid
+
+`func (o *NiatelemetryNexusDashboardsAllOf) SetClusterUuid(v string)`
+
+SetClusterUuid sets ClusterUuid field to given value.
+
+### HasClusterUuid
+
+`func (o *NiatelemetryNexusDashboardsAllOf) HasClusterUuid() bool`
+
+HasClusterUuid returns a boolean if a field has been set.
 
 ### GetDn
 
@@ -254,6 +282,56 @@ SetNumberOfApps sets NumberOfApps field to given value.
 `func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfApps() bool`
 
 HasNumberOfApps returns a boolean if a field has been set.
+
+### GetNumberOfInsightGroups
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfInsightGroups() int64`
+
+GetNumberOfInsightGroups returns the NumberOfInsightGroups field if non-nil, zero value otherwise.
+
+### GetNumberOfInsightGroupsOk
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfInsightGroupsOk() (*int64, bool)`
+
+GetNumberOfInsightGroupsOk returns a tuple with the NumberOfInsightGroups field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumberOfInsightGroups
+
+`func (o *NiatelemetryNexusDashboardsAllOf) SetNumberOfInsightGroups(v int64)`
+
+SetNumberOfInsightGroups sets NumberOfInsightGroups field to given value.
+
+### HasNumberOfInsightGroups
+
+`func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfInsightGroups() bool`
+
+HasNumberOfInsightGroups returns a boolean if a field has been set.
+
+### GetNumberOfNirDashboards
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfNirDashboards() int64`
+
+GetNumberOfNirDashboards returns the NumberOfNirDashboards field if non-nil, zero value otherwise.
+
+### GetNumberOfNirDashboardsOk
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNumberOfNirDashboardsOk() (*int64, bool)`
+
+GetNumberOfNirDashboardsOk returns a tuple with the NumberOfNirDashboards field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumberOfNirDashboards
+
+`func (o *NiatelemetryNexusDashboardsAllOf) SetNumberOfNirDashboards(v int64)`
+
+SetNumberOfNirDashboards sets NumberOfNirDashboards field to given value.
+
+### HasNumberOfNirDashboards
+
+`func (o *NiatelemetryNexusDashboardsAllOf) HasNumberOfNirDashboards() bool`
+
+HasNumberOfNirDashboards returns a boolean if a field has been set.
 
 ### GetNumberOfSchemasInMso
 

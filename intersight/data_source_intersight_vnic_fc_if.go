@@ -311,7 +311,7 @@ func dataSourceVnicFcIf() *schema.Resource {
 						Optional:    true,
 					},
 					"pci_link": {
-						Description: "The PCI Link used as transport for the virtual interface. All VIC adapters have a single PCI link except VIC 1385 which has two.",
+						Description: "The PCI Link used as transport for the virtual interface. This field is applicable only for VIC 1385 model (UCSC-PCIE-C40Q-03) which support two PCI links. The value, if specified, for any other VIC model will be ignored.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},
@@ -995,7 +995,7 @@ func dataSourceVnicFcIf() *schema.Resource {
 						Optional:    true,
 					},
 					"pci_link": {
-						Description: "The PCI Link used as transport for the virtual interface. All VIC adapters have a single PCI link except VIC 1385 which has two.",
+						Description: "The PCI Link used as transport for the virtual interface. This field is applicable only for VIC 1385 model (UCSC-PCIE-C40Q-03) which support two PCI links. The value, if specified, for any other VIC model will be ignored.",
 						Type:        schema.TypeInt,
 						Optional:    true,
 					},

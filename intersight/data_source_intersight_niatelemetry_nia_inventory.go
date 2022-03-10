@@ -64,6 +64,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"controller_ip_address": {
+			Description: "Returns controller's IP address details.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"cpu": {
 			Description: "CPU usage of device being inventoried. This determines the percentage of CPU resources used.",
 			Type:        schema.TypeFloat,
@@ -1087,6 +1092,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"controller_ip_address": {
+			Description: "Returns controller's IP address details.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -2140,6 +2150,11 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+
+	if v, ok := d.GetOk("controller_ip_address"); ok {
+		x := (v.(string))
+		o.SetControllerIpAddress(x)
 	}
 
 	if v, ok := d.GetOk("cpu"); ok {
@@ -3271,6 +3286,7 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
+				temp["controller_ip_address"] = (s.GetControllerIpAddress())
 				temp["cpu"] = (s.GetCpu())
 				temp["crash_reset_logs"] = (s.GetCrashResetLogs())
 

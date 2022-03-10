@@ -406,6 +406,51 @@ func dataSourceWorkflowTaskInfo() *schema.Resource {
 				},
 			},
 		},
+		"task_loop_info": {
+			Description: "Captures loop related information for tasks which are included inside a loop.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iteration": {
+						Description: "This specifies the count of iteration for the specific task executed inside the loop.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"loop_task_label": {
+						Description: "Label of the loop task inside which this task is executed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"loop_task_name": {
+						Description: "Name of the loop task inside which this task is executed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"loop_type": {
+						Description: "This specifies the type of loop, Serial or Parallel.\n* `Serial` - The enum specifies the option as Serial where the loop task type is parallel loop.\n* `Parallel` - The enum specifies the option as Parallel where the loop task type is parallel loop.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -935,6 +980,51 @@ func dataSourceWorkflowTaskInfo() *schema.Resource {
 					},
 					"task_inst_id": {
 						Description: "Retry instance will get a unique instance id.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"task_loop_info": {
+			Description: "Captures loop related information for tasks which are included inside a loop.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"iteration": {
+						Description: "This specifies the count of iteration for the specific task executed inside the loop.",
+						Type:        schema.TypeInt,
+						Optional:    true,
+					},
+					"loop_task_label": {
+						Description: "Label of the loop task inside which this task is executed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"loop_task_name": {
+						Description: "Name of the loop task inside which this task is executed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"loop_type": {
+						Description: "This specifies the type of loop, Serial or Parallel.\n* `Serial` - The enum specifies the option as Serial where the loop task type is parallel loop.\n* `Parallel` - The enum specifies the option as Parallel where the loop task type is parallel loop.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1556,6 +1646,61 @@ func dataSourceWorkflowTaskInfoRead(c context.Context, d *schema.ResourceData, m
 		o.SetTaskInstIdList(x)
 	}
 
+	if v, ok := d.GetOk("task_loop_info"); ok {
+		p := make([]models.WorkflowTaskLoopInfo, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.WorkflowTaskLoopInfo{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("")
+			if v, ok := l["iteration"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetIteration(x)
+				}
+			}
+			if v, ok := l["loop_task_label"]; ok {
+				{
+					x := (v.(string))
+					o.SetLoopTaskLabel(x)
+				}
+			}
+			if v, ok := l["loop_task_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetLoopTaskName(x)
+				}
+			}
+			if v, ok := l["loop_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetLoopType(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetTaskLoopInfo(x)
+		}
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1752,6 +1897,8 @@ func dataSourceWorkflowTaskInfoRead(c context.Context, d *schema.ResourceData, m
 				temp["task_definition"] = flattenMapWorkflowTaskDefinitionRelationship(s.GetTaskDefinition(), d)
 
 				temp["task_inst_id_list"] = flattenListWorkflowTaskRetryInfo(s.GetTaskInstIdList(), d)
+
+				temp["task_loop_info"] = flattenMapWorkflowTaskLoopInfo(s.GetTaskLoopInfo(), d)
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 

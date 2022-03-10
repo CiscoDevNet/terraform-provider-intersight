@@ -43,6 +43,7 @@ The following arguments can be used to get data of already created objects in In
 * `smart_account`:(string) Name of the smart account. 
 * `smart_account_domain`:(string) Domain Name of the smart account. 
 * `smart_api_enabled`:(bool) Indicate whether API integration is enabled. 
+* `smart_api_sync_status`:(string) The detailed error message when there is any smart API sync error related to this account. 
 * `sync_status`:(string) Current sync status for the account. 
 * `virtual_account`:(string) Name of the virtual account. 
  
