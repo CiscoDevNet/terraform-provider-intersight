@@ -1806,7 +1806,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 	var deploy_flag bool
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
-		if x == "Deploy" {
+		if x == "Deploy" && len(o.PolicyBucket) > 0 {
 			deploy_flag = true
 		} else {
 			o.SetAction(x)
