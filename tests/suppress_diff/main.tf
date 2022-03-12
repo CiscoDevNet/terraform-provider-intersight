@@ -18,146 +18,6 @@ data "intersight_organization_organization" "default" {
 }
 
 
-resource "intersight_networkconfig_policy" "network_config1" {
-  name                     = "network_config1"
-  description              = "demo network configuration policy"
-  enable_dynamic_dns       = false
-  preferred_ipv6dns_server = null
-  enable_ipv6              = false
-  enable_ipv6dns_from_dhcp = false
-  preferred_ipv4dns_server = "10.10.10.1"
-  alternate_ipv4dns_server = "10.10.10.1"
-  alternate_ipv6dns_server = null
-  dynamic_dns_domain       = ""
-  enable_ipv4dns_from_dhcp = false
-  organization {
-    object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.default.results.0.moid
-  }
-}
-
-resource "intersight_vnic_eth_adapter_policy" "vnic_eth_adapter_policy_1" {
-  name                    = "vnic_eth_adapter_policy_11"
-  rss_settings            = true
-  uplink_failback_timeout = 5
-  organization {
-    object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.default.results.0.moid
-  }
-
-  nvgre_settings {
-    enabled = true
-  }
-
-  arfs_settings {
-    enabled = true
-  }
-
-  roce_settings {
-    enabled = false
-  }
-
-  interrupt_settings {
-    coalescing_time = 125
-    coalescing_type = "MIN"
-    nr_count        = 4
-    mode            = "MSI"
-  }
-  completion_queue_settings {
-    nr_count  = 4
-    ring_size = 1
-  }
-  rx_queue_settings {
-    nr_count  = 4
-    ring_size = 512
-  }
-  tx_queue_settings {
-    nr_count  = 4
-    ring_size = 512
-  }
-  tcp_offload_settings {
-    large_receive = true
-    large_send    = true
-    rx_checksum   = true
-    tx_checksum   = true
-  }
-}
-
-resource "intersight_kubernetes_virtual_machine_infra_config_policy" "vm_infra_config_policy" {
-  name        = "TFC-Test-1"
-  description = "VM Infrastructure Config Policy used for Kubernetes deployment to vSphere"
-  organization {
-    object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.default.results[0].moid
-  }
-  vm_config {
-    object_type = "kubernetes.EsxiVirtualMachineInfraConfig"
-	interfaces = ["8", "4"]
-    additional_properties = jsonencode({
-      Cluster    =  "abc"
-      Datastore  = "datastore"
-      Passphrase =  "password123"
-    })
-  }
-}
-
-
-resource "intersight_hyperflex_proxy_setting_policy" "hyperflex_proxy_setting_policy1" {
-  hostname    = "10.10.10.1"
-  port        = 32628
-  username    = ""
-  password    = "ChangeMe"
-  description = "This is autoProxy"
-  tags {
-    key   = "test"
-    value = "autoProxy"
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.default.results.0.moid
-  }
-  name = "hyperflex_proxy_setting_policy1"
-}
-
-resource "intersight_kubernetes_cluster_profile" "kcp1" {
-  name = "dummy_kcp_tf"
-  organization {
-    object_type = "organization.Organization"
-    moid = data.intersight_organization_organization.default.results.0.moid
-  }
-  management_config {
-    ssh_user = "Testing_TF"	
-  }
-}
-
-
-resource "intersight_uuidpool_pool" "uuidpool_pool_test" {
-  name             = "uuidpool_pool_test"
-  description      = "uuidpool_pool"
-  assignment_order = "default"
-  prefix           = "123E4567-E89B-42D3"
-  uuid_suffix_blocks {
-    additional_properties = null
-    class_id              = "uuidpool.UuidBlock"
-    object_type           = "uuidpool.UuidBlock"
-    from                  = "E456-1234E89B42AA"
-    #size                  = 100
-    to = "E456-1234E89B430D"
-  }
-    uuid_suffix_blocks {
-    additional_properties = null
-    class_id              = "uuidpool.UuidBlock"
-    object_type           = "uuidpool.UuidBlock"
-    from                  = "E456-1234E89B430E"
-    size                  = 100
-    #to = "E456-1234E89B4371"
-  }
-  organization {
-    object_type = "organization.Organization"
-    moid        = data.intersight_organization_organization.default.results.0.moid
-  }
-}
-
 resource "intersight_smtp_policy" "smtp1" {
   enabled      = false
   name         = "smtp1"
@@ -505,6 +365,57 @@ resource "intersight_bios_policy" "bios_policy1" {
   txt_support                           = "disabled"
 }
 
+resource "intersight_vmedia_policy" "vmedia1" {
+  name          = "vmedia1"
+  description   = "demo vmedia policy"
+  enabled       = true
+  encryption    = true
+  low_power_usb = true
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+  mappings = [{
+    additional_properties   = ""
+    authentication_protocol = "none"
+    class_id                = "vmedia.Mapping"
+    device_type             = "cdd"
+    file_location           = "infra-chx.auslab.cisco.com/software/linux/ubuntu-18.04.5-server-amd64.iso"
+    host_name               = "infra-chx.auslab.cisco.com"
+    is_password_set         = false
+    mount_options           = "RO"
+    mount_protocol          = "nfs"
+    object_type             = "vmedia.Mapping"
+    password                = ""
+    remote_file             = "ubuntu-18.04.5-server-amd64.iso"
+    remote_path             = "/iso/software/linux"
+    sanitized_file_location = "infra-chx.auslab.cisco.com/software/linux/ubuntu-18.04.5-server-amd64.iso"
+    username                = ""
+    volume_name             = "IMC_DVD"
+  }]
+}
+
+resource "intersight_deviceconnector_policy" "dcp1" {
+  name            = "device_con1"
+  description     = "demo device connector policy"
+  lockout_enabled = true
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+}
+
+resource "intersight_ipmioverlan_policy" "ipmi1" {
+  name        = "ipmi1"
+  description = "demo ipmi policy"
+  enabled     = true
+  privilege   = "admin"
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+}
+
 resource "intersight_server_profile" "test" {
   name = "testing-server-profile"
   target_platform   = "Standalone"
@@ -520,8 +431,8 @@ resource "intersight_server_profile" "test" {
   }
 
   policy_bucket {
-	moid = intersight_ntp_policy.ntp1.moid
-	object_type = intersight_ntp_policy.ntp1.object_type
+        moid = intersight_ntp_policy.ntp1.moid
+        object_type = intersight_ntp_policy.ntp1.object_type
   }
     policy_bucket {
     moid        = intersight_boot_precision_policy.boot_precision1.moid
@@ -532,19 +443,308 @@ resource "intersight_server_profile" "test" {
     object_type = intersight_ssh_policy.ssh_policy1.object_type
   }
   policy_bucket {
-	moid = intersight_bios_policy.bios_policy1.moid
-	object_type = intersight_bios_policy.bios_policy1.object_type
+        moid = intersight_bios_policy.bios_policy1.moid
+        object_type = intersight_bios_policy.bios_policy1.object_type
   }
   policy_bucket {
-	moid = intersight_memory_persistent_memory_policy.configured_from_os.moid
-	object_type = intersight_memory_persistent_memory_policy.configured_from_os.object_type
+        moid = intersight_memory_persistent_memory_policy.configured_from_os1.moid
+        object_type = intersight_memory_persistent_memory_policy.configured_from_os1.object_type
+  }
+  policy_bucket {
+        moid = intersight_vmedia_policy.vmedia1.moid
+        object_type = intersight_vmedia_policy.vmedia1.object_type
+  }
+    policy_bucket {
+        moid = intersight_deviceconnector_policy.dcp1.moid
+        object_type = intersight_deviceconnector_policy.dcp1.object_type
+  }
+   policy_bucket {
+        moid = intersight_ipmioverlan_policy.ipmi1.moid
+        object_type = intersight_ipmioverlan_policy.ipmi1.object_type
+  }
+     policy_bucket {
+        moid = intersight_iam_ldap_policy.ldap1.moid
+        object_type = intersight_iam_ldap_policy.ldap1.object_type
+  }
+   policy_bucket {
+        moid = intersight_iam_end_point_user_policy.user_policy1.moid
+        object_type = intersight_iam_end_point_user_policy.user_policy1.object_type
+  }
+  policy_bucket {
+        moid = intersight_networkconfig_policy.network_config1.moid
+        object_type = intersight_networkconfig_policy.network_config1.object_type
+  }
+  policy_bucket {
+        moid = intersight_sol_policy.sol1.moid
+        object_type = intersight_sol_policy.sol1.object_type
+  }
+  policy_bucket {
+        moid = intersight_snmp_policy.disabled.moid
+        object_type = intersight_snmp_policy.disabled.object_type
+  }
+  policy_bucket {
+        moid = intersight_syslog_policy.syslog1.moid
+        object_type = intersight_syslog_policy.syslog1.object_type
+  }
+  policy_bucket {
+        moid = intersight_kvm_policy.kvm1.moid
+        object_type = intersight_kvm_policy.kvm1.object_type
+  }
+  policy_bucket {
+        moid = intersight_sdcard_policy.sdcard1.moid
+        object_type = intersight_sdcard_policy.sdcard1.object_type
+  }
+  policy_bucket {
+        moid = intersight_storage_storage_policy.storage_storage1.moid
+        object_type = intersight_storage_storage_policy.storage_storage1.object_type
+  }
+  policy_bucket {
+        moid = intersight_adapter_config_policy.adapter_config1.moid
+        object_type = intersight_adapter_config_policy.adapter_config1.object_type
+  }
+  policy_bucket {
+        moid = intersight_vnic_lan_connectivity_policy.vnic_lan1.moid
+        object_type = intersight_vnic_lan_connectivity_policy.vnic_lan1.object_type
+  }
+  policy_bucket {
+        moid = intersight_vnic_san_connectivity_policy.vnic_san1.moid
+        object_type = intersight_vnic_san_connectivity_policy.vnic_san1.object_type
   }
 }
 
 
+resource "intersight_networkconfig_policy" "network_config1" {
+  name                     = "network_config1"
+  description              = "demo network configuration policy"
+  enable_dynamic_dns       = false
+  preferred_ipv6dns_server = null
+  enable_ipv6              = false
+  enable_ipv6dns_from_dhcp = false
+  preferred_ipv4dns_server = "10.10.10.1"
+  alternate_ipv4dns_server = "10.10.10.1"
+  alternate_ipv6dns_server = null
+  dynamic_dns_domain       = ""
+  enable_ipv4dns_from_dhcp = false
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+}
 
-resource "intersight_memory_persistent_memory_policy" "configured_from_os" {
-  name = "configured_from_os"
+resource "intersight_vnic_san_connectivity_policy" "vnic_san1" {
+  name = "vnic_san1"
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+}
+
+resource "intersight_vnic_lan_connectivity_policy" "vnic_lan1" {
+  name                = "vnic_lan1"
+  description         = "demo vnic lan connectivity policy"
+  iqn_allocation_type = "None"
+  placement_mode      = "auto"
+  target_platform     = "FIAttached"
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+}
+
+resource "intersight_adapter_config_policy" "adapter_config1" {
+  name        = "adapter_config1"
+  description = "test policy"
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+  settings {
+    object_type = "adapter.AdapterConfig"
+    slot_id     = "1"
+    eth_settings {
+      lldp_enabled = true
+      object_type  = "adapter.EthSettings"
+    }
+    fc_settings {
+      object_type = "adapter.FcSettings"
+      fip_enabled = true
+    }
+  }
+  settings {
+    object_type = "adapter.AdapterConfig"
+    slot_id     = "MLOM"
+    eth_settings {
+      object_type  = "adapter.EthSettings"
+      lldp_enabled = true
+    }
+    fc_settings {
+      object_type = "adapter.FcSettings"
+      fip_enabled = true
+    }
+  }
+}
+
+resource "intersight_storage_storage_policy" "storage_storage1" {
+  name               = "storage_storage_policy1"
+  description        = "storage policy test"
+  unused_disks_state = "UnconfiguredGood"
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results[0].moid
+  }
+  use_jbod_for_vd_creation = false
+  m2_virtual_drive {
+    enable      = false
+    object_type = "storage.M2VirtualDriveConfig"
+  }
+  raid0_drive {
+    enable      = true
+    drive_slots = "2"
+    object_type = "storage.R0Drive"
+    virtual_drive_policy {
+      strip_size    = 64
+      access_policy = "Default"
+      read_policy   = "Default"
+      write_policy  = "Default"
+      drive_cache   = "Default"
+      object_type   = "storage.VirtualDrivePolicy"
+    }
+  }
+}
+
+resource "intersight_sdcard_policy" "sdcard1" {
+  name        = "sdcard1"
+  description = "demo sd card policy"
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+  partitions {
+    type        = "OS"
+    object_type = "sdcard.Partition"
+
+    virtual_drives {
+      enable      = true
+      object_type = "sdcard.OperatingSystem"
+      additional_properties = jsonencode({
+        Name = "Hypervisor"
+      })
+    }
+  }
+}
+
+resource "intersight_kvm_policy" "kvm1" {
+  name                      = "kvm1"
+  description               = "demo kvm policy"
+  enabled                   = true
+  maximum_sessions          = 3
+  remote_port               = 2069
+  enable_video_encryption   = true
+  enable_local_server_video = true
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+}
+
+resource "intersight_syslog_policy" "syslog1" {
+  name        = "syslog1"
+  description = "demo syslog policy"
+  local_clients {
+    min_severity = "emergency"
+    object_type  = "syslog.LocalFileLoggingClient"
+  }
+  remote_clients {
+    enabled      = true
+    hostname     = "10.10.10.10"
+    port         = 514
+    protocol     = "tcp"
+    min_severity = "emergency"
+    object_type  = "syslog.RemoteLoggingClient"
+  }
+  remote_clients {
+    enabled      = true
+    hostname     = "2001:0db8:0a0b:12f0:0000:0000:0000:0004"
+    port         = 64000
+    protocol     = "udp"
+    min_severity = "emergency"
+    object_type  = "syslog.RemoteLoggingClient"
+  }
+  organization {
+    object_type = "organization.Organization"
+	selector = "$filter=Name eq 'default'"
+	}
+}
+
+resource "intersight_snmp_policy" "disabled" {
+  name = "disabled"
+  enabled    = false
+  v2_enabled = false
+  v3_enabled = false
+}
+
+resource "intersight_sol_policy" "sol1" {
+  name        = "sol2"
+  description = "demo serial over lan policy"
+  enabled     = false
+  baud_rate   = 9600
+  com_port    = "com1"
+  ssh_port    = 1096
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+}
+
+resource "intersight_iam_end_point_user_policy" "user_policy1" {
+  name        = "user_policy1"
+  description = "test policy"
+
+  password_properties {
+    enforce_strong_password  = true
+    enable_password_expiry   = true
+    password_expiry_duration = 50
+    password_history         = 5
+    notification_period      = 1
+    grace_period             = 2
+  }
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+}
+
+resource "intersight_iam_ldap_policy" "ldap1" {
+  name                   = "ldap1"
+  description            = "test policy"
+  enabled                = true
+  enable_dns             = true
+  user_search_precedence = "LocalUserDb"
+  organization {
+    object_type = "organization.Organization"
+    moid        = data.intersight_organization_organization.default.results.0.moid
+  }
+  base_properties {
+    attribute                  = "CiscoAvPair"
+    base_dn                    = "DC=QATCSLABTPI02DC=ciscoDC=com"
+    bind_dn                    = "CN=administratorCN=UsersDC=QATCSLABTPI02DC=ciscoDC=com"
+    bind_method                = "Anonymous"
+    domain                     = "QATCSLABTPI02.cisco.com"
+    enable_encryption          = true
+    enable_group_authorization = true
+    filter                     = "sAMAccountName"
+    group_attribute            = "memberOf"
+    nested_group_search_depth  = 128
+    timeout                    = 180
+  }
+  dns_parameters {
+    nr_source     = "Extracted"
+    search_forest = "xyz"
+    search_domain = "abc"
+  }
+}
+resource "intersight_memory_persistent_memory_policy" "configured_from_os1" {
+  name = "configured_from_os1"
   management_mode = "configured-from-operating-system"
 }
 
