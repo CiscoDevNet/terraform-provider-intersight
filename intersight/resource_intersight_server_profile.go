@@ -1917,6 +1917,7 @@ func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta
 	log.Printf("Moid: %s", resultMo.GetMoid())
 	d.SetId(resultMo.GetMoid())
 	if deploy_flag {
+		time.Sleep(5 * time.Second)
 		o.SetAction("Deploy")
 		r := conn.ApiClient.ServerApi.UpdateServerProfile(conn.ctx, d.Id()).ServerProfile(*o)
 		result, _, responseErr := r.Execute()
