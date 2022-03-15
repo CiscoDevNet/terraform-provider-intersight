@@ -21,7 +21,7 @@ Please follow the issue template below for issue reports.
 
 <!-- Clear and concise descrption of what is the question, suggestion or issue and why this is a problem for you. -->
 
-##### terraform-provider-intersight version
+##### Terraform-provider-intersight version
 
 <!-- which version of terraform-provider-intersight are you using? -->
 
