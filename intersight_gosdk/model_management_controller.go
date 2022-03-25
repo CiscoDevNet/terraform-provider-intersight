@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -25,7 +25,9 @@ type ManagementController struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// Model of the endpoint that houses the management controller.
-	Model                       *string                                  `json:"Model,omitempty"`
+	Model *string `json:"Model,omitempty"`
+	// Desired state of the UEM stream. * `Disabled` - The UEM event channel is disabled. * `Enabled` - The UEM event channel is enabled.
+	UemStreamAdminState         *string                                  `json:"UemStreamAdminState,omitempty"`
 	AdapterUnit                 *AdapterUnitRelationship                 `json:"AdapterUnit,omitempty"`
 	ComputeBlade                *ComputeBladeRelationship                `json:"ComputeBlade,omitempty"`
 	ComputeRackUnit             *ComputeRackUnitRelationship             `json:"ComputeRackUnit,omitempty"`
@@ -54,6 +56,8 @@ func NewManagementController(classId string, objectType string) *ManagementContr
 	this := ManagementController{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var uemStreamAdminState string = "Disabled"
+	this.UemStreamAdminState = &uemStreamAdminState
 	return &this
 }
 
@@ -66,6 +70,8 @@ func NewManagementControllerWithDefaults() *ManagementController {
 	this.ClassId = classId
 	var objectType string = "management.Controller"
 	this.ObjectType = objectType
+	var uemStreamAdminState string = "Disabled"
+	this.UemStreamAdminState = &uemStreamAdminState
 	return &this
 }
 
@@ -147,6 +153,38 @@ func (o *ManagementController) HasModel() bool {
 // SetModel gets a reference to the given string and assigns it to the Model field.
 func (o *ManagementController) SetModel(v string) {
 	o.Model = &v
+}
+
+// GetUemStreamAdminState returns the UemStreamAdminState field value if set, zero value otherwise.
+func (o *ManagementController) GetUemStreamAdminState() string {
+	if o == nil || o.UemStreamAdminState == nil {
+		var ret string
+		return ret
+	}
+	return *o.UemStreamAdminState
+}
+
+// GetUemStreamAdminStateOk returns a tuple with the UemStreamAdminState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManagementController) GetUemStreamAdminStateOk() (*string, bool) {
+	if o == nil || o.UemStreamAdminState == nil {
+		return nil, false
+	}
+	return o.UemStreamAdminState, true
+}
+
+// HasUemStreamAdminState returns a boolean if a field has been set.
+func (o *ManagementController) HasUemStreamAdminState() bool {
+	if o != nil && o.UemStreamAdminState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUemStreamAdminState gets a reference to the given string and assigns it to the UemStreamAdminState field.
+func (o *ManagementController) SetUemStreamAdminState(v string) {
+	o.UemStreamAdminState = &v
 }
 
 // GetAdapterUnit returns the AdapterUnit field value if set, zero value otherwise.
@@ -586,6 +624,9 @@ func (o ManagementController) MarshalJSON() ([]byte, error) {
 	if o.Model != nil {
 		toSerialize["Model"] = o.Model
 	}
+	if o.UemStreamAdminState != nil {
+		toSerialize["UemStreamAdminState"] = o.UemStreamAdminState
+	}
 	if o.AdapterUnit != nil {
 		toSerialize["AdapterUnit"] = o.AdapterUnit
 	}
@@ -640,7 +681,9 @@ func (o *ManagementController) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
 		// Model of the endpoint that houses the management controller.
-		Model                       *string                                  `json:"Model,omitempty"`
+		Model *string `json:"Model,omitempty"`
+		// Desired state of the UEM stream. * `Disabled` - The UEM event channel is disabled. * `Enabled` - The UEM event channel is enabled.
+		UemStreamAdminState         *string                                  `json:"UemStreamAdminState,omitempty"`
 		AdapterUnit                 *AdapterUnitRelationship                 `json:"AdapterUnit,omitempty"`
 		ComputeBlade                *ComputeBladeRelationship                `json:"ComputeBlade,omitempty"`
 		ComputeRackUnit             *ComputeRackUnitRelationship             `json:"ComputeRackUnit,omitempty"`
@@ -666,6 +709,7 @@ func (o *ManagementController) UnmarshalJSON(bytes []byte) (err error) {
 		varManagementController.ClassId = varManagementControllerWithoutEmbeddedStruct.ClassId
 		varManagementController.ObjectType = varManagementControllerWithoutEmbeddedStruct.ObjectType
 		varManagementController.Model = varManagementControllerWithoutEmbeddedStruct.Model
+		varManagementController.UemStreamAdminState = varManagementControllerWithoutEmbeddedStruct.UemStreamAdminState
 		varManagementController.AdapterUnit = varManagementControllerWithoutEmbeddedStruct.AdapterUnit
 		varManagementController.ComputeBlade = varManagementControllerWithoutEmbeddedStruct.ComputeBlade
 		varManagementController.ComputeRackUnit = varManagementControllerWithoutEmbeddedStruct.ComputeRackUnit
@@ -699,6 +743,7 @@ func (o *ManagementController) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Model")
+		delete(additionalProperties, "UemStreamAdminState")
 		delete(additionalProperties, "AdapterUnit")
 		delete(additionalProperties, "ComputeBlade")
 		delete(additionalProperties, "ComputeRackUnit")

@@ -3,7 +3,8 @@ subcategory: "inventory"
 layout: "intersight"
 page_title: "Intersight: intersight_inventory_generic_inventory_holder"
 description: |-
-  A container class for generic inventory.
+        A container class for generic inventory.
+
 ---
 
 # Data Source: intersight_inventory_generic_inventory_holder

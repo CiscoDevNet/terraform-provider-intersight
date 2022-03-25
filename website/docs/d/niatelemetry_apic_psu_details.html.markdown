@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_apic_psu_details"
 description: |-
-  Object to capture PSU details in APIC.
+        Object to capture PSU details in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_apic_psu_details

@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_dcnm_cco_post"
 description: |-
-  The post reporting a new release is available for DCNM.
+        The post reporting a new release is available for DCNM.
+
 ---
 
 # Data Source: intersight_niaapi_dcnm_cco_post

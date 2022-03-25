@@ -25,6 +25,11 @@ func dataSourcePortSubGroup() *schema.Resource {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"aggregate_port_id": {
+			Description: "Breakout port member in the Fabric Interconnect.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -354,6 +359,11 @@ func dataSourcePortSubGroup() *schema.Resource {
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"slot_id": {
+			Description: "Switch expansion slot module identifier.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"tags": {
@@ -503,6 +513,11 @@ func dataSourcePortSubGroup() *schema.Resource {
 			Optional:         true,
 			DiffSuppressFunc: SuppressDiffAdditionProps,
 		},
+		"aggregate_port_id": {
+			Description: "Breakout port member in the Fabric Interconnect.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -832,6 +847,11 @@ func dataSourcePortSubGroup() *schema.Resource {
 		"shared_scope": {
 			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"slot_id": {
+			Description: "Switch expansion slot module identifier.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"tags": {
@@ -999,6 +1019,11 @@ func dataSourcePortSubGroupRead(c context.Context, d *schema.ResourceData, meta 
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if v, ok := d.GetOkExists("aggregate_port_id"); ok {
+		x := int64(v.(int))
+		o.SetAggregatePortId(x)
 	}
 
 	if v, ok := d.GetOk("ancestors"); ok {
@@ -1394,6 +1419,11 @@ func dataSourcePortSubGroupRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOkExists("slot_id"); ok {
+		x := int64(v.(int))
+		o.SetSlotId(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1544,6 +1574,7 @@ func dataSourcePortSubGroupRead(c context.Context, d *schema.ResourceData, meta 
 				var temp = make(map[string]interface{})
 				temp["account_moid"] = (s.GetAccountMoid())
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
+				temp["aggregate_port_id"] = (s.GetAggregatePortId())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["class_id"] = (s.GetClassId())
@@ -1573,6 +1604,7 @@ func dataSourcePortSubGroupRead(c context.Context, d *schema.ResourceData, meta 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
 				temp["rn"] = (s.GetRn())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["slot_id"] = (s.GetSlotId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["transport"] = (s.GetTransport())

@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_catalog"
 description: |-
-  A catalog to hold the Kubernetes related items such as versions and addons for Intersight Kubernetes Services.
+        A catalog to hold the Kubernetes related items such as versions and addons for Intersight Kubernetes Services.
+
 ---
 
 # Data Source: intersight_kubernetes_catalog

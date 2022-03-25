@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_io_card_capability_def"
 description: |-
-  Chassis Iocard module capabilities.
+        Chassis Iocard module capabilities.
+
 ---
 
 # Data Source: intersight_capability_io_card_capability_def

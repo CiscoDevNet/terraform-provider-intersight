@@ -3,7 +3,8 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_physical_summary"
 description: |-
-  Consolidated view of Blades and RackUnits.
+        Consolidated view of Blades and RackUnits.
+
 ---
 
 # Data Source: intersight_compute_physical_summary

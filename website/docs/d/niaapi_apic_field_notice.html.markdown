@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_field_notice"
 description: |-
-  The field notice reporting bug and related software or hardware for APIC.
+        The field notice reporting bug and related software or hardware for APIC.
+
 ---
 
 # Data Source: intersight_niaapi_apic_field_notice

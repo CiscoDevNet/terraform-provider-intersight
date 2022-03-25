@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_host"
 description: |-
-  A host group entity in Hitachi storage array. It is an abstraction used by Hitachi storage to organize the storage network addresses (Fibre Channel worldwide names or iSCSI qualified names) of client computers and to control communications between clients and volumes.
+        A host group entity in Hitachi storage array. It is an abstraction used by Hitachi storage to organize the storage network addresses (Fibre Channel worldwide names or iSCSI qualified names) of client computers and to control communications between clients and volumes.
+
 ---
 
 # Data Source: intersight_storage_hitachi_host

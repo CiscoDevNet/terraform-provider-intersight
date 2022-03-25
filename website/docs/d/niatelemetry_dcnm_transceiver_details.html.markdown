@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_dcnm_transceiver_details"
 description: |-
-  Inventory Object available for DCNM transceiver details.
+        Inventory Object available for DCNM transceiver details.
+
 ---
 
 # Data Source: intersight_niatelemetry_dcnm_transceiver_details

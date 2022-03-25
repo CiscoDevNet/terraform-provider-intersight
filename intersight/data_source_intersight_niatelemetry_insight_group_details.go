@@ -109,6 +109,44 @@ func dataSourceNiatelemetryInsightGroupDetails() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"insight_sites": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Returns the name of the site.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"site_type": {
+						Description: "Returns the type of the site.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"uuid": {
+						Description: "Returns the uuid of the site.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"kafka_settings_count": {
 			Description: "Kafka settings count of the Insight group.",
 			Type:        schema.TypeInt,
@@ -483,6 +521,44 @@ func dataSourceNiatelemetryInsightGroupDetails() *schema.Resource {
 			Description: "Name of the Insight group.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"insight_sites": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Returns the name of the site.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"site_type": {
+						Description: "Returns the type of the site.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"uuid": {
+						Description: "Returns the uuid of the site.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"kafka_settings_count": {
 			Description: "Kafka settings count of the Insight group.",
@@ -885,6 +961,52 @@ func dataSourceNiatelemetryInsightGroupDetailsRead(c context.Context, d *schema.
 		o.SetGroupName(x)
 	}
 
+	if v, ok := d.GetOk("insight_sites"); ok {
+		x := make([]models.NiatelemetrySites, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NiatelemetrySites{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.Sites")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["site_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetSiteType(x)
+				}
+			}
+			if v, ok := l["uuid"]; ok {
+				{
+					x := (v.(string))
+					o.SetUuid(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetInsightSites(x)
+	}
+
 	if v, ok := d.GetOkExists("kafka_settings_count"); ok {
 		x := int64(v.(int))
 		o.SetKafkaSettingsCount(x)
@@ -1220,6 +1342,8 @@ func dataSourceNiatelemetryInsightGroupDetailsRead(c context.Context, d *schema.
 				temp["email_settings_count"] = (s.GetEmailSettingsCount())
 				temp["flow_settings_count"] = (s.GetFlowSettingsCount())
 				temp["group_name"] = (s.GetGroupName())
+
+				temp["insight_sites"] = flattenListNiatelemetrySites(s.GetInsightSites(), d)
 				temp["kafka_settings_count"] = (s.GetKafkaSettingsCount())
 				temp["micro_burst_settings_status"] = (s.GetMicroBurstSettingsStatus())
 

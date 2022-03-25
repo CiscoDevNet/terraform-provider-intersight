@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_multicast_policy"
 description: |-
-  A policy to configure Multicast settings for all the Virtual LAN networks.
+        A policy to configure Multicast settings for all the Virtual LAN networks.
+
 ---
 
 # Data Source: intersight_fabric_multicast_policy

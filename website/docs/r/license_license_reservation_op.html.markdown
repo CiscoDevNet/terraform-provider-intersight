@@ -3,7 +3,8 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_license_reservation_op"
 description: |-
-  Customer operation object to request reservation code.
+        Customer operation object to request reservation code.
+
 ---
 
 # Resource: intersight_license_license_reservation_op

@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_pcie_descriptor"
 description: |-
-  Descriptor to uniquely identify a PCIE component.
+        Descriptor to uniquely identify a PCIE component.
+
 ---
 
 # Data Source: intersight_firmware_pcie_descriptor

@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_flex_util_controller"
 description: |-
-  Storage Flex Util Adapter.
+        Storage Flex Util Adapter.
+
 ---
 
 # Data Source: intersight_storage_flex_util_controller

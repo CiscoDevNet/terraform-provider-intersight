@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **LastStatus** | Pointer to **string** | Last status of the solution instance which will be reverted when an ongoing solution action instance is aborted. * &#x60;NotCreated&#x60; - Solution is not yet created and it is in a draft mode. A solution instance can be deleted in this state. * &#x60;InProgress&#x60; - An action is in progress and until that action has reached a final state, another action cannot be started. * &#x60;Failed&#x60; - The last action on the solution failed and corrective measures need to be taken to bring the solution back to valid state. * &#x60;Okay&#x60; - The last action on the solution completed and the solution is in Okay state. * &#x60;Decommissioned&#x60; - The solution is decommissioned and can be safely deleted. Solution in any other state after it has been created cannot be deleted until it has been decommissioned. | [optional] [readonly] [default to "NotCreated"]
 **Name** | Pointer to **string** | A name of the solution instance. Name of the solution instance must be unique within a type of Solution definition. | [optional] 
 **Status** | Pointer to **string** | Status of the solution instance which controls the actions that can be performed on this instance. * &#x60;NotCreated&#x60; - Solution is not yet created and it is in a draft mode. A solution instance can be deleted in this state. * &#x60;InProgress&#x60; - An action is in progress and until that action has reached a final state, another action cannot be started. * &#x60;Failed&#x60; - The last action on the solution failed and corrective measures need to be taken to bring the solution back to valid state. * &#x60;Okay&#x60; - The last action on the solution completed and the solution is in Okay state. * &#x60;Decommissioned&#x60; - The solution is decommissioned and can be safely deleted. Solution in any other state after it has been created cannot be deleted until it has been decommissioned. | [optional] [readonly] [default to "NotCreated"]
+**UpgradedMoid** | Pointer to **string** | Stores the upgraded Moid for help during future lookups. | [optional] [readonly] 
 **UserId** | Pointer to **string** | The user identifier which indicates the user that started this workflow. | [optional] [readonly] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **SolutionDefinition** | Pointer to [**WorkflowSolutionDefinitionRelationship**](WorkflowSolutionDefinitionRelationship.md) |  | [optional] 
@@ -172,6 +173,31 @@ SetStatus sets Status field to given value.
 `func (o *WorkflowSolutionInstanceAllOf) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetUpgradedMoid
+
+`func (o *WorkflowSolutionInstanceAllOf) GetUpgradedMoid() string`
+
+GetUpgradedMoid returns the UpgradedMoid field if non-nil, zero value otherwise.
+
+### GetUpgradedMoidOk
+
+`func (o *WorkflowSolutionInstanceAllOf) GetUpgradedMoidOk() (*string, bool)`
+
+GetUpgradedMoidOk returns a tuple with the UpgradedMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpgradedMoid
+
+`func (o *WorkflowSolutionInstanceAllOf) SetUpgradedMoid(v string)`
+
+SetUpgradedMoid sets UpgradedMoid field to given value.
+
+### HasUpgradedMoid
+
+`func (o *WorkflowSolutionInstanceAllOf) HasUpgradedMoid() bool`
+
+HasUpgradedMoid returns a boolean if a field has been set.
 
 ### GetUserId
 

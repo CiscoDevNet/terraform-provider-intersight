@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_ucsm_config_policy"
 description: |-
-  A policy specifying UCS Manager settings such as service profile org, KVM IP addresses, and MAC prefix for server configuration in Fabric Interconnect environment.
+        A policy specifying UCS Manager settings such as service profile org, KVM IP addresses, and MAC prefix for server configuration in Fabric Interconnect environment.
+
 ---
 
 # Data Source: intersight_hyperflex_ucsm_config_policy

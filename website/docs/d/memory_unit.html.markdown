@@ -3,7 +3,8 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_unit"
 description: |-
-  This represents a memory DIMM on a server.
+        This represents a memory DIMM on a server.
+
 ---
 
 # Data Source: intersight_memory_unit

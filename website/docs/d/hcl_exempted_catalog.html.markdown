@@ -3,7 +3,8 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_exempted_catalog"
 description: |-
-  Collection used to store exempted products (ie. adapters, storage controllers, etc). These products should be ignored for HCL validation purposes.
+        Collection used to store exempted products (ie. adapters, storage controllers, etc). These products should be ignored for HCL validation purposes.
+
 ---
 
 # Data Source: intersight_hcl_exempted_catalog

@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_software_distribution_component"
 description: |-
-  A HyperFlex Software Distribution Component.
+        A HyperFlex Software Distribution Component.
+
 ---
 
 # Resource: intersight_hyperflex_software_distribution_component

@@ -109,6 +109,44 @@ func dataSourceNiatelemetryNexusDashboards() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"nd_sites": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Returns the name of the site.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"site_type": {
+						Description: "Returns the type of the site.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"uuid": {
+						Description: "Returns the uuid of the site.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"nd_type": {
 			Description: "Node type in Nexus Dashboard cluster.",
 			Type:        schema.TypeString,
@@ -508,6 +546,44 @@ func dataSourceNiatelemetryNexusDashboards() *schema.Resource {
 			Description: "Number of nodes in Nexus Dashboard cluster.",
 			Type:        schema.TypeInt,
 			Optional:    true,
+		},
+		"nd_sites": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"name": {
+						Description: "Returns the name of the site.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"site_type": {
+						Description: "Returns the type of the site.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"uuid": {
+						Description: "Returns the uuid of the site.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"nd_type": {
 			Description: "Node type in Nexus Dashboard cluster.",
@@ -935,6 +1011,52 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 		o.SetNdClusterSize(x)
 	}
 
+	if v, ok := d.GetOk("nd_sites"); ok {
+		x := make([]models.NiatelemetrySites, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.NiatelemetrySites{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("niatelemetry.Sites")
+			if v, ok := l["name"]; ok {
+				{
+					x := (v.(string))
+					o.SetName(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["site_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetSiteType(x)
+				}
+			}
+			if v, ok := l["uuid"]; ok {
+				{
+					x := (v.(string))
+					o.SetUuid(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		o.SetNdSites(x)
+	}
+
 	if v, ok := d.GetOk("nd_type"); ok {
 		x := (v.(string))
 		o.SetNdType(x)
@@ -1296,6 +1418,8 @@ func dataSourceNiatelemetryNexusDashboardsRead(c context.Context, d *schema.Reso
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())
 				temp["nd_cluster_size"] = (s.GetNdClusterSize())
+
+				temp["nd_sites"] = flattenListNiatelemetrySites(s.GetNdSites(), d)
 				temp["nd_type"] = (s.GetNdType())
 				temp["nd_version"] = (s.GetNdVersion())
 				temp["number_of_apps"] = (s.GetNumberOfApps())

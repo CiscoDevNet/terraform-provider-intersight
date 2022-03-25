@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_running_firmware"
 description: |-
-  Running Firmware on an endpoint.
+        Running Firmware on an endpoint.
+
 ---
 
 # Data Source: intersight_firmware_running_firmware

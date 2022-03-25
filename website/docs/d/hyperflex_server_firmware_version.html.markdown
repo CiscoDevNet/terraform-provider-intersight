@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_server_firmware_version"
 description: |-
-  The server firmware version represents the UCS server firmware details.
+        The server firmware version represents the UCS server firmware details.
+
 ---
 
 # Data Source: intersight_hyperflex_server_firmware_version

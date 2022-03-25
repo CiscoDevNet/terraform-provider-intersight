@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_mso_contract_details"
 description: |-
-  Details of contract configured from the Multi-Site Orchestrator.
+        Details of contract configured from the Multi-Site Orchestrator.
+
 ---
 
 # Data Source: intersight_niatelemetry_mso_contract_details

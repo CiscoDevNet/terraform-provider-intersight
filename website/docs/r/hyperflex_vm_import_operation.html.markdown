@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_vm_import_operation"
 description: |-
-  Invoke Virtual Machine import operation.
+        Invoke Virtual Machine import operation.
+
 ---
 
 # Resource: intersight_hyperflex_vm_import_operation

@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_release_recommend"
 description: |-
-  The recommend version information for each release on APIC.
+        The recommend version information for each release on APIC.
+
 ---
 
 # Data Source: intersight_niaapi_apic_release_recommend

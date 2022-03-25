@@ -3,7 +3,8 @@ subcategory: "feedback"
 layout: "intersight"
 page_title: "Intersight: intersight_feedback_feedback_post"
 description: |-
-  Initial feedback submitted by the user from UI.
+        Initial feedback submitted by the user from UI.
+
 ---
 
 # Resource: intersight_feedback_feedback_post

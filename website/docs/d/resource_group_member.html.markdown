@@ -3,7 +3,8 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_group_member"
 description: |-
-  A resolved member of a resource group.
+        A resolved member of a resource group.
+
 ---
 
 # Data Source: intersight_resource_group_member

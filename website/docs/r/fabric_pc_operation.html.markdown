@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_pc_operation"
 description: |-
-  PcOperation objects allows the user to alter the state of the port channel.
+        PcOperation objects allows the user to alter the state of the port channel.
+
 ---
 
 # Resource: intersight_fabric_pc_operation

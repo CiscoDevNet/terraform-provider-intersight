@@ -3,7 +3,8 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_os_support"
 description: |-
-  OsSupport is used to validate the support for an Operating System's version.
+        OsSupport is used to validate the support for an Operating System's version.
+
 ---
 
 # Resource: intersight_os_os_support

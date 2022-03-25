@@ -3,7 +3,8 @@ subcategory: "resourcepool"
 layout: "intersight"
 page_title: "Intersight: intersight_resourcepool_lease_resource"
 description: |-
-  Lease API is for reserve or unreserve the resource from the pool. Those reserved resource details are maintained in LeaseResource.
+        Lease API is for reserve or unreserve the resource from the pool. Those reserved resource details are maintained in LeaseResource.
+
 ---
 
 # Data Source: intersight_resourcepool_lease_resource

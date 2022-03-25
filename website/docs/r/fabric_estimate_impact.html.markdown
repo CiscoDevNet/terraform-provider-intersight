@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_estimate_impact"
 description: |-
-  Before submitting switch profile deploy operation, the estimate impact helps to know the list of components be impacted and require switch reboot.
+        Before submitting switch profile deploy operation, the estimate impact helps to know the list of components be impacted and require switch reboot.
+
 ---
 
 # Resource: intersight_fabric_estimate_impact

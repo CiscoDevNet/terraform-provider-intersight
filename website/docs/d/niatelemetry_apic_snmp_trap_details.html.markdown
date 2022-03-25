@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_apic_snmp_trap_details"
 description: |-
-  Object to capture Snmp trap details in APIC.
+        Object to capture Snmp trap details in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_apic_snmp_trap_details

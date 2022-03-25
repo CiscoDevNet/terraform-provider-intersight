@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_dcnm_release_recommend"
 description: |-
-  The recommend version information for each release on DCNM.
+        The recommend version information for each release on DCNM.
+
 ---
 
 # Data Source: intersight_niaapi_dcnm_release_recommend

@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_distributable"
 description: |-
-  An image distributed by Cisco.
+        An image distributed by Cisco.
+
 ---
 
 # Data Source: intersight_firmware_distributable

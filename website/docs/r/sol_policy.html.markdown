@@ -3,7 +3,8 @@ subcategory: "sol"
 layout: "intersight"
 page_title: "Intersight: intersight_sol_policy"
 description: |-
-  Policy for configuring Serial Over LAN settings on endpoint.
+        Policy for configuring Serial Over LAN settings on endpoint.
+
 ---
 
 # Resource: intersight_sol_policy

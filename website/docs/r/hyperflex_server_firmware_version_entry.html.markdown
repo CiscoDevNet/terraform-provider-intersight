@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_server_firmware_version_entry"
 description: |-
-  An entry specifying supported server firmware version in regex format.
+        An entry specifying supported server firmware version in regex format.
+
 ---
 
 # Resource: intersight_hyperflex_server_firmware_version_entry

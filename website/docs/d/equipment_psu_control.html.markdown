@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_psu_control"
 description: |-
-  This represents the power states of an equipment.
+        This represents the power states of an equipment.
+
 ---
 
 # Data Source: intersight_equipment_psu_control

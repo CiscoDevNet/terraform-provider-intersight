@@ -3,7 +3,8 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_token_settings"
 description: |-
-  Token settings for Memory Reliability, availability and serviceability (RAS) configuration.
+        Token settings for Memory Reliability, availability and serviceability (RAS) configuration.
+
 ---
 
 # Data Source: intersight_bios_token_settings

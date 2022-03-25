@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_fan_module_manufacturing_def"
 description: |-
-  Fan module unit that contains multiple fans.
+        Fan module unit that contains multiple fans.
+
 ---
 
 # Resource: intersight_capability_fan_module_manufacturing_def

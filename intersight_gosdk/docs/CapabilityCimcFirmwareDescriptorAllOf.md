@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.CimcFirmwareDescriptor"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.CimcFirmwareDescriptor"]
 **AdapterEpProxyEnabled** | Pointer to **bool** | Indicates whether the server uses ep proxy to communicate with the adapter. | [optional] [readonly] 
+**LocalUserPswdSupportedVer** | Pointer to **string** | Minimum server firmware version for local users password properties feature support. | [optional] [readonly] 
 **Revision** | Pointer to **string** | Revision information for the server. | [optional] 
 **UuidSupportedVer** | Pointer to **string** | Minimum server firmware version for UUID feature support. | [optional] [readonly] 
 
@@ -93,6 +94,31 @@ SetAdapterEpProxyEnabled sets AdapterEpProxyEnabled field to given value.
 `func (o *CapabilityCimcFirmwareDescriptorAllOf) HasAdapterEpProxyEnabled() bool`
 
 HasAdapterEpProxyEnabled returns a boolean if a field has been set.
+
+### GetLocalUserPswdSupportedVer
+
+`func (o *CapabilityCimcFirmwareDescriptorAllOf) GetLocalUserPswdSupportedVer() string`
+
+GetLocalUserPswdSupportedVer returns the LocalUserPswdSupportedVer field if non-nil, zero value otherwise.
+
+### GetLocalUserPswdSupportedVerOk
+
+`func (o *CapabilityCimcFirmwareDescriptorAllOf) GetLocalUserPswdSupportedVerOk() (*string, bool)`
+
+GetLocalUserPswdSupportedVerOk returns a tuple with the LocalUserPswdSupportedVer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLocalUserPswdSupportedVer
+
+`func (o *CapabilityCimcFirmwareDescriptorAllOf) SetLocalUserPswdSupportedVer(v string)`
+
+SetLocalUserPswdSupportedVer sets LocalUserPswdSupportedVer field to given value.
+
+### HasLocalUserPswdSupportedVer
+
+`func (o *CapabilityCimcFirmwareDescriptorAllOf) HasLocalUserPswdSupportedVer() bool`
+
+HasLocalUserPswdSupportedVer returns a boolean if a field has been set.
 
 ### GetRevision
 

@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_syslog_remote_dest"
 description: |-
-  Object to capture Syslog remote dest details.
+        Object to capture Syslog remote dest details.
+
 ---
 
 # Data Source: intersight_niatelemetry_syslog_remote_dest

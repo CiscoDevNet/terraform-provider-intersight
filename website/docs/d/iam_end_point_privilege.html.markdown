@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_end_point_privilege"
 description: |-
-  The privilege defined at the end point which can be assigned to a user.
+        The privilege defined at the end point which can be assigned to a user.
+
 ---
 
 # Data Source: intersight_iam_end_point_privilege

@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_sku_instance_type"
 description: |-
-  Details for an instance type.
+        Details for an instance type.
+
 ---
 
 # Data Source: intersight_cloud_sku_instance_type

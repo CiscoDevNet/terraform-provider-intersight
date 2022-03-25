@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_cluster_replication_network_policy_deployment"
 description: |-
-  Record of HyperFlex Cluster replication network policy deployment.
+        Record of HyperFlex Cluster replication network policy deployment.
+
 ---
 
 # Data Source: intersight_hyperflex_cluster_replication_network_policy_deployment

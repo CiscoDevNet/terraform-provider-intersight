@@ -3,7 +3,8 @@ subcategory: "techsupportmanagement"
 layout: "intersight"
 page_title: "Intersight: intersight_techsupportmanagement_tech_support_status"
 description: |-
-  The techsupport collection status.
+        The techsupport collection status.
+
 ---
 
 # Data Source: intersight_techsupportmanagement_tech_support_status

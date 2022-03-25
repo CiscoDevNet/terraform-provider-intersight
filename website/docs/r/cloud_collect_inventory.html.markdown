@@ -3,8 +3,9 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_collect_inventory"
 description: |-
-  REST API endpoint for inventory collection. It is invoked asynchronously after TFC creation.
-The new target is sent to inventory collector to fetch organizations, agent pools and workspaces.
+        REST API endpoint for inventory collection. It is invoked asynchronously after TFC creation.
+        The new target is sent to inventory collector to fetch organizations, agent pools and workspaces.
+
 ---
 
 # Resource: intersight_cloud_collect_inventory

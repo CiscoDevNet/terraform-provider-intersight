@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_vlan"
 description: |-
-  Configuration object for Virtual LAN.
+        Configuration object for Virtual LAN.
+
 ---
 
 # Resource: intersight_fabric_vlan

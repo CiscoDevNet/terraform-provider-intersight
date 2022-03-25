@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_virtual_machine_snapshot"
 description: |-
-  The virtual machine snapshot is represented here.
+        The virtual machine snapshot is represented here.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_virtual_machine_snapshot

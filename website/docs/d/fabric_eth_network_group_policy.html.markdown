@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_eth_network_group_policy"
 description: |-
-  The allowed VLAN/s on an interface.
+        The allowed VLAN/s on an interface.
+
 ---
 
 # Data Source: intersight_fabric_eth_network_group_policy

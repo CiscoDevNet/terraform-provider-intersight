@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ldap_provider"
 description: |-
-  LDAP Provider or LDAP Server for user authentication.
+        LDAP Provider or LDAP Server for user authentication.
+
 ---
 
 # Resource: intersight_iam_ldap_provider

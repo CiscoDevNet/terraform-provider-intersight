@@ -157,6 +157,11 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 				},
 			},
 		},
+		"last_discovery_triggered": {
+			Description: "Denotes the type of discovery that was most recently triggered on this server.\n* `Unknown` - The last discovery type is unknown.\n* `Deep` - The last discovery triggered is deep.\n* `Shallow` - The last discovery triggered is shallow.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"nr_lifecycle": {
 			Description: "The equipment's lifecycle status.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DecommissionInProgress` - Decommission Inprogress Lifecycle state.\n* `RecommissionInProgress` - Recommission Inprogress Lifecycle state.\n* `OperationFailed` - Failed Operation Lifecycle state.\n* `ReackInProgress` - ReackInProgress Lifecycle state.\n* `RemoveInProgress` - RemoveInProgress Lifecycle state.\n* `Discovered` - Discovered Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `Inactive` - Inactive Lifecycle state.\n* `ReplaceInProgress` - ReplaceInProgress Lifecycle state.\n* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.",
 			Type:        schema.TypeString,
@@ -599,6 +604,11 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 					},
 				},
 			},
+		},
+		"last_discovery_triggered": {
+			Description: "Denotes the type of discovery that was most recently triggered on this server.\n* `Unknown` - The last discovery type is unknown.\n* `Deep` - The last discovery triggered is deep.\n* `Shallow` - The last discovery triggered is shallow.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"nr_lifecycle": {
 			Description: "The equipment's lifecycle status.\n* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.\n* `Active` - Default Lifecycle State for a physical entity.\n* `Decommissioned` - Decommission Lifecycle state.\n* `DecommissionInProgress` - Decommission Inprogress Lifecycle state.\n* `RecommissionInProgress` - Recommission Inprogress Lifecycle state.\n* `OperationFailed` - Failed Operation Lifecycle state.\n* `ReackInProgress` - ReackInProgress Lifecycle state.\n* `RemoveInProgress` - RemoveInProgress Lifecycle state.\n* `Discovered` - Discovered Lifecycle state.\n* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.\n* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.\n* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.\n* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.\n* `Inactive` - Inactive Lifecycle state.\n* `ReplaceInProgress` - ReplaceInProgress Lifecycle state.\n* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.",
@@ -1078,6 +1088,11 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 		o.SetIoCardIdentityList(x)
 	}
 
+	if v, ok := d.GetOk("last_discovery_triggered"); ok {
+		x := (v.(string))
+		o.SetLastDiscoveryTriggered(x)
+	}
+
 	if v, ok := d.GetOk("nr_lifecycle"); ok {
 		x := (v.(string))
 		o.SetLifecycle(x)
@@ -1436,6 +1451,7 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 				temp["identifier"] = (s.GetIdentifier())
 
 				temp["io_card_identity_list"] = flattenListEquipmentIoCardIdentity(s.GetIoCardIdentityList(), d)
+				temp["last_discovery_triggered"] = (s.GetLastDiscoveryTriggered())
 				temp["nr_lifecycle"] = (s.GetLifecycle())
 
 				temp["mod_time"] = (s.GetModTime()).String()

@@ -3,7 +3,8 @@ subcategory: "recommendation"
 layout: "intersight"
 page_title: "Intersight: intersight_recommendation_physical_item"
 description: |-
-  Entity representing the recommended physical device.
+        Entity representing the recommended physical device.
+
 ---
 
 # Data Source: intersight_recommendation_physical_item

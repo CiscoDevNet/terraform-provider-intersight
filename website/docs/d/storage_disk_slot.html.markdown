@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_disk_slot"
 description: |-
-  Information of disk slots as reported by a storage controller.
+        Information of disk slots as reported by a storage controller.
+
 ---
 
 # Data Source: intersight_storage_disk_slot

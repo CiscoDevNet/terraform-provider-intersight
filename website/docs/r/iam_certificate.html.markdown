@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_certificate"
 description: |-
-  Holds a certificate, signed by a CAcert.
+        Holds a certificate, signed by a CAcert.
+
 ---
 
 # Resource: intersight_iam_certificate

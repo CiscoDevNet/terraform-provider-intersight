@@ -3,7 +3,8 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_subscription_account"
 description: |-
-  It is a empty placeholder object for Account collection. Its purpose is to avoid data updates to Subscription related MOs on Account MO change event.
+        It is a empty placeholder object for Account collection. Its purpose is to avoid data updates to Subscription related MOs on Account MO change event.
+
 ---
 
 # Data Source: intersight_asset_subscription_account

@@ -3,7 +3,8 @@ subcategory: "iqnpool"
 layout: "intersight"
 page_title: "Intersight: intersight_iqnpool_pool"
 description: |-
-  Pool represents a collection of iSCSI Qualified Names (IQNs) for use as initiator identifiers by iSCSI vNICs.
+        Pool represents a collection of iSCSI Qualified Names (IQNs) for use as initiator identifiers by iSCSI vNICs.
+
 ---
 
 # Resource: intersight_iqnpool_pool

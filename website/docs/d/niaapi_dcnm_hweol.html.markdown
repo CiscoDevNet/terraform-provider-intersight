@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_dcnm_hweol"
 description: |-
-  The hardware end of life notice for DCNM.
+        The hardware end of life notice for DCNM.
+
 ---
 
 # Data Source: intersight_niaapi_dcnm_hweol

@@ -3,7 +3,8 @@ subcategory: "ether"
 layout: "intersight"
 page_title: "Intersight: intersight_ether_network_port"
 description: |-
-  Model contains the details of the ethernet port connected to the FI side.
+        Model contains the details of the ethernet port connected to the FI side.
+
 ---
 
 # Data Source: intersight_ether_network_port

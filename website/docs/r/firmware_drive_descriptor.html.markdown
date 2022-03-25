@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_drive_descriptor"
 description: |-
-  Descriptor to uniquely identify a Drive.
+        Descriptor to uniquely identify a Drive.
+
 ---
 
 # Resource: intersight_firmware_drive_descriptor

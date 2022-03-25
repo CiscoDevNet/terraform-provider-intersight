@@ -3,7 +3,8 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_cluster_member"
 description: |-
-  A node within a cluster of device connectors. A Device Registration may contain multiple ClusterMembers with each holding the connection details of the device connector as well as the nodes current leadership within the cluster.
+        A node within a cluster of device connectors. A Device Registration may contain multiple ClusterMembers with each holding the connection details of the device connector as well as the nodes current leadership within the cluster.
+
 ---
 
 # Data Source: intersight_asset_cluster_member

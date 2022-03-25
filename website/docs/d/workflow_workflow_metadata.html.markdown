@@ -3,7 +3,8 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_workflow_metadata"
 description: |-
-  Workflow metadata is a collection of properties that are common across all the versions of a workflow.
+        Workflow metadata is a collection of properties that are common across all the versions of a workflow.
+
 ---
 
 # Data Source: intersight_workflow_workflow_metadata

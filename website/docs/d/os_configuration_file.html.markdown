@@ -3,14 +3,15 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_configuration_file"
 description: |-
-  A ConfigurationFile is an OS specific answer file that helps with the unattended
-installation.
-The file can also be a template file with placeholders instead of actual answers.
-Intersight supports the golang template syntax specified in https://golang.org/pkg/text/template/.
-The template supports placeholders for all the properties of os.Answers MO type
-as well as any additional user-defined properties. The values for these placeholders
-shall be given during OS installation in the form of os.Answers type and 'additionalProperties' in
-os.OsInstall object.
+        A ConfigurationFile is an OS specific answer file that helps with the unattended
+        installation.
+        The file can also be a template file with placeholders instead of actual answers.
+        Intersight supports the golang template syntax specified in https://golang.org/pkg/text/template/.
+        The template supports placeholders for all the properties of os.Answers MO type
+        as well as any additional user-defined properties. The values for these placeholders
+        shall be given during OS installation in the form of os.Answers type and 'additionalProperties' in
+        os.OsInstall object.
+
 ---
 
 # Data Source: intersight_os_configuration_file

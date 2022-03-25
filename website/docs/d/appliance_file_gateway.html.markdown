@@ -3,12 +3,13 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_file_gateway"
 description: |-
-  FileGateway is a non-persistent model for accessing files from the Intersight.
-Intersight Appliances queries the FileGateway API, supplying a filename and version,
-to get the signed URL from the Intersight. Intersight Appliance services uses the
-signed URLs to download files and store them in the local image cache. Intersight
-will not store any record of the file access in the initial revision. This model is
-a pure pass through proxy for the cloud storage service.
+        FileGateway is a non-persistent model for accessing files from the Intersight.
+        Intersight Appliances queries the FileGateway API, supplying a filename and version,
+        to get the signed URL from the Intersight. Intersight Appliance services uses the
+        signed URLs to download files and store them in the local image cache. Intersight
+        will not store any record of the file access in the initial revision. This model is
+        a pure pass through proxy for the cloud storage service.
+
 ---
 
 # Data Source: intersight_appliance_file_gateway

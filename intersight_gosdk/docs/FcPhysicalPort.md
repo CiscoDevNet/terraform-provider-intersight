@@ -8,9 +8,11 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fc.PhysicalPort"]
 **AdminSpeed** | Pointer to **string** | Administrator configured Speed applied on the port. | [optional] [readonly] 
 **AdminState** | Pointer to **string** | Administratively configured state (enabled/disabled) for this port. | [optional] [readonly] 
+**AggregatePortId** | Pointer to **int64** | Breakout port member in the Fabric Interconnect. | [optional] [readonly] [default to 0]
 **B2bCredit** | Pointer to **int64** | Buffer to Buffer credits of FC port. | [optional] [readonly] 
 **MaxSpeed** | Pointer to **string** | Maximum Speed with which the port operates. | [optional] [readonly] 
 **Mode** | Pointer to **string** | Mode information N_proxy, F or E associated to the Fibre Channel port. | [optional] [readonly] 
+**Name** | Pointer to **string** | Name of the physical port of FC. | [optional] [readonly] 
 **OperSpeed** | Pointer to **string** | Operational Speed with which the port operates. | [optional] [readonly] 
 **PeerDn** | Pointer to **string** | PeerDn for fibre channel physical port. | [optional] [readonly] 
 **PortChannelId** | Pointer to **int64** | Port channel id of FC port channel created on FI switch. | [optional] [readonly] 
@@ -131,6 +133,31 @@ SetAdminState sets AdminState field to given value.
 
 HasAdminState returns a boolean if a field has been set.
 
+### GetAggregatePortId
+
+`func (o *FcPhysicalPort) GetAggregatePortId() int64`
+
+GetAggregatePortId returns the AggregatePortId field if non-nil, zero value otherwise.
+
+### GetAggregatePortIdOk
+
+`func (o *FcPhysicalPort) GetAggregatePortIdOk() (*int64, bool)`
+
+GetAggregatePortIdOk returns a tuple with the AggregatePortId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAggregatePortId
+
+`func (o *FcPhysicalPort) SetAggregatePortId(v int64)`
+
+SetAggregatePortId sets AggregatePortId field to given value.
+
+### HasAggregatePortId
+
+`func (o *FcPhysicalPort) HasAggregatePortId() bool`
+
+HasAggregatePortId returns a boolean if a field has been set.
+
 ### GetB2bCredit
 
 `func (o *FcPhysicalPort) GetB2bCredit() int64`
@@ -205,6 +232,31 @@ SetMode sets Mode field to given value.
 `func (o *FcPhysicalPort) HasMode() bool`
 
 HasMode returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *FcPhysicalPort) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *FcPhysicalPort) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *FcPhysicalPort) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *FcPhysicalPort) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetOperSpeed
 

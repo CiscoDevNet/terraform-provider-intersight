@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_virtual_machine_infrastructure_provider"
 description: |-
-  Infrastructure backend for providing virtual machines from a target.
+        Infrastructure backend for providing virtual machines from a target.
+
 ---
 
 # Data Source: intersight_kubernetes_virtual_machine_infrastructure_provider

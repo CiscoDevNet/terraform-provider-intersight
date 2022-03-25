@@ -3,7 +3,8 @@ subcategory: "rack"
 layout: "intersight"
 page_title: "Intersight: intersight_rack_unit_personality"
 description: |-
-  This can be used internally to model a server based on a defined personality without having to reprogram the server PID.
+        This can be used internally to model a server based on a defined personality without having to reprogram the server PID.
+
 ---
 
 # Data Source: intersight_rack_unit_personality

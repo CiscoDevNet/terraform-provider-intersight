@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_psu_descriptor"
 description: |-
-  Descriptor that uniquely identifies a power supply.
+        Descriptor that uniquely identifies a power supply.
+
 ---
 
 # Data Source: intersight_capability_psu_descriptor

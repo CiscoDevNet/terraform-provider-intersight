@@ -209,6 +209,11 @@ func dataSourceGraphicsCard() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"gpu_id": {
+			Description: "The identifier of the graphics processor unit.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"graphics_controllers": {
 			Description: "An array of relationships to graphicsController resources.",
 			Type:        schema.TypeList,
@@ -308,6 +313,11 @@ func dataSourceGraphicsCard() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"oper_reason": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"oper_state": {
 			Description: "The current operational state of the graphics card.",
 			Type:        schema.TypeString,
@@ -362,6 +372,41 @@ func dataSourceGraphicsCard() *schema.Resource {
 			Description: "This list contains the PCI address of all controllers for corresponding card.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"pci_device": {
+			Description: "A reference to a pciDevice resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"pci_slot": {
 			Description: "The PCI slot name of the graphics card.",
@@ -531,6 +576,16 @@ func dataSourceGraphicsCard() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"sub_device_id": {
+			Description: "The sub device id of the graphics processor unit.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"sub_vendor_id": {
+			Description: "The sub vendor id of the graphics processor unit.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -557,6 +612,11 @@ func dataSourceGraphicsCard() *schema.Resource {
 		"vendor": {
 			Description: "This field identifies the vendor of the given component.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"vendor_id": {
+			Description: "The vendor id of the graphics processor unit.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"version_context": {
@@ -862,6 +922,11 @@ func dataSourceGraphicsCard() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"gpu_id": {
+			Description: "The identifier of the graphics processor unit.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"graphics_controllers": {
 			Description: "An array of relationships to graphicsController resources.",
 			Type:        schema.TypeList,
@@ -961,6 +1026,11 @@ func dataSourceGraphicsCard() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"oper_reason": {
+			Type:     schema.TypeList,
+			Optional: true,
+			Elem: &schema.Schema{
+				Type: schema.TypeString}},
 		"oper_state": {
 			Description: "The current operational state of the graphics card.",
 			Type:        schema.TypeString,
@@ -1015,6 +1085,41 @@ func dataSourceGraphicsCard() *schema.Resource {
 			Description: "This list contains the PCI address of all controllers for corresponding card.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"pci_device": {
+			Description: "A reference to a pciDevice resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"pci_slot": {
 			Description: "The PCI slot name of the graphics card.",
@@ -1184,6 +1289,16 @@ func dataSourceGraphicsCard() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"sub_device_id": {
+			Description: "The sub device id of the graphics processor unit.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"sub_vendor_id": {
+			Description: "The sub vendor id of the graphics processor unit.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"tags": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -1210,6 +1325,11 @@ func dataSourceGraphicsCard() *schema.Resource {
 		"vendor": {
 			Description: "This field identifies the vendor of the given component.",
 			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"vendor_id": {
+			Description: "The vendor id of the graphics processor unit.",
+			Type:        schema.TypeInt,
 			Optional:    true,
 		},
 		"version_context": {
@@ -1565,6 +1685,11 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetFirmwareVersion(x)
 	}
 
+	if v, ok := d.GetOk("gpu_id"); ok {
+		x := (v.(string))
+		o.SetGpuId(x)
+	}
+
 	if v, ok := d.GetOk("graphics_controllers"); ok {
 		x := make([]models.GraphicsControllerRelationship, 0)
 		s := v.([]interface{})
@@ -1678,6 +1803,17 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetObjectType(x)
 	}
 
+	if v, ok := d.GetOk("oper_reason"); ok {
+		x := make([]string, 0)
+		y := reflect.ValueOf(v)
+		for i := 0; i < y.Len(); i++ {
+			if y.Index(i).Interface() != nil {
+				x = append(x, y.Index(i).Interface().(string))
+			}
+		}
+		o.SetOperReason(x)
+	}
+
 	if v, ok := d.GetOk("oper_state"); ok {
 		x := (v.(string))
 		o.SetOperState(x)
@@ -1745,6 +1881,49 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 	if v, ok := d.GetOk("pci_address_list"); ok {
 		x := (v.(string))
 		o.SetPciAddressList(x)
+	}
+
+	if v, ok := d.GetOk("pci_device"); ok {
+		p := make([]models.PciDeviceRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsPciDeviceRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetPciDevice(x)
+		}
 	}
 
 	if v, ok := d.GetOk("pci_slot"); ok {
@@ -1943,6 +2122,16 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOkExists("sub_device_id"); ok {
+		x := int64(v.(int))
+		o.SetSubDeviceId(x)
+	}
+
+	if v, ok := d.GetOkExists("sub_vendor_id"); ok {
+		x := int64(v.(int))
+		o.SetSubVendorId(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1979,6 +2168,11 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
+	}
+
+	if v, ok := d.GetOkExists("vendor_id"); ok {
+		x := int64(v.(int))
+		o.SetVendorId(x)
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -2111,6 +2305,7 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["expander_slot"] = (s.GetExpanderSlot())
 				temp["firmware_version"] = (s.GetFirmwareVersion())
+				temp["gpu_id"] = (s.GetGpuId())
 
 				temp["graphics_controllers"] = flattenListGraphicsControllerRelationship(s.GetGraphicsControllers(), d)
 
@@ -2122,12 +2317,15 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 				temp["moid"] = (s.GetMoid())
 				temp["num_gpus"] = (s.GetNumGpus())
 				temp["object_type"] = (s.GetObjectType())
+				temp["oper_reason"] = (s.GetOperReason())
 				temp["oper_state"] = (s.GetOperState())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 				temp["pci_address"] = (s.GetPciAddress())
 				temp["pci_address_list"] = (s.GetPciAddressList())
+
+				temp["pci_device"] = flattenMapPciDeviceRelationship(s.GetPciDevice(), d)
 				temp["pci_slot"] = (s.GetPciSlot())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
@@ -2142,9 +2340,12 @@ func dataSourceGraphicsCardRead(c context.Context, d *schema.ResourceData, meta 
 				temp["running_firmware"] = flattenListFirmwareRunningFirmwareRelationship(s.GetRunningFirmware(), d)
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["sub_device_id"] = (s.GetSubDeviceId())
+				temp["sub_vendor_id"] = (s.GetSubVendorId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["vendor"] = (s.GetVendor())
+				temp["vendor_id"] = (s.GetVendorId())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				graphicsCardResults[j] = temp

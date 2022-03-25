@@ -3,8 +3,9 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_valid_install_target"
 description: |-
-  ValidInstallTarget is used to fetch all the valid Install targets for the servers.
-The List of Install targets includes Physical Disks and Virtual Drives.
+        ValidInstallTarget is used to fetch all the valid Install targets for the servers.
+        The List of Install targets includes Physical Disks and Virtual Drives.
+
 ---
 
 # Resource: intersight_os_valid_install_target

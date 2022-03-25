@@ -3,7 +3,8 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_instance"
 description: |-
-  Instance of an Intersight advisory applicable for an Intersight managed object. An advisory instance is created when a given advisory is found applicable for an Intersight managed object. An advisory instance is retained for some time even after being cleared for historical purposes. A 'cleared' advisory instance is deleted after the retention time is elaspsed.
+        Instance of an Intersight advisory applicable for an Intersight managed object. An advisory instance is created when a given advisory is found applicable for an Intersight managed object. An advisory instance is retained for some time even after being cleared for historical purposes. A 'cleared' advisory instance is deleted after the retention time is elaspsed.
+
 ---
 
 # Data Source: intersight_tam_advisory_instance

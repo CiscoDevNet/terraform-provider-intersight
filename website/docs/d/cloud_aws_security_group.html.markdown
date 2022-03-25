@@ -3,8 +3,9 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_aws_security_group"
 description: |-
-  AWS Security group object is represented here. It contains inbound and outbound rules control the flow of
-traffic to and traffic from the virtual machine, respectively.
+        AWS Security group object is represented here. It contains inbound and outbound rules control the flow of
+        traffic to and traffic from the virtual machine, respectively.
+
 ---
 
 # Data Source: intersight_cloud_aws_security_group

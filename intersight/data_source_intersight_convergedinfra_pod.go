@@ -248,13 +248,8 @@ func dataSourceConvergedinfraPod() *schema.Resource {
 				},
 			},
 		},
-		"shared_scope": {
-			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"solution_instance": {
-			Description: "A reference to a workflowSolutionInstance resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		"service_item_instance": {
+			Description: "A reference to a workflowServiceItemInstance resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -287,6 +282,11 @@ func dataSourceConvergedinfraPod() *schema.Resource {
 					},
 				},
 			},
+		},
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"summary": {
 			Description: "The summary of pod's health, compliance, storage, number of nodes etc.",
@@ -793,13 +793,8 @@ func dataSourceConvergedinfraPod() *schema.Resource {
 				},
 			},
 		},
-		"shared_scope": {
-			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
-			Type:        schema.TypeString,
-			Optional:    true,
-		},
-		"solution_instance": {
-			Description: "A reference to a workflowSolutionInstance resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+		"service_item_instance": {
+			Description: "A reference to a workflowServiceItemInstance resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
 			Optional:    true,
@@ -832,6 +827,11 @@ func dataSourceConvergedinfraPod() *schema.Resource {
 					},
 				},
 			},
+		},
+		"shared_scope": {
+			Description: "Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.\nObjects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"summary": {
 			Description: "The summary of pod's health, compliance, storage, number of nodes etc.",
@@ -1400,13 +1400,8 @@ func dataSourceConvergedinfraPodRead(c context.Context, d *schema.ResourceData, 
 		}
 	}
 
-	if v, ok := d.GetOk("shared_scope"); ok {
-		x := (v.(string))
-		o.SetSharedScope(x)
-	}
-
-	if v, ok := d.GetOk("solution_instance"); ok {
-		p := make([]models.WorkflowSolutionInstanceRelationship, 0, 1)
+	if v, ok := d.GetOk("service_item_instance"); ok {
+		p := make([]models.WorkflowServiceItemInstanceRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
@@ -1440,12 +1435,17 @@ func dataSourceConvergedinfraPodRead(c context.Context, d *schema.ResourceData, 
 					o.SetSelector(x)
 				}
 			}
-			p = append(p, models.MoMoRefAsWorkflowSolutionInstanceRelationship(o))
+			p = append(p, models.MoMoRefAsWorkflowServiceItemInstanceRelationship(o))
 		}
 		if len(p) > 0 {
 			x := p[0]
-			o.SetSolutionInstance(x)
+			o.SetServiceItemInstance(x)
 		}
+	}
+
+	if v, ok := d.GetOk("shared_scope"); ok {
+		x := (v.(string))
+		o.SetSharedScope(x)
 	}
 
 	if v, ok := d.GetOk("summary"); ok {
@@ -1651,9 +1651,9 @@ func dataSourceConvergedinfraPodRead(c context.Context, d *schema.ResourceData, 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["pod_resource_group"] = flattenMapResourceGroupRelationship(s.GetPodResourceGroup(), d)
-				temp["shared_scope"] = (s.GetSharedScope())
 
-				temp["solution_instance"] = flattenMapWorkflowSolutionInstanceRelationship(s.GetSolutionInstance(), d)
+				temp["service_item_instance"] = flattenMapWorkflowServiceItemInstanceRelationship(s.GetServiceItemInstance(), d)
+				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["summary"] = flattenMapConvergedinfraPodSummary(s.GetSummary(), d)
 

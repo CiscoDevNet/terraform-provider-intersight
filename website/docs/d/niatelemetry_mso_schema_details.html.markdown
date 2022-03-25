@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_mso_schema_details"
 description: |-
-  Details of schema in Multi-Site Orchestrator.
+        Details of schema in Multi-Site Orchestrator.
+
 ---
 
 # Data Source: intersight_niatelemetry_mso_schema_details

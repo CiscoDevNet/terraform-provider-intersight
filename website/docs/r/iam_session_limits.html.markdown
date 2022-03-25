@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_session_limits"
 description: |-
-  The session related configuration limits.
+        The session related configuration limits.
+
 ---
 
 # Resource: intersight_iam_session_limits

@@ -3,7 +3,8 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_external_syslog_setting"
 description: |-
-  Configure External Syslog Server.
+        Configure External Syslog Server.
+
 ---
 
 # Data Source: intersight_appliance_external_syslog_setting

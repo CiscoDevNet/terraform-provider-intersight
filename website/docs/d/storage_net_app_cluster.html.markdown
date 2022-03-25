@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_cluster"
 description: |-
-  NetApp cluster consists of one or more nodes grouped together as HA pairs to form a scalable cluster.
+        NetApp cluster consists of one or more nodes grouped together as HA pairs to form a scalable cluster.
+
 ---
 
 # Data Source: intersight_storage_net_app_cluster

@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_user"
 description: |-
-  The Intersight account user.
+        The Intersight account user.
+
 ---
 
 # Data Source: intersight_iam_user

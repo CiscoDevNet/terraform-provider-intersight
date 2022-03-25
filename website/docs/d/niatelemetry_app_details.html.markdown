@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_app_details"
 description: |-
-  Details of apps installed on Nexus Dashboard.
+        Details of apps installed on Nexus Dashboard.
+
 ---
 
 # Data Source: intersight_niatelemetry_app_details

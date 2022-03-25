@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_apic_realm_details"
 description: |-
-  Object to capture Realm details in APIC.
+        Object to capture Realm details in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_apic_realm_details

@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_switch_profile"
 description: |-
-  This specifies configuration policies for a managed network switch.
+        This specifies configuration policies for a managed network switch.
+
 ---
 
 # Data Source: intersight_fabric_switch_profile

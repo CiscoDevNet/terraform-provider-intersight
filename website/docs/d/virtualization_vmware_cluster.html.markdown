@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_cluster"
 description: |-
-  A real cluster of resources within a data center in VMware. A cluster is a convenient grouping of resources such as Host, Datastore, etc.
+        A real cluster of resources within a data center in VMware. A cluster is a convenient grouping of resources such as Host, Datastore, etc.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_cluster
@@ -19,6 +20,7 @@ The following arguments can be used to get data of already created objects in In
 * `datastore_count`:(int) Count of all datastores associated with this cluster. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `hypervisor_type`:(string) Identifies the broad type of the underlying hypervisor.* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
+* `hypervisor_version`:(string) Identifies the version of the hypervisor running on this cluster. Keeping the hypervisor version in the cluster makes it convenient for applications to validate their deployment needs. Defaults to an empty string. 
 * `identity`:(string) The internally generated identity of this cluster. This entity is not manipulated by users. 
 * `inventory_path`:(string) Inventory path of the cluster. 
 * `mod_time`:(string) The time when this managed object was last modified. 

@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_upgrade_impact_status"
 description: |-
-  Captures the impact for an upgrade.
+        Captures the impact for an upgrade.
+
 ---
 
 # Data Source: intersight_firmware_upgrade_impact_status

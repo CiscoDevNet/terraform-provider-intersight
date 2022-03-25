@@ -2865,7 +2865,7 @@ func resourceServerProfileDelete(c context.Context, d *schema.ResourceData, meta
 	o.SetObjectType("server.Profile")
 	o.SetAction("Unassign")
 	r := conn.ApiClient.ServerApi.UpdateServerProfile(conn.ctx, d.Id()).ServerProfile(*o)
-	_, _, responseErr := r.Execute()
+	result, _, responseErr := r.Execute()
 	if responseErr != nil {
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: "ServerProfile object " + d.Id() + " is already deleted"})
@@ -2878,7 +2878,56 @@ func resourceServerProfileDelete(c context.Context, d *schema.ResourceData, meta
 		}
 		return diag.Errorf("error occurred while detaching server from ServerProfile: %s", responseErr.Error())
 	}
-	time.Sleep(3 * time.Second)
+	d.SetId(result.GetMoid())
+	var waitForCompletion bool
+	if v, ok := d.GetOk("wait_for_completion"); ok {
+		waitForCompletion = v.(bool)
+	}
+	// Check for Workflow Status
+	if waitForCompletion {
+		for i := 0; i < 4; i += 1 {
+			result, _, responseErr = conn.ApiClient.ServerApi.GetServerProfileByMoid(conn.ctx, result.GetMoid()).Execute()
+			if responseErr != nil {
+				errorType := fmt.Sprintf("%T", responseErr)
+				if strings.Contains(errorType, "GenericOpenAPIError") {
+					responseErr := responseErr.(models.GenericOpenAPIError)
+					return diag.Errorf("error occurred while fetching ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+				}
+				return diag.Errorf("error occurred while fetching ServerProfile: %s", responseErr.Error())
+			}
+			if _, ok := result.GetRunningWorkflowsOk(); ok {
+				log.Println("Workflow details found")
+				break
+			}
+		}
+		result, _, responseErr = conn.ApiClient.ServerApi.GetServerProfileByMoid(conn.ctx, result.GetMoid()).Execute()
+		if responseErr != nil {
+			errorType := fmt.Sprintf("%T", responseErr)
+			if strings.Contains(errorType, "GenericOpenAPIError") {
+				responseErr := responseErr.(models.GenericOpenAPIError)
+				return diag.Errorf("error occurred while fetching ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+			}
+			return diag.Errorf("error occurred while fetching ServerProfile: %s", responseErr.Error())
+		}
+		var runningWorkflows []models.WorkflowWorkflowInfoRelationship
+		if _, ok := result.GetRunningWorkflowsOk(); ok {
+			runningWorkflows = append(runningWorkflows, result.GetRunningWorkflows()...)
+		}
+		for _, w := range runningWorkflows {
+			warning, err := checkWorkflowStatus(conn, w)
+			if err != nil {
+				errorType := fmt.Sprintf("%T", err)
+				if strings.Contains(errorType, "GenericOpenAPIError") {
+					err := err.(models.GenericOpenAPIError)
+					return diag.Errorf("failed while fetching workflow information in ServerProfile: %s Response from endpoint: %s", err.Error(), string(err.Body()))
+				}
+				return diag.Errorf("failed while fetching workflow information in ServerProfile: %s", err.Error())
+			}
+			if len(warning) > 0 {
+				de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: warning})
+			}
+		}
+	}
 	p := conn.ApiClient.ServerApi.DeleteServerProfile(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
 	if deleteErr != nil {

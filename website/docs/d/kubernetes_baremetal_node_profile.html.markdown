@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_baremetal_node_profile"
 description: |-
-  A profile specifying configuration settings for a baremetal node. Users can do operations like Drain, Cordon, Rebuild on a node.
+        A profile specifying configuration settings for a baremetal node. Users can do operations like Drain, Cordon, Rebuild on a node.
+
 ---
 
 # Data Source: intersight_kubernetes_baremetal_node_profile

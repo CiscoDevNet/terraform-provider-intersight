@@ -3,13 +3,14 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_error_response_handler"
 description: |-
-  Intersight allows generic API tasks to be created by taking the API request
-body and a response parser specification in the form of content.Grammar object.
-Error Response Handler allows to create a generic error response specification
-which can be used by multiple Batch API. The parameters provided in the Error
-Response Handler may be used to parse error responses from an API request, if
-the response specification provided for the API request does not define
-error parameters.
+        Intersight allows generic API tasks to be created by taking the API request
+        body and a response parser specification in the form of content.Grammar object.
+        Error Response Handler allows to create a generic error response specification
+        which can be used by multiple Batch API. The parameters provided in the Error
+        Response Handler may be used to parse error responses from an API request, if
+        the response specification provided for the API request does not define
+        error parameters.
+
 ---
 
 # Resource: intersight_workflow_error_response_handler

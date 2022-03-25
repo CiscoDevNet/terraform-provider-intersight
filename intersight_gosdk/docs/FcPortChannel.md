@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **Role** | Pointer to **string** | This port-channel&#39;s configured role (fcUplink, fcStorage, etc.). | [optional] 
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] 
 **Vsan** | Pointer to **int64** | Virtual San that is associated to the port-channel. | [optional] 
+**Wwn** | Pointer to **string** | World Wide Name of the port channel. | [optional] [readonly] 
 **EquipmentSwitchCard** | Pointer to [**EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -327,6 +328,31 @@ SetVsan sets Vsan field to given value.
 `func (o *FcPortChannel) HasVsan() bool`
 
 HasVsan returns a boolean if a field has been set.
+
+### GetWwn
+
+`func (o *FcPortChannel) GetWwn() string`
+
+GetWwn returns the Wwn field if non-nil, zero value otherwise.
+
+### GetWwnOk
+
+`func (o *FcPortChannel) GetWwnOk() (*string, bool)`
+
+GetWwnOk returns a tuple with the Wwn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWwn
+
+`func (o *FcPortChannel) SetWwn(v string)`
+
+SetWwn sets Wwn field to given value.
+
+### HasWwn
+
+`func (o *FcPortChannel) HasWwn() bool`
+
+HasWwn returns a boolean if a field has been set.
 
 ### GetEquipmentSwitchCard
 

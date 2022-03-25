@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_network"
 description: |-
-  Details of VMware Virtual Network.
+        Details of VMware Virtual Network.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_network

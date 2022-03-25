@@ -3,7 +3,8 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_device"
 description: |-
-  PCI device present in a server.
+        PCI device present in a server.
+
 ---
 
 # Data Source: intersight_pci_device

@@ -3,7 +3,8 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_exported_item"
 description: |-
-  A single managed object that is being exported.
+        A single managed object that is being exported.
+
 ---
 
 # Data Source: intersight_bulk_exported_item

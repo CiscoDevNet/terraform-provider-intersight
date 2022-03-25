@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_aci_cni_apic"
 description: |-
-  Internally generated object of claimed APIC device known to Razor.
+        Internally generated object of claimed APIC device known to Razor.
+
 ---
 
 # Resource: intersight_kubernetes_aci_cni_apic

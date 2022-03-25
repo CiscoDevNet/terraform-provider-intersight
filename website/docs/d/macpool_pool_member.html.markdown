@@ -3,7 +3,8 @@ subcategory: "macpool"
 layout: "intersight"
 page_title: "Intersight: intersight_macpool_pool_member"
 description: |-
-  PoolMember represents a single MAC address that is part of a pool.
+        PoolMember represents a single MAC address that is part of a pool.
+
 ---
 
 # Data Source: intersight_macpool_pool_member

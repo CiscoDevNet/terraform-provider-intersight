@@ -3,8 +3,9 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_aws_subnet"
 description: |-
-  Subnet object in AWS inventory. It is a range of IP addresses in a VPC that can be used to isolate
-different EC2 resources from each other or from the Internet.
+        Subnet object in AWS inventory. It is a range of IP addresses in a VPC that can be used to isolate
+        different EC2 resources from each other or from the Internet.
+
 ---
 
 # Data Source: intersight_cloud_aws_subnet

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -29,10 +29,13 @@ type GraphicsCardAllOf struct {
 	ExpanderSlot *string `json:"ExpanderSlot,omitempty"`
 	// The firmware version of the graphics card.
 	FirmwareVersion *string `json:"FirmwareVersion,omitempty"`
+	// The identifier of the graphics processor unit.
+	GpuId *string `json:"GpuId,omitempty"`
 	// The current mode of the graphics card.
 	Mode *string `json:"Mode,omitempty"`
 	// The number of controllers under each card.
-	NumGpus *string `json:"NumGpus,omitempty"`
+	NumGpus    *string  `json:"NumGpus,omitempty"`
+	OperReason []string `json:"OperReason,omitempty"`
 	// The current operational state of the graphics card.
 	OperState *string `json:"OperState,omitempty"`
 	// The PCI address of the graphics card.
@@ -40,13 +43,20 @@ type GraphicsCardAllOf struct {
 	// This list contains the PCI address of all controllers for corresponding card.
 	PciAddressList *string `json:"PciAddressList,omitempty"`
 	// The PCI slot name of the graphics card.
-	PciSlot         *string                      `json:"PciSlot,omitempty"`
+	PciSlot *string `json:"PciSlot,omitempty"`
+	// The sub device id of the graphics processor unit.
+	SubDeviceId *int64 `json:"SubDeviceId,omitempty"`
+	// The sub vendor id of the graphics processor unit.
+	SubVendorId *int64 `json:"SubVendorId,omitempty"`
+	// The vendor id of the graphics processor unit.
+	VendorId        *int64                       `json:"VendorId,omitempty"`
 	ComputeBlade    *ComputeBladeRelationship    `json:"ComputeBlade,omitempty"`
 	ComputeBoard    *ComputeBoardRelationship    `json:"ComputeBoard,omitempty"`
 	ComputeRackUnit *ComputeRackUnitRelationship `json:"ComputeRackUnit,omitempty"`
 	// An array of relationships to graphicsController resources.
 	GraphicsControllers []GraphicsControllerRelationship     `json:"GraphicsControllers,omitempty"`
 	InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	PciDevice           *PciDeviceRelationship               `json:"PciDevice,omitempty"`
 	RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	// An array of relationships to firmwareRunningFirmware resources.
 	RunningFirmware      []FirmwareRunningFirmwareRelationship `json:"RunningFirmware,omitempty"`
@@ -254,6 +264,38 @@ func (o *GraphicsCardAllOf) SetFirmwareVersion(v string) {
 	o.FirmwareVersion = &v
 }
 
+// GetGpuId returns the GpuId field value if set, zero value otherwise.
+func (o *GraphicsCardAllOf) GetGpuId() string {
+	if o == nil || o.GpuId == nil {
+		var ret string
+		return ret
+	}
+	return *o.GpuId
+}
+
+// GetGpuIdOk returns a tuple with the GpuId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GraphicsCardAllOf) GetGpuIdOk() (*string, bool) {
+	if o == nil || o.GpuId == nil {
+		return nil, false
+	}
+	return o.GpuId, true
+}
+
+// HasGpuId returns a boolean if a field has been set.
+func (o *GraphicsCardAllOf) HasGpuId() bool {
+	if o != nil && o.GpuId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGpuId gets a reference to the given string and assigns it to the GpuId field.
+func (o *GraphicsCardAllOf) SetGpuId(v string) {
+	o.GpuId = &v
+}
+
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *GraphicsCardAllOf) GetMode() string {
 	if o == nil || o.Mode == nil {
@@ -316,6 +358,39 @@ func (o *GraphicsCardAllOf) HasNumGpus() bool {
 // SetNumGpus gets a reference to the given string and assigns it to the NumGpus field.
 func (o *GraphicsCardAllOf) SetNumGpus(v string) {
 	o.NumGpus = &v
+}
+
+// GetOperReason returns the OperReason field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GraphicsCardAllOf) GetOperReason() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.OperReason
+}
+
+// GetOperReasonOk returns a tuple with the OperReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GraphicsCardAllOf) GetOperReasonOk() (*[]string, bool) {
+	if o == nil || o.OperReason == nil {
+		return nil, false
+	}
+	return &o.OperReason, true
+}
+
+// HasOperReason returns a boolean if a field has been set.
+func (o *GraphicsCardAllOf) HasOperReason() bool {
+	if o != nil && o.OperReason != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOperReason gets a reference to the given []string and assigns it to the OperReason field.
+func (o *GraphicsCardAllOf) SetOperReason(v []string) {
+	o.OperReason = v
 }
 
 // GetOperState returns the OperState field value if set, zero value otherwise.
@@ -444,6 +519,102 @@ func (o *GraphicsCardAllOf) HasPciSlot() bool {
 // SetPciSlot gets a reference to the given string and assigns it to the PciSlot field.
 func (o *GraphicsCardAllOf) SetPciSlot(v string) {
 	o.PciSlot = &v
+}
+
+// GetSubDeviceId returns the SubDeviceId field value if set, zero value otherwise.
+func (o *GraphicsCardAllOf) GetSubDeviceId() int64 {
+	if o == nil || o.SubDeviceId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.SubDeviceId
+}
+
+// GetSubDeviceIdOk returns a tuple with the SubDeviceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GraphicsCardAllOf) GetSubDeviceIdOk() (*int64, bool) {
+	if o == nil || o.SubDeviceId == nil {
+		return nil, false
+	}
+	return o.SubDeviceId, true
+}
+
+// HasSubDeviceId returns a boolean if a field has been set.
+func (o *GraphicsCardAllOf) HasSubDeviceId() bool {
+	if o != nil && o.SubDeviceId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubDeviceId gets a reference to the given int64 and assigns it to the SubDeviceId field.
+func (o *GraphicsCardAllOf) SetSubDeviceId(v int64) {
+	o.SubDeviceId = &v
+}
+
+// GetSubVendorId returns the SubVendorId field value if set, zero value otherwise.
+func (o *GraphicsCardAllOf) GetSubVendorId() int64 {
+	if o == nil || o.SubVendorId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.SubVendorId
+}
+
+// GetSubVendorIdOk returns a tuple with the SubVendorId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GraphicsCardAllOf) GetSubVendorIdOk() (*int64, bool) {
+	if o == nil || o.SubVendorId == nil {
+		return nil, false
+	}
+	return o.SubVendorId, true
+}
+
+// HasSubVendorId returns a boolean if a field has been set.
+func (o *GraphicsCardAllOf) HasSubVendorId() bool {
+	if o != nil && o.SubVendorId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubVendorId gets a reference to the given int64 and assigns it to the SubVendorId field.
+func (o *GraphicsCardAllOf) SetSubVendorId(v int64) {
+	o.SubVendorId = &v
+}
+
+// GetVendorId returns the VendorId field value if set, zero value otherwise.
+func (o *GraphicsCardAllOf) GetVendorId() int64 {
+	if o == nil || o.VendorId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.VendorId
+}
+
+// GetVendorIdOk returns a tuple with the VendorId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GraphicsCardAllOf) GetVendorIdOk() (*int64, bool) {
+	if o == nil || o.VendorId == nil {
+		return nil, false
+	}
+	return o.VendorId, true
+}
+
+// HasVendorId returns a boolean if a field has been set.
+func (o *GraphicsCardAllOf) HasVendorId() bool {
+	if o != nil && o.VendorId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVendorId gets a reference to the given int64 and assigns it to the VendorId field.
+func (o *GraphicsCardAllOf) SetVendorId(v int64) {
+	o.VendorId = &v
 }
 
 // GetComputeBlade returns the ComputeBlade field value if set, zero value otherwise.
@@ -607,6 +778,38 @@ func (o *GraphicsCardAllOf) SetInventoryDeviceInfo(v InventoryDeviceInfoRelation
 	o.InventoryDeviceInfo = &v
 }
 
+// GetPciDevice returns the PciDevice field value if set, zero value otherwise.
+func (o *GraphicsCardAllOf) GetPciDevice() PciDeviceRelationship {
+	if o == nil || o.PciDevice == nil {
+		var ret PciDeviceRelationship
+		return ret
+	}
+	return *o.PciDevice
+}
+
+// GetPciDeviceOk returns a tuple with the PciDevice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GraphicsCardAllOf) GetPciDeviceOk() (*PciDeviceRelationship, bool) {
+	if o == nil || o.PciDevice == nil {
+		return nil, false
+	}
+	return o.PciDevice, true
+}
+
+// HasPciDevice returns a boolean if a field has been set.
+func (o *GraphicsCardAllOf) HasPciDevice() bool {
+	if o != nil && o.PciDevice != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPciDevice gets a reference to the given PciDeviceRelationship and assigns it to the PciDevice field.
+func (o *GraphicsCardAllOf) SetPciDevice(v PciDeviceRelationship) {
+	o.PciDevice = &v
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
 func (o *GraphicsCardAllOf) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || o.RegisteredDevice == nil {
@@ -692,11 +895,17 @@ func (o GraphicsCardAllOf) MarshalJSON() ([]byte, error) {
 	if o.FirmwareVersion != nil {
 		toSerialize["FirmwareVersion"] = o.FirmwareVersion
 	}
+	if o.GpuId != nil {
+		toSerialize["GpuId"] = o.GpuId
+	}
 	if o.Mode != nil {
 		toSerialize["Mode"] = o.Mode
 	}
 	if o.NumGpus != nil {
 		toSerialize["NumGpus"] = o.NumGpus
+	}
+	if o.OperReason != nil {
+		toSerialize["OperReason"] = o.OperReason
 	}
 	if o.OperState != nil {
 		toSerialize["OperState"] = o.OperState
@@ -709,6 +918,15 @@ func (o GraphicsCardAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.PciSlot != nil {
 		toSerialize["PciSlot"] = o.PciSlot
+	}
+	if o.SubDeviceId != nil {
+		toSerialize["SubDeviceId"] = o.SubDeviceId
+	}
+	if o.SubVendorId != nil {
+		toSerialize["SubVendorId"] = o.SubVendorId
+	}
+	if o.VendorId != nil {
+		toSerialize["VendorId"] = o.VendorId
 	}
 	if o.ComputeBlade != nil {
 		toSerialize["ComputeBlade"] = o.ComputeBlade
@@ -724,6 +942,9 @@ func (o GraphicsCardAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.InventoryDeviceInfo != nil {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
+	}
+	if o.PciDevice != nil {
+		toSerialize["PciDevice"] = o.PciDevice
 	}
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
@@ -755,17 +976,23 @@ func (o *GraphicsCardAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "DeviceId")
 		delete(additionalProperties, "ExpanderSlot")
 		delete(additionalProperties, "FirmwareVersion")
+		delete(additionalProperties, "GpuId")
 		delete(additionalProperties, "Mode")
 		delete(additionalProperties, "NumGpus")
+		delete(additionalProperties, "OperReason")
 		delete(additionalProperties, "OperState")
 		delete(additionalProperties, "PciAddress")
 		delete(additionalProperties, "PciAddressList")
 		delete(additionalProperties, "PciSlot")
+		delete(additionalProperties, "SubDeviceId")
+		delete(additionalProperties, "SubVendorId")
+		delete(additionalProperties, "VendorId")
 		delete(additionalProperties, "ComputeBlade")
 		delete(additionalProperties, "ComputeBoard")
 		delete(additionalProperties, "ComputeRackUnit")
 		delete(additionalProperties, "GraphicsControllers")
 		delete(additionalProperties, "InventoryDeviceInfo")
+		delete(additionalProperties, "PciDevice")
 		delete(additionalProperties, "RegisteredDevice")
 		delete(additionalProperties, "RunningFirmware")
 		o.AdditionalProperties = additionalProperties

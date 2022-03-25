@@ -3,7 +3,8 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_server_setting"
 description: |-
-  Models the configurable properties of a server in Intersight.
+        Models the configurable properties of a server in Intersight.
+
 ---
 
 # Data Source: intersight_compute_server_setting

@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_fc_uplink_pc_role"
 description: |-
-  Object sent by user to configure a fc uplink port-channel on the collection of ports.
+        Object sent by user to configure a fc uplink port-channel on the collection of ports.
+
 ---
 
 # Resource: intersight_fabric_fc_uplink_pc_role

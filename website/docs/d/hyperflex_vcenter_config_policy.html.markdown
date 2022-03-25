@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_vcenter_config_policy"
 description: |-
-  A policy specifying vCenter configuration.
+        A policy specifying vCenter configuration.
+
 ---
 
 # Data Source: intersight_hyperflex_vcenter_config_policy

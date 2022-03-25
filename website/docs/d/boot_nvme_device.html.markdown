@@ -3,7 +3,8 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_nvme_device"
 description: |-
-  Nvme Boot Device configured on the server.
+        Nvme Boot Device configured on the server.
+
 ---
 
 # Data Source: intersight_boot_nvme_device

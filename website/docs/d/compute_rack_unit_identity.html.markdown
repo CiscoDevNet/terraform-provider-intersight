@@ -3,7 +3,8 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_rack_unit_identity"
 description: |-
-  Identity object that uniquely represents a server object under a DR.
+        Identity object that uniquely represents a server object under a DR.
+
 ---
 
 # Data Source: intersight_compute_rack_unit_identity

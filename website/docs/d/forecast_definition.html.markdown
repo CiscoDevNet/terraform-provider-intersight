@@ -3,7 +3,8 @@ subcategory: "forecast"
 layout: "intersight"
 page_title: "Intersight: intersight_forecast_definition"
 description: |-
-  Definition for forecast metric settings.
+        Definition for forecast metric settings.
+
 ---
 
 # Data Source: intersight_forecast_definition

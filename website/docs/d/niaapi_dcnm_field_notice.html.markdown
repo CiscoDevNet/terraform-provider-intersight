@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_dcnm_field_notice"
 description: |-
-  The field notice reporting bug and related software or hardware for DCNM.
+        The field notice reporting bug and related software or hardware for DCNM.
+
 ---
 
 # Data Source: intersight_niaapi_dcnm_field_notice

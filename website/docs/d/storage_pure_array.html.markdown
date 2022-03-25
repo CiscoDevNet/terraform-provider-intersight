@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_array"
 description: |-
-  The details of the Pure storage array.
+        The details of the Pure storage array.
+
 ---
 
 # Data Source: intersight_storage_pure_array

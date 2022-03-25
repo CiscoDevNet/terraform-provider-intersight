@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_sas_expander"
 description: |-
-  SAS Expander present in a server.
+        SAS Expander present in a server.
+
 ---
 
 # Data Source: intersight_storage_sas_expander

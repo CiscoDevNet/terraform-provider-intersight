@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_driver_distributable"
 description: |-
-  A device driver image distributed by Cisco.
+        A device driver image distributed by Cisco.
+
 ---
 
 # Data Source: intersight_firmware_driver_distributable

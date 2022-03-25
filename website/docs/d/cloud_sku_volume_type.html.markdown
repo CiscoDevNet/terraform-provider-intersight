@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_sku_volume_type"
 description: |-
-  Stores information about the volume types.
+        Stores information about the volume types.
+
 ---
 
 # Data Source: intersight_cloud_sku_volume_type

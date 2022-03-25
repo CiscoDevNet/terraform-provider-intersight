@@ -406,11 +406,23 @@ func resourceUuidpoolPool() *schema.Resource {
 							Description: "Number of identifiers this block can hold.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								if new == "0" || new == "0.0" {
+									return true
+								}
+								return false
+							},
 						},
 						"to": {
 							Description: "Starting UUID suffix of the block must be in hexadecimal format xxxx-xxxxxxxxxxxx.",
 							Type:        schema.TypeString,
 							Optional:    true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								if new == "" || new == "null" {
+									return true
+								}
+								return false
+							},
 						},
 					},
 				},

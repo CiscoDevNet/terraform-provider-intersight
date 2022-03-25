@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_system_qos_policy"
 description: |-
-  Configuration object sent by user to setup Quality of Service (QoS) for this switch.
+        Configuration object sent by user to setup Quality of Service (QoS) for this switch.
+
 ---
 
 # Data Source: intersight_fabric_system_qos_policy

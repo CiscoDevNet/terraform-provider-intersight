@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -37,7 +37,8 @@ type NiatelemetryInsightGroupDetails struct {
 	// Flow setting count of the Insight group.
 	FlowSettingsCount *int64 `json:"FlowSettingsCount,omitempty"`
 	// Name of the Insight group.
-	GroupName *string `json:"GroupName,omitempty"`
+	GroupName    *string             `json:"GroupName,omitempty"`
+	InsightSites []NiatelemetrySites `json:"InsightSites,omitempty"`
 	// Kafka settings count of the Insight group.
 	KafkaSettingsCount *int64 `json:"KafkaSettingsCount,omitempty"`
 	// Microburst setting status of the Insight group.
@@ -347,6 +348,39 @@ func (o *NiatelemetryInsightGroupDetails) SetGroupName(v string) {
 	o.GroupName = &v
 }
 
+// GetInsightSites returns the InsightSites field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryInsightGroupDetails) GetInsightSites() []NiatelemetrySites {
+	if o == nil {
+		var ret []NiatelemetrySites
+		return ret
+	}
+	return o.InsightSites
+}
+
+// GetInsightSitesOk returns a tuple with the InsightSites field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryInsightGroupDetails) GetInsightSitesOk() (*[]NiatelemetrySites, bool) {
+	if o == nil || o.InsightSites == nil {
+		return nil, false
+	}
+	return &o.InsightSites, true
+}
+
+// HasInsightSites returns a boolean if a field has been set.
+func (o *NiatelemetryInsightGroupDetails) HasInsightSites() bool {
+	if o != nil && o.InsightSites != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInsightSites gets a reference to the given []NiatelemetrySites and assigns it to the InsightSites field.
+func (o *NiatelemetryInsightGroupDetails) SetInsightSites(v []NiatelemetrySites) {
+	o.InsightSites = v
+}
+
 // GetKafkaSettingsCount returns the KafkaSettingsCount field value if set, zero value otherwise.
 func (o *NiatelemetryInsightGroupDetails) GetKafkaSettingsCount() int64 {
 	if o == nil || o.KafkaSettingsCount == nil {
@@ -544,6 +578,9 @@ func (o NiatelemetryInsightGroupDetails) MarshalJSON() ([]byte, error) {
 	if o.GroupName != nil {
 		toSerialize["GroupName"] = o.GroupName
 	}
+	if o.InsightSites != nil {
+		toSerialize["InsightSites"] = o.InsightSites
+	}
 	if o.KafkaSettingsCount != nil {
 		toSerialize["KafkaSettingsCount"] = o.KafkaSettingsCount
 	}
@@ -586,7 +623,8 @@ func (o *NiatelemetryInsightGroupDetails) UnmarshalJSON(bytes []byte) (err error
 		// Flow setting count of the Insight group.
 		FlowSettingsCount *int64 `json:"FlowSettingsCount,omitempty"`
 		// Name of the Insight group.
-		GroupName *string `json:"GroupName,omitempty"`
+		GroupName    *string             `json:"GroupName,omitempty"`
+		InsightSites []NiatelemetrySites `json:"InsightSites,omitempty"`
 		// Kafka settings count of the Insight group.
 		KafkaSettingsCount *int64 `json:"KafkaSettingsCount,omitempty"`
 		// Microburst setting status of the Insight group.
@@ -612,6 +650,7 @@ func (o *NiatelemetryInsightGroupDetails) UnmarshalJSON(bytes []byte) (err error
 		varNiatelemetryInsightGroupDetails.EmailSettingsCount = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.EmailSettingsCount
 		varNiatelemetryInsightGroupDetails.FlowSettingsCount = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.FlowSettingsCount
 		varNiatelemetryInsightGroupDetails.GroupName = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.GroupName
+		varNiatelemetryInsightGroupDetails.InsightSites = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.InsightSites
 		varNiatelemetryInsightGroupDetails.KafkaSettingsCount = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.KafkaSettingsCount
 		varNiatelemetryInsightGroupDetails.MicroBurstSettingsStatus = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.MicroBurstSettingsStatus
 		varNiatelemetryInsightGroupDetails.PrechangeAnalysisCount = varNiatelemetryInsightGroupDetailsWithoutEmbeddedStruct.PrechangeAnalysisCount
@@ -643,6 +682,7 @@ func (o *NiatelemetryInsightGroupDetails) UnmarshalJSON(bytes []byte) (err error
 		delete(additionalProperties, "EmailSettingsCount")
 		delete(additionalProperties, "FlowSettingsCount")
 		delete(additionalProperties, "GroupName")
+		delete(additionalProperties, "InsightSites")
 		delete(additionalProperties, "KafkaSettingsCount")
 		delete(additionalProperties, "MicroBurstSettingsStatus")
 		delete(additionalProperties, "PrechangeAnalysisCount")

@@ -3,7 +3,8 @@ subcategory: "fcpool"
 layout: "intersight"
 page_title: "Intersight: intersight_fcpool_fc_block"
 description: |-
-  A block of contiguous WWN addresses that are part of a pool.
+        A block of contiguous WWN addresses that are part of a pool.
+
 ---
 
 # Data Source: intersight_fcpool_fc_block

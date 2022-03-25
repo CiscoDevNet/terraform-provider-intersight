@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_item"
 description: |-
-  FI Local Storage information.
+        FI Local Storage information.
+
 ---
 
 # Data Source: intersight_storage_item

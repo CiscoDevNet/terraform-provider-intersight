@@ -3,7 +3,8 @@ subcategory: "chassis"
 layout: "intersight"
 page_title: "Intersight: intersight_chassis_config_result_entry"
 description: |-
-  The profile configuration (deploy, validation) results details information.
+        The profile configuration (deploy, validation) results details information.
+
 ---
 
 # Data Source: intersight_chassis_config_result_entry

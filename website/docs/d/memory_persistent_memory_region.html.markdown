@@ -3,7 +3,8 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_persistent_memory_region"
 description: |-
-  Persistent Memory Region configured on the Persistent Memory Modules on a server.
+        Persistent Memory Region configured on the Persistent Memory Modules on a server.
+
 ---
 
 # Data Source: intersight_memory_persistent_memory_region

@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_port_mode"
 description: |-
-  Object sent by user to configure range of unified ports as FC/Ethernet or ports as breakout.
+        Object sent by user to configure range of unified ports as FC/Ethernet or ports as breakout.
+
 ---
 
 # Data Source: intersight_fabric_port_mode
@@ -15,7 +16,7 @@ To access the ith object of the results obtained, use `data.intersight_fabric_po
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
 * `create_time`:(string) The time when this managed object was created. 
-* `custom_mode`:(string) Custom Port Mode specified for the port range.* `FibreChannel` - Fibre Channel Port Types.* `BreakoutEthernet10G` - Breakout Ethernet 10G Port Type.* `BreakoutEthernet25G` - Breakout Ethernet 25G Port Type. 
+* `custom_mode`:(string) Custom Port Mode specified for the port range.* `FibreChannel` - Fibre Channel Port Types.* `BreakoutEthernet10G` - Breakout Ethernet 10G Port Type.* `BreakoutEthernet25G` - Breakout Ethernet 25G Port Type.* `BreakoutFibreChannel8G` - Breakout FibreChannel 8G Port Type.* `BreakoutFibreChannel16G` - Breakout FibreChannel 16G Port Type.* `BreakoutFibreChannel32G` - Breakout FibreChannel 32G Port Type. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

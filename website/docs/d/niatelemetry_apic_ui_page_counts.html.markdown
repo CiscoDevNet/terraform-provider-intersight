@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_apic_ui_page_counts"
 description: |-
-  Object to capture the UI page counts in APIC.
+        Object to capture the UI page counts in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_apic_ui_page_counts

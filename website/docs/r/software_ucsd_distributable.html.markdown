@@ -3,7 +3,8 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_ucsd_distributable"
 description: |-
-  A UCSD connector pack image distributed by Cisco.
+        A UCSD connector pack image distributed by Cisco.
+
 ---
 
 # Resource: intersight_software_ucsd_distributable

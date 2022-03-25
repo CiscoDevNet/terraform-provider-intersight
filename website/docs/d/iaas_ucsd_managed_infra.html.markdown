@@ -3,7 +3,8 @@ subcategory: "iaas"
 layout: "intersight"
 page_title: "Intersight: intersight_iaas_ucsd_managed_infra"
 description: |-
-  Describes about UCSD Managed infrastructure statistics.
+        Describes about UCSD Managed infrastructure statistics.
+
 ---
 
 # Data Source: intersight_iaas_ucsd_managed_infra

@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_vcenter"
 description: |-
-  VMware vCenter entity. The vCenter has a name assigned by user in Intersight.
+        VMware vCenter entity. The vCenter has a name assigned by user in Intersight.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_vcenter

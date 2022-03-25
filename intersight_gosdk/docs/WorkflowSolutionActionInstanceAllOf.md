@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name for the action instance is created in the system by appending name of the solution instance to the name of the action definition. | [optional] [readonly] 
 **StartTime** | Pointer to **time.Time** | The time when the action was started for execution last time. | [optional] [readonly] 
 **Status** | Pointer to **string** | State of the solution action instance. * &#x60;NotStarted&#x60; - Solution action is not yet started and it is in a draft mode. A solution action instance can be deleted in this state. * &#x60;Validating&#x60; - A validate action has been triggered on the action and until it completes the start action cannot be issued. * &#x60;InProgress&#x60; - An action is in progress and until that action has reached a final state, another action cannot be started. * &#x60;Failed&#x60; - The action on the solution failed and can be retried. * &#x60;Completed&#x60; - The action on the solution completed successfully. * &#x60;Stopping&#x60; - The stop action is running on the action instance. | [optional] [readonly] [default to "NotStarted"]
+**UpgradedMoid** | Pointer to **string** | Stores the upgraded Moid for help during future lookups. | [optional] [readonly] 
 **ActionWorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) |  | [optional] 
 **SolutionActionDefinition** | Pointer to [**WorkflowSolutionActionDefinitionRelationship**](WorkflowSolutionActionDefinitionRelationship.md) |  | [optional] 
 **SolutionDefinition** | Pointer to [**WorkflowSolutionDefinitionRelationship**](WorkflowSolutionDefinitionRelationship.md) |  | [optional] 
@@ -263,6 +264,31 @@ SetStatus sets Status field to given value.
 `func (o *WorkflowSolutionActionInstanceAllOf) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetUpgradedMoid
+
+`func (o *WorkflowSolutionActionInstanceAllOf) GetUpgradedMoid() string`
+
+GetUpgradedMoid returns the UpgradedMoid field if non-nil, zero value otherwise.
+
+### GetUpgradedMoidOk
+
+`func (o *WorkflowSolutionActionInstanceAllOf) GetUpgradedMoidOk() (*string, bool)`
+
+GetUpgradedMoidOk returns a tuple with the UpgradedMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpgradedMoid
+
+`func (o *WorkflowSolutionActionInstanceAllOf) SetUpgradedMoid(v string)`
+
+SetUpgradedMoid sets UpgradedMoid field to given value.
+
+### HasUpgradedMoid
+
+`func (o *WorkflowSolutionActionInstanceAllOf) HasUpgradedMoid() bool`
+
+HasUpgradedMoid returns a boolean if a field has been set.
 
 ### GetActionWorkflowInfo
 

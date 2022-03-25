@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_resource_roles"
 description: |-
-  ResourceRoles provides a way to specify the roles associated with a resource like organization in a permission which can be assigned to a user or user group.
+        ResourceRoles provides a way to specify the roles associated with a resource like organization in a permission which can be assigned to a user or user group.
+
 ---
 
 # Resource: intersight_iam_resource_roles

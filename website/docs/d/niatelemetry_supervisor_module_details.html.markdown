@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_supervisor_module_details"
 description: |-
-  Supervisor module slot details in APIC.
+        Supervisor module slot details in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_supervisor_module_details

@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_appliance_role"
 description: |-
-  Configuration object sent by user to create an appliance port.
+        Configuration object sent by user to create an appliance port.
+
 ---
 
 # Resource: intersight_fabric_appliance_role

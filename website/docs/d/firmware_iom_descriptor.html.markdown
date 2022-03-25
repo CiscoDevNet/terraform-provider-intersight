@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_iom_descriptor"
 description: |-
-  Descriptor to uniquely identify a IOM component.
+        Descriptor to uniquely identify a IOM component.
+
 ---
 
 # Data Source: intersight_firmware_iom_descriptor

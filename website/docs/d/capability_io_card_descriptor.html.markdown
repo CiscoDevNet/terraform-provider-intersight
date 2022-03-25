@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_io_card_descriptor"
 description: |-
-  Descriptor that uniquely identifies an IO card module.
+        Descriptor that uniquely identifies an IO card module.
+
 ---
 
 # Data Source: intersight_capability_io_card_descriptor

@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_end_point_user"
 description: |-
-  Endpoint User or Local User.
+        Endpoint User or Local User.
+
 ---
 
 # Resource: intersight_iam_end_point_user

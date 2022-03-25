@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_pod_snmp_policies"
 description: |-
-  Object to capture Pod SNMP Policy details.
+        Object to capture Pod SNMP Policy details.
+
 ---
 
 # Data Source: intersight_niatelemetry_pod_snmp_policies

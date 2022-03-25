@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_eth_network_policy"
 description: |-
-  A policy for all the Virtual LAN networks to be deployed on the Fabric Interconnect.
+        A policy for all the Virtual LAN networks to be deployed on the Fabric Interconnect.
+
 ---
 
 # Data Source: intersight_fabric_eth_network_policy

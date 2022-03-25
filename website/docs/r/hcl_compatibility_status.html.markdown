@@ -3,7 +3,8 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_compatibility_status"
 description: |-
-  Check the compatibility status for the given hardware and software configurations.
+        Check the compatibility status for the given hardware and software configurations.
+
 ---
 
 # Resource: intersight_hcl_compatibility_status

@@ -3,7 +3,8 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_uefi_shell_device"
 description: |-
-  UefiShell Boot Device configured on the server.
+        UefiShell Boot Device configured on the server.
+
 ---
 
 # Data Source: intersight_boot_uefi_shell_device

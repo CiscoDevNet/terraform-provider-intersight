@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_switch_cluster_profile"
 description: |-
-  This specifies the configuration policies for a cluster of switches.
+        This specifies the configuration policies for a cluster of switches.
+
 ---
 
 # Data Source: intersight_fabric_switch_cluster_profile

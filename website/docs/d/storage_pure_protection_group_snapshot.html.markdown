@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_protection_group_snapshot"
 description: |-
-  Protection group snapshot entity in Pure protection group.
+        Protection group snapshot entity in Pure protection group.
+
 ---
 
 # Data Source: intersight_storage_pure_protection_group_snapshot

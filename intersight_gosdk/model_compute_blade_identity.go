@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -32,6 +32,8 @@ type ComputeBladeIdentity struct {
 	CurrentSlotId *int64 `json:"CurrentSlotId,omitempty"`
 	// Describes whether the running CIMC version supports Intersight managed mode. * `Unknown` - The running firmware version is unknown. * `Supported` - The running firmware version is known and supports IMM mode. * `NotSupported` - The running firmware version is known and does not support IMM mode.
 	FirmwareSupportability *string `json:"FirmwareSupportability,omitempty"`
+	// Denotes the type of discovery that was most recently triggered on this server. * `Unknown` - The last discovery type is unknown. * `Deep` - The last discovery triggered is deep. * `Shallow` - The last discovery triggered is shallow.
+	LastDiscoveryTriggered *string `json:"LastDiscoveryTriggered,omitempty"`
 	// The presence state of the blade server. * `Unknown` - The default presence state. * `Equipped` - The server is equipped in the slot. * `EquippedMismatch` - The slot is equipped, but there is another server currently inventoried in the slot. * `Missing` - The server is not present in the given slot.
 	Presence *string `json:"Presence,omitempty"`
 	// Chassis slot number of a blade server.
@@ -242,6 +244,38 @@ func (o *ComputeBladeIdentity) SetFirmwareSupportability(v string) {
 	o.FirmwareSupportability = &v
 }
 
+// GetLastDiscoveryTriggered returns the LastDiscoveryTriggered field value if set, zero value otherwise.
+func (o *ComputeBladeIdentity) GetLastDiscoveryTriggered() string {
+	if o == nil || o.LastDiscoveryTriggered == nil {
+		var ret string
+		return ret
+	}
+	return *o.LastDiscoveryTriggered
+}
+
+// GetLastDiscoveryTriggeredOk returns a tuple with the LastDiscoveryTriggered field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputeBladeIdentity) GetLastDiscoveryTriggeredOk() (*string, bool) {
+	if o == nil || o.LastDiscoveryTriggered == nil {
+		return nil, false
+	}
+	return o.LastDiscoveryTriggered, true
+}
+
+// HasLastDiscoveryTriggered returns a boolean if a field has been set.
+func (o *ComputeBladeIdentity) HasLastDiscoveryTriggered() bool {
+	if o != nil && o.LastDiscoveryTriggered != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastDiscoveryTriggered gets a reference to the given string and assigns it to the LastDiscoveryTriggered field.
+func (o *ComputeBladeIdentity) SetLastDiscoveryTriggered(v string) {
+	o.LastDiscoveryTriggered = &v
+}
+
 // GetPresence returns the Presence field value if set, zero value otherwise.
 func (o *ComputeBladeIdentity) GetPresence() string {
 	if o == nil || o.Presence == nil {
@@ -334,6 +368,9 @@ func (o ComputeBladeIdentity) MarshalJSON() ([]byte, error) {
 	if o.FirmwareSupportability != nil {
 		toSerialize["FirmwareSupportability"] = o.FirmwareSupportability
 	}
+	if o.LastDiscoveryTriggered != nil {
+		toSerialize["LastDiscoveryTriggered"] = o.LastDiscoveryTriggered
+	}
 	if o.Presence != nil {
 		toSerialize["Presence"] = o.Presence
 	}
@@ -362,6 +399,8 @@ func (o *ComputeBladeIdentity) UnmarshalJSON(bytes []byte) (err error) {
 		CurrentSlotId *int64 `json:"CurrentSlotId,omitempty"`
 		// Describes whether the running CIMC version supports Intersight managed mode. * `Unknown` - The running firmware version is unknown. * `Supported` - The running firmware version is known and supports IMM mode. * `NotSupported` - The running firmware version is known and does not support IMM mode.
 		FirmwareSupportability *string `json:"FirmwareSupportability,omitempty"`
+		// Denotes the type of discovery that was most recently triggered on this server. * `Unknown` - The last discovery type is unknown. * `Deep` - The last discovery triggered is deep. * `Shallow` - The last discovery triggered is shallow.
+		LastDiscoveryTriggered *string `json:"LastDiscoveryTriggered,omitempty"`
 		// The presence state of the blade server. * `Unknown` - The default presence state. * `Equipped` - The server is equipped in the slot. * `EquippedMismatch` - The slot is equipped, but there is another server currently inventoried in the slot. * `Missing` - The server is not present in the given slot.
 		Presence *string `json:"Presence,omitempty"`
 		// Chassis slot number of a blade server.
@@ -379,6 +418,7 @@ func (o *ComputeBladeIdentity) UnmarshalJSON(bytes []byte) (err error) {
 		varComputeBladeIdentity.CurrentChassisId = varComputeBladeIdentityWithoutEmbeddedStruct.CurrentChassisId
 		varComputeBladeIdentity.CurrentSlotId = varComputeBladeIdentityWithoutEmbeddedStruct.CurrentSlotId
 		varComputeBladeIdentity.FirmwareSupportability = varComputeBladeIdentityWithoutEmbeddedStruct.FirmwareSupportability
+		varComputeBladeIdentity.LastDiscoveryTriggered = varComputeBladeIdentityWithoutEmbeddedStruct.LastDiscoveryTriggered
 		varComputeBladeIdentity.Presence = varComputeBladeIdentityWithoutEmbeddedStruct.Presence
 		varComputeBladeIdentity.SlotId = varComputeBladeIdentityWithoutEmbeddedStruct.SlotId
 		*o = ComputeBladeIdentity(varComputeBladeIdentity)
@@ -404,6 +444,7 @@ func (o *ComputeBladeIdentity) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "CurrentChassisId")
 		delete(additionalProperties, "CurrentSlotId")
 		delete(additionalProperties, "FirmwareSupportability")
+		delete(additionalProperties, "LastDiscoveryTriggered")
 		delete(additionalProperties, "Presence")
 		delete(additionalProperties, "SlotId")
 

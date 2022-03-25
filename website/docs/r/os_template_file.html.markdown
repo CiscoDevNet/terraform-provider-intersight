@@ -3,11 +3,12 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_template_file"
 description: |-
-  A TemplateFile is an OS specific answer file that helps with the unattended installation.
-The file can also be a template file with placeholders instead of actual answers.
-Intersight supports the golang template syntax specified in https://golang.org/pkg/text/template/.
-The values for these placeholders shall be given during OS installation in the form of 'additionalProperties'
-in os.OsInstall object.
+        A TemplateFile is an OS specific answer file that helps with the unattended installation.
+        The file can also be a template file with placeholders instead of actual answers.
+        Intersight supports the golang template syntax specified in https://golang.org/pkg/text/template/.
+        The values for these placeholders shall be given during OS installation in the form of 'additionalProperties'
+        in os.OsInstall object.
+
 ---
 
 # Resource: intersight_os_template_file

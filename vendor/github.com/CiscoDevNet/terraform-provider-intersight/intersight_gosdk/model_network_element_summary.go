@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -31,6 +31,12 @@ type NetworkElementSummary struct {
 	AlarmSummary              NullableComputeAlarmSummary `json:"AlarmSummary,omitempty"`
 	// Available memory (un-used) on this switch platform.
 	AvailableMemory *string `json:"AvailableMemory,omitempty"`
+	// Chassis IP of the switch.
+	Chassis *string `json:"Chassis,omitempty"`
+	// Configuration modified timestamp of the switch.
+	ConfModTs *string `json:"ConfModTs,omitempty"`
+	// Configuration modified backup timestamp of the switch.
+	ConfModTsBackup *string `json:"ConfModTsBackup,omitempty"`
 	// The database identifier of the registered device of an object.
 	DeviceMoId *string `json:"DeviceMoId,omitempty"`
 	// The Distinguished Name unambiguously identifies an object in the system.
@@ -104,6 +110,8 @@ type NetworkElementSummary struct {
 	OutOfBandIpv6Prefix *string `json:"OutOfBandIpv6Prefix,omitempty"`
 	// The MAC address of the network Element out-of-band management interface.
 	OutOfBandMac *string `json:"OutOfBandMac,omitempty"`
+	// Part number of the switch.
+	PartNumber *string `json:"PartNumber,omitempty"`
 	// This field identifies the presence (equipped) or absence of the given component.
 	Presence *string `json:"Presence,omitempty"`
 	// This field identifies the revision of the given component.
@@ -114,8 +122,14 @@ type NetworkElementSummary struct {
 	Serial *string `json:"Serial,omitempty"`
 	// The source object type of this view MO.
 	SourceObjectType *string `json:"SourceObjectType,omitempty"`
+	// The status of the switch.
+	Status *string `json:"Status,omitempty"`
 	// The Switch Id of the network Element.
 	SwitchId *string `json:"SwitchId,omitempty"`
+	// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices.
+	SwitchType *string `json:"SwitchType,omitempty"`
+	// System up time of the switch.
+	SystemUpTime *string `json:"SystemUpTime,omitempty"`
 	// The Thermal status of the fabric interconnect. * `unknown` - The default state of the sensor (in case no data is received). * `ok` - State of the sensor indicating the sensor's temperature range is okay. * `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range. * `upper-critical` - State of the sensor indicating that the temperature is above normal range. * `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range. * `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range. * `lower-critical` - State of the sensor indicating that the temperature is below normal range. * `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.
 	Thermal *string `json:"Thermal,omitempty"`
 	// Total available memory on this switch platform.
@@ -338,6 +352,102 @@ func (o *NetworkElementSummary) HasAvailableMemory() bool {
 // SetAvailableMemory gets a reference to the given string and assigns it to the AvailableMemory field.
 func (o *NetworkElementSummary) SetAvailableMemory(v string) {
 	o.AvailableMemory = &v
+}
+
+// GetChassis returns the Chassis field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetChassis() string {
+	if o == nil || o.Chassis == nil {
+		var ret string
+		return ret
+	}
+	return *o.Chassis
+}
+
+// GetChassisOk returns a tuple with the Chassis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetChassisOk() (*string, bool) {
+	if o == nil || o.Chassis == nil {
+		return nil, false
+	}
+	return o.Chassis, true
+}
+
+// HasChassis returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasChassis() bool {
+	if o != nil && o.Chassis != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetChassis gets a reference to the given string and assigns it to the Chassis field.
+func (o *NetworkElementSummary) SetChassis(v string) {
+	o.Chassis = &v
+}
+
+// GetConfModTs returns the ConfModTs field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetConfModTs() string {
+	if o == nil || o.ConfModTs == nil {
+		var ret string
+		return ret
+	}
+	return *o.ConfModTs
+}
+
+// GetConfModTsOk returns a tuple with the ConfModTs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetConfModTsOk() (*string, bool) {
+	if o == nil || o.ConfModTs == nil {
+		return nil, false
+	}
+	return o.ConfModTs, true
+}
+
+// HasConfModTs returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasConfModTs() bool {
+	if o != nil && o.ConfModTs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfModTs gets a reference to the given string and assigns it to the ConfModTs field.
+func (o *NetworkElementSummary) SetConfModTs(v string) {
+	o.ConfModTs = &v
+}
+
+// GetConfModTsBackup returns the ConfModTsBackup field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetConfModTsBackup() string {
+	if o == nil || o.ConfModTsBackup == nil {
+		var ret string
+		return ret
+	}
+	return *o.ConfModTsBackup
+}
+
+// GetConfModTsBackupOk returns a tuple with the ConfModTsBackup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetConfModTsBackupOk() (*string, bool) {
+	if o == nil || o.ConfModTsBackup == nil {
+		return nil, false
+	}
+	return o.ConfModTsBackup, true
+}
+
+// HasConfModTsBackup returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasConfModTsBackup() bool {
+	if o != nil && o.ConfModTsBackup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfModTsBackup gets a reference to the given string and assigns it to the ConfModTsBackup field.
+func (o *NetworkElementSummary) SetConfModTsBackup(v string) {
+	o.ConfModTsBackup = &v
 }
 
 // GetDeviceMoId returns the DeviceMoId field value if set, zero value otherwise.
@@ -1469,6 +1579,38 @@ func (o *NetworkElementSummary) SetOutOfBandMac(v string) {
 	o.OutOfBandMac = &v
 }
 
+// GetPartNumber returns the PartNumber field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetPartNumber() string {
+	if o == nil || o.PartNumber == nil {
+		var ret string
+		return ret
+	}
+	return *o.PartNumber
+}
+
+// GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetPartNumberOk() (*string, bool) {
+	if o == nil || o.PartNumber == nil {
+		return nil, false
+	}
+	return o.PartNumber, true
+}
+
+// HasPartNumber returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasPartNumber() bool {
+	if o != nil && o.PartNumber != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPartNumber gets a reference to the given string and assigns it to the PartNumber field.
+func (o *NetworkElementSummary) SetPartNumber(v string) {
+	o.PartNumber = &v
+}
+
 // GetPresence returns the Presence field value if set, zero value otherwise.
 func (o *NetworkElementSummary) GetPresence() string {
 	if o == nil || o.Presence == nil {
@@ -1629,6 +1771,38 @@ func (o *NetworkElementSummary) SetSourceObjectType(v string) {
 	o.SourceObjectType = &v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetStatus() string {
+	if o == nil || o.Status == nil {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetStatusOk() (*string, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *NetworkElementSummary) SetStatus(v string) {
+	o.Status = &v
+}
+
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *NetworkElementSummary) GetSwitchId() string {
 	if o == nil || o.SwitchId == nil {
@@ -1659,6 +1833,70 @@ func (o *NetworkElementSummary) HasSwitchId() bool {
 // SetSwitchId gets a reference to the given string and assigns it to the SwitchId field.
 func (o *NetworkElementSummary) SetSwitchId(v string) {
 	o.SwitchId = &v
+}
+
+// GetSwitchType returns the SwitchType field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetSwitchType() string {
+	if o == nil || o.SwitchType == nil {
+		var ret string
+		return ret
+	}
+	return *o.SwitchType
+}
+
+// GetSwitchTypeOk returns a tuple with the SwitchType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetSwitchTypeOk() (*string, bool) {
+	if o == nil || o.SwitchType == nil {
+		return nil, false
+	}
+	return o.SwitchType, true
+}
+
+// HasSwitchType returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasSwitchType() bool {
+	if o != nil && o.SwitchType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSwitchType gets a reference to the given string and assigns it to the SwitchType field.
+func (o *NetworkElementSummary) SetSwitchType(v string) {
+	o.SwitchType = &v
+}
+
+// GetSystemUpTime returns the SystemUpTime field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetSystemUpTime() string {
+	if o == nil || o.SystemUpTime == nil {
+		var ret string
+		return ret
+	}
+	return *o.SystemUpTime
+}
+
+// GetSystemUpTimeOk returns a tuple with the SystemUpTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetSystemUpTimeOk() (*string, bool) {
+	if o == nil || o.SystemUpTime == nil {
+		return nil, false
+	}
+	return o.SystemUpTime, true
+}
+
+// HasSystemUpTime returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasSystemUpTime() bool {
+	if o != nil && o.SystemUpTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSystemUpTime gets a reference to the given string and assigns it to the SystemUpTime field.
+func (o *NetworkElementSummary) SetSystemUpTime(v string) {
+	o.SystemUpTime = &v
 }
 
 // GetThermal returns the Thermal field value if set, zero value otherwise.
@@ -1849,6 +2087,15 @@ func (o NetworkElementSummary) MarshalJSON() ([]byte, error) {
 	if o.AvailableMemory != nil {
 		toSerialize["AvailableMemory"] = o.AvailableMemory
 	}
+	if o.Chassis != nil {
+		toSerialize["Chassis"] = o.Chassis
+	}
+	if o.ConfModTs != nil {
+		toSerialize["ConfModTs"] = o.ConfModTs
+	}
+	if o.ConfModTsBackup != nil {
+		toSerialize["ConfModTsBackup"] = o.ConfModTsBackup
+	}
 	if o.DeviceMoId != nil {
 		toSerialize["DeviceMoId"] = o.DeviceMoId
 	}
@@ -1954,6 +2201,9 @@ func (o NetworkElementSummary) MarshalJSON() ([]byte, error) {
 	if o.OutOfBandMac != nil {
 		toSerialize["OutOfBandMac"] = o.OutOfBandMac
 	}
+	if o.PartNumber != nil {
+		toSerialize["PartNumber"] = o.PartNumber
+	}
 	if o.Presence != nil {
 		toSerialize["Presence"] = o.Presence
 	}
@@ -1969,8 +2219,17 @@ func (o NetworkElementSummary) MarshalJSON() ([]byte, error) {
 	if o.SourceObjectType != nil {
 		toSerialize["SourceObjectType"] = o.SourceObjectType
 	}
+	if o.Status != nil {
+		toSerialize["Status"] = o.Status
+	}
 	if o.SwitchId != nil {
 		toSerialize["SwitchId"] = o.SwitchId
+	}
+	if o.SwitchType != nil {
+		toSerialize["SwitchType"] = o.SwitchType
+	}
+	if o.SystemUpTime != nil {
+		toSerialize["SystemUpTime"] = o.SystemUpTime
 	}
 	if o.Thermal != nil {
 		toSerialize["Thermal"] = o.Thermal
@@ -2008,6 +2267,12 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		AlarmSummary              NullableComputeAlarmSummary `json:"AlarmSummary,omitempty"`
 		// Available memory (un-used) on this switch platform.
 		AvailableMemory *string `json:"AvailableMemory,omitempty"`
+		// Chassis IP of the switch.
+		Chassis *string `json:"Chassis,omitempty"`
+		// Configuration modified timestamp of the switch.
+		ConfModTs *string `json:"ConfModTs,omitempty"`
+		// Configuration modified backup timestamp of the switch.
+		ConfModTsBackup *string `json:"ConfModTsBackup,omitempty"`
 		// The database identifier of the registered device of an object.
 		DeviceMoId *string `json:"DeviceMoId,omitempty"`
 		// The Distinguished Name unambiguously identifies an object in the system.
@@ -2081,6 +2346,8 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		OutOfBandIpv6Prefix *string `json:"OutOfBandIpv6Prefix,omitempty"`
 		// The MAC address of the network Element out-of-band management interface.
 		OutOfBandMac *string `json:"OutOfBandMac,omitempty"`
+		// Part number of the switch.
+		PartNumber *string `json:"PartNumber,omitempty"`
 		// This field identifies the presence (equipped) or absence of the given component.
 		Presence *string `json:"Presence,omitempty"`
 		// This field identifies the revision of the given component.
@@ -2091,8 +2358,14 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		Serial *string `json:"Serial,omitempty"`
 		// The source object type of this view MO.
 		SourceObjectType *string `json:"SourceObjectType,omitempty"`
+		// The status of the switch.
+		Status *string `json:"Status,omitempty"`
 		// The Switch Id of the network Element.
 		SwitchId *string `json:"SwitchId,omitempty"`
+		// The Switch type that the network element is a part of. * `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices. * `NexusDevice` - Switch type of Nexus devices. * `MDSDevice` - Switch type of Nexus MDS devices.
+		SwitchType *string `json:"SwitchType,omitempty"`
+		// System up time of the switch.
+		SystemUpTime *string `json:"SystemUpTime,omitempty"`
 		// The Thermal status of the fabric interconnect. * `unknown` - The default state of the sensor (in case no data is received). * `ok` - State of the sensor indicating the sensor's temperature range is okay. * `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range. * `upper-critical` - State of the sensor indicating that the temperature is above normal range. * `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range. * `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range. * `lower-critical` - State of the sensor indicating that the temperature is below normal range. * `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.
 		Thermal *string `json:"Thermal,omitempty"`
 		// Total available memory on this switch platform.
@@ -2115,6 +2388,9 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		varNetworkElementSummary.AdminInbandInterfaceState = varNetworkElementSummaryWithoutEmbeddedStruct.AdminInbandInterfaceState
 		varNetworkElementSummary.AlarmSummary = varNetworkElementSummaryWithoutEmbeddedStruct.AlarmSummary
 		varNetworkElementSummary.AvailableMemory = varNetworkElementSummaryWithoutEmbeddedStruct.AvailableMemory
+		varNetworkElementSummary.Chassis = varNetworkElementSummaryWithoutEmbeddedStruct.Chassis
+		varNetworkElementSummary.ConfModTs = varNetworkElementSummaryWithoutEmbeddedStruct.ConfModTs
+		varNetworkElementSummary.ConfModTsBackup = varNetworkElementSummaryWithoutEmbeddedStruct.ConfModTsBackup
 		varNetworkElementSummary.DeviceMoId = varNetworkElementSummaryWithoutEmbeddedStruct.DeviceMoId
 		varNetworkElementSummary.Dn = varNetworkElementSummaryWithoutEmbeddedStruct.Dn
 		varNetworkElementSummary.EthernetMode = varNetworkElementSummaryWithoutEmbeddedStruct.EthernetMode
@@ -2150,12 +2426,16 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		varNetworkElementSummary.OutOfBandIpv6Gateway = varNetworkElementSummaryWithoutEmbeddedStruct.OutOfBandIpv6Gateway
 		varNetworkElementSummary.OutOfBandIpv6Prefix = varNetworkElementSummaryWithoutEmbeddedStruct.OutOfBandIpv6Prefix
 		varNetworkElementSummary.OutOfBandMac = varNetworkElementSummaryWithoutEmbeddedStruct.OutOfBandMac
+		varNetworkElementSummary.PartNumber = varNetworkElementSummaryWithoutEmbeddedStruct.PartNumber
 		varNetworkElementSummary.Presence = varNetworkElementSummaryWithoutEmbeddedStruct.Presence
 		varNetworkElementSummary.Revision = varNetworkElementSummaryWithoutEmbeddedStruct.Revision
 		varNetworkElementSummary.Rn = varNetworkElementSummaryWithoutEmbeddedStruct.Rn
 		varNetworkElementSummary.Serial = varNetworkElementSummaryWithoutEmbeddedStruct.Serial
 		varNetworkElementSummary.SourceObjectType = varNetworkElementSummaryWithoutEmbeddedStruct.SourceObjectType
+		varNetworkElementSummary.Status = varNetworkElementSummaryWithoutEmbeddedStruct.Status
 		varNetworkElementSummary.SwitchId = varNetworkElementSummaryWithoutEmbeddedStruct.SwitchId
+		varNetworkElementSummary.SwitchType = varNetworkElementSummaryWithoutEmbeddedStruct.SwitchType
+		varNetworkElementSummary.SystemUpTime = varNetworkElementSummaryWithoutEmbeddedStruct.SystemUpTime
 		varNetworkElementSummary.Thermal = varNetworkElementSummaryWithoutEmbeddedStruct.Thermal
 		varNetworkElementSummary.TotalMemory = varNetworkElementSummaryWithoutEmbeddedStruct.TotalMemory
 		varNetworkElementSummary.Vendor = varNetworkElementSummaryWithoutEmbeddedStruct.Vendor
@@ -2184,6 +2464,9 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AdminInbandInterfaceState")
 		delete(additionalProperties, "AlarmSummary")
 		delete(additionalProperties, "AvailableMemory")
+		delete(additionalProperties, "Chassis")
+		delete(additionalProperties, "ConfModTs")
+		delete(additionalProperties, "ConfModTsBackup")
 		delete(additionalProperties, "DeviceMoId")
 		delete(additionalProperties, "Dn")
 		delete(additionalProperties, "EthernetMode")
@@ -2219,12 +2502,16 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OutOfBandIpv6Gateway")
 		delete(additionalProperties, "OutOfBandIpv6Prefix")
 		delete(additionalProperties, "OutOfBandMac")
+		delete(additionalProperties, "PartNumber")
 		delete(additionalProperties, "Presence")
 		delete(additionalProperties, "Revision")
 		delete(additionalProperties, "Rn")
 		delete(additionalProperties, "Serial")
 		delete(additionalProperties, "SourceObjectType")
+		delete(additionalProperties, "Status")
 		delete(additionalProperties, "SwitchId")
+		delete(additionalProperties, "SwitchType")
+		delete(additionalProperties, "SystemUpTime")
 		delete(additionalProperties, "Thermal")
 		delete(additionalProperties, "TotalMemory")
 		delete(additionalProperties, "Vendor")

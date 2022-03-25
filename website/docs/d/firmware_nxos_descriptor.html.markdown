@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_nxos_descriptor"
 description: |-
-  Descriptor to uniquely identify a Fabric interconnect.
+        Descriptor to uniquely identify a Fabric interconnect.
+
 ---
 
 # Data Source: intersight_firmware_nxos_descriptor

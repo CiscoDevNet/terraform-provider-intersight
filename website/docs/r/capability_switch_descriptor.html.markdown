@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_switch_descriptor"
 description: |-
-  Descriptor that uniquely identifies a Fabric interconnect.
+        Descriptor that uniquely identifies a Fabric interconnect.
+
 ---
 
 # Resource: intersight_capability_switch_descriptor

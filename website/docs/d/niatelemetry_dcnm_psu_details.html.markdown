@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_dcnm_psu_details"
 description: |-
-  Inventory Object available for DCNM PSU.
+        Inventory Object available for DCNM PSU.
+
 ---
 
 # Data Source: intersight_niatelemetry_dcnm_psu_details

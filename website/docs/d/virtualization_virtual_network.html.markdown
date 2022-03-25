@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_virtual_network"
 description: |-
-  Depicts network configuration used to create a virtual network.
+        Depicts network configuration used to create a virtual network.
+
 ---
 
 # Data Source: intersight_virtualization_virtual_network

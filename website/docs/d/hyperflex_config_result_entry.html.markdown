@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_config_result_entry"
 description: |-
-  An entry that describes the result of a cluster validation or deployment operation.
+        An entry that describes the result of a cluster validation or deployment operation.
+
 ---
 
 # Data Source: intersight_hyperflex_config_result_entry

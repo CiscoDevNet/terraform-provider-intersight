@@ -3,7 +3,8 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_cached_image"
 description: |-
-  The image cached in the customer's datacenter.
+        The image cached in the customer's datacenter.
+
 ---
 
 # Data Source: intersight_softwarerepository_cached_image

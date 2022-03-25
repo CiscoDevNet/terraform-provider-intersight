@@ -3,7 +3,8 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_link"
 description: |-
-  The PCI Switch Link connected to PCIe Switch.
+        The PCI Switch Link connected to PCIe Switch.
+
 ---
 
 # Data Source: intersight_pci_link

@@ -3,10 +3,11 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_node_info"
 description: |-
-  NodeInfo managed object stores the Intersight Appliance's cluster node information.
-NodeInfo managed objects are created during the Intersight Appliance setup. The
-Intersight Appliance updates the NodeInfo managed objects with status information
-periodically.
+        NodeInfo managed object stores the Intersight Appliance's cluster node information.
+        NodeInfo managed objects are created during the Intersight Appliance setup. The
+        Intersight Appliance updates the NodeInfo managed objects with status information
+        periodically.
+
 ---
 
 # Data Source: intersight_appliance_node_info

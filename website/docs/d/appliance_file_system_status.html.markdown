@@ -3,7 +3,8 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_file_system_status"
 description: |-
-  Status of a file system on an Intersight Appliance node.
+        Status of a file system on an Intersight Appliance node.
+
 ---
 
 # Data Source: intersight_appliance_file_system_status

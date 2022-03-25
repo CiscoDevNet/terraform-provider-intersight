@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_user_group"
 description: |-
-  User Group provides a way to assign permissions to a group of users based on the IdP attributes received after authentication.
+        User Group provides a way to assign permissions to a group of users based on the IdP attributes received after authentication.
+
 ---
 
 # Resource: intersight_iam_user_group

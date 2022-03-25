@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_sku_network_type"
 description: |-
-  Model to represent network attributes.
+        Model to represent network attributes.
+
 ---
 
 # Data Source: intersight_cloud_sku_network_type

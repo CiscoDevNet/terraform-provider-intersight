@@ -3,10 +3,11 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_backup_policy"
 description: |-
-  BackupPolicy stores the Intersight Appliance's backup policy. There will be only
-one BackupPolicy managed object in the Intersight Appliance. Default backup policy
-managed object is created during the Intersight Appliance setup, and it is configured
-in the manual backup mode.
+        BackupPolicy stores the Intersight Appliance's backup policy. There will be only
+        one BackupPolicy managed object in the Intersight Appliance. Default backup policy
+        managed object is created during the Intersight Appliance setup, and it is configured
+        in the manual backup mode.
+
 ---
 
 # Data Source: intersight_appliance_backup_policy

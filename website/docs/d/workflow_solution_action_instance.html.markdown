@@ -3,7 +3,8 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_solution_action_instance"
 description: |-
-  Solution action instance which represents one action on a solution instance.
+        Solution action instance which represents one action on a solution instance.
+
 ---
 
 # Data Source: intersight_workflow_solution_action_instance
@@ -25,4 +26,5 @@ The following arguments can be used to get data of already created objects in In
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `start_time`:(string) The time when the action was started for execution last time. 
 * `status`:(string) State of the solution action instance.* `NotStarted` - Solution action is not yet started and it is in a draft mode. A solution action instance can be deleted in this state.* `Validating` - A validate action has been triggered on the action and until it completes the start action cannot be issued.* `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started.* `Failed` - The action on the solution failed and can be retried.* `Completed` - The action on the solution completed successfully.* `Stopping` - The stop action is running on the action instance. 
+* `upgraded_moid`:(string) Stores the upgraded Moid for help during future lookups. 
  

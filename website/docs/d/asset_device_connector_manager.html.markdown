@@ -3,7 +3,8 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_device_connector_manager"
 description: |-
-  Information pertaining to a Registered Intersight Assist Appliance Device in Intersight.
+        Information pertaining to a Registered Intersight Assist Appliance Device in Intersight.
+
 ---
 
 # Data Source: intersight_asset_device_connector_manager

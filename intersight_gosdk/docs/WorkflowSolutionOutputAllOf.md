@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.SolutionOutput"]
 **Name** | Pointer to **string** | Output name which is used in the output definition of the solution. | [optional] 
 **Output** | Pointer to **interface{}** | Solution output for a solution instance and the format is specified by output definition of the solution definition. | [optional] 
+**UpgradedMoid** | Pointer to **string** | Stores the upgraded Moid for help during future lookups. | [optional] [readonly] 
 **SolutionInstance** | Pointer to [**WorkflowSolutionInstanceRelationship**](WorkflowSolutionInstanceRelationship.md) |  | [optional] 
 
 ## Methods
@@ -129,6 +130,31 @@ HasOutput returns a boolean if a field has been set.
 `func (o *WorkflowSolutionOutputAllOf) UnsetOutput()`
 
 UnsetOutput ensures that no value is present for Output, not even an explicit nil
+### GetUpgradedMoid
+
+`func (o *WorkflowSolutionOutputAllOf) GetUpgradedMoid() string`
+
+GetUpgradedMoid returns the UpgradedMoid field if non-nil, zero value otherwise.
+
+### GetUpgradedMoidOk
+
+`func (o *WorkflowSolutionOutputAllOf) GetUpgradedMoidOk() (*string, bool)`
+
+GetUpgradedMoidOk returns a tuple with the UpgradedMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpgradedMoid
+
+`func (o *WorkflowSolutionOutputAllOf) SetUpgradedMoid(v string)`
+
+SetUpgradedMoid sets UpgradedMoid field to given value.
+
+### HasUpgradedMoid
+
+`func (o *WorkflowSolutionOutputAllOf) HasUpgradedMoid() bool`
+
+HasUpgradedMoid returns a boolean if a field has been set.
+
 ### GetSolutionInstance
 
 `func (o *WorkflowSolutionOutputAllOf) GetSolutionInstance() WorkflowSolutionInstanceRelationship`

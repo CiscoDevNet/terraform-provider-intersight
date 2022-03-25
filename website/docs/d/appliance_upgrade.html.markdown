@@ -3,11 +3,12 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_upgrade"
 description: |-
-  Upgrade tracks the Intersight Appliance's software upgrades. Intersight Appliance's
-upgrade service automatically creates an Upgrade managed object when there is a
-pending software upgrade. User may modify an active Upgrade managed object to reset
-the software upgrade start time. However, user may not be able to postpone an upgrade
-beyond the limit enforced by the upgrade grace period set in the software manifest.
+        Upgrade tracks the Intersight Appliance's software upgrades. Intersight Appliance's
+        upgrade service automatically creates an Upgrade managed object when there is a
+        pending software upgrade. User may modify an active Upgrade managed object to reset
+        the software upgrade start time. However, user may not be able to postpone an upgrade
+        beyond the limit enforced by the upgrade grace period set in the software manifest.
+
 ---
 
 # Data Source: intersight_appliance_upgrade

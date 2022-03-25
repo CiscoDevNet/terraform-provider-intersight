@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_dimm_descriptor"
 description: |-
-  Descriptor to uniquely identify a DIMM.
+        Descriptor to uniquely identify a DIMM.
+
 ---
 
 # Data Source: intersight_firmware_dimm_descriptor

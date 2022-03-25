@@ -3,7 +3,8 @@ subcategory: "sdcard"
 layout: "intersight"
 page_title: "Intersight: intersight_sdcard_policy"
 description: |-
-  Policy for configuring SD Card settings on endpoint.
+        Policy for configuring SD Card settings on endpoint.
+
 ---
 
 # Resource: intersight_sdcard_policy

@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_fabric_pod_ss"
 description: |-
-  Object to capture Fabric PodS details.
+        Object to capture Fabric PodS details.
+
 ---
 
 # Data Source: intersight_niatelemetry_fabric_pod_ss

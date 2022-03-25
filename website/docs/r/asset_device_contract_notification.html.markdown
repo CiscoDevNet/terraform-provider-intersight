@@ -3,7 +3,8 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_device_contract_notification"
 description: |-
-  Appliances use this object to send request to cloud to compute contract status. Cloud uses this to send the contract status response back to appliance.
+        Appliances use this object to send request to cloud to compute contract status. Cloud uses this to send the contract status response back to appliance.
+
 ---
 
 # Resource: intersight_asset_device_contract_notification

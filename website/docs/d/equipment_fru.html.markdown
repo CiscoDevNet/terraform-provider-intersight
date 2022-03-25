@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fru"
 description: |-
-  Managed object for all equipments which contains the previous vendor /model / serial before insertion/replacement/removal.
+        Managed object for all equipments which contains the previous vendor /model / serial before insertion/replacement/removal.
+
 ---
 
 # Data Source: intersight_equipment_fru

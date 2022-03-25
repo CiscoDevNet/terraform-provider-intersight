@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_aws_billing_unit"
 description: |-
-  Details of the AWS billing account are represented here.
+        Details of the AWS billing account are represented here.
+
 ---
 
 # Data Source: intersight_cloud_aws_billing_unit

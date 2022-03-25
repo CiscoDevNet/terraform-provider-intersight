@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_cluster_backup_policy"
 description: |-
-  Specifies cluster backup configuration for a HyperFlex Cluster.
+        Specifies cluster backup configuration for a HyperFlex Cluster.
+
 ---
 
 # Resource: intersight_hyperflex_cluster_backup_policy

@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_health_check_definition"
 description: |-
-  HyperFlex health check definition metadata.
+        HyperFlex health check definition metadata.
+
 ---
 
 # Resource: intersight_hyperflex_health_check_definition

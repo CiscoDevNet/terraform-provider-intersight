@@ -3,7 +3,8 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_hyperflex_software_compatibility_info"
 description: |-
-  Lists software compatibility information between different HperFlex component versions like HyperFlex Data Platform, Hypervisor, Drive Firmware, etc.
+        Lists software compatibility information between different HperFlex component versions like HyperFlex Data Platform, Hypervisor, Drive Firmware, etc.
+
 ---
 
 # Data Source: intersight_hcl_hyperflex_software_compatibility_info

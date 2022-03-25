@@ -3,12 +3,13 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_diag_setting"
 description: |-
-  DiagSetting model is used for changing the password of the operating system's diagnostic
-user account. The diagnostic user account can be used to login to the Intersight Appliance
-virtual machine.
-The diagnostic user account is protected by two separate authentication mechanisms: user's
-password and Cisco CT-engine generated key. Only the Intersight Appliance's local account
-administrator has the privileges to use this REST API.
+        DiagSetting model is used for changing the password of the operating system's diagnostic
+        user account. The diagnostic user account can be used to login to the Intersight Appliance
+        virtual machine.
+        The diagnostic user account is protected by two separate authentication mechanisms: user's
+        password and Cisco CT-engine generated key. Only the Intersight Appliance's local account
+        administrator has the privileges to use this REST API.
+
 ---
 
 # Data Source: intersight_appliance_diag_setting

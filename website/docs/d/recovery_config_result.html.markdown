@@ -3,7 +3,8 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_config_result"
 description: |-
-  Profile configuration (deploy, validation) results with the overall state and detailed result messages.
+        Profile configuration (deploy, validation) results with the overall state and detailed result messages.
+
 ---
 
 # Data Source: intersight_recovery_config_result

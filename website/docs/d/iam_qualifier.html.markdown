@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_qualifier"
 description: |-
-  The qualifier defines how a user qualifies to be part of a user group.
+        The qualifier defines how a user qualifies to be part of a user group.
+
 ---
 
 # Data Source: intersight_iam_qualifier

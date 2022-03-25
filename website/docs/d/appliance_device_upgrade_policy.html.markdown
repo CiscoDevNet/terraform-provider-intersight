@@ -3,7 +3,8 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_device_upgrade_policy"
 description: |-
-  DeviceUpgradePolicy stores the current upgrade policy of the Intersight Appliances.
+        DeviceUpgradePolicy stores the current upgrade policy of the Intersight Appliances.
+
 ---
 
 # Data Source: intersight_appliance_device_upgrade_policy

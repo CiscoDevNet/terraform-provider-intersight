@@ -3,7 +3,8 @@ subcategory: "search"
 layout: "intersight"
 page_title: "Intersight: intersight_search_suggest_item"
 description: |-
-  This resource is used to search for objects matching a criteria in the endpoint.
+        This resource is used to search for objects matching a criteria in the endpoint.
+
 ---
 
 # Resource: intersight_search_suggest_item

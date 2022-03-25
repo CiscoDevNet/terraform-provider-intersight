@@ -10,6 +10,9 @@ Name | Type | Description | Notes
 **AdminInbandInterfaceState** | Pointer to **string** | The administrative state of the network Element inband management interface. | [optional] [readonly] 
 **AlarmSummary** | Pointer to [**NullableComputeAlarmSummary**](ComputeAlarmSummary.md) |  | [optional] 
 **AvailableMemory** | Pointer to **string** | Available memory (un-used) on this switch platform. | [optional] [readonly] 
+**Chassis** | Pointer to **string** | Chassis IP of the switch. | [optional] [readonly] 
+**ConfModTs** | Pointer to **string** | Configuration modified timestamp of the switch. | [optional] [readonly] 
+**ConfModTsBackup** | Pointer to **string** | Configuration modified backup timestamp of the switch. | [optional] [readonly] 
 **DeviceMoId** | Pointer to **string** | The database identifier of the registered device of an object. | [optional] [readonly] 
 **Dn** | Pointer to **string** | The Distinguished Name unambiguously identifies an object in the system. | [optional] [readonly] 
 **EthernetMode** | Pointer to **string** | The user configured Ethernet operational mode for this switch (End-Host or Switching). | [optional] [readonly] 
@@ -45,12 +48,16 @@ Name | Type | Description | Notes
 **OutOfBandIpv6Gateway** | Pointer to **string** | The default IPv6 gateway of the network Element out-of-band management interface. | [optional] [readonly] 
 **OutOfBandIpv6Prefix** | Pointer to **string** | The network mask of the network Element out-of-band management interface. | [optional] [readonly] 
 **OutOfBandMac** | Pointer to **string** | The MAC address of the network Element out-of-band management interface. | [optional] [readonly] 
+**PartNumber** | Pointer to **string** | Part number of the switch. | [optional] [readonly] 
 **Presence** | Pointer to **string** | This field identifies the presence (equipped) or absence of the given component. | [optional] [readonly] 
 **Revision** | Pointer to **string** | This field identifies the revision of the given component. | [optional] [readonly] 
 **Rn** | Pointer to **string** | The Relative Name uniquely identifies an object within a given context. | [optional] [readonly] 
 **Serial** | Pointer to **string** | This field identifies the serial of the given component. | [optional] [readonly] 
 **SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
+**Status** | Pointer to **string** | The status of the switch. | [optional] [readonly] 
 **SwitchId** | Pointer to **string** | The Switch Id of the network Element. | [optional] [readonly] 
+**SwitchType** | Pointer to **string** | The Switch type that the network element is a part of. * &#x60;FabricInterconnect&#x60; - The default Switch type of UCSM and IMM mode devices. * &#x60;NexusDevice&#x60; - Switch type of Nexus devices. * &#x60;MDSDevice&#x60; - Switch type of Nexus MDS devices. | [optional] [readonly] [default to "FabricInterconnect"]
+**SystemUpTime** | Pointer to **string** | System up time of the switch. | [optional] [readonly] 
 **Thermal** | Pointer to **string** | The Thermal status of the fabric interconnect. * &#x60;unknown&#x60; - The default state of the sensor (in case no data is received). * &#x60;ok&#x60; - State of the sensor indicating the sensor&#39;s temperature range is okay. * &#x60;upper-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely high above normal range. * &#x60;upper-critical&#x60; - State of the sensor indicating that the temperature is above normal range. * &#x60;upper-non-critical&#x60; - State of the sensor indicating that the temperature is a little above the normal range. * &#x60;lower-non-critical&#x60; - State of the sensor indicating that the temperature is a little below the normal range. * &#x60;lower-critical&#x60; - State of the sensor indicating that the temperature is below normal range. * &#x60;lower-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely below normal range. | [optional] [readonly] [default to "unknown"]
 **TotalMemory** | Pointer to **int64** | Total available memory on this switch platform. | [optional] [readonly] 
 **Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
@@ -225,6 +232,81 @@ SetAvailableMemory sets AvailableMemory field to given value.
 `func (o *NetworkElementSummaryAllOf) HasAvailableMemory() bool`
 
 HasAvailableMemory returns a boolean if a field has been set.
+
+### GetChassis
+
+`func (o *NetworkElementSummaryAllOf) GetChassis() string`
+
+GetChassis returns the Chassis field if non-nil, zero value otherwise.
+
+### GetChassisOk
+
+`func (o *NetworkElementSummaryAllOf) GetChassisOk() (*string, bool)`
+
+GetChassisOk returns a tuple with the Chassis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChassis
+
+`func (o *NetworkElementSummaryAllOf) SetChassis(v string)`
+
+SetChassis sets Chassis field to given value.
+
+### HasChassis
+
+`func (o *NetworkElementSummaryAllOf) HasChassis() bool`
+
+HasChassis returns a boolean if a field has been set.
+
+### GetConfModTs
+
+`func (o *NetworkElementSummaryAllOf) GetConfModTs() string`
+
+GetConfModTs returns the ConfModTs field if non-nil, zero value otherwise.
+
+### GetConfModTsOk
+
+`func (o *NetworkElementSummaryAllOf) GetConfModTsOk() (*string, bool)`
+
+GetConfModTsOk returns a tuple with the ConfModTs field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfModTs
+
+`func (o *NetworkElementSummaryAllOf) SetConfModTs(v string)`
+
+SetConfModTs sets ConfModTs field to given value.
+
+### HasConfModTs
+
+`func (o *NetworkElementSummaryAllOf) HasConfModTs() bool`
+
+HasConfModTs returns a boolean if a field has been set.
+
+### GetConfModTsBackup
+
+`func (o *NetworkElementSummaryAllOf) GetConfModTsBackup() string`
+
+GetConfModTsBackup returns the ConfModTsBackup field if non-nil, zero value otherwise.
+
+### GetConfModTsBackupOk
+
+`func (o *NetworkElementSummaryAllOf) GetConfModTsBackupOk() (*string, bool)`
+
+GetConfModTsBackupOk returns a tuple with the ConfModTsBackup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfModTsBackup
+
+`func (o *NetworkElementSummaryAllOf) SetConfModTsBackup(v string)`
+
+SetConfModTsBackup sets ConfModTsBackup field to given value.
+
+### HasConfModTsBackup
+
+`func (o *NetworkElementSummaryAllOf) HasConfModTsBackup() bool`
+
+HasConfModTsBackup returns a boolean if a field has been set.
 
 ### GetDeviceMoId
 
@@ -1101,6 +1183,31 @@ SetOutOfBandMac sets OutOfBandMac field to given value.
 
 HasOutOfBandMac returns a boolean if a field has been set.
 
+### GetPartNumber
+
+`func (o *NetworkElementSummaryAllOf) GetPartNumber() string`
+
+GetPartNumber returns the PartNumber field if non-nil, zero value otherwise.
+
+### GetPartNumberOk
+
+`func (o *NetworkElementSummaryAllOf) GetPartNumberOk() (*string, bool)`
+
+GetPartNumberOk returns a tuple with the PartNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartNumber
+
+`func (o *NetworkElementSummaryAllOf) SetPartNumber(v string)`
+
+SetPartNumber sets PartNumber field to given value.
+
+### HasPartNumber
+
+`func (o *NetworkElementSummaryAllOf) HasPartNumber() bool`
+
+HasPartNumber returns a boolean if a field has been set.
+
 ### GetPresence
 
 `func (o *NetworkElementSummaryAllOf) GetPresence() string`
@@ -1226,6 +1333,31 @@ SetSourceObjectType sets SourceObjectType field to given value.
 
 HasSourceObjectType returns a boolean if a field has been set.
 
+### GetStatus
+
+`func (o *NetworkElementSummaryAllOf) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *NetworkElementSummaryAllOf) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *NetworkElementSummaryAllOf) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *NetworkElementSummaryAllOf) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
 ### GetSwitchId
 
 `func (o *NetworkElementSummaryAllOf) GetSwitchId() string`
@@ -1250,6 +1382,56 @@ SetSwitchId sets SwitchId field to given value.
 `func (o *NetworkElementSummaryAllOf) HasSwitchId() bool`
 
 HasSwitchId returns a boolean if a field has been set.
+
+### GetSwitchType
+
+`func (o *NetworkElementSummaryAllOf) GetSwitchType() string`
+
+GetSwitchType returns the SwitchType field if non-nil, zero value otherwise.
+
+### GetSwitchTypeOk
+
+`func (o *NetworkElementSummaryAllOf) GetSwitchTypeOk() (*string, bool)`
+
+GetSwitchTypeOk returns a tuple with the SwitchType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSwitchType
+
+`func (o *NetworkElementSummaryAllOf) SetSwitchType(v string)`
+
+SetSwitchType sets SwitchType field to given value.
+
+### HasSwitchType
+
+`func (o *NetworkElementSummaryAllOf) HasSwitchType() bool`
+
+HasSwitchType returns a boolean if a field has been set.
+
+### GetSystemUpTime
+
+`func (o *NetworkElementSummaryAllOf) GetSystemUpTime() string`
+
+GetSystemUpTime returns the SystemUpTime field if non-nil, zero value otherwise.
+
+### GetSystemUpTimeOk
+
+`func (o *NetworkElementSummaryAllOf) GetSystemUpTimeOk() (*string, bool)`
+
+GetSystemUpTimeOk returns a tuple with the SystemUpTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemUpTime
+
+`func (o *NetworkElementSummaryAllOf) SetSystemUpTime(v string)`
+
+SetSystemUpTime sets SystemUpTime field to given value.
+
+### HasSystemUpTime
+
+`func (o *NetworkElementSummaryAllOf) HasSystemUpTime() bool`
+
+HasSystemUpTime returns a boolean if a field has been set.
 
 ### GetThermal
 

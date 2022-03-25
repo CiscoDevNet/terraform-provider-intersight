@@ -3,7 +3,8 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_definition"
 description: |-
-  An Intersight Advisory. An advisory represents an identification of a potential issue and may also include  a recommendation for resolving the said issue. Advisories may be of different kind and severity. for e.g. It could be a security vulnerability or a performance issue or a hardware issue with different recommendations for resolving them.
+        An Intersight Advisory. An advisory represents an identification of a potential issue and may also include  a recommendation for resolving the said issue. Advisories may be of different kind and severity. for e.g. It could be a security vulnerability or a performance issue or a hardware issue with different recommendations for resolving them.
+
 ---
 
 # Data Source: intersight_tam_advisory_definition

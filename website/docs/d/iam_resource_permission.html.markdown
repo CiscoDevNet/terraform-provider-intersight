@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_resource_permission"
 description: |-
-  ResourcePermission represents the permissions defined on a resource like organization.
+        ResourcePermission represents the permissions defined on a resource like organization.
+
 ---
 
 # Data Source: intersight_iam_resource_permission

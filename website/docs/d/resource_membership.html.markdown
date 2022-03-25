@@ -3,7 +3,8 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_membership"
 description: |-
-  ResourceMembership represents a resource's associated groups, organizations and the permissions associated to this resource via organizations.
+        ResourceMembership represents a resource's associated groups, organizations and the permissions associated to this resource via organizations.
+
 ---
 
 # Data Source: intersight_resource_membership

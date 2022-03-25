@@ -3,8 +3,9 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_export"
 description: |-
-  All export operations are captured as Export instances. Users shall use this Export
-mo to track the export operation progress.
+        All export operations are captured as Export instances. Users shall use this Export
+        mo to track the export operation progress.
+
 ---
 
 # Resource: intersight_bulk_export

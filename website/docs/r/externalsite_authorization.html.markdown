@@ -3,7 +3,8 @@ subcategory: "externalsite"
 layout: "intersight"
 page_title: "Intersight: intersight_externalsite_authorization"
 description: |-
-  An authentication request that will be used to get authorized from external repository like cisco.com in order to download the image. This MO creation is a one time configuration before calling firmware.Upgrade API. This MO has to be modified with updated details whenever the user has updated the credentials in external repository.
+        An authentication request that will be used to get authorized from external repository like cisco.com in order to download the image. This MO creation is a one time configuration before calling firmware.Upgrade API. This MO has to be modified with updated details whenever the user has updated the credentials in external repository.
+
 ---
 
 # Resource: intersight_externalsite_authorization

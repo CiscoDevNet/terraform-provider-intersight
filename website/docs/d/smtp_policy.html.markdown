@@ -3,7 +3,8 @@ subcategory: "smtp"
 layout: "intersight"
 page_title: "Intersight: intersight_smtp_policy"
 description: |-
-  Name that identifies the SMTP Policy.
+        Name that identifies the SMTP Policy.
+
 ---
 
 # Data Source: intersight_smtp_policy

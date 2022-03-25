@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_expander_module"
 description: |-
-  Expander module inside the chassis.
+        Expander module inside the chassis.
+
 ---
 
 # Data Source: intersight_equipment_expander_module

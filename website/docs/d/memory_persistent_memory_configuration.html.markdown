@@ -3,7 +3,8 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_persistent_memory_configuration"
 description: |-
-  Persistent Memory configuration on all the Persistent Memory Modules on a server.
+        Persistent Memory configuration on all the Persistent Memory Modules on a server.
+
 ---
 
 # Data Source: intersight_memory_persistent_memory_configuration

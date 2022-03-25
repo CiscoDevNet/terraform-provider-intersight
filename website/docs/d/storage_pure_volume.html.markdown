@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_volume"
 description: |-
-  A volume entity in PureStorage FlashArray.
+        A volume entity in PureStorage FlashArray.
+
 ---
 
 # Data Source: intersight_storage_pure_volume

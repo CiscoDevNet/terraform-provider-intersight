@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_physical_disk_usage"
 description: |-
-  Has usage map between physical disks and virtual drives.
+        Has usage map between physical disks and virtual drives.
+
 ---
 
 # Data Source: intersight_storage_physical_disk_usage

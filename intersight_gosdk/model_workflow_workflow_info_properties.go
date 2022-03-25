@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -23,7 +23,8 @@ type WorkflowWorkflowInfoProperties struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string `json:"ObjectType"`
+	ObjectType string                         `json:"ObjectType"`
+	Cancelable NullableWorkflowCancelableType `json:"Cancelable,omitempty"`
 	// When true, this workflow can be retried if has not been modified for more than a period of 2 weeks.
 	Retryable *bool `json:"Retryable,omitempty"`
 	// Status of rollback for this workflow instance. The rollback action of the workflow can be enabled, disabled, completed. * `Disabled` - Status of the rollback action when workflow is disabled for rollback. * `Enabled` - Status of the rollback action when workflow is enabled for rollback. * `Completed` - Status of the rollback action once workflow completes the rollback for all eligible tasks.
@@ -108,6 +109,49 @@ func (o *WorkflowWorkflowInfoProperties) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetCancelable returns the Cancelable field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WorkflowWorkflowInfoProperties) GetCancelable() WorkflowCancelableType {
+	if o == nil || o.Cancelable.Get() == nil {
+		var ret WorkflowCancelableType
+		return ret
+	}
+	return *o.Cancelable.Get()
+}
+
+// GetCancelableOk returns a tuple with the Cancelable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WorkflowWorkflowInfoProperties) GetCancelableOk() (*WorkflowCancelableType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Cancelable.Get(), o.Cancelable.IsSet()
+}
+
+// HasCancelable returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfoProperties) HasCancelable() bool {
+	if o != nil && o.Cancelable.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCancelable gets a reference to the given NullableWorkflowCancelableType and assigns it to the Cancelable field.
+func (o *WorkflowWorkflowInfoProperties) SetCancelable(v WorkflowCancelableType) {
+	o.Cancelable.Set(&v)
+}
+
+// SetCancelableNil sets the value for Cancelable to be an explicit nil
+func (o *WorkflowWorkflowInfoProperties) SetCancelableNil() {
+	o.Cancelable.Set(nil)
+}
+
+// UnsetCancelable ensures that no value is present for Cancelable, not even an explicit nil
+func (o *WorkflowWorkflowInfoProperties) UnsetCancelable() {
+	o.Cancelable.Unset()
+}
+
 // GetRetryable returns the Retryable field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfoProperties) GetRetryable() bool {
 	if o == nil || o.Retryable == nil {
@@ -188,6 +232,9 @@ func (o WorkflowWorkflowInfoProperties) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.Cancelable.IsSet() {
+		toSerialize["Cancelable"] = o.Cancelable.Get()
+	}
 	if o.Retryable != nil {
 		toSerialize["Retryable"] = o.Retryable
 	}
@@ -207,7 +254,8 @@ func (o *WorkflowWorkflowInfoProperties) UnmarshalJSON(bytes []byte) (err error)
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType string `json:"ObjectType"`
+		ObjectType string                         `json:"ObjectType"`
+		Cancelable NullableWorkflowCancelableType `json:"Cancelable,omitempty"`
 		// When true, this workflow can be retried if has not been modified for more than a period of 2 weeks.
 		Retryable *bool `json:"Retryable,omitempty"`
 		// Status of rollback for this workflow instance. The rollback action of the workflow can be enabled, disabled, completed. * `Disabled` - Status of the rollback action when workflow is disabled for rollback. * `Enabled` - Status of the rollback action when workflow is enabled for rollback. * `Completed` - Status of the rollback action once workflow completes the rollback for all eligible tasks.
@@ -221,6 +269,7 @@ func (o *WorkflowWorkflowInfoProperties) UnmarshalJSON(bytes []byte) (err error)
 		varWorkflowWorkflowInfoProperties := _WorkflowWorkflowInfoProperties{}
 		varWorkflowWorkflowInfoProperties.ClassId = varWorkflowWorkflowInfoPropertiesWithoutEmbeddedStruct.ClassId
 		varWorkflowWorkflowInfoProperties.ObjectType = varWorkflowWorkflowInfoPropertiesWithoutEmbeddedStruct.ObjectType
+		varWorkflowWorkflowInfoProperties.Cancelable = varWorkflowWorkflowInfoPropertiesWithoutEmbeddedStruct.Cancelable
 		varWorkflowWorkflowInfoProperties.Retryable = varWorkflowWorkflowInfoPropertiesWithoutEmbeddedStruct.Retryable
 		varWorkflowWorkflowInfoProperties.RollbackAction = varWorkflowWorkflowInfoPropertiesWithoutEmbeddedStruct.RollbackAction
 		*o = WorkflowWorkflowInfoProperties(varWorkflowWorkflowInfoProperties)
@@ -242,6 +291,7 @@ func (o *WorkflowWorkflowInfoProperties) UnmarshalJSON(bytes []byte) (err error)
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "Cancelable")
 		delete(additionalProperties, "Retryable")
 		delete(additionalProperties, "RollbackAction")
 

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **SlotId** | Pointer to **string** | The PCI slot id of the PCI device. | [optional] [readonly] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
+**GraphicsCards** | Pointer to [**[]GraphicsCardRelationship**](GraphicsCardRelationship.md) | An array of relationships to graphicsCard resources. | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
@@ -198,6 +199,41 @@ SetComputeRackUnit sets ComputeRackUnit field to given value.
 
 HasComputeRackUnit returns a boolean if a field has been set.
 
+### GetGraphicsCards
+
+`func (o *PciDevice) GetGraphicsCards() []GraphicsCardRelationship`
+
+GetGraphicsCards returns the GraphicsCards field if non-nil, zero value otherwise.
+
+### GetGraphicsCardsOk
+
+`func (o *PciDevice) GetGraphicsCardsOk() (*[]GraphicsCardRelationship, bool)`
+
+GetGraphicsCardsOk returns a tuple with the GraphicsCards field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGraphicsCards
+
+`func (o *PciDevice) SetGraphicsCards(v []GraphicsCardRelationship)`
+
+SetGraphicsCards sets GraphicsCards field to given value.
+
+### HasGraphicsCards
+
+`func (o *PciDevice) HasGraphicsCards() bool`
+
+HasGraphicsCards returns a boolean if a field has been set.
+
+### SetGraphicsCardsNil
+
+`func (o *PciDevice) SetGraphicsCardsNil(b bool)`
+
+ SetGraphicsCardsNil sets the value for GraphicsCards to be an explicit nil
+
+### UnsetGraphicsCards
+`func (o *PciDevice) UnsetGraphicsCards()`
+
+UnsetGraphicsCards ensures that no value is present for GraphicsCards, not even an explicit nil
 ### GetInventoryDeviceInfo
 
 `func (o *PciDevice) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship`

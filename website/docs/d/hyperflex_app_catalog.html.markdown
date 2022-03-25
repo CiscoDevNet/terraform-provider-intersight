@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_app_catalog"
 description: |-
-  A catalog for managing application settings for HyperFlex cluster configuration service.
+        A catalog for managing application settings for HyperFlex cluster configuration service.
+
 ---
 
 # Data Source: intersight_hyperflex_app_catalog

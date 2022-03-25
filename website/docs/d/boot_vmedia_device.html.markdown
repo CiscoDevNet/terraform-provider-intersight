@@ -3,7 +3,8 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_vmedia_device"
 description: |-
-  Virtual Media Boot Device configured on the server.
+        Virtual Media Boot Device configured on the server.
+
 ---
 
 # Data Source: intersight_boot_vmedia_device

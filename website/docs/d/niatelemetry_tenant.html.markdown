@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_tenant"
 description: |-
-  Object is available at Tenant scope.
+        Object is available at Tenant scope.
+
 ---
 
 # Data Source: intersight_niatelemetry_tenant

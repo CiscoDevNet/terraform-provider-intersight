@@ -3,7 +3,8 @@ subcategory: "ucsd"
 layout: "intersight"
 page_title: "Intersight: intersight_ucsd_backup_info"
 description: |-
-  List of backup images available for target end device for restore operation.
+        List of backup images available for target end device for restore operation.
+
 ---
 
 # Data Source: intersight_ucsd_backup_info

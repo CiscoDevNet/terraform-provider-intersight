@@ -3,7 +3,8 @@ subcategory: "resourcepool"
 layout: "intersight"
 page_title: "Intersight: intersight_resourcepool_pool"
 description: |-
-  Pool represents a collection of resource. The resource can be any MO which has PoolResource meta enabled. The resource in the pool can be reserved or unreserved by using Lease API, reserved/unreserved resources can be used in the entities like server profiles.
+        Pool represents a collection of resource. The resource can be any MO which has PoolResource meta enabled. The resource in the pool can be reserved or unreserved by using Lease API, reserved/unreserved resources can be used in the entities like server profiles.
+
 ---
 
 # Resource: intersight_resourcepool_pool

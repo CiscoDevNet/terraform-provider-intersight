@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_initiator_group"
 description: |-
-  NetApp Initiator Group specifies host access to LUNs on the storage system.
+        NetApp Initiator Group specifies host access to LUNs on the storage system.
+
 ---
 
 # Data Source: intersight_storage_net_app_initiator_group

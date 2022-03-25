@@ -3,7 +3,8 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_hyper_flex_management_scoped_inventory"
 description: |-
-  API to trigger on-demand HyperFlex inventory to update modified objects in Intersight report.
+        API to trigger on-demand HyperFlex inventory to update modified objects in Intersight report.
+
 ---
 
 # Resource: intersight_task_hyper_flex_management_scoped_inventory

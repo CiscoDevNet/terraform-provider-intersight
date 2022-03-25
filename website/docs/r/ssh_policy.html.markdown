@@ -3,7 +3,8 @@ subcategory: "ssh"
 layout: "intersight"
 page_title: "Intersight: intersight_ssh_policy"
 description: |-
-  Secure shell policy on the endpoint.
+        Secure shell policy on the endpoint.
+
 ---
 
 # Resource: intersight_ssh_policy

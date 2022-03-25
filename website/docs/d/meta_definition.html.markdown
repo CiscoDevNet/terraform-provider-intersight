@@ -3,7 +3,8 @@ subcategory: "meta"
 layout: "intersight"
 page_title: "Intersight: intersight_meta_definition"
 description: |-
-  The meta-data of managed objects and complex types.
+        The meta-data of managed objects and complex types.
+
 ---
 
 # Data Source: intersight_meta_definition

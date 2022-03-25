@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fan_control"
 description: |-
-  This represents the states of Fan equipment.
+        This represents the states of Fan equipment.
+
 ---
 
 # Data Source: intersight_equipment_fan_control

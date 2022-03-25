@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_user_preference"
 description: |-
-  Holder for UI preferences such as theme, columns.
+        Holder for UI preferences such as theme, columns.
+
 ---
 
 # Data Source: intersight_iam_user_preference

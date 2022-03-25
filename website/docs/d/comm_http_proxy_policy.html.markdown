@@ -3,7 +3,8 @@ subcategory: "comm"
 layout: "intersight"
 page_title: "Intersight: intersight_comm_http_proxy_policy"
 description: |-
-  A policy specifying the HTTP proxy settings to be used by the HyperFlex installation process and HyperFlex storage controller VMs. This policy is required when the internet access of your servers including CIMC and HyperFlex storage controller VMs is secured by a HTTP proxy.
+        A policy specifying the HTTP proxy settings to be used by the HyperFlex installation process and HyperFlex storage controller VMs. This policy is required when the internet access of your servers including CIMC and HyperFlex storage controller VMs is secured by a HTTP proxy.
+
 ---
 
 # Data Source: intersight_comm_http_proxy_policy

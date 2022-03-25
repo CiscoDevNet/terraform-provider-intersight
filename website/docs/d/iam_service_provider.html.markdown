@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_service_provider"
 description: |-
-  SAML Service provider related information in Intersight.
+        SAML Service provider related information in Intersight.
+
 ---
 
 # Data Source: intersight_iam_service_provider

@@ -35,6 +35,11 @@ func dataSourceFcPhysicalPort() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"aggregate_port_id": {
+			Description: "Breakout port member in the Fabric Interconnect.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -151,6 +156,11 @@ func dataSourceFcPhysicalPort() *schema.Resource {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "Name of the physical port of FC.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -560,6 +570,11 @@ func dataSourceFcPhysicalPort() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"aggregate_port_id": {
+			Description: "Breakout port member in the Fabric Interconnect.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"ancestors": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -676,6 +691,11 @@ func dataSourceFcPhysicalPort() *schema.Resource {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "Name of the physical port of FC.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1105,6 +1125,11 @@ func dataSourceFcPhysicalPortRead(c context.Context, d *schema.ResourceData, met
 		o.SetAdminState(x)
 	}
 
+	if v, ok := d.GetOkExists("aggregate_port_id"); ok {
+		x := int64(v.(int))
+		o.SetAggregatePortId(x)
+	}
+
 	if v, ok := d.GetOk("ancestors"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1236,6 +1261,11 @@ func dataSourceFcPhysicalPortRead(c context.Context, d *schema.ResourceData, met
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -1683,6 +1713,7 @@ func dataSourceFcPhysicalPortRead(c context.Context, d *schema.ResourceData, met
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 				temp["admin_speed"] = (s.GetAdminSpeed())
 				temp["admin_state"] = (s.GetAdminState())
+				temp["aggregate_port_id"] = (s.GetAggregatePortId())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["b2b_credit"] = (s.GetB2bCredit())
@@ -1699,6 +1730,7 @@ func dataSourceFcPhysicalPortRead(c context.Context, d *schema.ResourceData, met
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["mode"] = (s.GetMode())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_speed"] = (s.GetOperSpeed())
 				temp["oper_state"] = (s.GetOperState())

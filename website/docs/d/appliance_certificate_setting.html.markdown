@@ -3,7 +3,8 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_certificate_setting"
 description: |-
-  Certificate the appliance uses for browser traffic.
+        Certificate the appliance uses for browser traffic.
+
 ---
 
 # Data Source: intersight_appliance_certificate_setting

@@ -3,7 +3,8 @@ subcategory: "connectorpack"
 layout: "intersight"
 page_title: "Intersight: intersight_connectorpack_upgrade_impact"
 description: |-
-  Used to determine the list of connector packs to be installed on a target UCS Director in its next upgrade cycle. Accepts the moid of the target UcsdInfo as part of the filter query. Given below is a sample url :- https://{{target}}/api/v1/connectorpack/UpgradeImpacts? $filter= ( UcsdInfo.Moid eq <<MoId>> ).
+        Used to determine the list of connector packs to be installed on a target UCS Director in its next upgrade cycle. Accepts the moid of the target UcsdInfo as part of the filter query. Given below is a sample url :- https://{{target}}/api/v1/connectorpack/UpgradeImpacts? $filter= ( UcsdInfo.Moid eq <<MoId>> ).
+
 ---
 
 # Data Source: intersight_connectorpack_upgrade_impact

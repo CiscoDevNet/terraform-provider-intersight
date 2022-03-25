@@ -318,7 +318,7 @@ func dataSourceHyperflexNodeProfile() *schema.Resource {
 			},
 		},
 		"node_role": {
-			Description: "The role that this node performs in the HyperFlex cluster.\n* `Storage` - Cluster of storage nodes used to persist data.\n* `Compute` - Cluster of compute nodes used to execute business logic.\n* `Unknown` - This cluster type is Unknown. Expect Compute or Storage as valid values.",
+			Description: "The role that this node performs in the HyperFlex cluster.\n* `Unknown` - The node role is not available.\n* `Storage` - The node persists data and contributes to the storage capacity of a cluster.\n* `Compute` - The node contributes to the compute capacity of a cluster.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -915,7 +915,7 @@ func dataSourceHyperflexNodeProfile() *schema.Resource {
 			},
 		},
 		"node_role": {
-			Description: "The role that this node performs in the HyperFlex cluster.\n* `Storage` - Cluster of storage nodes used to persist data.\n* `Compute` - Cluster of compute nodes used to execute business logic.\n* `Unknown` - This cluster type is Unknown. Expect Compute or Storage as valid values.",
+			Description: "The role that this node performs in the HyperFlex cluster.\n* `Unknown` - The node role is not available.\n* `Storage` - The node persists data and contributes to the storage capacity of a cluster.\n* `Compute` - The node contributes to the compute capacity of a cluster.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

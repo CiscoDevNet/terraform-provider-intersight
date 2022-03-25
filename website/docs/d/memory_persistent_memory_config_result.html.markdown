@@ -3,7 +3,8 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_persistent_memory_config_result"
 description: |-
-  Result of a previously applied Persistent Memory configuration on a server.
+        Result of a previously applied Persistent Memory configuration on a server.
+
 ---
 
 # Data Source: intersight_memory_persistent_memory_config_result

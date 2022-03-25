@@ -3,7 +3,8 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_vlan_port_info"
 description: |-
-  Vlan Port information of a Fabric Interconnect.
+        Vlan Port information of a Fabric Interconnect.
+
 ---
 
 # Data Source: intersight_network_vlan_port_info

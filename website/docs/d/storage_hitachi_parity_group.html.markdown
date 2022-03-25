@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_parity_group"
 description: |-
-  A parity group in Hitachi storage array.
+        A parity group in Hitachi storage array.
+
 ---
 
 # Data Source: intersight_storage_hitachi_parity_group

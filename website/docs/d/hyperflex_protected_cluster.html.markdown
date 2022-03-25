@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_protected_cluster"
 description: |-
-  Object for the protected clusters view.
+        Object for the protected clusters view.
+
 ---
 
 # Data Source: intersight_hyperflex_protected_cluster

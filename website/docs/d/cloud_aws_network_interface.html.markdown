@@ -3,8 +3,9 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_aws_network_interface"
 description: |-
-  AWS Network Interface object is represented here.It is Virtual interface that can be attached to
-an instance in a Virtual Private Cloud (VPC).
+        AWS Network Interface object is represented here.It is Virtual interface that can be attached to
+        an instance in a Virtual Private Cloud (VPC).
+
 ---
 
 # Data Source: intersight_cloud_aws_network_interface

@@ -3,7 +3,8 @@ subcategory: "iqnpool"
 layout: "intersight"
 page_title: "Intersight: intersight_iqnpool_pool_member"
 description: |-
-  PoolMember represents a single IQN address that is part of a pool.
+        PoolMember represents a single IQN address that is part of a pool.
+
 ---
 
 # Data Source: intersight_iqnpool_pool_member

@@ -3,7 +3,8 @@ subcategory: "kvm"
 layout: "intersight"
 page_title: "Intersight: intersight_kvm_policy"
 description: |-
-  Policy to configure KVM Launch settings.
+        Policy to configure KVM Launch settings.
+
 ---
 
 # Resource: intersight_kvm_policy

@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_feature_limit_external"
 description: |-
-  The HyperFlex feature limits that are available to end users.
+        The HyperFlex feature limits that are available to end users.
+
 ---
 
 # Resource: intersight_hyperflex_feature_limit_external

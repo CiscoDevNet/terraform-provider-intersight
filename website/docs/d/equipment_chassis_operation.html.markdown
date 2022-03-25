@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_chassis_operation"
 description: |-
-  Models the configurable properties of Chassis.
+        Models the configurable properties of Chassis.
+
 ---
 
 # Data Source: intersight_equipment_chassis_operation

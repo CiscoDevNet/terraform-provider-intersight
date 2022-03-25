@@ -3,17 +3,18 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_data_export_policy"
 description: |-
-  Data Export Policy is a category-based data collection policy that enables or disables
-data export (data collection) from the Intersight Appliance to the Intersight. The Data
-Export Policy configuration is organized hierarchically as follows.
-  Global:
-     Inventory:
+        Data Export Policy is a category-based data collection policy that enables or disables
+        data export (data collection) from the Intersight Appliance to the Intersight. The Data
+        Export Policy configuration is organized hierarchically as follows.
+        Global:
+        Inventory:
         Network
         Storage
-     TechSupport
-When the DataExportPolicy for a category is enabled/disabled, all the sub-category configurations
-are enabled/disabled as well. For example, if you enable/disable Inventory, all its sub-category
-configurations (ie. Network and Storage) are also enabled/disabled.
+        TechSupport
+        When the DataExportPolicy for a category is enabled/disabled, all the sub-category configurations
+        are enabled/disabled as well. For example, if you enable/disable Inventory, all its sub-category
+        configurations (ie. Network and Storage) are also enabled/disabled.
+
 ---
 
 # Resource: intersight_appliance_data_export_policy

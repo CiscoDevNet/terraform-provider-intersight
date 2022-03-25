@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_cluster_profile"
 description: |-
-  A profile specifying configuration settings for a HyperFlex cluster.
+        A profile specifying configuration settings for a HyperFlex cluster.
+
 ---
 
 # Resource: intersight_hyperflex_cluster_profile

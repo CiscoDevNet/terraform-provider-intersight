@@ -3,7 +3,8 @@ subcategory: "ippool"
 layout: "intersight"
 page_title: "Intersight: intersight_ippool_shadow_block"
 description: |-
-  A block of Contiguous IP addresses that are part of a shadow pool.
+        A block of Contiguous IP addresses that are part of a shadow pool.
+
 ---
 
 # Data Source: intersight_ippool_shadow_block

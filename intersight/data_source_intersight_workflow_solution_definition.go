@@ -422,6 +422,11 @@ func dataSourceWorkflowSolutionDefinition() *schema.Resource {
 				},
 			},
 		},
+		"upgraded_moid": {
+			Description: "Stores the upgraded Moid for help during future lookups.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"nr_version": {
 			Description: "The version of the solution to support multiple versions.",
 			Type:        schema.TypeInt,
@@ -942,6 +947,11 @@ func dataSourceWorkflowSolutionDefinition() *schema.Resource {
 					},
 				},
 			},
+		},
+		"upgraded_moid": {
+			Description: "Stores the upgraded Moid for help during future lookups.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"nr_version": {
 			Description: "The version of the solution to support multiple versions.",
@@ -1551,6 +1561,11 @@ func dataSourceWorkflowSolutionDefinitionRead(c context.Context, d *schema.Resou
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("upgraded_moid"); ok {
+		x := (v.(string))
+		o.SetUpgradedMoid(x)
+	}
+
 	if v, ok := d.GetOkExists("nr_version"); ok {
 		x := int64(v.(int))
 		o.SetVersion(x)
@@ -1699,6 +1714,7 @@ func dataSourceWorkflowSolutionDefinitionRead(c context.Context, d *schema.Resou
 				temp["shared_scope"] = (s.GetSharedScope())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["upgraded_moid"] = (s.GetUpgradedMoid())
 				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

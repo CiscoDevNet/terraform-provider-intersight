@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **AggregatePortId** | Pointer to **int64** | Breakout port member in the Fabric Interconnect. | [optional] [readonly] 
 **LicenseGrace** | Pointer to **string** | The number of days this port&#39;s license has been in Grace Period for. | [optional] [readonly] 
 **LicenseState** | Pointer to **string** | The state of the port&#39;s licensing. | [optional] [readonly] 
+**Name** | Pointer to **string** | Name of the Physical Port. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **PortGroup** | Pointer to [**PortGroupRelationship**](PortGroupRelationship.md) |  | [optional] 
 **PortSubGroup** | Pointer to [**PortSubGroupRelationship**](PortSubGroupRelationship.md) |  | [optional] 
@@ -199,6 +200,31 @@ SetLicenseState sets LicenseState field to given value.
 `func (o *EtherPhysicalPort) HasLicenseState() bool`
 
 HasLicenseState returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *EtherPhysicalPort) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *EtherPhysicalPort) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *EtherPhysicalPort) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *EtherPhysicalPort) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

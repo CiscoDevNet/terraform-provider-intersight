@@ -59,6 +59,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 				},
 			},
 		},
+		"base_mac": {
+			Description: "The starting (base) MAC address of the switch hardware like \"d0-e0-42-87-39-00\".",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -86,6 +91,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"end_mac": {
+			Description: "The ending MAC address of the switch hardware like \"d0-e0-42-87-39-5f\".",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -130,6 +140,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 		},
 		"fc_switching_mode": {
 			Description: "The user configured FC switching mode for this switch (End-Host or Switch).\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"hw_version": {
+			Description: "The Hardware version of the switch hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -180,6 +195,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "The name of the switch card like Line Card-1.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -243,6 +263,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"out_of_band_mac": {
+			Description: "The MAC address of the Switch's out-of-band management interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"owners": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -282,6 +307,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 					},
 				},
 			},
+		},
+		"part_number": {
+			Description: "The part number of the switch hardware.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
@@ -384,6 +414,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 					},
 				},
 			},
+		},
+		"power_state": {
+			Description: "Power state of the switch hardware.\n* `unknown` - The power state of the switch hardware is unknown.\n* `off` - The power state of the switch hardware is off.\n* `on` - The power state of the switch hardware is on.\n* `deny` - The power state of the switch hardware is deny.\n* `multi-boot-fail` - The power state of the switch hardware is multi-boot-fail.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"presence": {
 			Description: "This field identifies the presence (equipped) or absence of the given component.",
@@ -490,6 +525,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"status": {
+			Description: "The connection status of the switch hardware like up/down.\n* `Down` - Connection status of the switch card is down.\n* `Up` - Connection status of the switch card is up.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"switch_id": {
 			Description: "Switch Identifier that is local to a cluster.",
 			Type:        schema.TypeString,
@@ -520,6 +560,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 		},
 		"thermal": {
 			Description: "The Thermal status of the fabric interconnect.\n* `unknown` - The default state of the sensor (in case no data is received).\n* `ok` - State of the sensor indicating the sensor's temperature range is okay.\n* `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range.\n* `upper-critical` - State of the sensor indicating that the temperature is above normal range.\n* `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range.\n* `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range.\n* `lower-critical` - State of the sensor indicating that the temperature is below normal range.\n* `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"type": {
+			Description: "Type of the switch card based on the capability like 4 Gbps or 2 Gbps type etc.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -681,6 +726,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 				},
 			},
 		},
+		"base_mac": {
+			Description: "The starting (base) MAC address of the switch hardware like \"d0-e0-42-87-39-00\".",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -708,6 +758,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"end_mac": {
+			Description: "The ending MAC address of the switch hardware like \"d0-e0-42-87-39-5f\".",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -752,6 +807,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 		},
 		"fc_switching_mode": {
 			Description: "The user configured FC switching mode for this switch (End-Host or Switch).\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"hw_version": {
+			Description: "The Hardware version of the switch hardware.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -802,6 +862,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "The name of the switch card like Line Card-1.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -865,6 +930,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"out_of_band_mac": {
+			Description: "The MAC address of the Switch's out-of-band management interface.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"owners": {
 			Type:     schema.TypeList,
 			Optional: true,
@@ -904,6 +974,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 					},
 				},
 			},
+		},
+		"part_number": {
+			Description: "The part number of the switch hardware.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
@@ -1006,6 +1081,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 					},
 				},
 			},
+		},
+		"power_state": {
+			Description: "Power state of the switch hardware.\n* `unknown` - The power state of the switch hardware is unknown.\n* `off` - The power state of the switch hardware is off.\n* `on` - The power state of the switch hardware is on.\n* `deny` - The power state of the switch hardware is deny.\n* `multi-boot-fail` - The power state of the switch hardware is multi-boot-fail.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"presence": {
 			Description: "This field identifies the presence (equipped) or absence of the given component.",
@@ -1112,6 +1192,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"status": {
+			Description: "The connection status of the switch hardware like up/down.\n* `Down` - Connection status of the switch card is down.\n* `Up` - Connection status of the switch card is up.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"switch_id": {
 			Description: "Switch Identifier that is local to a cluster.",
 			Type:        schema.TypeString,
@@ -1142,6 +1227,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 		},
 		"thermal": {
 			Description: "The Thermal status of the fabric interconnect.\n* `unknown` - The default state of the sensor (in case no data is received).\n* `ok` - State of the sensor indicating the sensor's temperature range is okay.\n* `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range.\n* `upper-critical` - State of the sensor indicating that the temperature is above normal range.\n* `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range.\n* `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range.\n* `lower-critical` - State of the sensor indicating that the temperature is below normal range.\n* `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"type": {
+			Description: "Type of the switch card based on the capability like 4 Gbps or 2 Gbps type etc.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1329,6 +1419,11 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("base_mac"); ok {
+		x := (v.(string))
+		o.SetBaseMac(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -1357,6 +1452,11 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOk("end_mac"); ok {
+		x := (v.(string))
+		o.SetEndMac(x)
 	}
 
 	if v, ok := d.GetOk("ethernet_switching_mode"); ok {
@@ -1407,6 +1507,11 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("fc_switching_mode"); ok {
 		x := (v.(string))
 		o.SetFcSwitchingMode(x)
+	}
+
+	if v, ok := d.GetOk("hw_version"); ok {
+		x := (v.(string))
+		o.SetHwVersion(x)
 	}
 
 	if v, ok := d.GetOk("inventory_device_info"); ok {
@@ -1465,6 +1570,11 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
 	}
 
 	if v, ok := d.GetOk("network_element"); ok {
@@ -1535,6 +1645,11 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 		o.SetOutOfBandIpMask(x)
 	}
 
+	if v, ok := d.GetOk("out_of_band_mac"); ok {
+		x := (v.(string))
+		o.SetOutOfBandMac(x)
+	}
+
 	if v, ok := d.GetOk("owners"); ok {
 		x := make([]string, 0)
 		y := reflect.ValueOf(v)
@@ -1587,6 +1702,11 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 			x := p[0]
 			o.SetParent(x)
 		}
+	}
+
+	if v, ok := d.GetOk("part_number"); ok {
+		x := (v.(string))
+		o.SetPartNumber(x)
 	}
 
 	if v, ok := d.GetOk("permission_resources"); ok {
@@ -1707,6 +1827,11 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 			x = append(x, models.MoMoRefAsPortGroupRelationship(o))
 		}
 		o.SetPortGroups(x)
+	}
+
+	if v, ok := d.GetOk("power_state"); ok {
+		x := (v.(string))
+		o.SetPowerState(x)
 	}
 
 	if v, ok := d.GetOk("presence"); ok {
@@ -1830,6 +1955,11 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 		o.SetState(x)
 	}
 
+	if v, ok := d.GetOk("status"); ok {
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+
 	if v, ok := d.GetOk("switch_id"); ok {
 		x := (v.(string))
 		o.SetSwitchId(x)
@@ -1871,6 +2001,11 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 	if v, ok := d.GetOk("thermal"); ok {
 		x := (v.(string))
 		o.SetThermal(x)
+	}
+
+	if v, ok := d.GetOk("type"); ok {
+		x := (v.(string))
+		o.SetType(x)
 	}
 
 	if v, ok := d.GetOk("vendor"); ok {
@@ -1992,6 +2127,7 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["base_mac"] = (s.GetBaseMac())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -1999,16 +2135,19 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 				temp["device_mo_id"] = (s.GetDeviceMoId())
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["end_mac"] = (s.GetEndMac())
 				temp["ethernet_switching_mode"] = (s.GetEthernetSwitchingMode())
 
 				temp["fc_port_channels"] = flattenListFcPortChannelRelationship(s.GetFcPortChannels(), d)
 				temp["fc_switching_mode"] = (s.GetFcSwitchingMode())
+				temp["hw_version"] = (s.GetHwVersion())
 
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 
 				temp["network_element"] = flattenMapNetworkElementRelationship(s.GetNetworkElement(), d)
 				temp["num_ports"] = (s.GetNumPorts())
@@ -2016,15 +2155,18 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 				temp["out_of_band_ip_address"] = (s.GetOutOfBandIpAddress())
 				temp["out_of_band_ip_gateway"] = (s.GetOutOfBandIpGateway())
 				temp["out_of_band_ip_mask"] = (s.GetOutOfBandIpMask())
+				temp["out_of_band_mac"] = (s.GetOutOfBandMac())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["part_number"] = (s.GetPartNumber())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
 				temp["port_channels"] = flattenListEtherPortChannelRelationship(s.GetPortChannels(), d)
 
 				temp["port_groups"] = flattenListPortGroupRelationship(s.GetPortGroups(), d)
+				temp["power_state"] = (s.GetPowerState())
 				temp["presence"] = (s.GetPresence())
 
 				temp["previous_fru"] = flattenMapEquipmentFruRelationship(s.GetPreviousFru(), d)
@@ -2036,10 +2178,12 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["slot_id"] = (s.GetSlotId())
 				temp["state"] = (s.GetState())
+				temp["status"] = (s.GetStatus())
 				temp["switch_id"] = (s.GetSwitchId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["thermal"] = (s.GetThermal())
+				temp["type"] = (s.GetType())
 				temp["vendor"] = (s.GetVendor())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_link_control_policy"
 description: |-
-  A policy to configure the link settings for all the ports (including UDLD).
+        A policy to configure the link settings for all the ports (including UDLD).
+
 ---
 
 # Data Source: intersight_fabric_link_control_policy

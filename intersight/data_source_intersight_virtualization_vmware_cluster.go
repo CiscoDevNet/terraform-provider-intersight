@@ -159,6 +159,11 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"hypervisor_version": {
+			Description: "Identifies the version of the hypervisor running on this cluster. Keeping the hypervisor version in the cluster makes it convenient for applications to validate their deployment needs. Defaults to an empty string.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"identity": {
 			Description: "The internally generated identity of this cluster. This entity is not manipulated by users.",
 			Type:        schema.TypeString,
@@ -700,6 +705,11 @@ func dataSourceVirtualizationVmwareCluster() *schema.Resource {
 		},
 		"hypervisor_type": {
 			Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.\n* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"hypervisor_version": {
+			Description: "Identifies the version of the hypervisor running on this cluster. Keeping the hypervisor version in the cluster makes it convenient for applications to validate their deployment needs. Defaults to an empty string.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1289,6 +1299,11 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 		o.SetHypervisorType(x)
 	}
 
+	if v, ok := d.GetOk("hypervisor_version"); ok {
+		x := (v.(string))
+		o.SetHypervisorVersion(x)
+	}
+
 	if v, ok := d.GetOk("identity"); ok {
 		x := (v.(string))
 		o.SetIdentity(x)
@@ -1767,6 +1782,7 @@ func dataSourceVirtualizationVmwareClusterRead(c context.Context, d *schema.Reso
 				temp["datastore_count"] = (s.GetDatastoreCount())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 				temp["hypervisor_type"] = (s.GetHypervisorType())
+				temp["hypervisor_version"] = (s.GetHypervisorVersion())
 				temp["identity"] = (s.GetIdentity())
 				temp["inventory_path"] = (s.GetInventoryPath())
 

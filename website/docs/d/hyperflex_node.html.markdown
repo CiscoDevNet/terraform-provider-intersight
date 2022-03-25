@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_node"
 description: |-
-  A host participating in the cluster. The host consists of a hypervisor installed on a node that manages virtual machines.
+        A host participating in the cluster. The host consists of a hypervisor installed on a node that manages virtual machines.
+
 ---
 
 # Data Source: intersight_hyperflex_node

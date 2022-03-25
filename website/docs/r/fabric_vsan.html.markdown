@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_vsan"
 description: |-
-  Configuration object sent by user to create VSAN configurations.
+        Configuration object sent by user to create VSAN configurations.
+
 ---
 
 # Resource: intersight_fabric_vsan

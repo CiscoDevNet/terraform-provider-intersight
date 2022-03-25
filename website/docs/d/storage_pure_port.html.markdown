@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_port"
 description: |-
-  Port entity in Pure FlashArray.
+        Port entity in Pure FlashArray.
+
 ---
 
 # Data Source: intersight_storage_pure_port

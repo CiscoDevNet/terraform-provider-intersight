@@ -3,7 +3,8 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_usb_device"
 description: |-
-  Usb Boot Device configured on the server.
+        Usb Boot Device configured on the server.
+
 ---
 
 # Data Source: intersight_boot_usb_device

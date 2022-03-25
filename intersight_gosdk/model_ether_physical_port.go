@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -33,7 +33,9 @@ type EtherPhysicalPort struct {
 	// The number of days this port's license has been in Grace Period for.
 	LicenseGrace *string `json:"LicenseGrace,omitempty"`
 	// The state of the port's licensing.
-	LicenseState         *string                              `json:"LicenseState,omitempty"`
+	LicenseState *string `json:"LicenseState,omitempty"`
+	// Name of the Physical Port.
+	Name                 *string                              `json:"Name,omitempty"`
 	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
 	PortGroup            *PortGroupRelationship               `json:"PortGroup,omitempty"`
 	PortSubGroup         *PortSubGroupRelationship            `json:"PortSubGroup,omitempty"`
@@ -274,6 +276,38 @@ func (o *EtherPhysicalPort) SetLicenseState(v string) {
 	o.LicenseState = &v
 }
 
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *EtherPhysicalPort) GetName() string {
+	if o == nil || o.Name == nil {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EtherPhysicalPort) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *EtherPhysicalPort) HasName() bool {
+	if o != nil && o.Name != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *EtherPhysicalPort) SetName(v string) {
+	o.Name = &v
+}
+
 // GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
 func (o *EtherPhysicalPort) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
 	if o == nil || o.InventoryDeviceInfo == nil {
@@ -433,6 +467,9 @@ func (o EtherPhysicalPort) MarshalJSON() ([]byte, error) {
 	if o.LicenseState != nil {
 		toSerialize["LicenseState"] = o.LicenseState
 	}
+	if o.Name != nil {
+		toSerialize["Name"] = o.Name
+	}
 	if o.InventoryDeviceInfo != nil {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
 	}
@@ -468,7 +505,9 @@ func (o *EtherPhysicalPort) UnmarshalJSON(bytes []byte) (err error) {
 		// The number of days this port's license has been in Grace Period for.
 		LicenseGrace *string `json:"LicenseGrace,omitempty"`
 		// The state of the port's licensing.
-		LicenseState        *string                              `json:"LicenseState,omitempty"`
+		LicenseState *string `json:"LicenseState,omitempty"`
+		// Name of the Physical Port.
+		Name                *string                              `json:"Name,omitempty"`
 		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
 		PortGroup           *PortGroupRelationship               `json:"PortGroup,omitempty"`
 		PortSubGroup        *PortSubGroupRelationship            `json:"PortSubGroup,omitempty"`
@@ -487,6 +526,7 @@ func (o *EtherPhysicalPort) UnmarshalJSON(bytes []byte) (err error) {
 		varEtherPhysicalPort.AggregatePortId = varEtherPhysicalPortWithoutEmbeddedStruct.AggregatePortId
 		varEtherPhysicalPort.LicenseGrace = varEtherPhysicalPortWithoutEmbeddedStruct.LicenseGrace
 		varEtherPhysicalPort.LicenseState = varEtherPhysicalPortWithoutEmbeddedStruct.LicenseState
+		varEtherPhysicalPort.Name = varEtherPhysicalPortWithoutEmbeddedStruct.Name
 		varEtherPhysicalPort.InventoryDeviceInfo = varEtherPhysicalPortWithoutEmbeddedStruct.InventoryDeviceInfo
 		varEtherPhysicalPort.PortGroup = varEtherPhysicalPortWithoutEmbeddedStruct.PortGroup
 		varEtherPhysicalPort.PortSubGroup = varEtherPhysicalPortWithoutEmbeddedStruct.PortSubGroup
@@ -515,6 +555,7 @@ func (o *EtherPhysicalPort) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "AggregatePortId")
 		delete(additionalProperties, "LicenseGrace")
 		delete(additionalProperties, "LicenseState")
+		delete(additionalProperties, "Name")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "PortGroup")
 		delete(additionalProperties, "PortSubGroup")

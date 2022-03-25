@@ -3,7 +3,8 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_workflow_meta"
 description: |-
-  Contains a workflow definition which is a sequence of tasks to execute. WorkflowMeta is deprecated and WorkflowDefinition is used for creating workflows.
+        Contains a workflow definition which is a sequence of tasks to execute. WorkflowMeta is deprecated and WorkflowDefinition is used for creating workflows.
+
 ---
 
 # Data Source: intersight_workflow_workflow_meta

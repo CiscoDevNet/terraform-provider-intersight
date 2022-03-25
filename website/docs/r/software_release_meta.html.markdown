@@ -3,7 +3,8 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_release_meta"
 description: |-
-  Release information for various software images. Gives information on the latest released version of a product.
+        Release information for various software images. Gives information on the latest released version of a product.
+
 ---
 
 # Resource: intersight_software_release_meta

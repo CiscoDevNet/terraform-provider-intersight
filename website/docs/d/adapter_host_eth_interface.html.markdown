@@ -3,7 +3,8 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_host_eth_interface"
 description: |-
-  Physical / Virtual port of an adapter as seen by the host.
+        Physical / Virtual port of an adapter as seen by the host.
+
 ---
 
 # Data Source: intersight_adapter_host_eth_interface

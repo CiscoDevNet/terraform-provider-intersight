@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_chassis"
 description: |-
-  A physical holder housing blade servers.
+        A physical holder housing blade servers.
+
 ---
 
 # Data Source: intersight_equipment_chassis

@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_container_runtime_policy"
 description: |-
-  A policy specifying container runtime configuration, such as docker proxy, no proxy and bridge network IP.
+        A policy specifying container runtime configuration, such as docker proxy, no proxy and bridge network IP.
+
 ---
 
 # Data Source: intersight_kubernetes_container_runtime_policy

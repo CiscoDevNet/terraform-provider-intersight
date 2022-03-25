@@ -3,7 +3,8 @@ subcategory: "top"
 layout: "intersight"
 page_title: "Intersight: intersight_top_system"
 description: |-
-  Root container for all UCSM / CIMC MOs.
+        Root container for all UCSM / CIMC MOs.
+
 ---
 
 # Data Source: intersight_top_system

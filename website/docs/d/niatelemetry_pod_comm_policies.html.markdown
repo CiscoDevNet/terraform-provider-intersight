@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_pod_comm_policies"
 description: |-
-  Object to capture Pod Communication Policy details.
+        Object to capture Pod Communication Policy details.
+
 ---
 
 # Data Source: intersight_niatelemetry_pod_comm_policies

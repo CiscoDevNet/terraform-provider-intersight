@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "port.SubGroup"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "port.SubGroup"]
+**AggregatePortId** | Pointer to **int64** | Breakout port member in the Fabric Interconnect. | [optional] [readonly] 
+**SlotId** | Pointer to **int64** | Switch expansion slot module identifier. | [optional] [readonly] 
 **Transport** | Pointer to **string** | Type of port sub-group. Values are Eth or Fc. | [optional] [readonly] 
 **EthernetPorts** | Pointer to [**[]EtherPhysicalPortRelationship**](EtherPhysicalPortRelationship.md) | An array of relationships to etherPhysicalPort resources. | [optional] [readonly] 
 **FcPorts** | Pointer to [**[]FcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) | An array of relationships to fcPhysicalPort resources. | [optional] [readonly] 
@@ -71,6 +73,56 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAggregatePortId
+
+`func (o *PortSubGroupAllOf) GetAggregatePortId() int64`
+
+GetAggregatePortId returns the AggregatePortId field if non-nil, zero value otherwise.
+
+### GetAggregatePortIdOk
+
+`func (o *PortSubGroupAllOf) GetAggregatePortIdOk() (*int64, bool)`
+
+GetAggregatePortIdOk returns a tuple with the AggregatePortId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAggregatePortId
+
+`func (o *PortSubGroupAllOf) SetAggregatePortId(v int64)`
+
+SetAggregatePortId sets AggregatePortId field to given value.
+
+### HasAggregatePortId
+
+`func (o *PortSubGroupAllOf) HasAggregatePortId() bool`
+
+HasAggregatePortId returns a boolean if a field has been set.
+
+### GetSlotId
+
+`func (o *PortSubGroupAllOf) GetSlotId() int64`
+
+GetSlotId returns the SlotId field if non-nil, zero value otherwise.
+
+### GetSlotIdOk
+
+`func (o *PortSubGroupAllOf) GetSlotIdOk() (*int64, bool)`
+
+GetSlotIdOk returns a tuple with the SlotId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSlotId
+
+`func (o *PortSubGroupAllOf) SetSlotId(v int64)`
+
+SetSlotId sets SlotId field to given value.
+
+### HasSlotId
+
+`func (o *PortSubGroupAllOf) HasSlotId() bool`
+
+HasSlotId returns a boolean if a field has been set.
 
 ### GetTransport
 

@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_auto_support_policy"
 description: |-
-  A policy specifying the configuration to automatically generate support tickets with Cisco TAC.
+        A policy specifying the configuration to automatically generate support tickets with Cisco TAC.
+
 ---
 
 # Resource: intersight_hyperflex_auto_support_policy

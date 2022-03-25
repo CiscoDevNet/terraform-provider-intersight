@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_enclosure_disk"
 description: |-
-  Physical Disk on the enclosure.
+        Physical Disk on the enclosure.
+
 ---
 
 # Data Source: intersight_storage_enclosure_disk

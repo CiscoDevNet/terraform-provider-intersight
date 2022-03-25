@@ -3,7 +3,8 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_board"
 description: |-
-  Mother board of a server.
+        Mother board of a server.
+
 ---
 
 # Data Source: intersight_compute_board

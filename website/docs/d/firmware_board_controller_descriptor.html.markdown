@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_board_controller_descriptor"
 description: |-
-  Descriptor to uniquely identify a board controller.
+        Descriptor to uniquely identify a board controller.
+
 ---
 
 # Data Source: intersight_firmware_board_controller_descriptor

@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_rack_enclosure"
 description: |-
-  A physical holder housing rack servers.
+        A physical holder housing rack servers.
+
 ---
 
 # Data Source: intersight_equipment_rack_enclosure

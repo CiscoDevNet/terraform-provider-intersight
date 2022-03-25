@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_iwe_cluster"
 description: |-
-  A Intersight Workload Engine compute cluster. Contains inventory information concerning the health, version and ip address of the cluster. The cluster has a name assigned by user in Intersight.
+        A Intersight Workload Engine compute cluster. Contains inventory information concerning the health, version and ip address of the cluster. The cluster has a name assigned by user in Intersight.
+
 ---
 
 # Data Source: intersight_virtualization_iwe_cluster
@@ -29,7 +30,7 @@ The following arguments can be used to get data of already created objects in In
 * `hx_version`:(string) The HyperFlex Data or Application Platform version of this cluster. 
 * `hypervisor_build`:(string) Hypervisor version of HyperFlex compute cluster along with build number. 
 * `hypervisor_type`:(string) Identifies the broad type of the underlying hypervisor.* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.* `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform.* `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
-* `hypervisor_version`:(string) The version of hypervisor running on this cluster. 
+* `hypervisor_version`:(string) Identifies the version of the hypervisor running on this cluster. Keeping the hypervisor version in the cluster makes it convenient for applications to validate their deployment needs. Defaults to an empty string. 
 * `identity`:(string) The internally generated identity of this cluster. This entity is not manipulated by users. 
 * `management_ip_address`:(string) Management IP Address of the cluster. 
 * `mod_time`:(string) The time when this managed object was last modified. 

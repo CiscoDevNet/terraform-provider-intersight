@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_distributable_meta"
 description: |-
-  Meta information for various firmware images stored in the database. Gives information on the particular category for a product.
+        Meta information for various firmware images stored in the database. Gives information on the particular category for a product.
+
 ---
 
 # Data Source: intersight_firmware_distributable_meta

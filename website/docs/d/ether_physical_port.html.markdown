@@ -3,7 +3,8 @@ subcategory: "ether"
 layout: "intersight"
 page_title: "Intersight: intersight_ether_physical_port"
 description: |-
-  Physical ethernet port present on a FI.
+        Physical ethernet port present on a FI.
+
 ---
 
 # Data Source: intersight_ether_physical_port
@@ -27,6 +28,7 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `mode`:(string) Operating mode of this port. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `name`:(string) Name of the Physical Port. 
 * `oper_speed`:(string) Current Operational speed for this port. 
 * `oper_state`:(string) Operational state of this port (enabled/disabled). 
 * `oper_state_qual`:(string) Reason for this port's Operational state. 

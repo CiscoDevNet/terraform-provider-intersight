@@ -3,7 +3,8 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_precision_policy"
 description: |-
-  Boot order policy models a reusable boot order configuration that can be applied to multiple servers via profile association. It supports advanced boot order configuration on Cisco CIMC servers.
+        Boot order policy models a reusable boot order configuration that can be applied to multiple servers via profile association. It supports advanced boot order configuration on Cisco CIMC servers.
+
 ---
 
 # Resource: intersight_boot_precision_policy
@@ -166,7 +167,7 @@ This complex property has following sub-properties:
   + `name`:(string) Name of the bootloader image. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `path`:(string) Path to the bootloader image. 
-* `slot`:(string) The slot id of the local disk device. Supported values for Standalone Rack servers are (1-205, \ M\ , \ HBA\ , \ SAS\ , \ RAID\ , \ MRAID\ , \ MRAID1\ , \ MRAID2\ , \ MSTOR-RAID\ ). Supported values for FI-attached servers are (1-205, \ MRAID\ , \ FMEZZ1-SAS\ , \ MRAID1\ , \ MRAID2\ , \ MSTOR-RAID\ , \ MSTOR-RAID-1\ , \ MSTOR-RAID-2\ ). 
+* `slot`:(string) The slot id of the local disk device. Supported values for Standalone Rack servers are (1-205, \ M\ , \ HBA\ , \ SAS\ , \ RAID\ , \ MRAID\ , \ MRAID1\ , \ MRAID2\ , \ MSTOR-RAID\ ). Supported values for FI-attached servers are (1-205, \ RAID\ , \ MRAID\ , \ FMEZZ1-SAS\ , \ MRAID1\ , \ MRAID2\ , \ MSTOR-RAID\ , \ MSTOR-RAID-1\ , \ MSTOR-RAID-2\ ). 
 
 ### [boot.Nvme](#argument-reference)
 Device type used when booting from a NVMe device.

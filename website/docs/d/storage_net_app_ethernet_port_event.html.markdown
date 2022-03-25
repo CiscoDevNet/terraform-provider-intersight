@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_ethernet_port_event"
 description: |-
-  An event where the impacted resource type is an ethernet port.
+        An event where the impacted resource type is an ethernet port.
+
 ---
 
 # Data Source: intersight_storage_net_app_ethernet_port_event

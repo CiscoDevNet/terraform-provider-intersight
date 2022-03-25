@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_apic_app_plugin_details"
 description: |-
-  Object to capture APIC App plugin details.
+        Object to capture APIC App plugin details.
+
 ---
 
 # Data Source: intersight_niatelemetry_apic_app_plugin_details

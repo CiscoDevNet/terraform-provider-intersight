@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_hba_descriptor"
 description: |-
-  Descriptor to uniquely identify a HBA component.
+        Descriptor to uniquely identify a HBA component.
+
 ---
 
 # Resource: intersight_firmware_hba_descriptor

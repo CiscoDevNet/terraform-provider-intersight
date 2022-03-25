@@ -3,7 +3,8 @@ subcategory: "oprs"
 layout: "intersight"
 page_title: "Intersight: intersight_oprs_sync_target_list_message"
 description: |-
-  The targets sync messages are sent to assist and back to euclid for reconciliation.
+        The targets sync messages are sent to assist and back to euclid for reconciliation.
+
 ---
 
 # Resource: intersight_oprs_sync_target_list_message

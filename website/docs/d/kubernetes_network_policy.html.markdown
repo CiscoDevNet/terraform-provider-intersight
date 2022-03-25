@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_network_policy"
 description: |-
-  A policy specifying the CIDR for internal networks in a Kubernetes cluster like Pod network, and Service network.
+        A policy specifying the CIDR for internal networks in a Kubernetes cluster like Pod network, and Service network.
+
 ---
 
 # Data Source: intersight_kubernetes_network_policy

@@ -3,7 +3,8 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_boot_device"
 description: |-
-  Actual boot devices of the system as enumerated by BIOS.
+        Actual boot devices of the system as enumerated by BIOS.
+
 ---
 
 # Data Source: intersight_bios_boot_device

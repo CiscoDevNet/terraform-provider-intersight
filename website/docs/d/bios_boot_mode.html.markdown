@@ -3,7 +3,8 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_boot_mode"
 description: |-
-  The mode through which bios has booted.
+        The mode through which bios has booted.
+
 ---
 
 # Data Source: intersight_bios_boot_mode

@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **ComputeBoard** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 
 ## Methods
@@ -518,6 +519,31 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 `func (o *ProcessorUnitAllOf) HasInventoryDeviceInfo() bool`
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
+
+### GetNetworkElement
+
+`func (o *ProcessorUnitAllOf) GetNetworkElement() NetworkElementRelationship`
+
+GetNetworkElement returns the NetworkElement field if non-nil, zero value otherwise.
+
+### GetNetworkElementOk
+
+`func (o *ProcessorUnitAllOf) GetNetworkElementOk() (*NetworkElementRelationship, bool)`
+
+GetNetworkElementOk returns a tuple with the NetworkElement field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkElement
+
+`func (o *ProcessorUnitAllOf) SetNetworkElement(v NetworkElementRelationship)`
+
+SetNetworkElement sets NetworkElement field to given value.
+
+### HasNetworkElement
+
+`func (o *ProcessorUnitAllOf) HasNetworkElement() bool`
+
+HasNetworkElement returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

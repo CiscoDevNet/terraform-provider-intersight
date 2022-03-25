@@ -3,7 +3,8 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_subscription"
 description: |-
-  Contains information about consumption-based Subscriptions related to the Cisco devices associated. We listen to messages sent by Cisco Install Base and create/update an instance of this object.
+        Contains information about consumption-based Subscriptions related to the Cisco devices associated. We listen to messages sent by Cisco Install Base and create/update an instance of this object.
+
 ---
 
 # Data Source: intersight_asset_subscription

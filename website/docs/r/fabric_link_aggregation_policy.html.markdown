@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_link_aggregation_policy"
 description: |-
-  A policy to configure the link settings for all the port channels (including LACP).
+        A policy to configure the link settings for all the port channels (including LACP).
+
 ---
 
 # Resource: intersight_fabric_link_aggregation_policy

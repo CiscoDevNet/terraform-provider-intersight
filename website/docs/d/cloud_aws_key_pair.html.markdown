@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_aws_key_pair"
 description: |-
-  Key pair object in AWS inventory. A key pair, consisting of a private key and a public key, is a set of security credentials that are used to prove identity when connecting to an EC2 instance.
+        Key pair object in AWS inventory. A key pair, consisting of a private key and a public key, is a set of security credentials that are used to prove identity when connecting to an EC2 instance.
+
 ---
 
 # Data Source: intersight_cloud_aws_key_pair

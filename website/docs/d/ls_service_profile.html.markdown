@@ -3,7 +3,8 @@ subcategory: "ls"
 layout: "intersight"
 page_title: "Intersight: intersight_ls_service_profile"
 description: |-
-  Logical Profile that can be associated to a physical server.
+        Logical Profile that can be associated to a physical server.
+
 ---
 
 # Data Source: intersight_ls_service_profile

@@ -3,7 +3,8 @@ subcategory: "forecast"
 layout: "intersight"
 page_title: "Intersight: intersight_forecast_catalog"
 description: |-
-  A catalog for managing forecast settings.
+        A catalog for managing forecast settings.
+
 ---
 
 # Data Source: intersight_forecast_catalog

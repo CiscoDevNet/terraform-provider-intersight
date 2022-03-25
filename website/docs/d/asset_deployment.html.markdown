@@ -3,7 +3,8 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_deployment"
 description: |-
-  Contains information about Deployments associated with consumption-based subscriptions. We listen to messages sent by Cisco Install Base and create/update an instance of this object.
+        Contains information about Deployments associated with consumption-based subscriptions. We listen to messages sent by Cisco Install Base and create/update an instance of this object.
+
 ---
 
 # Data Source: intersight_asset_deployment

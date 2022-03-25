@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_alarm"
 description: |-
-  An alarm representing a fault in the HyperFlex cluster configuration or hardware.
+        An alarm representing a fault in the HyperFlex cluster configuration or hardware.
+
 ---
 
 # Data Source: intersight_hyperflex_alarm

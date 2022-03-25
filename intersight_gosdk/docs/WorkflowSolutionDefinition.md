@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **LicenseEntitlement** | Pointer to **string** | License entitlement required to run this solution. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. * &#x60;IKS-Advantage&#x60; - IKS-Advantage as a License type. | [optional] [readonly] [default to "Base"]
 **Name** | Pointer to **string** | The name for this solution definition. You can have multiple versions of the solution with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_). | [optional] 
 **OutputDefinition** | Pointer to [**[]WorkflowBaseDataType**](WorkflowBaseDataType.md) |  | [optional] 
+**UpgradedMoid** | Pointer to **string** | Stores the upgraded Moid for help during future lookups. | [optional] [readonly] 
 **Version** | Pointer to **int64** | The version of the solution to support multiple versions. | [optional] [default to 1]
 **ActionDefinitions** | Pointer to [**[]WorkflowSolutionActionDefinitionRelationship**](WorkflowSolutionActionDefinitionRelationship.md) | An array of relationships to workflowSolutionActionDefinition resources. | [optional] 
 **Catalog** | Pointer to [**WorkflowCatalogRelationship**](WorkflowCatalogRelationship.md) |  | [optional] 
@@ -287,6 +288,31 @@ HasOutputDefinition returns a boolean if a field has been set.
 `func (o *WorkflowSolutionDefinition) UnsetOutputDefinition()`
 
 UnsetOutputDefinition ensures that no value is present for OutputDefinition, not even an explicit nil
+### GetUpgradedMoid
+
+`func (o *WorkflowSolutionDefinition) GetUpgradedMoid() string`
+
+GetUpgradedMoid returns the UpgradedMoid field if non-nil, zero value otherwise.
+
+### GetUpgradedMoidOk
+
+`func (o *WorkflowSolutionDefinition) GetUpgradedMoidOk() (*string, bool)`
+
+GetUpgradedMoidOk returns a tuple with the UpgradedMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpgradedMoid
+
+`func (o *WorkflowSolutionDefinition) SetUpgradedMoid(v string)`
+
+SetUpgradedMoid sets UpgradedMoid field to given value.
+
+### HasUpgradedMoid
+
+`func (o *WorkflowSolutionDefinition) HasUpgradedMoid() bool`
+
+HasUpgradedMoid returns a boolean if a field has been set.
+
 ### GetVersion
 
 `func (o *WorkflowSolutionDefinition) GetVersion() int64`

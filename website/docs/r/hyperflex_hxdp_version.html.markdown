@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_hxdp_version"
 description: |-
-  A HyperFlex Data Platform version.
+        A HyperFlex Data Platform version.
+
 ---
 
 # Resource: intersight_hyperflex_hxdp_version

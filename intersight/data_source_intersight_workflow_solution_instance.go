@@ -281,6 +281,11 @@ func dataSourceWorkflowSolutionInstance() *schema.Resource {
 				},
 			},
 		},
+		"upgraded_moid": {
+			Description: "Stores the upgraded Moid for help during future lookups.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"user_id": {
 			Description: "The user identifier which indicates the user that started this workflow.",
 			Type:        schema.TypeString,
@@ -660,6 +665,11 @@ func dataSourceWorkflowSolutionInstance() *schema.Resource {
 					},
 				},
 			},
+		},
+		"upgraded_moid": {
+			Description: "Stores the upgraded Moid for help during future lookups.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"user_id": {
 			Description: "The user identifier which indicates the user that started this workflow.",
@@ -1113,6 +1123,11 @@ func dataSourceWorkflowSolutionInstanceRead(c context.Context, d *schema.Resourc
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("upgraded_moid"); ok {
+		x := (v.(string))
+		o.SetUpgradedMoid(x)
+	}
+
 	if v, ok := d.GetOk("user_id"); ok {
 		x := (v.(string))
 		o.SetUserId(x)
@@ -1256,6 +1271,7 @@ func dataSourceWorkflowSolutionInstanceRead(c context.Context, d *schema.Resourc
 				temp["status"] = (s.GetStatus())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["upgraded_moid"] = (s.GetUpgradedMoid())
 				temp["user_id"] = (s.GetUserId())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

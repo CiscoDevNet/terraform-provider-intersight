@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_psu"
 description: |-
-  This represents power supply unit for chassis/server.
+        This represents power supply unit for chassis/server.
+
 ---
 
 # Data Source: intersight_equipment_psu
@@ -22,6 +23,7 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `name`:(string) This field is to provide name for the power supply unit. 
 * `oper_state`:(string) This field identifies the psu operational state. 
 * `part_number`:(string) This field identifies the Part Number for this Power Supply Unit. 
 * `pid`:(string) This field identifies the Product ID for the Power Supply. 

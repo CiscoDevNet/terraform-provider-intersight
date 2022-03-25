@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_host"
 description: |-
-  The VMware Host entity with its attributes. Every Host belongs to a Datacenter and may run VMs.
+        The VMware Host entity with its attributes. Every Host belongs to a Datacenter and may run VMs.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_host

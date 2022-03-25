@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_sensor"
 description: |-
-  Information for a particular sensor on a NetApp storage array controller.
+        Information for a particular sensor on a NetApp storage array controller.
+
 ---
 
 # Data Source: intersight_storage_net_app_sensor

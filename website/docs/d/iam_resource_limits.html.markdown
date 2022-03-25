@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_resource_limits"
 description: |-
-  The resource limits used to limit resources such as User accounts.
+        The resource limits used to limit resources such as User accounts.
+
 ---
 
 # Data Source: intersight_iam_resource_limits

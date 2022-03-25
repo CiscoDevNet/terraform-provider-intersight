@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **PostCoreWorkflows** | Pointer to [**[]WorkflowActionWorkflowDefinition**](WorkflowActionWorkflowDefinition.md) |  | [optional] 
 **PreCoreWorkflows** | Pointer to [**[]WorkflowActionWorkflowDefinition**](WorkflowActionWorkflowDefinition.md) |  | [optional] 
 **StopWorkflows** | Pointer to [**[]WorkflowActionWorkflowDefinition**](WorkflowActionWorkflowDefinition.md) |  | [optional] 
+**UpgradedMoid** | Pointer to **string** | Stores the upgraded Moid for help during future lookups. | [optional] [readonly] 
 **ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](WorkflowValidationInformation.md) |  | [optional] 
 **ValidationWorkflows** | Pointer to [**[]WorkflowActionWorkflowDefinition**](WorkflowActionWorkflowDefinition.md) |  | [optional] 
 **SolutionDefinition** | Pointer to [**WorkflowSolutionDefinitionRelationship**](WorkflowSolutionDefinitionRelationship.md) |  | [optional] 
@@ -452,6 +453,31 @@ HasStopWorkflows returns a boolean if a field has been set.
 `func (o *WorkflowSolutionActionDefinitionAllOf) UnsetStopWorkflows()`
 
 UnsetStopWorkflows ensures that no value is present for StopWorkflows, not even an explicit nil
+### GetUpgradedMoid
+
+`func (o *WorkflowSolutionActionDefinitionAllOf) GetUpgradedMoid() string`
+
+GetUpgradedMoid returns the UpgradedMoid field if non-nil, zero value otherwise.
+
+### GetUpgradedMoidOk
+
+`func (o *WorkflowSolutionActionDefinitionAllOf) GetUpgradedMoidOk() (*string, bool)`
+
+GetUpgradedMoidOk returns a tuple with the UpgradedMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpgradedMoid
+
+`func (o *WorkflowSolutionActionDefinitionAllOf) SetUpgradedMoid(v string)`
+
+SetUpgradedMoid sets UpgradedMoid field to given value.
+
+### HasUpgradedMoid
+
+`func (o *WorkflowSolutionActionDefinitionAllOf) HasUpgradedMoid() bool`
+
+HasUpgradedMoid returns a boolean if a field has been set.
+
 ### GetValidationInformation
 
 `func (o *WorkflowSolutionActionDefinitionAllOf) GetValidationInformation() WorkflowValidationInformation`

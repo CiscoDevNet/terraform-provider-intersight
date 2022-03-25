@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_nexus_dashboard_controller_details"
 description: |-
-  Details of controller added to NexusDashboard.
+        Details of controller added to NexusDashboard.
+
 ---
 
 # Data Source: intersight_niatelemetry_nexus_dashboard_controller_details

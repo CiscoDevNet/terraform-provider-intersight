@@ -3,7 +3,8 @@ subcategory: "aaa"
 layout: "intersight"
 page_title: "Intersight: intersight_aaa_retention_config"
 description: |-
-  Default configuration for audit log retention.
+        Default configuration for audit log retention.
+
 ---
 
 # Data Source: intersight_aaa_retention_config

@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_vd_member_ep"
 description: |-
-  Reference to LocalDisk to build up a VirtualDrive.
+        Reference to LocalDisk to build up a VirtualDrive.
+
 ---
 
 # Data Source: intersight_storage_vd_member_ep

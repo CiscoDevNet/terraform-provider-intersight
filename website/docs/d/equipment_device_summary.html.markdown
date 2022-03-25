@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_device_summary"
 description: |-
-  Aggregation of properties pertaining to different inventory MOs.
+        Aggregation of properties pertaining to different inventory MOs.
+
 ---
 
 # Data Source: intersight_equipment_device_summary

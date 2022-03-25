@@ -3,14 +3,15 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_upgrade_policy"
 description: |-
-  UpgradePolicy stores the Intersight Appliance's software upgrade policy. UpgradePolicy
-is a sinlgeton managed object. A default upgrade policy is created during the Intersight
-Appliance setup, and it is configured with an automatic upgrade policy.
-Automatic upgrade policy lets the system start software upgrade after a pre-defined
-number of seconds set in the software manifest.
-Scheduled upgrade policy lets the user start software upgrade at a specified schedule.
-However, scheduled time cannot be beyond the time limit enforced by the upgrade grace
-period set in the software manifest.
+        UpgradePolicy stores the Intersight Appliance's software upgrade policy. UpgradePolicy
+        is a sinlgeton managed object. A default upgrade policy is created during the Intersight
+        Appliance setup, and it is configured with an automatic upgrade policy.
+        Automatic upgrade policy lets the system start software upgrade after a pre-defined
+        number of seconds set in the software manifest.
+        Scheduled upgrade policy lets the user start software upgrade at a specified schedule.
+        However, scheduled time cannot be beyond the time limit enforced by the upgrade grace
+        period set in the software manifest.
+
 ---
 
 # Data Source: intersight_appliance_upgrade_policy

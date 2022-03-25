@@ -3,7 +3,8 @@ subcategory: "fault"
 layout: "intersight"
 page_title: "Intersight: intersight_fault_instance"
 description: |-
-  An endpoint anomaly is represented by this object.
+        An endpoint anomaly is represented by this object.
+
 ---
 
 # Data Source: intersight_fault_instance

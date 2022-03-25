@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_datastore"
 description: |-
-  The VMware Datastore entity with its attributes. Each Datastore belongs to a Datacenter and maybe attached to VMs.
+        The VMware Datastore entity with its attributes. Each Datastore belongs to a Datacenter and maybe attached to VMs.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_datastore

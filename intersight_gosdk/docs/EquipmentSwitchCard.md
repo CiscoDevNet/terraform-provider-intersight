@@ -6,17 +6,26 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.SwitchCard"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.SwitchCard"]
+**BaseMac** | Pointer to **string** | The starting (base) MAC address of the switch hardware like \&quot;d0-e0-42-87-39-00\&quot;. | [optional] 
 **Description** | Pointer to **string** | Detailed description of this switch hardware. | [optional] [readonly] 
+**EndMac** | Pointer to **string** | The ending MAC address of the switch hardware like \&quot;d0-e0-42-87-39-5f\&quot;. | [optional] 
 **EthernetSwitchingMode** | Pointer to **string** | The user configured Ethernet switching mode for this switch (End-Host or Switch). * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [readonly] [default to "end-host"]
 **FcSwitchingMode** | Pointer to **string** | The user configured FC switching mode for this switch (End-Host or Switch). * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [readonly] [default to "end-host"]
+**HwVersion** | Pointer to **string** | The Hardware version of the switch hardware. | [optional] 
+**Name** | Pointer to **string** | The name of the switch card like Line Card-1. | [optional] 
 **NumPorts** | Pointer to **int64** | Number of ports present in this switch hardware. | [optional] [readonly] 
 **OutOfBandIpAddress** | Pointer to **string** | Field specifies this Switch&#39;s Out-of-band IP address. | [optional] [readonly] 
 **OutOfBandIpGateway** | Pointer to **string** | Field specifies this Switch&#39;s default gateway for the out-of-band management interface. | [optional] [readonly] 
 **OutOfBandIpMask** | Pointer to **string** | Field specifies the Netmask for this Switch&#39;s Out-of-band IP address. | [optional] 
+**OutOfBandMac** | Pointer to **string** | The MAC address of the Switch&#39;s out-of-band management interface. | [optional] [readonly] 
+**PartNumber** | Pointer to **string** | The part number of the switch hardware. | [optional] 
+**PowerState** | Pointer to **string** | Power state of the switch hardware. * &#x60;unknown&#x60; - The power state of the switch hardware is unknown. * &#x60;off&#x60; - The power state of the switch hardware is off. * &#x60;on&#x60; - The power state of the switch hardware is on. * &#x60;deny&#x60; - The power state of the switch hardware is deny. * &#x60;multi-boot-fail&#x60; - The power state of the switch hardware is multi-boot-fail. | [optional] [default to "unknown"]
 **SlotId** | Pointer to **int64** | Slot identifier of the local Switch slot Interface. | [optional] [readonly] 
 **State** | Pointer to **string** | Operational state of the switch hardware. | [optional] [readonly] 
+**Status** | Pointer to **string** | The connection status of the switch hardware like up/down. * &#x60;Down&#x60; - Connection status of the switch card is down. * &#x60;Up&#x60; - Connection status of the switch card is up. | [optional] [default to "Down"]
 **SwitchId** | Pointer to **string** | Switch Identifier that is local to a cluster. | [optional] [readonly] 
 **Thermal** | Pointer to **string** | The Thermal status of the fabric interconnect. * &#x60;unknown&#x60; - The default state of the sensor (in case no data is received). * &#x60;ok&#x60; - State of the sensor indicating the sensor&#39;s temperature range is okay. * &#x60;upper-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely high above normal range. * &#x60;upper-critical&#x60; - State of the sensor indicating that the temperature is above normal range. * &#x60;upper-non-critical&#x60; - State of the sensor indicating that the temperature is a little above the normal range. * &#x60;lower-non-critical&#x60; - State of the sensor indicating that the temperature is a little below the normal range. * &#x60;lower-critical&#x60; - State of the sensor indicating that the temperature is below normal range. * &#x60;lower-non-recoverable&#x60; - State of the sensor indicating that the temperature is extremely below normal range. | [optional] [default to "unknown"]
+**Type** | Pointer to **string** | Type of the switch card based on the capability like 4 Gbps or 2 Gbps type etc. | [optional] 
 **FcPortChannels** | Pointer to [**[]FcPortChannelRelationship**](FcPortChannelRelationship.md) | An array of relationships to fcPortChannel resources. | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NetworkElementRelationship**](NetworkElementRelationship.md) |  | [optional] 
@@ -83,6 +92,31 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetBaseMac
+
+`func (o *EquipmentSwitchCard) GetBaseMac() string`
+
+GetBaseMac returns the BaseMac field if non-nil, zero value otherwise.
+
+### GetBaseMacOk
+
+`func (o *EquipmentSwitchCard) GetBaseMacOk() (*string, bool)`
+
+GetBaseMacOk returns a tuple with the BaseMac field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBaseMac
+
+`func (o *EquipmentSwitchCard) SetBaseMac(v string)`
+
+SetBaseMac sets BaseMac field to given value.
+
+### HasBaseMac
+
+`func (o *EquipmentSwitchCard) HasBaseMac() bool`
+
+HasBaseMac returns a boolean if a field has been set.
+
 ### GetDescription
 
 `func (o *EquipmentSwitchCard) GetDescription() string`
@@ -107,6 +141,31 @@ SetDescription sets Description field to given value.
 `func (o *EquipmentSwitchCard) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetEndMac
+
+`func (o *EquipmentSwitchCard) GetEndMac() string`
+
+GetEndMac returns the EndMac field if non-nil, zero value otherwise.
+
+### GetEndMacOk
+
+`func (o *EquipmentSwitchCard) GetEndMacOk() (*string, bool)`
+
+GetEndMacOk returns a tuple with the EndMac field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEndMac
+
+`func (o *EquipmentSwitchCard) SetEndMac(v string)`
+
+SetEndMac sets EndMac field to given value.
+
+### HasEndMac
+
+`func (o *EquipmentSwitchCard) HasEndMac() bool`
+
+HasEndMac returns a boolean if a field has been set.
 
 ### GetEthernetSwitchingMode
 
@@ -157,6 +216,56 @@ SetFcSwitchingMode sets FcSwitchingMode field to given value.
 `func (o *EquipmentSwitchCard) HasFcSwitchingMode() bool`
 
 HasFcSwitchingMode returns a boolean if a field has been set.
+
+### GetHwVersion
+
+`func (o *EquipmentSwitchCard) GetHwVersion() string`
+
+GetHwVersion returns the HwVersion field if non-nil, zero value otherwise.
+
+### GetHwVersionOk
+
+`func (o *EquipmentSwitchCard) GetHwVersionOk() (*string, bool)`
+
+GetHwVersionOk returns a tuple with the HwVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHwVersion
+
+`func (o *EquipmentSwitchCard) SetHwVersion(v string)`
+
+SetHwVersion sets HwVersion field to given value.
+
+### HasHwVersion
+
+`func (o *EquipmentSwitchCard) HasHwVersion() bool`
+
+HasHwVersion returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *EquipmentSwitchCard) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *EquipmentSwitchCard) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *EquipmentSwitchCard) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *EquipmentSwitchCard) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetNumPorts
 
@@ -258,6 +367,81 @@ SetOutOfBandIpMask sets OutOfBandIpMask field to given value.
 
 HasOutOfBandIpMask returns a boolean if a field has been set.
 
+### GetOutOfBandMac
+
+`func (o *EquipmentSwitchCard) GetOutOfBandMac() string`
+
+GetOutOfBandMac returns the OutOfBandMac field if non-nil, zero value otherwise.
+
+### GetOutOfBandMacOk
+
+`func (o *EquipmentSwitchCard) GetOutOfBandMacOk() (*string, bool)`
+
+GetOutOfBandMacOk returns a tuple with the OutOfBandMac field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutOfBandMac
+
+`func (o *EquipmentSwitchCard) SetOutOfBandMac(v string)`
+
+SetOutOfBandMac sets OutOfBandMac field to given value.
+
+### HasOutOfBandMac
+
+`func (o *EquipmentSwitchCard) HasOutOfBandMac() bool`
+
+HasOutOfBandMac returns a boolean if a field has been set.
+
+### GetPartNumber
+
+`func (o *EquipmentSwitchCard) GetPartNumber() string`
+
+GetPartNumber returns the PartNumber field if non-nil, zero value otherwise.
+
+### GetPartNumberOk
+
+`func (o *EquipmentSwitchCard) GetPartNumberOk() (*string, bool)`
+
+GetPartNumberOk returns a tuple with the PartNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartNumber
+
+`func (o *EquipmentSwitchCard) SetPartNumber(v string)`
+
+SetPartNumber sets PartNumber field to given value.
+
+### HasPartNumber
+
+`func (o *EquipmentSwitchCard) HasPartNumber() bool`
+
+HasPartNumber returns a boolean if a field has been set.
+
+### GetPowerState
+
+`func (o *EquipmentSwitchCard) GetPowerState() string`
+
+GetPowerState returns the PowerState field if non-nil, zero value otherwise.
+
+### GetPowerStateOk
+
+`func (o *EquipmentSwitchCard) GetPowerStateOk() (*string, bool)`
+
+GetPowerStateOk returns a tuple with the PowerState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPowerState
+
+`func (o *EquipmentSwitchCard) SetPowerState(v string)`
+
+SetPowerState sets PowerState field to given value.
+
+### HasPowerState
+
+`func (o *EquipmentSwitchCard) HasPowerState() bool`
+
+HasPowerState returns a boolean if a field has been set.
+
 ### GetSlotId
 
 `func (o *EquipmentSwitchCard) GetSlotId() int64`
@@ -308,6 +492,31 @@ SetState sets State field to given value.
 
 HasState returns a boolean if a field has been set.
 
+### GetStatus
+
+`func (o *EquipmentSwitchCard) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *EquipmentSwitchCard) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *EquipmentSwitchCard) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *EquipmentSwitchCard) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
 ### GetSwitchId
 
 `func (o *EquipmentSwitchCard) GetSwitchId() string`
@@ -357,6 +566,31 @@ SetThermal sets Thermal field to given value.
 `func (o *EquipmentSwitchCard) HasThermal() bool`
 
 HasThermal returns a boolean if a field has been set.
+
+### GetType
+
+`func (o *EquipmentSwitchCard) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *EquipmentSwitchCard) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *EquipmentSwitchCard) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *EquipmentSwitchCard) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetFcPortChannels
 

@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_virtual_machine"
 description: |-
-  Depicts operations to control the life cycle of a virtual machine on a hypervisor.
+        Depicts operations to control the life cycle of a virtual machine on a hypervisor.
+
 ---
 
 # Data Source: intersight_virtualization_virtual_machine

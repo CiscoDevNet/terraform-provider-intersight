@@ -3,7 +3,8 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_config_result_entry"
 description: |-
-  An entry that describes the result of a Backup Profile state on the end device.
+        An entry that describes the result of a Backup Profile state on the end device.
+
 ---
 
 # Data Source: intersight_recovery_config_result_entry

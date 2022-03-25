@@ -3,7 +3,8 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_device_registration"
 description: |-
-  DeviceRegistration represents a device connector enabled endpoint which has registered with Intersight.
+        DeviceRegistration represents a device connector enabled endpoint which has registered with Intersight.
+
 ---
 
 # Data Source: intersight_asset_device_registration

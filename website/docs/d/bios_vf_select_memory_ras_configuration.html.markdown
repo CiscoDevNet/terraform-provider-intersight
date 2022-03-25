@@ -3,7 +3,8 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_vf_select_memory_ras_configuration"
 description: |-
-  Memory Reliability, availability and serviceability (RAS) configuration.
+        Memory Reliability, availability and serviceability (RAS) configuration.
+
 ---
 
 # Data Source: intersight_bios_vf_select_memory_ras_configuration

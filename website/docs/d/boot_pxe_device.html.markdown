@@ -3,7 +3,8 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_pxe_device"
 description: |-
-  Pxe Boot Device configured on the server.
+        Pxe Boot Device configured on the server.
+
 ---
 
 # Data Source: intersight_boot_pxe_device

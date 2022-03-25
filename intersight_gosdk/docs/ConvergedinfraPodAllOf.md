@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Summary** | Pointer to [**ConvergedinfraPodSummary**](ConvergedinfraPodSummary.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **PodResourceGroup** | Pointer to [**ResourceGroupRelationship**](ResourceGroupRelationship.md) |  | [optional] 
-**SolutionInstance** | Pointer to [**WorkflowSolutionInstanceRelationship**](WorkflowSolutionInstanceRelationship.md) |  | [optional] 
+**ServiceItemInstance** | Pointer to [**WorkflowServiceItemInstanceRelationship**](WorkflowServiceItemInstanceRelationship.md) |  | [optional] 
 
 ## Methods
 
@@ -171,30 +171,30 @@ SetPodResourceGroup sets PodResourceGroup field to given value.
 
 HasPodResourceGroup returns a boolean if a field has been set.
 
-### GetSolutionInstance
+### GetServiceItemInstance
 
-`func (o *ConvergedinfraPodAllOf) GetSolutionInstance() WorkflowSolutionInstanceRelationship`
+`func (o *ConvergedinfraPodAllOf) GetServiceItemInstance() WorkflowServiceItemInstanceRelationship`
 
-GetSolutionInstance returns the SolutionInstance field if non-nil, zero value otherwise.
+GetServiceItemInstance returns the ServiceItemInstance field if non-nil, zero value otherwise.
 
-### GetSolutionInstanceOk
+### GetServiceItemInstanceOk
 
-`func (o *ConvergedinfraPodAllOf) GetSolutionInstanceOk() (*WorkflowSolutionInstanceRelationship, bool)`
+`func (o *ConvergedinfraPodAllOf) GetServiceItemInstanceOk() (*WorkflowServiceItemInstanceRelationship, bool)`
 
-GetSolutionInstanceOk returns a tuple with the SolutionInstance field if it's non-nil, zero value otherwise
+GetServiceItemInstanceOk returns a tuple with the ServiceItemInstance field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSolutionInstance
+### SetServiceItemInstance
 
-`func (o *ConvergedinfraPodAllOf) SetSolutionInstance(v WorkflowSolutionInstanceRelationship)`
+`func (o *ConvergedinfraPodAllOf) SetServiceItemInstance(v WorkflowServiceItemInstanceRelationship)`
 
-SetSolutionInstance sets SolutionInstance field to given value.
+SetServiceItemInstance sets ServiceItemInstance field to given value.
 
-### HasSolutionInstance
+### HasServiceItemInstance
 
-`func (o *ConvergedinfraPodAllOf) HasSolutionInstance() bool`
+`func (o *ConvergedinfraPodAllOf) HasServiceItemInstance() bool`
 
-HasSolutionInstance returns a boolean if a field has been set.
+HasServiceItemInstance returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

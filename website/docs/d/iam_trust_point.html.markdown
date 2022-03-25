@@ -3,9 +3,10 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_trust_point"
 description: |-
-  To affirm the identity of trusted source.
-Allows import of third-party CA certificates in X.509 (CER) format.
-It can be a root CA or an trust chain that leads to a root CA.
+        To affirm the identity of trusted source.
+        Allows import of third-party CA certificates in X.509 (CER) format.
+        It can be a root CA or an trust chain that leads to a root CA.
+
 ---
 
 # Data Source: intersight_iam_trust_point

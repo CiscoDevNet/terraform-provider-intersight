@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -24,6 +24,8 @@ type VirtualizationBaseClusterAllOf struct {
 	AlarmSummary NullableCondAlarmSummary `json:"AlarmSummary,omitempty"`
 	// Identifies the broad type of the underlying hypervisor. * `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * `HyperFlexAp` - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * `IWE` - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * `Unknown` - The hypervisor running on the HyperFlex cluster is not known.
 	HypervisorType *string `json:"HypervisorType,omitempty"`
+	// Identifies the version of the hypervisor running on this cluster. Keeping the hypervisor version in the cluster makes it convenient for applications to validate their deployment needs. Defaults to an empty string.
+	HypervisorVersion *string `json:"HypervisorVersion,omitempty"`
 	// The internally generated identity of this cluster. This entity is not manipulated by users.
 	Identity          *string                               `json:"Identity,omitempty"`
 	MemoryCapacity    NullableVirtualizationMemoryCapacity  `json:"MemoryCapacity,omitempty"`
@@ -179,6 +181,38 @@ func (o *VirtualizationBaseClusterAllOf) HasHypervisorType() bool {
 // SetHypervisorType gets a reference to the given string and assigns it to the HypervisorType field.
 func (o *VirtualizationBaseClusterAllOf) SetHypervisorType(v string) {
 	o.HypervisorType = &v
+}
+
+// GetHypervisorVersion returns the HypervisorVersion field value if set, zero value otherwise.
+func (o *VirtualizationBaseClusterAllOf) GetHypervisorVersion() string {
+	if o == nil || o.HypervisorVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.HypervisorVersion
+}
+
+// GetHypervisorVersionOk returns a tuple with the HypervisorVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationBaseClusterAllOf) GetHypervisorVersionOk() (*string, bool) {
+	if o == nil || o.HypervisorVersion == nil {
+		return nil, false
+	}
+	return o.HypervisorVersion, true
+}
+
+// HasHypervisorVersion returns a boolean if a field has been set.
+func (o *VirtualizationBaseClusterAllOf) HasHypervisorVersion() bool {
+	if o != nil && o.HypervisorVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHypervisorVersion gets a reference to the given string and assigns it to the HypervisorVersion field.
+func (o *VirtualizationBaseClusterAllOf) SetHypervisorVersion(v string) {
+	o.HypervisorVersion = &v
 }
 
 // GetIdentity returns the Identity field value if set, zero value otherwise.
@@ -345,6 +379,9 @@ func (o VirtualizationBaseClusterAllOf) MarshalJSON() ([]byte, error) {
 	if o.HypervisorType != nil {
 		toSerialize["HypervisorType"] = o.HypervisorType
 	}
+	if o.HypervisorVersion != nil {
+		toSerialize["HypervisorVersion"] = o.HypervisorVersion
+	}
 	if o.Identity != nil {
 		toSerialize["Identity"] = o.Identity
 	}
@@ -379,6 +416,7 @@ func (o *VirtualizationBaseClusterAllOf) UnmarshalJSON(bytes []byte) (err error)
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AlarmSummary")
 		delete(additionalProperties, "HypervisorType")
+		delete(additionalProperties, "HypervisorVersion")
 		delete(additionalProperties, "Identity")
 		delete(additionalProperties, "MemoryCapacity")
 		delete(additionalProperties, "ProcessorCapacity")

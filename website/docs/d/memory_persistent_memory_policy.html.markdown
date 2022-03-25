@@ -3,7 +3,8 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_persistent_memory_policy"
 description: |-
-  The Persistent Memory policy defines the reusable Persistent Memory related configuration that can be applied on many servers. This policy allows the application of Persistent Memory Goals and creation of Persistent Memory Regions and Namespaces. The encryption of the Persistent Memory Modules can be enabled through this policy by providing a passphrase.
+        The Persistent Memory policy defines the reusable Persistent Memory related configuration that can be applied on many servers. This policy allows the application of Persistent Memory Goals and creation of Persistent Memory Regions and Namespaces. The encryption of the Persistent Memory Modules can be enabled through this policy by providing a passphrase.
+
 ---
 
 # Data Source: intersight_memory_persistent_memory_policy

@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_system_controller_details"
 description: |-
-  System controller slot details in APIC.
+        System controller slot details in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_system_controller_details

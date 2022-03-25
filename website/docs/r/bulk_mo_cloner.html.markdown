@@ -3,13 +3,14 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_mo_cloner"
 description: |-
-  The MO Cloner interface facilitates making n number of shallow copies of any resource instance which supports the CREATE operation.
-The copy of the child objects of the resource is not supported currently, so the child references will not be copied in the clone.
-The MO to be cloned should be specified as an MoRef object in the Sources.
-The Targets array should contain n JSON documents each compliant to RFC 7386. 
-For each target mo to be created, the user can specify the following -
-- new values for the identity properties, if applicable
-- new values for specific properties or references of the source MO which need to be overridden in the cloned object.
+        The MO Cloner interface facilitates making n number of shallow copies of any resource instance which supports the CREATE operation.
+        The copy of the child objects of the resource is not supported currently, so the child references will not be copied in the clone.
+        The MO to be cloned should be specified as an MoRef object in the Sources.
+        The Targets array should contain n JSON documents each compliant to RFC 7386.
+        For each target mo to be created, the user can specify the following -
+        - new values for the identity properties, if applicable
+        - new values for specific properties or references of the source MO which need to be overridden in the cloned object.
+
 ---
 
 # Resource: intersight_bulk_mo_cloner

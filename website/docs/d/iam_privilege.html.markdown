@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_privilege"
 description: |-
-  Privilege represents an action which can be performed in Intersight such as creating server profile, deleting a user etc.
+        Privilege represents an action which can be performed in Intersight such as creating server profile, deleting a user etc.
+
 ---
 
 # Data Source: intersight_iam_privilege

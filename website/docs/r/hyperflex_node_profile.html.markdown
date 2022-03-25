@@ -3,8 +3,9 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_node_profile"
 description: |-
-  A configuration profile per node in the HyperFlex cluster.
-It defines node settings such as IP address configuration for hypervisor management network, storage data network, HyperFlex management network, and the assigned physical server.
+        A configuration profile per node in the HyperFlex cluster.
+        It defines node settings such as IP address configuration for hypervisor management network, storage data network, HyperFlex management network, and the assigned physical server.
+
 ---
 
 # Resource: intersight_hyperflex_node_profile
@@ -74,7 +75,7 @@ This complex property has following sub-properties:
   + `moid`:(string) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `node_role`:(string)(ReadOnly) The role that this node performs in the HyperFlex cluster.* `Storage` - Cluster of storage nodes used to persist data.* `Compute` - Cluster of compute nodes used to execute business logic.* `Unknown` - This cluster type is Unknown. Expect Compute or Storage as valid values. 
+* `node_role`:(string)(ReadOnly) The role that this node performs in the HyperFlex cluster.* `Unknown` - The node role is not available.* `Storage` - The node persists data and contributes to the storage capacity of a cluster.* `Compute` - The node contributes to the compute capacity of a cluster. 
 * `owners`:
                 (Array of schema.TypeString) -(ReadOnly)
 * `parent`:(HashMap) -(ReadOnly) A reference to a moBaseMo resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

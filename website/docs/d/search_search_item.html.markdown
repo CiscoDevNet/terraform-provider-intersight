@@ -3,9 +3,10 @@ subcategory: "search"
 layout: "intersight"
 page_title: "Intersight: intersight_search_search_item"
 description: |-
-  The Search service entry point to search Intersight REST resources using OData query syntax.
-See [Search API query syntax](/apidocs/introduction/query/#search-api) for details
-about the query syntax.
+        The Search service entry point to search Intersight REST resources using OData query syntax.
+        See [Search API query syntax](/apidocs/introduction/query/#search-api) for details
+        about the query syntax.
+
 ---
 
 # Data Source: intersight_search_search_item

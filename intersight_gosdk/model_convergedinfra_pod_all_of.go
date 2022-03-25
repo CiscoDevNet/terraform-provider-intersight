@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -22,11 +22,11 @@ type ConvergedinfraPodAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
 	// The deployment type for this solution pod. * `FlexPodInfra` - The deployment type for a pod is of Infrastructure. * `FlexPodNG` - The deployment type for a pod is of Nextgen type.
-	DeploymentType       *string                               `json:"DeploymentType,omitempty"`
-	Summary              *ConvergedinfraPodSummary             `json:"Summary,omitempty"`
-	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
-	PodResourceGroup     *ResourceGroupRelationship            `json:"PodResourceGroup,omitempty"`
-	SolutionInstance     *WorkflowSolutionInstanceRelationship `json:"SolutionInstance,omitempty"`
+	DeploymentType       *string                                  `json:"DeploymentType,omitempty"`
+	Summary              *ConvergedinfraPodSummary                `json:"Summary,omitempty"`
+	Organization         *OrganizationOrganizationRelationship    `json:"Organization,omitempty"`
+	PodResourceGroup     *ResourceGroupRelationship               `json:"PodResourceGroup,omitempty"`
+	ServiceItemInstance  *WorkflowServiceItemInstanceRelationship `json:"ServiceItemInstance,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -231,36 +231,36 @@ func (o *ConvergedinfraPodAllOf) SetPodResourceGroup(v ResourceGroupRelationship
 	o.PodResourceGroup = &v
 }
 
-// GetSolutionInstance returns the SolutionInstance field value if set, zero value otherwise.
-func (o *ConvergedinfraPodAllOf) GetSolutionInstance() WorkflowSolutionInstanceRelationship {
-	if o == nil || o.SolutionInstance == nil {
-		var ret WorkflowSolutionInstanceRelationship
+// GetServiceItemInstance returns the ServiceItemInstance field value if set, zero value otherwise.
+func (o *ConvergedinfraPodAllOf) GetServiceItemInstance() WorkflowServiceItemInstanceRelationship {
+	if o == nil || o.ServiceItemInstance == nil {
+		var ret WorkflowServiceItemInstanceRelationship
 		return ret
 	}
-	return *o.SolutionInstance
+	return *o.ServiceItemInstance
 }
 
-// GetSolutionInstanceOk returns a tuple with the SolutionInstance field value if set, nil otherwise
+// GetServiceItemInstanceOk returns a tuple with the ServiceItemInstance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConvergedinfraPodAllOf) GetSolutionInstanceOk() (*WorkflowSolutionInstanceRelationship, bool) {
-	if o == nil || o.SolutionInstance == nil {
+func (o *ConvergedinfraPodAllOf) GetServiceItemInstanceOk() (*WorkflowServiceItemInstanceRelationship, bool) {
+	if o == nil || o.ServiceItemInstance == nil {
 		return nil, false
 	}
-	return o.SolutionInstance, true
+	return o.ServiceItemInstance, true
 }
 
-// HasSolutionInstance returns a boolean if a field has been set.
-func (o *ConvergedinfraPodAllOf) HasSolutionInstance() bool {
-	if o != nil && o.SolutionInstance != nil {
+// HasServiceItemInstance returns a boolean if a field has been set.
+func (o *ConvergedinfraPodAllOf) HasServiceItemInstance() bool {
+	if o != nil && o.ServiceItemInstance != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetSolutionInstance gets a reference to the given WorkflowSolutionInstanceRelationship and assigns it to the SolutionInstance field.
-func (o *ConvergedinfraPodAllOf) SetSolutionInstance(v WorkflowSolutionInstanceRelationship) {
-	o.SolutionInstance = &v
+// SetServiceItemInstance gets a reference to the given WorkflowServiceItemInstanceRelationship and assigns it to the ServiceItemInstance field.
+func (o *ConvergedinfraPodAllOf) SetServiceItemInstance(v WorkflowServiceItemInstanceRelationship) {
+	o.ServiceItemInstance = &v
 }
 
 func (o ConvergedinfraPodAllOf) MarshalJSON() ([]byte, error) {
@@ -283,8 +283,8 @@ func (o ConvergedinfraPodAllOf) MarshalJSON() ([]byte, error) {
 	if o.PodResourceGroup != nil {
 		toSerialize["PodResourceGroup"] = o.PodResourceGroup
 	}
-	if o.SolutionInstance != nil {
-		toSerialize["SolutionInstance"] = o.SolutionInstance
+	if o.ServiceItemInstance != nil {
+		toSerialize["ServiceItemInstance"] = o.ServiceItemInstance
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -310,7 +310,7 @@ func (o *ConvergedinfraPodAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Summary")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "PodResourceGroup")
-		delete(additionalProperties, "SolutionInstance")
+		delete(additionalProperties, "ServiceItemInstance")
 		o.AdditionalProperties = additionalProperties
 	}
 

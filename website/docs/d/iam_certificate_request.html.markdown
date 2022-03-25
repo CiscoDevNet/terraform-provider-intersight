@@ -3,8 +3,9 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_certificate_request"
 description: |-
-  The information required to generate a certificate signing request (CSR),
-which is a block of encoded text that is given to a Certificate Authority when applying for an SSL Certificate.
+        The information required to generate a certificate signing request (CSR),
+        which is a block of encoded text that is given to a Certificate Authority when applying for an SSL Certificate.
+
 ---
 
 # Data Source: intersight_iam_certificate_request

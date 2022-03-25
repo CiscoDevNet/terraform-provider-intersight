@@ -3,7 +3,8 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_download_spec"
 description: |-
-  The URL, certificate and other associated information required to download an image listed in an Intersight catalog.
+        The URL, certificate and other associated information required to download an image listed in an Intersight catalog.
+
 ---
 
 # Data Source: intersight_softwarerepository_download_spec

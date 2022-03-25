@@ -3,7 +3,8 @@ subcategory: "vnc"
 layout: "intersight"
 page_title: "Intersight: intersight_vnc_console"
 description: |-
-  API to launch the Intersight Workload Engine virtual machine console.
+        API to launch the Intersight Workload Engine virtual machine console.
+
 ---
 
 # Resource: intersight_vnc_console

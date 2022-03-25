@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_svm_event"
 description: |-
-  An event where the impacted resource type is a storage vm.
+        An event where the impacted resource type is a storage vm.
+
 ---
 
 # Data Source: intersight_storage_net_app_svm_event

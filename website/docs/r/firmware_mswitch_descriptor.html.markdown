@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_mswitch_descriptor"
 description: |-
-  Descriptor to uniquely identify a mSwitch component.
+        Descriptor to uniquely identify a mSwitch component.
+
 ---
 
 # Resource: intersight_firmware_mswitch_descriptor

@@ -279,6 +279,11 @@ func dataSourceEquipmentPsu() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"name": {
+			Description: "This field is to provide name for the power supply unit.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"network_element": {
 			Description: "A reference to a networkElement resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -946,6 +951,11 @@ func dataSourceEquipmentPsu() *schema.Resource {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "This field is to provide name for the power supply unit.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1685,6 +1695,11 @@ func dataSourceEquipmentPsuRead(c context.Context, d *schema.ResourceData, meta 
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
+	}
+
 	if v, ok := d.GetOk("network_element"); ok {
 		p := make([]models.NetworkElementRelationship, 0, 1)
 		s := v.([]interface{})
@@ -2177,6 +2192,7 @@ func dataSourceEquipmentPsuRead(c context.Context, d *schema.ResourceData, meta 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 
 				temp["network_element"] = flattenMapNetworkElementRelationship(s.GetNetworkElement(), d)
 				temp["object_type"] = (s.GetObjectType())

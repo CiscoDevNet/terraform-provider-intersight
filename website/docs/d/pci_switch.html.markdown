@@ -3,7 +3,8 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_switch"
 description: |-
-  PCI Switch present in a server connected to two GPUs and one PCIe adapter.
+        PCI Switch present in a server connected to two GPUs and one PCIe adapter.
+
 ---
 
 # Data Source: intersight_pci_switch

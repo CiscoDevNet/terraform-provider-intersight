@@ -3,7 +3,8 @@ subcategory: "graphics"
 layout: "intersight"
 page_title: "Intersight: intersight_graphics_controller"
 description: |-
-  Controller for a Graphics Card.
+        Controller for a Graphics Card.
+
 ---
 
 # Data Source: intersight_graphics_controller

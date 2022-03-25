@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ip_access_management"
 description: |-
-  The access management based on IP address.
+        The access management based on IP address.
+
 ---
 
 # Data Source: intersight_iam_ip_access_management

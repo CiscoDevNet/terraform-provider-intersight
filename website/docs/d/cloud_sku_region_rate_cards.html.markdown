@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_sku_region_rate_cards"
 description: |-
-  Base sku for containing price information for instance type, volumes, containers.
+        Base sku for containing price information for instance type, volumes, containers.
+
 ---
 
 # Data Source: intersight_cloud_sku_region_rate_cards

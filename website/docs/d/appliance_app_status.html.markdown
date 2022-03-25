@@ -3,7 +3,8 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_app_status"
 description: |-
-  Status of an application.
+        Status of an application.
+
 ---
 
 # Data Source: intersight_appliance_app_status

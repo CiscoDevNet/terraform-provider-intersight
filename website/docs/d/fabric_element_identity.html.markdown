@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_element_identity"
 description: |-
-  Identity object that uniquely represents a network element object under the domain.
+        Identity object that uniquely represents a network element object under the domain.
+
 ---
 
 # Data Source: intersight_fabric_element_identity

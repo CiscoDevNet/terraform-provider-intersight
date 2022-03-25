@@ -3,7 +3,8 @@ subcategory: "macpool"
 layout: "intersight"
 page_title: "Intersight: intersight_macpool_id_block"
 description: |-
-  A block of contiguous MAC addresses that are part of a pool.
+        A block of contiguous MAC addresses that are part of a pool.
+
 ---
 
 # Data Source: intersight_macpool_id_block

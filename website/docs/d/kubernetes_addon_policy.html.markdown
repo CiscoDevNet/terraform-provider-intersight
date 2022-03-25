@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_addon_policy"
 description: |-
-  A policy that defines which AddonDefinitions to use.
+        A policy that defines which AddonDefinitions to use.
+
 ---
 
 # Data Source: intersight_kubernetes_addon_policy

@@ -3,7 +3,8 @@ subcategory: "oprs"
 layout: "intersight"
 page_title: "Intersight: intersight_oprs_deployment"
 description: |-
-  Monitors the status of operator deployed in the assist.
+        Monitors the status of operator deployed in the assist.
+
 ---
 
 # Resource: intersight_oprs_deployment

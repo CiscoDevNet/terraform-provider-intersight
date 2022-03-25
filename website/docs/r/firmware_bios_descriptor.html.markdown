@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_bios_descriptor"
 description: |-
-  Descriptor to uniquely identify a BIOS.
+        Descriptor to uniquely identify a BIOS.
+
 ---
 
 # Resource: intersight_firmware_bios_descriptor

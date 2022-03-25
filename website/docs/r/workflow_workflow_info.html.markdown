@@ -3,7 +3,8 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_workflow_info"
 description: |-
-  Contains information for a workflow execution which is a runtime instance of workflow.
+        Contains information for a workflow execution which is a runtime instance of workflow.
+
 ---
 
 # Resource: intersight_workflow_workflow_info
@@ -114,6 +115,13 @@ This complex property has following sub-properties:
 * `progress`:(float)(ReadOnly) This field indicates percentage of workflow task execution. 
 * `properties`:(HashMap) -(ReadOnly) Type to capture all the properties for the workflow info passed on from workflow definition. 
 This complex property has following sub-properties:
+  + `cancelable`:(HashMap) -(ReadOnly) Holds the parameters and conditions for a workflow to be cancelable. 
+This complex property has following sub-properties:
+    + `cancelable_states`:
+                (Array of schema.TypeString) -
+    + `enabled`:(bool) When true the workflow can be cancelled. The action can be further restricted by the mode and cancelableStates properties. 
+    + `mode`:(string) Mode controls how the workflow can be canceled.* `ApiOnly` - The workflow can only be canceled via API call.* `All` - The workflow can be canceled from API or from the user interface. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `retryable`:(bool) When true, this workflow can be retried if has not been modified for more than a period of 2 weeks. 
   + `rollback_action`:(string)(ReadOnly) Status of rollback for this workflow instance. The rollback action of the workflow can be enabled, disabled, completed.* `Disabled` - Status of the rollback action when workflow is disabled for rollback.* `Enabled` - Status of the rollback action when workflow is enabled for rollback.* `Completed` - Status of the rollback action once workflow completes the rollback for all eligible tasks. 

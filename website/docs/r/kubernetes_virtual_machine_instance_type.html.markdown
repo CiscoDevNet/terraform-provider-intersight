@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_virtual_machine_instance_type"
 description: |-
-  A policy specifying CPU, Memory and Disk size configuration for a Virtual Machine.
+        A policy specifying CPU, Memory and Disk size configuration for a Virtual Machine.
+
 ---
 
 # Resource: intersight_kubernetes_virtual_machine_instance_type

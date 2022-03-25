@@ -3,11 +3,12 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_mo_merger"
 description: |-
-  The MO Merger interface facilitates merging of all or selected properties of any MO instance to one or more MO instances.
-The Sources array should contain the list of source MO instances as MoRef objects.
-The Targets array should contain the list of target MO instances as MoRef objects.
-The TargetConfig property is applicable only for a merge operation. If a configuration action needs to be applied on all target MOs,
-it can be specified using this property.
+        The MO Merger interface facilitates merging of all or selected properties of any MO instance to one or more MO instances.
+        The Sources array should contain the list of source MO instances as MoRef objects.
+        The Targets array should contain the list of target MO instances as MoRef objects.
+        The TargetConfig property is applicable only for a merge operation. If a configuration action needs to be applied on all target MOs,
+        it can be specified using this property.
+
 ---
 
 # Resource: intersight_bulk_mo_merger

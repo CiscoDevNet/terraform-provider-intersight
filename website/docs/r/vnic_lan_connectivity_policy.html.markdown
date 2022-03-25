@@ -3,7 +3,8 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_lan_connectivity_policy"
 description: |-
-  A LAN Connectivity Policy determines the network resources and the connections between the server and the LAN on the network. This policy uses Consistent Device Naming to configure the vNIC. You can configure a usNIC or VMQ connection for the vNIC to improve network performance.
+        A LAN Connectivity Policy determines the network resources and the connections between the server and the LAN on the network. This policy uses Consistent Device Naming to configure the vNIC. You can configure a usNIC or VMQ connection for the vNIC to improve network performance.
+
 ---
 
 # Resource: intersight_vnic_lan_connectivity_policy

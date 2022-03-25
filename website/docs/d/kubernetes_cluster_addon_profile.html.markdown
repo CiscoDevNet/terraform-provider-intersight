@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_cluster_addon_profile"
 description: |-
-  A profile that describes a collection of Addons for a particular cluster.
+        A profile that describes a collection of Addons for a particular cluster.
+
 ---
 
 # Data Source: intersight_kubernetes_cluster_addon_profile

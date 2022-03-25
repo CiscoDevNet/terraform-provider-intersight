@@ -3,8 +3,9 @@ subcategory: "notification"
 layout: "intersight"
 page_title: "Intersight: intersight_notification_account_subscription"
 description: |-
-  AccountSubscription is a concrete type that extends abstract Subscription type and intent to be used only
-for account level subscriptions by Account Administrator.
+        AccountSubscription is a concrete type that extends abstract Subscription type and intent to be used only
+        for account level subscriptions by Account Administrator.
+
 ---
 
 # Resource: intersight_notification_account_subscription

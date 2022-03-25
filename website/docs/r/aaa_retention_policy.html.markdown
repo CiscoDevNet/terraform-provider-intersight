@@ -3,7 +3,8 @@ subcategory: "aaa"
 layout: "intersight"
 page_title: "Intersight: intersight_aaa_retention_policy"
 description: |-
-  An account level policy specifying the period for the audit log retention.
+        An account level policy specifying the period for the audit log retention.
+
 ---
 
 # Resource: intersight_aaa_retention_policy

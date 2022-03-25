@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ldap_policy"
 description: |-
-  LDAP Policy configurations.
+        LDAP Policy configurations.
+
 ---
 
 # Data Source: intersight_iam_ldap_policy

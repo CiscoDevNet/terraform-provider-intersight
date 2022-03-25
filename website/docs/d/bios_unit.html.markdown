@@ -3,7 +3,8 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_unit"
 description: |-
-  The BIOS Unit present on a server.
+        The BIOS Unit present on a server.
+
 ---
 
 # Data Source: intersight_bios_unit

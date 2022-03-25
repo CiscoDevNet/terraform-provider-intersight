@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_nexus_dashboard_memory_details"
 description: |-
-  Details of Nexus Dashboard's memory.
+        Details of Nexus Dashboard's memory.
+
 ---
 
 # Data Source: intersight_niatelemetry_nexus_dashboard_memory_details

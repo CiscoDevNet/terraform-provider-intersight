@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **FirmwareSupportability** | Pointer to **string** | Describes whether the running CIMC version supports Intersight managed mode. * &#x60;Unknown&#x60; - The running firmware version is unknown. * &#x60;Supported&#x60; - The running firmware version is known and supports IMM mode. * &#x60;NotSupported&#x60; - The running firmware version is known and does not support IMM mode. | [optional] [readonly] [default to "Unknown"]
 **Identifier** | Pointer to **int64** | Numeric Identifier assigned by the management system to the equipment. | [optional] [readonly] 
 **IoCardIdentityList** | Pointer to [**[]EquipmentIoCardIdentity**](EquipmentIoCardIdentity.md) |  | [optional] 
+**LastDiscoveryTriggered** | Pointer to **string** | Denotes the type of discovery that was most recently triggered on this server. * &#x60;Unknown&#x60; - The last discovery type is unknown. * &#x60;Deep&#x60; - The last discovery triggered is deep. * &#x60;Shallow&#x60; - The last discovery triggered is shallow. | [optional] [readonly] [default to "Unknown"]
 **Lifecycle** | Pointer to **string** | The equipment&#39;s lifecycle status. * &#x60;None&#x60; - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * &#x60;Active&#x60; - Default Lifecycle State for a physical entity. * &#x60;Decommissioned&#x60; - Decommission Lifecycle state. * &#x60;DecommissionInProgress&#x60; - Decommission Inprogress Lifecycle state. * &#x60;RecommissionInProgress&#x60; - Recommission Inprogress Lifecycle state. * &#x60;OperationFailed&#x60; - Failed Operation Lifecycle state. * &#x60;ReackInProgress&#x60; - ReackInProgress Lifecycle state. * &#x60;RemoveInProgress&#x60; - RemoveInProgress Lifecycle state. * &#x60;Discovered&#x60; - Discovered Lifecycle state. * &#x60;DiscoveryInProgress&#x60; - DiscoveryInProgress Lifecycle state. * &#x60;DiscoveryFailed&#x60; - DiscoveryFailed Lifecycle state. * &#x60;FirmwareUpgradeInProgress&#x60; - Firmware upgrade is in progress on given physical entity. * &#x60;BladeMigrationInProgress&#x60; - Server slot migration is in progress on given physical entity. * &#x60;Inactive&#x60; - Inactive Lifecycle state. * &#x60;ReplaceInProgress&#x60; - ReplaceInProgress Lifecycle state. * &#x60;SlotMismatch&#x60; - The blade server is detected in a different chassis/slot than it was previously. | [optional] [readonly] [default to "None"]
 **Model** | Pointer to **string** | The vendor provided model name for the equipment. | [optional] [readonly] 
 **Presence** | Pointer to **string** | The presence state of the blade server. * &#x60;Unknown&#x60; - The default presence state. * &#x60;Equipped&#x60; - The server is equipped in the slot. * &#x60;EquippedMismatch&#x60; - The slot is equipped, but there is another server currently inventoried in the slot. * &#x60;Missing&#x60; - The server is not present in the given slot. | [optional] [readonly] [default to "Unknown"]
@@ -319,6 +320,31 @@ HasIoCardIdentityList returns a boolean if a field has been set.
 `func (o *EquipmentIdentitySummary) UnsetIoCardIdentityList()`
 
 UnsetIoCardIdentityList ensures that no value is present for IoCardIdentityList, not even an explicit nil
+### GetLastDiscoveryTriggered
+
+`func (o *EquipmentIdentitySummary) GetLastDiscoveryTriggered() string`
+
+GetLastDiscoveryTriggered returns the LastDiscoveryTriggered field if non-nil, zero value otherwise.
+
+### GetLastDiscoveryTriggeredOk
+
+`func (o *EquipmentIdentitySummary) GetLastDiscoveryTriggeredOk() (*string, bool)`
+
+GetLastDiscoveryTriggeredOk returns a tuple with the LastDiscoveryTriggered field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastDiscoveryTriggered
+
+`func (o *EquipmentIdentitySummary) SetLastDiscoveryTriggered(v string)`
+
+SetLastDiscoveryTriggered sets LastDiscoveryTriggered field to given value.
+
+### HasLastDiscoveryTriggered
+
+`func (o *EquipmentIdentitySummary) HasLastDiscoveryTriggered() bool`
+
+HasLastDiscoveryTriggered returns a boolean if a field has been set.
+
 ### GetLifecycle
 
 `func (o *EquipmentIdentitySummary) GetLifecycle() string`

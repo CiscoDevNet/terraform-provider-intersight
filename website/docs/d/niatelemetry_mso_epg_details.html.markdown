@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_mso_epg_details"
 description: |-
-  Details of Epgs configured from the Multi-Site Orchestrator.
+        Details of Epgs configured from the Multi-Site Orchestrator.
+
 ---
 
 # Data Source: intersight_niatelemetry_mso_epg_details

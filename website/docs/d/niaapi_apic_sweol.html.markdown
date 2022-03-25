@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_sweol"
 description: |-
-  The software end of life notice for APIC.
+        The software end of life notice for APIC.
+
 ---
 
 # Data Source: intersight_niaapi_apic_sweol

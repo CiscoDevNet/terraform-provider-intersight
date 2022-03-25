@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_transceiver"
 description: |-
-  Transceiver information on the chassis.
+        Transceiver information on the chassis.
+
 ---
 
 # Data Source: intersight_equipment_transceiver
@@ -14,13 +15,18 @@ All objects matching the filter criteria are fetched through pagination.
 To access the ith object of the results obtained, use `data.intersight_equipment_transceiver.<custom_name>.results[i].<propertyname>`.
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `account_moid`:(string) The Account ID for this managed object. 
+* `cisco_extended_id_number`:(string) The cisco extended Id number state of the pluggable SFP. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `interface_type`:(string) Interface type of transceiver copper or fiber. 
+* `manufacturer_part_number`:(string) The manufacturer part number of the pluggable SFP. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) This field identifies the model of the given component. 
+* `module_id`:(int) Fabric extender identifier. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `name`:(string) The name of the pluggable transceiver. 
 * `oper_speed`:(string) Operational speed of the transceiver. 
 * `oper_state`:(string) Operational state of the transceiver. 
 * `oper_state_qual`:(string) Reason for this transceiver's operational state. 
@@ -31,6 +37,7 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) This field identifies the serial of the given component. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `slot_id`:(int) Switch expansion slot module identifier. 
+* `status`:(string) Status of the pluggable SFP. 
 * `switch_id`:(string) Switch Identifier that is local to a cluster. 
 * `type`:(string) The type of the transceiver. 
 * `vendor`:(string) This field identifies the vendor of the given component. 

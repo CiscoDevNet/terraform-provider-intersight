@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -38,10 +38,12 @@ type WorkflowSolutionActionDefinition struct {
 	// The output mappings from workflows in the action definition to the solution output definition. Any output from core or post-core workflow can be mapped to solution output definition. The output can be referred using the name of the workflow definition and the output name in the following format '${<ActionWorkflowDefinition.Name>.output.<outputName>'.
 	OutputParameters interface{} `json:"OutputParameters,omitempty"`
 	// Value in seconds to specify the periodicity of the workflows. A zero value indicate the workflow will not execute periodically. A non-zero value indicate, the workflow will be executed periodically with this periodicity.
-	Periodicity           *int64                                  `json:"Periodicity,omitempty"`
-	PostCoreWorkflows     []WorkflowActionWorkflowDefinition      `json:"PostCoreWorkflows,omitempty"`
-	PreCoreWorkflows      []WorkflowActionWorkflowDefinition      `json:"PreCoreWorkflows,omitempty"`
-	StopWorkflows         []WorkflowActionWorkflowDefinition      `json:"StopWorkflows,omitempty"`
+	Periodicity       *int64                             `json:"Periodicity,omitempty"`
+	PostCoreWorkflows []WorkflowActionWorkflowDefinition `json:"PostCoreWorkflows,omitempty"`
+	PreCoreWorkflows  []WorkflowActionWorkflowDefinition `json:"PreCoreWorkflows,omitempty"`
+	StopWorkflows     []WorkflowActionWorkflowDefinition `json:"StopWorkflows,omitempty"`
+	// Stores the upgraded Moid for help during future lookups.
+	UpgradedMoid          *string                                 `json:"UpgradedMoid,omitempty"`
 	ValidationInformation NullableWorkflowValidationInformation   `json:"ValidationInformation,omitempty"`
 	ValidationWorkflows   []WorkflowActionWorkflowDefinition      `json:"ValidationWorkflows,omitempty"`
 	SolutionDefinition    *WorkflowSolutionDefinitionRelationship `json:"SolutionDefinition,omitempty"`
@@ -517,6 +519,38 @@ func (o *WorkflowSolutionActionDefinition) SetStopWorkflows(v []WorkflowActionWo
 	o.StopWorkflows = v
 }
 
+// GetUpgradedMoid returns the UpgradedMoid field value if set, zero value otherwise.
+func (o *WorkflowSolutionActionDefinition) GetUpgradedMoid() string {
+	if o == nil || o.UpgradedMoid == nil {
+		var ret string
+		return ret
+	}
+	return *o.UpgradedMoid
+}
+
+// GetUpgradedMoidOk returns a tuple with the UpgradedMoid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowSolutionActionDefinition) GetUpgradedMoidOk() (*string, bool) {
+	if o == nil || o.UpgradedMoid == nil {
+		return nil, false
+	}
+	return o.UpgradedMoid, true
+}
+
+// HasUpgradedMoid returns a boolean if a field has been set.
+func (o *WorkflowSolutionActionDefinition) HasUpgradedMoid() bool {
+	if o != nil && o.UpgradedMoid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpgradedMoid gets a reference to the given string and assigns it to the UpgradedMoid field.
+func (o *WorkflowSolutionActionDefinition) SetUpgradedMoid(v string) {
+	o.UpgradedMoid = &v
+}
+
 // GetValidationInformation returns the ValidationInformation field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WorkflowSolutionActionDefinition) GetValidationInformation() WorkflowValidationInformation {
 	if o == nil || o.ValidationInformation.Get() == nil {
@@ -709,6 +743,9 @@ func (o WorkflowSolutionActionDefinition) MarshalJSON() ([]byte, error) {
 	if o.StopWorkflows != nil {
 		toSerialize["StopWorkflows"] = o.StopWorkflows
 	}
+	if o.UpgradedMoid != nil {
+		toSerialize["UpgradedMoid"] = o.UpgradedMoid
+	}
 	if o.ValidationInformation.IsSet() {
 		toSerialize["ValidationInformation"] = o.ValidationInformation.Get()
 	}
@@ -749,10 +786,12 @@ func (o *WorkflowSolutionActionDefinition) UnmarshalJSON(bytes []byte) (err erro
 		// The output mappings from workflows in the action definition to the solution output definition. Any output from core or post-core workflow can be mapped to solution output definition. The output can be referred using the name of the workflow definition and the output name in the following format '${<ActionWorkflowDefinition.Name>.output.<outputName>'.
 		OutputParameters interface{} `json:"OutputParameters,omitempty"`
 		// Value in seconds to specify the periodicity of the workflows. A zero value indicate the workflow will not execute periodically. A non-zero value indicate, the workflow will be executed periodically with this periodicity.
-		Periodicity           *int64                                  `json:"Periodicity,omitempty"`
-		PostCoreWorkflows     []WorkflowActionWorkflowDefinition      `json:"PostCoreWorkflows,omitempty"`
-		PreCoreWorkflows      []WorkflowActionWorkflowDefinition      `json:"PreCoreWorkflows,omitempty"`
-		StopWorkflows         []WorkflowActionWorkflowDefinition      `json:"StopWorkflows,omitempty"`
+		Periodicity       *int64                             `json:"Periodicity,omitempty"`
+		PostCoreWorkflows []WorkflowActionWorkflowDefinition `json:"PostCoreWorkflows,omitempty"`
+		PreCoreWorkflows  []WorkflowActionWorkflowDefinition `json:"PreCoreWorkflows,omitempty"`
+		StopWorkflows     []WorkflowActionWorkflowDefinition `json:"StopWorkflows,omitempty"`
+		// Stores the upgraded Moid for help during future lookups.
+		UpgradedMoid          *string                                 `json:"UpgradedMoid,omitempty"`
 		ValidationInformation NullableWorkflowValidationInformation   `json:"ValidationInformation,omitempty"`
 		ValidationWorkflows   []WorkflowActionWorkflowDefinition      `json:"ValidationWorkflows,omitempty"`
 		SolutionDefinition    *WorkflowSolutionDefinitionRelationship `json:"SolutionDefinition,omitempty"`
@@ -778,6 +817,7 @@ func (o *WorkflowSolutionActionDefinition) UnmarshalJSON(bytes []byte) (err erro
 		varWorkflowSolutionActionDefinition.PostCoreWorkflows = varWorkflowSolutionActionDefinitionWithoutEmbeddedStruct.PostCoreWorkflows
 		varWorkflowSolutionActionDefinition.PreCoreWorkflows = varWorkflowSolutionActionDefinitionWithoutEmbeddedStruct.PreCoreWorkflows
 		varWorkflowSolutionActionDefinition.StopWorkflows = varWorkflowSolutionActionDefinitionWithoutEmbeddedStruct.StopWorkflows
+		varWorkflowSolutionActionDefinition.UpgradedMoid = varWorkflowSolutionActionDefinitionWithoutEmbeddedStruct.UpgradedMoid
 		varWorkflowSolutionActionDefinition.ValidationInformation = varWorkflowSolutionActionDefinitionWithoutEmbeddedStruct.ValidationInformation
 		varWorkflowSolutionActionDefinition.ValidationWorkflows = varWorkflowSolutionActionDefinitionWithoutEmbeddedStruct.ValidationWorkflows
 		varWorkflowSolutionActionDefinition.SolutionDefinition = varWorkflowSolutionActionDefinitionWithoutEmbeddedStruct.SolutionDefinition
@@ -813,6 +853,7 @@ func (o *WorkflowSolutionActionDefinition) UnmarshalJSON(bytes []byte) (err erro
 		delete(additionalProperties, "PostCoreWorkflows")
 		delete(additionalProperties, "PreCoreWorkflows")
 		delete(additionalProperties, "StopWorkflows")
+		delete(additionalProperties, "UpgradedMoid")
 		delete(additionalProperties, "ValidationInformation")
 		delete(additionalProperties, "ValidationWorkflows")
 		delete(additionalProperties, "SolutionDefinition")

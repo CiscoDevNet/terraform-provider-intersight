@@ -3,9 +3,10 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_security_holder"
 description: |-
-  Holder for organization aggregated permissions and global account permissions.
-User configures permissions for entire account or subset of organizations and specifies associated roles with each organization.
-Intersight aggregates all the permissions and stores per organization aggregate permissions in iam.ResourcePermission object.
+        Holder for organization aggregated permissions and global account permissions.
+        User configures permissions for entire account or subset of organizations and specifies associated roles with each organization.
+        Intersight aggregates all the permissions and stores per organization aggregate permissions in iam.ResourcePermission object.
+
 ---
 
 # Data Source: intersight_iam_security_holder

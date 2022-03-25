@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_physical_disk"
 description: |-
-  Physical Disk on a server.
+        Physical Disk on a server.
+
 ---
 
 # Data Source: intersight_storage_physical_disk

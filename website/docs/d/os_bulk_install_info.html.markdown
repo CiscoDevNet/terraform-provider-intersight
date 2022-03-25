@@ -3,8 +3,9 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_bulk_install_info"
 description: |-
-  This MO models the CSV file content which the user uploaded for OS installation. As part of the handler, necessary filed
-in the model can be populated along with respective validation.
+        This MO models the CSV file content which the user uploaded for OS installation. As part of the handler, necessary filed
+        in the model can be populated along with respective validation.
+
 ---
 
 # Data Source: intersight_os_bulk_install_info

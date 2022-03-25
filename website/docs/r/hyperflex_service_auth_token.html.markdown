@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_service_auth_token"
 description: |-
-  A Service auth token entity that represents HyperFlex Data Platform service AAA token.
+        A Service auth token entity that represents HyperFlex Data Platform service AAA token.
+
 ---
 
 # Resource: intersight_hyperflex_service_auth_token

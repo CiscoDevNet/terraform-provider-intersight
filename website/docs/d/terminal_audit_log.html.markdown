@@ -3,7 +3,8 @@ subcategory: "terminal"
 layout: "intersight"
 page_title: "Intersight: intersight_terminal_audit_log"
 description: |-
-  Audit log of remote terminal user sessions.
+        Audit log of remote terminal user sessions.
+
 ---
 
 # Data Source: intersight_terminal_audit_log

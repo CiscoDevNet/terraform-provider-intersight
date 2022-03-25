@@ -3,7 +3,8 @@ subcategory: "ipmioverlan"
 layout: "intersight"
 page_title: "Intersight: intersight_ipmioverlan_policy"
 description: |-
-  Intelligent Platform Management Interface Over LAN Policy.
+        Intelligent Platform Management Interface Over LAN Policy.
+
 ---
 
 # Data Source: intersight_ipmioverlan_policy

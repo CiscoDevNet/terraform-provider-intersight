@@ -3,7 +3,8 @@ subcategory: "inventory"
 layout: "intersight"
 page_title: "Intersight: intersight_inventory_generic_inventory"
 description: |-
-  Any inventory which is represented as a key / value pair. Example - moInvKv in UCSM representing OS tools running on ESX.
+        Any inventory which is represented as a key / value pair. Example - moInvKv in UCSM representing OS tools running on ESX.
+
 ---
 
 # Data Source: intersight_inventory_generic_inventory

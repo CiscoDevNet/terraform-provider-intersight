@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_virtual_drive"
 description: |-
-  A Virtual Disk Drive or Logical Unit Number.
+        A Virtual Disk Drive or Logical Unit Number.
+
 ---
 
 # Data Source: intersight_storage_virtual_drive

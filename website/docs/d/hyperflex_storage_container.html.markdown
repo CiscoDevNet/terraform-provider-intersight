@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_storage_container"
 description: |-
-  A storage container (datastore) entity.
+        A storage container (datastore) entity.
+
 ---
 
 # Data Source: intersight_hyperflex_storage_container

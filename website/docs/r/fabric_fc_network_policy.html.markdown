@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_fc_network_policy"
 description: |-
-  A policy for all the Virtual SAN networks to be deployed on the Fabric Interconnect.
+        A policy for all the Virtual SAN networks to be deployed on the Fabric Interconnect.
+
 ---
 
 # Resource: intersight_fabric_fc_network_policy

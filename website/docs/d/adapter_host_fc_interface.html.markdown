@@ -3,7 +3,8 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_host_fc_interface"
 description: |-
-  Host facing fibre channel interface on a server adapter.
+        Host facing fibre channel interface on a server adapter.
+
 ---
 
 # Data Source: intersight_adapter_host_fc_interface

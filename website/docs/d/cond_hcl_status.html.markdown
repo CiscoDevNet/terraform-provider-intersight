@@ -3,7 +3,8 @@ subcategory: "cond"
 layout: "intersight"
 page_title: "Intersight: intersight_cond_hcl_status"
 description: |-
-  The HCL status of a managed object after we have validated the managed object components' firmware and drivers against the HCL.
+        The HCL status of a managed object after we have validated the managed object components' firmware and drivers against the HCL.
+
 ---
 
 # Data Source: intersight_cond_hcl_status

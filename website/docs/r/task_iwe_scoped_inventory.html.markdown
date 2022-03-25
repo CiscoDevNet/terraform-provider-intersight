@@ -3,7 +3,8 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_iwe_scoped_inventory"
 description: |-
-  API to trigger on-demand IWE inventory to update modified objects in Intersight report.
+        API to trigger on-demand IWE inventory to update modified objects in Intersight report.
+
 ---
 
 # Resource: intersight_task_iwe_scoped_inventory

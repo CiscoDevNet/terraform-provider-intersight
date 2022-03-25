@@ -3,7 +3,8 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_iscsi_adapter_policy"
 description: |-
-  Set of iSCSI properties that govern the host-side behavior of the adapter.
+        Set of iSCSI properties that govern the host-side behavior of the adapter.
+
 ---
 
 # Data Source: intersight_vnic_iscsi_adapter_policy

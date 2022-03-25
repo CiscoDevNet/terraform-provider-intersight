@@ -159,6 +159,17 @@ func resourceCapabilityCimcFirmwareDescriptor() *schema.Resource {
 					}
 					return
 				}},
+			"local_user_pswd_supported_ver": {
+				Description: "Minimum server firmware version for local users password properties feature support.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -677,6 +688,10 @@ func resourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema.R
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in CapabilityCimcFirmwareDescriptor object: %s", err.Error())
+	}
+
+	if err := d.Set("local_user_pswd_supported_ver", (s.GetLocalUserPswdSupportedVer())); err != nil {
+		return diag.Errorf("error occurred while setting property LocalUserPswdSupportedVer in CapabilityCimcFirmwareDescriptor object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {

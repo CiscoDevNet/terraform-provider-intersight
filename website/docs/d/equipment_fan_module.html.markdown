@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fan_module"
 description: |-
-  This represents Fan module housing multiple fans for chassis/server.
+        This represents Fan module housing multiple fans for chassis/server.
+
 ---
 
 # Data Source: intersight_equipment_fan_module

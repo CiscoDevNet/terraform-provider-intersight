@@ -3,7 +3,8 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_solution_instance"
 description: |-
-  Solution instance is one instance of a solution based on a solution definition.
+        Solution instance is one instance of a solution based on a solution definition.
+
 ---
 
 # Data Source: intersight_workflow_solution_instance
@@ -23,5 +24,6 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) A name of the solution instance. Name of the solution instance must be unique within a type of Solution definition. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `status`:(string) Status of the solution instance which controls the actions that can be performed on this instance.* `NotCreated` - Solution is not yet created and it is in a draft mode. A solution instance can be deleted in this state.* `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started.* `Failed` - The last action on the solution failed and corrective measures need to be taken to bring the solution back to valid state.* `Okay` - The last action on the solution completed and the solution is in Okay state.* `Decommissioned` - The solution is decommissioned and can be safely deleted. Solution in any other state after it has been created cannot be deleted until it has been decommissioned. 
+* `upgraded_moid`:(string) Stores the upgraded Moid for help during future lookups. 
 * `user_id`:(string) The user identifier which indicates the user that started this workflow. 
  

@@ -3,7 +3,8 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_schedule_config_policy"
 description: |-
-  Base Schedule config which contains all the required inputs to do schedule on a local or remote server.
+        Base Schedule config which contains all the required inputs to do schedule on a local or remote server.
+
 ---
 
 # Resource: intersight_recovery_schedule_config_policy

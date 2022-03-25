@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_privilege_set"
 description: |-
-  A collection of privileges.
+        A collection of privileges.
+
 ---
 
 # Data Source: intersight_iam_privilege_set

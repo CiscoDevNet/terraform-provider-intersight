@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_iwe_host_vswitch"
 description: |-
-  A Intersight Workload Engine vSwitch entity that is part of a cluster wide dvSwitch.
+        A Intersight Workload Engine vSwitch entity that is part of a cluster wide dvSwitch.
+
 ---
 
 # Data Source: intersight_virtualization_iwe_host_vswitch

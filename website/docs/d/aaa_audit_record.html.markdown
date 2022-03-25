@@ -3,7 +3,8 @@ subcategory: "aaa"
 layout: "intersight"
 page_title: "Intersight: intersight_aaa_audit_record"
 description: |-
-  AuditRecord presents the configuration changes made by the user per transaction.
+        AuditRecord presents the configuration changes made by the user per transaction.
+
 ---
 
 # Data Source: intersight_aaa_audit_record

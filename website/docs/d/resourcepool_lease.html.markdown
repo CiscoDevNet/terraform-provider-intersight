@@ -3,7 +3,8 @@ subcategory: "resourcepool"
 layout: "intersight"
 page_title: "Intersight: intersight_resourcepool_lease"
 description: |-
-  Lease API invoked by passing resource pool, lease API will reserve or un-reserve the resource from the pool.
+        Lease API invoked by passing resource pool, lease API will reserve or un-reserve the resource from the pool.
+
 ---
 
 # Data Source: intersight_resourcepool_lease

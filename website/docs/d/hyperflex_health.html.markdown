@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_health"
 description: |-
-  The data health status and ability of the HyperFlex storage cluster to tolerate failures.
+        The data health status and ability of the HyperFlex storage cluster to tolerate failures.
+
 ---
 
 # Data Source: intersight_hyperflex_health

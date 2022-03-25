@@ -3,7 +3,8 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_category_mapper"
 description: |-
-  Maps a Cisco software repository image category identifier to its applicable hardware models.
+        Maps a Cisco software repository image category identifier to its applicable hardware models.
+
 ---
 
 # Data Source: intersight_softwarerepository_category_mapper

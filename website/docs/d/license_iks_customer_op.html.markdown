@@ -3,7 +3,8 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_iks_customer_op"
 description: |-
-  Customer operation object to refresh the registration or start the trial period of the IKS license tiers.
+        Customer operation object to refresh the registration or start the trial period of the IKS license tiers.
+
 ---
 
 # Data Source: intersight_license_iks_customer_op
