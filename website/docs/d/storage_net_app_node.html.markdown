@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_node"
 description: |-
-  NetApp node is a controller in a NetApp cluster. Services and components are controlled and managed by the NetApp node.
+        NetApp node is a controller in a NetApp cluster. Services and components are controlled and managed by the NetApp node.
+
 ---
 
 # Data Source: intersight_storage_net_app_node

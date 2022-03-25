@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "management.Controller"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "management.Controller"]
 **Model** | Pointer to **string** | Model of the endpoint that houses the management controller. | [optional] [readonly] 
+**UemStreamAdminState** | Pointer to **string** | Desired state of the UEM stream. * &#x60;Disabled&#x60; - The UEM event channel is disabled. * &#x60;Enabled&#x60; - The UEM event channel is enabled. | [optional] [default to "Disabled"]
 **AdapterUnit** | Pointer to [**AdapterUnitRelationship**](AdapterUnitRelationship.md) |  | [optional] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
@@ -104,6 +105,31 @@ SetModel sets Model field to given value.
 `func (o *ManagementController) HasModel() bool`
 
 HasModel returns a boolean if a field has been set.
+
+### GetUemStreamAdminState
+
+`func (o *ManagementController) GetUemStreamAdminState() string`
+
+GetUemStreamAdminState returns the UemStreamAdminState field if non-nil, zero value otherwise.
+
+### GetUemStreamAdminStateOk
+
+`func (o *ManagementController) GetUemStreamAdminStateOk() (*string, bool)`
+
+GetUemStreamAdminStateOk returns a tuple with the UemStreamAdminState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUemStreamAdminState
+
+`func (o *ManagementController) SetUemStreamAdminState(v string)`
+
+SetUemStreamAdminState sets UemStreamAdminState field to given value.
+
+### HasUemStreamAdminState
+
+`func (o *ManagementController) HasUemStreamAdminState() bool`
+
+HasUemStreamAdminState returns a boolean if a field has been set.
 
 ### GetAdapterUnit
 

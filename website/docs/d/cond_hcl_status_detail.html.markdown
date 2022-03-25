@@ -3,7 +3,8 @@ subcategory: "cond"
 layout: "intersight"
 page_title: "Intersight: intersight_cond_hcl_status_detail"
 description: |-
-  The HCL status detail for each component firmware and driver.
+        The HCL status detail for each component firmware and driver.
+
 ---
 
 # Data Source: intersight_cond_hcl_status_detail

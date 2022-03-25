@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_tfc_organization"
 description: |-
-  Organizations are a shared space for teams to collaborate on workspaces in Terraform Cloud.
+        Organizations are a shared space for teams to collaborate on workspaces in Terraform Cloud.
+
 ---
 
 # Data Source: intersight_cloud_tfc_organization

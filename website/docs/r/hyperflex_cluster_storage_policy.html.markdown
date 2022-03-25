@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_cluster_storage_policy"
 description: |-
-  A policy specifying HyperFlex cluster storage settings (optional).
+        A policy specifying HyperFlex cluster storage settings (optional).
+
 ---
 
 # Resource: intersight_hyperflex_cluster_storage_policy

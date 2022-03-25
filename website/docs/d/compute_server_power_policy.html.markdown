@@ -3,7 +3,8 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_server_power_policy"
 description: |-
-  Policy to determine the required power task during server profile deploy/undeploy.
+        Policy to determine the required power task during server profile deploy/undeploy.
+
 ---
 
 # Data Source: intersight_compute_server_power_policy

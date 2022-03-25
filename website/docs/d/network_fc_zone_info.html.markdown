@@ -3,7 +3,8 @@ subcategory: "network"
 layout: "intersight"
 page_title: "Intersight: intersight_network_fc_zone_info"
 description: |-
-  FC Zone information of a Fabric Interconnect.
+        FC Zone information of a Fabric Interconnect.
+
 ---
 
 # Data Source: intersight_network_fc_zone_info

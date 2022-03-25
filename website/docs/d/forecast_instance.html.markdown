@@ -3,7 +3,8 @@ subcategory: "forecast"
 layout: "intersight"
 page_title: "Intersight: intersight_forecast_instance"
 description: |-
-  Entity representing forecast result for instance of managed object, ie, data source.
+        Entity representing forecast result for instance of managed object, ie, data source.
+
 ---
 
 # Data Source: intersight_forecast_instance

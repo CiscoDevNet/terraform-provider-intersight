@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_disk"
 description: |-
-  Disk entity associated with Pure FlashArray.
+        Disk entity associated with Pure FlashArray.
+
 ---
 
 # Data Source: intersight_storage_pure_disk

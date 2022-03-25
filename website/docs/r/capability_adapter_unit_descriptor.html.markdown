@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_adapter_unit_descriptor"
 description: |-
-  Descriptor that uniquely identifies an adapter.
+        Descriptor that uniquely identifies an adapter.
+
 ---
 
 # Resource: intersight_capability_adapter_unit_descriptor

@@ -3,7 +3,8 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_info"
 description: |-
-  State of an advisory in the context of a given account. Used to capture a given account's preferences regarding  associated advisory.
+        State of an advisory in the context of a given account. Used to capture a given account's preferences regarding  associated advisory.
+
 ---
 
 # Data Source: intersight_tam_advisory_info

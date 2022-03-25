@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Dn** | Pointer to **string** | Dn of the objects present for Nexus Dashboard devices. | [optional] 
 **IsClusterHealthy** | Pointer to **string** | Health of Nexus Dashboard cluster. | [optional] 
 **NdClusterSize** | Pointer to **int64** | Number of nodes in Nexus Dashboard cluster. | [optional] 
+**NdSites** | Pointer to [**[]NiatelemetrySites**](NiatelemetrySites.md) |  | [optional] 
 **NdType** | Pointer to **string** | Node type in Nexus Dashboard cluster. | [optional] 
 **NdVersion** | Pointer to **string** | Version running on Nexus Dashboard. | [optional] 
 **NumberOfApps** | Pointer to **int64** | Number of applications installed in the Nexus Dashboard. | [optional] 
@@ -208,6 +209,41 @@ SetNdClusterSize sets NdClusterSize field to given value.
 
 HasNdClusterSize returns a boolean if a field has been set.
 
+### GetNdSites
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNdSites() []NiatelemetrySites`
+
+GetNdSites returns the NdSites field if non-nil, zero value otherwise.
+
+### GetNdSitesOk
+
+`func (o *NiatelemetryNexusDashboardsAllOf) GetNdSitesOk() (*[]NiatelemetrySites, bool)`
+
+GetNdSitesOk returns a tuple with the NdSites field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNdSites
+
+`func (o *NiatelemetryNexusDashboardsAllOf) SetNdSites(v []NiatelemetrySites)`
+
+SetNdSites sets NdSites field to given value.
+
+### HasNdSites
+
+`func (o *NiatelemetryNexusDashboardsAllOf) HasNdSites() bool`
+
+HasNdSites returns a boolean if a field has been set.
+
+### SetNdSitesNil
+
+`func (o *NiatelemetryNexusDashboardsAllOf) SetNdSitesNil(b bool)`
+
+ SetNdSitesNil sets the value for NdSites to be an explicit nil
+
+### UnsetNdSites
+`func (o *NiatelemetryNexusDashboardsAllOf) UnsetNdSites()`
+
+UnsetNdSites ensures that no value is present for NdSites, not even an explicit nil
 ### GetNdType
 
 `func (o *NiatelemetryNexusDashboardsAllOf) GetNdType() string`

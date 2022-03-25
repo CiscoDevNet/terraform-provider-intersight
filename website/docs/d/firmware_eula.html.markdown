@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_eula"
 description: |-
-  End User License Agreement (EULA) acceptance status for an account to access cisco.com and download software.
+        End User License Agreement (EULA) acceptance status for an account to access cisco.com and download software.
+
 ---
 
 # Data Source: intersight_firmware_eula

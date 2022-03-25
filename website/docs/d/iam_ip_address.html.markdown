@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ip_address"
 description: |-
-  Add an IP address to enable IP address based access management.
+        Add an IP address to enable IP address based access management.
+
 ---
 
 # Data Source: intersight_iam_ip_address

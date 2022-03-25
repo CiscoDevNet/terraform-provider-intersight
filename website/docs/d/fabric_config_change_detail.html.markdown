@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_config_change_detail"
 description: |-
-  This captures details of configuration changes.
+        This captures details of configuration changes.
+
 ---
 
 # Data Source: intersight_fabric_config_change_detail

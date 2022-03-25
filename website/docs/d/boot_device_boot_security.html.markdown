@@ -3,7 +3,8 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_device_boot_security"
 description: |-
-  Boot Security of the devices that BIOS uses to boot them.
+        Boot Security of the devices that BIOS uses to boot them.
+
 ---
 
 # Data Source: intersight_boot_device_boot_security

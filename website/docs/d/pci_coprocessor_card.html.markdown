@@ -3,7 +3,8 @@ subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_coprocessor_card"
 description: |-
-  PCIe Compression and Cryptographic CPU Offload Card.
+        PCIe Compression and Cryptographic CPU Offload Card.
+
 ---
 
 # Data Source: intersight_pci_coprocessor_card

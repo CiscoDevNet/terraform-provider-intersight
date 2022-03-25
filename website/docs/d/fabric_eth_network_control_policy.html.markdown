@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_eth_network_control_policy"
 description: |-
-  The features that are applied on a vethernet that is connected to the vNIC.
+        The features that are applied on a vethernet that is connected to the vNIC.
+
 ---
 
 # Data Source: intersight_fabric_eth_network_control_policy

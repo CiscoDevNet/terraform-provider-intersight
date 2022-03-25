@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_psu_descriptor"
 description: |-
-  Descriptor to uniquely identify a PSU component.
+        Descriptor to uniquely identify a PSU component.
+
 ---
 
 # Data Source: intersight_firmware_psu_descriptor

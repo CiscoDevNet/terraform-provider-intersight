@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_software_distribution_version"
 description: |-
-  A HyperFlex Software Distribution version.
+        A HyperFlex Software Distribution version.
+
 ---
 
 # Resource: intersight_hyperflex_software_distribution_version

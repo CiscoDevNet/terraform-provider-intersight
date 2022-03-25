@@ -3,7 +3,8 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_remote_file_import"
 description: |-
-  Trigger a remote file import request by configuring this mo.
+        Trigger a remote file import request by configuring this mo.
+
 ---
 
 # Data Source: intersight_appliance_remote_file_import

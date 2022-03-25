@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_cimc_descriptor"
 description: |-
-  Descriptor to uniquely identify a Cisco IMC.
+        Descriptor to uniquely identify a Cisco IMC.
+
 ---
 
 # Data Source: intersight_firmware_cimc_descriptor

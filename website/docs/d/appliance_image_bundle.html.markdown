@@ -3,15 +3,16 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_image_bundle"
 description: |-
-  ImageBundle keeps track of all the software bundles installed in the Intersight Appliances.
-Each ImageBundle managed object is derived from a software upgrade manifest. ImageBundle has
-additional properties computed during the manifest processing. Additional properties are the
-dynamic attributes of the software packages declared in the software manifest. For example,
-SHA256 values of the software packages are computed during the software manifest processing.
-An ImageBundle managed object named 'current' is always present in the Intersight Appliance.
-The software upgrade service creates another ImageBundle managed object named 'pending'
-when there is a pending software upgrade. The upgrade service renames the 'pending' bundle
-to the 'current' bundle after the software upgrade is successful.
+        ImageBundle keeps track of all the software bundles installed in the Intersight Appliances.
+        Each ImageBundle managed object is derived from a software upgrade manifest. ImageBundle has
+        additional properties computed during the manifest processing. Additional properties are the
+        dynamic attributes of the software packages declared in the software manifest. For example,
+        SHA256 values of the software packages are computed during the software manifest processing.
+        An ImageBundle managed object named 'current' is always present in the Intersight Appliance.
+        The software upgrade service creates another ImageBundle managed object named 'pending'
+        when there is a pending software upgrade. The upgrade service renames the 'pending' bundle
+        to the 'current' bundle after the software upgrade is successful.
+
 ---
 
 # Data Source: intersight_appliance_image_bundle

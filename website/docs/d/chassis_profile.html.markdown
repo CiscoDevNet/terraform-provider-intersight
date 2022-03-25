@@ -3,7 +3,8 @@ subcategory: "chassis"
 layout: "intersight"
 page_title: "Intersight: intersight_chassis_profile"
 description: |-
-  A profile specifying configuration settings for a chassis.
+        A profile specifying configuration settings for a chassis.
+
 ---
 
 # Data Source: intersight_chassis_profile

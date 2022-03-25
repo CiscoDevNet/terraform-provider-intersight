@@ -3,7 +3,8 @@ subcategory: "chassis"
 layout: "intersight"
 page_title: "Intersight: intersight_chassis_iom_profile"
 description: |-
-  A profile specifying configuration settings for IOM.
+        A profile specifying configuration settings for IOM.
+
 ---
 
 # Data Source: intersight_chassis_iom_profile

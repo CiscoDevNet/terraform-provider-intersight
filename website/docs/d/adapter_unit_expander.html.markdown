@@ -3,7 +3,8 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_unit_expander"
 description: |-
-  The adapter unit extension card present on a server.
+        The adapter unit extension card present on a server.
+
 ---
 
 # Data Source: intersight_adapter_unit_expander

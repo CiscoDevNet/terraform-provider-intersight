@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_idp"
 description: |-
-  The SAML identity provider such as Cisco, that has been used to log in to Intersight.
+        The SAML identity provider such as Cisco, that has been used to log in to Intersight.
+
 ---
 
 # Resource: intersight_iam_idp

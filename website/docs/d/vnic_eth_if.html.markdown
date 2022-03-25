@@ -3,7 +3,8 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_eth_if"
 description: |-
-  Virtual Ethernet Interface.
+        Virtual Ethernet Interface.
+
 ---
 
 # Data Source: intersight_vnic_eth_if

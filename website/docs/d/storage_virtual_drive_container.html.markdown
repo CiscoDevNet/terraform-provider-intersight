@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_virtual_drive_container"
 description: |-
-  A Virtual Disk Drive Container.
+        A Virtual Disk Drive Container.
+
 ---
 
 # Data Source: intersight_storage_virtual_drive_container

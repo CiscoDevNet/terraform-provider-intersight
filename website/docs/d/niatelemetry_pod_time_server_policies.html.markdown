@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_pod_time_server_policies"
 description: |-
-  Object to capture Pod Timer server Policy details.
+        Object to capture Pod Timer server Policy details.
+
 ---
 
 # Data Source: intersight_niatelemetry_pod_time_server_policies

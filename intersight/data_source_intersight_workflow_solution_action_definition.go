@@ -630,6 +630,11 @@ func dataSourceWorkflowSolutionActionDefinition() *schema.Resource {
 				},
 			},
 		},
+		"upgraded_moid": {
+			Description: "Stores the upgraded Moid for help during future lookups.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"validation_information": {
 			Description: "The current validation state and associated validation errors when state is invalid.",
 			Type:        schema.TypeList,
@@ -1521,6 +1526,11 @@ func dataSourceWorkflowSolutionActionDefinition() *schema.Resource {
 					},
 				},
 			},
+		},
+		"upgraded_moid": {
+			Description: "Stores the upgraded Moid for help during future lookups.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"validation_information": {
 			Description: "The current validation state and associated validation errors when state is invalid.",
@@ -2534,6 +2544,11 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("upgraded_moid"); ok {
+		x := (v.(string))
+		o.SetUpgradedMoid(x)
+	}
+
 	if v, ok := d.GetOk("validation_information"); ok {
 		p := make([]models.WorkflowValidationInformation, 0, 1)
 		s := v.([]interface{})
@@ -2856,6 +2871,7 @@ func dataSourceWorkflowSolutionActionDefinitionRead(c context.Context, d *schema
 				temp["stop_workflows"] = flattenListWorkflowActionWorkflowDefinition(s.GetStopWorkflows(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["upgraded_moid"] = (s.GetUpgradedMoid())
 
 				temp["validation_information"] = flattenMapWorkflowValidationInformation(s.GetValidationInformation(), d)
 

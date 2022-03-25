@@ -3,7 +3,8 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_unit"
 description: |-
-  The physical adapter present on a server.
+        The physical adapter present on a server.
+
 ---
 
 # Data Source: intersight_adapter_unit

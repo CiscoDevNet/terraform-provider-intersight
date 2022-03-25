@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_end_point_role"
 description: |-
-  The role defined in the end point which can be assigned to a user.
+        The role defined in the end point which can be assigned to a user.
+
 ---
 
 # Data Source: intersight_iam_end_point_role

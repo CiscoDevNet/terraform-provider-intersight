@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_virtual_disk"
 description: |-
-  Depicts disk configuration used to create a virtual disk on a hypervisor datastore.
+        Depicts disk configuration used to create a virtual disk on a hypervisor datastore.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_virtual_disk

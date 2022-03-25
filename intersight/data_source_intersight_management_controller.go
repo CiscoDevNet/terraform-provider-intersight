@@ -664,6 +664,11 @@ func dataSourceManagementController() *schema.Resource {
 				},
 			},
 		},
+		"uem_stream_admin_state": {
+			Description: "Desired state of the UEM stream.\n* `Disabled` - The UEM event channel is disabled.\n* `Enabled` - The UEM event channel is enabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -1421,6 +1426,11 @@ func dataSourceManagementController() *schema.Resource {
 					},
 				},
 			},
+		},
+		"uem_stream_admin_state": {
+			Description: "Desired state of the UEM stream.\n* `Disabled` - The UEM event channel is disabled.\n* `Enabled` - The UEM event channel is enabled.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -2336,6 +2346,11 @@ func dataSourceManagementControllerRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("uem_stream_admin_state"); ok {
+		x := (v.(string))
+		o.SetUemStreamAdminState(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -2496,6 +2511,7 @@ func dataSourceManagementControllerRead(c context.Context, d *schema.ResourceDat
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 
 				temp["top_system"] = flattenMapTopSystemRelationship(s.GetTopSystem(), d)
+				temp["uem_stream_admin_state"] = (s.GetUemStreamAdminState())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				managementControllerResults[j] = temp

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -49,8 +49,6 @@ type VirtualizationIweCluster struct {
 	HxVersion *string `json:"HxVersion,omitempty"`
 	// Hypervisor version of HyperFlex compute cluster along with build number.
 	HypervisorBuild *string `json:"HypervisorBuild,omitempty"`
-	// The version of hypervisor running on this cluster.
-	HypervisorVersion *string `json:"HypervisorVersion,omitempty"`
 	// Management IP Address of the cluster.
 	ManagementIpAddress *string                                `json:"ManagementIpAddress,omitempty"`
 	MemoryAllocation    NullableVirtualizationMemoryAllocation `json:"MemoryAllocation,omitempty"`
@@ -572,38 +570,6 @@ func (o *VirtualizationIweCluster) SetHypervisorBuild(v string) {
 	o.HypervisorBuild = &v
 }
 
-// GetHypervisorVersion returns the HypervisorVersion field value if set, zero value otherwise.
-func (o *VirtualizationIweCluster) GetHypervisorVersion() string {
-	if o == nil || o.HypervisorVersion == nil {
-		var ret string
-		return ret
-	}
-	return *o.HypervisorVersion
-}
-
-// GetHypervisorVersionOk returns a tuple with the HypervisorVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VirtualizationIweCluster) GetHypervisorVersionOk() (*string, bool) {
-	if o == nil || o.HypervisorVersion == nil {
-		return nil, false
-	}
-	return o.HypervisorVersion, true
-}
-
-// HasHypervisorVersion returns a boolean if a field has been set.
-func (o *VirtualizationIweCluster) HasHypervisorVersion() bool {
-	if o != nil && o.HypervisorVersion != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetHypervisorVersion gets a reference to the given string and assigns it to the HypervisorVersion field.
-func (o *VirtualizationIweCluster) SetHypervisorVersion(v string) {
-	o.HypervisorVersion = &v
-}
-
 // GetManagementIpAddress returns the ManagementIpAddress field value if set, zero value otherwise.
 func (o *VirtualizationIweCluster) GetManagementIpAddress() string {
 	if o == nil || o.ManagementIpAddress == nil {
@@ -990,9 +956,6 @@ func (o VirtualizationIweCluster) MarshalJSON() ([]byte, error) {
 	if o.HypervisorBuild != nil {
 		toSerialize["HypervisorBuild"] = o.HypervisorBuild
 	}
-	if o.HypervisorVersion != nil {
-		toSerialize["HypervisorVersion"] = o.HypervisorVersion
-	}
 	if o.ManagementIpAddress != nil {
 		toSerialize["ManagementIpAddress"] = o.ManagementIpAddress
 	}
@@ -1062,8 +1025,6 @@ func (o *VirtualizationIweCluster) UnmarshalJSON(bytes []byte) (err error) {
 		HxVersion *string `json:"HxVersion,omitempty"`
 		// Hypervisor version of HyperFlex compute cluster along with build number.
 		HypervisorBuild *string `json:"HypervisorBuild,omitempty"`
-		// The version of hypervisor running on this cluster.
-		HypervisorVersion *string `json:"HypervisorVersion,omitempty"`
 		// Management IP Address of the cluster.
 		ManagementIpAddress *string                                `json:"ManagementIpAddress,omitempty"`
 		MemoryAllocation    NullableVirtualizationMemoryAllocation `json:"MemoryAllocation,omitempty"`
@@ -1102,7 +1063,6 @@ func (o *VirtualizationIweCluster) UnmarshalJSON(bytes []byte) (err error) {
 		varVirtualizationIweCluster.FailureReason = varVirtualizationIweClusterWithoutEmbeddedStruct.FailureReason
 		varVirtualizationIweCluster.HxVersion = varVirtualizationIweClusterWithoutEmbeddedStruct.HxVersion
 		varVirtualizationIweCluster.HypervisorBuild = varVirtualizationIweClusterWithoutEmbeddedStruct.HypervisorBuild
-		varVirtualizationIweCluster.HypervisorVersion = varVirtualizationIweClusterWithoutEmbeddedStruct.HypervisorVersion
 		varVirtualizationIweCluster.ManagementIpAddress = varVirtualizationIweClusterWithoutEmbeddedStruct.ManagementIpAddress
 		varVirtualizationIweCluster.MemoryAllocation = varVirtualizationIweClusterWithoutEmbeddedStruct.MemoryAllocation
 		varVirtualizationIweCluster.StorageCapacity = varVirtualizationIweClusterWithoutEmbeddedStruct.StorageCapacity
@@ -1145,7 +1105,6 @@ func (o *VirtualizationIweCluster) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "FailureReason")
 		delete(additionalProperties, "HxVersion")
 		delete(additionalProperties, "HypervisorBuild")
-		delete(additionalProperties, "HypervisorVersion")
 		delete(additionalProperties, "ManagementIpAddress")
 		delete(additionalProperties, "MemoryAllocation")
 		delete(additionalProperties, "StorageCapacity")

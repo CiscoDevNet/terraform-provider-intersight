@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_syslog_sys_msg_fac_filter"
 description: |-
-  Object to capture Syslog system Msg details.
+        Object to capture Syslog system Msg details.
+
 ---
 
 # Data Source: intersight_niatelemetry_syslog_sys_msg_fac_filter

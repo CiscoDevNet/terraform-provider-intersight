@@ -3,7 +3,8 @@ subcategory: "thermal"
 layout: "intersight"
 page_title: "Intersight: intersight_thermal_policy"
 description: |-
-  Thermal Management policy models a configuration that can be applied to Chassis or Server to manage Thermal Features.
+        Thermal Management policy models a configuration that can be applied to Chassis or Server to manage Thermal Features.
+
 ---
 
 # Resource: intersight_thermal_policy

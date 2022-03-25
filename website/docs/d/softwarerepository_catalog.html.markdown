@@ -3,7 +3,8 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_catalog"
 description: |-
-  A container MO that holds references to the files in an account's image repository. It is internally created for each account and is used to hold information about all user uploaded files.
+        A container MO that holds references to the files in an account's image repository. It is internally created for each account and is used to hold information about all user uploaded files.
+
 ---
 
 # Data Source: intersight_softwarerepository_catalog

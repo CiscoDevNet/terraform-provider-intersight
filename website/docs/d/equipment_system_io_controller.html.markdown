@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_system_io_controller"
 description: |-
-  I/O Controller on a chassis which provides the data path to S-series server.
+        I/O Controller on a chassis which provides the data path to S-series server.
+
 ---
 
 # Data Source: intersight_equipment_system_io_controller

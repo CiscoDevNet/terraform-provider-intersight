@@ -3,7 +3,8 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_workflow_definition"
 description: |-
-  Workflow definition is a collection of tasks that are sequenced in a certain way using control tasks. The tasks in the workflow definition is represented as a directed acyclic graph where each node in the graph is a task and the edges in the graph are transitions from one task to another.
+        Workflow definition is a collection of tasks that are sequenced in a certain way using control tasks. The tasks in the workflow definition is represented as a directed acyclic graph where each node in the graph is a task and the edges in the graph are transitions from one task to another.
+
 ---
 
 # Resource: intersight_workflow_workflow_definition
@@ -284,6 +285,97 @@ $ terraform import intersight_workflow_workflow_definition.example 1234567890987
 ```
 ## Allowed Types in `AdditionalProperties`
  
+### [workflow.ArrayDataType](#argument-reference)
+This data type represents an array of a given type. It can be an array of primitive data or of custom data.
+* `array_item_type`:(HashMap) - Data item within the array data type. 
+This complex property has following sub-properties:
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `max`:(int) Specify the maximum value of the array. 
+* `min`:(int) Specify the minimum value of the array. 
+
+### [workflow.CustomDataType](#argument-reference)
+This data type represents a custom data object.
+* `properties`:(HashMap) - Captures the custom data type properties. 
+This complex property has following sub-properties:
+  + `catalog_moid`:(string) Specify the catalog moid that this custom data type belongs. 
+  + `custom_data_type_id`:(string)(ReadOnly) The resolved custom data type definition managed object. 
+  + `custom_data_type_name`:(string) Name of the custom data type for this input. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+
+### [workflow.MoReferenceDataType](#argument-reference)
+Data type to capture an Intersight Managed object reference.
+* `properties`:(Array)
+This complex property has following sub-properties:
+  + `display_attributes`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `selector`:(string) Field to hold an Intersight API along with an optional filter to narrow down the search options. 
+  + `selector_property`:(HashMap) - Selector properties to define HTTP method and 'body' in case of upsert operation. 
+This complex property has following sub-properties:
+    + `body`:(JSON as string) Content of the request body to send for POST request. 
+    + `method`:(string) The HTTP method to be used.* `GET` - The HTTP GET method requests a representation of the specified resource.* `POST` - The HTTP POST method sends data to the server. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `value_attribute`:(string) A property from the Intersight object, value of which can be used as value for referenced input definition. 
+
+### [workflow.PrimitiveDataType](#argument-reference)
+This data type is used to represent primitives like string, floats and integers.
+* `properties`:(HashMap) - Primitive data type properties. 
+This complex property has following sub-properties:
+  + `constraints`:(HashMap) - Constraints that must be applied to the parameter value supplied for this data type. 
+This complex property has following sub-properties:
+    + `enum_list`:(Array)
+This complex property has following sub-properties:
+    + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must have an alphanumeric character. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `value`:(string) Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_). 
+  + `max`:(float) Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then maximum number supported is 1.797693134862315708145274237317043567981e+308 or (2**1023 * (2**53 - 1) / 2**52). When a number bigger than this is given as Maximum value, the constraints will not be enforced. 
+  + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `regex`:(string) When the parameter is a string this regular expression is used to ensure the value is valid. 
+  + `inventory_selector`:(Array)
+This complex property has following sub-properties:
+    + `display_attributes`:
+                (Array of schema.TypeString) -
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `selector`:(string) Field to hold an Intersight API along with an optional filter to narrow down the search options. 
+    + `selector_property`:(HashMap) - Selector properties to define HTTP method and 'body' in case of upsert operation. 
+This complex property has following sub-properties:
+    + `body`:(JSON as string) Content of the request body to send for POST request. 
+    + `method`:(string) The HTTP method to be used.* `GET` - The HTTP GET method requests a representation of the specified resource.* `POST` - The HTTP POST method sends data to the server. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `value_attribute`:(string) A property from the Intersight object, value of which can be used as value for referenced input definition. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `secure`:(bool) Intersight supports secure properties as task input/output. The values ofthese properties are encrypted and stored in Intersight.This flag marks the property to be secure when it is set to true. 
+  + `type`:(string) Specify the enum type for primitive data type.* `string` - Enum to specify a string data type.* `integer` - Enum to specify an integer32 data type.* `float` - Enum to specify a float64 data type.* `boolean` - Enum to specify a boolean data type.* `json` - Enum to specify a json data type.* `enum` - Enum to specify a enum data type which is a list of pre-defined strings. 
+
+### [workflow.TargetDataType](#argument-reference)
+Data type to capture a target endpoint or device.
+* `custom_data_type_properties`:(HashMap) - Reference to custom data type definition. 
+This complex property has following sub-properties:
+  + `catalog_moid`:(string) Specify the catalog moid that this custom data type belongs. 
+  + `custom_data_type_id`:(string)(ReadOnly) The resolved custom data type definition managed object. 
+  + `custom_data_type_name`:(string) Name of the custom data type for this input. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `is_array`:(bool) When this property is true then an array of targets can be passed as input. 
+* `max`:(int) Specify the maximum value of the array. 
+* `min`:(int) Specify the minimum value of the array. 
+* `properties`:(Array)
+This complex property has following sub-properties:
+  + `connector_attribute`:(string) A singleton value which will contain the path to connector object from the selected object. 
+  + `constraint_attributes`:
+                (Array of schema.TypeString) -
+  + `display_attributes`:
+                (Array of schema.TypeString) -
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `selector`:(string) Field to hold an Intersight API along with an optional filter to narrow down the search options for target device. 
+  + `selector_property`:(HashMap) - Selector properties to define HTTP method and 'body' in case of upsert operation. 
+This complex property has following sub-properties:
+    + `body`:(JSON as string) Content of the request body to send for POST request. 
+    + `method`:(string) The HTTP method to be used.* `GET` - The HTTP GET method requests a representation of the specified resource.* `POST` - The HTTP POST method sends data to the server. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `supported_objects`:
+                (Array of schema.TypeString) -
+  
 ### [workflow.DecisionTask](#argument-reference)
 A DecisionTask is a control task that executes a sequence of WorkflowTasks based off decision provided and evaluated by this task.
 * `condition`:(string) The condition to evaluate for this decision task. The condition can be a workflow or task variable or an JavaScript expression. Example value for condition could be a variable like \ ${task1.output.var1} or ${workflow.input.var2}\  which evaluates to a value matching any of the decision case values. Example value for condition if it's an expression - \ if ( ${task1.output.var1} ! = null && ${task1.output.var1} > 0 ) 'true'; else 'false'; \  which evaluates to 'true' or 'false' and will match one of the decision case values. You can also use JavaScript functions like indexOf, toUpperCase in the expression which will be evaluated by the expression evaluator. 
@@ -415,7 +507,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
     + `enum_list`:(Array)
 This complex property has following sub-properties:
-    + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters. 
+    + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must have an alphanumeric character. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `value`:(string) Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_). 
   + `max`:(float) Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then maximum number supported is 1.797693134862315708145274237317043567981e+308 or (2**1023 * (2**53 - 1) / 2**52). When a number bigger than this is given as Maximum value, the constraints will not be enforced. 
@@ -506,98 +598,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
     + `enum_list`:(Array)
 This complex property has following sub-properties:
-    + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters. 
-    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-    + `value`:(string) Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_). 
-  + `max`:(float) Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then maximum number supported is 1.797693134862315708145274237317043567981e+308 or (2**1023 * (2**53 - 1) / 2**52). When a number bigger than this is given as Maximum value, the constraints will not be enforced. 
-  + `min`:(float) Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `regex`:(string) When the parameter is a string this regular expression is used to ensure the value is valid. 
-  + `inventory_selector`:(Array)
-This complex property has following sub-properties:
-    + `display_attributes`:
-                (Array of schema.TypeString) -
-    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-    + `selector`:(string) Field to hold an Intersight API along with an optional filter to narrow down the search options. 
-    + `selector_property`:(HashMap) - Selector properties to define HTTP method and 'body' in case of upsert operation. 
-This complex property has following sub-properties:
-    + `body`:(JSON as string) Content of the request body to send for POST request. 
-    + `method`:(string) The HTTP method to be used.* `GET` - The HTTP GET method requests a representation of the specified resource.* `POST` - The HTTP POST method sends data to the server. 
-    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `value_attribute`:(string) A property from the Intersight object, value of which can be used as value for referenced input definition. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `secure`:(bool) Intersight supports secure properties as task input/output. The values ofthese properties are encrypted and stored in Intersight.This flag marks the property to be secure when it is set to true. 
-  + `type`:(string) Specify the enum type for primitive data type.* `string` - Enum to specify a string data type.* `integer` - Enum to specify an integer32 data type.* `float` - Enum to specify a float64 data type.* `boolean` - Enum to specify a boolean data type.* `json` - Enum to specify a json data type.* `enum` - Enum to specify a enum data type which is a list of pre-defined strings. 
-
-### [workflow.TargetDataType](#argument-reference)
-Data type to capture a target endpoint or device.
-* `custom_data_type_properties`:(HashMap) - Reference to custom data type definition. 
-This complex property has following sub-properties:
-  + `catalog_moid`:(string) Specify the catalog moid that this custom data type belongs. 
-  + `custom_data_type_id`:(string)(ReadOnly) The resolved custom data type definition managed object. 
-  + `custom_data_type_name`:(string) Name of the custom data type for this input. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-* `is_array`:(bool) When this property is true then an array of targets can be passed as input. 
-* `max`:(int) Specify the maximum value of the array. 
-* `min`:(int) Specify the minimum value of the array. 
-* `properties`:(Array)
-This complex property has following sub-properties:
-  + `connector_attribute`:(string) A singleton value which will contain the path to connector object from the selected object. 
-  + `constraint_attributes`:
-                (Array of schema.TypeString) -
-  + `display_attributes`:
-                (Array of schema.TypeString) -
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `selector`:(string) Field to hold an Intersight API along with an optional filter to narrow down the search options for target device. 
-  + `selector_property`:(HashMap) - Selector properties to define HTTP method and 'body' in case of upsert operation. 
-This complex property has following sub-properties:
-    + `body`:(JSON as string) Content of the request body to send for POST request. 
-    + `method`:(string) The HTTP method to be used.* `GET` - The HTTP GET method requests a representation of the specified resource.* `POST` - The HTTP POST method sends data to the server. 
-    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `supported_objects`:
-                (Array of schema.TypeString) -
-  
-### [workflow.ArrayDataType](#argument-reference)
-This data type represents an array of a given type. It can be an array of primitive data or of custom data.
-* `array_item_type`:(HashMap) - Data item within the array data type. 
-This complex property has following sub-properties:
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-* `max`:(int) Specify the maximum value of the array. 
-* `min`:(int) Specify the minimum value of the array. 
-
-### [workflow.CustomDataType](#argument-reference)
-This data type represents a custom data object.
-* `properties`:(HashMap) - Captures the custom data type properties. 
-This complex property has following sub-properties:
-  + `catalog_moid`:(string) Specify the catalog moid that this custom data type belongs. 
-  + `custom_data_type_id`:(string)(ReadOnly) The resolved custom data type definition managed object. 
-  + `custom_data_type_name`:(string) Name of the custom data type for this input. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-
-### [workflow.MoReferenceDataType](#argument-reference)
-Data type to capture an Intersight Managed object reference.
-* `properties`:(Array)
-This complex property has following sub-properties:
-  + `display_attributes`:
-                (Array of schema.TypeString) -
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `selector`:(string) Field to hold an Intersight API along with an optional filter to narrow down the search options. 
-  + `selector_property`:(HashMap) - Selector properties to define HTTP method and 'body' in case of upsert operation. 
-This complex property has following sub-properties:
-    + `body`:(JSON as string) Content of the request body to send for POST request. 
-    + `method`:(string) The HTTP method to be used.* `GET` - The HTTP GET method requests a representation of the specified resource.* `POST` - The HTTP POST method sends data to the server. 
-    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-  + `value_attribute`:(string) A property from the Intersight object, value of which can be used as value for referenced input definition. 
-
-### [workflow.PrimitiveDataType](#argument-reference)
-This data type is used to represent primitives like string, floats and integers.
-* `properties`:(HashMap) - Primitive data type properties. 
-This complex property has following sub-properties:
-  + `constraints`:(HashMap) - Constraints that must be applied to the parameter value supplied for this data type. 
-This complex property has following sub-properties:
-    + `enum_list`:(Array)
-This complex property has following sub-properties:
-    + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters. 
+    + `label`:(string) Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must have an alphanumeric character. 
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `value`:(string) Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_). 
   + `max`:(float) Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. If parameter is integer/float, then maximum number supported is 1.797693134862315708145274237317043567981e+308 or (2**1023 * (2**53 - 1) / 2**52). When a number bigger than this is given as Maximum value, the constraints will not be enforced. 

@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_sioc_module_manufacturing_def"
 description: |-
-  Chassis SIOC module properties.
+        Chassis SIOC module properties.
+
 ---
 
 # Resource: intersight_capability_sioc_module_manufacturing_def

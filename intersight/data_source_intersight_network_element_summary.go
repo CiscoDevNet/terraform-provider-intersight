@@ -109,8 +109,23 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"chassis": {
+			Description: "Chassis IP of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"conf_mod_ts": {
+			Description: "Configuration modified timestamp of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"conf_mod_ts_backup": {
+			Description: "Configuration modified backup timestamp of the switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -354,6 +369,11 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 				},
 			},
 		},
+		"part_number": {
+			Description: "Part number of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -453,8 +473,23 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"status": {
+			Description: "The status of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"switch_id": {
 			Description: "The Switch Id of the network Element.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"switch_type": {
+			Description: "The Switch type that the network element is a part of.\n* `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices.\n* `NexusDevice` - Switch type of Nexus devices.\n* `MDSDevice` - Switch type of Nexus MDS devices.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"system_up_time": {
+			Description: "System up time of the switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -704,8 +739,23 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"chassis": {
+			Description: "Chassis IP of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"conf_mod_ts": {
+			Description: "Configuration modified timestamp of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"conf_mod_ts_backup": {
+			Description: "Configuration modified backup timestamp of the switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -949,6 +999,11 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 				},
 			},
 		},
+		"part_number": {
+			Description: "Part number of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -1048,8 +1103,23 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"status": {
+			Description: "The status of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"switch_id": {
 			Description: "The Switch Id of the network Element.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"switch_type": {
+			Description: "The Switch type that the network element is a part of.\n* `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices.\n* `NexusDevice` - Switch type of Nexus devices.\n* `MDSDevice` - Switch type of Nexus MDS devices.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"system_up_time": {
+			Description: "System up time of the switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1333,9 +1403,24 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetAvailableMemory(x)
 	}
 
+	if v, ok := d.GetOk("chassis"); ok {
+		x := (v.(string))
+		o.SetChassis(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+
+	if v, ok := d.GetOk("conf_mod_ts"); ok {
+		x := (v.(string))
+		o.SetConfModTs(x)
+	}
+
+	if v, ok := d.GetOk("conf_mod_ts_backup"); ok {
+		x := (v.(string))
+		o.SetConfModTsBackup(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
@@ -1592,6 +1677,11 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		}
 	}
 
+	if v, ok := d.GetOk("part_number"); ok {
+		x := (v.(string))
+		o.SetPartNumber(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -1705,9 +1795,24 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 		o.SetSourceObjectType(x)
 	}
 
+	if v, ok := d.GetOk("status"); ok {
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+
 	if v, ok := d.GetOk("switch_id"); ok {
 		x := (v.(string))
 		o.SetSwitchId(x)
+	}
+
+	if v, ok := d.GetOk("switch_type"); ok {
+		x := (v.(string))
+		o.SetSwitchType(x)
+	}
+
+	if v, ok := d.GetOk("system_up_time"); ok {
+		x := (v.(string))
+		o.SetSystemUpTime(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -1882,7 +1987,10 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
 				temp["available_memory"] = (s.GetAvailableMemory())
+				temp["chassis"] = (s.GetChassis())
 				temp["class_id"] = (s.GetClassId())
+				temp["conf_mod_ts"] = (s.GetConfModTs())
+				temp["conf_mod_ts_backup"] = (s.GetConfModTsBackup())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["device_mo_id"] = (s.GetDeviceMoId())
@@ -1928,6 +2036,7 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["part_number"] = (s.GetPartNumber())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["presence"] = (s.GetPresence())
@@ -1938,7 +2047,10 @@ func dataSourceNetworkElementSummaryRead(c context.Context, d *schema.ResourceDa
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["source_object_type"] = (s.GetSourceObjectType())
+				temp["status"] = (s.GetStatus())
 				temp["switch_id"] = (s.GetSwitchId())
+				temp["switch_type"] = (s.GetSwitchType())
+				temp["system_up_time"] = (s.GetSystemUpTime())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["thermal"] = (s.GetThermal())

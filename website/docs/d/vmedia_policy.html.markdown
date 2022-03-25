@@ -3,7 +3,8 @@ subcategory: "vmedia"
 layout: "intersight"
 page_title: "Intersight: intersight_vmedia_policy"
 description: |-
-  Policy to configure virtual media settings on endpoint.
+        Policy to configure virtual media settings on endpoint.
+
 ---
 
 # Data Source: intersight_vmedia_policy

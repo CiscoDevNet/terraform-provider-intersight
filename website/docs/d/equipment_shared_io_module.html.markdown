@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_shared_io_module"
 description: |-
-  I/O Controller present inside SIOC to provide data path from S-series server to FI.
+        I/O Controller present inside SIOC to provide data path from S-series server to FI.
+
 ---
 
 # Data Source: intersight_equipment_shared_io_module

@@ -3,7 +3,8 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_workflow_notification"
 description: |-
-  The push notification received from conductor of the workflow which are in terminal state. Terminal state can be completed, failed, terminated, timed out.
+        The push notification received from conductor of the workflow which are in terminal state. Terminal state can be completed, failed, terminated, timed out.
+
 ---
 
 # Resource: intersight_workflow_workflow_notification

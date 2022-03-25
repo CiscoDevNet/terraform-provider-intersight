@@ -3,9 +3,10 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_appliance_distributable"
 description: |-
-  Appliance image distributed by Cisco. This image is required to upgrade the on-premise Intersight Appliance.
-There are two use cases. In Intersight SaaS, the object represents a downloadable image, whereas on the
-Appliance the represents the image that is uploaded by the user and to be used for upgrade.
+        Appliance image distributed by Cisco. This image is required to upgrade the on-premise Intersight Appliance.
+        There are two use cases. In Intersight SaaS, the object represents a downloadable image, whereas on the
+        Appliance the represents the image that is uploaded by the user and to be used for upgrade.
+
 ---
 
 # Resource: intersight_software_appliance_distributable

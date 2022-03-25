@@ -3,7 +3,8 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_san_device"
 description: |-
-  San Boot Device configured on the server.
+        San Boot Device configured on the server.
+
 ---
 
 # Data Source: intersight_boot_san_device

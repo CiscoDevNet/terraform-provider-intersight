@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_flex_flash_controller_props"
 description: |-
-  Flex flash controller properties.
+        Flex flash controller properties.
+
 ---
 
 # Data Source: intersight_storage_flex_flash_controller_props

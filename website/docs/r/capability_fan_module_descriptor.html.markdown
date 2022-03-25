@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_fan_module_descriptor"
 description: |-
-  Descriptor that uniquely identifies a fan module.
+        Descriptor that uniquely identifies a fan module.
+
 ---
 
 # Resource: intersight_capability_fan_module_descriptor

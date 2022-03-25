@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_lun"
 description: |-
-  NetApp LUN (logical unit number) is an identifier for a device called a logical unit addressed by a SAN protocol.
+        NetApp LUN (logical unit number) is an identifier for a device called a logical unit addressed by a SAN protocol.
+
 ---
 
 # Data Source: intersight_storage_net_app_lun

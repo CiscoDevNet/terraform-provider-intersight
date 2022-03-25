@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_virtual_network_interface"
 description: |-
-  Details of VMware virtual network interface.
+        Details of VMware virtual network interface.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_virtual_network_interface

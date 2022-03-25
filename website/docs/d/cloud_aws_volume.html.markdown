@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_aws_volume"
 description: |-
-  AWS volume object is represented here.It depicts configuration used to create volume and its identity.
+        AWS volume object is represented here.It depicts configuration used to create volume and its identity.
+
 ---
 
 # Data Source: intersight_cloud_aws_volume

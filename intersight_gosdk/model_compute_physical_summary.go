@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -118,6 +118,7 @@ type ComputePhysicalSummary struct {
 	Uuid *string `json:"Uuid,omitempty"`
 	// This field identifies the vendor of the given component.
 	Vendor               *string                              `json:"Vendor,omitempty"`
+	EquipmentChassis     *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
 	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -1748,6 +1749,38 @@ func (o *ComputePhysicalSummary) SetVendor(v string) {
 	o.Vendor = &v
 }
 
+// GetEquipmentChassis returns the EquipmentChassis field value if set, zero value otherwise.
+func (o *ComputePhysicalSummary) GetEquipmentChassis() EquipmentChassisRelationship {
+	if o == nil || o.EquipmentChassis == nil {
+		var ret EquipmentChassisRelationship
+		return ret
+	}
+	return *o.EquipmentChassis
+}
+
+// GetEquipmentChassisOk returns a tuple with the EquipmentChassis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputePhysicalSummary) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool) {
+	if o == nil || o.EquipmentChassis == nil {
+		return nil, false
+	}
+	return o.EquipmentChassis, true
+}
+
+// HasEquipmentChassis returns a boolean if a field has been set.
+func (o *ComputePhysicalSummary) HasEquipmentChassis() bool {
+	if o != nil && o.EquipmentChassis != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEquipmentChassis gets a reference to the given EquipmentChassisRelationship and assigns it to the EquipmentChassis field.
+func (o *ComputePhysicalSummary) SetEquipmentChassis(v EquipmentChassisRelationship) {
+	o.EquipmentChassis = &v
+}
+
 // GetInventoryDeviceInfo returns the InventoryDeviceInfo field value if set, zero value otherwise.
 func (o *ComputePhysicalSummary) GetInventoryDeviceInfo() InventoryDeviceInfoRelationship {
 	if o == nil || o.InventoryDeviceInfo == nil {
@@ -1972,6 +2005,9 @@ func (o ComputePhysicalSummary) MarshalJSON() ([]byte, error) {
 	if o.Vendor != nil {
 		toSerialize["Vendor"] = o.Vendor
 	}
+	if o.EquipmentChassis != nil {
+		toSerialize["EquipmentChassis"] = o.EquipmentChassis
+	}
 	if o.InventoryDeviceInfo != nil {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
 	}
@@ -2086,6 +2122,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(bytes []byte) (err error) {
 		Uuid *string `json:"Uuid,omitempty"`
 		// This field identifies the vendor of the given component.
 		Vendor              *string                              `json:"Vendor,omitempty"`
+		EquipmentChassis    *EquipmentChassisRelationship        `json:"EquipmentChassis,omitempty"`
 		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
 		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
@@ -2145,6 +2182,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(bytes []byte) (err error) {
 		varComputePhysicalSummary.UserLabel = varComputePhysicalSummaryWithoutEmbeddedStruct.UserLabel
 		varComputePhysicalSummary.Uuid = varComputePhysicalSummaryWithoutEmbeddedStruct.Uuid
 		varComputePhysicalSummary.Vendor = varComputePhysicalSummaryWithoutEmbeddedStruct.Vendor
+		varComputePhysicalSummary.EquipmentChassis = varComputePhysicalSummaryWithoutEmbeddedStruct.EquipmentChassis
 		varComputePhysicalSummary.InventoryDeviceInfo = varComputePhysicalSummaryWithoutEmbeddedStruct.InventoryDeviceInfo
 		varComputePhysicalSummary.RegisteredDevice = varComputePhysicalSummaryWithoutEmbeddedStruct.RegisteredDevice
 		*o = ComputePhysicalSummary(varComputePhysicalSummary)
@@ -2214,6 +2252,7 @@ func (o *ComputePhysicalSummary) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "UserLabel")
 		delete(additionalProperties, "Uuid")
 		delete(additionalProperties, "Vendor")
+		delete(additionalProperties, "EquipmentChassis")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "RegisteredDevice")
 

@@ -3,7 +3,8 @@ subcategory: "resourcepool"
 layout: "intersight"
 page_title: "Intersight: intersight_resourcepool_pool_member"
 description: |-
-  PoolMember represents a resources that is part of a pool.
+        PoolMember represents a resources that is part of a pool.
+
 ---
 
 # Data Source: intersight_resourcepool_pool_member

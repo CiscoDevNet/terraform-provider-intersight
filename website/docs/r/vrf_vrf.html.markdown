@@ -3,7 +3,8 @@ subcategory: "vrf"
 layout: "intersight"
 page_title: "Intersight: intersight_vrf_vrf"
 description: |-
-  Virtual Routing and Forwarding (VRF) is a networking technology that implements an isolated Layer 3 domain.
+        Virtual Routing and Forwarding (VRF) is a networking technology that implements an isolated Layer 3 domain.
+
 ---
 
 # Resource: intersight_vrf_vrf

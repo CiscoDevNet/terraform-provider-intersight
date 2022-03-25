@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_gpu_descriptor"
 description: |-
-  Descriptor to uniquely identify a GPU component.
+        Descriptor to uniquely identify a GPU component.
+
 ---
 
 # Resource: intersight_firmware_gpu_descriptor

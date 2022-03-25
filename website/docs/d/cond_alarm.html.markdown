@@ -3,7 +3,8 @@ subcategory: "cond"
 layout: "intersight"
 page_title: "Intersight: intersight_cond_alarm"
 description: |-
-  A state-full entity representing a found problem. Alarms can be reported by the managed system itself or can be determined by Intersight.
+        A state-full entity representing a found problem. Alarms can be reported by the managed system itself or can be determined by Intersight.
+
 ---
 
 # Data Source: intersight_cond_alarm

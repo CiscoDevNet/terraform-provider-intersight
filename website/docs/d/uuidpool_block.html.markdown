@@ -3,7 +3,8 @@ subcategory: "uuidpool"
 layout: "intersight"
 page_title: "Intersight: intersight_uuidpool_block"
 description: |-
-  A block of contiguous UUID addresses that are part of a pool.
+        A block of contiguous UUID addresses that are part of a pool.
+
 ---
 
 # Data Source: intersight_uuidpool_block

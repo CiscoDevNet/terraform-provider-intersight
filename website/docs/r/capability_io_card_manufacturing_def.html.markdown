@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_io_card_manufacturing_def"
 description: |-
-  Chassis Iocard module properties.
+        Chassis Iocard module properties.
+
 ---
 
 # Resource: intersight_capability_io_card_manufacturing_def

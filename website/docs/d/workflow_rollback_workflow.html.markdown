@@ -3,7 +3,8 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_rollback_workflow"
 description: |-
-  Rollback workflow contains details about the workflow instance, tasks to be rollback along with the status and workflow instances.
+        Rollback workflow contains details about the workflow instance, tasks to be rollback along with the status and workflow instances.
+
 ---
 
 # Data Source: intersight_workflow_rollback_workflow

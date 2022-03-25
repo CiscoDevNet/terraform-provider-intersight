@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_aaa_ldap_provider_details"
 description: |-
-  Object to capture AAA Ldap provider details.
+        Object to capture AAA Ldap provider details.
+
 ---
 
 # Data Source: intersight_niatelemetry_aaa_ldap_provider_details

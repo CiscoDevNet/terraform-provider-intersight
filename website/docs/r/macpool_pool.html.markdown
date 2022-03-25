@@ -3,7 +3,8 @@ subcategory: "macpool"
 layout: "intersight"
 page_title: "Intersight: intersight_macpool_pool"
 description: |-
-  Pool represents a collection of MAC addresses that can be allocated to VNICs of a server profile.
+        Pool represents a collection of MAC addresses that can be allocated to VNICs of a server profile.
+
 ---
 
 # Resource: intersight_macpool_pool

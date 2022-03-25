@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_apic_snmp_trap_fwd_server_details"
 description: |-
-  Object to capture the SNMP Trap Fwd Server details in APIC.
+        Object to capture the SNMP Trap Fwd Server details in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_apic_snmp_trap_fwd_server_details

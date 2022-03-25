@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_replication_schedule"
 description: |-
-  Pure snapshot replication schedule entity.
+        Pure snapshot replication schedule entity.
+
 ---
 
 # Data Source: intersight_storage_pure_replication_schedule

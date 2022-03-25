@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_nia_metadata"
 description: |-
-  Contains the latest Metadata available for download from server.
+        Contains the latest Metadata available for download from server.
+
 ---
 
 # Data Source: intersight_niaapi_nia_metadata

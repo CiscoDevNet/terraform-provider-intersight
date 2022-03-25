@@ -541,7 +541,7 @@ func resourceOsConfigurationFile() *schema.Resource {
 																			Default:     "workflow.EnumEntry",
 																		},
 																		"label": {
-																			Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must be at least 2 characters.",
+																			Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_) and must have an alphanumeric character.",
 																			Type:        schema.TypeString,
 																			Optional:    true,
 																		},

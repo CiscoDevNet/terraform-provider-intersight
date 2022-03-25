@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_sku_database_type"
 description: |-
-  Stores details of instance type which handle databases.
+        Stores details of instance type which handle databases.
+
 ---
 
 # Data Source: intersight_cloud_sku_database_type

@@ -3,7 +3,8 @@ subcategory: "ntp"
 layout: "intersight"
 page_title: "Intersight: intersight_ntp_policy"
 description: |-
-  Policy to configure the NTP Servers.
+        Policy to configure the NTP Servers.
+
 ---
 
 # Data Source: intersight_ntp_policy

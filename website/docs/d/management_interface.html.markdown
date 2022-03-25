@@ -3,7 +3,8 @@ subcategory: "management"
 layout: "intersight"
 page_title: "Intersight: intersight_management_interface"
 description: |-
-  Interface that provides access to the management controller.
+        Interface that provides access to the management controller.
+
 ---
 
 # Data Source: intersight_management_interface

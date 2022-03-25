@@ -3,7 +3,8 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_hdd_device"
 description: |-
-  Local Disk Boot Device configured on the server.
+        Local Disk Boot Device configured on the server.
+
 ---
 
 # Data Source: intersight_boot_hdd_device

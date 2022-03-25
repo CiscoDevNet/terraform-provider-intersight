@@ -3,7 +3,8 @@ subcategory: "crd"
 layout: "intersight"
 page_title: "Intersight: intersight_crd_custom_resource"
 description: |-
-  Custom kubernetes resource launcher service.
+        Custom kubernetes resource launcher service.
+
 ---
 
 # Resource: intersight_crd_custom_resource

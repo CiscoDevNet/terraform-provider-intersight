@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_virtual_switch"
 description: |-
-  The VMware Virtual Switch object is represented here.
+        The VMware Virtual Switch object is represented here.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_virtual_switch

@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_server_model"
 description: |-
-  A supported server model.
+        A supported server model.
+
 ---
 
 # Resource: intersight_hyperflex_server_model

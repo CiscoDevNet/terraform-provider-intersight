@@ -3,7 +3,8 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_task_metadata"
 description: |-
-  Task details is a collection of properties that are common across all the versions of a task.
+        Task details is a collection of properties that are common across all the versions of a task.
+
 ---
 
 # Data Source: intersight_workflow_task_metadata

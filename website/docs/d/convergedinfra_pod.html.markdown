@@ -3,8 +3,9 @@ subcategory: "convergedinfra"
 layout: "intersight"
 page_title: "Intersight: intersight_convergedinfra_pod"
 description: |-
-  A pod is unit of deployment of converged infrastructure. Contains inventory information related to the health, HCL, storage,
-nodes, etc. of the pod.
+        A pod is unit of deployment of converged infrastructure. Contains inventory information related to the health, HCL, storage,
+        nodes, etc. of the pod.
+
 ---
 
 # Data Source: intersight_convergedinfra_pod

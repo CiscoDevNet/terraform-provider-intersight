@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fex"
 description: |-
-  Fabric Extender which can mutiplex traffic from the host facing ports.
+        Fabric Extender which can mutiplex traffic from the host facing ports.
+
 ---
 
 # Data Source: intersight_equipment_fex

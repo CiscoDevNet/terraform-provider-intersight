@@ -3,7 +3,8 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_solution_distributable"
 description: |-
-  A solution image distributed by Cisco.
+        A solution image distributed by Cisco.
+
 ---
 
 # Data Source: intersight_software_solution_distributable

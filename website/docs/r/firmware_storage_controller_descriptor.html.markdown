@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_storage_controller_descriptor"
 description: |-
-  Descriptor to uniquely identify a storage controller.
+        Descriptor to uniquely identify a storage controller.
+
 ---
 
 # Resource: intersight_firmware_storage_controller_descriptor

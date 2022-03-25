@@ -3,7 +3,8 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_hyperflex_distributable"
 description: |-
-  A HyperFlex image distributed by Cisco.
+        A HyperFlex image distributed by Cisco.
+
 ---
 
 # Data Source: intersight_software_hyperflex_distributable

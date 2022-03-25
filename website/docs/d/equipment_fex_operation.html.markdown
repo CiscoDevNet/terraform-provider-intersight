@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fex_operation"
 description: |-
-  Models the configuration states of a FEX in Intersight.
+        Models the configuration states of a FEX in Intersight.
+
 ---
 
 # Data Source: intersight_equipment_fex_operation

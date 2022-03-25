@@ -3,8 +3,9 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_aws_vpc"
 description: |-
-  VPC (Virtual Private Cloud) object in AWS inventory.It is a service that lets you launch AWS resources in a logically isolated
-virtual network.
+        VPC (Virtual Private Cloud) object in AWS inventory.It is a service that lets you launch AWS resources in a logically isolated
+        virtual network.
+
 ---
 
 # Data Source: intersight_cloud_aws_vpc

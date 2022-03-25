@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_data_protection_peer"
 description: |-
-  Data Protection Peer describing the cluster pair from the HyperFlex backend.
+        Data Protection Peer describing the cluster pair from the HyperFlex backend.
+
 ---
 
 # Data Source: intersight_hyperflex_data_protection_peer

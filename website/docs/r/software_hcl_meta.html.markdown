@@ -3,7 +3,8 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_hcl_meta"
 description: |-
-  A JSON file wth HCL metadata uploaded for consumption by the HCL service.
+        A JSON file wth HCL metadata uploaded for consumption by the HCL service.
+
 ---
 
 # Resource: intersight_software_hcl_meta

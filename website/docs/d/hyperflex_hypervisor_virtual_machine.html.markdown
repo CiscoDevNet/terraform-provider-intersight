@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_hypervisor_virtual_machine"
 description: |-
-  A virtual machine belonging to the HyperFlex cluster spawned via the hypervisor.
+        A virtual machine belonging to the HyperFlex cluster spawned via the hypervisor.
+
 ---
 
 # Data Source: intersight_hyperflex_hypervisor_virtual_machine

@@ -403,6 +403,11 @@ func dataSourceWorkflowSolutionActionInstance() *schema.Resource {
 				},
 			},
 		},
+		"upgraded_moid": {
+			Description: "Stores the upgraded Moid for help during future lookups.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"validation_workflow_info": {
 			Description: "A reference to a workflowWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
@@ -934,6 +939,11 @@ func dataSourceWorkflowSolutionActionInstance() *schema.Resource {
 					},
 				},
 			},
+		},
+		"upgraded_moid": {
+			Description: "Stores the upgraded Moid for help during future lookups.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"validation_workflow_info": {
 			Description: "A reference to a workflowWorkflowInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -1560,6 +1570,11 @@ func dataSourceWorkflowSolutionActionInstanceRead(c context.Context, d *schema.R
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("upgraded_moid"); ok {
+		x := (v.(string))
+		o.SetUpgradedMoid(x)
+	}
+
 	if v, ok := d.GetOk("validation_workflow_info"); ok {
 		p := make([]models.WorkflowWorkflowInfoRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1751,6 +1766,7 @@ func dataSourceWorkflowSolutionActionInstanceRead(c context.Context, d *schema.R
 				temp["stop_workflow_info"] = flattenMapWorkflowWorkflowInfoRelationship(s.GetStopWorkflowInfo(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["upgraded_moid"] = (s.GetUpgradedMoid())
 
 				temp["validation_workflow_info"] = flattenMapWorkflowWorkflowInfoRelationship(s.GetValidationWorkflowInfo(), d)
 

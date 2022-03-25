@@ -3,9 +3,10 @@ subcategory: "rproxy"
 layout: "intersight"
 page_title: "Intersight: intersight_rproxy_reverse_proxy"
 description: |-
-  REST API endpoint for reverse proxy implementation. It receives an REST API request with URL and target type.
-Based on the target type, credentials is fetched from the target prior to being forwarded to the right upstream
-endpoint.
+        REST API endpoint for reverse proxy implementation. It receives an REST API request with URL and target type.
+        Based on the target type, credentials is fetched from the target prior to being forwarded to the right upstream
+        endpoint.
+
 ---
 
 # Resource: intersight_rproxy_reverse_proxy

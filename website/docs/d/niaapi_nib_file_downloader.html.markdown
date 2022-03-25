@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_nib_file_downloader"
 description: |-
-  Provide a presigned url to download the metadata file from server.
+        Provide a presigned url to download the metadata file from server.
+
 ---
 
 # Data Source: intersight_niaapi_nib_file_downloader

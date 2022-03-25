@@ -3,7 +3,8 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_account_license_data"
 description: |-
-  License information for an account.
+        License information for an account.
+
 ---
 
 # Data Source: intersight_license_account_license_data

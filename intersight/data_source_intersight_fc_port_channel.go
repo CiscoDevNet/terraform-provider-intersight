@@ -434,6 +434,11 @@ func dataSourceFcPortChannel() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"wwn": {
+			Description: "World Wide Name of the port channel.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 	}
 	var model = map[string]*schema.Schema{"account_moid": {
 		Description: "The Account ID for this managed object.",
@@ -852,6 +857,11 @@ func dataSourceFcPortChannel() *schema.Resource {
 		"vsan": {
 			Description: "Virtual San that is associated to the port-channel.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"wwn": {
+			Description: "World Wide Name of the port channel.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 	}
@@ -1312,6 +1322,11 @@ func dataSourceFcPortChannelRead(c context.Context, d *schema.ResourceData, meta
 		o.SetVsan(x)
 	}
 
+	if v, ok := d.GetOk("wwn"); ok {
+		x := (v.(string))
+		o.SetWwn(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of FcPortChannel object failed with error : %s", err.Error())
@@ -1387,6 +1402,7 @@ func dataSourceFcPortChannelRead(c context.Context, d *schema.ResourceData, meta
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["vsan"] = (s.GetVsan())
+				temp["wwn"] = (s.GetWwn())
 				fcPortChannelResults[j] = temp
 				j += 1
 			}

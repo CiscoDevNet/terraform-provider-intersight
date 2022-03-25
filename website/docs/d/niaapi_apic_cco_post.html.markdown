@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_cco_post"
 description: |-
-  The post reporting a new release is available for APIC.
+        The post reporting a new release is available for APIC.
+
 ---
 
 # Data Source: intersight_niaapi_apic_cco_post

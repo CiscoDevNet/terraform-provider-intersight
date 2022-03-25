@@ -3,7 +3,8 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_config_policy"
 description: |-
-  An Adapter Configuration Policy configures the Ethernet and Fibre-Channel settings for the VIC adapter.
+        An Adapter Configuration Policy configures the Ethernet and Fibre-Channel settings for the VIC adapter.
+
 ---
 
 # Resource: intersight_adapter_config_policy

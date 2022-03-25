@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **EmailSettingsCount** | Pointer to **int64** | Email settings count of the Insight group. | [optional] 
 **FlowSettingsCount** | Pointer to **int64** | Flow setting count of the Insight group. | [optional] 
 **GroupName** | Pointer to **string** | Name of the Insight group. | [optional] 
+**InsightSites** | Pointer to [**[]NiatelemetrySites**](NiatelemetrySites.md) |  | [optional] 
 **KafkaSettingsCount** | Pointer to **int64** | Kafka settings count of the Insight group. | [optional] 
 **MicroBurstSettingsStatus** | Pointer to **string** | Microburst setting status of the Insight group. | [optional] 
 **PrechangeAnalysisCount** | Pointer to **int64** | Prechange analysis count of the Insight group. | [optional] 
@@ -253,6 +254,41 @@ SetGroupName sets GroupName field to given value.
 
 HasGroupName returns a boolean if a field has been set.
 
+### GetInsightSites
+
+`func (o *NiatelemetryInsightGroupDetailsAllOf) GetInsightSites() []NiatelemetrySites`
+
+GetInsightSites returns the InsightSites field if non-nil, zero value otherwise.
+
+### GetInsightSitesOk
+
+`func (o *NiatelemetryInsightGroupDetailsAllOf) GetInsightSitesOk() (*[]NiatelemetrySites, bool)`
+
+GetInsightSitesOk returns a tuple with the InsightSites field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInsightSites
+
+`func (o *NiatelemetryInsightGroupDetailsAllOf) SetInsightSites(v []NiatelemetrySites)`
+
+SetInsightSites sets InsightSites field to given value.
+
+### HasInsightSites
+
+`func (o *NiatelemetryInsightGroupDetailsAllOf) HasInsightSites() bool`
+
+HasInsightSites returns a boolean if a field has been set.
+
+### SetInsightSitesNil
+
+`func (o *NiatelemetryInsightGroupDetailsAllOf) SetInsightSitesNil(b bool)`
+
+ SetInsightSitesNil sets the value for InsightSites to be an explicit nil
+
+### UnsetInsightSites
+`func (o *NiatelemetryInsightGroupDetailsAllOf) UnsetInsightSites()`
+
+UnsetInsightSites ensures that no value is present for InsightSites, not even an explicit nil
 ### GetKafkaSettingsCount
 
 `func (o *NiatelemetryInsightGroupDetailsAllOf) GetKafkaSettingsCount() int64`

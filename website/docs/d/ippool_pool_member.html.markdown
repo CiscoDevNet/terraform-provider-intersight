@@ -3,7 +3,8 @@ subcategory: "ippool"
 layout: "intersight"
 page_title: "Intersight: intersight_ippool_pool_member"
 description: |-
-  PoolMember represents a single IPv4 and or IPv6 address that is part of a pool.
+        PoolMember represents a single IPv4 and or IPv6 address that is part of a pool.
+
 ---
 
 # Data Source: intersight_ippool_pool_member

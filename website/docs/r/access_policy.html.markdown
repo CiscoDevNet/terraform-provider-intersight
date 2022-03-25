@@ -3,7 +3,8 @@ subcategory: "access"
 layout: "intersight"
 page_title: "Intersight: intersight_access_policy"
 description: |-
-  Policy to configure server or chassis management options.
+        Policy to configure server or chassis management options.
+
 ---
 
 # Resource: intersight_access_policy

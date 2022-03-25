@@ -3,7 +3,8 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_rack_unit"
 description: |-
-  Describes a standalone or FI-attached Rack-mounted server.
+        Describes a standalone or FI-attached Rack-mounted server.
+
 ---
 
 # Data Source: intersight_compute_rack_unit

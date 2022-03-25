@@ -3,7 +3,8 @@ subcategory: "power"
 layout: "intersight"
 page_title: "Intersight: intersight_power_control_state"
 description: |-
-  Managed object used to track chassis power capping information.
+        Managed object used to track chassis power capping information.
+
 ---
 
 # Data Source: intersight_power_control_state

@@ -3,11 +3,12 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_batch_api_executor"
 description: |-
-  Intersight allows generic API tasks to be created by taking the API request
-body and a response parser specification in the form of content.Grammar object.
-Batch API associates the list of API requests to be executed as part of single
-task execution. Each API request takes the request body and a response parser
-specification.
+        Intersight allows generic API tasks to be created by taking the API request
+        body and a response parser specification in the form of content.Grammar object.
+        Batch API associates the list of API requests to be executed as part of single
+        task execution. Each API request takes the request body and a response parser
+        specification.
+
 ---
 
 # Data Source: intersight_workflow_batch_api_executor

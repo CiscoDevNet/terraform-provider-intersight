@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_nexus_dashboard_details"
 description: |-
-  Details of NexusDashboard.
+        Details of NexusDashboard.
+
 ---
 
 # Data Source: intersight_niatelemetry_nexus_dashboard_details

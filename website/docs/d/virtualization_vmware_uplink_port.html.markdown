@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_uplink_port"
 description: |-
-  The VMware uplink port object is represented here.
+        The VMware uplink port object is represented here.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_uplink_port

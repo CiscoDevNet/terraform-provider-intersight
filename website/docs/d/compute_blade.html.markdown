@@ -3,7 +3,8 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_blade"
 description: |-
-  Server which is housed in a chassis and shares some of the hardware with other servers in the chassis.
+        Server which is housed in a chassis and shares some of the hardware with other servers in the chassis.
+
 ---
 
 # Data Source: intersight_compute_blade

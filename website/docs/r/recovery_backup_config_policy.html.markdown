@@ -3,7 +3,8 @@ subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_backup_config_policy"
 description: |-
-  Backup config policy which contains all the required inputs to do backup on a local or remote server.
+        Backup config policy which contains all the required inputs to do backup on a local or remote server.
+
 ---
 
 # Resource: intersight_recovery_backup_config_policy

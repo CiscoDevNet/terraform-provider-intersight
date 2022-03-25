@@ -3,9 +3,10 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_system_info"
 description: |-
-  The Intersight Appliance's system information. SystemInfo is a singleton managed object
-created during the Intersight Appliance setup. The Intersight Appliance updates the
-SystemInfo managed object with up to date cluster status information periodically.
+        The Intersight Appliance's system information. SystemInfo is a singleton managed object
+        created during the Intersight Appliance setup. The Intersight Appliance updates the
+        SystemInfo managed object with up to date cluster status information periodically.
+
 ---
 
 # Data Source: intersight_appliance_system_info

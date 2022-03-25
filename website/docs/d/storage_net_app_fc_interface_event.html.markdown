@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_fc_interface_event"
 description: |-
-  An event where the impacted resource type is a FC interface.
+        An event where the impacted resource type is a FC interface.
+
 ---
 
 # Data Source: intersight_storage_net_app_fc_interface_event

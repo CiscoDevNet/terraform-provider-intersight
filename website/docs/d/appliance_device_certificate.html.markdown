@@ -3,7 +3,8 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_device_certificate"
 description: |-
-  DeviceCertificate managed object stores the CA Certificate used by device connector and it allow tracks it renewal.
+        DeviceCertificate managed object stores the CA Certificate used by device connector and it allow tracks it renewal.
+
 ---
 
 # Data Source: intersight_appliance_device_certificate

@@ -3,7 +3,8 @@ subcategory: "oauth"
 layout: "intersight"
 page_title: "Intersight: intersight_oauth_authorization"
 description: |-
-  User's consent for Intersight to contact an external software repository such as cisco.com, on the behalf of the user. It is used by Intersight Appliance to support resource owner grant type.
+        User's consent for Intersight to contact an external software repository such as cisco.com, on the behalf of the user. It is used by Intersight Appliance to support resource owner grant type.
+
 ---
 
 # Data Source: intersight_oauth_authorization

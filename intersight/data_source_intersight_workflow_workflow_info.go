@@ -492,6 +492,46 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
 					},
+					"cancelable": {
+						Description: "Holds the parameters and conditions for a workflow to be cancelable.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"cancelable_states": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Schema{
+										Type: schema.TypeString}},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"enabled": {
+									Description: "When true the workflow can be cancelled. The action can be further restricted by the mode and cancelableStates properties.",
+									Type:        schema.TypeBool,
+									Optional:    true,
+								},
+								"mode": {
+									Description: "Mode controls how the workflow can be canceled.\n* `ApiOnly` - The workflow can only be canceled via API call.\n* `All` - The workflow can be canceled from API or from the user interface.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
+					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 						Type:        schema.TypeString,
@@ -1387,6 +1427,46 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 						Type:             schema.TypeString,
 						Optional:         true,
 						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"cancelable": {
+						Description: "Holds the parameters and conditions for a workflow to be cancelable.",
+						Type:        schema.TypeList,
+						MaxItems:    1,
+						Optional:    true,
+						Elem: &schema.Resource{
+							Schema: map[string]*schema.Schema{
+								"additional_properties": {
+									Type:             schema.TypeString,
+									Optional:         true,
+									DiffSuppressFunc: SuppressDiffAdditionProps,
+								},
+								"cancelable_states": {
+									Type:     schema.TypeList,
+									Optional: true,
+									Elem: &schema.Schema{
+										Type: schema.TypeString}},
+								"class_id": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"enabled": {
+									Description: "When true the workflow can be cancelled. The action can be further restricted by the mode and cancelableStates properties.",
+									Type:        schema.TypeBool,
+									Optional:    true,
+								},
+								"mode": {
+									Description: "Mode controls how the workflow can be canceled.\n* `ApiOnly` - The workflow can only be canceled via API call.\n* `All` - The workflow can be canceled from API or from the user interface.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+								"object_type": {
+									Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+									Type:        schema.TypeString,
+									Optional:    true,
+								},
+							},
+						},
 					},
 					"class_id": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",

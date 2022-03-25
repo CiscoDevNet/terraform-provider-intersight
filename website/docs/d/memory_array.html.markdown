@@ -3,7 +3,8 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_array"
 description: |-
-  Holder housing multiple memory units.
+        Holder housing multiple memory units.
+
 ---
 
 # Data Source: intersight_memory_array

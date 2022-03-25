@@ -3,7 +3,8 @@ subcategory: "ippool"
 layout: "intersight"
 page_title: "Intersight: intersight_ippool_universe"
 description: |-
-  Universe represents a book keeping container to keep track of all IP Addresses for a given VRF.
+        Universe represents a book keeping container to keep track of all IP Addresses for a given VRF.
+
 ---
 
 # Data Source: intersight_ippool_universe

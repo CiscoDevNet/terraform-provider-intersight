@@ -3,7 +3,8 @@ subcategory: "fcpool"
 layout: "intersight"
 page_title: "Intersight: intersight_fcpool_pool"
 description: |-
-  Pool represents a collection of WWN addresses that can be allocated to VHBAs of a server profile.
+        Pool represents a collection of WWN addresses that can be allocated to VHBAs of a server profile.
+
 ---
 
 # Resource: intersight_fcpool_pool

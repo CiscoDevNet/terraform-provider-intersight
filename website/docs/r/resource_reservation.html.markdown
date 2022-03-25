@@ -3,7 +3,8 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_reservation"
 description: |-
-  A Reservation is used to reserve a place for a new resource in the resource groups.
+        A Reservation is used to reserve a place for a new resource in the resource groups.
+
 ---
 
 # Resource: intersight_resource_reservation

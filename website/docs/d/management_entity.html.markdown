@@ -3,7 +3,8 @@ subcategory: "management"
 layout: "intersight"
 page_title: "Intersight: intersight_management_entity"
 description: |-
-  Logical representation that captures the role of each Fabric Interconnect in UCS Manager.
+        Logical representation that captures the role of each Fabric Interconnect in UCS Manager.
+
 ---
 
 # Data Source: intersight_management_entity

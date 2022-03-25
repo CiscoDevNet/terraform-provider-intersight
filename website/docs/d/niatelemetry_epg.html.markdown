@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_epg"
 description: |-
-  Object is available at End Point Group scope. This currently applies only to the APIC environemt.
+        Object is available at End Point Group scope. This currently applies only to the APIC environemt.
+
 ---
 
 # Data Source: intersight_niatelemetry_epg

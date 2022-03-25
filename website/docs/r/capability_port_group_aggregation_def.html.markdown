@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_port_group_aggregation_def"
 description: |-
-  FEX/IOCARD module port group aggregation capabilities.
+        FEX/IOCARD module port group aggregation capabilities.
+
 ---
 
 # Resource: intersight_capability_port_group_aggregation_def

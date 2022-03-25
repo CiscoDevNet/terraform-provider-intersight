@@ -3,9 +3,10 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_o_auth_token"
 description: |-
-  The meta data for generating OAuth2 token of a user.
-It is created when user logged in via OAuth2 using Authorization Code grant
-and deleted upon logout, expiration timeout or manual deletion.
+        The meta data for generating OAuth2 token of a user.
+        It is created when user logged in via OAuth2 using Authorization Code grant
+        and deleted upon logout, expiration timeout or manual deletion.
+
 ---
 
 # Data Source: intersight_iam_o_auth_token

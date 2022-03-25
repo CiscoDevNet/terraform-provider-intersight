@@ -3,7 +3,8 @@ subcategory: "terraform"
 layout: "intersight"
 page_title: "Intersight: intersight_terraform_executor"
 description: |-
-  Executor is a ManagedObject, aka MO. This API is used to execute terraform scripts.
+        Executor is a ManagedObject, aka MO. This API is used to execute terraform scripts.
+
 ---
 
 # Resource: intersight_terraform_executor

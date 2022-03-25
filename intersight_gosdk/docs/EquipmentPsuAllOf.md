@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.Psu"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.Psu"]
 **Description** | Pointer to **string** | This field is to provide description for the power supply unit. | [optional] [readonly] 
+**Name** | Pointer to **string** | This field is to provide name for the power supply unit. | [optional] [readonly] 
 **OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | This field identifies the psu operational state. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | This field identifies the Part Number for this Power Supply Unit. | [optional] [readonly] 
@@ -110,6 +111,31 @@ SetDescription sets Description field to given value.
 `func (o *EquipmentPsuAllOf) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *EquipmentPsuAllOf) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *EquipmentPsuAllOf) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *EquipmentPsuAllOf) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *EquipmentPsuAllOf) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetOperReason
 

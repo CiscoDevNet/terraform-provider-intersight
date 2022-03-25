@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_physical_network_interface"
 description: |-
-  Details of VMware physical network interface.
+        Details of VMware physical network interface.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_physical_network_interface

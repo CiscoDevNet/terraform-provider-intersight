@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_appliance_pc_role"
 description: |-
-  Configuration object sent by user to create an appliance port channel.
+        Configuration object sent by user to create an appliance port channel.
+
 ---
 
 # Data Source: intersight_fabric_appliance_pc_role

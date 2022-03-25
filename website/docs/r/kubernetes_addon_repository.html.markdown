@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_addon_repository"
 description: |-
-  Docker registry or helm repository which hosts helm charts and docker images.
+        Docker registry or helm repository which hosts helm charts and docker images.
+
 ---
 
 # Resource: intersight_kubernetes_addon_repository

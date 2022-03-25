@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_aws_virtual_machine"
 description: |-
-  Configuration details of the virtual machine.
+        Configuration details of the virtual machine.
+
 ---
 
 # Data Source: intersight_cloud_aws_virtual_machine

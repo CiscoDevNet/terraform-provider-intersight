@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_nexus_dashboards"
 description: |-
-  Object is available for Nexus Dashboard devices.
+        Object is available for Nexus Dashboard devices.
+
 ---
 
 # Data Source: intersight_niatelemetry_nexus_dashboards

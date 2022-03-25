@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_feature_limit_internal"
 description: |-
-  The HyperFlex installer feature limits for internal system use.
+        The HyperFlex installer feature limits for internal system use.
+
 ---
 
 # Resource: intersight_hyperflex_feature_limit_internal

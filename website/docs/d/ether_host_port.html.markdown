@@ -3,7 +3,8 @@ subcategory: "ether"
 layout: "intersight"
 page_title: "Intersight: intersight_ether_host_port"
 description: |-
-  Model object contains the details of host port available on IO card or fabric extender.
+        Model object contains the details of host port available on IO card or fabric extender.
+
 ---
 
 # Data Source: intersight_ether_host_port

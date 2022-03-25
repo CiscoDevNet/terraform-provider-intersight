@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_trusted_registries_policy"
 description: |-
-  A policy specifying self signed docker registries and CA certificates to trust.
+        A policy specifying self signed docker registries and CA certificates to trust.
+
 ---
 
 # Data Source: intersight_kubernetes_trusted_registries_policy

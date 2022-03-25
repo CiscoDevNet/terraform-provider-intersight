@@ -3,7 +3,8 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_pch_storage_device"
 description: |-
-  Pch Storage Boot Device configured on the server.
+        Pch Storage Boot Device configured on the server.
+
 ---
 
 # Data Source: intersight_boot_pch_storage_device

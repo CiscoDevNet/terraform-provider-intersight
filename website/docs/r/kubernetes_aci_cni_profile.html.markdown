@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_aci_cni_profile"
 description: |-
-  Configuration for an ACI CNI profile.
+        Configuration for an ACI CNI profile.
+
 ---
 
 # Resource: intersight_kubernetes_aci_cni_profile

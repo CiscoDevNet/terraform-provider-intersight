@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_datastore_statistic"
 description: |-
-  Datastore Statistic describing more detailed information about the Data Protection Peer.
+        Datastore Statistic describing more detailed information about the Data Protection Peer.
+
 ---
 
 # Data Source: intersight_hyperflex_datastore_statistic

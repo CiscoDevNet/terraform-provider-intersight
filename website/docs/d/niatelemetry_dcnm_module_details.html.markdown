@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_dcnm_module_details"
 description: |-
-  Inventory Object available for DCNM hardware modules.
+        Inventory Object available for DCNM hardware modules.
+
 ---
 
 # Data Source: intersight_niatelemetry_dcnm_module_details

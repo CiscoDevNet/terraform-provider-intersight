@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -38,6 +38,8 @@ type EquipmentIdentitySummaryAllOf struct {
 	// Numeric Identifier assigned by the management system to the equipment.
 	Identifier         *int64                    `json:"Identifier,omitempty"`
 	IoCardIdentityList []EquipmentIoCardIdentity `json:"IoCardIdentityList,omitempty"`
+	// Denotes the type of discovery that was most recently triggered on this server. * `Unknown` - The last discovery type is unknown. * `Deep` - The last discovery triggered is deep. * `Shallow` - The last discovery triggered is shallow.
+	LastDiscoveryTriggered *string `json:"LastDiscoveryTriggered,omitempty"`
 	// The equipment's lifecycle status. * `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment. * `Active` - Default Lifecycle State for a physical entity. * `Decommissioned` - Decommission Lifecycle state. * `DecommissionInProgress` - Decommission Inprogress Lifecycle state. * `RecommissionInProgress` - Recommission Inprogress Lifecycle state. * `OperationFailed` - Failed Operation Lifecycle state. * `ReackInProgress` - ReackInProgress Lifecycle state. * `RemoveInProgress` - RemoveInProgress Lifecycle state. * `Discovered` - Discovered Lifecycle state. * `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state. * `DiscoveryFailed` - DiscoveryFailed Lifecycle state. * `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity. * `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity. * `Inactive` - Inactive Lifecycle state. * `ReplaceInProgress` - ReplaceInProgress Lifecycle state. * `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously.
 	Lifecycle *string `json:"Lifecycle,omitempty"`
 	// The vendor provided model name for the equipment.
@@ -420,6 +422,38 @@ func (o *EquipmentIdentitySummaryAllOf) SetIoCardIdentityList(v []EquipmentIoCar
 	o.IoCardIdentityList = v
 }
 
+// GetLastDiscoveryTriggered returns the LastDiscoveryTriggered field value if set, zero value otherwise.
+func (o *EquipmentIdentitySummaryAllOf) GetLastDiscoveryTriggered() string {
+	if o == nil || o.LastDiscoveryTriggered == nil {
+		var ret string
+		return ret
+	}
+	return *o.LastDiscoveryTriggered
+}
+
+// GetLastDiscoveryTriggeredOk returns a tuple with the LastDiscoveryTriggered field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentIdentitySummaryAllOf) GetLastDiscoveryTriggeredOk() (*string, bool) {
+	if o == nil || o.LastDiscoveryTriggered == nil {
+		return nil, false
+	}
+	return o.LastDiscoveryTriggered, true
+}
+
+// HasLastDiscoveryTriggered returns a boolean if a field has been set.
+func (o *EquipmentIdentitySummaryAllOf) HasLastDiscoveryTriggered() bool {
+	if o != nil && o.LastDiscoveryTriggered != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLastDiscoveryTriggered gets a reference to the given string and assigns it to the LastDiscoveryTriggered field.
+func (o *EquipmentIdentitySummaryAllOf) SetLastDiscoveryTriggered(v string) {
+	o.LastDiscoveryTriggered = &v
+}
+
 // GetLifecycle returns the Lifecycle field value if set, zero value otherwise.
 func (o *EquipmentIdentitySummaryAllOf) GetLifecycle() string {
 	if o == nil || o.Lifecycle == nil {
@@ -743,6 +777,9 @@ func (o EquipmentIdentitySummaryAllOf) MarshalJSON() ([]byte, error) {
 	if o.IoCardIdentityList != nil {
 		toSerialize["IoCardIdentityList"] = o.IoCardIdentityList
 	}
+	if o.LastDiscoveryTriggered != nil {
+		toSerialize["LastDiscoveryTriggered"] = o.LastDiscoveryTriggered
+	}
 	if o.Lifecycle != nil {
 		toSerialize["Lifecycle"] = o.Lifecycle
 	}
@@ -799,6 +836,7 @@ func (o *EquipmentIdentitySummaryAllOf) UnmarshalJSON(bytes []byte) (err error) 
 		delete(additionalProperties, "FirmwareSupportability")
 		delete(additionalProperties, "Identifier")
 		delete(additionalProperties, "IoCardIdentityList")
+		delete(additionalProperties, "LastDiscoveryTriggered")
 		delete(additionalProperties, "Lifecycle")
 		delete(additionalProperties, "Model")
 		delete(additionalProperties, "Presence")

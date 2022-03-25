@@ -3,7 +3,8 @@ subcategory: "cond"
 layout: "intersight"
 page_title: "Intersight: intersight_cond_alarm_aggregation"
 description: |-
-  Object which represents alarm aggregation for a managed end point.
+        Object which represents alarm aggregation for a managed end point.
+
 ---
 
 # Data Source: intersight_cond_alarm_aggregation

@@ -3,7 +3,8 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_authorization"
 description: |-
-  User's consent for Intersight to contact an external software repository such as cisco.com, on the behalf of the user.
+        User's consent for Intersight to contact an external software repository such as cisco.com, on the behalf of the user.
+
 ---
 
 # Resource: intersight_softwarerepository_authorization

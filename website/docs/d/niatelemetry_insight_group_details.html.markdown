@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_insight_group_details"
 description: |-
-  Insight group details in ND.
+        Insight group details in ND.
+
 ---
 
 # Data Source: intersight_niatelemetry_insight_group_details

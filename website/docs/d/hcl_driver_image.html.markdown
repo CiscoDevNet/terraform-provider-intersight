@@ -3,7 +3,8 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_driver_image"
 description: |-
-  Collection used to store the driver ISO urls for each server based on how it is managed.
+        Collection used to store the driver ISO urls for each server based on how it is managed.
+
 ---
 
 # Data Source: intersight_hcl_driver_image

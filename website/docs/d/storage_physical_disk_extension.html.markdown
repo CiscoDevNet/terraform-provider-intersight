@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_physical_disk_extension"
 description: |-
-  Information of disks as reported by controller. In certain cases like S-series servers, disk information will be reported by controller separately and this represents such information.
+        Information of disks as reported by controller. In certain cases like S-series servers, disk information will be reported by controller separately and this represents such information.
+
 ---
 
 # Data Source: intersight_storage_physical_disk_extension

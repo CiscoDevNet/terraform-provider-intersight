@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_fcoe_uplink_role"
 description: |-
-  Configuration object sent by user to create a fcoe uplink port.
+        Configuration object sent by user to create a fcoe uplink port.
+
 ---
 
 # Data Source: intersight_fabric_fcoe_uplink_role

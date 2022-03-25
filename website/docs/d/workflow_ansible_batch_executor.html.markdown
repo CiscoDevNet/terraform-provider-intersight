@@ -3,11 +3,12 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_ansible_batch_executor"
 description: |-
-  Intersight allows generic tasks to be created by taking the executor request
-body and a response parser specification in the form of content.Grammar object.
-Ansible Batch associates the list of Ansible commands executed as SSH requests as part of single
-task execution. Each SSH request takes the Ansible command to execute and a response parser
-specification based off text to extract fields of interest.
+        Intersight allows generic tasks to be created by taking the executor request
+        body and a response parser specification in the form of content.Grammar object.
+        Ansible Batch associates the list of Ansible commands executed as SSH requests as part of single
+        task execution. Each SSH request takes the Ansible command to execute and a response parser
+        specification based off text to extract fields of interest.
+
 ---
 
 # Data Source: intersight_workflow_ansible_batch_executor

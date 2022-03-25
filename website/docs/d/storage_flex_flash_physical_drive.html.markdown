@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_flex_flash_physical_drive"
 description: |-
-  Physical Drive repersenting a SD Card.
+        Physical Drive repersenting a SD Card.
+
 ---
 
 # Data Source: intersight_storage_flex_flash_physical_drive

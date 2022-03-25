@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_hypervisor_host"
 description: |-
-  A host appliance in the HyperFlex Cluster.
+        A host appliance in the HyperFlex Cluster.
+
 ---
 
 # Data Source: intersight_hyperflex_hypervisor_host

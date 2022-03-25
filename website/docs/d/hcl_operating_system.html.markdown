@@ -3,7 +3,8 @@ subcategory: "hcl"
 layout: "intersight"
 page_title: "Intersight: intersight_hcl_operating_system"
 description: |-
-  Collection used to store operating system details.
+        Collection used to store operating system details.
+
 ---
 
 # Data Source: intersight_hcl_operating_system

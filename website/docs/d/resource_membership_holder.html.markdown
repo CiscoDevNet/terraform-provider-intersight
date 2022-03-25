@@ -3,7 +3,8 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_membership_holder"
 description: |-
-  A holder of REST resources and their membership.
+        A holder of REST resources and their membership.
+
 ---
 
 # Data Source: intersight_resource_membership_holder

@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_dcnm_fex_details"
 description: |-
-  Inventory Object available for DCNM FEX.
+        Inventory Object available for DCNM FEX.
+
 ---
 
 # Data Source: intersight_niatelemetry_dcnm_fex_details

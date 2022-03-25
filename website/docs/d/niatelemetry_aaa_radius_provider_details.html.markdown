@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_aaa_radius_provider_details"
 description: |-
-  Object to capture AAA Radius provider details.
+        Object to capture AAA Radius provider details.
+
 ---
 
 # Data Source: intersight_niatelemetry_aaa_radius_provider_details

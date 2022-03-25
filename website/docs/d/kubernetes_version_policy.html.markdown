@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_version_policy"
 description: |-
-  Policy that defines which kubernetes version to use.
+        Policy that defines which kubernetes version to use.
+
 ---
 
 # Data Source: intersight_kubernetes_version_policy

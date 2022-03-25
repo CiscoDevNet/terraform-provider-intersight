@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_distributed_switch"
 description: |-
-  The VMware Distributed Virtual Switch object is represented here.
+        The VMware Distributed Virtual Switch object is represented here.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_distributed_switch

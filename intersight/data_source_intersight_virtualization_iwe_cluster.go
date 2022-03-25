@@ -290,7 +290,7 @@ func dataSourceVirtualizationIweCluster() *schema.Resource {
 			Optional:    true,
 		},
 		"hypervisor_version": {
-			Description: "The version of hypervisor running on this cluster.",
+			Description: "Identifies the version of the hypervisor running on this cluster. Keeping the hypervisor version in the cluster makes it convenient for applications to validate their deployment needs. Defaults to an empty string.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1039,7 +1039,7 @@ func dataSourceVirtualizationIweCluster() *schema.Resource {
 			Optional:    true,
 		},
 		"hypervisor_version": {
-			Description: "The version of hypervisor running on this cluster.",
+			Description: "Identifies the version of the hypervisor running on this cluster. Keeping the hypervisor version in the cluster makes it convenient for applications to validate their deployment needs. Defaults to an empty string.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},

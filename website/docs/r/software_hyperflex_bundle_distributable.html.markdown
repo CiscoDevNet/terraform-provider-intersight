@@ -3,7 +3,8 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_hyperflex_bundle_distributable"
 description: |-
-  A HyperFlex image bundle distributed by Cisco for Private Appliance.
+        A HyperFlex image bundle distributed by Cisco for Private Appliance.
+
 ---
 
 # Resource: intersight_software_hyperflex_bundle_distributable

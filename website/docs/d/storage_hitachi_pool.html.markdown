@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_pool"
 description: |-
-  A pool entity in Hitachi storage array.
+        A pool entity in Hitachi storage array.
+
 ---
 
 # Data Source: intersight_storage_hitachi_pool

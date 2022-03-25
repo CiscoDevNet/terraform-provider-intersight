@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_sys_config_policy"
 description: |-
-  A policy specifying system configuration such as timezone, DNS servers, and NTP Servers.
+        A policy specifying system configuration such as timezone, DNS servers, and NTP Servers.
+
 ---
 
 # Resource: intersight_hyperflex_sys_config_policy

@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_key_encryption_key"
 description: |-
-  Specifies a key encryption Key and parameters for the associated resource.
+        Specifies a key encryption Key and parameters for the associated resource.
+
 ---
 
 # Resource: intersight_hyperflex_key_encryption_key

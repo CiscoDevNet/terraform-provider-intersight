@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_ethernet_port"
 description: |-
-  Ethernet port is a port on a node in a storage array.
+        Ethernet port is a port on a node in a storage array.
+
 ---
 
 # Data Source: intersight_storage_net_app_ethernet_port

@@ -3,7 +3,8 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_fc_if"
 description: |-
-  Virtual Fibre Channel Interface.
+        Virtual Fibre Channel Interface.
+
 ---
 
 # Resource: intersight_vnic_fc_if

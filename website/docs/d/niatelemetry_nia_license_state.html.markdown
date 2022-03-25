@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_nia_license_state"
 description: |-
-  Object available at device scope for license information. This determines the usage of this attribute.
+        Object available at device scope for license information. This determines the usage of this attribute.
+
 ---
 
 # Data Source: intersight_niatelemetry_nia_license_state

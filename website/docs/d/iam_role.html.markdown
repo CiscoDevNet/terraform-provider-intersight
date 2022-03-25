@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_role"
 description: |-
-  A role is a collection of privilege sets that are assigned to a user using a permission object.
+        A role is a collection of privilege sets that are assigned to a user using a permission object.
+
 ---
 
 # Data Source: intersight_iam_role

@@ -3,7 +3,8 @@ subcategory: "snmp"
 layout: "intersight"
 page_title: "Intersight: intersight_snmp_policy"
 description: |-
-  Policy to configure SNMP settings on endpoint.
+        Policy to configure SNMP settings on endpoint.
+
 ---
 
 # Resource: intersight_snmp_policy

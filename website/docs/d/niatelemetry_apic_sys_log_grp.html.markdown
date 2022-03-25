@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_apic_sys_log_grp"
 description: |-
-  Object to capture the SysLogGroup details in APIC.
+        Object to capture the SysLogGroup details in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_apic_sys_log_grp

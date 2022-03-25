@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_ssh_version_two"
 description: |-
-  Object to capture SSH V2 details in APIC.
+        Object to capture SSH V2 details in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_ssh_version_two

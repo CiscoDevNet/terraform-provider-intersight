@@ -3,11 +3,12 @@ subcategory: "os"
 layout: "intersight"
 page_title: "Intersight: intersight_os_install"
 description: |-
-  This MO models the target server, answers and other properties needed for
-OS installation. The OS installation can be started in the target server by doing
-a POST on this MO.
-The requests to this MO starts a OS installation workflow that can be tracked
-using workflow engine MO workflow.WorkflowInfo.
+        This MO models the target server, answers and other properties needed for
+        OS installation. The OS installation can be started in the target server by doing
+        a POST on this MO.
+        The requests to this MO starts a OS installation workflow that can be tracked
+        using workflow engine MO workflow.WorkflowInfo.
+
 ---
 
 # Data Source: intersight_os_install

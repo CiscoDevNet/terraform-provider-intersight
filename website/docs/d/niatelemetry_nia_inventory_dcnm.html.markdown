@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_nia_inventory_dcnm"
 description: |-
-  Inventory Object available for DCNM-scoped attributes.
+        Inventory Object available for DCNM-scoped attributes.
+
 ---
 
 # Data Source: intersight_niatelemetry_nia_inventory_dcnm

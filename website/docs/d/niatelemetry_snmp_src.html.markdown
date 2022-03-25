@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_snmp_src"
 description: |-
-  Object to capture SNMP Src details.
+        Object to capture SNMP Src details.
+
 ---
 
 # Data Source: intersight_niatelemetry_snmp_src

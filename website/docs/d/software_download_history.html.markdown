@@ -3,7 +3,8 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_download_history"
 description: |-
-  An object to keep track of software downloads from the Private Appliance portal in SaaS.
+        An object to keep track of software downloads from the Private Appliance portal in SaaS.
+
 ---
 
 # Data Source: intersight_software_download_history

@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_cisco_hypervisor_manager"
 description: |-
-  A hypervisor manager to manage Cisco Intersight Workload Engine compute clusters and is available per user account.
+        A hypervisor manager to manage Cisco Intersight Workload Engine compute clusters and is available per user account.
+
 ---
 
 # Resource: intersight_virtualization_cisco_hypervisor_manager

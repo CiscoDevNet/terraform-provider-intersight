@@ -3,7 +3,8 @@ subcategory: "ippool"
 layout: "intersight"
 page_title: "Intersight: intersight_ippool_shadow_pool"
 description: |-
-  Shadow Pool is a tracking object created on behalf of an IP pool, for each VRF.
+        Shadow Pool is a tracking object created on behalf of an IP pool, for each VRF.
+
 ---
 
 # Data Source: intersight_ippool_shadow_pool

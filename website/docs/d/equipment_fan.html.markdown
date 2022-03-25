@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fan"
 description: |-
-  Fan in a Fabric Interconnect / Chassis / RackUnit.
+        Fan in a Fabric Interconnect / Chassis / RackUnit.
+
 ---
 
 # Data Source: intersight_equipment_fan

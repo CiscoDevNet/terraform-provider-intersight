@@ -3,7 +3,8 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_blade_identity"
 description: |-
-  Identity object that uniquely represents a blade server object under a DR.
+        Identity object that uniquely represents a blade server object under a DR.
+
 ---
 
 # Data Source: intersight_compute_blade_identity
@@ -23,6 +24,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `firmware_supportability`:(string) Describes whether the running CIMC version supports Intersight managed mode.* `Unknown` - The running firmware version is unknown.* `Supported` - The running firmware version is known and supports IMM mode.* `NotSupported` - The running firmware version is known and does not support IMM mode. 
 * `identifier`:(int) Numeric Identifier assigned by the management system to the equipment. 
+* `last_discovery_triggered`:(string) Denotes the type of discovery that was most recently triggered on this server.* `Unknown` - The last discovery type is unknown.* `Deep` - The last discovery triggered is deep.* `Shallow` - The last discovery triggered is shallow. 
 * `nr_lifecycle`:(string) The equipment's lifecycle status.* `None` - Default state of an equipment. This should be an initial state when no state is defined for an equipment.* `Active` - Default Lifecycle State for a physical entity.* `Decommissioned` - Decommission Lifecycle state.* `DecommissionInProgress` - Decommission Inprogress Lifecycle state.* `RecommissionInProgress` - Recommission Inprogress Lifecycle state.* `OperationFailed` - Failed Operation Lifecycle state.* `ReackInProgress` - ReackInProgress Lifecycle state.* `RemoveInProgress` - RemoveInProgress Lifecycle state.* `Discovered` - Discovered Lifecycle state.* `DiscoveryInProgress` - DiscoveryInProgress Lifecycle state.* `DiscoveryFailed` - DiscoveryFailed Lifecycle state.* `FirmwareUpgradeInProgress` - Firmware upgrade is in progress on given physical entity.* `BladeMigrationInProgress` - Server slot migration is in progress on given physical entity.* `Inactive` - Inactive Lifecycle state.* `ReplaceInProgress` - ReplaceInProgress Lifecycle state.* `SlotMismatch` - The blade server is detected in a different chassis/slot than it was previously. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) The vendor provided model name for the equipment. 

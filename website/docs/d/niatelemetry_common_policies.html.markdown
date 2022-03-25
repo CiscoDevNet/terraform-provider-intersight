@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_common_policies"
 description: |-
-  Object to capture Common Policy details.
+        Object to capture Common Policy details.
+
 ---
 
 # Data Source: intersight_niatelemetry_common_policies

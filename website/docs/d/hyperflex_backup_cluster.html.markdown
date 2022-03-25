@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_backup_cluster"
 description: |-
-  BackupCluster object associated with Hyperflex cluster describing the backup related information.
+        BackupCluster object associated with Hyperflex cluster describing the backup related information.
+
 ---
 
 # Data Source: intersight_hyperflex_backup_cluster

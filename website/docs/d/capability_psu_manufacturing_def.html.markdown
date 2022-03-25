@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_psu_manufacturing_def"
 description: |-
-  Power supply unit properties.
+        Power supply unit properties.
+
 ---
 
 # Data Source: intersight_capability_psu_manufacturing_def

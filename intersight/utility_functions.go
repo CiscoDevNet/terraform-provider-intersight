@@ -60,6 +60,22 @@ func parseFilterMap(m map[string]interface{}) ([]string, []string) {
 				keyArray = append(keyArray, k+"."+temp_k[i])
 				valArray = append(valArray, temp_v[i])
 			}
+		case reflect.Slice:
+			valueArray := make([]string, 0)
+			for _, val := range v.([]interface{}) {
+				switch value := val.(type) {
+				case int64:
+					valueArray = append(valueArray, strconv.FormatInt(value, 10))
+				case string:
+					valueArray = append(valueArray, "'"+value+"'")
+				case float64:
+					valueArray = append(valueArray, fmt.Sprintf("%f", value))
+				case bool:
+					valueArray = append(valueArray, strconv.FormatBool(value))
+				}
+			}
+			keyArray = append(keyArray, k)
+			valArray = append(valArray, "("+strings.Join(valueArray, ",")+")")
 		case reflect.String:
 			keyArray = append(keyArray, k)
 			valArray = append(valArray, "'"+v.(string)+"'")

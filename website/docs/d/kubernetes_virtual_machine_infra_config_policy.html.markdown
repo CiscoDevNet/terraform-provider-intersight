@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_virtual_machine_infra_config_policy"
 description: |-
-  A policy specifying compute, storage and network infrastructure configuration for a Virtual Machine.
+        A policy specifying compute, storage and network infrastructure configuration for a Virtual Machine.
+
 ---
 
 # Data Source: intersight_kubernetes_virtual_machine_infra_config_policy

@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_permission"
 description: |-
-  Permission provides a way to assign roles to a user or user group to perform operations on object hierarchy.
+        Permission provides a way to assign roles to a user or user group to perform operations on object hierarchy.
+
 ---
 
 # Data Source: intersight_iam_permission

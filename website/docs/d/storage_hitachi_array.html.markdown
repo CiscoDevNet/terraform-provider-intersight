@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_array"
 description: |-
-  The details of the Hitachi storage array.
+        The details of the Hitachi storage array.
+
 ---
 
 # Data Source: intersight_storage_hitachi_array

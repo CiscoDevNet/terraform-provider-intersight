@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_firmware_summary"
 description: |-
-  Update inventory that contains the details for the firmware running on each component in the compute.Physical object.
+        Update inventory that contains the details for the firmware running on each component in the compute.Physical object.
+
 ---
 
 # Data Source: intersight_firmware_firmware_summary

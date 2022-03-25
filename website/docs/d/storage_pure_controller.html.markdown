@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_controller"
 description: |-
-  A storage controller entity in Pure FlashArray.
+        A storage controller entity in Pure FlashArray.
+
 ---
 
 # Data Source: intersight_storage_pure_controller

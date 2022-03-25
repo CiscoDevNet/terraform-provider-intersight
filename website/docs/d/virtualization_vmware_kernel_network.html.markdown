@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_kernel_network"
 description: |-
-  Details of VMware Kernel Network.
+        Details of VMware Kernel Network.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_kernel_network

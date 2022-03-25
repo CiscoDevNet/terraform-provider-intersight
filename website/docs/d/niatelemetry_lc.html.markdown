@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_lc"
 description: |-
-  Object is available at Line Card scope.
+        Object is available at Line Card scope.
+
 ---
 
 # Data Source: intersight_niatelemetry_lc

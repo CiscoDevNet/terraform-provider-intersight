@@ -3,7 +3,8 @@ subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_target"
 description: |-
-  Target represents an entity which can be managed by Intersight. This includes physical entities like UCS and HyperFlex servers and software entities like VMware vCenter and Microsoft Azure cloud accounts.
+        Target represents an entity which can be managed by Intersight. This includes physical entities like UCS and HyperFlex servers and software entities like VMware vCenter and Microsoft Azure cloud accounts.
+
 ---
 
 # Resource: intersight_asset_target
@@ -156,18 +157,6 @@ $ terraform import intersight_asset_target.example 1234567890987654321abcde
 ```
 ## Allowed Types in `AdditionalProperties`
  
-### [asset.OrchestrationService](#argument-reference)
-OrchestrationService provides the necessary configuration details to enable Intersight Orchestration on the selected managed target. Subject to licensing.
-
-### [asset.TerraformIntegrationService](#argument-reference)
-TerraformIntegrationService provides the necessary configuration details to enable Intersight Cloud Region on the selected Terraform Cloud.
-
-### [asset.VirtualizationService](#argument-reference)
-The necessary configuration details to enable  Intersight Virtualization features on the selected managed target.
-
-### [asset.WorkloadOptimizerService](#argument-reference)
-WorkloadOptimizerService provides the necessary configuration details to enable Intersight Workflow Optimizer on the selected managed target. Subject to licensing.
-  
 ### [asset.CloudConnection](#argument-reference)
 CloudConnection provides the necessary details for Intersight to connect to and authenticate with a target at a well-known service address. The service address is inferred based upon the target type. For example Amazon Web Services.
 
@@ -191,4 +180,16 @@ ScopedTargetConnection provides the necessary details for Intersight to connect 
 SshConnection provides the necessary details for Intersight to connect and authenticate with a managed target over an SSH connection.
 * `management_address`:(string) The DNS hostname or IP Address, either IPv4 or IPv6, to be used to connect to the managed target. 
 * `port`:(int) The port number to be used to connect to the managed target. Valid values are 1 - 65535. If not provided, a default port of 22 is used to establish the SSH connection to the given target. 
+  
+### [asset.OrchestrationService](#argument-reference)
+OrchestrationService provides the necessary configuration details to enable Intersight Orchestration on the selected managed target. Subject to licensing.
+
+### [asset.TerraformIntegrationService](#argument-reference)
+TerraformIntegrationService provides the necessary configuration details to enable Intersight Cloud Region on the selected Terraform Cloud.
+
+### [asset.VirtualizationService](#argument-reference)
+The necessary configuration details to enable  Intersight Virtualization features on the selected managed target.
+
+### [asset.WorkloadOptimizerService](#argument-reference)
+WorkloadOptimizerService provides the necessary configuration details to enable Intersight Workflow Optimizer on the selected managed target. Subject to licensing.
   

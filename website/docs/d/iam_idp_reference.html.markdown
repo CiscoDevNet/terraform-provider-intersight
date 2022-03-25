@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_idp_reference"
 description: |-
-  Default Cisco IdP for authentication.
+        Default Cisco IdP for authentication.
+
 ---
 
 # Data Source: intersight_iam_idp_reference

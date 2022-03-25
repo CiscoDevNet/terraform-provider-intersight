@@ -3,7 +3,8 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_iscsi_static_target_policy"
 description: |-
-  Configuration parameters that defines the reachability of iSCSI Target portal.
+        Configuration parameters that defines the reachability of iSCSI Target portal.
+
 ---
 
 # Resource: intersight_vnic_iscsi_static_target_policy

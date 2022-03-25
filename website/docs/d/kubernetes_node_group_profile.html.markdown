@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_node_group_profile"
 description: |-
-  A configuration profile for a node group in a Kubernetes cluster.
+        A configuration profile for a node group in a Kubernetes cluster.
+
 ---
 
 # Data Source: intersight_kubernetes_node_group_profile

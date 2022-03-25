@@ -3,7 +3,8 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_host_iscsi_interface"
 description: |-
-  Iscsi interface on a server adapter.
+        Iscsi interface on a server adapter.
+
 ---
 
 # Data Source: intersight_adapter_host_iscsi_interface

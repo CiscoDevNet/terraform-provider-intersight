@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_rack_enclosure_slot"
 description: |-
-  Rack Server Slot in a RackEnclosure.
+        Rack Server Slot in a RackEnclosure.
+
 ---
 
 # Data Source: intersight_equipment_rack_enclosure_slot

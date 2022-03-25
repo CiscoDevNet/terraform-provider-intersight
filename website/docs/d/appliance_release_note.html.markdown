@@ -3,7 +3,8 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_release_note"
 description: |-
-  ReleaseUpdate managed the object provides the information preview (new features and bug fixes) for one pending upgrade.
+        ReleaseUpdate managed the object provides the information preview (new features and bug fixes) for one pending upgrade.
+
 ---
 
 # Data Source: intersight_appliance_release_note

@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_iwe_datacenter"
 description: |-
-  A datacenter object in Intersight Workload Engine. It is a pre-defined object created internally by the system which acts as a container (logically) for all other objects (Host, VirtualMachine, Volume etc).
+        A datacenter object in Intersight Workload Engine. It is a pre-defined object created internally by the system which acts as a container (logically) for all other objects (Host, VirtualMachine, Volume etc).
+
 ---
 
 # Resource: intersight_virtualization_iwe_datacenter

@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_sku_container_type"
 description: |-
-  Stores hardware attribute information for a container.
+        Stores hardware attribute information for a container.
+
 ---
 
 # Data Source: intersight_cloud_sku_container_type

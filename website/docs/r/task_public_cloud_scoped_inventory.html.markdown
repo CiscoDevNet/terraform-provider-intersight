@@ -3,7 +3,8 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_public_cloud_scoped_inventory"
 description: |-
-  API to trigger on-demand scoped  inventory collection for  in public clouds.
+        API to trigger on-demand scoped  inventory collection for  in public clouds.
+
 ---
 
 # Resource: intersight_task_public_cloud_scoped_inventory

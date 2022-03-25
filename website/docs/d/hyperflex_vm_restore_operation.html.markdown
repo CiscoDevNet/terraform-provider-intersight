@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_vm_restore_operation"
 description: |-
-  Invoke Virtual Machine restore operation.
+        Invoke Virtual Machine restore operation.
+
 ---
 
 # Data Source: intersight_hyperflex_vm_restore_operation

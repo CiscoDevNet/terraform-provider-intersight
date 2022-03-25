@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_iwe_dvswitch"
 description: |-
-  A Intersight Workload Engine cluster wise distributed vSwitch entity.
+        A Intersight Workload Engine cluster wise distributed vSwitch entity.
+
 ---
 
 # Data Source: intersight_virtualization_iwe_dvswitch

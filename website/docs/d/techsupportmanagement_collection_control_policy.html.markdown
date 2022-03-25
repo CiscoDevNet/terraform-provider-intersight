@@ -3,7 +3,8 @@ subcategory: "techsupportmanagement"
 layout: "intersight"
 page_title: "Intersight: intersight_techsupportmanagement_collection_control_policy"
 description: |-
-  Policy to control techsupport collection for a specific account.
+        Policy to control techsupport collection for a specific account.
+
 ---
 
 # Data Source: intersight_techsupportmanagement_collection_control_policy

@@ -3,9 +3,10 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_domain_group"
 description: |-
-  Intersight services are mapped to three different categories of services for scaling purpose.
-Three categories are defined: Partition1/Partition2/Partition3. Topics for each category are created with
-a specific number of partitions. For each cloud environment these numbers will be different.
+        Intersight services are mapped to three different categories of services for scaling purpose.
+        Three categories are defined: Partition1/Partition2/Partition3. Topics for each category are created with
+        a specific number of partitions. For each cloud environment these numbers will be different.
+
 ---
 
 # Data Source: intersight_iam_domain_group

@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_export_policy"
 description: |-
-  NetApp export policies enable client access control to volumes. Clients that match specific IP addresses and/or specific authentication types are granted access.
+        NetApp export policies enable client access control to volumes. Clients that match specific IP addresses and/or specific authentication types are granted access.
+
 ---
 
 # Data Source: intersight_storage_net_app_export_policy

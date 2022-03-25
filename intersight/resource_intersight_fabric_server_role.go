@@ -81,11 +81,17 @@ func resourceFabricServerRole() *schema.Resource {
 					},
 				},
 			},
+			"auto_negotiation_disabled": {
+				Description: "Auto negotiation configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 100G speed port on UCS-FI-6536 and should be set as True.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
+			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
+				Default:     "fabric.ServerRole",
 			},
 			"create_time": {
 				Description: "The time when this managed object was created.",
@@ -109,6 +115,12 @@ func resourceFabricServerRole() *schema.Resource {
 					}
 					return
 				}},
+			"fec": {
+				Description: "Forward error correction configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 25G speed ports on UCS-FI-6454/UCS-FI-64108 and should be set as Cl74.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "Auto",
+			},
 			"mod_time": {
 				Description: "The time when this managed object was last modified.",
 				Type:        schema.TypeString,
@@ -128,10 +140,10 @@ func resourceFabricServerRole() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
+				Default:     "fabric.ServerRole",
 			},
 			"owners": {
 				Type:       schema.TypeList,
@@ -470,7 +482,17 @@ func resourceFabricServerRoleCreate(c context.Context, d *schema.ResourceData, m
 		o.SetAggregatePortId(x)
 	}
 
+	if v, ok := d.GetOkExists("auto_negotiation_disabled"); ok {
+		x := (v.(bool))
+		o.SetAutoNegotiationDisabled(x)
+	}
+
 	o.SetClassId("fabric.ServerRole")
+
+	if v, ok := d.GetOk("fec"); ok {
+		x := (v.(string))
+		o.SetFec(x)
+	}
 
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -619,6 +641,10 @@ func resourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, met
 		return diag.Errorf("error occurred while setting property Ancestors in FabricServerRole object: %s", err.Error())
 	}
 
+	if err := d.Set("auto_negotiation_disabled", (s.GetAutoNegotiationDisabled())); err != nil {
+		return diag.Errorf("error occurred while setting property AutoNegotiationDisabled in FabricServerRole object: %s", err.Error())
+	}
+
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
 		return diag.Errorf("error occurred while setting property ClassId in FabricServerRole object: %s", err.Error())
 	}
@@ -629,6 +655,10 @@ func resourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, met
 
 	if err := d.Set("domain_group_moid", (s.GetDomainGroupMoid())); err != nil {
 		return diag.Errorf("error occurred while setting property DomainGroupMoid in FabricServerRole object: %s", err.Error())
+	}
+
+	if err := d.Set("fec", (s.GetFec())); err != nil {
+		return diag.Errorf("error occurred while setting property Fec in FabricServerRole object: %s", err.Error())
 	}
 
 	if err := d.Set("mod_time", (s.GetModTime()).String()); err != nil {
@@ -707,7 +737,19 @@ func resourceFabricServerRoleUpdate(c context.Context, d *schema.ResourceData, m
 		o.SetAggregatePortId(x)
 	}
 
+	if d.HasChange("auto_negotiation_disabled") {
+		v := d.Get("auto_negotiation_disabled")
+		x := (v.(bool))
+		o.SetAutoNegotiationDisabled(x)
+	}
+
 	o.SetClassId("fabric.ServerRole")
+
+	if d.HasChange("fec") {
+		v := d.Get("fec")
+		x := (v.(string))
+		o.SetFec(x)
+	}
 
 	if d.HasChange("moid") {
 		v := d.Get("moid")

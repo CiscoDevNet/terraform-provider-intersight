@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_service"
 description: |-
-  Service Inventory represent a Kubernetes Service. In Kubernetes, a Service is an abstraction which defines a logical set of Pods and a policy by which to access them (sometimes this pattern is called a micro-service).
+        Service Inventory represent a Kubernetes Service. In Kubernetes, a Service is an abstraction which defines a logical set of Pods and a policy by which to access them (sometimes this pattern is called a micro-service).
+
 ---
 
 # Data Source: intersight_kubernetes_service

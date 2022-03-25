@@ -521,6 +521,17 @@ func resourceWorkflowSolutionDefinition() *schema.Resource {
 					},
 				},
 			},
+			"upgraded_moid": {
+				Description: "Stores the upgraded Moid for help during future lookups.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
+					if val != nil {
+						warns = append(warns, fmt.Sprintf("Cannot set read-only property: [%s]", key))
+					}
+					return
+				}},
 			"nr_version": {
 				Description: "The version of the solution to support multiple versions.",
 				Type:        schema.TypeInt,
@@ -1128,6 +1139,10 @@ func resourceWorkflowSolutionDefinitionRead(c context.Context, d *schema.Resourc
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in WorkflowSolutionDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("upgraded_moid", (s.GetUpgradedMoid())); err != nil {
+		return diag.Errorf("error occurred while setting property UpgradedMoid in WorkflowSolutionDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("nr_version", (s.GetVersion())); err != nil {

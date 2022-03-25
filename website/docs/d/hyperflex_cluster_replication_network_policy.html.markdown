@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_cluster_replication_network_policy"
 description: |-
-  Specifies all replication network parameters for the cluster.
+        Specifies all replication network parameters for the cluster.
+
 ---
 
 # Data Source: intersight_hyperflex_cluster_replication_network_policy

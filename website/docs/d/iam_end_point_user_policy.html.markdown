@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_end_point_user_policy"
 description: |-
-  Enables creation of local users on endpoints.
+        Enables creation of local users on endpoints.
+
 ---
 
 # Data Source: intersight_iam_end_point_user_policy

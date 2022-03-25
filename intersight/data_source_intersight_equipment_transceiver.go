@@ -59,6 +59,11 @@ func dataSourceEquipmentTransceiver() *schema.Resource {
 				},
 			},
 		},
+		"cisco_extended_id_number": {
+			Description: "The cisco extended Id number state of the pluggable SFP.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -83,6 +88,41 @@ func dataSourceEquipmentTransceiver() *schema.Resource {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"ether_host_port": {
+			Description: "A reference to a etherHostPort resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"ether_physical_port": {
 			Description: "A reference to a etherPhysicalPort resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -119,6 +159,51 @@ func dataSourceEquipmentTransceiver() *schema.Resource {
 				},
 			},
 		},
+		"fc_physical_port": {
+			Description: "A reference to a fcPhysicalPort resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"interface_type": {
+			Description: "Interface type of transceiver copper or fiber.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"manufacturer_part_number": {
+			Description: "The manufacturer part number of the pluggable SFP.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -129,8 +214,18 @@ func dataSourceEquipmentTransceiver() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"module_id": {
+			Description: "Fabric extender identifier.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "The name of the pluggable transceiver.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -331,6 +426,11 @@ func dataSourceEquipmentTransceiver() *schema.Resource {
 		"slot_id": {
 			Description: "Switch expansion slot module identifier.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"status": {
+			Description: "Status of the pluggable SFP.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"switch_id": {
@@ -524,6 +624,11 @@ func dataSourceEquipmentTransceiver() *schema.Resource {
 				},
 			},
 		},
+		"cisco_extended_id_number": {
+			Description: "The cisco extended Id number state of the pluggable SFP.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
@@ -548,6 +653,41 @@ func dataSourceEquipmentTransceiver() *schema.Resource {
 			Description: "The DomainGroup ID for this managed object.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"ether_host_port": {
+			Description: "A reference to a etherHostPort resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"ether_physical_port": {
 			Description: "A reference to a etherPhysicalPort resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -584,6 +724,51 @@ func dataSourceEquipmentTransceiver() *schema.Resource {
 				},
 			},
 		},
+		"fc_physical_port": {
+			Description: "A reference to a fcPhysicalPort resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+			Type:        schema.TypeList,
+			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"interface_type": {
+			Description: "Interface type of transceiver copper or fiber.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"manufacturer_part_number": {
+			Description: "The manufacturer part number of the pluggable SFP.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -594,8 +779,18 @@ func dataSourceEquipmentTransceiver() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"module_id": {
+			Description: "Fabric extender identifier.",
+			Type:        schema.TypeInt,
+			Optional:    true,
+		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "The name of the pluggable transceiver.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -796,6 +991,11 @@ func dataSourceEquipmentTransceiver() *schema.Resource {
 		"slot_id": {
 			Description: "Switch expansion slot module identifier.",
 			Type:        schema.TypeInt,
+			Optional:    true,
+		},
+		"status": {
+			Description: "Status of the pluggable SFP.",
+			Type:        schema.TypeString,
 			Optional:    true,
 		},
 		"switch_id": {
@@ -1015,6 +1215,11 @@ func dataSourceEquipmentTransceiverRead(c context.Context, d *schema.ResourceDat
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOk("cisco_extended_id_number"); ok {
+		x := (v.(string))
+		o.SetCiscoExtendedIdNumber(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -1038,6 +1243,49 @@ func dataSourceEquipmentTransceiverRead(c context.Context, d *schema.ResourceDat
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOk("ether_host_port"); ok {
+		p := make([]models.EtherHostPortRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsEtherHostPortRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetEtherHostPort(x)
+		}
 	}
 
 	if v, ok := d.GetOk("ether_physical_port"); ok {
@@ -1083,6 +1331,59 @@ func dataSourceEquipmentTransceiverRead(c context.Context, d *schema.ResourceDat
 		}
 	}
 
+	if v, ok := d.GetOk("fc_physical_port"); ok {
+		p := make([]models.FcPhysicalPortRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsFcPhysicalPortRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetFcPhysicalPort(x)
+		}
+	}
+
+	if v, ok := d.GetOk("interface_type"); ok {
+		x := (v.(string))
+		o.SetInterfaceType(x)
+	}
+
+	if v, ok := d.GetOk("manufacturer_part_number"); ok {
+		x := (v.(string))
+		o.SetManufacturerPartNumber(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1093,9 +1394,19 @@ func dataSourceEquipmentTransceiverRead(c context.Context, d *schema.ResourceDat
 		o.SetModel(x)
 	}
 
+	if v, ok := d.GetOkExists("module_id"); ok {
+		x := int64(v.(int))
+		o.SetModuleId(x)
+	}
+
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
 	}
 
 	if v, ok := d.GetOk("object_type"); ok {
@@ -1333,6 +1644,11 @@ func dataSourceEquipmentTransceiverRead(c context.Context, d *schema.ResourceDat
 		o.SetSlotId(x)
 	}
 
+	if v, ok := d.GetOk("status"); ok {
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+
 	if v, ok := d.GetOk("switch_id"); ok {
 		x := (v.(string))
 		o.SetSwitchId(x)
@@ -1495,6 +1811,7 @@ func dataSourceEquipmentTransceiverRead(c context.Context, d *schema.ResourceDat
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["cisco_extended_id_number"] = (s.GetCiscoExtendedIdNumber())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
@@ -1502,11 +1819,19 @@ func dataSourceEquipmentTransceiverRead(c context.Context, d *schema.ResourceDat
 				temp["dn"] = (s.GetDn())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
 
+				temp["ether_host_port"] = flattenMapEtherHostPortRelationship(s.GetEtherHostPort(), d)
+
 				temp["ether_physical_port"] = flattenMapEtherPhysicalPortRelationship(s.GetEtherPhysicalPort(), d)
+
+				temp["fc_physical_port"] = flattenMapFcPhysicalPortRelationship(s.GetFcPhysicalPort(), d)
+				temp["interface_type"] = (s.GetInterfaceType())
+				temp["manufacturer_part_number"] = (s.GetManufacturerPartNumber())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())
+				temp["module_id"] = (s.GetModuleId())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_speed"] = (s.GetOperSpeed())
 				temp["oper_state"] = (s.GetOperState())
@@ -1527,6 +1852,7 @@ func dataSourceEquipmentTransceiverRead(c context.Context, d *schema.ResourceDat
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
 				temp["slot_id"] = (s.GetSlotId())
+				temp["status"] = (s.GetStatus())
 				temp["switch_id"] = (s.GetSwitchId())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)

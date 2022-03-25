@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **AlarmSummary** | Pointer to [**NullableCondAlarmSummary**](CondAlarmSummary.md) |  | [optional] 
 **HypervisorType** | Pointer to **string** | Identifies the broad type of the underlying hypervisor. * &#x60;ESXi&#x60; - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version. * &#x60;HyperFlexAp&#x60; - The hypervisor of the virtualization platform is Cisco HyperFlex Application Platform. * &#x60;IWE&#x60; - The hypervisor of the virtualization platform is Cisco Intersight Workload Engine. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
+**HypervisorVersion** | Pointer to **string** | Identifies the version of the hypervisor running on this cluster. Keeping the hypervisor version in the cluster makes it convenient for applications to validate their deployment needs. Defaults to an empty string. | [optional] 
 **Identity** | Pointer to **string** | The internally generated identity of this cluster. This entity is not manipulated by users. | [optional] 
 **MemoryCapacity** | Pointer to [**NullableVirtualizationMemoryCapacity**](VirtualizationMemoryCapacity.md) |  | [optional] 
 **ProcessorCapacity** | Pointer to [**NullableVirtualizationComputeCapacity**](VirtualizationComputeCapacity.md) |  | [optional] 
@@ -131,6 +132,31 @@ SetHypervisorType sets HypervisorType field to given value.
 `func (o *VirtualizationBaseClusterAllOf) HasHypervisorType() bool`
 
 HasHypervisorType returns a boolean if a field has been set.
+
+### GetHypervisorVersion
+
+`func (o *VirtualizationBaseClusterAllOf) GetHypervisorVersion() string`
+
+GetHypervisorVersion returns the HypervisorVersion field if non-nil, zero value otherwise.
+
+### GetHypervisorVersionOk
+
+`func (o *VirtualizationBaseClusterAllOf) GetHypervisorVersionOk() (*string, bool)`
+
+GetHypervisorVersionOk returns a tuple with the HypervisorVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHypervisorVersion
+
+`func (o *VirtualizationBaseClusterAllOf) SetHypervisorVersion(v string)`
+
+SetHypervisorVersion sets HypervisorVersion field to given value.
+
+### HasHypervisorVersion
+
+`func (o *VirtualizationBaseClusterAllOf) HasHypervisorVersion() bool`
+
+HasHypervisorVersion returns a boolean if a field has been set.
 
 ### GetIdentity
 

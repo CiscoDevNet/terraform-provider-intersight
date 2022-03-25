@@ -3,7 +3,8 @@ subcategory: "resourcepool"
 layout: "intersight"
 page_title: "Intersight: intersight_resourcepool_universe"
 description: |-
-  Universe represents a book keeping container to keep track of all Resources for a given Account.
+        Universe represents a book keeping container to keep track of all Resources for a given Account.
+
 ---
 
 # Data Source: intersight_resourcepool_universe

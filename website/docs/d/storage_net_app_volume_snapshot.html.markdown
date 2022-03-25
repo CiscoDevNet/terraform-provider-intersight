@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_volume_snapshot"
 description: |-
-  NetApp Volume Snapshot is a read-only image of a traditional or FlexVol volume, or an aggregate, that captures the state of the file system at a point in time.
+        NetApp Volume Snapshot is a read-only image of a traditional or FlexVol volume, or an aggregate, that captures the state of the file system at a point in time.
+
 ---
 
 # Data Source: intersight_storage_net_app_volume_snapshot

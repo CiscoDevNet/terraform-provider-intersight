@@ -3,7 +3,8 @@ subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_customer_op"
 description: |-
-  Customer operation object to refresh the registration or re-authenticate, pre-created.
+        Customer operation object to refresh the registration or re-authenticate, pre-created.
+
 ---
 
 # Data Source: intersight_license_customer_op

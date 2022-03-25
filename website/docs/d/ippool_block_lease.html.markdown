@@ -3,7 +3,8 @@ subcategory: "ippool"
 layout: "intersight"
 page_title: "Intersight: intersight_ippool_block_lease"
 description: |-
-  BlockLease represents an IP address that is allocated from a pool to a specific entity like server profile.
+        BlockLease represents an IP address that is allocated from a pool to a specific entity like server profile.
+
 ---
 
 # Data Source: intersight_ippool_block_lease

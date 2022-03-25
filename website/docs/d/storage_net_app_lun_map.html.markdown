@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_lun_map"
 description: |-
-  NetApp LUN mapping is the process of associating a LUN with an igroup. When a LUN is mapped to an igroup, initiators in the igroup are granted. access to the LUN.
+        NetApp LUN mapping is the process of associating a LUN with an igroup. When a LUN is mapped to an igroup, initiators in the igroup are granted. access to the LUN.
+
 ---
 
 # Data Source: intersight_storage_net_app_lun_map

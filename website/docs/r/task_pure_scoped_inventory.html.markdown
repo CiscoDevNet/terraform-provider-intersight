@@ -3,7 +3,8 @@ subcategory: "task"
 layout: "intersight"
 page_title: "Intersight: intersight_task_pure_scoped_inventory"
 description: |-
-  API to trigger on-demand PureStorage FlashArray inventory to update modified objects in Intersight report.
+        API to trigger on-demand PureStorage FlashArray inventory to update modified objects in Intersight report.
+
 ---
 
 # Resource: intersight_task_pure_scoped_inventory

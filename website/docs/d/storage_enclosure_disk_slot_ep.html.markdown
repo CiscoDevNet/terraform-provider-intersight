@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_enclosure_disk_slot_ep"
 description: |-
-  Physical Disk slots on the enclosure.
+        Physical Disk slots on the enclosure.
+
 ---
 
 # Data Source: intersight_storage_enclosure_disk_slot_ep

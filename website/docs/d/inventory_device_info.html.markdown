@@ -3,7 +3,8 @@ subcategory: "inventory"
 layout: "intersight"
 page_title: "Intersight: intersight_inventory_device_info"
 description: |-
-  Information pertaining to a Registered Device in starship which is pertinent to Inventory Microservice.
+        Information pertaining to a Registered Device in starship which is pertinent to Inventory Microservice.
+
 ---
 
 # Data Source: intersight_inventory_device_info

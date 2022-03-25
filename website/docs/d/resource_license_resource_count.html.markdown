@@ -3,7 +3,8 @@ subcategory: "resource"
 layout: "intersight"
 page_title: "Intersight: intersight_resource_license_resource_count"
 description: |-
-  LicenseResourceCount tracks the server count info for 3 different licensing tiers.
+        LicenseResourceCount tracks the server count info for 3 different licensing tiers.
+
 ---
 
 # Data Source: intersight_resource_license_resource_count

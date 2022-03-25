@@ -198,11 +198,23 @@ func resourceMacpoolPool() *schema.Resource {
 							Description: "Number of identifiers this block can hold.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								if new == "0" || new == "0.0" {
+									return true
+								}
+								return false
+							},
 						},
 						"to": {
 							Description: "Ending address of the block must be in hexadecimal format xx:xx:xx:xx:xx:xx.",
 							Type:        schema.TypeString,
 							Optional:    true,
+							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+								if new == "" || new == "null" {
+									return true
+								}
+								return false
+							},
 						},
 					},
 				},

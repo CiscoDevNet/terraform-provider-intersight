@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_uplink_role"
 description: |-
-  Configuration object sent by user to create a uplink port.
+        Configuration object sent by user to create a uplink port.
+
 ---
 
 # Resource: intersight_fabric_uplink_role

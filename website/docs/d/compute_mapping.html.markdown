@@ -3,7 +3,8 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_mapping"
 description: |-
-  Virtual Media image uploaded on the server.
+        Virtual Media image uploaded on the server.
+
 ---
 
 # Data Source: intersight_compute_mapping

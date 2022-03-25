@@ -94,7 +94,7 @@ func resourceFabricPortMode() *schema.Resource {
 					return
 				}},
 			"custom_mode": {
-				Description: "Custom Port Mode specified for the port range.\n* `FibreChannel` - Fibre Channel Port Types.\n* `BreakoutEthernet10G` - Breakout Ethernet 10G Port Type.\n* `BreakoutEthernet25G` - Breakout Ethernet 25G Port Type.",
+				Description: "Custom Port Mode specified for the port range.\n* `FibreChannel` - Fibre Channel Port Types.\n* `BreakoutEthernet10G` - Breakout Ethernet 10G Port Type.\n* `BreakoutEthernet25G` - Breakout Ethernet 25G Port Type.\n* `BreakoutFibreChannel8G` - Breakout FibreChannel 8G Port Type.\n* `BreakoutFibreChannel16G` - Breakout FibreChannel 16G Port Type.\n* `BreakoutFibreChannel32G` - Breakout FibreChannel 32G Port Type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "FibreChannel",

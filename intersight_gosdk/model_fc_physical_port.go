@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -28,12 +28,16 @@ type FcPhysicalPort struct {
 	AdminSpeed *string `json:"AdminSpeed,omitempty"`
 	// Administratively configured state (enabled/disabled) for this port.
 	AdminState *string `json:"AdminState,omitempty"`
+	// Breakout port member in the Fabric Interconnect.
+	AggregatePortId *int64 `json:"AggregatePortId,omitempty"`
 	// Buffer to Buffer credits of FC port.
 	B2bCredit *int64 `json:"B2bCredit,omitempty"`
 	// Maximum Speed with which the port operates.
 	MaxSpeed *string `json:"MaxSpeed,omitempty"`
 	// Mode information N_proxy, F or E associated to the Fibre Channel port.
 	Mode *string `json:"Mode,omitempty"`
+	// Name of the physical port of FC.
+	Name *string `json:"Name,omitempty"`
 	// Operational Speed with which the port operates.
 	OperSpeed *string `json:"OperSpeed,omitempty"`
 	// PeerDn for fibre channel physical port.
@@ -190,6 +194,38 @@ func (o *FcPhysicalPort) SetAdminState(v string) {
 	o.AdminState = &v
 }
 
+// GetAggregatePortId returns the AggregatePortId field value if set, zero value otherwise.
+func (o *FcPhysicalPort) GetAggregatePortId() int64 {
+	if o == nil || o.AggregatePortId == nil {
+		var ret int64
+		return ret
+	}
+	return *o.AggregatePortId
+}
+
+// GetAggregatePortIdOk returns a tuple with the AggregatePortId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcPhysicalPort) GetAggregatePortIdOk() (*int64, bool) {
+	if o == nil || o.AggregatePortId == nil {
+		return nil, false
+	}
+	return o.AggregatePortId, true
+}
+
+// HasAggregatePortId returns a boolean if a field has been set.
+func (o *FcPhysicalPort) HasAggregatePortId() bool {
+	if o != nil && o.AggregatePortId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAggregatePortId gets a reference to the given int64 and assigns it to the AggregatePortId field.
+func (o *FcPhysicalPort) SetAggregatePortId(v int64) {
+	o.AggregatePortId = &v
+}
+
 // GetB2bCredit returns the B2bCredit field value if set, zero value otherwise.
 func (o *FcPhysicalPort) GetB2bCredit() int64 {
 	if o == nil || o.B2bCredit == nil {
@@ -284,6 +320,38 @@ func (o *FcPhysicalPort) HasMode() bool {
 // SetMode gets a reference to the given string and assigns it to the Mode field.
 func (o *FcPhysicalPort) SetMode(v string) {
 	o.Mode = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *FcPhysicalPort) GetName() string {
+	if o == nil || o.Name == nil {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FcPhysicalPort) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *FcPhysicalPort) HasName() bool {
+	if o != nil && o.Name != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *FcPhysicalPort) SetName(v string) {
+	o.Name = &v
 }
 
 // GetOperSpeed returns the OperSpeed field value if set, zero value otherwise.
@@ -628,6 +696,9 @@ func (o FcPhysicalPort) MarshalJSON() ([]byte, error) {
 	if o.AdminState != nil {
 		toSerialize["AdminState"] = o.AdminState
 	}
+	if o.AggregatePortId != nil {
+		toSerialize["AggregatePortId"] = o.AggregatePortId
+	}
 	if o.B2bCredit != nil {
 		toSerialize["B2bCredit"] = o.B2bCredit
 	}
@@ -636,6 +707,9 @@ func (o FcPhysicalPort) MarshalJSON() ([]byte, error) {
 	}
 	if o.Mode != nil {
 		toSerialize["Mode"] = o.Mode
+	}
+	if o.Name != nil {
+		toSerialize["Name"] = o.Name
 	}
 	if o.OperSpeed != nil {
 		toSerialize["OperSpeed"] = o.OperSpeed
@@ -685,12 +759,16 @@ func (o *FcPhysicalPort) UnmarshalJSON(bytes []byte) (err error) {
 		AdminSpeed *string `json:"AdminSpeed,omitempty"`
 		// Administratively configured state (enabled/disabled) for this port.
 		AdminState *string `json:"AdminState,omitempty"`
+		// Breakout port member in the Fabric Interconnect.
+		AggregatePortId *int64 `json:"AggregatePortId,omitempty"`
 		// Buffer to Buffer credits of FC port.
 		B2bCredit *int64 `json:"B2bCredit,omitempty"`
 		// Maximum Speed with which the port operates.
 		MaxSpeed *string `json:"MaxSpeed,omitempty"`
 		// Mode information N_proxy, F or E associated to the Fibre Channel port.
 		Mode *string `json:"Mode,omitempty"`
+		// Name of the physical port of FC.
+		Name *string `json:"Name,omitempty"`
 		// Operational Speed with which the port operates.
 		OperSpeed *string `json:"OperSpeed,omitempty"`
 		// PeerDn for fibre channel physical port.
@@ -718,9 +796,11 @@ func (o *FcPhysicalPort) UnmarshalJSON(bytes []byte) (err error) {
 		varFcPhysicalPort.ObjectType = varFcPhysicalPortWithoutEmbeddedStruct.ObjectType
 		varFcPhysicalPort.AdminSpeed = varFcPhysicalPortWithoutEmbeddedStruct.AdminSpeed
 		varFcPhysicalPort.AdminState = varFcPhysicalPortWithoutEmbeddedStruct.AdminState
+		varFcPhysicalPort.AggregatePortId = varFcPhysicalPortWithoutEmbeddedStruct.AggregatePortId
 		varFcPhysicalPort.B2bCredit = varFcPhysicalPortWithoutEmbeddedStruct.B2bCredit
 		varFcPhysicalPort.MaxSpeed = varFcPhysicalPortWithoutEmbeddedStruct.MaxSpeed
 		varFcPhysicalPort.Mode = varFcPhysicalPortWithoutEmbeddedStruct.Mode
+		varFcPhysicalPort.Name = varFcPhysicalPortWithoutEmbeddedStruct.Name
 		varFcPhysicalPort.OperSpeed = varFcPhysicalPortWithoutEmbeddedStruct.OperSpeed
 		varFcPhysicalPort.PeerDn = varFcPhysicalPortWithoutEmbeddedStruct.PeerDn
 		varFcPhysicalPort.PortChannelId = varFcPhysicalPortWithoutEmbeddedStruct.PortChannelId
@@ -752,9 +832,11 @@ func (o *FcPhysicalPort) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AdminSpeed")
 		delete(additionalProperties, "AdminState")
+		delete(additionalProperties, "AggregatePortId")
 		delete(additionalProperties, "B2bCredit")
 		delete(additionalProperties, "MaxSpeed")
 		delete(additionalProperties, "Mode")
+		delete(additionalProperties, "Name")
 		delete(additionalProperties, "OperSpeed")
 		delete(additionalProperties, "PeerDn")
 		delete(additionalProperties, "PortChannelId")

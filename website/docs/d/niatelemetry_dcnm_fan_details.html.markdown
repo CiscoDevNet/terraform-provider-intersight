@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_dcnm_fan_details"
 description: |-
-  Inventory Object available for DCNM Fan.
+        Inventory Object available for DCNM Fan.
+
 ---
 
 # Data Source: intersight_niatelemetry_dcnm_fan_details

@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_vm_snapshot_info"
 description: |-
-  Virtual Machine Snapshot information like replication status, snapshot point and status.
+        Virtual Machine Snapshot information like replication status, snapshot point and status.
+
 ---
 
 # Data Source: intersight_hyperflex_vm_snapshot_info

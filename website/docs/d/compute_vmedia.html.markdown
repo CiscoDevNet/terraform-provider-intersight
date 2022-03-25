@@ -3,7 +3,8 @@ subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_vmedia"
 description: |-
-  Inventory of Virtual Media configuration and images uploaded.
+        Inventory of Virtual Media configuration and images uploaded.
+
 ---
 
 # Data Source: intersight_compute_vmedia

@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_chassis_identity"
 description: |-
-  ChassisIdentity Object conatains connectivity information about IOMs of the chassis. ChassisID is uniquely allocated for the combination of vendor, model and serial number of the chassis.
+        ChassisIdentity Object conatains connectivity information about IOMs of the chassis. ChassisID is uniquely allocated for the combination of vendor, model and serial number of the chassis.
+
 ---
 
 # Data Source: intersight_equipment_chassis_identity

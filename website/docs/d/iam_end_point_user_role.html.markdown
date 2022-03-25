@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_end_point_user_role"
 description: |-
-  Mapping of endpoint user to endpoint roles.
+        Mapping of endpoint user to endpoint roles.
+
 ---
 
 # Data Source: intersight_iam_end_point_user_role

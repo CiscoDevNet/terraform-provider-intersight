@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_tpm"
 description: |-
-  TPM security chip on server board.
+        TPM security chip on server board.
+
 ---
 
 # Data Source: intersight_equipment_tpm

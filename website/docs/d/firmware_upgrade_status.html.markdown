@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_upgrade_status"
 description: |-
-  The status for the upgrade operation to include the status for the download and upgrade stages.
+        The status for the upgrade operation to include the status for the download and upgrade stages.
+
 ---
 
 # Data Source: intersight_firmware_upgrade_status

@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_fabric_module_details"
 description: |-
-  Fabric module slot details in APIC.
+        Fabric module slot details in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_fabric_module_details

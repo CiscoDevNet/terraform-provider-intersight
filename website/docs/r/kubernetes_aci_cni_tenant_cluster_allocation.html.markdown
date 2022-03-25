@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_aci_cni_tenant_cluster_allocation"
 description: |-
-  Internally generated parameter allocations for a k8s cluster using a particular ACI CNI profile.
+        Internally generated parameter allocations for a k8s cluster using a particular ACI CNI profile.
+
 ---
 
 # Resource: intersight_kubernetes_aci_cni_tenant_cluster_allocation

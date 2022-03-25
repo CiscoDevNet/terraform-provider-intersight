@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_disk_group"
 description: |-
-  Group of one or more Spans to configure virtual drive.
+        Group of one or more Spans to configure virtual drive.
+
 ---
 
 # Data Source: intersight_storage_disk_group

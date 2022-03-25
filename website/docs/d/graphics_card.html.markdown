@@ -3,7 +3,8 @@ subcategory: "graphics"
 layout: "intersight"
 page_title: "Intersight: intersight_graphics_card"
 description: |-
-  Graphics Card present in a server.
+        Graphics Card present in a server.
+
 ---
 
 # Data Source: intersight_graphics_card
@@ -22,6 +23,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `expander_slot`:(string) The expander slot information of the card. 
 * `firmware_version`:(string) The firmware version of the graphics card. 
+* `gpu_id`:(string) The identifier of the graphics processor unit. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `mode`:(string) The current mode of the graphics card. 
 * `model`:(string) This field identifies the model of the given component. 
@@ -36,5 +38,8 @@ The following arguments can be used to get data of already created objects in In
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `serial`:(string) This field identifies the serial of the given component. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `sub_device_id`:(int) The sub device id of the graphics processor unit. 
+* `sub_vendor_id`:(int) The sub vendor id of the graphics processor unit. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
+* `vendor_id`:(int) The vendor id of the graphics processor unit. 
  

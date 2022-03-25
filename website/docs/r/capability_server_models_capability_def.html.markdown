@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_server_models_capability_def"
 description: |-
-  Used to categorize server models.
+        Used to categorize server models.
+
 ---
 
 # Resource: intersight_capability_server_models_capability_def

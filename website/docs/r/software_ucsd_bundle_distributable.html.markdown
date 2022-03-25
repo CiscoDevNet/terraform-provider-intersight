@@ -3,7 +3,8 @@ subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_ucsd_bundle_distributable"
 description: |-
-  A UCSD connector pack image bundle distributed by Cisco for Private Appliance.
+        A UCSD connector pack image bundle distributed by Cisco for Private Appliance.
+
 ---
 
 # Resource: intersight_software_ucsd_bundle_distributable

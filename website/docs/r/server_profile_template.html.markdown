@@ -3,7 +3,8 @@ subcategory: "server"
 layout: "intersight"
 page_title: "Intersight: intersight_server_profile_template"
 description: |-
-  A profile template specifying configuration settings for a physical server.
+        A profile template specifying configuration settings for a physical server.
+
 ---
 
 # Resource: intersight_server_profile_template

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -32,6 +32,8 @@ type WorkflowSolutionInstance struct {
 	Name *string `json:"Name,omitempty"`
 	// Status of the solution instance which controls the actions that can be performed on this instance. * `NotCreated` - Solution is not yet created and it is in a draft mode. A solution instance can be deleted in this state. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The last action on the solution failed and corrective measures need to be taken to bring the solution back to valid state. * `Okay` - The last action on the solution completed and the solution is in Okay state. * `Decommissioned` - The solution is decommissioned and can be safely deleted. Solution in any other state after it has been created cannot be deleted until it has been decommissioned.
 	Status *string `json:"Status,omitempty"`
+	// Stores the upgraded Moid for help during future lookups.
+	UpgradedMoid *string `json:"UpgradedMoid,omitempty"`
 	// The user identifier which indicates the user that started this workflow.
 	UserId               *string                                 `json:"UserId,omitempty"`
 	Organization         *OrganizationOrganizationRelationship   `json:"Organization,omitempty"`
@@ -240,6 +242,38 @@ func (o *WorkflowSolutionInstance) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetUpgradedMoid returns the UpgradedMoid field value if set, zero value otherwise.
+func (o *WorkflowSolutionInstance) GetUpgradedMoid() string {
+	if o == nil || o.UpgradedMoid == nil {
+		var ret string
+		return ret
+	}
+	return *o.UpgradedMoid
+}
+
+// GetUpgradedMoidOk returns a tuple with the UpgradedMoid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowSolutionInstance) GetUpgradedMoidOk() (*string, bool) {
+	if o == nil || o.UpgradedMoid == nil {
+		return nil, false
+	}
+	return o.UpgradedMoid, true
+}
+
+// HasUpgradedMoid returns a boolean if a field has been set.
+func (o *WorkflowSolutionInstance) HasUpgradedMoid() bool {
+	if o != nil && o.UpgradedMoid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpgradedMoid gets a reference to the given string and assigns it to the UpgradedMoid field.
+func (o *WorkflowSolutionInstance) SetUpgradedMoid(v string) {
+	o.UpgradedMoid = &v
+}
+
 // GetUserId returns the UserId field value if set, zero value otherwise.
 func (o *WorkflowSolutionInstance) GetUserId() string {
 	if o == nil || o.UserId == nil {
@@ -364,6 +398,9 @@ func (o WorkflowSolutionInstance) MarshalJSON() ([]byte, error) {
 	if o.Status != nil {
 		toSerialize["Status"] = o.Status
 	}
+	if o.UpgradedMoid != nil {
+		toSerialize["UpgradedMoid"] = o.UpgradedMoid
+	}
 	if o.UserId != nil {
 		toSerialize["UserId"] = o.UserId
 	}
@@ -395,6 +432,8 @@ func (o *WorkflowSolutionInstance) UnmarshalJSON(bytes []byte) (err error) {
 		Name *string `json:"Name,omitempty"`
 		// Status of the solution instance which controls the actions that can be performed on this instance. * `NotCreated` - Solution is not yet created and it is in a draft mode. A solution instance can be deleted in this state. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The last action on the solution failed and corrective measures need to be taken to bring the solution back to valid state. * `Okay` - The last action on the solution completed and the solution is in Okay state. * `Decommissioned` - The solution is decommissioned and can be safely deleted. Solution in any other state after it has been created cannot be deleted until it has been decommissioned.
 		Status *string `json:"Status,omitempty"`
+		// Stores the upgraded Moid for help during future lookups.
+		UpgradedMoid *string `json:"UpgradedMoid,omitempty"`
 		// The user identifier which indicates the user that started this workflow.
 		UserId             *string                                 `json:"UserId,omitempty"`
 		Organization       *OrganizationOrganizationRelationship   `json:"Organization,omitempty"`
@@ -412,6 +451,7 @@ func (o *WorkflowSolutionInstance) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowSolutionInstance.LastStatus = varWorkflowSolutionInstanceWithoutEmbeddedStruct.LastStatus
 		varWorkflowSolutionInstance.Name = varWorkflowSolutionInstanceWithoutEmbeddedStruct.Name
 		varWorkflowSolutionInstance.Status = varWorkflowSolutionInstanceWithoutEmbeddedStruct.Status
+		varWorkflowSolutionInstance.UpgradedMoid = varWorkflowSolutionInstanceWithoutEmbeddedStruct.UpgradedMoid
 		varWorkflowSolutionInstance.UserId = varWorkflowSolutionInstanceWithoutEmbeddedStruct.UserId
 		varWorkflowSolutionInstance.Organization = varWorkflowSolutionInstanceWithoutEmbeddedStruct.Organization
 		varWorkflowSolutionInstance.SolutionDefinition = varWorkflowSolutionInstanceWithoutEmbeddedStruct.SolutionDefinition
@@ -438,6 +478,7 @@ func (o *WorkflowSolutionInstance) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "LastStatus")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Status")
+		delete(additionalProperties, "UpgradedMoid")
 		delete(additionalProperties, "UserId")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "SolutionDefinition")

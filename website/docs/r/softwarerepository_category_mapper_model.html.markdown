@@ -3,7 +3,8 @@ subcategory: "softwarerepository"
 layout: "intersight"
 page_title: "Intersight: intersight_softwarerepository_category_mapper_model"
 description: |-
-  Maps a Cisco hardware model Series to its applicable hardware models.
+        Maps a Cisco hardware model Series to its applicable hardware models.
+
 ---
 
 # Resource: intersight_softwarerepository_category_mapper_model

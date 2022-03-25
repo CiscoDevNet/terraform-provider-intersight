@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_ip_interface"
 description: |-
-  NetApp IP interface is a logical interface.
+        NetApp IP interface is a logical interface.
+
 ---
 
 # Data Source: intersight_storage_net_app_ip_interface

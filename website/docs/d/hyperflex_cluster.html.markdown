@@ -3,8 +3,9 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_cluster"
 description: |-
-  A HyperFlex cluster. Contains inventory information concerning the health, software versions, storage, and nodes
-of the cluster.
+        A HyperFlex cluster. Contains inventory information concerning the health, software versions, storage, and nodes
+        of the cluster.
+
 ---
 
 # Data Source: intersight_hyperflex_cluster

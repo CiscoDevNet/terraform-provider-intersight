@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_port_operation"
 description: |-
-  PortOperation objects allows the user to alter the state of the port.
+        PortOperation objects allows the user to alter the state of the port.
+
 ---
 
 # Resource: intersight_fabric_port_operation

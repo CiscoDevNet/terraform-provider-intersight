@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_version"
 description: |-
-  A policy capturing software versions for a Kubernetes cluster.
+        A policy capturing software versions for a Kubernetes cluster.
+
 ---
 
 # Resource: intersight_kubernetes_version

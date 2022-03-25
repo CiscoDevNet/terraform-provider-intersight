@@ -3,7 +3,8 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_policy"
 description: |-
-  Policy for setting BIOS tokens on the endpoint.
+        Policy for setting BIOS tokens on the endpoint.
+
 ---
 
 # Resource: intersight_bios_policy

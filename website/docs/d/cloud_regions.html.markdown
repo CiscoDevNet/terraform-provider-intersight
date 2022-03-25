@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_regions"
 description: |-
-  The geographic location where a clouds resources are located. It has details such as cloud name, region name, region identifier, list of zones, region endpoint etc.
+        The geographic location where a clouds resources are located. It has details such as cloud name, region name, region identifier, list of zones, region endpoint etc.
+
 ---
 
 # Data Source: intersight_cloud_regions

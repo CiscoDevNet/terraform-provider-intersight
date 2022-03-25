@@ -3,7 +3,8 @@ subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_system_boot_order"
 description: |-
-  Actual Boot Order of the system.
+        Actual Boot Order of the system.
+
 ---
 
 # Data Source: intersight_bios_system_boot_order

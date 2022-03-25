@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_fault"
 description: |-
-  Object is available at Fault scope in a fabric and provides details about a fault occurred.
+        Object is available at Fault scope in a fabric and provides details about a fault occurred.
+
 ---
 
 # Data Source: intersight_niatelemetry_fault

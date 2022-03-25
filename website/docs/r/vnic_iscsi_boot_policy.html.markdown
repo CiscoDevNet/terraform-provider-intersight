@@ -3,7 +3,8 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_iscsi_boot_policy"
 description: |-
-  Configuration parameters to enable a server to boot its operating system from an iSCSI target machine located remotely over a network.
+        Configuration parameters to enable a server to boot its operating system from an iSCSI target machine located remotely over a network.
+
 ---
 
 # Resource: intersight_vnic_iscsi_boot_policy

@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_chassis_manufacturing_def"
 description: |-
-  Chassis enclosure manufacturing def properties.
+        Chassis enclosure manufacturing def properties.
+
 ---
 
 # Data Source: intersight_capability_chassis_manufacturing_def

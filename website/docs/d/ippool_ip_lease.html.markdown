@@ -3,7 +3,8 @@ subcategory: "ippool"
 layout: "intersight"
 page_title: "Intersight: intersight_ippool_ip_lease"
 description: |-
-  IpLease represents an IP address that is allocated from a pool to a specific entity like server profile.
+        IpLease represents an IP address that is allocated from a pool to a specific entity like server profile.
+
 ---
 
 # Data Source: intersight_ippool_ip_lease

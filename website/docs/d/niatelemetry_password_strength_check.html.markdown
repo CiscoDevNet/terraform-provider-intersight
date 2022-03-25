@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_password_strength_check"
 description: |-
-  Password Strength of user in APIC.
+        Password Strength of user in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_password_strength_check

@@ -3,7 +3,8 @@ subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_persistent_memory_namespace"
 description: |-
-  Persistent Memory Namespace configured within a Persistent Memory Region on a server.
+        Persistent Memory Namespace configured within a Persistent Memory Region on a server.
+
 ---
 
 # Data Source: intersight_memory_persistent_memory_namespace

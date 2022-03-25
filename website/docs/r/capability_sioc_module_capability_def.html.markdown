@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_sioc_module_capability_def"
 description: |-
-  Chassis SIOC module capabilities.
+        Chassis SIOC module capabilities.
+
 ---
 
 # Resource: intersight_capability_sioc_module_capability_def

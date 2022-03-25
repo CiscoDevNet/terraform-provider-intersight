@@ -3,7 +3,8 @@ subcategory: "oauth"
 layout: "intersight"
 page_title: "Intersight: intersight_oauth_access_token"
 description: |-
-  Api access token for a given account.
+        Api access token for a given account.
+
 ---
 
 # Data Source: intersight_oauth_access_token

@@ -3,7 +3,8 @@ subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_count"
 description: |-
-  Total number of advisories currently affecting a given Account.
+        Total number of advisories currently affecting a given Account.
+
 ---
 
 # Data Source: intersight_tam_advisory_count

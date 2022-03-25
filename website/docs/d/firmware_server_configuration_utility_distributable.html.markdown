@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_server_configuration_utility_distributable"
 description: |-
-  A server configuration utility image distributed by Cisco.
+        A server configuration utility image distributed by Cisco.
+
 ---
 
 # Data Source: intersight_firmware_server_configuration_utility_distributable

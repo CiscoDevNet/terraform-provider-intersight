@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_virtual_drive_identity"
 description: |-
-  Identity object that uniquely represents a VirtualDrive object under a Server Profile.
+        Identity object that uniquely represents a VirtualDrive object under a Server Profile.
+
 ---
 
 # Data Source: intersight_storage_virtual_drive_identity

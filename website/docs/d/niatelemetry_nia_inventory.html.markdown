@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_nia_inventory"
 description: |-
-  Inventory object available per device scope. This common object holds a device level information.
+        Inventory object available per device scope. This common object holds a device level information.
+
 ---
 
 # Data Source: intersight_niatelemetry_nia_inventory

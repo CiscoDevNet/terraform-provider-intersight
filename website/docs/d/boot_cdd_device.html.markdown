@@ -3,7 +3,8 @@ subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_cdd_device"
 description: |-
-  Cdd Boot Device configured on the server.
+        Cdd Boot Device configured on the server.
+
 ---
 
 # Data Source: intersight_boot_cdd_device

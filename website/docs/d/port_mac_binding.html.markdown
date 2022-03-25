@@ -3,7 +3,8 @@ subcategory: "port"
 layout: "intersight"
 page_title: "Intersight: intersight_port_mac_binding"
 description: |-
-  Establishes relationship between the ports and connected end points based on LLDP TLVs.
+        Establishes relationship between the ports and connected end points based on LLDP TLVs.
+
 ---
 
 # Data Source: intersight_port_mac_binding

@@ -3,7 +3,8 @@ subcategory: "iaas"
 layout: "intersight"
 page_title: "Intersight: intersight_iaas_device_status"
 description: |-
-  List of infra accounts managed by UCSD.
+        List of infra accounts managed by UCSD.
+
 ---
 
 # Data Source: intersight_iaas_device_status

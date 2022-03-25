@@ -3,9 +3,10 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_restore"
 description: |-
-  Restore tracks requests to restore the Intersight Appliance. There will be only
-one Restore managed object with a 'Started' state at any time. All other Restore
-managed objects will be in terminal states.
+        Restore tracks requests to restore the Intersight Appliance. There will be only
+        one Restore managed object with a 'Started' state at any time. All other Restore
+        managed objects will be in terminal states.
+
 ---
 
 # Data Source: intersight_appliance_restore

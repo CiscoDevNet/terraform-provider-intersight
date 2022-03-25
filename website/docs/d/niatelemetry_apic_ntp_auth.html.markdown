@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_apic_ntp_auth"
 description: |-
-  Object to capture the authentication details of NTP in APIC.
+        Object to capture the authentication details of NTP in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_apic_ntp_auth

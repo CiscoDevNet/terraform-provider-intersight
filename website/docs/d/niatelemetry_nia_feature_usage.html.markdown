@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_nia_feature_usage"
 description: |-
-  Object available at Device connector scope for feature and fabric information. This applies to APIC environment currently.
+        Object available at Device connector scope for feature and fabric information. This applies to APIC environment currently.
+
 ---
 
 # Data Source: intersight_niatelemetry_nia_feature_usage

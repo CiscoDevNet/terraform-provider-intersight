@@ -3,7 +3,8 @@ subcategory: "adapter"
 layout: "intersight"
 page_title: "Intersight: intersight_adapter_ext_eth_interface"
 description: |-
-  Physical port of a virtual interface card.
+        Physical port of a virtual interface card.
+
 ---
 
 # Data Source: intersight_adapter_ext_eth_interface

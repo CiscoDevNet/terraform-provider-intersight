@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_version_regex"
 description: |-
-  The regular expression pattern to recongnize the version string.
+        The regular expression pattern to recongnize the version string.
+
 ---
 
 # Data Source: intersight_niaapi_version_regex

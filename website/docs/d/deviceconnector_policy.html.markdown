@@ -3,7 +3,8 @@ subcategory: "deviceconnector"
 layout: "intersight"
 page_title: "Intersight: intersight_deviceconnector_policy"
 description: |-
-  Policy to control configuration changes allowed from Cisco IMC.
+        Policy to control configuration changes allowed from Cisco IMC.
+
 ---
 
 # Data Source: intersight_deviceconnector_policy

@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_locator_led"
 description: |-
-  Locator Led of an Equipment like Rack, Disk etc.
+        Locator Led of an Equipment like Rack, Disk etc.
+
 ---
 
 # Data Source: intersight_equipment_locator_led

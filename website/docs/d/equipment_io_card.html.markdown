@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_io_card"
 description: |-
-  I/O module on a chassis which multiplexes traffic from blade servers.
+        I/O module on a chassis which multiplexes traffic from blade servers.
+
 ---
 
 # Data Source: intersight_equipment_io_card

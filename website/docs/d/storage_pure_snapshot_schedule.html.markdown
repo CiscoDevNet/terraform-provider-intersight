@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_snapshot_schedule"
 description: |-
-  PureStorage FlashArray snapshot schedule configuration entity.
+        PureStorage FlashArray snapshot schedule configuration entity.
+
 ---
 
 # Data Source: intersight_storage_pure_snapshot_schedule

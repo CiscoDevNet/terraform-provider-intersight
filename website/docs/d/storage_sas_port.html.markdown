@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_sas_port"
 description: |-
-  Sas Port details of the SAS endpoint.
+        Sas Port details of the SAS endpoint.
+
 ---
 
 # Data Source: intersight_storage_sas_port

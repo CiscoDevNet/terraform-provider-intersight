@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_cimc_firmware_descriptor"
 description: |-
-  Descriptor that identifies the server's redfish integration capability using cimc firmware info.
+        Descriptor that identifies the server's redfish integration capability using cimc firmware info.
+
 ---
 
 # Data Source: intersight_capability_cimc_firmware_descriptor
@@ -18,6 +19,7 @@ The following arguments can be used to get data of already created objects in In
 * `create_time`:(string) The time when this managed object was created. 
 * `description`:(string) Detailed information about the endpoint. 
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
+* `local_user_pswd_supported_ver`:(string) Minimum server firmware version for local users password properties feature support. 
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_node"
 description: |-
-  Node inventory represents the Kubernetes Node. One node represent one Kubernetes worker or master. A Kubernetes node is a worker machine in Kubernetes. A node may be a virtual machine or physical machine. Each node contains the services necessary to run pods and is managed by the master components.
+        Node inventory represents the Kubernetes Node. One node represent one Kubernetes worker or master. A Kubernetes node is a worker machine in Kubernetes. A node may be a virtual machine or physical machine. Each node contains the services necessary to run pods and is managed by the master components.
+
 ---
 
 # Data Source: intersight_kubernetes_node

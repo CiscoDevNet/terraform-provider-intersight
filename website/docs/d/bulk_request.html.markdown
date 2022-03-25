@@ -3,9 +3,10 @@ subcategory: "bulk"
 layout: "intersight"
 page_title: "Intersight: intersight_bulk_request"
 description: |-
-  The bulk.Request API allows users to perform API actions (Create, Update or Delete) in bulk, on a given URI.
-It is possible to operate on multiple subpaths relative to the provided URI (For example, it would be possible to
-perform a PATCH action on multiple objects of a given REST resource type).
+        The bulk.Request API allows users to perform API actions (Create, Update or Delete) in bulk, on a given URI.
+        It is possible to operate on multiple subpaths relative to the provided URI (For example, it would be possible to
+        perform a PATCH action on multiple objects of a given REST resource type).
+
 ---
 
 # Data Source: intersight_bulk_request

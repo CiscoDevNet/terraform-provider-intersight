@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_hweol"
 description: |-
-  The hardware end of life notice for APIC.
+        The hardware end of life notice for APIC.
+
 ---
 
 # Data Source: intersight_niaapi_apic_hweol

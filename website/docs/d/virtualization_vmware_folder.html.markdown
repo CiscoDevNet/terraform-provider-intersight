@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_folder"
 description: |-
-  A folder in a VMware vCenter. Folder can be created directly under the vCenter, under a datacenter, or inside another folder.
+        A folder in a VMware vCenter. Folder can be created directly under the vCenter, under a datacenter, or inside another folder.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_folder

@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_site_inventory"
 description: |-
-  Details of sites onboarded onto an ND.
+        Details of sites onboarded onto an ND.
+
 ---
 
 # Data Source: intersight_niatelemetry_site_inventory

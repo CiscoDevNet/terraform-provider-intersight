@@ -3,7 +3,8 @@ subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_latest_maintained_release"
 description: |-
-  This contains the latest maintained release information for each release on APIC.
+        This contains the latest maintained release information for each release on APIC.
+
 ---
 
 # Data Source: intersight_niaapi_apic_latest_maintained_release

@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_equipment_slot_array"
 description: |-
-  Type to represent additional switch specific capabilities.
+        Type to represent additional switch specific capabilities.
+
 ---
 
 # Data Source: intersight_capability_equipment_slot_array
@@ -28,7 +29,7 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) An unique identifer for a capability descriptor. 
 * `number_of_slots`:(int) Number of Slots information for a Switch/Fabric-Interconnect hardware. 
 * `orientation`:(string) Orientation information for a Switch/Fabric-Interconnect hardware. 
-* `pid`:(string) Product Identifier for a Switch/Fabric-Interconnect.* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.* `unknown` - Unknown device type, usage is TBD. 
+* `pid`:(string) Product Identifier for a Switch/Fabric-Interconnect.* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.* `UCS-FI-6536` - The standard 5th generation UCS Fabric Interconnect with 36 ports.* `unknown` - Unknown device type, usage is TBD. 
 * `selector`:(string) Selector information for a Switch/Fabric-Interconnect hardware. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
 * `sku`:(string) SKU information for Switch/Fabric-Interconnect. 

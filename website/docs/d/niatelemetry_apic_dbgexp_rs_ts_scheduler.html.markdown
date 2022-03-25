@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_apic_dbgexp_rs_ts_scheduler"
 description: |-
-  Object to capture Dn of Rs Ts scheduler in APIC.
+        Object to capture Dn of Rs Ts scheduler in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_apic_dbgexp_rs_ts_scheduler

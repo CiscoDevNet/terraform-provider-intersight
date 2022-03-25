@@ -1,0 +1,254 @@
+# WorkflowServiceItemInstance
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.ServiceItemInstance"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.ServiceItemInstance"]
+**Description** | Pointer to **string** | The description for this service item instance. | [optional] 
+**LastStatus** | Pointer to **string** | Last status of the service item instance which will be reverted when an ongoing service item action instance is aborted. * &#x60;NotCreated&#x60; - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * &#x60;InProgress&#x60; - An action is in progress and until that action has reached a final state, another action cannot be started. * &#x60;Failed&#x60; - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * &#x60;Okay&#x60; - The last action on the service item instance completed and the service item instance is in Okay state. * &#x60;Decommissioned&#x60; - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned. | [optional] [readonly] [default to "NotCreated"]
+**Name** | Pointer to **string** | A name of the service item instance. Name of the service item instance must be unique within a type of Service item definition. | [optional] 
+**Status** | Pointer to **string** | Status of the service item instance which controls the actions that can be performed on this instance. * &#x60;NotCreated&#x60; - The service item is not yet created and it is in a draft mode. A service item instance can be deleted in this state. * &#x60;InProgress&#x60; - An action is in progress and until that action has reached a final state, another action cannot be started. * &#x60;Failed&#x60; - The last action on the service item instance failed and corrective measures need to be taken to bring the service item instance back to valid state. * &#x60;Okay&#x60; - The last action on the service item instance completed and the service item instance is in Okay state. * &#x60;Decommissioned&#x60; - The service item is decommissioned and can be safely deleted. A service item instance in any other state after it has been created cannot be deleted until it has been decommissioned. | [optional] [readonly] [default to "NotCreated"]
+**UserId** | Pointer to **string** | The user identifier which indicates the user that started this workflow. | [optional] [readonly] 
+**Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
+**ServiceItemDefinition** | Pointer to [**WorkflowServiceItemDefinitionRelationship**](WorkflowServiceItemDefinitionRelationship.md) |  | [optional] 
+
+## Methods
+
+### NewWorkflowServiceItemInstance
+
+`func NewWorkflowServiceItemInstance(classId string, objectType string, ) *WorkflowServiceItemInstance`
+
+NewWorkflowServiceItemInstance instantiates a new WorkflowServiceItemInstance object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewWorkflowServiceItemInstanceWithDefaults
+
+`func NewWorkflowServiceItemInstanceWithDefaults() *WorkflowServiceItemInstance`
+
+NewWorkflowServiceItemInstanceWithDefaults instantiates a new WorkflowServiceItemInstance object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowServiceItemInstance) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowServiceItemInstance) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowServiceItemInstance) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowServiceItemInstance) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowServiceItemInstance) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowServiceItemInstance) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
+### GetDescription
+
+`func (o *WorkflowServiceItemInstance) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *WorkflowServiceItemInstance) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *WorkflowServiceItemInstance) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *WorkflowServiceItemInstance) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
+
+### GetLastStatus
+
+`func (o *WorkflowServiceItemInstance) GetLastStatus() string`
+
+GetLastStatus returns the LastStatus field if non-nil, zero value otherwise.
+
+### GetLastStatusOk
+
+`func (o *WorkflowServiceItemInstance) GetLastStatusOk() (*string, bool)`
+
+GetLastStatusOk returns a tuple with the LastStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastStatus
+
+`func (o *WorkflowServiceItemInstance) SetLastStatus(v string)`
+
+SetLastStatus sets LastStatus field to given value.
+
+### HasLastStatus
+
+`func (o *WorkflowServiceItemInstance) HasLastStatus() bool`
+
+HasLastStatus returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *WorkflowServiceItemInstance) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *WorkflowServiceItemInstance) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *WorkflowServiceItemInstance) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *WorkflowServiceItemInstance) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *WorkflowServiceItemInstance) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *WorkflowServiceItemInstance) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *WorkflowServiceItemInstance) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *WorkflowServiceItemInstance) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
+### GetUserId
+
+`func (o *WorkflowServiceItemInstance) GetUserId() string`
+
+GetUserId returns the UserId field if non-nil, zero value otherwise.
+
+### GetUserIdOk
+
+`func (o *WorkflowServiceItemInstance) GetUserIdOk() (*string, bool)`
+
+GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserId
+
+`func (o *WorkflowServiceItemInstance) SetUserId(v string)`
+
+SetUserId sets UserId field to given value.
+
+### HasUserId
+
+`func (o *WorkflowServiceItemInstance) HasUserId() bool`
+
+HasUserId returns a boolean if a field has been set.
+
+### GetOrganization
+
+`func (o *WorkflowServiceItemInstance) GetOrganization() OrganizationOrganizationRelationship`
+
+GetOrganization returns the Organization field if non-nil, zero value otherwise.
+
+### GetOrganizationOk
+
+`func (o *WorkflowServiceItemInstance) GetOrganizationOk() (*OrganizationOrganizationRelationship, bool)`
+
+GetOrganizationOk returns a tuple with the Organization field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrganization
+
+`func (o *WorkflowServiceItemInstance) SetOrganization(v OrganizationOrganizationRelationship)`
+
+SetOrganization sets Organization field to given value.
+
+### HasOrganization
+
+`func (o *WorkflowServiceItemInstance) HasOrganization() bool`
+
+HasOrganization returns a boolean if a field has been set.
+
+### GetServiceItemDefinition
+
+`func (o *WorkflowServiceItemInstance) GetServiceItemDefinition() WorkflowServiceItemDefinitionRelationship`
+
+GetServiceItemDefinition returns the ServiceItemDefinition field if non-nil, zero value otherwise.
+
+### GetServiceItemDefinitionOk
+
+`func (o *WorkflowServiceItemInstance) GetServiceItemDefinitionOk() (*WorkflowServiceItemDefinitionRelationship, bool)`
+
+GetServiceItemDefinitionOk returns a tuple with the ServiceItemDefinition field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServiceItemDefinition
+
+`func (o *WorkflowServiceItemInstance) SetServiceItemDefinition(v WorkflowServiceItemDefinitionRelationship)`
+
+SetServiceItemDefinition sets ServiceItemDefinition field to given value.
+
+### HasServiceItemDefinition
+
+`func (o *WorkflowServiceItemInstance) HasServiceItemDefinition() bool`
+
+HasServiceItemDefinition returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

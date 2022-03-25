@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_cluster_network_policy"
 description: |-
-  A policy specifying VLANs for management, VM migration, and VM traffic.
+        A policy specifying VLANs for management, VM migration, and VM traffic.
+
 ---
 
 # Data Source: intersight_hyperflex_cluster_network_policy

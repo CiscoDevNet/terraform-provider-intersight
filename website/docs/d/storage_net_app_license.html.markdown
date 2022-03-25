@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_license"
 description: |-
-  NetApp licenses for NetApp Ontap.
+        NetApp licenses for NetApp Ontap.
+
 ---
 
 # Data Source: intersight_storage_net_app_license

@@ -3,8 +3,9 @@ subcategory: "search"
 layout: "intersight"
 page_title: "Intersight: intersight_search_tag_item"
 description: |-
-  The TagItems service entry point to search Tags across all Intersight REST resources using OData Query syntax.
-See [Search Tags API query syntax](/apidocs/introduction/query/#search-tags-api) for details about the tag query syntax.
+        The TagItems service entry point to search Tags across all Intersight REST resources using OData Query syntax.
+        See [Search Tags API query syntax](/apidocs/introduction/query/#search-tags-api) for details about the tag query syntax.
+
 ---
 
 # Data Source: intersight_search_tag_item

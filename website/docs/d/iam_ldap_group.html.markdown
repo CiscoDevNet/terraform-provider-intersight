@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ldap_group"
 description: |-
-  Mapping of LDAP Group to EndPointRoles.
+        Mapping of LDAP Group to EndPointRoles.
+
 ---
 
 # Data Source: intersight_iam_ldap_group

@@ -3,7 +3,8 @@ subcategory: "kvm"
 layout: "intersight"
 page_title: "Intersight: intersight_kvm_session"
 description: |-
-  Virtual KVM Session that provides Single Sign-On access to the vKVM console of the server. The vKVM access can be direct or can be tunneled by specifying the tunnel to be used for the access.
+        Virtual KVM Session that provides Single Sign-On access to the vKVM console of the server. The vKVM access can be direct or can be tunneled by specifying the tunnel to be used for the access.
+
 ---
 
 # Resource: intersight_kvm_session

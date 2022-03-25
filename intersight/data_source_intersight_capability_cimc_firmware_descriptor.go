@@ -118,6 +118,11 @@ func dataSourceCapabilityCimcFirmwareDescriptor() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"local_user_pswd_supported_ver": {
+			Description: "Minimum server firmware version for local users password properties feature support.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"mod_time": {
 			Description: "The time when this managed object was last modified.",
 			Type:        schema.TypeString,
@@ -469,6 +474,11 @@ func dataSourceCapabilityCimcFirmwareDescriptor() *schema.Resource {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"local_user_pswd_supported_ver": {
+			Description: "Minimum server firmware version for local users password properties feature support.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -858,6 +868,11 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 		o.SetDomainGroupMoid(x)
 	}
 
+	if v, ok := d.GetOk("local_user_pswd_supported_ver"); ok {
+		x := (v.(string))
+		o.SetLocalUserPswdSupportedVer(x)
+	}
+
 	if v, ok := d.GetOk("mod_time"); ok {
 		x, _ := time.Parse(time.RFC1123, v.(string))
 		o.SetModTime(x)
@@ -1152,6 +1167,7 @@ func dataSourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["description"] = (s.GetDescription())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["local_user_pswd_supported_ver"] = (s.GetLocalUserPswdSupportedVer())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["model"] = (s.GetModel())

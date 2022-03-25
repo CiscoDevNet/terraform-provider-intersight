@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_vmware_datastore_cluster"
 description: |-
-  The VMware Datastore cluster entity with its attributes. Datastore cluster is a collection of datastores with shared resources and a shared management interface.
+        The VMware Datastore cluster entity with its attributes. Datastore cluster is a collection of datastores with shared resources and a shared management interface.
+
 ---
 
 # Data Source: intersight_virtualization_vmware_datastore_cluster

@@ -238,6 +238,11 @@ func dataSourceWorkflowSolutionOutput() *schema.Resource {
 				},
 			},
 		},
+		"upgraded_moid": {
+			Description: "Stores the upgraded Moid for help during future lookups.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -569,6 +574,11 @@ func dataSourceWorkflowSolutionOutput() *schema.Resource {
 					},
 				},
 			},
+		},
+		"upgraded_moid": {
+			Description: "Stores the upgraded Moid for help during future lookups.",
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -963,6 +973,11 @@ func dataSourceWorkflowSolutionOutputRead(c context.Context, d *schema.ResourceD
 		o.SetTags(x)
 	}
 
+	if v, ok := d.GetOk("upgraded_moid"); ok {
+		x := (v.(string))
+		o.SetUpgradedMoid(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -1096,6 +1111,7 @@ func dataSourceWorkflowSolutionOutputRead(c context.Context, d *schema.ResourceD
 				temp["solution_instance"] = flattenMapWorkflowSolutionInstanceRelationship(s.GetSolutionInstance(), d)
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["upgraded_moid"] = (s.GetUpgradedMoid())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				workflowSolutionOutputResults[j] = temp

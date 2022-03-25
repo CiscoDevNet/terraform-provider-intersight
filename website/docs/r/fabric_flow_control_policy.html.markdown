@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_flow_control_policy"
 description: |-
-  Priority Flow Control setting for each port.
+        Priority Flow Control setting for each port.
+
 ---
 
 # Resource: intersight_fabric_flow_control_policy

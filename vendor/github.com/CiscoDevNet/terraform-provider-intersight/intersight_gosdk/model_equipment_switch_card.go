@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -24,12 +24,20 @@ type EquipmentSwitchCard struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// The starting (base) MAC address of the switch hardware like \"d0-e0-42-87-39-00\".
+	BaseMac *string `json:"BaseMac,omitempty"`
 	// Detailed description of this switch hardware.
 	Description *string `json:"Description,omitempty"`
+	// The ending MAC address of the switch hardware like \"d0-e0-42-87-39-5f\".
+	EndMac *string `json:"EndMac,omitempty"`
 	// The user configured Ethernet switching mode for this switch (End-Host or Switch). * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 	EthernetSwitchingMode *string `json:"EthernetSwitchingMode,omitempty"`
 	// The user configured FC switching mode for this switch (End-Host or Switch). * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 	FcSwitchingMode *string `json:"FcSwitchingMode,omitempty"`
+	// The Hardware version of the switch hardware.
+	HwVersion *string `json:"HwVersion,omitempty"`
+	// The name of the switch card like Line Card-1.
+	Name *string `json:"Name,omitempty"`
 	// Number of ports present in this switch hardware.
 	NumPorts *int64 `json:"NumPorts,omitempty"`
 	// Field specifies this Switch's Out-of-band IP address.
@@ -38,14 +46,24 @@ type EquipmentSwitchCard struct {
 	OutOfBandIpGateway *string `json:"OutOfBandIpGateway,omitempty"`
 	// Field specifies the Netmask for this Switch's Out-of-band IP address.
 	OutOfBandIpMask *string `json:"OutOfBandIpMask,omitempty"`
+	// The MAC address of the Switch's out-of-band management interface.
+	OutOfBandMac *string `json:"OutOfBandMac,omitempty"`
+	// The part number of the switch hardware.
+	PartNumber *string `json:"PartNumber,omitempty"`
+	// Power state of the switch hardware. * `unknown` - The power state of the switch hardware is unknown. * `off` - The power state of the switch hardware is off. * `on` - The power state of the switch hardware is on. * `deny` - The power state of the switch hardware is deny. * `multi-boot-fail` - The power state of the switch hardware is multi-boot-fail.
+	PowerState *string `json:"PowerState,omitempty"`
 	// Slot identifier of the local Switch slot Interface.
 	SlotId *int64 `json:"SlotId,omitempty"`
 	// Operational state of the switch hardware.
 	State *string `json:"State,omitempty"`
+	// The connection status of the switch hardware like up/down. * `Down` - Connection status of the switch card is down. * `Up` - Connection status of the switch card is up.
+	Status *string `json:"Status,omitempty"`
 	// Switch Identifier that is local to a cluster.
 	SwitchId *string `json:"SwitchId,omitempty"`
 	// The Thermal status of the fabric interconnect. * `unknown` - The default state of the sensor (in case no data is received). * `ok` - State of the sensor indicating the sensor's temperature range is okay. * `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range. * `upper-critical` - State of the sensor indicating that the temperature is above normal range. * `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range. * `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range. * `lower-critical` - State of the sensor indicating that the temperature is below normal range. * `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.
 	Thermal *string `json:"Thermal,omitempty"`
+	// Type of the switch card based on the capability like 4 Gbps or 2 Gbps type etc.
+	Type *string `json:"Type,omitempty"`
 	// An array of relationships to fcPortChannel resources.
 	FcPortChannels      []FcPortChannelRelationship      `json:"FcPortChannels,omitempty"`
 	InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
@@ -68,6 +86,10 @@ func NewEquipmentSwitchCard(classId string, objectType string) *EquipmentSwitchC
 	this := EquipmentSwitchCard{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var powerState string = "unknown"
+	this.PowerState = &powerState
+	var status string = "Down"
+	this.Status = &status
 	var thermal string = "unknown"
 	this.Thermal = &thermal
 	return &this
@@ -82,6 +104,10 @@ func NewEquipmentSwitchCardWithDefaults() *EquipmentSwitchCard {
 	this.ClassId = classId
 	var objectType string = "equipment.SwitchCard"
 	this.ObjectType = objectType
+	var powerState string = "unknown"
+	this.PowerState = &powerState
+	var status string = "Down"
+	this.Status = &status
 	var thermal string = "unknown"
 	this.Thermal = &thermal
 	return &this
@@ -135,6 +161,38 @@ func (o *EquipmentSwitchCard) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetBaseMac returns the BaseMac field value if set, zero value otherwise.
+func (o *EquipmentSwitchCard) GetBaseMac() string {
+	if o == nil || o.BaseMac == nil {
+		var ret string
+		return ret
+	}
+	return *o.BaseMac
+}
+
+// GetBaseMacOk returns a tuple with the BaseMac field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentSwitchCard) GetBaseMacOk() (*string, bool) {
+	if o == nil || o.BaseMac == nil {
+		return nil, false
+	}
+	return o.BaseMac, true
+}
+
+// HasBaseMac returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasBaseMac() bool {
+	if o != nil && o.BaseMac != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBaseMac gets a reference to the given string and assigns it to the BaseMac field.
+func (o *EquipmentSwitchCard) SetBaseMac(v string) {
+	o.BaseMac = &v
+}
+
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetDescription() string {
 	if o == nil || o.Description == nil {
@@ -165,6 +223,38 @@ func (o *EquipmentSwitchCard) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *EquipmentSwitchCard) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetEndMac returns the EndMac field value if set, zero value otherwise.
+func (o *EquipmentSwitchCard) GetEndMac() string {
+	if o == nil || o.EndMac == nil {
+		var ret string
+		return ret
+	}
+	return *o.EndMac
+}
+
+// GetEndMacOk returns a tuple with the EndMac field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentSwitchCard) GetEndMacOk() (*string, bool) {
+	if o == nil || o.EndMac == nil {
+		return nil, false
+	}
+	return o.EndMac, true
+}
+
+// HasEndMac returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasEndMac() bool {
+	if o != nil && o.EndMac != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetEndMac gets a reference to the given string and assigns it to the EndMac field.
+func (o *EquipmentSwitchCard) SetEndMac(v string) {
+	o.EndMac = &v
 }
 
 // GetEthernetSwitchingMode returns the EthernetSwitchingMode field value if set, zero value otherwise.
@@ -229,6 +319,70 @@ func (o *EquipmentSwitchCard) HasFcSwitchingMode() bool {
 // SetFcSwitchingMode gets a reference to the given string and assigns it to the FcSwitchingMode field.
 func (o *EquipmentSwitchCard) SetFcSwitchingMode(v string) {
 	o.FcSwitchingMode = &v
+}
+
+// GetHwVersion returns the HwVersion field value if set, zero value otherwise.
+func (o *EquipmentSwitchCard) GetHwVersion() string {
+	if o == nil || o.HwVersion == nil {
+		var ret string
+		return ret
+	}
+	return *o.HwVersion
+}
+
+// GetHwVersionOk returns a tuple with the HwVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentSwitchCard) GetHwVersionOk() (*string, bool) {
+	if o == nil || o.HwVersion == nil {
+		return nil, false
+	}
+	return o.HwVersion, true
+}
+
+// HasHwVersion returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasHwVersion() bool {
+	if o != nil && o.HwVersion != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHwVersion gets a reference to the given string and assigns it to the HwVersion field.
+func (o *EquipmentSwitchCard) SetHwVersion(v string) {
+	o.HwVersion = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *EquipmentSwitchCard) GetName() string {
+	if o == nil || o.Name == nil {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentSwitchCard) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasName() bool {
+	if o != nil && o.Name != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *EquipmentSwitchCard) SetName(v string) {
+	o.Name = &v
 }
 
 // GetNumPorts returns the NumPorts field value if set, zero value otherwise.
@@ -359,6 +513,102 @@ func (o *EquipmentSwitchCard) SetOutOfBandIpMask(v string) {
 	o.OutOfBandIpMask = &v
 }
 
+// GetOutOfBandMac returns the OutOfBandMac field value if set, zero value otherwise.
+func (o *EquipmentSwitchCard) GetOutOfBandMac() string {
+	if o == nil || o.OutOfBandMac == nil {
+		var ret string
+		return ret
+	}
+	return *o.OutOfBandMac
+}
+
+// GetOutOfBandMacOk returns a tuple with the OutOfBandMac field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentSwitchCard) GetOutOfBandMacOk() (*string, bool) {
+	if o == nil || o.OutOfBandMac == nil {
+		return nil, false
+	}
+	return o.OutOfBandMac, true
+}
+
+// HasOutOfBandMac returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasOutOfBandMac() bool {
+	if o != nil && o.OutOfBandMac != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOutOfBandMac gets a reference to the given string and assigns it to the OutOfBandMac field.
+func (o *EquipmentSwitchCard) SetOutOfBandMac(v string) {
+	o.OutOfBandMac = &v
+}
+
+// GetPartNumber returns the PartNumber field value if set, zero value otherwise.
+func (o *EquipmentSwitchCard) GetPartNumber() string {
+	if o == nil || o.PartNumber == nil {
+		var ret string
+		return ret
+	}
+	return *o.PartNumber
+}
+
+// GetPartNumberOk returns a tuple with the PartNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentSwitchCard) GetPartNumberOk() (*string, bool) {
+	if o == nil || o.PartNumber == nil {
+		return nil, false
+	}
+	return o.PartNumber, true
+}
+
+// HasPartNumber returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasPartNumber() bool {
+	if o != nil && o.PartNumber != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPartNumber gets a reference to the given string and assigns it to the PartNumber field.
+func (o *EquipmentSwitchCard) SetPartNumber(v string) {
+	o.PartNumber = &v
+}
+
+// GetPowerState returns the PowerState field value if set, zero value otherwise.
+func (o *EquipmentSwitchCard) GetPowerState() string {
+	if o == nil || o.PowerState == nil {
+		var ret string
+		return ret
+	}
+	return *o.PowerState
+}
+
+// GetPowerStateOk returns a tuple with the PowerState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentSwitchCard) GetPowerStateOk() (*string, bool) {
+	if o == nil || o.PowerState == nil {
+		return nil, false
+	}
+	return o.PowerState, true
+}
+
+// HasPowerState returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasPowerState() bool {
+	if o != nil && o.PowerState != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPowerState gets a reference to the given string and assigns it to the PowerState field.
+func (o *EquipmentSwitchCard) SetPowerState(v string) {
+	o.PowerState = &v
+}
+
 // GetSlotId returns the SlotId field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetSlotId() int64 {
 	if o == nil || o.SlotId == nil {
@@ -423,6 +673,38 @@ func (o *EquipmentSwitchCard) SetState(v string) {
 	o.State = &v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *EquipmentSwitchCard) GetStatus() string {
+	if o == nil || o.Status == nil {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentSwitchCard) GetStatusOk() (*string, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *EquipmentSwitchCard) SetStatus(v string) {
+	o.Status = &v
+}
+
 // GetSwitchId returns the SwitchId field value if set, zero value otherwise.
 func (o *EquipmentSwitchCard) GetSwitchId() string {
 	if o == nil || o.SwitchId == nil {
@@ -485,6 +767,38 @@ func (o *EquipmentSwitchCard) HasThermal() bool {
 // SetThermal gets a reference to the given string and assigns it to the Thermal field.
 func (o *EquipmentSwitchCard) SetThermal(v string) {
 	o.Thermal = &v
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *EquipmentSwitchCard) GetType() string {
+	if o == nil || o.Type == nil {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentSwitchCard) GetTypeOk() (*string, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *EquipmentSwitchCard) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *EquipmentSwitchCard) SetType(v string) {
+	o.Type = &v
 }
 
 // GetFcPortChannels returns the FcPortChannels field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -698,14 +1012,26 @@ func (o EquipmentSwitchCard) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.BaseMac != nil {
+		toSerialize["BaseMac"] = o.BaseMac
+	}
 	if o.Description != nil {
 		toSerialize["Description"] = o.Description
+	}
+	if o.EndMac != nil {
+		toSerialize["EndMac"] = o.EndMac
 	}
 	if o.EthernetSwitchingMode != nil {
 		toSerialize["EthernetSwitchingMode"] = o.EthernetSwitchingMode
 	}
 	if o.FcSwitchingMode != nil {
 		toSerialize["FcSwitchingMode"] = o.FcSwitchingMode
+	}
+	if o.HwVersion != nil {
+		toSerialize["HwVersion"] = o.HwVersion
+	}
+	if o.Name != nil {
+		toSerialize["Name"] = o.Name
 	}
 	if o.NumPorts != nil {
 		toSerialize["NumPorts"] = o.NumPorts
@@ -719,17 +1045,32 @@ func (o EquipmentSwitchCard) MarshalJSON() ([]byte, error) {
 	if o.OutOfBandIpMask != nil {
 		toSerialize["OutOfBandIpMask"] = o.OutOfBandIpMask
 	}
+	if o.OutOfBandMac != nil {
+		toSerialize["OutOfBandMac"] = o.OutOfBandMac
+	}
+	if o.PartNumber != nil {
+		toSerialize["PartNumber"] = o.PartNumber
+	}
+	if o.PowerState != nil {
+		toSerialize["PowerState"] = o.PowerState
+	}
 	if o.SlotId != nil {
 		toSerialize["SlotId"] = o.SlotId
 	}
 	if o.State != nil {
 		toSerialize["State"] = o.State
 	}
+	if o.Status != nil {
+		toSerialize["Status"] = o.Status
+	}
 	if o.SwitchId != nil {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
 	if o.Thermal != nil {
 		toSerialize["Thermal"] = o.Thermal
+	}
+	if o.Type != nil {
+		toSerialize["Type"] = o.Type
 	}
 	if o.FcPortChannels != nil {
 		toSerialize["FcPortChannels"] = o.FcPortChannels
@@ -763,12 +1104,20 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// The starting (base) MAC address of the switch hardware like \"d0-e0-42-87-39-00\".
+		BaseMac *string `json:"BaseMac,omitempty"`
 		// Detailed description of this switch hardware.
 		Description *string `json:"Description,omitempty"`
+		// The ending MAC address of the switch hardware like \"d0-e0-42-87-39-5f\".
+		EndMac *string `json:"EndMac,omitempty"`
 		// The user configured Ethernet switching mode for this switch (End-Host or Switch). * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 		EthernetSwitchingMode *string `json:"EthernetSwitchingMode,omitempty"`
 		// The user configured FC switching mode for this switch (End-Host or Switch). * `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.
 		FcSwitchingMode *string `json:"FcSwitchingMode,omitempty"`
+		// The Hardware version of the switch hardware.
+		HwVersion *string `json:"HwVersion,omitempty"`
+		// The name of the switch card like Line Card-1.
+		Name *string `json:"Name,omitempty"`
 		// Number of ports present in this switch hardware.
 		NumPorts *int64 `json:"NumPorts,omitempty"`
 		// Field specifies this Switch's Out-of-band IP address.
@@ -777,14 +1126,24 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(bytes []byte) (err error) {
 		OutOfBandIpGateway *string `json:"OutOfBandIpGateway,omitempty"`
 		// Field specifies the Netmask for this Switch's Out-of-band IP address.
 		OutOfBandIpMask *string `json:"OutOfBandIpMask,omitempty"`
+		// The MAC address of the Switch's out-of-band management interface.
+		OutOfBandMac *string `json:"OutOfBandMac,omitempty"`
+		// The part number of the switch hardware.
+		PartNumber *string `json:"PartNumber,omitempty"`
+		// Power state of the switch hardware. * `unknown` - The power state of the switch hardware is unknown. * `off` - The power state of the switch hardware is off. * `on` - The power state of the switch hardware is on. * `deny` - The power state of the switch hardware is deny. * `multi-boot-fail` - The power state of the switch hardware is multi-boot-fail.
+		PowerState *string `json:"PowerState,omitempty"`
 		// Slot identifier of the local Switch slot Interface.
 		SlotId *int64 `json:"SlotId,omitempty"`
 		// Operational state of the switch hardware.
 		State *string `json:"State,omitempty"`
+		// The connection status of the switch hardware like up/down. * `Down` - Connection status of the switch card is down. * `Up` - Connection status of the switch card is up.
+		Status *string `json:"Status,omitempty"`
 		// Switch Identifier that is local to a cluster.
 		SwitchId *string `json:"SwitchId,omitempty"`
 		// The Thermal status of the fabric interconnect. * `unknown` - The default state of the sensor (in case no data is received). * `ok` - State of the sensor indicating the sensor's temperature range is okay. * `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range. * `upper-critical` - State of the sensor indicating that the temperature is above normal range. * `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range. * `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range. * `lower-critical` - State of the sensor indicating that the temperature is below normal range. * `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.
 		Thermal *string `json:"Thermal,omitempty"`
+		// Type of the switch card based on the capability like 4 Gbps or 2 Gbps type etc.
+		Type *string `json:"Type,omitempty"`
 		// An array of relationships to fcPortChannel resources.
 		FcPortChannels      []FcPortChannelRelationship      `json:"FcPortChannels,omitempty"`
 		InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
@@ -803,17 +1162,26 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(bytes []byte) (err error) {
 		varEquipmentSwitchCard := _EquipmentSwitchCard{}
 		varEquipmentSwitchCard.ClassId = varEquipmentSwitchCardWithoutEmbeddedStruct.ClassId
 		varEquipmentSwitchCard.ObjectType = varEquipmentSwitchCardWithoutEmbeddedStruct.ObjectType
+		varEquipmentSwitchCard.BaseMac = varEquipmentSwitchCardWithoutEmbeddedStruct.BaseMac
 		varEquipmentSwitchCard.Description = varEquipmentSwitchCardWithoutEmbeddedStruct.Description
+		varEquipmentSwitchCard.EndMac = varEquipmentSwitchCardWithoutEmbeddedStruct.EndMac
 		varEquipmentSwitchCard.EthernetSwitchingMode = varEquipmentSwitchCardWithoutEmbeddedStruct.EthernetSwitchingMode
 		varEquipmentSwitchCard.FcSwitchingMode = varEquipmentSwitchCardWithoutEmbeddedStruct.FcSwitchingMode
+		varEquipmentSwitchCard.HwVersion = varEquipmentSwitchCardWithoutEmbeddedStruct.HwVersion
+		varEquipmentSwitchCard.Name = varEquipmentSwitchCardWithoutEmbeddedStruct.Name
 		varEquipmentSwitchCard.NumPorts = varEquipmentSwitchCardWithoutEmbeddedStruct.NumPorts
 		varEquipmentSwitchCard.OutOfBandIpAddress = varEquipmentSwitchCardWithoutEmbeddedStruct.OutOfBandIpAddress
 		varEquipmentSwitchCard.OutOfBandIpGateway = varEquipmentSwitchCardWithoutEmbeddedStruct.OutOfBandIpGateway
 		varEquipmentSwitchCard.OutOfBandIpMask = varEquipmentSwitchCardWithoutEmbeddedStruct.OutOfBandIpMask
+		varEquipmentSwitchCard.OutOfBandMac = varEquipmentSwitchCardWithoutEmbeddedStruct.OutOfBandMac
+		varEquipmentSwitchCard.PartNumber = varEquipmentSwitchCardWithoutEmbeddedStruct.PartNumber
+		varEquipmentSwitchCard.PowerState = varEquipmentSwitchCardWithoutEmbeddedStruct.PowerState
 		varEquipmentSwitchCard.SlotId = varEquipmentSwitchCardWithoutEmbeddedStruct.SlotId
 		varEquipmentSwitchCard.State = varEquipmentSwitchCardWithoutEmbeddedStruct.State
+		varEquipmentSwitchCard.Status = varEquipmentSwitchCardWithoutEmbeddedStruct.Status
 		varEquipmentSwitchCard.SwitchId = varEquipmentSwitchCardWithoutEmbeddedStruct.SwitchId
 		varEquipmentSwitchCard.Thermal = varEquipmentSwitchCardWithoutEmbeddedStruct.Thermal
+		varEquipmentSwitchCard.Type = varEquipmentSwitchCardWithoutEmbeddedStruct.Type
 		varEquipmentSwitchCard.FcPortChannels = varEquipmentSwitchCardWithoutEmbeddedStruct.FcPortChannels
 		varEquipmentSwitchCard.InventoryDeviceInfo = varEquipmentSwitchCardWithoutEmbeddedStruct.InventoryDeviceInfo
 		varEquipmentSwitchCard.NetworkElement = varEquipmentSwitchCardWithoutEmbeddedStruct.NetworkElement
@@ -839,17 +1207,26 @@ func (o *EquipmentSwitchCard) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "BaseMac")
 		delete(additionalProperties, "Description")
+		delete(additionalProperties, "EndMac")
 		delete(additionalProperties, "EthernetSwitchingMode")
 		delete(additionalProperties, "FcSwitchingMode")
+		delete(additionalProperties, "HwVersion")
+		delete(additionalProperties, "Name")
 		delete(additionalProperties, "NumPorts")
 		delete(additionalProperties, "OutOfBandIpAddress")
 		delete(additionalProperties, "OutOfBandIpGateway")
 		delete(additionalProperties, "OutOfBandIpMask")
+		delete(additionalProperties, "OutOfBandMac")
+		delete(additionalProperties, "PartNumber")
+		delete(additionalProperties, "PowerState")
 		delete(additionalProperties, "SlotId")
 		delete(additionalProperties, "State")
+		delete(additionalProperties, "Status")
 		delete(additionalProperties, "SwitchId")
 		delete(additionalProperties, "Thermal")
+		delete(additionalProperties, "Type")
 		delete(additionalProperties, "FcPortChannels")
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "NetworkElement")

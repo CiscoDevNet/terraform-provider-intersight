@@ -3,7 +3,8 @@ subcategory: "server"
 layout: "intersight"
 page_title: "Intersight: intersight_server_config_change_detail"
 description: |-
-  The configuration change details are captured here.
+        The configuration change details are captured here.
+
 ---
 
 # Data Source: intersight_server_config_change_detail

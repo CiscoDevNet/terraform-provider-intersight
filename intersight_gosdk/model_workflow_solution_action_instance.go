@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -38,7 +38,9 @@ type WorkflowSolutionActionInstance struct {
 	// The time when the action was started for execution last time.
 	StartTime *time.Time `json:"StartTime,omitempty"`
 	// State of the solution action instance. * `NotStarted` - Solution action is not yet started and it is in a draft mode. A solution action instance can be deleted in this state. * `Validating` - A validate action has been triggered on the action and until it completes the start action cannot be issued. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The action on the solution failed and can be retried. * `Completed` - The action on the solution completed successfully. * `Stopping` - The stop action is running on the action instance.
-	Status                   *string                                       `json:"Status,omitempty"`
+	Status *string `json:"Status,omitempty"`
+	// Stores the upgraded Moid for help during future lookups.
+	UpgradedMoid             *string                                       `json:"UpgradedMoid,omitempty"`
 	ActionWorkflowInfo       *WorkflowWorkflowInfoRelationship             `json:"ActionWorkflowInfo,omitempty"`
 	SolutionActionDefinition *WorkflowSolutionActionDefinitionRelationship `json:"SolutionActionDefinition,omitempty"`
 	SolutionDefinition       *WorkflowSolutionDefinitionRelationship       `json:"SolutionDefinition,omitempty"`
@@ -350,6 +352,38 @@ func (o *WorkflowSolutionActionInstance) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetUpgradedMoid returns the UpgradedMoid field value if set, zero value otherwise.
+func (o *WorkflowSolutionActionInstance) GetUpgradedMoid() string {
+	if o == nil || o.UpgradedMoid == nil {
+		var ret string
+		return ret
+	}
+	return *o.UpgradedMoid
+}
+
+// GetUpgradedMoidOk returns a tuple with the UpgradedMoid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowSolutionActionInstance) GetUpgradedMoidOk() (*string, bool) {
+	if o == nil || o.UpgradedMoid == nil {
+		return nil, false
+	}
+	return o.UpgradedMoid, true
+}
+
+// HasUpgradedMoid returns a boolean if a field has been set.
+func (o *WorkflowSolutionActionInstance) HasUpgradedMoid() bool {
+	if o != nil && o.UpgradedMoid != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpgradedMoid gets a reference to the given string and assigns it to the UpgradedMoid field.
+func (o *WorkflowSolutionActionInstance) SetUpgradedMoid(v string) {
+	o.UpgradedMoid = &v
+}
+
 // GetActionWorkflowInfo returns the ActionWorkflowInfo field value if set, zero value otherwise.
 func (o *WorkflowSolutionActionInstance) GetActionWorkflowInfo() WorkflowWorkflowInfoRelationship {
 	if o == nil || o.ActionWorkflowInfo == nil {
@@ -579,6 +613,9 @@ func (o WorkflowSolutionActionInstance) MarshalJSON() ([]byte, error) {
 	if o.Status != nil {
 		toSerialize["Status"] = o.Status
 	}
+	if o.UpgradedMoid != nil {
+		toSerialize["UpgradedMoid"] = o.UpgradedMoid
+	}
 	if o.ActionWorkflowInfo != nil {
 		toSerialize["ActionWorkflowInfo"] = o.ActionWorkflowInfo
 	}
@@ -624,7 +661,9 @@ func (o *WorkflowSolutionActionInstance) UnmarshalJSON(bytes []byte) (err error)
 		// The time when the action was started for execution last time.
 		StartTime *time.Time `json:"StartTime,omitempty"`
 		// State of the solution action instance. * `NotStarted` - Solution action is not yet started and it is in a draft mode. A solution action instance can be deleted in this state. * `Validating` - A validate action has been triggered on the action and until it completes the start action cannot be issued. * `InProgress` - An action is in progress and until that action has reached a final state, another action cannot be started. * `Failed` - The action on the solution failed and can be retried. * `Completed` - The action on the solution completed successfully. * `Stopping` - The stop action is running on the action instance.
-		Status                   *string                                       `json:"Status,omitempty"`
+		Status *string `json:"Status,omitempty"`
+		// Stores the upgraded Moid for help during future lookups.
+		UpgradedMoid             *string                                       `json:"UpgradedMoid,omitempty"`
 		ActionWorkflowInfo       *WorkflowWorkflowInfoRelationship             `json:"ActionWorkflowInfo,omitempty"`
 		SolutionActionDefinition *WorkflowSolutionActionDefinitionRelationship `json:"SolutionActionDefinition,omitempty"`
 		SolutionDefinition       *WorkflowSolutionDefinitionRelationship       `json:"SolutionDefinition,omitempty"`
@@ -647,6 +686,7 @@ func (o *WorkflowSolutionActionInstance) UnmarshalJSON(bytes []byte) (err error)
 		varWorkflowSolutionActionInstance.Name = varWorkflowSolutionActionInstanceWithoutEmbeddedStruct.Name
 		varWorkflowSolutionActionInstance.StartTime = varWorkflowSolutionActionInstanceWithoutEmbeddedStruct.StartTime
 		varWorkflowSolutionActionInstance.Status = varWorkflowSolutionActionInstanceWithoutEmbeddedStruct.Status
+		varWorkflowSolutionActionInstance.UpgradedMoid = varWorkflowSolutionActionInstanceWithoutEmbeddedStruct.UpgradedMoid
 		varWorkflowSolutionActionInstance.ActionWorkflowInfo = varWorkflowSolutionActionInstanceWithoutEmbeddedStruct.ActionWorkflowInfo
 		varWorkflowSolutionActionInstance.SolutionActionDefinition = varWorkflowSolutionActionInstanceWithoutEmbeddedStruct.SolutionActionDefinition
 		varWorkflowSolutionActionInstance.SolutionDefinition = varWorkflowSolutionActionInstanceWithoutEmbeddedStruct.SolutionDefinition
@@ -679,6 +719,7 @@ func (o *WorkflowSolutionActionInstance) UnmarshalJSON(bytes []byte) (err error)
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "StartTime")
 		delete(additionalProperties, "Status")
+		delete(additionalProperties, "UpgradedMoid")
 		delete(additionalProperties, "ActionWorkflowInfo")
 		delete(additionalProperties, "SolutionActionDefinition")
 		delete(additionalProperties, "SolutionDefinition")

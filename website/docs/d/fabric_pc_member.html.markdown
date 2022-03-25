@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_pc_member"
 description: |-
-  PcMember object is to establish the relationship between port parameters and pcId.
+        PcMember object is to establish the relationship between port parameters and pcId.
+
 ---
 
 # Data Source: intersight_fabric_pc_member

@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_fabric_node_control_details"
 description: |-
-  Fabric node control details in APIC.
+        Fabric node control details in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_fabric_node_control_details

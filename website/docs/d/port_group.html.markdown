@@ -3,7 +3,8 @@ subcategory: "port"
 layout: "intersight"
 page_title: "Intersight: intersight_port_group"
 description: |-
-  Holder for multiple ports. A switch card will have one or more port groups.
+        Holder for multiple ports. A switch card will have one or more port groups.
+
 ---
 
 # Data Source: intersight_port_group

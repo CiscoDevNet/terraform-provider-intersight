@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_ingress"
 description: |-
-  Ingress inventory represent a Kubernetes Ingress. In Kubernetes, Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.
+        Ingress inventory represent a Kubernetes Ingress. In Kubernetes, Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.
+
 ---
 
 # Data Source: intersight_kubernetes_ingress

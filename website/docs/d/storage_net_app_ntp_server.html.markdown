@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_ntp_server"
 description: |-
-  External NTP time servers ONTAP uses for time adjustment and correction.
+        External NTP time servers ONTAP uses for time adjustment and correction.
+
 ---
 
 # Data Source: intersight_storage_net_app_ntp_server

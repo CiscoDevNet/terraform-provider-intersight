@@ -3,7 +3,8 @@ subcategory: "fc"
 layout: "intersight"
 page_title: "Intersight: intersight_fc_physical_port"
 description: |-
-  Physical fibre channel port present on a FI.
+        Physical fibre channel port present on a FI.
+
 ---
 
 # Data Source: intersight_fc_physical_port
@@ -16,6 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `account_moid`:(string) The Account ID for this managed object. 
 * `admin_speed`:(string) Administrator configured Speed applied on the port. 
 * `admin_state`:(string) Administratively configured state (enabled/disabled) for this port. 
+* `aggregate_port_id`:(int) Breakout port member in the Fabric Interconnect. 
 * `b2b_credit`:(int) Buffer to Buffer credits of FC port. 
 * `create_time`:(string) The time when this managed object was created. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -25,6 +27,7 @@ The following arguments can be used to get data of already created objects in In
 * `mod_time`:(string) The time when this managed object was last modified. 
 * `mode`:(string) Mode information N_proxy, F or E associated to the Fibre Channel port. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `name`:(string) Name of the physical port of FC. 
 * `oper_speed`:(string) Operational Speed with which the port operates. 
 * `oper_state`:(string) Operational state of this port (enabled/disabled). 
 * `oper_state_qual`:(string) Reason for this port's Operational state. 

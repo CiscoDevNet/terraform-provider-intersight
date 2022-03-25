@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_aws_organizational_unit"
 description: |-
-  AWS organization unit is represented here. It is a Logical grouping of accounts in a AWS organization.
+        AWS organization unit is represented here. It is a Logical grouping of accounts in a AWS organization.
+
 ---
 
 # Data Source: intersight_cloud_aws_organizational_unit

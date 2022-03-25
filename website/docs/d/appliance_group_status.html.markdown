@@ -3,7 +3,8 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_group_status"
 description: |-
-  Status of a group of applications.
+        Status of a group of applications.
+
 ---
 
 # Data Source: intersight_appliance_group_status

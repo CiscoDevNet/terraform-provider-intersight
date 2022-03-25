@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5517
+API version: 1.0.9-5808
 Contact: intersight@cisco.com
 */
 
@@ -53,6 +53,7 @@ type ProcessorUnit struct {
 	ComputeBoard         *ComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
 	ComputeRackUnit      *ComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
 	InventoryDeviceInfo  *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+	NetworkElement       *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
 	RegisteredDevice     *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -675,6 +676,38 @@ func (o *ProcessorUnit) SetInventoryDeviceInfo(v InventoryDeviceInfoRelationship
 	o.InventoryDeviceInfo = &v
 }
 
+// GetNetworkElement returns the NetworkElement field value if set, zero value otherwise.
+func (o *ProcessorUnit) GetNetworkElement() NetworkElementRelationship {
+	if o == nil || o.NetworkElement == nil {
+		var ret NetworkElementRelationship
+		return ret
+	}
+	return *o.NetworkElement
+}
+
+// GetNetworkElementOk returns a tuple with the NetworkElement field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ProcessorUnit) GetNetworkElementOk() (*NetworkElementRelationship, bool) {
+	if o == nil || o.NetworkElement == nil {
+		return nil, false
+	}
+	return o.NetworkElement, true
+}
+
+// HasNetworkElement returns a boolean if a field has been set.
+func (o *ProcessorUnit) HasNetworkElement() bool {
+	if o != nil && o.NetworkElement != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkElement gets a reference to the given NetworkElementRelationship and assigns it to the NetworkElement field.
+func (o *ProcessorUnit) SetNetworkElement(v NetworkElementRelationship) {
+	o.NetworkElement = &v
+}
+
 // GetRegisteredDevice returns the RegisteredDevice field value if set, zero value otherwise.
 func (o *ProcessorUnit) GetRegisteredDevice() AssetDeviceRegistrationRelationship {
 	if o == nil || o.RegisteredDevice == nil {
@@ -774,6 +807,9 @@ func (o ProcessorUnit) MarshalJSON() ([]byte, error) {
 	if o.InventoryDeviceInfo != nil {
 		toSerialize["InventoryDeviceInfo"] = o.InventoryDeviceInfo
 	}
+	if o.NetworkElement != nil {
+		toSerialize["NetworkElement"] = o.NetworkElement
+	}
 	if o.RegisteredDevice != nil {
 		toSerialize["RegisteredDevice"] = o.RegisteredDevice
 	}
@@ -820,6 +856,7 @@ func (o *ProcessorUnit) UnmarshalJSON(bytes []byte) (err error) {
 		ComputeBoard        *ComputeBoardRelationship            `json:"ComputeBoard,omitempty"`
 		ComputeRackUnit     *ComputeRackUnitRelationship         `json:"ComputeRackUnit,omitempty"`
 		InventoryDeviceInfo *InventoryDeviceInfoRelationship     `json:"InventoryDeviceInfo,omitempty"`
+		NetworkElement      *NetworkElementRelationship          `json:"NetworkElement,omitempty"`
 		RegisteredDevice    *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
 	}
 
@@ -847,6 +884,7 @@ func (o *ProcessorUnit) UnmarshalJSON(bytes []byte) (err error) {
 		varProcessorUnit.ComputeBoard = varProcessorUnitWithoutEmbeddedStruct.ComputeBoard
 		varProcessorUnit.ComputeRackUnit = varProcessorUnitWithoutEmbeddedStruct.ComputeRackUnit
 		varProcessorUnit.InventoryDeviceInfo = varProcessorUnitWithoutEmbeddedStruct.InventoryDeviceInfo
+		varProcessorUnit.NetworkElement = varProcessorUnitWithoutEmbeddedStruct.NetworkElement
 		varProcessorUnit.RegisteredDevice = varProcessorUnitWithoutEmbeddedStruct.RegisteredDevice
 		*o = ProcessorUnit(varProcessorUnit)
 	} else {
@@ -884,6 +922,7 @@ func (o *ProcessorUnit) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ComputeBoard")
 		delete(additionalProperties, "ComputeRackUnit")
 		delete(additionalProperties, "InventoryDeviceInfo")
+		delete(additionalProperties, "NetworkElement")
 		delete(additionalProperties, "RegisteredDevice")
 
 		// remove fields from embedded structs

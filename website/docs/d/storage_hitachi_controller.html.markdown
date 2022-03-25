@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_controller"
 description: |-
-  A storage controller entity in Hitachi storage array.
+        A storage controller entity in Hitachi storage array.
+
 ---
 
 # Data Source: intersight_storage_hitachi_controller

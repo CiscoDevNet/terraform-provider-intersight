@@ -3,7 +3,8 @@ subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_apic_transceiver_details"
 description: |-
-  Object to capture the Transceiver details in APIC.
+        Object to capture the Transceiver details in APIC.
+
 ---
 
 # Data Source: intersight_niatelemetry_apic_transceiver_details

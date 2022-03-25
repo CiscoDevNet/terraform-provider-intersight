@@ -3,7 +3,8 @@ subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_config_result_entry"
 description: |-
-  This provides detailed information for the deploy and validation profile configuration results.
+        This provides detailed information for the deploy and validation profile configuration results.
+
 ---
 
 # Data Source: intersight_fabric_config_result_entry

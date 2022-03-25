@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_base_disk"
 description: |-
-  NetApp base disk is a storage array disk.
+        NetApp base disk is a storage array disk.
+
 ---
 
 # Data Source: intersight_storage_net_app_base_disk

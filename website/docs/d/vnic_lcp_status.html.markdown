@@ -3,7 +3,8 @@ subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_lcp_status"
 description: |-
-  An internal MO to check if a LCP can be deployed or not on a specific Server Profile.
+        An internal MO to check if a LCP can be deployed or not on a specific Server Profile.
+
 ---
 
 # Data Source: intersight_vnic_lcp_status

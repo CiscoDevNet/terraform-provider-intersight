@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_io_card_operation"
 description: |-
-  Models the configurable properties of a iomodule in Intersight.
+        Models the configurable properties of a iomodule in Intersight.
+
 ---
 
 # Data Source: intersight_equipment_io_card_operation

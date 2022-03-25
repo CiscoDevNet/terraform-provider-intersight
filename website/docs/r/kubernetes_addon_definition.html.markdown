@@ -3,7 +3,8 @@ subcategory: "kubernetes"
 layout: "intersight"
 page_title: "Intersight: intersight_kubernetes_addon_definition"
 description: |-
-  An addon that can be added to any Kubernetes cluster.
+        An addon that can be added to any Kubernetes cluster.
+
 ---
 
 # Resource: intersight_kubernetes_addon_definition

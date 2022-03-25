@@ -3,7 +3,8 @@ subcategory: "cloud"
 layout: "intersight"
 page_title: "Intersight: intersight_cloud_tfc_workspace"
 description: |-
-  Terraform workspace which represents running infrastructure managed by Terraform.
+        Terraform workspace which represents running infrastructure managed by Terraform.
+
 ---
 
 # Data Source: intersight_cloud_tfc_workspace

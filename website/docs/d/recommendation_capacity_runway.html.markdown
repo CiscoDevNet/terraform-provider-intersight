@@ -3,7 +3,8 @@ subcategory: "recommendation"
 layout: "intersight"
 page_title: "Intersight: intersight_recommendation_capacity_runway"
 description: |-
-  Entity representing the new capacity runway based on recommendations.
+        Entity representing the new capacity runway based on recommendations.
+
 ---
 
 # Data Source: intersight_recommendation_capacity_runway

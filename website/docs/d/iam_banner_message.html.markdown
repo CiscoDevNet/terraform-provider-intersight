@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_banner_message"
 description: |-
-  Configuration for the banner message, including title, contents, and display toggle.
+        Configuration for the banner message, including title, contents, and display toggle.
+
 ---
 
 # Data Source: intersight_iam_banner_message

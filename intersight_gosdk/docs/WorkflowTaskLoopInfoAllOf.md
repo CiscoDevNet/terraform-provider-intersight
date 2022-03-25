@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Iteration** | Pointer to **int64** | This specifies the count of iteration for the specific task executed inside the loop. | [optional] 
 **LoopTaskLabel** | Pointer to **string** | Label of the loop task inside which this task is executed. | [optional] 
 **LoopTaskName** | Pointer to **string** | Name of the loop task inside which this task is executed. | [optional] 
-**LoopType** | Pointer to **string** | This specifies the type of loop, Serial or Parallel. * &#x60;Serial&#x60; - The enum specifies the option as Serial where the loop task type is parallel loop. * &#x60;Parallel&#x60; - The enum specifies the option as Parallel where the loop task type is parallel loop. | [optional] [default to "Serial"]
+**LoopType** | Pointer to **string** | This specifies the type of loop, Serial or Parallel. * &#x60;None&#x60; - The enum specifies the option as None which implies this is not a Loop type and this is the default value for loop type. * &#x60;Parallel&#x60; - The enum specifies the option as Parallel where the loop task type is parallel loop. * &#x60;Serial&#x60; - The enum specifies the option as Serial where the loop task type is serial loop. | [optional] [default to "None"]
 
 ## Methods
 

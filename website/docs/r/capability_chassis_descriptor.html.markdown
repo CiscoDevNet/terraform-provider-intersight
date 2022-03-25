@@ -3,7 +3,8 @@ subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_chassis_descriptor"
 description: |-
-  Descriptor that uniquely identifies an chassis enclosure.
+        Descriptor that uniquely identifies an chassis enclosure.
+
 ---
 
 # Resource: intersight_capability_chassis_descriptor

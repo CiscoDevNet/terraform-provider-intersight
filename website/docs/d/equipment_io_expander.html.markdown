@@ -3,7 +3,8 @@ subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_io_expander"
 description: |-
-  I/O expander card which is used as an extension for servers in a Colusa Chassis.
+        I/O expander card which is used as an extension for servers in a Colusa Chassis.
+
 ---
 
 # Data Source: intersight_equipment_io_expander

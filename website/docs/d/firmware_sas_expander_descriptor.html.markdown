@@ -3,7 +3,8 @@ subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_sas_expander_descriptor"
 description: |-
-  Descriptor to uniquely identify a SasExpandar component.
+        Descriptor to uniquely identify a SasExpandar component.
+
 ---
 
 # Data Source: intersight_firmware_sas_expander_descriptor

@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_controller"
 description: |-
-  Storage Controller present in a server.
+        Storage Controller present in a server.
+
 ---
 
 # Data Source: intersight_storage_controller

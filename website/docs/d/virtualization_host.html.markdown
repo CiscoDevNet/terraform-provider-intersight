@@ -3,7 +3,8 @@ subcategory: "virtualization"
 layout: "intersight"
 page_title: "Intersight: intersight_virtualization_host"
 description: |-
-  Depicts operations to control the life cycle of a Hypervisor Host.
+        Depicts operations to control the life cycle of a Hypervisor Host.
+
 ---
 
 # Data Source: intersight_virtualization_host

@@ -199,6 +199,11 @@ func dataSourceEtherPhysicalPort() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"name": {
+			Description: "Name of the Physical Port.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"object_type": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
@@ -796,6 +801,11 @@ func dataSourceEtherPhysicalPort() *schema.Resource {
 		},
 		"moid": {
 			Description: "The unique identifier of this Managed Object instance.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"name": {
+			Description: "Name of the Physical Port.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1441,6 +1451,11 @@ func dataSourceEtherPhysicalPortRead(c context.Context, d *schema.ResourceData, 
 		o.SetMoid(x)
 	}
 
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
+	}
+
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -1944,6 +1959,7 @@ func dataSourceEtherPhysicalPortRead(c context.Context, d *schema.ResourceData, 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["mode"] = (s.GetMode())
 				temp["moid"] = (s.GetMoid())
+				temp["name"] = (s.GetName())
 				temp["object_type"] = (s.GetObjectType())
 				temp["oper_speed"] = (s.GetOperSpeed())
 				temp["oper_state"] = (s.GetOperState())

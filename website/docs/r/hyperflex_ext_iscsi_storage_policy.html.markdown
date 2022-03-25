@@ -3,7 +3,8 @@ subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_ext_iscsi_storage_policy"
 description: |-
-  A policy specifying external storage connectivity information via Fabric attached FCoE storage.
+        A policy specifying external storage connectivity information via Fabric attached FCoE storage.
+
 ---
 
 # Resource: intersight_hyperflex_ext_iscsi_storage_policy

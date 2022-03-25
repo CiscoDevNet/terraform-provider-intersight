@@ -3,7 +3,8 @@ subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_solution_action_definition"
 description: |-
-  Definition to capture the details needed to execute an action on the solution.
+        Definition to capture the details needed to execute an action on the solution.
+
 ---
 
 # Data Source: intersight_workflow_solution_action_definition
@@ -24,4 +25,5 @@ The following arguments can be used to get data of already created objects in In
 * `name`:(string) The name for this action definition. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:) or an underscore (_). Name of the action must be unique within a solution definition. 
 * `periodicity`:(int) Value in seconds to specify the periodicity of the workflows. A zero value indicate the workflow will not execute periodically. A non-zero value indicate, the workflow will be executed periodically with this periodicity. 
 * `shared_scope`:(string) Intersight provides pre-built workflows, tasks and policies to end users through global catalogs.Objects that are made available through global catalogs are said to have a 'shared' ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. 
+* `upgraded_moid`:(string) Stores the upgraded Moid for help during future lookups. 
  

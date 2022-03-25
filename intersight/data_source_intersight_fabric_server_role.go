@@ -64,8 +64,13 @@ func dataSourceFabricServerRole() *schema.Resource {
 				},
 			},
 		},
+		"auto_negotiation_disabled": {
+			Description: "Auto negotiation configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 100G speed port on UCS-FI-6536 and should be set as True.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"class_id": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -76,6 +81,11 @@ func dataSourceFabricServerRole() *schema.Resource {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"fec": {
+			Description: "Forward error correction configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 25G speed ports on UCS-FI-6454/UCS-FI-64108 and should be set as Cl74.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -90,7 +100,7 @@ func dataSourceFabricServerRole() *schema.Resource {
 			Optional:    true,
 		},
 		"object_type": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -399,8 +409,13 @@ func dataSourceFabricServerRole() *schema.Resource {
 				},
 			},
 		},
+		"auto_negotiation_disabled": {
+			Description: "Auto negotiation configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 100G speed port on UCS-FI-6536 and should be set as True.",
+			Type:        schema.TypeBool,
+			Optional:    true,
+		},
 		"class_id": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -411,6 +426,11 @@ func dataSourceFabricServerRole() *schema.Resource {
 		},
 		"domain_group_moid": {
 			Description: "The DomainGroup ID for this managed object.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"fec": {
+			Description: "Forward error correction configuration for server port. This configuration is required only for FEX Model N9K-C93180YC-FX3 connected with 25G speed ports on UCS-FI-6454/UCS-FI-64108 and should be set as Cl74.\n* `Auto` - Forward error correction option 'Auto'.\n* `Cl91` - Forward error correction option 'cl91'.\n* `Cl74` - Forward error correction option 'cl74'.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -425,7 +445,7 @@ func dataSourceFabricServerRole() *schema.Resource {
 			Optional:    true,
 		},
 		"object_type": {
-			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -760,6 +780,11 @@ func dataSourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, m
 		o.SetAncestors(x)
 	}
 
+	if v, ok := d.GetOkExists("auto_negotiation_disabled"); ok {
+		x := (v.(bool))
+		o.SetAutoNegotiationDisabled(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -773,6 +798,11 @@ func dataSourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, m
 	if v, ok := d.GetOk("domain_group_moid"); ok {
 		x := (v.(string))
 		o.SetDomainGroupMoid(x)
+	}
+
+	if v, ok := d.GetOk("fec"); ok {
+		x := (v.(string))
+		o.SetFec(x)
 	}
 
 	if v, ok := d.GetOk("mod_time"); ok {
@@ -1090,10 +1120,12 @@ func dataSourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, m
 				temp["aggregate_port_id"] = (s.GetAggregatePortId())
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["auto_negotiation_disabled"] = (s.GetAutoNegotiationDisabled())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["fec"] = (s.GetFec())
 
 				temp["mod_time"] = (s.GetModTime()).String()
 				temp["moid"] = (s.GetMoid())

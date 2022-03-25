@@ -3,7 +3,8 @@ subcategory: "uuidpool"
 layout: "intersight"
 page_title: "Intersight: intersight_uuidpool_pool"
 description: |-
-  Pool represents a collection of UUID items that can be allocated to server profiles.
+        Pool represents a collection of UUID items that can be allocated to server profiles.
+
 ---
 
 # Data Source: intersight_uuidpool_pool

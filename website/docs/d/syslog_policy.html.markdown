@@ -3,7 +3,8 @@ subcategory: "syslog"
 layout: "intersight"
 page_title: "Intersight: intersight_syslog_policy"
 description: |-
-  The syslog policy configure the syslog server to receive CIMC log entries.
+        The syslog policy configure the syslog server to receive CIMC log entries.
+
 ---
 
 # Data Source: intersight_syslog_policy

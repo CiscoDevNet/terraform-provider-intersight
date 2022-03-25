@@ -10,17 +10,23 @@ Name | Type | Description | Notes
 **DeviceId** | Pointer to **int64** | The device id of the graphics card. | [optional] [readonly] 
 **ExpanderSlot** | Pointer to **string** | The expander slot information of the card. | [optional] [readonly] 
 **FirmwareVersion** | Pointer to **string** | The firmware version of the graphics card. | [optional] [readonly] 
+**GpuId** | Pointer to **string** | The identifier of the graphics processor unit. | [optional] [readonly] 
 **Mode** | Pointer to **string** | The current mode of the graphics card. | [optional] [readonly] 
 **NumGpus** | Pointer to **string** | The number of controllers under each card. | [optional] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | The current operational state of the graphics card. | [optional] [readonly] 
 **PciAddress** | Pointer to **string** | The PCI address of the graphics card. | [optional] [readonly] 
 **PciAddressList** | Pointer to **string** | This list contains the PCI address of all controllers for corresponding card. | [optional] [readonly] 
 **PciSlot** | Pointer to **string** | The PCI slot name of the graphics card. | [optional] [readonly] 
+**SubDeviceId** | Pointer to **int64** | The sub device id of the graphics processor unit. | [optional] [readonly] 
+**SubVendorId** | Pointer to **int64** | The sub vendor id of the graphics processor unit. | [optional] [readonly] 
+**VendorId** | Pointer to **int64** | The vendor id of the graphics processor unit. | [optional] [readonly] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](ComputeBladeRelationship.md) |  | [optional] 
 **ComputeBoard** | Pointer to [**ComputeBoardRelationship**](ComputeBoardRelationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](ComputeRackUnitRelationship.md) |  | [optional] 
 **GraphicsControllers** | Pointer to [**[]GraphicsControllerRelationship**](GraphicsControllerRelationship.md) | An array of relationships to graphicsController resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
+**PciDevice** | Pointer to [**PciDeviceRelationship**](PciDeviceRelationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) |  | [optional] 
 **RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
 
@@ -183,6 +189,31 @@ SetFirmwareVersion sets FirmwareVersion field to given value.
 
 HasFirmwareVersion returns a boolean if a field has been set.
 
+### GetGpuId
+
+`func (o *GraphicsCard) GetGpuId() string`
+
+GetGpuId returns the GpuId field if non-nil, zero value otherwise.
+
+### GetGpuIdOk
+
+`func (o *GraphicsCard) GetGpuIdOk() (*string, bool)`
+
+GetGpuIdOk returns a tuple with the GpuId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpuId
+
+`func (o *GraphicsCard) SetGpuId(v string)`
+
+SetGpuId sets GpuId field to given value.
+
+### HasGpuId
+
+`func (o *GraphicsCard) HasGpuId() bool`
+
+HasGpuId returns a boolean if a field has been set.
+
 ### GetMode
 
 `func (o *GraphicsCard) GetMode() string`
@@ -233,6 +264,41 @@ SetNumGpus sets NumGpus field to given value.
 
 HasNumGpus returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *GraphicsCard) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *GraphicsCard) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *GraphicsCard) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *GraphicsCard) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *GraphicsCard) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *GraphicsCard) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetOperState
 
 `func (o *GraphicsCard) GetOperState() string`
@@ -332,6 +398,81 @@ SetPciSlot sets PciSlot field to given value.
 `func (o *GraphicsCard) HasPciSlot() bool`
 
 HasPciSlot returns a boolean if a field has been set.
+
+### GetSubDeviceId
+
+`func (o *GraphicsCard) GetSubDeviceId() int64`
+
+GetSubDeviceId returns the SubDeviceId field if non-nil, zero value otherwise.
+
+### GetSubDeviceIdOk
+
+`func (o *GraphicsCard) GetSubDeviceIdOk() (*int64, bool)`
+
+GetSubDeviceIdOk returns a tuple with the SubDeviceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubDeviceId
+
+`func (o *GraphicsCard) SetSubDeviceId(v int64)`
+
+SetSubDeviceId sets SubDeviceId field to given value.
+
+### HasSubDeviceId
+
+`func (o *GraphicsCard) HasSubDeviceId() bool`
+
+HasSubDeviceId returns a boolean if a field has been set.
+
+### GetSubVendorId
+
+`func (o *GraphicsCard) GetSubVendorId() int64`
+
+GetSubVendorId returns the SubVendorId field if non-nil, zero value otherwise.
+
+### GetSubVendorIdOk
+
+`func (o *GraphicsCard) GetSubVendorIdOk() (*int64, bool)`
+
+GetSubVendorIdOk returns a tuple with the SubVendorId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubVendorId
+
+`func (o *GraphicsCard) SetSubVendorId(v int64)`
+
+SetSubVendorId sets SubVendorId field to given value.
+
+### HasSubVendorId
+
+`func (o *GraphicsCard) HasSubVendorId() bool`
+
+HasSubVendorId returns a boolean if a field has been set.
+
+### GetVendorId
+
+`func (o *GraphicsCard) GetVendorId() int64`
+
+GetVendorId returns the VendorId field if non-nil, zero value otherwise.
+
+### GetVendorIdOk
+
+`func (o *GraphicsCard) GetVendorIdOk() (*int64, bool)`
+
+GetVendorIdOk returns a tuple with the VendorId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVendorId
+
+`func (o *GraphicsCard) SetVendorId(v int64)`
+
+SetVendorId sets VendorId field to given value.
+
+### HasVendorId
+
+`func (o *GraphicsCard) HasVendorId() bool`
+
+HasVendorId returns a boolean if a field has been set.
 
 ### GetComputeBlade
 
@@ -467,6 +608,31 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 `func (o *GraphicsCard) HasInventoryDeviceInfo() bool`
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
+
+### GetPciDevice
+
+`func (o *GraphicsCard) GetPciDevice() PciDeviceRelationship`
+
+GetPciDevice returns the PciDevice field if non-nil, zero value otherwise.
+
+### GetPciDeviceOk
+
+`func (o *GraphicsCard) GetPciDeviceOk() (*PciDeviceRelationship, bool)`
+
+GetPciDeviceOk returns a tuple with the PciDevice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPciDevice
+
+`func (o *GraphicsCard) SetPciDevice(v PciDeviceRelationship)`
+
+SetPciDevice sets PciDevice field to given value.
+
+### HasPciDevice
+
+`func (o *GraphicsCard) HasPciDevice() bool`
+
+HasPciDevice returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

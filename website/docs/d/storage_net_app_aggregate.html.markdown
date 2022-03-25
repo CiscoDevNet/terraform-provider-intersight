@@ -3,7 +3,8 @@ subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_net_app_aggregate"
 description: |-
-  NetApp aggregate is a collection of disks arranged into one or more RAID groups.
+        NetApp aggregate is a collection of disks arranged into one or more RAID groups.
+
 ---
 
 # Data Source: intersight_storage_net_app_aggregate

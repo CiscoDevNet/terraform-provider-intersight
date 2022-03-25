@@ -3,7 +3,8 @@ subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_node_status"
 description: |-
-  Status of an Intersight Appliance node.
+        Status of an Intersight Appliance node.
+
 ---
 
 # Data Source: intersight_appliance_node_status

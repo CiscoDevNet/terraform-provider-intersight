@@ -3,7 +3,8 @@ subcategory: "inventory"
 layout: "intersight"
 page_title: "Intersight: intersight_inventory_dn_mo_binding"
 description: |-
-  DnMoBinding provides a binding between a Intersight MO and a UCSM MO which has a DN.
+        DnMoBinding provides a binding between a Intersight MO and a UCSM MO which has a DN.
+
 ---
 
 # Data Source: intersight_inventory_dn_mo_binding

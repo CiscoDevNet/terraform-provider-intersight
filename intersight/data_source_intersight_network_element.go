@@ -143,10 +143,59 @@ func dataSourceNetworkElement() *schema.Resource {
 				},
 			},
 		},
+		"chassis": {
+			Description: "Chassis IP of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"conf_mod_ts": {
+			Description: "Configuration modified timestamp of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"conf_mod_ts_backup": {
+			Description: "Configuration modified backup timestamp of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"console": {
+			Description: "An array of relationships to consoleConsoleConfig resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
@@ -227,6 +276,40 @@ func dataSourceNetworkElement() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"feature_control": {
+			Description: "An array of relationships to networkFeatureControl resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"inband_ip_address": {
 			Description: "The IP address of the network Element inband management interface.",
 			Type:        schema.TypeString,
@@ -247,10 +330,78 @@ func dataSourceNetworkElement() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"interface_list": {
+			Description: "An array of relationships to networkInterfaceList resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"inventory_device_info": {
 			Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"license_file": {
+			Description: "An array of relationships to networkLicenseFile resources.",
+			Type:        schema.TypeList,
 			Optional:    true,
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
@@ -547,6 +698,11 @@ func dataSourceNetworkElement() *schema.Resource {
 				},
 			},
 		},
+		"part_number": {
+			Description: "Part number of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -624,6 +780,40 @@ func dataSourceNetworkElement() *schema.Resource {
 			Description: "A reference to a equipmentFru resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"processor_unit": {
+			Description: "An array of relationships to processorUnit resources.",
+			Type:        schema.TypeList,
 			Optional:    true,
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
@@ -744,6 +934,11 @@ func dataSourceNetworkElement() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"status": {
+			Description: "The status of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"storage_items": {
 			Description: "An array of relationships to storageItem resources.",
 			Type:        schema.TypeList,
@@ -778,8 +973,52 @@ func dataSourceNetworkElement() *schema.Resource {
 				},
 			},
 		},
+		"supervisor_card": {
+			Description: "An array of relationships to networkSupervisorCard resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"switch_id": {
 			Description: "The Switch Id of the network Element.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"switch_type": {
+			Description: "The Switch type that the network element is a part of.\n* `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices.\n* `NexusDevice` - Switch type of Nexus devices.\n* `MDSDevice` - Switch type of Nexus MDS devices.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"system_up_time": {
+			Description: "System up time of the switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -891,6 +1130,11 @@ func dataSourceNetworkElement() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"nr_version": {
+			Description: "Firmware version of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -993,6 +1237,40 @@ func dataSourceNetworkElement() *schema.Resource {
 					},
 					"version_type": {
 						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"vrf": {
+			Description: "An array of relationships to networkVrf resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -1128,10 +1406,59 @@ func dataSourceNetworkElement() *schema.Resource {
 				},
 			},
 		},
+		"chassis": {
+			Description: "Chassis IP of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 			Type:        schema.TypeString,
 			Optional:    true,
+		},
+		"conf_mod_ts": {
+			Description: "Configuration modified timestamp of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"conf_mod_ts_backup": {
+			Description: "Configuration modified backup timestamp of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"console": {
+			Description: "An array of relationships to consoleConsoleConfig resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
 		},
 		"create_time": {
 			Description: "The time when this managed object was created.",
@@ -1212,6 +1539,40 @@ func dataSourceNetworkElement() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"feature_control": {
+			Description: "An array of relationships to networkFeatureControl resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"inband_ip_address": {
 			Description: "The IP address of the network Element inband management interface.",
 			Type:        schema.TypeString,
@@ -1232,10 +1593,78 @@ func dataSourceNetworkElement() *schema.Resource {
 			Type:        schema.TypeInt,
 			Optional:    true,
 		},
+		"interface_list": {
+			Description: "An array of relationships to networkInterfaceList resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"inventory_device_info": {
 			Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"license_file": {
+			Description: "An array of relationships to networkLicenseFile resources.",
+			Type:        schema.TypeList,
 			Optional:    true,
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
@@ -1532,6 +1961,11 @@ func dataSourceNetworkElement() *schema.Resource {
 				},
 			},
 		},
+		"part_number": {
+			Description: "Part number of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"permission_resources": {
 			Description: "An array of relationships to moBaseMo resources.",
 			Type:        schema.TypeList,
@@ -1609,6 +2043,40 @@ func dataSourceNetworkElement() *schema.Resource {
 			Description: "A reference to a equipmentFru resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 			Type:        schema.TypeList,
 			MaxItems:    1,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"processor_unit": {
+			Description: "An array of relationships to processorUnit resources.",
+			Type:        schema.TypeList,
 			Optional:    true,
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
@@ -1729,6 +2197,11 @@ func dataSourceNetworkElement() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"status": {
+			Description: "The status of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"storage_items": {
 			Description: "An array of relationships to storageItem resources.",
 			Type:        schema.TypeList,
@@ -1763,8 +2236,52 @@ func dataSourceNetworkElement() *schema.Resource {
 				},
 			},
 		},
+		"supervisor_card": {
+			Description: "An array of relationships to networkSupervisorCard resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
 		"switch_id": {
 			Description: "The Switch Id of the network Element.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"switch_type": {
+			Description: "The Switch type that the network element is a part of.\n* `FabricInterconnect` - The default Switch type of UCSM and IMM mode devices.\n* `NexusDevice` - Switch type of Nexus devices.\n* `MDSDevice` - Switch type of Nexus MDS devices.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
+		"system_up_time": {
+			Description: "System up time of the switch.",
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
@@ -1876,6 +2393,11 @@ func dataSourceNetworkElement() *schema.Resource {
 			Type:        schema.TypeString,
 			Optional:    true,
 		},
+		"nr_version": {
+			Description: "Firmware version of the switch.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
 			Type:        schema.TypeList,
@@ -1978,6 +2500,40 @@ func dataSourceNetworkElement() *schema.Resource {
 					},
 					"version_type": {
 						Description: "Specifies type of version. Currently the only supported value is \"Configured\"\nthat is used to keep track of snapshots of policies and profiles that are intended\nto be configured to target endpoints.\n* `Modified` - Version created every time an object is modified.\n* `Configured` - Version created every time an object is configured to the service profile.\n* `Deployed` - Version created for objects related to a service profile when it is deployed.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+				},
+			},
+		},
+		"vrf": {
+			Description: "An array of relationships to networkVrf resources.",
+			Type:        schema.TypeList,
+			Optional:    true,
+			Elem: &schema.Resource{
+				Schema: map[string]*schema.Schema{
+					"additional_properties": {
+						Type:             schema.TypeString,
+						Optional:         true,
+						DiffSuppressFunc: SuppressDiffAdditionProps,
+					},
+					"class_id": {
+						Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"moid": {
+						Description: "The Moid of the referenced REST resource.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"object_type": {
+						Description: "The fully-qualified name of the remote type referred by this relationship.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"selector": {
+						Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -2153,9 +2709,64 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		o.SetCards(x)
 	}
 
+	if v, ok := d.GetOk("chassis"); ok {
+		x := (v.(string))
+		o.SetChassis(x)
+	}
+
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
+	}
+
+	if v, ok := d.GetOk("conf_mod_ts"); ok {
+		x := (v.(string))
+		o.SetConfModTs(x)
+	}
+
+	if v, ok := d.GetOk("conf_mod_ts_backup"); ok {
+		x := (v.(string))
+		o.SetConfModTsBackup(x)
+	}
+
+	if v, ok := d.GetOk("console"); ok {
+		x := make([]models.ConsoleConsoleConfigRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsConsoleConsoleConfigRelationship(o))
+		}
+		o.SetConsole(x)
 	}
 
 	if v, ok := d.GetOk("create_time"); ok {
@@ -2243,6 +2854,46 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		o.SetFcSwitchingMode(x)
 	}
 
+	if v, ok := d.GetOk("feature_control"); ok {
+		x := make([]models.NetworkFeatureControlRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsNetworkFeatureControlRelationship(o))
+		}
+		o.SetFeatureControl(x)
+	}
+
 	if v, ok := d.GetOk("inband_ip_address"); ok {
 		x := (v.(string))
 		o.SetInbandIpAddress(x)
@@ -2261,6 +2912,46 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 	if v, ok := d.GetOkExists("inband_vlan"); ok {
 		x := int64(v.(int))
 		o.SetInbandVlan(x)
+	}
+
+	if v, ok := d.GetOk("interface_list"); ok {
+		x := make([]models.NetworkInterfaceListRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsNetworkInterfaceListRelationship(o))
+		}
+		o.SetInterfaceList(x)
 	}
 
 	if v, ok := d.GetOk("inventory_device_info"); ok {
@@ -2304,6 +2995,46 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 			x := p[0]
 			o.SetInventoryDeviceInfo(x)
 		}
+	}
+
+	if v, ok := d.GetOk("license_file"); ok {
+		x := make([]models.NetworkLicenseFileRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsNetworkLicenseFileRelationship(o))
+		}
+		o.SetLicenseFile(x)
 	}
 
 	if v, ok := d.GetOk("management_controller"); ok {
@@ -2617,6 +3348,11 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
+	if v, ok := d.GetOk("part_number"); ok {
+		x := (v.(string))
+		o.SetPartNumber(x)
+	}
+
 	if v, ok := d.GetOk("permission_resources"); ok {
 		x := make([]models.MoBaseMoRelationship, 0)
 		s := v.([]interface{})
@@ -2745,6 +3481,46 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
+	if v, ok := d.GetOk("processor_unit"); ok {
+		x := make([]models.ProcessorUnitRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsProcessorUnitRelationship(o))
+		}
+		o.SetProcessorUnit(x)
+	}
+
 	if v, ok := d.GetOk("psus"); ok {
 		x := make([]models.EquipmentPsuRelationship, 0)
 		s := v.([]interface{})
@@ -2848,6 +3624,11 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		o.SetSharedScope(x)
 	}
 
+	if v, ok := d.GetOk("status"); ok {
+		x := (v.(string))
+		o.SetStatus(x)
+	}
+
 	if v, ok := d.GetOk("storage_items"); ok {
 		x := make([]models.StorageItemRelationship, 0)
 		s := v.([]interface{})
@@ -2888,9 +3669,59 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		o.SetStorageItems(x)
 	}
 
+	if v, ok := d.GetOk("supervisor_card"); ok {
+		x := make([]models.NetworkSupervisorCardRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsNetworkSupervisorCardRelationship(o))
+		}
+		o.SetSupervisorCard(x)
+	}
+
 	if v, ok := d.GetOk("switch_id"); ok {
 		x := (v.(string))
 		o.SetSwitchId(x)
+	}
+
+	if v, ok := d.GetOk("switch_type"); ok {
+		x := (v.(string))
+		o.SetSwitchType(x)
+	}
+
+	if v, ok := d.GetOk("system_up_time"); ok {
+		x := (v.(string))
+		o.SetSystemUpTime(x)
 	}
 
 	if v, ok := d.GetOk("tags"); ok {
@@ -3027,6 +3858,11 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		o.SetVendor(x)
 	}
 
+	if v, ok := d.GetOk("nr_version"); ok {
+		x := (v.(string))
+		o.SetVersion(x)
+	}
+
 	if v, ok := d.GetOk("version_context"); ok {
 		p := make([]models.MoVersionContext, 0, 1)
 		s := v.([]interface{})
@@ -3101,6 +3937,46 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		}
 	}
 
+	if v, ok := d.GetOk("vrf"); ok {
+		x := make([]models.NetworkVrfRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsNetworkVrfRelationship(o))
+		}
+		o.SetVrf(x)
+	}
+
 	data, err := o.MarshalJSON()
 	if err != nil {
 		return diag.Errorf("json marshal of NetworkElement object failed with error : %s", err.Error())
@@ -3148,7 +4024,12 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["available_memory"] = (s.GetAvailableMemory())
 
 				temp["cards"] = flattenListEquipmentSwitchCardRelationship(s.GetCards(), d)
+				temp["chassis"] = (s.GetChassis())
 				temp["class_id"] = (s.GetClassId())
+				temp["conf_mod_ts"] = (s.GetConfModTs())
+				temp["conf_mod_ts_backup"] = (s.GetConfModTsBackup())
+
+				temp["console"] = flattenListConsoleConsoleConfigRelationship(s.GetConsole(), d)
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["device_mo_id"] = (s.GetDeviceMoId())
@@ -3161,12 +4042,18 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["fault_summary"] = (s.GetFaultSummary())
 				temp["fc_mode"] = (s.GetFcMode())
 				temp["fc_switching_mode"] = (s.GetFcSwitchingMode())
+
+				temp["feature_control"] = flattenListNetworkFeatureControlRelationship(s.GetFeatureControl(), d)
 				temp["inband_ip_address"] = (s.GetInbandIpAddress())
 				temp["inband_ip_gateway"] = (s.GetInbandIpGateway())
 				temp["inband_ip_mask"] = (s.GetInbandIpMask())
 				temp["inband_vlan"] = (s.GetInbandVlan())
 
+				temp["interface_list"] = flattenListNetworkInterfaceListRelationship(s.GetInterfaceList(), d)
+
 				temp["inventory_device_info"] = flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)
+
+				temp["license_file"] = flattenListNetworkLicenseFileRelationship(s.GetLicenseFile(), d)
 
 				temp["management_controller"] = flattenMapManagementControllerRelationship(s.GetManagementController(), d)
 
@@ -3196,6 +4083,7 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
+				temp["part_number"] = (s.GetPartNumber())
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 
@@ -3204,6 +4092,8 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 
 				temp["previous_fru"] = flattenMapEquipmentFruRelationship(s.GetPreviousFru(), d)
 
+				temp["processor_unit"] = flattenListProcessorUnitRelationship(s.GetProcessorUnit(), d)
+
 				temp["psus"] = flattenListEquipmentPsuRelationship(s.GetPsus(), d)
 
 				temp["registered_device"] = flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)
@@ -3211,9 +4101,14 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 				temp["rn"] = (s.GetRn())
 				temp["serial"] = (s.GetSerial())
 				temp["shared_scope"] = (s.GetSharedScope())
+				temp["status"] = (s.GetStatus())
 
 				temp["storage_items"] = flattenListStorageItemRelationship(s.GetStorageItems(), d)
+
+				temp["supervisor_card"] = flattenListNetworkSupervisorCardRelationship(s.GetSupervisorCard(), d)
 				temp["switch_id"] = (s.GetSwitchId())
+				temp["switch_type"] = (s.GetSwitchType())
+				temp["system_up_time"] = (s.GetSystemUpTime())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
 				temp["thermal"] = (s.GetThermal())
@@ -3223,8 +4118,11 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 
 				temp["ucsm_running_firmware"] = flattenMapFirmwareRunningFirmwareRelationship(s.GetUcsmRunningFirmware(), d)
 				temp["vendor"] = (s.GetVendor())
+				temp["nr_version"] = (s.GetVersion())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
+
+				temp["vrf"] = flattenListNetworkVrfRelationship(s.GetVrf(), d)
 				networkElementResults[j] = temp
 				j += 1
 			}

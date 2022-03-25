@@ -3,7 +3,8 @@ subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_local_user_password_policy"
 description: |-
-  Configuration for LocalUserPasswordPolicy.
+        Configuration for LocalUserPasswordPolicy.
+
 ---
 
 # Data Source: intersight_iam_local_user_password_policy

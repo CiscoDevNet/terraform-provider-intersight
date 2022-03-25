@@ -19,7 +19,6 @@ Name | Type | Description | Notes
 **FailureReason** | Pointer to **string** | Reason for the failure when cluster is in failed state. | [optional] 
 **HxVersion** | Pointer to **string** | The HyperFlex Data or Application Platform version of this cluster. | [optional] [readonly] 
 **HypervisorBuild** | Pointer to **string** | Hypervisor version of HyperFlex compute cluster along with build number. | [optional] 
-**HypervisorVersion** | Pointer to **string** | The version of hypervisor running on this cluster. | [optional] [readonly] 
 **ManagementIpAddress** | Pointer to **string** | Management IP Address of the cluster. | [optional] 
 **MemoryAllocation** | Pointer to [**NullableVirtualizationMemoryAllocation**](VirtualizationMemoryAllocation.md) |  | [optional] 
 **StorageCapacity** | Pointer to **int64** | The storage capacity in this cluster. | [optional] [readonly] 
@@ -424,31 +423,6 @@ SetHypervisorBuild sets HypervisorBuild field to given value.
 `func (o *VirtualizationIweClusterAllOf) HasHypervisorBuild() bool`
 
 HasHypervisorBuild returns a boolean if a field has been set.
-
-### GetHypervisorVersion
-
-`func (o *VirtualizationIweClusterAllOf) GetHypervisorVersion() string`
-
-GetHypervisorVersion returns the HypervisorVersion field if non-nil, zero value otherwise.
-
-### GetHypervisorVersionOk
-
-`func (o *VirtualizationIweClusterAllOf) GetHypervisorVersionOk() (*string, bool)`
-
-GetHypervisorVersionOk returns a tuple with the HypervisorVersion field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHypervisorVersion
-
-`func (o *VirtualizationIweClusterAllOf) SetHypervisorVersion(v string)`
-
-SetHypervisorVersion sets HypervisorVersion field to given value.
-
-### HasHypervisorVersion
-
-`func (o *VirtualizationIweClusterAllOf) HasHypervisorVersion() bool`
-
-HasHypervisorVersion returns a boolean if a field has been set.
 
 ### GetManagementIpAddress
 
