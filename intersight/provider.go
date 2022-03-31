@@ -58,7 +58,8 @@ func configureProvider(c context.Context, d *schema.ResourceData) (interface{}, 
 		return nil, diag.Errorf(err.Error())
 	}
 	config.ApiClient = client.GetApiClient(config.ctx, true)
-	diag.FromErr("Printing the value of InsecureSkipVerify")
-	diag.FromErr("%v", config.ApiClient.cfg.HTTPClient.Transport.(*http.Transport).TLSClientConfig.InsecureSkipVerify)
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+	log.Printf("Printing the value of InsecureSkipVerify")
+	log.Printf("%v", config.ApiClient.cfg.HTTPClient.Transport.(*http.Transport).TLSClientConfig.InsecureSkipVerify)
 	return &config, de
 }
