@@ -3,7 +3,8 @@ package intersight
 import (
 	"context"
 	"strings"
-
+	"log"
+        "net/http"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -57,5 +58,6 @@ func configureProvider(c context.Context, d *schema.ResourceData) (interface{}, 
 		return nil, diag.Errorf(err.Error())
 	}
 	config.ApiClient = client.GetApiClient(config.ctx, true)
+	log.Printf("%v", config.ApiClient.cfg.HTTPClient.Transport.(*http.Transport).TLSClientConfig.InsecureSkipVerify)
 	return &config, de
 }
