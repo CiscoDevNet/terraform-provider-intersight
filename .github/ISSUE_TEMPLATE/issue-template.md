@@ -8,10 +8,9 @@ assignees: ''
 
 #### Bug Report Checklist
 
-- [ ] Have you provided a full/minimal spec to reproduce the issue?
+- [ ] Have you provided a full/minimal configuration to reproduce the issue?
 - [ ] Have you [tested with the latest master] to confirm the issue still exists?
-- [ ] Have you searched for related issues/PRs?
-- [ ] What's the actual output vs expected output?
+- [ ] Have you provided the terraform console logs with environment variable set to TF_LOG=trace?
 
 <!--
 Please follow the issue template below for issue reports.
@@ -30,7 +29,7 @@ Please follow the issue template below for issue reports.
 <!-- if it is a bug, .tf file to reproduce it
 If you post the code inline, please wrap it with
 ``` hcl
-(here your code)
+(your code here)
 ```
   -->
 
@@ -38,12 +37,8 @@ If you post the code inline, please wrap it with
 
 <!-- 
     Post the actual output from the execution.
--->
-
-##### Expected behavior
-
-<!--
-    what is the expected output/behavior?
+    Run the terraform commands after setting the follow environment variable for detail logging.
+    export TF_LOG=trace
 -->
 
 ##### Related issues/PRs
