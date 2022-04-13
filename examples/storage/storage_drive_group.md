@@ -2,7 +2,6 @@
 
 ```hcl
 resource "intersight_storage_drive_group" "tf_drive_gp" {
-  type       = 0
   name       = "tf_drive_gp"
   raid_level = "Raid0"
   manual_drive_group {
@@ -36,13 +35,13 @@ resource "intersight_storage_drive_group" "tf_drive_gp" {
       drive_cache   = "Default"
     }
   }
-   storage_policy {
-     moid = var.tf_storage_policy
-   }
+  storage_policy {
+    moid = var.tf_storage_policy
+  }
 }
 
-variable "tf_storage_policy"{
-  type = string
+variable "tf_storage_policy" {
+  type        = string
   description = "value for tf_storage_policy"
 }
 ```

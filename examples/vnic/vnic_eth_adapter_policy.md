@@ -28,8 +28,7 @@ resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
     mode            = "MSI"
   }
   completion_queue_settings {
-    nr_count  = 4
-    ring_size = 1
+    nr_count = 4
   }
   rx_queue_settings {
     nr_count  = 4
@@ -48,7 +47,7 @@ resource "intersight_vnic_eth_adapter_policy" "v_eth_adapter1" {
 }
 
 variable "organization" {
-   type = string
-   description = "<value for organization>"
- }
+  type        = string
+  description = "<value for organization>"
+}
 ```

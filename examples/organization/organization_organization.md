@@ -7,23 +7,21 @@ resource "intersight_organization_organization" "organization1" {
     object_type = "iam.Account"
     moid        = var.account
   }
-  resource_groups = [{
-    moid                  = var.resource_group
-    object_type           = "resource.Group"
-    additional_properties = ""
-    class_id              = "resource.Group"
-    selector              = null
-  }]
+  resource_groups {
+    moid        = var.resource_group
+    object_type = "resource.Group"
+    class_id    = "resource.Group"
+  }
 
 }
 
-variable "account"{
-  type = string
+variable "account" {
+  type        = string
   description = "Moid of iam.Account"
 }
 
-variable "resource_group"{
-  type = string
+variable "resource_group" {
+  type        = string
   description = "Moid of resource.Group"
 }
 ```

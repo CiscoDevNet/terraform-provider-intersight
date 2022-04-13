@@ -36,11 +36,9 @@ resource "intersight_vnic_fc_adapter_policy" "v_fc_adapter1" {
   resource_allocation_timeout = 100000
 
   rx_queue_settings {
-    nr_count  = 1
     ring_size = 128
   }
   tx_queue_settings {
-    nr_count  = 1
     ring_size = 128
   }
 
@@ -53,7 +51,7 @@ resource "intersight_vnic_fc_adapter_policy" "v_fc_adapter1" {
 }
 
 variable "organization" {
-   type = string
-   description = "<value for organization>"
- }
+  type        = string
+  description = "<value for organization>"
+}
 ```
