@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.SiteInventory"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.SiteInventory"]
 **Apps** | Pointer to **[]string** |  | [optional] 
+**ConnectivityAnalysisCount** | Pointer to **int64** | Returns the total number of connectivity Analysis run for EPs in NDFC Fabrics. | [optional] 
 **FirmwareVersion** | Pointer to **string** | Version of the specified site. | [optional] 
 **InstallType** | Pointer to **string** | Fine-grained type DCNM either SAN or LAN. | [optional] 
 **IpAddress** | Pointer to **[]string** |  | [optional] 
@@ -111,6 +112,31 @@ HasApps returns a boolean if a field has been set.
 `func (o *NiatelemetrySiteInventory) UnsetApps()`
 
 UnsetApps ensures that no value is present for Apps, not even an explicit nil
+### GetConnectivityAnalysisCount
+
+`func (o *NiatelemetrySiteInventory) GetConnectivityAnalysisCount() int64`
+
+GetConnectivityAnalysisCount returns the ConnectivityAnalysisCount field if non-nil, zero value otherwise.
+
+### GetConnectivityAnalysisCountOk
+
+`func (o *NiatelemetrySiteInventory) GetConnectivityAnalysisCountOk() (*int64, bool)`
+
+GetConnectivityAnalysisCountOk returns a tuple with the ConnectivityAnalysisCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectivityAnalysisCount
+
+`func (o *NiatelemetrySiteInventory) SetConnectivityAnalysisCount(v int64)`
+
+SetConnectivityAnalysisCount sets ConnectivityAnalysisCount field to given value.
+
+### HasConnectivityAnalysisCount
+
+`func (o *NiatelemetrySiteInventory) HasConnectivityAnalysisCount() bool`
+
+HasConnectivityAnalysisCount returns a boolean if a field has been set.
+
 ### GetFirmwareVersion
 
 `func (o *NiatelemetrySiteInventory) GetFirmwareVersion() string`

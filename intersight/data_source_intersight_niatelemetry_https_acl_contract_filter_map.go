@@ -727,7 +727,6 @@ func dataSourceNiatelemetryHttpsAclContractFilterMap() *schema.Resource {
 
 func dataSourceNiatelemetryHttpsAclContractFilterMapRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryHttpsAclContractFilterMap{}
@@ -1102,7 +1101,7 @@ func dataSourceNiatelemetryHttpsAclContractFilterMapRead(c context.Context, d *s
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of NiatelemetryHttpsAclContractFilterMap: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of NiatelemetryHttpsAclContractFilterMap: %s", responseErr.Error())
@@ -1119,7 +1118,7 @@ func dataSourceNiatelemetryHttpsAclContractFilterMapRead(c context.Context, d *s
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching NiatelemetryHttpsAclContractFilterMap: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching NiatelemetryHttpsAclContractFilterMap: %s", responseErr.Error())

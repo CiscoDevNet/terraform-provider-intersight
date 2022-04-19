@@ -648,7 +648,6 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 
 func resourceMemoryPersistentMemoryPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewMemoryPersistentMemoryPolicyWithDefaults()
@@ -967,7 +966,7 @@ func resourceMemoryPersistentMemoryPolicyCreate(c context.Context, d *schema.Res
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating MemoryPersistentMemoryPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating MemoryPersistentMemoryPolicy: %s", responseErr.Error())
@@ -978,7 +977,6 @@ func resourceMemoryPersistentMemoryPolicyCreate(c context.Context, d *schema.Res
 }
 func detachMemoryPersistentMemoryPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.MemoryPersistentMemoryPolicy{}
@@ -991,7 +989,7 @@ func detachMemoryPersistentMemoryPolicyProfiles(d *schema.ResourceData, meta int
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -1001,7 +999,6 @@ func detachMemoryPersistentMemoryPolicyProfiles(d *schema.ResourceData, meta int
 
 func resourceMemoryPersistentMemoryPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.MemoryApi.GetMemoryPersistentMemoryPolicyByMoid(conn.ctx, d.Id())
@@ -1014,7 +1011,7 @@ func resourceMemoryPersistentMemoryPolicyRead(c context.Context, d *schema.Resou
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching MemoryPersistentMemoryPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching MemoryPersistentMemoryPolicy: %s", responseErr.Error())
@@ -1123,7 +1120,6 @@ func resourceMemoryPersistentMemoryPolicyRead(c context.Context, d *schema.Resou
 
 func resourceMemoryPersistentMemoryPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.MemoryPersistentMemoryPolicy{}
@@ -1446,7 +1442,7 @@ func resourceMemoryPersistentMemoryPolicyUpdate(c context.Context, d *schema.Res
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating MemoryPersistentMemoryPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating MemoryPersistentMemoryPolicy: %s", responseErr.Error())
@@ -1458,7 +1454,6 @@ func resourceMemoryPersistentMemoryPolicyUpdate(c context.Context, d *schema.Res
 
 func resourceMemoryPersistentMemoryPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
@@ -1478,7 +1473,7 @@ func resourceMemoryPersistentMemoryPolicyDelete(c context.Context, d *schema.Res
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting MemoryPersistentMemoryPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting MemoryPersistentMemoryPolicy object: %s", deleteErr.Error())

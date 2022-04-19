@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // IaasApiService IaasApi service
 type IaasApiService service
 
 type ApiDeleteIaasUcsdInfoRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IaasApiService
 	moid       string
 }
 
-func (r ApiDeleteIaasUcsdInfoRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIaasUcsdInfoRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIaasUcsdInfoExecute(r)
 }
 
 /*
 DeleteIaasUcsdInfo Delete a 'iaas.UcsdInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIaasUcsdInfoRequest
 */
-func (a *IaasApiService) DeleteIaasUcsdInfo(ctx _context.Context, moid string) ApiDeleteIaasUcsdInfoRequest {
+func (a *IaasApiService) DeleteIaasUcsdInfo(ctx context.Context, moid string) ApiDeleteIaasUcsdInfoRequest {
 	return ApiDeleteIaasUcsdInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -54,26 +49,24 @@ func (a *IaasApiService) DeleteIaasUcsdInfo(ctx _context.Context, moid string) A
 }
 
 // Execute executes the request
-func (a *IaasApiService) DeleteIaasUcsdInfoExecute(r ApiDeleteIaasUcsdInfoRequest) (*_nethttp.Response, error) {
+func (a *IaasApiService) DeleteIaasUcsdInfoExecute(r ApiDeleteIaasUcsdInfoRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.DeleteIaasUcsdInfo")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -92,7 +85,7 @@ func (a *IaasApiService) DeleteIaasUcsdInfoExecute(r ApiDeleteIaasUcsdInfoReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -102,15 +95,15 @@ func (a *IaasApiService) DeleteIaasUcsdInfoExecute(r ApiDeleteIaasUcsdInfoReques
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,23 +161,23 @@ func (a *IaasApiService) DeleteIaasUcsdInfoExecute(r ApiDeleteIaasUcsdInfoReques
 }
 
 type ApiGetIaasConnectorPackByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IaasApiService
 	moid       string
 }
 
-func (r ApiGetIaasConnectorPackByMoidRequest) Execute() (IaasConnectorPack, *_nethttp.Response, error) {
+func (r ApiGetIaasConnectorPackByMoidRequest) Execute() (*IaasConnectorPack, *http.Response, error) {
 	return r.ApiService.GetIaasConnectorPackByMoidExecute(r)
 }
 
 /*
 GetIaasConnectorPackByMoid Read a 'iaas.ConnectorPack' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIaasConnectorPackByMoidRequest
 */
-func (a *IaasApiService) GetIaasConnectorPackByMoid(ctx _context.Context, moid string) ApiGetIaasConnectorPackByMoidRequest {
+func (a *IaasApiService) GetIaasConnectorPackByMoid(ctx context.Context, moid string) ApiGetIaasConnectorPackByMoidRequest {
 	return ApiGetIaasConnectorPackByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -194,27 +187,25 @@ func (a *IaasApiService) GetIaasConnectorPackByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return IaasConnectorPack
-func (a *IaasApiService) GetIaasConnectorPackByMoidExecute(r ApiGetIaasConnectorPackByMoidRequest) (IaasConnectorPack, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasConnectorPackByMoidExecute(r ApiGetIaasConnectorPackByMoidRequest) (*IaasConnectorPack, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasConnectorPack
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasConnectorPack
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasConnectorPackByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/ConnectorPacks/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -233,7 +224,7 @@ func (a *IaasApiService) GetIaasConnectorPackByMoidExecute(r ApiGetIaasConnector
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -243,15 +234,15 @@ func (a *IaasApiService) GetIaasConnectorPackByMoidExecute(r ApiGetIaasConnector
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -307,7 +298,7 @@ func (a *IaasApiService) GetIaasConnectorPackByMoidExecute(r ApiGetIaasConnector
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -318,7 +309,7 @@ func (a *IaasApiService) GetIaasConnectorPackByMoidExecute(r ApiGetIaasConnector
 }
 
 type ApiGetIaasConnectorPackListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IaasApiService
 	filter      *string
 	orderby     *string
@@ -399,17 +390,17 @@ func (r ApiGetIaasConnectorPackListRequest) Tags(tags string) ApiGetIaasConnecto
 	return r
 }
 
-func (r ApiGetIaasConnectorPackListRequest) Execute() (IaasConnectorPackResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasConnectorPackListRequest) Execute() (*IaasConnectorPackResponse, *http.Response, error) {
 	return r.ApiService.GetIaasConnectorPackListExecute(r)
 }
 
 /*
 GetIaasConnectorPackList Read a 'iaas.ConnectorPack' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIaasConnectorPackListRequest
 */
-func (a *IaasApiService) GetIaasConnectorPackList(ctx _context.Context) ApiGetIaasConnectorPackListRequest {
+func (a *IaasApiService) GetIaasConnectorPackList(ctx context.Context) ApiGetIaasConnectorPackListRequest {
 	return ApiGetIaasConnectorPackListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -418,26 +409,24 @@ func (a *IaasApiService) GetIaasConnectorPackList(ctx _context.Context) ApiGetIa
 
 // Execute executes the request
 //  @return IaasConnectorPackResponse
-func (a *IaasApiService) GetIaasConnectorPackListExecute(r ApiGetIaasConnectorPackListRequest) (IaasConnectorPackResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasConnectorPackListExecute(r ApiGetIaasConnectorPackListRequest) (*IaasConnectorPackResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasConnectorPackResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasConnectorPackResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasConnectorPackList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/ConnectorPacks"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -489,7 +478,7 @@ func (a *IaasApiService) GetIaasConnectorPackListExecute(r ApiGetIaasConnectorPa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -499,15 +488,15 @@ func (a *IaasApiService) GetIaasConnectorPackListExecute(r ApiGetIaasConnectorPa
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -563,7 +552,7 @@ func (a *IaasApiService) GetIaasConnectorPackListExecute(r ApiGetIaasConnectorPa
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -573,25 +562,25 @@ func (a *IaasApiService) GetIaasConnectorPackListExecute(r ApiGetIaasConnectorPa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetIaasDeviceStatusByMoidRequest struct {
-	ctx        _context.Context
+type ApiGetIaasCustomTaskInfoByMoidRequest struct {
+	ctx        context.Context
 	ApiService *IaasApiService
 	moid       string
 }
 
-func (r ApiGetIaasDeviceStatusByMoidRequest) Execute() (IaasDeviceStatus, *_nethttp.Response, error) {
-	return r.ApiService.GetIaasDeviceStatusByMoidExecute(r)
+func (r ApiGetIaasCustomTaskInfoByMoidRequest) Execute() (*IaasCustomTaskInfo, *http.Response, error) {
+	return r.ApiService.GetIaasCustomTaskInfoByMoidExecute(r)
 }
 
 /*
-GetIaasDeviceStatusByMoid Read a 'iaas.DeviceStatus' resource.
+GetIaasCustomTaskInfoByMoid Read a 'iaas.CustomTaskInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIaasDeviceStatusByMoidRequest
+ @return ApiGetIaasCustomTaskInfoByMoidRequest
 */
-func (a *IaasApiService) GetIaasDeviceStatusByMoid(ctx _context.Context, moid string) ApiGetIaasDeviceStatusByMoidRequest {
-	return ApiGetIaasDeviceStatusByMoidRequest{
+func (a *IaasApiService) GetIaasCustomTaskInfoByMoid(ctx context.Context, moid string) ApiGetIaasCustomTaskInfoByMoidRequest {
+	return ApiGetIaasCustomTaskInfoByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
 		moid:       moid,
@@ -599,28 +588,26 @@ func (a *IaasApiService) GetIaasDeviceStatusByMoid(ctx _context.Context, moid st
 }
 
 // Execute executes the request
-//  @return IaasDeviceStatus
-func (a *IaasApiService) GetIaasDeviceStatusByMoidExecute(r ApiGetIaasDeviceStatusByMoidRequest) (IaasDeviceStatus, *_nethttp.Response, error) {
+//  @return IaasCustomTaskInfo
+func (a *IaasApiService) GetIaasCustomTaskInfoByMoidExecute(r ApiGetIaasCustomTaskInfoByMoidRequest) (*IaasCustomTaskInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasDeviceStatus
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasCustomTaskInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasDeviceStatusByMoid")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasCustomTaskInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/iaas/DeviceStatuses/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath := localBasePath + "/api/v1/iaas/CustomTaskInfos/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -639,7 +626,7 @@ func (a *IaasApiService) GetIaasDeviceStatusByMoidExecute(r ApiGetIaasDeviceStat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -649,15 +636,15 @@ func (a *IaasApiService) GetIaasDeviceStatusByMoidExecute(r ApiGetIaasDeviceStat
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -713,7 +700,409 @@ func (a *IaasApiService) GetIaasDeviceStatusByMoidExecute(r ApiGetIaasDeviceStat
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIaasCustomTaskInfoListRequest struct {
+	ctx         context.Context
+	ApiService  *IaasApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIaasCustomTaskInfoListRequest) Filter(filter string) ApiGetIaasCustomTaskInfoListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIaasCustomTaskInfoListRequest) Orderby(orderby string) ApiGetIaasCustomTaskInfoListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIaasCustomTaskInfoListRequest) Top(top int32) ApiGetIaasCustomTaskInfoListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIaasCustomTaskInfoListRequest) Skip(skip int32) ApiGetIaasCustomTaskInfoListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIaasCustomTaskInfoListRequest) Select_(select_ string) ApiGetIaasCustomTaskInfoListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIaasCustomTaskInfoListRequest) Expand(expand string) ApiGetIaasCustomTaskInfoListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIaasCustomTaskInfoListRequest) Apply(apply string) ApiGetIaasCustomTaskInfoListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIaasCustomTaskInfoListRequest) Count(count bool) ApiGetIaasCustomTaskInfoListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIaasCustomTaskInfoListRequest) Inlinecount(inlinecount string) ApiGetIaasCustomTaskInfoListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIaasCustomTaskInfoListRequest) At(at string) ApiGetIaasCustomTaskInfoListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIaasCustomTaskInfoListRequest) Tags(tags string) ApiGetIaasCustomTaskInfoListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIaasCustomTaskInfoListRequest) Execute() (*IaasCustomTaskInfoResponse, *http.Response, error) {
+	return r.ApiService.GetIaasCustomTaskInfoListExecute(r)
+}
+
+/*
+GetIaasCustomTaskInfoList Read a 'iaas.CustomTaskInfo' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetIaasCustomTaskInfoListRequest
+*/
+func (a *IaasApiService) GetIaasCustomTaskInfoList(ctx context.Context) ApiGetIaasCustomTaskInfoListRequest {
+	return ApiGetIaasCustomTaskInfoListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return IaasCustomTaskInfoResponse
+func (a *IaasApiService) GetIaasCustomTaskInfoListExecute(r ApiGetIaasCustomTaskInfoListRequest) (*IaasCustomTaskInfoResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasCustomTaskInfoResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasCustomTaskInfoList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iaas/CustomTaskInfos"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIaasDeviceStatusByMoidRequest struct {
+	ctx        context.Context
+	ApiService *IaasApiService
+	moid       string
+}
+
+func (r ApiGetIaasDeviceStatusByMoidRequest) Execute() (*IaasDeviceStatus, *http.Response, error) {
+	return r.ApiService.GetIaasDeviceStatusByMoidExecute(r)
+}
+
+/*
+GetIaasDeviceStatusByMoid Read a 'iaas.DeviceStatus' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetIaasDeviceStatusByMoidRequest
+*/
+func (a *IaasApiService) GetIaasDeviceStatusByMoid(ctx context.Context, moid string) ApiGetIaasDeviceStatusByMoidRequest {
+	return ApiGetIaasDeviceStatusByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IaasDeviceStatus
+func (a *IaasApiService) GetIaasDeviceStatusByMoidExecute(r ApiGetIaasDeviceStatusByMoidRequest) (*IaasDeviceStatus, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasDeviceStatus
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasDeviceStatusByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iaas/DeviceStatuses/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -724,7 +1113,7 @@ func (a *IaasApiService) GetIaasDeviceStatusByMoidExecute(r ApiGetIaasDeviceStat
 }
 
 type ApiGetIaasDeviceStatusListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IaasApiService
 	filter      *string
 	orderby     *string
@@ -805,17 +1194,17 @@ func (r ApiGetIaasDeviceStatusListRequest) Tags(tags string) ApiGetIaasDeviceSta
 	return r
 }
 
-func (r ApiGetIaasDeviceStatusListRequest) Execute() (IaasDeviceStatusResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasDeviceStatusListRequest) Execute() (*IaasDeviceStatusResponse, *http.Response, error) {
 	return r.ApiService.GetIaasDeviceStatusListExecute(r)
 }
 
 /*
 GetIaasDeviceStatusList Read a 'iaas.DeviceStatus' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIaasDeviceStatusListRequest
 */
-func (a *IaasApiService) GetIaasDeviceStatusList(ctx _context.Context) ApiGetIaasDeviceStatusListRequest {
+func (a *IaasApiService) GetIaasDeviceStatusList(ctx context.Context) ApiGetIaasDeviceStatusListRequest {
 	return ApiGetIaasDeviceStatusListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -824,26 +1213,24 @@ func (a *IaasApiService) GetIaasDeviceStatusList(ctx _context.Context) ApiGetIaa
 
 // Execute executes the request
 //  @return IaasDeviceStatusResponse
-func (a *IaasApiService) GetIaasDeviceStatusListExecute(r ApiGetIaasDeviceStatusListRequest) (IaasDeviceStatusResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasDeviceStatusListExecute(r ApiGetIaasDeviceStatusListRequest) (*IaasDeviceStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasDeviceStatusResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasDeviceStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasDeviceStatusList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/DeviceStatuses"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -895,7 +1282,7 @@ func (a *IaasApiService) GetIaasDeviceStatusListExecute(r ApiGetIaasDeviceStatus
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -905,15 +1292,15 @@ func (a *IaasApiService) GetIaasDeviceStatusListExecute(r ApiGetIaasDeviceStatus
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -969,7 +1356,7 @@ func (a *IaasApiService) GetIaasDeviceStatusListExecute(r ApiGetIaasDeviceStatus
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -980,23 +1367,23 @@ func (a *IaasApiService) GetIaasDeviceStatusListExecute(r ApiGetIaasDeviceStatus
 }
 
 type ApiGetIaasDiagnosticMessagesByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IaasApiService
 	moid       string
 }
 
-func (r ApiGetIaasDiagnosticMessagesByMoidRequest) Execute() (IaasDiagnosticMessages, *_nethttp.Response, error) {
+func (r ApiGetIaasDiagnosticMessagesByMoidRequest) Execute() (*IaasDiagnosticMessages, *http.Response, error) {
 	return r.ApiService.GetIaasDiagnosticMessagesByMoidExecute(r)
 }
 
 /*
 GetIaasDiagnosticMessagesByMoid Read a 'iaas.DiagnosticMessages' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIaasDiagnosticMessagesByMoidRequest
 */
-func (a *IaasApiService) GetIaasDiagnosticMessagesByMoid(ctx _context.Context, moid string) ApiGetIaasDiagnosticMessagesByMoidRequest {
+func (a *IaasApiService) GetIaasDiagnosticMessagesByMoid(ctx context.Context, moid string) ApiGetIaasDiagnosticMessagesByMoidRequest {
 	return ApiGetIaasDiagnosticMessagesByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1006,27 +1393,25 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return IaasDiagnosticMessages
-func (a *IaasApiService) GetIaasDiagnosticMessagesByMoidExecute(r ApiGetIaasDiagnosticMessagesByMoidRequest) (IaasDiagnosticMessages, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasDiagnosticMessagesByMoidExecute(r ApiGetIaasDiagnosticMessagesByMoidRequest) (*IaasDiagnosticMessages, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasDiagnosticMessages
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasDiagnosticMessages
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasDiagnosticMessagesByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/DiagnosticMessages/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1045,7 +1430,7 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesByMoidExecute(r ApiGetIaasDiag
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1055,15 +1440,15 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesByMoidExecute(r ApiGetIaasDiag
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1119,7 +1504,7 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesByMoidExecute(r ApiGetIaasDiag
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1130,7 +1515,7 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesByMoidExecute(r ApiGetIaasDiag
 }
 
 type ApiGetIaasDiagnosticMessagesListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IaasApiService
 	filter      *string
 	orderby     *string
@@ -1211,17 +1596,17 @@ func (r ApiGetIaasDiagnosticMessagesListRequest) Tags(tags string) ApiGetIaasDia
 	return r
 }
 
-func (r ApiGetIaasDiagnosticMessagesListRequest) Execute() (IaasDiagnosticMessagesResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasDiagnosticMessagesListRequest) Execute() (*IaasDiagnosticMessagesResponse, *http.Response, error) {
 	return r.ApiService.GetIaasDiagnosticMessagesListExecute(r)
 }
 
 /*
 GetIaasDiagnosticMessagesList Read a 'iaas.DiagnosticMessages' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIaasDiagnosticMessagesListRequest
 */
-func (a *IaasApiService) GetIaasDiagnosticMessagesList(ctx _context.Context) ApiGetIaasDiagnosticMessagesListRequest {
+func (a *IaasApiService) GetIaasDiagnosticMessagesList(ctx context.Context) ApiGetIaasDiagnosticMessagesListRequest {
 	return ApiGetIaasDiagnosticMessagesListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1230,26 +1615,24 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return IaasDiagnosticMessagesResponse
-func (a *IaasApiService) GetIaasDiagnosticMessagesListExecute(r ApiGetIaasDiagnosticMessagesListRequest) (IaasDiagnosticMessagesResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasDiagnosticMessagesListExecute(r ApiGetIaasDiagnosticMessagesListRequest) (*IaasDiagnosticMessagesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasDiagnosticMessagesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasDiagnosticMessagesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasDiagnosticMessagesList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/DiagnosticMessages"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1301,7 +1684,7 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesListExecute(r ApiGetIaasDiagno
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1311,15 +1694,15 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesListExecute(r ApiGetIaasDiagno
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1375,7 +1758,7 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesListExecute(r ApiGetIaasDiagno
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1386,23 +1769,23 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesListExecute(r ApiGetIaasDiagno
 }
 
 type ApiGetIaasLicenseInfoByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IaasApiService
 	moid       string
 }
 
-func (r ApiGetIaasLicenseInfoByMoidRequest) Execute() (IaasLicenseInfo, *_nethttp.Response, error) {
+func (r ApiGetIaasLicenseInfoByMoidRequest) Execute() (*IaasLicenseInfo, *http.Response, error) {
 	return r.ApiService.GetIaasLicenseInfoByMoidExecute(r)
 }
 
 /*
 GetIaasLicenseInfoByMoid Read a 'iaas.LicenseInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIaasLicenseInfoByMoidRequest
 */
-func (a *IaasApiService) GetIaasLicenseInfoByMoid(ctx _context.Context, moid string) ApiGetIaasLicenseInfoByMoidRequest {
+func (a *IaasApiService) GetIaasLicenseInfoByMoid(ctx context.Context, moid string) ApiGetIaasLicenseInfoByMoidRequest {
 	return ApiGetIaasLicenseInfoByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1412,27 +1795,25 @@ func (a *IaasApiService) GetIaasLicenseInfoByMoid(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return IaasLicenseInfo
-func (a *IaasApiService) GetIaasLicenseInfoByMoidExecute(r ApiGetIaasLicenseInfoByMoidRequest) (IaasLicenseInfo, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasLicenseInfoByMoidExecute(r ApiGetIaasLicenseInfoByMoidRequest) (*IaasLicenseInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasLicenseInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasLicenseInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasLicenseInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/LicenseInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1451,7 +1832,7 @@ func (a *IaasApiService) GetIaasLicenseInfoByMoidExecute(r ApiGetIaasLicenseInfo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1461,15 +1842,15 @@ func (a *IaasApiService) GetIaasLicenseInfoByMoidExecute(r ApiGetIaasLicenseInfo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1525,7 +1906,7 @@ func (a *IaasApiService) GetIaasLicenseInfoByMoidExecute(r ApiGetIaasLicenseInfo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1536,7 +1917,7 @@ func (a *IaasApiService) GetIaasLicenseInfoByMoidExecute(r ApiGetIaasLicenseInfo
 }
 
 type ApiGetIaasLicenseInfoListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IaasApiService
 	filter      *string
 	orderby     *string
@@ -1617,17 +1998,17 @@ func (r ApiGetIaasLicenseInfoListRequest) Tags(tags string) ApiGetIaasLicenseInf
 	return r
 }
 
-func (r ApiGetIaasLicenseInfoListRequest) Execute() (IaasLicenseInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasLicenseInfoListRequest) Execute() (*IaasLicenseInfoResponse, *http.Response, error) {
 	return r.ApiService.GetIaasLicenseInfoListExecute(r)
 }
 
 /*
 GetIaasLicenseInfoList Read a 'iaas.LicenseInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIaasLicenseInfoListRequest
 */
-func (a *IaasApiService) GetIaasLicenseInfoList(ctx _context.Context) ApiGetIaasLicenseInfoListRequest {
+func (a *IaasApiService) GetIaasLicenseInfoList(ctx context.Context) ApiGetIaasLicenseInfoListRequest {
 	return ApiGetIaasLicenseInfoListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1636,26 +2017,24 @@ func (a *IaasApiService) GetIaasLicenseInfoList(ctx _context.Context) ApiGetIaas
 
 // Execute executes the request
 //  @return IaasLicenseInfoResponse
-func (a *IaasApiService) GetIaasLicenseInfoListExecute(r ApiGetIaasLicenseInfoListRequest) (IaasLicenseInfoResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasLicenseInfoListExecute(r ApiGetIaasLicenseInfoListRequest) (*IaasLicenseInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasLicenseInfoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasLicenseInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasLicenseInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/LicenseInfos"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1707,7 +2086,7 @@ func (a *IaasApiService) GetIaasLicenseInfoListExecute(r ApiGetIaasLicenseInfoLi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1717,15 +2096,15 @@ func (a *IaasApiService) GetIaasLicenseInfoListExecute(r ApiGetIaasLicenseInfoLi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1781,7 +2160,7 @@ func (a *IaasApiService) GetIaasLicenseInfoListExecute(r ApiGetIaasLicenseInfoLi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1792,23 +2171,23 @@ func (a *IaasApiService) GetIaasLicenseInfoListExecute(r ApiGetIaasLicenseInfoLi
 }
 
 type ApiGetIaasMostRunTasksByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IaasApiService
 	moid       string
 }
 
-func (r ApiGetIaasMostRunTasksByMoidRequest) Execute() (IaasMostRunTasks, *_nethttp.Response, error) {
+func (r ApiGetIaasMostRunTasksByMoidRequest) Execute() (*IaasMostRunTasks, *http.Response, error) {
 	return r.ApiService.GetIaasMostRunTasksByMoidExecute(r)
 }
 
 /*
 GetIaasMostRunTasksByMoid Read a 'iaas.MostRunTasks' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIaasMostRunTasksByMoidRequest
 */
-func (a *IaasApiService) GetIaasMostRunTasksByMoid(ctx _context.Context, moid string) ApiGetIaasMostRunTasksByMoidRequest {
+func (a *IaasApiService) GetIaasMostRunTasksByMoid(ctx context.Context, moid string) ApiGetIaasMostRunTasksByMoidRequest {
 	return ApiGetIaasMostRunTasksByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1818,27 +2197,25 @@ func (a *IaasApiService) GetIaasMostRunTasksByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return IaasMostRunTasks
-func (a *IaasApiService) GetIaasMostRunTasksByMoidExecute(r ApiGetIaasMostRunTasksByMoidRequest) (IaasMostRunTasks, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasMostRunTasksByMoidExecute(r ApiGetIaasMostRunTasksByMoidRequest) (*IaasMostRunTasks, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasMostRunTasks
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasMostRunTasks
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasMostRunTasksByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/MostRunTasks/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1857,7 +2234,7 @@ func (a *IaasApiService) GetIaasMostRunTasksByMoidExecute(r ApiGetIaasMostRunTas
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1867,15 +2244,15 @@ func (a *IaasApiService) GetIaasMostRunTasksByMoidExecute(r ApiGetIaasMostRunTas
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1931,7 +2308,7 @@ func (a *IaasApiService) GetIaasMostRunTasksByMoidExecute(r ApiGetIaasMostRunTas
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1942,7 +2319,7 @@ func (a *IaasApiService) GetIaasMostRunTasksByMoidExecute(r ApiGetIaasMostRunTas
 }
 
 type ApiGetIaasMostRunTasksListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IaasApiService
 	filter      *string
 	orderby     *string
@@ -2023,17 +2400,17 @@ func (r ApiGetIaasMostRunTasksListRequest) Tags(tags string) ApiGetIaasMostRunTa
 	return r
 }
 
-func (r ApiGetIaasMostRunTasksListRequest) Execute() (IaasMostRunTasksResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasMostRunTasksListRequest) Execute() (*IaasMostRunTasksResponse, *http.Response, error) {
 	return r.ApiService.GetIaasMostRunTasksListExecute(r)
 }
 
 /*
 GetIaasMostRunTasksList Read a 'iaas.MostRunTasks' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIaasMostRunTasksListRequest
 */
-func (a *IaasApiService) GetIaasMostRunTasksList(ctx _context.Context) ApiGetIaasMostRunTasksListRequest {
+func (a *IaasApiService) GetIaasMostRunTasksList(ctx context.Context) ApiGetIaasMostRunTasksListRequest {
 	return ApiGetIaasMostRunTasksListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2042,26 +2419,24 @@ func (a *IaasApiService) GetIaasMostRunTasksList(ctx _context.Context) ApiGetIaa
 
 // Execute executes the request
 //  @return IaasMostRunTasksResponse
-func (a *IaasApiService) GetIaasMostRunTasksListExecute(r ApiGetIaasMostRunTasksListRequest) (IaasMostRunTasksResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasMostRunTasksListExecute(r ApiGetIaasMostRunTasksListRequest) (*IaasMostRunTasksResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasMostRunTasksResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasMostRunTasksResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasMostRunTasksList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/MostRunTasks"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2113,7 +2488,7 @@ func (a *IaasApiService) GetIaasMostRunTasksListExecute(r ApiGetIaasMostRunTasks
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2123,15 +2498,15 @@ func (a *IaasApiService) GetIaasMostRunTasksListExecute(r ApiGetIaasMostRunTasks
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2187,7 +2562,7 @@ func (a *IaasApiService) GetIaasMostRunTasksListExecute(r ApiGetIaasMostRunTasks
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2198,23 +2573,23 @@ func (a *IaasApiService) GetIaasMostRunTasksListExecute(r ApiGetIaasMostRunTasks
 }
 
 type ApiGetIaasServiceRequestByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IaasApiService
 	moid       string
 }
 
-func (r ApiGetIaasServiceRequestByMoidRequest) Execute() (IaasServiceRequest, *_nethttp.Response, error) {
+func (r ApiGetIaasServiceRequestByMoidRequest) Execute() (*IaasServiceRequest, *http.Response, error) {
 	return r.ApiService.GetIaasServiceRequestByMoidExecute(r)
 }
 
 /*
 GetIaasServiceRequestByMoid Read a 'iaas.ServiceRequest' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIaasServiceRequestByMoidRequest
 */
-func (a *IaasApiService) GetIaasServiceRequestByMoid(ctx _context.Context, moid string) ApiGetIaasServiceRequestByMoidRequest {
+func (a *IaasApiService) GetIaasServiceRequestByMoid(ctx context.Context, moid string) ApiGetIaasServiceRequestByMoidRequest {
 	return ApiGetIaasServiceRequestByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2224,27 +2599,25 @@ func (a *IaasApiService) GetIaasServiceRequestByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return IaasServiceRequest
-func (a *IaasApiService) GetIaasServiceRequestByMoidExecute(r ApiGetIaasServiceRequestByMoidRequest) (IaasServiceRequest, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasServiceRequestByMoidExecute(r ApiGetIaasServiceRequestByMoidRequest) (*IaasServiceRequest, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasServiceRequest
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasServiceRequest
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasServiceRequestByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/ServiceRequests/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2263,7 +2636,7 @@ func (a *IaasApiService) GetIaasServiceRequestByMoidExecute(r ApiGetIaasServiceR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2273,15 +2646,15 @@ func (a *IaasApiService) GetIaasServiceRequestByMoidExecute(r ApiGetIaasServiceR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2337,7 +2710,7 @@ func (a *IaasApiService) GetIaasServiceRequestByMoidExecute(r ApiGetIaasServiceR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2348,7 +2721,7 @@ func (a *IaasApiService) GetIaasServiceRequestByMoidExecute(r ApiGetIaasServiceR
 }
 
 type ApiGetIaasServiceRequestListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IaasApiService
 	filter      *string
 	orderby     *string
@@ -2429,17 +2802,17 @@ func (r ApiGetIaasServiceRequestListRequest) Tags(tags string) ApiGetIaasService
 	return r
 }
 
-func (r ApiGetIaasServiceRequestListRequest) Execute() (IaasServiceRequestResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasServiceRequestListRequest) Execute() (*IaasServiceRequestResponse, *http.Response, error) {
 	return r.ApiService.GetIaasServiceRequestListExecute(r)
 }
 
 /*
 GetIaasServiceRequestList Read a 'iaas.ServiceRequest' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIaasServiceRequestListRequest
 */
-func (a *IaasApiService) GetIaasServiceRequestList(ctx _context.Context) ApiGetIaasServiceRequestListRequest {
+func (a *IaasApiService) GetIaasServiceRequestList(ctx context.Context) ApiGetIaasServiceRequestListRequest {
 	return ApiGetIaasServiceRequestListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2448,26 +2821,24 @@ func (a *IaasApiService) GetIaasServiceRequestList(ctx _context.Context) ApiGetI
 
 // Execute executes the request
 //  @return IaasServiceRequestResponse
-func (a *IaasApiService) GetIaasServiceRequestListExecute(r ApiGetIaasServiceRequestListRequest) (IaasServiceRequestResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasServiceRequestListExecute(r ApiGetIaasServiceRequestListRequest) (*IaasServiceRequestResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasServiceRequestResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasServiceRequestResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasServiceRequestList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/ServiceRequests"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2519,7 +2890,7 @@ func (a *IaasApiService) GetIaasServiceRequestListExecute(r ApiGetIaasServiceReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2529,15 +2900,15 @@ func (a *IaasApiService) GetIaasServiceRequestListExecute(r ApiGetIaasServiceReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2593,7 +2964,7 @@ func (a *IaasApiService) GetIaasServiceRequestListExecute(r ApiGetIaasServiceReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2603,25 +2974,25 @@ func (a *IaasApiService) GetIaasServiceRequestListExecute(r ApiGetIaasServiceReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetIaasUcsdInfoByMoidRequest struct {
-	ctx        _context.Context
+type ApiGetIaasSystemTaskInfoByMoidRequest struct {
+	ctx        context.Context
 	ApiService *IaasApiService
 	moid       string
 }
 
-func (r ApiGetIaasUcsdInfoByMoidRequest) Execute() (IaasUcsdInfo, *_nethttp.Response, error) {
-	return r.ApiService.GetIaasUcsdInfoByMoidExecute(r)
+func (r ApiGetIaasSystemTaskInfoByMoidRequest) Execute() (*IaasSystemTaskInfo, *http.Response, error) {
+	return r.ApiService.GetIaasSystemTaskInfoByMoidExecute(r)
 }
 
 /*
-GetIaasUcsdInfoByMoid Read a 'iaas.UcsdInfo' resource.
+GetIaasSystemTaskInfoByMoid Read a 'iaas.SystemTaskInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
- @return ApiGetIaasUcsdInfoByMoidRequest
+ @return ApiGetIaasSystemTaskInfoByMoidRequest
 */
-func (a *IaasApiService) GetIaasUcsdInfoByMoid(ctx _context.Context, moid string) ApiGetIaasUcsdInfoByMoidRequest {
-	return ApiGetIaasUcsdInfoByMoidRequest{
+func (a *IaasApiService) GetIaasSystemTaskInfoByMoid(ctx context.Context, moid string) ApiGetIaasSystemTaskInfoByMoidRequest {
+	return ApiGetIaasSystemTaskInfoByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
 		moid:       moid,
@@ -2629,28 +3000,26 @@ func (a *IaasApiService) GetIaasUcsdInfoByMoid(ctx _context.Context, moid string
 }
 
 // Execute executes the request
-//  @return IaasUcsdInfo
-func (a *IaasApiService) GetIaasUcsdInfoByMoidExecute(r ApiGetIaasUcsdInfoByMoidRequest) (IaasUcsdInfo, *_nethttp.Response, error) {
+//  @return IaasSystemTaskInfo
+func (a *IaasApiService) GetIaasSystemTaskInfoByMoidExecute(r ApiGetIaasSystemTaskInfoByMoidRequest) (*IaasSystemTaskInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasUcsdInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasSystemTaskInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdInfoByMoid")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasSystemTaskInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/api/v1/iaas/UcsdInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath := localBasePath + "/api/v1/iaas/SystemTaskInfos/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2669,7 +3038,7 @@ func (a *IaasApiService) GetIaasUcsdInfoByMoidExecute(r ApiGetIaasUcsdInfoByMoid
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2679,15 +3048,15 @@ func (a *IaasApiService) GetIaasUcsdInfoByMoidExecute(r ApiGetIaasUcsdInfoByMoid
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2743,7 +3112,409 @@ func (a *IaasApiService) GetIaasUcsdInfoByMoidExecute(r ApiGetIaasUcsdInfoByMoid
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIaasSystemTaskInfoListRequest struct {
+	ctx         context.Context
+	ApiService  *IaasApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+// Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false).
+func (r ApiGetIaasSystemTaskInfoListRequest) Filter(filter string) ApiGetIaasSystemTaskInfoListRequest {
+	r.filter = &filter
+	return r
+}
+
+// Determines what properties are used to sort the collection of resources.
+func (r ApiGetIaasSystemTaskInfoListRequest) Orderby(orderby string) ApiGetIaasSystemTaskInfoListRequest {
+	r.orderby = &orderby
+	return r
+}
+
+// Specifies the maximum number of resources to return in the response.
+func (r ApiGetIaasSystemTaskInfoListRequest) Top(top int32) ApiGetIaasSystemTaskInfoListRequest {
+	r.top = &top
+	return r
+}
+
+// Specifies the number of resources to skip in the response.
+func (r ApiGetIaasSystemTaskInfoListRequest) Skip(skip int32) ApiGetIaasSystemTaskInfoListRequest {
+	r.skip = &skip
+	return r
+}
+
+// Specifies a subset of properties to return.
+func (r ApiGetIaasSystemTaskInfoListRequest) Select_(select_ string) ApiGetIaasSystemTaskInfoListRequest {
+	r.select_ = &select_
+	return r
+}
+
+// Specify additional attributes or related resources to return in addition to the primary resources.
+func (r ApiGetIaasSystemTaskInfoListRequest) Expand(expand string) ApiGetIaasSystemTaskInfoListRequest {
+	r.expand = &expand
+	return r
+}
+
+// Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set.
+func (r ApiGetIaasSystemTaskInfoListRequest) Apply(apply string) ApiGetIaasSystemTaskInfoListRequest {
+	r.apply = &apply
+	return r
+}
+
+// The $count query specifies the service should return the count of the matching resources, instead of returning the resources.
+func (r ApiGetIaasSystemTaskInfoListRequest) Count(count bool) ApiGetIaasSystemTaskInfoListRequest {
+	r.count = &count
+	return r
+}
+
+// The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response.
+func (r ApiGetIaasSystemTaskInfoListRequest) Inlinecount(inlinecount string) ApiGetIaasSystemTaskInfoListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+
+// Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section.
+func (r ApiGetIaasSystemTaskInfoListRequest) At(at string) ApiGetIaasSystemTaskInfoListRequest {
+	r.at = &at
+	return r
+}
+
+// The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key.
+func (r ApiGetIaasSystemTaskInfoListRequest) Tags(tags string) ApiGetIaasSystemTaskInfoListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetIaasSystemTaskInfoListRequest) Execute() (*IaasSystemTaskInfoResponse, *http.Response, error) {
+	return r.ApiService.GetIaasSystemTaskInfoListExecute(r)
+}
+
+/*
+GetIaasSystemTaskInfoList Read a 'iaas.SystemTaskInfo' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetIaasSystemTaskInfoListRequest
+*/
+func (a *IaasApiService) GetIaasSystemTaskInfoList(ctx context.Context) ApiGetIaasSystemTaskInfoListRequest {
+	return ApiGetIaasSystemTaskInfoListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return IaasSystemTaskInfoResponse
+func (a *IaasApiService) GetIaasSystemTaskInfoListExecute(r ApiGetIaasSystemTaskInfoListRequest) (*IaasSystemTaskInfoResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasSystemTaskInfoResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasSystemTaskInfoList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iaas/SystemTaskInfos"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetIaasUcsdInfoByMoidRequest struct {
+	ctx        context.Context
+	ApiService *IaasApiService
+	moid       string
+}
+
+func (r ApiGetIaasUcsdInfoByMoidRequest) Execute() (*IaasUcsdInfo, *http.Response, error) {
+	return r.ApiService.GetIaasUcsdInfoByMoidExecute(r)
+}
+
+/*
+GetIaasUcsdInfoByMoid Read a 'iaas.UcsdInfo' resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param moid The unique Moid identifier of a resource instance.
+ @return ApiGetIaasUcsdInfoByMoidRequest
+*/
+func (a *IaasApiService) GetIaasUcsdInfoByMoid(ctx context.Context, moid string) ApiGetIaasUcsdInfoByMoidRequest {
+	return ApiGetIaasUcsdInfoByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+// Execute executes the request
+//  @return IaasUcsdInfo
+func (a *IaasApiService) GetIaasUcsdInfoByMoidExecute(r ApiGetIaasUcsdInfoByMoidRequest) (*IaasUcsdInfo, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasUcsdInfo
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdInfoByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/iaas/UcsdInfos/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2754,7 +3525,7 @@ func (a *IaasApiService) GetIaasUcsdInfoByMoidExecute(r ApiGetIaasUcsdInfoByMoid
 }
 
 type ApiGetIaasUcsdInfoListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IaasApiService
 	filter      *string
 	orderby     *string
@@ -2835,17 +3606,17 @@ func (r ApiGetIaasUcsdInfoListRequest) Tags(tags string) ApiGetIaasUcsdInfoListR
 	return r
 }
 
-func (r ApiGetIaasUcsdInfoListRequest) Execute() (IaasUcsdInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasUcsdInfoListRequest) Execute() (*IaasUcsdInfoResponse, *http.Response, error) {
 	return r.ApiService.GetIaasUcsdInfoListExecute(r)
 }
 
 /*
 GetIaasUcsdInfoList Read a 'iaas.UcsdInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIaasUcsdInfoListRequest
 */
-func (a *IaasApiService) GetIaasUcsdInfoList(ctx _context.Context) ApiGetIaasUcsdInfoListRequest {
+func (a *IaasApiService) GetIaasUcsdInfoList(ctx context.Context) ApiGetIaasUcsdInfoListRequest {
 	return ApiGetIaasUcsdInfoListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2854,26 +3625,24 @@ func (a *IaasApiService) GetIaasUcsdInfoList(ctx _context.Context) ApiGetIaasUcs
 
 // Execute executes the request
 //  @return IaasUcsdInfoResponse
-func (a *IaasApiService) GetIaasUcsdInfoListExecute(r ApiGetIaasUcsdInfoListRequest) (IaasUcsdInfoResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasUcsdInfoListExecute(r ApiGetIaasUcsdInfoListRequest) (*IaasUcsdInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasUcsdInfoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasUcsdInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdInfos"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2925,7 +3694,7 @@ func (a *IaasApiService) GetIaasUcsdInfoListExecute(r ApiGetIaasUcsdInfoListRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2935,15 +3704,15 @@ func (a *IaasApiService) GetIaasUcsdInfoListExecute(r ApiGetIaasUcsdInfoListRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2999,7 +3768,7 @@ func (a *IaasApiService) GetIaasUcsdInfoListExecute(r ApiGetIaasUcsdInfoListRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3010,23 +3779,23 @@ func (a *IaasApiService) GetIaasUcsdInfoListExecute(r ApiGetIaasUcsdInfoListRequ
 }
 
 type ApiGetIaasUcsdManagedInfraByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IaasApiService
 	moid       string
 }
 
-func (r ApiGetIaasUcsdManagedInfraByMoidRequest) Execute() (IaasUcsdManagedInfra, *_nethttp.Response, error) {
+func (r ApiGetIaasUcsdManagedInfraByMoidRequest) Execute() (*IaasUcsdManagedInfra, *http.Response, error) {
 	return r.ApiService.GetIaasUcsdManagedInfraByMoidExecute(r)
 }
 
 /*
 GetIaasUcsdManagedInfraByMoid Read a 'iaas.UcsdManagedInfra' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIaasUcsdManagedInfraByMoidRequest
 */
-func (a *IaasApiService) GetIaasUcsdManagedInfraByMoid(ctx _context.Context, moid string) ApiGetIaasUcsdManagedInfraByMoidRequest {
+func (a *IaasApiService) GetIaasUcsdManagedInfraByMoid(ctx context.Context, moid string) ApiGetIaasUcsdManagedInfraByMoidRequest {
 	return ApiGetIaasUcsdManagedInfraByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3036,27 +3805,25 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return IaasUcsdManagedInfra
-func (a *IaasApiService) GetIaasUcsdManagedInfraByMoidExecute(r ApiGetIaasUcsdManagedInfraByMoidRequest) (IaasUcsdManagedInfra, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasUcsdManagedInfraByMoidExecute(r ApiGetIaasUcsdManagedInfraByMoidRequest) (*IaasUcsdManagedInfra, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasUcsdManagedInfra
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasUcsdManagedInfra
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdManagedInfraByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdManagedInfras/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3075,7 +3842,7 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraByMoidExecute(r ApiGetIaasUcsdMa
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3085,15 +3852,15 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraByMoidExecute(r ApiGetIaasUcsdMa
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3149,7 +3916,7 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraByMoidExecute(r ApiGetIaasUcsdMa
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3160,7 +3927,7 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraByMoidExecute(r ApiGetIaasUcsdMa
 }
 
 type ApiGetIaasUcsdManagedInfraListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IaasApiService
 	filter      *string
 	orderby     *string
@@ -3241,17 +4008,17 @@ func (r ApiGetIaasUcsdManagedInfraListRequest) Tags(tags string) ApiGetIaasUcsdM
 	return r
 }
 
-func (r ApiGetIaasUcsdManagedInfraListRequest) Execute() (IaasUcsdManagedInfraResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasUcsdManagedInfraListRequest) Execute() (*IaasUcsdManagedInfraResponse, *http.Response, error) {
 	return r.ApiService.GetIaasUcsdManagedInfraListExecute(r)
 }
 
 /*
 GetIaasUcsdManagedInfraList Read a 'iaas.UcsdManagedInfra' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIaasUcsdManagedInfraListRequest
 */
-func (a *IaasApiService) GetIaasUcsdManagedInfraList(ctx _context.Context) ApiGetIaasUcsdManagedInfraListRequest {
+func (a *IaasApiService) GetIaasUcsdManagedInfraList(ctx context.Context) ApiGetIaasUcsdManagedInfraListRequest {
 	return ApiGetIaasUcsdManagedInfraListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3260,26 +4027,24 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return IaasUcsdManagedInfraResponse
-func (a *IaasApiService) GetIaasUcsdManagedInfraListExecute(r ApiGetIaasUcsdManagedInfraListRequest) (IaasUcsdManagedInfraResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasUcsdManagedInfraListExecute(r ApiGetIaasUcsdManagedInfraListRequest) (*IaasUcsdManagedInfraResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasUcsdManagedInfraResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasUcsdManagedInfraResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdManagedInfraList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdManagedInfras"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3331,7 +4096,7 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraListExecute(r ApiGetIaasUcsdMana
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3341,15 +4106,15 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraListExecute(r ApiGetIaasUcsdMana
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3405,7 +4170,7 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraListExecute(r ApiGetIaasUcsdMana
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3416,23 +4181,23 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraListExecute(r ApiGetIaasUcsdMana
 }
 
 type ApiGetIaasUcsdMessagesByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IaasApiService
 	moid       string
 }
 
-func (r ApiGetIaasUcsdMessagesByMoidRequest) Execute() (IaasUcsdMessages, *_nethttp.Response, error) {
+func (r ApiGetIaasUcsdMessagesByMoidRequest) Execute() (*IaasUcsdMessages, *http.Response, error) {
 	return r.ApiService.GetIaasUcsdMessagesByMoidExecute(r)
 }
 
 /*
 GetIaasUcsdMessagesByMoid Read a 'iaas.UcsdMessages' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIaasUcsdMessagesByMoidRequest
 */
-func (a *IaasApiService) GetIaasUcsdMessagesByMoid(ctx _context.Context, moid string) ApiGetIaasUcsdMessagesByMoidRequest {
+func (a *IaasApiService) GetIaasUcsdMessagesByMoid(ctx context.Context, moid string) ApiGetIaasUcsdMessagesByMoidRequest {
 	return ApiGetIaasUcsdMessagesByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3442,27 +4207,25 @@ func (a *IaasApiService) GetIaasUcsdMessagesByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return IaasUcsdMessages
-func (a *IaasApiService) GetIaasUcsdMessagesByMoidExecute(r ApiGetIaasUcsdMessagesByMoidRequest) (IaasUcsdMessages, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasUcsdMessagesByMoidExecute(r ApiGetIaasUcsdMessagesByMoidRequest) (*IaasUcsdMessages, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasUcsdMessages
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasUcsdMessages
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdMessagesByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdMessages/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3481,7 +4244,7 @@ func (a *IaasApiService) GetIaasUcsdMessagesByMoidExecute(r ApiGetIaasUcsdMessag
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3491,15 +4254,15 @@ func (a *IaasApiService) GetIaasUcsdMessagesByMoidExecute(r ApiGetIaasUcsdMessag
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3555,7 +4318,7 @@ func (a *IaasApiService) GetIaasUcsdMessagesByMoidExecute(r ApiGetIaasUcsdMessag
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3566,7 +4329,7 @@ func (a *IaasApiService) GetIaasUcsdMessagesByMoidExecute(r ApiGetIaasUcsdMessag
 }
 
 type ApiGetIaasUcsdMessagesListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IaasApiService
 	filter      *string
 	orderby     *string
@@ -3647,17 +4410,17 @@ func (r ApiGetIaasUcsdMessagesListRequest) Tags(tags string) ApiGetIaasUcsdMessa
 	return r
 }
 
-func (r ApiGetIaasUcsdMessagesListRequest) Execute() (IaasUcsdMessagesResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasUcsdMessagesListRequest) Execute() (*IaasUcsdMessagesResponse, *http.Response, error) {
 	return r.ApiService.GetIaasUcsdMessagesListExecute(r)
 }
 
 /*
 GetIaasUcsdMessagesList Read a 'iaas.UcsdMessages' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIaasUcsdMessagesListRequest
 */
-func (a *IaasApiService) GetIaasUcsdMessagesList(ctx _context.Context) ApiGetIaasUcsdMessagesListRequest {
+func (a *IaasApiService) GetIaasUcsdMessagesList(ctx context.Context) ApiGetIaasUcsdMessagesListRequest {
 	return ApiGetIaasUcsdMessagesListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3666,26 +4429,24 @@ func (a *IaasApiService) GetIaasUcsdMessagesList(ctx _context.Context) ApiGetIaa
 
 // Execute executes the request
 //  @return IaasUcsdMessagesResponse
-func (a *IaasApiService) GetIaasUcsdMessagesListExecute(r ApiGetIaasUcsdMessagesListRequest) (IaasUcsdMessagesResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasUcsdMessagesListExecute(r ApiGetIaasUcsdMessagesListRequest) (*IaasUcsdMessagesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasUcsdMessagesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasUcsdMessagesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdMessagesList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdMessages"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3737,7 +4498,7 @@ func (a *IaasApiService) GetIaasUcsdMessagesListExecute(r ApiGetIaasUcsdMessages
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3747,15 +4508,15 @@ func (a *IaasApiService) GetIaasUcsdMessagesListExecute(r ApiGetIaasUcsdMessages
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3811,7 +4572,7 @@ func (a *IaasApiService) GetIaasUcsdMessagesListExecute(r ApiGetIaasUcsdMessages
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3822,7 +4583,7 @@ func (a *IaasApiService) GetIaasUcsdMessagesListExecute(r ApiGetIaasUcsdMessages
 }
 
 type ApiPatchIaasUcsdInfoRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IaasApiService
 	moid         string
 	iaasUcsdInfo *IaasUcsdInfo
@@ -3841,18 +4602,18 @@ func (r ApiPatchIaasUcsdInfoRequest) IfMatch(ifMatch string) ApiPatchIaasUcsdInf
 	return r
 }
 
-func (r ApiPatchIaasUcsdInfoRequest) Execute() (IaasUcsdInfo, *_nethttp.Response, error) {
+func (r ApiPatchIaasUcsdInfoRequest) Execute() (*IaasUcsdInfo, *http.Response, error) {
 	return r.ApiService.PatchIaasUcsdInfoExecute(r)
 }
 
 /*
 PatchIaasUcsdInfo Update a 'iaas.UcsdInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIaasUcsdInfoRequest
 */
-func (a *IaasApiService) PatchIaasUcsdInfo(ctx _context.Context, moid string) ApiPatchIaasUcsdInfoRequest {
+func (a *IaasApiService) PatchIaasUcsdInfo(ctx context.Context, moid string) ApiPatchIaasUcsdInfoRequest {
 	return ApiPatchIaasUcsdInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3862,27 +4623,25 @@ func (a *IaasApiService) PatchIaasUcsdInfo(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return IaasUcsdInfo
-func (a *IaasApiService) PatchIaasUcsdInfoExecute(r ApiPatchIaasUcsdInfoRequest) (IaasUcsdInfo, *_nethttp.Response, error) {
+func (a *IaasApiService) PatchIaasUcsdInfoExecute(r ApiPatchIaasUcsdInfoRequest) (*IaasUcsdInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasUcsdInfo
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasUcsdInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.PatchIaasUcsdInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iaasUcsdInfo == nil {
 		return localVarReturnValue, nil, reportError("iaasUcsdInfo is required and must be specified")
 	}
@@ -3909,7 +4668,7 @@ func (a *IaasApiService) PatchIaasUcsdInfoExecute(r ApiPatchIaasUcsdInfoRequest)
 	}
 	// body params
 	localVarPostBody = r.iaasUcsdInfo
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3919,15 +4678,15 @@ func (a *IaasApiService) PatchIaasUcsdInfoExecute(r ApiPatchIaasUcsdInfoRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3983,7 +4742,7 @@ func (a *IaasApiService) PatchIaasUcsdInfoExecute(r ApiPatchIaasUcsdInfoRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3994,7 +4753,7 @@ func (a *IaasApiService) PatchIaasUcsdInfoExecute(r ApiPatchIaasUcsdInfoRequest)
 }
 
 type ApiUpdateIaasUcsdInfoRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *IaasApiService
 	moid         string
 	iaasUcsdInfo *IaasUcsdInfo
@@ -4013,18 +4772,18 @@ func (r ApiUpdateIaasUcsdInfoRequest) IfMatch(ifMatch string) ApiUpdateIaasUcsdI
 	return r
 }
 
-func (r ApiUpdateIaasUcsdInfoRequest) Execute() (IaasUcsdInfo, *_nethttp.Response, error) {
+func (r ApiUpdateIaasUcsdInfoRequest) Execute() (*IaasUcsdInfo, *http.Response, error) {
 	return r.ApiService.UpdateIaasUcsdInfoExecute(r)
 }
 
 /*
 UpdateIaasUcsdInfo Update a 'iaas.UcsdInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIaasUcsdInfoRequest
 */
-func (a *IaasApiService) UpdateIaasUcsdInfo(ctx _context.Context, moid string) ApiUpdateIaasUcsdInfoRequest {
+func (a *IaasApiService) UpdateIaasUcsdInfo(ctx context.Context, moid string) ApiUpdateIaasUcsdInfoRequest {
 	return ApiUpdateIaasUcsdInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4034,27 +4793,25 @@ func (a *IaasApiService) UpdateIaasUcsdInfo(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return IaasUcsdInfo
-func (a *IaasApiService) UpdateIaasUcsdInfoExecute(r ApiUpdateIaasUcsdInfoRequest) (IaasUcsdInfo, *_nethttp.Response, error) {
+func (a *IaasApiService) UpdateIaasUcsdInfoExecute(r ApiUpdateIaasUcsdInfoRequest) (*IaasUcsdInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IaasUcsdInfo
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IaasUcsdInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.UpdateIaasUcsdInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.iaasUcsdInfo == nil {
 		return localVarReturnValue, nil, reportError("iaasUcsdInfo is required and must be specified")
 	}
@@ -4081,7 +4838,7 @@ func (a *IaasApiService) UpdateIaasUcsdInfoExecute(r ApiUpdateIaasUcsdInfoReques
 	}
 	// body params
 	localVarPostBody = r.iaasUcsdInfo
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4091,15 +4848,15 @@ func (a *IaasApiService) UpdateIaasUcsdInfoExecute(r ApiUpdateIaasUcsdInfoReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4155,7 +4912,7 @@ func (a *IaasApiService) UpdateIaasUcsdInfoExecute(r ApiUpdateIaasUcsdInfoReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

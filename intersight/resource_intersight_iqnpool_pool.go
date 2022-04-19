@@ -566,7 +566,6 @@ func resourceIqnpoolPool() *schema.Resource {
 
 func resourceIqnpoolPoolCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIqnpoolPoolWithDefaults()
@@ -746,7 +745,7 @@ func resourceIqnpoolPoolCreate(c context.Context, d *schema.ResourceData, meta i
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating IqnpoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating IqnpoolPool: %s", responseErr.Error())
@@ -758,7 +757,6 @@ func resourceIqnpoolPoolCreate(c context.Context, d *schema.ResourceData, meta i
 
 func resourceIqnpoolPoolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.IqnpoolApi.GetIqnpoolPoolByMoid(conn.ctx, d.Id())
@@ -771,7 +769,7 @@ func resourceIqnpoolPoolRead(c context.Context, d *schema.ResourceData, meta int
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching IqnpoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching IqnpoolPool: %s", responseErr.Error())
@@ -880,7 +878,6 @@ func resourceIqnpoolPoolRead(c context.Context, d *schema.ResourceData, meta int
 
 func resourceIqnpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IqnpoolPool{}
@@ -1065,7 +1062,7 @@ func resourceIqnpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta i
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating IqnpoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating IqnpoolPool: %s", responseErr.Error())
@@ -1077,7 +1074,6 @@ func resourceIqnpoolPoolUpdate(c context.Context, d *schema.ResourceData, meta i
 
 func resourceIqnpoolPoolDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IqnpoolApi.DeleteIqnpoolPool(conn.ctx, d.Id())
@@ -1089,7 +1085,7 @@ func resourceIqnpoolPoolDelete(c context.Context, d *schema.ResourceData, meta i
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting IqnpoolPool object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting IqnpoolPool object: %s", deleteErr.Error())

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -64,10 +64,11 @@ type EquipmentChassis struct {
 	Fanmodules          []EquipmentFanModuleRelationship `json:"Fanmodules,omitempty"`
 	InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 	// An array of relationships to equipmentIoCard resources.
-	Ioms              []EquipmentIoCardRelationship    `json:"Ioms,omitempty"`
-	LocatorLed        *EquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
-	PowerControlState *PowerControlStateRelationship   `json:"PowerControlState,omitempty"`
-	PsuControl        *EquipmentPsuControlRelationship `json:"PsuControl,omitempty"`
+	Ioms                []EquipmentIoCardRelationship    `json:"Ioms,omitempty"`
+	LocatorLed          *EquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
+	ManagementInterface *ManagementInterfaceRelationship `json:"ManagementInterface,omitempty"`
+	PowerControlState   *PowerControlStateRelationship   `json:"PowerControlState,omitempty"`
+	PsuControl          *EquipmentPsuControlRelationship `json:"PsuControl,omitempty"`
 	// An array of relationships to equipmentPsu resources.
 	Psus             []EquipmentPsuRelationship           `json:"Psus,omitempty"`
 	RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -437,11 +438,11 @@ func (o *EquipmentChassis) GetOperReason() []string {
 // GetOperReasonOk returns a tuple with the OperReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EquipmentChassis) GetOperReasonOk() (*[]string, bool) {
+func (o *EquipmentChassis) GetOperReasonOk() ([]string, bool) {
 	if o == nil || o.OperReason == nil {
 		return nil, false
 	}
-	return &o.OperReason, true
+	return o.OperReason, true
 }
 
 // HasOperReason returns a boolean if a field has been set.
@@ -694,11 +695,11 @@ func (o *EquipmentChassis) GetBlades() []ComputeBladeRelationship {
 // GetBladesOk returns a tuple with the Blades field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EquipmentChassis) GetBladesOk() (*[]ComputeBladeRelationship, bool) {
+func (o *EquipmentChassis) GetBladesOk() ([]ComputeBladeRelationship, bool) {
 	if o == nil || o.Blades == nil {
 		return nil, false
 	}
-	return &o.Blades, true
+	return o.Blades, true
 }
 
 // HasBlades returns a boolean if a field has been set.
@@ -727,11 +728,11 @@ func (o *EquipmentChassis) GetExpanderModules() []EquipmentExpanderModuleRelatio
 // GetExpanderModulesOk returns a tuple with the ExpanderModules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EquipmentChassis) GetExpanderModulesOk() (*[]EquipmentExpanderModuleRelationship, bool) {
+func (o *EquipmentChassis) GetExpanderModulesOk() ([]EquipmentExpanderModuleRelationship, bool) {
 	if o == nil || o.ExpanderModules == nil {
 		return nil, false
 	}
-	return &o.ExpanderModules, true
+	return o.ExpanderModules, true
 }
 
 // HasExpanderModules returns a boolean if a field has been set.
@@ -792,11 +793,11 @@ func (o *EquipmentChassis) GetFanmodules() []EquipmentFanModuleRelationship {
 // GetFanmodulesOk returns a tuple with the Fanmodules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EquipmentChassis) GetFanmodulesOk() (*[]EquipmentFanModuleRelationship, bool) {
+func (o *EquipmentChassis) GetFanmodulesOk() ([]EquipmentFanModuleRelationship, bool) {
 	if o == nil || o.Fanmodules == nil {
 		return nil, false
 	}
-	return &o.Fanmodules, true
+	return o.Fanmodules, true
 }
 
 // HasFanmodules returns a boolean if a field has been set.
@@ -857,11 +858,11 @@ func (o *EquipmentChassis) GetIoms() []EquipmentIoCardRelationship {
 // GetIomsOk returns a tuple with the Ioms field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EquipmentChassis) GetIomsOk() (*[]EquipmentIoCardRelationship, bool) {
+func (o *EquipmentChassis) GetIomsOk() ([]EquipmentIoCardRelationship, bool) {
 	if o == nil || o.Ioms == nil {
 		return nil, false
 	}
-	return &o.Ioms, true
+	return o.Ioms, true
 }
 
 // HasIoms returns a boolean if a field has been set.
@@ -908,6 +909,38 @@ func (o *EquipmentChassis) HasLocatorLed() bool {
 // SetLocatorLed gets a reference to the given EquipmentLocatorLedRelationship and assigns it to the LocatorLed field.
 func (o *EquipmentChassis) SetLocatorLed(v EquipmentLocatorLedRelationship) {
 	o.LocatorLed = &v
+}
+
+// GetManagementInterface returns the ManagementInterface field value if set, zero value otherwise.
+func (o *EquipmentChassis) GetManagementInterface() ManagementInterfaceRelationship {
+	if o == nil || o.ManagementInterface == nil {
+		var ret ManagementInterfaceRelationship
+		return ret
+	}
+	return *o.ManagementInterface
+}
+
+// GetManagementInterfaceOk returns a tuple with the ManagementInterface field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EquipmentChassis) GetManagementInterfaceOk() (*ManagementInterfaceRelationship, bool) {
+	if o == nil || o.ManagementInterface == nil {
+		return nil, false
+	}
+	return o.ManagementInterface, true
+}
+
+// HasManagementInterface returns a boolean if a field has been set.
+func (o *EquipmentChassis) HasManagementInterface() bool {
+	if o != nil && o.ManagementInterface != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetManagementInterface gets a reference to the given ManagementInterfaceRelationship and assigns it to the ManagementInterface field.
+func (o *EquipmentChassis) SetManagementInterface(v ManagementInterfaceRelationship) {
+	o.ManagementInterface = &v
 }
 
 // GetPowerControlState returns the PowerControlState field value if set, zero value otherwise.
@@ -986,11 +1019,11 @@ func (o *EquipmentChassis) GetPsus() []EquipmentPsuRelationship {
 // GetPsusOk returns a tuple with the Psus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EquipmentChassis) GetPsusOk() (*[]EquipmentPsuRelationship, bool) {
+func (o *EquipmentChassis) GetPsusOk() ([]EquipmentPsuRelationship, bool) {
 	if o == nil || o.Psus == nil {
 		return nil, false
 	}
-	return &o.Psus, true
+	return o.Psus, true
 }
 
 // HasPsus returns a boolean if a field has been set.
@@ -1051,11 +1084,11 @@ func (o *EquipmentChassis) GetSasexpanders() []StorageSasExpanderRelationship {
 // GetSasexpandersOk returns a tuple with the Sasexpanders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EquipmentChassis) GetSasexpandersOk() (*[]StorageSasExpanderRelationship, bool) {
+func (o *EquipmentChassis) GetSasexpandersOk() ([]StorageSasExpanderRelationship, bool) {
 	if o == nil || o.Sasexpanders == nil {
 		return nil, false
 	}
-	return &o.Sasexpanders, true
+	return o.Sasexpanders, true
 }
 
 // HasSasexpanders returns a boolean if a field has been set.
@@ -1084,11 +1117,11 @@ func (o *EquipmentChassis) GetSiocs() []EquipmentSystemIoControllerRelationship 
 // GetSiocsOk returns a tuple with the Siocs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EquipmentChassis) GetSiocsOk() (*[]EquipmentSystemIoControllerRelationship, bool) {
+func (o *EquipmentChassis) GetSiocsOk() ([]EquipmentSystemIoControllerRelationship, bool) {
 	if o == nil || o.Siocs == nil {
 		return nil, false
 	}
-	return &o.Siocs, true
+	return o.Siocs, true
 }
 
 // HasSiocs returns a boolean if a field has been set.
@@ -1117,11 +1150,11 @@ func (o *EquipmentChassis) GetStorageEnclosures() []StorageEnclosureRelationship
 // GetStorageEnclosuresOk returns a tuple with the StorageEnclosures field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EquipmentChassis) GetStorageEnclosuresOk() (*[]StorageEnclosureRelationship, bool) {
+func (o *EquipmentChassis) GetStorageEnclosuresOk() ([]StorageEnclosureRelationship, bool) {
 	if o == nil || o.StorageEnclosures == nil {
 		return nil, false
 	}
-	return &o.StorageEnclosures, true
+	return o.StorageEnclosures, true
 }
 
 // HasStorageEnclosures returns a boolean if a field has been set.
@@ -1150,11 +1183,11 @@ func (o *EquipmentChassis) GetVirtualDriveContainer() []StorageVirtualDriveConta
 // GetVirtualDriveContainerOk returns a tuple with the VirtualDriveContainer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *EquipmentChassis) GetVirtualDriveContainerOk() (*[]StorageVirtualDriveContainerRelationship, bool) {
+func (o *EquipmentChassis) GetVirtualDriveContainerOk() ([]StorageVirtualDriveContainerRelationship, bool) {
 	if o == nil || o.VirtualDriveContainer == nil {
 		return nil, false
 	}
-	return &o.VirtualDriveContainer, true
+	return o.VirtualDriveContainer, true
 }
 
 // HasVirtualDriveContainer returns a boolean if a field has been set.
@@ -1256,6 +1289,9 @@ func (o EquipmentChassis) MarshalJSON() ([]byte, error) {
 	if o.LocatorLed != nil {
 		toSerialize["LocatorLed"] = o.LocatorLed
 	}
+	if o.ManagementInterface != nil {
+		toSerialize["ManagementInterface"] = o.ManagementInterface
+	}
 	if o.PowerControlState != nil {
 		toSerialize["PowerControlState"] = o.PowerControlState
 	}
@@ -1334,10 +1370,11 @@ func (o *EquipmentChassis) UnmarshalJSON(bytes []byte) (err error) {
 		Fanmodules          []EquipmentFanModuleRelationship `json:"Fanmodules,omitempty"`
 		InventoryDeviceInfo *InventoryDeviceInfoRelationship `json:"InventoryDeviceInfo,omitempty"`
 		// An array of relationships to equipmentIoCard resources.
-		Ioms              []EquipmentIoCardRelationship    `json:"Ioms,omitempty"`
-		LocatorLed        *EquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
-		PowerControlState *PowerControlStateRelationship   `json:"PowerControlState,omitempty"`
-		PsuControl        *EquipmentPsuControlRelationship `json:"PsuControl,omitempty"`
+		Ioms                []EquipmentIoCardRelationship    `json:"Ioms,omitempty"`
+		LocatorLed          *EquipmentLocatorLedRelationship `json:"LocatorLed,omitempty"`
+		ManagementInterface *ManagementInterfaceRelationship `json:"ManagementInterface,omitempty"`
+		PowerControlState   *PowerControlStateRelationship   `json:"PowerControlState,omitempty"`
+		PsuControl          *EquipmentPsuControlRelationship `json:"PsuControl,omitempty"`
 		// An array of relationships to equipmentPsu resources.
 		Psus             []EquipmentPsuRelationship           `json:"Psus,omitempty"`
 		RegisteredDevice *AssetDeviceRegistrationRelationship `json:"RegisteredDevice,omitempty"`
@@ -1381,6 +1418,7 @@ func (o *EquipmentChassis) UnmarshalJSON(bytes []byte) (err error) {
 		varEquipmentChassis.InventoryDeviceInfo = varEquipmentChassisWithoutEmbeddedStruct.InventoryDeviceInfo
 		varEquipmentChassis.Ioms = varEquipmentChassisWithoutEmbeddedStruct.Ioms
 		varEquipmentChassis.LocatorLed = varEquipmentChassisWithoutEmbeddedStruct.LocatorLed
+		varEquipmentChassis.ManagementInterface = varEquipmentChassisWithoutEmbeddedStruct.ManagementInterface
 		varEquipmentChassis.PowerControlState = varEquipmentChassisWithoutEmbeddedStruct.PowerControlState
 		varEquipmentChassis.PsuControl = varEquipmentChassisWithoutEmbeddedStruct.PsuControl
 		varEquipmentChassis.Psus = varEquipmentChassisWithoutEmbeddedStruct.Psus
@@ -1431,6 +1469,7 @@ func (o *EquipmentChassis) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "InventoryDeviceInfo")
 		delete(additionalProperties, "Ioms")
 		delete(additionalProperties, "LocatorLed")
+		delete(additionalProperties, "ManagementInterface")
 		delete(additionalProperties, "PowerControlState")
 		delete(additionalProperties, "PsuControl")
 		delete(additionalProperties, "Psus")

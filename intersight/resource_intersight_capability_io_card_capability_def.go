@@ -406,7 +406,6 @@ func resourceCapabilityIoCardCapabilityDef() *schema.Resource {
 
 func resourceCapabilityIoCardCapabilityDefCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityIoCardCapabilityDefWithDefaults()
@@ -479,7 +478,7 @@ func resourceCapabilityIoCardCapabilityDefCreate(c context.Context, d *schema.Re
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityIoCardCapabilityDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityIoCardCapabilityDef: %s", responseErr.Error())
@@ -491,7 +490,6 @@ func resourceCapabilityIoCardCapabilityDefCreate(c context.Context, d *schema.Re
 
 func resourceCapabilityIoCardCapabilityDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityIoCardCapabilityDefByMoid(conn.ctx, d.Id())
@@ -504,7 +502,7 @@ func resourceCapabilityIoCardCapabilityDefRead(c context.Context, d *schema.Reso
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityIoCardCapabilityDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityIoCardCapabilityDef: %s", responseErr.Error())
@@ -585,7 +583,6 @@ func resourceCapabilityIoCardCapabilityDefRead(c context.Context, d *schema.Reso
 
 func resourceCapabilityIoCardCapabilityDefUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityIoCardCapabilityDef{}
@@ -661,7 +658,7 @@ func resourceCapabilityIoCardCapabilityDefUpdate(c context.Context, d *schema.Re
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityIoCardCapabilityDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityIoCardCapabilityDef: %s", responseErr.Error())
@@ -673,7 +670,6 @@ func resourceCapabilityIoCardCapabilityDefUpdate(c context.Context, d *schema.Re
 
 func resourceCapabilityIoCardCapabilityDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityIoCardCapabilityDef(conn.ctx, d.Id())
@@ -685,7 +681,7 @@ func resourceCapabilityIoCardCapabilityDefDelete(c context.Context, d *schema.Re
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityIoCardCapabilityDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityIoCardCapabilityDef object: %s", deleteErr.Error())

@@ -551,7 +551,6 @@ func resourceSdcardPolicy() *schema.Resource {
 
 func resourceSdcardPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewSdcardPolicyWithDefaults()
@@ -782,7 +781,7 @@ func resourceSdcardPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating SdcardPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating SdcardPolicy: %s", responseErr.Error())
@@ -793,7 +792,6 @@ func resourceSdcardPolicyCreate(c context.Context, d *schema.ResourceData, meta 
 }
 func detachSdcardPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SdcardPolicy{}
@@ -806,7 +804,7 @@ func detachSdcardPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.D
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -816,7 +814,6 @@ func detachSdcardPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.D
 
 func resourceSdcardPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.SdcardApi.GetSdcardPolicyByMoid(conn.ctx, d.Id())
@@ -829,7 +826,7 @@ func resourceSdcardPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching SdcardPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching SdcardPolicy: %s", responseErr.Error())
@@ -922,7 +919,6 @@ func resourceSdcardPolicyRead(c context.Context, d *schema.ResourceData, meta in
 
 func resourceSdcardPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SdcardPolicy{}
@@ -1155,7 +1151,7 @@ func resourceSdcardPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating SdcardPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating SdcardPolicy: %s", responseErr.Error())
@@ -1167,7 +1163,6 @@ func resourceSdcardPolicyUpdate(c context.Context, d *schema.ResourceData, meta 
 
 func resourceSdcardPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
@@ -1187,7 +1182,7 @@ func resourceSdcardPolicyDelete(c context.Context, d *schema.ResourceData, meta 
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting SdcardPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting SdcardPolicy object: %s", deleteErr.Error())

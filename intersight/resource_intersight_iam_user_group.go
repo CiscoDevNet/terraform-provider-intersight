@@ -600,7 +600,6 @@ func resourceIamUserGroup() *schema.Resource {
 
 func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIamUserGroupWithDefaults()
@@ -839,7 +838,7 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating IamUserGroup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating IamUserGroup: %s", responseErr.Error())
@@ -851,7 +850,6 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 
 func resourceIamUserGroupRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamUserGroupByMoid(conn.ctx, d.Id())
@@ -864,7 +862,7 @@ func resourceIamUserGroupRead(c context.Context, d *schema.ResourceData, meta in
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching IamUserGroup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching IamUserGroup: %s", responseErr.Error())
@@ -961,7 +959,6 @@ func resourceIamUserGroupRead(c context.Context, d *schema.ResourceData, meta in
 
 func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamUserGroup{}
@@ -1204,7 +1201,7 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating IamUserGroup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating IamUserGroup: %s", responseErr.Error())
@@ -1216,7 +1213,6 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 
 func resourceIamUserGroupDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamUserGroup(conn.ctx, d.Id())
@@ -1228,7 +1224,7 @@ func resourceIamUserGroupDelete(c context.Context, d *schema.ResourceData, meta 
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting IamUserGroup object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting IamUserGroup object: %s", deleteErr.Error())

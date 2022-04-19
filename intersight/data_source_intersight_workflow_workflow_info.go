@@ -171,10 +171,8 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 		},
 		"input": {
 			Description: "All the given inputs for the workflow.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"inst_id": {
 			Description: "A workflow instance Id which is the unique identified for the workflow execution.",
@@ -286,10 +284,8 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 		},
 		"output": {
 			Description: "All the generated outputs for the workflow.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"owners": {
 			Type:     schema.TypeList,
@@ -552,6 +548,16 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"rollback_on_cancel": {
+						Description: "When set to true, the changes are automatically rolled back if the workflow execution is cancelled.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"rollback_on_failure": {
+						Description: "When set to true, the changes are automatically rolled back if the workflow fails to execute.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 				},
 			},
 		},
@@ -664,10 +670,8 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 		},
 		"variable": {
 			Description: "All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -1107,10 +1111,8 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 		},
 		"input": {
 			Description: "All the given inputs for the workflow.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"inst_id": {
 			Description: "A workflow instance Id which is the unique identified for the workflow execution.",
@@ -1222,10 +1224,8 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 		},
 		"output": {
 			Description: "All the generated outputs for the workflow.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"owners": {
 			Type:     schema.TypeList,
@@ -1488,6 +1488,16 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
+					"rollback_on_cancel": {
+						Description: "When set to true, the changes are automatically rolled back if the workflow execution is cancelled.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"rollback_on_failure": {
+						Description: "When set to true, the changes are automatically rolled back if the workflow fails to execute.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 				},
 			},
 		},
@@ -1600,10 +1610,8 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 		},
 		"variable": {
 			Description: "All the generated variables for the workflow. During workflow execution, the variables will be updated as per the variableParameters specified after each task execution.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"version_context": {
 			Description: "The versioning info for this managed object.",
@@ -1899,7 +1907,6 @@ func dataSourceWorkflowWorkflowInfo() *schema.Resource {
 
 func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowWorkflowInfo{}
@@ -2084,7 +2091,13 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("input"); ok {
-		o.SetInput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetInput(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("inst_id"); ok {
@@ -2211,7 +2224,13 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("output"); ok {
-		o.SetOutput(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutput(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -2608,7 +2627,13 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("variable"); ok {
-		o.SetVariable(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetVariable(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("version_context"); ok {
@@ -2904,7 +2929,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of WorkflowWorkflowInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of WorkflowWorkflowInfo: %s", responseErr.Error())
@@ -2921,7 +2946,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching WorkflowWorkflowInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching WorkflowWorkflowInfo: %s", responseErr.Error())
@@ -2951,6 +2976,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 
 				temp["end_time"] = (s.GetEndTime()).String()
 				temp["failed_workflow_cleanup_duration"] = (s.GetFailedWorkflowCleanupDuration())
+				temp["input"] = flattenAdditionalProperties(s.GetInput())
 				temp["inst_id"] = (s.GetInstId())
 				temp["internal"] = (s.GetInternal())
 				temp["last_action"] = (s.GetLastAction())
@@ -2964,6 +2990,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
+				temp["output"] = flattenAdditionalProperties(s.GetOutput())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
@@ -2994,6 +3021,7 @@ func dataSourceWorkflowWorkflowInfoRead(c context.Context, d *schema.ResourceDat
 				temp["type"] = (s.GetType())
 				temp["user_action_required"] = (s.GetUserActionRequired())
 				temp["user_id"] = (s.GetUserId())
+				temp["variable"] = flattenAdditionalProperties(s.GetVariable())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)
 				temp["wait_reason"] = (s.GetWaitReason())

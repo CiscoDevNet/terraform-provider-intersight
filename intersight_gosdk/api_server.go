@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // ServerApiService ServerApi service
 type ServerApiService service
 
 type ApiCreateServerConfigImportRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *ServerApiService
 	serverConfigImport *ServerConfigImport
 	ifMatch            *string
@@ -54,17 +49,17 @@ func (r ApiCreateServerConfigImportRequest) IfNoneMatch(ifNoneMatch string) ApiC
 	return r
 }
 
-func (r ApiCreateServerConfigImportRequest) Execute() (ServerConfigImport, *_nethttp.Response, error) {
+func (r ApiCreateServerConfigImportRequest) Execute() (*ServerConfigImport, *http.Response, error) {
 	return r.ApiService.CreateServerConfigImportExecute(r)
 }
 
 /*
 CreateServerConfigImport Create a 'server.ConfigImport' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateServerConfigImportRequest
 */
-func (a *ServerApiService) CreateServerConfigImport(ctx _context.Context) ApiCreateServerConfigImportRequest {
+func (a *ServerApiService) CreateServerConfigImport(ctx context.Context) ApiCreateServerConfigImportRequest {
 	return ApiCreateServerConfigImportRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *ServerApiService) CreateServerConfigImport(ctx _context.Context) ApiCre
 
 // Execute executes the request
 //  @return ServerConfigImport
-func (a *ServerApiService) CreateServerConfigImportExecute(r ApiCreateServerConfigImportRequest) (ServerConfigImport, *_nethttp.Response, error) {
+func (a *ServerApiService) CreateServerConfigImportExecute(r ApiCreateServerConfigImportRequest) (*ServerConfigImport, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerConfigImport
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerConfigImport
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.CreateServerConfigImport")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ConfigImports"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.serverConfigImport == nil {
 		return localVarReturnValue, nil, reportError("serverConfigImport is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *ServerApiService) CreateServerConfigImportExecute(r ApiCreateServerConf
 	}
 	// body params
 	localVarPostBody = r.serverConfigImport
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *ServerApiService) CreateServerConfigImportExecute(r ApiCreateServerConf
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *ServerApiService) CreateServerConfigImportExecute(r ApiCreateServerConf
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,7 +200,7 @@ func (a *ServerApiService) CreateServerConfigImportExecute(r ApiCreateServerConf
 }
 
 type ApiCreateServerProfileRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *ServerApiService
 	serverProfile *ServerProfile
 	ifMatch       *string
@@ -232,17 +225,17 @@ func (r ApiCreateServerProfileRequest) IfNoneMatch(ifNoneMatch string) ApiCreate
 	return r
 }
 
-func (r ApiCreateServerProfileRequest) Execute() (ServerProfile, *_nethttp.Response, error) {
+func (r ApiCreateServerProfileRequest) Execute() (*ServerProfile, *http.Response, error) {
 	return r.ApiService.CreateServerProfileExecute(r)
 }
 
 /*
 CreateServerProfile Create a 'server.Profile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateServerProfileRequest
 */
-func (a *ServerApiService) CreateServerProfile(ctx _context.Context) ApiCreateServerProfileRequest {
+func (a *ServerApiService) CreateServerProfile(ctx context.Context) ApiCreateServerProfileRequest {
 	return ApiCreateServerProfileRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -251,26 +244,24 @@ func (a *ServerApiService) CreateServerProfile(ctx _context.Context) ApiCreateSe
 
 // Execute executes the request
 //  @return ServerProfile
-func (a *ServerApiService) CreateServerProfileExecute(r ApiCreateServerProfileRequest) (ServerProfile, *_nethttp.Response, error) {
+func (a *ServerApiService) CreateServerProfileExecute(r ApiCreateServerProfileRequest) (*ServerProfile, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerProfile
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.CreateServerProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/Profiles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.serverProfile == nil {
 		return localVarReturnValue, nil, reportError("serverProfile is required and must be specified")
 	}
@@ -300,7 +291,7 @@ func (a *ServerApiService) CreateServerProfileExecute(r ApiCreateServerProfileRe
 	}
 	// body params
 	localVarPostBody = r.serverProfile
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -310,15 +301,15 @@ func (a *ServerApiService) CreateServerProfileExecute(r ApiCreateServerProfileRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -374,7 +365,7 @@ func (a *ServerApiService) CreateServerProfileExecute(r ApiCreateServerProfileRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -385,7 +376,7 @@ func (a *ServerApiService) CreateServerProfileExecute(r ApiCreateServerProfileRe
 }
 
 type ApiCreateServerProfileTemplateRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *ServerApiService
 	serverProfileTemplate *ServerProfileTemplate
 	ifMatch               *string
@@ -410,17 +401,17 @@ func (r ApiCreateServerProfileTemplateRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateServerProfileTemplateRequest) Execute() (ServerProfileTemplate, *_nethttp.Response, error) {
+func (r ApiCreateServerProfileTemplateRequest) Execute() (*ServerProfileTemplate, *http.Response, error) {
 	return r.ApiService.CreateServerProfileTemplateExecute(r)
 }
 
 /*
 CreateServerProfileTemplate Create a 'server.ProfileTemplate' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateServerProfileTemplateRequest
 */
-func (a *ServerApiService) CreateServerProfileTemplate(ctx _context.Context) ApiCreateServerProfileTemplateRequest {
+func (a *ServerApiService) CreateServerProfileTemplate(ctx context.Context) ApiCreateServerProfileTemplateRequest {
 	return ApiCreateServerProfileTemplateRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -429,26 +420,24 @@ func (a *ServerApiService) CreateServerProfileTemplate(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return ServerProfileTemplate
-func (a *ServerApiService) CreateServerProfileTemplateExecute(r ApiCreateServerProfileTemplateRequest) (ServerProfileTemplate, *_nethttp.Response, error) {
+func (a *ServerApiService) CreateServerProfileTemplateExecute(r ApiCreateServerProfileTemplateRequest) (*ServerProfileTemplate, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerProfileTemplate
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerProfileTemplate
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.CreateServerProfileTemplate")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ProfileTemplates"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.serverProfileTemplate == nil {
 		return localVarReturnValue, nil, reportError("serverProfileTemplate is required and must be specified")
 	}
@@ -478,7 +467,7 @@ func (a *ServerApiService) CreateServerProfileTemplateExecute(r ApiCreateServerP
 	}
 	// body params
 	localVarPostBody = r.serverProfileTemplate
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -488,15 +477,15 @@ func (a *ServerApiService) CreateServerProfileTemplateExecute(r ApiCreateServerP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -552,7 +541,7 @@ func (a *ServerApiService) CreateServerProfileTemplateExecute(r ApiCreateServerP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -563,23 +552,23 @@ func (a *ServerApiService) CreateServerProfileTemplateExecute(r ApiCreateServerP
 }
 
 type ApiDeleteServerProfileRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ServerApiService
 	moid       string
 }
 
-func (r ApiDeleteServerProfileRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteServerProfileRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteServerProfileExecute(r)
 }
 
 /*
 DeleteServerProfile Delete a 'server.Profile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteServerProfileRequest
 */
-func (a *ServerApiService) DeleteServerProfile(ctx _context.Context, moid string) ApiDeleteServerProfileRequest {
+func (a *ServerApiService) DeleteServerProfile(ctx context.Context, moid string) ApiDeleteServerProfileRequest {
 	return ApiDeleteServerProfileRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -588,26 +577,24 @@ func (a *ServerApiService) DeleteServerProfile(ctx _context.Context, moid string
 }
 
 // Execute executes the request
-func (a *ServerApiService) DeleteServerProfileExecute(r ApiDeleteServerProfileRequest) (*_nethttp.Response, error) {
+func (a *ServerApiService) DeleteServerProfileExecute(r ApiDeleteServerProfileRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.DeleteServerProfile")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/Profiles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -626,7 +613,7 @@ func (a *ServerApiService) DeleteServerProfileExecute(r ApiDeleteServerProfileRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -636,15 +623,15 @@ func (a *ServerApiService) DeleteServerProfileExecute(r ApiDeleteServerProfileRe
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -702,23 +689,23 @@ func (a *ServerApiService) DeleteServerProfileExecute(r ApiDeleteServerProfileRe
 }
 
 type ApiDeleteServerProfileTemplateRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ServerApiService
 	moid       string
 }
 
-func (r ApiDeleteServerProfileTemplateRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteServerProfileTemplateRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteServerProfileTemplateExecute(r)
 }
 
 /*
 DeleteServerProfileTemplate Delete a 'server.ProfileTemplate' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteServerProfileTemplateRequest
 */
-func (a *ServerApiService) DeleteServerProfileTemplate(ctx _context.Context, moid string) ApiDeleteServerProfileTemplateRequest {
+func (a *ServerApiService) DeleteServerProfileTemplate(ctx context.Context, moid string) ApiDeleteServerProfileTemplateRequest {
 	return ApiDeleteServerProfileTemplateRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -727,26 +714,24 @@ func (a *ServerApiService) DeleteServerProfileTemplate(ctx _context.Context, moi
 }
 
 // Execute executes the request
-func (a *ServerApiService) DeleteServerProfileTemplateExecute(r ApiDeleteServerProfileTemplateRequest) (*_nethttp.Response, error) {
+func (a *ServerApiService) DeleteServerProfileTemplateExecute(r ApiDeleteServerProfileTemplateRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.DeleteServerProfileTemplate")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ProfileTemplates/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -765,7 +750,7 @@ func (a *ServerApiService) DeleteServerProfileTemplateExecute(r ApiDeleteServerP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -775,15 +760,15 @@ func (a *ServerApiService) DeleteServerProfileTemplateExecute(r ApiDeleteServerP
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -841,23 +826,23 @@ func (a *ServerApiService) DeleteServerProfileTemplateExecute(r ApiDeleteServerP
 }
 
 type ApiGetServerConfigChangeDetailByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ServerApiService
 	moid       string
 }
 
-func (r ApiGetServerConfigChangeDetailByMoidRequest) Execute() (ServerConfigChangeDetail, *_nethttp.Response, error) {
+func (r ApiGetServerConfigChangeDetailByMoidRequest) Execute() (*ServerConfigChangeDetail, *http.Response, error) {
 	return r.ApiService.GetServerConfigChangeDetailByMoidExecute(r)
 }
 
 /*
 GetServerConfigChangeDetailByMoid Read a 'server.ConfigChangeDetail' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetServerConfigChangeDetailByMoidRequest
 */
-func (a *ServerApiService) GetServerConfigChangeDetailByMoid(ctx _context.Context, moid string) ApiGetServerConfigChangeDetailByMoidRequest {
+func (a *ServerApiService) GetServerConfigChangeDetailByMoid(ctx context.Context, moid string) ApiGetServerConfigChangeDetailByMoidRequest {
 	return ApiGetServerConfigChangeDetailByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -867,27 +852,25 @@ func (a *ServerApiService) GetServerConfigChangeDetailByMoid(ctx _context.Contex
 
 // Execute executes the request
 //  @return ServerConfigChangeDetail
-func (a *ServerApiService) GetServerConfigChangeDetailByMoidExecute(r ApiGetServerConfigChangeDetailByMoidRequest) (ServerConfigChangeDetail, *_nethttp.Response, error) {
+func (a *ServerApiService) GetServerConfigChangeDetailByMoidExecute(r ApiGetServerConfigChangeDetailByMoidRequest) (*ServerConfigChangeDetail, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerConfigChangeDetail
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerConfigChangeDetail
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.GetServerConfigChangeDetailByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ConfigChangeDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -906,7 +889,7 @@ func (a *ServerApiService) GetServerConfigChangeDetailByMoidExecute(r ApiGetServ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -916,15 +899,15 @@ func (a *ServerApiService) GetServerConfigChangeDetailByMoidExecute(r ApiGetServ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -980,7 +963,7 @@ func (a *ServerApiService) GetServerConfigChangeDetailByMoidExecute(r ApiGetServ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -991,7 +974,7 @@ func (a *ServerApiService) GetServerConfigChangeDetailByMoidExecute(r ApiGetServ
 }
 
 type ApiGetServerConfigChangeDetailListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ServerApiService
 	filter      *string
 	orderby     *string
@@ -1072,17 +1055,17 @@ func (r ApiGetServerConfigChangeDetailListRequest) Tags(tags string) ApiGetServe
 	return r
 }
 
-func (r ApiGetServerConfigChangeDetailListRequest) Execute() (ServerConfigChangeDetailResponse, *_nethttp.Response, error) {
+func (r ApiGetServerConfigChangeDetailListRequest) Execute() (*ServerConfigChangeDetailResponse, *http.Response, error) {
 	return r.ApiService.GetServerConfigChangeDetailListExecute(r)
 }
 
 /*
 GetServerConfigChangeDetailList Read a 'server.ConfigChangeDetail' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetServerConfigChangeDetailListRequest
 */
-func (a *ServerApiService) GetServerConfigChangeDetailList(ctx _context.Context) ApiGetServerConfigChangeDetailListRequest {
+func (a *ServerApiService) GetServerConfigChangeDetailList(ctx context.Context) ApiGetServerConfigChangeDetailListRequest {
 	return ApiGetServerConfigChangeDetailListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1091,26 +1074,24 @@ func (a *ServerApiService) GetServerConfigChangeDetailList(ctx _context.Context)
 
 // Execute executes the request
 //  @return ServerConfigChangeDetailResponse
-func (a *ServerApiService) GetServerConfigChangeDetailListExecute(r ApiGetServerConfigChangeDetailListRequest) (ServerConfigChangeDetailResponse, *_nethttp.Response, error) {
+func (a *ServerApiService) GetServerConfigChangeDetailListExecute(r ApiGetServerConfigChangeDetailListRequest) (*ServerConfigChangeDetailResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerConfigChangeDetailResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerConfigChangeDetailResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.GetServerConfigChangeDetailList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ConfigChangeDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1162,7 +1143,7 @@ func (a *ServerApiService) GetServerConfigChangeDetailListExecute(r ApiGetServer
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1172,15 +1153,15 @@ func (a *ServerApiService) GetServerConfigChangeDetailListExecute(r ApiGetServer
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1236,7 +1217,7 @@ func (a *ServerApiService) GetServerConfigChangeDetailListExecute(r ApiGetServer
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1247,23 +1228,23 @@ func (a *ServerApiService) GetServerConfigChangeDetailListExecute(r ApiGetServer
 }
 
 type ApiGetServerConfigImportByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ServerApiService
 	moid       string
 }
 
-func (r ApiGetServerConfigImportByMoidRequest) Execute() (ServerConfigImport, *_nethttp.Response, error) {
+func (r ApiGetServerConfigImportByMoidRequest) Execute() (*ServerConfigImport, *http.Response, error) {
 	return r.ApiService.GetServerConfigImportByMoidExecute(r)
 }
 
 /*
 GetServerConfigImportByMoid Read a 'server.ConfigImport' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetServerConfigImportByMoidRequest
 */
-func (a *ServerApiService) GetServerConfigImportByMoid(ctx _context.Context, moid string) ApiGetServerConfigImportByMoidRequest {
+func (a *ServerApiService) GetServerConfigImportByMoid(ctx context.Context, moid string) ApiGetServerConfigImportByMoidRequest {
 	return ApiGetServerConfigImportByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1273,27 +1254,25 @@ func (a *ServerApiService) GetServerConfigImportByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return ServerConfigImport
-func (a *ServerApiService) GetServerConfigImportByMoidExecute(r ApiGetServerConfigImportByMoidRequest) (ServerConfigImport, *_nethttp.Response, error) {
+func (a *ServerApiService) GetServerConfigImportByMoidExecute(r ApiGetServerConfigImportByMoidRequest) (*ServerConfigImport, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerConfigImport
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerConfigImport
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.GetServerConfigImportByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ConfigImports/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1312,7 +1291,7 @@ func (a *ServerApiService) GetServerConfigImportByMoidExecute(r ApiGetServerConf
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1322,15 +1301,15 @@ func (a *ServerApiService) GetServerConfigImportByMoidExecute(r ApiGetServerConf
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1386,7 +1365,7 @@ func (a *ServerApiService) GetServerConfigImportByMoidExecute(r ApiGetServerConf
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1397,7 +1376,7 @@ func (a *ServerApiService) GetServerConfigImportByMoidExecute(r ApiGetServerConf
 }
 
 type ApiGetServerConfigImportListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ServerApiService
 	filter      *string
 	orderby     *string
@@ -1478,17 +1457,17 @@ func (r ApiGetServerConfigImportListRequest) Tags(tags string) ApiGetServerConfi
 	return r
 }
 
-func (r ApiGetServerConfigImportListRequest) Execute() (ServerConfigImportResponse, *_nethttp.Response, error) {
+func (r ApiGetServerConfigImportListRequest) Execute() (*ServerConfigImportResponse, *http.Response, error) {
 	return r.ApiService.GetServerConfigImportListExecute(r)
 }
 
 /*
 GetServerConfigImportList Read a 'server.ConfigImport' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetServerConfigImportListRequest
 */
-func (a *ServerApiService) GetServerConfigImportList(ctx _context.Context) ApiGetServerConfigImportListRequest {
+func (a *ServerApiService) GetServerConfigImportList(ctx context.Context) ApiGetServerConfigImportListRequest {
 	return ApiGetServerConfigImportListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1497,26 +1476,24 @@ func (a *ServerApiService) GetServerConfigImportList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return ServerConfigImportResponse
-func (a *ServerApiService) GetServerConfigImportListExecute(r ApiGetServerConfigImportListRequest) (ServerConfigImportResponse, *_nethttp.Response, error) {
+func (a *ServerApiService) GetServerConfigImportListExecute(r ApiGetServerConfigImportListRequest) (*ServerConfigImportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerConfigImportResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerConfigImportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.GetServerConfigImportList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ConfigImports"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1568,7 +1545,7 @@ func (a *ServerApiService) GetServerConfigImportListExecute(r ApiGetServerConfig
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1578,15 +1555,15 @@ func (a *ServerApiService) GetServerConfigImportListExecute(r ApiGetServerConfig
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1642,7 +1619,7 @@ func (a *ServerApiService) GetServerConfigImportListExecute(r ApiGetServerConfig
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1653,23 +1630,23 @@ func (a *ServerApiService) GetServerConfigImportListExecute(r ApiGetServerConfig
 }
 
 type ApiGetServerConfigResultByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ServerApiService
 	moid       string
 }
 
-func (r ApiGetServerConfigResultByMoidRequest) Execute() (ServerConfigResult, *_nethttp.Response, error) {
+func (r ApiGetServerConfigResultByMoidRequest) Execute() (*ServerConfigResult, *http.Response, error) {
 	return r.ApiService.GetServerConfigResultByMoidExecute(r)
 }
 
 /*
 GetServerConfigResultByMoid Read a 'server.ConfigResult' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetServerConfigResultByMoidRequest
 */
-func (a *ServerApiService) GetServerConfigResultByMoid(ctx _context.Context, moid string) ApiGetServerConfigResultByMoidRequest {
+func (a *ServerApiService) GetServerConfigResultByMoid(ctx context.Context, moid string) ApiGetServerConfigResultByMoidRequest {
 	return ApiGetServerConfigResultByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1679,27 +1656,25 @@ func (a *ServerApiService) GetServerConfigResultByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return ServerConfigResult
-func (a *ServerApiService) GetServerConfigResultByMoidExecute(r ApiGetServerConfigResultByMoidRequest) (ServerConfigResult, *_nethttp.Response, error) {
+func (a *ServerApiService) GetServerConfigResultByMoidExecute(r ApiGetServerConfigResultByMoidRequest) (*ServerConfigResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerConfigResult
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerConfigResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.GetServerConfigResultByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ConfigResults/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1718,7 +1693,7 @@ func (a *ServerApiService) GetServerConfigResultByMoidExecute(r ApiGetServerConf
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1728,15 +1703,15 @@ func (a *ServerApiService) GetServerConfigResultByMoidExecute(r ApiGetServerConf
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1792,7 +1767,7 @@ func (a *ServerApiService) GetServerConfigResultByMoidExecute(r ApiGetServerConf
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1803,23 +1778,23 @@ func (a *ServerApiService) GetServerConfigResultByMoidExecute(r ApiGetServerConf
 }
 
 type ApiGetServerConfigResultEntryByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ServerApiService
 	moid       string
 }
 
-func (r ApiGetServerConfigResultEntryByMoidRequest) Execute() (ServerConfigResultEntry, *_nethttp.Response, error) {
+func (r ApiGetServerConfigResultEntryByMoidRequest) Execute() (*ServerConfigResultEntry, *http.Response, error) {
 	return r.ApiService.GetServerConfigResultEntryByMoidExecute(r)
 }
 
 /*
 GetServerConfigResultEntryByMoid Read a 'server.ConfigResultEntry' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetServerConfigResultEntryByMoidRequest
 */
-func (a *ServerApiService) GetServerConfigResultEntryByMoid(ctx _context.Context, moid string) ApiGetServerConfigResultEntryByMoidRequest {
+func (a *ServerApiService) GetServerConfigResultEntryByMoid(ctx context.Context, moid string) ApiGetServerConfigResultEntryByMoidRequest {
 	return ApiGetServerConfigResultEntryByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1829,27 +1804,25 @@ func (a *ServerApiService) GetServerConfigResultEntryByMoid(ctx _context.Context
 
 // Execute executes the request
 //  @return ServerConfigResultEntry
-func (a *ServerApiService) GetServerConfigResultEntryByMoidExecute(r ApiGetServerConfigResultEntryByMoidRequest) (ServerConfigResultEntry, *_nethttp.Response, error) {
+func (a *ServerApiService) GetServerConfigResultEntryByMoidExecute(r ApiGetServerConfigResultEntryByMoidRequest) (*ServerConfigResultEntry, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerConfigResultEntry
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerConfigResultEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.GetServerConfigResultEntryByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ConfigResultEntries/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1868,7 +1841,7 @@ func (a *ServerApiService) GetServerConfigResultEntryByMoidExecute(r ApiGetServe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1878,15 +1851,15 @@ func (a *ServerApiService) GetServerConfigResultEntryByMoidExecute(r ApiGetServe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1942,7 +1915,7 @@ func (a *ServerApiService) GetServerConfigResultEntryByMoidExecute(r ApiGetServe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1953,7 +1926,7 @@ func (a *ServerApiService) GetServerConfigResultEntryByMoidExecute(r ApiGetServe
 }
 
 type ApiGetServerConfigResultEntryListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ServerApiService
 	filter      *string
 	orderby     *string
@@ -2034,17 +2007,17 @@ func (r ApiGetServerConfigResultEntryListRequest) Tags(tags string) ApiGetServer
 	return r
 }
 
-func (r ApiGetServerConfigResultEntryListRequest) Execute() (ServerConfigResultEntryResponse, *_nethttp.Response, error) {
+func (r ApiGetServerConfigResultEntryListRequest) Execute() (*ServerConfigResultEntryResponse, *http.Response, error) {
 	return r.ApiService.GetServerConfigResultEntryListExecute(r)
 }
 
 /*
 GetServerConfigResultEntryList Read a 'server.ConfigResultEntry' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetServerConfigResultEntryListRequest
 */
-func (a *ServerApiService) GetServerConfigResultEntryList(ctx _context.Context) ApiGetServerConfigResultEntryListRequest {
+func (a *ServerApiService) GetServerConfigResultEntryList(ctx context.Context) ApiGetServerConfigResultEntryListRequest {
 	return ApiGetServerConfigResultEntryListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2053,26 +2026,24 @@ func (a *ServerApiService) GetServerConfigResultEntryList(ctx _context.Context) 
 
 // Execute executes the request
 //  @return ServerConfigResultEntryResponse
-func (a *ServerApiService) GetServerConfigResultEntryListExecute(r ApiGetServerConfigResultEntryListRequest) (ServerConfigResultEntryResponse, *_nethttp.Response, error) {
+func (a *ServerApiService) GetServerConfigResultEntryListExecute(r ApiGetServerConfigResultEntryListRequest) (*ServerConfigResultEntryResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerConfigResultEntryResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerConfigResultEntryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.GetServerConfigResultEntryList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ConfigResultEntries"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2124,7 +2095,7 @@ func (a *ServerApiService) GetServerConfigResultEntryListExecute(r ApiGetServerC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2134,15 +2105,15 @@ func (a *ServerApiService) GetServerConfigResultEntryListExecute(r ApiGetServerC
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2198,7 +2169,7 @@ func (a *ServerApiService) GetServerConfigResultEntryListExecute(r ApiGetServerC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2209,7 +2180,7 @@ func (a *ServerApiService) GetServerConfigResultEntryListExecute(r ApiGetServerC
 }
 
 type ApiGetServerConfigResultListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ServerApiService
 	filter      *string
 	orderby     *string
@@ -2290,17 +2261,17 @@ func (r ApiGetServerConfigResultListRequest) Tags(tags string) ApiGetServerConfi
 	return r
 }
 
-func (r ApiGetServerConfigResultListRequest) Execute() (ServerConfigResultResponse, *_nethttp.Response, error) {
+func (r ApiGetServerConfigResultListRequest) Execute() (*ServerConfigResultResponse, *http.Response, error) {
 	return r.ApiService.GetServerConfigResultListExecute(r)
 }
 
 /*
 GetServerConfigResultList Read a 'server.ConfigResult' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetServerConfigResultListRequest
 */
-func (a *ServerApiService) GetServerConfigResultList(ctx _context.Context) ApiGetServerConfigResultListRequest {
+func (a *ServerApiService) GetServerConfigResultList(ctx context.Context) ApiGetServerConfigResultListRequest {
 	return ApiGetServerConfigResultListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2309,26 +2280,24 @@ func (a *ServerApiService) GetServerConfigResultList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return ServerConfigResultResponse
-func (a *ServerApiService) GetServerConfigResultListExecute(r ApiGetServerConfigResultListRequest) (ServerConfigResultResponse, *_nethttp.Response, error) {
+func (a *ServerApiService) GetServerConfigResultListExecute(r ApiGetServerConfigResultListRequest) (*ServerConfigResultResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerConfigResultResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerConfigResultResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.GetServerConfigResultList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ConfigResults"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2380,7 +2349,7 @@ func (a *ServerApiService) GetServerConfigResultListExecute(r ApiGetServerConfig
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2390,15 +2359,15 @@ func (a *ServerApiService) GetServerConfigResultListExecute(r ApiGetServerConfig
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2454,7 +2423,7 @@ func (a *ServerApiService) GetServerConfigResultListExecute(r ApiGetServerConfig
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2465,23 +2434,23 @@ func (a *ServerApiService) GetServerConfigResultListExecute(r ApiGetServerConfig
 }
 
 type ApiGetServerProfileByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ServerApiService
 	moid       string
 }
 
-func (r ApiGetServerProfileByMoidRequest) Execute() (ServerProfile, *_nethttp.Response, error) {
+func (r ApiGetServerProfileByMoidRequest) Execute() (*ServerProfile, *http.Response, error) {
 	return r.ApiService.GetServerProfileByMoidExecute(r)
 }
 
 /*
 GetServerProfileByMoid Read a 'server.Profile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetServerProfileByMoidRequest
 */
-func (a *ServerApiService) GetServerProfileByMoid(ctx _context.Context, moid string) ApiGetServerProfileByMoidRequest {
+func (a *ServerApiService) GetServerProfileByMoid(ctx context.Context, moid string) ApiGetServerProfileByMoidRequest {
 	return ApiGetServerProfileByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2491,27 +2460,25 @@ func (a *ServerApiService) GetServerProfileByMoid(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return ServerProfile
-func (a *ServerApiService) GetServerProfileByMoidExecute(r ApiGetServerProfileByMoidRequest) (ServerProfile, *_nethttp.Response, error) {
+func (a *ServerApiService) GetServerProfileByMoidExecute(r ApiGetServerProfileByMoidRequest) (*ServerProfile, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerProfile
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.GetServerProfileByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/Profiles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2530,7 +2497,7 @@ func (a *ServerApiService) GetServerProfileByMoidExecute(r ApiGetServerProfileBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2540,15 +2507,15 @@ func (a *ServerApiService) GetServerProfileByMoidExecute(r ApiGetServerProfileBy
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2604,7 +2571,7 @@ func (a *ServerApiService) GetServerProfileByMoidExecute(r ApiGetServerProfileBy
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2615,7 +2582,7 @@ func (a *ServerApiService) GetServerProfileByMoidExecute(r ApiGetServerProfileBy
 }
 
 type ApiGetServerProfileListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ServerApiService
 	filter      *string
 	orderby     *string
@@ -2696,17 +2663,17 @@ func (r ApiGetServerProfileListRequest) Tags(tags string) ApiGetServerProfileLis
 	return r
 }
 
-func (r ApiGetServerProfileListRequest) Execute() (ServerProfileResponse, *_nethttp.Response, error) {
+func (r ApiGetServerProfileListRequest) Execute() (*ServerProfileResponse, *http.Response, error) {
 	return r.ApiService.GetServerProfileListExecute(r)
 }
 
 /*
 GetServerProfileList Read a 'server.Profile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetServerProfileListRequest
 */
-func (a *ServerApiService) GetServerProfileList(ctx _context.Context) ApiGetServerProfileListRequest {
+func (a *ServerApiService) GetServerProfileList(ctx context.Context) ApiGetServerProfileListRequest {
 	return ApiGetServerProfileListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2715,26 +2682,24 @@ func (a *ServerApiService) GetServerProfileList(ctx _context.Context) ApiGetServ
 
 // Execute executes the request
 //  @return ServerProfileResponse
-func (a *ServerApiService) GetServerProfileListExecute(r ApiGetServerProfileListRequest) (ServerProfileResponse, *_nethttp.Response, error) {
+func (a *ServerApiService) GetServerProfileListExecute(r ApiGetServerProfileListRequest) (*ServerProfileResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerProfileResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.GetServerProfileList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/Profiles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2786,7 +2751,7 @@ func (a *ServerApiService) GetServerProfileListExecute(r ApiGetServerProfileList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2796,15 +2761,15 @@ func (a *ServerApiService) GetServerProfileListExecute(r ApiGetServerProfileList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2860,7 +2825,7 @@ func (a *ServerApiService) GetServerProfileListExecute(r ApiGetServerProfileList
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2871,23 +2836,23 @@ func (a *ServerApiService) GetServerProfileListExecute(r ApiGetServerProfileList
 }
 
 type ApiGetServerProfileTemplateByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ServerApiService
 	moid       string
 }
 
-func (r ApiGetServerProfileTemplateByMoidRequest) Execute() (ServerProfileTemplate, *_nethttp.Response, error) {
+func (r ApiGetServerProfileTemplateByMoidRequest) Execute() (*ServerProfileTemplate, *http.Response, error) {
 	return r.ApiService.GetServerProfileTemplateByMoidExecute(r)
 }
 
 /*
 GetServerProfileTemplateByMoid Read a 'server.ProfileTemplate' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetServerProfileTemplateByMoidRequest
 */
-func (a *ServerApiService) GetServerProfileTemplateByMoid(ctx _context.Context, moid string) ApiGetServerProfileTemplateByMoidRequest {
+func (a *ServerApiService) GetServerProfileTemplateByMoid(ctx context.Context, moid string) ApiGetServerProfileTemplateByMoidRequest {
 	return ApiGetServerProfileTemplateByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2897,27 +2862,25 @@ func (a *ServerApiService) GetServerProfileTemplateByMoid(ctx _context.Context, 
 
 // Execute executes the request
 //  @return ServerProfileTemplate
-func (a *ServerApiService) GetServerProfileTemplateByMoidExecute(r ApiGetServerProfileTemplateByMoidRequest) (ServerProfileTemplate, *_nethttp.Response, error) {
+func (a *ServerApiService) GetServerProfileTemplateByMoidExecute(r ApiGetServerProfileTemplateByMoidRequest) (*ServerProfileTemplate, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerProfileTemplate
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerProfileTemplate
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.GetServerProfileTemplateByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ProfileTemplates/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2936,7 +2899,7 @@ func (a *ServerApiService) GetServerProfileTemplateByMoidExecute(r ApiGetServerP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2946,15 +2909,15 @@ func (a *ServerApiService) GetServerProfileTemplateByMoidExecute(r ApiGetServerP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3010,7 +2973,7 @@ func (a *ServerApiService) GetServerProfileTemplateByMoidExecute(r ApiGetServerP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3021,7 +2984,7 @@ func (a *ServerApiService) GetServerProfileTemplateByMoidExecute(r ApiGetServerP
 }
 
 type ApiGetServerProfileTemplateListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ServerApiService
 	filter      *string
 	orderby     *string
@@ -3102,17 +3065,17 @@ func (r ApiGetServerProfileTemplateListRequest) Tags(tags string) ApiGetServerPr
 	return r
 }
 
-func (r ApiGetServerProfileTemplateListRequest) Execute() (ServerProfileTemplateResponse, *_nethttp.Response, error) {
+func (r ApiGetServerProfileTemplateListRequest) Execute() (*ServerProfileTemplateResponse, *http.Response, error) {
 	return r.ApiService.GetServerProfileTemplateListExecute(r)
 }
 
 /*
 GetServerProfileTemplateList Read a 'server.ProfileTemplate' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetServerProfileTemplateListRequest
 */
-func (a *ServerApiService) GetServerProfileTemplateList(ctx _context.Context) ApiGetServerProfileTemplateListRequest {
+func (a *ServerApiService) GetServerProfileTemplateList(ctx context.Context) ApiGetServerProfileTemplateListRequest {
 	return ApiGetServerProfileTemplateListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3121,26 +3084,24 @@ func (a *ServerApiService) GetServerProfileTemplateList(ctx _context.Context) Ap
 
 // Execute executes the request
 //  @return ServerProfileTemplateResponse
-func (a *ServerApiService) GetServerProfileTemplateListExecute(r ApiGetServerProfileTemplateListRequest) (ServerProfileTemplateResponse, *_nethttp.Response, error) {
+func (a *ServerApiService) GetServerProfileTemplateListExecute(r ApiGetServerProfileTemplateListRequest) (*ServerProfileTemplateResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerProfileTemplateResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerProfileTemplateResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.GetServerProfileTemplateList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ProfileTemplates"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3192,7 +3153,7 @@ func (a *ServerApiService) GetServerProfileTemplateListExecute(r ApiGetServerPro
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3202,15 +3163,15 @@ func (a *ServerApiService) GetServerProfileTemplateListExecute(r ApiGetServerPro
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3266,7 +3227,7 @@ func (a *ServerApiService) GetServerProfileTemplateListExecute(r ApiGetServerPro
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3277,7 +3238,7 @@ func (a *ServerApiService) GetServerProfileTemplateListExecute(r ApiGetServerPro
 }
 
 type ApiPatchServerProfileRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *ServerApiService
 	moid          string
 	serverProfile *ServerProfile
@@ -3296,18 +3257,18 @@ func (r ApiPatchServerProfileRequest) IfMatch(ifMatch string) ApiPatchServerProf
 	return r
 }
 
-func (r ApiPatchServerProfileRequest) Execute() (ServerProfile, *_nethttp.Response, error) {
+func (r ApiPatchServerProfileRequest) Execute() (*ServerProfile, *http.Response, error) {
 	return r.ApiService.PatchServerProfileExecute(r)
 }
 
 /*
 PatchServerProfile Update a 'server.Profile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchServerProfileRequest
 */
-func (a *ServerApiService) PatchServerProfile(ctx _context.Context, moid string) ApiPatchServerProfileRequest {
+func (a *ServerApiService) PatchServerProfile(ctx context.Context, moid string) ApiPatchServerProfileRequest {
 	return ApiPatchServerProfileRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3317,27 +3278,25 @@ func (a *ServerApiService) PatchServerProfile(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return ServerProfile
-func (a *ServerApiService) PatchServerProfileExecute(r ApiPatchServerProfileRequest) (ServerProfile, *_nethttp.Response, error) {
+func (a *ServerApiService) PatchServerProfileExecute(r ApiPatchServerProfileRequest) (*ServerProfile, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerProfile
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.PatchServerProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/Profiles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.serverProfile == nil {
 		return localVarReturnValue, nil, reportError("serverProfile is required and must be specified")
 	}
@@ -3364,7 +3323,7 @@ func (a *ServerApiService) PatchServerProfileExecute(r ApiPatchServerProfileRequ
 	}
 	// body params
 	localVarPostBody = r.serverProfile
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3374,15 +3333,15 @@ func (a *ServerApiService) PatchServerProfileExecute(r ApiPatchServerProfileRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3438,7 +3397,7 @@ func (a *ServerApiService) PatchServerProfileExecute(r ApiPatchServerProfileRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3449,7 +3408,7 @@ func (a *ServerApiService) PatchServerProfileExecute(r ApiPatchServerProfileRequ
 }
 
 type ApiPatchServerProfileTemplateRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *ServerApiService
 	moid                  string
 	serverProfileTemplate *ServerProfileTemplate
@@ -3468,18 +3427,18 @@ func (r ApiPatchServerProfileTemplateRequest) IfMatch(ifMatch string) ApiPatchSe
 	return r
 }
 
-func (r ApiPatchServerProfileTemplateRequest) Execute() (ServerProfileTemplate, *_nethttp.Response, error) {
+func (r ApiPatchServerProfileTemplateRequest) Execute() (*ServerProfileTemplate, *http.Response, error) {
 	return r.ApiService.PatchServerProfileTemplateExecute(r)
 }
 
 /*
 PatchServerProfileTemplate Update a 'server.ProfileTemplate' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchServerProfileTemplateRequest
 */
-func (a *ServerApiService) PatchServerProfileTemplate(ctx _context.Context, moid string) ApiPatchServerProfileTemplateRequest {
+func (a *ServerApiService) PatchServerProfileTemplate(ctx context.Context, moid string) ApiPatchServerProfileTemplateRequest {
 	return ApiPatchServerProfileTemplateRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3489,27 +3448,25 @@ func (a *ServerApiService) PatchServerProfileTemplate(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return ServerProfileTemplate
-func (a *ServerApiService) PatchServerProfileTemplateExecute(r ApiPatchServerProfileTemplateRequest) (ServerProfileTemplate, *_nethttp.Response, error) {
+func (a *ServerApiService) PatchServerProfileTemplateExecute(r ApiPatchServerProfileTemplateRequest) (*ServerProfileTemplate, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerProfileTemplate
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerProfileTemplate
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.PatchServerProfileTemplate")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ProfileTemplates/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.serverProfileTemplate == nil {
 		return localVarReturnValue, nil, reportError("serverProfileTemplate is required and must be specified")
 	}
@@ -3536,7 +3493,7 @@ func (a *ServerApiService) PatchServerProfileTemplateExecute(r ApiPatchServerPro
 	}
 	// body params
 	localVarPostBody = r.serverProfileTemplate
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3546,15 +3503,15 @@ func (a *ServerApiService) PatchServerProfileTemplateExecute(r ApiPatchServerPro
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3610,7 +3567,7 @@ func (a *ServerApiService) PatchServerProfileTemplateExecute(r ApiPatchServerPro
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3621,7 +3578,7 @@ func (a *ServerApiService) PatchServerProfileTemplateExecute(r ApiPatchServerPro
 }
 
 type ApiUpdateServerProfileRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *ServerApiService
 	moid          string
 	serverProfile *ServerProfile
@@ -3640,18 +3597,18 @@ func (r ApiUpdateServerProfileRequest) IfMatch(ifMatch string) ApiUpdateServerPr
 	return r
 }
 
-func (r ApiUpdateServerProfileRequest) Execute() (ServerProfile, *_nethttp.Response, error) {
+func (r ApiUpdateServerProfileRequest) Execute() (*ServerProfile, *http.Response, error) {
 	return r.ApiService.UpdateServerProfileExecute(r)
 }
 
 /*
 UpdateServerProfile Update a 'server.Profile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateServerProfileRequest
 */
-func (a *ServerApiService) UpdateServerProfile(ctx _context.Context, moid string) ApiUpdateServerProfileRequest {
+func (a *ServerApiService) UpdateServerProfile(ctx context.Context, moid string) ApiUpdateServerProfileRequest {
 	return ApiUpdateServerProfileRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3661,27 +3618,25 @@ func (a *ServerApiService) UpdateServerProfile(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return ServerProfile
-func (a *ServerApiService) UpdateServerProfileExecute(r ApiUpdateServerProfileRequest) (ServerProfile, *_nethttp.Response, error) {
+func (a *ServerApiService) UpdateServerProfileExecute(r ApiUpdateServerProfileRequest) (*ServerProfile, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerProfile
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.UpdateServerProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/Profiles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.serverProfile == nil {
 		return localVarReturnValue, nil, reportError("serverProfile is required and must be specified")
 	}
@@ -3708,7 +3663,7 @@ func (a *ServerApiService) UpdateServerProfileExecute(r ApiUpdateServerProfileRe
 	}
 	// body params
 	localVarPostBody = r.serverProfile
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3718,15 +3673,15 @@ func (a *ServerApiService) UpdateServerProfileExecute(r ApiUpdateServerProfileRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3782,7 +3737,7 @@ func (a *ServerApiService) UpdateServerProfileExecute(r ApiUpdateServerProfileRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3793,7 +3748,7 @@ func (a *ServerApiService) UpdateServerProfileExecute(r ApiUpdateServerProfileRe
 }
 
 type ApiUpdateServerProfileTemplateRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *ServerApiService
 	moid                  string
 	serverProfileTemplate *ServerProfileTemplate
@@ -3812,18 +3767,18 @@ func (r ApiUpdateServerProfileTemplateRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateServerProfileTemplateRequest) Execute() (ServerProfileTemplate, *_nethttp.Response, error) {
+func (r ApiUpdateServerProfileTemplateRequest) Execute() (*ServerProfileTemplate, *http.Response, error) {
 	return r.ApiService.UpdateServerProfileTemplateExecute(r)
 }
 
 /*
 UpdateServerProfileTemplate Update a 'server.ProfileTemplate' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateServerProfileTemplateRequest
 */
-func (a *ServerApiService) UpdateServerProfileTemplate(ctx _context.Context, moid string) ApiUpdateServerProfileTemplateRequest {
+func (a *ServerApiService) UpdateServerProfileTemplate(ctx context.Context, moid string) ApiUpdateServerProfileTemplateRequest {
 	return ApiUpdateServerProfileTemplateRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3833,27 +3788,25 @@ func (a *ServerApiService) UpdateServerProfileTemplate(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return ServerProfileTemplate
-func (a *ServerApiService) UpdateServerProfileTemplateExecute(r ApiUpdateServerProfileTemplateRequest) (ServerProfileTemplate, *_nethttp.Response, error) {
+func (a *ServerApiService) UpdateServerProfileTemplateExecute(r ApiUpdateServerProfileTemplateRequest) (*ServerProfileTemplate, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ServerProfileTemplate
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ServerProfileTemplate
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ServerApiService.UpdateServerProfileTemplate")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/server/ProfileTemplates/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.serverProfileTemplate == nil {
 		return localVarReturnValue, nil, reportError("serverProfileTemplate is required and must be specified")
 	}
@@ -3880,7 +3833,7 @@ func (a *ServerApiService) UpdateServerProfileTemplateExecute(r ApiUpdateServerP
 	}
 	// body params
 	localVarPostBody = r.serverProfileTemplate
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3890,15 +3843,15 @@ func (a *ServerApiService) UpdateServerProfileTemplateExecute(r ApiUpdateServerP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3954,7 +3907,7 @@ func (a *ServerApiService) UpdateServerProfileTemplateExecute(r ApiUpdateServerP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

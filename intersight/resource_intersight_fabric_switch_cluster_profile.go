@@ -615,7 +615,6 @@ func resourceFabricSwitchClusterProfile() *schema.Resource {
 
 func resourceFabricSwitchClusterProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFabricSwitchClusterProfileWithDefaults()
@@ -821,7 +820,7 @@ func resourceFabricSwitchClusterProfileCreate(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FabricSwitchClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FabricSwitchClusterProfile: %s", responseErr.Error())
@@ -833,7 +832,6 @@ func resourceFabricSwitchClusterProfileCreate(c context.Context, d *schema.Resou
 
 func resourceFabricSwitchClusterProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FabricApi.GetFabricSwitchClusterProfileByMoid(conn.ctx, d.Id())
@@ -846,7 +844,7 @@ func resourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resourc
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FabricSwitchClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FabricSwitchClusterProfile: %s", responseErr.Error())
@@ -951,7 +949,6 @@ func resourceFabricSwitchClusterProfileRead(c context.Context, d *schema.Resourc
 
 func resourceFabricSwitchClusterProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricSwitchClusterProfile{}
@@ -1162,7 +1159,7 @@ func resourceFabricSwitchClusterProfileUpdate(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating FabricSwitchClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating FabricSwitchClusterProfile: %s", responseErr.Error())
@@ -1174,7 +1171,6 @@ func resourceFabricSwitchClusterProfileUpdate(c context.Context, d *schema.Resou
 
 func resourceFabricSwitchClusterProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricSwitchClusterProfile(conn.ctx, d.Id())
@@ -1186,7 +1182,7 @@ func resourceFabricSwitchClusterProfileDelete(c context.Context, d *schema.Resou
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FabricSwitchClusterProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FabricSwitchClusterProfile object: %s", deleteErr.Error())

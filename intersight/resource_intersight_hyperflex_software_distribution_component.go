@@ -469,7 +469,6 @@ func resourceHyperflexSoftwareDistributionComponent() *schema.Resource {
 
 func resourceHyperflexSoftwareDistributionComponentCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexSoftwareDistributionComponentWithDefaults()
@@ -613,7 +612,7 @@ func resourceHyperflexSoftwareDistributionComponentCreate(c context.Context, d *
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexSoftwareDistributionComponent: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexSoftwareDistributionComponent: %s", responseErr.Error())
@@ -625,7 +624,6 @@ func resourceHyperflexSoftwareDistributionComponentCreate(c context.Context, d *
 
 func resourceHyperflexSoftwareDistributionComponentRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexSoftwareDistributionComponentByMoid(conn.ctx, d.Id())
@@ -638,7 +636,7 @@ func resourceHyperflexSoftwareDistributionComponentRead(c context.Context, d *sc
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexSoftwareDistributionComponent: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexSoftwareDistributionComponent: %s", responseErr.Error())
@@ -739,7 +737,6 @@ func resourceHyperflexSoftwareDistributionComponentRead(c context.Context, d *sc
 
 func resourceHyperflexSoftwareDistributionComponentUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexSoftwareDistributionComponent{}
@@ -889,7 +886,7 @@ func resourceHyperflexSoftwareDistributionComponentUpdate(c context.Context, d *
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexSoftwareDistributionComponent: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexSoftwareDistributionComponent: %s", responseErr.Error())
@@ -901,7 +898,6 @@ func resourceHyperflexSoftwareDistributionComponentUpdate(c context.Context, d *
 
 func resourceHyperflexSoftwareDistributionComponentDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexSoftwareDistributionComponent(conn.ctx, d.Id())
@@ -913,7 +909,7 @@ func resourceHyperflexSoftwareDistributionComponentDelete(c context.Context, d *
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexSoftwareDistributionComponent object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexSoftwareDistributionComponent object: %s", deleteErr.Error())

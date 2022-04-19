@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -198,11 +198,11 @@ func (o *IamAccountAllOf) GetAppRegistrations() []IamAppRegistrationRelationship
 // GetAppRegistrationsOk returns a tuple with the AppRegistrations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAccountAllOf) GetAppRegistrationsOk() (*[]IamAppRegistrationRelationship, bool) {
+func (o *IamAccountAllOf) GetAppRegistrationsOk() ([]IamAppRegistrationRelationship, bool) {
 	if o == nil || o.AppRegistrations == nil {
 		return nil, false
 	}
-	return &o.AppRegistrations, true
+	return o.AppRegistrations, true
 }
 
 // HasAppRegistrations returns a boolean if a field has been set.
@@ -231,11 +231,11 @@ func (o *IamAccountAllOf) GetDomainGroups() []IamDomainGroupRelationship {
 // GetDomainGroupsOk returns a tuple with the DomainGroups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAccountAllOf) GetDomainGroupsOk() (*[]IamDomainGroupRelationship, bool) {
+func (o *IamAccountAllOf) GetDomainGroupsOk() ([]IamDomainGroupRelationship, bool) {
 	if o == nil || o.DomainGroups == nil {
 		return nil, false
 	}
-	return &o.DomainGroups, true
+	return o.DomainGroups, true
 }
 
 // HasDomainGroups returns a boolean if a field has been set.
@@ -264,11 +264,11 @@ func (o *IamAccountAllOf) GetEndPointRoles() []IamEndPointRoleRelationship {
 // GetEndPointRolesOk returns a tuple with the EndPointRoles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAccountAllOf) GetEndPointRolesOk() (*[]IamEndPointRoleRelationship, bool) {
+func (o *IamAccountAllOf) GetEndPointRolesOk() ([]IamEndPointRoleRelationship, bool) {
 	if o == nil || o.EndPointRoles == nil {
 		return nil, false
 	}
-	return &o.EndPointRoles, true
+	return o.EndPointRoles, true
 }
 
 // HasEndPointRoles returns a boolean if a field has been set.
@@ -297,11 +297,11 @@ func (o *IamAccountAllOf) GetIdpreferences() []IamIdpReferenceRelationship {
 // GetIdpreferencesOk returns a tuple with the Idpreferences field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAccountAllOf) GetIdpreferencesOk() (*[]IamIdpReferenceRelationship, bool) {
+func (o *IamAccountAllOf) GetIdpreferencesOk() ([]IamIdpReferenceRelationship, bool) {
 	if o == nil || o.Idpreferences == nil {
 		return nil, false
 	}
-	return &o.Idpreferences, true
+	return o.Idpreferences, true
 }
 
 // HasIdpreferences returns a boolean if a field has been set.
@@ -330,11 +330,11 @@ func (o *IamAccountAllOf) GetIdps() []IamIdpRelationship {
 // GetIdpsOk returns a tuple with the Idps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAccountAllOf) GetIdpsOk() (*[]IamIdpRelationship, bool) {
+func (o *IamAccountAllOf) GetIdpsOk() ([]IamIdpRelationship, bool) {
 	if o == nil || o.Idps == nil {
 		return nil, false
 	}
-	return &o.Idps, true
+	return o.Idps, true
 }
 
 // HasIdps returns a boolean if a field has been set.
@@ -363,11 +363,11 @@ func (o *IamAccountAllOf) GetPermissions() []IamPermissionRelationship {
 // GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAccountAllOf) GetPermissionsOk() (*[]IamPermissionRelationship, bool) {
+func (o *IamAccountAllOf) GetPermissionsOk() ([]IamPermissionRelationship, bool) {
 	if o == nil || o.Permissions == nil {
 		return nil, false
 	}
-	return &o.Permissions, true
+	return o.Permissions, true
 }
 
 // HasPermissions returns a boolean if a field has been set.
@@ -396,11 +396,11 @@ func (o *IamAccountAllOf) GetPrivilegeSets() []IamPrivilegeSetRelationship {
 // GetPrivilegeSetsOk returns a tuple with the PrivilegeSets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAccountAllOf) GetPrivilegeSetsOk() (*[]IamPrivilegeSetRelationship, bool) {
+func (o *IamAccountAllOf) GetPrivilegeSetsOk() ([]IamPrivilegeSetRelationship, bool) {
 	if o == nil || o.PrivilegeSets == nil {
 		return nil, false
 	}
-	return &o.PrivilegeSets, true
+	return o.PrivilegeSets, true
 }
 
 // HasPrivilegeSets returns a boolean if a field has been set.
@@ -429,11 +429,11 @@ func (o *IamAccountAllOf) GetPrivileges() []IamPrivilegeRelationship {
 // GetPrivilegesOk returns a tuple with the Privileges field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAccountAllOf) GetPrivilegesOk() (*[]IamPrivilegeRelationship, bool) {
+func (o *IamAccountAllOf) GetPrivilegesOk() ([]IamPrivilegeRelationship, bool) {
 	if o == nil || o.Privileges == nil {
 		return nil, false
 	}
-	return &o.Privileges, true
+	return o.Privileges, true
 }
 
 // HasPrivileges returns a boolean if a field has been set.
@@ -494,11 +494,11 @@ func (o *IamAccountAllOf) GetRoles() []IamRoleRelationship {
 // GetRolesOk returns a tuple with the Roles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamAccountAllOf) GetRolesOk() (*[]IamRoleRelationship, bool) {
+func (o *IamAccountAllOf) GetRolesOk() ([]IamRoleRelationship, bool) {
 	if o == nil || o.Roles == nil {
 		return nil, false
 	}
-	return &o.Roles, true
+	return o.Roles, true
 }
 
 // HasRoles returns a boolean if a field has been set.

@@ -203,10 +203,8 @@ func dataSourceWorkflowBuildTaskMeta() *schema.Resource {
 		},
 		"task_list": {
 			Description: "Task list used to build the dynamic workflow.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"task_type": {
 			Description: "The type of the task within this workflow.",
@@ -515,10 +513,8 @@ func dataSourceWorkflowBuildTaskMeta() *schema.Resource {
 		},
 		"task_list": {
 			Description: "Task list used to build the dynamic workflow.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"task_type": {
 			Description: "The type of the task within this workflow.",
@@ -651,7 +647,6 @@ func dataSourceWorkflowBuildTaskMeta() *schema.Resource {
 
 func dataSourceWorkflowBuildTaskMetaRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowBuildTaskMeta{}
@@ -882,7 +877,13 @@ func dataSourceWorkflowBuildTaskMetaRead(c context.Context, d *schema.ResourceDa
 	}
 
 	if v, ok := d.GetOk("task_list"); ok {
-		o.SetTaskList(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetTaskList(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("task_type"); ok {
@@ -977,7 +978,7 @@ func dataSourceWorkflowBuildTaskMetaRead(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of WorkflowBuildTaskMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of WorkflowBuildTaskMeta: %s", responseErr.Error())
@@ -994,7 +995,7 @@ func dataSourceWorkflowBuildTaskMetaRead(c context.Context, d *schema.ResourceDa
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching WorkflowBuildTaskMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching WorkflowBuildTaskMeta: %s", responseErr.Error())
@@ -1027,6 +1028,7 @@ func dataSourceWorkflowBuildTaskMetaRead(c context.Context, d *schema.ResourceDa
 				temp["src"] = (s.GetSrc())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["task_list"] = flattenAdditionalProperties(s.GetTaskList())
 				temp["task_type"] = (s.GetTaskType())
 
 				temp["version_context"] = flattenMapMoVersionContext(s.GetVersionContext(), d)

@@ -907,7 +907,6 @@ func dataSourceHyperflexVmRestoreOperation() *schema.Resource {
 
 func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexVmRestoreOperation{}
@@ -1396,7 +1395,7 @@ func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Reso
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of HyperflexVmRestoreOperation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of HyperflexVmRestoreOperation: %s", responseErr.Error())
@@ -1413,7 +1412,7 @@ func dataSourceHyperflexVmRestoreOperationRead(c context.Context, d *schema.Reso
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching HyperflexVmRestoreOperation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching HyperflexVmRestoreOperation: %s", responseErr.Error())

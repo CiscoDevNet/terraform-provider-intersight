@@ -542,7 +542,6 @@ func resourceInventoryRequest() *schema.Resource {
 
 func resourceInventoryRequestCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewInventoryRequestWithDefaults()
@@ -696,7 +695,7 @@ func resourceInventoryRequestCreate(c context.Context, d *schema.ResourceData, m
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating InventoryRequest: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating InventoryRequest: %s", responseErr.Error())
@@ -708,7 +707,6 @@ func resourceInventoryRequestCreate(c context.Context, d *schema.ResourceData, m
 
 func resourceInventoryRequestRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	log.Printf("%v", d)
 	var de diag.Diagnostics
 	return de
@@ -716,7 +714,6 @@ func resourceInventoryRequestRead(c context.Context, d *schema.ResourceData, met
 
 func resourceInventoryRequestDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "InventoryRequest does not allow delete functionality"}
 	de = append(de, warning)

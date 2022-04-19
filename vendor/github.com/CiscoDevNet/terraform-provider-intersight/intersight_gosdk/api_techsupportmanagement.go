@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // TechsupportmanagementApiService TechsupportmanagementApi service
 type TechsupportmanagementApiService service
 
 type ApiCreateTechsupportmanagementCollectionControlPolicyRequest struct {
-	ctx                                          _context.Context
+	ctx                                          context.Context
 	ApiService                                   *TechsupportmanagementApiService
 	techsupportmanagementCollectionControlPolicy *TechsupportmanagementCollectionControlPolicy
 	ifMatch                                      *string
@@ -54,17 +49,17 @@ func (r ApiCreateTechsupportmanagementCollectionControlPolicyRequest) IfNoneMatc
 	return r
 }
 
-func (r ApiCreateTechsupportmanagementCollectionControlPolicyRequest) Execute() (TechsupportmanagementCollectionControlPolicy, *_nethttp.Response, error) {
+func (r ApiCreateTechsupportmanagementCollectionControlPolicyRequest) Execute() (*TechsupportmanagementCollectionControlPolicy, *http.Response, error) {
 	return r.ApiService.CreateTechsupportmanagementCollectionControlPolicyExecute(r)
 }
 
 /*
 CreateTechsupportmanagementCollectionControlPolicy Create a 'techsupportmanagement.CollectionControlPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTechsupportmanagementCollectionControlPolicyRequest
 */
-func (a *TechsupportmanagementApiService) CreateTechsupportmanagementCollectionControlPolicy(ctx _context.Context) ApiCreateTechsupportmanagementCollectionControlPolicyRequest {
+func (a *TechsupportmanagementApiService) CreateTechsupportmanagementCollectionControlPolicy(ctx context.Context) ApiCreateTechsupportmanagementCollectionControlPolicyRequest {
 	return ApiCreateTechsupportmanagementCollectionControlPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *TechsupportmanagementApiService) CreateTechsupportmanagementCollectionC
 
 // Execute executes the request
 //  @return TechsupportmanagementCollectionControlPolicy
-func (a *TechsupportmanagementApiService) CreateTechsupportmanagementCollectionControlPolicyExecute(r ApiCreateTechsupportmanagementCollectionControlPolicyRequest) (TechsupportmanagementCollectionControlPolicy, *_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) CreateTechsupportmanagementCollectionControlPolicyExecute(r ApiCreateTechsupportmanagementCollectionControlPolicyRequest) (*TechsupportmanagementCollectionControlPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TechsupportmanagementCollectionControlPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TechsupportmanagementCollectionControlPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.CreateTechsupportmanagementCollectionControlPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/CollectionControlPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.techsupportmanagementCollectionControlPolicy == nil {
 		return localVarReturnValue, nil, reportError("techsupportmanagementCollectionControlPolicy is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *TechsupportmanagementApiService) CreateTechsupportmanagementCollectionC
 	}
 	// body params
 	localVarPostBody = r.techsupportmanagementCollectionControlPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *TechsupportmanagementApiService) CreateTechsupportmanagementCollectionC
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *TechsupportmanagementApiService) CreateTechsupportmanagementCollectionC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,7 +200,7 @@ func (a *TechsupportmanagementApiService) CreateTechsupportmanagementCollectionC
 }
 
 type ApiCreateTechsupportmanagementTechSupportBundleRequest struct {
-	ctx                                    _context.Context
+	ctx                                    context.Context
 	ApiService                             *TechsupportmanagementApiService
 	techsupportmanagementTechSupportBundle *TechsupportmanagementTechSupportBundle
 	ifMatch                                *string
@@ -232,17 +225,17 @@ func (r ApiCreateTechsupportmanagementTechSupportBundleRequest) IfNoneMatch(ifNo
 	return r
 }
 
-func (r ApiCreateTechsupportmanagementTechSupportBundleRequest) Execute() (TechsupportmanagementTechSupportBundle, *_nethttp.Response, error) {
+func (r ApiCreateTechsupportmanagementTechSupportBundleRequest) Execute() (*TechsupportmanagementTechSupportBundle, *http.Response, error) {
 	return r.ApiService.CreateTechsupportmanagementTechSupportBundleExecute(r)
 }
 
 /*
 CreateTechsupportmanagementTechSupportBundle Create a 'techsupportmanagement.TechSupportBundle' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTechsupportmanagementTechSupportBundleRequest
 */
-func (a *TechsupportmanagementApiService) CreateTechsupportmanagementTechSupportBundle(ctx _context.Context) ApiCreateTechsupportmanagementTechSupportBundleRequest {
+func (a *TechsupportmanagementApiService) CreateTechsupportmanagementTechSupportBundle(ctx context.Context) ApiCreateTechsupportmanagementTechSupportBundleRequest {
 	return ApiCreateTechsupportmanagementTechSupportBundleRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -251,26 +244,24 @@ func (a *TechsupportmanagementApiService) CreateTechsupportmanagementTechSupport
 
 // Execute executes the request
 //  @return TechsupportmanagementTechSupportBundle
-func (a *TechsupportmanagementApiService) CreateTechsupportmanagementTechSupportBundleExecute(r ApiCreateTechsupportmanagementTechSupportBundleRequest) (TechsupportmanagementTechSupportBundle, *_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) CreateTechsupportmanagementTechSupportBundleExecute(r ApiCreateTechsupportmanagementTechSupportBundleRequest) (*TechsupportmanagementTechSupportBundle, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TechsupportmanagementTechSupportBundle
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TechsupportmanagementTechSupportBundle
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.CreateTechsupportmanagementTechSupportBundle")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/TechSupportBundles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.techsupportmanagementTechSupportBundle == nil {
 		return localVarReturnValue, nil, reportError("techsupportmanagementTechSupportBundle is required and must be specified")
 	}
@@ -300,7 +291,7 @@ func (a *TechsupportmanagementApiService) CreateTechsupportmanagementTechSupport
 	}
 	// body params
 	localVarPostBody = r.techsupportmanagementTechSupportBundle
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -310,15 +301,15 @@ func (a *TechsupportmanagementApiService) CreateTechsupportmanagementTechSupport
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -374,7 +365,7 @@ func (a *TechsupportmanagementApiService) CreateTechsupportmanagementTechSupport
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -385,23 +376,23 @@ func (a *TechsupportmanagementApiService) CreateTechsupportmanagementTechSupport
 }
 
 type ApiDeleteTechsupportmanagementCollectionControlPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TechsupportmanagementApiService
 	moid       string
 }
 
-func (r ApiDeleteTechsupportmanagementCollectionControlPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteTechsupportmanagementCollectionControlPolicyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteTechsupportmanagementCollectionControlPolicyExecute(r)
 }
 
 /*
 DeleteTechsupportmanagementCollectionControlPolicy Delete a 'techsupportmanagement.CollectionControlPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteTechsupportmanagementCollectionControlPolicyRequest
 */
-func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementCollectionControlPolicy(ctx _context.Context, moid string) ApiDeleteTechsupportmanagementCollectionControlPolicyRequest {
+func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementCollectionControlPolicy(ctx context.Context, moid string) ApiDeleteTechsupportmanagementCollectionControlPolicyRequest {
 	return ApiDeleteTechsupportmanagementCollectionControlPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -410,26 +401,24 @@ func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementCollectionC
 }
 
 // Execute executes the request
-func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementCollectionControlPolicyExecute(r ApiDeleteTechsupportmanagementCollectionControlPolicyRequest) (*_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementCollectionControlPolicyExecute(r ApiDeleteTechsupportmanagementCollectionControlPolicyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.DeleteTechsupportmanagementCollectionControlPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/CollectionControlPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -448,7 +437,7 @@ func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementCollectionC
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -458,15 +447,15 @@ func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementCollectionC
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -524,23 +513,23 @@ func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementCollectionC
 }
 
 type ApiDeleteTechsupportmanagementTechSupportBundleRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TechsupportmanagementApiService
 	moid       string
 }
 
-func (r ApiDeleteTechsupportmanagementTechSupportBundleRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteTechsupportmanagementTechSupportBundleRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteTechsupportmanagementTechSupportBundleExecute(r)
 }
 
 /*
 DeleteTechsupportmanagementTechSupportBundle Delete a 'techsupportmanagement.TechSupportBundle' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteTechsupportmanagementTechSupportBundleRequest
 */
-func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementTechSupportBundle(ctx _context.Context, moid string) ApiDeleteTechsupportmanagementTechSupportBundleRequest {
+func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementTechSupportBundle(ctx context.Context, moid string) ApiDeleteTechsupportmanagementTechSupportBundleRequest {
 	return ApiDeleteTechsupportmanagementTechSupportBundleRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -549,26 +538,24 @@ func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementTechSupport
 }
 
 // Execute executes the request
-func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementTechSupportBundleExecute(r ApiDeleteTechsupportmanagementTechSupportBundleRequest) (*_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementTechSupportBundleExecute(r ApiDeleteTechsupportmanagementTechSupportBundleRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.DeleteTechsupportmanagementTechSupportBundle")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/TechSupportBundles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -587,7 +574,7 @@ func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementTechSupport
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -597,15 +584,15 @@ func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementTechSupport
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -663,23 +650,23 @@ func (a *TechsupportmanagementApiService) DeleteTechsupportmanagementTechSupport
 }
 
 type ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TechsupportmanagementApiService
 	moid       string
 }
 
-func (r ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest) Execute() (TechsupportmanagementCollectionControlPolicy, *_nethttp.Response, error) {
+func (r ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest) Execute() (*TechsupportmanagementCollectionControlPolicy, *http.Response, error) {
 	return r.ApiService.GetTechsupportmanagementCollectionControlPolicyByMoidExecute(r)
 }
 
 /*
 GetTechsupportmanagementCollectionControlPolicyByMoid Read a 'techsupportmanagement.CollectionControlPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest
 */
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionControlPolicyByMoid(ctx _context.Context, moid string) ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionControlPolicyByMoid(ctx context.Context, moid string) ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest {
 	return ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -689,27 +676,25 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionCont
 
 // Execute executes the request
 //  @return TechsupportmanagementCollectionControlPolicy
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionControlPolicyByMoidExecute(r ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest) (TechsupportmanagementCollectionControlPolicy, *_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionControlPolicyByMoidExecute(r ApiGetTechsupportmanagementCollectionControlPolicyByMoidRequest) (*TechsupportmanagementCollectionControlPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TechsupportmanagementCollectionControlPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TechsupportmanagementCollectionControlPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.GetTechsupportmanagementCollectionControlPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/CollectionControlPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -728,7 +713,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionCont
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -738,15 +723,15 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionCont
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -802,7 +787,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionCont
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -813,7 +798,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionCont
 }
 
 type ApiGetTechsupportmanagementCollectionControlPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *TechsupportmanagementApiService
 	filter      *string
 	orderby     *string
@@ -894,17 +879,17 @@ func (r ApiGetTechsupportmanagementCollectionControlPolicyListRequest) Tags(tags
 	return r
 }
 
-func (r ApiGetTechsupportmanagementCollectionControlPolicyListRequest) Execute() (TechsupportmanagementCollectionControlPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetTechsupportmanagementCollectionControlPolicyListRequest) Execute() (*TechsupportmanagementCollectionControlPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetTechsupportmanagementCollectionControlPolicyListExecute(r)
 }
 
 /*
 GetTechsupportmanagementCollectionControlPolicyList Read a 'techsupportmanagement.CollectionControlPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTechsupportmanagementCollectionControlPolicyListRequest
 */
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionControlPolicyList(ctx _context.Context) ApiGetTechsupportmanagementCollectionControlPolicyListRequest {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionControlPolicyList(ctx context.Context) ApiGetTechsupportmanagementCollectionControlPolicyListRequest {
 	return ApiGetTechsupportmanagementCollectionControlPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -913,26 +898,24 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionCont
 
 // Execute executes the request
 //  @return TechsupportmanagementCollectionControlPolicyResponse
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionControlPolicyListExecute(r ApiGetTechsupportmanagementCollectionControlPolicyListRequest) (TechsupportmanagementCollectionControlPolicyResponse, *_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionControlPolicyListExecute(r ApiGetTechsupportmanagementCollectionControlPolicyListRequest) (*TechsupportmanagementCollectionControlPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TechsupportmanagementCollectionControlPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TechsupportmanagementCollectionControlPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.GetTechsupportmanagementCollectionControlPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/CollectionControlPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -984,7 +967,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionCont
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -994,15 +977,15 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionCont
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1058,7 +1041,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionCont
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1069,23 +1052,23 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementCollectionCont
 }
 
 type ApiGetTechsupportmanagementDownloadByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TechsupportmanagementApiService
 	moid       string
 }
 
-func (r ApiGetTechsupportmanagementDownloadByMoidRequest) Execute() (TechsupportmanagementDownload, *_nethttp.Response, error) {
+func (r ApiGetTechsupportmanagementDownloadByMoidRequest) Execute() (*TechsupportmanagementDownload, *http.Response, error) {
 	return r.ApiService.GetTechsupportmanagementDownloadByMoidExecute(r)
 }
 
 /*
 GetTechsupportmanagementDownloadByMoid Read a 'techsupportmanagement.Download' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetTechsupportmanagementDownloadByMoidRequest
 */
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadByMoid(ctx _context.Context, moid string) ApiGetTechsupportmanagementDownloadByMoidRequest {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadByMoid(ctx context.Context, moid string) ApiGetTechsupportmanagementDownloadByMoidRequest {
 	return ApiGetTechsupportmanagementDownloadByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1095,27 +1078,25 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadByMoid
 
 // Execute executes the request
 //  @return TechsupportmanagementDownload
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadByMoidExecute(r ApiGetTechsupportmanagementDownloadByMoidRequest) (TechsupportmanagementDownload, *_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadByMoidExecute(r ApiGetTechsupportmanagementDownloadByMoidRequest) (*TechsupportmanagementDownload, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TechsupportmanagementDownload
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TechsupportmanagementDownload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.GetTechsupportmanagementDownloadByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/Downloads/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1134,7 +1115,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadByMoid
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1144,15 +1125,15 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadByMoid
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1208,7 +1189,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadByMoid
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1219,7 +1200,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadByMoid
 }
 
 type ApiGetTechsupportmanagementDownloadListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *TechsupportmanagementApiService
 	filter      *string
 	orderby     *string
@@ -1300,17 +1281,17 @@ func (r ApiGetTechsupportmanagementDownloadListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetTechsupportmanagementDownloadListRequest) Execute() (TechsupportmanagementDownloadResponse, *_nethttp.Response, error) {
+func (r ApiGetTechsupportmanagementDownloadListRequest) Execute() (*TechsupportmanagementDownloadResponse, *http.Response, error) {
 	return r.ApiService.GetTechsupportmanagementDownloadListExecute(r)
 }
 
 /*
 GetTechsupportmanagementDownloadList Read a 'techsupportmanagement.Download' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTechsupportmanagementDownloadListRequest
 */
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadList(ctx _context.Context) ApiGetTechsupportmanagementDownloadListRequest {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadList(ctx context.Context) ApiGetTechsupportmanagementDownloadListRequest {
 	return ApiGetTechsupportmanagementDownloadListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1319,26 +1300,24 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadList(c
 
 // Execute executes the request
 //  @return TechsupportmanagementDownloadResponse
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadListExecute(r ApiGetTechsupportmanagementDownloadListRequest) (TechsupportmanagementDownloadResponse, *_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadListExecute(r ApiGetTechsupportmanagementDownloadListRequest) (*TechsupportmanagementDownloadResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TechsupportmanagementDownloadResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TechsupportmanagementDownloadResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.GetTechsupportmanagementDownloadList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/Downloads"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1390,7 +1369,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadListEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1400,15 +1379,15 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadListEx
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1464,7 +1443,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadListEx
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1475,23 +1454,23 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementDownloadListEx
 }
 
 type ApiGetTechsupportmanagementTechSupportBundleByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TechsupportmanagementApiService
 	moid       string
 }
 
-func (r ApiGetTechsupportmanagementTechSupportBundleByMoidRequest) Execute() (TechsupportmanagementTechSupportBundle, *_nethttp.Response, error) {
+func (r ApiGetTechsupportmanagementTechSupportBundleByMoidRequest) Execute() (*TechsupportmanagementTechSupportBundle, *http.Response, error) {
 	return r.ApiService.GetTechsupportmanagementTechSupportBundleByMoidExecute(r)
 }
 
 /*
 GetTechsupportmanagementTechSupportBundleByMoid Read a 'techsupportmanagement.TechSupportBundle' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetTechsupportmanagementTechSupportBundleByMoidRequest
 */
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBundleByMoid(ctx _context.Context, moid string) ApiGetTechsupportmanagementTechSupportBundleByMoidRequest {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBundleByMoid(ctx context.Context, moid string) ApiGetTechsupportmanagementTechSupportBundleByMoidRequest {
 	return ApiGetTechsupportmanagementTechSupportBundleByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1501,27 +1480,25 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBun
 
 // Execute executes the request
 //  @return TechsupportmanagementTechSupportBundle
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBundleByMoidExecute(r ApiGetTechsupportmanagementTechSupportBundleByMoidRequest) (TechsupportmanagementTechSupportBundle, *_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBundleByMoidExecute(r ApiGetTechsupportmanagementTechSupportBundleByMoidRequest) (*TechsupportmanagementTechSupportBundle, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TechsupportmanagementTechSupportBundle
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TechsupportmanagementTechSupportBundle
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.GetTechsupportmanagementTechSupportBundleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/TechSupportBundles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1540,7 +1517,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBun
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1550,15 +1527,15 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBun
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1614,7 +1591,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBun
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1625,7 +1602,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBun
 }
 
 type ApiGetTechsupportmanagementTechSupportBundleListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *TechsupportmanagementApiService
 	filter      *string
 	orderby     *string
@@ -1706,17 +1683,17 @@ func (r ApiGetTechsupportmanagementTechSupportBundleListRequest) Tags(tags strin
 	return r
 }
 
-func (r ApiGetTechsupportmanagementTechSupportBundleListRequest) Execute() (TechsupportmanagementTechSupportBundleResponse, *_nethttp.Response, error) {
+func (r ApiGetTechsupportmanagementTechSupportBundleListRequest) Execute() (*TechsupportmanagementTechSupportBundleResponse, *http.Response, error) {
 	return r.ApiService.GetTechsupportmanagementTechSupportBundleListExecute(r)
 }
 
 /*
 GetTechsupportmanagementTechSupportBundleList Read a 'techsupportmanagement.TechSupportBundle' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTechsupportmanagementTechSupportBundleListRequest
 */
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBundleList(ctx _context.Context) ApiGetTechsupportmanagementTechSupportBundleListRequest {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBundleList(ctx context.Context) ApiGetTechsupportmanagementTechSupportBundleListRequest {
 	return ApiGetTechsupportmanagementTechSupportBundleListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1725,26 +1702,24 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBun
 
 // Execute executes the request
 //  @return TechsupportmanagementTechSupportBundleResponse
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBundleListExecute(r ApiGetTechsupportmanagementTechSupportBundleListRequest) (TechsupportmanagementTechSupportBundleResponse, *_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBundleListExecute(r ApiGetTechsupportmanagementTechSupportBundleListRequest) (*TechsupportmanagementTechSupportBundleResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TechsupportmanagementTechSupportBundleResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TechsupportmanagementTechSupportBundleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.GetTechsupportmanagementTechSupportBundleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/TechSupportBundles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1796,7 +1771,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBun
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1806,15 +1781,15 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBun
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1870,7 +1845,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBun
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1881,23 +1856,23 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportBun
 }
 
 type ApiGetTechsupportmanagementTechSupportStatusByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TechsupportmanagementApiService
 	moid       string
 }
 
-func (r ApiGetTechsupportmanagementTechSupportStatusByMoidRequest) Execute() (TechsupportmanagementTechSupportStatus, *_nethttp.Response, error) {
+func (r ApiGetTechsupportmanagementTechSupportStatusByMoidRequest) Execute() (*TechsupportmanagementTechSupportStatus, *http.Response, error) {
 	return r.ApiService.GetTechsupportmanagementTechSupportStatusByMoidExecute(r)
 }
 
 /*
 GetTechsupportmanagementTechSupportStatusByMoid Read a 'techsupportmanagement.TechSupportStatus' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetTechsupportmanagementTechSupportStatusByMoidRequest
 */
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportStatusByMoid(ctx _context.Context, moid string) ApiGetTechsupportmanagementTechSupportStatusByMoidRequest {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportStatusByMoid(ctx context.Context, moid string) ApiGetTechsupportmanagementTechSupportStatusByMoidRequest {
 	return ApiGetTechsupportmanagementTechSupportStatusByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1907,27 +1882,25 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportSta
 
 // Execute executes the request
 //  @return TechsupportmanagementTechSupportStatus
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportStatusByMoidExecute(r ApiGetTechsupportmanagementTechSupportStatusByMoidRequest) (TechsupportmanagementTechSupportStatus, *_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportStatusByMoidExecute(r ApiGetTechsupportmanagementTechSupportStatusByMoidRequest) (*TechsupportmanagementTechSupportStatus, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TechsupportmanagementTechSupportStatus
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TechsupportmanagementTechSupportStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.GetTechsupportmanagementTechSupportStatusByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/TechSupportStatuses/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1946,7 +1919,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportSta
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1956,15 +1929,15 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportSta
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2020,7 +1993,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportSta
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2031,7 +2004,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportSta
 }
 
 type ApiGetTechsupportmanagementTechSupportStatusListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *TechsupportmanagementApiService
 	filter      *string
 	orderby     *string
@@ -2112,17 +2085,17 @@ func (r ApiGetTechsupportmanagementTechSupportStatusListRequest) Tags(tags strin
 	return r
 }
 
-func (r ApiGetTechsupportmanagementTechSupportStatusListRequest) Execute() (TechsupportmanagementTechSupportStatusResponse, *_nethttp.Response, error) {
+func (r ApiGetTechsupportmanagementTechSupportStatusListRequest) Execute() (*TechsupportmanagementTechSupportStatusResponse, *http.Response, error) {
 	return r.ApiService.GetTechsupportmanagementTechSupportStatusListExecute(r)
 }
 
 /*
 GetTechsupportmanagementTechSupportStatusList Read a 'techsupportmanagement.TechSupportStatus' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTechsupportmanagementTechSupportStatusListRequest
 */
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportStatusList(ctx _context.Context) ApiGetTechsupportmanagementTechSupportStatusListRequest {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportStatusList(ctx context.Context) ApiGetTechsupportmanagementTechSupportStatusListRequest {
 	return ApiGetTechsupportmanagementTechSupportStatusListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2131,26 +2104,24 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportSta
 
 // Execute executes the request
 //  @return TechsupportmanagementTechSupportStatusResponse
-func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportStatusListExecute(r ApiGetTechsupportmanagementTechSupportStatusListRequest) (TechsupportmanagementTechSupportStatusResponse, *_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportStatusListExecute(r ApiGetTechsupportmanagementTechSupportStatusListRequest) (*TechsupportmanagementTechSupportStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TechsupportmanagementTechSupportStatusResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TechsupportmanagementTechSupportStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.GetTechsupportmanagementTechSupportStatusList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/TechSupportStatuses"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2202,7 +2173,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportSta
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2212,15 +2183,15 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportSta
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2276,7 +2247,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportSta
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2287,7 +2258,7 @@ func (a *TechsupportmanagementApiService) GetTechsupportmanagementTechSupportSta
 }
 
 type ApiPatchTechsupportmanagementCollectionControlPolicyRequest struct {
-	ctx                                          _context.Context
+	ctx                                          context.Context
 	ApiService                                   *TechsupportmanagementApiService
 	moid                                         string
 	techsupportmanagementCollectionControlPolicy *TechsupportmanagementCollectionControlPolicy
@@ -2306,18 +2277,18 @@ func (r ApiPatchTechsupportmanagementCollectionControlPolicyRequest) IfMatch(ifM
 	return r
 }
 
-func (r ApiPatchTechsupportmanagementCollectionControlPolicyRequest) Execute() (TechsupportmanagementCollectionControlPolicy, *_nethttp.Response, error) {
+func (r ApiPatchTechsupportmanagementCollectionControlPolicyRequest) Execute() (*TechsupportmanagementCollectionControlPolicy, *http.Response, error) {
 	return r.ApiService.PatchTechsupportmanagementCollectionControlPolicyExecute(r)
 }
 
 /*
 PatchTechsupportmanagementCollectionControlPolicy Update a 'techsupportmanagement.CollectionControlPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchTechsupportmanagementCollectionControlPolicyRequest
 */
-func (a *TechsupportmanagementApiService) PatchTechsupportmanagementCollectionControlPolicy(ctx _context.Context, moid string) ApiPatchTechsupportmanagementCollectionControlPolicyRequest {
+func (a *TechsupportmanagementApiService) PatchTechsupportmanagementCollectionControlPolicy(ctx context.Context, moid string) ApiPatchTechsupportmanagementCollectionControlPolicyRequest {
 	return ApiPatchTechsupportmanagementCollectionControlPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2327,27 +2298,25 @@ func (a *TechsupportmanagementApiService) PatchTechsupportmanagementCollectionCo
 
 // Execute executes the request
 //  @return TechsupportmanagementCollectionControlPolicy
-func (a *TechsupportmanagementApiService) PatchTechsupportmanagementCollectionControlPolicyExecute(r ApiPatchTechsupportmanagementCollectionControlPolicyRequest) (TechsupportmanagementCollectionControlPolicy, *_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) PatchTechsupportmanagementCollectionControlPolicyExecute(r ApiPatchTechsupportmanagementCollectionControlPolicyRequest) (*TechsupportmanagementCollectionControlPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TechsupportmanagementCollectionControlPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TechsupportmanagementCollectionControlPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.PatchTechsupportmanagementCollectionControlPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/CollectionControlPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.techsupportmanagementCollectionControlPolicy == nil {
 		return localVarReturnValue, nil, reportError("techsupportmanagementCollectionControlPolicy is required and must be specified")
 	}
@@ -2374,7 +2343,7 @@ func (a *TechsupportmanagementApiService) PatchTechsupportmanagementCollectionCo
 	}
 	// body params
 	localVarPostBody = r.techsupportmanagementCollectionControlPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2384,15 +2353,15 @@ func (a *TechsupportmanagementApiService) PatchTechsupportmanagementCollectionCo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2448,7 +2417,7 @@ func (a *TechsupportmanagementApiService) PatchTechsupportmanagementCollectionCo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2459,7 +2428,7 @@ func (a *TechsupportmanagementApiService) PatchTechsupportmanagementCollectionCo
 }
 
 type ApiUpdateTechsupportmanagementCollectionControlPolicyRequest struct {
-	ctx                                          _context.Context
+	ctx                                          context.Context
 	ApiService                                   *TechsupportmanagementApiService
 	moid                                         string
 	techsupportmanagementCollectionControlPolicy *TechsupportmanagementCollectionControlPolicy
@@ -2478,18 +2447,18 @@ func (r ApiUpdateTechsupportmanagementCollectionControlPolicyRequest) IfMatch(if
 	return r
 }
 
-func (r ApiUpdateTechsupportmanagementCollectionControlPolicyRequest) Execute() (TechsupportmanagementCollectionControlPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateTechsupportmanagementCollectionControlPolicyRequest) Execute() (*TechsupportmanagementCollectionControlPolicy, *http.Response, error) {
 	return r.ApiService.UpdateTechsupportmanagementCollectionControlPolicyExecute(r)
 }
 
 /*
 UpdateTechsupportmanagementCollectionControlPolicy Update a 'techsupportmanagement.CollectionControlPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateTechsupportmanagementCollectionControlPolicyRequest
 */
-func (a *TechsupportmanagementApiService) UpdateTechsupportmanagementCollectionControlPolicy(ctx _context.Context, moid string) ApiUpdateTechsupportmanagementCollectionControlPolicyRequest {
+func (a *TechsupportmanagementApiService) UpdateTechsupportmanagementCollectionControlPolicy(ctx context.Context, moid string) ApiUpdateTechsupportmanagementCollectionControlPolicyRequest {
 	return ApiUpdateTechsupportmanagementCollectionControlPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2499,27 +2468,25 @@ func (a *TechsupportmanagementApiService) UpdateTechsupportmanagementCollectionC
 
 // Execute executes the request
 //  @return TechsupportmanagementCollectionControlPolicy
-func (a *TechsupportmanagementApiService) UpdateTechsupportmanagementCollectionControlPolicyExecute(r ApiUpdateTechsupportmanagementCollectionControlPolicyRequest) (TechsupportmanagementCollectionControlPolicy, *_nethttp.Response, error) {
+func (a *TechsupportmanagementApiService) UpdateTechsupportmanagementCollectionControlPolicyExecute(r ApiUpdateTechsupportmanagementCollectionControlPolicyRequest) (*TechsupportmanagementCollectionControlPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TechsupportmanagementCollectionControlPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TechsupportmanagementCollectionControlPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TechsupportmanagementApiService.UpdateTechsupportmanagementCollectionControlPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/techsupportmanagement/CollectionControlPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.techsupportmanagementCollectionControlPolicy == nil {
 		return localVarReturnValue, nil, reportError("techsupportmanagementCollectionControlPolicy is required and must be specified")
 	}
@@ -2546,7 +2513,7 @@ func (a *TechsupportmanagementApiService) UpdateTechsupportmanagementCollectionC
 	}
 	// body params
 	localVarPostBody = r.techsupportmanagementCollectionControlPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2556,15 +2523,15 @@ func (a *TechsupportmanagementApiService) UpdateTechsupportmanagementCollectionC
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2620,7 +2587,7 @@ func (a *TechsupportmanagementApiService) UpdateTechsupportmanagementCollectionC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

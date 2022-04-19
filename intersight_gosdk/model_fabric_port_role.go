@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -19,7 +19,7 @@ import (
 
 // FabricPortRole Configuration object sent by user to apply on a port. A common port naming convention is to identify a port as \"slotId/portId\" when no breakout port is configured and \"slotId/aggregatePortId/portId\" when a breakout port is configured.
 type FabricPortRole struct {
-	MoBaseMo
+	FabricAbstractInterfaceRole
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property. The enum values provides the list of concrete types that can be instantiated from this abstract type.
@@ -233,13 +233,13 @@ func (o *FabricPortRole) SetPortPolicy(v FabricPortPolicyRelationship) {
 
 func (o FabricPortRole) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	serializedMoBaseMo, errMoBaseMo := json.Marshal(o.MoBaseMo)
-	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+	serializedFabricAbstractInterfaceRole, errFabricAbstractInterfaceRole := json.Marshal(o.FabricAbstractInterfaceRole)
+	if errFabricAbstractInterfaceRole != nil {
+		return []byte{}, errFabricAbstractInterfaceRole
 	}
-	errMoBaseMo = json.Unmarshal([]byte(serializedMoBaseMo), &toSerialize)
-	if errMoBaseMo != nil {
-		return []byte{}, errMoBaseMo
+	errFabricAbstractInterfaceRole = json.Unmarshal([]byte(serializedFabricAbstractInterfaceRole), &toSerialize)
+	if errFabricAbstractInterfaceRole != nil {
+		return []byte{}, errFabricAbstractInterfaceRole
 	}
 	if true {
 		toSerialize["ClassId"] = o.ClassId
@@ -302,7 +302,7 @@ func (o *FabricPortRole) UnmarshalJSON(bytes []byte) (err error) {
 
 	err = json.Unmarshal(bytes, &varFabricPortRole)
 	if err == nil {
-		o.MoBaseMo = varFabricPortRole.MoBaseMo
+		o.FabricAbstractInterfaceRole = varFabricPortRole.FabricAbstractInterfaceRole
 	} else {
 		return err
 	}
@@ -318,9 +318,9 @@ func (o *FabricPortRole) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "PortPolicy")
 
 		// remove fields from embedded structs
-		reflectMoBaseMo := reflect.ValueOf(o.MoBaseMo)
-		for i := 0; i < reflectMoBaseMo.Type().NumField(); i++ {
-			t := reflectMoBaseMo.Type().Field(i)
+		reflectFabricAbstractInterfaceRole := reflect.ValueOf(o.FabricAbstractInterfaceRole)
+		for i := 0; i < reflectFabricAbstractInterfaceRole.Type().NumField(); i++ {
+			t := reflectFabricAbstractInterfaceRole.Type().Field(i)
 
 			if jsonTag := t.Tag.Get("json"); jsonTag != "" {
 				fieldName := ""

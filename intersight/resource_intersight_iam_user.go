@@ -811,7 +811,6 @@ func resourceIamUser() *schema.Resource {
 
 func resourceIamUserCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIamUserWithDefaults()
@@ -1012,7 +1011,7 @@ func resourceIamUserCreate(c context.Context, d *schema.ResourceData, meta inter
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating IamUser: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating IamUser: %s", responseErr.Error())
@@ -1024,7 +1023,6 @@ func resourceIamUserCreate(c context.Context, d *schema.ResourceData, meta inter
 
 func resourceIamUserRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamUserByMoid(conn.ctx, d.Id())
@@ -1037,7 +1035,7 @@ func resourceIamUserRead(c context.Context, d *schema.ResourceData, meta interfa
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching IamUser: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching IamUser: %s", responseErr.Error())
@@ -1182,7 +1180,6 @@ func resourceIamUserRead(c context.Context, d *schema.ResourceData, meta interfa
 
 func resourceIamUserUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamUser{}
@@ -1387,7 +1384,7 @@ func resourceIamUserUpdate(c context.Context, d *schema.ResourceData, meta inter
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating IamUser: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating IamUser: %s", responseErr.Error())
@@ -1399,7 +1396,6 @@ func resourceIamUserUpdate(c context.Context, d *schema.ResourceData, meta inter
 
 func resourceIamUserDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamUser(conn.ctx, d.Id())
@@ -1411,7 +1407,7 @@ func resourceIamUserDelete(c context.Context, d *schema.ResourceData, meta inter
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting IamUser object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting IamUser object: %s", deleteErr.Error())

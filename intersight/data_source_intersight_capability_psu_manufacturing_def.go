@@ -667,7 +667,6 @@ func dataSourceCapabilityPsuManufacturingDef() *schema.Resource {
 
 func dataSourceCapabilityPsuManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityPsuManufacturingDef{}
@@ -1004,7 +1003,7 @@ func dataSourceCapabilityPsuManufacturingDefRead(c context.Context, d *schema.Re
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of CapabilityPsuManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of CapabilityPsuManufacturingDef: %s", responseErr.Error())
@@ -1021,7 +1020,7 @@ func dataSourceCapabilityPsuManufacturingDefRead(c context.Context, d *schema.Re
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching CapabilityPsuManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching CapabilityPsuManufacturingDef: %s", responseErr.Error())

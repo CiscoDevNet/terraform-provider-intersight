@@ -470,7 +470,6 @@ func resourceFirmwareBiosDescriptor() *schema.Resource {
 
 func resourceFirmwareBiosDescriptorCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFirmwareBiosDescriptorWithDefaults()
@@ -610,7 +609,7 @@ func resourceFirmwareBiosDescriptorCreate(c context.Context, d *schema.ResourceD
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FirmwareBiosDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FirmwareBiosDescriptor: %s", responseErr.Error())
@@ -622,7 +621,6 @@ func resourceFirmwareBiosDescriptorCreate(c context.Context, d *schema.ResourceD
 
 func resourceFirmwareBiosDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FirmwareApi.GetFirmwareBiosDescriptorByMoid(conn.ctx, d.Id())
@@ -635,7 +633,7 @@ func resourceFirmwareBiosDescriptorRead(c context.Context, d *schema.ResourceDat
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FirmwareBiosDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FirmwareBiosDescriptor: %s", responseErr.Error())
@@ -740,7 +738,6 @@ func resourceFirmwareBiosDescriptorRead(c context.Context, d *schema.ResourceDat
 
 func resourceFirmwareBiosDescriptorUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FirmwareBiosDescriptor{}
@@ -887,7 +884,7 @@ func resourceFirmwareBiosDescriptorUpdate(c context.Context, d *schema.ResourceD
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating FirmwareBiosDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating FirmwareBiosDescriptor: %s", responseErr.Error())
@@ -899,7 +896,6 @@ func resourceFirmwareBiosDescriptorUpdate(c context.Context, d *schema.ResourceD
 
 func resourceFirmwareBiosDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FirmwareApi.DeleteFirmwareBiosDescriptor(conn.ctx, d.Id())
@@ -911,7 +907,7 @@ func resourceFirmwareBiosDescriptorDelete(c context.Context, d *schema.ResourceD
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FirmwareBiosDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FirmwareBiosDescriptor object: %s", deleteErr.Error())

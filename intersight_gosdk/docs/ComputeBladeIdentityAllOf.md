@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **CurrentChassisId** | Pointer to **int64** | The id of the chassis that the blade is currently located in. | [optional] [readonly] 
 **CurrentSlotId** | Pointer to **int64** | The slot number in the chassis that the blade is currently located in. | [optional] [readonly] 
 **FirmwareSupportability** | Pointer to **string** | Describes whether the running CIMC version supports Intersight managed mode. * &#x60;Unknown&#x60; - The running firmware version is unknown. * &#x60;Supported&#x60; - The running firmware version is known and supports IMM mode. * &#x60;NotSupported&#x60; - The running firmware version is known and does not support IMM mode. | [optional] [readonly] [default to "Unknown"]
-**LastDiscoveryTriggered** | Pointer to **string** | Denotes the type of discovery that was most recently triggered on this server. * &#x60;Unknown&#x60; - The last discovery type is unknown. * &#x60;Deep&#x60; - The last discovery triggered is deep. * &#x60;Shallow&#x60; - The last discovery triggered is shallow. | [optional] [readonly] [default to "Unknown"]
 **Presence** | Pointer to **string** | The presence state of the blade server. * &#x60;Unknown&#x60; - The default presence state. * &#x60;Equipped&#x60; - The server is equipped in the slot. * &#x60;EquippedMismatch&#x60; - The slot is equipped, but there is another server currently inventoried in the slot. * &#x60;Missing&#x60; - The server is not present in the given slot. | [optional] [readonly] [default to "Unknown"]
 **SlotId** | Pointer to **int64** | Chassis slot number of a blade server. | [optional] [readonly] 
 
@@ -172,31 +171,6 @@ SetFirmwareSupportability sets FirmwareSupportability field to given value.
 `func (o *ComputeBladeIdentityAllOf) HasFirmwareSupportability() bool`
 
 HasFirmwareSupportability returns a boolean if a field has been set.
-
-### GetLastDiscoveryTriggered
-
-`func (o *ComputeBladeIdentityAllOf) GetLastDiscoveryTriggered() string`
-
-GetLastDiscoveryTriggered returns the LastDiscoveryTriggered field if non-nil, zero value otherwise.
-
-### GetLastDiscoveryTriggeredOk
-
-`func (o *ComputeBladeIdentityAllOf) GetLastDiscoveryTriggeredOk() (*string, bool)`
-
-GetLastDiscoveryTriggeredOk returns a tuple with the LastDiscoveryTriggered field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLastDiscoveryTriggered
-
-`func (o *ComputeBladeIdentityAllOf) SetLastDiscoveryTriggered(v string)`
-
-SetLastDiscoveryTriggered sets LastDiscoveryTriggered field to given value.
-
-### HasLastDiscoveryTriggered
-
-`func (o *ComputeBladeIdentityAllOf) HasLastDiscoveryTriggered() bool`
-
-HasLastDiscoveryTriggered returns a boolean if a field has been set.
 
 ### GetPresence
 

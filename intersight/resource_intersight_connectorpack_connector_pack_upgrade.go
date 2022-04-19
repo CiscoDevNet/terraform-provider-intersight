@@ -549,7 +549,6 @@ func resourceConnectorpackConnectorPackUpgrade() *schema.Resource {
 
 func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewConnectorpackConnectorPackUpgradeWithDefaults()
@@ -660,7 +659,7 @@ func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schem
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating ConnectorpackConnectorPackUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating ConnectorpackConnectorPackUpgrade: %s", responseErr.Error())
@@ -678,7 +677,7 @@ func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schem
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching ConnectorpackConnectorPackUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching ConnectorpackConnectorPackUpgrade: %s", responseErr.Error())
@@ -692,7 +691,7 @@ func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schem
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching ConnectorpackConnectorPackUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching ConnectorpackConnectorPackUpgrade: %s", responseErr.Error())
@@ -706,7 +705,7 @@ func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schem
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in ConnectorpackConnectorPackUpgrade: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in ConnectorpackConnectorPackUpgrade: %s", err.Error())
@@ -721,7 +720,6 @@ func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schem
 
 func resourceConnectorpackConnectorPackUpgradeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.ConnectorpackApi.GetConnectorpackConnectorPackUpgradeByMoid(conn.ctx, d.Id())
@@ -734,7 +732,7 @@ func resourceConnectorpackConnectorPackUpgradeRead(c context.Context, d *schema.
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching ConnectorpackConnectorPackUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching ConnectorpackConnectorPackUpgrade: %s", responseErr.Error())
@@ -819,7 +817,6 @@ func resourceConnectorpackConnectorPackUpgradeRead(c context.Context, d *schema.
 
 func resourceConnectorpackConnectorPackUpgradeDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.ConnectorpackApi.DeleteConnectorpackConnectorPackUpgrade(conn.ctx, d.Id())
@@ -831,7 +828,7 @@ func resourceConnectorpackConnectorPackUpgradeDelete(c context.Context, d *schem
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting ConnectorpackConnectorPackUpgrade object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting ConnectorpackConnectorPackUpgrade object: %s", deleteErr.Error())

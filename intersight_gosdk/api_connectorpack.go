@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // ConnectorpackApiService ConnectorpackApi service
 type ConnectorpackApiService service
 
 type ApiCreateConnectorpackConnectorPackUpgradeRequest struct {
-	ctx                               _context.Context
+	ctx                               context.Context
 	ApiService                        *ConnectorpackApiService
 	connectorpackConnectorPackUpgrade *ConnectorpackConnectorPackUpgrade
 	ifMatch                           *string
@@ -54,17 +49,17 @@ func (r ApiCreateConnectorpackConnectorPackUpgradeRequest) IfNoneMatch(ifNoneMat
 	return r
 }
 
-func (r ApiCreateConnectorpackConnectorPackUpgradeRequest) Execute() (ConnectorpackConnectorPackUpgrade, *_nethttp.Response, error) {
+func (r ApiCreateConnectorpackConnectorPackUpgradeRequest) Execute() (*ConnectorpackConnectorPackUpgrade, *http.Response, error) {
 	return r.ApiService.CreateConnectorpackConnectorPackUpgradeExecute(r)
 }
 
 /*
 CreateConnectorpackConnectorPackUpgrade Create a 'connectorpack.ConnectorPackUpgrade' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateConnectorpackConnectorPackUpgradeRequest
 */
-func (a *ConnectorpackApiService) CreateConnectorpackConnectorPackUpgrade(ctx _context.Context) ApiCreateConnectorpackConnectorPackUpgradeRequest {
+func (a *ConnectorpackApiService) CreateConnectorpackConnectorPackUpgrade(ctx context.Context) ApiCreateConnectorpackConnectorPackUpgradeRequest {
 	return ApiCreateConnectorpackConnectorPackUpgradeRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *ConnectorpackApiService) CreateConnectorpackConnectorPackUpgrade(ctx _c
 
 // Execute executes the request
 //  @return ConnectorpackConnectorPackUpgrade
-func (a *ConnectorpackApiService) CreateConnectorpackConnectorPackUpgradeExecute(r ApiCreateConnectorpackConnectorPackUpgradeRequest) (ConnectorpackConnectorPackUpgrade, *_nethttp.Response, error) {
+func (a *ConnectorpackApiService) CreateConnectorpackConnectorPackUpgradeExecute(r ApiCreateConnectorpackConnectorPackUpgradeRequest) (*ConnectorpackConnectorPackUpgrade, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConnectorpackConnectorPackUpgrade
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConnectorpackConnectorPackUpgrade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorpackApiService.CreateConnectorpackConnectorPackUpgrade")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/connectorpack/ConnectorPackUpgrades"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.connectorpackConnectorPackUpgrade == nil {
 		return localVarReturnValue, nil, reportError("connectorpackConnectorPackUpgrade is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *ConnectorpackApiService) CreateConnectorpackConnectorPackUpgradeExecute
 	}
 	// body params
 	localVarPostBody = r.connectorpackConnectorPackUpgrade
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *ConnectorpackApiService) CreateConnectorpackConnectorPackUpgradeExecute
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *ConnectorpackApiService) CreateConnectorpackConnectorPackUpgradeExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *ConnectorpackApiService) CreateConnectorpackConnectorPackUpgradeExecute
 }
 
 type ApiDeleteConnectorpackConnectorPackUpgradeRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ConnectorpackApiService
 	moid       string
 }
 
-func (r ApiDeleteConnectorpackConnectorPackUpgradeRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteConnectorpackConnectorPackUpgradeRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteConnectorpackConnectorPackUpgradeExecute(r)
 }
 
 /*
 DeleteConnectorpackConnectorPackUpgrade Delete a 'connectorpack.ConnectorPackUpgrade' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteConnectorpackConnectorPackUpgradeRequest
 */
-func (a *ConnectorpackApiService) DeleteConnectorpackConnectorPackUpgrade(ctx _context.Context, moid string) ApiDeleteConnectorpackConnectorPackUpgradeRequest {
+func (a *ConnectorpackApiService) DeleteConnectorpackConnectorPackUpgrade(ctx context.Context, moid string) ApiDeleteConnectorpackConnectorPackUpgradeRequest {
 	return ApiDeleteConnectorpackConnectorPackUpgradeRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *ConnectorpackApiService) DeleteConnectorpackConnectorPackUpgrade(ctx _c
 }
 
 // Execute executes the request
-func (a *ConnectorpackApiService) DeleteConnectorpackConnectorPackUpgradeExecute(r ApiDeleteConnectorpackConnectorPackUpgradeRequest) (*_nethttp.Response, error) {
+func (a *ConnectorpackApiService) DeleteConnectorpackConnectorPackUpgradeExecute(r ApiDeleteConnectorpackConnectorPackUpgradeRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorpackApiService.DeleteConnectorpackConnectorPackUpgrade")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/connectorpack/ConnectorPackUpgrades/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *ConnectorpackApiService) DeleteConnectorpackConnectorPackUpgradeExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *ConnectorpackApiService) DeleteConnectorpackConnectorPackUpgradeExecute
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *ConnectorpackApiService) DeleteConnectorpackConnectorPackUpgradeExecute
 }
 
 type ApiGetConnectorpackConnectorPackUpgradeByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ConnectorpackApiService
 	moid       string
 }
 
-func (r ApiGetConnectorpackConnectorPackUpgradeByMoidRequest) Execute() (ConnectorpackConnectorPackUpgrade, *_nethttp.Response, error) {
+func (r ApiGetConnectorpackConnectorPackUpgradeByMoidRequest) Execute() (*ConnectorpackConnectorPackUpgrade, *http.Response, error) {
 	return r.ApiService.GetConnectorpackConnectorPackUpgradeByMoidExecute(r)
 }
 
 /*
 GetConnectorpackConnectorPackUpgradeByMoid Read a 'connectorpack.ConnectorPackUpgrade' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetConnectorpackConnectorPackUpgradeByMoidRequest
 */
-func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeByMoid(ctx _context.Context, moid string) ApiGetConnectorpackConnectorPackUpgradeByMoidRequest {
+func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeByMoid(ctx context.Context, moid string) ApiGetConnectorpackConnectorPackUpgradeByMoidRequest {
 	return ApiGetConnectorpackConnectorPackUpgradeByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeByMoid(ctx
 
 // Execute executes the request
 //  @return ConnectorpackConnectorPackUpgrade
-func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeByMoidExecute(r ApiGetConnectorpackConnectorPackUpgradeByMoidRequest) (ConnectorpackConnectorPackUpgrade, *_nethttp.Response, error) {
+func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeByMoidExecute(r ApiGetConnectorpackConnectorPackUpgradeByMoidRequest) (*ConnectorpackConnectorPackUpgrade, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConnectorpackConnectorPackUpgrade
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConnectorpackConnectorPackUpgrade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorpackApiService.GetConnectorpackConnectorPackUpgradeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/connectorpack/ConnectorPackUpgrades/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeByMoidExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeByMoidExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeByMoidExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeByMoidExec
 }
 
 type ApiGetConnectorpackConnectorPackUpgradeListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ConnectorpackApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetConnectorpackConnectorPackUpgradeListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetConnectorpackConnectorPackUpgradeListRequest) Execute() (ConnectorpackConnectorPackUpgradeResponse, *_nethttp.Response, error) {
+func (r ApiGetConnectorpackConnectorPackUpgradeListRequest) Execute() (*ConnectorpackConnectorPackUpgradeResponse, *http.Response, error) {
 	return r.ApiService.GetConnectorpackConnectorPackUpgradeListExecute(r)
 }
 
 /*
 GetConnectorpackConnectorPackUpgradeList Read a 'connectorpack.ConnectorPackUpgrade' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetConnectorpackConnectorPackUpgradeListRequest
 */
-func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeList(ctx _context.Context) ApiGetConnectorpackConnectorPackUpgradeListRequest {
+func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeList(ctx context.Context) ApiGetConnectorpackConnectorPackUpgradeListRequest {
 	return ApiGetConnectorpackConnectorPackUpgradeListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeList(ctx _
 
 // Execute executes the request
 //  @return ConnectorpackConnectorPackUpgradeResponse
-func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeListExecute(r ApiGetConnectorpackConnectorPackUpgradeListRequest) (ConnectorpackConnectorPackUpgradeResponse, *_nethttp.Response, error) {
+func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeListExecute(r ApiGetConnectorpackConnectorPackUpgradeListRequest) (*ConnectorpackConnectorPackUpgradeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConnectorpackConnectorPackUpgradeResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConnectorpackConnectorPackUpgradeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorpackApiService.GetConnectorpackConnectorPackUpgradeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/connectorpack/ConnectorPackUpgrades"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeListExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeListExecut
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeListExecut
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,23 +739,23 @@ func (a *ConnectorpackApiService) GetConnectorpackConnectorPackUpgradeListExecut
 }
 
 type ApiGetConnectorpackUpgradeImpactByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ConnectorpackApiService
 	moid       string
 }
 
-func (r ApiGetConnectorpackUpgradeImpactByMoidRequest) Execute() (ConnectorpackUpgradeImpact, *_nethttp.Response, error) {
+func (r ApiGetConnectorpackUpgradeImpactByMoidRequest) Execute() (*ConnectorpackUpgradeImpact, *http.Response, error) {
 	return r.ApiService.GetConnectorpackUpgradeImpactByMoidExecute(r)
 }
 
 /*
 GetConnectorpackUpgradeImpactByMoid Read a 'connectorpack.UpgradeImpact' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetConnectorpackUpgradeImpactByMoidRequest
 */
-func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactByMoid(ctx _context.Context, moid string) ApiGetConnectorpackUpgradeImpactByMoidRequest {
+func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactByMoid(ctx context.Context, moid string) ApiGetConnectorpackUpgradeImpactByMoidRequest {
 	return ApiGetConnectorpackUpgradeImpactByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -778,27 +765,25 @@ func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactByMoid(ctx _conte
 
 // Execute executes the request
 //  @return ConnectorpackUpgradeImpact
-func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactByMoidExecute(r ApiGetConnectorpackUpgradeImpactByMoidRequest) (ConnectorpackUpgradeImpact, *_nethttp.Response, error) {
+func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactByMoidExecute(r ApiGetConnectorpackUpgradeImpactByMoidRequest) (*ConnectorpackUpgradeImpact, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConnectorpackUpgradeImpact
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConnectorpackUpgradeImpact
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorpackApiService.GetConnectorpackUpgradeImpactByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/connectorpack/UpgradeImpacts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -817,7 +802,7 @@ func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactByMoidExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -827,15 +812,15 @@ func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -891,7 +876,7 @@ func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactByMoidExecute(r A
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -902,7 +887,7 @@ func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactByMoidExecute(r A
 }
 
 type ApiGetConnectorpackUpgradeImpactListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ConnectorpackApiService
 	filter      *string
 	orderby     *string
@@ -983,17 +968,17 @@ func (r ApiGetConnectorpackUpgradeImpactListRequest) Tags(tags string) ApiGetCon
 	return r
 }
 
-func (r ApiGetConnectorpackUpgradeImpactListRequest) Execute() (ConnectorpackUpgradeImpactResponse, *_nethttp.Response, error) {
+func (r ApiGetConnectorpackUpgradeImpactListRequest) Execute() (*ConnectorpackUpgradeImpactResponse, *http.Response, error) {
 	return r.ApiService.GetConnectorpackUpgradeImpactListExecute(r)
 }
 
 /*
 GetConnectorpackUpgradeImpactList Read a 'connectorpack.UpgradeImpact' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetConnectorpackUpgradeImpactListRequest
 */
-func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactList(ctx _context.Context) ApiGetConnectorpackUpgradeImpactListRequest {
+func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactList(ctx context.Context) ApiGetConnectorpackUpgradeImpactListRequest {
 	return ApiGetConnectorpackUpgradeImpactListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1002,26 +987,24 @@ func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactList(ctx _context
 
 // Execute executes the request
 //  @return ConnectorpackUpgradeImpactResponse
-func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactListExecute(r ApiGetConnectorpackUpgradeImpactListRequest) (ConnectorpackUpgradeImpactResponse, *_nethttp.Response, error) {
+func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactListExecute(r ApiGetConnectorpackUpgradeImpactListRequest) (*ConnectorpackUpgradeImpactResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ConnectorpackUpgradeImpactResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ConnectorpackUpgradeImpactResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConnectorpackApiService.GetConnectorpackUpgradeImpactList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/connectorpack/UpgradeImpacts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1073,7 +1056,7 @@ func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactListExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1083,15 +1066,15 @@ func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1147,7 +1130,7 @@ func (a *ConnectorpackApiService) GetConnectorpackUpgradeImpactListExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

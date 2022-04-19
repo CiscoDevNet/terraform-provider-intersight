@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // FcApiService FcApi service
 type FcApiService service
 
 type ApiGetFcPhysicalPortByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *FcApiService
 	moid       string
 }
 
-func (r ApiGetFcPhysicalPortByMoidRequest) Execute() (FcPhysicalPort, *_nethttp.Response, error) {
+func (r ApiGetFcPhysicalPortByMoidRequest) Execute() (*FcPhysicalPort, *http.Response, error) {
 	return r.ApiService.GetFcPhysicalPortByMoidExecute(r)
 }
 
 /*
 GetFcPhysicalPortByMoid Read a 'fc.PhysicalPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetFcPhysicalPortByMoidRequest
 */
-func (a *FcApiService) GetFcPhysicalPortByMoid(ctx _context.Context, moid string) ApiGetFcPhysicalPortByMoidRequest {
+func (a *FcApiService) GetFcPhysicalPortByMoid(ctx context.Context, moid string) ApiGetFcPhysicalPortByMoidRequest {
 	return ApiGetFcPhysicalPortByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -55,27 +50,25 @@ func (a *FcApiService) GetFcPhysicalPortByMoid(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return FcPhysicalPort
-func (a *FcApiService) GetFcPhysicalPortByMoidExecute(r ApiGetFcPhysicalPortByMoidRequest) (FcPhysicalPort, *_nethttp.Response, error) {
+func (a *FcApiService) GetFcPhysicalPortByMoidExecute(r ApiGetFcPhysicalPortByMoidRequest) (*FcPhysicalPort, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  FcPhysicalPort
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FcPhysicalPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcApiService.GetFcPhysicalPortByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fc/PhysicalPorts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -94,7 +87,7 @@ func (a *FcApiService) GetFcPhysicalPortByMoidExecute(r ApiGetFcPhysicalPortByMo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -104,15 +97,15 @@ func (a *FcApiService) GetFcPhysicalPortByMoidExecute(r ApiGetFcPhysicalPortByMo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,7 +161,7 @@ func (a *FcApiService) GetFcPhysicalPortByMoidExecute(r ApiGetFcPhysicalPortByMo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -179,7 +172,7 @@ func (a *FcApiService) GetFcPhysicalPortByMoidExecute(r ApiGetFcPhysicalPortByMo
 }
 
 type ApiGetFcPhysicalPortListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *FcApiService
 	filter      *string
 	orderby     *string
@@ -260,17 +253,17 @@ func (r ApiGetFcPhysicalPortListRequest) Tags(tags string) ApiGetFcPhysicalPortL
 	return r
 }
 
-func (r ApiGetFcPhysicalPortListRequest) Execute() (FcPhysicalPortResponse, *_nethttp.Response, error) {
+func (r ApiGetFcPhysicalPortListRequest) Execute() (*FcPhysicalPortResponse, *http.Response, error) {
 	return r.ApiService.GetFcPhysicalPortListExecute(r)
 }
 
 /*
 GetFcPhysicalPortList Read a 'fc.PhysicalPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetFcPhysicalPortListRequest
 */
-func (a *FcApiService) GetFcPhysicalPortList(ctx _context.Context) ApiGetFcPhysicalPortListRequest {
+func (a *FcApiService) GetFcPhysicalPortList(ctx context.Context) ApiGetFcPhysicalPortListRequest {
 	return ApiGetFcPhysicalPortListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -279,26 +272,24 @@ func (a *FcApiService) GetFcPhysicalPortList(ctx _context.Context) ApiGetFcPhysi
 
 // Execute executes the request
 //  @return FcPhysicalPortResponse
-func (a *FcApiService) GetFcPhysicalPortListExecute(r ApiGetFcPhysicalPortListRequest) (FcPhysicalPortResponse, *_nethttp.Response, error) {
+func (a *FcApiService) GetFcPhysicalPortListExecute(r ApiGetFcPhysicalPortListRequest) (*FcPhysicalPortResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  FcPhysicalPortResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FcPhysicalPortResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcApiService.GetFcPhysicalPortList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fc/PhysicalPorts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -350,7 +341,7 @@ func (a *FcApiService) GetFcPhysicalPortListExecute(r ApiGetFcPhysicalPortListRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -360,15 +351,15 @@ func (a *FcApiService) GetFcPhysicalPortListExecute(r ApiGetFcPhysicalPortListRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -424,7 +415,7 @@ func (a *FcApiService) GetFcPhysicalPortListExecute(r ApiGetFcPhysicalPortListRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -435,23 +426,23 @@ func (a *FcApiService) GetFcPhysicalPortListExecute(r ApiGetFcPhysicalPortListRe
 }
 
 type ApiGetFcPortChannelByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *FcApiService
 	moid       string
 }
 
-func (r ApiGetFcPortChannelByMoidRequest) Execute() (FcPortChannel, *_nethttp.Response, error) {
+func (r ApiGetFcPortChannelByMoidRequest) Execute() (*FcPortChannel, *http.Response, error) {
 	return r.ApiService.GetFcPortChannelByMoidExecute(r)
 }
 
 /*
 GetFcPortChannelByMoid Read a 'fc.PortChannel' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetFcPortChannelByMoidRequest
 */
-func (a *FcApiService) GetFcPortChannelByMoid(ctx _context.Context, moid string) ApiGetFcPortChannelByMoidRequest {
+func (a *FcApiService) GetFcPortChannelByMoid(ctx context.Context, moid string) ApiGetFcPortChannelByMoidRequest {
 	return ApiGetFcPortChannelByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -461,27 +452,25 @@ func (a *FcApiService) GetFcPortChannelByMoid(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return FcPortChannel
-func (a *FcApiService) GetFcPortChannelByMoidExecute(r ApiGetFcPortChannelByMoidRequest) (FcPortChannel, *_nethttp.Response, error) {
+func (a *FcApiService) GetFcPortChannelByMoidExecute(r ApiGetFcPortChannelByMoidRequest) (*FcPortChannel, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  FcPortChannel
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FcPortChannel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcApiService.GetFcPortChannelByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fc/PortChannels/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -500,7 +489,7 @@ func (a *FcApiService) GetFcPortChannelByMoidExecute(r ApiGetFcPortChannelByMoid
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -510,15 +499,15 @@ func (a *FcApiService) GetFcPortChannelByMoidExecute(r ApiGetFcPortChannelByMoid
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -574,7 +563,7 @@ func (a *FcApiService) GetFcPortChannelByMoidExecute(r ApiGetFcPortChannelByMoid
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -585,7 +574,7 @@ func (a *FcApiService) GetFcPortChannelByMoidExecute(r ApiGetFcPortChannelByMoid
 }
 
 type ApiGetFcPortChannelListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *FcApiService
 	filter      *string
 	orderby     *string
@@ -666,17 +655,17 @@ func (r ApiGetFcPortChannelListRequest) Tags(tags string) ApiGetFcPortChannelLis
 	return r
 }
 
-func (r ApiGetFcPortChannelListRequest) Execute() (FcPortChannelResponse, *_nethttp.Response, error) {
+func (r ApiGetFcPortChannelListRequest) Execute() (*FcPortChannelResponse, *http.Response, error) {
 	return r.ApiService.GetFcPortChannelListExecute(r)
 }
 
 /*
 GetFcPortChannelList Read a 'fc.PortChannel' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetFcPortChannelListRequest
 */
-func (a *FcApiService) GetFcPortChannelList(ctx _context.Context) ApiGetFcPortChannelListRequest {
+func (a *FcApiService) GetFcPortChannelList(ctx context.Context) ApiGetFcPortChannelListRequest {
 	return ApiGetFcPortChannelListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -685,26 +674,24 @@ func (a *FcApiService) GetFcPortChannelList(ctx _context.Context) ApiGetFcPortCh
 
 // Execute executes the request
 //  @return FcPortChannelResponse
-func (a *FcApiService) GetFcPortChannelListExecute(r ApiGetFcPortChannelListRequest) (FcPortChannelResponse, *_nethttp.Response, error) {
+func (a *FcApiService) GetFcPortChannelListExecute(r ApiGetFcPortChannelListRequest) (*FcPortChannelResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  FcPortChannelResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FcPortChannelResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcApiService.GetFcPortChannelList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fc/PortChannels"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -756,7 +743,7 @@ func (a *FcApiService) GetFcPortChannelListExecute(r ApiGetFcPortChannelListRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -766,15 +753,15 @@ func (a *FcApiService) GetFcPortChannelListExecute(r ApiGetFcPortChannelListRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -830,7 +817,7 @@ func (a *FcApiService) GetFcPortChannelListExecute(r ApiGetFcPortChannelListRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -841,7 +828,7 @@ func (a *FcApiService) GetFcPortChannelListExecute(r ApiGetFcPortChannelListRequ
 }
 
 type ApiPatchFcPhysicalPortRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *FcApiService
 	moid           string
 	fcPhysicalPort *FcPhysicalPort
@@ -860,18 +847,18 @@ func (r ApiPatchFcPhysicalPortRequest) IfMatch(ifMatch string) ApiPatchFcPhysica
 	return r
 }
 
-func (r ApiPatchFcPhysicalPortRequest) Execute() (FcPhysicalPort, *_nethttp.Response, error) {
+func (r ApiPatchFcPhysicalPortRequest) Execute() (*FcPhysicalPort, *http.Response, error) {
 	return r.ApiService.PatchFcPhysicalPortExecute(r)
 }
 
 /*
 PatchFcPhysicalPort Update a 'fc.PhysicalPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchFcPhysicalPortRequest
 */
-func (a *FcApiService) PatchFcPhysicalPort(ctx _context.Context, moid string) ApiPatchFcPhysicalPortRequest {
+func (a *FcApiService) PatchFcPhysicalPort(ctx context.Context, moid string) ApiPatchFcPhysicalPortRequest {
 	return ApiPatchFcPhysicalPortRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -881,27 +868,25 @@ func (a *FcApiService) PatchFcPhysicalPort(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return FcPhysicalPort
-func (a *FcApiService) PatchFcPhysicalPortExecute(r ApiPatchFcPhysicalPortRequest) (FcPhysicalPort, *_nethttp.Response, error) {
+func (a *FcApiService) PatchFcPhysicalPortExecute(r ApiPatchFcPhysicalPortRequest) (*FcPhysicalPort, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  FcPhysicalPort
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FcPhysicalPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcApiService.PatchFcPhysicalPort")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fc/PhysicalPorts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.fcPhysicalPort == nil {
 		return localVarReturnValue, nil, reportError("fcPhysicalPort is required and must be specified")
 	}
@@ -928,7 +913,7 @@ func (a *FcApiService) PatchFcPhysicalPortExecute(r ApiPatchFcPhysicalPortReques
 	}
 	// body params
 	localVarPostBody = r.fcPhysicalPort
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -938,15 +923,15 @@ func (a *FcApiService) PatchFcPhysicalPortExecute(r ApiPatchFcPhysicalPortReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1002,7 +987,7 @@ func (a *FcApiService) PatchFcPhysicalPortExecute(r ApiPatchFcPhysicalPortReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1013,7 +998,7 @@ func (a *FcApiService) PatchFcPhysicalPortExecute(r ApiPatchFcPhysicalPortReques
 }
 
 type ApiUpdateFcPhysicalPortRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *FcApiService
 	moid           string
 	fcPhysicalPort *FcPhysicalPort
@@ -1032,18 +1017,18 @@ func (r ApiUpdateFcPhysicalPortRequest) IfMatch(ifMatch string) ApiUpdateFcPhysi
 	return r
 }
 
-func (r ApiUpdateFcPhysicalPortRequest) Execute() (FcPhysicalPort, *_nethttp.Response, error) {
+func (r ApiUpdateFcPhysicalPortRequest) Execute() (*FcPhysicalPort, *http.Response, error) {
 	return r.ApiService.UpdateFcPhysicalPortExecute(r)
 }
 
 /*
 UpdateFcPhysicalPort Update a 'fc.PhysicalPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateFcPhysicalPortRequest
 */
-func (a *FcApiService) UpdateFcPhysicalPort(ctx _context.Context, moid string) ApiUpdateFcPhysicalPortRequest {
+func (a *FcApiService) UpdateFcPhysicalPort(ctx context.Context, moid string) ApiUpdateFcPhysicalPortRequest {
 	return ApiUpdateFcPhysicalPortRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1053,27 +1038,25 @@ func (a *FcApiService) UpdateFcPhysicalPort(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return FcPhysicalPort
-func (a *FcApiService) UpdateFcPhysicalPortExecute(r ApiUpdateFcPhysicalPortRequest) (FcPhysicalPort, *_nethttp.Response, error) {
+func (a *FcApiService) UpdateFcPhysicalPortExecute(r ApiUpdateFcPhysicalPortRequest) (*FcPhysicalPort, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  FcPhysicalPort
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FcPhysicalPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FcApiService.UpdateFcPhysicalPort")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/fc/PhysicalPorts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.fcPhysicalPort == nil {
 		return localVarReturnValue, nil, reportError("fcPhysicalPort is required and must be specified")
 	}
@@ -1100,7 +1083,7 @@ func (a *FcApiService) UpdateFcPhysicalPortExecute(r ApiUpdateFcPhysicalPortRequ
 	}
 	// body params
 	localVarPostBody = r.fcPhysicalPort
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1110,15 +1093,15 @@ func (a *FcApiService) UpdateFcPhysicalPortExecute(r ApiUpdateFcPhysicalPortRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1174,7 +1157,7 @@ func (a *FcApiService) UpdateFcPhysicalPortExecute(r ApiUpdateFcPhysicalPortRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

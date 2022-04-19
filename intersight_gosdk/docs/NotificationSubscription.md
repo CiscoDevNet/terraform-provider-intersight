@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "notification.AccountSubscription"]
 **Actions** | Pointer to [**[]NotificationAction**](NotificationAction.md) |  | [optional] 
 **Conditions** | Pointer to [**[]NotificationAbstractCondition**](NotificationAbstractCondition.md) |  | [optional] 
-**Enabled** | Pointer to **bool** | Subscription can be switched on/off with out necessity to change the subscription settings: notification methods, conditions etc. Ex.: Subscription MO can be configured, but switched off. | [optional] 
+**Enabled** | Pointer to **bool** | Subscription can be switched on/off without necessity to change the subscription settings: notification methods, conditions, etc. Ex.: Subscription MO can be configured, but switched off. | [optional] 
 
 ## Methods
 

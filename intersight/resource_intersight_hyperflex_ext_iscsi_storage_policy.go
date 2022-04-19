@@ -569,7 +569,6 @@ func resourceHyperflexExtIscsiStoragePolicy() *schema.Resource {
 
 func resourceHyperflexExtIscsiStoragePolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexExtIscsiStoragePolicyWithDefaults()
@@ -818,7 +817,7 @@ func resourceHyperflexExtIscsiStoragePolicyCreate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexExtIscsiStoragePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexExtIscsiStoragePolicy: %s", responseErr.Error())
@@ -830,7 +829,6 @@ func resourceHyperflexExtIscsiStoragePolicyCreate(c context.Context, d *schema.R
 
 func resourceHyperflexExtIscsiStoragePolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexExtIscsiStoragePolicyByMoid(conn.ctx, d.Id())
@@ -843,7 +841,7 @@ func resourceHyperflexExtIscsiStoragePolicyRead(c context.Context, d *schema.Res
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexExtIscsiStoragePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexExtIscsiStoragePolicy: %s", responseErr.Error())
@@ -944,7 +942,6 @@ func resourceHyperflexExtIscsiStoragePolicyRead(c context.Context, d *schema.Res
 
 func resourceHyperflexExtIscsiStoragePolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexExtIscsiStoragePolicy{}
@@ -1199,7 +1196,7 @@ func resourceHyperflexExtIscsiStoragePolicyUpdate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexExtIscsiStoragePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexExtIscsiStoragePolicy: %s", responseErr.Error())
@@ -1211,7 +1208,6 @@ func resourceHyperflexExtIscsiStoragePolicyUpdate(c context.Context, d *schema.R
 
 func resourceHyperflexExtIscsiStoragePolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexExtIscsiStoragePolicy(conn.ctx, d.Id())
@@ -1223,7 +1219,7 @@ func resourceHyperflexExtIscsiStoragePolicyDelete(c context.Context, d *schema.R
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexExtIscsiStoragePolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexExtIscsiStoragePolicy object: %s", deleteErr.Error())

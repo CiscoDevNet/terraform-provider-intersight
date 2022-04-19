@@ -530,7 +530,6 @@ func resourceHyperflexFeatureLimitInternal() *schema.Resource {
 
 func resourceHyperflexFeatureLimitInternalCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexFeatureLimitInternalWithDefaults()
@@ -740,7 +739,7 @@ func resourceHyperflexFeatureLimitInternalCreate(c context.Context, d *schema.Re
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexFeatureLimitInternal: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexFeatureLimitInternal: %s", responseErr.Error())
@@ -752,7 +751,6 @@ func resourceHyperflexFeatureLimitInternalCreate(c context.Context, d *schema.Re
 
 func resourceHyperflexFeatureLimitInternalRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexFeatureLimitInternalByMoid(conn.ctx, d.Id())
@@ -765,7 +763,7 @@ func resourceHyperflexFeatureLimitInternalRead(c context.Context, d *schema.Reso
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexFeatureLimitInternal: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexFeatureLimitInternal: %s", responseErr.Error())
@@ -846,7 +844,6 @@ func resourceHyperflexFeatureLimitInternalRead(c context.Context, d *schema.Reso
 
 func resourceHyperflexFeatureLimitInternalUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexFeatureLimitInternal{}
@@ -1057,7 +1054,7 @@ func resourceHyperflexFeatureLimitInternalUpdate(c context.Context, d *schema.Re
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexFeatureLimitInternal: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexFeatureLimitInternal: %s", responseErr.Error())
@@ -1069,7 +1066,6 @@ func resourceHyperflexFeatureLimitInternalUpdate(c context.Context, d *schema.Re
 
 func resourceHyperflexFeatureLimitInternalDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexFeatureLimitInternal(conn.ctx, d.Id())
@@ -1081,7 +1077,7 @@ func resourceHyperflexFeatureLimitInternalDelete(c context.Context, d *schema.Re
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexFeatureLimitInternal object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexFeatureLimitInternal object: %s", deleteErr.Error())

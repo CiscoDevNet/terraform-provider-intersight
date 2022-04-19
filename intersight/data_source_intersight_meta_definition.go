@@ -319,10 +319,8 @@ func dataSourceMetaDefinition() *schema.Resource {
 					},
 					"default": {
 						Description: "The default value of the property. Not applicable when IsComplexType is True.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"is_collection": {
 						Description: "Indicates whether the property is a collection (i.e. a JSON array), otherwise it is a single value.",
@@ -891,10 +889,8 @@ func dataSourceMetaDefinition() *schema.Resource {
 					},
 					"default": {
 						Description: "The default value of the property. Not applicable when IsComplexType is True.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"is_collection": {
 						Description: "Indicates whether the property is a collection (i.e. a JSON array), otherwise it is a single value.",
@@ -1171,7 +1167,6 @@ func dataSourceMetaDefinition() *schema.Resource {
 
 func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.MetaDefinition{}
@@ -1511,7 +1506,13 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 			o.SetClassId("meta.PropDefinition")
 			if v, ok := l["default"]; ok {
 				{
-					o.SetDefault(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetDefault(x2)
+					}
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -1699,7 +1700,7 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of MetaDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of MetaDefinition: %s", responseErr.Error())
@@ -1716,7 +1717,7 @@ func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, met
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching MetaDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching MetaDefinition: %s", responseErr.Error())

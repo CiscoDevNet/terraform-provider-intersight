@@ -504,7 +504,6 @@ func resourceHyperflexServerFirmwareVersionEntry() *schema.Resource {
 
 func resourceHyperflexServerFirmwareVersionEntryCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexServerFirmwareVersionEntryWithDefaults()
@@ -681,7 +680,7 @@ func resourceHyperflexServerFirmwareVersionEntryCreate(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexServerFirmwareVersionEntry: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexServerFirmwareVersionEntry: %s", responseErr.Error())
@@ -693,7 +692,6 @@ func resourceHyperflexServerFirmwareVersionEntryCreate(c context.Context, d *sch
 
 func resourceHyperflexServerFirmwareVersionEntryRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexServerFirmwareVersionEntryByMoid(conn.ctx, d.Id())
@@ -706,7 +704,7 @@ func resourceHyperflexServerFirmwareVersionEntryRead(c context.Context, d *schem
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexServerFirmwareVersionEntry: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexServerFirmwareVersionEntry: %s", responseErr.Error())
@@ -795,7 +793,6 @@ func resourceHyperflexServerFirmwareVersionEntryRead(c context.Context, d *schem
 
 func resourceHyperflexServerFirmwareVersionEntryUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexServerFirmwareVersionEntry{}
@@ -977,7 +974,7 @@ func resourceHyperflexServerFirmwareVersionEntryUpdate(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexServerFirmwareVersionEntry: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexServerFirmwareVersionEntry: %s", responseErr.Error())
@@ -989,7 +986,6 @@ func resourceHyperflexServerFirmwareVersionEntryUpdate(c context.Context, d *sch
 
 func resourceHyperflexServerFirmwareVersionEntryDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexServerFirmwareVersionEntry(conn.ctx, d.Id())
@@ -1001,7 +997,7 @@ func resourceHyperflexServerFirmwareVersionEntryDelete(c context.Context, d *sch
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexServerFirmwareVersionEntry object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexServerFirmwareVersionEntry object: %s", deleteErr.Error())

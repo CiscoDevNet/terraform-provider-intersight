@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "chassis.ConfigChangeDetail"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "chassis.ConfigChangeDetail"]
+**IomProfile** | Pointer to [**ChassisIomProfileRelationship**](ChassisIomProfileRelationship.md) |  | [optional] 
 **Profile** | Pointer to [**ChassisProfileRelationship**](ChassisProfileRelationship.md) |  | [optional] 
 
 ## Methods
@@ -66,6 +67,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetIomProfile
+
+`func (o *ChassisConfigChangeDetailAllOf) GetIomProfile() ChassisIomProfileRelationship`
+
+GetIomProfile returns the IomProfile field if non-nil, zero value otherwise.
+
+### GetIomProfileOk
+
+`func (o *ChassisConfigChangeDetailAllOf) GetIomProfileOk() (*ChassisIomProfileRelationship, bool)`
+
+GetIomProfileOk returns a tuple with the IomProfile field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIomProfile
+
+`func (o *ChassisConfigChangeDetailAllOf) SetIomProfile(v ChassisIomProfileRelationship)`
+
+SetIomProfile sets IomProfile field to given value.
+
+### HasIomProfile
+
+`func (o *ChassisConfigChangeDetailAllOf) HasIomProfile() bool`
+
+HasIomProfile returns a boolean if a field has been set.
 
 ### GetProfile
 

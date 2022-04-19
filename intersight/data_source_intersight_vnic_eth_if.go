@@ -662,6 +662,11 @@ func dataSourceVnicEthIf() *schema.Resource {
 				},
 			},
 		},
+		"pin_group_name": {
+			Description: "Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"placement": {
 			Description: "Placement Settings for the virtual interface.",
 			Type:        schema.TypeList,
@@ -1670,6 +1675,11 @@ func dataSourceVnicEthIf() *schema.Resource {
 				},
 			},
 		},
+		"pin_group_name": {
+			Description: "Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"placement": {
 			Description: "Placement Settings for the virtual interface.",
 			Type:        schema.TypeList,
@@ -2043,7 +2053,6 @@ func dataSourceVnicEthIf() *schema.Resource {
 
 func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VnicEthIf{}
@@ -2828,6 +2837,11 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 		o.SetPermissionResources(x)
 	}
 
+	if v, ok := d.GetOk("pin_group_name"); ok {
+		x := (v.(string))
+		o.SetPinGroupName(x)
+	}
+
 	if v, ok := d.GetOk("placement"); ok {
 		p := make([]models.VnicPlacementSettings, 0, 1)
 		s := v.([]interface{})
@@ -3217,7 +3231,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of VnicEthIf: %s", responseErr.Error())
@@ -3234,7 +3248,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching VnicEthIf: %s", responseErr.Error())
@@ -3295,6 +3309,7 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["pin_group_name"] = (s.GetPinGroupName())
 
 				temp["placement"] = flattenMapVnicPlacementSettings(s.GetPlacement(), d)
 

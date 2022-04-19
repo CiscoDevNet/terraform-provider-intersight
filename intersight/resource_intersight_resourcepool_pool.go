@@ -548,7 +548,6 @@ func resourceResourcepoolPool() *schema.Resource {
 
 func resourceResourcepoolPoolCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewResourcepoolPoolWithDefaults()
@@ -746,7 +745,7 @@ func resourceResourcepoolPoolCreate(c context.Context, d *schema.ResourceData, m
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating ResourcepoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating ResourcepoolPool: %s", responseErr.Error())
@@ -758,7 +757,6 @@ func resourceResourcepoolPoolCreate(c context.Context, d *schema.ResourceData, m
 
 func resourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.ResourcepoolApi.GetResourcepoolPoolByMoid(conn.ctx, d.Id())
@@ -771,7 +769,7 @@ func resourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, met
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching ResourcepoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching ResourcepoolPool: %s", responseErr.Error())
@@ -884,7 +882,6 @@ func resourceResourcepoolPoolRead(c context.Context, d *schema.ResourceData, met
 
 func resourceResourcepoolPoolUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ResourcepoolPool{}
@@ -1089,7 +1086,7 @@ func resourceResourcepoolPoolUpdate(c context.Context, d *schema.ResourceData, m
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating ResourcepoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating ResourcepoolPool: %s", responseErr.Error())
@@ -1101,7 +1098,6 @@ func resourceResourcepoolPoolUpdate(c context.Context, d *schema.ResourceData, m
 
 func resourceResourcepoolPoolDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.ResourcepoolApi.DeleteResourcepoolPool(conn.ctx, d.Id())
@@ -1113,7 +1109,7 @@ func resourceResourcepoolPoolDelete(c context.Context, d *schema.ResourceData, m
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting ResourcepoolPool object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting ResourcepoolPool object: %s", deleteErr.Error())

@@ -31,7 +31,7 @@ The following arguments can be used to get data of already created objects in In
 * `fabric_name`:(string) Returns the value of the Name of a fabric. 
 * `fabric_parent`:(string) Parent of the fabric on DCNM. 
 * `fabric_technology`:(string) Fabric Technology details on the fabric. 
-* `feature_ptp`:(bool) PTP feature details on the fabric. 
+* `feature_ptp`:(string) PTP feature details on the fabric. 
 * `is_bgw_present`:(bool) Checks if border gateway is present in the fabric inventory. 
 * `is_enable_nxapi_http`:(bool) Check if NXAPI HTTP is enable or not on the fabric. 
 * `is_enable_real_time_backup`:(bool) Check if real time backup is enable or not on the fabric. 

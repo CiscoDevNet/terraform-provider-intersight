@@ -481,7 +481,6 @@ func resourceKubernetesAciCniTenantClusterAllocation() *schema.Resource {
 
 func resourceKubernetesAciCniTenantClusterAllocationCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesAciCniTenantClusterAllocationWithDefaults()
@@ -587,7 +586,7 @@ func resourceKubernetesAciCniTenantClusterAllocationCreate(c context.Context, d 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesAciCniTenantClusterAllocation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesAciCniTenantClusterAllocation: %s", responseErr.Error())
@@ -599,7 +598,6 @@ func resourceKubernetesAciCniTenantClusterAllocationCreate(c context.Context, d 
 
 func resourceKubernetesAciCniTenantClusterAllocationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesAciCniTenantClusterAllocationByMoid(conn.ctx, d.Id())
@@ -612,7 +610,7 @@ func resourceKubernetesAciCniTenantClusterAllocationRead(c context.Context, d *s
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesAciCniTenantClusterAllocation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesAciCniTenantClusterAllocation: %s", responseErr.Error())
@@ -705,7 +703,6 @@ func resourceKubernetesAciCniTenantClusterAllocationRead(c context.Context, d *s
 
 func resourceKubernetesAciCniTenantClusterAllocationUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesAciCniTenantClusterAllocation{}
@@ -813,7 +810,7 @@ func resourceKubernetesAciCniTenantClusterAllocationUpdate(c context.Context, d 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesAciCniTenantClusterAllocation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesAciCniTenantClusterAllocation: %s", responseErr.Error())
@@ -825,7 +822,6 @@ func resourceKubernetesAciCniTenantClusterAllocationUpdate(c context.Context, d 
 
 func resourceKubernetesAciCniTenantClusterAllocationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesAciCniTenantClusterAllocation(conn.ctx, d.Id())
@@ -837,7 +833,7 @@ func resourceKubernetesAciCniTenantClusterAllocationDelete(c context.Context, d 
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesAciCniTenantClusterAllocation object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesAciCniTenantClusterAllocation object: %s", deleteErr.Error())

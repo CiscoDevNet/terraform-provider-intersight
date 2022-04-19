@@ -817,7 +817,6 @@ func resourceFirmwareServerConfigurationUtilityDistributable() *schema.Resource 
 
 func resourceFirmwareServerConfigurationUtilityDistributableCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFirmwareServerConfigurationUtilityDistributableWithDefaults()
@@ -1231,7 +1230,7 @@ func resourceFirmwareServerConfigurationUtilityDistributableCreate(c context.Con
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FirmwareServerConfigurationUtilityDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FirmwareServerConfigurationUtilityDistributable: %s", responseErr.Error())
@@ -1243,7 +1242,6 @@ func resourceFirmwareServerConfigurationUtilityDistributableCreate(c context.Con
 
 func resourceFirmwareServerConfigurationUtilityDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FirmwareApi.GetFirmwareServerConfigurationUtilityDistributableByMoid(conn.ctx, d.Id())
@@ -1256,7 +1254,7 @@ func resourceFirmwareServerConfigurationUtilityDistributableRead(c context.Conte
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FirmwareServerConfigurationUtilityDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FirmwareServerConfigurationUtilityDistributable: %s", responseErr.Error())
@@ -1449,7 +1447,6 @@ func resourceFirmwareServerConfigurationUtilityDistributableRead(c context.Conte
 
 func resourceFirmwareServerConfigurationUtilityDistributableUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FirmwareServerConfigurationUtilityDistributable{}
@@ -1879,7 +1876,7 @@ func resourceFirmwareServerConfigurationUtilityDistributableUpdate(c context.Con
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating FirmwareServerConfigurationUtilityDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating FirmwareServerConfigurationUtilityDistributable: %s", responseErr.Error())
@@ -1891,7 +1888,6 @@ func resourceFirmwareServerConfigurationUtilityDistributableUpdate(c context.Con
 
 func resourceFirmwareServerConfigurationUtilityDistributableDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FirmwareApi.DeleteFirmwareServerConfigurationUtilityDistributable(conn.ctx, d.Id())
@@ -1903,7 +1899,7 @@ func resourceFirmwareServerConfigurationUtilityDistributableDelete(c context.Con
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FirmwareServerConfigurationUtilityDistributable object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FirmwareServerConfigurationUtilityDistributable object: %s", deleteErr.Error())

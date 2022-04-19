@@ -436,7 +436,6 @@ func resourceCapabilityFexManufacturingDef() *schema.Resource {
 
 func resourceCapabilityFexManufacturingDefCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityFexManufacturingDefWithDefaults()
@@ -539,7 +538,7 @@ func resourceCapabilityFexManufacturingDefCreate(c context.Context, d *schema.Re
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityFexManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityFexManufacturingDef: %s", responseErr.Error())
@@ -551,7 +550,6 @@ func resourceCapabilityFexManufacturingDefCreate(c context.Context, d *schema.Re
 
 func resourceCapabilityFexManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityFexManufacturingDefByMoid(conn.ctx, d.Id())
@@ -564,7 +562,7 @@ func resourceCapabilityFexManufacturingDefRead(c context.Context, d *schema.Reso
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityFexManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityFexManufacturingDef: %s", responseErr.Error())
@@ -669,7 +667,6 @@ func resourceCapabilityFexManufacturingDefRead(c context.Context, d *schema.Reso
 
 func resourceCapabilityFexManufacturingDefUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityFexManufacturingDef{}
@@ -781,7 +778,7 @@ func resourceCapabilityFexManufacturingDefUpdate(c context.Context, d *schema.Re
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityFexManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityFexManufacturingDef: %s", responseErr.Error())
@@ -793,7 +790,6 @@ func resourceCapabilityFexManufacturingDefUpdate(c context.Context, d *schema.Re
 
 func resourceCapabilityFexManufacturingDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityFexManufacturingDef(conn.ctx, d.Id())
@@ -805,7 +801,7 @@ func resourceCapabilityFexManufacturingDefDelete(c context.Context, d *schema.Re
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityFexManufacturingDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityFexManufacturingDef object: %s", deleteErr.Error())

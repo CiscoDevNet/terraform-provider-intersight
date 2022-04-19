@@ -583,7 +583,6 @@ func resourceResourceGroup() *schema.Resource {
 
 func resourceResourceGroupCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewResourceGroupWithDefaults()
@@ -769,7 +768,7 @@ func resourceResourceGroupCreate(c context.Context, d *schema.ResourceData, meta
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating ResourceGroup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating ResourceGroup: %s", responseErr.Error())
@@ -781,7 +780,6 @@ func resourceResourceGroupCreate(c context.Context, d *schema.ResourceData, meta
 
 func resourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.ResourceApi.GetResourceGroupByMoid(conn.ctx, d.Id())
@@ -794,7 +792,7 @@ func resourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta i
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching ResourceGroup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching ResourceGroup: %s", responseErr.Error())
@@ -895,7 +893,6 @@ func resourceResourceGroupRead(c context.Context, d *schema.ResourceData, meta i
 
 func resourceResourceGroupUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ResourceGroup{}
@@ -1082,7 +1079,7 @@ func resourceResourceGroupUpdate(c context.Context, d *schema.ResourceData, meta
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating ResourceGroup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating ResourceGroup: %s", responseErr.Error())
@@ -1094,7 +1091,6 @@ func resourceResourceGroupUpdate(c context.Context, d *schema.ResourceData, meta
 
 func resourceResourceGroupDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.ResourceApi.DeleteResourceGroup(conn.ctx, d.Id())
@@ -1106,7 +1102,7 @@ func resourceResourceGroupDelete(c context.Context, d *schema.ResourceData, meta
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting ResourceGroup object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting ResourceGroup object: %s", deleteErr.Error())

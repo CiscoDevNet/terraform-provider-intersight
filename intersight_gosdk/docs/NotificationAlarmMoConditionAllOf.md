@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "notification.AlarmMoCondition"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "notification.AlarmMoCondition"]
+**OdataFilter** | Pointer to **string** | Odata filter string managed internally. It is built with specific ObjectType properties. | [optional] [readonly] 
 **Severity** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
@@ -66,6 +67,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetOdataFilter
+
+`func (o *NotificationAlarmMoConditionAllOf) GetOdataFilter() string`
+
+GetOdataFilter returns the OdataFilter field if non-nil, zero value otherwise.
+
+### GetOdataFilterOk
+
+`func (o *NotificationAlarmMoConditionAllOf) GetOdataFilterOk() (*string, bool)`
+
+GetOdataFilterOk returns a tuple with the OdataFilter field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOdataFilter
+
+`func (o *NotificationAlarmMoConditionAllOf) SetOdataFilter(v string)`
+
+SetOdataFilter sets OdataFilter field to given value.
+
+### HasOdataFilter
+
+`func (o *NotificationAlarmMoConditionAllOf) HasOdataFilter() bool`
+
+HasOdataFilter returns a boolean if a field has been set.
 
 ### GetSeverity
 

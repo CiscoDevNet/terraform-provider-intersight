@@ -717,7 +717,6 @@ func dataSourceNiatelemetryPasswordStrengthCheck() *schema.Resource {
 
 func dataSourceNiatelemetryPasswordStrengthCheckRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryPasswordStrengthCheck{}
@@ -1087,7 +1086,7 @@ func dataSourceNiatelemetryPasswordStrengthCheckRead(c context.Context, d *schem
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of NiatelemetryPasswordStrengthCheck: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of NiatelemetryPasswordStrengthCheck: %s", responseErr.Error())
@@ -1104,7 +1103,7 @@ func dataSourceNiatelemetryPasswordStrengthCheckRead(c context.Context, d *schem
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching NiatelemetryPasswordStrengthCheck: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching NiatelemetryPasswordStrengthCheck: %s", responseErr.Error())

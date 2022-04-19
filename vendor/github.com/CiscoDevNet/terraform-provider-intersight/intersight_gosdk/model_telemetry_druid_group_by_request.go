@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -17,7 +17,6 @@ import (
 
 // TelemetryDruidGroupByRequest These types of Apache Druid queries take a groupBy query object and return an array of JSON objects where each object represents a grouping asked for by the query.
 type TelemetryDruidGroupByRequest struct {
-	// null
 	QueryType  string                   `json:"queryType"`
 	DataSource TelemetryDruidDataSource `json:"dataSource"`
 	// A JSON list of dimensions to do the groupBy over; or see DimensionSpec for ways to extract dimensions..
@@ -27,13 +26,13 @@ type TelemetryDruidGroupByRequest struct {
 	Granularity TelemetryDruidGranularity       `json:"granularity"`
 	Filter      *TelemetryDruidFilter           `json:"filter,omitempty"`
 	// Aggregation functions are used to summarize data in buckets. Summarization functions include counting rows, calculating the min/max/sum of metrics and retrieving the first/last value of metrics for each bucket. Additional summarization functions are available with extensions. If no aggregator is provided, the results will be empty for each bucket.
-	Aggregations *[]TelemetryDruidAggregator `json:"aggregations,omitempty"`
+	Aggregations []TelemetryDruidAggregator `json:"aggregations,omitempty"`
 	// Post-aggregations are specifications of processing that should happen on aggregated values as they come out of Apache Druid. If you include a post aggregation as part of a query, make sure to include all aggregators the post-aggregator requires.
-	PostAggregations *[]TelemetryDruidPostAggregator `json:"postAggregations,omitempty"`
+	PostAggregations []TelemetryDruidPostAggregator `json:"postAggregations,omitempty"`
 	// A JSON Object representing ISO-8601 Intervals. This defines the time ranges to run the query over.
 	Intervals []string `json:"intervals"`
 	// A JSON array of arrays to return additional result sets for groupings of subsets of top level dimensions. The subtotals feature allows computation of multiple sub-groupings in a single query. To use this feature, add a \"subtotalsSpec\" to your query, which should be a list of subgroup dimension sets. It should contain the \"outputName\" from dimensions in your \"dimensions\" attribute, in the same order as they appear in the \"dimensions\" attribute.
-	SubtotalsSpec        *map[string]interface{}     `json:"subtotalsSpec,omitempty"`
+	SubtotalsSpec        map[string]interface{}      `json:"subtotalsSpec,omitempty"`
 	Context              *TelemetryDruidQueryContext `json:"context,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -122,11 +121,11 @@ func (o *TelemetryDruidGroupByRequest) GetDimensions() []TelemetryDruidDimension
 
 // GetDimensionsOk returns a tuple with the Dimensions field value
 // and a boolean to check if the value has been set.
-func (o *TelemetryDruidGroupByRequest) GetDimensionsOk() (*[]TelemetryDruidDimensionSpec, bool) {
+func (o *TelemetryDruidGroupByRequest) GetDimensionsOk() ([]TelemetryDruidDimensionSpec, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Dimensions, true
+	return o.Dimensions, true
 }
 
 // SetDimensions sets field value
@@ -260,12 +259,12 @@ func (o *TelemetryDruidGroupByRequest) GetAggregations() []TelemetryDruidAggrega
 		var ret []TelemetryDruidAggregator
 		return ret
 	}
-	return *o.Aggregations
+	return o.Aggregations
 }
 
 // GetAggregationsOk returns a tuple with the Aggregations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TelemetryDruidGroupByRequest) GetAggregationsOk() (*[]TelemetryDruidAggregator, bool) {
+func (o *TelemetryDruidGroupByRequest) GetAggregationsOk() ([]TelemetryDruidAggregator, bool) {
 	if o == nil || o.Aggregations == nil {
 		return nil, false
 	}
@@ -283,7 +282,7 @@ func (o *TelemetryDruidGroupByRequest) HasAggregations() bool {
 
 // SetAggregations gets a reference to the given []TelemetryDruidAggregator and assigns it to the Aggregations field.
 func (o *TelemetryDruidGroupByRequest) SetAggregations(v []TelemetryDruidAggregator) {
-	o.Aggregations = &v
+	o.Aggregations = v
 }
 
 // GetPostAggregations returns the PostAggregations field value if set, zero value otherwise.
@@ -292,12 +291,12 @@ func (o *TelemetryDruidGroupByRequest) GetPostAggregations() []TelemetryDruidPos
 		var ret []TelemetryDruidPostAggregator
 		return ret
 	}
-	return *o.PostAggregations
+	return o.PostAggregations
 }
 
 // GetPostAggregationsOk returns a tuple with the PostAggregations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TelemetryDruidGroupByRequest) GetPostAggregationsOk() (*[]TelemetryDruidPostAggregator, bool) {
+func (o *TelemetryDruidGroupByRequest) GetPostAggregationsOk() ([]TelemetryDruidPostAggregator, bool) {
 	if o == nil || o.PostAggregations == nil {
 		return nil, false
 	}
@@ -315,7 +314,7 @@ func (o *TelemetryDruidGroupByRequest) HasPostAggregations() bool {
 
 // SetPostAggregations gets a reference to the given []TelemetryDruidPostAggregator and assigns it to the PostAggregations field.
 func (o *TelemetryDruidGroupByRequest) SetPostAggregations(v []TelemetryDruidPostAggregator) {
-	o.PostAggregations = &v
+	o.PostAggregations = v
 }
 
 // GetIntervals returns the Intervals field value
@@ -330,11 +329,11 @@ func (o *TelemetryDruidGroupByRequest) GetIntervals() []string {
 
 // GetIntervalsOk returns a tuple with the Intervals field value
 // and a boolean to check if the value has been set.
-func (o *TelemetryDruidGroupByRequest) GetIntervalsOk() (*[]string, bool) {
+func (o *TelemetryDruidGroupByRequest) GetIntervalsOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Intervals, true
+	return o.Intervals, true
 }
 
 // SetIntervals sets field value
@@ -348,12 +347,12 @@ func (o *TelemetryDruidGroupByRequest) GetSubtotalsSpec() map[string]interface{}
 		var ret map[string]interface{}
 		return ret
 	}
-	return *o.SubtotalsSpec
+	return o.SubtotalsSpec
 }
 
 // GetSubtotalsSpecOk returns a tuple with the SubtotalsSpec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TelemetryDruidGroupByRequest) GetSubtotalsSpecOk() (*map[string]interface{}, bool) {
+func (o *TelemetryDruidGroupByRequest) GetSubtotalsSpecOk() (map[string]interface{}, bool) {
 	if o == nil || o.SubtotalsSpec == nil {
 		return nil, false
 	}
@@ -371,7 +370,7 @@ func (o *TelemetryDruidGroupByRequest) HasSubtotalsSpec() bool {
 
 // SetSubtotalsSpec gets a reference to the given map[string]interface{} and assigns it to the SubtotalsSpec field.
 func (o *TelemetryDruidGroupByRequest) SetSubtotalsSpec(v map[string]interface{}) {
-	o.SubtotalsSpec = &v
+	o.SubtotalsSpec = v
 }
 
 // GetContext returns the Context field value if set, zero value otherwise.

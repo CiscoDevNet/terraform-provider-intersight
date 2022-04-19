@@ -917,7 +917,6 @@ func resourceKubernetesNodeGroupProfile() *schema.Resource {
 
 func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesNodeGroupProfileWithDefaults()
@@ -1493,7 +1492,7 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesNodeGroupProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesNodeGroupProfile: %s", responseErr.Error())
@@ -1505,7 +1504,6 @@ func resourceKubernetesNodeGroupProfileCreate(c context.Context, d *schema.Resou
 
 func resourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesNodeGroupProfileByMoid(conn.ctx, d.Id())
@@ -1518,7 +1516,7 @@ func resourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resourc
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesNodeGroupProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesNodeGroupProfile: %s", responseErr.Error())
@@ -1671,7 +1669,6 @@ func resourceKubernetesNodeGroupProfileRead(c context.Context, d *schema.Resourc
 
 func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesNodeGroupProfile{}
@@ -2255,7 +2252,7 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesNodeGroupProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesNodeGroupProfile: %s", responseErr.Error())
@@ -2267,7 +2264,6 @@ func resourceKubernetesNodeGroupProfileUpdate(c context.Context, d *schema.Resou
 
 func resourceKubernetesNodeGroupProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesNodeGroupProfile(conn.ctx, d.Id())
@@ -2279,7 +2275,7 @@ func resourceKubernetesNodeGroupProfileDelete(c context.Context, d *schema.Resou
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesNodeGroupProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesNodeGroupProfile object: %s", deleteErr.Error())

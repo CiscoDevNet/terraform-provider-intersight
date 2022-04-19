@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // AssetApiService AssetApi service
 type AssetApiService service
 
 type ApiCreateAssetDeviceClaimRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *AssetApiService
 	assetDeviceClaim *AssetDeviceClaim
 	ifMatch          *string
@@ -54,17 +49,17 @@ func (r ApiCreateAssetDeviceClaimRequest) IfNoneMatch(ifNoneMatch string) ApiCre
 	return r
 }
 
-func (r ApiCreateAssetDeviceClaimRequest) Execute() (AssetDeviceClaim, *_nethttp.Response, error) {
+func (r ApiCreateAssetDeviceClaimRequest) Execute() (*AssetDeviceClaim, *http.Response, error) {
 	return r.ApiService.CreateAssetDeviceClaimExecute(r)
 }
 
 /*
 CreateAssetDeviceClaim Create a 'asset.DeviceClaim' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateAssetDeviceClaimRequest
 */
-func (a *AssetApiService) CreateAssetDeviceClaim(ctx _context.Context) ApiCreateAssetDeviceClaimRequest {
+func (a *AssetApiService) CreateAssetDeviceClaim(ctx context.Context) ApiCreateAssetDeviceClaimRequest {
 	return ApiCreateAssetDeviceClaimRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *AssetApiService) CreateAssetDeviceClaim(ctx _context.Context) ApiCreate
 
 // Execute executes the request
 //  @return AssetDeviceClaim
-func (a *AssetApiService) CreateAssetDeviceClaimExecute(r ApiCreateAssetDeviceClaimRequest) (AssetDeviceClaim, *_nethttp.Response, error) {
+func (a *AssetApiService) CreateAssetDeviceClaimExecute(r ApiCreateAssetDeviceClaimRequest) (*AssetDeviceClaim, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceClaim
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceClaim
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.CreateAssetDeviceClaim")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceClaims"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.assetDeviceClaim == nil {
 		return localVarReturnValue, nil, reportError("assetDeviceClaim is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *AssetApiService) CreateAssetDeviceClaimExecute(r ApiCreateAssetDeviceCl
 	}
 	// body params
 	localVarPostBody = r.assetDeviceClaim
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *AssetApiService) CreateAssetDeviceClaimExecute(r ApiCreateAssetDeviceCl
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *AssetApiService) CreateAssetDeviceClaimExecute(r ApiCreateAssetDeviceCl
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,7 +200,7 @@ func (a *AssetApiService) CreateAssetDeviceClaimExecute(r ApiCreateAssetDeviceCl
 }
 
 type ApiCreateAssetDeviceContractNotificationRequest struct {
-	ctx                             _context.Context
+	ctx                             context.Context
 	ApiService                      *AssetApiService
 	assetDeviceContractNotification *AssetDeviceContractNotification
 	ifMatch                         *string
@@ -232,17 +225,17 @@ func (r ApiCreateAssetDeviceContractNotificationRequest) IfNoneMatch(ifNoneMatch
 	return r
 }
 
-func (r ApiCreateAssetDeviceContractNotificationRequest) Execute() (AssetDeviceContractNotification, *_nethttp.Response, error) {
+func (r ApiCreateAssetDeviceContractNotificationRequest) Execute() (*AssetDeviceContractNotification, *http.Response, error) {
 	return r.ApiService.CreateAssetDeviceContractNotificationExecute(r)
 }
 
 /*
 CreateAssetDeviceContractNotification Create a 'asset.DeviceContractNotification' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateAssetDeviceContractNotificationRequest
 */
-func (a *AssetApiService) CreateAssetDeviceContractNotification(ctx _context.Context) ApiCreateAssetDeviceContractNotificationRequest {
+func (a *AssetApiService) CreateAssetDeviceContractNotification(ctx context.Context) ApiCreateAssetDeviceContractNotificationRequest {
 	return ApiCreateAssetDeviceContractNotificationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -251,26 +244,24 @@ func (a *AssetApiService) CreateAssetDeviceContractNotification(ctx _context.Con
 
 // Execute executes the request
 //  @return AssetDeviceContractNotification
-func (a *AssetApiService) CreateAssetDeviceContractNotificationExecute(r ApiCreateAssetDeviceContractNotificationRequest) (AssetDeviceContractNotification, *_nethttp.Response, error) {
+func (a *AssetApiService) CreateAssetDeviceContractNotificationExecute(r ApiCreateAssetDeviceContractNotificationRequest) (*AssetDeviceContractNotification, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceContractNotification
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceContractNotification
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.CreateAssetDeviceContractNotification")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceContractNotifications"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.assetDeviceContractNotification == nil {
 		return localVarReturnValue, nil, reportError("assetDeviceContractNotification is required and must be specified")
 	}
@@ -300,7 +291,7 @@ func (a *AssetApiService) CreateAssetDeviceContractNotificationExecute(r ApiCrea
 	}
 	// body params
 	localVarPostBody = r.assetDeviceContractNotification
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -310,15 +301,15 @@ func (a *AssetApiService) CreateAssetDeviceContractNotificationExecute(r ApiCrea
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -374,7 +365,7 @@ func (a *AssetApiService) CreateAssetDeviceContractNotificationExecute(r ApiCrea
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -385,7 +376,7 @@ func (a *AssetApiService) CreateAssetDeviceContractNotificationExecute(r ApiCrea
 }
 
 type ApiCreateAssetTargetRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	assetTarget *AssetTarget
 	ifMatch     *string
@@ -410,17 +401,17 @@ func (r ApiCreateAssetTargetRequest) IfNoneMatch(ifNoneMatch string) ApiCreateAs
 	return r
 }
 
-func (r ApiCreateAssetTargetRequest) Execute() (AssetTarget, *_nethttp.Response, error) {
+func (r ApiCreateAssetTargetRequest) Execute() (*AssetTarget, *http.Response, error) {
 	return r.ApiService.CreateAssetTargetExecute(r)
 }
 
 /*
 CreateAssetTarget Create a 'asset.Target' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateAssetTargetRequest
 */
-func (a *AssetApiService) CreateAssetTarget(ctx _context.Context) ApiCreateAssetTargetRequest {
+func (a *AssetApiService) CreateAssetTarget(ctx context.Context) ApiCreateAssetTargetRequest {
 	return ApiCreateAssetTargetRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -429,26 +420,24 @@ func (a *AssetApiService) CreateAssetTarget(ctx _context.Context) ApiCreateAsset
 
 // Execute executes the request
 //  @return AssetTarget
-func (a *AssetApiService) CreateAssetTargetExecute(r ApiCreateAssetTargetRequest) (AssetTarget, *_nethttp.Response, error) {
+func (a *AssetApiService) CreateAssetTargetExecute(r ApiCreateAssetTargetRequest) (*AssetTarget, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetTarget
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetTarget
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.CreateAssetTarget")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/Targets"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.assetTarget == nil {
 		return localVarReturnValue, nil, reportError("assetTarget is required and must be specified")
 	}
@@ -478,7 +467,7 @@ func (a *AssetApiService) CreateAssetTargetExecute(r ApiCreateAssetTargetRequest
 	}
 	// body params
 	localVarPostBody = r.assetTarget
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -488,15 +477,15 @@ func (a *AssetApiService) CreateAssetTargetExecute(r ApiCreateAssetTargetRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -552,7 +541,7 @@ func (a *AssetApiService) CreateAssetTargetExecute(r ApiCreateAssetTargetRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -563,23 +552,23 @@ func (a *AssetApiService) CreateAssetTargetExecute(r ApiCreateAssetTargetRequest
 }
 
 type ApiDeleteAssetDeploymentRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiDeleteAssetDeploymentRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteAssetDeploymentRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteAssetDeploymentExecute(r)
 }
 
 /*
 DeleteAssetDeployment Delete a 'asset.Deployment' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteAssetDeploymentRequest
 */
-func (a *AssetApiService) DeleteAssetDeployment(ctx _context.Context, moid string) ApiDeleteAssetDeploymentRequest {
+func (a *AssetApiService) DeleteAssetDeployment(ctx context.Context, moid string) ApiDeleteAssetDeploymentRequest {
 	return ApiDeleteAssetDeploymentRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -588,26 +577,24 @@ func (a *AssetApiService) DeleteAssetDeployment(ctx _context.Context, moid strin
 }
 
 // Execute executes the request
-func (a *AssetApiService) DeleteAssetDeploymentExecute(r ApiDeleteAssetDeploymentRequest) (*_nethttp.Response, error) {
+func (a *AssetApiService) DeleteAssetDeploymentExecute(r ApiDeleteAssetDeploymentRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.DeleteAssetDeployment")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/Deployments/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -626,7 +613,7 @@ func (a *AssetApiService) DeleteAssetDeploymentExecute(r ApiDeleteAssetDeploymen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -636,15 +623,15 @@ func (a *AssetApiService) DeleteAssetDeploymentExecute(r ApiDeleteAssetDeploymen
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -702,23 +689,23 @@ func (a *AssetApiService) DeleteAssetDeploymentExecute(r ApiDeleteAssetDeploymen
 }
 
 type ApiDeleteAssetDeploymentDeviceRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiDeleteAssetDeploymentDeviceRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteAssetDeploymentDeviceRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteAssetDeploymentDeviceExecute(r)
 }
 
 /*
 DeleteAssetDeploymentDevice Delete a 'asset.DeploymentDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteAssetDeploymentDeviceRequest
 */
-func (a *AssetApiService) DeleteAssetDeploymentDevice(ctx _context.Context, moid string) ApiDeleteAssetDeploymentDeviceRequest {
+func (a *AssetApiService) DeleteAssetDeploymentDevice(ctx context.Context, moid string) ApiDeleteAssetDeploymentDeviceRequest {
 	return ApiDeleteAssetDeploymentDeviceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -727,26 +714,24 @@ func (a *AssetApiService) DeleteAssetDeploymentDevice(ctx _context.Context, moid
 }
 
 // Execute executes the request
-func (a *AssetApiService) DeleteAssetDeploymentDeviceExecute(r ApiDeleteAssetDeploymentDeviceRequest) (*_nethttp.Response, error) {
+func (a *AssetApiService) DeleteAssetDeploymentDeviceExecute(r ApiDeleteAssetDeploymentDeviceRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.DeleteAssetDeploymentDevice")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeploymentDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -765,7 +750,7 @@ func (a *AssetApiService) DeleteAssetDeploymentDeviceExecute(r ApiDeleteAssetDep
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -775,15 +760,15 @@ func (a *AssetApiService) DeleteAssetDeploymentDeviceExecute(r ApiDeleteAssetDep
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -841,23 +826,23 @@ func (a *AssetApiService) DeleteAssetDeploymentDeviceExecute(r ApiDeleteAssetDep
 }
 
 type ApiDeleteAssetDeviceClaimRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiDeleteAssetDeviceClaimRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteAssetDeviceClaimRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteAssetDeviceClaimExecute(r)
 }
 
 /*
 DeleteAssetDeviceClaim Delete a 'asset.DeviceClaim' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteAssetDeviceClaimRequest
 */
-func (a *AssetApiService) DeleteAssetDeviceClaim(ctx _context.Context, moid string) ApiDeleteAssetDeviceClaimRequest {
+func (a *AssetApiService) DeleteAssetDeviceClaim(ctx context.Context, moid string) ApiDeleteAssetDeviceClaimRequest {
 	return ApiDeleteAssetDeviceClaimRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -866,26 +851,24 @@ func (a *AssetApiService) DeleteAssetDeviceClaim(ctx _context.Context, moid stri
 }
 
 // Execute executes the request
-func (a *AssetApiService) DeleteAssetDeviceClaimExecute(r ApiDeleteAssetDeviceClaimRequest) (*_nethttp.Response, error) {
+func (a *AssetApiService) DeleteAssetDeviceClaimExecute(r ApiDeleteAssetDeviceClaimRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.DeleteAssetDeviceClaim")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceClaims/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -904,7 +887,7 @@ func (a *AssetApiService) DeleteAssetDeviceClaimExecute(r ApiDeleteAssetDeviceCl
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -914,15 +897,15 @@ func (a *AssetApiService) DeleteAssetDeviceClaimExecute(r ApiDeleteAssetDeviceCl
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -980,23 +963,23 @@ func (a *AssetApiService) DeleteAssetDeviceClaimExecute(r ApiDeleteAssetDeviceCl
 }
 
 type ApiDeleteAssetDeviceContractInformationRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiDeleteAssetDeviceContractInformationRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteAssetDeviceContractInformationRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteAssetDeviceContractInformationExecute(r)
 }
 
 /*
 DeleteAssetDeviceContractInformation Delete a 'asset.DeviceContractInformation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteAssetDeviceContractInformationRequest
 */
-func (a *AssetApiService) DeleteAssetDeviceContractInformation(ctx _context.Context, moid string) ApiDeleteAssetDeviceContractInformationRequest {
+func (a *AssetApiService) DeleteAssetDeviceContractInformation(ctx context.Context, moid string) ApiDeleteAssetDeviceContractInformationRequest {
 	return ApiDeleteAssetDeviceContractInformationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1005,26 +988,24 @@ func (a *AssetApiService) DeleteAssetDeviceContractInformation(ctx _context.Cont
 }
 
 // Execute executes the request
-func (a *AssetApiService) DeleteAssetDeviceContractInformationExecute(r ApiDeleteAssetDeviceContractInformationRequest) (*_nethttp.Response, error) {
+func (a *AssetApiService) DeleteAssetDeviceContractInformationExecute(r ApiDeleteAssetDeviceContractInformationRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.DeleteAssetDeviceContractInformation")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceContractInformations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1043,7 +1024,7 @@ func (a *AssetApiService) DeleteAssetDeviceContractInformationExecute(r ApiDelet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1053,15 +1034,15 @@ func (a *AssetApiService) DeleteAssetDeviceContractInformationExecute(r ApiDelet
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1119,23 +1100,23 @@ func (a *AssetApiService) DeleteAssetDeviceContractInformationExecute(r ApiDelet
 }
 
 type ApiDeleteAssetDeviceRegistrationRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiDeleteAssetDeviceRegistrationRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteAssetDeviceRegistrationRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteAssetDeviceRegistrationExecute(r)
 }
 
 /*
 DeleteAssetDeviceRegistration Deletes the resource representing the device connector. All associated REST resources will be deleted. In particular, inventory and operational data associated with this device will be deleted.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteAssetDeviceRegistrationRequest
 */
-func (a *AssetApiService) DeleteAssetDeviceRegistration(ctx _context.Context, moid string) ApiDeleteAssetDeviceRegistrationRequest {
+func (a *AssetApiService) DeleteAssetDeviceRegistration(ctx context.Context, moid string) ApiDeleteAssetDeviceRegistrationRequest {
 	return ApiDeleteAssetDeviceRegistrationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1144,26 +1125,24 @@ func (a *AssetApiService) DeleteAssetDeviceRegistration(ctx _context.Context, mo
 }
 
 // Execute executes the request
-func (a *AssetApiService) DeleteAssetDeviceRegistrationExecute(r ApiDeleteAssetDeviceRegistrationRequest) (*_nethttp.Response, error) {
+func (a *AssetApiService) DeleteAssetDeviceRegistrationExecute(r ApiDeleteAssetDeviceRegistrationRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.DeleteAssetDeviceRegistration")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceRegistrations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1182,7 +1161,7 @@ func (a *AssetApiService) DeleteAssetDeviceRegistrationExecute(r ApiDeleteAssetD
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1192,15 +1171,15 @@ func (a *AssetApiService) DeleteAssetDeviceRegistrationExecute(r ApiDeleteAssetD
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1258,23 +1237,23 @@ func (a *AssetApiService) DeleteAssetDeviceRegistrationExecute(r ApiDeleteAssetD
 }
 
 type ApiDeleteAssetSubscriptionRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiDeleteAssetSubscriptionRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteAssetSubscriptionRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteAssetSubscriptionExecute(r)
 }
 
 /*
 DeleteAssetSubscription Delete a 'asset.Subscription' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteAssetSubscriptionRequest
 */
-func (a *AssetApiService) DeleteAssetSubscription(ctx _context.Context, moid string) ApiDeleteAssetSubscriptionRequest {
+func (a *AssetApiService) DeleteAssetSubscription(ctx context.Context, moid string) ApiDeleteAssetSubscriptionRequest {
 	return ApiDeleteAssetSubscriptionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1283,26 +1262,24 @@ func (a *AssetApiService) DeleteAssetSubscription(ctx _context.Context, moid str
 }
 
 // Execute executes the request
-func (a *AssetApiService) DeleteAssetSubscriptionExecute(r ApiDeleteAssetSubscriptionRequest) (*_nethttp.Response, error) {
+func (a *AssetApiService) DeleteAssetSubscriptionExecute(r ApiDeleteAssetSubscriptionRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.DeleteAssetSubscription")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/Subscriptions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1321,7 +1298,7 @@ func (a *AssetApiService) DeleteAssetSubscriptionExecute(r ApiDeleteAssetSubscri
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1331,15 +1308,15 @@ func (a *AssetApiService) DeleteAssetSubscriptionExecute(r ApiDeleteAssetSubscri
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1397,23 +1374,23 @@ func (a *AssetApiService) DeleteAssetSubscriptionExecute(r ApiDeleteAssetSubscri
 }
 
 type ApiDeleteAssetSubscriptionAccountRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiDeleteAssetSubscriptionAccountRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteAssetSubscriptionAccountRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteAssetSubscriptionAccountExecute(r)
 }
 
 /*
 DeleteAssetSubscriptionAccount Delete a 'asset.SubscriptionAccount' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteAssetSubscriptionAccountRequest
 */
-func (a *AssetApiService) DeleteAssetSubscriptionAccount(ctx _context.Context, moid string) ApiDeleteAssetSubscriptionAccountRequest {
+func (a *AssetApiService) DeleteAssetSubscriptionAccount(ctx context.Context, moid string) ApiDeleteAssetSubscriptionAccountRequest {
 	return ApiDeleteAssetSubscriptionAccountRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1422,26 +1399,24 @@ func (a *AssetApiService) DeleteAssetSubscriptionAccount(ctx _context.Context, m
 }
 
 // Execute executes the request
-func (a *AssetApiService) DeleteAssetSubscriptionAccountExecute(r ApiDeleteAssetSubscriptionAccountRequest) (*_nethttp.Response, error) {
+func (a *AssetApiService) DeleteAssetSubscriptionAccountExecute(r ApiDeleteAssetSubscriptionAccountRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.DeleteAssetSubscriptionAccount")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/SubscriptionAccounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1460,7 +1435,7 @@ func (a *AssetApiService) DeleteAssetSubscriptionAccountExecute(r ApiDeleteAsset
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1470,15 +1445,15 @@ func (a *AssetApiService) DeleteAssetSubscriptionAccountExecute(r ApiDeleteAsset
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1536,23 +1511,23 @@ func (a *AssetApiService) DeleteAssetSubscriptionAccountExecute(r ApiDeleteAsset
 }
 
 type ApiDeleteAssetTargetRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiDeleteAssetTargetRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteAssetTargetRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteAssetTargetExecute(r)
 }
 
 /*
 DeleteAssetTarget Delete a 'asset.Target' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteAssetTargetRequest
 */
-func (a *AssetApiService) DeleteAssetTarget(ctx _context.Context, moid string) ApiDeleteAssetTargetRequest {
+func (a *AssetApiService) DeleteAssetTarget(ctx context.Context, moid string) ApiDeleteAssetTargetRequest {
 	return ApiDeleteAssetTargetRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1561,26 +1536,24 @@ func (a *AssetApiService) DeleteAssetTarget(ctx _context.Context, moid string) A
 }
 
 // Execute executes the request
-func (a *AssetApiService) DeleteAssetTargetExecute(r ApiDeleteAssetTargetRequest) (*_nethttp.Response, error) {
+func (a *AssetApiService) DeleteAssetTargetExecute(r ApiDeleteAssetTargetRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.DeleteAssetTarget")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/Targets/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1599,7 +1572,7 @@ func (a *AssetApiService) DeleteAssetTargetExecute(r ApiDeleteAssetTargetRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -1609,15 +1582,15 @@ func (a *AssetApiService) DeleteAssetTargetExecute(r ApiDeleteAssetTargetRequest
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1675,23 +1648,23 @@ func (a *AssetApiService) DeleteAssetTargetExecute(r ApiDeleteAssetTargetRequest
 }
 
 type ApiGetAssetClusterMemberByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiGetAssetClusterMemberByMoidRequest) Execute() (AssetClusterMember, *_nethttp.Response, error) {
+func (r ApiGetAssetClusterMemberByMoidRequest) Execute() (*AssetClusterMember, *http.Response, error) {
 	return r.ApiService.GetAssetClusterMemberByMoidExecute(r)
 }
 
 /*
 GetAssetClusterMemberByMoid Read a 'asset.ClusterMember' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAssetClusterMemberByMoidRequest
 */
-func (a *AssetApiService) GetAssetClusterMemberByMoid(ctx _context.Context, moid string) ApiGetAssetClusterMemberByMoidRequest {
+func (a *AssetApiService) GetAssetClusterMemberByMoid(ctx context.Context, moid string) ApiGetAssetClusterMemberByMoidRequest {
 	return ApiGetAssetClusterMemberByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1701,27 +1674,25 @@ func (a *AssetApiService) GetAssetClusterMemberByMoid(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return AssetClusterMember
-func (a *AssetApiService) GetAssetClusterMemberByMoidExecute(r ApiGetAssetClusterMemberByMoidRequest) (AssetClusterMember, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetClusterMemberByMoidExecute(r ApiGetAssetClusterMemberByMoidRequest) (*AssetClusterMember, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetClusterMember
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetClusterMember
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetClusterMemberByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/ClusterMembers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1740,7 +1711,7 @@ func (a *AssetApiService) GetAssetClusterMemberByMoidExecute(r ApiGetAssetCluste
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1750,15 +1721,15 @@ func (a *AssetApiService) GetAssetClusterMemberByMoidExecute(r ApiGetAssetCluste
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1814,7 +1785,7 @@ func (a *AssetApiService) GetAssetClusterMemberByMoidExecute(r ApiGetAssetCluste
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1825,7 +1796,7 @@ func (a *AssetApiService) GetAssetClusterMemberByMoidExecute(r ApiGetAssetCluste
 }
 
 type ApiGetAssetClusterMemberListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	filter      *string
 	orderby     *string
@@ -1906,17 +1877,17 @@ func (r ApiGetAssetClusterMemberListRequest) Tags(tags string) ApiGetAssetCluste
 	return r
 }
 
-func (r ApiGetAssetClusterMemberListRequest) Execute() (AssetClusterMemberResponse, *_nethttp.Response, error) {
+func (r ApiGetAssetClusterMemberListRequest) Execute() (*AssetClusterMemberResponse, *http.Response, error) {
 	return r.ApiService.GetAssetClusterMemberListExecute(r)
 }
 
 /*
 GetAssetClusterMemberList Read a 'asset.ClusterMember' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAssetClusterMemberListRequest
 */
-func (a *AssetApiService) GetAssetClusterMemberList(ctx _context.Context) ApiGetAssetClusterMemberListRequest {
+func (a *AssetApiService) GetAssetClusterMemberList(ctx context.Context) ApiGetAssetClusterMemberListRequest {
 	return ApiGetAssetClusterMemberListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1925,26 +1896,24 @@ func (a *AssetApiService) GetAssetClusterMemberList(ctx _context.Context) ApiGet
 
 // Execute executes the request
 //  @return AssetClusterMemberResponse
-func (a *AssetApiService) GetAssetClusterMemberListExecute(r ApiGetAssetClusterMemberListRequest) (AssetClusterMemberResponse, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetClusterMemberListExecute(r ApiGetAssetClusterMemberListRequest) (*AssetClusterMemberResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetClusterMemberResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetClusterMemberResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetClusterMemberList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/ClusterMembers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1996,7 +1965,7 @@ func (a *AssetApiService) GetAssetClusterMemberListExecute(r ApiGetAssetClusterM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2006,15 +1975,15 @@ func (a *AssetApiService) GetAssetClusterMemberListExecute(r ApiGetAssetClusterM
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2070,7 +2039,7 @@ func (a *AssetApiService) GetAssetClusterMemberListExecute(r ApiGetAssetClusterM
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2081,23 +2050,23 @@ func (a *AssetApiService) GetAssetClusterMemberListExecute(r ApiGetAssetClusterM
 }
 
 type ApiGetAssetDeploymentByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiGetAssetDeploymentByMoidRequest) Execute() (AssetDeployment, *_nethttp.Response, error) {
+func (r ApiGetAssetDeploymentByMoidRequest) Execute() (*AssetDeployment, *http.Response, error) {
 	return r.ApiService.GetAssetDeploymentByMoidExecute(r)
 }
 
 /*
 GetAssetDeploymentByMoid Read a 'asset.Deployment' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAssetDeploymentByMoidRequest
 */
-func (a *AssetApiService) GetAssetDeploymentByMoid(ctx _context.Context, moid string) ApiGetAssetDeploymentByMoidRequest {
+func (a *AssetApiService) GetAssetDeploymentByMoid(ctx context.Context, moid string) ApiGetAssetDeploymentByMoidRequest {
 	return ApiGetAssetDeploymentByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2107,27 +2076,25 @@ func (a *AssetApiService) GetAssetDeploymentByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return AssetDeployment
-func (a *AssetApiService) GetAssetDeploymentByMoidExecute(r ApiGetAssetDeploymentByMoidRequest) (AssetDeployment, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetDeploymentByMoidExecute(r ApiGetAssetDeploymentByMoidRequest) (*AssetDeployment, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeployment
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetDeploymentByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/Deployments/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2146,7 +2113,7 @@ func (a *AssetApiService) GetAssetDeploymentByMoidExecute(r ApiGetAssetDeploymen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2156,15 +2123,15 @@ func (a *AssetApiService) GetAssetDeploymentByMoidExecute(r ApiGetAssetDeploymen
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2220,7 +2187,7 @@ func (a *AssetApiService) GetAssetDeploymentByMoidExecute(r ApiGetAssetDeploymen
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2231,23 +2198,23 @@ func (a *AssetApiService) GetAssetDeploymentByMoidExecute(r ApiGetAssetDeploymen
 }
 
 type ApiGetAssetDeploymentDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiGetAssetDeploymentDeviceByMoidRequest) Execute() (AssetDeploymentDevice, *_nethttp.Response, error) {
+func (r ApiGetAssetDeploymentDeviceByMoidRequest) Execute() (*AssetDeploymentDevice, *http.Response, error) {
 	return r.ApiService.GetAssetDeploymentDeviceByMoidExecute(r)
 }
 
 /*
 GetAssetDeploymentDeviceByMoid Read a 'asset.DeploymentDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAssetDeploymentDeviceByMoidRequest
 */
-func (a *AssetApiService) GetAssetDeploymentDeviceByMoid(ctx _context.Context, moid string) ApiGetAssetDeploymentDeviceByMoidRequest {
+func (a *AssetApiService) GetAssetDeploymentDeviceByMoid(ctx context.Context, moid string) ApiGetAssetDeploymentDeviceByMoidRequest {
 	return ApiGetAssetDeploymentDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2257,27 +2224,25 @@ func (a *AssetApiService) GetAssetDeploymentDeviceByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return AssetDeploymentDevice
-func (a *AssetApiService) GetAssetDeploymentDeviceByMoidExecute(r ApiGetAssetDeploymentDeviceByMoidRequest) (AssetDeploymentDevice, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetDeploymentDeviceByMoidExecute(r ApiGetAssetDeploymentDeviceByMoidRequest) (*AssetDeploymentDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeploymentDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeploymentDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetDeploymentDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeploymentDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2296,7 +2261,7 @@ func (a *AssetApiService) GetAssetDeploymentDeviceByMoidExecute(r ApiGetAssetDep
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2306,15 +2271,15 @@ func (a *AssetApiService) GetAssetDeploymentDeviceByMoidExecute(r ApiGetAssetDep
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2370,7 +2335,7 @@ func (a *AssetApiService) GetAssetDeploymentDeviceByMoidExecute(r ApiGetAssetDep
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2381,7 +2346,7 @@ func (a *AssetApiService) GetAssetDeploymentDeviceByMoidExecute(r ApiGetAssetDep
 }
 
 type ApiGetAssetDeploymentDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	filter      *string
 	orderby     *string
@@ -2462,17 +2427,17 @@ func (r ApiGetAssetDeploymentDeviceListRequest) Tags(tags string) ApiGetAssetDep
 	return r
 }
 
-func (r ApiGetAssetDeploymentDeviceListRequest) Execute() (AssetDeploymentDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetAssetDeploymentDeviceListRequest) Execute() (*AssetDeploymentDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetAssetDeploymentDeviceListExecute(r)
 }
 
 /*
 GetAssetDeploymentDeviceList Read a 'asset.DeploymentDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAssetDeploymentDeviceListRequest
 */
-func (a *AssetApiService) GetAssetDeploymentDeviceList(ctx _context.Context) ApiGetAssetDeploymentDeviceListRequest {
+func (a *AssetApiService) GetAssetDeploymentDeviceList(ctx context.Context) ApiGetAssetDeploymentDeviceListRequest {
 	return ApiGetAssetDeploymentDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2481,26 +2446,24 @@ func (a *AssetApiService) GetAssetDeploymentDeviceList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return AssetDeploymentDeviceResponse
-func (a *AssetApiService) GetAssetDeploymentDeviceListExecute(r ApiGetAssetDeploymentDeviceListRequest) (AssetDeploymentDeviceResponse, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetDeploymentDeviceListExecute(r ApiGetAssetDeploymentDeviceListRequest) (*AssetDeploymentDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeploymentDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeploymentDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetDeploymentDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeploymentDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2552,7 +2515,7 @@ func (a *AssetApiService) GetAssetDeploymentDeviceListExecute(r ApiGetAssetDeplo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2562,15 +2525,15 @@ func (a *AssetApiService) GetAssetDeploymentDeviceListExecute(r ApiGetAssetDeplo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2626,7 +2589,7 @@ func (a *AssetApiService) GetAssetDeploymentDeviceListExecute(r ApiGetAssetDeplo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2637,7 +2600,7 @@ func (a *AssetApiService) GetAssetDeploymentDeviceListExecute(r ApiGetAssetDeplo
 }
 
 type ApiGetAssetDeploymentListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	filter      *string
 	orderby     *string
@@ -2718,17 +2681,17 @@ func (r ApiGetAssetDeploymentListRequest) Tags(tags string) ApiGetAssetDeploymen
 	return r
 }
 
-func (r ApiGetAssetDeploymentListRequest) Execute() (AssetDeploymentResponse, *_nethttp.Response, error) {
+func (r ApiGetAssetDeploymentListRequest) Execute() (*AssetDeploymentResponse, *http.Response, error) {
 	return r.ApiService.GetAssetDeploymentListExecute(r)
 }
 
 /*
 GetAssetDeploymentList Read a 'asset.Deployment' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAssetDeploymentListRequest
 */
-func (a *AssetApiService) GetAssetDeploymentList(ctx _context.Context) ApiGetAssetDeploymentListRequest {
+func (a *AssetApiService) GetAssetDeploymentList(ctx context.Context) ApiGetAssetDeploymentListRequest {
 	return ApiGetAssetDeploymentListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2737,26 +2700,24 @@ func (a *AssetApiService) GetAssetDeploymentList(ctx _context.Context) ApiGetAss
 
 // Execute executes the request
 //  @return AssetDeploymentResponse
-func (a *AssetApiService) GetAssetDeploymentListExecute(r ApiGetAssetDeploymentListRequest) (AssetDeploymentResponse, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetDeploymentListExecute(r ApiGetAssetDeploymentListRequest) (*AssetDeploymentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeploymentResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeploymentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetDeploymentList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/Deployments"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2808,7 +2769,7 @@ func (a *AssetApiService) GetAssetDeploymentListExecute(r ApiGetAssetDeploymentL
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2818,15 +2779,15 @@ func (a *AssetApiService) GetAssetDeploymentListExecute(r ApiGetAssetDeploymentL
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2882,7 +2843,7 @@ func (a *AssetApiService) GetAssetDeploymentListExecute(r ApiGetAssetDeploymentL
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2893,23 +2854,23 @@ func (a *AssetApiService) GetAssetDeploymentListExecute(r ApiGetAssetDeploymentL
 }
 
 type ApiGetAssetDeviceConfigurationByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiGetAssetDeviceConfigurationByMoidRequest) Execute() (AssetDeviceConfiguration, *_nethttp.Response, error) {
+func (r ApiGetAssetDeviceConfigurationByMoidRequest) Execute() (*AssetDeviceConfiguration, *http.Response, error) {
 	return r.ApiService.GetAssetDeviceConfigurationByMoidExecute(r)
 }
 
 /*
 GetAssetDeviceConfigurationByMoid Read a 'asset.DeviceConfiguration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAssetDeviceConfigurationByMoidRequest
 */
-func (a *AssetApiService) GetAssetDeviceConfigurationByMoid(ctx _context.Context, moid string) ApiGetAssetDeviceConfigurationByMoidRequest {
+func (a *AssetApiService) GetAssetDeviceConfigurationByMoid(ctx context.Context, moid string) ApiGetAssetDeviceConfigurationByMoidRequest {
 	return ApiGetAssetDeviceConfigurationByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2919,27 +2880,25 @@ func (a *AssetApiService) GetAssetDeviceConfigurationByMoid(ctx _context.Context
 
 // Execute executes the request
 //  @return AssetDeviceConfiguration
-func (a *AssetApiService) GetAssetDeviceConfigurationByMoidExecute(r ApiGetAssetDeviceConfigurationByMoidRequest) (AssetDeviceConfiguration, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetDeviceConfigurationByMoidExecute(r ApiGetAssetDeviceConfigurationByMoidRequest) (*AssetDeviceConfiguration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceConfiguration
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetDeviceConfigurationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceConfigurations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2958,7 +2917,7 @@ func (a *AssetApiService) GetAssetDeviceConfigurationByMoidExecute(r ApiGetAsset
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2968,15 +2927,15 @@ func (a *AssetApiService) GetAssetDeviceConfigurationByMoidExecute(r ApiGetAsset
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3032,7 +2991,7 @@ func (a *AssetApiService) GetAssetDeviceConfigurationByMoidExecute(r ApiGetAsset
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3043,7 +3002,7 @@ func (a *AssetApiService) GetAssetDeviceConfigurationByMoidExecute(r ApiGetAsset
 }
 
 type ApiGetAssetDeviceConfigurationListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	filter      *string
 	orderby     *string
@@ -3124,17 +3083,17 @@ func (r ApiGetAssetDeviceConfigurationListRequest) Tags(tags string) ApiGetAsset
 	return r
 }
 
-func (r ApiGetAssetDeviceConfigurationListRequest) Execute() (AssetDeviceConfigurationResponse, *_nethttp.Response, error) {
+func (r ApiGetAssetDeviceConfigurationListRequest) Execute() (*AssetDeviceConfigurationResponse, *http.Response, error) {
 	return r.ApiService.GetAssetDeviceConfigurationListExecute(r)
 }
 
 /*
 GetAssetDeviceConfigurationList Read a 'asset.DeviceConfiguration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAssetDeviceConfigurationListRequest
 */
-func (a *AssetApiService) GetAssetDeviceConfigurationList(ctx _context.Context) ApiGetAssetDeviceConfigurationListRequest {
+func (a *AssetApiService) GetAssetDeviceConfigurationList(ctx context.Context) ApiGetAssetDeviceConfigurationListRequest {
 	return ApiGetAssetDeviceConfigurationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3143,26 +3102,24 @@ func (a *AssetApiService) GetAssetDeviceConfigurationList(ctx _context.Context) 
 
 // Execute executes the request
 //  @return AssetDeviceConfigurationResponse
-func (a *AssetApiService) GetAssetDeviceConfigurationListExecute(r ApiGetAssetDeviceConfigurationListRequest) (AssetDeviceConfigurationResponse, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetDeviceConfigurationListExecute(r ApiGetAssetDeviceConfigurationListRequest) (*AssetDeviceConfigurationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceConfigurationResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceConfigurationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetDeviceConfigurationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceConfigurations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3214,7 +3171,7 @@ func (a *AssetApiService) GetAssetDeviceConfigurationListExecute(r ApiGetAssetDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3224,15 +3181,15 @@ func (a *AssetApiService) GetAssetDeviceConfigurationListExecute(r ApiGetAssetDe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3288,7 +3245,7 @@ func (a *AssetApiService) GetAssetDeviceConfigurationListExecute(r ApiGetAssetDe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3299,23 +3256,23 @@ func (a *AssetApiService) GetAssetDeviceConfigurationListExecute(r ApiGetAssetDe
 }
 
 type ApiGetAssetDeviceConnectorManagerByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiGetAssetDeviceConnectorManagerByMoidRequest) Execute() (AssetDeviceConnectorManager, *_nethttp.Response, error) {
+func (r ApiGetAssetDeviceConnectorManagerByMoidRequest) Execute() (*AssetDeviceConnectorManager, *http.Response, error) {
 	return r.ApiService.GetAssetDeviceConnectorManagerByMoidExecute(r)
 }
 
 /*
 GetAssetDeviceConnectorManagerByMoid Read a 'asset.DeviceConnectorManager' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAssetDeviceConnectorManagerByMoidRequest
 */
-func (a *AssetApiService) GetAssetDeviceConnectorManagerByMoid(ctx _context.Context, moid string) ApiGetAssetDeviceConnectorManagerByMoidRequest {
+func (a *AssetApiService) GetAssetDeviceConnectorManagerByMoid(ctx context.Context, moid string) ApiGetAssetDeviceConnectorManagerByMoidRequest {
 	return ApiGetAssetDeviceConnectorManagerByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3325,27 +3282,25 @@ func (a *AssetApiService) GetAssetDeviceConnectorManagerByMoid(ctx _context.Cont
 
 // Execute executes the request
 //  @return AssetDeviceConnectorManager
-func (a *AssetApiService) GetAssetDeviceConnectorManagerByMoidExecute(r ApiGetAssetDeviceConnectorManagerByMoidRequest) (AssetDeviceConnectorManager, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetDeviceConnectorManagerByMoidExecute(r ApiGetAssetDeviceConnectorManagerByMoidRequest) (*AssetDeviceConnectorManager, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceConnectorManager
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceConnectorManager
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetDeviceConnectorManagerByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceConnectorManagers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3364,7 +3319,7 @@ func (a *AssetApiService) GetAssetDeviceConnectorManagerByMoidExecute(r ApiGetAs
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3374,15 +3329,15 @@ func (a *AssetApiService) GetAssetDeviceConnectorManagerByMoidExecute(r ApiGetAs
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3438,7 +3393,7 @@ func (a *AssetApiService) GetAssetDeviceConnectorManagerByMoidExecute(r ApiGetAs
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3449,7 +3404,7 @@ func (a *AssetApiService) GetAssetDeviceConnectorManagerByMoidExecute(r ApiGetAs
 }
 
 type ApiGetAssetDeviceConnectorManagerListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	filter      *string
 	orderby     *string
@@ -3530,17 +3485,17 @@ func (r ApiGetAssetDeviceConnectorManagerListRequest) Tags(tags string) ApiGetAs
 	return r
 }
 
-func (r ApiGetAssetDeviceConnectorManagerListRequest) Execute() (AssetDeviceConnectorManagerResponse, *_nethttp.Response, error) {
+func (r ApiGetAssetDeviceConnectorManagerListRequest) Execute() (*AssetDeviceConnectorManagerResponse, *http.Response, error) {
 	return r.ApiService.GetAssetDeviceConnectorManagerListExecute(r)
 }
 
 /*
 GetAssetDeviceConnectorManagerList Read a 'asset.DeviceConnectorManager' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAssetDeviceConnectorManagerListRequest
 */
-func (a *AssetApiService) GetAssetDeviceConnectorManagerList(ctx _context.Context) ApiGetAssetDeviceConnectorManagerListRequest {
+func (a *AssetApiService) GetAssetDeviceConnectorManagerList(ctx context.Context) ApiGetAssetDeviceConnectorManagerListRequest {
 	return ApiGetAssetDeviceConnectorManagerListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3549,26 +3504,24 @@ func (a *AssetApiService) GetAssetDeviceConnectorManagerList(ctx _context.Contex
 
 // Execute executes the request
 //  @return AssetDeviceConnectorManagerResponse
-func (a *AssetApiService) GetAssetDeviceConnectorManagerListExecute(r ApiGetAssetDeviceConnectorManagerListRequest) (AssetDeviceConnectorManagerResponse, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetDeviceConnectorManagerListExecute(r ApiGetAssetDeviceConnectorManagerListRequest) (*AssetDeviceConnectorManagerResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceConnectorManagerResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceConnectorManagerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetDeviceConnectorManagerList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceConnectorManagers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3620,7 +3573,7 @@ func (a *AssetApiService) GetAssetDeviceConnectorManagerListExecute(r ApiGetAsse
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3630,15 +3583,15 @@ func (a *AssetApiService) GetAssetDeviceConnectorManagerListExecute(r ApiGetAsse
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3694,7 +3647,7 @@ func (a *AssetApiService) GetAssetDeviceConnectorManagerListExecute(r ApiGetAsse
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3705,23 +3658,23 @@ func (a *AssetApiService) GetAssetDeviceConnectorManagerListExecute(r ApiGetAsse
 }
 
 type ApiGetAssetDeviceContractInformationByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiGetAssetDeviceContractInformationByMoidRequest) Execute() (AssetDeviceContractInformation, *_nethttp.Response, error) {
+func (r ApiGetAssetDeviceContractInformationByMoidRequest) Execute() (*AssetDeviceContractInformation, *http.Response, error) {
 	return r.ApiService.GetAssetDeviceContractInformationByMoidExecute(r)
 }
 
 /*
 GetAssetDeviceContractInformationByMoid Read a 'asset.DeviceContractInformation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAssetDeviceContractInformationByMoidRequest
 */
-func (a *AssetApiService) GetAssetDeviceContractInformationByMoid(ctx _context.Context, moid string) ApiGetAssetDeviceContractInformationByMoidRequest {
+func (a *AssetApiService) GetAssetDeviceContractInformationByMoid(ctx context.Context, moid string) ApiGetAssetDeviceContractInformationByMoidRequest {
 	return ApiGetAssetDeviceContractInformationByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3731,27 +3684,25 @@ func (a *AssetApiService) GetAssetDeviceContractInformationByMoid(ctx _context.C
 
 // Execute executes the request
 //  @return AssetDeviceContractInformation
-func (a *AssetApiService) GetAssetDeviceContractInformationByMoidExecute(r ApiGetAssetDeviceContractInformationByMoidRequest) (AssetDeviceContractInformation, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetDeviceContractInformationByMoidExecute(r ApiGetAssetDeviceContractInformationByMoidRequest) (*AssetDeviceContractInformation, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceContractInformation
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceContractInformation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetDeviceContractInformationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceContractInformations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3770,7 +3721,7 @@ func (a *AssetApiService) GetAssetDeviceContractInformationByMoidExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3780,15 +3731,15 @@ func (a *AssetApiService) GetAssetDeviceContractInformationByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3844,7 +3795,7 @@ func (a *AssetApiService) GetAssetDeviceContractInformationByMoidExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3855,7 +3806,7 @@ func (a *AssetApiService) GetAssetDeviceContractInformationByMoidExecute(r ApiGe
 }
 
 type ApiGetAssetDeviceContractInformationListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	filter      *string
 	orderby     *string
@@ -3936,17 +3887,17 @@ func (r ApiGetAssetDeviceContractInformationListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetAssetDeviceContractInformationListRequest) Execute() (AssetDeviceContractInformationResponse, *_nethttp.Response, error) {
+func (r ApiGetAssetDeviceContractInformationListRequest) Execute() (*AssetDeviceContractInformationResponse, *http.Response, error) {
 	return r.ApiService.GetAssetDeviceContractInformationListExecute(r)
 }
 
 /*
 GetAssetDeviceContractInformationList Read a 'asset.DeviceContractInformation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAssetDeviceContractInformationListRequest
 */
-func (a *AssetApiService) GetAssetDeviceContractInformationList(ctx _context.Context) ApiGetAssetDeviceContractInformationListRequest {
+func (a *AssetApiService) GetAssetDeviceContractInformationList(ctx context.Context) ApiGetAssetDeviceContractInformationListRequest {
 	return ApiGetAssetDeviceContractInformationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3955,26 +3906,24 @@ func (a *AssetApiService) GetAssetDeviceContractInformationList(ctx _context.Con
 
 // Execute executes the request
 //  @return AssetDeviceContractInformationResponse
-func (a *AssetApiService) GetAssetDeviceContractInformationListExecute(r ApiGetAssetDeviceContractInformationListRequest) (AssetDeviceContractInformationResponse, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetDeviceContractInformationListExecute(r ApiGetAssetDeviceContractInformationListRequest) (*AssetDeviceContractInformationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceContractInformationResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceContractInformationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetDeviceContractInformationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceContractInformations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -4026,7 +3975,7 @@ func (a *AssetApiService) GetAssetDeviceContractInformationListExecute(r ApiGetA
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4036,15 +3985,15 @@ func (a *AssetApiService) GetAssetDeviceContractInformationListExecute(r ApiGetA
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4100,7 +4049,7 @@ func (a *AssetApiService) GetAssetDeviceContractInformationListExecute(r ApiGetA
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4111,23 +4060,23 @@ func (a *AssetApiService) GetAssetDeviceContractInformationListExecute(r ApiGetA
 }
 
 type ApiGetAssetDeviceRegistrationByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiGetAssetDeviceRegistrationByMoidRequest) Execute() (AssetDeviceRegistration, *_nethttp.Response, error) {
+func (r ApiGetAssetDeviceRegistrationByMoidRequest) Execute() (*AssetDeviceRegistration, *http.Response, error) {
 	return r.ApiService.GetAssetDeviceRegistrationByMoidExecute(r)
 }
 
 /*
 GetAssetDeviceRegistrationByMoid Read a 'asset.DeviceRegistration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAssetDeviceRegistrationByMoidRequest
 */
-func (a *AssetApiService) GetAssetDeviceRegistrationByMoid(ctx _context.Context, moid string) ApiGetAssetDeviceRegistrationByMoidRequest {
+func (a *AssetApiService) GetAssetDeviceRegistrationByMoid(ctx context.Context, moid string) ApiGetAssetDeviceRegistrationByMoidRequest {
 	return ApiGetAssetDeviceRegistrationByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4137,27 +4086,25 @@ func (a *AssetApiService) GetAssetDeviceRegistrationByMoid(ctx _context.Context,
 
 // Execute executes the request
 //  @return AssetDeviceRegistration
-func (a *AssetApiService) GetAssetDeviceRegistrationByMoidExecute(r ApiGetAssetDeviceRegistrationByMoidRequest) (AssetDeviceRegistration, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetDeviceRegistrationByMoidExecute(r ApiGetAssetDeviceRegistrationByMoidRequest) (*AssetDeviceRegistration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceRegistration
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceRegistration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetDeviceRegistrationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceRegistrations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4176,7 +4123,7 @@ func (a *AssetApiService) GetAssetDeviceRegistrationByMoidExecute(r ApiGetAssetD
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4186,15 +4133,15 @@ func (a *AssetApiService) GetAssetDeviceRegistrationByMoidExecute(r ApiGetAssetD
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4250,7 +4197,7 @@ func (a *AssetApiService) GetAssetDeviceRegistrationByMoidExecute(r ApiGetAssetD
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4261,7 +4208,7 @@ func (a *AssetApiService) GetAssetDeviceRegistrationByMoidExecute(r ApiGetAssetD
 }
 
 type ApiGetAssetDeviceRegistrationListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	filter      *string
 	orderby     *string
@@ -4342,17 +4289,17 @@ func (r ApiGetAssetDeviceRegistrationListRequest) Tags(tags string) ApiGetAssetD
 	return r
 }
 
-func (r ApiGetAssetDeviceRegistrationListRequest) Execute() (AssetDeviceRegistrationResponse, *_nethttp.Response, error) {
+func (r ApiGetAssetDeviceRegistrationListRequest) Execute() (*AssetDeviceRegistrationResponse, *http.Response, error) {
 	return r.ApiService.GetAssetDeviceRegistrationListExecute(r)
 }
 
 /*
 GetAssetDeviceRegistrationList Read a 'asset.DeviceRegistration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAssetDeviceRegistrationListRequest
 */
-func (a *AssetApiService) GetAssetDeviceRegistrationList(ctx _context.Context) ApiGetAssetDeviceRegistrationListRequest {
+func (a *AssetApiService) GetAssetDeviceRegistrationList(ctx context.Context) ApiGetAssetDeviceRegistrationListRequest {
 	return ApiGetAssetDeviceRegistrationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4361,26 +4308,24 @@ func (a *AssetApiService) GetAssetDeviceRegistrationList(ctx _context.Context) A
 
 // Execute executes the request
 //  @return AssetDeviceRegistrationResponse
-func (a *AssetApiService) GetAssetDeviceRegistrationListExecute(r ApiGetAssetDeviceRegistrationListRequest) (AssetDeviceRegistrationResponse, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetDeviceRegistrationListExecute(r ApiGetAssetDeviceRegistrationListRequest) (*AssetDeviceRegistrationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceRegistrationResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceRegistrationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetDeviceRegistrationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceRegistrations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -4432,7 +4377,7 @@ func (a *AssetApiService) GetAssetDeviceRegistrationListExecute(r ApiGetAssetDev
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4442,15 +4387,15 @@ func (a *AssetApiService) GetAssetDeviceRegistrationListExecute(r ApiGetAssetDev
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4506,7 +4451,7 @@ func (a *AssetApiService) GetAssetDeviceRegistrationListExecute(r ApiGetAssetDev
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4517,23 +4462,23 @@ func (a *AssetApiService) GetAssetDeviceRegistrationListExecute(r ApiGetAssetDev
 }
 
 type ApiGetAssetSubscriptionAccountByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiGetAssetSubscriptionAccountByMoidRequest) Execute() (AssetSubscriptionAccount, *_nethttp.Response, error) {
+func (r ApiGetAssetSubscriptionAccountByMoidRequest) Execute() (*AssetSubscriptionAccount, *http.Response, error) {
 	return r.ApiService.GetAssetSubscriptionAccountByMoidExecute(r)
 }
 
 /*
 GetAssetSubscriptionAccountByMoid Read a 'asset.SubscriptionAccount' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAssetSubscriptionAccountByMoidRequest
 */
-func (a *AssetApiService) GetAssetSubscriptionAccountByMoid(ctx _context.Context, moid string) ApiGetAssetSubscriptionAccountByMoidRequest {
+func (a *AssetApiService) GetAssetSubscriptionAccountByMoid(ctx context.Context, moid string) ApiGetAssetSubscriptionAccountByMoidRequest {
 	return ApiGetAssetSubscriptionAccountByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4543,27 +4488,25 @@ func (a *AssetApiService) GetAssetSubscriptionAccountByMoid(ctx _context.Context
 
 // Execute executes the request
 //  @return AssetSubscriptionAccount
-func (a *AssetApiService) GetAssetSubscriptionAccountByMoidExecute(r ApiGetAssetSubscriptionAccountByMoidRequest) (AssetSubscriptionAccount, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetSubscriptionAccountByMoidExecute(r ApiGetAssetSubscriptionAccountByMoidRequest) (*AssetSubscriptionAccount, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetSubscriptionAccount
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetSubscriptionAccount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetSubscriptionAccountByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/SubscriptionAccounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4582,7 +4525,7 @@ func (a *AssetApiService) GetAssetSubscriptionAccountByMoidExecute(r ApiGetAsset
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4592,15 +4535,15 @@ func (a *AssetApiService) GetAssetSubscriptionAccountByMoidExecute(r ApiGetAsset
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4656,7 +4599,7 @@ func (a *AssetApiService) GetAssetSubscriptionAccountByMoidExecute(r ApiGetAsset
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4667,7 +4610,7 @@ func (a *AssetApiService) GetAssetSubscriptionAccountByMoidExecute(r ApiGetAsset
 }
 
 type ApiGetAssetSubscriptionAccountListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	filter      *string
 	orderby     *string
@@ -4748,17 +4691,17 @@ func (r ApiGetAssetSubscriptionAccountListRequest) Tags(tags string) ApiGetAsset
 	return r
 }
 
-func (r ApiGetAssetSubscriptionAccountListRequest) Execute() (AssetSubscriptionAccountResponse, *_nethttp.Response, error) {
+func (r ApiGetAssetSubscriptionAccountListRequest) Execute() (*AssetSubscriptionAccountResponse, *http.Response, error) {
 	return r.ApiService.GetAssetSubscriptionAccountListExecute(r)
 }
 
 /*
 GetAssetSubscriptionAccountList Read a 'asset.SubscriptionAccount' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAssetSubscriptionAccountListRequest
 */
-func (a *AssetApiService) GetAssetSubscriptionAccountList(ctx _context.Context) ApiGetAssetSubscriptionAccountListRequest {
+func (a *AssetApiService) GetAssetSubscriptionAccountList(ctx context.Context) ApiGetAssetSubscriptionAccountListRequest {
 	return ApiGetAssetSubscriptionAccountListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4767,26 +4710,24 @@ func (a *AssetApiService) GetAssetSubscriptionAccountList(ctx _context.Context) 
 
 // Execute executes the request
 //  @return AssetSubscriptionAccountResponse
-func (a *AssetApiService) GetAssetSubscriptionAccountListExecute(r ApiGetAssetSubscriptionAccountListRequest) (AssetSubscriptionAccountResponse, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetSubscriptionAccountListExecute(r ApiGetAssetSubscriptionAccountListRequest) (*AssetSubscriptionAccountResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetSubscriptionAccountResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetSubscriptionAccountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetSubscriptionAccountList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/SubscriptionAccounts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -4838,7 +4779,7 @@ func (a *AssetApiService) GetAssetSubscriptionAccountListExecute(r ApiGetAssetSu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4848,15 +4789,15 @@ func (a *AssetApiService) GetAssetSubscriptionAccountListExecute(r ApiGetAssetSu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4912,7 +4853,7 @@ func (a *AssetApiService) GetAssetSubscriptionAccountListExecute(r ApiGetAssetSu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4923,23 +4864,23 @@ func (a *AssetApiService) GetAssetSubscriptionAccountListExecute(r ApiGetAssetSu
 }
 
 type ApiGetAssetSubscriptionByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiGetAssetSubscriptionByMoidRequest) Execute() (AssetSubscription, *_nethttp.Response, error) {
+func (r ApiGetAssetSubscriptionByMoidRequest) Execute() (*AssetSubscription, *http.Response, error) {
 	return r.ApiService.GetAssetSubscriptionByMoidExecute(r)
 }
 
 /*
 GetAssetSubscriptionByMoid Read a 'asset.Subscription' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAssetSubscriptionByMoidRequest
 */
-func (a *AssetApiService) GetAssetSubscriptionByMoid(ctx _context.Context, moid string) ApiGetAssetSubscriptionByMoidRequest {
+func (a *AssetApiService) GetAssetSubscriptionByMoid(ctx context.Context, moid string) ApiGetAssetSubscriptionByMoidRequest {
 	return ApiGetAssetSubscriptionByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4949,27 +4890,25 @@ func (a *AssetApiService) GetAssetSubscriptionByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return AssetSubscription
-func (a *AssetApiService) GetAssetSubscriptionByMoidExecute(r ApiGetAssetSubscriptionByMoidRequest) (AssetSubscription, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetSubscriptionByMoidExecute(r ApiGetAssetSubscriptionByMoidRequest) (*AssetSubscription, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetSubscription
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetSubscription
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetSubscriptionByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/Subscriptions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4988,7 +4927,7 @@ func (a *AssetApiService) GetAssetSubscriptionByMoidExecute(r ApiGetAssetSubscri
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4998,15 +4937,15 @@ func (a *AssetApiService) GetAssetSubscriptionByMoidExecute(r ApiGetAssetSubscri
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5062,7 +5001,7 @@ func (a *AssetApiService) GetAssetSubscriptionByMoidExecute(r ApiGetAssetSubscri
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5073,23 +5012,23 @@ func (a *AssetApiService) GetAssetSubscriptionByMoidExecute(r ApiGetAssetSubscri
 }
 
 type ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest) Execute() (AssetSubscriptionDeviceContractInformation, *_nethttp.Response, error) {
+func (r ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest) Execute() (*AssetSubscriptionDeviceContractInformation, *http.Response, error) {
 	return r.ApiService.GetAssetSubscriptionDeviceContractInformationByMoidExecute(r)
 }
 
 /*
 GetAssetSubscriptionDeviceContractInformationByMoid Read a 'asset.SubscriptionDeviceContractInformation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest
 */
-func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationByMoid(ctx _context.Context, moid string) ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest {
+func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationByMoid(ctx context.Context, moid string) ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest {
 	return ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5099,27 +5038,25 @@ func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationByMoid(ct
 
 // Execute executes the request
 //  @return AssetSubscriptionDeviceContractInformation
-func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationByMoidExecute(r ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest) (AssetSubscriptionDeviceContractInformation, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationByMoidExecute(r ApiGetAssetSubscriptionDeviceContractInformationByMoidRequest) (*AssetSubscriptionDeviceContractInformation, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetSubscriptionDeviceContractInformation
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetSubscriptionDeviceContractInformation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetSubscriptionDeviceContractInformationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/SubscriptionDeviceContractInformations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5138,7 +5075,7 @@ func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationByMoidExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5148,15 +5085,15 @@ func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationByMoidExe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5212,7 +5149,7 @@ func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationByMoidExe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5223,7 +5160,7 @@ func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationByMoidExe
 }
 
 type ApiGetAssetSubscriptionDeviceContractInformationListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	filter      *string
 	orderby     *string
@@ -5304,17 +5241,17 @@ func (r ApiGetAssetSubscriptionDeviceContractInformationListRequest) Tags(tags s
 	return r
 }
 
-func (r ApiGetAssetSubscriptionDeviceContractInformationListRequest) Execute() (AssetSubscriptionDeviceContractInformationResponse, *_nethttp.Response, error) {
+func (r ApiGetAssetSubscriptionDeviceContractInformationListRequest) Execute() (*AssetSubscriptionDeviceContractInformationResponse, *http.Response, error) {
 	return r.ApiService.GetAssetSubscriptionDeviceContractInformationListExecute(r)
 }
 
 /*
 GetAssetSubscriptionDeviceContractInformationList Read a 'asset.SubscriptionDeviceContractInformation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAssetSubscriptionDeviceContractInformationListRequest
 */
-func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationList(ctx _context.Context) ApiGetAssetSubscriptionDeviceContractInformationListRequest {
+func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationList(ctx context.Context) ApiGetAssetSubscriptionDeviceContractInformationListRequest {
 	return ApiGetAssetSubscriptionDeviceContractInformationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5323,26 +5260,24 @@ func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationList(ctx 
 
 // Execute executes the request
 //  @return AssetSubscriptionDeviceContractInformationResponse
-func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationListExecute(r ApiGetAssetSubscriptionDeviceContractInformationListRequest) (AssetSubscriptionDeviceContractInformationResponse, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationListExecute(r ApiGetAssetSubscriptionDeviceContractInformationListRequest) (*AssetSubscriptionDeviceContractInformationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetSubscriptionDeviceContractInformationResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetSubscriptionDeviceContractInformationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetSubscriptionDeviceContractInformationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/SubscriptionDeviceContractInformations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -5394,7 +5329,7 @@ func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationListExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5404,15 +5339,15 @@ func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationListExecu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5468,7 +5403,7 @@ func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationListExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5479,7 +5414,7 @@ func (a *AssetApiService) GetAssetSubscriptionDeviceContractInformationListExecu
 }
 
 type ApiGetAssetSubscriptionListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	filter      *string
 	orderby     *string
@@ -5560,17 +5495,17 @@ func (r ApiGetAssetSubscriptionListRequest) Tags(tags string) ApiGetAssetSubscri
 	return r
 }
 
-func (r ApiGetAssetSubscriptionListRequest) Execute() (AssetSubscriptionResponse, *_nethttp.Response, error) {
+func (r ApiGetAssetSubscriptionListRequest) Execute() (*AssetSubscriptionResponse, *http.Response, error) {
 	return r.ApiService.GetAssetSubscriptionListExecute(r)
 }
 
 /*
 GetAssetSubscriptionList Read a 'asset.Subscription' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAssetSubscriptionListRequest
 */
-func (a *AssetApiService) GetAssetSubscriptionList(ctx _context.Context) ApiGetAssetSubscriptionListRequest {
+func (a *AssetApiService) GetAssetSubscriptionList(ctx context.Context) ApiGetAssetSubscriptionListRequest {
 	return ApiGetAssetSubscriptionListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5579,26 +5514,24 @@ func (a *AssetApiService) GetAssetSubscriptionList(ctx _context.Context) ApiGetA
 
 // Execute executes the request
 //  @return AssetSubscriptionResponse
-func (a *AssetApiService) GetAssetSubscriptionListExecute(r ApiGetAssetSubscriptionListRequest) (AssetSubscriptionResponse, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetSubscriptionListExecute(r ApiGetAssetSubscriptionListRequest) (*AssetSubscriptionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetSubscriptionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetSubscriptionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetSubscriptionList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/Subscriptions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -5650,7 +5583,7 @@ func (a *AssetApiService) GetAssetSubscriptionListExecute(r ApiGetAssetSubscript
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5660,15 +5593,15 @@ func (a *AssetApiService) GetAssetSubscriptionListExecute(r ApiGetAssetSubscript
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5724,7 +5657,7 @@ func (a *AssetApiService) GetAssetSubscriptionListExecute(r ApiGetAssetSubscript
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5735,23 +5668,23 @@ func (a *AssetApiService) GetAssetSubscriptionListExecute(r ApiGetAssetSubscript
 }
 
 type ApiGetAssetTargetByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *AssetApiService
 	moid       string
 }
 
-func (r ApiGetAssetTargetByMoidRequest) Execute() (AssetTarget, *_nethttp.Response, error) {
+func (r ApiGetAssetTargetByMoidRequest) Execute() (*AssetTarget, *http.Response, error) {
 	return r.ApiService.GetAssetTargetByMoidExecute(r)
 }
 
 /*
 GetAssetTargetByMoid Read a 'asset.Target' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetAssetTargetByMoidRequest
 */
-func (a *AssetApiService) GetAssetTargetByMoid(ctx _context.Context, moid string) ApiGetAssetTargetByMoidRequest {
+func (a *AssetApiService) GetAssetTargetByMoid(ctx context.Context, moid string) ApiGetAssetTargetByMoidRequest {
 	return ApiGetAssetTargetByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5761,27 +5694,25 @@ func (a *AssetApiService) GetAssetTargetByMoid(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return AssetTarget
-func (a *AssetApiService) GetAssetTargetByMoidExecute(r ApiGetAssetTargetByMoidRequest) (AssetTarget, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetTargetByMoidExecute(r ApiGetAssetTargetByMoidRequest) (*AssetTarget, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetTarget
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetTarget
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetTargetByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/Targets/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5800,7 +5731,7 @@ func (a *AssetApiService) GetAssetTargetByMoidExecute(r ApiGetAssetTargetByMoidR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5810,15 +5741,15 @@ func (a *AssetApiService) GetAssetTargetByMoidExecute(r ApiGetAssetTargetByMoidR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5874,7 +5805,7 @@ func (a *AssetApiService) GetAssetTargetByMoidExecute(r ApiGetAssetTargetByMoidR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5885,7 +5816,7 @@ func (a *AssetApiService) GetAssetTargetByMoidExecute(r ApiGetAssetTargetByMoidR
 }
 
 type ApiGetAssetTargetListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	filter      *string
 	orderby     *string
@@ -5966,17 +5897,17 @@ func (r ApiGetAssetTargetListRequest) Tags(tags string) ApiGetAssetTargetListReq
 	return r
 }
 
-func (r ApiGetAssetTargetListRequest) Execute() (AssetTargetResponse, *_nethttp.Response, error) {
+func (r ApiGetAssetTargetListRequest) Execute() (*AssetTargetResponse, *http.Response, error) {
 	return r.ApiService.GetAssetTargetListExecute(r)
 }
 
 /*
 GetAssetTargetList Read a 'asset.Target' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetAssetTargetListRequest
 */
-func (a *AssetApiService) GetAssetTargetList(ctx _context.Context) ApiGetAssetTargetListRequest {
+func (a *AssetApiService) GetAssetTargetList(ctx context.Context) ApiGetAssetTargetListRequest {
 	return ApiGetAssetTargetListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5985,26 +5916,24 @@ func (a *AssetApiService) GetAssetTargetList(ctx _context.Context) ApiGetAssetTa
 
 // Execute executes the request
 //  @return AssetTargetResponse
-func (a *AssetApiService) GetAssetTargetListExecute(r ApiGetAssetTargetListRequest) (AssetTargetResponse, *_nethttp.Response, error) {
+func (a *AssetApiService) GetAssetTargetListExecute(r ApiGetAssetTargetListRequest) (*AssetTargetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetTargetResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetTargetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.GetAssetTargetList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/Targets"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -6056,7 +5985,7 @@ func (a *AssetApiService) GetAssetTargetListExecute(r ApiGetAssetTargetListReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6066,15 +5995,15 @@ func (a *AssetApiService) GetAssetTargetListExecute(r ApiGetAssetTargetListReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6130,7 +6059,7 @@ func (a *AssetApiService) GetAssetTargetListExecute(r ApiGetAssetTargetListReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6141,7 +6070,7 @@ func (a *AssetApiService) GetAssetTargetListExecute(r ApiGetAssetTargetListReque
 }
 
 type ApiPatchAssetDeviceConfigurationRequest struct {
-	ctx                      _context.Context
+	ctx                      context.Context
 	ApiService               *AssetApiService
 	moid                     string
 	assetDeviceConfiguration *AssetDeviceConfiguration
@@ -6160,18 +6089,18 @@ func (r ApiPatchAssetDeviceConfigurationRequest) IfMatch(ifMatch string) ApiPatc
 	return r
 }
 
-func (r ApiPatchAssetDeviceConfigurationRequest) Execute() (AssetDeviceConfiguration, *_nethttp.Response, error) {
+func (r ApiPatchAssetDeviceConfigurationRequest) Execute() (*AssetDeviceConfiguration, *http.Response, error) {
 	return r.ApiService.PatchAssetDeviceConfigurationExecute(r)
 }
 
 /*
 PatchAssetDeviceConfiguration Update a 'asset.DeviceConfiguration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchAssetDeviceConfigurationRequest
 */
-func (a *AssetApiService) PatchAssetDeviceConfiguration(ctx _context.Context, moid string) ApiPatchAssetDeviceConfigurationRequest {
+func (a *AssetApiService) PatchAssetDeviceConfiguration(ctx context.Context, moid string) ApiPatchAssetDeviceConfigurationRequest {
 	return ApiPatchAssetDeviceConfigurationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6181,27 +6110,25 @@ func (a *AssetApiService) PatchAssetDeviceConfiguration(ctx _context.Context, mo
 
 // Execute executes the request
 //  @return AssetDeviceConfiguration
-func (a *AssetApiService) PatchAssetDeviceConfigurationExecute(r ApiPatchAssetDeviceConfigurationRequest) (AssetDeviceConfiguration, *_nethttp.Response, error) {
+func (a *AssetApiService) PatchAssetDeviceConfigurationExecute(r ApiPatchAssetDeviceConfigurationRequest) (*AssetDeviceConfiguration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceConfiguration
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.PatchAssetDeviceConfiguration")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceConfigurations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.assetDeviceConfiguration == nil {
 		return localVarReturnValue, nil, reportError("assetDeviceConfiguration is required and must be specified")
 	}
@@ -6228,7 +6155,7 @@ func (a *AssetApiService) PatchAssetDeviceConfigurationExecute(r ApiPatchAssetDe
 	}
 	// body params
 	localVarPostBody = r.assetDeviceConfiguration
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6238,15 +6165,15 @@ func (a *AssetApiService) PatchAssetDeviceConfigurationExecute(r ApiPatchAssetDe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6302,7 +6229,7 @@ func (a *AssetApiService) PatchAssetDeviceConfigurationExecute(r ApiPatchAssetDe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6313,7 +6240,7 @@ func (a *AssetApiService) PatchAssetDeviceConfigurationExecute(r ApiPatchAssetDe
 }
 
 type ApiPatchAssetDeviceContractInformationRequest struct {
-	ctx                            _context.Context
+	ctx                            context.Context
 	ApiService                     *AssetApiService
 	moid                           string
 	assetDeviceContractInformation *AssetDeviceContractInformation
@@ -6332,18 +6259,18 @@ func (r ApiPatchAssetDeviceContractInformationRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiPatchAssetDeviceContractInformationRequest) Execute() (AssetDeviceContractInformation, *_nethttp.Response, error) {
+func (r ApiPatchAssetDeviceContractInformationRequest) Execute() (*AssetDeviceContractInformation, *http.Response, error) {
 	return r.ApiService.PatchAssetDeviceContractInformationExecute(r)
 }
 
 /*
 PatchAssetDeviceContractInformation Update a 'asset.DeviceContractInformation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchAssetDeviceContractInformationRequest
 */
-func (a *AssetApiService) PatchAssetDeviceContractInformation(ctx _context.Context, moid string) ApiPatchAssetDeviceContractInformationRequest {
+func (a *AssetApiService) PatchAssetDeviceContractInformation(ctx context.Context, moid string) ApiPatchAssetDeviceContractInformationRequest {
 	return ApiPatchAssetDeviceContractInformationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6353,27 +6280,25 @@ func (a *AssetApiService) PatchAssetDeviceContractInformation(ctx _context.Conte
 
 // Execute executes the request
 //  @return AssetDeviceContractInformation
-func (a *AssetApiService) PatchAssetDeviceContractInformationExecute(r ApiPatchAssetDeviceContractInformationRequest) (AssetDeviceContractInformation, *_nethttp.Response, error) {
+func (a *AssetApiService) PatchAssetDeviceContractInformationExecute(r ApiPatchAssetDeviceContractInformationRequest) (*AssetDeviceContractInformation, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceContractInformation
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceContractInformation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.PatchAssetDeviceContractInformation")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceContractInformations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.assetDeviceContractInformation == nil {
 		return localVarReturnValue, nil, reportError("assetDeviceContractInformation is required and must be specified")
 	}
@@ -6400,7 +6325,7 @@ func (a *AssetApiService) PatchAssetDeviceContractInformationExecute(r ApiPatchA
 	}
 	// body params
 	localVarPostBody = r.assetDeviceContractInformation
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6410,15 +6335,15 @@ func (a *AssetApiService) PatchAssetDeviceContractInformationExecute(r ApiPatchA
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6474,7 +6399,7 @@ func (a *AssetApiService) PatchAssetDeviceContractInformationExecute(r ApiPatchA
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6485,7 +6410,7 @@ func (a *AssetApiService) PatchAssetDeviceContractInformationExecute(r ApiPatchA
 }
 
 type ApiPatchAssetDeviceRegistrationRequest struct {
-	ctx                     _context.Context
+	ctx                     context.Context
 	ApiService              *AssetApiService
 	moid                    string
 	assetDeviceRegistration *AssetDeviceRegistration
@@ -6504,18 +6429,18 @@ func (r ApiPatchAssetDeviceRegistrationRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchAssetDeviceRegistrationRequest) Execute() (AssetDeviceRegistration, *_nethttp.Response, error) {
+func (r ApiPatchAssetDeviceRegistrationRequest) Execute() (*AssetDeviceRegistration, *http.Response, error) {
 	return r.ApiService.PatchAssetDeviceRegistrationExecute(r)
 }
 
 /*
 PatchAssetDeviceRegistration Updates the resource representing the device connector. For example, this can be used to annotate the device connector resource with user-specified tags.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchAssetDeviceRegistrationRequest
 */
-func (a *AssetApiService) PatchAssetDeviceRegistration(ctx _context.Context, moid string) ApiPatchAssetDeviceRegistrationRequest {
+func (a *AssetApiService) PatchAssetDeviceRegistration(ctx context.Context, moid string) ApiPatchAssetDeviceRegistrationRequest {
 	return ApiPatchAssetDeviceRegistrationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6525,27 +6450,25 @@ func (a *AssetApiService) PatchAssetDeviceRegistration(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return AssetDeviceRegistration
-func (a *AssetApiService) PatchAssetDeviceRegistrationExecute(r ApiPatchAssetDeviceRegistrationRequest) (AssetDeviceRegistration, *_nethttp.Response, error) {
+func (a *AssetApiService) PatchAssetDeviceRegistrationExecute(r ApiPatchAssetDeviceRegistrationRequest) (*AssetDeviceRegistration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceRegistration
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceRegistration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.PatchAssetDeviceRegistration")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceRegistrations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.assetDeviceRegistration == nil {
 		return localVarReturnValue, nil, reportError("assetDeviceRegistration is required and must be specified")
 	}
@@ -6572,7 +6495,7 @@ func (a *AssetApiService) PatchAssetDeviceRegistrationExecute(r ApiPatchAssetDev
 	}
 	// body params
 	localVarPostBody = r.assetDeviceRegistration
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6582,15 +6505,15 @@ func (a *AssetApiService) PatchAssetDeviceRegistrationExecute(r ApiPatchAssetDev
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6646,7 +6569,7 @@ func (a *AssetApiService) PatchAssetDeviceRegistrationExecute(r ApiPatchAssetDev
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6657,7 +6580,7 @@ func (a *AssetApiService) PatchAssetDeviceRegistrationExecute(r ApiPatchAssetDev
 }
 
 type ApiPatchAssetTargetRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	moid        string
 	assetTarget *AssetTarget
@@ -6676,18 +6599,18 @@ func (r ApiPatchAssetTargetRequest) IfMatch(ifMatch string) ApiPatchAssetTargetR
 	return r
 }
 
-func (r ApiPatchAssetTargetRequest) Execute() (AssetTarget, *_nethttp.Response, error) {
+func (r ApiPatchAssetTargetRequest) Execute() (*AssetTarget, *http.Response, error) {
 	return r.ApiService.PatchAssetTargetExecute(r)
 }
 
 /*
 PatchAssetTarget Update a 'asset.Target' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchAssetTargetRequest
 */
-func (a *AssetApiService) PatchAssetTarget(ctx _context.Context, moid string) ApiPatchAssetTargetRequest {
+func (a *AssetApiService) PatchAssetTarget(ctx context.Context, moid string) ApiPatchAssetTargetRequest {
 	return ApiPatchAssetTargetRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6697,27 +6620,25 @@ func (a *AssetApiService) PatchAssetTarget(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return AssetTarget
-func (a *AssetApiService) PatchAssetTargetExecute(r ApiPatchAssetTargetRequest) (AssetTarget, *_nethttp.Response, error) {
+func (a *AssetApiService) PatchAssetTargetExecute(r ApiPatchAssetTargetRequest) (*AssetTarget, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetTarget
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetTarget
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.PatchAssetTarget")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/Targets/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.assetTarget == nil {
 		return localVarReturnValue, nil, reportError("assetTarget is required and must be specified")
 	}
@@ -6744,7 +6665,7 @@ func (a *AssetApiService) PatchAssetTargetExecute(r ApiPatchAssetTargetRequest) 
 	}
 	// body params
 	localVarPostBody = r.assetTarget
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6754,15 +6675,15 @@ func (a *AssetApiService) PatchAssetTargetExecute(r ApiPatchAssetTargetRequest) 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6818,7 +6739,7 @@ func (a *AssetApiService) PatchAssetTargetExecute(r ApiPatchAssetTargetRequest) 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6829,7 +6750,7 @@ func (a *AssetApiService) PatchAssetTargetExecute(r ApiPatchAssetTargetRequest) 
 }
 
 type ApiUpdateAssetDeviceConfigurationRequest struct {
-	ctx                      _context.Context
+	ctx                      context.Context
 	ApiService               *AssetApiService
 	moid                     string
 	assetDeviceConfiguration *AssetDeviceConfiguration
@@ -6848,18 +6769,18 @@ func (r ApiUpdateAssetDeviceConfigurationRequest) IfMatch(ifMatch string) ApiUpd
 	return r
 }
 
-func (r ApiUpdateAssetDeviceConfigurationRequest) Execute() (AssetDeviceConfiguration, *_nethttp.Response, error) {
+func (r ApiUpdateAssetDeviceConfigurationRequest) Execute() (*AssetDeviceConfiguration, *http.Response, error) {
 	return r.ApiService.UpdateAssetDeviceConfigurationExecute(r)
 }
 
 /*
 UpdateAssetDeviceConfiguration Update a 'asset.DeviceConfiguration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateAssetDeviceConfigurationRequest
 */
-func (a *AssetApiService) UpdateAssetDeviceConfiguration(ctx _context.Context, moid string) ApiUpdateAssetDeviceConfigurationRequest {
+func (a *AssetApiService) UpdateAssetDeviceConfiguration(ctx context.Context, moid string) ApiUpdateAssetDeviceConfigurationRequest {
 	return ApiUpdateAssetDeviceConfigurationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6869,27 +6790,25 @@ func (a *AssetApiService) UpdateAssetDeviceConfiguration(ctx _context.Context, m
 
 // Execute executes the request
 //  @return AssetDeviceConfiguration
-func (a *AssetApiService) UpdateAssetDeviceConfigurationExecute(r ApiUpdateAssetDeviceConfigurationRequest) (AssetDeviceConfiguration, *_nethttp.Response, error) {
+func (a *AssetApiService) UpdateAssetDeviceConfigurationExecute(r ApiUpdateAssetDeviceConfigurationRequest) (*AssetDeviceConfiguration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceConfiguration
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.UpdateAssetDeviceConfiguration")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceConfigurations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.assetDeviceConfiguration == nil {
 		return localVarReturnValue, nil, reportError("assetDeviceConfiguration is required and must be specified")
 	}
@@ -6916,7 +6835,7 @@ func (a *AssetApiService) UpdateAssetDeviceConfigurationExecute(r ApiUpdateAsset
 	}
 	// body params
 	localVarPostBody = r.assetDeviceConfiguration
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6926,15 +6845,15 @@ func (a *AssetApiService) UpdateAssetDeviceConfigurationExecute(r ApiUpdateAsset
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6990,7 +6909,7 @@ func (a *AssetApiService) UpdateAssetDeviceConfigurationExecute(r ApiUpdateAsset
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7001,7 +6920,7 @@ func (a *AssetApiService) UpdateAssetDeviceConfigurationExecute(r ApiUpdateAsset
 }
 
 type ApiUpdateAssetDeviceContractInformationRequest struct {
-	ctx                            _context.Context
+	ctx                            context.Context
 	ApiService                     *AssetApiService
 	moid                           string
 	assetDeviceContractInformation *AssetDeviceContractInformation
@@ -7020,18 +6939,18 @@ func (r ApiUpdateAssetDeviceContractInformationRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiUpdateAssetDeviceContractInformationRequest) Execute() (AssetDeviceContractInformation, *_nethttp.Response, error) {
+func (r ApiUpdateAssetDeviceContractInformationRequest) Execute() (*AssetDeviceContractInformation, *http.Response, error) {
 	return r.ApiService.UpdateAssetDeviceContractInformationExecute(r)
 }
 
 /*
 UpdateAssetDeviceContractInformation Update a 'asset.DeviceContractInformation' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateAssetDeviceContractInformationRequest
 */
-func (a *AssetApiService) UpdateAssetDeviceContractInformation(ctx _context.Context, moid string) ApiUpdateAssetDeviceContractInformationRequest {
+func (a *AssetApiService) UpdateAssetDeviceContractInformation(ctx context.Context, moid string) ApiUpdateAssetDeviceContractInformationRequest {
 	return ApiUpdateAssetDeviceContractInformationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7041,27 +6960,25 @@ func (a *AssetApiService) UpdateAssetDeviceContractInformation(ctx _context.Cont
 
 // Execute executes the request
 //  @return AssetDeviceContractInformation
-func (a *AssetApiService) UpdateAssetDeviceContractInformationExecute(r ApiUpdateAssetDeviceContractInformationRequest) (AssetDeviceContractInformation, *_nethttp.Response, error) {
+func (a *AssetApiService) UpdateAssetDeviceContractInformationExecute(r ApiUpdateAssetDeviceContractInformationRequest) (*AssetDeviceContractInformation, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceContractInformation
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceContractInformation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.UpdateAssetDeviceContractInformation")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceContractInformations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.assetDeviceContractInformation == nil {
 		return localVarReturnValue, nil, reportError("assetDeviceContractInformation is required and must be specified")
 	}
@@ -7088,7 +7005,7 @@ func (a *AssetApiService) UpdateAssetDeviceContractInformationExecute(r ApiUpdat
 	}
 	// body params
 	localVarPostBody = r.assetDeviceContractInformation
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7098,15 +7015,15 @@ func (a *AssetApiService) UpdateAssetDeviceContractInformationExecute(r ApiUpdat
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7162,7 +7079,7 @@ func (a *AssetApiService) UpdateAssetDeviceContractInformationExecute(r ApiUpdat
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7173,7 +7090,7 @@ func (a *AssetApiService) UpdateAssetDeviceContractInformationExecute(r ApiUpdat
 }
 
 type ApiUpdateAssetDeviceRegistrationRequest struct {
-	ctx                     _context.Context
+	ctx                     context.Context
 	ApiService              *AssetApiService
 	moid                    string
 	assetDeviceRegistration *AssetDeviceRegistration
@@ -7192,18 +7109,18 @@ func (r ApiUpdateAssetDeviceRegistrationRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateAssetDeviceRegistrationRequest) Execute() (AssetDeviceRegistration, *_nethttp.Response, error) {
+func (r ApiUpdateAssetDeviceRegistrationRequest) Execute() (*AssetDeviceRegistration, *http.Response, error) {
 	return r.ApiService.UpdateAssetDeviceRegistrationExecute(r)
 }
 
 /*
 UpdateAssetDeviceRegistration Updates the resource representing the device connector. For example, this can be used to annotate the device connector resource with user-specified tags.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateAssetDeviceRegistrationRequest
 */
-func (a *AssetApiService) UpdateAssetDeviceRegistration(ctx _context.Context, moid string) ApiUpdateAssetDeviceRegistrationRequest {
+func (a *AssetApiService) UpdateAssetDeviceRegistration(ctx context.Context, moid string) ApiUpdateAssetDeviceRegistrationRequest {
 	return ApiUpdateAssetDeviceRegistrationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7213,27 +7130,25 @@ func (a *AssetApiService) UpdateAssetDeviceRegistration(ctx _context.Context, mo
 
 // Execute executes the request
 //  @return AssetDeviceRegistration
-func (a *AssetApiService) UpdateAssetDeviceRegistrationExecute(r ApiUpdateAssetDeviceRegistrationRequest) (AssetDeviceRegistration, *_nethttp.Response, error) {
+func (a *AssetApiService) UpdateAssetDeviceRegistrationExecute(r ApiUpdateAssetDeviceRegistrationRequest) (*AssetDeviceRegistration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetDeviceRegistration
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetDeviceRegistration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.UpdateAssetDeviceRegistration")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/DeviceRegistrations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.assetDeviceRegistration == nil {
 		return localVarReturnValue, nil, reportError("assetDeviceRegistration is required and must be specified")
 	}
@@ -7260,7 +7175,7 @@ func (a *AssetApiService) UpdateAssetDeviceRegistrationExecute(r ApiUpdateAssetD
 	}
 	// body params
 	localVarPostBody = r.assetDeviceRegistration
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7270,15 +7185,15 @@ func (a *AssetApiService) UpdateAssetDeviceRegistrationExecute(r ApiUpdateAssetD
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7334,7 +7249,7 @@ func (a *AssetApiService) UpdateAssetDeviceRegistrationExecute(r ApiUpdateAssetD
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7345,7 +7260,7 @@ func (a *AssetApiService) UpdateAssetDeviceRegistrationExecute(r ApiUpdateAssetD
 }
 
 type ApiUpdateAssetTargetRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *AssetApiService
 	moid        string
 	assetTarget *AssetTarget
@@ -7364,18 +7279,18 @@ func (r ApiUpdateAssetTargetRequest) IfMatch(ifMatch string) ApiUpdateAssetTarge
 	return r
 }
 
-func (r ApiUpdateAssetTargetRequest) Execute() (AssetTarget, *_nethttp.Response, error) {
+func (r ApiUpdateAssetTargetRequest) Execute() (*AssetTarget, *http.Response, error) {
 	return r.ApiService.UpdateAssetTargetExecute(r)
 }
 
 /*
 UpdateAssetTarget Update a 'asset.Target' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateAssetTargetRequest
 */
-func (a *AssetApiService) UpdateAssetTarget(ctx _context.Context, moid string) ApiUpdateAssetTargetRequest {
+func (a *AssetApiService) UpdateAssetTarget(ctx context.Context, moid string) ApiUpdateAssetTargetRequest {
 	return ApiUpdateAssetTargetRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7385,27 +7300,25 @@ func (a *AssetApiService) UpdateAssetTarget(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return AssetTarget
-func (a *AssetApiService) UpdateAssetTargetExecute(r ApiUpdateAssetTargetRequest) (AssetTarget, *_nethttp.Response, error) {
+func (a *AssetApiService) UpdateAssetTargetExecute(r ApiUpdateAssetTargetRequest) (*AssetTarget, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  AssetTarget
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AssetTarget
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AssetApiService.UpdateAssetTarget")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/asset/Targets/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.assetTarget == nil {
 		return localVarReturnValue, nil, reportError("assetTarget is required and must be specified")
 	}
@@ -7432,7 +7345,7 @@ func (a *AssetApiService) UpdateAssetTargetExecute(r ApiUpdateAssetTargetRequest
 	}
 	// body params
 	localVarPostBody = r.assetTarget
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7442,15 +7355,15 @@ func (a *AssetApiService) UpdateAssetTargetExecute(r ApiUpdateAssetTargetRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7506,7 +7419,7 @@ func (a *AssetApiService) UpdateAssetTargetExecute(r ApiUpdateAssetTargetRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

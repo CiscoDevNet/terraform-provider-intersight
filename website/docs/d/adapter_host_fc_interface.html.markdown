@@ -31,6 +31,7 @@ The following arguments can be used to get data of already created objects in In
 * `original_wwnn`:(string) The uniquely distinguishable factory default  World Wide Node Name of the Host. 
 * `original_wwpn`:(string) The uniquely distinguishable factory default World Wide Port Name of the Host Fibre Channel Interface. 
 * `peer_dn`:(string) PeerPort Dn of Host Fibre Channel Interface. 
+* `pin_group_name`:(string) Name given for San PinGroup. 
 * `presence`:(string) This field identifies the presence (equipped) or absence of the given component. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

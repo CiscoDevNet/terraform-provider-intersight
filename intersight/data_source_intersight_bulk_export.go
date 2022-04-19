@@ -153,10 +153,8 @@ func dataSourceBulkExport() *schema.Resource {
 		},
 		"import_order": {
 			Description: "Contains the list of import order.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"items": {
 			Type:     schema.TypeList,
@@ -605,10 +603,8 @@ func dataSourceBulkExport() *schema.Resource {
 		},
 		"import_order": {
 			Description: "Contains the list of import order.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"items": {
 			Type:     schema.TypeList,
@@ -931,7 +927,6 @@ func dataSourceBulkExport() *schema.Resource {
 
 func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.BulkExport{}
@@ -1095,7 +1090,13 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 	}
 
 	if v, ok := d.GetOk("import_order"); ok {
-		o.SetImportOrder(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetImportOrder(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("items"); ok {
@@ -1425,7 +1426,7 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of BulkExport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of BulkExport: %s", responseErr.Error())
@@ -1442,7 +1443,7 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching BulkExport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching BulkExport: %s", responseErr.Error())
@@ -1467,6 +1468,7 @@ func dataSourceBulkExportRead(c context.Context, d *schema.ResourceData, meta in
 				temp["exported_items"] = flattenListBulkExportedItemRelationship(s.GetExportedItems(), d)
 
 				temp["exported_objects"] = flattenListBulkSubRequest(s.GetExportedObjects(), d)
+				temp["import_order"] = flattenAdditionalProperties(s.GetImportOrder())
 
 				temp["items"] = flattenListMoMoRef(s.GetItems(), d)
 

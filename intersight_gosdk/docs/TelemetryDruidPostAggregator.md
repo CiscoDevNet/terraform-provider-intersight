@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Type** | **string** | The post-aggregator type. | 
 **Fields** | Pointer to [**[]TelemetryDruidPostAggregator**](TelemetryDruidPostAggregator.md) | Fields processed by post aggregator | [optional] 
 **Name** | Pointer to **string** | Output name for the post-aggregator. | [optional] 
-**Fn** | Pointer to **string** | null | [optional] 
+**Fn** | Pointer to **string** |  | [optional] 
 **Ordering** | Pointer to **string** | Arithmetic post-aggregators may specify an ordering, which defines the order of resulting values when sorting results. This can be useful for topN queries for instance. If no ordering (or null) is specified, the default floating point ordering is used. numericFirst ordering always returns finite values first, followed by NaN, and infinite values last. | [optional] 
 **FieldName** | Pointer to **string** | The name field value of the hyperUnique aggregator. | [optional] 
 **Value** | Pointer to **float64** | The numerical value. | [optional] 

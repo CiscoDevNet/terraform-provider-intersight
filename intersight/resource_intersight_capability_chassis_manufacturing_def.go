@@ -436,7 +436,6 @@ func resourceCapabilityChassisManufacturingDef() *schema.Resource {
 
 func resourceCapabilityChassisManufacturingDefCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityChassisManufacturingDefWithDefaults()
@@ -539,7 +538,7 @@ func resourceCapabilityChassisManufacturingDefCreate(c context.Context, d *schem
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityChassisManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityChassisManufacturingDef: %s", responseErr.Error())
@@ -551,7 +550,6 @@ func resourceCapabilityChassisManufacturingDefCreate(c context.Context, d *schem
 
 func resourceCapabilityChassisManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityChassisManufacturingDefByMoid(conn.ctx, d.Id())
@@ -564,7 +562,7 @@ func resourceCapabilityChassisManufacturingDefRead(c context.Context, d *schema.
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityChassisManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityChassisManufacturingDef: %s", responseErr.Error())
@@ -669,7 +667,6 @@ func resourceCapabilityChassisManufacturingDefRead(c context.Context, d *schema.
 
 func resourceCapabilityChassisManufacturingDefUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityChassisManufacturingDef{}
@@ -781,7 +778,7 @@ func resourceCapabilityChassisManufacturingDefUpdate(c context.Context, d *schem
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityChassisManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityChassisManufacturingDef: %s", responseErr.Error())
@@ -793,7 +790,6 @@ func resourceCapabilityChassisManufacturingDefUpdate(c context.Context, d *schem
 
 func resourceCapabilityChassisManufacturingDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityChassisManufacturingDef(conn.ctx, d.Id())
@@ -805,7 +801,7 @@ func resourceCapabilityChassisManufacturingDefDelete(c context.Context, d *schem
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityChassisManufacturingDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityChassisManufacturingDef object: %s", deleteErr.Error())

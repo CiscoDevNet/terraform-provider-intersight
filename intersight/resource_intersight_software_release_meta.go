@@ -503,7 +503,6 @@ func resourceSoftwareReleaseMeta() *schema.Resource {
 
 func resourceSoftwareReleaseMetaCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewSoftwareReleaseMetaWithDefaults()
@@ -624,7 +623,7 @@ func resourceSoftwareReleaseMetaCreate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating SoftwareReleaseMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating SoftwareReleaseMeta: %s", responseErr.Error())
@@ -636,7 +635,6 @@ func resourceSoftwareReleaseMetaCreate(c context.Context, d *schema.ResourceData
 
 func resourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.SoftwareApi.GetSoftwareReleaseMetaByMoid(conn.ctx, d.Id())
@@ -649,7 +647,7 @@ func resourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData, 
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching SoftwareReleaseMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching SoftwareReleaseMeta: %s", responseErr.Error())
@@ -746,7 +744,6 @@ func resourceSoftwareReleaseMetaRead(c context.Context, d *schema.ResourceData, 
 
 func resourceSoftwareReleaseMetaUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.SoftwareReleaseMeta{}
@@ -872,7 +869,7 @@ func resourceSoftwareReleaseMetaUpdate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating SoftwareReleaseMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating SoftwareReleaseMeta: %s", responseErr.Error())
@@ -884,7 +881,6 @@ func resourceSoftwareReleaseMetaUpdate(c context.Context, d *schema.ResourceData
 
 func resourceSoftwareReleaseMetaDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.SoftwareApi.DeleteSoftwareReleaseMeta(conn.ctx, d.Id())
@@ -896,7 +892,7 @@ func resourceSoftwareReleaseMetaDelete(c context.Context, d *schema.ResourceData
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting SoftwareReleaseMeta object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting SoftwareReleaseMeta object: %s", deleteErr.Error())

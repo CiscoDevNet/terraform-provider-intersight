@@ -607,7 +607,6 @@ func resourceHyperflexClusterBackupPolicy() *schema.Resource {
 
 func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexClusterBackupPolicyWithDefaults()
@@ -880,7 +879,7 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexClusterBackupPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexClusterBackupPolicy: %s", responseErr.Error())
@@ -892,7 +891,6 @@ func resourceHyperflexClusterBackupPolicyCreate(c context.Context, d *schema.Res
 
 func resourceHyperflexClusterBackupPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexClusterBackupPolicyByMoid(conn.ctx, d.Id())
@@ -905,7 +903,7 @@ func resourceHyperflexClusterBackupPolicyRead(c context.Context, d *schema.Resou
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexClusterBackupPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexClusterBackupPolicy: %s", responseErr.Error())
@@ -1030,7 +1028,6 @@ func resourceHyperflexClusterBackupPolicyRead(c context.Context, d *schema.Resou
 
 func resourceHyperflexClusterBackupPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexClusterBackupPolicy{}
@@ -1315,7 +1312,7 @@ func resourceHyperflexClusterBackupPolicyUpdate(c context.Context, d *schema.Res
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexClusterBackupPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexClusterBackupPolicy: %s", responseErr.Error())
@@ -1327,7 +1324,6 @@ func resourceHyperflexClusterBackupPolicyUpdate(c context.Context, d *schema.Res
 
 func resourceHyperflexClusterBackupPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexClusterBackupPolicy(conn.ctx, d.Id())
@@ -1339,7 +1335,7 @@ func resourceHyperflexClusterBackupPolicyDelete(c context.Context, d *schema.Res
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexClusterBackupPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexClusterBackupPolicy object: %s", deleteErr.Error())

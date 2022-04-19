@@ -465,7 +465,6 @@ func resourceCapabilityServerSchemaDescriptor() *schema.Resource {
 
 func resourceCapabilityServerSchemaDescriptorCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityServerSchemaDescriptorWithDefaults()
@@ -600,7 +599,7 @@ func resourceCapabilityServerSchemaDescriptorCreate(c context.Context, d *schema
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityServerSchemaDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityServerSchemaDescriptor: %s", responseErr.Error())
@@ -612,7 +611,6 @@ func resourceCapabilityServerSchemaDescriptorCreate(c context.Context, d *schema
 
 func resourceCapabilityServerSchemaDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityServerSchemaDescriptorByMoid(conn.ctx, d.Id())
@@ -625,7 +623,7 @@ func resourceCapabilityServerSchemaDescriptorRead(c context.Context, d *schema.R
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityServerSchemaDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityServerSchemaDescriptor: %s", responseErr.Error())
@@ -726,7 +724,6 @@ func resourceCapabilityServerSchemaDescriptorRead(c context.Context, d *schema.R
 
 func resourceCapabilityServerSchemaDescriptorUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityServerSchemaDescriptor{}
@@ -867,7 +864,7 @@ func resourceCapabilityServerSchemaDescriptorUpdate(c context.Context, d *schema
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityServerSchemaDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityServerSchemaDescriptor: %s", responseErr.Error())
@@ -879,7 +876,6 @@ func resourceCapabilityServerSchemaDescriptorUpdate(c context.Context, d *schema
 
 func resourceCapabilityServerSchemaDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityServerSchemaDescriptor(conn.ctx, d.Id())
@@ -891,7 +887,7 @@ func resourceCapabilityServerSchemaDescriptorDelete(c context.Context, d *schema
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityServerSchemaDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityServerSchemaDescriptor object: %s", deleteErr.Error())

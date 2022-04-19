@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Aggregation** | **string** | aggregate metric | 
-**Value** | **float64** | null | 
+**Value** | **float64** |  | 
 
 ## Methods
 

@@ -203,10 +203,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 								},
 								"value": {
 									Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-									Type:        schema.TypeMap,
-									Elem: &schema.Schema{
-										Type: schema.TypeString,
-									}, Optional: true,
+									Type:        schema.TypeString,
+									Optional:    true,
 								},
 							},
 						},
@@ -253,10 +251,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 					},
 					"input_parameters": {
 						Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"label": {
 						Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
@@ -418,10 +414,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 								},
 								"value": {
 									Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-									Type:        schema.TypeMap,
-									Elem: &schema.Schema{
-										Type: schema.TypeString,
-									}, Optional: true,
+									Type:        schema.TypeString,
+									Optional:    true,
 								},
 							},
 						},
@@ -468,10 +462,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 					},
 					"input_parameters": {
 						Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"label": {
 						Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
@@ -498,10 +490,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 		},
 		"output_parameters": {
 			Description: "The output mappings for the workflow. The outputs for workflows will generally be task output variables that we want to export out at the end of the workflow. The format to specify the mapping is '${Source.output.JsonPath}', where 'Source' is the name of the task within the workflow. Any task output can be mapped to a workflow output as long as the types are compatible. It's followed by a JSON path expression to extract JSON fragment from source's output.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"owners": {
 			Type:     schema.TypeList,
@@ -619,6 +609,16 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"rollback_on_cancel": {
+						Description: "When set to true, the changes are automatically rolled back if the workflow execution is cancelled.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"rollback_on_failure": {
+						Description: "When set to true, the changes are automatically rolled back if the workflow fails to execute.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"support_status": {
 						Description: "Supported status of the definition.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
 						Type:        schema.TypeString,
@@ -733,10 +733,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 		},
 		"ui_rendering_data": {
 			Description: "This will hold the data needed for workflow to be rendered in the user interface.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"validation_information": {
 			Description: "The current validation state and associated information for this workflow.",
@@ -860,10 +858,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 								},
 								"value": {
 									Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-									Type:        schema.TypeMap,
-									Elem: &schema.Schema{
-										Type: schema.TypeString,
-									}, Optional: true,
+									Type:        schema.TypeString,
+									Optional:    true,
 								},
 							},
 						},
@@ -910,10 +906,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 					},
 					"input_parameters": {
 						Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"label": {
 						Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
@@ -1275,10 +1269,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 								},
 								"value": {
 									Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-									Type:        schema.TypeMap,
-									Elem: &schema.Schema{
-										Type: schema.TypeString,
-									}, Optional: true,
+									Type:        schema.TypeString,
+									Optional:    true,
 								},
 							},
 						},
@@ -1325,10 +1317,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 					},
 					"input_parameters": {
 						Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"label": {
 						Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
@@ -1490,10 +1480,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 								},
 								"value": {
 									Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-									Type:        schema.TypeMap,
-									Elem: &schema.Schema{
-										Type: schema.TypeString,
-									}, Optional: true,
+									Type:        schema.TypeString,
+									Optional:    true,
 								},
 							},
 						},
@@ -1540,10 +1528,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 					},
 					"input_parameters": {
 						Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"label": {
 						Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
@@ -1570,10 +1556,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 		},
 		"output_parameters": {
 			Description: "The output mappings for the workflow. The outputs for workflows will generally be task output variables that we want to export out at the end of the workflow. The format to specify the mapping is '${Source.output.JsonPath}', where 'Source' is the name of the task within the workflow. Any task output can be mapped to a workflow output as long as the types are compatible. It's followed by a JSON path expression to extract JSON fragment from source's output.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"owners": {
 			Type:     schema.TypeList,
@@ -1691,6 +1675,16 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 						Type:        schema.TypeBool,
 						Optional:    true,
 					},
+					"rollback_on_cancel": {
+						Description: "When set to true, the changes are automatically rolled back if the workflow execution is cancelled.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
+					"rollback_on_failure": {
+						Description: "When set to true, the changes are automatically rolled back if the workflow fails to execute.",
+						Type:        schema.TypeBool,
+						Optional:    true,
+					},
 					"support_status": {
 						Description: "Supported status of the definition.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
 						Type:        schema.TypeString,
@@ -1805,10 +1799,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 		},
 		"ui_rendering_data": {
 			Description: "This will hold the data needed for workflow to be rendered in the user interface.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"validation_information": {
 			Description: "The current validation state and associated information for this workflow.",
@@ -1932,10 +1924,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 								},
 								"value": {
 									Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
-									Type:        schema.TypeMap,
-									Elem: &schema.Schema{
-										Type: schema.TypeString,
-									}, Optional: true,
+									Type:        schema.TypeString,
+									Optional:    true,
 								},
 							},
 						},
@@ -1982,10 +1972,8 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 					},
 					"input_parameters": {
 						Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"label": {
 						Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
@@ -2171,7 +2159,6 @@ func dataSourceWorkflowWorkflowDefinition() *schema.Resource {
 
 func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowWorkflowDefinition{}
@@ -2389,7 +2376,13 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 						}
 						if v, ok := l["value"]; ok {
 							{
-								o.SetValue(v)
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									x2 := x1.(map[string]interface{})
+									o.SetValue(x2)
+								}
 							}
 						}
 						p = append(p, *o)
@@ -2452,7 +2445,13 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -2639,7 +2638,13 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 						}
 						if v, ok := l["value"]; ok {
 							{
-								o.SetValue(v)
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									x2 := x1.(map[string]interface{})
+									o.SetValue(x2)
+								}
 							}
 						}
 						p = append(p, *o)
@@ -2702,7 +2707,13 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -2735,7 +2746,13 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("output_parameters"); ok {
-		o.SetOutputParameters(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutputParameters(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -2871,6 +2888,18 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 				{
 					x := (v.(bool))
 					o.SetRetryable(x)
+				}
+			}
+			if v, ok := l["rollback_on_cancel"]; ok {
+				{
+					x := (v.(bool))
+					o.SetRollbackOnCancel(x)
+				}
+			}
+			if v, ok := l["rollback_on_failure"]; ok {
+				{
+					x := (v.(bool))
+					o.SetRollbackOnFailure(x)
 				}
 			}
 			if v, ok := l["support_status"]; ok {
@@ -3026,7 +3055,13 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 	}
 
 	if v, ok := d.GetOk("ui_rendering_data"); ok {
-		o.SetUiRenderingData(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetUiRenderingData(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("validation_information"); ok {
@@ -3140,7 +3175,13 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 						}
 						if v, ok := l["value"]; ok {
 							{
-								o.SetValue(v)
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									x2 := x1.(map[string]interface{})
+									o.SetValue(x2)
+								}
 							}
 						}
 						p = append(p, *o)
@@ -3203,7 +3244,13 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 			}
 			if v, ok := l["input_parameters"]; ok {
 				{
-					o.SetInputParameters(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetInputParameters(x2)
+					}
 				}
 			}
 			if v, ok := l["label"]; ok {
@@ -3365,7 +3412,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of WorkflowWorkflowDefinition: %s", responseErr.Error())
@@ -3382,7 +3429,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching WorkflowWorkflowDefinition: %s", responseErr.Error())
@@ -3422,6 +3469,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["output_definition"] = flattenListWorkflowBaseDataType(s.GetOutputDefinition(), d)
+				temp["output_parameters"] = flattenAdditionalProperties(s.GetOutputParameters())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
@@ -3436,6 +3484,7 @@ func dataSourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resou
 				temp["tasks"] = flattenListWorkflowWorkflowTask(s.GetTasks(), d)
 
 				temp["ui_input_filters"] = flattenListWorkflowUiInputFilter(s.GetUiInputFilters(), d)
+				temp["ui_rendering_data"] = flattenAdditionalProperties(s.GetUiRenderingData())
 
 				temp["validation_information"] = flattenMapWorkflowValidationInformation(s.GetValidationInformation(), d)
 

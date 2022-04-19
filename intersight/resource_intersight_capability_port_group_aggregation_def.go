@@ -416,7 +416,6 @@ func resourceCapabilityPortGroupAggregationDef() *schema.Resource {
 
 func resourceCapabilityPortGroupAggregationDefCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityPortGroupAggregationDefWithDefaults()
@@ -499,7 +498,7 @@ func resourceCapabilityPortGroupAggregationDefCreate(c context.Context, d *schem
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityPortGroupAggregationDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityPortGroupAggregationDef: %s", responseErr.Error())
@@ -511,7 +510,6 @@ func resourceCapabilityPortGroupAggregationDefCreate(c context.Context, d *schem
 
 func resourceCapabilityPortGroupAggregationDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityPortGroupAggregationDefByMoid(conn.ctx, d.Id())
@@ -524,7 +522,7 @@ func resourceCapabilityPortGroupAggregationDefRead(c context.Context, d *schema.
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityPortGroupAggregationDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityPortGroupAggregationDef: %s", responseErr.Error())
@@ -613,7 +611,6 @@ func resourceCapabilityPortGroupAggregationDefRead(c context.Context, d *schema.
 
 func resourceCapabilityPortGroupAggregationDefUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityPortGroupAggregationDef{}
@@ -701,7 +698,7 @@ func resourceCapabilityPortGroupAggregationDefUpdate(c context.Context, d *schem
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityPortGroupAggregationDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityPortGroupAggregationDef: %s", responseErr.Error())
@@ -713,7 +710,6 @@ func resourceCapabilityPortGroupAggregationDefUpdate(c context.Context, d *schem
 
 func resourceCapabilityPortGroupAggregationDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityPortGroupAggregationDef(conn.ctx, d.Id())
@@ -725,7 +721,7 @@ func resourceCapabilityPortGroupAggregationDefDelete(c context.Context, d *schem
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityPortGroupAggregationDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityPortGroupAggregationDef object: %s", deleteErr.Error())

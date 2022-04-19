@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "chassis.IomProfile"]
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](PolicyConfigChange.md) |  | [optional] 
 **IomEntity** | Pointer to **string** | IOM in chassis for which IOM profile is applicable. or which is attached to a Fabric Interconnect managed by Intersight. * &#x60;IOMA&#x60; - IOM on left side of chassis. * &#x60;IOMB&#x60; - IOM on right side of chassis. | [optional] [default to "IOMA"]
+**ConfigChangeDetails** | Pointer to [**[]ChassisConfigChangeDetailRelationship**](ChassisConfigChangeDetailRelationship.md) | An array of relationships to chassisConfigChangeDetail resources. | [optional] [readonly] 
+**ConfigResult** | Pointer to [**ChassisConfigResultRelationship**](ChassisConfigResultRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **Profile** | Pointer to [**ChassisProfileRelationship**](ChassisProfileRelationship.md) |  | [optional] 
 
@@ -129,6 +131,66 @@ SetIomEntity sets IomEntity field to given value.
 `func (o *ChassisIomProfileAllOf) HasIomEntity() bool`
 
 HasIomEntity returns a boolean if a field has been set.
+
+### GetConfigChangeDetails
+
+`func (o *ChassisIomProfileAllOf) GetConfigChangeDetails() []ChassisConfigChangeDetailRelationship`
+
+GetConfigChangeDetails returns the ConfigChangeDetails field if non-nil, zero value otherwise.
+
+### GetConfigChangeDetailsOk
+
+`func (o *ChassisIomProfileAllOf) GetConfigChangeDetailsOk() (*[]ChassisConfigChangeDetailRelationship, bool)`
+
+GetConfigChangeDetailsOk returns a tuple with the ConfigChangeDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigChangeDetails
+
+`func (o *ChassisIomProfileAllOf) SetConfigChangeDetails(v []ChassisConfigChangeDetailRelationship)`
+
+SetConfigChangeDetails sets ConfigChangeDetails field to given value.
+
+### HasConfigChangeDetails
+
+`func (o *ChassisIomProfileAllOf) HasConfigChangeDetails() bool`
+
+HasConfigChangeDetails returns a boolean if a field has been set.
+
+### SetConfigChangeDetailsNil
+
+`func (o *ChassisIomProfileAllOf) SetConfigChangeDetailsNil(b bool)`
+
+ SetConfigChangeDetailsNil sets the value for ConfigChangeDetails to be an explicit nil
+
+### UnsetConfigChangeDetails
+`func (o *ChassisIomProfileAllOf) UnsetConfigChangeDetails()`
+
+UnsetConfigChangeDetails ensures that no value is present for ConfigChangeDetails, not even an explicit nil
+### GetConfigResult
+
+`func (o *ChassisIomProfileAllOf) GetConfigResult() ChassisConfigResultRelationship`
+
+GetConfigResult returns the ConfigResult field if non-nil, zero value otherwise.
+
+### GetConfigResultOk
+
+`func (o *ChassisIomProfileAllOf) GetConfigResultOk() (*ChassisConfigResultRelationship, bool)`
+
+GetConfigResultOk returns a tuple with the ConfigResult field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfigResult
+
+`func (o *ChassisIomProfileAllOf) SetConfigResult(v ChassisConfigResultRelationship)`
+
+SetConfigResult sets ConfigResult field to given value.
+
+### HasConfigResult
+
+`func (o *ChassisIomProfileAllOf) HasConfigResult() bool`
+
+HasConfigResult returns a boolean if a field has been set.
 
 ### GetOrganization
 

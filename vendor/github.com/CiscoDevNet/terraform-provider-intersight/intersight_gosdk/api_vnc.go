@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // VncApiService VncApi service
 type VncApiService service
 
 type ApiCreateVncConsoleRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *VncApiService
 	vncConsole  *VncConsole
 	ifMatch     *string
@@ -54,17 +49,17 @@ func (r ApiCreateVncConsoleRequest) IfNoneMatch(ifNoneMatch string) ApiCreateVnc
 	return r
 }
 
-func (r ApiCreateVncConsoleRequest) Execute() (VncConsole, *_nethttp.Response, error) {
+func (r ApiCreateVncConsoleRequest) Execute() (*VncConsole, *http.Response, error) {
 	return r.ApiService.CreateVncConsoleExecute(r)
 }
 
 /*
 CreateVncConsole Create a 'vnc.Console' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateVncConsoleRequest
 */
-func (a *VncApiService) CreateVncConsole(ctx _context.Context) ApiCreateVncConsoleRequest {
+func (a *VncApiService) CreateVncConsole(ctx context.Context) ApiCreateVncConsoleRequest {
 	return ApiCreateVncConsoleRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *VncApiService) CreateVncConsole(ctx _context.Context) ApiCreateVncConso
 
 // Execute executes the request
 //  @return VncConsole
-func (a *VncApiService) CreateVncConsoleExecute(r ApiCreateVncConsoleRequest) (VncConsole, *_nethttp.Response, error) {
+func (a *VncApiService) CreateVncConsoleExecute(r ApiCreateVncConsoleRequest) (*VncConsole, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  VncConsole
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *VncConsole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VncApiService.CreateVncConsole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnc/Consoles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.vncConsole == nil {
 		return localVarReturnValue, nil, reportError("vncConsole is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *VncApiService) CreateVncConsoleExecute(r ApiCreateVncConsoleRequest) (V
 	}
 	// body params
 	localVarPostBody = r.vncConsole
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *VncApiService) CreateVncConsoleExecute(r ApiCreateVncConsoleRequest) (V
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *VncApiService) CreateVncConsoleExecute(r ApiCreateVncConsoleRequest) (V
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *VncApiService) CreateVncConsoleExecute(r ApiCreateVncConsoleRequest) (V
 }
 
 type ApiGetVncConsoleByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *VncApiService
 	moid       string
 }
 
-func (r ApiGetVncConsoleByMoidRequest) Execute() (VncConsole, *_nethttp.Response, error) {
+func (r ApiGetVncConsoleByMoidRequest) Execute() (*VncConsole, *http.Response, error) {
 	return r.ApiService.GetVncConsoleByMoidExecute(r)
 }
 
 /*
 GetVncConsoleByMoid Read a 'vnc.Console' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetVncConsoleByMoidRequest
 */
-func (a *VncApiService) GetVncConsoleByMoid(ctx _context.Context, moid string) ApiGetVncConsoleByMoidRequest {
+func (a *VncApiService) GetVncConsoleByMoid(ctx context.Context, moid string) ApiGetVncConsoleByMoidRequest {
 	return ApiGetVncConsoleByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -233,27 +226,25 @@ func (a *VncApiService) GetVncConsoleByMoid(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return VncConsole
-func (a *VncApiService) GetVncConsoleByMoidExecute(r ApiGetVncConsoleByMoidRequest) (VncConsole, *_nethttp.Response, error) {
+func (a *VncApiService) GetVncConsoleByMoidExecute(r ApiGetVncConsoleByMoidRequest) (*VncConsole, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  VncConsole
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *VncConsole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VncApiService.GetVncConsoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnc/Consoles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -272,7 +263,7 @@ func (a *VncApiService) GetVncConsoleByMoidExecute(r ApiGetVncConsoleByMoidReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -282,15 +273,15 @@ func (a *VncApiService) GetVncConsoleByMoidExecute(r ApiGetVncConsoleByMoidReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,7 +337,7 @@ func (a *VncApiService) GetVncConsoleByMoidExecute(r ApiGetVncConsoleByMoidReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -357,7 +348,7 @@ func (a *VncApiService) GetVncConsoleByMoidExecute(r ApiGetVncConsoleByMoidReque
 }
 
 type ApiGetVncConsoleListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *VncApiService
 	filter      *string
 	orderby     *string
@@ -438,17 +429,17 @@ func (r ApiGetVncConsoleListRequest) Tags(tags string) ApiGetVncConsoleListReque
 	return r
 }
 
-func (r ApiGetVncConsoleListRequest) Execute() (VncConsoleResponse, *_nethttp.Response, error) {
+func (r ApiGetVncConsoleListRequest) Execute() (*VncConsoleResponse, *http.Response, error) {
 	return r.ApiService.GetVncConsoleListExecute(r)
 }
 
 /*
 GetVncConsoleList Read a 'vnc.Console' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetVncConsoleListRequest
 */
-func (a *VncApiService) GetVncConsoleList(ctx _context.Context) ApiGetVncConsoleListRequest {
+func (a *VncApiService) GetVncConsoleList(ctx context.Context) ApiGetVncConsoleListRequest {
 	return ApiGetVncConsoleListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -457,26 +448,24 @@ func (a *VncApiService) GetVncConsoleList(ctx _context.Context) ApiGetVncConsole
 
 // Execute executes the request
 //  @return VncConsoleResponse
-func (a *VncApiService) GetVncConsoleListExecute(r ApiGetVncConsoleListRequest) (VncConsoleResponse, *_nethttp.Response, error) {
+func (a *VncApiService) GetVncConsoleListExecute(r ApiGetVncConsoleListRequest) (*VncConsoleResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  VncConsoleResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *VncConsoleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VncApiService.GetVncConsoleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnc/Consoles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -528,7 +517,7 @@ func (a *VncApiService) GetVncConsoleListExecute(r ApiGetVncConsoleListRequest) 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -538,15 +527,15 @@ func (a *VncApiService) GetVncConsoleListExecute(r ApiGetVncConsoleListRequest) 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -602,7 +591,7 @@ func (a *VncApiService) GetVncConsoleListExecute(r ApiGetVncConsoleListRequest) 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -613,7 +602,7 @@ func (a *VncApiService) GetVncConsoleListExecute(r ApiGetVncConsoleListRequest) 
 }
 
 type ApiPatchVncConsoleRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *VncApiService
 	moid       string
 	vncConsole *VncConsole
@@ -632,18 +621,18 @@ func (r ApiPatchVncConsoleRequest) IfMatch(ifMatch string) ApiPatchVncConsoleReq
 	return r
 }
 
-func (r ApiPatchVncConsoleRequest) Execute() (VncConsole, *_nethttp.Response, error) {
+func (r ApiPatchVncConsoleRequest) Execute() (*VncConsole, *http.Response, error) {
 	return r.ApiService.PatchVncConsoleExecute(r)
 }
 
 /*
 PatchVncConsole Update a 'vnc.Console' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchVncConsoleRequest
 */
-func (a *VncApiService) PatchVncConsole(ctx _context.Context, moid string) ApiPatchVncConsoleRequest {
+func (a *VncApiService) PatchVncConsole(ctx context.Context, moid string) ApiPatchVncConsoleRequest {
 	return ApiPatchVncConsoleRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -653,27 +642,25 @@ func (a *VncApiService) PatchVncConsole(ctx _context.Context, moid string) ApiPa
 
 // Execute executes the request
 //  @return VncConsole
-func (a *VncApiService) PatchVncConsoleExecute(r ApiPatchVncConsoleRequest) (VncConsole, *_nethttp.Response, error) {
+func (a *VncApiService) PatchVncConsoleExecute(r ApiPatchVncConsoleRequest) (*VncConsole, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  VncConsole
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *VncConsole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VncApiService.PatchVncConsole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnc/Consoles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.vncConsole == nil {
 		return localVarReturnValue, nil, reportError("vncConsole is required and must be specified")
 	}
@@ -700,7 +687,7 @@ func (a *VncApiService) PatchVncConsoleExecute(r ApiPatchVncConsoleRequest) (Vnc
 	}
 	// body params
 	localVarPostBody = r.vncConsole
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -710,15 +697,15 @@ func (a *VncApiService) PatchVncConsoleExecute(r ApiPatchVncConsoleRequest) (Vnc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -774,7 +761,7 @@ func (a *VncApiService) PatchVncConsoleExecute(r ApiPatchVncConsoleRequest) (Vnc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -785,7 +772,7 @@ func (a *VncApiService) PatchVncConsoleExecute(r ApiPatchVncConsoleRequest) (Vnc
 }
 
 type ApiUpdateVncConsoleRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *VncApiService
 	moid       string
 	vncConsole *VncConsole
@@ -804,18 +791,18 @@ func (r ApiUpdateVncConsoleRequest) IfMatch(ifMatch string) ApiUpdateVncConsoleR
 	return r
 }
 
-func (r ApiUpdateVncConsoleRequest) Execute() (VncConsole, *_nethttp.Response, error) {
+func (r ApiUpdateVncConsoleRequest) Execute() (*VncConsole, *http.Response, error) {
 	return r.ApiService.UpdateVncConsoleExecute(r)
 }
 
 /*
 UpdateVncConsole Update a 'vnc.Console' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateVncConsoleRequest
 */
-func (a *VncApiService) UpdateVncConsole(ctx _context.Context, moid string) ApiUpdateVncConsoleRequest {
+func (a *VncApiService) UpdateVncConsole(ctx context.Context, moid string) ApiUpdateVncConsoleRequest {
 	return ApiUpdateVncConsoleRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -825,27 +812,25 @@ func (a *VncApiService) UpdateVncConsole(ctx _context.Context, moid string) ApiU
 
 // Execute executes the request
 //  @return VncConsole
-func (a *VncApiService) UpdateVncConsoleExecute(r ApiUpdateVncConsoleRequest) (VncConsole, *_nethttp.Response, error) {
+func (a *VncApiService) UpdateVncConsoleExecute(r ApiUpdateVncConsoleRequest) (*VncConsole, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  VncConsole
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *VncConsole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VncApiService.UpdateVncConsole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnc/Consoles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.vncConsole == nil {
 		return localVarReturnValue, nil, reportError("vncConsole is required and must be specified")
 	}
@@ -872,7 +857,7 @@ func (a *VncApiService) UpdateVncConsoleExecute(r ApiUpdateVncConsoleRequest) (V
 	}
 	// body params
 	localVarPostBody = r.vncConsole
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -882,15 +867,15 @@ func (a *VncApiService) UpdateVncConsoleExecute(r ApiUpdateVncConsoleRequest) (V
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -946,7 +931,7 @@ func (a *VncApiService) UpdateVncConsoleExecute(r ApiUpdateVncConsoleRequest) (V
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

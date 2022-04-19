@@ -468,7 +468,6 @@ func resourceOsTemplateFile() *schema.Resource {
 
 func resourceOsTemplateFileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewOsTemplateFileWithDefaults()
@@ -554,7 +553,7 @@ func resourceOsTemplateFileCreate(c context.Context, d *schema.ResourceData, met
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating OsTemplateFile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating OsTemplateFile: %s", responseErr.Error())
@@ -566,7 +565,6 @@ func resourceOsTemplateFileCreate(c context.Context, d *schema.ResourceData, met
 
 func resourceOsTemplateFileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	log.Printf("%v", d)
 	var de diag.Diagnostics
 	return de
@@ -574,7 +572,6 @@ func resourceOsTemplateFileRead(c context.Context, d *schema.ResourceData, meta 
 
 func resourceOsTemplateFileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "OsTemplateFile does not allow delete functionality"}
 	de = append(de, warning)

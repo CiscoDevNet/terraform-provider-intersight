@@ -447,7 +447,6 @@ func resourceLicenseIwoLicenseCount() *schema.Resource {
 
 func resourceLicenseIwoLicenseCountCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewLicenseIwoLicenseCountWithDefaults()
@@ -552,7 +551,7 @@ func resourceLicenseIwoLicenseCountCreate(c context.Context, d *schema.ResourceD
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating LicenseIwoLicenseCount: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating LicenseIwoLicenseCount: %s", responseErr.Error())
@@ -564,7 +563,6 @@ func resourceLicenseIwoLicenseCountCreate(c context.Context, d *schema.ResourceD
 
 func resourceLicenseIwoLicenseCountRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.LicenseApi.GetLicenseIwoLicenseCountByMoid(conn.ctx, d.Id())
@@ -577,7 +575,7 @@ func resourceLicenseIwoLicenseCountRead(c context.Context, d *schema.ResourceDat
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching LicenseIwoLicenseCount: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching LicenseIwoLicenseCount: %s", responseErr.Error())
@@ -658,7 +656,6 @@ func resourceLicenseIwoLicenseCountRead(c context.Context, d *schema.ResourceDat
 
 func resourceLicenseIwoLicenseCountUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.LicenseIwoLicenseCount{}
@@ -765,7 +762,7 @@ func resourceLicenseIwoLicenseCountUpdate(c context.Context, d *schema.ResourceD
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating LicenseIwoLicenseCount: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating LicenseIwoLicenseCount: %s", responseErr.Error())
@@ -777,7 +774,6 @@ func resourceLicenseIwoLicenseCountUpdate(c context.Context, d *schema.ResourceD
 
 func resourceLicenseIwoLicenseCountDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "LicenseIwoLicenseCount does not allow delete functionality"}
 	de = append(de, warning)

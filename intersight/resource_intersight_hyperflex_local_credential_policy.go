@@ -540,7 +540,6 @@ func resourceHyperflexLocalCredentialPolicy() *schema.Resource {
 
 func resourceHyperflexLocalCredentialPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexLocalCredentialPolicyWithDefaults()
@@ -718,7 +717,7 @@ func resourceHyperflexLocalCredentialPolicyCreate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexLocalCredentialPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexLocalCredentialPolicy: %s", responseErr.Error())
@@ -730,7 +729,6 @@ func resourceHyperflexLocalCredentialPolicyCreate(c context.Context, d *schema.R
 
 func resourceHyperflexLocalCredentialPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexLocalCredentialPolicyByMoid(conn.ctx, d.Id())
@@ -743,7 +741,7 @@ func resourceHyperflexLocalCredentialPolicyRead(c context.Context, d *schema.Res
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexLocalCredentialPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexLocalCredentialPolicy: %s", responseErr.Error())
@@ -852,7 +850,6 @@ func resourceHyperflexLocalCredentialPolicyRead(c context.Context, d *schema.Res
 
 func resourceHyperflexLocalCredentialPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexLocalCredentialPolicy{}
@@ -1037,7 +1034,7 @@ func resourceHyperflexLocalCredentialPolicyUpdate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexLocalCredentialPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexLocalCredentialPolicy: %s", responseErr.Error())
@@ -1049,7 +1046,6 @@ func resourceHyperflexLocalCredentialPolicyUpdate(c context.Context, d *schema.R
 
 func resourceHyperflexLocalCredentialPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexLocalCredentialPolicy(conn.ctx, d.Id())
@@ -1061,7 +1057,7 @@ func resourceHyperflexLocalCredentialPolicyDelete(c context.Context, d *schema.R
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexLocalCredentialPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexLocalCredentialPolicy object: %s", deleteErr.Error())

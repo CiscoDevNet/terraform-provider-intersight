@@ -335,7 +335,7 @@ func resourceWorkflowRollbackWorkflow() *schema.Resource {
 								return
 							}},
 						"status": {
-							Description: "Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed.\n* `NotStarted` - Status of rollback task when it is not started rollback.\n* `NotSupported` - Status of task when it is not supporting rollback.\n* `Completed` - Status of rollback task once execution is successful.\n* `Failed` - Status of rollback task when it is failed.",
+							Description: "Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed.\n* `NotStarted` - Status of rollback task when it is not started rollback.\n* `NotSupported` - Status of task when it is not supporting rollback.\n* `Completed` - Status of rollback task once execution is successful.\n* `Failed` - Status of rollback task when it is failed.\n* `Disabled` - Status of rollback task when rollback is disabled.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -471,7 +471,7 @@ func resourceWorkflowRollbackWorkflow() *schema.Resource {
 								return
 							}},
 						"status": {
-							Description: "Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed.\n* `NotStarted` - Status of rollback task when it is not started rollback.\n* `NotSupported` - Status of task when it is not supporting rollback.\n* `Completed` - Status of rollback task once execution is successful.\n* `Failed` - Status of rollback task when it is failed.",
+							Description: "Status of the rollback task. By default, task status will be not started. Task status will be set to completed on successful execution, otherwise it will be set to failed.\n* `NotStarted` - Status of rollback task when it is not started rollback.\n* `NotSupported` - Status of task when it is not supporting rollback.\n* `Completed` - Status of rollback task once execution is successful.\n* `Failed` - Status of rollback task when it is failed.\n* `Disabled` - Status of rollback task when rollback is disabled.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -698,7 +698,6 @@ func resourceWorkflowRollbackWorkflow() *schema.Resource {
 
 func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewWorkflowRollbackWorkflowWithDefaults()
@@ -910,7 +909,7 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating WorkflowRollbackWorkflow: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating WorkflowRollbackWorkflow: %s", responseErr.Error())
@@ -928,7 +927,7 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s", responseErr.Error())
@@ -942,7 +941,7 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s", responseErr.Error())
@@ -959,7 +958,7 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in WorkflowRollbackWorkflow: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in WorkflowRollbackWorkflow: %s", err.Error())
@@ -974,7 +973,6 @@ func resourceWorkflowRollbackWorkflowCreate(c context.Context, d *schema.Resourc
 
 func resourceWorkflowRollbackWorkflowRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.WorkflowApi.GetWorkflowRollbackWorkflowByMoid(conn.ctx, d.Id())
@@ -987,7 +985,7 @@ func resourceWorkflowRollbackWorkflowRead(c context.Context, d *schema.ResourceD
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s", responseErr.Error())
@@ -1088,7 +1086,6 @@ func resourceWorkflowRollbackWorkflowRead(c context.Context, d *schema.ResourceD
 
 func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowRollbackWorkflow{}
@@ -1302,7 +1299,7 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating WorkflowRollbackWorkflow: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating WorkflowRollbackWorkflow: %s", responseErr.Error())
@@ -1320,7 +1317,7 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s", responseErr.Error())
@@ -1334,7 +1331,7 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s", responseErr.Error())
@@ -1351,7 +1348,7 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in WorkflowRollbackWorkflow: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in WorkflowRollbackWorkflow: %s", err.Error())
@@ -1366,7 +1363,6 @@ func resourceWorkflowRollbackWorkflowUpdate(c context.Context, d *schema.Resourc
 
 func resourceWorkflowRollbackWorkflowDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.WorkflowApi.DeleteWorkflowRollbackWorkflow(conn.ctx, d.Id())
@@ -1378,7 +1374,7 @@ func resourceWorkflowRollbackWorkflowDelete(c context.Context, d *schema.Resourc
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting WorkflowRollbackWorkflow object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting WorkflowRollbackWorkflow object: %s", deleteErr.Error())

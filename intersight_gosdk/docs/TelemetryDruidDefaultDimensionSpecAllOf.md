@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Dimension** | **string** | null | 
-**OutputName** | **string** | null | 
-**OutputType** | **string** | null | [default to "STRING"]
+**Dimension** | **string** |  | 
+**OutputName** | **string** |  | 
+**OutputType** | **string** |  | [default to "STRING"]
 
 ## Methods
 

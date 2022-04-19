@@ -249,10 +249,10 @@ func resourceTaskServerScopedInventory() *schema.Resource {
 				ForceNew: true,
 			},
 			"queries": {
-				Description:      "Set of queries to identify objects to be inventoried as part of this scoped inventory action.",
-				Type:             schema.TypeString,
-				DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
-				ForceNew: true,
+				Description: "Set of queries to identify objects to be inventoried as part of this scoped inventory action.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				ForceNew:    true,
 			},
 			"registered_device": {
 				Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -520,7 +520,6 @@ func resourceTaskServerScopedInventory() *schema.Resource {
 
 func resourceTaskServerScopedInventoryCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewTaskServerScopedInventoryWithDefaults()
@@ -549,7 +548,13 @@ func resourceTaskServerScopedInventoryCreate(c context.Context, d *schema.Resour
 	o.SetObjectType("task.ServerScopedInventory")
 
 	if v, ok := d.GetOk("queries"); ok {
-		o.SetQueries(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetQueries(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("registered_device"); ok {
@@ -653,7 +658,7 @@ func resourceTaskServerScopedInventoryCreate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating TaskServerScopedInventory: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating TaskServerScopedInventory: %s", responseErr.Error())
@@ -665,7 +670,6 @@ func resourceTaskServerScopedInventoryCreate(c context.Context, d *schema.Resour
 
 func resourceTaskServerScopedInventoryRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	log.Printf("%v", d)
 	var de diag.Diagnostics
 	return de
@@ -673,7 +677,6 @@ func resourceTaskServerScopedInventoryRead(c context.Context, d *schema.Resource
 
 func resourceTaskServerScopedInventoryDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "TaskServerScopedInventory does not allow delete functionality"}
 	de = append(de, warning)

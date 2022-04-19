@@ -512,7 +512,6 @@ func resourceHyperflexSysConfigPolicy() *schema.Resource {
 
 func resourceHyperflexSysConfigPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHyperflexSysConfigPolicyWithDefaults()
@@ -706,7 +705,7 @@ func resourceHyperflexSysConfigPolicyCreate(c context.Context, d *schema.Resourc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HyperflexSysConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HyperflexSysConfigPolicy: %s", responseErr.Error())
@@ -718,7 +717,6 @@ func resourceHyperflexSysConfigPolicyCreate(c context.Context, d *schema.Resourc
 
 func resourceHyperflexSysConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HyperflexApi.GetHyperflexSysConfigPolicyByMoid(conn.ctx, d.Id())
@@ -731,7 +729,7 @@ func resourceHyperflexSysConfigPolicyRead(c context.Context, d *schema.ResourceD
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HyperflexSysConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HyperflexSysConfigPolicy: %s", responseErr.Error())
@@ -836,7 +834,6 @@ func resourceHyperflexSysConfigPolicyRead(c context.Context, d *schema.ResourceD
 
 func resourceHyperflexSysConfigPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexSysConfigPolicy{}
@@ -1033,7 +1030,7 @@ func resourceHyperflexSysConfigPolicyUpdate(c context.Context, d *schema.Resourc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HyperflexSysConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HyperflexSysConfigPolicy: %s", responseErr.Error())
@@ -1045,7 +1042,6 @@ func resourceHyperflexSysConfigPolicyUpdate(c context.Context, d *schema.Resourc
 
 func resourceHyperflexSysConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexSysConfigPolicy(conn.ctx, d.Id())
@@ -1057,7 +1053,7 @@ func resourceHyperflexSysConfigPolicyDelete(c context.Context, d *schema.Resourc
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HyperflexSysConfigPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HyperflexSysConfigPolicy object: %s", deleteErr.Error())

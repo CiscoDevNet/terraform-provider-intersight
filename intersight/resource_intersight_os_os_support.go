@@ -453,7 +453,6 @@ func resourceOsOsSupport() *schema.Resource {
 
 func resourceOsOsSupportCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewOsOsSupportWithDefaults()
@@ -521,7 +520,7 @@ func resourceOsOsSupportCreate(c context.Context, d *schema.ResourceData, meta i
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating OsOsSupport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating OsOsSupport: %s", responseErr.Error())
@@ -533,7 +532,6 @@ func resourceOsOsSupportCreate(c context.Context, d *schema.ResourceData, meta i
 
 func resourceOsOsSupportRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	log.Printf("%v", d)
 	var de diag.Diagnostics
 	return de
@@ -541,7 +539,6 @@ func resourceOsOsSupportRead(c context.Context, d *schema.ResourceData, meta int
 
 func resourceOsOsSupportDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "OsOsSupport does not allow delete functionality"}
 	de = append(de, warning)

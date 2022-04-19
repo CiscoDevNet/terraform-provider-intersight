@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,22 +13,17 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
-)
-
-// Linger please
-var (
-	_ _context.Context
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 )
 
 // TaskApiService TaskApi service
 type TaskApiService service
 
 type ApiCreateTaskHitachiScopedInventoryRequest struct {
-	ctx                        _context.Context
+	ctx                        context.Context
 	ApiService                 *TaskApiService
 	taskHitachiScopedInventory *TaskHitachiScopedInventory
 	ifMatch                    *string
@@ -53,17 +48,17 @@ func (r ApiCreateTaskHitachiScopedInventoryRequest) IfNoneMatch(ifNoneMatch stri
 	return r
 }
 
-func (r ApiCreateTaskHitachiScopedInventoryRequest) Execute() (TaskHitachiScopedInventory, *_nethttp.Response, error) {
+func (r ApiCreateTaskHitachiScopedInventoryRequest) Execute() (*TaskHitachiScopedInventory, *http.Response, error) {
 	return r.ApiService.CreateTaskHitachiScopedInventoryExecute(r)
 }
 
 /*
 CreateTaskHitachiScopedInventory Create a 'task.HitachiScopedInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTaskHitachiScopedInventoryRequest
 */
-func (a *TaskApiService) CreateTaskHitachiScopedInventory(ctx _context.Context) ApiCreateTaskHitachiScopedInventoryRequest {
+func (a *TaskApiService) CreateTaskHitachiScopedInventory(ctx context.Context) ApiCreateTaskHitachiScopedInventoryRequest {
 	return ApiCreateTaskHitachiScopedInventoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -72,26 +67,24 @@ func (a *TaskApiService) CreateTaskHitachiScopedInventory(ctx _context.Context) 
 
 // Execute executes the request
 //  @return TaskHitachiScopedInventory
-func (a *TaskApiService) CreateTaskHitachiScopedInventoryExecute(r ApiCreateTaskHitachiScopedInventoryRequest) (TaskHitachiScopedInventory, *_nethttp.Response, error) {
+func (a *TaskApiService) CreateTaskHitachiScopedInventoryExecute(r ApiCreateTaskHitachiScopedInventoryRequest) (*TaskHitachiScopedInventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TaskHitachiScopedInventory
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TaskHitachiScopedInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TaskApiService.CreateTaskHitachiScopedInventory")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/task/HitachiScopedInventories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.taskHitachiScopedInventory == nil {
 		return localVarReturnValue, nil, reportError("taskHitachiScopedInventory is required and must be specified")
 	}
@@ -121,7 +114,7 @@ func (a *TaskApiService) CreateTaskHitachiScopedInventoryExecute(r ApiCreateTask
 	}
 	// body params
 	localVarPostBody = r.taskHitachiScopedInventory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -131,15 +124,15 @@ func (a *TaskApiService) CreateTaskHitachiScopedInventoryExecute(r ApiCreateTask
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -195,7 +188,7 @@ func (a *TaskApiService) CreateTaskHitachiScopedInventoryExecute(r ApiCreateTask
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -206,7 +199,7 @@ func (a *TaskApiService) CreateTaskHitachiScopedInventoryExecute(r ApiCreateTask
 }
 
 type ApiCreateTaskHyperFlexManagementScopedInventoryRequest struct {
-	ctx                                    _context.Context
+	ctx                                    context.Context
 	ApiService                             *TaskApiService
 	taskHyperFlexManagementScopedInventory *TaskHyperFlexManagementScopedInventory
 	ifMatch                                *string
@@ -231,17 +224,17 @@ func (r ApiCreateTaskHyperFlexManagementScopedInventoryRequest) IfNoneMatch(ifNo
 	return r
 }
 
-func (r ApiCreateTaskHyperFlexManagementScopedInventoryRequest) Execute() (TaskHyperFlexManagementScopedInventory, *_nethttp.Response, error) {
+func (r ApiCreateTaskHyperFlexManagementScopedInventoryRequest) Execute() (*TaskHyperFlexManagementScopedInventory, *http.Response, error) {
 	return r.ApiService.CreateTaskHyperFlexManagementScopedInventoryExecute(r)
 }
 
 /*
 CreateTaskHyperFlexManagementScopedInventory Create a 'task.HyperFlexManagementScopedInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTaskHyperFlexManagementScopedInventoryRequest
 */
-func (a *TaskApiService) CreateTaskHyperFlexManagementScopedInventory(ctx _context.Context) ApiCreateTaskHyperFlexManagementScopedInventoryRequest {
+func (a *TaskApiService) CreateTaskHyperFlexManagementScopedInventory(ctx context.Context) ApiCreateTaskHyperFlexManagementScopedInventoryRequest {
 	return ApiCreateTaskHyperFlexManagementScopedInventoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -250,26 +243,24 @@ func (a *TaskApiService) CreateTaskHyperFlexManagementScopedInventory(ctx _conte
 
 // Execute executes the request
 //  @return TaskHyperFlexManagementScopedInventory
-func (a *TaskApiService) CreateTaskHyperFlexManagementScopedInventoryExecute(r ApiCreateTaskHyperFlexManagementScopedInventoryRequest) (TaskHyperFlexManagementScopedInventory, *_nethttp.Response, error) {
+func (a *TaskApiService) CreateTaskHyperFlexManagementScopedInventoryExecute(r ApiCreateTaskHyperFlexManagementScopedInventoryRequest) (*TaskHyperFlexManagementScopedInventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TaskHyperFlexManagementScopedInventory
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TaskHyperFlexManagementScopedInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TaskApiService.CreateTaskHyperFlexManagementScopedInventory")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/task/HyperFlexManagementScopedInventories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.taskHyperFlexManagementScopedInventory == nil {
 		return localVarReturnValue, nil, reportError("taskHyperFlexManagementScopedInventory is required and must be specified")
 	}
@@ -299,7 +290,7 @@ func (a *TaskApiService) CreateTaskHyperFlexManagementScopedInventoryExecute(r A
 	}
 	// body params
 	localVarPostBody = r.taskHyperFlexManagementScopedInventory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -309,15 +300,15 @@ func (a *TaskApiService) CreateTaskHyperFlexManagementScopedInventoryExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -373,7 +364,7 @@ func (a *TaskApiService) CreateTaskHyperFlexManagementScopedInventoryExecute(r A
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -384,7 +375,7 @@ func (a *TaskApiService) CreateTaskHyperFlexManagementScopedInventoryExecute(r A
 }
 
 type ApiCreateTaskHyperflexScopedInventoryRequest struct {
-	ctx                          _context.Context
+	ctx                          context.Context
 	ApiService                   *TaskApiService
 	taskHyperflexScopedInventory *TaskHyperflexScopedInventory
 	ifMatch                      *string
@@ -409,17 +400,17 @@ func (r ApiCreateTaskHyperflexScopedInventoryRequest) IfNoneMatch(ifNoneMatch st
 	return r
 }
 
-func (r ApiCreateTaskHyperflexScopedInventoryRequest) Execute() (TaskHyperflexScopedInventory, *_nethttp.Response, error) {
+func (r ApiCreateTaskHyperflexScopedInventoryRequest) Execute() (*TaskHyperflexScopedInventory, *http.Response, error) {
 	return r.ApiService.CreateTaskHyperflexScopedInventoryExecute(r)
 }
 
 /*
 CreateTaskHyperflexScopedInventory Create a 'task.HyperflexScopedInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTaskHyperflexScopedInventoryRequest
 */
-func (a *TaskApiService) CreateTaskHyperflexScopedInventory(ctx _context.Context) ApiCreateTaskHyperflexScopedInventoryRequest {
+func (a *TaskApiService) CreateTaskHyperflexScopedInventory(ctx context.Context) ApiCreateTaskHyperflexScopedInventoryRequest {
 	return ApiCreateTaskHyperflexScopedInventoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -428,26 +419,24 @@ func (a *TaskApiService) CreateTaskHyperflexScopedInventory(ctx _context.Context
 
 // Execute executes the request
 //  @return TaskHyperflexScopedInventory
-func (a *TaskApiService) CreateTaskHyperflexScopedInventoryExecute(r ApiCreateTaskHyperflexScopedInventoryRequest) (TaskHyperflexScopedInventory, *_nethttp.Response, error) {
+func (a *TaskApiService) CreateTaskHyperflexScopedInventoryExecute(r ApiCreateTaskHyperflexScopedInventoryRequest) (*TaskHyperflexScopedInventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TaskHyperflexScopedInventory
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TaskHyperflexScopedInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TaskApiService.CreateTaskHyperflexScopedInventory")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/task/HyperflexScopedInventories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.taskHyperflexScopedInventory == nil {
 		return localVarReturnValue, nil, reportError("taskHyperflexScopedInventory is required and must be specified")
 	}
@@ -477,7 +466,7 @@ func (a *TaskApiService) CreateTaskHyperflexScopedInventoryExecute(r ApiCreateTa
 	}
 	// body params
 	localVarPostBody = r.taskHyperflexScopedInventory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -487,15 +476,15 @@ func (a *TaskApiService) CreateTaskHyperflexScopedInventoryExecute(r ApiCreateTa
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -551,7 +540,7 @@ func (a *TaskApiService) CreateTaskHyperflexScopedInventoryExecute(r ApiCreateTa
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -562,7 +551,7 @@ func (a *TaskApiService) CreateTaskHyperflexScopedInventoryExecute(r ApiCreateTa
 }
 
 type ApiCreateTaskIweScopedInventoryRequest struct {
-	ctx                    _context.Context
+	ctx                    context.Context
 	ApiService             *TaskApiService
 	taskIweScopedInventory *TaskIweScopedInventory
 	ifMatch                *string
@@ -587,17 +576,17 @@ func (r ApiCreateTaskIweScopedInventoryRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateTaskIweScopedInventoryRequest) Execute() (TaskIweScopedInventory, *_nethttp.Response, error) {
+func (r ApiCreateTaskIweScopedInventoryRequest) Execute() (*TaskIweScopedInventory, *http.Response, error) {
 	return r.ApiService.CreateTaskIweScopedInventoryExecute(r)
 }
 
 /*
 CreateTaskIweScopedInventory Create a 'task.IweScopedInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTaskIweScopedInventoryRequest
 */
-func (a *TaskApiService) CreateTaskIweScopedInventory(ctx _context.Context) ApiCreateTaskIweScopedInventoryRequest {
+func (a *TaskApiService) CreateTaskIweScopedInventory(ctx context.Context) ApiCreateTaskIweScopedInventoryRequest {
 	return ApiCreateTaskIweScopedInventoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -606,26 +595,24 @@ func (a *TaskApiService) CreateTaskIweScopedInventory(ctx _context.Context) ApiC
 
 // Execute executes the request
 //  @return TaskIweScopedInventory
-func (a *TaskApiService) CreateTaskIweScopedInventoryExecute(r ApiCreateTaskIweScopedInventoryRequest) (TaskIweScopedInventory, *_nethttp.Response, error) {
+func (a *TaskApiService) CreateTaskIweScopedInventoryExecute(r ApiCreateTaskIweScopedInventoryRequest) (*TaskIweScopedInventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TaskIweScopedInventory
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TaskIweScopedInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TaskApiService.CreateTaskIweScopedInventory")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/task/IweScopedInventories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.taskIweScopedInventory == nil {
 		return localVarReturnValue, nil, reportError("taskIweScopedInventory is required and must be specified")
 	}
@@ -655,7 +642,7 @@ func (a *TaskApiService) CreateTaskIweScopedInventoryExecute(r ApiCreateTaskIweS
 	}
 	// body params
 	localVarPostBody = r.taskIweScopedInventory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -665,15 +652,15 @@ func (a *TaskApiService) CreateTaskIweScopedInventoryExecute(r ApiCreateTaskIweS
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -729,7 +716,7 @@ func (a *TaskApiService) CreateTaskIweScopedInventoryExecute(r ApiCreateTaskIweS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -740,7 +727,7 @@ func (a *TaskApiService) CreateTaskIweScopedInventoryExecute(r ApiCreateTaskIweS
 }
 
 type ApiCreateTaskNetAppScopedInventoryRequest struct {
-	ctx                       _context.Context
+	ctx                       context.Context
 	ApiService                *TaskApiService
 	taskNetAppScopedInventory *TaskNetAppScopedInventory
 	ifMatch                   *string
@@ -765,17 +752,17 @@ func (r ApiCreateTaskNetAppScopedInventoryRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateTaskNetAppScopedInventoryRequest) Execute() (TaskNetAppScopedInventory, *_nethttp.Response, error) {
+func (r ApiCreateTaskNetAppScopedInventoryRequest) Execute() (*TaskNetAppScopedInventory, *http.Response, error) {
 	return r.ApiService.CreateTaskNetAppScopedInventoryExecute(r)
 }
 
 /*
 CreateTaskNetAppScopedInventory Create a 'task.NetAppScopedInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTaskNetAppScopedInventoryRequest
 */
-func (a *TaskApiService) CreateTaskNetAppScopedInventory(ctx _context.Context) ApiCreateTaskNetAppScopedInventoryRequest {
+func (a *TaskApiService) CreateTaskNetAppScopedInventory(ctx context.Context) ApiCreateTaskNetAppScopedInventoryRequest {
 	return ApiCreateTaskNetAppScopedInventoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -784,26 +771,24 @@ func (a *TaskApiService) CreateTaskNetAppScopedInventory(ctx _context.Context) A
 
 // Execute executes the request
 //  @return TaskNetAppScopedInventory
-func (a *TaskApiService) CreateTaskNetAppScopedInventoryExecute(r ApiCreateTaskNetAppScopedInventoryRequest) (TaskNetAppScopedInventory, *_nethttp.Response, error) {
+func (a *TaskApiService) CreateTaskNetAppScopedInventoryExecute(r ApiCreateTaskNetAppScopedInventoryRequest) (*TaskNetAppScopedInventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TaskNetAppScopedInventory
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TaskNetAppScopedInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TaskApiService.CreateTaskNetAppScopedInventory")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/task/NetAppScopedInventories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.taskNetAppScopedInventory == nil {
 		return localVarReturnValue, nil, reportError("taskNetAppScopedInventory is required and must be specified")
 	}
@@ -833,7 +818,7 @@ func (a *TaskApiService) CreateTaskNetAppScopedInventoryExecute(r ApiCreateTaskN
 	}
 	// body params
 	localVarPostBody = r.taskNetAppScopedInventory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -843,15 +828,15 @@ func (a *TaskApiService) CreateTaskNetAppScopedInventoryExecute(r ApiCreateTaskN
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -907,7 +892,7 @@ func (a *TaskApiService) CreateTaskNetAppScopedInventoryExecute(r ApiCreateTaskN
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -918,7 +903,7 @@ func (a *TaskApiService) CreateTaskNetAppScopedInventoryExecute(r ApiCreateTaskN
 }
 
 type ApiCreateTaskPublicCloudScopedInventoryRequest struct {
-	ctx                            _context.Context
+	ctx                            context.Context
 	ApiService                     *TaskApiService
 	taskPublicCloudScopedInventory *TaskPublicCloudScopedInventory
 	ifMatch                        *string
@@ -943,17 +928,17 @@ func (r ApiCreateTaskPublicCloudScopedInventoryRequest) IfNoneMatch(ifNoneMatch 
 	return r
 }
 
-func (r ApiCreateTaskPublicCloudScopedInventoryRequest) Execute() (TaskPublicCloudScopedInventory, *_nethttp.Response, error) {
+func (r ApiCreateTaskPublicCloudScopedInventoryRequest) Execute() (*TaskPublicCloudScopedInventory, *http.Response, error) {
 	return r.ApiService.CreateTaskPublicCloudScopedInventoryExecute(r)
 }
 
 /*
 CreateTaskPublicCloudScopedInventory Create a 'task.PublicCloudScopedInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTaskPublicCloudScopedInventoryRequest
 */
-func (a *TaskApiService) CreateTaskPublicCloudScopedInventory(ctx _context.Context) ApiCreateTaskPublicCloudScopedInventoryRequest {
+func (a *TaskApiService) CreateTaskPublicCloudScopedInventory(ctx context.Context) ApiCreateTaskPublicCloudScopedInventoryRequest {
 	return ApiCreateTaskPublicCloudScopedInventoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -962,26 +947,24 @@ func (a *TaskApiService) CreateTaskPublicCloudScopedInventory(ctx _context.Conte
 
 // Execute executes the request
 //  @return TaskPublicCloudScopedInventory
-func (a *TaskApiService) CreateTaskPublicCloudScopedInventoryExecute(r ApiCreateTaskPublicCloudScopedInventoryRequest) (TaskPublicCloudScopedInventory, *_nethttp.Response, error) {
+func (a *TaskApiService) CreateTaskPublicCloudScopedInventoryExecute(r ApiCreateTaskPublicCloudScopedInventoryRequest) (*TaskPublicCloudScopedInventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TaskPublicCloudScopedInventory
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TaskPublicCloudScopedInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TaskApiService.CreateTaskPublicCloudScopedInventory")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/task/PublicCloudScopedInventories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.taskPublicCloudScopedInventory == nil {
 		return localVarReturnValue, nil, reportError("taskPublicCloudScopedInventory is required and must be specified")
 	}
@@ -1011,7 +994,7 @@ func (a *TaskApiService) CreateTaskPublicCloudScopedInventoryExecute(r ApiCreate
 	}
 	// body params
 	localVarPostBody = r.taskPublicCloudScopedInventory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1021,15 +1004,15 @@ func (a *TaskApiService) CreateTaskPublicCloudScopedInventoryExecute(r ApiCreate
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1085,7 +1068,7 @@ func (a *TaskApiService) CreateTaskPublicCloudScopedInventoryExecute(r ApiCreate
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1096,7 +1079,7 @@ func (a *TaskApiService) CreateTaskPublicCloudScopedInventoryExecute(r ApiCreate
 }
 
 type ApiCreateTaskPureScopedInventoryRequest struct {
-	ctx                     _context.Context
+	ctx                     context.Context
 	ApiService              *TaskApiService
 	taskPureScopedInventory *TaskPureScopedInventory
 	ifMatch                 *string
@@ -1121,17 +1104,17 @@ func (r ApiCreateTaskPureScopedInventoryRequest) IfNoneMatch(ifNoneMatch string)
 	return r
 }
 
-func (r ApiCreateTaskPureScopedInventoryRequest) Execute() (TaskPureScopedInventory, *_nethttp.Response, error) {
+func (r ApiCreateTaskPureScopedInventoryRequest) Execute() (*TaskPureScopedInventory, *http.Response, error) {
 	return r.ApiService.CreateTaskPureScopedInventoryExecute(r)
 }
 
 /*
 CreateTaskPureScopedInventory Create a 'task.PureScopedInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTaskPureScopedInventoryRequest
 */
-func (a *TaskApiService) CreateTaskPureScopedInventory(ctx _context.Context) ApiCreateTaskPureScopedInventoryRequest {
+func (a *TaskApiService) CreateTaskPureScopedInventory(ctx context.Context) ApiCreateTaskPureScopedInventoryRequest {
 	return ApiCreateTaskPureScopedInventoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1140,26 +1123,24 @@ func (a *TaskApiService) CreateTaskPureScopedInventory(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return TaskPureScopedInventory
-func (a *TaskApiService) CreateTaskPureScopedInventoryExecute(r ApiCreateTaskPureScopedInventoryRequest) (TaskPureScopedInventory, *_nethttp.Response, error) {
+func (a *TaskApiService) CreateTaskPureScopedInventoryExecute(r ApiCreateTaskPureScopedInventoryRequest) (*TaskPureScopedInventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TaskPureScopedInventory
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TaskPureScopedInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TaskApiService.CreateTaskPureScopedInventory")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/task/PureScopedInventories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.taskPureScopedInventory == nil {
 		return localVarReturnValue, nil, reportError("taskPureScopedInventory is required and must be specified")
 	}
@@ -1189,7 +1170,7 @@ func (a *TaskApiService) CreateTaskPureScopedInventoryExecute(r ApiCreateTaskPur
 	}
 	// body params
 	localVarPostBody = r.taskPureScopedInventory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1199,15 +1180,15 @@ func (a *TaskApiService) CreateTaskPureScopedInventoryExecute(r ApiCreateTaskPur
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1263,7 +1244,7 @@ func (a *TaskApiService) CreateTaskPureScopedInventoryExecute(r ApiCreateTaskPur
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1274,7 +1255,7 @@ func (a *TaskApiService) CreateTaskPureScopedInventoryExecute(r ApiCreateTaskPur
 }
 
 type ApiCreateTaskServerScopedInventoryRequest struct {
-	ctx                       _context.Context
+	ctx                       context.Context
 	ApiService                *TaskApiService
 	taskServerScopedInventory *TaskServerScopedInventory
 	ifMatch                   *string
@@ -1299,17 +1280,17 @@ func (r ApiCreateTaskServerScopedInventoryRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateTaskServerScopedInventoryRequest) Execute() (TaskServerScopedInventory, *_nethttp.Response, error) {
+func (r ApiCreateTaskServerScopedInventoryRequest) Execute() (*TaskServerScopedInventory, *http.Response, error) {
 	return r.ApiService.CreateTaskServerScopedInventoryExecute(r)
 }
 
 /*
 CreateTaskServerScopedInventory Create a 'task.ServerScopedInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateTaskServerScopedInventoryRequest
 */
-func (a *TaskApiService) CreateTaskServerScopedInventory(ctx _context.Context) ApiCreateTaskServerScopedInventoryRequest {
+func (a *TaskApiService) CreateTaskServerScopedInventory(ctx context.Context) ApiCreateTaskServerScopedInventoryRequest {
 	return ApiCreateTaskServerScopedInventoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1318,26 +1299,24 @@ func (a *TaskApiService) CreateTaskServerScopedInventory(ctx _context.Context) A
 
 // Execute executes the request
 //  @return TaskServerScopedInventory
-func (a *TaskApiService) CreateTaskServerScopedInventoryExecute(r ApiCreateTaskServerScopedInventoryRequest) (TaskServerScopedInventory, *_nethttp.Response, error) {
+func (a *TaskApiService) CreateTaskServerScopedInventoryExecute(r ApiCreateTaskServerScopedInventoryRequest) (*TaskServerScopedInventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TaskServerScopedInventory
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TaskServerScopedInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TaskApiService.CreateTaskServerScopedInventory")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/task/ServerScopedInventories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.taskServerScopedInventory == nil {
 		return localVarReturnValue, nil, reportError("taskServerScopedInventory is required and must be specified")
 	}
@@ -1367,7 +1346,7 @@ func (a *TaskApiService) CreateTaskServerScopedInventoryExecute(r ApiCreateTaskS
 	}
 	// body params
 	localVarPostBody = r.taskServerScopedInventory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1377,15 +1356,15 @@ func (a *TaskApiService) CreateTaskServerScopedInventoryExecute(r ApiCreateTaskS
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1441,7 +1420,7 @@ func (a *TaskApiService) CreateTaskServerScopedInventoryExecute(r ApiCreateTaskS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

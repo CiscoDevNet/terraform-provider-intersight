@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -466,11 +466,11 @@ func (o *IamUser) GetApiKeys() []IamApiKeyRelationship {
 // GetApiKeysOk returns a tuple with the ApiKeys field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamUser) GetApiKeysOk() (*[]IamApiKeyRelationship, bool) {
+func (o *IamUser) GetApiKeysOk() ([]IamApiKeyRelationship, bool) {
 	if o == nil || o.ApiKeys == nil {
 		return nil, false
 	}
-	return &o.ApiKeys, true
+	return o.ApiKeys, true
 }
 
 // HasApiKeys returns a boolean if a field has been set.
@@ -499,11 +499,11 @@ func (o *IamUser) GetAppRegistrations() []IamAppRegistrationRelationship {
 // GetAppRegistrationsOk returns a tuple with the AppRegistrations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamUser) GetAppRegistrationsOk() (*[]IamAppRegistrationRelationship, bool) {
+func (o *IamUser) GetAppRegistrationsOk() ([]IamAppRegistrationRelationship, bool) {
 	if o == nil || o.AppRegistrations == nil {
 		return nil, false
 	}
-	return &o.AppRegistrations, true
+	return o.AppRegistrations, true
 }
 
 // HasAppRegistrations returns a boolean if a field has been set.
@@ -628,11 +628,11 @@ func (o *IamUser) GetOauthTokens() []IamOAuthTokenRelationship {
 // GetOauthTokensOk returns a tuple with the OauthTokens field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamUser) GetOauthTokensOk() (*[]IamOAuthTokenRelationship, bool) {
+func (o *IamUser) GetOauthTokensOk() ([]IamOAuthTokenRelationship, bool) {
 	if o == nil || o.OauthTokens == nil {
 		return nil, false
 	}
-	return &o.OauthTokens, true
+	return o.OauthTokens, true
 }
 
 // HasOauthTokens returns a boolean if a field has been set.
@@ -661,11 +661,11 @@ func (o *IamUser) GetPermissions() []IamPermissionRelationship {
 // GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamUser) GetPermissionsOk() (*[]IamPermissionRelationship, bool) {
+func (o *IamUser) GetPermissionsOk() ([]IamPermissionRelationship, bool) {
 	if o == nil || o.Permissions == nil {
 		return nil, false
 	}
-	return &o.Permissions, true
+	return o.Permissions, true
 }
 
 // HasPermissions returns a boolean if a field has been set.
@@ -694,11 +694,11 @@ func (o *IamUser) GetSessions() []IamSessionRelationship {
 // GetSessionsOk returns a tuple with the Sessions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IamUser) GetSessionsOk() (*[]IamSessionRelationship, bool) {
+func (o *IamUser) GetSessionsOk() ([]IamSessionRelationship, bool) {
 	if o == nil || o.Sessions == nil {
 		return nil, false
 	}
-	return &o.Sessions, true
+	return o.Sessions, true
 }
 
 // HasSessions returns a boolean if a field has been set.

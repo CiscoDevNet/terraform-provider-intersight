@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // IppoolApiService IppoolApi service
 type IppoolApiService service
 
 type ApiCreateIppoolPoolRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IppoolApiService
 	ippoolPool  *IppoolPool
 	ifMatch     *string
@@ -54,17 +49,17 @@ func (r ApiCreateIppoolPoolRequest) IfNoneMatch(ifNoneMatch string) ApiCreateIpp
 	return r
 }
 
-func (r ApiCreateIppoolPoolRequest) Execute() (IppoolPool, *_nethttp.Response, error) {
+func (r ApiCreateIppoolPoolRequest) Execute() (*IppoolPool, *http.Response, error) {
 	return r.ApiService.CreateIppoolPoolExecute(r)
 }
 
 /*
 CreateIppoolPool Create a 'ippool.Pool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateIppoolPoolRequest
 */
-func (a *IppoolApiService) CreateIppoolPool(ctx _context.Context) ApiCreateIppoolPoolRequest {
+func (a *IppoolApiService) CreateIppoolPool(ctx context.Context) ApiCreateIppoolPoolRequest {
 	return ApiCreateIppoolPoolRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *IppoolApiService) CreateIppoolPool(ctx _context.Context) ApiCreateIppoo
 
 // Execute executes the request
 //  @return IppoolPool
-func (a *IppoolApiService) CreateIppoolPoolExecute(r ApiCreateIppoolPoolRequest) (IppoolPool, *_nethttp.Response, error) {
+func (a *IppoolApiService) CreateIppoolPoolExecute(r ApiCreateIppoolPoolRequest) (*IppoolPool, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolPool
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.CreateIppoolPool")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/Pools"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.ippoolPool == nil {
 		return localVarReturnValue, nil, reportError("ippoolPool is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *IppoolApiService) CreateIppoolPoolExecute(r ApiCreateIppoolPoolRequest)
 	}
 	// body params
 	localVarPostBody = r.ippoolPool
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *IppoolApiService) CreateIppoolPoolExecute(r ApiCreateIppoolPoolRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *IppoolApiService) CreateIppoolPoolExecute(r ApiCreateIppoolPoolRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *IppoolApiService) CreateIppoolPoolExecute(r ApiCreateIppoolPoolRequest)
 }
 
 type ApiDeleteIppoolIpLeaseRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IppoolApiService
 	moid       string
 }
 
-func (r ApiDeleteIppoolIpLeaseRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIppoolIpLeaseRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIppoolIpLeaseExecute(r)
 }
 
 /*
 DeleteIppoolIpLease Delete a 'ippool.IpLease' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIppoolIpLeaseRequest
 */
-func (a *IppoolApiService) DeleteIppoolIpLease(ctx _context.Context, moid string) ApiDeleteIppoolIpLeaseRequest {
+func (a *IppoolApiService) DeleteIppoolIpLease(ctx context.Context, moid string) ApiDeleteIppoolIpLeaseRequest {
 	return ApiDeleteIppoolIpLeaseRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *IppoolApiService) DeleteIppoolIpLease(ctx _context.Context, moid string
 }
 
 // Execute executes the request
-func (a *IppoolApiService) DeleteIppoolIpLeaseExecute(r ApiDeleteIppoolIpLeaseRequest) (*_nethttp.Response, error) {
+func (a *IppoolApiService) DeleteIppoolIpLeaseExecute(r ApiDeleteIppoolIpLeaseRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.DeleteIppoolIpLease")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/IpLeases/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *IppoolApiService) DeleteIppoolIpLeaseExecute(r ApiDeleteIppoolIpLeaseRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *IppoolApiService) DeleteIppoolIpLeaseExecute(r ApiDeleteIppoolIpLeaseRe
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *IppoolApiService) DeleteIppoolIpLeaseExecute(r ApiDeleteIppoolIpLeaseRe
 }
 
 type ApiDeleteIppoolPoolRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IppoolApiService
 	moid       string
 }
 
-func (r ApiDeleteIppoolPoolRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIppoolPoolRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIppoolPoolExecute(r)
 }
 
 /*
 DeleteIppoolPool Delete a 'ippool.Pool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteIppoolPoolRequest
 */
-func (a *IppoolApiService) DeleteIppoolPool(ctx _context.Context, moid string) ApiDeleteIppoolPoolRequest {
+func (a *IppoolApiService) DeleteIppoolPool(ctx context.Context, moid string) ApiDeleteIppoolPoolRequest {
 	return ApiDeleteIppoolPoolRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -371,26 +362,24 @@ func (a *IppoolApiService) DeleteIppoolPool(ctx _context.Context, moid string) A
 }
 
 // Execute executes the request
-func (a *IppoolApiService) DeleteIppoolPoolExecute(r ApiDeleteIppoolPoolRequest) (*_nethttp.Response, error) {
+func (a *IppoolApiService) DeleteIppoolPoolExecute(r ApiDeleteIppoolPoolRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.DeleteIppoolPool")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/Pools/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -409,7 +398,7 @@ func (a *IppoolApiService) DeleteIppoolPoolExecute(r ApiDeleteIppoolPoolRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -419,15 +408,15 @@ func (a *IppoolApiService) DeleteIppoolPoolExecute(r ApiDeleteIppoolPoolRequest)
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,23 +474,23 @@ func (a *IppoolApiService) DeleteIppoolPoolExecute(r ApiDeleteIppoolPoolRequest)
 }
 
 type ApiGetIppoolBlockLeaseByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IppoolApiService
 	moid       string
 }
 
-func (r ApiGetIppoolBlockLeaseByMoidRequest) Execute() (IppoolBlockLease, *_nethttp.Response, error) {
+func (r ApiGetIppoolBlockLeaseByMoidRequest) Execute() (*IppoolBlockLease, *http.Response, error) {
 	return r.ApiService.GetIppoolBlockLeaseByMoidExecute(r)
 }
 
 /*
 GetIppoolBlockLeaseByMoid Read a 'ippool.BlockLease' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIppoolBlockLeaseByMoidRequest
 */
-func (a *IppoolApiService) GetIppoolBlockLeaseByMoid(ctx _context.Context, moid string) ApiGetIppoolBlockLeaseByMoidRequest {
+func (a *IppoolApiService) GetIppoolBlockLeaseByMoid(ctx context.Context, moid string) ApiGetIppoolBlockLeaseByMoidRequest {
 	return ApiGetIppoolBlockLeaseByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -511,27 +500,25 @@ func (a *IppoolApiService) GetIppoolBlockLeaseByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return IppoolBlockLease
-func (a *IppoolApiService) GetIppoolBlockLeaseByMoidExecute(r ApiGetIppoolBlockLeaseByMoidRequest) (IppoolBlockLease, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolBlockLeaseByMoidExecute(r ApiGetIppoolBlockLeaseByMoidRequest) (*IppoolBlockLease, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolBlockLease
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolBlockLease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolBlockLeaseByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/BlockLeases/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -550,7 +537,7 @@ func (a *IppoolApiService) GetIppoolBlockLeaseByMoidExecute(r ApiGetIppoolBlockL
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -560,15 +547,15 @@ func (a *IppoolApiService) GetIppoolBlockLeaseByMoidExecute(r ApiGetIppoolBlockL
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -624,7 +611,7 @@ func (a *IppoolApiService) GetIppoolBlockLeaseByMoidExecute(r ApiGetIppoolBlockL
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -635,7 +622,7 @@ func (a *IppoolApiService) GetIppoolBlockLeaseByMoidExecute(r ApiGetIppoolBlockL
 }
 
 type ApiGetIppoolBlockLeaseListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IppoolApiService
 	filter      *string
 	orderby     *string
@@ -716,17 +703,17 @@ func (r ApiGetIppoolBlockLeaseListRequest) Tags(tags string) ApiGetIppoolBlockLe
 	return r
 }
 
-func (r ApiGetIppoolBlockLeaseListRequest) Execute() (IppoolBlockLeaseResponse, *_nethttp.Response, error) {
+func (r ApiGetIppoolBlockLeaseListRequest) Execute() (*IppoolBlockLeaseResponse, *http.Response, error) {
 	return r.ApiService.GetIppoolBlockLeaseListExecute(r)
 }
 
 /*
 GetIppoolBlockLeaseList Read a 'ippool.BlockLease' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIppoolBlockLeaseListRequest
 */
-func (a *IppoolApiService) GetIppoolBlockLeaseList(ctx _context.Context) ApiGetIppoolBlockLeaseListRequest {
+func (a *IppoolApiService) GetIppoolBlockLeaseList(ctx context.Context) ApiGetIppoolBlockLeaseListRequest {
 	return ApiGetIppoolBlockLeaseListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -735,26 +722,24 @@ func (a *IppoolApiService) GetIppoolBlockLeaseList(ctx _context.Context) ApiGetI
 
 // Execute executes the request
 //  @return IppoolBlockLeaseResponse
-func (a *IppoolApiService) GetIppoolBlockLeaseListExecute(r ApiGetIppoolBlockLeaseListRequest) (IppoolBlockLeaseResponse, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolBlockLeaseListExecute(r ApiGetIppoolBlockLeaseListRequest) (*IppoolBlockLeaseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolBlockLeaseResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolBlockLeaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolBlockLeaseList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/BlockLeases"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -806,7 +791,7 @@ func (a *IppoolApiService) GetIppoolBlockLeaseListExecute(r ApiGetIppoolBlockLea
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -816,15 +801,15 @@ func (a *IppoolApiService) GetIppoolBlockLeaseListExecute(r ApiGetIppoolBlockLea
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -880,7 +865,7 @@ func (a *IppoolApiService) GetIppoolBlockLeaseListExecute(r ApiGetIppoolBlockLea
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -891,23 +876,23 @@ func (a *IppoolApiService) GetIppoolBlockLeaseListExecute(r ApiGetIppoolBlockLea
 }
 
 type ApiGetIppoolIpLeaseByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IppoolApiService
 	moid       string
 }
 
-func (r ApiGetIppoolIpLeaseByMoidRequest) Execute() (IppoolIpLease, *_nethttp.Response, error) {
+func (r ApiGetIppoolIpLeaseByMoidRequest) Execute() (*IppoolIpLease, *http.Response, error) {
 	return r.ApiService.GetIppoolIpLeaseByMoidExecute(r)
 }
 
 /*
 GetIppoolIpLeaseByMoid Read a 'ippool.IpLease' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIppoolIpLeaseByMoidRequest
 */
-func (a *IppoolApiService) GetIppoolIpLeaseByMoid(ctx _context.Context, moid string) ApiGetIppoolIpLeaseByMoidRequest {
+func (a *IppoolApiService) GetIppoolIpLeaseByMoid(ctx context.Context, moid string) ApiGetIppoolIpLeaseByMoidRequest {
 	return ApiGetIppoolIpLeaseByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -917,27 +902,25 @@ func (a *IppoolApiService) GetIppoolIpLeaseByMoid(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return IppoolIpLease
-func (a *IppoolApiService) GetIppoolIpLeaseByMoidExecute(r ApiGetIppoolIpLeaseByMoidRequest) (IppoolIpLease, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolIpLeaseByMoidExecute(r ApiGetIppoolIpLeaseByMoidRequest) (*IppoolIpLease, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolIpLease
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolIpLease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolIpLeaseByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/IpLeases/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -956,7 +939,7 @@ func (a *IppoolApiService) GetIppoolIpLeaseByMoidExecute(r ApiGetIppoolIpLeaseBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -966,15 +949,15 @@ func (a *IppoolApiService) GetIppoolIpLeaseByMoidExecute(r ApiGetIppoolIpLeaseBy
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1030,7 +1013,7 @@ func (a *IppoolApiService) GetIppoolIpLeaseByMoidExecute(r ApiGetIppoolIpLeaseBy
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1041,7 +1024,7 @@ func (a *IppoolApiService) GetIppoolIpLeaseByMoidExecute(r ApiGetIppoolIpLeaseBy
 }
 
 type ApiGetIppoolIpLeaseListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IppoolApiService
 	filter      *string
 	orderby     *string
@@ -1122,17 +1105,17 @@ func (r ApiGetIppoolIpLeaseListRequest) Tags(tags string) ApiGetIppoolIpLeaseLis
 	return r
 }
 
-func (r ApiGetIppoolIpLeaseListRequest) Execute() (IppoolIpLeaseResponse, *_nethttp.Response, error) {
+func (r ApiGetIppoolIpLeaseListRequest) Execute() (*IppoolIpLeaseResponse, *http.Response, error) {
 	return r.ApiService.GetIppoolIpLeaseListExecute(r)
 }
 
 /*
 GetIppoolIpLeaseList Read a 'ippool.IpLease' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIppoolIpLeaseListRequest
 */
-func (a *IppoolApiService) GetIppoolIpLeaseList(ctx _context.Context) ApiGetIppoolIpLeaseListRequest {
+func (a *IppoolApiService) GetIppoolIpLeaseList(ctx context.Context) ApiGetIppoolIpLeaseListRequest {
 	return ApiGetIppoolIpLeaseListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1141,26 +1124,24 @@ func (a *IppoolApiService) GetIppoolIpLeaseList(ctx _context.Context) ApiGetIppo
 
 // Execute executes the request
 //  @return IppoolIpLeaseResponse
-func (a *IppoolApiService) GetIppoolIpLeaseListExecute(r ApiGetIppoolIpLeaseListRequest) (IppoolIpLeaseResponse, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolIpLeaseListExecute(r ApiGetIppoolIpLeaseListRequest) (*IppoolIpLeaseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolIpLeaseResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolIpLeaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolIpLeaseList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/IpLeases"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1212,7 +1193,7 @@ func (a *IppoolApiService) GetIppoolIpLeaseListExecute(r ApiGetIppoolIpLeaseList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1222,15 +1203,15 @@ func (a *IppoolApiService) GetIppoolIpLeaseListExecute(r ApiGetIppoolIpLeaseList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1286,7 +1267,7 @@ func (a *IppoolApiService) GetIppoolIpLeaseListExecute(r ApiGetIppoolIpLeaseList
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1297,23 +1278,23 @@ func (a *IppoolApiService) GetIppoolIpLeaseListExecute(r ApiGetIppoolIpLeaseList
 }
 
 type ApiGetIppoolPoolByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IppoolApiService
 	moid       string
 }
 
-func (r ApiGetIppoolPoolByMoidRequest) Execute() (IppoolPool, *_nethttp.Response, error) {
+func (r ApiGetIppoolPoolByMoidRequest) Execute() (*IppoolPool, *http.Response, error) {
 	return r.ApiService.GetIppoolPoolByMoidExecute(r)
 }
 
 /*
 GetIppoolPoolByMoid Read a 'ippool.Pool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIppoolPoolByMoidRequest
 */
-func (a *IppoolApiService) GetIppoolPoolByMoid(ctx _context.Context, moid string) ApiGetIppoolPoolByMoidRequest {
+func (a *IppoolApiService) GetIppoolPoolByMoid(ctx context.Context, moid string) ApiGetIppoolPoolByMoidRequest {
 	return ApiGetIppoolPoolByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1323,27 +1304,25 @@ func (a *IppoolApiService) GetIppoolPoolByMoid(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return IppoolPool
-func (a *IppoolApiService) GetIppoolPoolByMoidExecute(r ApiGetIppoolPoolByMoidRequest) (IppoolPool, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolPoolByMoidExecute(r ApiGetIppoolPoolByMoidRequest) (*IppoolPool, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolPool
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolPoolByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/Pools/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1362,7 +1341,7 @@ func (a *IppoolApiService) GetIppoolPoolByMoidExecute(r ApiGetIppoolPoolByMoidRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1372,15 +1351,15 @@ func (a *IppoolApiService) GetIppoolPoolByMoidExecute(r ApiGetIppoolPoolByMoidRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1436,7 +1415,7 @@ func (a *IppoolApiService) GetIppoolPoolByMoidExecute(r ApiGetIppoolPoolByMoidRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1447,7 +1426,7 @@ func (a *IppoolApiService) GetIppoolPoolByMoidExecute(r ApiGetIppoolPoolByMoidRe
 }
 
 type ApiGetIppoolPoolListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IppoolApiService
 	filter      *string
 	orderby     *string
@@ -1528,17 +1507,17 @@ func (r ApiGetIppoolPoolListRequest) Tags(tags string) ApiGetIppoolPoolListReque
 	return r
 }
 
-func (r ApiGetIppoolPoolListRequest) Execute() (IppoolPoolResponse, *_nethttp.Response, error) {
+func (r ApiGetIppoolPoolListRequest) Execute() (*IppoolPoolResponse, *http.Response, error) {
 	return r.ApiService.GetIppoolPoolListExecute(r)
 }
 
 /*
 GetIppoolPoolList Read a 'ippool.Pool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIppoolPoolListRequest
 */
-func (a *IppoolApiService) GetIppoolPoolList(ctx _context.Context) ApiGetIppoolPoolListRequest {
+func (a *IppoolApiService) GetIppoolPoolList(ctx context.Context) ApiGetIppoolPoolListRequest {
 	return ApiGetIppoolPoolListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1547,26 +1526,24 @@ func (a *IppoolApiService) GetIppoolPoolList(ctx _context.Context) ApiGetIppoolP
 
 // Execute executes the request
 //  @return IppoolPoolResponse
-func (a *IppoolApiService) GetIppoolPoolListExecute(r ApiGetIppoolPoolListRequest) (IppoolPoolResponse, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolPoolListExecute(r ApiGetIppoolPoolListRequest) (*IppoolPoolResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolPoolResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolPoolResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolPoolList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/Pools"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1618,7 +1595,7 @@ func (a *IppoolApiService) GetIppoolPoolListExecute(r ApiGetIppoolPoolListReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1628,15 +1605,15 @@ func (a *IppoolApiService) GetIppoolPoolListExecute(r ApiGetIppoolPoolListReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1692,7 +1669,7 @@ func (a *IppoolApiService) GetIppoolPoolListExecute(r ApiGetIppoolPoolListReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1703,23 +1680,23 @@ func (a *IppoolApiService) GetIppoolPoolListExecute(r ApiGetIppoolPoolListReques
 }
 
 type ApiGetIppoolPoolMemberByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IppoolApiService
 	moid       string
 }
 
-func (r ApiGetIppoolPoolMemberByMoidRequest) Execute() (IppoolPoolMember, *_nethttp.Response, error) {
+func (r ApiGetIppoolPoolMemberByMoidRequest) Execute() (*IppoolPoolMember, *http.Response, error) {
 	return r.ApiService.GetIppoolPoolMemberByMoidExecute(r)
 }
 
 /*
 GetIppoolPoolMemberByMoid Read a 'ippool.PoolMember' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIppoolPoolMemberByMoidRequest
 */
-func (a *IppoolApiService) GetIppoolPoolMemberByMoid(ctx _context.Context, moid string) ApiGetIppoolPoolMemberByMoidRequest {
+func (a *IppoolApiService) GetIppoolPoolMemberByMoid(ctx context.Context, moid string) ApiGetIppoolPoolMemberByMoidRequest {
 	return ApiGetIppoolPoolMemberByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1729,27 +1706,25 @@ func (a *IppoolApiService) GetIppoolPoolMemberByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return IppoolPoolMember
-func (a *IppoolApiService) GetIppoolPoolMemberByMoidExecute(r ApiGetIppoolPoolMemberByMoidRequest) (IppoolPoolMember, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolPoolMemberByMoidExecute(r ApiGetIppoolPoolMemberByMoidRequest) (*IppoolPoolMember, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolPoolMember
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolPoolMember
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolPoolMemberByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/PoolMembers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1768,7 +1743,7 @@ func (a *IppoolApiService) GetIppoolPoolMemberByMoidExecute(r ApiGetIppoolPoolMe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1778,15 +1753,15 @@ func (a *IppoolApiService) GetIppoolPoolMemberByMoidExecute(r ApiGetIppoolPoolMe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1842,7 +1817,7 @@ func (a *IppoolApiService) GetIppoolPoolMemberByMoidExecute(r ApiGetIppoolPoolMe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1853,7 +1828,7 @@ func (a *IppoolApiService) GetIppoolPoolMemberByMoidExecute(r ApiGetIppoolPoolMe
 }
 
 type ApiGetIppoolPoolMemberListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IppoolApiService
 	filter      *string
 	orderby     *string
@@ -1934,17 +1909,17 @@ func (r ApiGetIppoolPoolMemberListRequest) Tags(tags string) ApiGetIppoolPoolMem
 	return r
 }
 
-func (r ApiGetIppoolPoolMemberListRequest) Execute() (IppoolPoolMemberResponse, *_nethttp.Response, error) {
+func (r ApiGetIppoolPoolMemberListRequest) Execute() (*IppoolPoolMemberResponse, *http.Response, error) {
 	return r.ApiService.GetIppoolPoolMemberListExecute(r)
 }
 
 /*
 GetIppoolPoolMemberList Read a 'ippool.PoolMember' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIppoolPoolMemberListRequest
 */
-func (a *IppoolApiService) GetIppoolPoolMemberList(ctx _context.Context) ApiGetIppoolPoolMemberListRequest {
+func (a *IppoolApiService) GetIppoolPoolMemberList(ctx context.Context) ApiGetIppoolPoolMemberListRequest {
 	return ApiGetIppoolPoolMemberListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1953,26 +1928,24 @@ func (a *IppoolApiService) GetIppoolPoolMemberList(ctx _context.Context) ApiGetI
 
 // Execute executes the request
 //  @return IppoolPoolMemberResponse
-func (a *IppoolApiService) GetIppoolPoolMemberListExecute(r ApiGetIppoolPoolMemberListRequest) (IppoolPoolMemberResponse, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolPoolMemberListExecute(r ApiGetIppoolPoolMemberListRequest) (*IppoolPoolMemberResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolPoolMemberResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolPoolMemberResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolPoolMemberList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/PoolMembers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2024,7 +1997,7 @@ func (a *IppoolApiService) GetIppoolPoolMemberListExecute(r ApiGetIppoolPoolMemb
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2034,15 +2007,15 @@ func (a *IppoolApiService) GetIppoolPoolMemberListExecute(r ApiGetIppoolPoolMemb
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2098,7 +2071,7 @@ func (a *IppoolApiService) GetIppoolPoolMemberListExecute(r ApiGetIppoolPoolMemb
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2109,23 +2082,23 @@ func (a *IppoolApiService) GetIppoolPoolMemberListExecute(r ApiGetIppoolPoolMemb
 }
 
 type ApiGetIppoolShadowBlockByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IppoolApiService
 	moid       string
 }
 
-func (r ApiGetIppoolShadowBlockByMoidRequest) Execute() (IppoolShadowBlock, *_nethttp.Response, error) {
+func (r ApiGetIppoolShadowBlockByMoidRequest) Execute() (*IppoolShadowBlock, *http.Response, error) {
 	return r.ApiService.GetIppoolShadowBlockByMoidExecute(r)
 }
 
 /*
 GetIppoolShadowBlockByMoid Read a 'ippool.ShadowBlock' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIppoolShadowBlockByMoidRequest
 */
-func (a *IppoolApiService) GetIppoolShadowBlockByMoid(ctx _context.Context, moid string) ApiGetIppoolShadowBlockByMoidRequest {
+func (a *IppoolApiService) GetIppoolShadowBlockByMoid(ctx context.Context, moid string) ApiGetIppoolShadowBlockByMoidRequest {
 	return ApiGetIppoolShadowBlockByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2135,27 +2108,25 @@ func (a *IppoolApiService) GetIppoolShadowBlockByMoid(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return IppoolShadowBlock
-func (a *IppoolApiService) GetIppoolShadowBlockByMoidExecute(r ApiGetIppoolShadowBlockByMoidRequest) (IppoolShadowBlock, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolShadowBlockByMoidExecute(r ApiGetIppoolShadowBlockByMoidRequest) (*IppoolShadowBlock, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolShadowBlock
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolShadowBlock
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolShadowBlockByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/ShadowBlocks/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2174,7 +2145,7 @@ func (a *IppoolApiService) GetIppoolShadowBlockByMoidExecute(r ApiGetIppoolShado
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2184,15 +2155,15 @@ func (a *IppoolApiService) GetIppoolShadowBlockByMoidExecute(r ApiGetIppoolShado
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2248,7 +2219,7 @@ func (a *IppoolApiService) GetIppoolShadowBlockByMoidExecute(r ApiGetIppoolShado
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2259,7 +2230,7 @@ func (a *IppoolApiService) GetIppoolShadowBlockByMoidExecute(r ApiGetIppoolShado
 }
 
 type ApiGetIppoolShadowBlockListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IppoolApiService
 	filter      *string
 	orderby     *string
@@ -2340,17 +2311,17 @@ func (r ApiGetIppoolShadowBlockListRequest) Tags(tags string) ApiGetIppoolShadow
 	return r
 }
 
-func (r ApiGetIppoolShadowBlockListRequest) Execute() (IppoolShadowBlockResponse, *_nethttp.Response, error) {
+func (r ApiGetIppoolShadowBlockListRequest) Execute() (*IppoolShadowBlockResponse, *http.Response, error) {
 	return r.ApiService.GetIppoolShadowBlockListExecute(r)
 }
 
 /*
 GetIppoolShadowBlockList Read a 'ippool.ShadowBlock' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIppoolShadowBlockListRequest
 */
-func (a *IppoolApiService) GetIppoolShadowBlockList(ctx _context.Context) ApiGetIppoolShadowBlockListRequest {
+func (a *IppoolApiService) GetIppoolShadowBlockList(ctx context.Context) ApiGetIppoolShadowBlockListRequest {
 	return ApiGetIppoolShadowBlockListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2359,26 +2330,24 @@ func (a *IppoolApiService) GetIppoolShadowBlockList(ctx _context.Context) ApiGet
 
 // Execute executes the request
 //  @return IppoolShadowBlockResponse
-func (a *IppoolApiService) GetIppoolShadowBlockListExecute(r ApiGetIppoolShadowBlockListRequest) (IppoolShadowBlockResponse, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolShadowBlockListExecute(r ApiGetIppoolShadowBlockListRequest) (*IppoolShadowBlockResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolShadowBlockResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolShadowBlockResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolShadowBlockList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/ShadowBlocks"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2430,7 +2399,7 @@ func (a *IppoolApiService) GetIppoolShadowBlockListExecute(r ApiGetIppoolShadowB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2440,15 +2409,15 @@ func (a *IppoolApiService) GetIppoolShadowBlockListExecute(r ApiGetIppoolShadowB
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2504,7 +2473,7 @@ func (a *IppoolApiService) GetIppoolShadowBlockListExecute(r ApiGetIppoolShadowB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2515,23 +2484,23 @@ func (a *IppoolApiService) GetIppoolShadowBlockListExecute(r ApiGetIppoolShadowB
 }
 
 type ApiGetIppoolShadowPoolByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IppoolApiService
 	moid       string
 }
 
-func (r ApiGetIppoolShadowPoolByMoidRequest) Execute() (IppoolShadowPool, *_nethttp.Response, error) {
+func (r ApiGetIppoolShadowPoolByMoidRequest) Execute() (*IppoolShadowPool, *http.Response, error) {
 	return r.ApiService.GetIppoolShadowPoolByMoidExecute(r)
 }
 
 /*
 GetIppoolShadowPoolByMoid Read a 'ippool.ShadowPool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIppoolShadowPoolByMoidRequest
 */
-func (a *IppoolApiService) GetIppoolShadowPoolByMoid(ctx _context.Context, moid string) ApiGetIppoolShadowPoolByMoidRequest {
+func (a *IppoolApiService) GetIppoolShadowPoolByMoid(ctx context.Context, moid string) ApiGetIppoolShadowPoolByMoidRequest {
 	return ApiGetIppoolShadowPoolByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2541,27 +2510,25 @@ func (a *IppoolApiService) GetIppoolShadowPoolByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return IppoolShadowPool
-func (a *IppoolApiService) GetIppoolShadowPoolByMoidExecute(r ApiGetIppoolShadowPoolByMoidRequest) (IppoolShadowPool, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolShadowPoolByMoidExecute(r ApiGetIppoolShadowPoolByMoidRequest) (*IppoolShadowPool, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolShadowPool
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolShadowPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolShadowPoolByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/ShadowPools/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2580,7 +2547,7 @@ func (a *IppoolApiService) GetIppoolShadowPoolByMoidExecute(r ApiGetIppoolShadow
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2590,15 +2557,15 @@ func (a *IppoolApiService) GetIppoolShadowPoolByMoidExecute(r ApiGetIppoolShadow
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2654,7 +2621,7 @@ func (a *IppoolApiService) GetIppoolShadowPoolByMoidExecute(r ApiGetIppoolShadow
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2665,7 +2632,7 @@ func (a *IppoolApiService) GetIppoolShadowPoolByMoidExecute(r ApiGetIppoolShadow
 }
 
 type ApiGetIppoolShadowPoolListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IppoolApiService
 	filter      *string
 	orderby     *string
@@ -2746,17 +2713,17 @@ func (r ApiGetIppoolShadowPoolListRequest) Tags(tags string) ApiGetIppoolShadowP
 	return r
 }
 
-func (r ApiGetIppoolShadowPoolListRequest) Execute() (IppoolShadowPoolResponse, *_nethttp.Response, error) {
+func (r ApiGetIppoolShadowPoolListRequest) Execute() (*IppoolShadowPoolResponse, *http.Response, error) {
 	return r.ApiService.GetIppoolShadowPoolListExecute(r)
 }
 
 /*
 GetIppoolShadowPoolList Read a 'ippool.ShadowPool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIppoolShadowPoolListRequest
 */
-func (a *IppoolApiService) GetIppoolShadowPoolList(ctx _context.Context) ApiGetIppoolShadowPoolListRequest {
+func (a *IppoolApiService) GetIppoolShadowPoolList(ctx context.Context) ApiGetIppoolShadowPoolListRequest {
 	return ApiGetIppoolShadowPoolListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2765,26 +2732,24 @@ func (a *IppoolApiService) GetIppoolShadowPoolList(ctx _context.Context) ApiGetI
 
 // Execute executes the request
 //  @return IppoolShadowPoolResponse
-func (a *IppoolApiService) GetIppoolShadowPoolListExecute(r ApiGetIppoolShadowPoolListRequest) (IppoolShadowPoolResponse, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolShadowPoolListExecute(r ApiGetIppoolShadowPoolListRequest) (*IppoolShadowPoolResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolShadowPoolResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolShadowPoolResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolShadowPoolList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/ShadowPools"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2836,7 +2801,7 @@ func (a *IppoolApiService) GetIppoolShadowPoolListExecute(r ApiGetIppoolShadowPo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2846,15 +2811,15 @@ func (a *IppoolApiService) GetIppoolShadowPoolListExecute(r ApiGetIppoolShadowPo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2910,7 +2875,7 @@ func (a *IppoolApiService) GetIppoolShadowPoolListExecute(r ApiGetIppoolShadowPo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2921,23 +2886,23 @@ func (a *IppoolApiService) GetIppoolShadowPoolListExecute(r ApiGetIppoolShadowPo
 }
 
 type ApiGetIppoolUniverseByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IppoolApiService
 	moid       string
 }
 
-func (r ApiGetIppoolUniverseByMoidRequest) Execute() (IppoolUniverse, *_nethttp.Response, error) {
+func (r ApiGetIppoolUniverseByMoidRequest) Execute() (*IppoolUniverse, *http.Response, error) {
 	return r.ApiService.GetIppoolUniverseByMoidExecute(r)
 }
 
 /*
 GetIppoolUniverseByMoid Read a 'ippool.Universe' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetIppoolUniverseByMoidRequest
 */
-func (a *IppoolApiService) GetIppoolUniverseByMoid(ctx _context.Context, moid string) ApiGetIppoolUniverseByMoidRequest {
+func (a *IppoolApiService) GetIppoolUniverseByMoid(ctx context.Context, moid string) ApiGetIppoolUniverseByMoidRequest {
 	return ApiGetIppoolUniverseByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2947,27 +2912,25 @@ func (a *IppoolApiService) GetIppoolUniverseByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return IppoolUniverse
-func (a *IppoolApiService) GetIppoolUniverseByMoidExecute(r ApiGetIppoolUniverseByMoidRequest) (IppoolUniverse, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolUniverseByMoidExecute(r ApiGetIppoolUniverseByMoidRequest) (*IppoolUniverse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolUniverse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolUniverse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolUniverseByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/Universes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2986,7 +2949,7 @@ func (a *IppoolApiService) GetIppoolUniverseByMoidExecute(r ApiGetIppoolUniverse
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2996,15 +2959,15 @@ func (a *IppoolApiService) GetIppoolUniverseByMoidExecute(r ApiGetIppoolUniverse
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3060,7 +3023,7 @@ func (a *IppoolApiService) GetIppoolUniverseByMoidExecute(r ApiGetIppoolUniverse
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3071,7 +3034,7 @@ func (a *IppoolApiService) GetIppoolUniverseByMoidExecute(r ApiGetIppoolUniverse
 }
 
 type ApiGetIppoolUniverseListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *IppoolApiService
 	filter      *string
 	orderby     *string
@@ -3152,17 +3115,17 @@ func (r ApiGetIppoolUniverseListRequest) Tags(tags string) ApiGetIppoolUniverseL
 	return r
 }
 
-func (r ApiGetIppoolUniverseListRequest) Execute() (IppoolUniverseResponse, *_nethttp.Response, error) {
+func (r ApiGetIppoolUniverseListRequest) Execute() (*IppoolUniverseResponse, *http.Response, error) {
 	return r.ApiService.GetIppoolUniverseListExecute(r)
 }
 
 /*
 GetIppoolUniverseList Read a 'ippool.Universe' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetIppoolUniverseListRequest
 */
-func (a *IppoolApiService) GetIppoolUniverseList(ctx _context.Context) ApiGetIppoolUniverseListRequest {
+func (a *IppoolApiService) GetIppoolUniverseList(ctx context.Context) ApiGetIppoolUniverseListRequest {
 	return ApiGetIppoolUniverseListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3171,26 +3134,24 @@ func (a *IppoolApiService) GetIppoolUniverseList(ctx _context.Context) ApiGetIpp
 
 // Execute executes the request
 //  @return IppoolUniverseResponse
-func (a *IppoolApiService) GetIppoolUniverseListExecute(r ApiGetIppoolUniverseListRequest) (IppoolUniverseResponse, *_nethttp.Response, error) {
+func (a *IppoolApiService) GetIppoolUniverseListExecute(r ApiGetIppoolUniverseListRequest) (*IppoolUniverseResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolUniverseResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolUniverseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.GetIppoolUniverseList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/Universes"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3242,7 +3203,7 @@ func (a *IppoolApiService) GetIppoolUniverseListExecute(r ApiGetIppoolUniverseLi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3252,15 +3213,15 @@ func (a *IppoolApiService) GetIppoolUniverseListExecute(r ApiGetIppoolUniverseLi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3316,7 +3277,7 @@ func (a *IppoolApiService) GetIppoolUniverseListExecute(r ApiGetIppoolUniverseLi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3327,7 +3288,7 @@ func (a *IppoolApiService) GetIppoolUniverseListExecute(r ApiGetIppoolUniverseLi
 }
 
 type ApiPatchIppoolPoolRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IppoolApiService
 	moid       string
 	ippoolPool *IppoolPool
@@ -3346,18 +3307,18 @@ func (r ApiPatchIppoolPoolRequest) IfMatch(ifMatch string) ApiPatchIppoolPoolReq
 	return r
 }
 
-func (r ApiPatchIppoolPoolRequest) Execute() (IppoolPool, *_nethttp.Response, error) {
+func (r ApiPatchIppoolPoolRequest) Execute() (*IppoolPool, *http.Response, error) {
 	return r.ApiService.PatchIppoolPoolExecute(r)
 }
 
 /*
 PatchIppoolPool Update a 'ippool.Pool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchIppoolPoolRequest
 */
-func (a *IppoolApiService) PatchIppoolPool(ctx _context.Context, moid string) ApiPatchIppoolPoolRequest {
+func (a *IppoolApiService) PatchIppoolPool(ctx context.Context, moid string) ApiPatchIppoolPoolRequest {
 	return ApiPatchIppoolPoolRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3367,27 +3328,25 @@ func (a *IppoolApiService) PatchIppoolPool(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return IppoolPool
-func (a *IppoolApiService) PatchIppoolPoolExecute(r ApiPatchIppoolPoolRequest) (IppoolPool, *_nethttp.Response, error) {
+func (a *IppoolApiService) PatchIppoolPoolExecute(r ApiPatchIppoolPoolRequest) (*IppoolPool, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolPool
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.PatchIppoolPool")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/Pools/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.ippoolPool == nil {
 		return localVarReturnValue, nil, reportError("ippoolPool is required and must be specified")
 	}
@@ -3414,7 +3373,7 @@ func (a *IppoolApiService) PatchIppoolPoolExecute(r ApiPatchIppoolPoolRequest) (
 	}
 	// body params
 	localVarPostBody = r.ippoolPool
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3424,15 +3383,15 @@ func (a *IppoolApiService) PatchIppoolPoolExecute(r ApiPatchIppoolPoolRequest) (
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3488,7 +3447,7 @@ func (a *IppoolApiService) PatchIppoolPoolExecute(r ApiPatchIppoolPoolRequest) (
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3499,7 +3458,7 @@ func (a *IppoolApiService) PatchIppoolPoolExecute(r ApiPatchIppoolPoolRequest) (
 }
 
 type ApiUpdateIppoolPoolRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *IppoolApiService
 	moid       string
 	ippoolPool *IppoolPool
@@ -3518,18 +3477,18 @@ func (r ApiUpdateIppoolPoolRequest) IfMatch(ifMatch string) ApiUpdateIppoolPoolR
 	return r
 }
 
-func (r ApiUpdateIppoolPoolRequest) Execute() (IppoolPool, *_nethttp.Response, error) {
+func (r ApiUpdateIppoolPoolRequest) Execute() (*IppoolPool, *http.Response, error) {
 	return r.ApiService.UpdateIppoolPoolExecute(r)
 }
 
 /*
 UpdateIppoolPool Update a 'ippool.Pool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateIppoolPoolRequest
 */
-func (a *IppoolApiService) UpdateIppoolPool(ctx _context.Context, moid string) ApiUpdateIppoolPoolRequest {
+func (a *IppoolApiService) UpdateIppoolPool(ctx context.Context, moid string) ApiUpdateIppoolPoolRequest {
 	return ApiUpdateIppoolPoolRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3539,27 +3498,25 @@ func (a *IppoolApiService) UpdateIppoolPool(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return IppoolPool
-func (a *IppoolApiService) UpdateIppoolPoolExecute(r ApiUpdateIppoolPoolRequest) (IppoolPool, *_nethttp.Response, error) {
+func (a *IppoolApiService) UpdateIppoolPoolExecute(r ApiUpdateIppoolPoolRequest) (*IppoolPool, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  IppoolPool
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *IppoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IppoolApiService.UpdateIppoolPool")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ippool/Pools/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.ippoolPool == nil {
 		return localVarReturnValue, nil, reportError("ippoolPool is required and must be specified")
 	}
@@ -3586,7 +3543,7 @@ func (a *IppoolApiService) UpdateIppoolPoolExecute(r ApiUpdateIppoolPoolRequest)
 	}
 	// body params
 	localVarPostBody = r.ippoolPool
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3596,15 +3553,15 @@ func (a *IppoolApiService) UpdateIppoolPoolExecute(r ApiUpdateIppoolPoolRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3660,7 +3617,7 @@ func (a *IppoolApiService) UpdateIppoolPoolExecute(r ApiUpdateIppoolPoolRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

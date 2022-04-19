@@ -513,7 +513,6 @@ func resourceCrdCustomResource() *schema.Resource {
 
 func resourceCrdCustomResourceCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCrdCustomResourceWithDefaults()
@@ -700,7 +699,7 @@ func resourceCrdCustomResourceCreate(c context.Context, d *schema.ResourceData, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CrdCustomResource: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CrdCustomResource: %s", responseErr.Error())
@@ -712,7 +711,6 @@ func resourceCrdCustomResourceCreate(c context.Context, d *schema.ResourceData, 
 
 func resourceCrdCustomResourceRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CrdApi.GetCrdCustomResourceByMoid(conn.ctx, d.Id())
@@ -725,7 +723,7 @@ func resourceCrdCustomResourceRead(c context.Context, d *schema.ResourceData, me
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CrdCustomResource: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CrdCustomResource: %s", responseErr.Error())
@@ -838,7 +836,6 @@ func resourceCrdCustomResourceRead(c context.Context, d *schema.ResourceData, me
 
 func resourceCrdCustomResourceUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CrdCustomResource{}
@@ -1034,7 +1031,7 @@ func resourceCrdCustomResourceUpdate(c context.Context, d *schema.ResourceData, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CrdCustomResource: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CrdCustomResource: %s", responseErr.Error())
@@ -1046,7 +1043,6 @@ func resourceCrdCustomResourceUpdate(c context.Context, d *schema.ResourceData, 
 
 func resourceCrdCustomResourceDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CrdApi.DeleteCrdCustomResource(conn.ctx, d.Id())
@@ -1058,7 +1054,7 @@ func resourceCrdCustomResourceDelete(c context.Context, d *schema.ResourceData, 
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CrdCustomResource object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CrdCustomResource object: %s", deleteErr.Error())

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Output name for the minimum/maximum timestamp value. | 
 **FieldName** | **string** | Name of the metric column. | 
-**MaxStringBytes** | Pointer to **int32** | null | [optional] [default to 1024]
+**MaxStringBytes** | Pointer to **int32** |  | [optional] [default to 1024]
 
 ## Methods
 

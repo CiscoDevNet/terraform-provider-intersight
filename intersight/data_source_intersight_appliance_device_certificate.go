@@ -883,7 +883,6 @@ func dataSourceApplianceDeviceCertificate() *schema.Resource {
 
 func dataSourceApplianceDeviceCertificateRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ApplianceDeviceCertificate{}
@@ -1295,7 +1294,7 @@ func dataSourceApplianceDeviceCertificateRead(c context.Context, d *schema.Resou
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of ApplianceDeviceCertificate: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of ApplianceDeviceCertificate: %s", responseErr.Error())
@@ -1312,7 +1311,7 @@ func dataSourceApplianceDeviceCertificateRead(c context.Context, d *schema.Resou
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching ApplianceDeviceCertificate: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching ApplianceDeviceCertificate: %s", responseErr.Error())

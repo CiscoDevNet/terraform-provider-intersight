@@ -199,7 +199,7 @@ func resourceNotificationAccountSubscription() *schema.Resource {
 					return
 				}},
 			"enabled": {
-				Description: "Subscription can be switched on/off with out necessity to change the subscription\nsettings: notification methods, conditions etc.\nEx.: Subscription MO can be configured, but switched off.",
+				Description: "Subscription can be switched on/off without necessity to change the subscription\nsettings: notification methods, conditions, etc.\nEx.: Subscription MO can be configured, but switched off.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
@@ -354,6 +354,19 @@ func resourceNotificationAccountSubscription() *schema.Resource {
 					},
 				},
 			},
+			"type": {
+				Description: "The chosen subscription type imposes it is own validation rules.\nWhen 'email' type is chosen, actions array can contain only one entry and it is entry should be of can\nbe only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and condition\ntypes should be unique.\nWhen the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of can\nbe only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of them\nshould be of type notification.MoCondition.\n* `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions.\n* `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "email",
+				ForceNew:    true,
+			},
+			"verify": {
+				Description: "Used to verify the actions of the Subscription MO. For a 'webhook' type Ping event is sent to verify\nthat the webhook server is accessible. For an 'email' type there will be a verification email sent.\n* `none` - No actions will be verified. Default value.\n* `all` - All actions will be re-verified. The previous state of the verification will be preserved.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "none",
+			},
 			"version_context": {
 				Description: "The versioning info for this managed object.",
 				Type:        schema.TypeList,
@@ -500,7 +513,6 @@ func resourceNotificationAccountSubscription() *schema.Resource {
 
 func resourceNotificationAccountSubscriptionCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewNotificationAccountSubscriptionWithDefaults()
@@ -628,12 +640,22 @@ func resourceNotificationAccountSubscriptionCreate(c context.Context, d *schema.
 		}
 	}
 
+	if v, ok := d.GetOk("type"); ok {
+		x := (v.(string))
+		o.SetType(x)
+	}
+
+	if v, ok := d.GetOk("verify"); ok {
+		x := (v.(string))
+		o.SetVerify(x)
+	}
+
 	r := conn.ApiClient.NotificationApi.CreateNotificationAccountSubscription(conn.ctx).NotificationAccountSubscription(*o)
 	resultMo, _, responseErr := r.Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating NotificationAccountSubscription: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating NotificationAccountSubscription: %s", responseErr.Error())
@@ -645,7 +667,6 @@ func resourceNotificationAccountSubscriptionCreate(c context.Context, d *schema.
 
 func resourceNotificationAccountSubscriptionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.NotificationApi.GetNotificationAccountSubscriptionByMoid(conn.ctx, d.Id())
@@ -658,7 +679,7 @@ func resourceNotificationAccountSubscriptionRead(c context.Context, d *schema.Re
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching NotificationAccountSubscription: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching NotificationAccountSubscription: %s", responseErr.Error())
@@ -740,6 +761,14 @@ func resourceNotificationAccountSubscriptionRead(c context.Context, d *schema.Re
 		return diag.Errorf("error occurred while setting property Tags in NotificationAccountSubscription object: %s", err.Error())
 	}
 
+	if err := d.Set("type", (s.GetType())); err != nil {
+		return diag.Errorf("error occurred while setting property Type in NotificationAccountSubscription object: %s", err.Error())
+	}
+
+	if err := d.Set("verify", (s.GetVerify())); err != nil {
+		return diag.Errorf("error occurred while setting property Verify in NotificationAccountSubscription object: %s", err.Error())
+	}
+
 	if err := d.Set("version_context", flattenMapMoVersionContext(s.GetVersionContext(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property VersionContext in NotificationAccountSubscription object: %s", err.Error())
 	}
@@ -751,7 +780,6 @@ func resourceNotificationAccountSubscriptionRead(c context.Context, d *schema.Re
 
 func resourceNotificationAccountSubscriptionUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NotificationAccountSubscription{}
@@ -880,12 +908,24 @@ func resourceNotificationAccountSubscriptionUpdate(c context.Context, d *schema.
 		o.SetTags(x)
 	}
 
+	if d.HasChange("type") {
+		v := d.Get("type")
+		x := (v.(string))
+		o.SetType(x)
+	}
+
+	if d.HasChange("verify") {
+		v := d.Get("verify")
+		x := (v.(string))
+		o.SetVerify(x)
+	}
+
 	r := conn.ApiClient.NotificationApi.UpdateNotificationAccountSubscription(conn.ctx, d.Id()).NotificationAccountSubscription(*o)
 	result, _, responseErr := r.Execute()
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating NotificationAccountSubscription: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating NotificationAccountSubscription: %s", responseErr.Error())
@@ -897,7 +937,6 @@ func resourceNotificationAccountSubscriptionUpdate(c context.Context, d *schema.
 
 func resourceNotificationAccountSubscriptionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.NotificationApi.DeleteNotificationAccountSubscription(conn.ctx, d.Id())
@@ -909,7 +948,7 @@ func resourceNotificationAccountSubscriptionDelete(c context.Context, d *schema.
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting NotificationAccountSubscription object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting NotificationAccountSubscription object: %s", deleteErr.Error())

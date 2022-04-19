@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Dimension** | Pointer to **string** | Any dimension or metric name. | [optional] 
-**Direction** | Pointer to **string** | null | [optional] 
-**DimensionOrder** | Pointer to **string** | null | [optional] 
+**Direction** | Pointer to **string** |  | [optional] 
+**DimensionOrder** | Pointer to **string** |  | [optional] 
 
 ## Methods
 

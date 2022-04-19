@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Dimension** | **string** | dimension | 
-**Value** | **float64** | null | 
+**Value** | **float64** |  | 
 
 ## Methods
 

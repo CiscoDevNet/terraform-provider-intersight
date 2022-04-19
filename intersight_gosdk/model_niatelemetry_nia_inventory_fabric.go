@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -53,7 +53,7 @@ type NiatelemetryNiaInventoryFabric struct {
 	// Fabric Technology details on the fabric.
 	FabricTechnology *string `json:"FabricTechnology,omitempty"`
 	// PTP feature details on the fabric.
-	FeaturePtp *bool `json:"FeaturePtp,omitempty"`
+	FeaturePtp *string `json:"FeaturePtp,omitempty"`
 	// Checks if border gateway is present in the fabric inventory.
 	IsBgwPresent *bool `json:"IsBgwPresent,omitempty"`
 	// Check if NXAPI HTTP is enable or not on the fabric.
@@ -632,9 +632,9 @@ func (o *NiatelemetryNiaInventoryFabric) SetFabricTechnology(v string) {
 }
 
 // GetFeaturePtp returns the FeaturePtp field value if set, zero value otherwise.
-func (o *NiatelemetryNiaInventoryFabric) GetFeaturePtp() bool {
+func (o *NiatelemetryNiaInventoryFabric) GetFeaturePtp() string {
 	if o == nil || o.FeaturePtp == nil {
-		var ret bool
+		var ret string
 		return ret
 	}
 	return *o.FeaturePtp
@@ -642,7 +642,7 @@ func (o *NiatelemetryNiaInventoryFabric) GetFeaturePtp() bool {
 
 // GetFeaturePtpOk returns a tuple with the FeaturePtp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NiatelemetryNiaInventoryFabric) GetFeaturePtpOk() (*bool, bool) {
+func (o *NiatelemetryNiaInventoryFabric) GetFeaturePtpOk() (*string, bool) {
 	if o == nil || o.FeaturePtp == nil {
 		return nil, false
 	}
@@ -658,8 +658,8 @@ func (o *NiatelemetryNiaInventoryFabric) HasFeaturePtp() bool {
 	return false
 }
 
-// SetFeaturePtp gets a reference to the given bool and assigns it to the FeaturePtp field.
-func (o *NiatelemetryNiaInventoryFabric) SetFeaturePtp(v bool) {
+// SetFeaturePtp gets a reference to the given string and assigns it to the FeaturePtp field.
+func (o *NiatelemetryNiaInventoryFabric) SetFeaturePtp(v string) {
 	o.FeaturePtp = &v
 }
 
@@ -899,11 +899,11 @@ func (o *NiatelemetryNiaInventoryFabric) GetLogicalLinks() []NiatelemetryLogical
 // GetLogicalLinksOk returns a tuple with the LogicalLinks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NiatelemetryNiaInventoryFabric) GetLogicalLinksOk() (*[]NiatelemetryLogicalLink, bool) {
+func (o *NiatelemetryNiaInventoryFabric) GetLogicalLinksOk() ([]NiatelemetryLogicalLink, bool) {
 	if o == nil || o.LogicalLinks == nil {
 		return nil, false
 	}
-	return &o.LogicalLinks, true
+	return o.LogicalLinks, true
 }
 
 // HasLogicalLinks returns a boolean if a field has been set.
@@ -964,11 +964,11 @@ func (o *NiatelemetryNiaInventoryFabric) GetNetworkDeploymentStatus() []Niatelem
 // GetNetworkDeploymentStatusOk returns a tuple with the NetworkDeploymentStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NiatelemetryNiaInventoryFabric) GetNetworkDeploymentStatusOk() (*[]NiatelemetryDeploymentStatus, bool) {
+func (o *NiatelemetryNiaInventoryFabric) GetNetworkDeploymentStatusOk() ([]NiatelemetryDeploymentStatus, bool) {
 	if o == nil || o.NetworkDeploymentStatus == nil {
 		return nil, false
 	}
-	return &o.NetworkDeploymentStatus, true
+	return o.NetworkDeploymentStatus, true
 }
 
 // HasNetworkDeploymentStatus returns a boolean if a field has been set.
@@ -1477,11 +1477,11 @@ func (o *NiatelemetryNiaInventoryFabric) GetVpcDetails() []NiatelemetryVpcDetail
 // GetVpcDetailsOk returns a tuple with the VpcDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NiatelemetryNiaInventoryFabric) GetVpcDetailsOk() (*[]NiatelemetryVpcDetails, bool) {
+func (o *NiatelemetryNiaInventoryFabric) GetVpcDetailsOk() ([]NiatelemetryVpcDetails, bool) {
 	if o == nil || o.VpcDetails == nil {
 		return nil, false
 	}
-	return &o.VpcDetails, true
+	return o.VpcDetails, true
 }
 
 // HasVpcDetails returns a boolean if a field has been set.
@@ -1542,11 +1542,11 @@ func (o *NiatelemetryNiaInventoryFabric) GetVrfDeploymentStatus() []Niatelemetry
 // GetVrfDeploymentStatusOk returns a tuple with the VrfDeploymentStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NiatelemetryNiaInventoryFabric) GetVrfDeploymentStatusOk() (*[]NiatelemetryDeploymentStatus, bool) {
+func (o *NiatelemetryNiaInventoryFabric) GetVrfDeploymentStatusOk() ([]NiatelemetryDeploymentStatus, bool) {
 	if o == nil || o.VrfDeploymentStatus == nil {
 		return nil, false
 	}
-	return &o.VrfDeploymentStatus, true
+	return o.VrfDeploymentStatus, true
 }
 
 // HasVrfDeploymentStatus returns a boolean if a field has been set.
@@ -1786,7 +1786,7 @@ func (o *NiatelemetryNiaInventoryFabric) UnmarshalJSON(bytes []byte) (err error)
 		// Fabric Technology details on the fabric.
 		FabricTechnology *string `json:"FabricTechnology,omitempty"`
 		// PTP feature details on the fabric.
-		FeaturePtp *bool `json:"FeaturePtp,omitempty"`
+		FeaturePtp *string `json:"FeaturePtp,omitempty"`
 		// Checks if border gateway is present in the fabric inventory.
 		IsBgwPresent *bool `json:"IsBgwPresent,omitempty"`
 		// Check if NXAPI HTTP is enable or not on the fabric.

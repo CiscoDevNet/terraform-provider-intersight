@@ -2279,7 +2279,6 @@ func resourceBulkMoMerger() *schema.Resource {
 
 func resourceBulkMoMergerCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewBulkMoMergerWithDefaults()
@@ -2647,7 +2646,7 @@ func resourceBulkMoMergerCreate(c context.Context, d *schema.ResourceData, meta 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating BulkMoMerger: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating BulkMoMerger: %s", responseErr.Error())
@@ -2659,7 +2658,6 @@ func resourceBulkMoMergerCreate(c context.Context, d *schema.ResourceData, meta 
 
 func resourceBulkMoMergerRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	log.Printf("%v", d)
 	var de diag.Diagnostics
 	return de
@@ -2667,7 +2665,6 @@ func resourceBulkMoMergerRead(c context.Context, d *schema.ResourceData, meta in
 
 func resourceBulkMoMergerDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "BulkMoMerger does not allow delete functionality"}
 	de = append(de, warning)

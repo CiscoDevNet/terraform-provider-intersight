@@ -432,7 +432,6 @@ func resourceConvergedinfraHealthCheckDefinition() *schema.Resource {
 
 func resourceConvergedinfraHealthCheckDefinitionCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewConvergedinfraHealthCheckDefinitionWithDefaults()
@@ -530,7 +529,7 @@ func resourceConvergedinfraHealthCheckDefinitionCreate(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating ConvergedinfraHealthCheckDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating ConvergedinfraHealthCheckDefinition: %s", responseErr.Error())
@@ -542,7 +541,6 @@ func resourceConvergedinfraHealthCheckDefinitionCreate(c context.Context, d *sch
 
 func resourceConvergedinfraHealthCheckDefinitionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.ConvergedinfraApi.GetConvergedinfraHealthCheckDefinitionByMoid(conn.ctx, d.Id())
@@ -555,7 +553,7 @@ func resourceConvergedinfraHealthCheckDefinitionRead(c context.Context, d *schem
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching ConvergedinfraHealthCheckDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching ConvergedinfraHealthCheckDefinition: %s", responseErr.Error())
@@ -656,7 +654,6 @@ func resourceConvergedinfraHealthCheckDefinitionRead(c context.Context, d *schem
 
 func resourceConvergedinfraHealthCheckDefinitionUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ConvergedinfraHealthCheckDefinition{}
@@ -762,7 +759,7 @@ func resourceConvergedinfraHealthCheckDefinitionUpdate(c context.Context, d *sch
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating ConvergedinfraHealthCheckDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating ConvergedinfraHealthCheckDefinition: %s", responseErr.Error())
@@ -774,7 +771,6 @@ func resourceConvergedinfraHealthCheckDefinitionUpdate(c context.Context, d *sch
 
 func resourceConvergedinfraHealthCheckDefinitionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.ConvergedinfraApi.DeleteConvergedinfraHealthCheckDefinition(conn.ctx, d.Id())
@@ -786,7 +782,7 @@ func resourceConvergedinfraHealthCheckDefinitionDelete(c context.Context, d *sch
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting ConvergedinfraHealthCheckDefinition object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting ConvergedinfraHealthCheckDefinition object: %s", deleteErr.Error())

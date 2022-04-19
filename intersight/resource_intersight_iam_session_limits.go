@@ -500,7 +500,6 @@ func resourceIamSessionLimits() *schema.Resource {
 
 func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIamSessionLimitsWithDefaults()
@@ -626,7 +625,7 @@ func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, m
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating IamSessionLimits: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating IamSessionLimits: %s", responseErr.Error())
@@ -638,7 +637,6 @@ func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, m
 
 func resourceIamSessionLimitsRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamSessionLimitsByMoid(conn.ctx, d.Id())
@@ -651,7 +649,7 @@ func resourceIamSessionLimitsRead(c context.Context, d *schema.ResourceData, met
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching IamSessionLimits: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching IamSessionLimits: %s", responseErr.Error())
@@ -748,7 +746,6 @@ func resourceIamSessionLimitsRead(c context.Context, d *schema.ResourceData, met
 
 func resourceIamSessionLimitsUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamSessionLimits{}
@@ -880,7 +877,7 @@ func resourceIamSessionLimitsUpdate(c context.Context, d *schema.ResourceData, m
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating IamSessionLimits: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating IamSessionLimits: %s", responseErr.Error())
@@ -892,7 +889,6 @@ func resourceIamSessionLimitsUpdate(c context.Context, d *schema.ResourceData, m
 
 func resourceIamSessionLimitsDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamSessionLimits(conn.ctx, d.Id())
@@ -904,7 +900,7 @@ func resourceIamSessionLimitsDelete(c context.Context, d *schema.ResourceData, m
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting IamSessionLimits object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting IamSessionLimits object: %s", deleteErr.Error())

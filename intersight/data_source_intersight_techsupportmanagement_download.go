@@ -667,7 +667,6 @@ func dataSourceTechsupportmanagementDownload() *schema.Resource {
 
 func dataSourceTechsupportmanagementDownloadRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.TechsupportmanagementDownload{}
@@ -1012,7 +1011,7 @@ func dataSourceTechsupportmanagementDownloadRead(c context.Context, d *schema.Re
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of TechsupportmanagementDownload: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of TechsupportmanagementDownload: %s", responseErr.Error())
@@ -1029,7 +1028,7 @@ func dataSourceTechsupportmanagementDownloadRead(c context.Context, d *schema.Re
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching TechsupportmanagementDownload: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching TechsupportmanagementDownload: %s", responseErr.Error())

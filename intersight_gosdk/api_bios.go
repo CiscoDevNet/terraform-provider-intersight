@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // BiosApiService BiosApi service
 type BiosApiService service
 
 type ApiCreateBiosPolicyRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BiosApiService
 	biosPolicy  *BiosPolicy
 	ifMatch     *string
@@ -54,17 +49,17 @@ func (r ApiCreateBiosPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateBio
 	return r
 }
 
-func (r ApiCreateBiosPolicyRequest) Execute() (BiosPolicy, *_nethttp.Response, error) {
+func (r ApiCreateBiosPolicyRequest) Execute() (*BiosPolicy, *http.Response, error) {
 	return r.ApiService.CreateBiosPolicyExecute(r)
 }
 
 /*
 CreateBiosPolicy Create a 'bios.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateBiosPolicyRequest
 */
-func (a *BiosApiService) CreateBiosPolicy(ctx _context.Context) ApiCreateBiosPolicyRequest {
+func (a *BiosApiService) CreateBiosPolicy(ctx context.Context) ApiCreateBiosPolicyRequest {
 	return ApiCreateBiosPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *BiosApiService) CreateBiosPolicy(ctx _context.Context) ApiCreateBiosPol
 
 // Execute executes the request
 //  @return BiosPolicy
-func (a *BiosApiService) CreateBiosPolicyExecute(r ApiCreateBiosPolicyRequest) (BiosPolicy, *_nethttp.Response, error) {
+func (a *BiosApiService) CreateBiosPolicyExecute(r ApiCreateBiosPolicyRequest) (*BiosPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.CreateBiosPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/Policies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.biosPolicy == nil {
 		return localVarReturnValue, nil, reportError("biosPolicy is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *BiosApiService) CreateBiosPolicyExecute(r ApiCreateBiosPolicyRequest) (
 	}
 	// body params
 	localVarPostBody = r.biosPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *BiosApiService) CreateBiosPolicyExecute(r ApiCreateBiosPolicyRequest) (
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *BiosApiService) CreateBiosPolicyExecute(r ApiCreateBiosPolicyRequest) (
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *BiosApiService) CreateBiosPolicyExecute(r ApiCreateBiosPolicyRequest) (
 }
 
 type ApiDeleteBiosPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BiosApiService
 	moid       string
 }
 
-func (r ApiDeleteBiosPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteBiosPolicyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteBiosPolicyExecute(r)
 }
 
 /*
 DeleteBiosPolicy Delete a 'bios.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteBiosPolicyRequest
 */
-func (a *BiosApiService) DeleteBiosPolicy(ctx _context.Context, moid string) ApiDeleteBiosPolicyRequest {
+func (a *BiosApiService) DeleteBiosPolicy(ctx context.Context, moid string) ApiDeleteBiosPolicyRequest {
 	return ApiDeleteBiosPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *BiosApiService) DeleteBiosPolicy(ctx _context.Context, moid string) Api
 }
 
 // Execute executes the request
-func (a *BiosApiService) DeleteBiosPolicyExecute(r ApiDeleteBiosPolicyRequest) (*_nethttp.Response, error) {
+func (a *BiosApiService) DeleteBiosPolicyExecute(r ApiDeleteBiosPolicyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.DeleteBiosPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *BiosApiService) DeleteBiosPolicyExecute(r ApiDeleteBiosPolicyRequest) (
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *BiosApiService) DeleteBiosPolicyExecute(r ApiDeleteBiosPolicyRequest) (
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *BiosApiService) DeleteBiosPolicyExecute(r ApiDeleteBiosPolicyRequest) (
 }
 
 type ApiGetBiosBootDeviceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BiosApiService
 	moid       string
 }
 
-func (r ApiGetBiosBootDeviceByMoidRequest) Execute() (BiosBootDevice, *_nethttp.Response, error) {
+func (r ApiGetBiosBootDeviceByMoidRequest) Execute() (*BiosBootDevice, *http.Response, error) {
 	return r.ApiService.GetBiosBootDeviceByMoidExecute(r)
 }
 
 /*
 GetBiosBootDeviceByMoid Read a 'bios.BootDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBiosBootDeviceByMoidRequest
 */
-func (a *BiosApiService) GetBiosBootDeviceByMoid(ctx _context.Context, moid string) ApiGetBiosBootDeviceByMoidRequest {
+func (a *BiosApiService) GetBiosBootDeviceByMoid(ctx context.Context, moid string) ApiGetBiosBootDeviceByMoidRequest {
 	return ApiGetBiosBootDeviceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *BiosApiService) GetBiosBootDeviceByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return BiosBootDevice
-func (a *BiosApiService) GetBiosBootDeviceByMoidExecute(r ApiGetBiosBootDeviceByMoidRequest) (BiosBootDevice, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosBootDeviceByMoidExecute(r ApiGetBiosBootDeviceByMoidRequest) (*BiosBootDevice, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosBootDevice
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosBootDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosBootDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/BootDevices/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *BiosApiService) GetBiosBootDeviceByMoidExecute(r ApiGetBiosBootDeviceBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *BiosApiService) GetBiosBootDeviceByMoidExecute(r ApiGetBiosBootDeviceBy
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *BiosApiService) GetBiosBootDeviceByMoidExecute(r ApiGetBiosBootDeviceBy
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *BiosApiService) GetBiosBootDeviceByMoidExecute(r ApiGetBiosBootDeviceBy
 }
 
 type ApiGetBiosBootDeviceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BiosApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetBiosBootDeviceListRequest) Tags(tags string) ApiGetBiosBootDeviceL
 	return r
 }
 
-func (r ApiGetBiosBootDeviceListRequest) Execute() (BiosBootDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetBiosBootDeviceListRequest) Execute() (*BiosBootDeviceResponse, *http.Response, error) {
 	return r.ApiService.GetBiosBootDeviceListExecute(r)
 }
 
 /*
 GetBiosBootDeviceList Read a 'bios.BootDevice' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBiosBootDeviceListRequest
 */
-func (a *BiosApiService) GetBiosBootDeviceList(ctx _context.Context) ApiGetBiosBootDeviceListRequest {
+func (a *BiosApiService) GetBiosBootDeviceList(ctx context.Context) ApiGetBiosBootDeviceListRequest {
 	return ApiGetBiosBootDeviceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *BiosApiService) GetBiosBootDeviceList(ctx _context.Context) ApiGetBiosB
 
 // Execute executes the request
 //  @return BiosBootDeviceResponse
-func (a *BiosApiService) GetBiosBootDeviceListExecute(r ApiGetBiosBootDeviceListRequest) (BiosBootDeviceResponse, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosBootDeviceListExecute(r ApiGetBiosBootDeviceListRequest) (*BiosBootDeviceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosBootDeviceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosBootDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosBootDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/BootDevices"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *BiosApiService) GetBiosBootDeviceListExecute(r ApiGetBiosBootDeviceList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *BiosApiService) GetBiosBootDeviceListExecute(r ApiGetBiosBootDeviceList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *BiosApiService) GetBiosBootDeviceListExecute(r ApiGetBiosBootDeviceList
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,23 +739,23 @@ func (a *BiosApiService) GetBiosBootDeviceListExecute(r ApiGetBiosBootDeviceList
 }
 
 type ApiGetBiosBootModeByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BiosApiService
 	moid       string
 }
 
-func (r ApiGetBiosBootModeByMoidRequest) Execute() (BiosBootMode, *_nethttp.Response, error) {
+func (r ApiGetBiosBootModeByMoidRequest) Execute() (*BiosBootMode, *http.Response, error) {
 	return r.ApiService.GetBiosBootModeByMoidExecute(r)
 }
 
 /*
 GetBiosBootModeByMoid Read a 'bios.BootMode' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBiosBootModeByMoidRequest
 */
-func (a *BiosApiService) GetBiosBootModeByMoid(ctx _context.Context, moid string) ApiGetBiosBootModeByMoidRequest {
+func (a *BiosApiService) GetBiosBootModeByMoid(ctx context.Context, moid string) ApiGetBiosBootModeByMoidRequest {
 	return ApiGetBiosBootModeByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -778,27 +765,25 @@ func (a *BiosApiService) GetBiosBootModeByMoid(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return BiosBootMode
-func (a *BiosApiService) GetBiosBootModeByMoidExecute(r ApiGetBiosBootModeByMoidRequest) (BiosBootMode, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosBootModeByMoidExecute(r ApiGetBiosBootModeByMoidRequest) (*BiosBootMode, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosBootMode
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosBootMode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosBootModeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/BootModes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -817,7 +802,7 @@ func (a *BiosApiService) GetBiosBootModeByMoidExecute(r ApiGetBiosBootModeByMoid
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -827,15 +812,15 @@ func (a *BiosApiService) GetBiosBootModeByMoidExecute(r ApiGetBiosBootModeByMoid
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -891,7 +876,7 @@ func (a *BiosApiService) GetBiosBootModeByMoidExecute(r ApiGetBiosBootModeByMoid
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -902,7 +887,7 @@ func (a *BiosApiService) GetBiosBootModeByMoidExecute(r ApiGetBiosBootModeByMoid
 }
 
 type ApiGetBiosBootModeListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BiosApiService
 	filter      *string
 	orderby     *string
@@ -983,17 +968,17 @@ func (r ApiGetBiosBootModeListRequest) Tags(tags string) ApiGetBiosBootModeListR
 	return r
 }
 
-func (r ApiGetBiosBootModeListRequest) Execute() (BiosBootModeResponse, *_nethttp.Response, error) {
+func (r ApiGetBiosBootModeListRequest) Execute() (*BiosBootModeResponse, *http.Response, error) {
 	return r.ApiService.GetBiosBootModeListExecute(r)
 }
 
 /*
 GetBiosBootModeList Read a 'bios.BootMode' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBiosBootModeListRequest
 */
-func (a *BiosApiService) GetBiosBootModeList(ctx _context.Context) ApiGetBiosBootModeListRequest {
+func (a *BiosApiService) GetBiosBootModeList(ctx context.Context) ApiGetBiosBootModeListRequest {
 	return ApiGetBiosBootModeListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1002,26 +987,24 @@ func (a *BiosApiService) GetBiosBootModeList(ctx _context.Context) ApiGetBiosBoo
 
 // Execute executes the request
 //  @return BiosBootModeResponse
-func (a *BiosApiService) GetBiosBootModeListExecute(r ApiGetBiosBootModeListRequest) (BiosBootModeResponse, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosBootModeListExecute(r ApiGetBiosBootModeListRequest) (*BiosBootModeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosBootModeResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosBootModeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosBootModeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/BootModes"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1073,7 +1056,7 @@ func (a *BiosApiService) GetBiosBootModeListExecute(r ApiGetBiosBootModeListRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1083,15 +1066,15 @@ func (a *BiosApiService) GetBiosBootModeListExecute(r ApiGetBiosBootModeListRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1147,7 +1130,7 @@ func (a *BiosApiService) GetBiosBootModeListExecute(r ApiGetBiosBootModeListRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1158,23 +1141,23 @@ func (a *BiosApiService) GetBiosBootModeListExecute(r ApiGetBiosBootModeListRequ
 }
 
 type ApiGetBiosPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BiosApiService
 	moid       string
 }
 
-func (r ApiGetBiosPolicyByMoidRequest) Execute() (BiosPolicy, *_nethttp.Response, error) {
+func (r ApiGetBiosPolicyByMoidRequest) Execute() (*BiosPolicy, *http.Response, error) {
 	return r.ApiService.GetBiosPolicyByMoidExecute(r)
 }
 
 /*
 GetBiosPolicyByMoid Read a 'bios.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBiosPolicyByMoidRequest
 */
-func (a *BiosApiService) GetBiosPolicyByMoid(ctx _context.Context, moid string) ApiGetBiosPolicyByMoidRequest {
+func (a *BiosApiService) GetBiosPolicyByMoid(ctx context.Context, moid string) ApiGetBiosPolicyByMoidRequest {
 	return ApiGetBiosPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1184,27 +1167,25 @@ func (a *BiosApiService) GetBiosPolicyByMoid(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return BiosPolicy
-func (a *BiosApiService) GetBiosPolicyByMoidExecute(r ApiGetBiosPolicyByMoidRequest) (BiosPolicy, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosPolicyByMoidExecute(r ApiGetBiosPolicyByMoidRequest) (*BiosPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1223,7 +1204,7 @@ func (a *BiosApiService) GetBiosPolicyByMoidExecute(r ApiGetBiosPolicyByMoidRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1233,15 +1214,15 @@ func (a *BiosApiService) GetBiosPolicyByMoidExecute(r ApiGetBiosPolicyByMoidRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1297,7 +1278,7 @@ func (a *BiosApiService) GetBiosPolicyByMoidExecute(r ApiGetBiosPolicyByMoidRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1308,7 +1289,7 @@ func (a *BiosApiService) GetBiosPolicyByMoidExecute(r ApiGetBiosPolicyByMoidRequ
 }
 
 type ApiGetBiosPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BiosApiService
 	filter      *string
 	orderby     *string
@@ -1389,17 +1370,17 @@ func (r ApiGetBiosPolicyListRequest) Tags(tags string) ApiGetBiosPolicyListReque
 	return r
 }
 
-func (r ApiGetBiosPolicyListRequest) Execute() (BiosPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetBiosPolicyListRequest) Execute() (*BiosPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetBiosPolicyListExecute(r)
 }
 
 /*
 GetBiosPolicyList Read a 'bios.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBiosPolicyListRequest
 */
-func (a *BiosApiService) GetBiosPolicyList(ctx _context.Context) ApiGetBiosPolicyListRequest {
+func (a *BiosApiService) GetBiosPolicyList(ctx context.Context) ApiGetBiosPolicyListRequest {
 	return ApiGetBiosPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1408,26 +1389,24 @@ func (a *BiosApiService) GetBiosPolicyList(ctx _context.Context) ApiGetBiosPolic
 
 // Execute executes the request
 //  @return BiosPolicyResponse
-func (a *BiosApiService) GetBiosPolicyListExecute(r ApiGetBiosPolicyListRequest) (BiosPolicyResponse, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosPolicyListExecute(r ApiGetBiosPolicyListRequest) (*BiosPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/Policies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1479,7 +1458,7 @@ func (a *BiosApiService) GetBiosPolicyListExecute(r ApiGetBiosPolicyListRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1489,15 +1468,15 @@ func (a *BiosApiService) GetBiosPolicyListExecute(r ApiGetBiosPolicyListRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1553,7 +1532,7 @@ func (a *BiosApiService) GetBiosPolicyListExecute(r ApiGetBiosPolicyListRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1564,23 +1543,23 @@ func (a *BiosApiService) GetBiosPolicyListExecute(r ApiGetBiosPolicyListRequest)
 }
 
 type ApiGetBiosSystemBootOrderByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BiosApiService
 	moid       string
 }
 
-func (r ApiGetBiosSystemBootOrderByMoidRequest) Execute() (BiosSystemBootOrder, *_nethttp.Response, error) {
+func (r ApiGetBiosSystemBootOrderByMoidRequest) Execute() (*BiosSystemBootOrder, *http.Response, error) {
 	return r.ApiService.GetBiosSystemBootOrderByMoidExecute(r)
 }
 
 /*
 GetBiosSystemBootOrderByMoid Read a 'bios.SystemBootOrder' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBiosSystemBootOrderByMoidRequest
 */
-func (a *BiosApiService) GetBiosSystemBootOrderByMoid(ctx _context.Context, moid string) ApiGetBiosSystemBootOrderByMoidRequest {
+func (a *BiosApiService) GetBiosSystemBootOrderByMoid(ctx context.Context, moid string) ApiGetBiosSystemBootOrderByMoidRequest {
 	return ApiGetBiosSystemBootOrderByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1590,27 +1569,25 @@ func (a *BiosApiService) GetBiosSystemBootOrderByMoid(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return BiosSystemBootOrder
-func (a *BiosApiService) GetBiosSystemBootOrderByMoidExecute(r ApiGetBiosSystemBootOrderByMoidRequest) (BiosSystemBootOrder, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosSystemBootOrderByMoidExecute(r ApiGetBiosSystemBootOrderByMoidRequest) (*BiosSystemBootOrder, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosSystemBootOrder
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosSystemBootOrder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosSystemBootOrderByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/SystemBootOrders/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1629,7 +1606,7 @@ func (a *BiosApiService) GetBiosSystemBootOrderByMoidExecute(r ApiGetBiosSystemB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1639,15 +1616,15 @@ func (a *BiosApiService) GetBiosSystemBootOrderByMoidExecute(r ApiGetBiosSystemB
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1703,7 +1680,7 @@ func (a *BiosApiService) GetBiosSystemBootOrderByMoidExecute(r ApiGetBiosSystemB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1714,7 +1691,7 @@ func (a *BiosApiService) GetBiosSystemBootOrderByMoidExecute(r ApiGetBiosSystemB
 }
 
 type ApiGetBiosSystemBootOrderListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BiosApiService
 	filter      *string
 	orderby     *string
@@ -1795,17 +1772,17 @@ func (r ApiGetBiosSystemBootOrderListRequest) Tags(tags string) ApiGetBiosSystem
 	return r
 }
 
-func (r ApiGetBiosSystemBootOrderListRequest) Execute() (BiosSystemBootOrderResponse, *_nethttp.Response, error) {
+func (r ApiGetBiosSystemBootOrderListRequest) Execute() (*BiosSystemBootOrderResponse, *http.Response, error) {
 	return r.ApiService.GetBiosSystemBootOrderListExecute(r)
 }
 
 /*
 GetBiosSystemBootOrderList Read a 'bios.SystemBootOrder' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBiosSystemBootOrderListRequest
 */
-func (a *BiosApiService) GetBiosSystemBootOrderList(ctx _context.Context) ApiGetBiosSystemBootOrderListRequest {
+func (a *BiosApiService) GetBiosSystemBootOrderList(ctx context.Context) ApiGetBiosSystemBootOrderListRequest {
 	return ApiGetBiosSystemBootOrderListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1814,26 +1791,24 @@ func (a *BiosApiService) GetBiosSystemBootOrderList(ctx _context.Context) ApiGet
 
 // Execute executes the request
 //  @return BiosSystemBootOrderResponse
-func (a *BiosApiService) GetBiosSystemBootOrderListExecute(r ApiGetBiosSystemBootOrderListRequest) (BiosSystemBootOrderResponse, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosSystemBootOrderListExecute(r ApiGetBiosSystemBootOrderListRequest) (*BiosSystemBootOrderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosSystemBootOrderResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosSystemBootOrderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosSystemBootOrderList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/SystemBootOrders"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1885,7 +1860,7 @@ func (a *BiosApiService) GetBiosSystemBootOrderListExecute(r ApiGetBiosSystemBoo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1895,15 +1870,15 @@ func (a *BiosApiService) GetBiosSystemBootOrderListExecute(r ApiGetBiosSystemBoo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1959,7 +1934,7 @@ func (a *BiosApiService) GetBiosSystemBootOrderListExecute(r ApiGetBiosSystemBoo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1970,23 +1945,23 @@ func (a *BiosApiService) GetBiosSystemBootOrderListExecute(r ApiGetBiosSystemBoo
 }
 
 type ApiGetBiosTokenSettingsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BiosApiService
 	moid       string
 }
 
-func (r ApiGetBiosTokenSettingsByMoidRequest) Execute() (BiosTokenSettings, *_nethttp.Response, error) {
+func (r ApiGetBiosTokenSettingsByMoidRequest) Execute() (*BiosTokenSettings, *http.Response, error) {
 	return r.ApiService.GetBiosTokenSettingsByMoidExecute(r)
 }
 
 /*
 GetBiosTokenSettingsByMoid Read a 'bios.TokenSettings' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBiosTokenSettingsByMoidRequest
 */
-func (a *BiosApiService) GetBiosTokenSettingsByMoid(ctx _context.Context, moid string) ApiGetBiosTokenSettingsByMoidRequest {
+func (a *BiosApiService) GetBiosTokenSettingsByMoid(ctx context.Context, moid string) ApiGetBiosTokenSettingsByMoidRequest {
 	return ApiGetBiosTokenSettingsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1996,27 +1971,25 @@ func (a *BiosApiService) GetBiosTokenSettingsByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return BiosTokenSettings
-func (a *BiosApiService) GetBiosTokenSettingsByMoidExecute(r ApiGetBiosTokenSettingsByMoidRequest) (BiosTokenSettings, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosTokenSettingsByMoidExecute(r ApiGetBiosTokenSettingsByMoidRequest) (*BiosTokenSettings, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosTokenSettings
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosTokenSettings
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosTokenSettingsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/TokenSettings/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2035,7 +2008,7 @@ func (a *BiosApiService) GetBiosTokenSettingsByMoidExecute(r ApiGetBiosTokenSett
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2045,15 +2018,15 @@ func (a *BiosApiService) GetBiosTokenSettingsByMoidExecute(r ApiGetBiosTokenSett
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2109,7 +2082,7 @@ func (a *BiosApiService) GetBiosTokenSettingsByMoidExecute(r ApiGetBiosTokenSett
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2120,7 +2093,7 @@ func (a *BiosApiService) GetBiosTokenSettingsByMoidExecute(r ApiGetBiosTokenSett
 }
 
 type ApiGetBiosTokenSettingsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BiosApiService
 	filter      *string
 	orderby     *string
@@ -2201,17 +2174,17 @@ func (r ApiGetBiosTokenSettingsListRequest) Tags(tags string) ApiGetBiosTokenSet
 	return r
 }
 
-func (r ApiGetBiosTokenSettingsListRequest) Execute() (BiosTokenSettingsResponse, *_nethttp.Response, error) {
+func (r ApiGetBiosTokenSettingsListRequest) Execute() (*BiosTokenSettingsResponse, *http.Response, error) {
 	return r.ApiService.GetBiosTokenSettingsListExecute(r)
 }
 
 /*
 GetBiosTokenSettingsList Read a 'bios.TokenSettings' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBiosTokenSettingsListRequest
 */
-func (a *BiosApiService) GetBiosTokenSettingsList(ctx _context.Context) ApiGetBiosTokenSettingsListRequest {
+func (a *BiosApiService) GetBiosTokenSettingsList(ctx context.Context) ApiGetBiosTokenSettingsListRequest {
 	return ApiGetBiosTokenSettingsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2220,26 +2193,24 @@ func (a *BiosApiService) GetBiosTokenSettingsList(ctx _context.Context) ApiGetBi
 
 // Execute executes the request
 //  @return BiosTokenSettingsResponse
-func (a *BiosApiService) GetBiosTokenSettingsListExecute(r ApiGetBiosTokenSettingsListRequest) (BiosTokenSettingsResponse, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosTokenSettingsListExecute(r ApiGetBiosTokenSettingsListRequest) (*BiosTokenSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosTokenSettingsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosTokenSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosTokenSettingsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/TokenSettings"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2291,7 +2262,7 @@ func (a *BiosApiService) GetBiosTokenSettingsListExecute(r ApiGetBiosTokenSettin
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2301,15 +2272,15 @@ func (a *BiosApiService) GetBiosTokenSettingsListExecute(r ApiGetBiosTokenSettin
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2365,7 +2336,7 @@ func (a *BiosApiService) GetBiosTokenSettingsListExecute(r ApiGetBiosTokenSettin
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2376,23 +2347,23 @@ func (a *BiosApiService) GetBiosTokenSettingsListExecute(r ApiGetBiosTokenSettin
 }
 
 type ApiGetBiosUnitByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BiosApiService
 	moid       string
 }
 
-func (r ApiGetBiosUnitByMoidRequest) Execute() (BiosUnit, *_nethttp.Response, error) {
+func (r ApiGetBiosUnitByMoidRequest) Execute() (*BiosUnit, *http.Response, error) {
 	return r.ApiService.GetBiosUnitByMoidExecute(r)
 }
 
 /*
 GetBiosUnitByMoid Read a 'bios.Unit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBiosUnitByMoidRequest
 */
-func (a *BiosApiService) GetBiosUnitByMoid(ctx _context.Context, moid string) ApiGetBiosUnitByMoidRequest {
+func (a *BiosApiService) GetBiosUnitByMoid(ctx context.Context, moid string) ApiGetBiosUnitByMoidRequest {
 	return ApiGetBiosUnitByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2402,27 +2373,25 @@ func (a *BiosApiService) GetBiosUnitByMoid(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return BiosUnit
-func (a *BiosApiService) GetBiosUnitByMoidExecute(r ApiGetBiosUnitByMoidRequest) (BiosUnit, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosUnitByMoidExecute(r ApiGetBiosUnitByMoidRequest) (*BiosUnit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosUnit
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosUnitByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/Units/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2441,7 +2410,7 @@ func (a *BiosApiService) GetBiosUnitByMoidExecute(r ApiGetBiosUnitByMoidRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2451,15 +2420,15 @@ func (a *BiosApiService) GetBiosUnitByMoidExecute(r ApiGetBiosUnitByMoidRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2515,7 +2484,7 @@ func (a *BiosApiService) GetBiosUnitByMoidExecute(r ApiGetBiosUnitByMoidRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2526,7 +2495,7 @@ func (a *BiosApiService) GetBiosUnitByMoidExecute(r ApiGetBiosUnitByMoidRequest)
 }
 
 type ApiGetBiosUnitListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BiosApiService
 	filter      *string
 	orderby     *string
@@ -2607,17 +2576,17 @@ func (r ApiGetBiosUnitListRequest) Tags(tags string) ApiGetBiosUnitListRequest {
 	return r
 }
 
-func (r ApiGetBiosUnitListRequest) Execute() (BiosUnitResponse, *_nethttp.Response, error) {
+func (r ApiGetBiosUnitListRequest) Execute() (*BiosUnitResponse, *http.Response, error) {
 	return r.ApiService.GetBiosUnitListExecute(r)
 }
 
 /*
 GetBiosUnitList Read a 'bios.Unit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBiosUnitListRequest
 */
-func (a *BiosApiService) GetBiosUnitList(ctx _context.Context) ApiGetBiosUnitListRequest {
+func (a *BiosApiService) GetBiosUnitList(ctx context.Context) ApiGetBiosUnitListRequest {
 	return ApiGetBiosUnitListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2626,26 +2595,24 @@ func (a *BiosApiService) GetBiosUnitList(ctx _context.Context) ApiGetBiosUnitLis
 
 // Execute executes the request
 //  @return BiosUnitResponse
-func (a *BiosApiService) GetBiosUnitListExecute(r ApiGetBiosUnitListRequest) (BiosUnitResponse, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosUnitListExecute(r ApiGetBiosUnitListRequest) (*BiosUnitResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosUnitResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosUnitResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosUnitList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/Units"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2697,7 +2664,7 @@ func (a *BiosApiService) GetBiosUnitListExecute(r ApiGetBiosUnitListRequest) (Bi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2707,15 +2674,15 @@ func (a *BiosApiService) GetBiosUnitListExecute(r ApiGetBiosUnitListRequest) (Bi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2771,7 +2738,7 @@ func (a *BiosApiService) GetBiosUnitListExecute(r ApiGetBiosUnitListRequest) (Bi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2782,23 +2749,23 @@ func (a *BiosApiService) GetBiosUnitListExecute(r ApiGetBiosUnitListRequest) (Bi
 }
 
 type ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BiosApiService
 	moid       string
 }
 
-func (r ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest) Execute() (BiosVfSelectMemoryRasConfiguration, *_nethttp.Response, error) {
+func (r ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest) Execute() (*BiosVfSelectMemoryRasConfiguration, *http.Response, error) {
 	return r.ApiService.GetBiosVfSelectMemoryRasConfigurationByMoidExecute(r)
 }
 
 /*
 GetBiosVfSelectMemoryRasConfigurationByMoid Read a 'bios.VfSelectMemoryRasConfiguration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest
 */
-func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationByMoid(ctx _context.Context, moid string) ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest {
+func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationByMoid(ctx context.Context, moid string) ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest {
 	return ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2808,27 +2775,25 @@ func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationByMoid(ctx _contex
 
 // Execute executes the request
 //  @return BiosVfSelectMemoryRasConfiguration
-func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationByMoidExecute(r ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest) (BiosVfSelectMemoryRasConfiguration, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationByMoidExecute(r ApiGetBiosVfSelectMemoryRasConfigurationByMoidRequest) (*BiosVfSelectMemoryRasConfiguration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosVfSelectMemoryRasConfiguration
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosVfSelectMemoryRasConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosVfSelectMemoryRasConfigurationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/VfSelectMemoryRasConfigurations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2847,7 +2812,7 @@ func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationByMoidExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2857,15 +2822,15 @@ func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2921,7 +2886,7 @@ func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationByMoidExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2932,7 +2897,7 @@ func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationByMoidExecute(r Ap
 }
 
 type ApiGetBiosVfSelectMemoryRasConfigurationListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BiosApiService
 	filter      *string
 	orderby     *string
@@ -3013,17 +2978,17 @@ func (r ApiGetBiosVfSelectMemoryRasConfigurationListRequest) Tags(tags string) A
 	return r
 }
 
-func (r ApiGetBiosVfSelectMemoryRasConfigurationListRequest) Execute() (BiosVfSelectMemoryRasConfigurationResponse, *_nethttp.Response, error) {
+func (r ApiGetBiosVfSelectMemoryRasConfigurationListRequest) Execute() (*BiosVfSelectMemoryRasConfigurationResponse, *http.Response, error) {
 	return r.ApiService.GetBiosVfSelectMemoryRasConfigurationListExecute(r)
 }
 
 /*
 GetBiosVfSelectMemoryRasConfigurationList Read a 'bios.VfSelectMemoryRasConfiguration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBiosVfSelectMemoryRasConfigurationListRequest
 */
-func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationList(ctx _context.Context) ApiGetBiosVfSelectMemoryRasConfigurationListRequest {
+func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationList(ctx context.Context) ApiGetBiosVfSelectMemoryRasConfigurationListRequest {
 	return ApiGetBiosVfSelectMemoryRasConfigurationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3032,26 +2997,24 @@ func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationList(ctx _context.
 
 // Execute executes the request
 //  @return BiosVfSelectMemoryRasConfigurationResponse
-func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationListExecute(r ApiGetBiosVfSelectMemoryRasConfigurationListRequest) (BiosVfSelectMemoryRasConfigurationResponse, *_nethttp.Response, error) {
+func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationListExecute(r ApiGetBiosVfSelectMemoryRasConfigurationListRequest) (*BiosVfSelectMemoryRasConfigurationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosVfSelectMemoryRasConfigurationResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosVfSelectMemoryRasConfigurationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.GetBiosVfSelectMemoryRasConfigurationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/VfSelectMemoryRasConfigurations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3103,7 +3066,7 @@ func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationListExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3113,15 +3076,15 @@ func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3177,7 +3140,7 @@ func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationListExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3188,7 +3151,7 @@ func (a *BiosApiService) GetBiosVfSelectMemoryRasConfigurationListExecute(r ApiG
 }
 
 type ApiPatchBiosBootModeRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *BiosApiService
 	moid         string
 	biosBootMode *BiosBootMode
@@ -3207,18 +3170,18 @@ func (r ApiPatchBiosBootModeRequest) IfMatch(ifMatch string) ApiPatchBiosBootMod
 	return r
 }
 
-func (r ApiPatchBiosBootModeRequest) Execute() (BiosBootMode, *_nethttp.Response, error) {
+func (r ApiPatchBiosBootModeRequest) Execute() (*BiosBootMode, *http.Response, error) {
 	return r.ApiService.PatchBiosBootModeExecute(r)
 }
 
 /*
 PatchBiosBootMode Update a 'bios.BootMode' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBiosBootModeRequest
 */
-func (a *BiosApiService) PatchBiosBootMode(ctx _context.Context, moid string) ApiPatchBiosBootModeRequest {
+func (a *BiosApiService) PatchBiosBootMode(ctx context.Context, moid string) ApiPatchBiosBootModeRequest {
 	return ApiPatchBiosBootModeRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3228,27 +3191,25 @@ func (a *BiosApiService) PatchBiosBootMode(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return BiosBootMode
-func (a *BiosApiService) PatchBiosBootModeExecute(r ApiPatchBiosBootModeRequest) (BiosBootMode, *_nethttp.Response, error) {
+func (a *BiosApiService) PatchBiosBootModeExecute(r ApiPatchBiosBootModeRequest) (*BiosBootMode, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosBootMode
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosBootMode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.PatchBiosBootMode")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/BootModes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.biosBootMode == nil {
 		return localVarReturnValue, nil, reportError("biosBootMode is required and must be specified")
 	}
@@ -3275,7 +3236,7 @@ func (a *BiosApiService) PatchBiosBootModeExecute(r ApiPatchBiosBootModeRequest)
 	}
 	// body params
 	localVarPostBody = r.biosBootMode
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3285,15 +3246,15 @@ func (a *BiosApiService) PatchBiosBootModeExecute(r ApiPatchBiosBootModeRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3349,7 +3310,7 @@ func (a *BiosApiService) PatchBiosBootModeExecute(r ApiPatchBiosBootModeRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3360,7 +3321,7 @@ func (a *BiosApiService) PatchBiosBootModeExecute(r ApiPatchBiosBootModeRequest)
 }
 
 type ApiPatchBiosPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BiosApiService
 	moid       string
 	biosPolicy *BiosPolicy
@@ -3379,18 +3340,18 @@ func (r ApiPatchBiosPolicyRequest) IfMatch(ifMatch string) ApiPatchBiosPolicyReq
 	return r
 }
 
-func (r ApiPatchBiosPolicyRequest) Execute() (BiosPolicy, *_nethttp.Response, error) {
+func (r ApiPatchBiosPolicyRequest) Execute() (*BiosPolicy, *http.Response, error) {
 	return r.ApiService.PatchBiosPolicyExecute(r)
 }
 
 /*
 PatchBiosPolicy Update a 'bios.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBiosPolicyRequest
 */
-func (a *BiosApiService) PatchBiosPolicy(ctx _context.Context, moid string) ApiPatchBiosPolicyRequest {
+func (a *BiosApiService) PatchBiosPolicy(ctx context.Context, moid string) ApiPatchBiosPolicyRequest {
 	return ApiPatchBiosPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3400,27 +3361,25 @@ func (a *BiosApiService) PatchBiosPolicy(ctx _context.Context, moid string) ApiP
 
 // Execute executes the request
 //  @return BiosPolicy
-func (a *BiosApiService) PatchBiosPolicyExecute(r ApiPatchBiosPolicyRequest) (BiosPolicy, *_nethttp.Response, error) {
+func (a *BiosApiService) PatchBiosPolicyExecute(r ApiPatchBiosPolicyRequest) (*BiosPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.PatchBiosPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.biosPolicy == nil {
 		return localVarReturnValue, nil, reportError("biosPolicy is required and must be specified")
 	}
@@ -3447,7 +3406,7 @@ func (a *BiosApiService) PatchBiosPolicyExecute(r ApiPatchBiosPolicyRequest) (Bi
 	}
 	// body params
 	localVarPostBody = r.biosPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3457,15 +3416,15 @@ func (a *BiosApiService) PatchBiosPolicyExecute(r ApiPatchBiosPolicyRequest) (Bi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3521,7 +3480,7 @@ func (a *BiosApiService) PatchBiosPolicyExecute(r ApiPatchBiosPolicyRequest) (Bi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3532,7 +3491,7 @@ func (a *BiosApiService) PatchBiosPolicyExecute(r ApiPatchBiosPolicyRequest) (Bi
 }
 
 type ApiPatchBiosUnitRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BiosApiService
 	moid       string
 	biosUnit   *BiosUnit
@@ -3551,18 +3510,18 @@ func (r ApiPatchBiosUnitRequest) IfMatch(ifMatch string) ApiPatchBiosUnitRequest
 	return r
 }
 
-func (r ApiPatchBiosUnitRequest) Execute() (BiosUnit, *_nethttp.Response, error) {
+func (r ApiPatchBiosUnitRequest) Execute() (*BiosUnit, *http.Response, error) {
 	return r.ApiService.PatchBiosUnitExecute(r)
 }
 
 /*
 PatchBiosUnit Update a 'bios.Unit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBiosUnitRequest
 */
-func (a *BiosApiService) PatchBiosUnit(ctx _context.Context, moid string) ApiPatchBiosUnitRequest {
+func (a *BiosApiService) PatchBiosUnit(ctx context.Context, moid string) ApiPatchBiosUnitRequest {
 	return ApiPatchBiosUnitRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3572,27 +3531,25 @@ func (a *BiosApiService) PatchBiosUnit(ctx _context.Context, moid string) ApiPat
 
 // Execute executes the request
 //  @return BiosUnit
-func (a *BiosApiService) PatchBiosUnitExecute(r ApiPatchBiosUnitRequest) (BiosUnit, *_nethttp.Response, error) {
+func (a *BiosApiService) PatchBiosUnitExecute(r ApiPatchBiosUnitRequest) (*BiosUnit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosUnit
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.PatchBiosUnit")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/Units/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.biosUnit == nil {
 		return localVarReturnValue, nil, reportError("biosUnit is required and must be specified")
 	}
@@ -3619,7 +3576,7 @@ func (a *BiosApiService) PatchBiosUnitExecute(r ApiPatchBiosUnitRequest) (BiosUn
 	}
 	// body params
 	localVarPostBody = r.biosUnit
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3629,15 +3586,15 @@ func (a *BiosApiService) PatchBiosUnitExecute(r ApiPatchBiosUnitRequest) (BiosUn
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3693,7 +3650,7 @@ func (a *BiosApiService) PatchBiosUnitExecute(r ApiPatchBiosUnitRequest) (BiosUn
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3704,7 +3661,7 @@ func (a *BiosApiService) PatchBiosUnitExecute(r ApiPatchBiosUnitRequest) (BiosUn
 }
 
 type ApiUpdateBiosBootModeRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *BiosApiService
 	moid         string
 	biosBootMode *BiosBootMode
@@ -3723,18 +3680,18 @@ func (r ApiUpdateBiosBootModeRequest) IfMatch(ifMatch string) ApiUpdateBiosBootM
 	return r
 }
 
-func (r ApiUpdateBiosBootModeRequest) Execute() (BiosBootMode, *_nethttp.Response, error) {
+func (r ApiUpdateBiosBootModeRequest) Execute() (*BiosBootMode, *http.Response, error) {
 	return r.ApiService.UpdateBiosBootModeExecute(r)
 }
 
 /*
 UpdateBiosBootMode Update a 'bios.BootMode' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBiosBootModeRequest
 */
-func (a *BiosApiService) UpdateBiosBootMode(ctx _context.Context, moid string) ApiUpdateBiosBootModeRequest {
+func (a *BiosApiService) UpdateBiosBootMode(ctx context.Context, moid string) ApiUpdateBiosBootModeRequest {
 	return ApiUpdateBiosBootModeRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3744,27 +3701,25 @@ func (a *BiosApiService) UpdateBiosBootMode(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return BiosBootMode
-func (a *BiosApiService) UpdateBiosBootModeExecute(r ApiUpdateBiosBootModeRequest) (BiosBootMode, *_nethttp.Response, error) {
+func (a *BiosApiService) UpdateBiosBootModeExecute(r ApiUpdateBiosBootModeRequest) (*BiosBootMode, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosBootMode
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosBootMode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.UpdateBiosBootMode")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/BootModes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.biosBootMode == nil {
 		return localVarReturnValue, nil, reportError("biosBootMode is required and must be specified")
 	}
@@ -3791,7 +3746,7 @@ func (a *BiosApiService) UpdateBiosBootModeExecute(r ApiUpdateBiosBootModeReques
 	}
 	// body params
 	localVarPostBody = r.biosBootMode
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3801,15 +3756,15 @@ func (a *BiosApiService) UpdateBiosBootModeExecute(r ApiUpdateBiosBootModeReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3865,7 +3820,7 @@ func (a *BiosApiService) UpdateBiosBootModeExecute(r ApiUpdateBiosBootModeReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3876,7 +3831,7 @@ func (a *BiosApiService) UpdateBiosBootModeExecute(r ApiUpdateBiosBootModeReques
 }
 
 type ApiUpdateBiosPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BiosApiService
 	moid       string
 	biosPolicy *BiosPolicy
@@ -3895,18 +3850,18 @@ func (r ApiUpdateBiosPolicyRequest) IfMatch(ifMatch string) ApiUpdateBiosPolicyR
 	return r
 }
 
-func (r ApiUpdateBiosPolicyRequest) Execute() (BiosPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateBiosPolicyRequest) Execute() (*BiosPolicy, *http.Response, error) {
 	return r.ApiService.UpdateBiosPolicyExecute(r)
 }
 
 /*
 UpdateBiosPolicy Update a 'bios.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBiosPolicyRequest
 */
-func (a *BiosApiService) UpdateBiosPolicy(ctx _context.Context, moid string) ApiUpdateBiosPolicyRequest {
+func (a *BiosApiService) UpdateBiosPolicy(ctx context.Context, moid string) ApiUpdateBiosPolicyRequest {
 	return ApiUpdateBiosPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3916,27 +3871,25 @@ func (a *BiosApiService) UpdateBiosPolicy(ctx _context.Context, moid string) Api
 
 // Execute executes the request
 //  @return BiosPolicy
-func (a *BiosApiService) UpdateBiosPolicyExecute(r ApiUpdateBiosPolicyRequest) (BiosPolicy, *_nethttp.Response, error) {
+func (a *BiosApiService) UpdateBiosPolicyExecute(r ApiUpdateBiosPolicyRequest) (*BiosPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.UpdateBiosPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.biosPolicy == nil {
 		return localVarReturnValue, nil, reportError("biosPolicy is required and must be specified")
 	}
@@ -3963,7 +3916,7 @@ func (a *BiosApiService) UpdateBiosPolicyExecute(r ApiUpdateBiosPolicyRequest) (
 	}
 	// body params
 	localVarPostBody = r.biosPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3973,15 +3926,15 @@ func (a *BiosApiService) UpdateBiosPolicyExecute(r ApiUpdateBiosPolicyRequest) (
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4037,7 +3990,7 @@ func (a *BiosApiService) UpdateBiosPolicyExecute(r ApiUpdateBiosPolicyRequest) (
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4048,7 +4001,7 @@ func (a *BiosApiService) UpdateBiosPolicyExecute(r ApiUpdateBiosPolicyRequest) (
 }
 
 type ApiUpdateBiosUnitRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BiosApiService
 	moid       string
 	biosUnit   *BiosUnit
@@ -4067,18 +4020,18 @@ func (r ApiUpdateBiosUnitRequest) IfMatch(ifMatch string) ApiUpdateBiosUnitReque
 	return r
 }
 
-func (r ApiUpdateBiosUnitRequest) Execute() (BiosUnit, *_nethttp.Response, error) {
+func (r ApiUpdateBiosUnitRequest) Execute() (*BiosUnit, *http.Response, error) {
 	return r.ApiService.UpdateBiosUnitExecute(r)
 }
 
 /*
 UpdateBiosUnit Update a 'bios.Unit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBiosUnitRequest
 */
-func (a *BiosApiService) UpdateBiosUnit(ctx _context.Context, moid string) ApiUpdateBiosUnitRequest {
+func (a *BiosApiService) UpdateBiosUnit(ctx context.Context, moid string) ApiUpdateBiosUnitRequest {
 	return ApiUpdateBiosUnitRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4088,27 +4041,25 @@ func (a *BiosApiService) UpdateBiosUnit(ctx _context.Context, moid string) ApiUp
 
 // Execute executes the request
 //  @return BiosUnit
-func (a *BiosApiService) UpdateBiosUnitExecute(r ApiUpdateBiosUnitRequest) (BiosUnit, *_nethttp.Response, error) {
+func (a *BiosApiService) UpdateBiosUnitExecute(r ApiUpdateBiosUnitRequest) (*BiosUnit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BiosUnit
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BiosUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BiosApiService.UpdateBiosUnit")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bios/Units/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.biosUnit == nil {
 		return localVarReturnValue, nil, reportError("biosUnit is required and must be specified")
 	}
@@ -4135,7 +4086,7 @@ func (a *BiosApiService) UpdateBiosUnitExecute(r ApiUpdateBiosUnitRequest) (Bios
 	}
 	// body params
 	localVarPostBody = r.biosUnit
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4145,15 +4096,15 @@ func (a *BiosApiService) UpdateBiosUnitExecute(r ApiUpdateBiosUnitRequest) (Bios
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4209,7 +4160,7 @@ func (a *BiosApiService) UpdateBiosUnitExecute(r ApiUpdateBiosUnitRequest) (Bios
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

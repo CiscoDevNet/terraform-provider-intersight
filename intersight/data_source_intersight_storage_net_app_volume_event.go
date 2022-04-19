@@ -807,7 +807,6 @@ func dataSourceStorageNetAppVolumeEvent() *schema.Resource {
 
 func dataSourceStorageNetAppVolumeEventRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.StorageNetAppVolumeEvent{}
@@ -1222,7 +1221,7 @@ func dataSourceStorageNetAppVolumeEventRead(c context.Context, d *schema.Resourc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of StorageNetAppVolumeEvent: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of StorageNetAppVolumeEvent: %s", responseErr.Error())
@@ -1239,7 +1238,7 @@ func dataSourceStorageNetAppVolumeEventRead(c context.Context, d *schema.Resourc
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching StorageNetAppVolumeEvent: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching StorageNetAppVolumeEvent: %s", responseErr.Error())

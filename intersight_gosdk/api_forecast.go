@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // ForecastApiService ForecastApi service
 type ForecastApiService service
 
 type ApiGetForecastCatalogByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ForecastApiService
 	moid       string
 }
 
-func (r ApiGetForecastCatalogByMoidRequest) Execute() (ForecastCatalog, *_nethttp.Response, error) {
+func (r ApiGetForecastCatalogByMoidRequest) Execute() (*ForecastCatalog, *http.Response, error) {
 	return r.ApiService.GetForecastCatalogByMoidExecute(r)
 }
 
 /*
 GetForecastCatalogByMoid Read a 'forecast.Catalog' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetForecastCatalogByMoidRequest
 */
-func (a *ForecastApiService) GetForecastCatalogByMoid(ctx _context.Context, moid string) ApiGetForecastCatalogByMoidRequest {
+func (a *ForecastApiService) GetForecastCatalogByMoid(ctx context.Context, moid string) ApiGetForecastCatalogByMoidRequest {
 	return ApiGetForecastCatalogByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -55,27 +50,25 @@ func (a *ForecastApiService) GetForecastCatalogByMoid(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return ForecastCatalog
-func (a *ForecastApiService) GetForecastCatalogByMoidExecute(r ApiGetForecastCatalogByMoidRequest) (ForecastCatalog, *_nethttp.Response, error) {
+func (a *ForecastApiService) GetForecastCatalogByMoidExecute(r ApiGetForecastCatalogByMoidRequest) (*ForecastCatalog, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ForecastCatalog
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ForecastCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ForecastApiService.GetForecastCatalogByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/forecast/Catalogs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -94,7 +87,7 @@ func (a *ForecastApiService) GetForecastCatalogByMoidExecute(r ApiGetForecastCat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -104,15 +97,15 @@ func (a *ForecastApiService) GetForecastCatalogByMoidExecute(r ApiGetForecastCat
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,7 +161,7 @@ func (a *ForecastApiService) GetForecastCatalogByMoidExecute(r ApiGetForecastCat
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -179,7 +172,7 @@ func (a *ForecastApiService) GetForecastCatalogByMoidExecute(r ApiGetForecastCat
 }
 
 type ApiGetForecastCatalogListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ForecastApiService
 	filter      *string
 	orderby     *string
@@ -260,17 +253,17 @@ func (r ApiGetForecastCatalogListRequest) Tags(tags string) ApiGetForecastCatalo
 	return r
 }
 
-func (r ApiGetForecastCatalogListRequest) Execute() (ForecastCatalogResponse, *_nethttp.Response, error) {
+func (r ApiGetForecastCatalogListRequest) Execute() (*ForecastCatalogResponse, *http.Response, error) {
 	return r.ApiService.GetForecastCatalogListExecute(r)
 }
 
 /*
 GetForecastCatalogList Read a 'forecast.Catalog' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetForecastCatalogListRequest
 */
-func (a *ForecastApiService) GetForecastCatalogList(ctx _context.Context) ApiGetForecastCatalogListRequest {
+func (a *ForecastApiService) GetForecastCatalogList(ctx context.Context) ApiGetForecastCatalogListRequest {
 	return ApiGetForecastCatalogListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -279,26 +272,24 @@ func (a *ForecastApiService) GetForecastCatalogList(ctx _context.Context) ApiGet
 
 // Execute executes the request
 //  @return ForecastCatalogResponse
-func (a *ForecastApiService) GetForecastCatalogListExecute(r ApiGetForecastCatalogListRequest) (ForecastCatalogResponse, *_nethttp.Response, error) {
+func (a *ForecastApiService) GetForecastCatalogListExecute(r ApiGetForecastCatalogListRequest) (*ForecastCatalogResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ForecastCatalogResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ForecastCatalogResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ForecastApiService.GetForecastCatalogList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/forecast/Catalogs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -350,7 +341,7 @@ func (a *ForecastApiService) GetForecastCatalogListExecute(r ApiGetForecastCatal
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -360,15 +351,15 @@ func (a *ForecastApiService) GetForecastCatalogListExecute(r ApiGetForecastCatal
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -424,7 +415,7 @@ func (a *ForecastApiService) GetForecastCatalogListExecute(r ApiGetForecastCatal
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -435,23 +426,23 @@ func (a *ForecastApiService) GetForecastCatalogListExecute(r ApiGetForecastCatal
 }
 
 type ApiGetForecastDefinitionByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ForecastApiService
 	moid       string
 }
 
-func (r ApiGetForecastDefinitionByMoidRequest) Execute() (ForecastDefinition, *_nethttp.Response, error) {
+func (r ApiGetForecastDefinitionByMoidRequest) Execute() (*ForecastDefinition, *http.Response, error) {
 	return r.ApiService.GetForecastDefinitionByMoidExecute(r)
 }
 
 /*
 GetForecastDefinitionByMoid Read a 'forecast.Definition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetForecastDefinitionByMoidRequest
 */
-func (a *ForecastApiService) GetForecastDefinitionByMoid(ctx _context.Context, moid string) ApiGetForecastDefinitionByMoidRequest {
+func (a *ForecastApiService) GetForecastDefinitionByMoid(ctx context.Context, moid string) ApiGetForecastDefinitionByMoidRequest {
 	return ApiGetForecastDefinitionByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -461,27 +452,25 @@ func (a *ForecastApiService) GetForecastDefinitionByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return ForecastDefinition
-func (a *ForecastApiService) GetForecastDefinitionByMoidExecute(r ApiGetForecastDefinitionByMoidRequest) (ForecastDefinition, *_nethttp.Response, error) {
+func (a *ForecastApiService) GetForecastDefinitionByMoidExecute(r ApiGetForecastDefinitionByMoidRequest) (*ForecastDefinition, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ForecastDefinition
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ForecastDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ForecastApiService.GetForecastDefinitionByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/forecast/Definitions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -500,7 +489,7 @@ func (a *ForecastApiService) GetForecastDefinitionByMoidExecute(r ApiGetForecast
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -510,15 +499,15 @@ func (a *ForecastApiService) GetForecastDefinitionByMoidExecute(r ApiGetForecast
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -574,7 +563,7 @@ func (a *ForecastApiService) GetForecastDefinitionByMoidExecute(r ApiGetForecast
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -585,7 +574,7 @@ func (a *ForecastApiService) GetForecastDefinitionByMoidExecute(r ApiGetForecast
 }
 
 type ApiGetForecastDefinitionListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ForecastApiService
 	filter      *string
 	orderby     *string
@@ -666,17 +655,17 @@ func (r ApiGetForecastDefinitionListRequest) Tags(tags string) ApiGetForecastDef
 	return r
 }
 
-func (r ApiGetForecastDefinitionListRequest) Execute() (ForecastDefinitionResponse, *_nethttp.Response, error) {
+func (r ApiGetForecastDefinitionListRequest) Execute() (*ForecastDefinitionResponse, *http.Response, error) {
 	return r.ApiService.GetForecastDefinitionListExecute(r)
 }
 
 /*
 GetForecastDefinitionList Read a 'forecast.Definition' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetForecastDefinitionListRequest
 */
-func (a *ForecastApiService) GetForecastDefinitionList(ctx _context.Context) ApiGetForecastDefinitionListRequest {
+func (a *ForecastApiService) GetForecastDefinitionList(ctx context.Context) ApiGetForecastDefinitionListRequest {
 	return ApiGetForecastDefinitionListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -685,26 +674,24 @@ func (a *ForecastApiService) GetForecastDefinitionList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return ForecastDefinitionResponse
-func (a *ForecastApiService) GetForecastDefinitionListExecute(r ApiGetForecastDefinitionListRequest) (ForecastDefinitionResponse, *_nethttp.Response, error) {
+func (a *ForecastApiService) GetForecastDefinitionListExecute(r ApiGetForecastDefinitionListRequest) (*ForecastDefinitionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ForecastDefinitionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ForecastDefinitionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ForecastApiService.GetForecastDefinitionList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/forecast/Definitions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -756,7 +743,7 @@ func (a *ForecastApiService) GetForecastDefinitionListExecute(r ApiGetForecastDe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -766,15 +753,15 @@ func (a *ForecastApiService) GetForecastDefinitionListExecute(r ApiGetForecastDe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -830,7 +817,7 @@ func (a *ForecastApiService) GetForecastDefinitionListExecute(r ApiGetForecastDe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -841,23 +828,23 @@ func (a *ForecastApiService) GetForecastDefinitionListExecute(r ApiGetForecastDe
 }
 
 type ApiGetForecastInstanceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ForecastApiService
 	moid       string
 }
 
-func (r ApiGetForecastInstanceByMoidRequest) Execute() (ForecastInstance, *_nethttp.Response, error) {
+func (r ApiGetForecastInstanceByMoidRequest) Execute() (*ForecastInstance, *http.Response, error) {
 	return r.ApiService.GetForecastInstanceByMoidExecute(r)
 }
 
 /*
 GetForecastInstanceByMoid Read a 'forecast.Instance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetForecastInstanceByMoidRequest
 */
-func (a *ForecastApiService) GetForecastInstanceByMoid(ctx _context.Context, moid string) ApiGetForecastInstanceByMoidRequest {
+func (a *ForecastApiService) GetForecastInstanceByMoid(ctx context.Context, moid string) ApiGetForecastInstanceByMoidRequest {
 	return ApiGetForecastInstanceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -867,27 +854,25 @@ func (a *ForecastApiService) GetForecastInstanceByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return ForecastInstance
-func (a *ForecastApiService) GetForecastInstanceByMoidExecute(r ApiGetForecastInstanceByMoidRequest) (ForecastInstance, *_nethttp.Response, error) {
+func (a *ForecastApiService) GetForecastInstanceByMoidExecute(r ApiGetForecastInstanceByMoidRequest) (*ForecastInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ForecastInstance
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ForecastInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ForecastApiService.GetForecastInstanceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/forecast/Instances/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -906,7 +891,7 @@ func (a *ForecastApiService) GetForecastInstanceByMoidExecute(r ApiGetForecastIn
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -916,15 +901,15 @@ func (a *ForecastApiService) GetForecastInstanceByMoidExecute(r ApiGetForecastIn
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -980,7 +965,7 @@ func (a *ForecastApiService) GetForecastInstanceByMoidExecute(r ApiGetForecastIn
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -991,7 +976,7 @@ func (a *ForecastApiService) GetForecastInstanceByMoidExecute(r ApiGetForecastIn
 }
 
 type ApiGetForecastInstanceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ForecastApiService
 	filter      *string
 	orderby     *string
@@ -1072,17 +1057,17 @@ func (r ApiGetForecastInstanceListRequest) Tags(tags string) ApiGetForecastInsta
 	return r
 }
 
-func (r ApiGetForecastInstanceListRequest) Execute() (ForecastInstanceResponse, *_nethttp.Response, error) {
+func (r ApiGetForecastInstanceListRequest) Execute() (*ForecastInstanceResponse, *http.Response, error) {
 	return r.ApiService.GetForecastInstanceListExecute(r)
 }
 
 /*
 GetForecastInstanceList Read a 'forecast.Instance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetForecastInstanceListRequest
 */
-func (a *ForecastApiService) GetForecastInstanceList(ctx _context.Context) ApiGetForecastInstanceListRequest {
+func (a *ForecastApiService) GetForecastInstanceList(ctx context.Context) ApiGetForecastInstanceListRequest {
 	return ApiGetForecastInstanceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1091,26 +1076,24 @@ func (a *ForecastApiService) GetForecastInstanceList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return ForecastInstanceResponse
-func (a *ForecastApiService) GetForecastInstanceListExecute(r ApiGetForecastInstanceListRequest) (ForecastInstanceResponse, *_nethttp.Response, error) {
+func (a *ForecastApiService) GetForecastInstanceListExecute(r ApiGetForecastInstanceListRequest) (*ForecastInstanceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ForecastInstanceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ForecastInstanceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ForecastApiService.GetForecastInstanceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/forecast/Instances"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1162,7 +1145,7 @@ func (a *ForecastApiService) GetForecastInstanceListExecute(r ApiGetForecastInst
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1172,15 +1155,15 @@ func (a *ForecastApiService) GetForecastInstanceListExecute(r ApiGetForecastInst
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1236,7 +1219,7 @@ func (a *ForecastApiService) GetForecastInstanceListExecute(r ApiGetForecastInst
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1247,7 +1230,7 @@ func (a *ForecastApiService) GetForecastInstanceListExecute(r ApiGetForecastInst
 }
 
 type ApiPatchForecastInstanceRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *ForecastApiService
 	moid             string
 	forecastInstance *ForecastInstance
@@ -1266,18 +1249,18 @@ func (r ApiPatchForecastInstanceRequest) IfMatch(ifMatch string) ApiPatchForecas
 	return r
 }
 
-func (r ApiPatchForecastInstanceRequest) Execute() (ForecastInstance, *_nethttp.Response, error) {
+func (r ApiPatchForecastInstanceRequest) Execute() (*ForecastInstance, *http.Response, error) {
 	return r.ApiService.PatchForecastInstanceExecute(r)
 }
 
 /*
 PatchForecastInstance Update a 'forecast.Instance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchForecastInstanceRequest
 */
-func (a *ForecastApiService) PatchForecastInstance(ctx _context.Context, moid string) ApiPatchForecastInstanceRequest {
+func (a *ForecastApiService) PatchForecastInstance(ctx context.Context, moid string) ApiPatchForecastInstanceRequest {
 	return ApiPatchForecastInstanceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1287,27 +1270,25 @@ func (a *ForecastApiService) PatchForecastInstance(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return ForecastInstance
-func (a *ForecastApiService) PatchForecastInstanceExecute(r ApiPatchForecastInstanceRequest) (ForecastInstance, *_nethttp.Response, error) {
+func (a *ForecastApiService) PatchForecastInstanceExecute(r ApiPatchForecastInstanceRequest) (*ForecastInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ForecastInstance
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ForecastInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ForecastApiService.PatchForecastInstance")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/forecast/Instances/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.forecastInstance == nil {
 		return localVarReturnValue, nil, reportError("forecastInstance is required and must be specified")
 	}
@@ -1334,7 +1315,7 @@ func (a *ForecastApiService) PatchForecastInstanceExecute(r ApiPatchForecastInst
 	}
 	// body params
 	localVarPostBody = r.forecastInstance
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1344,15 +1325,15 @@ func (a *ForecastApiService) PatchForecastInstanceExecute(r ApiPatchForecastInst
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1408,7 +1389,7 @@ func (a *ForecastApiService) PatchForecastInstanceExecute(r ApiPatchForecastInst
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1419,7 +1400,7 @@ func (a *ForecastApiService) PatchForecastInstanceExecute(r ApiPatchForecastInst
 }
 
 type ApiUpdateForecastInstanceRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *ForecastApiService
 	moid             string
 	forecastInstance *ForecastInstance
@@ -1438,18 +1419,18 @@ func (r ApiUpdateForecastInstanceRequest) IfMatch(ifMatch string) ApiUpdateForec
 	return r
 }
 
-func (r ApiUpdateForecastInstanceRequest) Execute() (ForecastInstance, *_nethttp.Response, error) {
+func (r ApiUpdateForecastInstanceRequest) Execute() (*ForecastInstance, *http.Response, error) {
 	return r.ApiService.UpdateForecastInstanceExecute(r)
 }
 
 /*
 UpdateForecastInstance Update a 'forecast.Instance' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateForecastInstanceRequest
 */
-func (a *ForecastApiService) UpdateForecastInstance(ctx _context.Context, moid string) ApiUpdateForecastInstanceRequest {
+func (a *ForecastApiService) UpdateForecastInstance(ctx context.Context, moid string) ApiUpdateForecastInstanceRequest {
 	return ApiUpdateForecastInstanceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1459,27 +1440,25 @@ func (a *ForecastApiService) UpdateForecastInstance(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return ForecastInstance
-func (a *ForecastApiService) UpdateForecastInstanceExecute(r ApiUpdateForecastInstanceRequest) (ForecastInstance, *_nethttp.Response, error) {
+func (a *ForecastApiService) UpdateForecastInstanceExecute(r ApiUpdateForecastInstanceRequest) (*ForecastInstance, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ForecastInstance
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ForecastInstance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ForecastApiService.UpdateForecastInstance")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/forecast/Instances/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.forecastInstance == nil {
 		return localVarReturnValue, nil, reportError("forecastInstance is required and must be specified")
 	}
@@ -1506,7 +1485,7 @@ func (a *ForecastApiService) UpdateForecastInstanceExecute(r ApiUpdateForecastIn
 	}
 	// body params
 	localVarPostBody = r.forecastInstance
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1516,15 +1495,15 @@ func (a *ForecastApiService) UpdateForecastInstanceExecute(r ApiUpdateForecastIn
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1580,7 +1559,7 @@ func (a *ForecastApiService) UpdateForecastInstanceExecute(r ApiUpdateForecastIn
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

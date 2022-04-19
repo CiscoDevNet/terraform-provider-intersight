@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // ThermalApiService ThermalApi service
 type ThermalApiService service
 
 type ApiCreateThermalPolicyRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *ThermalApiService
 	thermalPolicy *ThermalPolicy
 	ifMatch       *string
@@ -54,17 +49,17 @@ func (r ApiCreateThermalPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreate
 	return r
 }
 
-func (r ApiCreateThermalPolicyRequest) Execute() (ThermalPolicy, *_nethttp.Response, error) {
+func (r ApiCreateThermalPolicyRequest) Execute() (*ThermalPolicy, *http.Response, error) {
 	return r.ApiService.CreateThermalPolicyExecute(r)
 }
 
 /*
 CreateThermalPolicy Create a 'thermal.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateThermalPolicyRequest
 */
-func (a *ThermalApiService) CreateThermalPolicy(ctx _context.Context) ApiCreateThermalPolicyRequest {
+func (a *ThermalApiService) CreateThermalPolicy(ctx context.Context) ApiCreateThermalPolicyRequest {
 	return ApiCreateThermalPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *ThermalApiService) CreateThermalPolicy(ctx _context.Context) ApiCreateT
 
 // Execute executes the request
 //  @return ThermalPolicy
-func (a *ThermalApiService) CreateThermalPolicyExecute(r ApiCreateThermalPolicyRequest) (ThermalPolicy, *_nethttp.Response, error) {
+func (a *ThermalApiService) CreateThermalPolicyExecute(r ApiCreateThermalPolicyRequest) (*ThermalPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ThermalPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ThermalPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ThermalApiService.CreateThermalPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/thermal/Policies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.thermalPolicy == nil {
 		return localVarReturnValue, nil, reportError("thermalPolicy is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *ThermalApiService) CreateThermalPolicyExecute(r ApiCreateThermalPolicyR
 	}
 	// body params
 	localVarPostBody = r.thermalPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *ThermalApiService) CreateThermalPolicyExecute(r ApiCreateThermalPolicyR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *ThermalApiService) CreateThermalPolicyExecute(r ApiCreateThermalPolicyR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *ThermalApiService) CreateThermalPolicyExecute(r ApiCreateThermalPolicyR
 }
 
 type ApiDeleteThermalPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ThermalApiService
 	moid       string
 }
 
-func (r ApiDeleteThermalPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteThermalPolicyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteThermalPolicyExecute(r)
 }
 
 /*
 DeleteThermalPolicy Delete a 'thermal.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteThermalPolicyRequest
 */
-func (a *ThermalApiService) DeleteThermalPolicy(ctx _context.Context, moid string) ApiDeleteThermalPolicyRequest {
+func (a *ThermalApiService) DeleteThermalPolicy(ctx context.Context, moid string) ApiDeleteThermalPolicyRequest {
 	return ApiDeleteThermalPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *ThermalApiService) DeleteThermalPolicy(ctx _context.Context, moid strin
 }
 
 // Execute executes the request
-func (a *ThermalApiService) DeleteThermalPolicyExecute(r ApiDeleteThermalPolicyRequest) (*_nethttp.Response, error) {
+func (a *ThermalApiService) DeleteThermalPolicyExecute(r ApiDeleteThermalPolicyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ThermalApiService.DeleteThermalPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/thermal/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *ThermalApiService) DeleteThermalPolicyExecute(r ApiDeleteThermalPolicyR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *ThermalApiService) DeleteThermalPolicyExecute(r ApiDeleteThermalPolicyR
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *ThermalApiService) DeleteThermalPolicyExecute(r ApiDeleteThermalPolicyR
 }
 
 type ApiGetThermalPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *ThermalApiService
 	moid       string
 }
 
-func (r ApiGetThermalPolicyByMoidRequest) Execute() (ThermalPolicy, *_nethttp.Response, error) {
+func (r ApiGetThermalPolicyByMoidRequest) Execute() (*ThermalPolicy, *http.Response, error) {
 	return r.ApiService.GetThermalPolicyByMoidExecute(r)
 }
 
 /*
 GetThermalPolicyByMoid Read a 'thermal.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetThermalPolicyByMoidRequest
 */
-func (a *ThermalApiService) GetThermalPolicyByMoid(ctx _context.Context, moid string) ApiGetThermalPolicyByMoidRequest {
+func (a *ThermalApiService) GetThermalPolicyByMoid(ctx context.Context, moid string) ApiGetThermalPolicyByMoidRequest {
 	return ApiGetThermalPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *ThermalApiService) GetThermalPolicyByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return ThermalPolicy
-func (a *ThermalApiService) GetThermalPolicyByMoidExecute(r ApiGetThermalPolicyByMoidRequest) (ThermalPolicy, *_nethttp.Response, error) {
+func (a *ThermalApiService) GetThermalPolicyByMoidExecute(r ApiGetThermalPolicyByMoidRequest) (*ThermalPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ThermalPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ThermalPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ThermalApiService.GetThermalPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/thermal/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *ThermalApiService) GetThermalPolicyByMoidExecute(r ApiGetThermalPolicyB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *ThermalApiService) GetThermalPolicyByMoidExecute(r ApiGetThermalPolicyB
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *ThermalApiService) GetThermalPolicyByMoidExecute(r ApiGetThermalPolicyB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *ThermalApiService) GetThermalPolicyByMoidExecute(r ApiGetThermalPolicyB
 }
 
 type ApiGetThermalPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *ThermalApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetThermalPolicyListRequest) Tags(tags string) ApiGetThermalPolicyLis
 	return r
 }
 
-func (r ApiGetThermalPolicyListRequest) Execute() (ThermalPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetThermalPolicyListRequest) Execute() (*ThermalPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetThermalPolicyListExecute(r)
 }
 
 /*
 GetThermalPolicyList Read a 'thermal.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetThermalPolicyListRequest
 */
-func (a *ThermalApiService) GetThermalPolicyList(ctx _context.Context) ApiGetThermalPolicyListRequest {
+func (a *ThermalApiService) GetThermalPolicyList(ctx context.Context) ApiGetThermalPolicyListRequest {
 	return ApiGetThermalPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *ThermalApiService) GetThermalPolicyList(ctx _context.Context) ApiGetThe
 
 // Execute executes the request
 //  @return ThermalPolicyResponse
-func (a *ThermalApiService) GetThermalPolicyListExecute(r ApiGetThermalPolicyListRequest) (ThermalPolicyResponse, *_nethttp.Response, error) {
+func (a *ThermalApiService) GetThermalPolicyListExecute(r ApiGetThermalPolicyListRequest) (*ThermalPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ThermalPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ThermalPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ThermalApiService.GetThermalPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/thermal/Policies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *ThermalApiService) GetThermalPolicyListExecute(r ApiGetThermalPolicyLis
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *ThermalApiService) GetThermalPolicyListExecute(r ApiGetThermalPolicyLis
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *ThermalApiService) GetThermalPolicyListExecute(r ApiGetThermalPolicyLis
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,7 +739,7 @@ func (a *ThermalApiService) GetThermalPolicyListExecute(r ApiGetThermalPolicyLis
 }
 
 type ApiPatchThermalPolicyRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *ThermalApiService
 	moid          string
 	thermalPolicy *ThermalPolicy
@@ -771,18 +758,18 @@ func (r ApiPatchThermalPolicyRequest) IfMatch(ifMatch string) ApiPatchThermalPol
 	return r
 }
 
-func (r ApiPatchThermalPolicyRequest) Execute() (ThermalPolicy, *_nethttp.Response, error) {
+func (r ApiPatchThermalPolicyRequest) Execute() (*ThermalPolicy, *http.Response, error) {
 	return r.ApiService.PatchThermalPolicyExecute(r)
 }
 
 /*
 PatchThermalPolicy Update a 'thermal.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchThermalPolicyRequest
 */
-func (a *ThermalApiService) PatchThermalPolicy(ctx _context.Context, moid string) ApiPatchThermalPolicyRequest {
+func (a *ThermalApiService) PatchThermalPolicy(ctx context.Context, moid string) ApiPatchThermalPolicyRequest {
 	return ApiPatchThermalPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -792,27 +779,25 @@ func (a *ThermalApiService) PatchThermalPolicy(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return ThermalPolicy
-func (a *ThermalApiService) PatchThermalPolicyExecute(r ApiPatchThermalPolicyRequest) (ThermalPolicy, *_nethttp.Response, error) {
+func (a *ThermalApiService) PatchThermalPolicyExecute(r ApiPatchThermalPolicyRequest) (*ThermalPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ThermalPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ThermalPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ThermalApiService.PatchThermalPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/thermal/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.thermalPolicy == nil {
 		return localVarReturnValue, nil, reportError("thermalPolicy is required and must be specified")
 	}
@@ -839,7 +824,7 @@ func (a *ThermalApiService) PatchThermalPolicyExecute(r ApiPatchThermalPolicyReq
 	}
 	// body params
 	localVarPostBody = r.thermalPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -849,15 +834,15 @@ func (a *ThermalApiService) PatchThermalPolicyExecute(r ApiPatchThermalPolicyReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -913,7 +898,7 @@ func (a *ThermalApiService) PatchThermalPolicyExecute(r ApiPatchThermalPolicyReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -924,7 +909,7 @@ func (a *ThermalApiService) PatchThermalPolicyExecute(r ApiPatchThermalPolicyReq
 }
 
 type ApiUpdateThermalPolicyRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *ThermalApiService
 	moid          string
 	thermalPolicy *ThermalPolicy
@@ -943,18 +928,18 @@ func (r ApiUpdateThermalPolicyRequest) IfMatch(ifMatch string) ApiUpdateThermalP
 	return r
 }
 
-func (r ApiUpdateThermalPolicyRequest) Execute() (ThermalPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateThermalPolicyRequest) Execute() (*ThermalPolicy, *http.Response, error) {
 	return r.ApiService.UpdateThermalPolicyExecute(r)
 }
 
 /*
 UpdateThermalPolicy Update a 'thermal.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateThermalPolicyRequest
 */
-func (a *ThermalApiService) UpdateThermalPolicy(ctx _context.Context, moid string) ApiUpdateThermalPolicyRequest {
+func (a *ThermalApiService) UpdateThermalPolicy(ctx context.Context, moid string) ApiUpdateThermalPolicyRequest {
 	return ApiUpdateThermalPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -964,27 +949,25 @@ func (a *ThermalApiService) UpdateThermalPolicy(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return ThermalPolicy
-func (a *ThermalApiService) UpdateThermalPolicyExecute(r ApiUpdateThermalPolicyRequest) (ThermalPolicy, *_nethttp.Response, error) {
+func (a *ThermalApiService) UpdateThermalPolicyExecute(r ApiUpdateThermalPolicyRequest) (*ThermalPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ThermalPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ThermalPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ThermalApiService.UpdateThermalPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/thermal/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.thermalPolicy == nil {
 		return localVarReturnValue, nil, reportError("thermalPolicy is required and must be specified")
 	}
@@ -1011,7 +994,7 @@ func (a *ThermalApiService) UpdateThermalPolicyExecute(r ApiUpdateThermalPolicyR
 	}
 	// body params
 	localVarPostBody = r.thermalPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1021,15 +1004,15 @@ func (a *ThermalApiService) UpdateThermalPolicyExecute(r ApiUpdateThermalPolicyR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1085,7 +1068,7 @@ func (a *ThermalApiService) UpdateThermalPolicyExecute(r ApiUpdateThermalPolicyR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

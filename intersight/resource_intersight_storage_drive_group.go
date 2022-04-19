@@ -692,7 +692,6 @@ func resourceStorageDriveGroup() *schema.Resource {
 
 func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewStorageDriveGroupWithDefaults()
@@ -1065,7 +1064,7 @@ func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating StorageDriveGroup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating StorageDriveGroup: %s", responseErr.Error())
@@ -1077,7 +1076,6 @@ func resourceStorageDriveGroupCreate(c context.Context, d *schema.ResourceData, 
 
 func resourceStorageDriveGroupRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.StorageApi.GetStorageDriveGroupByMoid(conn.ctx, d.Id())
@@ -1090,7 +1088,7 @@ func resourceStorageDriveGroupRead(c context.Context, d *schema.ResourceData, me
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching StorageDriveGroup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching StorageDriveGroup: %s", responseErr.Error())
@@ -1191,7 +1189,6 @@ func resourceStorageDriveGroupRead(c context.Context, d *schema.ResourceData, me
 
 func resourceStorageDriveGroupUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.StorageDriveGroup{}
@@ -1569,7 +1566,7 @@ func resourceStorageDriveGroupUpdate(c context.Context, d *schema.ResourceData, 
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating StorageDriveGroup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating StorageDriveGroup: %s", responseErr.Error())
@@ -1581,7 +1578,6 @@ func resourceStorageDriveGroupUpdate(c context.Context, d *schema.ResourceData, 
 
 func resourceStorageDriveGroupDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.StorageApi.DeleteStorageDriveGroup(conn.ctx, d.Id())
@@ -1593,7 +1589,7 @@ func resourceStorageDriveGroupDelete(c context.Context, d *schema.ResourceData, 
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting StorageDriveGroup object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting StorageDriveGroup object: %s", deleteErr.Error())

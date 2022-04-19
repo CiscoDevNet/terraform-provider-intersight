@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // NtpApiService NtpApi service
 type NtpApiService service
 
 type ApiCreateNtpPolicyRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NtpApiService
 	ntpPolicy   *NtpPolicy
 	ifMatch     *string
@@ -54,17 +49,17 @@ func (r ApiCreateNtpPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateNtpP
 	return r
 }
 
-func (r ApiCreateNtpPolicyRequest) Execute() (NtpPolicy, *_nethttp.Response, error) {
+func (r ApiCreateNtpPolicyRequest) Execute() (*NtpPolicy, *http.Response, error) {
 	return r.ApiService.CreateNtpPolicyExecute(r)
 }
 
 /*
 CreateNtpPolicy Create a 'ntp.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateNtpPolicyRequest
 */
-func (a *NtpApiService) CreateNtpPolicy(ctx _context.Context) ApiCreateNtpPolicyRequest {
+func (a *NtpApiService) CreateNtpPolicy(ctx context.Context) ApiCreateNtpPolicyRequest {
 	return ApiCreateNtpPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *NtpApiService) CreateNtpPolicy(ctx _context.Context) ApiCreateNtpPolicy
 
 // Execute executes the request
 //  @return NtpPolicy
-func (a *NtpApiService) CreateNtpPolicyExecute(r ApiCreateNtpPolicyRequest) (NtpPolicy, *_nethttp.Response, error) {
+func (a *NtpApiService) CreateNtpPolicyExecute(r ApiCreateNtpPolicyRequest) (*NtpPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NtpPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NtpPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NtpApiService.CreateNtpPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ntp/Policies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.ntpPolicy == nil {
 		return localVarReturnValue, nil, reportError("ntpPolicy is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *NtpApiService) CreateNtpPolicyExecute(r ApiCreateNtpPolicyRequest) (Ntp
 	}
 	// body params
 	localVarPostBody = r.ntpPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *NtpApiService) CreateNtpPolicyExecute(r ApiCreateNtpPolicyRequest) (Ntp
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *NtpApiService) CreateNtpPolicyExecute(r ApiCreateNtpPolicyRequest) (Ntp
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *NtpApiService) CreateNtpPolicyExecute(r ApiCreateNtpPolicyRequest) (Ntp
 }
 
 type ApiDeleteNtpPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NtpApiService
 	moid       string
 }
 
-func (r ApiDeleteNtpPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteNtpPolicyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteNtpPolicyExecute(r)
 }
 
 /*
 DeleteNtpPolicy Delete a 'ntp.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteNtpPolicyRequest
 */
-func (a *NtpApiService) DeleteNtpPolicy(ctx _context.Context, moid string) ApiDeleteNtpPolicyRequest {
+func (a *NtpApiService) DeleteNtpPolicy(ctx context.Context, moid string) ApiDeleteNtpPolicyRequest {
 	return ApiDeleteNtpPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *NtpApiService) DeleteNtpPolicy(ctx _context.Context, moid string) ApiDe
 }
 
 // Execute executes the request
-func (a *NtpApiService) DeleteNtpPolicyExecute(r ApiDeleteNtpPolicyRequest) (*_nethttp.Response, error) {
+func (a *NtpApiService) DeleteNtpPolicyExecute(r ApiDeleteNtpPolicyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NtpApiService.DeleteNtpPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ntp/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *NtpApiService) DeleteNtpPolicyExecute(r ApiDeleteNtpPolicyRequest) (*_n
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *NtpApiService) DeleteNtpPolicyExecute(r ApiDeleteNtpPolicyRequest) (*_n
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *NtpApiService) DeleteNtpPolicyExecute(r ApiDeleteNtpPolicyRequest) (*_n
 }
 
 type ApiGetNtpPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NtpApiService
 	moid       string
 }
 
-func (r ApiGetNtpPolicyByMoidRequest) Execute() (NtpPolicy, *_nethttp.Response, error) {
+func (r ApiGetNtpPolicyByMoidRequest) Execute() (*NtpPolicy, *http.Response, error) {
 	return r.ApiService.GetNtpPolicyByMoidExecute(r)
 }
 
 /*
 GetNtpPolicyByMoid Read a 'ntp.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNtpPolicyByMoidRequest
 */
-func (a *NtpApiService) GetNtpPolicyByMoid(ctx _context.Context, moid string) ApiGetNtpPolicyByMoidRequest {
+func (a *NtpApiService) GetNtpPolicyByMoid(ctx context.Context, moid string) ApiGetNtpPolicyByMoidRequest {
 	return ApiGetNtpPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *NtpApiService) GetNtpPolicyByMoid(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return NtpPolicy
-func (a *NtpApiService) GetNtpPolicyByMoidExecute(r ApiGetNtpPolicyByMoidRequest) (NtpPolicy, *_nethttp.Response, error) {
+func (a *NtpApiService) GetNtpPolicyByMoidExecute(r ApiGetNtpPolicyByMoidRequest) (*NtpPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NtpPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NtpPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NtpApiService.GetNtpPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ntp/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *NtpApiService) GetNtpPolicyByMoidExecute(r ApiGetNtpPolicyByMoidRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *NtpApiService) GetNtpPolicyByMoidExecute(r ApiGetNtpPolicyByMoidRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *NtpApiService) GetNtpPolicyByMoidExecute(r ApiGetNtpPolicyByMoidRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *NtpApiService) GetNtpPolicyByMoidExecute(r ApiGetNtpPolicyByMoidRequest
 }
 
 type ApiGetNtpPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NtpApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetNtpPolicyListRequest) Tags(tags string) ApiGetNtpPolicyListRequest
 	return r
 }
 
-func (r ApiGetNtpPolicyListRequest) Execute() (NtpPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetNtpPolicyListRequest) Execute() (*NtpPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetNtpPolicyListExecute(r)
 }
 
 /*
 GetNtpPolicyList Read a 'ntp.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNtpPolicyListRequest
 */
-func (a *NtpApiService) GetNtpPolicyList(ctx _context.Context) ApiGetNtpPolicyListRequest {
+func (a *NtpApiService) GetNtpPolicyList(ctx context.Context) ApiGetNtpPolicyListRequest {
 	return ApiGetNtpPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *NtpApiService) GetNtpPolicyList(ctx _context.Context) ApiGetNtpPolicyLi
 
 // Execute executes the request
 //  @return NtpPolicyResponse
-func (a *NtpApiService) GetNtpPolicyListExecute(r ApiGetNtpPolicyListRequest) (NtpPolicyResponse, *_nethttp.Response, error) {
+func (a *NtpApiService) GetNtpPolicyListExecute(r ApiGetNtpPolicyListRequest) (*NtpPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NtpPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NtpPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NtpApiService.GetNtpPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ntp/Policies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *NtpApiService) GetNtpPolicyListExecute(r ApiGetNtpPolicyListRequest) (N
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *NtpApiService) GetNtpPolicyListExecute(r ApiGetNtpPolicyListRequest) (N
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *NtpApiService) GetNtpPolicyListExecute(r ApiGetNtpPolicyListRequest) (N
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,7 +739,7 @@ func (a *NtpApiService) GetNtpPolicyListExecute(r ApiGetNtpPolicyListRequest) (N
 }
 
 type ApiPatchNtpPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NtpApiService
 	moid       string
 	ntpPolicy  *NtpPolicy
@@ -771,18 +758,18 @@ func (r ApiPatchNtpPolicyRequest) IfMatch(ifMatch string) ApiPatchNtpPolicyReque
 	return r
 }
 
-func (r ApiPatchNtpPolicyRequest) Execute() (NtpPolicy, *_nethttp.Response, error) {
+func (r ApiPatchNtpPolicyRequest) Execute() (*NtpPolicy, *http.Response, error) {
 	return r.ApiService.PatchNtpPolicyExecute(r)
 }
 
 /*
 PatchNtpPolicy Update a 'ntp.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchNtpPolicyRequest
 */
-func (a *NtpApiService) PatchNtpPolicy(ctx _context.Context, moid string) ApiPatchNtpPolicyRequest {
+func (a *NtpApiService) PatchNtpPolicy(ctx context.Context, moid string) ApiPatchNtpPolicyRequest {
 	return ApiPatchNtpPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -792,27 +779,25 @@ func (a *NtpApiService) PatchNtpPolicy(ctx _context.Context, moid string) ApiPat
 
 // Execute executes the request
 //  @return NtpPolicy
-func (a *NtpApiService) PatchNtpPolicyExecute(r ApiPatchNtpPolicyRequest) (NtpPolicy, *_nethttp.Response, error) {
+func (a *NtpApiService) PatchNtpPolicyExecute(r ApiPatchNtpPolicyRequest) (*NtpPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NtpPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NtpPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NtpApiService.PatchNtpPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ntp/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.ntpPolicy == nil {
 		return localVarReturnValue, nil, reportError("ntpPolicy is required and must be specified")
 	}
@@ -839,7 +824,7 @@ func (a *NtpApiService) PatchNtpPolicyExecute(r ApiPatchNtpPolicyRequest) (NtpPo
 	}
 	// body params
 	localVarPostBody = r.ntpPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -849,15 +834,15 @@ func (a *NtpApiService) PatchNtpPolicyExecute(r ApiPatchNtpPolicyRequest) (NtpPo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -913,7 +898,7 @@ func (a *NtpApiService) PatchNtpPolicyExecute(r ApiPatchNtpPolicyRequest) (NtpPo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -924,7 +909,7 @@ func (a *NtpApiService) PatchNtpPolicyExecute(r ApiPatchNtpPolicyRequest) (NtpPo
 }
 
 type ApiUpdateNtpPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NtpApiService
 	moid       string
 	ntpPolicy  *NtpPolicy
@@ -943,18 +928,18 @@ func (r ApiUpdateNtpPolicyRequest) IfMatch(ifMatch string) ApiUpdateNtpPolicyReq
 	return r
 }
 
-func (r ApiUpdateNtpPolicyRequest) Execute() (NtpPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateNtpPolicyRequest) Execute() (*NtpPolicy, *http.Response, error) {
 	return r.ApiService.UpdateNtpPolicyExecute(r)
 }
 
 /*
 UpdateNtpPolicy Update a 'ntp.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateNtpPolicyRequest
 */
-func (a *NtpApiService) UpdateNtpPolicy(ctx _context.Context, moid string) ApiUpdateNtpPolicyRequest {
+func (a *NtpApiService) UpdateNtpPolicy(ctx context.Context, moid string) ApiUpdateNtpPolicyRequest {
 	return ApiUpdateNtpPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -964,27 +949,25 @@ func (a *NtpApiService) UpdateNtpPolicy(ctx _context.Context, moid string) ApiUp
 
 // Execute executes the request
 //  @return NtpPolicy
-func (a *NtpApiService) UpdateNtpPolicyExecute(r ApiUpdateNtpPolicyRequest) (NtpPolicy, *_nethttp.Response, error) {
+func (a *NtpApiService) UpdateNtpPolicyExecute(r ApiUpdateNtpPolicyRequest) (*NtpPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NtpPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NtpPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NtpApiService.UpdateNtpPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ntp/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.ntpPolicy == nil {
 		return localVarReturnValue, nil, reportError("ntpPolicy is required and must be specified")
 	}
@@ -1011,7 +994,7 @@ func (a *NtpApiService) UpdateNtpPolicyExecute(r ApiUpdateNtpPolicyRequest) (Ntp
 	}
 	// body params
 	localVarPostBody = r.ntpPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1021,15 +1004,15 @@ func (a *NtpApiService) UpdateNtpPolicyExecute(r ApiUpdateNtpPolicyRequest) (Ntp
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1085,7 +1068,7 @@ func (a *NtpApiService) UpdateNtpPolicyExecute(r ApiUpdateNtpPolicyRequest) (Ntp
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

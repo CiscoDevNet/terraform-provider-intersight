@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** | the dimension spec type. | 
-**Dimension** | **string** | null | 
-**OutputName** | **string** | null | 
-**OutputType** | **string** | null | [default to "STRING"]
+**Dimension** | **string** |  | 
+**OutputName** | **string** |  | 
+**OutputType** | **string** |  | [default to "STRING"]
 
 ## Methods
 

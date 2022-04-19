@@ -447,7 +447,6 @@ func resourceIamLdapProvider() *schema.Resource {
 
 func resourceIamLdapProviderCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewIamLdapProviderWithDefaults()
@@ -563,7 +562,7 @@ func resourceIamLdapProviderCreate(c context.Context, d *schema.ResourceData, me
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating IamLdapProvider: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating IamLdapProvider: %s", responseErr.Error())
@@ -575,7 +574,6 @@ func resourceIamLdapProviderCreate(c context.Context, d *schema.ResourceData, me
 
 func resourceIamLdapProviderRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.IamApi.GetIamLdapProviderByMoid(conn.ctx, d.Id())
@@ -588,7 +586,7 @@ func resourceIamLdapProviderRead(c context.Context, d *schema.ResourceData, meta
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching IamLdapProvider: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching IamLdapProvider: %s", responseErr.Error())
@@ -673,7 +671,6 @@ func resourceIamLdapProviderRead(c context.Context, d *schema.ResourceData, meta
 
 func resourceIamLdapProviderUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.IamLdapProvider{}
@@ -793,7 +790,7 @@ func resourceIamLdapProviderUpdate(c context.Context, d *schema.ResourceData, me
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating IamLdapProvider: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating IamLdapProvider: %s", responseErr.Error())
@@ -805,7 +802,6 @@ func resourceIamLdapProviderUpdate(c context.Context, d *schema.ResourceData, me
 
 func resourceIamLdapProviderDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamLdapProvider(conn.ctx, d.Id())
@@ -817,7 +813,7 @@ func resourceIamLdapProviderDelete(c context.Context, d *schema.ResourceData, me
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting IamLdapProvider object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting IamLdapProvider object: %s", deleteErr.Error())

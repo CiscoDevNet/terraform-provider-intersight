@@ -501,7 +501,6 @@ func resourceVnicIscsiStaticTargetPolicy() *schema.Resource {
 
 func resourceVnicIscsiStaticTargetPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewVnicIscsiStaticTargetPolicyWithDefaults()
@@ -675,7 +674,7 @@ func resourceVnicIscsiStaticTargetPolicyCreate(c context.Context, d *schema.Reso
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating VnicIscsiStaticTargetPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating VnicIscsiStaticTargetPolicy: %s", responseErr.Error())
@@ -687,7 +686,6 @@ func resourceVnicIscsiStaticTargetPolicyCreate(c context.Context, d *schema.Reso
 
 func resourceVnicIscsiStaticTargetPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.VnicApi.GetVnicIscsiStaticTargetPolicyByMoid(conn.ctx, d.Id())
@@ -700,7 +698,7 @@ func resourceVnicIscsiStaticTargetPolicyRead(c context.Context, d *schema.Resour
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching VnicIscsiStaticTargetPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching VnicIscsiStaticTargetPolicy: %s", responseErr.Error())
@@ -801,7 +799,6 @@ func resourceVnicIscsiStaticTargetPolicyRead(c context.Context, d *schema.Resour
 
 func resourceVnicIscsiStaticTargetPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VnicIscsiStaticTargetPolicy{}
@@ -983,7 +980,7 @@ func resourceVnicIscsiStaticTargetPolicyUpdate(c context.Context, d *schema.Reso
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating VnicIscsiStaticTargetPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating VnicIscsiStaticTargetPolicy: %s", responseErr.Error())
@@ -995,7 +992,6 @@ func resourceVnicIscsiStaticTargetPolicyUpdate(c context.Context, d *schema.Reso
 
 func resourceVnicIscsiStaticTargetPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.VnicApi.DeleteVnicIscsiStaticTargetPolicy(conn.ctx, d.Id())
@@ -1007,7 +1003,7 @@ func resourceVnicIscsiStaticTargetPolicyDelete(c context.Context, d *schema.Reso
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting VnicIscsiStaticTargetPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting VnicIscsiStaticTargetPolicy object: %s", deleteErr.Error())

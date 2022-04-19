@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // MemoryApiService MemoryApi service
 type MemoryApiService service
 
 type ApiCreateMemoryPersistentMemoryPolicyRequest struct {
-	ctx                          _context.Context
+	ctx                          context.Context
 	ApiService                   *MemoryApiService
 	memoryPersistentMemoryPolicy *MemoryPersistentMemoryPolicy
 	ifMatch                      *string
@@ -54,17 +49,17 @@ func (r ApiCreateMemoryPersistentMemoryPolicyRequest) IfNoneMatch(ifNoneMatch st
 	return r
 }
 
-func (r ApiCreateMemoryPersistentMemoryPolicyRequest) Execute() (MemoryPersistentMemoryPolicy, *_nethttp.Response, error) {
+func (r ApiCreateMemoryPersistentMemoryPolicyRequest) Execute() (*MemoryPersistentMemoryPolicy, *http.Response, error) {
 	return r.ApiService.CreateMemoryPersistentMemoryPolicyExecute(r)
 }
 
 /*
 CreateMemoryPersistentMemoryPolicy Create a 'memory.PersistentMemoryPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateMemoryPersistentMemoryPolicyRequest
 */
-func (a *MemoryApiService) CreateMemoryPersistentMemoryPolicy(ctx _context.Context) ApiCreateMemoryPersistentMemoryPolicyRequest {
+func (a *MemoryApiService) CreateMemoryPersistentMemoryPolicy(ctx context.Context) ApiCreateMemoryPersistentMemoryPolicyRequest {
 	return ApiCreateMemoryPersistentMemoryPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *MemoryApiService) CreateMemoryPersistentMemoryPolicy(ctx _context.Conte
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryPolicy
-func (a *MemoryApiService) CreateMemoryPersistentMemoryPolicyExecute(r ApiCreateMemoryPersistentMemoryPolicyRequest) (MemoryPersistentMemoryPolicy, *_nethttp.Response, error) {
+func (a *MemoryApiService) CreateMemoryPersistentMemoryPolicyExecute(r ApiCreateMemoryPersistentMemoryPolicyRequest) (*MemoryPersistentMemoryPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.CreateMemoryPersistentMemoryPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryPolicy == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryPolicy is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *MemoryApiService) CreateMemoryPersistentMemoryPolicyExecute(r ApiCreate
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *MemoryApiService) CreateMemoryPersistentMemoryPolicyExecute(r ApiCreate
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *MemoryApiService) CreateMemoryPersistentMemoryPolicyExecute(r ApiCreate
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *MemoryApiService) CreateMemoryPersistentMemoryPolicyExecute(r ApiCreate
 }
 
 type ApiDeleteMemoryPersistentMemoryPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
 }
 
-func (r ApiDeleteMemoryPersistentMemoryPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteMemoryPersistentMemoryPolicyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteMemoryPersistentMemoryPolicyExecute(r)
 }
 
 /*
 DeleteMemoryPersistentMemoryPolicy Delete a 'memory.PersistentMemoryPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteMemoryPersistentMemoryPolicyRequest
 */
-func (a *MemoryApiService) DeleteMemoryPersistentMemoryPolicy(ctx _context.Context, moid string) ApiDeleteMemoryPersistentMemoryPolicyRequest {
+func (a *MemoryApiService) DeleteMemoryPersistentMemoryPolicy(ctx context.Context, moid string) ApiDeleteMemoryPersistentMemoryPolicyRequest {
 	return ApiDeleteMemoryPersistentMemoryPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *MemoryApiService) DeleteMemoryPersistentMemoryPolicy(ctx _context.Conte
 }
 
 // Execute executes the request
-func (a *MemoryApiService) DeleteMemoryPersistentMemoryPolicyExecute(r ApiDeleteMemoryPersistentMemoryPolicyRequest) (*_nethttp.Response, error) {
+func (a *MemoryApiService) DeleteMemoryPersistentMemoryPolicyExecute(r ApiDeleteMemoryPersistentMemoryPolicyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.DeleteMemoryPersistentMemoryPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *MemoryApiService) DeleteMemoryPersistentMemoryPolicyExecute(r ApiDelete
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *MemoryApiService) DeleteMemoryPersistentMemoryPolicyExecute(r ApiDelete
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *MemoryApiService) DeleteMemoryPersistentMemoryPolicyExecute(r ApiDelete
 }
 
 type ApiGetMemoryArrayByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
 }
 
-func (r ApiGetMemoryArrayByMoidRequest) Execute() (MemoryArray, *_nethttp.Response, error) {
+func (r ApiGetMemoryArrayByMoidRequest) Execute() (*MemoryArray, *http.Response, error) {
 	return r.ApiService.GetMemoryArrayByMoidExecute(r)
 }
 
 /*
 GetMemoryArrayByMoid Read a 'memory.Array' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetMemoryArrayByMoidRequest
 */
-func (a *MemoryApiService) GetMemoryArrayByMoid(ctx _context.Context, moid string) ApiGetMemoryArrayByMoidRequest {
+func (a *MemoryApiService) GetMemoryArrayByMoid(ctx context.Context, moid string) ApiGetMemoryArrayByMoidRequest {
 	return ApiGetMemoryArrayByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *MemoryApiService) GetMemoryArrayByMoid(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return MemoryArray
-func (a *MemoryApiService) GetMemoryArrayByMoidExecute(r ApiGetMemoryArrayByMoidRequest) (MemoryArray, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryArrayByMoidExecute(r ApiGetMemoryArrayByMoidRequest) (*MemoryArray, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryArray
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryArrayByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/Arrays/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *MemoryApiService) GetMemoryArrayByMoidExecute(r ApiGetMemoryArrayByMoid
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *MemoryApiService) GetMemoryArrayByMoidExecute(r ApiGetMemoryArrayByMoid
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *MemoryApiService) GetMemoryArrayByMoidExecute(r ApiGetMemoryArrayByMoid
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *MemoryApiService) GetMemoryArrayByMoidExecute(r ApiGetMemoryArrayByMoid
 }
 
 type ApiGetMemoryArrayListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *MemoryApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetMemoryArrayListRequest) Tags(tags string) ApiGetMemoryArrayListReq
 	return r
 }
 
-func (r ApiGetMemoryArrayListRequest) Execute() (MemoryArrayResponse, *_nethttp.Response, error) {
+func (r ApiGetMemoryArrayListRequest) Execute() (*MemoryArrayResponse, *http.Response, error) {
 	return r.ApiService.GetMemoryArrayListExecute(r)
 }
 
 /*
 GetMemoryArrayList Read a 'memory.Array' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMemoryArrayListRequest
 */
-func (a *MemoryApiService) GetMemoryArrayList(ctx _context.Context) ApiGetMemoryArrayListRequest {
+func (a *MemoryApiService) GetMemoryArrayList(ctx context.Context) ApiGetMemoryArrayListRequest {
 	return ApiGetMemoryArrayListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *MemoryApiService) GetMemoryArrayList(ctx _context.Context) ApiGetMemory
 
 // Execute executes the request
 //  @return MemoryArrayResponse
-func (a *MemoryApiService) GetMemoryArrayListExecute(r ApiGetMemoryArrayListRequest) (MemoryArrayResponse, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryArrayListExecute(r ApiGetMemoryArrayListRequest) (*MemoryArrayResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryArrayResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryArrayResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryArrayList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/Arrays"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *MemoryApiService) GetMemoryArrayListExecute(r ApiGetMemoryArrayListRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *MemoryApiService) GetMemoryArrayListExecute(r ApiGetMemoryArrayListRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *MemoryApiService) GetMemoryArrayListExecute(r ApiGetMemoryArrayListRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,23 +739,23 @@ func (a *MemoryApiService) GetMemoryArrayListExecute(r ApiGetMemoryArrayListRequ
 }
 
 type ApiGetMemoryPersistentMemoryConfigResultByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
 }
 
-func (r ApiGetMemoryPersistentMemoryConfigResultByMoidRequest) Execute() (MemoryPersistentMemoryConfigResult, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryConfigResultByMoidRequest) Execute() (*MemoryPersistentMemoryConfigResult, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryConfigResultByMoidExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryConfigResultByMoid Read a 'memory.PersistentMemoryConfigResult' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetMemoryPersistentMemoryConfigResultByMoidRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoid(ctx _context.Context, moid string) ApiGetMemoryPersistentMemoryConfigResultByMoidRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryConfigResultByMoidRequest {
 	return ApiGetMemoryPersistentMemoryConfigResultByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -778,27 +765,25 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoid(ctx _cont
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryConfigResult
-func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoidExecute(r ApiGetMemoryPersistentMemoryConfigResultByMoidRequest) (MemoryPersistentMemoryConfigResult, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoidExecute(r ApiGetMemoryPersistentMemoryConfigResultByMoidRequest) (*MemoryPersistentMemoryConfigResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryConfigResult
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryConfigResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryConfigResultByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryConfigResults/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -817,7 +802,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoidExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -827,15 +812,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -891,7 +876,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoidExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -902,7 +887,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultByMoidExecute(r 
 }
 
 type ApiGetMemoryPersistentMemoryConfigResultListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *MemoryApiService
 	filter      *string
 	orderby     *string
@@ -983,17 +968,17 @@ func (r ApiGetMemoryPersistentMemoryConfigResultListRequest) Tags(tags string) A
 	return r
 }
 
-func (r ApiGetMemoryPersistentMemoryConfigResultListRequest) Execute() (MemoryPersistentMemoryConfigResultResponse, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryConfigResultListRequest) Execute() (*MemoryPersistentMemoryConfigResultResponse, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryConfigResultListExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryConfigResultList Read a 'memory.PersistentMemoryConfigResult' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMemoryPersistentMemoryConfigResultListRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultList(ctx _context.Context) ApiGetMemoryPersistentMemoryConfigResultListRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultList(ctx context.Context) ApiGetMemoryPersistentMemoryConfigResultListRequest {
 	return ApiGetMemoryPersistentMemoryConfigResultListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1002,26 +987,24 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultList(ctx _contex
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryConfigResultResponse
-func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultListExecute(r ApiGetMemoryPersistentMemoryConfigResultListRequest) (MemoryPersistentMemoryConfigResultResponse, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultListExecute(r ApiGetMemoryPersistentMemoryConfigResultListRequest) (*MemoryPersistentMemoryConfigResultResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryConfigResultResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryConfigResultResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryConfigResultList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryConfigResults"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1073,7 +1056,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultListExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1083,15 +1066,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1147,7 +1130,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultListExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1158,23 +1141,23 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigResultListExecute(r Ap
 }
 
 type ApiGetMemoryPersistentMemoryConfigurationByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
 }
 
-func (r ApiGetMemoryPersistentMemoryConfigurationByMoidRequest) Execute() (MemoryPersistentMemoryConfiguration, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryConfigurationByMoidRequest) Execute() (*MemoryPersistentMemoryConfiguration, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryConfigurationByMoidExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryConfigurationByMoid Read a 'memory.PersistentMemoryConfiguration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetMemoryPersistentMemoryConfigurationByMoidRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoid(ctx _context.Context, moid string) ApiGetMemoryPersistentMemoryConfigurationByMoidRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryConfigurationByMoidRequest {
 	return ApiGetMemoryPersistentMemoryConfigurationByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1184,27 +1167,25 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoid(ctx _con
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryConfiguration
-func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoidExecute(r ApiGetMemoryPersistentMemoryConfigurationByMoidRequest) (MemoryPersistentMemoryConfiguration, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoidExecute(r ApiGetMemoryPersistentMemoryConfigurationByMoidRequest) (*MemoryPersistentMemoryConfiguration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryConfiguration
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryConfigurationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryConfigurations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1223,7 +1204,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoidExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1233,15 +1214,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoidExecute(r
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1297,7 +1278,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoidExecute(r
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1308,7 +1289,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationByMoidExecute(r
 }
 
 type ApiGetMemoryPersistentMemoryConfigurationListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *MemoryApiService
 	filter      *string
 	orderby     *string
@@ -1389,17 +1370,17 @@ func (r ApiGetMemoryPersistentMemoryConfigurationListRequest) Tags(tags string) 
 	return r
 }
 
-func (r ApiGetMemoryPersistentMemoryConfigurationListRequest) Execute() (MemoryPersistentMemoryConfigurationResponse, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryConfigurationListRequest) Execute() (*MemoryPersistentMemoryConfigurationResponse, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryConfigurationListExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryConfigurationList Read a 'memory.PersistentMemoryConfiguration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMemoryPersistentMemoryConfigurationListRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationList(ctx _context.Context) ApiGetMemoryPersistentMemoryConfigurationListRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationList(ctx context.Context) ApiGetMemoryPersistentMemoryConfigurationListRequest {
 	return ApiGetMemoryPersistentMemoryConfigurationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1408,26 +1389,24 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationList(ctx _conte
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryConfigurationResponse
-func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationListExecute(r ApiGetMemoryPersistentMemoryConfigurationListRequest) (MemoryPersistentMemoryConfigurationResponse, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationListExecute(r ApiGetMemoryPersistentMemoryConfigurationListRequest) (*MemoryPersistentMemoryConfigurationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryConfigurationResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryConfigurationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryConfigurationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryConfigurations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1479,7 +1458,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationListExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1489,15 +1468,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationListExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1553,7 +1532,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationListExecute(r A
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1564,23 +1543,23 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryConfigurationListExecute(r A
 }
 
 type ApiGetMemoryPersistentMemoryNamespaceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
 }
 
-func (r ApiGetMemoryPersistentMemoryNamespaceByMoidRequest) Execute() (MemoryPersistentMemoryNamespace, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryNamespaceByMoidRequest) Execute() (*MemoryPersistentMemoryNamespace, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryNamespaceByMoidExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryNamespaceByMoid Read a 'memory.PersistentMemoryNamespace' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetMemoryPersistentMemoryNamespaceByMoidRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoid(ctx _context.Context, moid string) ApiGetMemoryPersistentMemoryNamespaceByMoidRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryNamespaceByMoidRequest {
 	return ApiGetMemoryPersistentMemoryNamespaceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1590,27 +1569,25 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoid(ctx _context
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryNamespace
-func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoidExecute(r ApiGetMemoryPersistentMemoryNamespaceByMoidRequest) (MemoryPersistentMemoryNamespace, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoidExecute(r ApiGetMemoryPersistentMemoryNamespaceByMoidRequest) (*MemoryPersistentMemoryNamespace, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryNamespace
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryNamespace
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryNamespaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryNamespaces/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1629,7 +1606,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoidExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1639,15 +1616,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1703,7 +1680,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoidExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1714,23 +1691,23 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceByMoidExecute(r Api
 }
 
 type ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
 }
 
-func (r ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest) Execute() (MemoryPersistentMemoryNamespaceConfigResult, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest) Execute() (*MemoryPersistentMemoryNamespaceConfigResult, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryNamespaceConfigResultByMoidExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryNamespaceConfigResultByMoid Read a 'memory.PersistentMemoryNamespaceConfigResult' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoid(ctx _context.Context, moid string) ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest {
 	return ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1740,27 +1717,25 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoid(
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryNamespaceConfigResult
-func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoidExecute(r ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest) (MemoryPersistentMemoryNamespaceConfigResult, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoidExecute(r ApiGetMemoryPersistentMemoryNamespaceConfigResultByMoidRequest) (*MemoryPersistentMemoryNamespaceConfigResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryNamespaceConfigResult
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryNamespaceConfigResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryNamespaceConfigResultByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryNamespaceConfigResults/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1779,7 +1754,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoidE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1789,15 +1764,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoidE
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1853,7 +1828,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoidE
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1864,7 +1839,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultByMoidE
 }
 
 type ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *MemoryApiService
 	filter      *string
 	orderby     *string
@@ -1945,17 +1920,17 @@ func (r ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest) Tags(tags 
 	return r
 }
 
-func (r ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest) Execute() (MemoryPersistentMemoryNamespaceConfigResultResponse, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest) Execute() (*MemoryPersistentMemoryNamespaceConfigResultResponse, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryNamespaceConfigResultListExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryNamespaceConfigResultList Read a 'memory.PersistentMemoryNamespaceConfigResult' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultList(ctx _context.Context) ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultList(ctx context.Context) ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest {
 	return ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1964,26 +1939,24 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultList(ct
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryNamespaceConfigResultResponse
-func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultListExecute(r ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest) (MemoryPersistentMemoryNamespaceConfigResultResponse, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultListExecute(r ApiGetMemoryPersistentMemoryNamespaceConfigResultListRequest) (*MemoryPersistentMemoryNamespaceConfigResultResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryNamespaceConfigResultResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryNamespaceConfigResultResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryNamespaceConfigResultList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryNamespaceConfigResults"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2035,7 +2008,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultListExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2045,15 +2018,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultListExe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2109,7 +2082,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultListExe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2120,7 +2093,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceConfigResultListExe
 }
 
 type ApiGetMemoryPersistentMemoryNamespaceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *MemoryApiService
 	filter      *string
 	orderby     *string
@@ -2201,17 +2174,17 @@ func (r ApiGetMemoryPersistentMemoryNamespaceListRequest) Tags(tags string) ApiG
 	return r
 }
 
-func (r ApiGetMemoryPersistentMemoryNamespaceListRequest) Execute() (MemoryPersistentMemoryNamespaceResponse, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryNamespaceListRequest) Execute() (*MemoryPersistentMemoryNamespaceResponse, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryNamespaceListExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryNamespaceList Read a 'memory.PersistentMemoryNamespace' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMemoryPersistentMemoryNamespaceListRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceList(ctx _context.Context) ApiGetMemoryPersistentMemoryNamespaceListRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceList(ctx context.Context) ApiGetMemoryPersistentMemoryNamespaceListRequest {
 	return ApiGetMemoryPersistentMemoryNamespaceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2220,26 +2193,24 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceList(ctx _context.C
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryNamespaceResponse
-func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceListExecute(r ApiGetMemoryPersistentMemoryNamespaceListRequest) (MemoryPersistentMemoryNamespaceResponse, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceListExecute(r ApiGetMemoryPersistentMemoryNamespaceListRequest) (*MemoryPersistentMemoryNamespaceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryNamespaceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryNamespaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryNamespaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryNamespaces"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2291,7 +2262,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceListExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2301,15 +2272,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2365,7 +2336,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceListExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2376,23 +2347,23 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryNamespaceListExecute(r ApiGe
 }
 
 type ApiGetMemoryPersistentMemoryPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
 }
 
-func (r ApiGetMemoryPersistentMemoryPolicyByMoidRequest) Execute() (MemoryPersistentMemoryPolicy, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryPolicyByMoidRequest) Execute() (*MemoryPersistentMemoryPolicy, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryPolicyByMoidExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryPolicyByMoid Read a 'memory.PersistentMemoryPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetMemoryPersistentMemoryPolicyByMoidRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoid(ctx _context.Context, moid string) ApiGetMemoryPersistentMemoryPolicyByMoidRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryPolicyByMoidRequest {
 	return ApiGetMemoryPersistentMemoryPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2402,27 +2373,25 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoid(ctx _context.Co
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryPolicy
-func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoidExecute(r ApiGetMemoryPersistentMemoryPolicyByMoidRequest) (MemoryPersistentMemoryPolicy, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoidExecute(r ApiGetMemoryPersistentMemoryPolicyByMoidRequest) (*MemoryPersistentMemoryPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2441,7 +2410,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoidExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2451,15 +2420,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2515,7 +2484,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoidExecute(r ApiGet
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2526,7 +2495,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyByMoidExecute(r ApiGet
 }
 
 type ApiGetMemoryPersistentMemoryPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *MemoryApiService
 	filter      *string
 	orderby     *string
@@ -2607,17 +2576,17 @@ func (r ApiGetMemoryPersistentMemoryPolicyListRequest) Tags(tags string) ApiGetM
 	return r
 }
 
-func (r ApiGetMemoryPersistentMemoryPolicyListRequest) Execute() (MemoryPersistentMemoryPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryPolicyListRequest) Execute() (*MemoryPersistentMemoryPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryPolicyListExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryPolicyList Read a 'memory.PersistentMemoryPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMemoryPersistentMemoryPolicyListRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyList(ctx _context.Context) ApiGetMemoryPersistentMemoryPolicyListRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyList(ctx context.Context) ApiGetMemoryPersistentMemoryPolicyListRequest {
 	return ApiGetMemoryPersistentMemoryPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2626,26 +2595,24 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyList(ctx _context.Cont
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryPolicyResponse
-func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyListExecute(r ApiGetMemoryPersistentMemoryPolicyListRequest) (MemoryPersistentMemoryPolicyResponse, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyListExecute(r ApiGetMemoryPersistentMemoryPolicyListRequest) (*MemoryPersistentMemoryPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2697,7 +2664,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyListExecute(r ApiGetMe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2707,15 +2674,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyListExecute(r ApiGetMe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2771,7 +2738,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyListExecute(r ApiGetMe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2782,23 +2749,23 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryPolicyListExecute(r ApiGetMe
 }
 
 type ApiGetMemoryPersistentMemoryRegionByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
 }
 
-func (r ApiGetMemoryPersistentMemoryRegionByMoidRequest) Execute() (MemoryPersistentMemoryRegion, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryRegionByMoidRequest) Execute() (*MemoryPersistentMemoryRegion, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryRegionByMoidExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryRegionByMoid Read a 'memory.PersistentMemoryRegion' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetMemoryPersistentMemoryRegionByMoidRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoid(ctx _context.Context, moid string) ApiGetMemoryPersistentMemoryRegionByMoidRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryRegionByMoidRequest {
 	return ApiGetMemoryPersistentMemoryRegionByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2808,27 +2775,25 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoid(ctx _context.Co
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryRegion
-func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoidExecute(r ApiGetMemoryPersistentMemoryRegionByMoidRequest) (MemoryPersistentMemoryRegion, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoidExecute(r ApiGetMemoryPersistentMemoryRegionByMoidRequest) (*MemoryPersistentMemoryRegion, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryRegion
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryRegion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryRegionByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryRegions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2847,7 +2812,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoidExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2857,15 +2822,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2921,7 +2886,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoidExecute(r ApiGet
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2932,7 +2897,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionByMoidExecute(r ApiGet
 }
 
 type ApiGetMemoryPersistentMemoryRegionListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *MemoryApiService
 	filter      *string
 	orderby     *string
@@ -3013,17 +2978,17 @@ func (r ApiGetMemoryPersistentMemoryRegionListRequest) Tags(tags string) ApiGetM
 	return r
 }
 
-func (r ApiGetMemoryPersistentMemoryRegionListRequest) Execute() (MemoryPersistentMemoryRegionResponse, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryRegionListRequest) Execute() (*MemoryPersistentMemoryRegionResponse, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryRegionListExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryRegionList Read a 'memory.PersistentMemoryRegion' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMemoryPersistentMemoryRegionListRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryRegionList(ctx _context.Context) ApiGetMemoryPersistentMemoryRegionListRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryRegionList(ctx context.Context) ApiGetMemoryPersistentMemoryRegionListRequest {
 	return ApiGetMemoryPersistentMemoryRegionListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3032,26 +2997,24 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionList(ctx _context.Cont
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryRegionResponse
-func (a *MemoryApiService) GetMemoryPersistentMemoryRegionListExecute(r ApiGetMemoryPersistentMemoryRegionListRequest) (MemoryPersistentMemoryRegionResponse, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryRegionListExecute(r ApiGetMemoryPersistentMemoryRegionListRequest) (*MemoryPersistentMemoryRegionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryRegionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryRegionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryRegionList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryRegions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3103,7 +3066,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionListExecute(r ApiGetMe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3113,15 +3076,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionListExecute(r ApiGetMe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3177,7 +3140,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionListExecute(r ApiGetMe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3188,23 +3151,23 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryRegionListExecute(r ApiGetMe
 }
 
 type ApiGetMemoryPersistentMemoryUnitByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
 }
 
-func (r ApiGetMemoryPersistentMemoryUnitByMoidRequest) Execute() (MemoryPersistentMemoryUnit, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryUnitByMoidRequest) Execute() (*MemoryPersistentMemoryUnit, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryUnitByMoidExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryUnitByMoid Read a 'memory.PersistentMemoryUnit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetMemoryPersistentMemoryUnitByMoidRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoid(ctx _context.Context, moid string) ApiGetMemoryPersistentMemoryUnitByMoidRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoid(ctx context.Context, moid string) ApiGetMemoryPersistentMemoryUnitByMoidRequest {
 	return ApiGetMemoryPersistentMemoryUnitByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3214,27 +3177,25 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoid(ctx _context.Cont
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryUnit
-func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoidExecute(r ApiGetMemoryPersistentMemoryUnitByMoidRequest) (MemoryPersistentMemoryUnit, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoidExecute(r ApiGetMemoryPersistentMemoryUnitByMoidRequest) (*MemoryPersistentMemoryUnit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryUnit
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryUnitByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryUnits/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3253,7 +3214,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoidExecute(r ApiGetMe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3263,15 +3224,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoidExecute(r ApiGetMe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3327,7 +3288,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoidExecute(r ApiGetMe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3338,7 +3299,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitByMoidExecute(r ApiGetMe
 }
 
 type ApiGetMemoryPersistentMemoryUnitListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *MemoryApiService
 	filter      *string
 	orderby     *string
@@ -3419,17 +3380,17 @@ func (r ApiGetMemoryPersistentMemoryUnitListRequest) Tags(tags string) ApiGetMem
 	return r
 }
 
-func (r ApiGetMemoryPersistentMemoryUnitListRequest) Execute() (MemoryPersistentMemoryUnitResponse, *_nethttp.Response, error) {
+func (r ApiGetMemoryPersistentMemoryUnitListRequest) Execute() (*MemoryPersistentMemoryUnitResponse, *http.Response, error) {
 	return r.ApiService.GetMemoryPersistentMemoryUnitListExecute(r)
 }
 
 /*
 GetMemoryPersistentMemoryUnitList Read a 'memory.PersistentMemoryUnit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMemoryPersistentMemoryUnitListRequest
 */
-func (a *MemoryApiService) GetMemoryPersistentMemoryUnitList(ctx _context.Context) ApiGetMemoryPersistentMemoryUnitListRequest {
+func (a *MemoryApiService) GetMemoryPersistentMemoryUnitList(ctx context.Context) ApiGetMemoryPersistentMemoryUnitListRequest {
 	return ApiGetMemoryPersistentMemoryUnitListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3438,26 +3399,24 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitList(ctx _context.Contex
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryUnitResponse
-func (a *MemoryApiService) GetMemoryPersistentMemoryUnitListExecute(r ApiGetMemoryPersistentMemoryUnitListRequest) (MemoryPersistentMemoryUnitResponse, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryPersistentMemoryUnitListExecute(r ApiGetMemoryPersistentMemoryUnitListRequest) (*MemoryPersistentMemoryUnitResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryUnitResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryUnitResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryPersistentMemoryUnitList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryUnits"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3509,7 +3468,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitListExecute(r ApiGetMemo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3519,15 +3478,15 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitListExecute(r ApiGetMemo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3583,7 +3542,7 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitListExecute(r ApiGetMemo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3594,23 +3553,23 @@ func (a *MemoryApiService) GetMemoryPersistentMemoryUnitListExecute(r ApiGetMemo
 }
 
 type ApiGetMemoryUnitByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
 }
 
-func (r ApiGetMemoryUnitByMoidRequest) Execute() (MemoryUnit, *_nethttp.Response, error) {
+func (r ApiGetMemoryUnitByMoidRequest) Execute() (*MemoryUnit, *http.Response, error) {
 	return r.ApiService.GetMemoryUnitByMoidExecute(r)
 }
 
 /*
 GetMemoryUnitByMoid Read a 'memory.Unit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetMemoryUnitByMoidRequest
 */
-func (a *MemoryApiService) GetMemoryUnitByMoid(ctx _context.Context, moid string) ApiGetMemoryUnitByMoidRequest {
+func (a *MemoryApiService) GetMemoryUnitByMoid(ctx context.Context, moid string) ApiGetMemoryUnitByMoidRequest {
 	return ApiGetMemoryUnitByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3620,27 +3579,25 @@ func (a *MemoryApiService) GetMemoryUnitByMoid(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return MemoryUnit
-func (a *MemoryApiService) GetMemoryUnitByMoidExecute(r ApiGetMemoryUnitByMoidRequest) (MemoryUnit, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryUnitByMoidExecute(r ApiGetMemoryUnitByMoidRequest) (*MemoryUnit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryUnit
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryUnitByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/Units/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3659,7 +3616,7 @@ func (a *MemoryApiService) GetMemoryUnitByMoidExecute(r ApiGetMemoryUnitByMoidRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3669,15 +3626,15 @@ func (a *MemoryApiService) GetMemoryUnitByMoidExecute(r ApiGetMemoryUnitByMoidRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3733,7 +3690,7 @@ func (a *MemoryApiService) GetMemoryUnitByMoidExecute(r ApiGetMemoryUnitByMoidRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3744,7 +3701,7 @@ func (a *MemoryApiService) GetMemoryUnitByMoidExecute(r ApiGetMemoryUnitByMoidRe
 }
 
 type ApiGetMemoryUnitListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *MemoryApiService
 	filter      *string
 	orderby     *string
@@ -3825,17 +3782,17 @@ func (r ApiGetMemoryUnitListRequest) Tags(tags string) ApiGetMemoryUnitListReque
 	return r
 }
 
-func (r ApiGetMemoryUnitListRequest) Execute() (MemoryUnitResponse, *_nethttp.Response, error) {
+func (r ApiGetMemoryUnitListRequest) Execute() (*MemoryUnitResponse, *http.Response, error) {
 	return r.ApiService.GetMemoryUnitListExecute(r)
 }
 
 /*
 GetMemoryUnitList Read a 'memory.Unit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetMemoryUnitListRequest
 */
-func (a *MemoryApiService) GetMemoryUnitList(ctx _context.Context) ApiGetMemoryUnitListRequest {
+func (a *MemoryApiService) GetMemoryUnitList(ctx context.Context) ApiGetMemoryUnitListRequest {
 	return ApiGetMemoryUnitListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3844,26 +3801,24 @@ func (a *MemoryApiService) GetMemoryUnitList(ctx _context.Context) ApiGetMemoryU
 
 // Execute executes the request
 //  @return MemoryUnitResponse
-func (a *MemoryApiService) GetMemoryUnitListExecute(r ApiGetMemoryUnitListRequest) (MemoryUnitResponse, *_nethttp.Response, error) {
+func (a *MemoryApiService) GetMemoryUnitListExecute(r ApiGetMemoryUnitListRequest) (*MemoryUnitResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryUnitResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryUnitResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.GetMemoryUnitList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/Units"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3915,7 +3870,7 @@ func (a *MemoryApiService) GetMemoryUnitListExecute(r ApiGetMemoryUnitListReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3925,15 +3880,15 @@ func (a *MemoryApiService) GetMemoryUnitListExecute(r ApiGetMemoryUnitListReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3989,7 +3944,7 @@ func (a *MemoryApiService) GetMemoryUnitListExecute(r ApiGetMemoryUnitListReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4000,7 +3955,7 @@ func (a *MemoryApiService) GetMemoryUnitListExecute(r ApiGetMemoryUnitListReques
 }
 
 type ApiPatchMemoryArrayRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *MemoryApiService
 	moid        string
 	memoryArray *MemoryArray
@@ -4019,18 +3974,18 @@ func (r ApiPatchMemoryArrayRequest) IfMatch(ifMatch string) ApiPatchMemoryArrayR
 	return r
 }
 
-func (r ApiPatchMemoryArrayRequest) Execute() (MemoryArray, *_nethttp.Response, error) {
+func (r ApiPatchMemoryArrayRequest) Execute() (*MemoryArray, *http.Response, error) {
 	return r.ApiService.PatchMemoryArrayExecute(r)
 }
 
 /*
 PatchMemoryArray Update a 'memory.Array' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchMemoryArrayRequest
 */
-func (a *MemoryApiService) PatchMemoryArray(ctx _context.Context, moid string) ApiPatchMemoryArrayRequest {
+func (a *MemoryApiService) PatchMemoryArray(ctx context.Context, moid string) ApiPatchMemoryArrayRequest {
 	return ApiPatchMemoryArrayRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4040,27 +3995,25 @@ func (a *MemoryApiService) PatchMemoryArray(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return MemoryArray
-func (a *MemoryApiService) PatchMemoryArrayExecute(r ApiPatchMemoryArrayRequest) (MemoryArray, *_nethttp.Response, error) {
+func (a *MemoryApiService) PatchMemoryArrayExecute(r ApiPatchMemoryArrayRequest) (*MemoryArray, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryArray
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.PatchMemoryArray")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/Arrays/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryArray == nil {
 		return localVarReturnValue, nil, reportError("memoryArray is required and must be specified")
 	}
@@ -4087,7 +4040,7 @@ func (a *MemoryApiService) PatchMemoryArrayExecute(r ApiPatchMemoryArrayRequest)
 	}
 	// body params
 	localVarPostBody = r.memoryArray
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4097,15 +4050,15 @@ func (a *MemoryApiService) PatchMemoryArrayExecute(r ApiPatchMemoryArrayRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4161,7 +4114,7 @@ func (a *MemoryApiService) PatchMemoryArrayExecute(r ApiPatchMemoryArrayRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4172,7 +4125,7 @@ func (a *MemoryApiService) PatchMemoryArrayExecute(r ApiPatchMemoryArrayRequest)
 }
 
 type ApiPatchMemoryPersistentMemoryConfigResultRequest struct {
-	ctx                                _context.Context
+	ctx                                context.Context
 	ApiService                         *MemoryApiService
 	moid                               string
 	memoryPersistentMemoryConfigResult *MemoryPersistentMemoryConfigResult
@@ -4191,18 +4144,18 @@ func (r ApiPatchMemoryPersistentMemoryConfigResultRequest) IfMatch(ifMatch strin
 	return r
 }
 
-func (r ApiPatchMemoryPersistentMemoryConfigResultRequest) Execute() (MemoryPersistentMemoryConfigResult, *_nethttp.Response, error) {
+func (r ApiPatchMemoryPersistentMemoryConfigResultRequest) Execute() (*MemoryPersistentMemoryConfigResult, *http.Response, error) {
 	return r.ApiService.PatchMemoryPersistentMemoryConfigResultExecute(r)
 }
 
 /*
 PatchMemoryPersistentMemoryConfigResult Update a 'memory.PersistentMemoryConfigResult' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchMemoryPersistentMemoryConfigResultRequest
 */
-func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigResult(ctx _context.Context, moid string) ApiPatchMemoryPersistentMemoryConfigResultRequest {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigResult(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryConfigResultRequest {
 	return ApiPatchMemoryPersistentMemoryConfigResultRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4212,27 +4165,25 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigResult(ctx _context.
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryConfigResult
-func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigResultExecute(r ApiPatchMemoryPersistentMemoryConfigResultRequest) (MemoryPersistentMemoryConfigResult, *_nethttp.Response, error) {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigResultExecute(r ApiPatchMemoryPersistentMemoryConfigResultRequest) (*MemoryPersistentMemoryConfigResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryConfigResult
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryConfigResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.PatchMemoryPersistentMemoryConfigResult")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryConfigResults/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryConfigResult == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryConfigResult is required and must be specified")
 	}
@@ -4259,7 +4210,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigResultExecute(r ApiP
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryConfigResult
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4269,15 +4220,15 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigResultExecute(r ApiP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4333,7 +4284,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigResultExecute(r ApiP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4344,7 +4295,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigResultExecute(r ApiP
 }
 
 type ApiPatchMemoryPersistentMemoryConfigurationRequest struct {
-	ctx                                 _context.Context
+	ctx                                 context.Context
 	ApiService                          *MemoryApiService
 	moid                                string
 	memoryPersistentMemoryConfiguration *MemoryPersistentMemoryConfiguration
@@ -4363,18 +4314,18 @@ func (r ApiPatchMemoryPersistentMemoryConfigurationRequest) IfMatch(ifMatch stri
 	return r
 }
 
-func (r ApiPatchMemoryPersistentMemoryConfigurationRequest) Execute() (MemoryPersistentMemoryConfiguration, *_nethttp.Response, error) {
+func (r ApiPatchMemoryPersistentMemoryConfigurationRequest) Execute() (*MemoryPersistentMemoryConfiguration, *http.Response, error) {
 	return r.ApiService.PatchMemoryPersistentMemoryConfigurationExecute(r)
 }
 
 /*
 PatchMemoryPersistentMemoryConfiguration Update a 'memory.PersistentMemoryConfiguration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchMemoryPersistentMemoryConfigurationRequest
 */
-func (a *MemoryApiService) PatchMemoryPersistentMemoryConfiguration(ctx _context.Context, moid string) ApiPatchMemoryPersistentMemoryConfigurationRequest {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryConfiguration(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryConfigurationRequest {
 	return ApiPatchMemoryPersistentMemoryConfigurationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4384,27 +4335,25 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryConfiguration(ctx _context
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryConfiguration
-func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigurationExecute(r ApiPatchMemoryPersistentMemoryConfigurationRequest) (MemoryPersistentMemoryConfiguration, *_nethttp.Response, error) {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigurationExecute(r ApiPatchMemoryPersistentMemoryConfigurationRequest) (*MemoryPersistentMemoryConfiguration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryConfiguration
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.PatchMemoryPersistentMemoryConfiguration")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryConfigurations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryConfiguration == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryConfiguration is required and must be specified")
 	}
@@ -4431,7 +4380,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigurationExecute(r Api
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryConfiguration
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4441,15 +4390,15 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigurationExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4505,7 +4454,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigurationExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4516,7 +4465,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryConfigurationExecute(r Api
 }
 
 type ApiPatchMemoryPersistentMemoryNamespaceRequest struct {
-	ctx                             _context.Context
+	ctx                             context.Context
 	ApiService                      *MemoryApiService
 	moid                            string
 	memoryPersistentMemoryNamespace *MemoryPersistentMemoryNamespace
@@ -4535,18 +4484,18 @@ func (r ApiPatchMemoryPersistentMemoryNamespaceRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiPatchMemoryPersistentMemoryNamespaceRequest) Execute() (MemoryPersistentMemoryNamespace, *_nethttp.Response, error) {
+func (r ApiPatchMemoryPersistentMemoryNamespaceRequest) Execute() (*MemoryPersistentMemoryNamespace, *http.Response, error) {
 	return r.ApiService.PatchMemoryPersistentMemoryNamespaceExecute(r)
 }
 
 /*
 PatchMemoryPersistentMemoryNamespace Update a 'memory.PersistentMemoryNamespace' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchMemoryPersistentMemoryNamespaceRequest
 */
-func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespace(ctx _context.Context, moid string) ApiPatchMemoryPersistentMemoryNamespaceRequest {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespace(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryNamespaceRequest {
 	return ApiPatchMemoryPersistentMemoryNamespaceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4556,27 +4505,25 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespace(ctx _context.Con
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryNamespace
-func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceExecute(r ApiPatchMemoryPersistentMemoryNamespaceRequest) (MemoryPersistentMemoryNamespace, *_nethttp.Response, error) {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceExecute(r ApiPatchMemoryPersistentMemoryNamespaceRequest) (*MemoryPersistentMemoryNamespace, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryNamespace
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryNamespace
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.PatchMemoryPersistentMemoryNamespace")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryNamespaces/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryNamespace == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryNamespace is required and must be specified")
 	}
@@ -4603,7 +4550,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceExecute(r ApiPatc
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryNamespace
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4613,15 +4560,15 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceExecute(r ApiPatc
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4677,7 +4624,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceExecute(r ApiPatc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4688,7 +4635,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceExecute(r ApiPatc
 }
 
 type ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest struct {
-	ctx                                         _context.Context
+	ctx                                         context.Context
 	ApiService                                  *MemoryApiService
 	moid                                        string
 	memoryPersistentMemoryNamespaceConfigResult *MemoryPersistentMemoryNamespaceConfigResult
@@ -4707,18 +4654,18 @@ func (r ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest) IfMatch(ifMa
 	return r
 }
 
-func (r ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest) Execute() (MemoryPersistentMemoryNamespaceConfigResult, *_nethttp.Response, error) {
+func (r ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest) Execute() (*MemoryPersistentMemoryNamespaceConfigResult, *http.Response, error) {
 	return r.ApiService.PatchMemoryPersistentMemoryNamespaceConfigResultExecute(r)
 }
 
 /*
 PatchMemoryPersistentMemoryNamespaceConfigResult Update a 'memory.PersistentMemoryNamespaceConfigResult' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest
 */
-func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceConfigResult(ctx _context.Context, moid string) ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceConfigResult(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest {
 	return ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4728,27 +4675,25 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceConfigResult(ctx 
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryNamespaceConfigResult
-func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceConfigResultExecute(r ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest) (MemoryPersistentMemoryNamespaceConfigResult, *_nethttp.Response, error) {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceConfigResultExecute(r ApiPatchMemoryPersistentMemoryNamespaceConfigResultRequest) (*MemoryPersistentMemoryNamespaceConfigResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryNamespaceConfigResult
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryNamespaceConfigResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.PatchMemoryPersistentMemoryNamespaceConfigResult")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryNamespaceConfigResults/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryNamespaceConfigResult == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryNamespaceConfigResult is required and must be specified")
 	}
@@ -4775,7 +4720,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceConfigResultExecu
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryNamespaceConfigResult
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4785,15 +4730,15 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceConfigResultExecu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4849,7 +4794,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceConfigResultExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4860,7 +4805,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryNamespaceConfigResultExecu
 }
 
 type ApiPatchMemoryPersistentMemoryPolicyRequest struct {
-	ctx                          _context.Context
+	ctx                          context.Context
 	ApiService                   *MemoryApiService
 	moid                         string
 	memoryPersistentMemoryPolicy *MemoryPersistentMemoryPolicy
@@ -4879,18 +4824,18 @@ func (r ApiPatchMemoryPersistentMemoryPolicyRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiPatchMemoryPersistentMemoryPolicyRequest) Execute() (MemoryPersistentMemoryPolicy, *_nethttp.Response, error) {
+func (r ApiPatchMemoryPersistentMemoryPolicyRequest) Execute() (*MemoryPersistentMemoryPolicy, *http.Response, error) {
 	return r.ApiService.PatchMemoryPersistentMemoryPolicyExecute(r)
 }
 
 /*
 PatchMemoryPersistentMemoryPolicy Update a 'memory.PersistentMemoryPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchMemoryPersistentMemoryPolicyRequest
 */
-func (a *MemoryApiService) PatchMemoryPersistentMemoryPolicy(ctx _context.Context, moid string) ApiPatchMemoryPersistentMemoryPolicyRequest {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryPolicy(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryPolicyRequest {
 	return ApiPatchMemoryPersistentMemoryPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4900,27 +4845,25 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryPolicy(ctx _context.Contex
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryPolicy
-func (a *MemoryApiService) PatchMemoryPersistentMemoryPolicyExecute(r ApiPatchMemoryPersistentMemoryPolicyRequest) (MemoryPersistentMemoryPolicy, *_nethttp.Response, error) {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryPolicyExecute(r ApiPatchMemoryPersistentMemoryPolicyRequest) (*MemoryPersistentMemoryPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.PatchMemoryPersistentMemoryPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryPolicy == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryPolicy is required and must be specified")
 	}
@@ -4947,7 +4890,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryPolicyExecute(r ApiPatchMe
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4957,15 +4900,15 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryPolicyExecute(r ApiPatchMe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5021,7 +4964,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryPolicyExecute(r ApiPatchMe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5032,7 +4975,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryPolicyExecute(r ApiPatchMe
 }
 
 type ApiPatchMemoryPersistentMemoryRegionRequest struct {
-	ctx                          _context.Context
+	ctx                          context.Context
 	ApiService                   *MemoryApiService
 	moid                         string
 	memoryPersistentMemoryRegion *MemoryPersistentMemoryRegion
@@ -5051,18 +4994,18 @@ func (r ApiPatchMemoryPersistentMemoryRegionRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiPatchMemoryPersistentMemoryRegionRequest) Execute() (MemoryPersistentMemoryRegion, *_nethttp.Response, error) {
+func (r ApiPatchMemoryPersistentMemoryRegionRequest) Execute() (*MemoryPersistentMemoryRegion, *http.Response, error) {
 	return r.ApiService.PatchMemoryPersistentMemoryRegionExecute(r)
 }
 
 /*
 PatchMemoryPersistentMemoryRegion Update a 'memory.PersistentMemoryRegion' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchMemoryPersistentMemoryRegionRequest
 */
-func (a *MemoryApiService) PatchMemoryPersistentMemoryRegion(ctx _context.Context, moid string) ApiPatchMemoryPersistentMemoryRegionRequest {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryRegion(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryRegionRequest {
 	return ApiPatchMemoryPersistentMemoryRegionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5072,27 +5015,25 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryRegion(ctx _context.Contex
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryRegion
-func (a *MemoryApiService) PatchMemoryPersistentMemoryRegionExecute(r ApiPatchMemoryPersistentMemoryRegionRequest) (MemoryPersistentMemoryRegion, *_nethttp.Response, error) {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryRegionExecute(r ApiPatchMemoryPersistentMemoryRegionRequest) (*MemoryPersistentMemoryRegion, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryRegion
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryRegion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.PatchMemoryPersistentMemoryRegion")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryRegions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryRegion == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryRegion is required and must be specified")
 	}
@@ -5119,7 +5060,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryRegionExecute(r ApiPatchMe
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryRegion
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5129,15 +5070,15 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryRegionExecute(r ApiPatchMe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5193,7 +5134,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryRegionExecute(r ApiPatchMe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5204,7 +5145,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryRegionExecute(r ApiPatchMe
 }
 
 type ApiPatchMemoryPersistentMemoryUnitRequest struct {
-	ctx                        _context.Context
+	ctx                        context.Context
 	ApiService                 *MemoryApiService
 	moid                       string
 	memoryPersistentMemoryUnit *MemoryPersistentMemoryUnit
@@ -5223,18 +5164,18 @@ func (r ApiPatchMemoryPersistentMemoryUnitRequest) IfMatch(ifMatch string) ApiPa
 	return r
 }
 
-func (r ApiPatchMemoryPersistentMemoryUnitRequest) Execute() (MemoryPersistentMemoryUnit, *_nethttp.Response, error) {
+func (r ApiPatchMemoryPersistentMemoryUnitRequest) Execute() (*MemoryPersistentMemoryUnit, *http.Response, error) {
 	return r.ApiService.PatchMemoryPersistentMemoryUnitExecute(r)
 }
 
 /*
 PatchMemoryPersistentMemoryUnit Update a 'memory.PersistentMemoryUnit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchMemoryPersistentMemoryUnitRequest
 */
-func (a *MemoryApiService) PatchMemoryPersistentMemoryUnit(ctx _context.Context, moid string) ApiPatchMemoryPersistentMemoryUnitRequest {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryUnit(ctx context.Context, moid string) ApiPatchMemoryPersistentMemoryUnitRequest {
 	return ApiPatchMemoryPersistentMemoryUnitRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5244,27 +5185,25 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryUnit(ctx _context.Context,
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryUnit
-func (a *MemoryApiService) PatchMemoryPersistentMemoryUnitExecute(r ApiPatchMemoryPersistentMemoryUnitRequest) (MemoryPersistentMemoryUnit, *_nethttp.Response, error) {
+func (a *MemoryApiService) PatchMemoryPersistentMemoryUnitExecute(r ApiPatchMemoryPersistentMemoryUnitRequest) (*MemoryPersistentMemoryUnit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryUnit
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.PatchMemoryPersistentMemoryUnit")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryUnits/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryUnit == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryUnit is required and must be specified")
 	}
@@ -5291,7 +5230,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryUnitExecute(r ApiPatchMemo
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryUnit
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5301,15 +5240,15 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryUnitExecute(r ApiPatchMemo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5365,7 +5304,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryUnitExecute(r ApiPatchMemo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5376,7 +5315,7 @@ func (a *MemoryApiService) PatchMemoryPersistentMemoryUnitExecute(r ApiPatchMemo
 }
 
 type ApiPatchMemoryUnitRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
 	memoryUnit *MemoryUnit
@@ -5395,18 +5334,18 @@ func (r ApiPatchMemoryUnitRequest) IfMatch(ifMatch string) ApiPatchMemoryUnitReq
 	return r
 }
 
-func (r ApiPatchMemoryUnitRequest) Execute() (MemoryUnit, *_nethttp.Response, error) {
+func (r ApiPatchMemoryUnitRequest) Execute() (*MemoryUnit, *http.Response, error) {
 	return r.ApiService.PatchMemoryUnitExecute(r)
 }
 
 /*
 PatchMemoryUnit Update a 'memory.Unit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchMemoryUnitRequest
 */
-func (a *MemoryApiService) PatchMemoryUnit(ctx _context.Context, moid string) ApiPatchMemoryUnitRequest {
+func (a *MemoryApiService) PatchMemoryUnit(ctx context.Context, moid string) ApiPatchMemoryUnitRequest {
 	return ApiPatchMemoryUnitRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5416,27 +5355,25 @@ func (a *MemoryApiService) PatchMemoryUnit(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return MemoryUnit
-func (a *MemoryApiService) PatchMemoryUnitExecute(r ApiPatchMemoryUnitRequest) (MemoryUnit, *_nethttp.Response, error) {
+func (a *MemoryApiService) PatchMemoryUnitExecute(r ApiPatchMemoryUnitRequest) (*MemoryUnit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryUnit
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.PatchMemoryUnit")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/Units/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryUnit == nil {
 		return localVarReturnValue, nil, reportError("memoryUnit is required and must be specified")
 	}
@@ -5463,7 +5400,7 @@ func (a *MemoryApiService) PatchMemoryUnitExecute(r ApiPatchMemoryUnitRequest) (
 	}
 	// body params
 	localVarPostBody = r.memoryUnit
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5473,15 +5410,15 @@ func (a *MemoryApiService) PatchMemoryUnitExecute(r ApiPatchMemoryUnitRequest) (
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5537,7 +5474,7 @@ func (a *MemoryApiService) PatchMemoryUnitExecute(r ApiPatchMemoryUnitRequest) (
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5548,7 +5485,7 @@ func (a *MemoryApiService) PatchMemoryUnitExecute(r ApiPatchMemoryUnitRequest) (
 }
 
 type ApiUpdateMemoryArrayRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *MemoryApiService
 	moid        string
 	memoryArray *MemoryArray
@@ -5567,18 +5504,18 @@ func (r ApiUpdateMemoryArrayRequest) IfMatch(ifMatch string) ApiUpdateMemoryArra
 	return r
 }
 
-func (r ApiUpdateMemoryArrayRequest) Execute() (MemoryArray, *_nethttp.Response, error) {
+func (r ApiUpdateMemoryArrayRequest) Execute() (*MemoryArray, *http.Response, error) {
 	return r.ApiService.UpdateMemoryArrayExecute(r)
 }
 
 /*
 UpdateMemoryArray Update a 'memory.Array' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateMemoryArrayRequest
 */
-func (a *MemoryApiService) UpdateMemoryArray(ctx _context.Context, moid string) ApiUpdateMemoryArrayRequest {
+func (a *MemoryApiService) UpdateMemoryArray(ctx context.Context, moid string) ApiUpdateMemoryArrayRequest {
 	return ApiUpdateMemoryArrayRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5588,27 +5525,25 @@ func (a *MemoryApiService) UpdateMemoryArray(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return MemoryArray
-func (a *MemoryApiService) UpdateMemoryArrayExecute(r ApiUpdateMemoryArrayRequest) (MemoryArray, *_nethttp.Response, error) {
+func (a *MemoryApiService) UpdateMemoryArrayExecute(r ApiUpdateMemoryArrayRequest) (*MemoryArray, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryArray
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.UpdateMemoryArray")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/Arrays/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryArray == nil {
 		return localVarReturnValue, nil, reportError("memoryArray is required and must be specified")
 	}
@@ -5635,7 +5570,7 @@ func (a *MemoryApiService) UpdateMemoryArrayExecute(r ApiUpdateMemoryArrayReques
 	}
 	// body params
 	localVarPostBody = r.memoryArray
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5645,15 +5580,15 @@ func (a *MemoryApiService) UpdateMemoryArrayExecute(r ApiUpdateMemoryArrayReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5709,7 +5644,7 @@ func (a *MemoryApiService) UpdateMemoryArrayExecute(r ApiUpdateMemoryArrayReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5720,7 +5655,7 @@ func (a *MemoryApiService) UpdateMemoryArrayExecute(r ApiUpdateMemoryArrayReques
 }
 
 type ApiUpdateMemoryPersistentMemoryConfigResultRequest struct {
-	ctx                                _context.Context
+	ctx                                context.Context
 	ApiService                         *MemoryApiService
 	moid                               string
 	memoryPersistentMemoryConfigResult *MemoryPersistentMemoryConfigResult
@@ -5739,18 +5674,18 @@ func (r ApiUpdateMemoryPersistentMemoryConfigResultRequest) IfMatch(ifMatch stri
 	return r
 }
 
-func (r ApiUpdateMemoryPersistentMemoryConfigResultRequest) Execute() (MemoryPersistentMemoryConfigResult, *_nethttp.Response, error) {
+func (r ApiUpdateMemoryPersistentMemoryConfigResultRequest) Execute() (*MemoryPersistentMemoryConfigResult, *http.Response, error) {
 	return r.ApiService.UpdateMemoryPersistentMemoryConfigResultExecute(r)
 }
 
 /*
 UpdateMemoryPersistentMemoryConfigResult Update a 'memory.PersistentMemoryConfigResult' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateMemoryPersistentMemoryConfigResultRequest
 */
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigResult(ctx _context.Context, moid string) ApiUpdateMemoryPersistentMemoryConfigResultRequest {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigResult(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryConfigResultRequest {
 	return ApiUpdateMemoryPersistentMemoryConfigResultRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5760,27 +5695,25 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigResult(ctx _context
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryConfigResult
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigResultExecute(r ApiUpdateMemoryPersistentMemoryConfigResultRequest) (MemoryPersistentMemoryConfigResult, *_nethttp.Response, error) {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigResultExecute(r ApiUpdateMemoryPersistentMemoryConfigResultRequest) (*MemoryPersistentMemoryConfigResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryConfigResult
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryConfigResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.UpdateMemoryPersistentMemoryConfigResult")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryConfigResults/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryConfigResult == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryConfigResult is required and must be specified")
 	}
@@ -5807,7 +5740,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigResultExecute(r Api
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryConfigResult
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5817,15 +5750,15 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigResultExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5881,7 +5814,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigResultExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5892,7 +5825,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigResultExecute(r Api
 }
 
 type ApiUpdateMemoryPersistentMemoryConfigurationRequest struct {
-	ctx                                 _context.Context
+	ctx                                 context.Context
 	ApiService                          *MemoryApiService
 	moid                                string
 	memoryPersistentMemoryConfiguration *MemoryPersistentMemoryConfiguration
@@ -5911,18 +5844,18 @@ func (r ApiUpdateMemoryPersistentMemoryConfigurationRequest) IfMatch(ifMatch str
 	return r
 }
 
-func (r ApiUpdateMemoryPersistentMemoryConfigurationRequest) Execute() (MemoryPersistentMemoryConfiguration, *_nethttp.Response, error) {
+func (r ApiUpdateMemoryPersistentMemoryConfigurationRequest) Execute() (*MemoryPersistentMemoryConfiguration, *http.Response, error) {
 	return r.ApiService.UpdateMemoryPersistentMemoryConfigurationExecute(r)
 }
 
 /*
 UpdateMemoryPersistentMemoryConfiguration Update a 'memory.PersistentMemoryConfiguration' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateMemoryPersistentMemoryConfigurationRequest
 */
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfiguration(ctx _context.Context, moid string) ApiUpdateMemoryPersistentMemoryConfigurationRequest {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfiguration(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryConfigurationRequest {
 	return ApiUpdateMemoryPersistentMemoryConfigurationRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5932,27 +5865,25 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfiguration(ctx _contex
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryConfiguration
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigurationExecute(r ApiUpdateMemoryPersistentMemoryConfigurationRequest) (MemoryPersistentMemoryConfiguration, *_nethttp.Response, error) {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigurationExecute(r ApiUpdateMemoryPersistentMemoryConfigurationRequest) (*MemoryPersistentMemoryConfiguration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryConfiguration
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryConfiguration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.UpdateMemoryPersistentMemoryConfiguration")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryConfigurations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryConfiguration == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryConfiguration is required and must be specified")
 	}
@@ -5979,7 +5910,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigurationExecute(r Ap
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryConfiguration
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5989,15 +5920,15 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigurationExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6053,7 +5984,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigurationExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6064,7 +5995,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryConfigurationExecute(r Ap
 }
 
 type ApiUpdateMemoryPersistentMemoryNamespaceRequest struct {
-	ctx                             _context.Context
+	ctx                             context.Context
 	ApiService                      *MemoryApiService
 	moid                            string
 	memoryPersistentMemoryNamespace *MemoryPersistentMemoryNamespace
@@ -6083,18 +6014,18 @@ func (r ApiUpdateMemoryPersistentMemoryNamespaceRequest) IfMatch(ifMatch string)
 	return r
 }
 
-func (r ApiUpdateMemoryPersistentMemoryNamespaceRequest) Execute() (MemoryPersistentMemoryNamespace, *_nethttp.Response, error) {
+func (r ApiUpdateMemoryPersistentMemoryNamespaceRequest) Execute() (*MemoryPersistentMemoryNamespace, *http.Response, error) {
 	return r.ApiService.UpdateMemoryPersistentMemoryNamespaceExecute(r)
 }
 
 /*
 UpdateMemoryPersistentMemoryNamespace Update a 'memory.PersistentMemoryNamespace' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateMemoryPersistentMemoryNamespaceRequest
 */
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespace(ctx _context.Context, moid string) ApiUpdateMemoryPersistentMemoryNamespaceRequest {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespace(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryNamespaceRequest {
 	return ApiUpdateMemoryPersistentMemoryNamespaceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6104,27 +6035,25 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespace(ctx _context.Co
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryNamespace
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceExecute(r ApiUpdateMemoryPersistentMemoryNamespaceRequest) (MemoryPersistentMemoryNamespace, *_nethttp.Response, error) {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceExecute(r ApiUpdateMemoryPersistentMemoryNamespaceRequest) (*MemoryPersistentMemoryNamespace, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryNamespace
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryNamespace
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.UpdateMemoryPersistentMemoryNamespace")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryNamespaces/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryNamespace == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryNamespace is required and must be specified")
 	}
@@ -6151,7 +6080,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceExecute(r ApiUpd
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryNamespace
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6161,15 +6090,15 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceExecute(r ApiUpd
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6225,7 +6154,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceExecute(r ApiUpd
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6236,7 +6165,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceExecute(r ApiUpd
 }
 
 type ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest struct {
-	ctx                                         _context.Context
+	ctx                                         context.Context
 	ApiService                                  *MemoryApiService
 	moid                                        string
 	memoryPersistentMemoryNamespaceConfigResult *MemoryPersistentMemoryNamespaceConfigResult
@@ -6255,18 +6184,18 @@ func (r ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest) IfMatch(ifM
 	return r
 }
 
-func (r ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest) Execute() (MemoryPersistentMemoryNamespaceConfigResult, *_nethttp.Response, error) {
+func (r ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest) Execute() (*MemoryPersistentMemoryNamespaceConfigResult, *http.Response, error) {
 	return r.ApiService.UpdateMemoryPersistentMemoryNamespaceConfigResultExecute(r)
 }
 
 /*
 UpdateMemoryPersistentMemoryNamespaceConfigResult Update a 'memory.PersistentMemoryNamespaceConfigResult' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest
 */
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceConfigResult(ctx _context.Context, moid string) ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceConfigResult(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest {
 	return ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6276,27 +6205,25 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceConfigResult(ctx
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryNamespaceConfigResult
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceConfigResultExecute(r ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest) (MemoryPersistentMemoryNamespaceConfigResult, *_nethttp.Response, error) {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceConfigResultExecute(r ApiUpdateMemoryPersistentMemoryNamespaceConfigResultRequest) (*MemoryPersistentMemoryNamespaceConfigResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryNamespaceConfigResult
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryNamespaceConfigResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.UpdateMemoryPersistentMemoryNamespaceConfigResult")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryNamespaceConfigResults/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryNamespaceConfigResult == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryNamespaceConfigResult is required and must be specified")
 	}
@@ -6323,7 +6250,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceConfigResultExec
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryNamespaceConfigResult
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6333,15 +6260,15 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceConfigResultExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6397,7 +6324,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceConfigResultExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6408,7 +6335,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryNamespaceConfigResultExec
 }
 
 type ApiUpdateMemoryPersistentMemoryPolicyRequest struct {
-	ctx                          _context.Context
+	ctx                          context.Context
 	ApiService                   *MemoryApiService
 	moid                         string
 	memoryPersistentMemoryPolicy *MemoryPersistentMemoryPolicy
@@ -6427,18 +6354,18 @@ func (r ApiUpdateMemoryPersistentMemoryPolicyRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiUpdateMemoryPersistentMemoryPolicyRequest) Execute() (MemoryPersistentMemoryPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateMemoryPersistentMemoryPolicyRequest) Execute() (*MemoryPersistentMemoryPolicy, *http.Response, error) {
 	return r.ApiService.UpdateMemoryPersistentMemoryPolicyExecute(r)
 }
 
 /*
 UpdateMemoryPersistentMemoryPolicy Update a 'memory.PersistentMemoryPolicy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateMemoryPersistentMemoryPolicyRequest
 */
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryPolicy(ctx _context.Context, moid string) ApiUpdateMemoryPersistentMemoryPolicyRequest {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryPolicy(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryPolicyRequest {
 	return ApiUpdateMemoryPersistentMemoryPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6448,27 +6375,25 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryPolicy(ctx _context.Conte
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryPolicy
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryPolicyExecute(r ApiUpdateMemoryPersistentMemoryPolicyRequest) (MemoryPersistentMemoryPolicy, *_nethttp.Response, error) {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryPolicyExecute(r ApiUpdateMemoryPersistentMemoryPolicyRequest) (*MemoryPersistentMemoryPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.UpdateMemoryPersistentMemoryPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryPolicy == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryPolicy is required and must be specified")
 	}
@@ -6495,7 +6420,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryPolicyExecute(r ApiUpdate
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6505,15 +6430,15 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryPolicyExecute(r ApiUpdate
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6569,7 +6494,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryPolicyExecute(r ApiUpdate
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6580,7 +6505,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryPolicyExecute(r ApiUpdate
 }
 
 type ApiUpdateMemoryPersistentMemoryRegionRequest struct {
-	ctx                          _context.Context
+	ctx                          context.Context
 	ApiService                   *MemoryApiService
 	moid                         string
 	memoryPersistentMemoryRegion *MemoryPersistentMemoryRegion
@@ -6599,18 +6524,18 @@ func (r ApiUpdateMemoryPersistentMemoryRegionRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiUpdateMemoryPersistentMemoryRegionRequest) Execute() (MemoryPersistentMemoryRegion, *_nethttp.Response, error) {
+func (r ApiUpdateMemoryPersistentMemoryRegionRequest) Execute() (*MemoryPersistentMemoryRegion, *http.Response, error) {
 	return r.ApiService.UpdateMemoryPersistentMemoryRegionExecute(r)
 }
 
 /*
 UpdateMemoryPersistentMemoryRegion Update a 'memory.PersistentMemoryRegion' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateMemoryPersistentMemoryRegionRequest
 */
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryRegion(ctx _context.Context, moid string) ApiUpdateMemoryPersistentMemoryRegionRequest {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryRegion(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryRegionRequest {
 	return ApiUpdateMemoryPersistentMemoryRegionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6620,27 +6545,25 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryRegion(ctx _context.Conte
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryRegion
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryRegionExecute(r ApiUpdateMemoryPersistentMemoryRegionRequest) (MemoryPersistentMemoryRegion, *_nethttp.Response, error) {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryRegionExecute(r ApiUpdateMemoryPersistentMemoryRegionRequest) (*MemoryPersistentMemoryRegion, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryRegion
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryRegion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.UpdateMemoryPersistentMemoryRegion")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryRegions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryRegion == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryRegion is required and must be specified")
 	}
@@ -6667,7 +6590,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryRegionExecute(r ApiUpdate
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryRegion
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6677,15 +6600,15 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryRegionExecute(r ApiUpdate
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6741,7 +6664,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryRegionExecute(r ApiUpdate
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6752,7 +6675,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryRegionExecute(r ApiUpdate
 }
 
 type ApiUpdateMemoryPersistentMemoryUnitRequest struct {
-	ctx                        _context.Context
+	ctx                        context.Context
 	ApiService                 *MemoryApiService
 	moid                       string
 	memoryPersistentMemoryUnit *MemoryPersistentMemoryUnit
@@ -6771,18 +6694,18 @@ func (r ApiUpdateMemoryPersistentMemoryUnitRequest) IfMatch(ifMatch string) ApiU
 	return r
 }
 
-func (r ApiUpdateMemoryPersistentMemoryUnitRequest) Execute() (MemoryPersistentMemoryUnit, *_nethttp.Response, error) {
+func (r ApiUpdateMemoryPersistentMemoryUnitRequest) Execute() (*MemoryPersistentMemoryUnit, *http.Response, error) {
 	return r.ApiService.UpdateMemoryPersistentMemoryUnitExecute(r)
 }
 
 /*
 UpdateMemoryPersistentMemoryUnit Update a 'memory.PersistentMemoryUnit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateMemoryPersistentMemoryUnitRequest
 */
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryUnit(ctx _context.Context, moid string) ApiUpdateMemoryPersistentMemoryUnitRequest {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryUnit(ctx context.Context, moid string) ApiUpdateMemoryPersistentMemoryUnitRequest {
 	return ApiUpdateMemoryPersistentMemoryUnitRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6792,27 +6715,25 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryUnit(ctx _context.Context
 
 // Execute executes the request
 //  @return MemoryPersistentMemoryUnit
-func (a *MemoryApiService) UpdateMemoryPersistentMemoryUnitExecute(r ApiUpdateMemoryPersistentMemoryUnitRequest) (MemoryPersistentMemoryUnit, *_nethttp.Response, error) {
+func (a *MemoryApiService) UpdateMemoryPersistentMemoryUnitExecute(r ApiUpdateMemoryPersistentMemoryUnitRequest) (*MemoryPersistentMemoryUnit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryPersistentMemoryUnit
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryPersistentMemoryUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.UpdateMemoryPersistentMemoryUnit")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/PersistentMemoryUnits/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryPersistentMemoryUnit == nil {
 		return localVarReturnValue, nil, reportError("memoryPersistentMemoryUnit is required and must be specified")
 	}
@@ -6839,7 +6760,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryUnitExecute(r ApiUpdateMe
 	}
 	// body params
 	localVarPostBody = r.memoryPersistentMemoryUnit
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6849,15 +6770,15 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryUnitExecute(r ApiUpdateMe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6913,7 +6834,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryUnitExecute(r ApiUpdateMe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6924,7 +6845,7 @@ func (a *MemoryApiService) UpdateMemoryPersistentMemoryUnitExecute(r ApiUpdateMe
 }
 
 type ApiUpdateMemoryUnitRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *MemoryApiService
 	moid       string
 	memoryUnit *MemoryUnit
@@ -6943,18 +6864,18 @@ func (r ApiUpdateMemoryUnitRequest) IfMatch(ifMatch string) ApiUpdateMemoryUnitR
 	return r
 }
 
-func (r ApiUpdateMemoryUnitRequest) Execute() (MemoryUnit, *_nethttp.Response, error) {
+func (r ApiUpdateMemoryUnitRequest) Execute() (*MemoryUnit, *http.Response, error) {
 	return r.ApiService.UpdateMemoryUnitExecute(r)
 }
 
 /*
 UpdateMemoryUnit Update a 'memory.Unit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateMemoryUnitRequest
 */
-func (a *MemoryApiService) UpdateMemoryUnit(ctx _context.Context, moid string) ApiUpdateMemoryUnitRequest {
+func (a *MemoryApiService) UpdateMemoryUnit(ctx context.Context, moid string) ApiUpdateMemoryUnitRequest {
 	return ApiUpdateMemoryUnitRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6964,27 +6885,25 @@ func (a *MemoryApiService) UpdateMemoryUnit(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return MemoryUnit
-func (a *MemoryApiService) UpdateMemoryUnitExecute(r ApiUpdateMemoryUnitRequest) (MemoryUnit, *_nethttp.Response, error) {
+func (a *MemoryApiService) UpdateMemoryUnitExecute(r ApiUpdateMemoryUnitRequest) (*MemoryUnit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  MemoryUnit
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *MemoryUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MemoryApiService.UpdateMemoryUnit")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/memory/Units/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.memoryUnit == nil {
 		return localVarReturnValue, nil, reportError("memoryUnit is required and must be specified")
 	}
@@ -7011,7 +6930,7 @@ func (a *MemoryApiService) UpdateMemoryUnitExecute(r ApiUpdateMemoryUnitRequest)
 	}
 	// body params
 	localVarPostBody = r.memoryUnit
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7021,15 +6940,15 @@ func (a *MemoryApiService) UpdateMemoryUnitExecute(r ApiUpdateMemoryUnitRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7085,7 +7004,7 @@ func (a *MemoryApiService) UpdateMemoryUnitExecute(r ApiUpdateMemoryUnitRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

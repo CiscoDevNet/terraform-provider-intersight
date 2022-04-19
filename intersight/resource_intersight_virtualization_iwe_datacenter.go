@@ -549,7 +549,6 @@ func resourceVirtualizationIweDatacenter() *schema.Resource {
 
 func resourceVirtualizationIweDatacenterCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewVirtualizationIweDatacenterWithDefaults()
@@ -655,7 +654,7 @@ func resourceVirtualizationIweDatacenterCreate(c context.Context, d *schema.Reso
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating VirtualizationIweDatacenter: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating VirtualizationIweDatacenter: %s", responseErr.Error())
@@ -667,7 +666,6 @@ func resourceVirtualizationIweDatacenterCreate(c context.Context, d *schema.Reso
 
 func resourceVirtualizationIweDatacenterRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.VirtualizationApi.GetVirtualizationIweDatacenterByMoid(conn.ctx, d.Id())
@@ -680,7 +678,7 @@ func resourceVirtualizationIweDatacenterRead(c context.Context, d *schema.Resour
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching VirtualizationIweDatacenter: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching VirtualizationIweDatacenter: %s", responseErr.Error())
@@ -777,7 +775,6 @@ func resourceVirtualizationIweDatacenterRead(c context.Context, d *schema.Resour
 
 func resourceVirtualizationIweDatacenterUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationIweDatacenter{}
@@ -885,7 +882,7 @@ func resourceVirtualizationIweDatacenterUpdate(c context.Context, d *schema.Reso
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating VirtualizationIweDatacenter: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating VirtualizationIweDatacenter: %s", responseErr.Error())
@@ -897,7 +894,6 @@ func resourceVirtualizationIweDatacenterUpdate(c context.Context, d *schema.Reso
 
 func resourceVirtualizationIweDatacenterDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.VirtualizationApi.DeleteVirtualizationIweDatacenter(conn.ctx, d.Id())
@@ -909,7 +905,7 @@ func resourceVirtualizationIweDatacenterDelete(c context.Context, d *schema.Reso
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting VirtualizationIweDatacenter object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting VirtualizationIweDatacenter object: %s", deleteErr.Error())

@@ -493,7 +493,6 @@ func resourceCapabilityCimcFirmwareDescriptor() *schema.Resource {
 
 func resourceCapabilityCimcFirmwareDescriptorCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilityCimcFirmwareDescriptorWithDefaults()
@@ -623,7 +622,7 @@ func resourceCapabilityCimcFirmwareDescriptorCreate(c context.Context, d *schema
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilityCimcFirmwareDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilityCimcFirmwareDescriptor: %s", responseErr.Error())
@@ -635,7 +634,6 @@ func resourceCapabilityCimcFirmwareDescriptorCreate(c context.Context, d *schema
 
 func resourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilityCimcFirmwareDescriptorByMoid(conn.ctx, d.Id())
@@ -648,7 +646,7 @@ func resourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema.R
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilityCimcFirmwareDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilityCimcFirmwareDescriptor: %s", responseErr.Error())
@@ -757,7 +755,6 @@ func resourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema.R
 
 func resourceCapabilityCimcFirmwareDescriptorUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilityCimcFirmwareDescriptor{}
@@ -892,7 +889,7 @@ func resourceCapabilityCimcFirmwareDescriptorUpdate(c context.Context, d *schema
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilityCimcFirmwareDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilityCimcFirmwareDescriptor: %s", responseErr.Error())
@@ -904,7 +901,6 @@ func resourceCapabilityCimcFirmwareDescriptorUpdate(c context.Context, d *schema
 
 func resourceCapabilityCimcFirmwareDescriptorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityCimcFirmwareDescriptor(conn.ctx, d.Id())
@@ -916,7 +912,7 @@ func resourceCapabilityCimcFirmwareDescriptorDelete(c context.Context, d *schema
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilityCimcFirmwareDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilityCimcFirmwareDescriptor object: %s", deleteErr.Error())

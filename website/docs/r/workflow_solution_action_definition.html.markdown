@@ -37,6 +37,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `additional_properties`:(JSON as string) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [workflow.ArrayDataType](#workflowArrayDataType)
 [workflow.CustomDataType](#workflowCustomDataType)
+[workflow.DynamicTemplateParserDataType](#workflowDynamicTemplateParserDataType)
 [workflow.MoReferenceDataType](#workflowMoReferenceDataType)
 [workflow.PrimitiveDataType](#workflowPrimitiveDataType)
 [workflow.TargetDataType](#workflowTargetDataType)
@@ -183,6 +184,11 @@ This complex property has following sub-properties:
   + `custom_data_type_id`:(string)(ReadOnly) The resolved custom data type definition managed object. 
   + `custom_data_type_name`:(string) Name of the custom data type for this input. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+
+### [workflow.DynamicTemplateParserDataType](#argument-reference)
+Data type to fetch a generic template from given selector and parse it using an api to give an array of secure and non-secure keys for form generation. URL used to fetch the template object is based on the templateType. Final input passed to the workflow using this data type is a JSON containing {'Template':'<template string value>', 'Keys':[{'<key1>':'<val 1>'}], 'SecureKeys':[{'<key2>':'<val2>'}]}.
+* `is_template_secure`:(bool) When set to true, the template is marked as secure and the content is encrypted and stored. 
+* `template_type`:(string) Template type decides on the API to be used to fetch the placeholders present inside the template.* `OsInstall` - This refers to the OS configuration template MO. 
 
 ### [workflow.MoReferenceDataType](#argument-reference)
 Data type to capture an Intersight Managed object reference.

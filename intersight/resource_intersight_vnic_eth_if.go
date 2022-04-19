@@ -797,6 +797,11 @@ func resourceVnicEthIf() *schema.Resource {
 					},
 				},
 			},
+			"pin_group_name": {
+				Description: "Pingroup name associated to vNIC for static pinning. LCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vNIC traffic.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"placement": {
 				Description: "Placement Settings for the virtual interface.",
 				Type:        schema.TypeList,
@@ -1245,7 +1250,6 @@ func resourceVnicEthIf() *schema.Resource {
 
 func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewVnicEthIfWithDefaults()
@@ -1760,6 +1764,11 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 		o.SetOrder(x)
 	}
 
+	if v, ok := d.GetOk("pin_group_name"); ok {
+		x := (v.(string))
+		o.SetPinGroupName(x)
+	}
+
 	if v, ok := d.GetOk("placement"); ok {
 		p := make([]models.VnicPlacementSettings, 0, 1)
 		s := v.([]interface{})
@@ -2019,7 +2028,7 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating VnicEthIf: %s", responseErr.Error())
@@ -2030,7 +2039,6 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 }
 func detachVnicEthIfProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VnicEthIf{}
@@ -2043,7 +2051,7 @@ func detachVnicEthIfProfiles(d *schema.ResourceData, meta interface{}) diag.Diag
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while detaching profile/profiles: %s", responseErr.Error())
@@ -2053,7 +2061,6 @@ func detachVnicEthIfProfiles(d *schema.ResourceData, meta interface{}) diag.Diag
 
 func resourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.VnicApi.GetVnicEthIfByMoid(conn.ctx, d.Id())
@@ -2066,7 +2073,7 @@ func resourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta inter
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching VnicEthIf: %s", responseErr.Error())
@@ -2200,6 +2207,10 @@ func resourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta inter
 		return diag.Errorf("error occurred while setting property PermissionResources in VnicEthIf object: %s", err.Error())
 	}
 
+	if err := d.Set("pin_group_name", (s.GetPinGroupName())); err != nil {
+		return diag.Errorf("error occurred while setting property PinGroupName in VnicEthIf object: %s", err.Error())
+	}
+
 	if err := d.Set("placement", flattenMapVnicPlacementSettings(s.GetPlacement(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Placement in VnicEthIf object: %s", err.Error())
 	}
@@ -2251,7 +2262,6 @@ func resourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta inter
 
 func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VnicEthIf{}
@@ -2781,6 +2791,12 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 		o.SetOrder(x)
 	}
 
+	if d.HasChange("pin_group_name") {
+		v := d.Get("pin_group_name")
+		x := (v.(string))
+		o.SetPinGroupName(x)
+	}
+
 	if d.HasChange("placement") {
 		v := d.Get("placement")
 		p := make([]models.VnicPlacementSettings, 0, 1)
@@ -3044,7 +3060,7 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating VnicEthIf: %s", responseErr.Error())
@@ -3056,7 +3072,6 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 
 func resourceVnicEthIfDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profile"); ok {
@@ -3076,7 +3091,7 @@ func resourceVnicEthIfDelete(c context.Context, d *schema.ResourceData, meta int
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting VnicEthIf object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting VnicEthIf object: %s", deleteErr.Error())

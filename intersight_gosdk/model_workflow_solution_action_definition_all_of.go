@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -169,11 +169,11 @@ func (o *WorkflowSolutionActionDefinitionAllOf) GetAllowedInstanceStates() []str
 // GetAllowedInstanceStatesOk returns a tuple with the AllowedInstanceStates field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WorkflowSolutionActionDefinitionAllOf) GetAllowedInstanceStatesOk() (*[]string, bool) {
+func (o *WorkflowSolutionActionDefinitionAllOf) GetAllowedInstanceStatesOk() ([]string, bool) {
 	if o == nil || o.AllowedInstanceStates == nil {
 		return nil, false
 	}
-	return &o.AllowedInstanceStates, true
+	return o.AllowedInstanceStates, true
 }
 
 // HasAllowedInstanceStates returns a boolean if a field has been set.
@@ -202,11 +202,11 @@ func (o *WorkflowSolutionActionDefinitionAllOf) GetCoreWorkflows() []WorkflowAct
 // GetCoreWorkflowsOk returns a tuple with the CoreWorkflows field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WorkflowSolutionActionDefinitionAllOf) GetCoreWorkflowsOk() (*[]WorkflowActionWorkflowDefinition, bool) {
+func (o *WorkflowSolutionActionDefinitionAllOf) GetCoreWorkflowsOk() ([]WorkflowActionWorkflowDefinition, bool) {
 	if o == nil || o.CoreWorkflows == nil {
 		return nil, false
 	}
-	return &o.CoreWorkflows, true
+	return o.CoreWorkflows, true
 }
 
 // HasCoreWorkflows returns a boolean if a field has been set.
@@ -267,11 +267,11 @@ func (o *WorkflowSolutionActionDefinitionAllOf) GetInputDefinition() []WorkflowB
 // GetInputDefinitionOk returns a tuple with the InputDefinition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WorkflowSolutionActionDefinitionAllOf) GetInputDefinitionOk() (*[]WorkflowBaseDataType, bool) {
+func (o *WorkflowSolutionActionDefinitionAllOf) GetInputDefinitionOk() ([]WorkflowBaseDataType, bool) {
 	if o == nil || o.InputDefinition == nil {
 		return nil, false
 	}
-	return &o.InputDefinition, true
+	return o.InputDefinition, true
 }
 
 // HasInputDefinition returns a boolean if a field has been set.
@@ -429,11 +429,11 @@ func (o *WorkflowSolutionActionDefinitionAllOf) GetPostCoreWorkflows() []Workflo
 // GetPostCoreWorkflowsOk returns a tuple with the PostCoreWorkflows field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WorkflowSolutionActionDefinitionAllOf) GetPostCoreWorkflowsOk() (*[]WorkflowActionWorkflowDefinition, bool) {
+func (o *WorkflowSolutionActionDefinitionAllOf) GetPostCoreWorkflowsOk() ([]WorkflowActionWorkflowDefinition, bool) {
 	if o == nil || o.PostCoreWorkflows == nil {
 		return nil, false
 	}
-	return &o.PostCoreWorkflows, true
+	return o.PostCoreWorkflows, true
 }
 
 // HasPostCoreWorkflows returns a boolean if a field has been set.
@@ -462,11 +462,11 @@ func (o *WorkflowSolutionActionDefinitionAllOf) GetPreCoreWorkflows() []Workflow
 // GetPreCoreWorkflowsOk returns a tuple with the PreCoreWorkflows field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WorkflowSolutionActionDefinitionAllOf) GetPreCoreWorkflowsOk() (*[]WorkflowActionWorkflowDefinition, bool) {
+func (o *WorkflowSolutionActionDefinitionAllOf) GetPreCoreWorkflowsOk() ([]WorkflowActionWorkflowDefinition, bool) {
 	if o == nil || o.PreCoreWorkflows == nil {
 		return nil, false
 	}
-	return &o.PreCoreWorkflows, true
+	return o.PreCoreWorkflows, true
 }
 
 // HasPreCoreWorkflows returns a boolean if a field has been set.
@@ -495,11 +495,11 @@ func (o *WorkflowSolutionActionDefinitionAllOf) GetStopWorkflows() []WorkflowAct
 // GetStopWorkflowsOk returns a tuple with the StopWorkflows field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WorkflowSolutionActionDefinitionAllOf) GetStopWorkflowsOk() (*[]WorkflowActionWorkflowDefinition, bool) {
+func (o *WorkflowSolutionActionDefinitionAllOf) GetStopWorkflowsOk() ([]WorkflowActionWorkflowDefinition, bool) {
 	if o == nil || o.StopWorkflows == nil {
 		return nil, false
 	}
-	return &o.StopWorkflows, true
+	return o.StopWorkflows, true
 }
 
 // HasStopWorkflows returns a boolean if a field has been set.
@@ -603,11 +603,11 @@ func (o *WorkflowSolutionActionDefinitionAllOf) GetValidationWorkflows() []Workf
 // GetValidationWorkflowsOk returns a tuple with the ValidationWorkflows field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WorkflowSolutionActionDefinitionAllOf) GetValidationWorkflowsOk() (*[]WorkflowActionWorkflowDefinition, bool) {
+func (o *WorkflowSolutionActionDefinitionAllOf) GetValidationWorkflowsOk() ([]WorkflowActionWorkflowDefinition, bool) {
 	if o == nil || o.ValidationWorkflows == nil {
 		return nil, false
 	}
-	return &o.ValidationWorkflows, true
+	return o.ValidationWorkflows, true
 }
 
 // HasValidationWorkflows returns a boolean if a field has been set.

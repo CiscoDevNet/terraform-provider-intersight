@@ -448,7 +448,6 @@ func resourceKvmTunneledKvmPolicy() *schema.Resource {
 
 func resourceKvmTunneledKvmPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKvmTunneledKvmPolicyWithDefaults()
@@ -521,7 +520,7 @@ func resourceKvmTunneledKvmPolicyCreate(c context.Context, d *schema.ResourceDat
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KvmTunneledKvmPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KvmTunneledKvmPolicy: %s", responseErr.Error())
@@ -533,7 +532,6 @@ func resourceKvmTunneledKvmPolicyCreate(c context.Context, d *schema.ResourceDat
 
 func resourceKvmTunneledKvmPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KvmApi.GetKvmTunneledKvmPolicyByMoid(conn.ctx, d.Id())
@@ -546,7 +544,7 @@ func resourceKvmTunneledKvmPolicyRead(c context.Context, d *schema.ResourceData,
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KvmTunneledKvmPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KvmTunneledKvmPolicy: %s", responseErr.Error())
@@ -631,7 +629,6 @@ func resourceKvmTunneledKvmPolicyRead(c context.Context, d *schema.ResourceData,
 
 func resourceKvmTunneledKvmPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KvmTunneledKvmPolicy{}
@@ -707,7 +704,7 @@ func resourceKvmTunneledKvmPolicyUpdate(c context.Context, d *schema.ResourceDat
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KvmTunneledKvmPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KvmTunneledKvmPolicy: %s", responseErr.Error())
@@ -719,7 +716,6 @@ func resourceKvmTunneledKvmPolicyUpdate(c context.Context, d *schema.ResourceDat
 
 func resourceKvmTunneledKvmPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KvmApi.DeleteKvmTunneledKvmPolicy(conn.ctx, d.Id())
@@ -731,7 +727,7 @@ func resourceKvmTunneledKvmPolicyDelete(c context.Context, d *schema.ResourceDat
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KvmTunneledKvmPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KvmTunneledKvmPolicy object: %s", deleteErr.Error())

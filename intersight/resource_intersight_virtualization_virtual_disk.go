@@ -759,7 +759,6 @@ func resourceVirtualizationVirtualDisk() *schema.Resource {
 
 func resourceVirtualizationVirtualDiskCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewVirtualizationVirtualDiskWithDefaults()
@@ -1015,7 +1014,7 @@ func resourceVirtualizationVirtualDiskCreate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating VirtualizationVirtualDisk: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating VirtualizationVirtualDisk: %s", responseErr.Error())
@@ -1033,7 +1032,7 @@ func resourceVirtualizationVirtualDiskCreate(c context.Context, d *schema.Resour
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching VirtualizationVirtualDisk: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching VirtualizationVirtualDisk: %s", responseErr.Error())
@@ -1047,7 +1046,7 @@ func resourceVirtualizationVirtualDiskCreate(c context.Context, d *schema.Resour
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching VirtualizationVirtualDisk: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching VirtualizationVirtualDisk: %s", responseErr.Error())
@@ -1061,7 +1060,7 @@ func resourceVirtualizationVirtualDiskCreate(c context.Context, d *schema.Resour
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualDisk: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualDisk: %s", err.Error())
@@ -1076,7 +1075,6 @@ func resourceVirtualizationVirtualDiskCreate(c context.Context, d *schema.Resour
 
 func resourceVirtualizationVirtualDiskRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualDiskByMoid(conn.ctx, d.Id())
@@ -1089,7 +1087,7 @@ func resourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resource
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching VirtualizationVirtualDisk: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching VirtualizationVirtualDisk: %s", responseErr.Error())
@@ -1230,7 +1228,6 @@ func resourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resource
 
 func resourceVirtualizationVirtualDiskUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationVirtualDisk{}
@@ -1500,7 +1497,7 @@ func resourceVirtualizationVirtualDiskUpdate(c context.Context, d *schema.Resour
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating VirtualizationVirtualDisk: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating VirtualizationVirtualDisk: %s", responseErr.Error())
@@ -1518,7 +1515,7 @@ func resourceVirtualizationVirtualDiskUpdate(c context.Context, d *schema.Resour
 			if responseErr != nil {
 				errorType := fmt.Sprintf("%T", responseErr)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					responseErr := responseErr.(models.GenericOpenAPIError)
+					responseErr := responseErr.(*models.GenericOpenAPIError)
 					return diag.Errorf("error occurred while fetching VirtualizationVirtualDisk: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 				}
 				return diag.Errorf("error occurred while fetching VirtualizationVirtualDisk: %s", responseErr.Error())
@@ -1532,7 +1529,7 @@ func resourceVirtualizationVirtualDiskUpdate(c context.Context, d *schema.Resour
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching VirtualizationVirtualDisk: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching VirtualizationVirtualDisk: %s", responseErr.Error())
@@ -1546,7 +1543,7 @@ func resourceVirtualizationVirtualDiskUpdate(c context.Context, d *schema.Resour
 			if err != nil {
 				errorType := fmt.Sprintf("%T", err)
 				if strings.Contains(errorType, "GenericOpenAPIError") {
-					err := err.(models.GenericOpenAPIError)
+					err := err.(*models.GenericOpenAPIError)
 					return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualDisk: %s Response from endpoint: %s", err.Error(), string(err.Body()))
 				}
 				return diag.Errorf("failed while fetching workflow information in VirtualizationVirtualDisk: %s", err.Error())
@@ -1561,7 +1558,6 @@ func resourceVirtualizationVirtualDiskUpdate(c context.Context, d *schema.Resour
 
 func resourceVirtualizationVirtualDiskDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.VirtualizationApi.DeleteVirtualizationVirtualDisk(conn.ctx, d.Id())
@@ -1573,7 +1569,7 @@ func resourceVirtualizationVirtualDiskDelete(c context.Context, d *schema.Resour
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting VirtualizationVirtualDisk object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting VirtualizationVirtualDisk object: %s", deleteErr.Error())

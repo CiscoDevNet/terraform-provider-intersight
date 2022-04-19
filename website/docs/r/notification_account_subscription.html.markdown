@@ -32,7 +32,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `create_time`:(string)(ReadOnly) The time when this managed object was created. 
 * `domain_group_moid`:(string)(ReadOnly) The DomainGroup ID for this managed object. 
-* `enabled`:(bool) Subscription can be switched on/off with out necessity to change the subscriptionsettings: notification methods, conditions etc.Ex.: Subscription MO can be configured, but switched off. 
+* `enabled`:(bool) Subscription can be switched on/off without necessity to change the subscriptionsettings: notification methods, conditions, etc.Ex.: Subscription MO can be configured, but switched off. 
 * `mod_time`:(string)(ReadOnly) The time when this managed object was last modified. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the subscription. 
@@ -53,6 +53,8 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+* `type`:(string) The chosen subscription type imposes it is own validation rules.When 'email' type is chosen, actions array can contain only one entry and it is entry should be of canbe only notification.SendEmail; conditions can contain only notification.AlarmMoCondition and conditiontypes should be unique.When the 'webhook' type is chosen, the actions array can contain only one entry and it is entry should be of canbe only notification.TriggerWebhook; conditions can contain up to a limited amount of entries and all of themshould be of type notification.MoCondition.* `email` - Email type requires usage of notification.SendEmail complex types for actionsand notification.AlarmMoCondition complex types for conditions.* `webhook` - Webhook type requires usage of notification.TriggerWebhook complex types for actionsand notification.MoCondition complex types for conditions. 
+* `verify`:(string) Used to verify the actions of the Subscription MO. For a 'webhook' type Ping event is sent to verifythat the webhook server is accessible. For an 'email' type there will be a verification email sent.* `none` - No actions will be verified. Default value.* `all` - All actions will be re-verified. The previous state of the verification will be preserved. 
 * `version_context`:(HashMap) -(ReadOnly) The versioning info for this managed object. 
 This complex property has following sub-properties:
   + `interested_mos`:(Array)

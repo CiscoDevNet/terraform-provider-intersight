@@ -677,7 +677,6 @@ func resourceAssetDeviceClaim() *schema.Resource {
 
 func resourceAssetDeviceClaimCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewAssetDeviceClaimWithDefaults()
@@ -871,7 +870,7 @@ func resourceAssetDeviceClaimCreate(c context.Context, d *schema.ResourceData, m
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating AssetDeviceClaim: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating AssetDeviceClaim: %s", responseErr.Error())
@@ -883,7 +882,6 @@ func resourceAssetDeviceClaimCreate(c context.Context, d *schema.ResourceData, m
 
 func resourceAssetDeviceClaimRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	log.Printf("%v", d)
 	var de diag.Diagnostics
 	return de
@@ -891,7 +889,6 @@ func resourceAssetDeviceClaimRead(c context.Context, d *schema.ResourceData, met
 
 func resourceAssetDeviceClaimDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "AssetDeviceClaim does not allow delete functionality"}
 	de = append(de, warning)

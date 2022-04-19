@@ -88,10 +88,8 @@ func dataSourceServerConfigChangeDetail() *schema.Resource {
 					},
 					"entity_data": {
 						Description: "The data of the object present in config result context.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"entity_moid": {
 						Description: "The Moid of the object present in config result context.",
@@ -110,6 +108,16 @@ func dataSourceServerConfigChangeDetail() *schema.Resource {
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"parent_moid": {
+						Description: "The Moid of the parent object present in config result context.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"parent_type": {
+						Description: "The type of the parent object present in config result context.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -480,10 +488,8 @@ func dataSourceServerConfigChangeDetail() *schema.Resource {
 					},
 					"entity_data": {
 						Description: "The data of the object present in config result context.",
-						Type:        schema.TypeMap,
-						Elem: &schema.Schema{
-							Type: schema.TypeString,
-						}, Optional: true,
+						Type:        schema.TypeString,
+						Optional:    true,
 					},
 					"entity_moid": {
 						Description: "The Moid of the object present in config result context.",
@@ -502,6 +508,16 @@ func dataSourceServerConfigChangeDetail() *schema.Resource {
 					},
 					"object_type": {
 						Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"parent_moid": {
+						Description: "The Moid of the parent object present in config result context.",
+						Type:        schema.TypeString,
+						Optional:    true,
+					},
+					"parent_type": {
+						Description: "The type of the parent object present in config result context.",
 						Type:        schema.TypeString,
 						Optional:    true,
 					},
@@ -811,7 +827,6 @@ func dataSourceServerConfigChangeDetail() *schema.Resource {
 
 func dataSourceServerConfigChangeDetailRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ServerConfigChangeDetail{}
@@ -904,7 +919,13 @@ func dataSourceServerConfigChangeDetailRead(c context.Context, d *schema.Resourc
 			o.SetClassId("")
 			if v, ok := l["entity_data"]; ok {
 				{
-					o.SetEntityData(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetEntityData(x2)
+					}
 				}
 			}
 			if v, ok := l["entity_moid"]; ok {
@@ -929,6 +950,18 @@ func dataSourceServerConfigChangeDetailRead(c context.Context, d *schema.Resourc
 				{
 					x := (v.(string))
 					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["parent_moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetParentMoid(x)
+				}
+			}
+			if v, ok := l["parent_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetParentType(x)
 				}
 			}
 			p = append(p, *o)
@@ -1247,7 +1280,7 @@ func dataSourceServerConfigChangeDetailRead(c context.Context, d *schema.Resourc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of ServerConfigChangeDetail: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of ServerConfigChangeDetail: %s", responseErr.Error())
@@ -1264,7 +1297,7 @@ func dataSourceServerConfigChangeDetailRead(c context.Context, d *schema.Resourc
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching ServerConfigChangeDetail: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching ServerConfigChangeDetail: %s", responseErr.Error())

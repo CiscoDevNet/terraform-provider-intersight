@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -17,7 +17,6 @@ import (
 
 // TelemetryDruidTopNRequest TopN queries return a sorted set of results for the values in a given dimension according to some criteria. Conceptually, they can be thought of as an approximate GroupByQuery over a single dimension with an Ordering spec. TopNs are much faster and resource efficient than GroupBys for this use case. These types of queries take a topN query object and return an array of JSON objects where each object represents a value asked for by the topN query. TopNs are approximate in that each data process will rank their top K results and only return those top K results to the Broker. K, by default in Druid, is max(1000, threshold). In practice, this means that if you ask for the top 1000 items ordered, the correctness of the first ~900 items will be 100%, and the ordering of the results after that is not guaranteed. TopNs can be made more accurate by increasing the threshold.
 type TelemetryDruidTopNRequest struct {
-	// null
 	QueryType  string                   `json:"queryType"`
 	DataSource TelemetryDruidDataSource `json:"dataSource"`
 	// A JSON Object representing ISO-8601 Intervals. This defines the time ranges to run the query over.
@@ -25,10 +24,10 @@ type TelemetryDruidTopNRequest struct {
 	Granularity TelemetryDruidGranularity `json:"granularity"`
 	Filter      *TelemetryDruidFilter     `json:"filter,omitempty"`
 	// Aggregation functions are used to summarize data in buckets. Summarization functions include counting rows, calculating the min/max/sum of metrics and retrieving the first/last value of metrics for each bucket. Additional summarization functions are available with extensions. If no aggregator is provided, the results will be empty for each bucket.
-	Aggregations *[]TelemetryDruidAggregator `json:"aggregations,omitempty"`
+	Aggregations []TelemetryDruidAggregator `json:"aggregations,omitempty"`
 	// Post-aggregations are specifications of processing that should happen on aggregated values as they come out of Apache Druid. If you include a post aggregation as part of a query, make sure to include all aggregators the post-aggregator requires.
-	PostAggregations *[]TelemetryDruidPostAggregator `json:"postAggregations,omitempty"`
-	Dimension        TelemetryDruidDimensionSpec     `json:"dimension"`
+	PostAggregations []TelemetryDruidPostAggregator `json:"postAggregations,omitempty"`
+	Dimension        TelemetryDruidDimensionSpec    `json:"dimension"`
 	// An integer defining the N in the topN (i.e. how many results you want in the top list).
 	Threshold            int32                        `json:"threshold"`
 	Metric               TelemetryDruidTopNMetricSpec `json:"metric"`
@@ -122,11 +121,11 @@ func (o *TelemetryDruidTopNRequest) GetIntervals() []string {
 
 // GetIntervalsOk returns a tuple with the Intervals field value
 // and a boolean to check if the value has been set.
-func (o *TelemetryDruidTopNRequest) GetIntervalsOk() (*[]string, bool) {
+func (o *TelemetryDruidTopNRequest) GetIntervalsOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Intervals, true
+	return o.Intervals, true
 }
 
 // SetIntervals sets field value
@@ -196,12 +195,12 @@ func (o *TelemetryDruidTopNRequest) GetAggregations() []TelemetryDruidAggregator
 		var ret []TelemetryDruidAggregator
 		return ret
 	}
-	return *o.Aggregations
+	return o.Aggregations
 }
 
 // GetAggregationsOk returns a tuple with the Aggregations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TelemetryDruidTopNRequest) GetAggregationsOk() (*[]TelemetryDruidAggregator, bool) {
+func (o *TelemetryDruidTopNRequest) GetAggregationsOk() ([]TelemetryDruidAggregator, bool) {
 	if o == nil || o.Aggregations == nil {
 		return nil, false
 	}
@@ -219,7 +218,7 @@ func (o *TelemetryDruidTopNRequest) HasAggregations() bool {
 
 // SetAggregations gets a reference to the given []TelemetryDruidAggregator and assigns it to the Aggregations field.
 func (o *TelemetryDruidTopNRequest) SetAggregations(v []TelemetryDruidAggregator) {
-	o.Aggregations = &v
+	o.Aggregations = v
 }
 
 // GetPostAggregations returns the PostAggregations field value if set, zero value otherwise.
@@ -228,12 +227,12 @@ func (o *TelemetryDruidTopNRequest) GetPostAggregations() []TelemetryDruidPostAg
 		var ret []TelemetryDruidPostAggregator
 		return ret
 	}
-	return *o.PostAggregations
+	return o.PostAggregations
 }
 
 // GetPostAggregationsOk returns a tuple with the PostAggregations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TelemetryDruidTopNRequest) GetPostAggregationsOk() (*[]TelemetryDruidPostAggregator, bool) {
+func (o *TelemetryDruidTopNRequest) GetPostAggregationsOk() ([]TelemetryDruidPostAggregator, bool) {
 	if o == nil || o.PostAggregations == nil {
 		return nil, false
 	}
@@ -251,7 +250,7 @@ func (o *TelemetryDruidTopNRequest) HasPostAggregations() bool {
 
 // SetPostAggregations gets a reference to the given []TelemetryDruidPostAggregator and assigns it to the PostAggregations field.
 func (o *TelemetryDruidTopNRequest) SetPostAggregations(v []TelemetryDruidPostAggregator) {
-	o.PostAggregations = &v
+	o.PostAggregations = v
 }
 
 // GetDimension returns the Dimension field value

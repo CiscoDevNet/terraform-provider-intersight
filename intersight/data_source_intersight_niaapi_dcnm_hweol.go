@@ -837,7 +837,6 @@ func dataSourceNiaapiDcnmHweol() *schema.Resource {
 
 func dataSourceNiaapiDcnmHweolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiaapiDcnmHweol{}
@@ -1259,7 +1258,7 @@ func dataSourceNiaapiDcnmHweolRead(c context.Context, d *schema.ResourceData, me
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of NiaapiDcnmHweol: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of NiaapiDcnmHweol: %s", responseErr.Error())
@@ -1276,7 +1275,7 @@ func dataSourceNiaapiDcnmHweolRead(c context.Context, d *schema.ResourceData, me
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching NiaapiDcnmHweol: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching NiaapiDcnmHweol: %s", responseErr.Error())

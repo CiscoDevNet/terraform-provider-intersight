@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // NetworkconfigApiService NetworkconfigApi service
 type NetworkconfigApiService service
 
 type ApiCreateNetworkconfigPolicyRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *NetworkconfigApiService
 	networkconfigPolicy *NetworkconfigPolicy
 	ifMatch             *string
@@ -54,17 +49,17 @@ func (r ApiCreateNetworkconfigPolicyRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateNetworkconfigPolicyRequest) Execute() (NetworkconfigPolicy, *_nethttp.Response, error) {
+func (r ApiCreateNetworkconfigPolicyRequest) Execute() (*NetworkconfigPolicy, *http.Response, error) {
 	return r.ApiService.CreateNetworkconfigPolicyExecute(r)
 }
 
 /*
 CreateNetworkconfigPolicy Create a 'networkconfig.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateNetworkconfigPolicyRequest
 */
-func (a *NetworkconfigApiService) CreateNetworkconfigPolicy(ctx _context.Context) ApiCreateNetworkconfigPolicyRequest {
+func (a *NetworkconfigApiService) CreateNetworkconfigPolicy(ctx context.Context) ApiCreateNetworkconfigPolicyRequest {
 	return ApiCreateNetworkconfigPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *NetworkconfigApiService) CreateNetworkconfigPolicy(ctx _context.Context
 
 // Execute executes the request
 //  @return NetworkconfigPolicy
-func (a *NetworkconfigApiService) CreateNetworkconfigPolicyExecute(r ApiCreateNetworkconfigPolicyRequest) (NetworkconfigPolicy, *_nethttp.Response, error) {
+func (a *NetworkconfigApiService) CreateNetworkconfigPolicyExecute(r ApiCreateNetworkconfigPolicyRequest) (*NetworkconfigPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkconfigPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkconfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkconfigApiService.CreateNetworkconfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/networkconfig/Policies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.networkconfigPolicy == nil {
 		return localVarReturnValue, nil, reportError("networkconfigPolicy is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *NetworkconfigApiService) CreateNetworkconfigPolicyExecute(r ApiCreateNe
 	}
 	// body params
 	localVarPostBody = r.networkconfigPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *NetworkconfigApiService) CreateNetworkconfigPolicyExecute(r ApiCreateNe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *NetworkconfigApiService) CreateNetworkconfigPolicyExecute(r ApiCreateNe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *NetworkconfigApiService) CreateNetworkconfigPolicyExecute(r ApiCreateNe
 }
 
 type ApiDeleteNetworkconfigPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NetworkconfigApiService
 	moid       string
 }
 
-func (r ApiDeleteNetworkconfigPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteNetworkconfigPolicyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteNetworkconfigPolicyExecute(r)
 }
 
 /*
 DeleteNetworkconfigPolicy Delete a 'networkconfig.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteNetworkconfigPolicyRequest
 */
-func (a *NetworkconfigApiService) DeleteNetworkconfigPolicy(ctx _context.Context, moid string) ApiDeleteNetworkconfigPolicyRequest {
+func (a *NetworkconfigApiService) DeleteNetworkconfigPolicy(ctx context.Context, moid string) ApiDeleteNetworkconfigPolicyRequest {
 	return ApiDeleteNetworkconfigPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *NetworkconfigApiService) DeleteNetworkconfigPolicy(ctx _context.Context
 }
 
 // Execute executes the request
-func (a *NetworkconfigApiService) DeleteNetworkconfigPolicyExecute(r ApiDeleteNetworkconfigPolicyRequest) (*_nethttp.Response, error) {
+func (a *NetworkconfigApiService) DeleteNetworkconfigPolicyExecute(r ApiDeleteNetworkconfigPolicyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkconfigApiService.DeleteNetworkconfigPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/networkconfig/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *NetworkconfigApiService) DeleteNetworkconfigPolicyExecute(r ApiDeleteNe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *NetworkconfigApiService) DeleteNetworkconfigPolicyExecute(r ApiDeleteNe
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *NetworkconfigApiService) DeleteNetworkconfigPolicyExecute(r ApiDeleteNe
 }
 
 type ApiGetNetworkconfigPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NetworkconfigApiService
 	moid       string
 }
 
-func (r ApiGetNetworkconfigPolicyByMoidRequest) Execute() (NetworkconfigPolicy, *_nethttp.Response, error) {
+func (r ApiGetNetworkconfigPolicyByMoidRequest) Execute() (*NetworkconfigPolicy, *http.Response, error) {
 	return r.ApiService.GetNetworkconfigPolicyByMoidExecute(r)
 }
 
 /*
 GetNetworkconfigPolicyByMoid Read a 'networkconfig.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNetworkconfigPolicyByMoidRequest
 */
-func (a *NetworkconfigApiService) GetNetworkconfigPolicyByMoid(ctx _context.Context, moid string) ApiGetNetworkconfigPolicyByMoidRequest {
+func (a *NetworkconfigApiService) GetNetworkconfigPolicyByMoid(ctx context.Context, moid string) ApiGetNetworkconfigPolicyByMoidRequest {
 	return ApiGetNetworkconfigPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyByMoid(ctx _context.Cont
 
 // Execute executes the request
 //  @return NetworkconfigPolicy
-func (a *NetworkconfigApiService) GetNetworkconfigPolicyByMoidExecute(r ApiGetNetworkconfigPolicyByMoidRequest) (NetworkconfigPolicy, *_nethttp.Response, error) {
+func (a *NetworkconfigApiService) GetNetworkconfigPolicyByMoidExecute(r ApiGetNetworkconfigPolicyByMoidRequest) (*NetworkconfigPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkconfigPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkconfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkconfigApiService.GetNetworkconfigPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/networkconfig/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyByMoidExecute(r ApiGetNe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyByMoidExecute(r ApiGetNe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyByMoidExecute(r ApiGetNe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyByMoidExecute(r ApiGetNe
 }
 
 type ApiGetNetworkconfigPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NetworkconfigApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetNetworkconfigPolicyListRequest) Tags(tags string) ApiGetNetworkcon
 	return r
 }
 
-func (r ApiGetNetworkconfigPolicyListRequest) Execute() (NetworkconfigPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetNetworkconfigPolicyListRequest) Execute() (*NetworkconfigPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetNetworkconfigPolicyListExecute(r)
 }
 
 /*
 GetNetworkconfigPolicyList Read a 'networkconfig.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNetworkconfigPolicyListRequest
 */
-func (a *NetworkconfigApiService) GetNetworkconfigPolicyList(ctx _context.Context) ApiGetNetworkconfigPolicyListRequest {
+func (a *NetworkconfigApiService) GetNetworkconfigPolicyList(ctx context.Context) ApiGetNetworkconfigPolicyListRequest {
 	return ApiGetNetworkconfigPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyList(ctx _context.Contex
 
 // Execute executes the request
 //  @return NetworkconfigPolicyResponse
-func (a *NetworkconfigApiService) GetNetworkconfigPolicyListExecute(r ApiGetNetworkconfigPolicyListRequest) (NetworkconfigPolicyResponse, *_nethttp.Response, error) {
+func (a *NetworkconfigApiService) GetNetworkconfigPolicyListExecute(r ApiGetNetworkconfigPolicyListRequest) (*NetworkconfigPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkconfigPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkconfigPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkconfigApiService.GetNetworkconfigPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/networkconfig/Policies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyListExecute(r ApiGetNetw
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyListExecute(r ApiGetNetw
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyListExecute(r ApiGetNetw
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,7 +739,7 @@ func (a *NetworkconfigApiService) GetNetworkconfigPolicyListExecute(r ApiGetNetw
 }
 
 type ApiPatchNetworkconfigPolicyRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *NetworkconfigApiService
 	moid                string
 	networkconfigPolicy *NetworkconfigPolicy
@@ -771,18 +758,18 @@ func (r ApiPatchNetworkconfigPolicyRequest) IfMatch(ifMatch string) ApiPatchNetw
 	return r
 }
 
-func (r ApiPatchNetworkconfigPolicyRequest) Execute() (NetworkconfigPolicy, *_nethttp.Response, error) {
+func (r ApiPatchNetworkconfigPolicyRequest) Execute() (*NetworkconfigPolicy, *http.Response, error) {
 	return r.ApiService.PatchNetworkconfigPolicyExecute(r)
 }
 
 /*
 PatchNetworkconfigPolicy Update a 'networkconfig.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchNetworkconfigPolicyRequest
 */
-func (a *NetworkconfigApiService) PatchNetworkconfigPolicy(ctx _context.Context, moid string) ApiPatchNetworkconfigPolicyRequest {
+func (a *NetworkconfigApiService) PatchNetworkconfigPolicy(ctx context.Context, moid string) ApiPatchNetworkconfigPolicyRequest {
 	return ApiPatchNetworkconfigPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -792,27 +779,25 @@ func (a *NetworkconfigApiService) PatchNetworkconfigPolicy(ctx _context.Context,
 
 // Execute executes the request
 //  @return NetworkconfigPolicy
-func (a *NetworkconfigApiService) PatchNetworkconfigPolicyExecute(r ApiPatchNetworkconfigPolicyRequest) (NetworkconfigPolicy, *_nethttp.Response, error) {
+func (a *NetworkconfigApiService) PatchNetworkconfigPolicyExecute(r ApiPatchNetworkconfigPolicyRequest) (*NetworkconfigPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkconfigPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkconfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkconfigApiService.PatchNetworkconfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/networkconfig/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.networkconfigPolicy == nil {
 		return localVarReturnValue, nil, reportError("networkconfigPolicy is required and must be specified")
 	}
@@ -839,7 +824,7 @@ func (a *NetworkconfigApiService) PatchNetworkconfigPolicyExecute(r ApiPatchNetw
 	}
 	// body params
 	localVarPostBody = r.networkconfigPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -849,15 +834,15 @@ func (a *NetworkconfigApiService) PatchNetworkconfigPolicyExecute(r ApiPatchNetw
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -913,7 +898,7 @@ func (a *NetworkconfigApiService) PatchNetworkconfigPolicyExecute(r ApiPatchNetw
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -924,7 +909,7 @@ func (a *NetworkconfigApiService) PatchNetworkconfigPolicyExecute(r ApiPatchNetw
 }
 
 type ApiUpdateNetworkconfigPolicyRequest struct {
-	ctx                 _context.Context
+	ctx                 context.Context
 	ApiService          *NetworkconfigApiService
 	moid                string
 	networkconfigPolicy *NetworkconfigPolicy
@@ -943,18 +928,18 @@ func (r ApiUpdateNetworkconfigPolicyRequest) IfMatch(ifMatch string) ApiUpdateNe
 	return r
 }
 
-func (r ApiUpdateNetworkconfigPolicyRequest) Execute() (NetworkconfigPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateNetworkconfigPolicyRequest) Execute() (*NetworkconfigPolicy, *http.Response, error) {
 	return r.ApiService.UpdateNetworkconfigPolicyExecute(r)
 }
 
 /*
 UpdateNetworkconfigPolicy Update a 'networkconfig.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateNetworkconfigPolicyRequest
 */
-func (a *NetworkconfigApiService) UpdateNetworkconfigPolicy(ctx _context.Context, moid string) ApiUpdateNetworkconfigPolicyRequest {
+func (a *NetworkconfigApiService) UpdateNetworkconfigPolicy(ctx context.Context, moid string) ApiUpdateNetworkconfigPolicyRequest {
 	return ApiUpdateNetworkconfigPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -964,27 +949,25 @@ func (a *NetworkconfigApiService) UpdateNetworkconfigPolicy(ctx _context.Context
 
 // Execute executes the request
 //  @return NetworkconfigPolicy
-func (a *NetworkconfigApiService) UpdateNetworkconfigPolicyExecute(r ApiUpdateNetworkconfigPolicyRequest) (NetworkconfigPolicy, *_nethttp.Response, error) {
+func (a *NetworkconfigApiService) UpdateNetworkconfigPolicyExecute(r ApiUpdateNetworkconfigPolicyRequest) (*NetworkconfigPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NetworkconfigPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NetworkconfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NetworkconfigApiService.UpdateNetworkconfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/networkconfig/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.networkconfigPolicy == nil {
 		return localVarReturnValue, nil, reportError("networkconfigPolicy is required and must be specified")
 	}
@@ -1011,7 +994,7 @@ func (a *NetworkconfigApiService) UpdateNetworkconfigPolicyExecute(r ApiUpdateNe
 	}
 	// body params
 	localVarPostBody = r.networkconfigPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1021,15 +1004,15 @@ func (a *NetworkconfigApiService) UpdateNetworkconfigPolicyExecute(r ApiUpdateNe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1085,7 +1068,7 @@ func (a *NetworkconfigApiService) UpdateNetworkconfigPolicyExecute(r ApiUpdateNe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

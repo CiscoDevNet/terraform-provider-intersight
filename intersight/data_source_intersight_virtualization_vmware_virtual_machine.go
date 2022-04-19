@@ -400,10 +400,8 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 		},
 		"extra_config": {
 			Description: "Additional custom configuration settings applied to this VM. It is a set of name-value pairs stored as json.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"folder": {
 			Description: "The folder name associated with this VM.",
@@ -1540,10 +1538,8 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 		},
 		"extra_config": {
 			Description: "Additional custom configuration settings applied to this VM. It is a set of name-value pairs stored as json.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"folder": {
 			Description: "The folder name associated with this VM.",
@@ -2307,7 +2303,6 @@ func dataSourceVirtualizationVmwareVirtualMachine() *schema.Resource {
 
 func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VirtualizationVmwareVirtualMachine{}
@@ -2782,7 +2777,13 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 	}
 
 	if v, ok := d.GetOk("extra_config"); ok {
-		o.SetExtraConfig(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetExtraConfig(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("folder"); ok {
@@ -3645,7 +3646,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of VirtualizationVmwareVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of VirtualizationVmwareVirtualMachine: %s", responseErr.Error())
@@ -3662,7 +3663,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching VirtualizationVmwareVirtualMachine: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching VirtualizationVmwareVirtualMachine: %s", responseErr.Error())
@@ -3707,6 +3708,7 @@ func dataSourceVirtualizationVmwareVirtualMachineRead(c context.Context, d *sche
 				temp["dns_server_list"] = (s.GetDnsServerList())
 				temp["dns_suffix_list"] = (s.GetDnsSuffixList())
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["extra_config"] = flattenAdditionalProperties(s.GetExtraConfig())
 				temp["folder"] = (s.GetFolder())
 
 				temp["guest_info"] = flattenMapVirtualizationGuestInfo(s.GetGuestInfo(), d)

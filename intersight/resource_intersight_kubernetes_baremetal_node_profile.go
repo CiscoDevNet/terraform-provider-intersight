@@ -1220,7 +1220,6 @@ func resourceKubernetesBaremetalNodeProfile() *schema.Resource {
 
 func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesBaremetalNodeProfileWithDefaults()
@@ -1999,7 +1998,7 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesBaremetalNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesBaremetalNodeProfile: %s", responseErr.Error())
@@ -2011,7 +2010,6 @@ func resourceKubernetesBaremetalNodeProfileCreate(c context.Context, d *schema.R
 
 func resourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesBaremetalNodeProfileByMoid(conn.ctx, d.Id())
@@ -2024,7 +2022,7 @@ func resourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.Res
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesBaremetalNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesBaremetalNodeProfile: %s", responseErr.Error())
@@ -2161,7 +2159,6 @@ func resourceKubernetesBaremetalNodeProfileRead(c context.Context, d *schema.Res
 
 func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesBaremetalNodeProfile{}
@@ -2951,7 +2948,7 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesBaremetalNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesBaremetalNodeProfile: %s", responseErr.Error())
@@ -2963,7 +2960,6 @@ func resourceKubernetesBaremetalNodeProfileUpdate(c context.Context, d *schema.R
 
 func resourceKubernetesBaremetalNodeProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesBaremetalNodeProfile(conn.ctx, d.Id())
@@ -2975,7 +2971,7 @@ func resourceKubernetesBaremetalNodeProfileDelete(c context.Context, d *schema.R
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesBaremetalNodeProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesBaremetalNodeProfile object: %s", deleteErr.Error())

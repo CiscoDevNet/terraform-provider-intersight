@@ -451,7 +451,6 @@ func resourceAaaRetentionPolicy() *schema.Resource {
 
 func resourceAaaRetentionPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewAaaRetentionPolicyWithDefaults()
@@ -529,7 +528,7 @@ func resourceAaaRetentionPolicyCreate(c context.Context, d *schema.ResourceData,
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating AaaRetentionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating AaaRetentionPolicy: %s", responseErr.Error())
@@ -541,7 +540,6 @@ func resourceAaaRetentionPolicyCreate(c context.Context, d *schema.ResourceData,
 
 func resourceAaaRetentionPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.AaaApi.GetAaaRetentionPolicyByMoid(conn.ctx, d.Id())
@@ -554,7 +552,7 @@ func resourceAaaRetentionPolicyRead(c context.Context, d *schema.ResourceData, m
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching AaaRetentionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching AaaRetentionPolicy: %s", responseErr.Error())
@@ -643,7 +641,6 @@ func resourceAaaRetentionPolicyRead(c context.Context, d *schema.ResourceData, m
 
 func resourceAaaRetentionPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.AaaRetentionPolicy{}
@@ -725,7 +722,7 @@ func resourceAaaRetentionPolicyUpdate(c context.Context, d *schema.ResourceData,
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating AaaRetentionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating AaaRetentionPolicy: %s", responseErr.Error())
@@ -737,7 +734,6 @@ func resourceAaaRetentionPolicyUpdate(c context.Context, d *schema.ResourceData,
 
 func resourceAaaRetentionPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "AaaRetentionPolicy does not allow delete functionality"}
 	de = append(de, warning)

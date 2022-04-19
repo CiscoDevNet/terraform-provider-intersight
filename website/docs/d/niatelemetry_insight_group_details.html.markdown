@@ -23,6 +23,7 @@ The following arguments can be used to get data of already created objects in In
 * `domain_group_moid`:(string) The DomainGroup ID for this managed object. 
 * `email_settings_count`:(int) Email settings count of the Insight group. 
 * `flow_settings_count`:(int) Flow setting count of the Insight group. 
+* `flow_settings_status`:(string) Flow setting status of the Insight group. 
 * `group_name`:(string) Name of the Insight group. 
 * `kafka_settings_count`:(int) Kafka settings count of the Insight group. 
 * `micro_burst_settings_status`:(string) Microburst setting status of the Insight group. 

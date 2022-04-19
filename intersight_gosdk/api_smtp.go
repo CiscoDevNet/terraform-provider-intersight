@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // SmtpApiService SmtpApi service
 type SmtpApiService service
 
 type ApiCreateSmtpPolicyRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *SmtpApiService
 	smtpPolicy  *SmtpPolicy
 	ifMatch     *string
@@ -54,17 +49,17 @@ func (r ApiCreateSmtpPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateSmt
 	return r
 }
 
-func (r ApiCreateSmtpPolicyRequest) Execute() (SmtpPolicy, *_nethttp.Response, error) {
+func (r ApiCreateSmtpPolicyRequest) Execute() (*SmtpPolicy, *http.Response, error) {
 	return r.ApiService.CreateSmtpPolicyExecute(r)
 }
 
 /*
 CreateSmtpPolicy Create a 'smtp.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateSmtpPolicyRequest
 */
-func (a *SmtpApiService) CreateSmtpPolicy(ctx _context.Context) ApiCreateSmtpPolicyRequest {
+func (a *SmtpApiService) CreateSmtpPolicy(ctx context.Context) ApiCreateSmtpPolicyRequest {
 	return ApiCreateSmtpPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *SmtpApiService) CreateSmtpPolicy(ctx _context.Context) ApiCreateSmtpPol
 
 // Execute executes the request
 //  @return SmtpPolicy
-func (a *SmtpApiService) CreateSmtpPolicyExecute(r ApiCreateSmtpPolicyRequest) (SmtpPolicy, *_nethttp.Response, error) {
+func (a *SmtpApiService) CreateSmtpPolicyExecute(r ApiCreateSmtpPolicyRequest) (*SmtpPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SmtpPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SmtpPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SmtpApiService.CreateSmtpPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/smtp/Policies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.smtpPolicy == nil {
 		return localVarReturnValue, nil, reportError("smtpPolicy is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *SmtpApiService) CreateSmtpPolicyExecute(r ApiCreateSmtpPolicyRequest) (
 	}
 	// body params
 	localVarPostBody = r.smtpPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *SmtpApiService) CreateSmtpPolicyExecute(r ApiCreateSmtpPolicyRequest) (
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *SmtpApiService) CreateSmtpPolicyExecute(r ApiCreateSmtpPolicyRequest) (
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *SmtpApiService) CreateSmtpPolicyExecute(r ApiCreateSmtpPolicyRequest) (
 }
 
 type ApiDeleteSmtpPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *SmtpApiService
 	moid       string
 }
 
-func (r ApiDeleteSmtpPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteSmtpPolicyRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteSmtpPolicyExecute(r)
 }
 
 /*
 DeleteSmtpPolicy Delete a 'smtp.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteSmtpPolicyRequest
 */
-func (a *SmtpApiService) DeleteSmtpPolicy(ctx _context.Context, moid string) ApiDeleteSmtpPolicyRequest {
+func (a *SmtpApiService) DeleteSmtpPolicy(ctx context.Context, moid string) ApiDeleteSmtpPolicyRequest {
 	return ApiDeleteSmtpPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -232,26 +225,24 @@ func (a *SmtpApiService) DeleteSmtpPolicy(ctx _context.Context, moid string) Api
 }
 
 // Execute executes the request
-func (a *SmtpApiService) DeleteSmtpPolicyExecute(r ApiDeleteSmtpPolicyRequest) (*_nethttp.Response, error) {
+func (a *SmtpApiService) DeleteSmtpPolicyExecute(r ApiDeleteSmtpPolicyRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SmtpApiService.DeleteSmtpPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/smtp/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -270,7 +261,7 @@ func (a *SmtpApiService) DeleteSmtpPolicyExecute(r ApiDeleteSmtpPolicyRequest) (
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -280,15 +271,15 @@ func (a *SmtpApiService) DeleteSmtpPolicyExecute(r ApiDeleteSmtpPolicyRequest) (
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,23 +337,23 @@ func (a *SmtpApiService) DeleteSmtpPolicyExecute(r ApiDeleteSmtpPolicyRequest) (
 }
 
 type ApiGetSmtpPolicyByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *SmtpApiService
 	moid       string
 }
 
-func (r ApiGetSmtpPolicyByMoidRequest) Execute() (SmtpPolicy, *_nethttp.Response, error) {
+func (r ApiGetSmtpPolicyByMoidRequest) Execute() (*SmtpPolicy, *http.Response, error) {
 	return r.ApiService.GetSmtpPolicyByMoidExecute(r)
 }
 
 /*
 GetSmtpPolicyByMoid Read a 'smtp.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetSmtpPolicyByMoidRequest
 */
-func (a *SmtpApiService) GetSmtpPolicyByMoid(ctx _context.Context, moid string) ApiGetSmtpPolicyByMoidRequest {
+func (a *SmtpApiService) GetSmtpPolicyByMoid(ctx context.Context, moid string) ApiGetSmtpPolicyByMoidRequest {
 	return ApiGetSmtpPolicyByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -372,27 +363,25 @@ func (a *SmtpApiService) GetSmtpPolicyByMoid(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return SmtpPolicy
-func (a *SmtpApiService) GetSmtpPolicyByMoidExecute(r ApiGetSmtpPolicyByMoidRequest) (SmtpPolicy, *_nethttp.Response, error) {
+func (a *SmtpApiService) GetSmtpPolicyByMoidExecute(r ApiGetSmtpPolicyByMoidRequest) (*SmtpPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SmtpPolicy
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SmtpPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SmtpApiService.GetSmtpPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/smtp/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -411,7 +400,7 @@ func (a *SmtpApiService) GetSmtpPolicyByMoidExecute(r ApiGetSmtpPolicyByMoidRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,15 +410,15 @@ func (a *SmtpApiService) GetSmtpPolicyByMoidExecute(r ApiGetSmtpPolicyByMoidRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -485,7 +474,7 @@ func (a *SmtpApiService) GetSmtpPolicyByMoidExecute(r ApiGetSmtpPolicyByMoidRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -496,7 +485,7 @@ func (a *SmtpApiService) GetSmtpPolicyByMoidExecute(r ApiGetSmtpPolicyByMoidRequ
 }
 
 type ApiGetSmtpPolicyListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *SmtpApiService
 	filter      *string
 	orderby     *string
@@ -577,17 +566,17 @@ func (r ApiGetSmtpPolicyListRequest) Tags(tags string) ApiGetSmtpPolicyListReque
 	return r
 }
 
-func (r ApiGetSmtpPolicyListRequest) Execute() (SmtpPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetSmtpPolicyListRequest) Execute() (*SmtpPolicyResponse, *http.Response, error) {
 	return r.ApiService.GetSmtpPolicyListExecute(r)
 }
 
 /*
 GetSmtpPolicyList Read a 'smtp.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetSmtpPolicyListRequest
 */
-func (a *SmtpApiService) GetSmtpPolicyList(ctx _context.Context) ApiGetSmtpPolicyListRequest {
+func (a *SmtpApiService) GetSmtpPolicyList(ctx context.Context) ApiGetSmtpPolicyListRequest {
 	return ApiGetSmtpPolicyListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -596,26 +585,24 @@ func (a *SmtpApiService) GetSmtpPolicyList(ctx _context.Context) ApiGetSmtpPolic
 
 // Execute executes the request
 //  @return SmtpPolicyResponse
-func (a *SmtpApiService) GetSmtpPolicyListExecute(r ApiGetSmtpPolicyListRequest) (SmtpPolicyResponse, *_nethttp.Response, error) {
+func (a *SmtpApiService) GetSmtpPolicyListExecute(r ApiGetSmtpPolicyListRequest) (*SmtpPolicyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SmtpPolicyResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SmtpPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SmtpApiService.GetSmtpPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/smtp/Policies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -667,7 +654,7 @@ func (a *SmtpApiService) GetSmtpPolicyListExecute(r ApiGetSmtpPolicyListRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -677,15 +664,15 @@ func (a *SmtpApiService) GetSmtpPolicyListExecute(r ApiGetSmtpPolicyListRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -741,7 +728,7 @@ func (a *SmtpApiService) GetSmtpPolicyListExecute(r ApiGetSmtpPolicyListRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -752,7 +739,7 @@ func (a *SmtpApiService) GetSmtpPolicyListExecute(r ApiGetSmtpPolicyListRequest)
 }
 
 type ApiPatchSmtpPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *SmtpApiService
 	moid       string
 	smtpPolicy *SmtpPolicy
@@ -771,18 +758,18 @@ func (r ApiPatchSmtpPolicyRequest) IfMatch(ifMatch string) ApiPatchSmtpPolicyReq
 	return r
 }
 
-func (r ApiPatchSmtpPolicyRequest) Execute() (SmtpPolicy, *_nethttp.Response, error) {
+func (r ApiPatchSmtpPolicyRequest) Execute() (*SmtpPolicy, *http.Response, error) {
 	return r.ApiService.PatchSmtpPolicyExecute(r)
 }
 
 /*
 PatchSmtpPolicy Update a 'smtp.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchSmtpPolicyRequest
 */
-func (a *SmtpApiService) PatchSmtpPolicy(ctx _context.Context, moid string) ApiPatchSmtpPolicyRequest {
+func (a *SmtpApiService) PatchSmtpPolicy(ctx context.Context, moid string) ApiPatchSmtpPolicyRequest {
 	return ApiPatchSmtpPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -792,27 +779,25 @@ func (a *SmtpApiService) PatchSmtpPolicy(ctx _context.Context, moid string) ApiP
 
 // Execute executes the request
 //  @return SmtpPolicy
-func (a *SmtpApiService) PatchSmtpPolicyExecute(r ApiPatchSmtpPolicyRequest) (SmtpPolicy, *_nethttp.Response, error) {
+func (a *SmtpApiService) PatchSmtpPolicyExecute(r ApiPatchSmtpPolicyRequest) (*SmtpPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SmtpPolicy
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SmtpPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SmtpApiService.PatchSmtpPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/smtp/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.smtpPolicy == nil {
 		return localVarReturnValue, nil, reportError("smtpPolicy is required and must be specified")
 	}
@@ -839,7 +824,7 @@ func (a *SmtpApiService) PatchSmtpPolicyExecute(r ApiPatchSmtpPolicyRequest) (Sm
 	}
 	// body params
 	localVarPostBody = r.smtpPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -849,15 +834,15 @@ func (a *SmtpApiService) PatchSmtpPolicyExecute(r ApiPatchSmtpPolicyRequest) (Sm
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -913,7 +898,7 @@ func (a *SmtpApiService) PatchSmtpPolicyExecute(r ApiPatchSmtpPolicyRequest) (Sm
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -924,7 +909,7 @@ func (a *SmtpApiService) PatchSmtpPolicyExecute(r ApiPatchSmtpPolicyRequest) (Sm
 }
 
 type ApiUpdateSmtpPolicyRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *SmtpApiService
 	moid       string
 	smtpPolicy *SmtpPolicy
@@ -943,18 +928,18 @@ func (r ApiUpdateSmtpPolicyRequest) IfMatch(ifMatch string) ApiUpdateSmtpPolicyR
 	return r
 }
 
-func (r ApiUpdateSmtpPolicyRequest) Execute() (SmtpPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateSmtpPolicyRequest) Execute() (*SmtpPolicy, *http.Response, error) {
 	return r.ApiService.UpdateSmtpPolicyExecute(r)
 }
 
 /*
 UpdateSmtpPolicy Update a 'smtp.Policy' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateSmtpPolicyRequest
 */
-func (a *SmtpApiService) UpdateSmtpPolicy(ctx _context.Context, moid string) ApiUpdateSmtpPolicyRequest {
+func (a *SmtpApiService) UpdateSmtpPolicy(ctx context.Context, moid string) ApiUpdateSmtpPolicyRequest {
 	return ApiUpdateSmtpPolicyRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -964,27 +949,25 @@ func (a *SmtpApiService) UpdateSmtpPolicy(ctx _context.Context, moid string) Api
 
 // Execute executes the request
 //  @return SmtpPolicy
-func (a *SmtpApiService) UpdateSmtpPolicyExecute(r ApiUpdateSmtpPolicyRequest) (SmtpPolicy, *_nethttp.Response, error) {
+func (a *SmtpApiService) UpdateSmtpPolicyExecute(r ApiUpdateSmtpPolicyRequest) (*SmtpPolicy, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  SmtpPolicy
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SmtpPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SmtpApiService.UpdateSmtpPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/smtp/Policies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.smtpPolicy == nil {
 		return localVarReturnValue, nil, reportError("smtpPolicy is required and must be specified")
 	}
@@ -1011,7 +994,7 @@ func (a *SmtpApiService) UpdateSmtpPolicyExecute(r ApiUpdateSmtpPolicyRequest) (
 	}
 	// body params
 	localVarPostBody = r.smtpPolicy
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1021,15 +1004,15 @@ func (a *SmtpApiService) UpdateSmtpPolicyExecute(r ApiUpdateSmtpPolicyRequest) (
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1085,7 +1068,7 @@ func (a *SmtpApiService) UpdateSmtpPolicyExecute(r ApiUpdateSmtpPolicyRequest) (
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

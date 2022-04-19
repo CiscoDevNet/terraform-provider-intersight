@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](InventoryDeviceInfoRelationship.md) |  | [optional] 
 **Ioms** | Pointer to [**[]EquipmentIoCardRelationship**](EquipmentIoCardRelationship.md) | An array of relationships to equipmentIoCard resources. | [optional] [readonly] 
 **LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](EquipmentLocatorLedRelationship.md) |  | [optional] 
+**ManagementInterface** | Pointer to [**ManagementInterfaceRelationship**](ManagementInterfaceRelationship.md) |  | [optional] 
 **PowerControlState** | Pointer to [**PowerControlStateRelationship**](PowerControlStateRelationship.md) |  | [optional] 
 **PsuControl** | Pointer to [**EquipmentPsuControlRelationship**](EquipmentPsuControlRelationship.md) |  | [optional] 
 **Psus** | Pointer to [**[]EquipmentPsuRelationship**](EquipmentPsuRelationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
@@ -731,6 +732,31 @@ SetLocatorLed sets LocatorLed field to given value.
 `func (o *EquipmentChassis) HasLocatorLed() bool`
 
 HasLocatorLed returns a boolean if a field has been set.
+
+### GetManagementInterface
+
+`func (o *EquipmentChassis) GetManagementInterface() ManagementInterfaceRelationship`
+
+GetManagementInterface returns the ManagementInterface field if non-nil, zero value otherwise.
+
+### GetManagementInterfaceOk
+
+`func (o *EquipmentChassis) GetManagementInterfaceOk() (*ManagementInterfaceRelationship, bool)`
+
+GetManagementInterfaceOk returns a tuple with the ManagementInterface field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManagementInterface
+
+`func (o *EquipmentChassis) SetManagementInterface(v ManagementInterfaceRelationship)`
+
+SetManagementInterface sets ManagementInterface field to given value.
+
+### HasManagementInterface
+
+`func (o *EquipmentChassis) HasManagementInterface() bool`
+
+HasManagementInterface returns a boolean if a field has been set.
 
 ### GetPowerControlState
 

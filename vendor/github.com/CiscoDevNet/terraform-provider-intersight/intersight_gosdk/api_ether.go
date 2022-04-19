@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // EtherApiService EtherApi service
 type EtherApiService service
 
 type ApiGetEtherHostPortByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *EtherApiService
 	moid       string
 }
 
-func (r ApiGetEtherHostPortByMoidRequest) Execute() (EtherHostPort, *_nethttp.Response, error) {
+func (r ApiGetEtherHostPortByMoidRequest) Execute() (*EtherHostPort, *http.Response, error) {
 	return r.ApiService.GetEtherHostPortByMoidExecute(r)
 }
 
 /*
 GetEtherHostPortByMoid Read a 'ether.HostPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetEtherHostPortByMoidRequest
 */
-func (a *EtherApiService) GetEtherHostPortByMoid(ctx _context.Context, moid string) ApiGetEtherHostPortByMoidRequest {
+func (a *EtherApiService) GetEtherHostPortByMoid(ctx context.Context, moid string) ApiGetEtherHostPortByMoidRequest {
 	return ApiGetEtherHostPortByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -55,27 +50,25 @@ func (a *EtherApiService) GetEtherHostPortByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return EtherHostPort
-func (a *EtherApiService) GetEtherHostPortByMoidExecute(r ApiGetEtherHostPortByMoidRequest) (EtherHostPort, *_nethttp.Response, error) {
+func (a *EtherApiService) GetEtherHostPortByMoidExecute(r ApiGetEtherHostPortByMoidRequest) (*EtherHostPort, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherHostPort
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherHostPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.GetEtherHostPortByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/HostPorts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -94,7 +87,7 @@ func (a *EtherApiService) GetEtherHostPortByMoidExecute(r ApiGetEtherHostPortByM
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -104,15 +97,15 @@ func (a *EtherApiService) GetEtherHostPortByMoidExecute(r ApiGetEtherHostPortByM
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,7 +161,7 @@ func (a *EtherApiService) GetEtherHostPortByMoidExecute(r ApiGetEtherHostPortByM
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -179,7 +172,7 @@ func (a *EtherApiService) GetEtherHostPortByMoidExecute(r ApiGetEtherHostPortByM
 }
 
 type ApiGetEtherHostPortListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *EtherApiService
 	filter      *string
 	orderby     *string
@@ -260,17 +253,17 @@ func (r ApiGetEtherHostPortListRequest) Tags(tags string) ApiGetEtherHostPortLis
 	return r
 }
 
-func (r ApiGetEtherHostPortListRequest) Execute() (EtherHostPortResponse, *_nethttp.Response, error) {
+func (r ApiGetEtherHostPortListRequest) Execute() (*EtherHostPortResponse, *http.Response, error) {
 	return r.ApiService.GetEtherHostPortListExecute(r)
 }
 
 /*
 GetEtherHostPortList Read a 'ether.HostPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetEtherHostPortListRequest
 */
-func (a *EtherApiService) GetEtherHostPortList(ctx _context.Context) ApiGetEtherHostPortListRequest {
+func (a *EtherApiService) GetEtherHostPortList(ctx context.Context) ApiGetEtherHostPortListRequest {
 	return ApiGetEtherHostPortListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -279,26 +272,24 @@ func (a *EtherApiService) GetEtherHostPortList(ctx _context.Context) ApiGetEther
 
 // Execute executes the request
 //  @return EtherHostPortResponse
-func (a *EtherApiService) GetEtherHostPortListExecute(r ApiGetEtherHostPortListRequest) (EtherHostPortResponse, *_nethttp.Response, error) {
+func (a *EtherApiService) GetEtherHostPortListExecute(r ApiGetEtherHostPortListRequest) (*EtherHostPortResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherHostPortResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherHostPortResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.GetEtherHostPortList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/HostPorts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -350,7 +341,7 @@ func (a *EtherApiService) GetEtherHostPortListExecute(r ApiGetEtherHostPortListR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -360,15 +351,15 @@ func (a *EtherApiService) GetEtherHostPortListExecute(r ApiGetEtherHostPortListR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -424,7 +415,7 @@ func (a *EtherApiService) GetEtherHostPortListExecute(r ApiGetEtherHostPortListR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -435,23 +426,23 @@ func (a *EtherApiService) GetEtherHostPortListExecute(r ApiGetEtherHostPortListR
 }
 
 type ApiGetEtherNetworkPortByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *EtherApiService
 	moid       string
 }
 
-func (r ApiGetEtherNetworkPortByMoidRequest) Execute() (EtherNetworkPort, *_nethttp.Response, error) {
+func (r ApiGetEtherNetworkPortByMoidRequest) Execute() (*EtherNetworkPort, *http.Response, error) {
 	return r.ApiService.GetEtherNetworkPortByMoidExecute(r)
 }
 
 /*
 GetEtherNetworkPortByMoid Read a 'ether.NetworkPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetEtherNetworkPortByMoidRequest
 */
-func (a *EtherApiService) GetEtherNetworkPortByMoid(ctx _context.Context, moid string) ApiGetEtherNetworkPortByMoidRequest {
+func (a *EtherApiService) GetEtherNetworkPortByMoid(ctx context.Context, moid string) ApiGetEtherNetworkPortByMoidRequest {
 	return ApiGetEtherNetworkPortByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -461,27 +452,25 @@ func (a *EtherApiService) GetEtherNetworkPortByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return EtherNetworkPort
-func (a *EtherApiService) GetEtherNetworkPortByMoidExecute(r ApiGetEtherNetworkPortByMoidRequest) (EtherNetworkPort, *_nethttp.Response, error) {
+func (a *EtherApiService) GetEtherNetworkPortByMoidExecute(r ApiGetEtherNetworkPortByMoidRequest) (*EtherNetworkPort, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherNetworkPort
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherNetworkPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.GetEtherNetworkPortByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/NetworkPorts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -500,7 +489,7 @@ func (a *EtherApiService) GetEtherNetworkPortByMoidExecute(r ApiGetEtherNetworkP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -510,15 +499,15 @@ func (a *EtherApiService) GetEtherNetworkPortByMoidExecute(r ApiGetEtherNetworkP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -574,7 +563,7 @@ func (a *EtherApiService) GetEtherNetworkPortByMoidExecute(r ApiGetEtherNetworkP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -585,7 +574,7 @@ func (a *EtherApiService) GetEtherNetworkPortByMoidExecute(r ApiGetEtherNetworkP
 }
 
 type ApiGetEtherNetworkPortListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *EtherApiService
 	filter      *string
 	orderby     *string
@@ -666,17 +655,17 @@ func (r ApiGetEtherNetworkPortListRequest) Tags(tags string) ApiGetEtherNetworkP
 	return r
 }
 
-func (r ApiGetEtherNetworkPortListRequest) Execute() (EtherNetworkPortResponse, *_nethttp.Response, error) {
+func (r ApiGetEtherNetworkPortListRequest) Execute() (*EtherNetworkPortResponse, *http.Response, error) {
 	return r.ApiService.GetEtherNetworkPortListExecute(r)
 }
 
 /*
 GetEtherNetworkPortList Read a 'ether.NetworkPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetEtherNetworkPortListRequest
 */
-func (a *EtherApiService) GetEtherNetworkPortList(ctx _context.Context) ApiGetEtherNetworkPortListRequest {
+func (a *EtherApiService) GetEtherNetworkPortList(ctx context.Context) ApiGetEtherNetworkPortListRequest {
 	return ApiGetEtherNetworkPortListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -685,26 +674,24 @@ func (a *EtherApiService) GetEtherNetworkPortList(ctx _context.Context) ApiGetEt
 
 // Execute executes the request
 //  @return EtherNetworkPortResponse
-func (a *EtherApiService) GetEtherNetworkPortListExecute(r ApiGetEtherNetworkPortListRequest) (EtherNetworkPortResponse, *_nethttp.Response, error) {
+func (a *EtherApiService) GetEtherNetworkPortListExecute(r ApiGetEtherNetworkPortListRequest) (*EtherNetworkPortResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherNetworkPortResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherNetworkPortResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.GetEtherNetworkPortList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/NetworkPorts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -756,7 +743,7 @@ func (a *EtherApiService) GetEtherNetworkPortListExecute(r ApiGetEtherNetworkPor
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -766,15 +753,15 @@ func (a *EtherApiService) GetEtherNetworkPortListExecute(r ApiGetEtherNetworkPor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -830,7 +817,7 @@ func (a *EtherApiService) GetEtherNetworkPortListExecute(r ApiGetEtherNetworkPor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -841,23 +828,23 @@ func (a *EtherApiService) GetEtherNetworkPortListExecute(r ApiGetEtherNetworkPor
 }
 
 type ApiGetEtherPhysicalPortByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *EtherApiService
 	moid       string
 }
 
-func (r ApiGetEtherPhysicalPortByMoidRequest) Execute() (EtherPhysicalPort, *_nethttp.Response, error) {
+func (r ApiGetEtherPhysicalPortByMoidRequest) Execute() (*EtherPhysicalPort, *http.Response, error) {
 	return r.ApiService.GetEtherPhysicalPortByMoidExecute(r)
 }
 
 /*
 GetEtherPhysicalPortByMoid Read a 'ether.PhysicalPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetEtherPhysicalPortByMoidRequest
 */
-func (a *EtherApiService) GetEtherPhysicalPortByMoid(ctx _context.Context, moid string) ApiGetEtherPhysicalPortByMoidRequest {
+func (a *EtherApiService) GetEtherPhysicalPortByMoid(ctx context.Context, moid string) ApiGetEtherPhysicalPortByMoidRequest {
 	return ApiGetEtherPhysicalPortByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -867,27 +854,25 @@ func (a *EtherApiService) GetEtherPhysicalPortByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return EtherPhysicalPort
-func (a *EtherApiService) GetEtherPhysicalPortByMoidExecute(r ApiGetEtherPhysicalPortByMoidRequest) (EtherPhysicalPort, *_nethttp.Response, error) {
+func (a *EtherApiService) GetEtherPhysicalPortByMoidExecute(r ApiGetEtherPhysicalPortByMoidRequest) (*EtherPhysicalPort, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherPhysicalPort
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherPhysicalPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.GetEtherPhysicalPortByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/PhysicalPorts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -906,7 +891,7 @@ func (a *EtherApiService) GetEtherPhysicalPortByMoidExecute(r ApiGetEtherPhysica
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -916,15 +901,15 @@ func (a *EtherApiService) GetEtherPhysicalPortByMoidExecute(r ApiGetEtherPhysica
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -980,7 +965,7 @@ func (a *EtherApiService) GetEtherPhysicalPortByMoidExecute(r ApiGetEtherPhysica
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -991,7 +976,7 @@ func (a *EtherApiService) GetEtherPhysicalPortByMoidExecute(r ApiGetEtherPhysica
 }
 
 type ApiGetEtherPhysicalPortListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *EtherApiService
 	filter      *string
 	orderby     *string
@@ -1072,17 +1057,17 @@ func (r ApiGetEtherPhysicalPortListRequest) Tags(tags string) ApiGetEtherPhysica
 	return r
 }
 
-func (r ApiGetEtherPhysicalPortListRequest) Execute() (EtherPhysicalPortResponse, *_nethttp.Response, error) {
+func (r ApiGetEtherPhysicalPortListRequest) Execute() (*EtherPhysicalPortResponse, *http.Response, error) {
 	return r.ApiService.GetEtherPhysicalPortListExecute(r)
 }
 
 /*
 GetEtherPhysicalPortList Read a 'ether.PhysicalPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetEtherPhysicalPortListRequest
 */
-func (a *EtherApiService) GetEtherPhysicalPortList(ctx _context.Context) ApiGetEtherPhysicalPortListRequest {
+func (a *EtherApiService) GetEtherPhysicalPortList(ctx context.Context) ApiGetEtherPhysicalPortListRequest {
 	return ApiGetEtherPhysicalPortListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1091,26 +1076,24 @@ func (a *EtherApiService) GetEtherPhysicalPortList(ctx _context.Context) ApiGetE
 
 // Execute executes the request
 //  @return EtherPhysicalPortResponse
-func (a *EtherApiService) GetEtherPhysicalPortListExecute(r ApiGetEtherPhysicalPortListRequest) (EtherPhysicalPortResponse, *_nethttp.Response, error) {
+func (a *EtherApiService) GetEtherPhysicalPortListExecute(r ApiGetEtherPhysicalPortListRequest) (*EtherPhysicalPortResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherPhysicalPortResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherPhysicalPortResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.GetEtherPhysicalPortList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/PhysicalPorts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1162,7 +1145,7 @@ func (a *EtherApiService) GetEtherPhysicalPortListExecute(r ApiGetEtherPhysicalP
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1172,15 +1155,15 @@ func (a *EtherApiService) GetEtherPhysicalPortListExecute(r ApiGetEtherPhysicalP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1236,7 +1219,7 @@ func (a *EtherApiService) GetEtherPhysicalPortListExecute(r ApiGetEtherPhysicalP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1247,23 +1230,23 @@ func (a *EtherApiService) GetEtherPhysicalPortListExecute(r ApiGetEtherPhysicalP
 }
 
 type ApiGetEtherPortChannelByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *EtherApiService
 	moid       string
 }
 
-func (r ApiGetEtherPortChannelByMoidRequest) Execute() (EtherPortChannel, *_nethttp.Response, error) {
+func (r ApiGetEtherPortChannelByMoidRequest) Execute() (*EtherPortChannel, *http.Response, error) {
 	return r.ApiService.GetEtherPortChannelByMoidExecute(r)
 }
 
 /*
 GetEtherPortChannelByMoid Read a 'ether.PortChannel' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetEtherPortChannelByMoidRequest
 */
-func (a *EtherApiService) GetEtherPortChannelByMoid(ctx _context.Context, moid string) ApiGetEtherPortChannelByMoidRequest {
+func (a *EtherApiService) GetEtherPortChannelByMoid(ctx context.Context, moid string) ApiGetEtherPortChannelByMoidRequest {
 	return ApiGetEtherPortChannelByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1273,27 +1256,25 @@ func (a *EtherApiService) GetEtherPortChannelByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return EtherPortChannel
-func (a *EtherApiService) GetEtherPortChannelByMoidExecute(r ApiGetEtherPortChannelByMoidRequest) (EtherPortChannel, *_nethttp.Response, error) {
+func (a *EtherApiService) GetEtherPortChannelByMoidExecute(r ApiGetEtherPortChannelByMoidRequest) (*EtherPortChannel, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherPortChannel
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherPortChannel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.GetEtherPortChannelByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/PortChannels/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1312,7 +1293,7 @@ func (a *EtherApiService) GetEtherPortChannelByMoidExecute(r ApiGetEtherPortChan
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1322,15 +1303,15 @@ func (a *EtherApiService) GetEtherPortChannelByMoidExecute(r ApiGetEtherPortChan
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1386,7 +1367,7 @@ func (a *EtherApiService) GetEtherPortChannelByMoidExecute(r ApiGetEtherPortChan
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1397,7 +1378,7 @@ func (a *EtherApiService) GetEtherPortChannelByMoidExecute(r ApiGetEtherPortChan
 }
 
 type ApiGetEtherPortChannelListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *EtherApiService
 	filter      *string
 	orderby     *string
@@ -1478,17 +1459,17 @@ func (r ApiGetEtherPortChannelListRequest) Tags(tags string) ApiGetEtherPortChan
 	return r
 }
 
-func (r ApiGetEtherPortChannelListRequest) Execute() (EtherPortChannelResponse, *_nethttp.Response, error) {
+func (r ApiGetEtherPortChannelListRequest) Execute() (*EtherPortChannelResponse, *http.Response, error) {
 	return r.ApiService.GetEtherPortChannelListExecute(r)
 }
 
 /*
 GetEtherPortChannelList Read a 'ether.PortChannel' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetEtherPortChannelListRequest
 */
-func (a *EtherApiService) GetEtherPortChannelList(ctx _context.Context) ApiGetEtherPortChannelListRequest {
+func (a *EtherApiService) GetEtherPortChannelList(ctx context.Context) ApiGetEtherPortChannelListRequest {
 	return ApiGetEtherPortChannelListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1497,26 +1478,24 @@ func (a *EtherApiService) GetEtherPortChannelList(ctx _context.Context) ApiGetEt
 
 // Execute executes the request
 //  @return EtherPortChannelResponse
-func (a *EtherApiService) GetEtherPortChannelListExecute(r ApiGetEtherPortChannelListRequest) (EtherPortChannelResponse, *_nethttp.Response, error) {
+func (a *EtherApiService) GetEtherPortChannelListExecute(r ApiGetEtherPortChannelListRequest) (*EtherPortChannelResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherPortChannelResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherPortChannelResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.GetEtherPortChannelList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/PortChannels"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1568,7 +1547,7 @@ func (a *EtherApiService) GetEtherPortChannelListExecute(r ApiGetEtherPortChanne
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1578,15 +1557,15 @@ func (a *EtherApiService) GetEtherPortChannelListExecute(r ApiGetEtherPortChanne
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1642,7 +1621,7 @@ func (a *EtherApiService) GetEtherPortChannelListExecute(r ApiGetEtherPortChanne
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1653,7 +1632,7 @@ func (a *EtherApiService) GetEtherPortChannelListExecute(r ApiGetEtherPortChanne
 }
 
 type ApiPatchEtherHostPortRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *EtherApiService
 	moid          string
 	etherHostPort *EtherHostPort
@@ -1672,18 +1651,18 @@ func (r ApiPatchEtherHostPortRequest) IfMatch(ifMatch string) ApiPatchEtherHostP
 	return r
 }
 
-func (r ApiPatchEtherHostPortRequest) Execute() (EtherHostPort, *_nethttp.Response, error) {
+func (r ApiPatchEtherHostPortRequest) Execute() (*EtherHostPort, *http.Response, error) {
 	return r.ApiService.PatchEtherHostPortExecute(r)
 }
 
 /*
 PatchEtherHostPort Update a 'ether.HostPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchEtherHostPortRequest
 */
-func (a *EtherApiService) PatchEtherHostPort(ctx _context.Context, moid string) ApiPatchEtherHostPortRequest {
+func (a *EtherApiService) PatchEtherHostPort(ctx context.Context, moid string) ApiPatchEtherHostPortRequest {
 	return ApiPatchEtherHostPortRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1693,27 +1672,25 @@ func (a *EtherApiService) PatchEtherHostPort(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return EtherHostPort
-func (a *EtherApiService) PatchEtherHostPortExecute(r ApiPatchEtherHostPortRequest) (EtherHostPort, *_nethttp.Response, error) {
+func (a *EtherApiService) PatchEtherHostPortExecute(r ApiPatchEtherHostPortRequest) (*EtherHostPort, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherHostPort
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherHostPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.PatchEtherHostPort")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/HostPorts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.etherHostPort == nil {
 		return localVarReturnValue, nil, reportError("etherHostPort is required and must be specified")
 	}
@@ -1740,7 +1717,7 @@ func (a *EtherApiService) PatchEtherHostPortExecute(r ApiPatchEtherHostPortReque
 	}
 	// body params
 	localVarPostBody = r.etherHostPort
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1750,15 +1727,15 @@ func (a *EtherApiService) PatchEtherHostPortExecute(r ApiPatchEtherHostPortReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1814,7 +1791,7 @@ func (a *EtherApiService) PatchEtherHostPortExecute(r ApiPatchEtherHostPortReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1825,7 +1802,7 @@ func (a *EtherApiService) PatchEtherHostPortExecute(r ApiPatchEtherHostPortReque
 }
 
 type ApiPatchEtherNetworkPortRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *EtherApiService
 	moid             string
 	etherNetworkPort *EtherNetworkPort
@@ -1844,18 +1821,18 @@ func (r ApiPatchEtherNetworkPortRequest) IfMatch(ifMatch string) ApiPatchEtherNe
 	return r
 }
 
-func (r ApiPatchEtherNetworkPortRequest) Execute() (EtherNetworkPort, *_nethttp.Response, error) {
+func (r ApiPatchEtherNetworkPortRequest) Execute() (*EtherNetworkPort, *http.Response, error) {
 	return r.ApiService.PatchEtherNetworkPortExecute(r)
 }
 
 /*
 PatchEtherNetworkPort Update a 'ether.NetworkPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchEtherNetworkPortRequest
 */
-func (a *EtherApiService) PatchEtherNetworkPort(ctx _context.Context, moid string) ApiPatchEtherNetworkPortRequest {
+func (a *EtherApiService) PatchEtherNetworkPort(ctx context.Context, moid string) ApiPatchEtherNetworkPortRequest {
 	return ApiPatchEtherNetworkPortRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1865,27 +1842,25 @@ func (a *EtherApiService) PatchEtherNetworkPort(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return EtherNetworkPort
-func (a *EtherApiService) PatchEtherNetworkPortExecute(r ApiPatchEtherNetworkPortRequest) (EtherNetworkPort, *_nethttp.Response, error) {
+func (a *EtherApiService) PatchEtherNetworkPortExecute(r ApiPatchEtherNetworkPortRequest) (*EtherNetworkPort, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherNetworkPort
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherNetworkPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.PatchEtherNetworkPort")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/NetworkPorts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.etherNetworkPort == nil {
 		return localVarReturnValue, nil, reportError("etherNetworkPort is required and must be specified")
 	}
@@ -1912,7 +1887,7 @@ func (a *EtherApiService) PatchEtherNetworkPortExecute(r ApiPatchEtherNetworkPor
 	}
 	// body params
 	localVarPostBody = r.etherNetworkPort
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1922,15 +1897,15 @@ func (a *EtherApiService) PatchEtherNetworkPortExecute(r ApiPatchEtherNetworkPor
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1986,7 +1961,7 @@ func (a *EtherApiService) PatchEtherNetworkPortExecute(r ApiPatchEtherNetworkPor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1997,7 +1972,7 @@ func (a *EtherApiService) PatchEtherNetworkPortExecute(r ApiPatchEtherNetworkPor
 }
 
 type ApiPatchEtherPhysicalPortRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *EtherApiService
 	moid              string
 	etherPhysicalPort *EtherPhysicalPort
@@ -2016,18 +1991,18 @@ func (r ApiPatchEtherPhysicalPortRequest) IfMatch(ifMatch string) ApiPatchEtherP
 	return r
 }
 
-func (r ApiPatchEtherPhysicalPortRequest) Execute() (EtherPhysicalPort, *_nethttp.Response, error) {
+func (r ApiPatchEtherPhysicalPortRequest) Execute() (*EtherPhysicalPort, *http.Response, error) {
 	return r.ApiService.PatchEtherPhysicalPortExecute(r)
 }
 
 /*
 PatchEtherPhysicalPort Update a 'ether.PhysicalPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchEtherPhysicalPortRequest
 */
-func (a *EtherApiService) PatchEtherPhysicalPort(ctx _context.Context, moid string) ApiPatchEtherPhysicalPortRequest {
+func (a *EtherApiService) PatchEtherPhysicalPort(ctx context.Context, moid string) ApiPatchEtherPhysicalPortRequest {
 	return ApiPatchEtherPhysicalPortRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2037,27 +2012,25 @@ func (a *EtherApiService) PatchEtherPhysicalPort(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return EtherPhysicalPort
-func (a *EtherApiService) PatchEtherPhysicalPortExecute(r ApiPatchEtherPhysicalPortRequest) (EtherPhysicalPort, *_nethttp.Response, error) {
+func (a *EtherApiService) PatchEtherPhysicalPortExecute(r ApiPatchEtherPhysicalPortRequest) (*EtherPhysicalPort, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherPhysicalPort
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherPhysicalPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.PatchEtherPhysicalPort")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/PhysicalPorts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.etherPhysicalPort == nil {
 		return localVarReturnValue, nil, reportError("etherPhysicalPort is required and must be specified")
 	}
@@ -2084,7 +2057,7 @@ func (a *EtherApiService) PatchEtherPhysicalPortExecute(r ApiPatchEtherPhysicalP
 	}
 	// body params
 	localVarPostBody = r.etherPhysicalPort
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2094,15 +2067,15 @@ func (a *EtherApiService) PatchEtherPhysicalPortExecute(r ApiPatchEtherPhysicalP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2158,7 +2131,7 @@ func (a *EtherApiService) PatchEtherPhysicalPortExecute(r ApiPatchEtherPhysicalP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2169,7 +2142,7 @@ func (a *EtherApiService) PatchEtherPhysicalPortExecute(r ApiPatchEtherPhysicalP
 }
 
 type ApiUpdateEtherHostPortRequest struct {
-	ctx           _context.Context
+	ctx           context.Context
 	ApiService    *EtherApiService
 	moid          string
 	etherHostPort *EtherHostPort
@@ -2188,18 +2161,18 @@ func (r ApiUpdateEtherHostPortRequest) IfMatch(ifMatch string) ApiUpdateEtherHos
 	return r
 }
 
-func (r ApiUpdateEtherHostPortRequest) Execute() (EtherHostPort, *_nethttp.Response, error) {
+func (r ApiUpdateEtherHostPortRequest) Execute() (*EtherHostPort, *http.Response, error) {
 	return r.ApiService.UpdateEtherHostPortExecute(r)
 }
 
 /*
 UpdateEtherHostPort Update a 'ether.HostPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateEtherHostPortRequest
 */
-func (a *EtherApiService) UpdateEtherHostPort(ctx _context.Context, moid string) ApiUpdateEtherHostPortRequest {
+func (a *EtherApiService) UpdateEtherHostPort(ctx context.Context, moid string) ApiUpdateEtherHostPortRequest {
 	return ApiUpdateEtherHostPortRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2209,27 +2182,25 @@ func (a *EtherApiService) UpdateEtherHostPort(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return EtherHostPort
-func (a *EtherApiService) UpdateEtherHostPortExecute(r ApiUpdateEtherHostPortRequest) (EtherHostPort, *_nethttp.Response, error) {
+func (a *EtherApiService) UpdateEtherHostPortExecute(r ApiUpdateEtherHostPortRequest) (*EtherHostPort, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherHostPort
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherHostPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.UpdateEtherHostPort")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/HostPorts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.etherHostPort == nil {
 		return localVarReturnValue, nil, reportError("etherHostPort is required and must be specified")
 	}
@@ -2256,7 +2227,7 @@ func (a *EtherApiService) UpdateEtherHostPortExecute(r ApiUpdateEtherHostPortReq
 	}
 	// body params
 	localVarPostBody = r.etherHostPort
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2266,15 +2237,15 @@ func (a *EtherApiService) UpdateEtherHostPortExecute(r ApiUpdateEtherHostPortReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2330,7 +2301,7 @@ func (a *EtherApiService) UpdateEtherHostPortExecute(r ApiUpdateEtherHostPortReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2341,7 +2312,7 @@ func (a *EtherApiService) UpdateEtherHostPortExecute(r ApiUpdateEtherHostPortReq
 }
 
 type ApiUpdateEtherNetworkPortRequest struct {
-	ctx              _context.Context
+	ctx              context.Context
 	ApiService       *EtherApiService
 	moid             string
 	etherNetworkPort *EtherNetworkPort
@@ -2360,18 +2331,18 @@ func (r ApiUpdateEtherNetworkPortRequest) IfMatch(ifMatch string) ApiUpdateEther
 	return r
 }
 
-func (r ApiUpdateEtherNetworkPortRequest) Execute() (EtherNetworkPort, *_nethttp.Response, error) {
+func (r ApiUpdateEtherNetworkPortRequest) Execute() (*EtherNetworkPort, *http.Response, error) {
 	return r.ApiService.UpdateEtherNetworkPortExecute(r)
 }
 
 /*
 UpdateEtherNetworkPort Update a 'ether.NetworkPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateEtherNetworkPortRequest
 */
-func (a *EtherApiService) UpdateEtherNetworkPort(ctx _context.Context, moid string) ApiUpdateEtherNetworkPortRequest {
+func (a *EtherApiService) UpdateEtherNetworkPort(ctx context.Context, moid string) ApiUpdateEtherNetworkPortRequest {
 	return ApiUpdateEtherNetworkPortRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2381,27 +2352,25 @@ func (a *EtherApiService) UpdateEtherNetworkPort(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return EtherNetworkPort
-func (a *EtherApiService) UpdateEtherNetworkPortExecute(r ApiUpdateEtherNetworkPortRequest) (EtherNetworkPort, *_nethttp.Response, error) {
+func (a *EtherApiService) UpdateEtherNetworkPortExecute(r ApiUpdateEtherNetworkPortRequest) (*EtherNetworkPort, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherNetworkPort
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherNetworkPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.UpdateEtherNetworkPort")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/NetworkPorts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.etherNetworkPort == nil {
 		return localVarReturnValue, nil, reportError("etherNetworkPort is required and must be specified")
 	}
@@ -2428,7 +2397,7 @@ func (a *EtherApiService) UpdateEtherNetworkPortExecute(r ApiUpdateEtherNetworkP
 	}
 	// body params
 	localVarPostBody = r.etherNetworkPort
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2438,15 +2407,15 @@ func (a *EtherApiService) UpdateEtherNetworkPortExecute(r ApiUpdateEtherNetworkP
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2502,7 +2471,7 @@ func (a *EtherApiService) UpdateEtherNetworkPortExecute(r ApiUpdateEtherNetworkP
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2513,7 +2482,7 @@ func (a *EtherApiService) UpdateEtherNetworkPortExecute(r ApiUpdateEtherNetworkP
 }
 
 type ApiUpdateEtherPhysicalPortRequest struct {
-	ctx               _context.Context
+	ctx               context.Context
 	ApiService        *EtherApiService
 	moid              string
 	etherPhysicalPort *EtherPhysicalPort
@@ -2532,18 +2501,18 @@ func (r ApiUpdateEtherPhysicalPortRequest) IfMatch(ifMatch string) ApiUpdateEthe
 	return r
 }
 
-func (r ApiUpdateEtherPhysicalPortRequest) Execute() (EtherPhysicalPort, *_nethttp.Response, error) {
+func (r ApiUpdateEtherPhysicalPortRequest) Execute() (*EtherPhysicalPort, *http.Response, error) {
 	return r.ApiService.UpdateEtherPhysicalPortExecute(r)
 }
 
 /*
 UpdateEtherPhysicalPort Update a 'ether.PhysicalPort' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateEtherPhysicalPortRequest
 */
-func (a *EtherApiService) UpdateEtherPhysicalPort(ctx _context.Context, moid string) ApiUpdateEtherPhysicalPortRequest {
+func (a *EtherApiService) UpdateEtherPhysicalPort(ctx context.Context, moid string) ApiUpdateEtherPhysicalPortRequest {
 	return ApiUpdateEtherPhysicalPortRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2553,27 +2522,25 @@ func (a *EtherApiService) UpdateEtherPhysicalPort(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return EtherPhysicalPort
-func (a *EtherApiService) UpdateEtherPhysicalPortExecute(r ApiUpdateEtherPhysicalPortRequest) (EtherPhysicalPort, *_nethttp.Response, error) {
+func (a *EtherApiService) UpdateEtherPhysicalPortExecute(r ApiUpdateEtherPhysicalPortRequest) (*EtherPhysicalPort, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  EtherPhysicalPort
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EtherPhysicalPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EtherApiService.UpdateEtherPhysicalPort")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ether/PhysicalPorts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.etherPhysicalPort == nil {
 		return localVarReturnValue, nil, reportError("etherPhysicalPort is required and must be specified")
 	}
@@ -2600,7 +2567,7 @@ func (a *EtherApiService) UpdateEtherPhysicalPortExecute(r ApiUpdateEtherPhysica
 	}
 	// body params
 	localVarPostBody = r.etherPhysicalPort
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2610,15 +2577,15 @@ func (a *EtherApiService) UpdateEtherPhysicalPortExecute(r ApiUpdateEtherPhysica
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2674,7 +2641,7 @@ func (a *EtherApiService) UpdateEtherPhysicalPortExecute(r ApiUpdateEtherPhysica
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

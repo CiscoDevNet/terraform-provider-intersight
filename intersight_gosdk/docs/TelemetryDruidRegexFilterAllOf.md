@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Dimension** | **string** | null | 
-**Pattern** | **string** | null | 
+**Dimension** | **string** |  | 
+**Pattern** | **string** |  | 
 
 ## Methods
 

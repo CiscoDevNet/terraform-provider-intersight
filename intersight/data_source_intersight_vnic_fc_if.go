@@ -283,6 +283,11 @@ func dataSourceVnicFcIf() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"pin_group_name": {
+			Description: "Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"placement": {
 			Description: "Placement Settings for the virtual interface.",
 			Type:        schema.TypeList,
@@ -967,6 +972,11 @@ func dataSourceVnicFcIf() *schema.Resource {
 			Type:        schema.TypeBool,
 			Optional:    true,
 		},
+		"pin_group_name": {
+			Description: "Pingroup name associated to vfc for static pinning. SCP deploy will resolve pingroup name and fetches the correspoding uplink port/port channel to pin the vfc traffic.",
+			Type:        schema.TypeString,
+			Optional:    true,
+		},
 		"placement": {
 			Description: "Placement Settings for the virtual interface.",
 			Type:        schema.TypeList,
@@ -1395,7 +1405,6 @@ func dataSourceVnicFcIf() *schema.Resource {
 
 func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VnicFcIf{}
@@ -1719,6 +1728,11 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 	if v, ok := d.GetOkExists("persistent_bindings"); ok {
 		x := (v.(bool))
 		o.SetPersistentBindings(x)
+	}
+
+	if v, ok := d.GetOk("pin_group_name"); ok {
+		x := (v.(string))
+		o.SetPinGroupName(x)
 	}
 
 	if v, ok := d.GetOk("placement"); ok {
@@ -2176,7 +2190,7 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of VnicFcIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of VnicFcIf: %s", responseErr.Error())
@@ -2193,7 +2207,7 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching VnicFcIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching VnicFcIf: %s", responseErr.Error())
@@ -2230,6 +2244,7 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
 				temp["persistent_bindings"] = (s.GetPersistentBindings())
+				temp["pin_group_name"] = (s.GetPinGroupName())
 
 				temp["placement"] = flattenMapVnicPlacementSettings(s.GetPlacement(), d)
 

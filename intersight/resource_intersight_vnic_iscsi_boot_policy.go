@@ -778,7 +778,6 @@ func resourceVnicIscsiBootPolicy() *schema.Resource {
 
 func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewVnicIscsiBootPolicyWithDefaults()
@@ -1227,7 +1226,7 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating VnicIscsiBootPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating VnicIscsiBootPolicy: %s", responseErr.Error())
@@ -1239,7 +1238,6 @@ func resourceVnicIscsiBootPolicyCreate(c context.Context, d *schema.ResourceData
 
 func resourceVnicIscsiBootPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.VnicApi.GetVnicIscsiBootPolicyByMoid(conn.ctx, d.Id())
@@ -1252,7 +1250,7 @@ func resourceVnicIscsiBootPolicyRead(c context.Context, d *schema.ResourceData, 
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching VnicIscsiBootPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching VnicIscsiBootPolicy: %s", responseErr.Error())
@@ -1381,7 +1379,6 @@ func resourceVnicIscsiBootPolicyRead(c context.Context, d *schema.ResourceData, 
 
 func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.VnicIscsiBootPolicy{}
@@ -1845,7 +1842,7 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating VnicIscsiBootPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating VnicIscsiBootPolicy: %s", responseErr.Error())
@@ -1857,7 +1854,6 @@ func resourceVnicIscsiBootPolicyUpdate(c context.Context, d *schema.ResourceData
 
 func resourceVnicIscsiBootPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.VnicApi.DeleteVnicIscsiBootPolicy(conn.ctx, d.Id())
@@ -1869,7 +1865,7 @@ func resourceVnicIscsiBootPolicyDelete(c context.Context, d *schema.ResourceData
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting VnicIscsiBootPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting VnicIscsiBootPolicy object: %s", deleteErr.Error())

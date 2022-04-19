@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // NiatelemetryApiService NiatelemetryApi service
 type NiatelemetryApiService service
 
 type ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest) Execute() (NiatelemetryAaaLdapProviderDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest) Execute() (*NiatelemetryAaaLdapProviderDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryAaaLdapProviderDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryAaaLdapProviderDetailsByMoid Read a 'niatelemetry.AaaLdapProviderDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest {
 	return ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -55,27 +50,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoid(ctx
 
 // Execute executes the request
 //  @return NiatelemetryAaaLdapProviderDetails
-func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoidExecute(r ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest) (NiatelemetryAaaLdapProviderDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoidExecute(r ApiGetNiatelemetryAaaLdapProviderDetailsByMoidRequest) (*NiatelemetryAaaLdapProviderDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryAaaLdapProviderDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryAaaLdapProviderDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryAaaLdapProviderDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/AaaLdapProviderDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -94,7 +87,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoidExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -104,15 +97,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoidExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,7 +161,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoidExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -179,7 +172,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsByMoidExec
 }
 
 type ApiGetNiatelemetryAaaLdapProviderDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -260,17 +253,17 @@ func (r ApiGetNiatelemetryAaaLdapProviderDetailsListRequest) Tags(tags string) A
 	return r
 }
 
-func (r ApiGetNiatelemetryAaaLdapProviderDetailsListRequest) Execute() (NiatelemetryAaaLdapProviderDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryAaaLdapProviderDetailsListRequest) Execute() (*NiatelemetryAaaLdapProviderDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryAaaLdapProviderDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryAaaLdapProviderDetailsList Read a 'niatelemetry.AaaLdapProviderDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryAaaLdapProviderDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsList(ctx _context.Context) ApiGetNiatelemetryAaaLdapProviderDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsList(ctx context.Context) ApiGetNiatelemetryAaaLdapProviderDetailsListRequest {
 	return ApiGetNiatelemetryAaaLdapProviderDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -279,26 +272,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsList(ctx _
 
 // Execute executes the request
 //  @return NiatelemetryAaaLdapProviderDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsListExecute(r ApiGetNiatelemetryAaaLdapProviderDetailsListRequest) (NiatelemetryAaaLdapProviderDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsListExecute(r ApiGetNiatelemetryAaaLdapProviderDetailsListRequest) (*NiatelemetryAaaLdapProviderDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryAaaLdapProviderDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryAaaLdapProviderDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryAaaLdapProviderDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/AaaLdapProviderDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -350,7 +341,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsListExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -360,15 +351,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsListExecut
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -424,7 +415,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsListExecut
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -435,23 +426,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaLdapProviderDetailsListExecut
 }
 
 type ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest) Execute() (NiatelemetryAaaRadiusProviderDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest) Execute() (*NiatelemetryAaaRadiusProviderDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryAaaRadiusProviderDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryAaaRadiusProviderDetailsByMoid Read a 'niatelemetry.AaaRadiusProviderDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest {
 	return ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -461,27 +452,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoid(c
 
 // Execute executes the request
 //  @return NiatelemetryAaaRadiusProviderDetails
-func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoidExecute(r ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest) (NiatelemetryAaaRadiusProviderDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoidExecute(r ApiGetNiatelemetryAaaRadiusProviderDetailsByMoidRequest) (*NiatelemetryAaaRadiusProviderDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryAaaRadiusProviderDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryAaaRadiusProviderDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryAaaRadiusProviderDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/AaaRadiusProviderDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -500,7 +489,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoidEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -510,15 +499,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoidEx
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -574,7 +563,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoidEx
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -585,7 +574,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsByMoidEx
 }
 
 type ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -666,17 +655,17 @@ func (r ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest) Tags(tags string)
 	return r
 }
 
-func (r ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest) Execute() (NiatelemetryAaaRadiusProviderDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest) Execute() (*NiatelemetryAaaRadiusProviderDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryAaaRadiusProviderDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryAaaRadiusProviderDetailsList Read a 'niatelemetry.AaaRadiusProviderDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsList(ctx _context.Context) ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsList(ctx context.Context) ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest {
 	return ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -685,26 +674,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsList(ctx
 
 // Execute executes the request
 //  @return NiatelemetryAaaRadiusProviderDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsListExecute(r ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest) (NiatelemetryAaaRadiusProviderDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsListExecute(r ApiGetNiatelemetryAaaRadiusProviderDetailsListRequest) (*NiatelemetryAaaRadiusProviderDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryAaaRadiusProviderDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryAaaRadiusProviderDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryAaaRadiusProviderDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/AaaRadiusProviderDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -756,7 +743,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsListExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -766,15 +753,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsListExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -830,7 +817,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsListExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -841,23 +828,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaRadiusProviderDetailsListExec
 }
 
 type ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest) Execute() (NiatelemetryAaaTacacsProviderDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest) Execute() (*NiatelemetryAaaTacacsProviderDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryAaaTacacsProviderDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryAaaTacacsProviderDetailsByMoid Read a 'niatelemetry.AaaTacacsProviderDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest {
 	return ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -867,27 +854,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoid(c
 
 // Execute executes the request
 //  @return NiatelemetryAaaTacacsProviderDetails
-func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoidExecute(r ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest) (NiatelemetryAaaTacacsProviderDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoidExecute(r ApiGetNiatelemetryAaaTacacsProviderDetailsByMoidRequest) (*NiatelemetryAaaTacacsProviderDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryAaaTacacsProviderDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryAaaTacacsProviderDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryAaaTacacsProviderDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/AaaTacacsProviderDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -906,7 +891,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoidEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -916,15 +901,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoidEx
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -980,7 +965,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoidEx
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -991,7 +976,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsByMoidEx
 }
 
 type ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -1072,17 +1057,17 @@ func (r ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest) Tags(tags string)
 	return r
 }
 
-func (r ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest) Execute() (NiatelemetryAaaTacacsProviderDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest) Execute() (*NiatelemetryAaaTacacsProviderDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryAaaTacacsProviderDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryAaaTacacsProviderDetailsList Read a 'niatelemetry.AaaTacacsProviderDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsList(ctx _context.Context) ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsList(ctx context.Context) ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest {
 	return ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1091,26 +1076,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsList(ctx
 
 // Execute executes the request
 //  @return NiatelemetryAaaTacacsProviderDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsListExecute(r ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest) (NiatelemetryAaaTacacsProviderDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsListExecute(r ApiGetNiatelemetryAaaTacacsProviderDetailsListRequest) (*NiatelemetryAaaTacacsProviderDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryAaaTacacsProviderDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryAaaTacacsProviderDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryAaaTacacsProviderDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/AaaTacacsProviderDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1162,7 +1145,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsListExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1172,15 +1155,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsListExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1236,7 +1219,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsListExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1247,23 +1230,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryAaaTacacsProviderDetailsListExec
 }
 
 type ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest) Execute() (NiatelemetryApicAppPluginDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest) Execute() (*NiatelemetryApicAppPluginDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicAppPluginDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicAppPluginDetailsByMoid Read a 'niatelemetry.ApicAppPluginDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1273,27 +1256,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoid(ctx _
 
 // Execute executes the request
 //  @return NiatelemetryApicAppPluginDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoidExecute(r ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest) (NiatelemetryApicAppPluginDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoidExecute(r ApiGetNiatelemetryApicAppPluginDetailsByMoidRequest) (*NiatelemetryApicAppPluginDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicAppPluginDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicAppPluginDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicAppPluginDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicAppPluginDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1312,7 +1293,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoidExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1322,15 +1303,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoidExecut
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1386,7 +1367,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoidExecut
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1397,7 +1378,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsByMoidExecut
 }
 
 type ApiGetNiatelemetryApicAppPluginDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -1478,17 +1459,17 @@ func (r ApiGetNiatelemetryApicAppPluginDetailsListRequest) Tags(tags string) Api
 	return r
 }
 
-func (r ApiGetNiatelemetryApicAppPluginDetailsListRequest) Execute() (NiatelemetryApicAppPluginDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicAppPluginDetailsListRequest) Execute() (*NiatelemetryApicAppPluginDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicAppPluginDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicAppPluginDetailsList Read a 'niatelemetry.ApicAppPluginDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicAppPluginDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsList(ctx _context.Context) ApiGetNiatelemetryApicAppPluginDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsList(ctx context.Context) ApiGetNiatelemetryApicAppPluginDetailsListRequest {
 	return ApiGetNiatelemetryApicAppPluginDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1497,26 +1478,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsList(ctx _co
 
 // Execute executes the request
 //  @return NiatelemetryApicAppPluginDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsListExecute(r ApiGetNiatelemetryApicAppPluginDetailsListRequest) (NiatelemetryApicAppPluginDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsListExecute(r ApiGetNiatelemetryApicAppPluginDetailsListRequest) (*NiatelemetryApicAppPluginDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicAppPluginDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicAppPluginDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicAppPluginDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicAppPluginDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1568,7 +1547,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsListExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1578,15 +1557,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsListExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1642,7 +1621,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsListExecute(
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1653,23 +1632,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicAppPluginDetailsListExecute(
 }
 
 type ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest) Execute() (NiatelemetryApicCoreFileDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest) Execute() (*NiatelemetryApicCoreFileDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicCoreFileDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicCoreFileDetailsByMoid Read a 'niatelemetry.ApicCoreFileDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1679,27 +1658,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoid(ctx _c
 
 // Execute executes the request
 //  @return NiatelemetryApicCoreFileDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoidExecute(r ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest) (NiatelemetryApicCoreFileDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoidExecute(r ApiGetNiatelemetryApicCoreFileDetailsByMoidRequest) (*NiatelemetryApicCoreFileDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicCoreFileDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicCoreFileDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicCoreFileDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicCoreFileDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1718,7 +1695,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoidExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1728,15 +1705,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoidExecute
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1792,7 +1769,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoidExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1803,7 +1780,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsByMoidExecute
 }
 
 type ApiGetNiatelemetryApicCoreFileDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -1884,17 +1861,17 @@ func (r ApiGetNiatelemetryApicCoreFileDetailsListRequest) Tags(tags string) ApiG
 	return r
 }
 
-func (r ApiGetNiatelemetryApicCoreFileDetailsListRequest) Execute() (NiatelemetryApicCoreFileDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicCoreFileDetailsListRequest) Execute() (*NiatelemetryApicCoreFileDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicCoreFileDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicCoreFileDetailsList Read a 'niatelemetry.ApicCoreFileDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicCoreFileDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsList(ctx _context.Context) ApiGetNiatelemetryApicCoreFileDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsList(ctx context.Context) ApiGetNiatelemetryApicCoreFileDetailsListRequest {
 	return ApiGetNiatelemetryApicCoreFileDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1903,26 +1880,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsList(ctx _con
 
 // Execute executes the request
 //  @return NiatelemetryApicCoreFileDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsListExecute(r ApiGetNiatelemetryApicCoreFileDetailsListRequest) (NiatelemetryApicCoreFileDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsListExecute(r ApiGetNiatelemetryApicCoreFileDetailsListRequest) (*NiatelemetryApicCoreFileDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicCoreFileDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicCoreFileDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicCoreFileDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicCoreFileDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1974,7 +1949,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsListExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1984,15 +1959,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsListExecute(r
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2048,7 +2023,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsListExecute(r
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2059,23 +2034,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicCoreFileDetailsListExecute(r
 }
 
 type ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest) Execute() (NiatelemetryApicDbgexpRsExportDest, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest) Execute() (*NiatelemetryApicDbgexpRsExportDest, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicDbgexpRsExportDestByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicDbgexpRsExportDestByMoid Read a 'niatelemetry.ApicDbgexpRsExportDest' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest {
 	return ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2085,27 +2060,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoid(ctx
 
 // Execute executes the request
 //  @return NiatelemetryApicDbgexpRsExportDest
-func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoidExecute(r ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest) (NiatelemetryApicDbgexpRsExportDest, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoidExecute(r ApiGetNiatelemetryApicDbgexpRsExportDestByMoidRequest) (*NiatelemetryApicDbgexpRsExportDest, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicDbgexpRsExportDest
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicDbgexpRsExportDest
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicDbgexpRsExportDestByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicDbgexpRsExportDests/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2124,7 +2097,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoidExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2134,15 +2107,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoidExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2198,7 +2171,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoidExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2209,7 +2182,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestByMoidExec
 }
 
 type ApiGetNiatelemetryApicDbgexpRsExportDestListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -2290,17 +2263,17 @@ func (r ApiGetNiatelemetryApicDbgexpRsExportDestListRequest) Tags(tags string) A
 	return r
 }
 
-func (r ApiGetNiatelemetryApicDbgexpRsExportDestListRequest) Execute() (NiatelemetryApicDbgexpRsExportDestResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicDbgexpRsExportDestListRequest) Execute() (*NiatelemetryApicDbgexpRsExportDestResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicDbgexpRsExportDestListExecute(r)
 }
 
 /*
 GetNiatelemetryApicDbgexpRsExportDestList Read a 'niatelemetry.ApicDbgexpRsExportDest' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicDbgexpRsExportDestListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestList(ctx _context.Context) ApiGetNiatelemetryApicDbgexpRsExportDestListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestList(ctx context.Context) ApiGetNiatelemetryApicDbgexpRsExportDestListRequest {
 	return ApiGetNiatelemetryApicDbgexpRsExportDestListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2309,26 +2282,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestList(ctx _
 
 // Execute executes the request
 //  @return NiatelemetryApicDbgexpRsExportDestResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestListExecute(r ApiGetNiatelemetryApicDbgexpRsExportDestListRequest) (NiatelemetryApicDbgexpRsExportDestResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestListExecute(r ApiGetNiatelemetryApicDbgexpRsExportDestListRequest) (*NiatelemetryApicDbgexpRsExportDestResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicDbgexpRsExportDestResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicDbgexpRsExportDestResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicDbgexpRsExportDestList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicDbgexpRsExportDests"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2380,7 +2351,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestListExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2390,15 +2361,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestListExecut
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2454,7 +2425,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestListExecut
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2465,23 +2436,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsExportDestListExecut
 }
 
 type ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest) Execute() (NiatelemetryApicDbgexpRsTsScheduler, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest) Execute() (*NiatelemetryApicDbgexpRsTsScheduler, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicDbgexpRsTsSchedulerByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicDbgexpRsTsSchedulerByMoid Read a 'niatelemetry.ApicDbgexpRsTsScheduler' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest {
 	return ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2491,27 +2462,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoid(ct
 
 // Execute executes the request
 //  @return NiatelemetryApicDbgexpRsTsScheduler
-func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoidExecute(r ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest) (NiatelemetryApicDbgexpRsTsScheduler, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoidExecute(r ApiGetNiatelemetryApicDbgexpRsTsSchedulerByMoidRequest) (*NiatelemetryApicDbgexpRsTsScheduler, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicDbgexpRsTsScheduler
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicDbgexpRsTsScheduler
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicDbgexpRsTsSchedulerByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicDbgexpRsTsSchedulers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2530,7 +2499,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoidExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2540,15 +2509,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoidExe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2604,7 +2573,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoidExe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2615,7 +2584,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerByMoidExe
 }
 
 type ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -2696,17 +2665,17 @@ func (r ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest) Tags(tags string) 
 	return r
 }
 
-func (r ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest) Execute() (NiatelemetryApicDbgexpRsTsSchedulerResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest) Execute() (*NiatelemetryApicDbgexpRsTsSchedulerResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicDbgexpRsTsSchedulerListExecute(r)
 }
 
 /*
 GetNiatelemetryApicDbgexpRsTsSchedulerList Read a 'niatelemetry.ApicDbgexpRsTsScheduler' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerList(ctx _context.Context) ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerList(ctx context.Context) ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest {
 	return ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2715,26 +2684,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerList(ctx 
 
 // Execute executes the request
 //  @return NiatelemetryApicDbgexpRsTsSchedulerResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerListExecute(r ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest) (NiatelemetryApicDbgexpRsTsSchedulerResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerListExecute(r ApiGetNiatelemetryApicDbgexpRsTsSchedulerListRequest) (*NiatelemetryApicDbgexpRsTsSchedulerResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicDbgexpRsTsSchedulerResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicDbgexpRsTsSchedulerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicDbgexpRsTsSchedulerList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicDbgexpRsTsSchedulers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2786,7 +2753,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerListExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2796,15 +2763,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerListExecu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2860,7 +2827,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerListExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2871,23 +2838,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicDbgexpRsTsSchedulerListExecu
 }
 
 type ApiGetNiatelemetryApicFanDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicFanDetailsByMoidRequest) Execute() (NiatelemetryApicFanDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicFanDetailsByMoidRequest) Execute() (*NiatelemetryApicFanDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicFanDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicFanDetailsByMoid Read a 'niatelemetry.ApicFanDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicFanDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicFanDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicFanDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicFanDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2897,27 +2864,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoid(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryApicFanDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoidExecute(r ApiGetNiatelemetryApicFanDetailsByMoidRequest) (NiatelemetryApicFanDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoidExecute(r ApiGetNiatelemetryApicFanDetailsByMoidRequest) (*NiatelemetryApicFanDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicFanDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicFanDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicFanDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicFanDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2936,7 +2901,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoidExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2946,15 +2911,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3010,7 +2975,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoidExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3021,7 +2986,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsByMoidExecute(r Ap
 }
 
 type ApiGetNiatelemetryApicFanDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -3102,17 +3067,17 @@ func (r ApiGetNiatelemetryApicFanDetailsListRequest) Tags(tags string) ApiGetNia
 	return r
 }
 
-func (r ApiGetNiatelemetryApicFanDetailsListRequest) Execute() (NiatelemetryApicFanDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicFanDetailsListRequest) Execute() (*NiatelemetryApicFanDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicFanDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicFanDetailsList Read a 'niatelemetry.ApicFanDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicFanDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsList(ctx _context.Context) ApiGetNiatelemetryApicFanDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsList(ctx context.Context) ApiGetNiatelemetryApicFanDetailsListRequest {
 	return ApiGetNiatelemetryApicFanDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3121,26 +3086,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsList(ctx _context.
 
 // Execute executes the request
 //  @return NiatelemetryApicFanDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsListExecute(r ApiGetNiatelemetryApicFanDetailsListRequest) (NiatelemetryApicFanDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsListExecute(r ApiGetNiatelemetryApicFanDetailsListRequest) (*NiatelemetryApicFanDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicFanDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicFanDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicFanDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicFanDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3192,7 +3155,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsListExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3202,15 +3165,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3266,7 +3229,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsListExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3277,23 +3240,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFanDetailsListExecute(r ApiG
 }
 
 type ApiGetNiatelemetryApicFexDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicFexDetailsByMoidRequest) Execute() (NiatelemetryApicFexDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicFexDetailsByMoidRequest) Execute() (*NiatelemetryApicFexDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicFexDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicFexDetailsByMoid Read a 'niatelemetry.ApicFexDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicFexDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicFexDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicFexDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicFexDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3303,27 +3266,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoid(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryApicFexDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoidExecute(r ApiGetNiatelemetryApicFexDetailsByMoidRequest) (NiatelemetryApicFexDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoidExecute(r ApiGetNiatelemetryApicFexDetailsByMoidRequest) (*NiatelemetryApicFexDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicFexDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicFexDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicFexDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicFexDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3342,7 +3303,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoidExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3352,15 +3313,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3416,7 +3377,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoidExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3427,7 +3388,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsByMoidExecute(r Ap
 }
 
 type ApiGetNiatelemetryApicFexDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -3508,17 +3469,17 @@ func (r ApiGetNiatelemetryApicFexDetailsListRequest) Tags(tags string) ApiGetNia
 	return r
 }
 
-func (r ApiGetNiatelemetryApicFexDetailsListRequest) Execute() (NiatelemetryApicFexDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicFexDetailsListRequest) Execute() (*NiatelemetryApicFexDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicFexDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicFexDetailsList Read a 'niatelemetry.ApicFexDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicFexDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsList(ctx _context.Context) ApiGetNiatelemetryApicFexDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsList(ctx context.Context) ApiGetNiatelemetryApicFexDetailsListRequest {
 	return ApiGetNiatelemetryApicFexDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3527,26 +3488,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsList(ctx _context.
 
 // Execute executes the request
 //  @return NiatelemetryApicFexDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsListExecute(r ApiGetNiatelemetryApicFexDetailsListRequest) (NiatelemetryApicFexDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsListExecute(r ApiGetNiatelemetryApicFexDetailsListRequest) (*NiatelemetryApicFexDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicFexDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicFexDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicFexDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicFexDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3598,7 +3557,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsListExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3608,15 +3567,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3672,7 +3631,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsListExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3683,23 +3642,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFexDetailsListExecute(r ApiG
 }
 
 type ApiGetNiatelemetryApicFlashDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicFlashDetailsByMoidRequest) Execute() (NiatelemetryApicFlashDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicFlashDetailsByMoidRequest) Execute() (*NiatelemetryApicFlashDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicFlashDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicFlashDetailsByMoid Read a 'niatelemetry.ApicFlashDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicFlashDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicFlashDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicFlashDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicFlashDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3709,27 +3668,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoid(ctx _cont
 
 // Execute executes the request
 //  @return NiatelemetryApicFlashDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoidExecute(r ApiGetNiatelemetryApicFlashDetailsByMoidRequest) (NiatelemetryApicFlashDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoidExecute(r ApiGetNiatelemetryApicFlashDetailsByMoidRequest) (*NiatelemetryApicFlashDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicFlashDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicFlashDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicFlashDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicFlashDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3748,7 +3705,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoidExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3758,15 +3715,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3822,7 +3779,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoidExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3833,7 +3790,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsByMoidExecute(r 
 }
 
 type ApiGetNiatelemetryApicFlashDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -3914,17 +3871,17 @@ func (r ApiGetNiatelemetryApicFlashDetailsListRequest) Tags(tags string) ApiGetN
 	return r
 }
 
-func (r ApiGetNiatelemetryApicFlashDetailsListRequest) Execute() (NiatelemetryApicFlashDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicFlashDetailsListRequest) Execute() (*NiatelemetryApicFlashDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicFlashDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicFlashDetailsList Read a 'niatelemetry.ApicFlashDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicFlashDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsList(ctx _context.Context) ApiGetNiatelemetryApicFlashDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsList(ctx context.Context) ApiGetNiatelemetryApicFlashDetailsListRequest {
 	return ApiGetNiatelemetryApicFlashDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3933,26 +3890,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsList(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryApicFlashDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsListExecute(r ApiGetNiatelemetryApicFlashDetailsListRequest) (NiatelemetryApicFlashDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsListExecute(r ApiGetNiatelemetryApicFlashDetailsListRequest) (*NiatelemetryApicFlashDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicFlashDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicFlashDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicFlashDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicFlashDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -4004,7 +3959,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsListExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4014,15 +3969,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4078,7 +4033,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsListExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4089,23 +4044,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicFlashDetailsListExecute(r Ap
 }
 
 type ApiGetNiatelemetryApicNtpAuthByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicNtpAuthByMoidRequest) Execute() (NiatelemetryApicNtpAuth, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicNtpAuthByMoidRequest) Execute() (*NiatelemetryApicNtpAuth, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicNtpAuthByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicNtpAuthByMoid Read a 'niatelemetry.ApicNtpAuth' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicNtpAuthByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicNtpAuthByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicNtpAuthByMoidRequest {
 	return ApiGetNiatelemetryApicNtpAuthByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4115,27 +4070,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoid(ctx _context.C
 
 // Execute executes the request
 //  @return NiatelemetryApicNtpAuth
-func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoidExecute(r ApiGetNiatelemetryApicNtpAuthByMoidRequest) (NiatelemetryApicNtpAuth, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoidExecute(r ApiGetNiatelemetryApicNtpAuthByMoidRequest) (*NiatelemetryApicNtpAuth, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicNtpAuth
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicNtpAuth
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicNtpAuthByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicNtpAuths/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4154,7 +4107,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoidExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4164,15 +4117,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4228,7 +4181,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoidExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4239,7 +4192,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthByMoidExecute(r ApiGe
 }
 
 type ApiGetNiatelemetryApicNtpAuthListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -4320,17 +4273,17 @@ func (r ApiGetNiatelemetryApicNtpAuthListRequest) Tags(tags string) ApiGetNiatel
 	return r
 }
 
-func (r ApiGetNiatelemetryApicNtpAuthListRequest) Execute() (NiatelemetryApicNtpAuthResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicNtpAuthListRequest) Execute() (*NiatelemetryApicNtpAuthResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicNtpAuthListExecute(r)
 }
 
 /*
 GetNiatelemetryApicNtpAuthList Read a 'niatelemetry.ApicNtpAuth' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicNtpAuthListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthList(ctx _context.Context) ApiGetNiatelemetryApicNtpAuthListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthList(ctx context.Context) ApiGetNiatelemetryApicNtpAuthListRequest {
 	return ApiGetNiatelemetryApicNtpAuthListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4339,26 +4292,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthList(ctx _context.Con
 
 // Execute executes the request
 //  @return NiatelemetryApicNtpAuthResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthListExecute(r ApiGetNiatelemetryApicNtpAuthListRequest) (NiatelemetryApicNtpAuthResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthListExecute(r ApiGetNiatelemetryApicNtpAuthListRequest) (*NiatelemetryApicNtpAuthResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicNtpAuthResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicNtpAuthResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicNtpAuthList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicNtpAuths"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -4410,7 +4361,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthListExecute(r ApiGetN
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4420,15 +4371,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthListExecute(r ApiGetN
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4484,7 +4435,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthListExecute(r ApiGetN
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4495,23 +4446,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicNtpAuthListExecute(r ApiGetN
 }
 
 type ApiGetNiatelemetryApicPsuDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicPsuDetailsByMoidRequest) Execute() (NiatelemetryApicPsuDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicPsuDetailsByMoidRequest) Execute() (*NiatelemetryApicPsuDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicPsuDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicPsuDetailsByMoid Read a 'niatelemetry.ApicPsuDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicPsuDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicPsuDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicPsuDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicPsuDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4521,27 +4472,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoid(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryApicPsuDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoidExecute(r ApiGetNiatelemetryApicPsuDetailsByMoidRequest) (NiatelemetryApicPsuDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoidExecute(r ApiGetNiatelemetryApicPsuDetailsByMoidRequest) (*NiatelemetryApicPsuDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicPsuDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicPsuDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicPsuDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicPsuDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4560,7 +4509,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoidExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4570,15 +4519,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4634,7 +4583,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoidExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4645,7 +4594,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsByMoidExecute(r Ap
 }
 
 type ApiGetNiatelemetryApicPsuDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -4726,17 +4675,17 @@ func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Tags(tags string) ApiGetNia
 	return r
 }
 
-func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Execute() (NiatelemetryApicPsuDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicPsuDetailsListRequest) Execute() (*NiatelemetryApicPsuDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicPsuDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicPsuDetailsList Read a 'niatelemetry.ApicPsuDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicPsuDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsList(ctx _context.Context) ApiGetNiatelemetryApicPsuDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsList(ctx context.Context) ApiGetNiatelemetryApicPsuDetailsListRequest {
 	return ApiGetNiatelemetryApicPsuDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4745,26 +4694,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsList(ctx _context.
 
 // Execute executes the request
 //  @return NiatelemetryApicPsuDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsListExecute(r ApiGetNiatelemetryApicPsuDetailsListRequest) (NiatelemetryApicPsuDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsListExecute(r ApiGetNiatelemetryApicPsuDetailsListRequest) (*NiatelemetryApicPsuDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicPsuDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicPsuDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicPsuDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicPsuDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -4816,7 +4763,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsListExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4826,15 +4773,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4890,7 +4837,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsListExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4901,23 +4848,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicPsuDetailsListExecute(r ApiG
 }
 
 type ApiGetNiatelemetryApicRealmDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicRealmDetailsByMoidRequest) Execute() (NiatelemetryApicRealmDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicRealmDetailsByMoidRequest) Execute() (*NiatelemetryApicRealmDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicRealmDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicRealmDetailsByMoid Read a 'niatelemetry.ApicRealmDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicRealmDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicRealmDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicRealmDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicRealmDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4927,27 +4874,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoid(ctx _cont
 
 // Execute executes the request
 //  @return NiatelemetryApicRealmDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoidExecute(r ApiGetNiatelemetryApicRealmDetailsByMoidRequest) (NiatelemetryApicRealmDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoidExecute(r ApiGetNiatelemetryApicRealmDetailsByMoidRequest) (*NiatelemetryApicRealmDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicRealmDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicRealmDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicRealmDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicRealmDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4966,7 +4911,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoidExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4976,15 +4921,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5040,7 +4985,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoidExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5051,7 +4996,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsByMoidExecute(r 
 }
 
 type ApiGetNiatelemetryApicRealmDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -5132,17 +5077,17 @@ func (r ApiGetNiatelemetryApicRealmDetailsListRequest) Tags(tags string) ApiGetN
 	return r
 }
 
-func (r ApiGetNiatelemetryApicRealmDetailsListRequest) Execute() (NiatelemetryApicRealmDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicRealmDetailsListRequest) Execute() (*NiatelemetryApicRealmDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicRealmDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicRealmDetailsList Read a 'niatelemetry.ApicRealmDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicRealmDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsList(ctx _context.Context) ApiGetNiatelemetryApicRealmDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsList(ctx context.Context) ApiGetNiatelemetryApicRealmDetailsListRequest {
 	return ApiGetNiatelemetryApicRealmDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5151,26 +5096,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsList(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryApicRealmDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsListExecute(r ApiGetNiatelemetryApicRealmDetailsListRequest) (NiatelemetryApicRealmDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsListExecute(r ApiGetNiatelemetryApicRealmDetailsListRequest) (*NiatelemetryApicRealmDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicRealmDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicRealmDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicRealmDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicRealmDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -5222,7 +5165,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsListExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5232,15 +5175,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5296,7 +5239,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsListExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5307,23 +5250,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicRealmDetailsListExecute(r Ap
 }
 
 type ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest) Execute() (NiatelemetryApicSnmpClientGrpDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest) Execute() (*NiatelemetryApicSnmpClientGrpDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSnmpClientGrpDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicSnmpClientGrpDetailsByMoid Read a 'niatelemetry.ApicSnmpClientGrpDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5333,27 +5276,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoid(c
 
 // Execute executes the request
 //  @return NiatelemetryApicSnmpClientGrpDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest) (NiatelemetryApicSnmpClientGrpDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpClientGrpDetailsByMoidRequest) (*NiatelemetryApicSnmpClientGrpDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSnmpClientGrpDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSnmpClientGrpDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSnmpClientGrpDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSnmpClientGrpDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5372,7 +5313,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoidEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5382,15 +5323,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoidEx
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5446,7 +5387,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoidEx
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5457,7 +5398,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsByMoidEx
 }
 
 type ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -5538,17 +5479,17 @@ func (r ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest) Tags(tags string)
 	return r
 }
 
-func (r ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest) Execute() (NiatelemetryApicSnmpClientGrpDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest) Execute() (*NiatelemetryApicSnmpClientGrpDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSnmpClientGrpDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicSnmpClientGrpDetailsList Read a 'niatelemetry.ApicSnmpClientGrpDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsList(ctx _context.Context) ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsList(ctx context.Context) ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest {
 	return ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5557,26 +5498,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsList(ctx
 
 // Execute executes the request
 //  @return NiatelemetryApicSnmpClientGrpDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsListExecute(r ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest) (NiatelemetryApicSnmpClientGrpDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsListExecute(r ApiGetNiatelemetryApicSnmpClientGrpDetailsListRequest) (*NiatelemetryApicSnmpClientGrpDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSnmpClientGrpDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSnmpClientGrpDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSnmpClientGrpDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSnmpClientGrpDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -5628,7 +5567,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsListExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5638,15 +5577,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsListExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5702,7 +5641,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsListExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5713,23 +5652,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpClientGrpDetailsListExec
 }
 
 type ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest) Execute() (NiatelemetryApicSnmpCommunityAccessDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest) Execute() (*NiatelemetryApicSnmpCommunityAccessDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSnmpCommunityAccessDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicSnmpCommunityAccessDetailsByMoid Read a 'niatelemetry.ApicSnmpCommunityAccessDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5739,27 +5678,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsBy
 
 // Execute executes the request
 //  @return NiatelemetryApicSnmpCommunityAccessDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest) (NiatelemetryApicSnmpCommunityAccessDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsByMoidRequest) (*NiatelemetryApicSnmpCommunityAccessDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSnmpCommunityAccessDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSnmpCommunityAccessDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSnmpCommunityAccessDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSnmpCommunityAccessDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5778,7 +5715,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5788,15 +5725,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsBy
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5852,7 +5789,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsBy
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5863,7 +5800,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsBy
 }
 
 type ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -5944,17 +5881,17 @@ func (r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest) Tags(tags s
 	return r
 }
 
-func (r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest) Execute() (NiatelemetryApicSnmpCommunityAccessDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest) Execute() (*NiatelemetryApicSnmpCommunityAccessDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSnmpCommunityAccessDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicSnmpCommunityAccessDetailsList Read a 'niatelemetry.ApicSnmpCommunityAccessDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsList(ctx _context.Context) ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsList(ctx context.Context) ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest {
 	return ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5963,26 +5900,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsLi
 
 // Execute executes the request
 //  @return NiatelemetryApicSnmpCommunityAccessDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsListExecute(r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest) (NiatelemetryApicSnmpCommunityAccessDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsListExecute(r ApiGetNiatelemetryApicSnmpCommunityAccessDetailsListRequest) (*NiatelemetryApicSnmpCommunityAccessDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSnmpCommunityAccessDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSnmpCommunityAccessDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSnmpCommunityAccessDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSnmpCommunityAccessDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -6034,7 +5969,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsLi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6044,15 +5979,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsLi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6108,7 +6043,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsLi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6119,23 +6054,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityAccessDetailsLi
 }
 
 type ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest) Execute() (NiatelemetryApicSnmpCommunityDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest) Execute() (*NiatelemetryApicSnmpCommunityDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSnmpCommunityDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicSnmpCommunityDetailsByMoid Read a 'niatelemetry.ApicSnmpCommunityDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6145,27 +6080,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoid(c
 
 // Execute executes the request
 //  @return NiatelemetryApicSnmpCommunityDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest) (NiatelemetryApicSnmpCommunityDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpCommunityDetailsByMoidRequest) (*NiatelemetryApicSnmpCommunityDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSnmpCommunityDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSnmpCommunityDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSnmpCommunityDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSnmpCommunityDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6184,7 +6117,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoidEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6194,15 +6127,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoidEx
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6258,7 +6191,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoidEx
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6269,7 +6202,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsByMoidEx
 }
 
 type ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -6350,17 +6283,17 @@ func (r ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest) Tags(tags string)
 	return r
 }
 
-func (r ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest) Execute() (NiatelemetryApicSnmpCommunityDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest) Execute() (*NiatelemetryApicSnmpCommunityDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSnmpCommunityDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicSnmpCommunityDetailsList Read a 'niatelemetry.ApicSnmpCommunityDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsList(ctx _context.Context) ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsList(ctx context.Context) ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest {
 	return ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6369,26 +6302,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsList(ctx
 
 // Execute executes the request
 //  @return NiatelemetryApicSnmpCommunityDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsListExecute(r ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest) (NiatelemetryApicSnmpCommunityDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsListExecute(r ApiGetNiatelemetryApicSnmpCommunityDetailsListRequest) (*NiatelemetryApicSnmpCommunityDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSnmpCommunityDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSnmpCommunityDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSnmpCommunityDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSnmpCommunityDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -6440,7 +6371,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsListExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6450,15 +6381,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsListExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6514,7 +6445,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsListExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6525,23 +6456,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpCommunityDetailsListExec
 }
 
 type ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest) Execute() (NiatelemetryApicSnmpTrapDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest) Execute() (*NiatelemetryApicSnmpTrapDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSnmpTrapDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicSnmpTrapDetailsByMoid Read a 'niatelemetry.ApicSnmpTrapDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6551,27 +6482,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoid(ctx _c
 
 // Execute executes the request
 //  @return NiatelemetryApicSnmpTrapDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest) (NiatelemetryApicSnmpTrapDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpTrapDetailsByMoidRequest) (*NiatelemetryApicSnmpTrapDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSnmpTrapDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSnmpTrapDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSnmpTrapDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSnmpTrapDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6590,7 +6519,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoidExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6600,15 +6529,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoidExecute
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6664,7 +6593,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoidExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6675,7 +6604,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsByMoidExecute
 }
 
 type ApiGetNiatelemetryApicSnmpTrapDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -6756,17 +6685,17 @@ func (r ApiGetNiatelemetryApicSnmpTrapDetailsListRequest) Tags(tags string) ApiG
 	return r
 }
 
-func (r ApiGetNiatelemetryApicSnmpTrapDetailsListRequest) Execute() (NiatelemetryApicSnmpTrapDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSnmpTrapDetailsListRequest) Execute() (*NiatelemetryApicSnmpTrapDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSnmpTrapDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicSnmpTrapDetailsList Read a 'niatelemetry.ApicSnmpTrapDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicSnmpTrapDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsList(ctx _context.Context) ApiGetNiatelemetryApicSnmpTrapDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsList(ctx context.Context) ApiGetNiatelemetryApicSnmpTrapDetailsListRequest {
 	return ApiGetNiatelemetryApicSnmpTrapDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6775,26 +6704,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsList(ctx _con
 
 // Execute executes the request
 //  @return NiatelemetryApicSnmpTrapDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsListExecute(r ApiGetNiatelemetryApicSnmpTrapDetailsListRequest) (NiatelemetryApicSnmpTrapDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsListExecute(r ApiGetNiatelemetryApicSnmpTrapDetailsListRequest) (*NiatelemetryApicSnmpTrapDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSnmpTrapDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSnmpTrapDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSnmpTrapDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSnmpTrapDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -6846,7 +6773,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsListExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6856,15 +6783,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsListExecute(r
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6920,7 +6847,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsListExecute(r
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6931,23 +6858,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapDetailsListExecute(r
 }
 
 type ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest) Execute() (NiatelemetryApicSnmpTrapFwdServerDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest) Execute() (*NiatelemetryApicSnmpTrapFwdServerDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoid Read a 'niatelemetry.ApicSnmpTrapFwdServerDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6957,27 +6884,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMo
 
 // Execute executes the request
 //  @return NiatelemetryApicSnmpTrapFwdServerDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest) (NiatelemetryApicSnmpTrapFwdServerDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsByMoidRequest) (*NiatelemetryApicSnmpTrapFwdServerDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSnmpTrapFwdServerDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSnmpTrapFwdServerDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSnmpTrapFwdServerDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSnmpTrapFwdServerDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6996,7 +6921,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7006,15 +6931,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7070,7 +6995,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7081,7 +7006,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsByMo
 }
 
 type ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -7162,17 +7087,17 @@ func (r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest) Tags(tags str
 	return r
 }
 
-func (r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest) Execute() (NiatelemetryApicSnmpTrapFwdServerDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest) Execute() (*NiatelemetryApicSnmpTrapFwdServerDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSnmpTrapFwdServerDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicSnmpTrapFwdServerDetailsList Read a 'niatelemetry.ApicSnmpTrapFwdServerDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsList(ctx _context.Context) ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsList(ctx context.Context) ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest {
 	return ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7181,26 +7106,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsList
 
 // Execute executes the request
 //  @return NiatelemetryApicSnmpTrapFwdServerDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsListExecute(r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest) (NiatelemetryApicSnmpTrapFwdServerDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsListExecute(r ApiGetNiatelemetryApicSnmpTrapFwdServerDetailsListRequest) (*NiatelemetryApicSnmpTrapFwdServerDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSnmpTrapFwdServerDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSnmpTrapFwdServerDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSnmpTrapFwdServerDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSnmpTrapFwdServerDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -7252,7 +7175,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7262,15 +7185,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7326,7 +7249,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsList
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7337,23 +7260,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpTrapFwdServerDetailsList
 }
 
 type ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest) Execute() (NiatelemetryApicSnmpVersionThreeDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest) Execute() (*NiatelemetryApicSnmpVersionThreeDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSnmpVersionThreeDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicSnmpVersionThreeDetailsByMoid Read a 'niatelemetry.ApicSnmpVersionThreeDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7363,27 +7286,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoi
 
 // Execute executes the request
 //  @return NiatelemetryApicSnmpVersionThreeDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest) (NiatelemetryApicSnmpVersionThreeDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoidExecute(r ApiGetNiatelemetryApicSnmpVersionThreeDetailsByMoidRequest) (*NiatelemetryApicSnmpVersionThreeDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSnmpVersionThreeDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSnmpVersionThreeDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSnmpVersionThreeDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSnmpVersionThreeDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7402,7 +7323,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7412,15 +7333,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7476,7 +7397,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7487,7 +7408,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsByMoi
 }
 
 type ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -7568,17 +7489,17 @@ func (r ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest) Tags(tags stri
 	return r
 }
 
-func (r ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest) Execute() (NiatelemetryApicSnmpVersionThreeDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest) Execute() (*NiatelemetryApicSnmpVersionThreeDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSnmpVersionThreeDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicSnmpVersionThreeDetailsList Read a 'niatelemetry.ApicSnmpVersionThreeDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsList(ctx _context.Context) ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsList(ctx context.Context) ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest {
 	return ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7587,26 +7508,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsList(
 
 // Execute executes the request
 //  @return NiatelemetryApicSnmpVersionThreeDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsListExecute(r ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest) (NiatelemetryApicSnmpVersionThreeDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsListExecute(r ApiGetNiatelemetryApicSnmpVersionThreeDetailsListRequest) (*NiatelemetryApicSnmpVersionThreeDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSnmpVersionThreeDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSnmpVersionThreeDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSnmpVersionThreeDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSnmpVersionThreeDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -7658,7 +7577,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsListE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7668,15 +7587,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsListE
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7732,7 +7651,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsListE
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7743,23 +7662,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSnmpVersionThreeDetailsListE
 }
 
 type ApiGetNiatelemetryApicSysLogGrpByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicSysLogGrpByMoidRequest) Execute() (NiatelemetryApicSysLogGrp, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSysLogGrpByMoidRequest) Execute() (*NiatelemetryApicSysLogGrp, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSysLogGrpByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicSysLogGrpByMoid Read a 'niatelemetry.ApicSysLogGrp' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicSysLogGrpByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicSysLogGrpByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSysLogGrpByMoidRequest {
 	return ApiGetNiatelemetryApicSysLogGrpByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7769,27 +7688,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoid(ctx _context
 
 // Execute executes the request
 //  @return NiatelemetryApicSysLogGrp
-func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoidExecute(r ApiGetNiatelemetryApicSysLogGrpByMoidRequest) (NiatelemetryApicSysLogGrp, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoidExecute(r ApiGetNiatelemetryApicSysLogGrpByMoidRequest) (*NiatelemetryApicSysLogGrp, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSysLogGrp
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSysLogGrp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSysLogGrpByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSysLogGrps/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7808,7 +7725,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoidExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7818,15 +7735,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7882,7 +7799,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoidExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7893,7 +7810,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpByMoidExecute(r Api
 }
 
 type ApiGetNiatelemetryApicSysLogGrpListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -7974,17 +7891,17 @@ func (r ApiGetNiatelemetryApicSysLogGrpListRequest) Tags(tags string) ApiGetNiat
 	return r
 }
 
-func (r ApiGetNiatelemetryApicSysLogGrpListRequest) Execute() (NiatelemetryApicSysLogGrpResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSysLogGrpListRequest) Execute() (*NiatelemetryApicSysLogGrpResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSysLogGrpListExecute(r)
 }
 
 /*
 GetNiatelemetryApicSysLogGrpList Read a 'niatelemetry.ApicSysLogGrp' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicSysLogGrpListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpList(ctx _context.Context) ApiGetNiatelemetryApicSysLogGrpListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpList(ctx context.Context) ApiGetNiatelemetryApicSysLogGrpListRequest {
 	return ApiGetNiatelemetryApicSysLogGrpListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7993,26 +7910,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpList(ctx _context.C
 
 // Execute executes the request
 //  @return NiatelemetryApicSysLogGrpResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpListExecute(r ApiGetNiatelemetryApicSysLogGrpListRequest) (NiatelemetryApicSysLogGrpResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpListExecute(r ApiGetNiatelemetryApicSysLogGrpListRequest) (*NiatelemetryApicSysLogGrpResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSysLogGrpResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSysLogGrpResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSysLogGrpList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSysLogGrps"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -8064,7 +7979,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpListExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8074,15 +7989,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8138,7 +8053,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpListExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8149,23 +8064,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogGrpListExecute(r ApiGe
 }
 
 type ApiGetNiatelemetryApicSysLogSrcByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicSysLogSrcByMoidRequest) Execute() (NiatelemetryApicSysLogSrc, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSysLogSrcByMoidRequest) Execute() (*NiatelemetryApicSysLogSrc, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSysLogSrcByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicSysLogSrcByMoid Read a 'niatelemetry.ApicSysLogSrc' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicSysLogSrcByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicSysLogSrcByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicSysLogSrcByMoidRequest {
 	return ApiGetNiatelemetryApicSysLogSrcByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8175,27 +8090,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoid(ctx _context
 
 // Execute executes the request
 //  @return NiatelemetryApicSysLogSrc
-func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoidExecute(r ApiGetNiatelemetryApicSysLogSrcByMoidRequest) (NiatelemetryApicSysLogSrc, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoidExecute(r ApiGetNiatelemetryApicSysLogSrcByMoidRequest) (*NiatelemetryApicSysLogSrc, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSysLogSrc
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSysLogSrc
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSysLogSrcByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSysLogSrcs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -8214,7 +8127,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoidExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8224,15 +8137,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8288,7 +8201,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoidExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8299,7 +8212,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcByMoidExecute(r Api
 }
 
 type ApiGetNiatelemetryApicSysLogSrcListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -8380,17 +8293,17 @@ func (r ApiGetNiatelemetryApicSysLogSrcListRequest) Tags(tags string) ApiGetNiat
 	return r
 }
 
-func (r ApiGetNiatelemetryApicSysLogSrcListRequest) Execute() (NiatelemetryApicSysLogSrcResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicSysLogSrcListRequest) Execute() (*NiatelemetryApicSysLogSrcResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicSysLogSrcListExecute(r)
 }
 
 /*
 GetNiatelemetryApicSysLogSrcList Read a 'niatelemetry.ApicSysLogSrc' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicSysLogSrcListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcList(ctx _context.Context) ApiGetNiatelemetryApicSysLogSrcListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcList(ctx context.Context) ApiGetNiatelemetryApicSysLogSrcListRequest {
 	return ApiGetNiatelemetryApicSysLogSrcListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8399,26 +8312,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcList(ctx _context.C
 
 // Execute executes the request
 //  @return NiatelemetryApicSysLogSrcResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcListExecute(r ApiGetNiatelemetryApicSysLogSrcListRequest) (NiatelemetryApicSysLogSrcResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcListExecute(r ApiGetNiatelemetryApicSysLogSrcListRequest) (*NiatelemetryApicSysLogSrcResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicSysLogSrcResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicSysLogSrcResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicSysLogSrcList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicSysLogSrcs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -8470,7 +8381,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcListExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8480,15 +8391,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8544,7 +8455,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcListExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8555,23 +8466,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicSysLogSrcListExecute(r ApiGe
 }
 
 type ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest) Execute() (NiatelemetryApicTransceiverDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest) Execute() (*NiatelemetryApicTransceiverDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicTransceiverDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicTransceiverDetailsByMoid Read a 'niatelemetry.ApicTransceiverDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest {
 	return ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8581,27 +8492,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoid(ctx
 
 // Execute executes the request
 //  @return NiatelemetryApicTransceiverDetails
-func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoidExecute(r ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest) (NiatelemetryApicTransceiverDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoidExecute(r ApiGetNiatelemetryApicTransceiverDetailsByMoidRequest) (*NiatelemetryApicTransceiverDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicTransceiverDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicTransceiverDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicTransceiverDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicTransceiverDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -8620,7 +8529,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoidExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8630,15 +8539,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoidExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8694,7 +8603,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoidExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8705,7 +8614,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsByMoidExec
 }
 
 type ApiGetNiatelemetryApicTransceiverDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -8786,17 +8695,17 @@ func (r ApiGetNiatelemetryApicTransceiverDetailsListRequest) Tags(tags string) A
 	return r
 }
 
-func (r ApiGetNiatelemetryApicTransceiverDetailsListRequest) Execute() (NiatelemetryApicTransceiverDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicTransceiverDetailsListRequest) Execute() (*NiatelemetryApicTransceiverDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicTransceiverDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicTransceiverDetailsList Read a 'niatelemetry.ApicTransceiverDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicTransceiverDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsList(ctx _context.Context) ApiGetNiatelemetryApicTransceiverDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsList(ctx context.Context) ApiGetNiatelemetryApicTransceiverDetailsListRequest {
 	return ApiGetNiatelemetryApicTransceiverDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8805,26 +8714,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsList(ctx _
 
 // Execute executes the request
 //  @return NiatelemetryApicTransceiverDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsListExecute(r ApiGetNiatelemetryApicTransceiverDetailsListRequest) (NiatelemetryApicTransceiverDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsListExecute(r ApiGetNiatelemetryApicTransceiverDetailsListRequest) (*NiatelemetryApicTransceiverDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicTransceiverDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicTransceiverDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicTransceiverDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicTransceiverDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -8876,7 +8783,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsListExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8886,15 +8793,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsListExecut
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8950,7 +8857,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsListExecut
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8961,23 +8868,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicTransceiverDetailsListExecut
 }
 
 type ApiGetNiatelemetryApicUiPageCountsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryApicUiPageCountsByMoidRequest) Execute() (NiatelemetryApicUiPageCounts, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicUiPageCountsByMoidRequest) Execute() (*NiatelemetryApicUiPageCounts, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicUiPageCountsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryApicUiPageCountsByMoid Read a 'niatelemetry.ApicUiPageCounts' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryApicUiPageCountsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryApicUiPageCountsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryApicUiPageCountsByMoidRequest {
 	return ApiGetNiatelemetryApicUiPageCountsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8987,27 +8894,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoid(ctx _cont
 
 // Execute executes the request
 //  @return NiatelemetryApicUiPageCounts
-func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoidExecute(r ApiGetNiatelemetryApicUiPageCountsByMoidRequest) (NiatelemetryApicUiPageCounts, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoidExecute(r ApiGetNiatelemetryApicUiPageCountsByMoidRequest) (*NiatelemetryApicUiPageCounts, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicUiPageCounts
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicUiPageCounts
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicUiPageCountsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicUiPageCounts/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9026,7 +8931,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoidExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9036,15 +8941,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9100,7 +9005,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoidExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9111,7 +9016,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsByMoidExecute(r 
 }
 
 type ApiGetNiatelemetryApicUiPageCountsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -9192,17 +9097,17 @@ func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Tags(tags string) ApiGetN
 	return r
 }
 
-func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Execute() (NiatelemetryApicUiPageCountsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryApicUiPageCountsListRequest) Execute() (*NiatelemetryApicUiPageCountsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryApicUiPageCountsListExecute(r)
 }
 
 /*
 GetNiatelemetryApicUiPageCountsList Read a 'niatelemetry.ApicUiPageCounts' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryApicUiPageCountsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsList(ctx _context.Context) ApiGetNiatelemetryApicUiPageCountsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsList(ctx context.Context) ApiGetNiatelemetryApicUiPageCountsListRequest {
 	return ApiGetNiatelemetryApicUiPageCountsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9211,26 +9116,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsList(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryApicUiPageCountsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsListExecute(r ApiGetNiatelemetryApicUiPageCountsListRequest) (NiatelemetryApicUiPageCountsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsListExecute(r ApiGetNiatelemetryApicUiPageCountsListRequest) (*NiatelemetryApicUiPageCountsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryApicUiPageCountsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryApicUiPageCountsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryApicUiPageCountsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/ApicUiPageCounts"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -9282,7 +9185,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsListExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9292,15 +9195,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9356,7 +9259,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsListExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9367,23 +9270,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryApicUiPageCountsListExecute(r Ap
 }
 
 type ApiGetNiatelemetryAppDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryAppDetailsByMoidRequest) Execute() (NiatelemetryAppDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryAppDetailsByMoidRequest) Execute() (*NiatelemetryAppDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryAppDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryAppDetailsByMoid Read a 'niatelemetry.AppDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryAppDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryAppDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryAppDetailsByMoidRequest {
 	return ApiGetNiatelemetryAppDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9393,27 +9296,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoid(ctx _context.Co
 
 // Execute executes the request
 //  @return NiatelemetryAppDetails
-func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoidExecute(r ApiGetNiatelemetryAppDetailsByMoidRequest) (NiatelemetryAppDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoidExecute(r ApiGetNiatelemetryAppDetailsByMoidRequest) (*NiatelemetryAppDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryAppDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryAppDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryAppDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/AppDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9432,7 +9333,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoidExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9442,15 +9343,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9506,7 +9407,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoidExecute(r ApiGet
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9517,7 +9418,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsByMoidExecute(r ApiGet
 }
 
 type ApiGetNiatelemetryAppDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -9598,17 +9499,17 @@ func (r ApiGetNiatelemetryAppDetailsListRequest) Tags(tags string) ApiGetNiatele
 	return r
 }
 
-func (r ApiGetNiatelemetryAppDetailsListRequest) Execute() (NiatelemetryAppDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryAppDetailsListRequest) Execute() (*NiatelemetryAppDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryAppDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryAppDetailsList Read a 'niatelemetry.AppDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryAppDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsList(ctx _context.Context) ApiGetNiatelemetryAppDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsList(ctx context.Context) ApiGetNiatelemetryAppDetailsListRequest {
 	return ApiGetNiatelemetryAppDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9617,26 +9518,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsList(ctx _context.Cont
 
 // Execute executes the request
 //  @return NiatelemetryAppDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsListExecute(r ApiGetNiatelemetryAppDetailsListRequest) (NiatelemetryAppDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsListExecute(r ApiGetNiatelemetryAppDetailsListRequest) (*NiatelemetryAppDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryAppDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryAppDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryAppDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/AppDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -9688,7 +9587,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsListExecute(r ApiGetNi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9698,15 +9597,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsListExecute(r ApiGetNi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9762,7 +9661,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsListExecute(r ApiGetNi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9773,23 +9672,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryAppDetailsListExecute(r ApiGetNi
 }
 
 type ApiGetNiatelemetryCommonPoliciesByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryCommonPoliciesByMoidRequest) Execute() (NiatelemetryCommonPolicies, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryCommonPoliciesByMoidRequest) Execute() (*NiatelemetryCommonPolicies, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryCommonPoliciesByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryCommonPoliciesByMoid Read a 'niatelemetry.CommonPolicies' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryCommonPoliciesByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryCommonPoliciesByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoid(ctx context.Context, moid string) ApiGetNiatelemetryCommonPoliciesByMoidRequest {
 	return ApiGetNiatelemetryCommonPoliciesByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -9799,27 +9698,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoid(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryCommonPolicies
-func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoidExecute(r ApiGetNiatelemetryCommonPoliciesByMoidRequest) (NiatelemetryCommonPolicies, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoidExecute(r ApiGetNiatelemetryCommonPoliciesByMoidRequest) (*NiatelemetryCommonPolicies, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryCommonPolicies
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryCommonPolicies
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryCommonPoliciesByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/CommonPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9838,7 +9735,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoidExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -9848,15 +9745,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -9912,7 +9809,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoidExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -9923,7 +9820,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesByMoidExecute(r Ap
 }
 
 type ApiGetNiatelemetryCommonPoliciesListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -10004,17 +9901,17 @@ func (r ApiGetNiatelemetryCommonPoliciesListRequest) Tags(tags string) ApiGetNia
 	return r
 }
 
-func (r ApiGetNiatelemetryCommonPoliciesListRequest) Execute() (NiatelemetryCommonPoliciesResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryCommonPoliciesListRequest) Execute() (*NiatelemetryCommonPoliciesResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryCommonPoliciesListExecute(r)
 }
 
 /*
 GetNiatelemetryCommonPoliciesList Read a 'niatelemetry.CommonPolicies' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryCommonPoliciesListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesList(ctx _context.Context) ApiGetNiatelemetryCommonPoliciesListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesList(ctx context.Context) ApiGetNiatelemetryCommonPoliciesListRequest {
 	return ApiGetNiatelemetryCommonPoliciesListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10023,26 +9920,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesList(ctx _context.
 
 // Execute executes the request
 //  @return NiatelemetryCommonPoliciesResponse
-func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesListExecute(r ApiGetNiatelemetryCommonPoliciesListRequest) (NiatelemetryCommonPoliciesResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesListExecute(r ApiGetNiatelemetryCommonPoliciesListRequest) (*NiatelemetryCommonPoliciesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryCommonPoliciesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryCommonPoliciesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryCommonPoliciesList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/CommonPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -10094,7 +9989,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesListExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10104,15 +9999,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10168,7 +10063,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesListExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10179,23 +10074,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryCommonPoliciesListExecute(r ApiG
 }
 
 type ApiGetNiatelemetryDcnmFanDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryDcnmFanDetailsByMoidRequest) Execute() (NiatelemetryDcnmFanDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryDcnmFanDetailsByMoidRequest) Execute() (*NiatelemetryDcnmFanDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryDcnmFanDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryDcnmFanDetailsByMoid Read a 'niatelemetry.DcnmFanDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryDcnmFanDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryDcnmFanDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryDcnmFanDetailsByMoidRequest {
 	return ApiGetNiatelemetryDcnmFanDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10205,27 +10100,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoid(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryDcnmFanDetails
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoidExecute(r ApiGetNiatelemetryDcnmFanDetailsByMoidRequest) (NiatelemetryDcnmFanDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoidExecute(r ApiGetNiatelemetryDcnmFanDetailsByMoidRequest) (*NiatelemetryDcnmFanDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryDcnmFanDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryDcnmFanDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryDcnmFanDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/DcnmFanDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10244,7 +10137,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoidExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10254,15 +10147,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10318,7 +10211,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoidExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10329,7 +10222,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsByMoidExecute(r Ap
 }
 
 type ApiGetNiatelemetryDcnmFanDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -10410,17 +10303,17 @@ func (r ApiGetNiatelemetryDcnmFanDetailsListRequest) Tags(tags string) ApiGetNia
 	return r
 }
 
-func (r ApiGetNiatelemetryDcnmFanDetailsListRequest) Execute() (NiatelemetryDcnmFanDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryDcnmFanDetailsListRequest) Execute() (*NiatelemetryDcnmFanDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryDcnmFanDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryDcnmFanDetailsList Read a 'niatelemetry.DcnmFanDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryDcnmFanDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsList(ctx _context.Context) ApiGetNiatelemetryDcnmFanDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsList(ctx context.Context) ApiGetNiatelemetryDcnmFanDetailsListRequest {
 	return ApiGetNiatelemetryDcnmFanDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10429,26 +10322,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsList(ctx _context.
 
 // Execute executes the request
 //  @return NiatelemetryDcnmFanDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsListExecute(r ApiGetNiatelemetryDcnmFanDetailsListRequest) (NiatelemetryDcnmFanDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsListExecute(r ApiGetNiatelemetryDcnmFanDetailsListRequest) (*NiatelemetryDcnmFanDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryDcnmFanDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryDcnmFanDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryDcnmFanDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/DcnmFanDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -10500,7 +10391,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsListExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10510,15 +10401,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10574,7 +10465,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsListExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10585,23 +10476,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFanDetailsListExecute(r ApiG
 }
 
 type ApiGetNiatelemetryDcnmFexDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryDcnmFexDetailsByMoidRequest) Execute() (NiatelemetryDcnmFexDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryDcnmFexDetailsByMoidRequest) Execute() (*NiatelemetryDcnmFexDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryDcnmFexDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryDcnmFexDetailsByMoid Read a 'niatelemetry.DcnmFexDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryDcnmFexDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryDcnmFexDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryDcnmFexDetailsByMoidRequest {
 	return ApiGetNiatelemetryDcnmFexDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10611,27 +10502,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoid(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryDcnmFexDetails
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoidExecute(r ApiGetNiatelemetryDcnmFexDetailsByMoidRequest) (NiatelemetryDcnmFexDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoidExecute(r ApiGetNiatelemetryDcnmFexDetailsByMoidRequest) (*NiatelemetryDcnmFexDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryDcnmFexDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryDcnmFexDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryDcnmFexDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/DcnmFexDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10650,7 +10539,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoidExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10660,15 +10549,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10724,7 +10613,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoidExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10735,7 +10624,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsByMoidExecute(r Ap
 }
 
 type ApiGetNiatelemetryDcnmFexDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -10816,17 +10705,17 @@ func (r ApiGetNiatelemetryDcnmFexDetailsListRequest) Tags(tags string) ApiGetNia
 	return r
 }
 
-func (r ApiGetNiatelemetryDcnmFexDetailsListRequest) Execute() (NiatelemetryDcnmFexDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryDcnmFexDetailsListRequest) Execute() (*NiatelemetryDcnmFexDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryDcnmFexDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryDcnmFexDetailsList Read a 'niatelemetry.DcnmFexDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryDcnmFexDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsList(ctx _context.Context) ApiGetNiatelemetryDcnmFexDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsList(ctx context.Context) ApiGetNiatelemetryDcnmFexDetailsListRequest {
 	return ApiGetNiatelemetryDcnmFexDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -10835,26 +10724,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsList(ctx _context.
 
 // Execute executes the request
 //  @return NiatelemetryDcnmFexDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsListExecute(r ApiGetNiatelemetryDcnmFexDetailsListRequest) (NiatelemetryDcnmFexDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsListExecute(r ApiGetNiatelemetryDcnmFexDetailsListRequest) (*NiatelemetryDcnmFexDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryDcnmFexDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryDcnmFexDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryDcnmFexDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/DcnmFexDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -10906,7 +10793,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsListExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -10916,15 +10803,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -10980,7 +10867,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsListExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -10991,23 +10878,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmFexDetailsListExecute(r ApiG
 }
 
 type ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest) Execute() (NiatelemetryDcnmModuleDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest) Execute() (*NiatelemetryDcnmModuleDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryDcnmModuleDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryDcnmModuleDetailsByMoid Read a 'niatelemetry.DcnmModuleDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest {
 	return ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -11017,27 +10904,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoid(ctx _con
 
 // Execute executes the request
 //  @return NiatelemetryDcnmModuleDetails
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoidExecute(r ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest) (NiatelemetryDcnmModuleDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoidExecute(r ApiGetNiatelemetryDcnmModuleDetailsByMoidRequest) (*NiatelemetryDcnmModuleDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryDcnmModuleDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryDcnmModuleDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryDcnmModuleDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/DcnmModuleDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11056,7 +10941,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoidExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -11066,15 +10951,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoidExecute(r
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -11130,7 +11015,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoidExecute(r
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -11141,7 +11026,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsByMoidExecute(r
 }
 
 type ApiGetNiatelemetryDcnmModuleDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -11222,17 +11107,17 @@ func (r ApiGetNiatelemetryDcnmModuleDetailsListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetNiatelemetryDcnmModuleDetailsListRequest) Execute() (NiatelemetryDcnmModuleDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryDcnmModuleDetailsListRequest) Execute() (*NiatelemetryDcnmModuleDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryDcnmModuleDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryDcnmModuleDetailsList Read a 'niatelemetry.DcnmModuleDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryDcnmModuleDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsList(ctx _context.Context) ApiGetNiatelemetryDcnmModuleDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsList(ctx context.Context) ApiGetNiatelemetryDcnmModuleDetailsListRequest {
 	return ApiGetNiatelemetryDcnmModuleDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -11241,26 +11126,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsList(ctx _conte
 
 // Execute executes the request
 //  @return NiatelemetryDcnmModuleDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsListExecute(r ApiGetNiatelemetryDcnmModuleDetailsListRequest) (NiatelemetryDcnmModuleDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsListExecute(r ApiGetNiatelemetryDcnmModuleDetailsListRequest) (*NiatelemetryDcnmModuleDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryDcnmModuleDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryDcnmModuleDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryDcnmModuleDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/DcnmModuleDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -11312,7 +11195,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsListExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -11322,15 +11205,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsListExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -11386,7 +11269,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsListExecute(r A
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -11397,23 +11280,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmModuleDetailsListExecute(r A
 }
 
 type ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest) Execute() (NiatelemetryDcnmPsuDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest) Execute() (*NiatelemetryDcnmPsuDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryDcnmPsuDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryDcnmPsuDetailsByMoid Read a 'niatelemetry.DcnmPsuDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest {
 	return ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -11423,27 +11306,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoid(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryDcnmPsuDetails
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoidExecute(r ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest) (NiatelemetryDcnmPsuDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoidExecute(r ApiGetNiatelemetryDcnmPsuDetailsByMoidRequest) (*NiatelemetryDcnmPsuDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryDcnmPsuDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryDcnmPsuDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryDcnmPsuDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/DcnmPsuDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11462,7 +11343,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoidExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -11472,15 +11353,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -11536,7 +11417,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoidExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -11547,7 +11428,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsByMoidExecute(r Ap
 }
 
 type ApiGetNiatelemetryDcnmPsuDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -11628,17 +11509,17 @@ func (r ApiGetNiatelemetryDcnmPsuDetailsListRequest) Tags(tags string) ApiGetNia
 	return r
 }
 
-func (r ApiGetNiatelemetryDcnmPsuDetailsListRequest) Execute() (NiatelemetryDcnmPsuDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryDcnmPsuDetailsListRequest) Execute() (*NiatelemetryDcnmPsuDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryDcnmPsuDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryDcnmPsuDetailsList Read a 'niatelemetry.DcnmPsuDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryDcnmPsuDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsList(ctx _context.Context) ApiGetNiatelemetryDcnmPsuDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsList(ctx context.Context) ApiGetNiatelemetryDcnmPsuDetailsListRequest {
 	return ApiGetNiatelemetryDcnmPsuDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -11647,26 +11528,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsList(ctx _context.
 
 // Execute executes the request
 //  @return NiatelemetryDcnmPsuDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsListExecute(r ApiGetNiatelemetryDcnmPsuDetailsListRequest) (NiatelemetryDcnmPsuDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsListExecute(r ApiGetNiatelemetryDcnmPsuDetailsListRequest) (*NiatelemetryDcnmPsuDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryDcnmPsuDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryDcnmPsuDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryDcnmPsuDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/DcnmPsuDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -11718,7 +11597,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsListExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -11728,15 +11607,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -11792,7 +11671,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsListExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -11803,23 +11682,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmPsuDetailsListExecute(r ApiG
 }
 
 type ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest) Execute() (NiatelemetryDcnmTransceiverDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest) Execute() (*NiatelemetryDcnmTransceiverDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryDcnmTransceiverDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryDcnmTransceiverDetailsByMoid Read a 'niatelemetry.DcnmTransceiverDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest {
 	return ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -11829,27 +11708,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoid(ctx
 
 // Execute executes the request
 //  @return NiatelemetryDcnmTransceiverDetails
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoidExecute(r ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest) (NiatelemetryDcnmTransceiverDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoidExecute(r ApiGetNiatelemetryDcnmTransceiverDetailsByMoidRequest) (*NiatelemetryDcnmTransceiverDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryDcnmTransceiverDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryDcnmTransceiverDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryDcnmTransceiverDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/DcnmTransceiverDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11868,7 +11745,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoidExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -11878,15 +11755,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoidExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -11942,7 +11819,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoidExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -11953,7 +11830,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsByMoidExec
 }
 
 type ApiGetNiatelemetryDcnmTransceiverDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -12034,17 +11911,17 @@ func (r ApiGetNiatelemetryDcnmTransceiverDetailsListRequest) Tags(tags string) A
 	return r
 }
 
-func (r ApiGetNiatelemetryDcnmTransceiverDetailsListRequest) Execute() (NiatelemetryDcnmTransceiverDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryDcnmTransceiverDetailsListRequest) Execute() (*NiatelemetryDcnmTransceiverDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryDcnmTransceiverDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryDcnmTransceiverDetailsList Read a 'niatelemetry.DcnmTransceiverDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryDcnmTransceiverDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsList(ctx _context.Context) ApiGetNiatelemetryDcnmTransceiverDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsList(ctx context.Context) ApiGetNiatelemetryDcnmTransceiverDetailsListRequest {
 	return ApiGetNiatelemetryDcnmTransceiverDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -12053,26 +11930,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsList(ctx _
 
 // Execute executes the request
 //  @return NiatelemetryDcnmTransceiverDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsListExecute(r ApiGetNiatelemetryDcnmTransceiverDetailsListRequest) (NiatelemetryDcnmTransceiverDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsListExecute(r ApiGetNiatelemetryDcnmTransceiverDetailsListRequest) (*NiatelemetryDcnmTransceiverDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryDcnmTransceiverDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryDcnmTransceiverDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryDcnmTransceiverDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/DcnmTransceiverDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -12124,7 +11999,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsListExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -12134,15 +12009,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsListExecut
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -12198,7 +12073,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsListExecut
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -12209,23 +12084,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryDcnmTransceiverDetailsListExecut
 }
 
 type ApiGetNiatelemetryEpgByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryEpgByMoidRequest) Execute() (NiatelemetryEpg, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryEpgByMoidRequest) Execute() (*NiatelemetryEpg, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryEpgByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryEpgByMoid Read a 'niatelemetry.Epg' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryEpgByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryEpgByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoid(ctx context.Context, moid string) ApiGetNiatelemetryEpgByMoidRequest {
 	return ApiGetNiatelemetryEpgByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -12235,27 +12110,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoid(ctx _context.Context, 
 
 // Execute executes the request
 //  @return NiatelemetryEpg
-func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoidExecute(r ApiGetNiatelemetryEpgByMoidRequest) (NiatelemetryEpg, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoidExecute(r ApiGetNiatelemetryEpgByMoidRequest) (*NiatelemetryEpg, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryEpg
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryEpg
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryEpgByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Epgs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -12274,7 +12147,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoidExecute(r ApiGetNiatele
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -12284,15 +12157,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoidExecute(r ApiGetNiatele
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -12348,7 +12221,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoidExecute(r ApiGetNiatele
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -12359,7 +12232,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgByMoidExecute(r ApiGetNiatele
 }
 
 type ApiGetNiatelemetryEpgListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -12440,17 +12313,17 @@ func (r ApiGetNiatelemetryEpgListRequest) Tags(tags string) ApiGetNiatelemetryEp
 	return r
 }
 
-func (r ApiGetNiatelemetryEpgListRequest) Execute() (NiatelemetryEpgResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryEpgListRequest) Execute() (*NiatelemetryEpgResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryEpgListExecute(r)
 }
 
 /*
 GetNiatelemetryEpgList Read a 'niatelemetry.Epg' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryEpgListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryEpgList(ctx _context.Context) ApiGetNiatelemetryEpgListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryEpgList(ctx context.Context) ApiGetNiatelemetryEpgListRequest {
 	return ApiGetNiatelemetryEpgListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -12459,26 +12332,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgList(ctx _context.Context) Ap
 
 // Execute executes the request
 //  @return NiatelemetryEpgResponse
-func (a *NiatelemetryApiService) GetNiatelemetryEpgListExecute(r ApiGetNiatelemetryEpgListRequest) (NiatelemetryEpgResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryEpgListExecute(r ApiGetNiatelemetryEpgListRequest) (*NiatelemetryEpgResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryEpgResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryEpgResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryEpgList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Epgs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -12530,7 +12401,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgListExecute(r ApiGetNiateleme
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -12540,15 +12411,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgListExecute(r ApiGetNiateleme
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -12604,7 +12475,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgListExecute(r ApiGetNiateleme
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -12615,23 +12486,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryEpgListExecute(r ApiGetNiateleme
 }
 
 type ApiGetNiatelemetryFabricModuleDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryFabricModuleDetailsByMoidRequest) Execute() (NiatelemetryFabricModuleDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryFabricModuleDetailsByMoidRequest) Execute() (*NiatelemetryFabricModuleDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryFabricModuleDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryFabricModuleDetailsByMoid Read a 'niatelemetry.FabricModuleDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryFabricModuleDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryFabricModuleDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryFabricModuleDetailsByMoidRequest {
 	return ApiGetNiatelemetryFabricModuleDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -12641,27 +12512,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoid(ctx _c
 
 // Execute executes the request
 //  @return NiatelemetryFabricModuleDetails
-func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoidExecute(r ApiGetNiatelemetryFabricModuleDetailsByMoidRequest) (NiatelemetryFabricModuleDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoidExecute(r ApiGetNiatelemetryFabricModuleDetailsByMoidRequest) (*NiatelemetryFabricModuleDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryFabricModuleDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryFabricModuleDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryFabricModuleDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/FabricModuleDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -12680,7 +12549,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoidExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -12690,15 +12559,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoidExecute
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -12754,7 +12623,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoidExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -12765,7 +12634,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsByMoidExecute
 }
 
 type ApiGetNiatelemetryFabricModuleDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -12846,17 +12715,17 @@ func (r ApiGetNiatelemetryFabricModuleDetailsListRequest) Tags(tags string) ApiG
 	return r
 }
 
-func (r ApiGetNiatelemetryFabricModuleDetailsListRequest) Execute() (NiatelemetryFabricModuleDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryFabricModuleDetailsListRequest) Execute() (*NiatelemetryFabricModuleDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryFabricModuleDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryFabricModuleDetailsList Read a 'niatelemetry.FabricModuleDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryFabricModuleDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsList(ctx _context.Context) ApiGetNiatelemetryFabricModuleDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsList(ctx context.Context) ApiGetNiatelemetryFabricModuleDetailsListRequest {
 	return ApiGetNiatelemetryFabricModuleDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -12865,26 +12734,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsList(ctx _con
 
 // Execute executes the request
 //  @return NiatelemetryFabricModuleDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsListExecute(r ApiGetNiatelemetryFabricModuleDetailsListRequest) (NiatelemetryFabricModuleDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsListExecute(r ApiGetNiatelemetryFabricModuleDetailsListRequest) (*NiatelemetryFabricModuleDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryFabricModuleDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryFabricModuleDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryFabricModuleDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/FabricModuleDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -12936,7 +12803,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsListExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -12946,15 +12813,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsListExecute(r
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -13010,7 +12877,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsListExecute(r
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -13021,23 +12888,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricModuleDetailsListExecute(r
 }
 
 type ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest) Execute() (NiatelemetryFabricNodeControlDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest) Execute() (*NiatelemetryFabricNodeControlDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryFabricNodeControlDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryFabricNodeControlDetailsByMoid Read a 'niatelemetry.FabricNodeControlDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest {
 	return ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -13047,27 +12914,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoid(c
 
 // Execute executes the request
 //  @return NiatelemetryFabricNodeControlDetails
-func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoidExecute(r ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest) (NiatelemetryFabricNodeControlDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoidExecute(r ApiGetNiatelemetryFabricNodeControlDetailsByMoidRequest) (*NiatelemetryFabricNodeControlDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryFabricNodeControlDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryFabricNodeControlDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryFabricNodeControlDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/FabricNodeControlDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -13086,7 +12951,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoidEx
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -13096,15 +12961,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoidEx
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -13160,7 +13025,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoidEx
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -13171,7 +13036,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsByMoidEx
 }
 
 type ApiGetNiatelemetryFabricNodeControlDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -13252,17 +13117,17 @@ func (r ApiGetNiatelemetryFabricNodeControlDetailsListRequest) Tags(tags string)
 	return r
 }
 
-func (r ApiGetNiatelemetryFabricNodeControlDetailsListRequest) Execute() (NiatelemetryFabricNodeControlDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryFabricNodeControlDetailsListRequest) Execute() (*NiatelemetryFabricNodeControlDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryFabricNodeControlDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryFabricNodeControlDetailsList Read a 'niatelemetry.FabricNodeControlDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryFabricNodeControlDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsList(ctx _context.Context) ApiGetNiatelemetryFabricNodeControlDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsList(ctx context.Context) ApiGetNiatelemetryFabricNodeControlDetailsListRequest {
 	return ApiGetNiatelemetryFabricNodeControlDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -13271,26 +13136,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsList(ctx
 
 // Execute executes the request
 //  @return NiatelemetryFabricNodeControlDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsListExecute(r ApiGetNiatelemetryFabricNodeControlDetailsListRequest) (NiatelemetryFabricNodeControlDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsListExecute(r ApiGetNiatelemetryFabricNodeControlDetailsListRequest) (*NiatelemetryFabricNodeControlDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryFabricNodeControlDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryFabricNodeControlDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryFabricNodeControlDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/FabricNodeControlDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -13342,7 +13205,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsListExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -13352,15 +13215,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsListExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -13416,7 +13279,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsListExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -13427,23 +13290,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricNodeControlDetailsListExec
 }
 
 type ApiGetNiatelemetryFabricPodProfileByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryFabricPodProfileByMoidRequest) Execute() (NiatelemetryFabricPodProfile, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryFabricPodProfileByMoidRequest) Execute() (*NiatelemetryFabricPodProfile, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryFabricPodProfileByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryFabricPodProfileByMoid Read a 'niatelemetry.FabricPodProfile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryFabricPodProfileByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryFabricPodProfileByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoid(ctx context.Context, moid string) ApiGetNiatelemetryFabricPodProfileByMoidRequest {
 	return ApiGetNiatelemetryFabricPodProfileByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -13453,27 +13316,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoid(ctx _cont
 
 // Execute executes the request
 //  @return NiatelemetryFabricPodProfile
-func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoidExecute(r ApiGetNiatelemetryFabricPodProfileByMoidRequest) (NiatelemetryFabricPodProfile, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoidExecute(r ApiGetNiatelemetryFabricPodProfileByMoidRequest) (*NiatelemetryFabricPodProfile, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryFabricPodProfile
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryFabricPodProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryFabricPodProfileByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/FabricPodProfiles/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -13492,7 +13353,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoidExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -13502,15 +13363,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -13566,7 +13427,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoidExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -13577,7 +13438,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileByMoidExecute(r 
 }
 
 type ApiGetNiatelemetryFabricPodProfileListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -13658,17 +13519,17 @@ func (r ApiGetNiatelemetryFabricPodProfileListRequest) Tags(tags string) ApiGetN
 	return r
 }
 
-func (r ApiGetNiatelemetryFabricPodProfileListRequest) Execute() (NiatelemetryFabricPodProfileResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryFabricPodProfileListRequest) Execute() (*NiatelemetryFabricPodProfileResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryFabricPodProfileListExecute(r)
 }
 
 /*
 GetNiatelemetryFabricPodProfileList Read a 'niatelemetry.FabricPodProfile' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryFabricPodProfileListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileList(ctx _context.Context) ApiGetNiatelemetryFabricPodProfileListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileList(ctx context.Context) ApiGetNiatelemetryFabricPodProfileListRequest {
 	return ApiGetNiatelemetryFabricPodProfileListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -13677,26 +13538,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileList(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryFabricPodProfileResponse
-func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileListExecute(r ApiGetNiatelemetryFabricPodProfileListRequest) (NiatelemetryFabricPodProfileResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileListExecute(r ApiGetNiatelemetryFabricPodProfileListRequest) (*NiatelemetryFabricPodProfileResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryFabricPodProfileResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryFabricPodProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryFabricPodProfileList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/FabricPodProfiles"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -13748,7 +13607,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileListExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -13758,15 +13617,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -13822,7 +13681,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileListExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -13833,23 +13692,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodProfileListExecute(r Ap
 }
 
 type ApiGetNiatelemetryFabricPodSsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryFabricPodSsByMoidRequest) Execute() (NiatelemetryFabricPodSs, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryFabricPodSsByMoidRequest) Execute() (*NiatelemetryFabricPodSs, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryFabricPodSsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryFabricPodSsByMoid Read a 'niatelemetry.FabricPodSs' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryFabricPodSsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryFabricPodSsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryFabricPodSsByMoidRequest {
 	return ApiGetNiatelemetryFabricPodSsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -13859,27 +13718,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoid(ctx _context.C
 
 // Execute executes the request
 //  @return NiatelemetryFabricPodSs
-func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoidExecute(r ApiGetNiatelemetryFabricPodSsByMoidRequest) (NiatelemetryFabricPodSs, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoidExecute(r ApiGetNiatelemetryFabricPodSsByMoidRequest) (*NiatelemetryFabricPodSs, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryFabricPodSs
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryFabricPodSs
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryFabricPodSsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/FabricPodSs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -13898,7 +13755,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoidExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -13908,15 +13765,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -13972,7 +13829,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoidExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -13983,7 +13840,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsByMoidExecute(r ApiGe
 }
 
 type ApiGetNiatelemetryFabricPodSsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -14064,17 +13921,17 @@ func (r ApiGetNiatelemetryFabricPodSsListRequest) Tags(tags string) ApiGetNiatel
 	return r
 }
 
-func (r ApiGetNiatelemetryFabricPodSsListRequest) Execute() (NiatelemetryFabricPodSsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryFabricPodSsListRequest) Execute() (*NiatelemetryFabricPodSsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryFabricPodSsListExecute(r)
 }
 
 /*
 GetNiatelemetryFabricPodSsList Read a 'niatelemetry.FabricPodSs' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryFabricPodSsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsList(ctx _context.Context) ApiGetNiatelemetryFabricPodSsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsList(ctx context.Context) ApiGetNiatelemetryFabricPodSsListRequest {
 	return ApiGetNiatelemetryFabricPodSsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -14083,26 +13940,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsList(ctx _context.Con
 
 // Execute executes the request
 //  @return NiatelemetryFabricPodSsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsListExecute(r ApiGetNiatelemetryFabricPodSsListRequest) (NiatelemetryFabricPodSsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsListExecute(r ApiGetNiatelemetryFabricPodSsListRequest) (*NiatelemetryFabricPodSsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryFabricPodSsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryFabricPodSsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryFabricPodSsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/FabricPodSs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -14154,7 +14009,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsListExecute(r ApiGetN
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -14164,15 +14019,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsListExecute(r ApiGetN
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -14228,7 +14083,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsListExecute(r ApiGetN
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -14239,23 +14094,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryFabricPodSsListExecute(r ApiGetN
 }
 
 type ApiGetNiatelemetryFaultByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryFaultByMoidRequest) Execute() (NiatelemetryFault, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryFaultByMoidRequest) Execute() (*NiatelemetryFault, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryFaultByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryFaultByMoid Read a 'niatelemetry.Fault' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryFaultByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryFaultByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoid(ctx context.Context, moid string) ApiGetNiatelemetryFaultByMoidRequest {
 	return ApiGetNiatelemetryFaultByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -14265,27 +14120,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoid(ctx _context.Context
 
 // Execute executes the request
 //  @return NiatelemetryFault
-func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoidExecute(r ApiGetNiatelemetryFaultByMoidRequest) (NiatelemetryFault, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoidExecute(r ApiGetNiatelemetryFaultByMoidRequest) (*NiatelemetryFault, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryFault
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryFault
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryFaultByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Faults/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -14304,7 +14157,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoidExecute(r ApiGetNiate
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -14314,15 +14167,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoidExecute(r ApiGetNiate
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -14378,7 +14231,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoidExecute(r ApiGetNiate
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -14389,7 +14242,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultByMoidExecute(r ApiGetNiate
 }
 
 type ApiGetNiatelemetryFaultListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -14470,17 +14323,17 @@ func (r ApiGetNiatelemetryFaultListRequest) Tags(tags string) ApiGetNiatelemetry
 	return r
 }
 
-func (r ApiGetNiatelemetryFaultListRequest) Execute() (NiatelemetryFaultResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryFaultListRequest) Execute() (*NiatelemetryFaultResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryFaultListExecute(r)
 }
 
 /*
 GetNiatelemetryFaultList Read a 'niatelemetry.Fault' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryFaultListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryFaultList(ctx _context.Context) ApiGetNiatelemetryFaultListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryFaultList(ctx context.Context) ApiGetNiatelemetryFaultListRequest {
 	return ApiGetNiatelemetryFaultListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -14489,26 +14342,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultList(ctx _context.Context) 
 
 // Execute executes the request
 //  @return NiatelemetryFaultResponse
-func (a *NiatelemetryApiService) GetNiatelemetryFaultListExecute(r ApiGetNiatelemetryFaultListRequest) (NiatelemetryFaultResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryFaultListExecute(r ApiGetNiatelemetryFaultListRequest) (*NiatelemetryFaultResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryFaultResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryFaultResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryFaultList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Faults"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -14560,7 +14411,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultListExecute(r ApiGetNiatele
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -14570,15 +14421,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultListExecute(r ApiGetNiatele
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -14634,7 +14485,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultListExecute(r ApiGetNiatele
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -14645,23 +14496,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryFaultListExecute(r ApiGetNiatele
 }
 
 type ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest) Execute() (NiatelemetryHttpsAclContractDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest) Execute() (*NiatelemetryHttpsAclContractDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryHttpsAclContractDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryHttpsAclContractDetailsByMoid Read a 'niatelemetry.HttpsAclContractDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest {
 	return ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -14671,27 +14522,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoid(ct
 
 // Execute executes the request
 //  @return NiatelemetryHttpsAclContractDetails
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoidExecute(r ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest) (NiatelemetryHttpsAclContractDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoidExecute(r ApiGetNiatelemetryHttpsAclContractDetailsByMoidRequest) (*NiatelemetryHttpsAclContractDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryHttpsAclContractDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryHttpsAclContractDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryHttpsAclContractDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/HttpsAclContractDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -14710,7 +14559,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoidExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -14720,15 +14569,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoidExe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -14784,7 +14633,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoidExe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -14795,7 +14644,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsByMoidExe
 }
 
 type ApiGetNiatelemetryHttpsAclContractDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -14876,17 +14725,17 @@ func (r ApiGetNiatelemetryHttpsAclContractDetailsListRequest) Tags(tags string) 
 	return r
 }
 
-func (r ApiGetNiatelemetryHttpsAclContractDetailsListRequest) Execute() (NiatelemetryHttpsAclContractDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryHttpsAclContractDetailsListRequest) Execute() (*NiatelemetryHttpsAclContractDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryHttpsAclContractDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryHttpsAclContractDetailsList Read a 'niatelemetry.HttpsAclContractDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryHttpsAclContractDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsList(ctx _context.Context) ApiGetNiatelemetryHttpsAclContractDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsList(ctx context.Context) ApiGetNiatelemetryHttpsAclContractDetailsListRequest {
 	return ApiGetNiatelemetryHttpsAclContractDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -14895,26 +14744,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsList(ctx 
 
 // Execute executes the request
 //  @return NiatelemetryHttpsAclContractDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsListExecute(r ApiGetNiatelemetryHttpsAclContractDetailsListRequest) (NiatelemetryHttpsAclContractDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsListExecute(r ApiGetNiatelemetryHttpsAclContractDetailsListRequest) (*NiatelemetryHttpsAclContractDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryHttpsAclContractDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryHttpsAclContractDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryHttpsAclContractDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/HttpsAclContractDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -14966,7 +14813,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsListExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -14976,15 +14823,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsListExecu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -15040,7 +14887,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsListExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -15051,23 +14898,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractDetailsListExecu
 }
 
 type ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest) Execute() (NiatelemetryHttpsAclContractFilterMap, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest) Execute() (*NiatelemetryHttpsAclContractFilterMap, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryHttpsAclContractFilterMapByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryHttpsAclContractFilterMapByMoid Read a 'niatelemetry.HttpsAclContractFilterMap' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoid(ctx context.Context, moid string) ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest {
 	return ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -15077,27 +14924,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoid(
 
 // Execute executes the request
 //  @return NiatelemetryHttpsAclContractFilterMap
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoidExecute(r ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest) (NiatelemetryHttpsAclContractFilterMap, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoidExecute(r ApiGetNiatelemetryHttpsAclContractFilterMapByMoidRequest) (*NiatelemetryHttpsAclContractFilterMap, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryHttpsAclContractFilterMap
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryHttpsAclContractFilterMap
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryHttpsAclContractFilterMapByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/HttpsAclContractFilterMaps/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -15116,7 +14961,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoidE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -15126,15 +14971,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoidE
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -15190,7 +15035,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoidE
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -15201,7 +15046,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapByMoidE
 }
 
 type ApiGetNiatelemetryHttpsAclContractFilterMapListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -15282,17 +15127,17 @@ func (r ApiGetNiatelemetryHttpsAclContractFilterMapListRequest) Tags(tags string
 	return r
 }
 
-func (r ApiGetNiatelemetryHttpsAclContractFilterMapListRequest) Execute() (NiatelemetryHttpsAclContractFilterMapResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryHttpsAclContractFilterMapListRequest) Execute() (*NiatelemetryHttpsAclContractFilterMapResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryHttpsAclContractFilterMapListExecute(r)
 }
 
 /*
 GetNiatelemetryHttpsAclContractFilterMapList Read a 'niatelemetry.HttpsAclContractFilterMap' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryHttpsAclContractFilterMapListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapList(ctx _context.Context) ApiGetNiatelemetryHttpsAclContractFilterMapListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapList(ctx context.Context) ApiGetNiatelemetryHttpsAclContractFilterMapListRequest {
 	return ApiGetNiatelemetryHttpsAclContractFilterMapListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -15301,26 +15146,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapList(ct
 
 // Execute executes the request
 //  @return NiatelemetryHttpsAclContractFilterMapResponse
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapListExecute(r ApiGetNiatelemetryHttpsAclContractFilterMapListRequest) (NiatelemetryHttpsAclContractFilterMapResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapListExecute(r ApiGetNiatelemetryHttpsAclContractFilterMapListRequest) (*NiatelemetryHttpsAclContractFilterMapResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryHttpsAclContractFilterMapResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryHttpsAclContractFilterMapResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryHttpsAclContractFilterMapList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/HttpsAclContractFilterMaps"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -15372,7 +15215,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapListExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -15382,15 +15225,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapListExe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -15446,7 +15289,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapListExe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -15457,23 +15300,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclContractFilterMapListExe
 }
 
 type ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest) Execute() (NiatelemetryHttpsAclEpgContractMap, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest) Execute() (*NiatelemetryHttpsAclEpgContractMap, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryHttpsAclEpgContractMapByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryHttpsAclEpgContractMapByMoid Read a 'niatelemetry.HttpsAclEpgContractMap' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoid(ctx context.Context, moid string) ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest {
 	return ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -15483,27 +15326,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoid(ctx
 
 // Execute executes the request
 //  @return NiatelemetryHttpsAclEpgContractMap
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoidExecute(r ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest) (NiatelemetryHttpsAclEpgContractMap, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoidExecute(r ApiGetNiatelemetryHttpsAclEpgContractMapByMoidRequest) (*NiatelemetryHttpsAclEpgContractMap, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryHttpsAclEpgContractMap
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryHttpsAclEpgContractMap
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryHttpsAclEpgContractMapByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/HttpsAclEpgContractMaps/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -15522,7 +15363,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoidExec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -15532,15 +15373,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoidExec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -15596,7 +15437,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoidExec
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -15607,7 +15448,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapByMoidExec
 }
 
 type ApiGetNiatelemetryHttpsAclEpgContractMapListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -15688,17 +15529,17 @@ func (r ApiGetNiatelemetryHttpsAclEpgContractMapListRequest) Tags(tags string) A
 	return r
 }
 
-func (r ApiGetNiatelemetryHttpsAclEpgContractMapListRequest) Execute() (NiatelemetryHttpsAclEpgContractMapResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryHttpsAclEpgContractMapListRequest) Execute() (*NiatelemetryHttpsAclEpgContractMapResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryHttpsAclEpgContractMapListExecute(r)
 }
 
 /*
 GetNiatelemetryHttpsAclEpgContractMapList Read a 'niatelemetry.HttpsAclEpgContractMap' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryHttpsAclEpgContractMapListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapList(ctx _context.Context) ApiGetNiatelemetryHttpsAclEpgContractMapListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapList(ctx context.Context) ApiGetNiatelemetryHttpsAclEpgContractMapListRequest {
 	return ApiGetNiatelemetryHttpsAclEpgContractMapListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -15707,26 +15548,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapList(ctx _
 
 // Execute executes the request
 //  @return NiatelemetryHttpsAclEpgContractMapResponse
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapListExecute(r ApiGetNiatelemetryHttpsAclEpgContractMapListRequest) (NiatelemetryHttpsAclEpgContractMapResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapListExecute(r ApiGetNiatelemetryHttpsAclEpgContractMapListRequest) (*NiatelemetryHttpsAclEpgContractMapResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryHttpsAclEpgContractMapResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryHttpsAclEpgContractMapResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryHttpsAclEpgContractMapList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/HttpsAclEpgContractMaps"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -15778,7 +15617,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapListExecut
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -15788,15 +15627,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapListExecut
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -15852,7 +15691,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapListExecut
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -15863,23 +15702,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgContractMapListExecut
 }
 
 type ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest) Execute() (NiatelemetryHttpsAclEpgDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest) Execute() (*NiatelemetryHttpsAclEpgDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryHttpsAclEpgDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryHttpsAclEpgDetailsByMoid Read a 'niatelemetry.HttpsAclEpgDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest {
 	return ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -15889,27 +15728,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoid(ctx _co
 
 // Execute executes the request
 //  @return NiatelemetryHttpsAclEpgDetails
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoidExecute(r ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest) (NiatelemetryHttpsAclEpgDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoidExecute(r ApiGetNiatelemetryHttpsAclEpgDetailsByMoidRequest) (*NiatelemetryHttpsAclEpgDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryHttpsAclEpgDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryHttpsAclEpgDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryHttpsAclEpgDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/HttpsAclEpgDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -15928,7 +15765,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoidExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -15938,15 +15775,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoidExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -16002,7 +15839,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoidExecute(
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -16013,7 +15850,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsByMoidExecute(
 }
 
 type ApiGetNiatelemetryHttpsAclEpgDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -16094,17 +15931,17 @@ func (r ApiGetNiatelemetryHttpsAclEpgDetailsListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetNiatelemetryHttpsAclEpgDetailsListRequest) Execute() (NiatelemetryHttpsAclEpgDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryHttpsAclEpgDetailsListRequest) Execute() (*NiatelemetryHttpsAclEpgDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryHttpsAclEpgDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryHttpsAclEpgDetailsList Read a 'niatelemetry.HttpsAclEpgDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryHttpsAclEpgDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsList(ctx _context.Context) ApiGetNiatelemetryHttpsAclEpgDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsList(ctx context.Context) ApiGetNiatelemetryHttpsAclEpgDetailsListRequest {
 	return ApiGetNiatelemetryHttpsAclEpgDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -16113,26 +15950,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsList(ctx _cont
 
 // Execute executes the request
 //  @return NiatelemetryHttpsAclEpgDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsListExecute(r ApiGetNiatelemetryHttpsAclEpgDetailsListRequest) (NiatelemetryHttpsAclEpgDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsListExecute(r ApiGetNiatelemetryHttpsAclEpgDetailsListRequest) (*NiatelemetryHttpsAclEpgDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryHttpsAclEpgDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryHttpsAclEpgDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryHttpsAclEpgDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/HttpsAclEpgDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -16184,7 +16019,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsListExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -16194,15 +16029,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsListExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -16258,7 +16093,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsListExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -16269,23 +16104,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclEpgDetailsListExecute(r 
 }
 
 type ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest) Execute() (NiatelemetryHttpsAclFilterDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest) Execute() (*NiatelemetryHttpsAclFilterDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryHttpsAclFilterDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryHttpsAclFilterDetailsByMoid Read a 'niatelemetry.HttpsAclFilterDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest {
 	return ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -16295,27 +16130,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoid(ctx 
 
 // Execute executes the request
 //  @return NiatelemetryHttpsAclFilterDetails
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoidExecute(r ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest) (NiatelemetryHttpsAclFilterDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoidExecute(r ApiGetNiatelemetryHttpsAclFilterDetailsByMoidRequest) (*NiatelemetryHttpsAclFilterDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryHttpsAclFilterDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryHttpsAclFilterDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryHttpsAclFilterDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/HttpsAclFilterDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -16334,7 +16167,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoidExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -16344,15 +16177,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoidExecu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -16408,7 +16241,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoidExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -16419,7 +16252,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsByMoidExecu
 }
 
 type ApiGetNiatelemetryHttpsAclFilterDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -16500,17 +16333,17 @@ func (r ApiGetNiatelemetryHttpsAclFilterDetailsListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetNiatelemetryHttpsAclFilterDetailsListRequest) Execute() (NiatelemetryHttpsAclFilterDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryHttpsAclFilterDetailsListRequest) Execute() (*NiatelemetryHttpsAclFilterDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryHttpsAclFilterDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryHttpsAclFilterDetailsList Read a 'niatelemetry.HttpsAclFilterDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryHttpsAclFilterDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsList(ctx _context.Context) ApiGetNiatelemetryHttpsAclFilterDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsList(ctx context.Context) ApiGetNiatelemetryHttpsAclFilterDetailsListRequest {
 	return ApiGetNiatelemetryHttpsAclFilterDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -16519,26 +16352,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsList(ctx _c
 
 // Execute executes the request
 //  @return NiatelemetryHttpsAclFilterDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsListExecute(r ApiGetNiatelemetryHttpsAclFilterDetailsListRequest) (NiatelemetryHttpsAclFilterDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsListExecute(r ApiGetNiatelemetryHttpsAclFilterDetailsListRequest) (*NiatelemetryHttpsAclFilterDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryHttpsAclFilterDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryHttpsAclFilterDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryHttpsAclFilterDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/HttpsAclFilterDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -16590,7 +16421,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsListExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -16600,15 +16431,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsListExecute
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -16664,7 +16495,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsListExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -16675,23 +16506,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryHttpsAclFilterDetailsListExecute
 }
 
 type ApiGetNiatelemetryInsightGroupDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryInsightGroupDetailsByMoidRequest) Execute() (NiatelemetryInsightGroupDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryInsightGroupDetailsByMoidRequest) Execute() (*NiatelemetryInsightGroupDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryInsightGroupDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryInsightGroupDetailsByMoid Read a 'niatelemetry.InsightGroupDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryInsightGroupDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryInsightGroupDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryInsightGroupDetailsByMoidRequest {
 	return ApiGetNiatelemetryInsightGroupDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -16701,27 +16532,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoid(ctx _c
 
 // Execute executes the request
 //  @return NiatelemetryInsightGroupDetails
-func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoidExecute(r ApiGetNiatelemetryInsightGroupDetailsByMoidRequest) (NiatelemetryInsightGroupDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoidExecute(r ApiGetNiatelemetryInsightGroupDetailsByMoidRequest) (*NiatelemetryInsightGroupDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryInsightGroupDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryInsightGroupDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryInsightGroupDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/InsightGroupDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -16740,7 +16569,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoidExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -16750,15 +16579,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoidExecute
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -16814,7 +16643,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoidExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -16825,7 +16654,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsByMoidExecute
 }
 
 type ApiGetNiatelemetryInsightGroupDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -16906,17 +16735,17 @@ func (r ApiGetNiatelemetryInsightGroupDetailsListRequest) Tags(tags string) ApiG
 	return r
 }
 
-func (r ApiGetNiatelemetryInsightGroupDetailsListRequest) Execute() (NiatelemetryInsightGroupDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryInsightGroupDetailsListRequest) Execute() (*NiatelemetryInsightGroupDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryInsightGroupDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryInsightGroupDetailsList Read a 'niatelemetry.InsightGroupDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryInsightGroupDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsList(ctx _context.Context) ApiGetNiatelemetryInsightGroupDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsList(ctx context.Context) ApiGetNiatelemetryInsightGroupDetailsListRequest {
 	return ApiGetNiatelemetryInsightGroupDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -16925,26 +16754,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsList(ctx _con
 
 // Execute executes the request
 //  @return NiatelemetryInsightGroupDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsListExecute(r ApiGetNiatelemetryInsightGroupDetailsListRequest) (NiatelemetryInsightGroupDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsListExecute(r ApiGetNiatelemetryInsightGroupDetailsListRequest) (*NiatelemetryInsightGroupDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryInsightGroupDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryInsightGroupDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryInsightGroupDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/InsightGroupDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -16996,7 +16823,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsListExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -17006,15 +16833,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsListExecute(r
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -17070,7 +16897,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsListExecute(r
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -17081,23 +16908,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryInsightGroupDetailsListExecute(r
 }
 
 type ApiGetNiatelemetryLcByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryLcByMoidRequest) Execute() (NiatelemetryLc, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryLcByMoidRequest) Execute() (*NiatelemetryLc, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryLcByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryLcByMoid Read a 'niatelemetry.Lc' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryLcByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryLcByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryLcByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryLcByMoid(ctx context.Context, moid string) ApiGetNiatelemetryLcByMoidRequest {
 	return ApiGetNiatelemetryLcByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -17107,27 +16934,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return NiatelemetryLc
-func (a *NiatelemetryApiService) GetNiatelemetryLcByMoidExecute(r ApiGetNiatelemetryLcByMoidRequest) (NiatelemetryLc, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryLcByMoidExecute(r ApiGetNiatelemetryLcByMoidRequest) (*NiatelemetryLc, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryLc
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryLc
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryLcByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Lcs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -17146,7 +16971,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcByMoidExecute(r ApiGetNiatelem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -17156,15 +16981,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcByMoidExecute(r ApiGetNiatelem
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -17220,7 +17045,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcByMoidExecute(r ApiGetNiatelem
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -17231,7 +17056,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcByMoidExecute(r ApiGetNiatelem
 }
 
 type ApiGetNiatelemetryLcListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -17312,17 +17137,17 @@ func (r ApiGetNiatelemetryLcListRequest) Tags(tags string) ApiGetNiatelemetryLcL
 	return r
 }
 
-func (r ApiGetNiatelemetryLcListRequest) Execute() (NiatelemetryLcResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryLcListRequest) Execute() (*NiatelemetryLcResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryLcListExecute(r)
 }
 
 /*
 GetNiatelemetryLcList Read a 'niatelemetry.Lc' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryLcListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryLcList(ctx _context.Context) ApiGetNiatelemetryLcListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryLcList(ctx context.Context) ApiGetNiatelemetryLcListRequest {
 	return ApiGetNiatelemetryLcListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -17331,26 +17156,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return NiatelemetryLcResponse
-func (a *NiatelemetryApiService) GetNiatelemetryLcListExecute(r ApiGetNiatelemetryLcListRequest) (NiatelemetryLcResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryLcListExecute(r ApiGetNiatelemetryLcListRequest) (*NiatelemetryLcResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryLcResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryLcResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryLcList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Lcs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -17402,7 +17225,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcListExecute(r ApiGetNiatelemet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -17412,15 +17235,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcListExecute(r ApiGetNiatelemet
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -17476,7 +17299,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcListExecute(r ApiGetNiatelemet
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -17487,23 +17310,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryLcListExecute(r ApiGetNiatelemet
 }
 
 type ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest) Execute() (NiatelemetryLeafPolGrpDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest) Execute() (*NiatelemetryLeafPolGrpDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryLeafPolGrpDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryLeafPolGrpDetailsByMoid Read a 'niatelemetry.LeafPolGrpDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest {
 	return ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -17513,27 +17336,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoid(ctx _con
 
 // Execute executes the request
 //  @return NiatelemetryLeafPolGrpDetails
-func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoidExecute(r ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest) (NiatelemetryLeafPolGrpDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoidExecute(r ApiGetNiatelemetryLeafPolGrpDetailsByMoidRequest) (*NiatelemetryLeafPolGrpDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryLeafPolGrpDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryLeafPolGrpDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryLeafPolGrpDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/LeafPolGrpDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -17552,7 +17373,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoidExecute(r
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -17562,15 +17383,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoidExecute(r
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -17626,7 +17447,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoidExecute(r
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -17637,7 +17458,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsByMoidExecute(r
 }
 
 type ApiGetNiatelemetryLeafPolGrpDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -17718,17 +17539,17 @@ func (r ApiGetNiatelemetryLeafPolGrpDetailsListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetNiatelemetryLeafPolGrpDetailsListRequest) Execute() (NiatelemetryLeafPolGrpDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryLeafPolGrpDetailsListRequest) Execute() (*NiatelemetryLeafPolGrpDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryLeafPolGrpDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryLeafPolGrpDetailsList Read a 'niatelemetry.LeafPolGrpDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryLeafPolGrpDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsList(ctx _context.Context) ApiGetNiatelemetryLeafPolGrpDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsList(ctx context.Context) ApiGetNiatelemetryLeafPolGrpDetailsListRequest {
 	return ApiGetNiatelemetryLeafPolGrpDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -17737,26 +17558,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsList(ctx _conte
 
 // Execute executes the request
 //  @return NiatelemetryLeafPolGrpDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsListExecute(r ApiGetNiatelemetryLeafPolGrpDetailsListRequest) (NiatelemetryLeafPolGrpDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsListExecute(r ApiGetNiatelemetryLeafPolGrpDetailsListRequest) (*NiatelemetryLeafPolGrpDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryLeafPolGrpDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryLeafPolGrpDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryLeafPolGrpDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/LeafPolGrpDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -17808,7 +17627,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsListExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -17818,15 +17637,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsListExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -17882,7 +17701,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsListExecute(r A
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -17893,23 +17712,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryLeafPolGrpDetailsListExecute(r A
 }
 
 type ApiGetNiatelemetryMsoContractDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryMsoContractDetailsByMoidRequest) Execute() (NiatelemetryMsoContractDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryMsoContractDetailsByMoidRequest) Execute() (*NiatelemetryMsoContractDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryMsoContractDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryMsoContractDetailsByMoid Read a 'niatelemetry.MsoContractDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryMsoContractDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryMsoContractDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryMsoContractDetailsByMoidRequest {
 	return ApiGetNiatelemetryMsoContractDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -17919,27 +17738,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoid(ctx _co
 
 // Execute executes the request
 //  @return NiatelemetryMsoContractDetails
-func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoidExecute(r ApiGetNiatelemetryMsoContractDetailsByMoidRequest) (NiatelemetryMsoContractDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoidExecute(r ApiGetNiatelemetryMsoContractDetailsByMoidRequest) (*NiatelemetryMsoContractDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryMsoContractDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryMsoContractDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoContractDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoContractDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -17958,7 +17775,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoidExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -17968,15 +17785,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoidExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -18032,7 +17849,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoidExecute(
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -18043,7 +17860,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsByMoidExecute(
 }
 
 type ApiGetNiatelemetryMsoContractDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -18124,17 +17941,17 @@ func (r ApiGetNiatelemetryMsoContractDetailsListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetNiatelemetryMsoContractDetailsListRequest) Execute() (NiatelemetryMsoContractDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryMsoContractDetailsListRequest) Execute() (*NiatelemetryMsoContractDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryMsoContractDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryMsoContractDetailsList Read a 'niatelemetry.MsoContractDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryMsoContractDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsList(ctx _context.Context) ApiGetNiatelemetryMsoContractDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsList(ctx context.Context) ApiGetNiatelemetryMsoContractDetailsListRequest {
 	return ApiGetNiatelemetryMsoContractDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -18143,26 +17960,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsList(ctx _cont
 
 // Execute executes the request
 //  @return NiatelemetryMsoContractDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsListExecute(r ApiGetNiatelemetryMsoContractDetailsListRequest) (NiatelemetryMsoContractDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsListExecute(r ApiGetNiatelemetryMsoContractDetailsListRequest) (*NiatelemetryMsoContractDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryMsoContractDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryMsoContractDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoContractDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoContractDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -18214,7 +18029,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsListExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -18224,15 +18039,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsListExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -18288,7 +18103,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsListExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -18299,23 +18114,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoContractDetailsListExecute(r 
 }
 
 type ApiGetNiatelemetryMsoEpgDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryMsoEpgDetailsByMoidRequest) Execute() (NiatelemetryMsoEpgDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryMsoEpgDetailsByMoidRequest) Execute() (*NiatelemetryMsoEpgDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryMsoEpgDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryMsoEpgDetailsByMoid Read a 'niatelemetry.MsoEpgDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryMsoEpgDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryMsoEpgDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryMsoEpgDetailsByMoidRequest {
 	return ApiGetNiatelemetryMsoEpgDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -18325,27 +18140,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoid(ctx _context
 
 // Execute executes the request
 //  @return NiatelemetryMsoEpgDetails
-func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoidExecute(r ApiGetNiatelemetryMsoEpgDetailsByMoidRequest) (NiatelemetryMsoEpgDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoidExecute(r ApiGetNiatelemetryMsoEpgDetailsByMoidRequest) (*NiatelemetryMsoEpgDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryMsoEpgDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryMsoEpgDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoEpgDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoEpgDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -18364,7 +18177,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoidExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -18374,15 +18187,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -18438,7 +18251,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoidExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -18449,7 +18262,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsByMoidExecute(r Api
 }
 
 type ApiGetNiatelemetryMsoEpgDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -18530,17 +18343,17 @@ func (r ApiGetNiatelemetryMsoEpgDetailsListRequest) Tags(tags string) ApiGetNiat
 	return r
 }
 
-func (r ApiGetNiatelemetryMsoEpgDetailsListRequest) Execute() (NiatelemetryMsoEpgDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryMsoEpgDetailsListRequest) Execute() (*NiatelemetryMsoEpgDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryMsoEpgDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryMsoEpgDetailsList Read a 'niatelemetry.MsoEpgDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryMsoEpgDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsList(ctx _context.Context) ApiGetNiatelemetryMsoEpgDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsList(ctx context.Context) ApiGetNiatelemetryMsoEpgDetailsListRequest {
 	return ApiGetNiatelemetryMsoEpgDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -18549,26 +18362,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsList(ctx _context.C
 
 // Execute executes the request
 //  @return NiatelemetryMsoEpgDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsListExecute(r ApiGetNiatelemetryMsoEpgDetailsListRequest) (NiatelemetryMsoEpgDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsListExecute(r ApiGetNiatelemetryMsoEpgDetailsListRequest) (*NiatelemetryMsoEpgDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryMsoEpgDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryMsoEpgDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoEpgDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoEpgDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -18620,7 +18431,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsListExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -18630,15 +18441,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -18694,7 +18505,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsListExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -18705,23 +18516,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoEpgDetailsListExecute(r ApiGe
 }
 
 type ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest) Execute() (NiatelemetryMsoSchemaDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest) Execute() (*NiatelemetryMsoSchemaDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryMsoSchemaDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryMsoSchemaDetailsByMoid Read a 'niatelemetry.MsoSchemaDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest {
 	return ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -18731,27 +18542,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoid(ctx _cont
 
 // Execute executes the request
 //  @return NiatelemetryMsoSchemaDetails
-func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoidExecute(r ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest) (NiatelemetryMsoSchemaDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoidExecute(r ApiGetNiatelemetryMsoSchemaDetailsByMoidRequest) (*NiatelemetryMsoSchemaDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryMsoSchemaDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryMsoSchemaDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoSchemaDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoSchemaDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -18770,7 +18579,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoidExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -18780,15 +18589,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -18844,7 +18653,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoidExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -18855,7 +18664,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsByMoidExecute(r 
 }
 
 type ApiGetNiatelemetryMsoSchemaDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -18936,17 +18745,17 @@ func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Tags(tags string) ApiGetN
 	return r
 }
 
-func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Execute() (NiatelemetryMsoSchemaDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryMsoSchemaDetailsListRequest) Execute() (*NiatelemetryMsoSchemaDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryMsoSchemaDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryMsoSchemaDetailsList Read a 'niatelemetry.MsoSchemaDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryMsoSchemaDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsList(ctx _context.Context) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsList(ctx context.Context) ApiGetNiatelemetryMsoSchemaDetailsListRequest {
 	return ApiGetNiatelemetryMsoSchemaDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -18955,26 +18764,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsList(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryMsoSchemaDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsListExecute(r ApiGetNiatelemetryMsoSchemaDetailsListRequest) (NiatelemetryMsoSchemaDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsListExecute(r ApiGetNiatelemetryMsoSchemaDetailsListRequest) (*NiatelemetryMsoSchemaDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryMsoSchemaDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryMsoSchemaDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoSchemaDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoSchemaDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -19026,7 +18833,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsListExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -19036,15 +18843,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -19100,7 +18907,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsListExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -19111,23 +18918,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSchemaDetailsListExecute(r Ap
 }
 
 type ApiGetNiatelemetryMsoSiteDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryMsoSiteDetailsByMoidRequest) Execute() (NiatelemetryMsoSiteDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryMsoSiteDetailsByMoidRequest) Execute() (*NiatelemetryMsoSiteDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryMsoSiteDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryMsoSiteDetailsByMoid Read a 'niatelemetry.MsoSiteDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryMsoSiteDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryMsoSiteDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryMsoSiteDetailsByMoidRequest {
 	return ApiGetNiatelemetryMsoSiteDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -19137,27 +18944,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoid(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryMsoSiteDetails
-func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoidExecute(r ApiGetNiatelemetryMsoSiteDetailsByMoidRequest) (NiatelemetryMsoSiteDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoidExecute(r ApiGetNiatelemetryMsoSiteDetailsByMoidRequest) (*NiatelemetryMsoSiteDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryMsoSiteDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryMsoSiteDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoSiteDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoSiteDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -19176,7 +18981,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoidExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -19186,15 +18991,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -19250,7 +19055,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoidExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -19261,7 +19066,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsByMoidExecute(r Ap
 }
 
 type ApiGetNiatelemetryMsoSiteDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -19342,17 +19147,17 @@ func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Tags(tags string) ApiGetNia
 	return r
 }
 
-func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Execute() (NiatelemetryMsoSiteDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryMsoSiteDetailsListRequest) Execute() (*NiatelemetryMsoSiteDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryMsoSiteDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryMsoSiteDetailsList Read a 'niatelemetry.MsoSiteDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryMsoSiteDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsList(ctx _context.Context) ApiGetNiatelemetryMsoSiteDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsList(ctx context.Context) ApiGetNiatelemetryMsoSiteDetailsListRequest {
 	return ApiGetNiatelemetryMsoSiteDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -19361,26 +19166,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsList(ctx _context.
 
 // Execute executes the request
 //  @return NiatelemetryMsoSiteDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsListExecute(r ApiGetNiatelemetryMsoSiteDetailsListRequest) (NiatelemetryMsoSiteDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsListExecute(r ApiGetNiatelemetryMsoSiteDetailsListRequest) (*NiatelemetryMsoSiteDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryMsoSiteDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryMsoSiteDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoSiteDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoSiteDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -19432,7 +19235,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsListExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -19442,15 +19245,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -19506,7 +19309,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsListExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -19517,23 +19320,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoSiteDetailsListExecute(r ApiG
 }
 
 type ApiGetNiatelemetryMsoTenantDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryMsoTenantDetailsByMoidRequest) Execute() (NiatelemetryMsoTenantDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryMsoTenantDetailsByMoidRequest) Execute() (*NiatelemetryMsoTenantDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryMsoTenantDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryMsoTenantDetailsByMoid Read a 'niatelemetry.MsoTenantDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryMsoTenantDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryMsoTenantDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryMsoTenantDetailsByMoidRequest {
 	return ApiGetNiatelemetryMsoTenantDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -19543,27 +19346,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoid(ctx _cont
 
 // Execute executes the request
 //  @return NiatelemetryMsoTenantDetails
-func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoidExecute(r ApiGetNiatelemetryMsoTenantDetailsByMoidRequest) (NiatelemetryMsoTenantDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoidExecute(r ApiGetNiatelemetryMsoTenantDetailsByMoidRequest) (*NiatelemetryMsoTenantDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryMsoTenantDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryMsoTenantDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoTenantDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoTenantDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -19582,7 +19383,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoidExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -19592,15 +19393,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -19656,7 +19457,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoidExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -19667,7 +19468,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsByMoidExecute(r 
 }
 
 type ApiGetNiatelemetryMsoTenantDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -19748,17 +19549,17 @@ func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Tags(tags string) ApiGetN
 	return r
 }
 
-func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Execute() (NiatelemetryMsoTenantDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryMsoTenantDetailsListRequest) Execute() (*NiatelemetryMsoTenantDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryMsoTenantDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryMsoTenantDetailsList Read a 'niatelemetry.MsoTenantDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryMsoTenantDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsList(ctx _context.Context) ApiGetNiatelemetryMsoTenantDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsList(ctx context.Context) ApiGetNiatelemetryMsoTenantDetailsListRequest {
 	return ApiGetNiatelemetryMsoTenantDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -19767,26 +19568,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsList(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryMsoTenantDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsListExecute(r ApiGetNiatelemetryMsoTenantDetailsListRequest) (NiatelemetryMsoTenantDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsListExecute(r ApiGetNiatelemetryMsoTenantDetailsListRequest) (*NiatelemetryMsoTenantDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryMsoTenantDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryMsoTenantDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryMsoTenantDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/MsoTenantDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -19838,7 +19637,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsListExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -19848,15 +19647,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -19912,7 +19711,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsListExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -19923,23 +19722,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryMsoTenantDetailsListExecute(r Ap
 }
 
 type ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) Execute() (NiatelemetryNexusDashboardControllerDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) Execute() (*NiatelemetryNexusDashboardControllerDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardControllerDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryNexusDashboardControllerDetailsByMoid Read a 'niatelemetry.NexusDashboardControllerDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest {
 	return ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -19949,27 +19748,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsB
 
 // Execute executes the request
 //  @return NiatelemetryNexusDashboardControllerDetails
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) (NiatelemetryNexusDashboardControllerDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardControllerDetailsByMoidRequest) (*NiatelemetryNexusDashboardControllerDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNexusDashboardControllerDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusDashboardControllerDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardControllerDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboardControllerDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -19988,7 +19785,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -19998,15 +19795,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsB
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -20062,7 +19859,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -20073,7 +19870,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsB
 }
 
 type ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -20154,17 +19951,17 @@ func (r ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest) Tags(tags 
 	return r
 }
 
-func (r ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest) Execute() (NiatelemetryNexusDashboardControllerDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest) Execute() (*NiatelemetryNexusDashboardControllerDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardControllerDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryNexusDashboardControllerDetailsList Read a 'niatelemetry.NexusDashboardControllerDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsList(ctx _context.Context) ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsList(ctx context.Context) ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest {
 	return ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -20173,26 +19970,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsL
 
 // Execute executes the request
 //  @return NiatelemetryNexusDashboardControllerDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsListExecute(r ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest) (NiatelemetryNexusDashboardControllerDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsListExecute(r ApiGetNiatelemetryNexusDashboardControllerDetailsListRequest) (*NiatelemetryNexusDashboardControllerDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNexusDashboardControllerDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusDashboardControllerDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardControllerDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboardControllerDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -20244,7 +20039,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsL
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -20254,15 +20049,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsL
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -20318,7 +20113,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsL
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -20329,23 +20124,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardControllerDetailsL
 }
 
 type ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) Execute() (NiatelemetryNexusDashboardDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) Execute() (*NiatelemetryNexusDashboardDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryNexusDashboardDetailsByMoid Read a 'niatelemetry.NexusDashboardDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest {
 	return ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -20355,27 +20150,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoid(ctx 
 
 // Execute executes the request
 //  @return NiatelemetryNexusDashboardDetails
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) (NiatelemetryNexusDashboardDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardDetailsByMoidRequest) (*NiatelemetryNexusDashboardDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNexusDashboardDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusDashboardDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboardDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -20394,7 +20187,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoidExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -20404,15 +20197,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoidExecu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -20468,7 +20261,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoidExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -20479,7 +20272,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsByMoidExecu
 }
 
 type ApiGetNiatelemetryNexusDashboardDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -20560,17 +20353,17 @@ func (r ApiGetNiatelemetryNexusDashboardDetailsListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetNiatelemetryNexusDashboardDetailsListRequest) Execute() (NiatelemetryNexusDashboardDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNexusDashboardDetailsListRequest) Execute() (*NiatelemetryNexusDashboardDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryNexusDashboardDetailsList Read a 'niatelemetry.NexusDashboardDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryNexusDashboardDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsList(ctx _context.Context) ApiGetNiatelemetryNexusDashboardDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsList(ctx context.Context) ApiGetNiatelemetryNexusDashboardDetailsListRequest {
 	return ApiGetNiatelemetryNexusDashboardDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -20579,26 +20372,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsList(ctx _c
 
 // Execute executes the request
 //  @return NiatelemetryNexusDashboardDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsListExecute(r ApiGetNiatelemetryNexusDashboardDetailsListRequest) (NiatelemetryNexusDashboardDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsListExecute(r ApiGetNiatelemetryNexusDashboardDetailsListRequest) (*NiatelemetryNexusDashboardDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNexusDashboardDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusDashboardDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboardDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -20650,7 +20441,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsListExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -20660,15 +20451,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsListExecute
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -20724,7 +20515,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsListExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -20735,23 +20526,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardDetailsListExecute
 }
 
 type ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) Execute() (NiatelemetryNexusDashboardMemoryDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) Execute() (*NiatelemetryNexusDashboardMemoryDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardMemoryDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryNexusDashboardMemoryDetailsByMoid Read a 'niatelemetry.NexusDashboardMemoryDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest {
 	return ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -20761,27 +20552,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoi
 
 // Execute executes the request
 //  @return NiatelemetryNexusDashboardMemoryDetails
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) (NiatelemetryNexusDashboardMemoryDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoidExecute(r ApiGetNiatelemetryNexusDashboardMemoryDetailsByMoidRequest) (*NiatelemetryNexusDashboardMemoryDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNexusDashboardMemoryDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusDashboardMemoryDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardMemoryDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboardMemoryDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -20800,7 +20589,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -20810,15 +20599,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -20874,7 +20663,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -20885,7 +20674,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsByMoi
 }
 
 type ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -20966,17 +20755,17 @@ func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest) Tags(tags stri
 	return r
 }
 
-func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest) Execute() (NiatelemetryNexusDashboardMemoryDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest) Execute() (*NiatelemetryNexusDashboardMemoryDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardMemoryDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetryNexusDashboardMemoryDetailsList Read a 'niatelemetry.NexusDashboardMemoryDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsList(ctx _context.Context) ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsList(ctx context.Context) ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest {
 	return ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -20985,26 +20774,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsList(
 
 // Execute executes the request
 //  @return NiatelemetryNexusDashboardMemoryDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsListExecute(r ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest) (NiatelemetryNexusDashboardMemoryDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsListExecute(r ApiGetNiatelemetryNexusDashboardMemoryDetailsListRequest) (*NiatelemetryNexusDashboardMemoryDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNexusDashboardMemoryDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusDashboardMemoryDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardMemoryDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboardMemoryDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -21056,7 +20843,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsListE
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -21066,15 +20853,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsListE
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -21130,7 +20917,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsListE
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -21141,23 +20928,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardMemoryDetailsListE
 }
 
 type ApiGetNiatelemetryNexusDashboardsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNexusDashboardsByMoidRequest) Execute() (NiatelemetryNexusDashboards, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNexusDashboardsByMoidRequest) Execute() (*NiatelemetryNexusDashboards, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryNexusDashboardsByMoid Read a 'niatelemetry.NexusDashboards' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryNexusDashboardsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryNexusDashboardsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNexusDashboardsByMoidRequest {
 	return ApiGetNiatelemetryNexusDashboardsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -21167,27 +20954,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoid(ctx _conte
 
 // Execute executes the request
 //  @return NiatelemetryNexusDashboards
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoidExecute(r ApiGetNiatelemetryNexusDashboardsByMoidRequest) (NiatelemetryNexusDashboards, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoidExecute(r ApiGetNiatelemetryNexusDashboardsByMoidRequest) (*NiatelemetryNexusDashboards, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNexusDashboards
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusDashboards
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboards/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -21206,7 +20991,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoidExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -21216,15 +21001,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -21280,7 +21065,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoidExecute(r A
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -21291,7 +21076,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsByMoidExecute(r A
 }
 
 type ApiGetNiatelemetryNexusDashboardsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -21372,17 +21157,17 @@ func (r ApiGetNiatelemetryNexusDashboardsListRequest) Tags(tags string) ApiGetNi
 	return r
 }
 
-func (r ApiGetNiatelemetryNexusDashboardsListRequest) Execute() (NiatelemetryNexusDashboardsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNexusDashboardsListRequest) Execute() (*NiatelemetryNexusDashboardsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNexusDashboardsListExecute(r)
 }
 
 /*
 GetNiatelemetryNexusDashboardsList Read a 'niatelemetry.NexusDashboards' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryNexusDashboardsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsList(ctx _context.Context) ApiGetNiatelemetryNexusDashboardsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsList(ctx context.Context) ApiGetNiatelemetryNexusDashboardsListRequest {
 	return ApiGetNiatelemetryNexusDashboardsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -21391,26 +21176,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsList(ctx _context
 
 // Execute executes the request
 //  @return NiatelemetryNexusDashboardsResponse
-func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsListExecute(r ApiGetNiatelemetryNexusDashboardsListRequest) (NiatelemetryNexusDashboardsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsListExecute(r ApiGetNiatelemetryNexusDashboardsListRequest) (*NiatelemetryNexusDashboardsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNexusDashboardsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNexusDashboardsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNexusDashboardsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NexusDashboards"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -21462,7 +21245,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsListExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -21472,15 +21255,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -21536,7 +21319,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsListExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -21547,23 +21330,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryNexusDashboardsListExecute(r Api
 }
 
 type ApiGetNiatelemetryNiaFeatureUsageByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) Execute() (NiatelemetryNiaFeatureUsage, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) Execute() (*NiatelemetryNiaFeatureUsage, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaFeatureUsageByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryNiaFeatureUsageByMoid Read a 'niatelemetry.NiaFeatureUsage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryNiaFeatureUsageByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryNiaFeatureUsageByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNiaFeatureUsageByMoidRequest {
 	return ApiGetNiatelemetryNiaFeatureUsageByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -21573,27 +21356,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoid(ctx _conte
 
 // Execute executes the request
 //  @return NiatelemetryNiaFeatureUsage
-func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoidExecute(r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) (NiatelemetryNiaFeatureUsage, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoidExecute(r ApiGetNiatelemetryNiaFeatureUsageByMoidRequest) (*NiatelemetryNiaFeatureUsage, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNiaFeatureUsage
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNiaFeatureUsage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaFeatureUsageByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaFeatureUsages/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -21612,7 +21393,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoidExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -21622,15 +21403,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -21686,7 +21467,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoidExecute(r A
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -21697,7 +21478,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageByMoidExecute(r A
 }
 
 type ApiGetNiatelemetryNiaFeatureUsageListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -21778,17 +21559,17 @@ func (r ApiGetNiatelemetryNiaFeatureUsageListRequest) Tags(tags string) ApiGetNi
 	return r
 }
 
-func (r ApiGetNiatelemetryNiaFeatureUsageListRequest) Execute() (NiatelemetryNiaFeatureUsageResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNiaFeatureUsageListRequest) Execute() (*NiatelemetryNiaFeatureUsageResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaFeatureUsageListExecute(r)
 }
 
 /*
 GetNiatelemetryNiaFeatureUsageList Read a 'niatelemetry.NiaFeatureUsage' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryNiaFeatureUsageListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageList(ctx _context.Context) ApiGetNiatelemetryNiaFeatureUsageListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageList(ctx context.Context) ApiGetNiatelemetryNiaFeatureUsageListRequest {
 	return ApiGetNiatelemetryNiaFeatureUsageListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -21797,26 +21578,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageList(ctx _context
 
 // Execute executes the request
 //  @return NiatelemetryNiaFeatureUsageResponse
-func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageListExecute(r ApiGetNiatelemetryNiaFeatureUsageListRequest) (NiatelemetryNiaFeatureUsageResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageListExecute(r ApiGetNiatelemetryNiaFeatureUsageListRequest) (*NiatelemetryNiaFeatureUsageResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNiaFeatureUsageResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNiaFeatureUsageResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaFeatureUsageList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaFeatureUsages"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -21868,7 +21647,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageListExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -21878,15 +21657,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -21942,7 +21721,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageListExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -21953,23 +21732,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaFeatureUsageListExecute(r Api
 }
 
 type ApiGetNiatelemetryNiaInventoryByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNiaInventoryByMoidRequest) Execute() (NiatelemetryNiaInventory, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNiaInventoryByMoidRequest) Execute() (*NiatelemetryNiaInventory, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaInventoryByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryNiaInventoryByMoid Read a 'niatelemetry.NiaInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryNiaInventoryByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryNiaInventoryByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNiaInventoryByMoidRequest {
 	return ApiGetNiatelemetryNiaInventoryByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -21979,27 +21758,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoid(ctx _context.
 
 // Execute executes the request
 //  @return NiatelemetryNiaInventory
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoidExecute(r ApiGetNiatelemetryNiaInventoryByMoidRequest) (NiatelemetryNiaInventory, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoidExecute(r ApiGetNiatelemetryNiaInventoryByMoidRequest) (*NiatelemetryNiaInventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNiaInventory
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNiaInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaInventoryByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventories/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -22018,7 +21795,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoidExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -22028,15 +21805,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -22092,7 +21869,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoidExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -22103,23 +21880,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryByMoidExecute(r ApiG
 }
 
 type ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest) Execute() (NiatelemetryNiaInventoryDcnm, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest) Execute() (*NiatelemetryNiaInventoryDcnm, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaInventoryDcnmByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryNiaInventoryDcnmByMoid Read a 'niatelemetry.NiaInventoryDcnm' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest {
 	return ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -22129,27 +21906,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoid(ctx _cont
 
 // Execute executes the request
 //  @return NiatelemetryNiaInventoryDcnm
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoidExecute(r ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest) (NiatelemetryNiaInventoryDcnm, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoidExecute(r ApiGetNiatelemetryNiaInventoryDcnmByMoidRequest) (*NiatelemetryNiaInventoryDcnm, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNiaInventoryDcnm
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNiaInventoryDcnm
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaInventoryDcnmByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventoryDcnms/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -22168,7 +21943,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoidExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -22178,15 +21953,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -22242,7 +22017,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoidExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -22253,7 +22028,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmByMoidExecute(r 
 }
 
 type ApiGetNiatelemetryNiaInventoryDcnmListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -22334,17 +22109,17 @@ func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Tags(tags string) ApiGetN
 	return r
 }
 
-func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Execute() (NiatelemetryNiaInventoryDcnmResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNiaInventoryDcnmListRequest) Execute() (*NiatelemetryNiaInventoryDcnmResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaInventoryDcnmListExecute(r)
 }
 
 /*
 GetNiatelemetryNiaInventoryDcnmList Read a 'niatelemetry.NiaInventoryDcnm' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryNiaInventoryDcnmListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmList(ctx _context.Context) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmList(ctx context.Context) ApiGetNiatelemetryNiaInventoryDcnmListRequest {
 	return ApiGetNiatelemetryNiaInventoryDcnmListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -22353,26 +22128,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmList(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetryNiaInventoryDcnmResponse
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmListExecute(r ApiGetNiatelemetryNiaInventoryDcnmListRequest) (NiatelemetryNiaInventoryDcnmResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmListExecute(r ApiGetNiatelemetryNiaInventoryDcnmListRequest) (*NiatelemetryNiaInventoryDcnmResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNiaInventoryDcnmResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNiaInventoryDcnmResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaInventoryDcnmList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventoryDcnms"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -22424,7 +22197,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmListExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -22434,15 +22207,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -22498,7 +22271,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmListExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -22509,23 +22282,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryDcnmListExecute(r Ap
 }
 
 type ApiGetNiatelemetryNiaInventoryFabricByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNiaInventoryFabricByMoidRequest) Execute() (NiatelemetryNiaInventoryFabric, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNiaInventoryFabricByMoidRequest) Execute() (*NiatelemetryNiaInventoryFabric, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaInventoryFabricByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryNiaInventoryFabricByMoid Read a 'niatelemetry.NiaInventoryFabric' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryNiaInventoryFabricByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryNiaInventoryFabricByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNiaInventoryFabricByMoidRequest {
 	return ApiGetNiatelemetryNiaInventoryFabricByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -22535,27 +22308,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoid(ctx _co
 
 // Execute executes the request
 //  @return NiatelemetryNiaInventoryFabric
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoidExecute(r ApiGetNiatelemetryNiaInventoryFabricByMoidRequest) (NiatelemetryNiaInventoryFabric, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoidExecute(r ApiGetNiatelemetryNiaInventoryFabricByMoidRequest) (*NiatelemetryNiaInventoryFabric, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNiaInventoryFabric
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNiaInventoryFabric
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaInventoryFabricByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventoryFabrics/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -22574,7 +22345,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoidExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -22584,15 +22355,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoidExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -22648,7 +22419,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoidExecute(
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -22659,7 +22430,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricByMoidExecute(
 }
 
 type ApiGetNiatelemetryNiaInventoryFabricListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -22740,17 +22511,17 @@ func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Execute() (NiatelemetryNiaInventoryFabricResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNiaInventoryFabricListRequest) Execute() (*NiatelemetryNiaInventoryFabricResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaInventoryFabricListExecute(r)
 }
 
 /*
 GetNiatelemetryNiaInventoryFabricList Read a 'niatelemetry.NiaInventoryFabric' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryNiaInventoryFabricListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricList(ctx _context.Context) ApiGetNiatelemetryNiaInventoryFabricListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricList(ctx context.Context) ApiGetNiatelemetryNiaInventoryFabricListRequest {
 	return ApiGetNiatelemetryNiaInventoryFabricListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -22759,26 +22530,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricList(ctx _cont
 
 // Execute executes the request
 //  @return NiatelemetryNiaInventoryFabricResponse
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricListExecute(r ApiGetNiatelemetryNiaInventoryFabricListRequest) (NiatelemetryNiaInventoryFabricResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricListExecute(r ApiGetNiatelemetryNiaInventoryFabricListRequest) (*NiatelemetryNiaInventoryFabricResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNiaInventoryFabricResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNiaInventoryFabricResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaInventoryFabricList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventoryFabrics"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -22830,7 +22599,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricListExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -22840,15 +22609,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricListExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -22904,7 +22673,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricListExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -22915,7 +22684,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryFabricListExecute(r 
 }
 
 type ApiGetNiatelemetryNiaInventoryListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -22996,17 +22765,17 @@ func (r ApiGetNiatelemetryNiaInventoryListRequest) Tags(tags string) ApiGetNiate
 	return r
 }
 
-func (r ApiGetNiatelemetryNiaInventoryListRequest) Execute() (NiatelemetryNiaInventoryResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNiaInventoryListRequest) Execute() (*NiatelemetryNiaInventoryResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaInventoryListExecute(r)
 }
 
 /*
 GetNiatelemetryNiaInventoryList Read a 'niatelemetry.NiaInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryNiaInventoryListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryList(ctx _context.Context) ApiGetNiatelemetryNiaInventoryListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryList(ctx context.Context) ApiGetNiatelemetryNiaInventoryListRequest {
 	return ApiGetNiatelemetryNiaInventoryListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -23015,26 +22784,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryList(ctx _context.Co
 
 // Execute executes the request
 //  @return NiatelemetryNiaInventoryResponse
-func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryListExecute(r ApiGetNiatelemetryNiaInventoryListRequest) (NiatelemetryNiaInventoryResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryListExecute(r ApiGetNiatelemetryNiaInventoryListRequest) (*NiatelemetryNiaInventoryResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNiaInventoryResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNiaInventoryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaInventoryList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaInventories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -23086,7 +22853,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryListExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -23096,15 +22863,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -23160,7 +22927,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryListExecute(r ApiGet
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -23171,23 +22938,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaInventoryListExecute(r ApiGet
 }
 
 type ApiGetNiatelemetryNiaLicenseStateByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) Execute() (NiatelemetryNiaLicenseState, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) Execute() (*NiatelemetryNiaLicenseState, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaLicenseStateByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryNiaLicenseStateByMoid Read a 'niatelemetry.NiaLicenseState' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryNiaLicenseStateByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryNiaLicenseStateByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoid(ctx context.Context, moid string) ApiGetNiatelemetryNiaLicenseStateByMoidRequest {
 	return ApiGetNiatelemetryNiaLicenseStateByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -23197,27 +22964,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoid(ctx _conte
 
 // Execute executes the request
 //  @return NiatelemetryNiaLicenseState
-func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoidExecute(r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) (NiatelemetryNiaLicenseState, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoidExecute(r ApiGetNiatelemetryNiaLicenseStateByMoidRequest) (*NiatelemetryNiaLicenseState, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNiaLicenseState
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNiaLicenseState
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaLicenseStateByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaLicenseStates/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -23236,7 +23001,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoidExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -23246,15 +23011,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -23310,7 +23075,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoidExecute(r A
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -23321,7 +23086,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateByMoidExecute(r A
 }
 
 type ApiGetNiatelemetryNiaLicenseStateListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -23402,17 +23167,17 @@ func (r ApiGetNiatelemetryNiaLicenseStateListRequest) Tags(tags string) ApiGetNi
 	return r
 }
 
-func (r ApiGetNiatelemetryNiaLicenseStateListRequest) Execute() (NiatelemetryNiaLicenseStateResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryNiaLicenseStateListRequest) Execute() (*NiatelemetryNiaLicenseStateResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryNiaLicenseStateListExecute(r)
 }
 
 /*
 GetNiatelemetryNiaLicenseStateList Read a 'niatelemetry.NiaLicenseState' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryNiaLicenseStateListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateList(ctx _context.Context) ApiGetNiatelemetryNiaLicenseStateListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateList(ctx context.Context) ApiGetNiatelemetryNiaLicenseStateListRequest {
 	return ApiGetNiatelemetryNiaLicenseStateListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -23421,26 +23186,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateList(ctx _context
 
 // Execute executes the request
 //  @return NiatelemetryNiaLicenseStateResponse
-func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateListExecute(r ApiGetNiatelemetryNiaLicenseStateListRequest) (NiatelemetryNiaLicenseStateResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateListExecute(r ApiGetNiatelemetryNiaLicenseStateListRequest) (*NiatelemetryNiaLicenseStateResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryNiaLicenseStateResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryNiaLicenseStateResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryNiaLicenseStateList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/NiaLicenseStates"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -23492,7 +23255,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateListExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -23502,15 +23265,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -23566,7 +23329,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateListExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -23577,23 +23340,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryNiaLicenseStateListExecute(r Api
 }
 
 type ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest) Execute() (NiatelemetryPasswordStrengthCheck, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest) Execute() (*NiatelemetryPasswordStrengthCheck, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryPasswordStrengthCheckByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryPasswordStrengthCheckByMoid Read a 'niatelemetry.PasswordStrengthCheck' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoid(ctx context.Context, moid string) ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest {
 	return ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -23603,27 +23366,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoid(ctx 
 
 // Execute executes the request
 //  @return NiatelemetryPasswordStrengthCheck
-func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoidExecute(r ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest) (NiatelemetryPasswordStrengthCheck, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoidExecute(r ApiGetNiatelemetryPasswordStrengthCheckByMoidRequest) (*NiatelemetryPasswordStrengthCheck, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryPasswordStrengthCheck
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryPasswordStrengthCheck
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryPasswordStrengthCheckByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/PasswordStrengthChecks/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -23642,7 +23403,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoidExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -23652,15 +23413,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoidExecu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -23716,7 +23477,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoidExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -23727,7 +23488,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckByMoidExecu
 }
 
 type ApiGetNiatelemetryPasswordStrengthCheckListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -23808,17 +23569,17 @@ func (r ApiGetNiatelemetryPasswordStrengthCheckListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetNiatelemetryPasswordStrengthCheckListRequest) Execute() (NiatelemetryPasswordStrengthCheckResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryPasswordStrengthCheckListRequest) Execute() (*NiatelemetryPasswordStrengthCheckResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryPasswordStrengthCheckListExecute(r)
 }
 
 /*
 GetNiatelemetryPasswordStrengthCheckList Read a 'niatelemetry.PasswordStrengthCheck' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryPasswordStrengthCheckListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckList(ctx _context.Context) ApiGetNiatelemetryPasswordStrengthCheckListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckList(ctx context.Context) ApiGetNiatelemetryPasswordStrengthCheckListRequest {
 	return ApiGetNiatelemetryPasswordStrengthCheckListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -23827,26 +23588,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckList(ctx _c
 
 // Execute executes the request
 //  @return NiatelemetryPasswordStrengthCheckResponse
-func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckListExecute(r ApiGetNiatelemetryPasswordStrengthCheckListRequest) (NiatelemetryPasswordStrengthCheckResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckListExecute(r ApiGetNiatelemetryPasswordStrengthCheckListRequest) (*NiatelemetryPasswordStrengthCheckResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryPasswordStrengthCheckResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryPasswordStrengthCheckResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryPasswordStrengthCheckList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/PasswordStrengthChecks"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -23898,7 +23657,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckListExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -23908,15 +23667,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckListExecute
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -23972,7 +23731,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckListExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -23983,23 +23742,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryPasswordStrengthCheckListExecute
 }
 
 type ApiGetNiatelemetryPodCommPoliciesByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryPodCommPoliciesByMoidRequest) Execute() (NiatelemetryPodCommPolicies, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryPodCommPoliciesByMoidRequest) Execute() (*NiatelemetryPodCommPolicies, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryPodCommPoliciesByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryPodCommPoliciesByMoid Read a 'niatelemetry.PodCommPolicies' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryPodCommPoliciesByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryPodCommPoliciesByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoid(ctx context.Context, moid string) ApiGetNiatelemetryPodCommPoliciesByMoidRequest {
 	return ApiGetNiatelemetryPodCommPoliciesByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -24009,27 +23768,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoid(ctx _conte
 
 // Execute executes the request
 //  @return NiatelemetryPodCommPolicies
-func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoidExecute(r ApiGetNiatelemetryPodCommPoliciesByMoidRequest) (NiatelemetryPodCommPolicies, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoidExecute(r ApiGetNiatelemetryPodCommPoliciesByMoidRequest) (*NiatelemetryPodCommPolicies, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryPodCommPolicies
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryPodCommPolicies
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryPodCommPoliciesByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/PodCommPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -24048,7 +23805,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoidExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -24058,15 +23815,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -24122,7 +23879,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoidExecute(r A
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -24133,7 +23890,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesByMoidExecute(r A
 }
 
 type ApiGetNiatelemetryPodCommPoliciesListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -24214,17 +23971,17 @@ func (r ApiGetNiatelemetryPodCommPoliciesListRequest) Tags(tags string) ApiGetNi
 	return r
 }
 
-func (r ApiGetNiatelemetryPodCommPoliciesListRequest) Execute() (NiatelemetryPodCommPoliciesResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryPodCommPoliciesListRequest) Execute() (*NiatelemetryPodCommPoliciesResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryPodCommPoliciesListExecute(r)
 }
 
 /*
 GetNiatelemetryPodCommPoliciesList Read a 'niatelemetry.PodCommPolicies' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryPodCommPoliciesListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesList(ctx _context.Context) ApiGetNiatelemetryPodCommPoliciesListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesList(ctx context.Context) ApiGetNiatelemetryPodCommPoliciesListRequest {
 	return ApiGetNiatelemetryPodCommPoliciesListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -24233,26 +23990,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesList(ctx _context
 
 // Execute executes the request
 //  @return NiatelemetryPodCommPoliciesResponse
-func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesListExecute(r ApiGetNiatelemetryPodCommPoliciesListRequest) (NiatelemetryPodCommPoliciesResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesListExecute(r ApiGetNiatelemetryPodCommPoliciesListRequest) (*NiatelemetryPodCommPoliciesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryPodCommPoliciesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryPodCommPoliciesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryPodCommPoliciesList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/PodCommPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -24304,7 +24059,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesListExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -24314,15 +24069,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -24378,7 +24133,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesListExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -24389,23 +24144,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodCommPoliciesListExecute(r Api
 }
 
 type ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest) Execute() (NiatelemetryPodSnmpPolicies, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest) Execute() (*NiatelemetryPodSnmpPolicies, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryPodSnmpPoliciesByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryPodSnmpPoliciesByMoid Read a 'niatelemetry.PodSnmpPolicies' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoid(ctx context.Context, moid string) ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest {
 	return ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -24415,27 +24170,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoid(ctx _conte
 
 // Execute executes the request
 //  @return NiatelemetryPodSnmpPolicies
-func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoidExecute(r ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest) (NiatelemetryPodSnmpPolicies, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoidExecute(r ApiGetNiatelemetryPodSnmpPoliciesByMoidRequest) (*NiatelemetryPodSnmpPolicies, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryPodSnmpPolicies
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryPodSnmpPolicies
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryPodSnmpPoliciesByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/PodSnmpPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -24454,7 +24207,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoidExecute(r A
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -24464,15 +24217,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -24528,7 +24281,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoidExecute(r A
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -24539,7 +24292,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesByMoidExecute(r A
 }
 
 type ApiGetNiatelemetryPodSnmpPoliciesListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -24620,17 +24373,17 @@ func (r ApiGetNiatelemetryPodSnmpPoliciesListRequest) Tags(tags string) ApiGetNi
 	return r
 }
 
-func (r ApiGetNiatelemetryPodSnmpPoliciesListRequest) Execute() (NiatelemetryPodSnmpPoliciesResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryPodSnmpPoliciesListRequest) Execute() (*NiatelemetryPodSnmpPoliciesResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryPodSnmpPoliciesListExecute(r)
 }
 
 /*
 GetNiatelemetryPodSnmpPoliciesList Read a 'niatelemetry.PodSnmpPolicies' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryPodSnmpPoliciesListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesList(ctx _context.Context) ApiGetNiatelemetryPodSnmpPoliciesListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesList(ctx context.Context) ApiGetNiatelemetryPodSnmpPoliciesListRequest {
 	return ApiGetNiatelemetryPodSnmpPoliciesListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -24639,26 +24392,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesList(ctx _context
 
 // Execute executes the request
 //  @return NiatelemetryPodSnmpPoliciesResponse
-func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesListExecute(r ApiGetNiatelemetryPodSnmpPoliciesListRequest) (NiatelemetryPodSnmpPoliciesResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesListExecute(r ApiGetNiatelemetryPodSnmpPoliciesListRequest) (*NiatelemetryPodSnmpPoliciesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryPodSnmpPoliciesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryPodSnmpPoliciesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryPodSnmpPoliciesList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/PodSnmpPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -24710,7 +24461,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesListExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -24720,15 +24471,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -24784,7 +24535,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesListExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -24795,23 +24546,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodSnmpPoliciesListExecute(r Api
 }
 
 type ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest) Execute() (NiatelemetryPodTimeServerPolicies, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest) Execute() (*NiatelemetryPodTimeServerPolicies, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryPodTimeServerPoliciesByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryPodTimeServerPoliciesByMoid Read a 'niatelemetry.PodTimeServerPolicies' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoid(ctx context.Context, moid string) ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest {
 	return ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -24821,27 +24572,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoid(ctx 
 
 // Execute executes the request
 //  @return NiatelemetryPodTimeServerPolicies
-func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoidExecute(r ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest) (NiatelemetryPodTimeServerPolicies, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoidExecute(r ApiGetNiatelemetryPodTimeServerPoliciesByMoidRequest) (*NiatelemetryPodTimeServerPolicies, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryPodTimeServerPolicies
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryPodTimeServerPolicies
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryPodTimeServerPoliciesByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/PodTimeServerPolicies/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -24860,7 +24609,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoidExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -24870,15 +24619,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoidExecu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -24934,7 +24683,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoidExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -24945,7 +24694,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesByMoidExecu
 }
 
 type ApiGetNiatelemetryPodTimeServerPoliciesListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -25026,17 +24775,17 @@ func (r ApiGetNiatelemetryPodTimeServerPoliciesListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetNiatelemetryPodTimeServerPoliciesListRequest) Execute() (NiatelemetryPodTimeServerPoliciesResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryPodTimeServerPoliciesListRequest) Execute() (*NiatelemetryPodTimeServerPoliciesResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryPodTimeServerPoliciesListExecute(r)
 }
 
 /*
 GetNiatelemetryPodTimeServerPoliciesList Read a 'niatelemetry.PodTimeServerPolicies' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryPodTimeServerPoliciesListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesList(ctx _context.Context) ApiGetNiatelemetryPodTimeServerPoliciesListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesList(ctx context.Context) ApiGetNiatelemetryPodTimeServerPoliciesListRequest {
 	return ApiGetNiatelemetryPodTimeServerPoliciesListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -25045,26 +24794,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesList(ctx _c
 
 // Execute executes the request
 //  @return NiatelemetryPodTimeServerPoliciesResponse
-func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesListExecute(r ApiGetNiatelemetryPodTimeServerPoliciesListRequest) (NiatelemetryPodTimeServerPoliciesResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesListExecute(r ApiGetNiatelemetryPodTimeServerPoliciesListRequest) (*NiatelemetryPodTimeServerPoliciesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryPodTimeServerPoliciesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryPodTimeServerPoliciesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryPodTimeServerPoliciesList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/PodTimeServerPolicies"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -25116,7 +24863,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesListExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -25126,15 +24873,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesListExecute
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -25190,7 +24937,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesListExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -25201,23 +24948,23 @@ func (a *NiatelemetryApiService) GetNiatelemetryPodTimeServerPoliciesListExecute
 }
 
 type ApiGetNiatelemetrySiteInventoryByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetrySiteInventoryByMoidRequest) Execute() (NiatelemetrySiteInventory, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySiteInventoryByMoidRequest) Execute() (*NiatelemetrySiteInventory, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySiteInventoryByMoidExecute(r)
 }
 
 /*
 GetNiatelemetrySiteInventoryByMoid Read a 'niatelemetry.SiteInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetrySiteInventoryByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoid(ctx _context.Context, moid string) ApiGetNiatelemetrySiteInventoryByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySiteInventoryByMoidRequest {
 	return ApiGetNiatelemetrySiteInventoryByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -25227,27 +24974,25 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoid(ctx _context
 
 // Execute executes the request
 //  @return NiatelemetrySiteInventory
-func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoidExecute(r ApiGetNiatelemetrySiteInventoryByMoidRequest) (NiatelemetrySiteInventory, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoidExecute(r ApiGetNiatelemetrySiteInventoryByMoidRequest) (*NiatelemetrySiteInventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySiteInventory
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySiteInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySiteInventoryByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SiteInventories/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -25266,7 +25011,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoidExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -25276,15 +25021,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -25340,7 +25085,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoidExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -25351,7 +25096,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryByMoidExecute(r Api
 }
 
 type ApiGetNiatelemetrySiteInventoryListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -25432,17 +25177,17 @@ func (r ApiGetNiatelemetrySiteInventoryListRequest) Tags(tags string) ApiGetNiat
 	return r
 }
 
-func (r ApiGetNiatelemetrySiteInventoryListRequest) Execute() (NiatelemetrySiteInventoryResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySiteInventoryListRequest) Execute() (*NiatelemetrySiteInventoryResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySiteInventoryListExecute(r)
 }
 
 /*
 GetNiatelemetrySiteInventoryList Read a 'niatelemetry.SiteInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetrySiteInventoryListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryList(ctx _context.Context) ApiGetNiatelemetrySiteInventoryListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryList(ctx context.Context) ApiGetNiatelemetrySiteInventoryListRequest {
 	return ApiGetNiatelemetrySiteInventoryListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -25451,26 +25196,24 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryList(ctx _context.C
 
 // Execute executes the request
 //  @return NiatelemetrySiteInventoryResponse
-func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryListExecute(r ApiGetNiatelemetrySiteInventoryListRequest) (NiatelemetrySiteInventoryResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryListExecute(r ApiGetNiatelemetrySiteInventoryListRequest) (*NiatelemetrySiteInventoryResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySiteInventoryResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySiteInventoryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySiteInventoryList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SiteInventories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -25522,7 +25265,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryListExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -25532,15 +25275,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -25596,7 +25339,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryListExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -25607,23 +25350,23 @@ func (a *NiatelemetryApiService) GetNiatelemetrySiteInventoryListExecute(r ApiGe
 }
 
 type ApiGetNiatelemetrySnmpSrcByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetrySnmpSrcByMoidRequest) Execute() (NiatelemetrySnmpSrc, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySnmpSrcByMoidRequest) Execute() (*NiatelemetrySnmpSrc, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySnmpSrcByMoidExecute(r)
 }
 
 /*
 GetNiatelemetrySnmpSrcByMoid Read a 'niatelemetry.SnmpSrc' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetrySnmpSrcByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoid(ctx _context.Context, moid string) ApiGetNiatelemetrySnmpSrcByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySnmpSrcByMoidRequest {
 	return ApiGetNiatelemetrySnmpSrcByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -25633,27 +25376,25 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoid(ctx _context.Conte
 
 // Execute executes the request
 //  @return NiatelemetrySnmpSrc
-func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoidExecute(r ApiGetNiatelemetrySnmpSrcByMoidRequest) (NiatelemetrySnmpSrc, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoidExecute(r ApiGetNiatelemetrySnmpSrcByMoidRequest) (*NiatelemetrySnmpSrc, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySnmpSrc
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySnmpSrc
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySnmpSrcByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SnmpSrcs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -25672,7 +25413,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoidExecute(r ApiGetNia
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -25682,15 +25423,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoidExecute(r ApiGetNia
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -25746,7 +25487,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoidExecute(r ApiGetNia
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -25757,7 +25498,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcByMoidExecute(r ApiGetNia
 }
 
 type ApiGetNiatelemetrySnmpSrcListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -25838,17 +25579,17 @@ func (r ApiGetNiatelemetrySnmpSrcListRequest) Tags(tags string) ApiGetNiatelemet
 	return r
 }
 
-func (r ApiGetNiatelemetrySnmpSrcListRequest) Execute() (NiatelemetrySnmpSrcResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySnmpSrcListRequest) Execute() (*NiatelemetrySnmpSrcResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySnmpSrcListExecute(r)
 }
 
 /*
 GetNiatelemetrySnmpSrcList Read a 'niatelemetry.SnmpSrc' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetrySnmpSrcListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcList(ctx _context.Context) ApiGetNiatelemetrySnmpSrcListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcList(ctx context.Context) ApiGetNiatelemetrySnmpSrcListRequest {
 	return ApiGetNiatelemetrySnmpSrcListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -25857,26 +25598,24 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcList(ctx _context.Context
 
 // Execute executes the request
 //  @return NiatelemetrySnmpSrcResponse
-func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcListExecute(r ApiGetNiatelemetrySnmpSrcListRequest) (NiatelemetrySnmpSrcResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcListExecute(r ApiGetNiatelemetrySnmpSrcListRequest) (*NiatelemetrySnmpSrcResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySnmpSrcResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySnmpSrcResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySnmpSrcList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SnmpSrcs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -25928,7 +25667,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcListExecute(r ApiGetNiate
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -25938,15 +25677,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcListExecute(r ApiGetNiate
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -26002,7 +25741,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcListExecute(r ApiGetNiate
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -26013,23 +25752,23 @@ func (a *NiatelemetryApiService) GetNiatelemetrySnmpSrcListExecute(r ApiGetNiate
 }
 
 type ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest) Execute() (NiatelemetrySpinePolGrpDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest) Execute() (*NiatelemetrySpinePolGrpDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySpinePolGrpDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetrySpinePolGrpDetailsByMoid Read a 'niatelemetry.SpinePolGrpDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest {
 	return ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -26039,27 +25778,25 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoid(ctx _co
 
 // Execute executes the request
 //  @return NiatelemetrySpinePolGrpDetails
-func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoidExecute(r ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest) (NiatelemetrySpinePolGrpDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoidExecute(r ApiGetNiatelemetrySpinePolGrpDetailsByMoidRequest) (*NiatelemetrySpinePolGrpDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySpinePolGrpDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySpinePolGrpDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySpinePolGrpDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SpinePolGrpDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -26078,7 +25815,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoidExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -26088,15 +25825,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoidExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -26152,7 +25889,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoidExecute(
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -26163,7 +25900,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsByMoidExecute(
 }
 
 type ApiGetNiatelemetrySpinePolGrpDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -26244,17 +25981,17 @@ func (r ApiGetNiatelemetrySpinePolGrpDetailsListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetNiatelemetrySpinePolGrpDetailsListRequest) Execute() (NiatelemetrySpinePolGrpDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySpinePolGrpDetailsListRequest) Execute() (*NiatelemetrySpinePolGrpDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySpinePolGrpDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetrySpinePolGrpDetailsList Read a 'niatelemetry.SpinePolGrpDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetrySpinePolGrpDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsList(ctx _context.Context) ApiGetNiatelemetrySpinePolGrpDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsList(ctx context.Context) ApiGetNiatelemetrySpinePolGrpDetailsListRequest {
 	return ApiGetNiatelemetrySpinePolGrpDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -26263,26 +26000,24 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsList(ctx _cont
 
 // Execute executes the request
 //  @return NiatelemetrySpinePolGrpDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsListExecute(r ApiGetNiatelemetrySpinePolGrpDetailsListRequest) (NiatelemetrySpinePolGrpDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsListExecute(r ApiGetNiatelemetrySpinePolGrpDetailsListRequest) (*NiatelemetrySpinePolGrpDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySpinePolGrpDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySpinePolGrpDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySpinePolGrpDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SpinePolGrpDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -26334,7 +26069,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsListExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -26344,15 +26079,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsListExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -26408,7 +26143,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsListExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -26419,23 +26154,23 @@ func (a *NiatelemetryApiService) GetNiatelemetrySpinePolGrpDetailsListExecute(r 
 }
 
 type ApiGetNiatelemetrySshVersionTwoByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetrySshVersionTwoByMoidRequest) Execute() (NiatelemetrySshVersionTwo, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySshVersionTwoByMoidRequest) Execute() (*NiatelemetrySshVersionTwo, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySshVersionTwoByMoidExecute(r)
 }
 
 /*
 GetNiatelemetrySshVersionTwoByMoid Read a 'niatelemetry.SshVersionTwo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetrySshVersionTwoByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoid(ctx _context.Context, moid string) ApiGetNiatelemetrySshVersionTwoByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySshVersionTwoByMoidRequest {
 	return ApiGetNiatelemetrySshVersionTwoByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -26445,27 +26180,25 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoid(ctx _context
 
 // Execute executes the request
 //  @return NiatelemetrySshVersionTwo
-func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoidExecute(r ApiGetNiatelemetrySshVersionTwoByMoidRequest) (NiatelemetrySshVersionTwo, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoidExecute(r ApiGetNiatelemetrySshVersionTwoByMoidRequest) (*NiatelemetrySshVersionTwo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySshVersionTwo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySshVersionTwo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySshVersionTwoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SshVersionTwos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -26484,7 +26217,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoidExecute(r Api
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -26494,15 +26227,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -26558,7 +26291,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoidExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -26569,7 +26302,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoByMoidExecute(r Api
 }
 
 type ApiGetNiatelemetrySshVersionTwoListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -26650,17 +26383,17 @@ func (r ApiGetNiatelemetrySshVersionTwoListRequest) Tags(tags string) ApiGetNiat
 	return r
 }
 
-func (r ApiGetNiatelemetrySshVersionTwoListRequest) Execute() (NiatelemetrySshVersionTwoResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySshVersionTwoListRequest) Execute() (*NiatelemetrySshVersionTwoResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySshVersionTwoListExecute(r)
 }
 
 /*
 GetNiatelemetrySshVersionTwoList Read a 'niatelemetry.SshVersionTwo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetrySshVersionTwoListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoList(ctx _context.Context) ApiGetNiatelemetrySshVersionTwoListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoList(ctx context.Context) ApiGetNiatelemetrySshVersionTwoListRequest {
 	return ApiGetNiatelemetrySshVersionTwoListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -26669,26 +26402,24 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoList(ctx _context.C
 
 // Execute executes the request
 //  @return NiatelemetrySshVersionTwoResponse
-func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoListExecute(r ApiGetNiatelemetrySshVersionTwoListRequest) (NiatelemetrySshVersionTwoResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoListExecute(r ApiGetNiatelemetrySshVersionTwoListRequest) (*NiatelemetrySshVersionTwoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySshVersionTwoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySshVersionTwoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySshVersionTwoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SshVersionTwos"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -26740,7 +26471,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoListExecute(r ApiGe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -26750,15 +26481,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -26814,7 +26545,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoListExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -26825,23 +26556,23 @@ func (a *NiatelemetryApiService) GetNiatelemetrySshVersionTwoListExecute(r ApiGe
 }
 
 type ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest) Execute() (NiatelemetrySupervisorModuleDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest) Execute() (*NiatelemetrySupervisorModuleDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySupervisorModuleDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetrySupervisorModuleDetailsByMoid Read a 'niatelemetry.SupervisorModuleDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest {
 	return ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -26851,27 +26582,25 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoid(ct
 
 // Execute executes the request
 //  @return NiatelemetrySupervisorModuleDetails
-func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoidExecute(r ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest) (NiatelemetrySupervisorModuleDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoidExecute(r ApiGetNiatelemetrySupervisorModuleDetailsByMoidRequest) (*NiatelemetrySupervisorModuleDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySupervisorModuleDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySupervisorModuleDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySupervisorModuleDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SupervisorModuleDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -26890,7 +26619,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoidExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -26900,15 +26629,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoidExe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -26964,7 +26693,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoidExe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -26975,7 +26704,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsByMoidExe
 }
 
 type ApiGetNiatelemetrySupervisorModuleDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -27056,17 +26785,17 @@ func (r ApiGetNiatelemetrySupervisorModuleDetailsListRequest) Tags(tags string) 
 	return r
 }
 
-func (r ApiGetNiatelemetrySupervisorModuleDetailsListRequest) Execute() (NiatelemetrySupervisorModuleDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySupervisorModuleDetailsListRequest) Execute() (*NiatelemetrySupervisorModuleDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySupervisorModuleDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetrySupervisorModuleDetailsList Read a 'niatelemetry.SupervisorModuleDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetrySupervisorModuleDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsList(ctx _context.Context) ApiGetNiatelemetrySupervisorModuleDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsList(ctx context.Context) ApiGetNiatelemetrySupervisorModuleDetailsListRequest {
 	return ApiGetNiatelemetrySupervisorModuleDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -27075,26 +26804,24 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsList(ctx 
 
 // Execute executes the request
 //  @return NiatelemetrySupervisorModuleDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsListExecute(r ApiGetNiatelemetrySupervisorModuleDetailsListRequest) (NiatelemetrySupervisorModuleDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsListExecute(r ApiGetNiatelemetrySupervisorModuleDetailsListRequest) (*NiatelemetrySupervisorModuleDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySupervisorModuleDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySupervisorModuleDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySupervisorModuleDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SupervisorModuleDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -27146,7 +26873,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsListExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -27156,15 +26883,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsListExecu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -27220,7 +26947,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsListExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -27231,23 +26958,23 @@ func (a *NiatelemetryApiService) GetNiatelemetrySupervisorModuleDetailsListExecu
 }
 
 type ApiGetNiatelemetrySyslogRemoteDestByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetrySyslogRemoteDestByMoidRequest) Execute() (NiatelemetrySyslogRemoteDest, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySyslogRemoteDestByMoidRequest) Execute() (*NiatelemetrySyslogRemoteDest, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySyslogRemoteDestByMoidExecute(r)
 }
 
 /*
 GetNiatelemetrySyslogRemoteDestByMoid Read a 'niatelemetry.SyslogRemoteDest' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetrySyslogRemoteDestByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoid(ctx _context.Context, moid string) ApiGetNiatelemetrySyslogRemoteDestByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySyslogRemoteDestByMoidRequest {
 	return ApiGetNiatelemetrySyslogRemoteDestByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -27257,27 +26984,25 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoid(ctx _cont
 
 // Execute executes the request
 //  @return NiatelemetrySyslogRemoteDest
-func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoidExecute(r ApiGetNiatelemetrySyslogRemoteDestByMoidRequest) (NiatelemetrySyslogRemoteDest, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoidExecute(r ApiGetNiatelemetrySyslogRemoteDestByMoidRequest) (*NiatelemetrySyslogRemoteDest, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySyslogRemoteDest
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySyslogRemoteDest
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySyslogRemoteDestByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SyslogRemoteDests/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -27296,7 +27021,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoidExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -27306,15 +27031,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -27370,7 +27095,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoidExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -27381,7 +27106,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestByMoidExecute(r 
 }
 
 type ApiGetNiatelemetrySyslogRemoteDestListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -27462,17 +27187,17 @@ func (r ApiGetNiatelemetrySyslogRemoteDestListRequest) Tags(tags string) ApiGetN
 	return r
 }
 
-func (r ApiGetNiatelemetrySyslogRemoteDestListRequest) Execute() (NiatelemetrySyslogRemoteDestResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySyslogRemoteDestListRequest) Execute() (*NiatelemetrySyslogRemoteDestResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySyslogRemoteDestListExecute(r)
 }
 
 /*
 GetNiatelemetrySyslogRemoteDestList Read a 'niatelemetry.SyslogRemoteDest' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetrySyslogRemoteDestListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestList(ctx _context.Context) ApiGetNiatelemetrySyslogRemoteDestListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestList(ctx context.Context) ApiGetNiatelemetrySyslogRemoteDestListRequest {
 	return ApiGetNiatelemetrySyslogRemoteDestListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -27481,26 +27206,24 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestList(ctx _contex
 
 // Execute executes the request
 //  @return NiatelemetrySyslogRemoteDestResponse
-func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestListExecute(r ApiGetNiatelemetrySyslogRemoteDestListRequest) (NiatelemetrySyslogRemoteDestResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestListExecute(r ApiGetNiatelemetrySyslogRemoteDestListRequest) (*NiatelemetrySyslogRemoteDestResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySyslogRemoteDestResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySyslogRemoteDestResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySyslogRemoteDestList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SyslogRemoteDests"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -27552,7 +27275,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestListExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -27562,15 +27285,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -27626,7 +27349,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestListExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -27637,23 +27360,23 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogRemoteDestListExecute(r Ap
 }
 
 type ApiGetNiatelemetrySyslogSysMsgByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetrySyslogSysMsgByMoidRequest) Execute() (NiatelemetrySyslogSysMsg, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySyslogSysMsgByMoidRequest) Execute() (*NiatelemetrySyslogSysMsg, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySyslogSysMsgByMoidExecute(r)
 }
 
 /*
 GetNiatelemetrySyslogSysMsgByMoid Read a 'niatelemetry.SyslogSysMsg' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetrySyslogSysMsgByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoid(ctx _context.Context, moid string) ApiGetNiatelemetrySyslogSysMsgByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySyslogSysMsgByMoidRequest {
 	return ApiGetNiatelemetrySyslogSysMsgByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -27663,27 +27386,25 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoid(ctx _context.
 
 // Execute executes the request
 //  @return NiatelemetrySyslogSysMsg
-func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoidExecute(r ApiGetNiatelemetrySyslogSysMsgByMoidRequest) (NiatelemetrySyslogSysMsg, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoidExecute(r ApiGetNiatelemetrySyslogSysMsgByMoidRequest) (*NiatelemetrySyslogSysMsg, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySyslogSysMsg
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySyslogSysMsg
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySyslogSysMsgByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SyslogSysMsgs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -27702,7 +27423,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoidExecute(r ApiG
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -27712,15 +27433,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -27776,7 +27497,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoidExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -27787,23 +27508,23 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgByMoidExecute(r ApiG
 }
 
 type ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest) Execute() (NiatelemetrySyslogSysMsgFacFilter, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest) Execute() (*NiatelemetrySyslogSysMsgFacFilter, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySyslogSysMsgFacFilterByMoidExecute(r)
 }
 
 /*
 GetNiatelemetrySyslogSysMsgFacFilterByMoid Read a 'niatelemetry.SyslogSysMsgFacFilter' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoid(ctx _context.Context, moid string) ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest {
 	return ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -27813,27 +27534,25 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoid(ctx 
 
 // Execute executes the request
 //  @return NiatelemetrySyslogSysMsgFacFilter
-func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoidExecute(r ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest) (NiatelemetrySyslogSysMsgFacFilter, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoidExecute(r ApiGetNiatelemetrySyslogSysMsgFacFilterByMoidRequest) (*NiatelemetrySyslogSysMsgFacFilter, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySyslogSysMsgFacFilter
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySyslogSysMsgFacFilter
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySyslogSysMsgFacFilterByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SyslogSysMsgFacFilters/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -27852,7 +27571,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoidExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -27862,15 +27581,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoidExecu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -27926,7 +27645,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoidExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -27937,7 +27656,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterByMoidExecu
 }
 
 type ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -28018,17 +27737,17 @@ func (r ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest) Execute() (NiatelemetrySyslogSysMsgFacFilterResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest) Execute() (*NiatelemetrySyslogSysMsgFacFilterResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySyslogSysMsgFacFilterListExecute(r)
 }
 
 /*
 GetNiatelemetrySyslogSysMsgFacFilterList Read a 'niatelemetry.SyslogSysMsgFacFilter' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterList(ctx _context.Context) ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterList(ctx context.Context) ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest {
 	return ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -28037,26 +27756,24 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterList(ctx _c
 
 // Execute executes the request
 //  @return NiatelemetrySyslogSysMsgFacFilterResponse
-func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterListExecute(r ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest) (NiatelemetrySyslogSysMsgFacFilterResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterListExecute(r ApiGetNiatelemetrySyslogSysMsgFacFilterListRequest) (*NiatelemetrySyslogSysMsgFacFilterResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySyslogSysMsgFacFilterResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySyslogSysMsgFacFilterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySyslogSysMsgFacFilterList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SyslogSysMsgFacFilters"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -28108,7 +27825,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterListExecute
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -28118,15 +27835,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterListExecute
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -28182,7 +27899,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterListExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -28193,7 +27910,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgFacFilterListExecute
 }
 
 type ApiGetNiatelemetrySyslogSysMsgListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -28274,17 +27991,17 @@ func (r ApiGetNiatelemetrySyslogSysMsgListRequest) Tags(tags string) ApiGetNiate
 	return r
 }
 
-func (r ApiGetNiatelemetrySyslogSysMsgListRequest) Execute() (NiatelemetrySyslogSysMsgResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySyslogSysMsgListRequest) Execute() (*NiatelemetrySyslogSysMsgResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySyslogSysMsgListExecute(r)
 }
 
 /*
 GetNiatelemetrySyslogSysMsgList Read a 'niatelemetry.SyslogSysMsg' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetrySyslogSysMsgListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgList(ctx _context.Context) ApiGetNiatelemetrySyslogSysMsgListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgList(ctx context.Context) ApiGetNiatelemetrySyslogSysMsgListRequest {
 	return ApiGetNiatelemetrySyslogSysMsgListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -28293,26 +28010,24 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgList(ctx _context.Co
 
 // Execute executes the request
 //  @return NiatelemetrySyslogSysMsgResponse
-func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgListExecute(r ApiGetNiatelemetrySyslogSysMsgListRequest) (NiatelemetrySyslogSysMsgResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgListExecute(r ApiGetNiatelemetrySyslogSysMsgListRequest) (*NiatelemetrySyslogSysMsgResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySyslogSysMsgResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySyslogSysMsgResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySyslogSysMsgList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SyslogSysMsgs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -28364,7 +28079,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgListExecute(r ApiGet
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -28374,15 +28089,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -28438,7 +28153,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgListExecute(r ApiGet
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -28449,23 +28164,23 @@ func (a *NiatelemetryApiService) GetNiatelemetrySyslogSysMsgListExecute(r ApiGet
 }
 
 type ApiGetNiatelemetrySystemControllerDetailsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetrySystemControllerDetailsByMoidRequest) Execute() (NiatelemetrySystemControllerDetails, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySystemControllerDetailsByMoidRequest) Execute() (*NiatelemetrySystemControllerDetails, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySystemControllerDetailsByMoidExecute(r)
 }
 
 /*
 GetNiatelemetrySystemControllerDetailsByMoid Read a 'niatelemetry.SystemControllerDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetrySystemControllerDetailsByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoid(ctx _context.Context, moid string) ApiGetNiatelemetrySystemControllerDetailsByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoid(ctx context.Context, moid string) ApiGetNiatelemetrySystemControllerDetailsByMoidRequest {
 	return ApiGetNiatelemetrySystemControllerDetailsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -28475,27 +28190,25 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoid(ct
 
 // Execute executes the request
 //  @return NiatelemetrySystemControllerDetails
-func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoidExecute(r ApiGetNiatelemetrySystemControllerDetailsByMoidRequest) (NiatelemetrySystemControllerDetails, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoidExecute(r ApiGetNiatelemetrySystemControllerDetailsByMoidRequest) (*NiatelemetrySystemControllerDetails, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySystemControllerDetails
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySystemControllerDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySystemControllerDetailsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SystemControllerDetails/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -28514,7 +28227,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoidExe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -28524,15 +28237,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoidExe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -28588,7 +28301,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoidExe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -28599,7 +28312,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsByMoidExe
 }
 
 type ApiGetNiatelemetrySystemControllerDetailsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -28680,17 +28393,17 @@ func (r ApiGetNiatelemetrySystemControllerDetailsListRequest) Tags(tags string) 
 	return r
 }
 
-func (r ApiGetNiatelemetrySystemControllerDetailsListRequest) Execute() (NiatelemetrySystemControllerDetailsResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetrySystemControllerDetailsListRequest) Execute() (*NiatelemetrySystemControllerDetailsResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetrySystemControllerDetailsListExecute(r)
 }
 
 /*
 GetNiatelemetrySystemControllerDetailsList Read a 'niatelemetry.SystemControllerDetails' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetrySystemControllerDetailsListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsList(ctx _context.Context) ApiGetNiatelemetrySystemControllerDetailsListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsList(ctx context.Context) ApiGetNiatelemetrySystemControllerDetailsListRequest {
 	return ApiGetNiatelemetrySystemControllerDetailsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -28699,26 +28412,24 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsList(ctx 
 
 // Execute executes the request
 //  @return NiatelemetrySystemControllerDetailsResponse
-func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsListExecute(r ApiGetNiatelemetrySystemControllerDetailsListRequest) (NiatelemetrySystemControllerDetailsResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsListExecute(r ApiGetNiatelemetrySystemControllerDetailsListRequest) (*NiatelemetrySystemControllerDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetrySystemControllerDetailsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetrySystemControllerDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetrySystemControllerDetailsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/SystemControllerDetails"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -28770,7 +28481,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsListExecu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -28780,15 +28491,15 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsListExecu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -28844,7 +28555,7 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsListExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -28855,23 +28566,23 @@ func (a *NiatelemetryApiService) GetNiatelemetrySystemControllerDetailsListExecu
 }
 
 type ApiGetNiatelemetryTenantByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *NiatelemetryApiService
 	moid       string
 }
 
-func (r ApiGetNiatelemetryTenantByMoidRequest) Execute() (NiatelemetryTenant, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryTenantByMoidRequest) Execute() (*NiatelemetryTenant, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryTenantByMoidExecute(r)
 }
 
 /*
 GetNiatelemetryTenantByMoid Read a 'niatelemetry.Tenant' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetNiatelemetryTenantByMoidRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoid(ctx _context.Context, moid string) ApiGetNiatelemetryTenantByMoidRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoid(ctx context.Context, moid string) ApiGetNiatelemetryTenantByMoidRequest {
 	return ApiGetNiatelemetryTenantByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -28881,27 +28592,25 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoid(ctx _context.Contex
 
 // Execute executes the request
 //  @return NiatelemetryTenant
-func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoidExecute(r ApiGetNiatelemetryTenantByMoidRequest) (NiatelemetryTenant, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoidExecute(r ApiGetNiatelemetryTenantByMoidRequest) (*NiatelemetryTenant, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryTenant
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryTenant
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryTenantByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Tenants/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -28920,7 +28629,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoidExecute(r ApiGetNiat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -28930,15 +28639,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoidExecute(r ApiGetNiat
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -28994,7 +28703,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoidExecute(r ApiGetNiat
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -29005,7 +28714,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantByMoidExecute(r ApiGetNiat
 }
 
 type ApiGetNiatelemetryTenantListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *NiatelemetryApiService
 	filter      *string
 	orderby     *string
@@ -29086,17 +28795,17 @@ func (r ApiGetNiatelemetryTenantListRequest) Tags(tags string) ApiGetNiatelemetr
 	return r
 }
 
-func (r ApiGetNiatelemetryTenantListRequest) Execute() (NiatelemetryTenantResponse, *_nethttp.Response, error) {
+func (r ApiGetNiatelemetryTenantListRequest) Execute() (*NiatelemetryTenantResponse, *http.Response, error) {
 	return r.ApiService.GetNiatelemetryTenantListExecute(r)
 }
 
 /*
 GetNiatelemetryTenantList Read a 'niatelemetry.Tenant' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetNiatelemetryTenantListRequest
 */
-func (a *NiatelemetryApiService) GetNiatelemetryTenantList(ctx _context.Context) ApiGetNiatelemetryTenantListRequest {
+func (a *NiatelemetryApiService) GetNiatelemetryTenantList(ctx context.Context) ApiGetNiatelemetryTenantListRequest {
 	return ApiGetNiatelemetryTenantListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -29105,26 +28814,24 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantList(ctx _context.Context)
 
 // Execute executes the request
 //  @return NiatelemetryTenantResponse
-func (a *NiatelemetryApiService) GetNiatelemetryTenantListExecute(r ApiGetNiatelemetryTenantListRequest) (NiatelemetryTenantResponse, *_nethttp.Response, error) {
+func (a *NiatelemetryApiService) GetNiatelemetryTenantListExecute(r ApiGetNiatelemetryTenantListRequest) (*NiatelemetryTenantResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  NiatelemetryTenantResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *NiatelemetryTenantResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiatelemetryApiService.GetNiatelemetryTenantList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niatelemetry/Tenants"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -29176,7 +28883,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantListExecute(r ApiGetNiatel
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -29186,15 +28893,15 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantListExecute(r ApiGetNiatel
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -29250,7 +28957,7 @@ func (a *NiatelemetryApiService) GetNiatelemetryTenantListExecute(r ApiGetNiatel
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

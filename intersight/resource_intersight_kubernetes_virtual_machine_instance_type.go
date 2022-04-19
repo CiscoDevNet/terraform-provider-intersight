@@ -503,7 +503,6 @@ func resourceKubernetesVirtualMachineInstanceType() *schema.Resource {
 
 func resourceKubernetesVirtualMachineInstanceTypeCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewKubernetesVirtualMachineInstanceTypeWithDefaults()
@@ -676,7 +675,7 @@ func resourceKubernetesVirtualMachineInstanceTypeCreate(c context.Context, d *sc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating KubernetesVirtualMachineInstanceType: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating KubernetesVirtualMachineInstanceType: %s", responseErr.Error())
@@ -688,7 +687,6 @@ func resourceKubernetesVirtualMachineInstanceTypeCreate(c context.Context, d *sc
 
 func resourceKubernetesVirtualMachineInstanceTypeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.KubernetesApi.GetKubernetesVirtualMachineInstanceTypeByMoid(conn.ctx, d.Id())
@@ -701,7 +699,7 @@ func resourceKubernetesVirtualMachineInstanceTypeRead(c context.Context, d *sche
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching KubernetesVirtualMachineInstanceType: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching KubernetesVirtualMachineInstanceType: %s", responseErr.Error())
@@ -802,7 +800,6 @@ func resourceKubernetesVirtualMachineInstanceTypeRead(c context.Context, d *sche
 
 func resourceKubernetesVirtualMachineInstanceTypeUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesVirtualMachineInstanceType{}
@@ -981,7 +978,7 @@ func resourceKubernetesVirtualMachineInstanceTypeUpdate(c context.Context, d *sc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating KubernetesVirtualMachineInstanceType: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating KubernetesVirtualMachineInstanceType: %s", responseErr.Error())
@@ -993,7 +990,6 @@ func resourceKubernetesVirtualMachineInstanceTypeUpdate(c context.Context, d *sc
 
 func resourceKubernetesVirtualMachineInstanceTypeDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesVirtualMachineInstanceType(conn.ctx, d.Id())
@@ -1005,7 +1001,7 @@ func resourceKubernetesVirtualMachineInstanceTypeDelete(c context.Context, d *sc
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting KubernetesVirtualMachineInstanceType object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting KubernetesVirtualMachineInstanceType object: %s", deleteErr.Error())

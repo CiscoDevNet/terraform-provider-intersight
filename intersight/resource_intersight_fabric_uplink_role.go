@@ -582,7 +582,6 @@ func resourceFabricUplinkRole() *schema.Resource {
 
 func resourceFabricUplinkRoleCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFabricUplinkRoleWithDefaults()
@@ -841,7 +840,7 @@ func resourceFabricUplinkRoleCreate(c context.Context, d *schema.ResourceData, m
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FabricUplinkRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FabricUplinkRole: %s", responseErr.Error())
@@ -853,7 +852,6 @@ func resourceFabricUplinkRoleCreate(c context.Context, d *schema.ResourceData, m
 
 func resourceFabricUplinkRoleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.FabricApi.GetFabricUplinkRoleByMoid(conn.ctx, d.Id())
@@ -866,7 +864,7 @@ func resourceFabricUplinkRoleRead(c context.Context, d *schema.ResourceData, met
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching FabricUplinkRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching FabricUplinkRole: %s", responseErr.Error())
@@ -975,7 +973,6 @@ func resourceFabricUplinkRoleRead(c context.Context, d *schema.ResourceData, met
 
 func resourceFabricUplinkRoleUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FabricUplinkRole{}
@@ -1242,7 +1239,7 @@ func resourceFabricUplinkRoleUpdate(c context.Context, d *schema.ResourceData, m
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating FabricUplinkRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating FabricUplinkRole: %s", responseErr.Error())
@@ -1254,7 +1251,6 @@ func resourceFabricUplinkRoleUpdate(c context.Context, d *schema.ResourceData, m
 
 func resourceFabricUplinkRoleDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricUplinkRole(conn.ctx, d.Id())
@@ -1266,7 +1262,7 @@ func resourceFabricUplinkRoleDelete(c context.Context, d *schema.ResourceData, m
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting FabricUplinkRole object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting FabricUplinkRole object: %s", deleteErr.Error())

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // GraphicsApiService GraphicsApi service
 type GraphicsApiService service
 
 type ApiGetGraphicsCardByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *GraphicsApiService
 	moid       string
 }
 
-func (r ApiGetGraphicsCardByMoidRequest) Execute() (GraphicsCard, *_nethttp.Response, error) {
+func (r ApiGetGraphicsCardByMoidRequest) Execute() (*GraphicsCard, *http.Response, error) {
 	return r.ApiService.GetGraphicsCardByMoidExecute(r)
 }
 
 /*
 GetGraphicsCardByMoid Read a 'graphics.Card' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetGraphicsCardByMoidRequest
 */
-func (a *GraphicsApiService) GetGraphicsCardByMoid(ctx _context.Context, moid string) ApiGetGraphicsCardByMoidRequest {
+func (a *GraphicsApiService) GetGraphicsCardByMoid(ctx context.Context, moid string) ApiGetGraphicsCardByMoidRequest {
 	return ApiGetGraphicsCardByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -55,27 +50,25 @@ func (a *GraphicsApiService) GetGraphicsCardByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return GraphicsCard
-func (a *GraphicsApiService) GetGraphicsCardByMoidExecute(r ApiGetGraphicsCardByMoidRequest) (GraphicsCard, *_nethttp.Response, error) {
+func (a *GraphicsApiService) GetGraphicsCardByMoidExecute(r ApiGetGraphicsCardByMoidRequest) (*GraphicsCard, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GraphicsCard
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GraphicsCard
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GraphicsApiService.GetGraphicsCardByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/graphics/Cards/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -94,7 +87,7 @@ func (a *GraphicsApiService) GetGraphicsCardByMoidExecute(r ApiGetGraphicsCardBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -104,15 +97,15 @@ func (a *GraphicsApiService) GetGraphicsCardByMoidExecute(r ApiGetGraphicsCardBy
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,7 +161,7 @@ func (a *GraphicsApiService) GetGraphicsCardByMoidExecute(r ApiGetGraphicsCardBy
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -179,7 +172,7 @@ func (a *GraphicsApiService) GetGraphicsCardByMoidExecute(r ApiGetGraphicsCardBy
 }
 
 type ApiGetGraphicsCardListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *GraphicsApiService
 	filter      *string
 	orderby     *string
@@ -260,17 +253,17 @@ func (r ApiGetGraphicsCardListRequest) Tags(tags string) ApiGetGraphicsCardListR
 	return r
 }
 
-func (r ApiGetGraphicsCardListRequest) Execute() (GraphicsCardResponse, *_nethttp.Response, error) {
+func (r ApiGetGraphicsCardListRequest) Execute() (*GraphicsCardResponse, *http.Response, error) {
 	return r.ApiService.GetGraphicsCardListExecute(r)
 }
 
 /*
 GetGraphicsCardList Read a 'graphics.Card' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetGraphicsCardListRequest
 */
-func (a *GraphicsApiService) GetGraphicsCardList(ctx _context.Context) ApiGetGraphicsCardListRequest {
+func (a *GraphicsApiService) GetGraphicsCardList(ctx context.Context) ApiGetGraphicsCardListRequest {
 	return ApiGetGraphicsCardListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -279,26 +272,24 @@ func (a *GraphicsApiService) GetGraphicsCardList(ctx _context.Context) ApiGetGra
 
 // Execute executes the request
 //  @return GraphicsCardResponse
-func (a *GraphicsApiService) GetGraphicsCardListExecute(r ApiGetGraphicsCardListRequest) (GraphicsCardResponse, *_nethttp.Response, error) {
+func (a *GraphicsApiService) GetGraphicsCardListExecute(r ApiGetGraphicsCardListRequest) (*GraphicsCardResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GraphicsCardResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GraphicsCardResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GraphicsApiService.GetGraphicsCardList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/graphics/Cards"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -350,7 +341,7 @@ func (a *GraphicsApiService) GetGraphicsCardListExecute(r ApiGetGraphicsCardList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -360,15 +351,15 @@ func (a *GraphicsApiService) GetGraphicsCardListExecute(r ApiGetGraphicsCardList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -424,7 +415,7 @@ func (a *GraphicsApiService) GetGraphicsCardListExecute(r ApiGetGraphicsCardList
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -435,23 +426,23 @@ func (a *GraphicsApiService) GetGraphicsCardListExecute(r ApiGetGraphicsCardList
 }
 
 type ApiGetGraphicsControllerByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *GraphicsApiService
 	moid       string
 }
 
-func (r ApiGetGraphicsControllerByMoidRequest) Execute() (GraphicsController, *_nethttp.Response, error) {
+func (r ApiGetGraphicsControllerByMoidRequest) Execute() (*GraphicsController, *http.Response, error) {
 	return r.ApiService.GetGraphicsControllerByMoidExecute(r)
 }
 
 /*
 GetGraphicsControllerByMoid Read a 'graphics.Controller' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetGraphicsControllerByMoidRequest
 */
-func (a *GraphicsApiService) GetGraphicsControllerByMoid(ctx _context.Context, moid string) ApiGetGraphicsControllerByMoidRequest {
+func (a *GraphicsApiService) GetGraphicsControllerByMoid(ctx context.Context, moid string) ApiGetGraphicsControllerByMoidRequest {
 	return ApiGetGraphicsControllerByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -461,27 +452,25 @@ func (a *GraphicsApiService) GetGraphicsControllerByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return GraphicsController
-func (a *GraphicsApiService) GetGraphicsControllerByMoidExecute(r ApiGetGraphicsControllerByMoidRequest) (GraphicsController, *_nethttp.Response, error) {
+func (a *GraphicsApiService) GetGraphicsControllerByMoidExecute(r ApiGetGraphicsControllerByMoidRequest) (*GraphicsController, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GraphicsController
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GraphicsController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GraphicsApiService.GetGraphicsControllerByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/graphics/Controllers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -500,7 +489,7 @@ func (a *GraphicsApiService) GetGraphicsControllerByMoidExecute(r ApiGetGraphics
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -510,15 +499,15 @@ func (a *GraphicsApiService) GetGraphicsControllerByMoidExecute(r ApiGetGraphics
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -574,7 +563,7 @@ func (a *GraphicsApiService) GetGraphicsControllerByMoidExecute(r ApiGetGraphics
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -585,7 +574,7 @@ func (a *GraphicsApiService) GetGraphicsControllerByMoidExecute(r ApiGetGraphics
 }
 
 type ApiGetGraphicsControllerListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *GraphicsApiService
 	filter      *string
 	orderby     *string
@@ -666,17 +655,17 @@ func (r ApiGetGraphicsControllerListRequest) Tags(tags string) ApiGetGraphicsCon
 	return r
 }
 
-func (r ApiGetGraphicsControllerListRequest) Execute() (GraphicsControllerResponse, *_nethttp.Response, error) {
+func (r ApiGetGraphicsControllerListRequest) Execute() (*GraphicsControllerResponse, *http.Response, error) {
 	return r.ApiService.GetGraphicsControllerListExecute(r)
 }
 
 /*
 GetGraphicsControllerList Read a 'graphics.Controller' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetGraphicsControllerListRequest
 */
-func (a *GraphicsApiService) GetGraphicsControllerList(ctx _context.Context) ApiGetGraphicsControllerListRequest {
+func (a *GraphicsApiService) GetGraphicsControllerList(ctx context.Context) ApiGetGraphicsControllerListRequest {
 	return ApiGetGraphicsControllerListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -685,26 +674,24 @@ func (a *GraphicsApiService) GetGraphicsControllerList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return GraphicsControllerResponse
-func (a *GraphicsApiService) GetGraphicsControllerListExecute(r ApiGetGraphicsControllerListRequest) (GraphicsControllerResponse, *_nethttp.Response, error) {
+func (a *GraphicsApiService) GetGraphicsControllerListExecute(r ApiGetGraphicsControllerListRequest) (*GraphicsControllerResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GraphicsControllerResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GraphicsControllerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GraphicsApiService.GetGraphicsControllerList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/graphics/Controllers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -756,7 +743,7 @@ func (a *GraphicsApiService) GetGraphicsControllerListExecute(r ApiGetGraphicsCo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -766,15 +753,15 @@ func (a *GraphicsApiService) GetGraphicsControllerListExecute(r ApiGetGraphicsCo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -830,7 +817,7 @@ func (a *GraphicsApiService) GetGraphicsControllerListExecute(r ApiGetGraphicsCo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -841,7 +828,7 @@ func (a *GraphicsApiService) GetGraphicsControllerListExecute(r ApiGetGraphicsCo
 }
 
 type ApiPatchGraphicsCardRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *GraphicsApiService
 	moid         string
 	graphicsCard *GraphicsCard
@@ -860,18 +847,18 @@ func (r ApiPatchGraphicsCardRequest) IfMatch(ifMatch string) ApiPatchGraphicsCar
 	return r
 }
 
-func (r ApiPatchGraphicsCardRequest) Execute() (GraphicsCard, *_nethttp.Response, error) {
+func (r ApiPatchGraphicsCardRequest) Execute() (*GraphicsCard, *http.Response, error) {
 	return r.ApiService.PatchGraphicsCardExecute(r)
 }
 
 /*
 PatchGraphicsCard Update a 'graphics.Card' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchGraphicsCardRequest
 */
-func (a *GraphicsApiService) PatchGraphicsCard(ctx _context.Context, moid string) ApiPatchGraphicsCardRequest {
+func (a *GraphicsApiService) PatchGraphicsCard(ctx context.Context, moid string) ApiPatchGraphicsCardRequest {
 	return ApiPatchGraphicsCardRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -881,27 +868,25 @@ func (a *GraphicsApiService) PatchGraphicsCard(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return GraphicsCard
-func (a *GraphicsApiService) PatchGraphicsCardExecute(r ApiPatchGraphicsCardRequest) (GraphicsCard, *_nethttp.Response, error) {
+func (a *GraphicsApiService) PatchGraphicsCardExecute(r ApiPatchGraphicsCardRequest) (*GraphicsCard, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GraphicsCard
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GraphicsCard
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GraphicsApiService.PatchGraphicsCard")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/graphics/Cards/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.graphicsCard == nil {
 		return localVarReturnValue, nil, reportError("graphicsCard is required and must be specified")
 	}
@@ -928,7 +913,7 @@ func (a *GraphicsApiService) PatchGraphicsCardExecute(r ApiPatchGraphicsCardRequ
 	}
 	// body params
 	localVarPostBody = r.graphicsCard
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -938,15 +923,15 @@ func (a *GraphicsApiService) PatchGraphicsCardExecute(r ApiPatchGraphicsCardRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1002,7 +987,7 @@ func (a *GraphicsApiService) PatchGraphicsCardExecute(r ApiPatchGraphicsCardRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1013,7 +998,7 @@ func (a *GraphicsApiService) PatchGraphicsCardExecute(r ApiPatchGraphicsCardRequ
 }
 
 type ApiPatchGraphicsControllerRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *GraphicsApiService
 	moid               string
 	graphicsController *GraphicsController
@@ -1032,18 +1017,18 @@ func (r ApiPatchGraphicsControllerRequest) IfMatch(ifMatch string) ApiPatchGraph
 	return r
 }
 
-func (r ApiPatchGraphicsControllerRequest) Execute() (GraphicsController, *_nethttp.Response, error) {
+func (r ApiPatchGraphicsControllerRequest) Execute() (*GraphicsController, *http.Response, error) {
 	return r.ApiService.PatchGraphicsControllerExecute(r)
 }
 
 /*
 PatchGraphicsController Update a 'graphics.Controller' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchGraphicsControllerRequest
 */
-func (a *GraphicsApiService) PatchGraphicsController(ctx _context.Context, moid string) ApiPatchGraphicsControllerRequest {
+func (a *GraphicsApiService) PatchGraphicsController(ctx context.Context, moid string) ApiPatchGraphicsControllerRequest {
 	return ApiPatchGraphicsControllerRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1053,27 +1038,25 @@ func (a *GraphicsApiService) PatchGraphicsController(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return GraphicsController
-func (a *GraphicsApiService) PatchGraphicsControllerExecute(r ApiPatchGraphicsControllerRequest) (GraphicsController, *_nethttp.Response, error) {
+func (a *GraphicsApiService) PatchGraphicsControllerExecute(r ApiPatchGraphicsControllerRequest) (*GraphicsController, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GraphicsController
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GraphicsController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GraphicsApiService.PatchGraphicsController")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/graphics/Controllers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.graphicsController == nil {
 		return localVarReturnValue, nil, reportError("graphicsController is required and must be specified")
 	}
@@ -1100,7 +1083,7 @@ func (a *GraphicsApiService) PatchGraphicsControllerExecute(r ApiPatchGraphicsCo
 	}
 	// body params
 	localVarPostBody = r.graphicsController
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1110,15 +1093,15 @@ func (a *GraphicsApiService) PatchGraphicsControllerExecute(r ApiPatchGraphicsCo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1174,7 +1157,7 @@ func (a *GraphicsApiService) PatchGraphicsControllerExecute(r ApiPatchGraphicsCo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1185,7 +1168,7 @@ func (a *GraphicsApiService) PatchGraphicsControllerExecute(r ApiPatchGraphicsCo
 }
 
 type ApiUpdateGraphicsCardRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *GraphicsApiService
 	moid         string
 	graphicsCard *GraphicsCard
@@ -1204,18 +1187,18 @@ func (r ApiUpdateGraphicsCardRequest) IfMatch(ifMatch string) ApiUpdateGraphicsC
 	return r
 }
 
-func (r ApiUpdateGraphicsCardRequest) Execute() (GraphicsCard, *_nethttp.Response, error) {
+func (r ApiUpdateGraphicsCardRequest) Execute() (*GraphicsCard, *http.Response, error) {
 	return r.ApiService.UpdateGraphicsCardExecute(r)
 }
 
 /*
 UpdateGraphicsCard Update a 'graphics.Card' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateGraphicsCardRequest
 */
-func (a *GraphicsApiService) UpdateGraphicsCard(ctx _context.Context, moid string) ApiUpdateGraphicsCardRequest {
+func (a *GraphicsApiService) UpdateGraphicsCard(ctx context.Context, moid string) ApiUpdateGraphicsCardRequest {
 	return ApiUpdateGraphicsCardRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1225,27 +1208,25 @@ func (a *GraphicsApiService) UpdateGraphicsCard(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return GraphicsCard
-func (a *GraphicsApiService) UpdateGraphicsCardExecute(r ApiUpdateGraphicsCardRequest) (GraphicsCard, *_nethttp.Response, error) {
+func (a *GraphicsApiService) UpdateGraphicsCardExecute(r ApiUpdateGraphicsCardRequest) (*GraphicsCard, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GraphicsCard
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GraphicsCard
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GraphicsApiService.UpdateGraphicsCard")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/graphics/Cards/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.graphicsCard == nil {
 		return localVarReturnValue, nil, reportError("graphicsCard is required and must be specified")
 	}
@@ -1272,7 +1253,7 @@ func (a *GraphicsApiService) UpdateGraphicsCardExecute(r ApiUpdateGraphicsCardRe
 	}
 	// body params
 	localVarPostBody = r.graphicsCard
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1282,15 +1263,15 @@ func (a *GraphicsApiService) UpdateGraphicsCardExecute(r ApiUpdateGraphicsCardRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1346,7 +1327,7 @@ func (a *GraphicsApiService) UpdateGraphicsCardExecute(r ApiUpdateGraphicsCardRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1357,7 +1338,7 @@ func (a *GraphicsApiService) UpdateGraphicsCardExecute(r ApiUpdateGraphicsCardRe
 }
 
 type ApiUpdateGraphicsControllerRequest struct {
-	ctx                _context.Context
+	ctx                context.Context
 	ApiService         *GraphicsApiService
 	moid               string
 	graphicsController *GraphicsController
@@ -1376,18 +1357,18 @@ func (r ApiUpdateGraphicsControllerRequest) IfMatch(ifMatch string) ApiUpdateGra
 	return r
 }
 
-func (r ApiUpdateGraphicsControllerRequest) Execute() (GraphicsController, *_nethttp.Response, error) {
+func (r ApiUpdateGraphicsControllerRequest) Execute() (*GraphicsController, *http.Response, error) {
 	return r.ApiService.UpdateGraphicsControllerExecute(r)
 }
 
 /*
 UpdateGraphicsController Update a 'graphics.Controller' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateGraphicsControllerRequest
 */
-func (a *GraphicsApiService) UpdateGraphicsController(ctx _context.Context, moid string) ApiUpdateGraphicsControllerRequest {
+func (a *GraphicsApiService) UpdateGraphicsController(ctx context.Context, moid string) ApiUpdateGraphicsControllerRequest {
 	return ApiUpdateGraphicsControllerRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1397,27 +1378,25 @@ func (a *GraphicsApiService) UpdateGraphicsController(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return GraphicsController
-func (a *GraphicsApiService) UpdateGraphicsControllerExecute(r ApiUpdateGraphicsControllerRequest) (GraphicsController, *_nethttp.Response, error) {
+func (a *GraphicsApiService) UpdateGraphicsControllerExecute(r ApiUpdateGraphicsControllerRequest) (*GraphicsController, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  GraphicsController
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GraphicsController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GraphicsApiService.UpdateGraphicsController")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/graphics/Controllers/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.graphicsController == nil {
 		return localVarReturnValue, nil, reportError("graphicsController is required and must be specified")
 	}
@@ -1444,7 +1423,7 @@ func (a *GraphicsApiService) UpdateGraphicsControllerExecute(r ApiUpdateGraphics
 	}
 	// body params
 	localVarPostBody = r.graphicsController
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1454,15 +1433,15 @@ func (a *GraphicsApiService) UpdateGraphicsControllerExecute(r ApiUpdateGraphics
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1518,7 +1497,7 @@ func (a *GraphicsApiService) UpdateGraphicsControllerExecute(r ApiUpdateGraphics
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

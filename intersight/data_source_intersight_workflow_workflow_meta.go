@@ -141,10 +141,8 @@ func dataSourceWorkflowWorkflowMeta() *schema.Resource {
 		},
 		"output_parameters": {
 			Description: "The workflow output parameters.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"owners": {
 			Type:     schema.TypeList,
@@ -265,10 +263,8 @@ func dataSourceWorkflowWorkflowMeta() *schema.Resource {
 		},
 		"tasks": {
 			Description: "The tasks contained inside of the workflow.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"type": {
 			Description: "The type of workflow definition.\n* `SystemDefined` - System defined workflow definition.\n* `UserDefined` - User defined workflow definition.\n* `Dynamic` - Dynamically defined workflow definition.",
@@ -520,10 +516,8 @@ func dataSourceWorkflowWorkflowMeta() *schema.Resource {
 		},
 		"output_parameters": {
 			Description: "The workflow output parameters.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"owners": {
 			Type:     schema.TypeList,
@@ -644,10 +638,8 @@ func dataSourceWorkflowWorkflowMeta() *schema.Resource {
 		},
 		"tasks": {
 			Description: "The tasks contained inside of the workflow.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"type": {
 			Description: "The type of workflow definition.\n* `SystemDefined` - System defined workflow definition.\n* `UserDefined` - User defined workflow definition.\n* `Dynamic` - Dynamically defined workflow definition.",
@@ -785,7 +777,6 @@ func dataSourceWorkflowWorkflowMeta() *schema.Resource {
 
 func dataSourceWorkflowWorkflowMetaRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.WorkflowWorkflowMeta{}
@@ -938,7 +929,13 @@ func dataSourceWorkflowWorkflowMetaRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("output_parameters"); ok {
-		o.SetOutputParameters(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetOutputParameters(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("owners"); ok {
@@ -1089,7 +1086,13 @@ func dataSourceWorkflowWorkflowMetaRead(c context.Context, d *schema.ResourceDat
 	}
 
 	if v, ok := d.GetOk("tasks"); ok {
-		o.SetTasks(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetTasks(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("type"); ok {
@@ -1189,7 +1192,7 @@ func dataSourceWorkflowWorkflowMetaRead(c context.Context, d *schema.ResourceDat
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of WorkflowWorkflowMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of WorkflowWorkflowMeta: %s", responseErr.Error())
@@ -1206,7 +1209,7 @@ func dataSourceWorkflowWorkflowMetaRead(c context.Context, d *schema.ResourceDat
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching WorkflowWorkflowMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching WorkflowWorkflowMeta: %s", responseErr.Error())
@@ -1234,6 +1237,7 @@ func dataSourceWorkflowWorkflowMetaRead(c context.Context, d *schema.ResourceDat
 				temp["object_type"] = (s.GetObjectType())
 
 				temp["organization"] = flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)
+				temp["output_parameters"] = flattenAdditionalProperties(s.GetOutputParameters())
 				temp["owners"] = (s.GetOwners())
 
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
@@ -1245,6 +1249,7 @@ func dataSourceWorkflowWorkflowMetaRead(c context.Context, d *schema.ResourceDat
 				temp["src"] = (s.GetSrc())
 
 				temp["tags"] = flattenListMoTag(s.GetTags(), d)
+				temp["tasks"] = flattenAdditionalProperties(s.GetTasks())
 				temp["type"] = (s.GetType())
 				temp["nr_version"] = (s.GetVersion())
 

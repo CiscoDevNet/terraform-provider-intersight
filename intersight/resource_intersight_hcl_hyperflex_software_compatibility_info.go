@@ -499,7 +499,6 @@ func resourceHclHyperflexSoftwareCompatibilityInfo() *schema.Resource {
 
 func resourceHclHyperflexSoftwareCompatibilityInfoCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewHclHyperflexSoftwareCompatibilityInfoWithDefaults()
@@ -672,7 +671,7 @@ func resourceHclHyperflexSoftwareCompatibilityInfoCreate(c context.Context, d *s
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating HclHyperflexSoftwareCompatibilityInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating HclHyperflexSoftwareCompatibilityInfo: %s", responseErr.Error())
@@ -684,7 +683,6 @@ func resourceHclHyperflexSoftwareCompatibilityInfoCreate(c context.Context, d *s
 
 func resourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.HclApi.GetHclHyperflexSoftwareCompatibilityInfoByMoid(conn.ctx, d.Id())
@@ -697,7 +695,7 @@ func resourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *sch
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching HclHyperflexSoftwareCompatibilityInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching HclHyperflexSoftwareCompatibilityInfo: %s", responseErr.Error())
@@ -798,7 +796,6 @@ func resourceHclHyperflexSoftwareCompatibilityInfoRead(c context.Context, d *sch
 
 func resourceHclHyperflexSoftwareCompatibilityInfoUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HclHyperflexSoftwareCompatibilityInfo{}
@@ -977,7 +974,7 @@ func resourceHclHyperflexSoftwareCompatibilityInfoUpdate(c context.Context, d *s
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating HclHyperflexSoftwareCompatibilityInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating HclHyperflexSoftwareCompatibilityInfo: %s", responseErr.Error())
@@ -989,7 +986,6 @@ func resourceHclHyperflexSoftwareCompatibilityInfoUpdate(c context.Context, d *s
 
 func resourceHclHyperflexSoftwareCompatibilityInfoDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HclApi.DeleteHclHyperflexSoftwareCompatibilityInfo(conn.ctx, d.Id())
@@ -1001,7 +997,7 @@ func resourceHclHyperflexSoftwareCompatibilityInfoDelete(c context.Context, d *s
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting HclHyperflexSoftwareCompatibilityInfo object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting HclHyperflexSoftwareCompatibilityInfo object: %s", deleteErr.Error())

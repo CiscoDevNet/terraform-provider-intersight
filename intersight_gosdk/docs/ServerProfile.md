@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 **AssociatedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 **AssociatedServerPool** | Pointer to [**ResourcepoolPoolRelationship**](ResourcepoolPoolRelationship.md) |  | [optional] 
 **ConfigChangeDetails** | Pointer to [**[]ServerConfigChangeDetailRelationship**](ServerConfigChangeDetailRelationship.md) | An array of relationships to serverConfigChangeDetail resources. | [optional] [readonly] 
-**ConfigResult** | Pointer to [**ServerConfigResultRelationship**](ServerConfigResultRelationship.md) |  | [optional] 
 **LeasedServer** | Pointer to [**ComputePhysicalRelationship**](ComputePhysicalRelationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) |  | [optional] 
 **ResourceLease** | Pointer to [**ResourcepoolLeaseRelationship**](ResourcepoolLeaseRelationship.md) |  | [optional] 
@@ -389,31 +388,6 @@ HasConfigChangeDetails returns a boolean if a field has been set.
 `func (o *ServerProfile) UnsetConfigChangeDetails()`
 
 UnsetConfigChangeDetails ensures that no value is present for ConfigChangeDetails, not even an explicit nil
-### GetConfigResult
-
-`func (o *ServerProfile) GetConfigResult() ServerConfigResultRelationship`
-
-GetConfigResult returns the ConfigResult field if non-nil, zero value otherwise.
-
-### GetConfigResultOk
-
-`func (o *ServerProfile) GetConfigResultOk() (*ServerConfigResultRelationship, bool)`
-
-GetConfigResultOk returns a tuple with the ConfigResult field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConfigResult
-
-`func (o *ServerProfile) SetConfigResult(v ServerConfigResultRelationship)`
-
-SetConfigResult sets ConfigResult field to given value.
-
-### HasConfigResult
-
-`func (o *ServerProfile) HasConfigResult() bool`
-
-HasConfigResult returns a boolean if a field has been set.
-
 ### GetLeasedServer
 
 `func (o *ServerProfile) GetLeasedServer() ComputePhysicalRelationship`

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // BulkApiService BulkApi service
 type BulkApiService service
 
 type ApiCreateBulkExportRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BulkApiService
 	bulkExport  *BulkExport
 	ifMatch     *string
@@ -54,17 +49,17 @@ func (r ApiCreateBulkExportRequest) IfNoneMatch(ifNoneMatch string) ApiCreateBul
 	return r
 }
 
-func (r ApiCreateBulkExportRequest) Execute() (BulkExport, *_nethttp.Response, error) {
+func (r ApiCreateBulkExportRequest) Execute() (*BulkExport, *http.Response, error) {
 	return r.ApiService.CreateBulkExportExecute(r)
 }
 
 /*
 CreateBulkExport Create a 'bulk.Export' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateBulkExportRequest
 */
-func (a *BulkApiService) CreateBulkExport(ctx _context.Context) ApiCreateBulkExportRequest {
+func (a *BulkApiService) CreateBulkExport(ctx context.Context) ApiCreateBulkExportRequest {
 	return ApiCreateBulkExportRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *BulkApiService) CreateBulkExport(ctx _context.Context) ApiCreateBulkExp
 
 // Execute executes the request
 //  @return BulkExport
-func (a *BulkApiService) CreateBulkExportExecute(r ApiCreateBulkExportRequest) (BulkExport, *_nethttp.Response, error) {
+func (a *BulkApiService) CreateBulkExportExecute(r ApiCreateBulkExportRequest) (*BulkExport, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkExport
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkExport
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.CreateBulkExport")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/Exports"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bulkExport == nil {
 		return localVarReturnValue, nil, reportError("bulkExport is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *BulkApiService) CreateBulkExportExecute(r ApiCreateBulkExportRequest) (
 	}
 	// body params
 	localVarPostBody = r.bulkExport
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *BulkApiService) CreateBulkExportExecute(r ApiCreateBulkExportRequest) (
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *BulkApiService) CreateBulkExportExecute(r ApiCreateBulkExportRequest) (
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,7 +200,7 @@ func (a *BulkApiService) CreateBulkExportExecute(r ApiCreateBulkExportRequest) (
 }
 
 type ApiCreateBulkMoClonerRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *BulkApiService
 	bulkMoCloner *BulkMoCloner
 	ifMatch      *string
@@ -232,17 +225,17 @@ func (r ApiCreateBulkMoClonerRequest) IfNoneMatch(ifNoneMatch string) ApiCreateB
 	return r
 }
 
-func (r ApiCreateBulkMoClonerRequest) Execute() (BulkMoCloner, *_nethttp.Response, error) {
+func (r ApiCreateBulkMoClonerRequest) Execute() (*BulkMoCloner, *http.Response, error) {
 	return r.ApiService.CreateBulkMoClonerExecute(r)
 }
 
 /*
 CreateBulkMoCloner Create a 'bulk.MoCloner' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateBulkMoClonerRequest
 */
-func (a *BulkApiService) CreateBulkMoCloner(ctx _context.Context) ApiCreateBulkMoClonerRequest {
+func (a *BulkApiService) CreateBulkMoCloner(ctx context.Context) ApiCreateBulkMoClonerRequest {
 	return ApiCreateBulkMoClonerRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -251,26 +244,24 @@ func (a *BulkApiService) CreateBulkMoCloner(ctx _context.Context) ApiCreateBulkM
 
 // Execute executes the request
 //  @return BulkMoCloner
-func (a *BulkApiService) CreateBulkMoClonerExecute(r ApiCreateBulkMoClonerRequest) (BulkMoCloner, *_nethttp.Response, error) {
+func (a *BulkApiService) CreateBulkMoClonerExecute(r ApiCreateBulkMoClonerRequest) (*BulkMoCloner, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkMoCloner
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkMoCloner
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.CreateBulkMoCloner")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/MoCloners"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bulkMoCloner == nil {
 		return localVarReturnValue, nil, reportError("bulkMoCloner is required and must be specified")
 	}
@@ -300,7 +291,7 @@ func (a *BulkApiService) CreateBulkMoClonerExecute(r ApiCreateBulkMoClonerReques
 	}
 	// body params
 	localVarPostBody = r.bulkMoCloner
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -310,15 +301,15 @@ func (a *BulkApiService) CreateBulkMoClonerExecute(r ApiCreateBulkMoClonerReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -374,7 +365,7 @@ func (a *BulkApiService) CreateBulkMoClonerExecute(r ApiCreateBulkMoClonerReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -385,7 +376,7 @@ func (a *BulkApiService) CreateBulkMoClonerExecute(r ApiCreateBulkMoClonerReques
 }
 
 type ApiCreateBulkMoMergerRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *BulkApiService
 	bulkMoMerger *BulkMoMerger
 	ifMatch      *string
@@ -410,17 +401,17 @@ func (r ApiCreateBulkMoMergerRequest) IfNoneMatch(ifNoneMatch string) ApiCreateB
 	return r
 }
 
-func (r ApiCreateBulkMoMergerRequest) Execute() (BulkMoMerger, *_nethttp.Response, error) {
+func (r ApiCreateBulkMoMergerRequest) Execute() (*BulkMoMerger, *http.Response, error) {
 	return r.ApiService.CreateBulkMoMergerExecute(r)
 }
 
 /*
 CreateBulkMoMerger Create a 'bulk.MoMerger' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateBulkMoMergerRequest
 */
-func (a *BulkApiService) CreateBulkMoMerger(ctx _context.Context) ApiCreateBulkMoMergerRequest {
+func (a *BulkApiService) CreateBulkMoMerger(ctx context.Context) ApiCreateBulkMoMergerRequest {
 	return ApiCreateBulkMoMergerRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -429,26 +420,24 @@ func (a *BulkApiService) CreateBulkMoMerger(ctx _context.Context) ApiCreateBulkM
 
 // Execute executes the request
 //  @return BulkMoMerger
-func (a *BulkApiService) CreateBulkMoMergerExecute(r ApiCreateBulkMoMergerRequest) (BulkMoMerger, *_nethttp.Response, error) {
+func (a *BulkApiService) CreateBulkMoMergerExecute(r ApiCreateBulkMoMergerRequest) (*BulkMoMerger, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkMoMerger
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkMoMerger
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.CreateBulkMoMerger")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/MoMergers"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bulkMoMerger == nil {
 		return localVarReturnValue, nil, reportError("bulkMoMerger is required and must be specified")
 	}
@@ -478,7 +467,7 @@ func (a *BulkApiService) CreateBulkMoMergerExecute(r ApiCreateBulkMoMergerReques
 	}
 	// body params
 	localVarPostBody = r.bulkMoMerger
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -488,15 +477,15 @@ func (a *BulkApiService) CreateBulkMoMergerExecute(r ApiCreateBulkMoMergerReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -552,7 +541,7 @@ func (a *BulkApiService) CreateBulkMoMergerExecute(r ApiCreateBulkMoMergerReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -563,7 +552,7 @@ func (a *BulkApiService) CreateBulkMoMergerExecute(r ApiCreateBulkMoMergerReques
 }
 
 type ApiCreateBulkRequestRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BulkApiService
 	bulkRequest *BulkRequest
 	ifMatch     *string
@@ -588,17 +577,17 @@ func (r ApiCreateBulkRequestRequest) IfNoneMatch(ifNoneMatch string) ApiCreateBu
 	return r
 }
 
-func (r ApiCreateBulkRequestRequest) Execute() (BulkRequest, *_nethttp.Response, error) {
+func (r ApiCreateBulkRequestRequest) Execute() (*BulkRequest, *http.Response, error) {
 	return r.ApiService.CreateBulkRequestExecute(r)
 }
 
 /*
 CreateBulkRequest Create a 'bulk.Request' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateBulkRequestRequest
 */
-func (a *BulkApiService) CreateBulkRequest(ctx _context.Context) ApiCreateBulkRequestRequest {
+func (a *BulkApiService) CreateBulkRequest(ctx context.Context) ApiCreateBulkRequestRequest {
 	return ApiCreateBulkRequestRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -607,26 +596,24 @@ func (a *BulkApiService) CreateBulkRequest(ctx _context.Context) ApiCreateBulkRe
 
 // Execute executes the request
 //  @return BulkRequest
-func (a *BulkApiService) CreateBulkRequestExecute(r ApiCreateBulkRequestRequest) (BulkRequest, *_nethttp.Response, error) {
+func (a *BulkApiService) CreateBulkRequestExecute(r ApiCreateBulkRequestRequest) (*BulkRequest, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkRequest
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkRequest
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.CreateBulkRequest")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/Requests"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bulkRequest == nil {
 		return localVarReturnValue, nil, reportError("bulkRequest is required and must be specified")
 	}
@@ -656,7 +643,7 @@ func (a *BulkApiService) CreateBulkRequestExecute(r ApiCreateBulkRequestRequest)
 	}
 	// body params
 	localVarPostBody = r.bulkRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -666,15 +653,15 @@ func (a *BulkApiService) CreateBulkRequestExecute(r ApiCreateBulkRequestRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -730,7 +717,7 @@ func (a *BulkApiService) CreateBulkRequestExecute(r ApiCreateBulkRequestRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -741,23 +728,23 @@ func (a *BulkApiService) CreateBulkRequestExecute(r ApiCreateBulkRequestRequest)
 }
 
 type ApiDeleteBulkExportRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BulkApiService
 	moid       string
 }
 
-func (r ApiDeleteBulkExportRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteBulkExportRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteBulkExportExecute(r)
 }
 
 /*
 DeleteBulkExport Delete a 'bulk.Export' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteBulkExportRequest
 */
-func (a *BulkApiService) DeleteBulkExport(ctx _context.Context, moid string) ApiDeleteBulkExportRequest {
+func (a *BulkApiService) DeleteBulkExport(ctx context.Context, moid string) ApiDeleteBulkExportRequest {
 	return ApiDeleteBulkExportRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -766,26 +753,24 @@ func (a *BulkApiService) DeleteBulkExport(ctx _context.Context, moid string) Api
 }
 
 // Execute executes the request
-func (a *BulkApiService) DeleteBulkExportExecute(r ApiDeleteBulkExportRequest) (*_nethttp.Response, error) {
+func (a *BulkApiService) DeleteBulkExportExecute(r ApiDeleteBulkExportRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.DeleteBulkExport")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/Exports/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -804,7 +789,7 @@ func (a *BulkApiService) DeleteBulkExportExecute(r ApiDeleteBulkExportRequest) (
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -814,15 +799,15 @@ func (a *BulkApiService) DeleteBulkExportExecute(r ApiDeleteBulkExportRequest) (
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -880,23 +865,23 @@ func (a *BulkApiService) DeleteBulkExportExecute(r ApiDeleteBulkExportRequest) (
 }
 
 type ApiGetBulkExportByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BulkApiService
 	moid       string
 }
 
-func (r ApiGetBulkExportByMoidRequest) Execute() (BulkExport, *_nethttp.Response, error) {
+func (r ApiGetBulkExportByMoidRequest) Execute() (*BulkExport, *http.Response, error) {
 	return r.ApiService.GetBulkExportByMoidExecute(r)
 }
 
 /*
 GetBulkExportByMoid Read a 'bulk.Export' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBulkExportByMoidRequest
 */
-func (a *BulkApiService) GetBulkExportByMoid(ctx _context.Context, moid string) ApiGetBulkExportByMoidRequest {
+func (a *BulkApiService) GetBulkExportByMoid(ctx context.Context, moid string) ApiGetBulkExportByMoidRequest {
 	return ApiGetBulkExportByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -906,27 +891,25 @@ func (a *BulkApiService) GetBulkExportByMoid(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return BulkExport
-func (a *BulkApiService) GetBulkExportByMoidExecute(r ApiGetBulkExportByMoidRequest) (BulkExport, *_nethttp.Response, error) {
+func (a *BulkApiService) GetBulkExportByMoidExecute(r ApiGetBulkExportByMoidRequest) (*BulkExport, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkExport
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkExport
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.GetBulkExportByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/Exports/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -945,7 +928,7 @@ func (a *BulkApiService) GetBulkExportByMoidExecute(r ApiGetBulkExportByMoidRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -955,15 +938,15 @@ func (a *BulkApiService) GetBulkExportByMoidExecute(r ApiGetBulkExportByMoidRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1019,7 +1002,7 @@ func (a *BulkApiService) GetBulkExportByMoidExecute(r ApiGetBulkExportByMoidRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1030,7 +1013,7 @@ func (a *BulkApiService) GetBulkExportByMoidExecute(r ApiGetBulkExportByMoidRequ
 }
 
 type ApiGetBulkExportListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BulkApiService
 	filter      *string
 	orderby     *string
@@ -1111,17 +1094,17 @@ func (r ApiGetBulkExportListRequest) Tags(tags string) ApiGetBulkExportListReque
 	return r
 }
 
-func (r ApiGetBulkExportListRequest) Execute() (BulkExportResponse, *_nethttp.Response, error) {
+func (r ApiGetBulkExportListRequest) Execute() (*BulkExportResponse, *http.Response, error) {
 	return r.ApiService.GetBulkExportListExecute(r)
 }
 
 /*
 GetBulkExportList Read a 'bulk.Export' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBulkExportListRequest
 */
-func (a *BulkApiService) GetBulkExportList(ctx _context.Context) ApiGetBulkExportListRequest {
+func (a *BulkApiService) GetBulkExportList(ctx context.Context) ApiGetBulkExportListRequest {
 	return ApiGetBulkExportListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1130,26 +1113,24 @@ func (a *BulkApiService) GetBulkExportList(ctx _context.Context) ApiGetBulkExpor
 
 // Execute executes the request
 //  @return BulkExportResponse
-func (a *BulkApiService) GetBulkExportListExecute(r ApiGetBulkExportListRequest) (BulkExportResponse, *_nethttp.Response, error) {
+func (a *BulkApiService) GetBulkExportListExecute(r ApiGetBulkExportListRequest) (*BulkExportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkExportResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkExportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.GetBulkExportList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/Exports"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1201,7 +1182,7 @@ func (a *BulkApiService) GetBulkExportListExecute(r ApiGetBulkExportListRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1211,15 +1192,15 @@ func (a *BulkApiService) GetBulkExportListExecute(r ApiGetBulkExportListRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1275,7 +1256,7 @@ func (a *BulkApiService) GetBulkExportListExecute(r ApiGetBulkExportListRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1286,23 +1267,23 @@ func (a *BulkApiService) GetBulkExportListExecute(r ApiGetBulkExportListRequest)
 }
 
 type ApiGetBulkExportedItemByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BulkApiService
 	moid       string
 }
 
-func (r ApiGetBulkExportedItemByMoidRequest) Execute() (BulkExportedItem, *_nethttp.Response, error) {
+func (r ApiGetBulkExportedItemByMoidRequest) Execute() (*BulkExportedItem, *http.Response, error) {
 	return r.ApiService.GetBulkExportedItemByMoidExecute(r)
 }
 
 /*
 GetBulkExportedItemByMoid Read a 'bulk.ExportedItem' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBulkExportedItemByMoidRequest
 */
-func (a *BulkApiService) GetBulkExportedItemByMoid(ctx _context.Context, moid string) ApiGetBulkExportedItemByMoidRequest {
+func (a *BulkApiService) GetBulkExportedItemByMoid(ctx context.Context, moid string) ApiGetBulkExportedItemByMoidRequest {
 	return ApiGetBulkExportedItemByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1312,27 +1293,25 @@ func (a *BulkApiService) GetBulkExportedItemByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return BulkExportedItem
-func (a *BulkApiService) GetBulkExportedItemByMoidExecute(r ApiGetBulkExportedItemByMoidRequest) (BulkExportedItem, *_nethttp.Response, error) {
+func (a *BulkApiService) GetBulkExportedItemByMoidExecute(r ApiGetBulkExportedItemByMoidRequest) (*BulkExportedItem, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkExportedItem
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkExportedItem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.GetBulkExportedItemByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/ExportedItems/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1351,7 +1330,7 @@ func (a *BulkApiService) GetBulkExportedItemByMoidExecute(r ApiGetBulkExportedIt
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1361,15 +1340,15 @@ func (a *BulkApiService) GetBulkExportedItemByMoidExecute(r ApiGetBulkExportedIt
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1425,7 +1404,7 @@ func (a *BulkApiService) GetBulkExportedItemByMoidExecute(r ApiGetBulkExportedIt
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1436,7 +1415,7 @@ func (a *BulkApiService) GetBulkExportedItemByMoidExecute(r ApiGetBulkExportedIt
 }
 
 type ApiGetBulkExportedItemListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BulkApiService
 	filter      *string
 	orderby     *string
@@ -1517,17 +1496,17 @@ func (r ApiGetBulkExportedItemListRequest) Tags(tags string) ApiGetBulkExportedI
 	return r
 }
 
-func (r ApiGetBulkExportedItemListRequest) Execute() (BulkExportedItemResponse, *_nethttp.Response, error) {
+func (r ApiGetBulkExportedItemListRequest) Execute() (*BulkExportedItemResponse, *http.Response, error) {
 	return r.ApiService.GetBulkExportedItemListExecute(r)
 }
 
 /*
 GetBulkExportedItemList Read a 'bulk.ExportedItem' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBulkExportedItemListRequest
 */
-func (a *BulkApiService) GetBulkExportedItemList(ctx _context.Context) ApiGetBulkExportedItemListRequest {
+func (a *BulkApiService) GetBulkExportedItemList(ctx context.Context) ApiGetBulkExportedItemListRequest {
 	return ApiGetBulkExportedItemListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1536,26 +1515,24 @@ func (a *BulkApiService) GetBulkExportedItemList(ctx _context.Context) ApiGetBul
 
 // Execute executes the request
 //  @return BulkExportedItemResponse
-func (a *BulkApiService) GetBulkExportedItemListExecute(r ApiGetBulkExportedItemListRequest) (BulkExportedItemResponse, *_nethttp.Response, error) {
+func (a *BulkApiService) GetBulkExportedItemListExecute(r ApiGetBulkExportedItemListRequest) (*BulkExportedItemResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkExportedItemResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkExportedItemResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.GetBulkExportedItemList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/ExportedItems"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1607,7 +1584,7 @@ func (a *BulkApiService) GetBulkExportedItemListExecute(r ApiGetBulkExportedItem
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1617,15 +1594,15 @@ func (a *BulkApiService) GetBulkExportedItemListExecute(r ApiGetBulkExportedItem
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1681,7 +1658,7 @@ func (a *BulkApiService) GetBulkExportedItemListExecute(r ApiGetBulkExportedItem
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1692,23 +1669,23 @@ func (a *BulkApiService) GetBulkExportedItemListExecute(r ApiGetBulkExportedItem
 }
 
 type ApiGetBulkRequestByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BulkApiService
 	moid       string
 }
 
-func (r ApiGetBulkRequestByMoidRequest) Execute() (BulkRequest, *_nethttp.Response, error) {
+func (r ApiGetBulkRequestByMoidRequest) Execute() (*BulkRequest, *http.Response, error) {
 	return r.ApiService.GetBulkRequestByMoidExecute(r)
 }
 
 /*
 GetBulkRequestByMoid Read a 'bulk.Request' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBulkRequestByMoidRequest
 */
-func (a *BulkApiService) GetBulkRequestByMoid(ctx _context.Context, moid string) ApiGetBulkRequestByMoidRequest {
+func (a *BulkApiService) GetBulkRequestByMoid(ctx context.Context, moid string) ApiGetBulkRequestByMoidRequest {
 	return ApiGetBulkRequestByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1718,27 +1695,25 @@ func (a *BulkApiService) GetBulkRequestByMoid(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return BulkRequest
-func (a *BulkApiService) GetBulkRequestByMoidExecute(r ApiGetBulkRequestByMoidRequest) (BulkRequest, *_nethttp.Response, error) {
+func (a *BulkApiService) GetBulkRequestByMoidExecute(r ApiGetBulkRequestByMoidRequest) (*BulkRequest, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkRequest
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkRequest
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.GetBulkRequestByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/Requests/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1757,7 +1732,7 @@ func (a *BulkApiService) GetBulkRequestByMoidExecute(r ApiGetBulkRequestByMoidRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1767,15 +1742,15 @@ func (a *BulkApiService) GetBulkRequestByMoidExecute(r ApiGetBulkRequestByMoidRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1831,7 +1806,7 @@ func (a *BulkApiService) GetBulkRequestByMoidExecute(r ApiGetBulkRequestByMoidRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1842,7 +1817,7 @@ func (a *BulkApiService) GetBulkRequestByMoidExecute(r ApiGetBulkRequestByMoidRe
 }
 
 type ApiGetBulkRequestListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BulkApiService
 	filter      *string
 	orderby     *string
@@ -1923,17 +1898,17 @@ func (r ApiGetBulkRequestListRequest) Tags(tags string) ApiGetBulkRequestListReq
 	return r
 }
 
-func (r ApiGetBulkRequestListRequest) Execute() (BulkRequestResponse, *_nethttp.Response, error) {
+func (r ApiGetBulkRequestListRequest) Execute() (*BulkRequestResponse, *http.Response, error) {
 	return r.ApiService.GetBulkRequestListExecute(r)
 }
 
 /*
 GetBulkRequestList Read a 'bulk.Request' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBulkRequestListRequest
 */
-func (a *BulkApiService) GetBulkRequestList(ctx _context.Context) ApiGetBulkRequestListRequest {
+func (a *BulkApiService) GetBulkRequestList(ctx context.Context) ApiGetBulkRequestListRequest {
 	return ApiGetBulkRequestListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1942,26 +1917,24 @@ func (a *BulkApiService) GetBulkRequestList(ctx _context.Context) ApiGetBulkRequ
 
 // Execute executes the request
 //  @return BulkRequestResponse
-func (a *BulkApiService) GetBulkRequestListExecute(r ApiGetBulkRequestListRequest) (BulkRequestResponse, *_nethttp.Response, error) {
+func (a *BulkApiService) GetBulkRequestListExecute(r ApiGetBulkRequestListRequest) (*BulkRequestResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkRequestResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkRequestResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.GetBulkRequestList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/Requests"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2013,7 +1986,7 @@ func (a *BulkApiService) GetBulkRequestListExecute(r ApiGetBulkRequestListReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2023,15 +1996,15 @@ func (a *BulkApiService) GetBulkRequestListExecute(r ApiGetBulkRequestListReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2087,7 +2060,7 @@ func (a *BulkApiService) GetBulkRequestListExecute(r ApiGetBulkRequestListReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2098,23 +2071,23 @@ func (a *BulkApiService) GetBulkRequestListExecute(r ApiGetBulkRequestListReques
 }
 
 type ApiGetBulkSubRequestObjByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BulkApiService
 	moid       string
 }
 
-func (r ApiGetBulkSubRequestObjByMoidRequest) Execute() (BulkSubRequestObj, *_nethttp.Response, error) {
+func (r ApiGetBulkSubRequestObjByMoidRequest) Execute() (*BulkSubRequestObj, *http.Response, error) {
 	return r.ApiService.GetBulkSubRequestObjByMoidExecute(r)
 }
 
 /*
 GetBulkSubRequestObjByMoid Read a 'bulk.SubRequestObj' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetBulkSubRequestObjByMoidRequest
 */
-func (a *BulkApiService) GetBulkSubRequestObjByMoid(ctx _context.Context, moid string) ApiGetBulkSubRequestObjByMoidRequest {
+func (a *BulkApiService) GetBulkSubRequestObjByMoid(ctx context.Context, moid string) ApiGetBulkSubRequestObjByMoidRequest {
 	return ApiGetBulkSubRequestObjByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2124,27 +2097,25 @@ func (a *BulkApiService) GetBulkSubRequestObjByMoid(ctx _context.Context, moid s
 
 // Execute executes the request
 //  @return BulkSubRequestObj
-func (a *BulkApiService) GetBulkSubRequestObjByMoidExecute(r ApiGetBulkSubRequestObjByMoidRequest) (BulkSubRequestObj, *_nethttp.Response, error) {
+func (a *BulkApiService) GetBulkSubRequestObjByMoidExecute(r ApiGetBulkSubRequestObjByMoidRequest) (*BulkSubRequestObj, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkSubRequestObj
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkSubRequestObj
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.GetBulkSubRequestObjByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/SubRequestObjs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2163,7 +2134,7 @@ func (a *BulkApiService) GetBulkSubRequestObjByMoidExecute(r ApiGetBulkSubReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2173,15 +2144,15 @@ func (a *BulkApiService) GetBulkSubRequestObjByMoidExecute(r ApiGetBulkSubReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2237,7 +2208,7 @@ func (a *BulkApiService) GetBulkSubRequestObjByMoidExecute(r ApiGetBulkSubReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2248,7 +2219,7 @@ func (a *BulkApiService) GetBulkSubRequestObjByMoidExecute(r ApiGetBulkSubReques
 }
 
 type ApiGetBulkSubRequestObjListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *BulkApiService
 	filter      *string
 	orderby     *string
@@ -2329,17 +2300,17 @@ func (r ApiGetBulkSubRequestObjListRequest) Tags(tags string) ApiGetBulkSubReque
 	return r
 }
 
-func (r ApiGetBulkSubRequestObjListRequest) Execute() (BulkSubRequestObjResponse, *_nethttp.Response, error) {
+func (r ApiGetBulkSubRequestObjListRequest) Execute() (*BulkSubRequestObjResponse, *http.Response, error) {
 	return r.ApiService.GetBulkSubRequestObjListExecute(r)
 }
 
 /*
 GetBulkSubRequestObjList Read a 'bulk.SubRequestObj' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetBulkSubRequestObjListRequest
 */
-func (a *BulkApiService) GetBulkSubRequestObjList(ctx _context.Context) ApiGetBulkSubRequestObjListRequest {
+func (a *BulkApiService) GetBulkSubRequestObjList(ctx context.Context) ApiGetBulkSubRequestObjListRequest {
 	return ApiGetBulkSubRequestObjListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2348,26 +2319,24 @@ func (a *BulkApiService) GetBulkSubRequestObjList(ctx _context.Context) ApiGetBu
 
 // Execute executes the request
 //  @return BulkSubRequestObjResponse
-func (a *BulkApiService) GetBulkSubRequestObjListExecute(r ApiGetBulkSubRequestObjListRequest) (BulkSubRequestObjResponse, *_nethttp.Response, error) {
+func (a *BulkApiService) GetBulkSubRequestObjListExecute(r ApiGetBulkSubRequestObjListRequest) (*BulkSubRequestObjResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkSubRequestObjResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkSubRequestObjResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.GetBulkSubRequestObjList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/SubRequestObjs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2419,7 +2388,7 @@ func (a *BulkApiService) GetBulkSubRequestObjListExecute(r ApiGetBulkSubRequestO
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2429,15 +2398,15 @@ func (a *BulkApiService) GetBulkSubRequestObjListExecute(r ApiGetBulkSubRequestO
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2493,7 +2462,7 @@ func (a *BulkApiService) GetBulkSubRequestObjListExecute(r ApiGetBulkSubRequestO
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2504,7 +2473,7 @@ func (a *BulkApiService) GetBulkSubRequestObjListExecute(r ApiGetBulkSubRequestO
 }
 
 type ApiPatchBulkExportRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BulkApiService
 	moid       string
 	bulkExport *BulkExport
@@ -2523,18 +2492,18 @@ func (r ApiPatchBulkExportRequest) IfMatch(ifMatch string) ApiPatchBulkExportReq
 	return r
 }
 
-func (r ApiPatchBulkExportRequest) Execute() (BulkExport, *_nethttp.Response, error) {
+func (r ApiPatchBulkExportRequest) Execute() (*BulkExport, *http.Response, error) {
 	return r.ApiService.PatchBulkExportExecute(r)
 }
 
 /*
 PatchBulkExport Update a 'bulk.Export' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchBulkExportRequest
 */
-func (a *BulkApiService) PatchBulkExport(ctx _context.Context, moid string) ApiPatchBulkExportRequest {
+func (a *BulkApiService) PatchBulkExport(ctx context.Context, moid string) ApiPatchBulkExportRequest {
 	return ApiPatchBulkExportRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2544,27 +2513,25 @@ func (a *BulkApiService) PatchBulkExport(ctx _context.Context, moid string) ApiP
 
 // Execute executes the request
 //  @return BulkExport
-func (a *BulkApiService) PatchBulkExportExecute(r ApiPatchBulkExportRequest) (BulkExport, *_nethttp.Response, error) {
+func (a *BulkApiService) PatchBulkExportExecute(r ApiPatchBulkExportRequest) (*BulkExport, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkExport
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkExport
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.PatchBulkExport")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/Exports/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bulkExport == nil {
 		return localVarReturnValue, nil, reportError("bulkExport is required and must be specified")
 	}
@@ -2591,7 +2558,7 @@ func (a *BulkApiService) PatchBulkExportExecute(r ApiPatchBulkExportRequest) (Bu
 	}
 	// body params
 	localVarPostBody = r.bulkExport
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2601,15 +2568,15 @@ func (a *BulkApiService) PatchBulkExportExecute(r ApiPatchBulkExportRequest) (Bu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2665,7 +2632,7 @@ func (a *BulkApiService) PatchBulkExportExecute(r ApiPatchBulkExportRequest) (Bu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2676,7 +2643,7 @@ func (a *BulkApiService) PatchBulkExportExecute(r ApiPatchBulkExportRequest) (Bu
 }
 
 type ApiUpdateBulkExportRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *BulkApiService
 	moid       string
 	bulkExport *BulkExport
@@ -2695,18 +2662,18 @@ func (r ApiUpdateBulkExportRequest) IfMatch(ifMatch string) ApiUpdateBulkExportR
 	return r
 }
 
-func (r ApiUpdateBulkExportRequest) Execute() (BulkExport, *_nethttp.Response, error) {
+func (r ApiUpdateBulkExportRequest) Execute() (*BulkExport, *http.Response, error) {
 	return r.ApiService.UpdateBulkExportExecute(r)
 }
 
 /*
 UpdateBulkExport Update a 'bulk.Export' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateBulkExportRequest
 */
-func (a *BulkApiService) UpdateBulkExport(ctx _context.Context, moid string) ApiUpdateBulkExportRequest {
+func (a *BulkApiService) UpdateBulkExport(ctx context.Context, moid string) ApiUpdateBulkExportRequest {
 	return ApiUpdateBulkExportRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2716,27 +2683,25 @@ func (a *BulkApiService) UpdateBulkExport(ctx _context.Context, moid string) Api
 
 // Execute executes the request
 //  @return BulkExport
-func (a *BulkApiService) UpdateBulkExportExecute(r ApiUpdateBulkExportRequest) (BulkExport, *_nethttp.Response, error) {
+func (a *BulkApiService) UpdateBulkExportExecute(r ApiUpdateBulkExportRequest) (*BulkExport, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  BulkExport
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkExport
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkApiService.UpdateBulkExport")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/bulk/Exports/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.bulkExport == nil {
 		return localVarReturnValue, nil, reportError("bulkExport is required and must be specified")
 	}
@@ -2763,7 +2728,7 @@ func (a *BulkApiService) UpdateBulkExportExecute(r ApiUpdateBulkExportRequest) (
 	}
 	// body params
 	localVarPostBody = r.bulkExport
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2773,15 +2738,15 @@ func (a *BulkApiService) UpdateBulkExportExecute(r ApiUpdateBulkExportRequest) (
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2837,7 +2802,7 @@ func (a *BulkApiService) UpdateBulkExportExecute(r ApiUpdateBulkExportRequest) (
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

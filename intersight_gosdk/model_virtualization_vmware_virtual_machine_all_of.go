@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -403,11 +403,11 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) GetCustomAttributes() []string
 // GetCustomAttributesOk returns a tuple with the CustomAttributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VirtualizationVmwareVirtualMachineAllOf) GetCustomAttributesOk() (*[]string, bool) {
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetCustomAttributesOk() ([]string, bool) {
 	if o == nil || o.CustomAttributes == nil {
 		return nil, false
 	}
-	return &o.CustomAttributes, true
+	return o.CustomAttributes, true
 }
 
 // HasCustomAttributes returns a boolean if a field has been set.
@@ -543,11 +543,11 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) GetDnsServerList() []string {
 // GetDnsServerListOk returns a tuple with the DnsServerList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VirtualizationVmwareVirtualMachineAllOf) GetDnsServerListOk() (*[]string, bool) {
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetDnsServerListOk() ([]string, bool) {
 	if o == nil || o.DnsServerList == nil {
 		return nil, false
 	}
-	return &o.DnsServerList, true
+	return o.DnsServerList, true
 }
 
 // HasDnsServerList returns a boolean if a field has been set.
@@ -576,11 +576,11 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) GetDnsSuffixList() []string {
 // GetDnsSuffixListOk returns a tuple with the DnsSuffixList field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VirtualizationVmwareVirtualMachineAllOf) GetDnsSuffixListOk() (*[]string, bool) {
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetDnsSuffixListOk() ([]string, bool) {
 	if o == nil || o.DnsSuffixList == nil {
 		return nil, false
 	}
-	return &o.DnsSuffixList, true
+	return o.DnsSuffixList, true
 }
 
 // HasDnsSuffixList returns a boolean if a field has been set.
@@ -834,11 +834,11 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) GetMacAddress() []string {
 // GetMacAddressOk returns a tuple with the MacAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VirtualizationVmwareVirtualMachineAllOf) GetMacAddressOk() (*[]string, bool) {
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetMacAddressOk() ([]string, bool) {
 	if o == nil || o.MacAddress == nil {
 		return nil, false
 	}
-	return &o.MacAddress, true
+	return o.MacAddress, true
 }
 
 // HasMacAddress returns a boolean if a field has been set.
@@ -974,11 +974,11 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) GetPortGroups() []string {
 // GetPortGroupsOk returns a tuple with the PortGroups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VirtualizationVmwareVirtualMachineAllOf) GetPortGroupsOk() (*[]string, bool) {
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetPortGroupsOk() ([]string, bool) {
 	if o == nil || o.PortGroups == nil {
 		return nil, false
 	}
-	return &o.PortGroups, true
+	return o.PortGroups, true
 }
 
 // HasPortGroups returns a boolean if a field has been set.
@@ -1274,11 +1274,11 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) GetVirtualDisks() []int64 {
 // GetVirtualDisksOk returns a tuple with the VirtualDisks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VirtualizationVmwareVirtualMachineAllOf) GetVirtualDisksOk() (*[]int64, bool) {
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetVirtualDisksOk() ([]int64, bool) {
 	if o == nil || o.VirtualDisks == nil {
 		return nil, false
 	}
-	return &o.VirtualDisks, true
+	return o.VirtualDisks, true
 }
 
 // HasVirtualDisks returns a boolean if a field has been set.
@@ -1307,11 +1307,11 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) GetVirtualNetworkInterfaces() 
 // GetVirtualNetworkInterfacesOk returns a tuple with the VirtualNetworkInterfaces field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VirtualizationVmwareVirtualMachineAllOf) GetVirtualNetworkInterfacesOk() (*[]int64, bool) {
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetVirtualNetworkInterfacesOk() ([]int64, bool) {
 	if o == nil || o.VirtualNetworkInterfaces == nil {
 		return nil, false
 	}
-	return &o.VirtualNetworkInterfaces, true
+	return o.VirtualNetworkInterfaces, true
 }
 
 // HasVirtualNetworkInterfaces returns a boolean if a field has been set.
@@ -1596,11 +1596,11 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) GetDatastores() []Virtualizati
 // GetDatastoresOk returns a tuple with the Datastores field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VirtualizationVmwareVirtualMachineAllOf) GetDatastoresOk() (*[]VirtualizationVmwareDatastoreRelationship, bool) {
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetDatastoresOk() ([]VirtualizationVmwareDatastoreRelationship, bool) {
 	if o == nil || o.Datastores == nil {
 		return nil, false
 	}
-	return &o.Datastores, true
+	return o.Datastores, true
 }
 
 // HasDatastores returns a boolean if a field has been set.
@@ -1661,11 +1661,11 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) GetNetworks() []Virtualization
 // GetNetworksOk returns a tuple with the Networks field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VirtualizationVmwareVirtualMachineAllOf) GetNetworksOk() (*[]VirtualizationBaseNetworkRelationship, bool) {
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetNetworksOk() ([]VirtualizationBaseNetworkRelationship, bool) {
 	if o == nil || o.Networks == nil {
 		return nil, false
 	}
-	return &o.Networks, true
+	return o.Networks, true
 }
 
 // HasNetworks returns a boolean if a field has been set.

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // TopApiService TopApi service
 type TopApiService service
 
 type ApiGetTopSystemByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TopApiService
 	moid       string
 }
 
-func (r ApiGetTopSystemByMoidRequest) Execute() (TopSystem, *_nethttp.Response, error) {
+func (r ApiGetTopSystemByMoidRequest) Execute() (*TopSystem, *http.Response, error) {
 	return r.ApiService.GetTopSystemByMoidExecute(r)
 }
 
 /*
 GetTopSystemByMoid Read a 'top.System' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetTopSystemByMoidRequest
 */
-func (a *TopApiService) GetTopSystemByMoid(ctx _context.Context, moid string) ApiGetTopSystemByMoidRequest {
+func (a *TopApiService) GetTopSystemByMoid(ctx context.Context, moid string) ApiGetTopSystemByMoidRequest {
 	return ApiGetTopSystemByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -55,27 +50,25 @@ func (a *TopApiService) GetTopSystemByMoid(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return TopSystem
-func (a *TopApiService) GetTopSystemByMoidExecute(r ApiGetTopSystemByMoidRequest) (TopSystem, *_nethttp.Response, error) {
+func (a *TopApiService) GetTopSystemByMoidExecute(r ApiGetTopSystemByMoidRequest) (*TopSystem, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TopSystem
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TopSystem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TopApiService.GetTopSystemByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/top/Systems/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -94,7 +87,7 @@ func (a *TopApiService) GetTopSystemByMoidExecute(r ApiGetTopSystemByMoidRequest
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -104,15 +97,15 @@ func (a *TopApiService) GetTopSystemByMoidExecute(r ApiGetTopSystemByMoidRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,7 +161,7 @@ func (a *TopApiService) GetTopSystemByMoidExecute(r ApiGetTopSystemByMoidRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -179,7 +172,7 @@ func (a *TopApiService) GetTopSystemByMoidExecute(r ApiGetTopSystemByMoidRequest
 }
 
 type ApiGetTopSystemListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *TopApiService
 	filter      *string
 	orderby     *string
@@ -260,17 +253,17 @@ func (r ApiGetTopSystemListRequest) Tags(tags string) ApiGetTopSystemListRequest
 	return r
 }
 
-func (r ApiGetTopSystemListRequest) Execute() (TopSystemResponse, *_nethttp.Response, error) {
+func (r ApiGetTopSystemListRequest) Execute() (*TopSystemResponse, *http.Response, error) {
 	return r.ApiService.GetTopSystemListExecute(r)
 }
 
 /*
 GetTopSystemList Read a 'top.System' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetTopSystemListRequest
 */
-func (a *TopApiService) GetTopSystemList(ctx _context.Context) ApiGetTopSystemListRequest {
+func (a *TopApiService) GetTopSystemList(ctx context.Context) ApiGetTopSystemListRequest {
 	return ApiGetTopSystemListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -279,26 +272,24 @@ func (a *TopApiService) GetTopSystemList(ctx _context.Context) ApiGetTopSystemLi
 
 // Execute executes the request
 //  @return TopSystemResponse
-func (a *TopApiService) GetTopSystemListExecute(r ApiGetTopSystemListRequest) (TopSystemResponse, *_nethttp.Response, error) {
+func (a *TopApiService) GetTopSystemListExecute(r ApiGetTopSystemListRequest) (*TopSystemResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TopSystemResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TopSystemResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TopApiService.GetTopSystemList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/top/Systems"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -350,7 +341,7 @@ func (a *TopApiService) GetTopSystemListExecute(r ApiGetTopSystemListRequest) (T
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -360,15 +351,15 @@ func (a *TopApiService) GetTopSystemListExecute(r ApiGetTopSystemListRequest) (T
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -424,7 +415,7 @@ func (a *TopApiService) GetTopSystemListExecute(r ApiGetTopSystemListRequest) (T
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -435,7 +426,7 @@ func (a *TopApiService) GetTopSystemListExecute(r ApiGetTopSystemListRequest) (T
 }
 
 type ApiPatchTopSystemRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TopApiService
 	moid       string
 	topSystem  *TopSystem
@@ -454,18 +445,18 @@ func (r ApiPatchTopSystemRequest) IfMatch(ifMatch string) ApiPatchTopSystemReque
 	return r
 }
 
-func (r ApiPatchTopSystemRequest) Execute() (TopSystem, *_nethttp.Response, error) {
+func (r ApiPatchTopSystemRequest) Execute() (*TopSystem, *http.Response, error) {
 	return r.ApiService.PatchTopSystemExecute(r)
 }
 
 /*
 PatchTopSystem Update a 'top.System' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchTopSystemRequest
 */
-func (a *TopApiService) PatchTopSystem(ctx _context.Context, moid string) ApiPatchTopSystemRequest {
+func (a *TopApiService) PatchTopSystem(ctx context.Context, moid string) ApiPatchTopSystemRequest {
 	return ApiPatchTopSystemRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -475,27 +466,25 @@ func (a *TopApiService) PatchTopSystem(ctx _context.Context, moid string) ApiPat
 
 // Execute executes the request
 //  @return TopSystem
-func (a *TopApiService) PatchTopSystemExecute(r ApiPatchTopSystemRequest) (TopSystem, *_nethttp.Response, error) {
+func (a *TopApiService) PatchTopSystemExecute(r ApiPatchTopSystemRequest) (*TopSystem, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TopSystem
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TopSystem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TopApiService.PatchTopSystem")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/top/Systems/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.topSystem == nil {
 		return localVarReturnValue, nil, reportError("topSystem is required and must be specified")
 	}
@@ -522,7 +511,7 @@ func (a *TopApiService) PatchTopSystemExecute(r ApiPatchTopSystemRequest) (TopSy
 	}
 	// body params
 	localVarPostBody = r.topSystem
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -532,15 +521,15 @@ func (a *TopApiService) PatchTopSystemExecute(r ApiPatchTopSystemRequest) (TopSy
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -596,7 +585,7 @@ func (a *TopApiService) PatchTopSystemExecute(r ApiPatchTopSystemRequest) (TopSy
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -607,7 +596,7 @@ func (a *TopApiService) PatchTopSystemExecute(r ApiPatchTopSystemRequest) (TopSy
 }
 
 type ApiUpdateTopSystemRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *TopApiService
 	moid       string
 	topSystem  *TopSystem
@@ -626,18 +615,18 @@ func (r ApiUpdateTopSystemRequest) IfMatch(ifMatch string) ApiUpdateTopSystemReq
 	return r
 }
 
-func (r ApiUpdateTopSystemRequest) Execute() (TopSystem, *_nethttp.Response, error) {
+func (r ApiUpdateTopSystemRequest) Execute() (*TopSystem, *http.Response, error) {
 	return r.ApiService.UpdateTopSystemExecute(r)
 }
 
 /*
 UpdateTopSystem Update a 'top.System' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateTopSystemRequest
 */
-func (a *TopApiService) UpdateTopSystem(ctx _context.Context, moid string) ApiUpdateTopSystemRequest {
+func (a *TopApiService) UpdateTopSystem(ctx context.Context, moid string) ApiUpdateTopSystemRequest {
 	return ApiUpdateTopSystemRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -647,27 +636,25 @@ func (a *TopApiService) UpdateTopSystem(ctx _context.Context, moid string) ApiUp
 
 // Execute executes the request
 //  @return TopSystem
-func (a *TopApiService) UpdateTopSystemExecute(r ApiUpdateTopSystemRequest) (TopSystem, *_nethttp.Response, error) {
+func (a *TopApiService) UpdateTopSystemExecute(r ApiUpdateTopSystemRequest) (*TopSystem, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  TopSystem
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *TopSystem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TopApiService.UpdateTopSystem")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/top/Systems/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.topSystem == nil {
 		return localVarReturnValue, nil, reportError("topSystem is required and must be specified")
 	}
@@ -694,7 +681,7 @@ func (a *TopApiService) UpdateTopSystemExecute(r ApiUpdateTopSystemRequest) (Top
 	}
 	// body params
 	localVarPostBody = r.topSystem
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -704,15 +691,15 @@ func (a *TopApiService) UpdateTopSystemExecute(r ApiUpdateTopSystemRequest) (Top
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -768,7 +755,7 @@ func (a *TopApiService) UpdateTopSystemExecute(r ApiUpdateTopSystemRequest) (Top
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

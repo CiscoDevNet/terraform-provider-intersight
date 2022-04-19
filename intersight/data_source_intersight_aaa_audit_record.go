@@ -126,10 +126,8 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 		},
 		"mo_display_names": {
 			Description: "The user-friendly names of the changed MO.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"mo_type": {
 			Description: "The object type of the REST resource that was created, modified or deleted.",
@@ -232,10 +230,8 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 		},
 		"request": {
 			Description: "The body of the REST request that was received from a client to create or modify a REST resource, represented as a JSON document.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"session_id": {
 			Description: "The sessionId in which the user made the change. In case that the session is later deleted, we still have some reference to the information.",
@@ -580,10 +576,8 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 		},
 		"mo_display_names": {
 			Description: "The user-friendly names of the changed MO.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"mo_type": {
 			Description: "The object type of the REST resource that was created, modified or deleted.",
@@ -686,10 +680,8 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 		},
 		"request": {
 			Description: "The body of the REST request that was received from a client to create or modify a REST resource, represented as a JSON document.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"session_id": {
 			Description: "The sessionId in which the user made the change. In case that the session is later deleted, we still have some reference to the information.",
@@ -935,7 +927,6 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 
 func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.AaaAuditRecord{}
@@ -1067,7 +1058,13 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 	}
 
 	if v, ok := d.GetOk("mo_display_names"); ok {
-		o.SetMoDisplayNames(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetMoDisplayNames(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("mo_type"); ok {
@@ -1190,7 +1187,13 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 	}
 
 	if v, ok := d.GetOk("request"); ok {
-		o.SetRequest(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetRequest(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("session_id"); ok {
@@ -1424,7 +1427,7 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of AaaAuditRecord: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of AaaAuditRecord: %s", responseErr.Error())
@@ -1441,7 +1444,7 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching AaaAuditRecord: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching AaaAuditRecord: %s", responseErr.Error())
@@ -1465,6 +1468,7 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 				temp["email"] = (s.GetEmail())
 				temp["event"] = (s.GetEvent())
 				temp["inst_id"] = (s.GetInstId())
+				temp["mo_display_names"] = flattenAdditionalProperties(s.GetMoDisplayNames())
 				temp["mo_type"] = (s.GetMoType())
 
 				temp["mod_time"] = (s.GetModTime()).String()
@@ -1476,6 +1480,7 @@ func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, met
 				temp["parent"] = flattenMapMoBaseMoRelationship(s.GetParent(), d)
 
 				temp["permission_resources"] = flattenListMoBaseMoRelationship(s.GetPermissionResources(), d)
+				temp["request"] = flattenAdditionalProperties(s.GetRequest())
 				temp["session_id"] = (s.GetSessionId())
 
 				temp["sessions"] = flattenMapIamSessionRelationship(s.GetSessions(), d)

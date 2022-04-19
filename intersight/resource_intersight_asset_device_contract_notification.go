@@ -1655,7 +1655,6 @@ func resourceAssetDeviceContractNotification() *schema.Resource {
 
 func resourceAssetDeviceContractNotificationCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewAssetDeviceContractNotificationWithDefaults()
@@ -1973,7 +1972,7 @@ func resourceAssetDeviceContractNotificationCreate(c context.Context, d *schema.
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating AssetDeviceContractNotification: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating AssetDeviceContractNotification: %s", responseErr.Error())
@@ -1985,7 +1984,6 @@ func resourceAssetDeviceContractNotificationCreate(c context.Context, d *schema.
 
 func resourceAssetDeviceContractNotificationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	log.Printf("%v", d)
 	var de diag.Diagnostics
 	return de
@@ -1993,7 +1991,6 @@ func resourceAssetDeviceContractNotificationRead(c context.Context, d *schema.Re
 
 func resourceAssetDeviceContractNotificationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "AssetDeviceContractNotification does not allow delete functionality"}
 	de = append(de, warning)

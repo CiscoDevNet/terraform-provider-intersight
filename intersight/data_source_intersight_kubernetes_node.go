@@ -61,10 +61,8 @@ func dataSourceKubernetesNode() *schema.Resource {
 		},
 		"annotations": {
 			Description: "Kubernetes metadata annotations for a Node.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -83,10 +81,8 @@ func dataSourceKubernetesNode() *schema.Resource {
 		},
 		"labels": {
 			Description: "Kubernetes metadata labels for a Node.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"metadata": {
 			Description: "Meta data of the kubernetes resource.",
@@ -669,10 +665,8 @@ func dataSourceKubernetesNode() *schema.Resource {
 		},
 		"annotations": {
 			Description: "Kubernetes metadata annotations for a Node.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"class_id": {
 			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -691,10 +685,8 @@ func dataSourceKubernetesNode() *schema.Resource {
 		},
 		"labels": {
 			Description: "Kubernetes metadata labels for a Node.",
-			Type:        schema.TypeMap,
-			Elem: &schema.Schema{
-				Type: schema.TypeString,
-			}, Optional: true,
+			Type:        schema.TypeString,
+			Optional:    true,
 		},
 		"metadata": {
 			Description: "Meta data of the kubernetes resource.",
@@ -1243,7 +1235,6 @@ func dataSourceKubernetesNode() *schema.Resource {
 
 func dataSourceKubernetesNodeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.KubernetesNode{}
@@ -1302,7 +1293,13 @@ func dataSourceKubernetesNodeRead(c context.Context, d *schema.ResourceData, met
 	}
 
 	if v, ok := d.GetOk("annotations"); ok {
-		o.SetAnnotations(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetAnnotations(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("class_id"); ok {
@@ -1321,7 +1318,13 @@ func dataSourceKubernetesNodeRead(c context.Context, d *schema.ResourceData, met
 	}
 
 	if v, ok := d.GetOk("labels"); ok {
-		o.SetLabels(v)
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			x2 := x1.(map[string]interface{})
+			o.SetLabels(x2)
+		}
 	}
 
 	if v, ok := d.GetOk("metadata"); ok {
@@ -1903,7 +1906,7 @@ func dataSourceKubernetesNodeRead(c context.Context, d *schema.ResourceData, met
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of KubernetesNode: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of KubernetesNode: %s", responseErr.Error())
@@ -1920,7 +1923,7 @@ func dataSourceKubernetesNodeRead(c context.Context, d *schema.ResourceData, met
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching KubernetesNode: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching KubernetesNode: %s", responseErr.Error())
@@ -1935,10 +1938,12 @@ func dataSourceKubernetesNodeRead(c context.Context, d *schema.ResourceData, met
 				temp["additional_properties"] = flattenAdditionalProperties(s.AdditionalProperties)
 
 				temp["ancestors"] = flattenListMoBaseMoRelationship(s.GetAncestors(), d)
+				temp["annotations"] = flattenAdditionalProperties(s.GetAnnotations())
 				temp["class_id"] = (s.GetClassId())
 
 				temp["create_time"] = (s.GetCreateTime()).String()
 				temp["domain_group_moid"] = (s.GetDomainGroupMoid())
+				temp["labels"] = flattenAdditionalProperties(s.GetLabels())
 
 				temp["metadata"] = flattenMapKubernetesObjectMeta(s.GetMetadata(), d)
 

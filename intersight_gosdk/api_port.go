@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // PortApiService PortApi service
 type PortApiService service
 
 type ApiGetPortGroupByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *PortApiService
 	moid       string
 }
 
-func (r ApiGetPortGroupByMoidRequest) Execute() (PortGroup, *_nethttp.Response, error) {
+func (r ApiGetPortGroupByMoidRequest) Execute() (*PortGroup, *http.Response, error) {
 	return r.ApiService.GetPortGroupByMoidExecute(r)
 }
 
 /*
 GetPortGroupByMoid Read a 'port.Group' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetPortGroupByMoidRequest
 */
-func (a *PortApiService) GetPortGroupByMoid(ctx _context.Context, moid string) ApiGetPortGroupByMoidRequest {
+func (a *PortApiService) GetPortGroupByMoid(ctx context.Context, moid string) ApiGetPortGroupByMoidRequest {
 	return ApiGetPortGroupByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -55,27 +50,25 @@ func (a *PortApiService) GetPortGroupByMoid(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return PortGroup
-func (a *PortApiService) GetPortGroupByMoidExecute(r ApiGetPortGroupByMoidRequest) (PortGroup, *_nethttp.Response, error) {
+func (a *PortApiService) GetPortGroupByMoidExecute(r ApiGetPortGroupByMoidRequest) (*PortGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PortGroup
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PortGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.GetPortGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/Groups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -94,7 +87,7 @@ func (a *PortApiService) GetPortGroupByMoidExecute(r ApiGetPortGroupByMoidReques
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -104,15 +97,15 @@ func (a *PortApiService) GetPortGroupByMoidExecute(r ApiGetPortGroupByMoidReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,7 +161,7 @@ func (a *PortApiService) GetPortGroupByMoidExecute(r ApiGetPortGroupByMoidReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -179,7 +172,7 @@ func (a *PortApiService) GetPortGroupByMoidExecute(r ApiGetPortGroupByMoidReques
 }
 
 type ApiGetPortGroupListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *PortApiService
 	filter      *string
 	orderby     *string
@@ -260,17 +253,17 @@ func (r ApiGetPortGroupListRequest) Tags(tags string) ApiGetPortGroupListRequest
 	return r
 }
 
-func (r ApiGetPortGroupListRequest) Execute() (PortGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetPortGroupListRequest) Execute() (*PortGroupResponse, *http.Response, error) {
 	return r.ApiService.GetPortGroupListExecute(r)
 }
 
 /*
 GetPortGroupList Read a 'port.Group' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetPortGroupListRequest
 */
-func (a *PortApiService) GetPortGroupList(ctx _context.Context) ApiGetPortGroupListRequest {
+func (a *PortApiService) GetPortGroupList(ctx context.Context) ApiGetPortGroupListRequest {
 	return ApiGetPortGroupListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -279,26 +272,24 @@ func (a *PortApiService) GetPortGroupList(ctx _context.Context) ApiGetPortGroupL
 
 // Execute executes the request
 //  @return PortGroupResponse
-func (a *PortApiService) GetPortGroupListExecute(r ApiGetPortGroupListRequest) (PortGroupResponse, *_nethttp.Response, error) {
+func (a *PortApiService) GetPortGroupListExecute(r ApiGetPortGroupListRequest) (*PortGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PortGroupResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PortGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.GetPortGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/Groups"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -350,7 +341,7 @@ func (a *PortApiService) GetPortGroupListExecute(r ApiGetPortGroupListRequest) (
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -360,15 +351,15 @@ func (a *PortApiService) GetPortGroupListExecute(r ApiGetPortGroupListRequest) (
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -424,7 +415,7 @@ func (a *PortApiService) GetPortGroupListExecute(r ApiGetPortGroupListRequest) (
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -435,23 +426,23 @@ func (a *PortApiService) GetPortGroupListExecute(r ApiGetPortGroupListRequest) (
 }
 
 type ApiGetPortMacBindingByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *PortApiService
 	moid       string
 }
 
-func (r ApiGetPortMacBindingByMoidRequest) Execute() (PortMacBinding, *_nethttp.Response, error) {
+func (r ApiGetPortMacBindingByMoidRequest) Execute() (*PortMacBinding, *http.Response, error) {
 	return r.ApiService.GetPortMacBindingByMoidExecute(r)
 }
 
 /*
 GetPortMacBindingByMoid Read a 'port.MacBinding' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetPortMacBindingByMoidRequest
 */
-func (a *PortApiService) GetPortMacBindingByMoid(ctx _context.Context, moid string) ApiGetPortMacBindingByMoidRequest {
+func (a *PortApiService) GetPortMacBindingByMoid(ctx context.Context, moid string) ApiGetPortMacBindingByMoidRequest {
 	return ApiGetPortMacBindingByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -461,27 +452,25 @@ func (a *PortApiService) GetPortMacBindingByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return PortMacBinding
-func (a *PortApiService) GetPortMacBindingByMoidExecute(r ApiGetPortMacBindingByMoidRequest) (PortMacBinding, *_nethttp.Response, error) {
+func (a *PortApiService) GetPortMacBindingByMoidExecute(r ApiGetPortMacBindingByMoidRequest) (*PortMacBinding, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PortMacBinding
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PortMacBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.GetPortMacBindingByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/MacBindings/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -500,7 +489,7 @@ func (a *PortApiService) GetPortMacBindingByMoidExecute(r ApiGetPortMacBindingBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -510,15 +499,15 @@ func (a *PortApiService) GetPortMacBindingByMoidExecute(r ApiGetPortMacBindingBy
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -574,7 +563,7 @@ func (a *PortApiService) GetPortMacBindingByMoidExecute(r ApiGetPortMacBindingBy
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -585,7 +574,7 @@ func (a *PortApiService) GetPortMacBindingByMoidExecute(r ApiGetPortMacBindingBy
 }
 
 type ApiGetPortMacBindingListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *PortApiService
 	filter      *string
 	orderby     *string
@@ -666,17 +655,17 @@ func (r ApiGetPortMacBindingListRequest) Tags(tags string) ApiGetPortMacBindingL
 	return r
 }
 
-func (r ApiGetPortMacBindingListRequest) Execute() (PortMacBindingResponse, *_nethttp.Response, error) {
+func (r ApiGetPortMacBindingListRequest) Execute() (*PortMacBindingResponse, *http.Response, error) {
 	return r.ApiService.GetPortMacBindingListExecute(r)
 }
 
 /*
 GetPortMacBindingList Read a 'port.MacBinding' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetPortMacBindingListRequest
 */
-func (a *PortApiService) GetPortMacBindingList(ctx _context.Context) ApiGetPortMacBindingListRequest {
+func (a *PortApiService) GetPortMacBindingList(ctx context.Context) ApiGetPortMacBindingListRequest {
 	return ApiGetPortMacBindingListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -685,26 +674,24 @@ func (a *PortApiService) GetPortMacBindingList(ctx _context.Context) ApiGetPortM
 
 // Execute executes the request
 //  @return PortMacBindingResponse
-func (a *PortApiService) GetPortMacBindingListExecute(r ApiGetPortMacBindingListRequest) (PortMacBindingResponse, *_nethttp.Response, error) {
+func (a *PortApiService) GetPortMacBindingListExecute(r ApiGetPortMacBindingListRequest) (*PortMacBindingResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PortMacBindingResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PortMacBindingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.GetPortMacBindingList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/MacBindings"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -756,7 +743,7 @@ func (a *PortApiService) GetPortMacBindingListExecute(r ApiGetPortMacBindingList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -766,15 +753,15 @@ func (a *PortApiService) GetPortMacBindingListExecute(r ApiGetPortMacBindingList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -830,7 +817,7 @@ func (a *PortApiService) GetPortMacBindingListExecute(r ApiGetPortMacBindingList
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -841,23 +828,23 @@ func (a *PortApiService) GetPortMacBindingListExecute(r ApiGetPortMacBindingList
 }
 
 type ApiGetPortSubGroupByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *PortApiService
 	moid       string
 }
 
-func (r ApiGetPortSubGroupByMoidRequest) Execute() (PortSubGroup, *_nethttp.Response, error) {
+func (r ApiGetPortSubGroupByMoidRequest) Execute() (*PortSubGroup, *http.Response, error) {
 	return r.ApiService.GetPortSubGroupByMoidExecute(r)
 }
 
 /*
 GetPortSubGroupByMoid Read a 'port.SubGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetPortSubGroupByMoidRequest
 */
-func (a *PortApiService) GetPortSubGroupByMoid(ctx _context.Context, moid string) ApiGetPortSubGroupByMoidRequest {
+func (a *PortApiService) GetPortSubGroupByMoid(ctx context.Context, moid string) ApiGetPortSubGroupByMoidRequest {
 	return ApiGetPortSubGroupByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -867,27 +854,25 @@ func (a *PortApiService) GetPortSubGroupByMoid(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return PortSubGroup
-func (a *PortApiService) GetPortSubGroupByMoidExecute(r ApiGetPortSubGroupByMoidRequest) (PortSubGroup, *_nethttp.Response, error) {
+func (a *PortApiService) GetPortSubGroupByMoidExecute(r ApiGetPortSubGroupByMoidRequest) (*PortSubGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PortSubGroup
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PortSubGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.GetPortSubGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/SubGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -906,7 +891,7 @@ func (a *PortApiService) GetPortSubGroupByMoidExecute(r ApiGetPortSubGroupByMoid
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -916,15 +901,15 @@ func (a *PortApiService) GetPortSubGroupByMoidExecute(r ApiGetPortSubGroupByMoid
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -980,7 +965,7 @@ func (a *PortApiService) GetPortSubGroupByMoidExecute(r ApiGetPortSubGroupByMoid
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -991,7 +976,7 @@ func (a *PortApiService) GetPortSubGroupByMoidExecute(r ApiGetPortSubGroupByMoid
 }
 
 type ApiGetPortSubGroupListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *PortApiService
 	filter      *string
 	orderby     *string
@@ -1072,17 +1057,17 @@ func (r ApiGetPortSubGroupListRequest) Tags(tags string) ApiGetPortSubGroupListR
 	return r
 }
 
-func (r ApiGetPortSubGroupListRequest) Execute() (PortSubGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetPortSubGroupListRequest) Execute() (*PortSubGroupResponse, *http.Response, error) {
 	return r.ApiService.GetPortSubGroupListExecute(r)
 }
 
 /*
 GetPortSubGroupList Read a 'port.SubGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetPortSubGroupListRequest
 */
-func (a *PortApiService) GetPortSubGroupList(ctx _context.Context) ApiGetPortSubGroupListRequest {
+func (a *PortApiService) GetPortSubGroupList(ctx context.Context) ApiGetPortSubGroupListRequest {
 	return ApiGetPortSubGroupListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1091,26 +1076,24 @@ func (a *PortApiService) GetPortSubGroupList(ctx _context.Context) ApiGetPortSub
 
 // Execute executes the request
 //  @return PortSubGroupResponse
-func (a *PortApiService) GetPortSubGroupListExecute(r ApiGetPortSubGroupListRequest) (PortSubGroupResponse, *_nethttp.Response, error) {
+func (a *PortApiService) GetPortSubGroupListExecute(r ApiGetPortSubGroupListRequest) (*PortSubGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PortSubGroupResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PortSubGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.GetPortSubGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/SubGroups"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1162,7 +1145,7 @@ func (a *PortApiService) GetPortSubGroupListExecute(r ApiGetPortSubGroupListRequ
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1172,15 +1155,15 @@ func (a *PortApiService) GetPortSubGroupListExecute(r ApiGetPortSubGroupListRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1236,7 +1219,7 @@ func (a *PortApiService) GetPortSubGroupListExecute(r ApiGetPortSubGroupListRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1247,7 +1230,7 @@ func (a *PortApiService) GetPortSubGroupListExecute(r ApiGetPortSubGroupListRequ
 }
 
 type ApiPatchPortGroupRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *PortApiService
 	moid       string
 	portGroup  *PortGroup
@@ -1266,18 +1249,18 @@ func (r ApiPatchPortGroupRequest) IfMatch(ifMatch string) ApiPatchPortGroupReque
 	return r
 }
 
-func (r ApiPatchPortGroupRequest) Execute() (PortGroup, *_nethttp.Response, error) {
+func (r ApiPatchPortGroupRequest) Execute() (*PortGroup, *http.Response, error) {
 	return r.ApiService.PatchPortGroupExecute(r)
 }
 
 /*
 PatchPortGroup Update a 'port.Group' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchPortGroupRequest
 */
-func (a *PortApiService) PatchPortGroup(ctx _context.Context, moid string) ApiPatchPortGroupRequest {
+func (a *PortApiService) PatchPortGroup(ctx context.Context, moid string) ApiPatchPortGroupRequest {
 	return ApiPatchPortGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1287,27 +1270,25 @@ func (a *PortApiService) PatchPortGroup(ctx _context.Context, moid string) ApiPa
 
 // Execute executes the request
 //  @return PortGroup
-func (a *PortApiService) PatchPortGroupExecute(r ApiPatchPortGroupRequest) (PortGroup, *_nethttp.Response, error) {
+func (a *PortApiService) PatchPortGroupExecute(r ApiPatchPortGroupRequest) (*PortGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PortGroup
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PortGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.PatchPortGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/Groups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.portGroup == nil {
 		return localVarReturnValue, nil, reportError("portGroup is required and must be specified")
 	}
@@ -1334,7 +1315,7 @@ func (a *PortApiService) PatchPortGroupExecute(r ApiPatchPortGroupRequest) (Port
 	}
 	// body params
 	localVarPostBody = r.portGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1344,15 +1325,15 @@ func (a *PortApiService) PatchPortGroupExecute(r ApiPatchPortGroupRequest) (Port
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1408,7 +1389,7 @@ func (a *PortApiService) PatchPortGroupExecute(r ApiPatchPortGroupRequest) (Port
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1419,7 +1400,7 @@ func (a *PortApiService) PatchPortGroupExecute(r ApiPatchPortGroupRequest) (Port
 }
 
 type ApiPatchPortMacBindingRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *PortApiService
 	moid           string
 	portMacBinding *PortMacBinding
@@ -1438,18 +1419,18 @@ func (r ApiPatchPortMacBindingRequest) IfMatch(ifMatch string) ApiPatchPortMacBi
 	return r
 }
 
-func (r ApiPatchPortMacBindingRequest) Execute() (PortMacBinding, *_nethttp.Response, error) {
+func (r ApiPatchPortMacBindingRequest) Execute() (*PortMacBinding, *http.Response, error) {
 	return r.ApiService.PatchPortMacBindingExecute(r)
 }
 
 /*
 PatchPortMacBinding Update a 'port.MacBinding' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchPortMacBindingRequest
 */
-func (a *PortApiService) PatchPortMacBinding(ctx _context.Context, moid string) ApiPatchPortMacBindingRequest {
+func (a *PortApiService) PatchPortMacBinding(ctx context.Context, moid string) ApiPatchPortMacBindingRequest {
 	return ApiPatchPortMacBindingRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1459,27 +1440,25 @@ func (a *PortApiService) PatchPortMacBinding(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return PortMacBinding
-func (a *PortApiService) PatchPortMacBindingExecute(r ApiPatchPortMacBindingRequest) (PortMacBinding, *_nethttp.Response, error) {
+func (a *PortApiService) PatchPortMacBindingExecute(r ApiPatchPortMacBindingRequest) (*PortMacBinding, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PortMacBinding
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PortMacBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.PatchPortMacBinding")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/MacBindings/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.portMacBinding == nil {
 		return localVarReturnValue, nil, reportError("portMacBinding is required and must be specified")
 	}
@@ -1506,7 +1485,7 @@ func (a *PortApiService) PatchPortMacBindingExecute(r ApiPatchPortMacBindingRequ
 	}
 	// body params
 	localVarPostBody = r.portMacBinding
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1516,15 +1495,15 @@ func (a *PortApiService) PatchPortMacBindingExecute(r ApiPatchPortMacBindingRequ
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1580,7 +1559,7 @@ func (a *PortApiService) PatchPortMacBindingExecute(r ApiPatchPortMacBindingRequ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1591,7 +1570,7 @@ func (a *PortApiService) PatchPortMacBindingExecute(r ApiPatchPortMacBindingRequ
 }
 
 type ApiPatchPortSubGroupRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *PortApiService
 	moid         string
 	portSubGroup *PortSubGroup
@@ -1610,18 +1589,18 @@ func (r ApiPatchPortSubGroupRequest) IfMatch(ifMatch string) ApiPatchPortSubGrou
 	return r
 }
 
-func (r ApiPatchPortSubGroupRequest) Execute() (PortSubGroup, *_nethttp.Response, error) {
+func (r ApiPatchPortSubGroupRequest) Execute() (*PortSubGroup, *http.Response, error) {
 	return r.ApiService.PatchPortSubGroupExecute(r)
 }
 
 /*
 PatchPortSubGroup Update a 'port.SubGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchPortSubGroupRequest
 */
-func (a *PortApiService) PatchPortSubGroup(ctx _context.Context, moid string) ApiPatchPortSubGroupRequest {
+func (a *PortApiService) PatchPortSubGroup(ctx context.Context, moid string) ApiPatchPortSubGroupRequest {
 	return ApiPatchPortSubGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1631,27 +1610,25 @@ func (a *PortApiService) PatchPortSubGroup(ctx _context.Context, moid string) Ap
 
 // Execute executes the request
 //  @return PortSubGroup
-func (a *PortApiService) PatchPortSubGroupExecute(r ApiPatchPortSubGroupRequest) (PortSubGroup, *_nethttp.Response, error) {
+func (a *PortApiService) PatchPortSubGroupExecute(r ApiPatchPortSubGroupRequest) (*PortSubGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PortSubGroup
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PortSubGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.PatchPortSubGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/SubGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.portSubGroup == nil {
 		return localVarReturnValue, nil, reportError("portSubGroup is required and must be specified")
 	}
@@ -1678,7 +1655,7 @@ func (a *PortApiService) PatchPortSubGroupExecute(r ApiPatchPortSubGroupRequest)
 	}
 	// body params
 	localVarPostBody = r.portSubGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1688,15 +1665,15 @@ func (a *PortApiService) PatchPortSubGroupExecute(r ApiPatchPortSubGroupRequest)
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1752,7 +1729,7 @@ func (a *PortApiService) PatchPortSubGroupExecute(r ApiPatchPortSubGroupRequest)
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1763,7 +1740,7 @@ func (a *PortApiService) PatchPortSubGroupExecute(r ApiPatchPortSubGroupRequest)
 }
 
 type ApiUpdatePortGroupRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *PortApiService
 	moid       string
 	portGroup  *PortGroup
@@ -1782,18 +1759,18 @@ func (r ApiUpdatePortGroupRequest) IfMatch(ifMatch string) ApiUpdatePortGroupReq
 	return r
 }
 
-func (r ApiUpdatePortGroupRequest) Execute() (PortGroup, *_nethttp.Response, error) {
+func (r ApiUpdatePortGroupRequest) Execute() (*PortGroup, *http.Response, error) {
 	return r.ApiService.UpdatePortGroupExecute(r)
 }
 
 /*
 UpdatePortGroup Update a 'port.Group' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdatePortGroupRequest
 */
-func (a *PortApiService) UpdatePortGroup(ctx _context.Context, moid string) ApiUpdatePortGroupRequest {
+func (a *PortApiService) UpdatePortGroup(ctx context.Context, moid string) ApiUpdatePortGroupRequest {
 	return ApiUpdatePortGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1803,27 +1780,25 @@ func (a *PortApiService) UpdatePortGroup(ctx _context.Context, moid string) ApiU
 
 // Execute executes the request
 //  @return PortGroup
-func (a *PortApiService) UpdatePortGroupExecute(r ApiUpdatePortGroupRequest) (PortGroup, *_nethttp.Response, error) {
+func (a *PortApiService) UpdatePortGroupExecute(r ApiUpdatePortGroupRequest) (*PortGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PortGroup
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PortGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.UpdatePortGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/Groups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.portGroup == nil {
 		return localVarReturnValue, nil, reportError("portGroup is required and must be specified")
 	}
@@ -1850,7 +1825,7 @@ func (a *PortApiService) UpdatePortGroupExecute(r ApiUpdatePortGroupRequest) (Po
 	}
 	// body params
 	localVarPostBody = r.portGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1860,15 +1835,15 @@ func (a *PortApiService) UpdatePortGroupExecute(r ApiUpdatePortGroupRequest) (Po
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1924,7 +1899,7 @@ func (a *PortApiService) UpdatePortGroupExecute(r ApiUpdatePortGroupRequest) (Po
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1935,7 +1910,7 @@ func (a *PortApiService) UpdatePortGroupExecute(r ApiUpdatePortGroupRequest) (Po
 }
 
 type ApiUpdatePortMacBindingRequest struct {
-	ctx            _context.Context
+	ctx            context.Context
 	ApiService     *PortApiService
 	moid           string
 	portMacBinding *PortMacBinding
@@ -1954,18 +1929,18 @@ func (r ApiUpdatePortMacBindingRequest) IfMatch(ifMatch string) ApiUpdatePortMac
 	return r
 }
 
-func (r ApiUpdatePortMacBindingRequest) Execute() (PortMacBinding, *_nethttp.Response, error) {
+func (r ApiUpdatePortMacBindingRequest) Execute() (*PortMacBinding, *http.Response, error) {
 	return r.ApiService.UpdatePortMacBindingExecute(r)
 }
 
 /*
 UpdatePortMacBinding Update a 'port.MacBinding' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdatePortMacBindingRequest
 */
-func (a *PortApiService) UpdatePortMacBinding(ctx _context.Context, moid string) ApiUpdatePortMacBindingRequest {
+func (a *PortApiService) UpdatePortMacBinding(ctx context.Context, moid string) ApiUpdatePortMacBindingRequest {
 	return ApiUpdatePortMacBindingRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1975,27 +1950,25 @@ func (a *PortApiService) UpdatePortMacBinding(ctx _context.Context, moid string)
 
 // Execute executes the request
 //  @return PortMacBinding
-func (a *PortApiService) UpdatePortMacBindingExecute(r ApiUpdatePortMacBindingRequest) (PortMacBinding, *_nethttp.Response, error) {
+func (a *PortApiService) UpdatePortMacBindingExecute(r ApiUpdatePortMacBindingRequest) (*PortMacBinding, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PortMacBinding
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PortMacBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.UpdatePortMacBinding")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/MacBindings/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.portMacBinding == nil {
 		return localVarReturnValue, nil, reportError("portMacBinding is required and must be specified")
 	}
@@ -2022,7 +1995,7 @@ func (a *PortApiService) UpdatePortMacBindingExecute(r ApiUpdatePortMacBindingRe
 	}
 	// body params
 	localVarPostBody = r.portMacBinding
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2032,15 +2005,15 @@ func (a *PortApiService) UpdatePortMacBindingExecute(r ApiUpdatePortMacBindingRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2096,7 +2069,7 @@ func (a *PortApiService) UpdatePortMacBindingExecute(r ApiUpdatePortMacBindingRe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2107,7 +2080,7 @@ func (a *PortApiService) UpdatePortMacBindingExecute(r ApiUpdatePortMacBindingRe
 }
 
 type ApiUpdatePortSubGroupRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *PortApiService
 	moid         string
 	portSubGroup *PortSubGroup
@@ -2126,18 +2099,18 @@ func (r ApiUpdatePortSubGroupRequest) IfMatch(ifMatch string) ApiUpdatePortSubGr
 	return r
 }
 
-func (r ApiUpdatePortSubGroupRequest) Execute() (PortSubGroup, *_nethttp.Response, error) {
+func (r ApiUpdatePortSubGroupRequest) Execute() (*PortSubGroup, *http.Response, error) {
 	return r.ApiService.UpdatePortSubGroupExecute(r)
 }
 
 /*
 UpdatePortSubGroup Update a 'port.SubGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdatePortSubGroupRequest
 */
-func (a *PortApiService) UpdatePortSubGroup(ctx _context.Context, moid string) ApiUpdatePortSubGroupRequest {
+func (a *PortApiService) UpdatePortSubGroup(ctx context.Context, moid string) ApiUpdatePortSubGroupRequest {
 	return ApiUpdatePortSubGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2147,27 +2120,25 @@ func (a *PortApiService) UpdatePortSubGroup(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return PortSubGroup
-func (a *PortApiService) UpdatePortSubGroupExecute(r ApiUpdatePortSubGroupRequest) (PortSubGroup, *_nethttp.Response, error) {
+func (a *PortApiService) UpdatePortSubGroupExecute(r ApiUpdatePortSubGroupRequest) (*PortSubGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  PortSubGroup
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *PortSubGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.UpdatePortSubGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/SubGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.portSubGroup == nil {
 		return localVarReturnValue, nil, reportError("portSubGroup is required and must be specified")
 	}
@@ -2194,7 +2165,7 @@ func (a *PortApiService) UpdatePortSubGroupExecute(r ApiUpdatePortSubGroupReques
 	}
 	// body params
 	localVarPostBody = r.portSubGroup
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2204,15 +2175,15 @@ func (a *PortApiService) UpdatePortSubGroupExecute(r ApiUpdatePortSubGroupReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2268,7 +2239,7 @@ func (a *PortApiService) UpdatePortSubGroupExecute(r ApiUpdatePortSubGroupReques
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

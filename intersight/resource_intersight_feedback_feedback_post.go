@@ -232,10 +232,10 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 							ForceNew:    true,
 						},
 						"trace_ids": {
-							Description:      "Bunch of last traceId for reproducing user last activity.",
-							Type:             schema.TypeString,
-							DiffSuppressFunc: SuppressDiffAdditionProps, Optional: true,
-							ForceNew: true,
+							Description: "Bunch of last traceId for reproducing user last activity.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
 						},
 						"type": {
 							Description: "Type of the feedback from user.\n* `Evaluation` - User's feedback classified as an evaluation.\n* `Bug` - User's feedback classified as a bug.",
@@ -579,7 +579,6 @@ func resourceFeedbackFeedbackPost() *schema.Resource {
 
 func resourceFeedbackFeedbackPostCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewFeedbackFeedbackPostWithDefaults()
@@ -664,7 +663,13 @@ func resourceFeedbackFeedbackPostCreate(c context.Context, d *schema.ResourceDat
 			}
 			if v, ok := l["trace_ids"]; ok {
 				{
-					o.SetTraceIds(v)
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						x2 := x1.(map[string]interface{})
+						o.SetTraceIds(x2)
+					}
 				}
 			}
 			if v, ok := l["type"]; ok {
@@ -728,7 +733,7 @@ func resourceFeedbackFeedbackPostCreate(c context.Context, d *schema.ResourceDat
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating FeedbackFeedbackPost: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating FeedbackFeedbackPost: %s", responseErr.Error())
@@ -740,7 +745,6 @@ func resourceFeedbackFeedbackPostCreate(c context.Context, d *schema.ResourceDat
 
 func resourceFeedbackFeedbackPostRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	log.Printf("%v", d)
 	var de diag.Diagnostics
 	return de
@@ -748,7 +752,6 @@ func resourceFeedbackFeedbackPostRead(c context.Context, d *schema.ResourceData,
 
 func resourceFeedbackFeedbackPostDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "FeedbackFeedbackPost does not allow delete functionality"}
 	de = append(de, warning)

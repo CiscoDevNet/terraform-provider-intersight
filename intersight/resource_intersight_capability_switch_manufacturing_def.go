@@ -437,7 +437,6 @@ func resourceCapabilitySwitchManufacturingDef() *schema.Resource {
 
 func resourceCapabilitySwitchManufacturingDefCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewCapabilitySwitchManufacturingDefWithDefaults()
@@ -540,7 +539,7 @@ func resourceCapabilitySwitchManufacturingDefCreate(c context.Context, d *schema
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating CapabilitySwitchManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating CapabilitySwitchManufacturingDef: %s", responseErr.Error())
@@ -552,7 +551,6 @@ func resourceCapabilitySwitchManufacturingDefCreate(c context.Context, d *schema
 
 func resourceCapabilitySwitchManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.CapabilityApi.GetCapabilitySwitchManufacturingDefByMoid(conn.ctx, d.Id())
@@ -565,7 +563,7 @@ func resourceCapabilitySwitchManufacturingDefRead(c context.Context, d *schema.R
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching CapabilitySwitchManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching CapabilitySwitchManufacturingDef: %s", responseErr.Error())
@@ -670,7 +668,6 @@ func resourceCapabilitySwitchManufacturingDefRead(c context.Context, d *schema.R
 
 func resourceCapabilitySwitchManufacturingDefUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.CapabilitySwitchManufacturingDef{}
@@ -782,7 +779,7 @@ func resourceCapabilitySwitchManufacturingDefUpdate(c context.Context, d *schema
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating CapabilitySwitchManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating CapabilitySwitchManufacturingDef: %s", responseErr.Error())
@@ -794,7 +791,6 @@ func resourceCapabilitySwitchManufacturingDefUpdate(c context.Context, d *schema
 
 func resourceCapabilitySwitchManufacturingDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilitySwitchManufacturingDef(conn.ctx, d.Id())
@@ -806,7 +802,7 @@ func resourceCapabilitySwitchManufacturingDefDelete(c context.Context, d *schema
 			return de
 		}
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			deleteErr := deleteErr.(models.GenericOpenAPIError)
+			deleteErr := deleteErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting CapabilitySwitchManufacturingDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 		}
 		return diag.Errorf("error occurred while deleting CapabilitySwitchManufacturingDef object: %s", deleteErr.Error())

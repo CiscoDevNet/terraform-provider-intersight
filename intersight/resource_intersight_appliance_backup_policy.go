@@ -564,7 +564,6 @@ func resourceApplianceBackupPolicy() *schema.Resource {
 
 func resourceApplianceBackupPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = models.NewApplianceBackupPolicyWithDefaults()
@@ -782,7 +781,7 @@ func resourceApplianceBackupPolicyCreate(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while creating ApplianceBackupPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while creating ApplianceBackupPolicy: %s", responseErr.Error())
@@ -794,7 +793,6 @@ func resourceApplianceBackupPolicyCreate(c context.Context, d *schema.ResourceDa
 
 func resourceApplianceBackupPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	conn := meta.(*Config)
 	r := conn.ApiClient.ApplianceApi.GetApplianceBackupPolicyByMoid(conn.ctx, d.Id())
@@ -807,7 +805,7 @@ func resourceApplianceBackupPolicyRead(c context.Context, d *schema.ResourceData
 		}
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching ApplianceBackupPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching ApplianceBackupPolicy: %s", responseErr.Error())
@@ -924,7 +922,6 @@ func resourceApplianceBackupPolicyRead(c context.Context, d *schema.ResourceData
 
 func resourceApplianceBackupPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.ApplianceBackupPolicy{}
@@ -1153,7 +1150,7 @@ func resourceApplianceBackupPolicyUpdate(c context.Context, d *schema.ResourceDa
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while updating ApplianceBackupPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while updating ApplianceBackupPolicy: %s", responseErr.Error())
@@ -1165,7 +1162,6 @@ func resourceApplianceBackupPolicyUpdate(c context.Context, d *schema.ResourceDa
 
 func resourceApplianceBackupPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	var de diag.Diagnostics
 	var warning = diag.Diagnostic{Severity: diag.Warning, Summary: "ApplianceBackupPolicy does not allow delete functionality"}
 	de = append(de, warning)

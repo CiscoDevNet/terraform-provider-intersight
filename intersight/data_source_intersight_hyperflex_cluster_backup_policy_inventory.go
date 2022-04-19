@@ -987,7 +987,6 @@ func dataSourceHyperflexClusterBackupPolicyInventory() *schema.Resource {
 
 func dataSourceHyperflexClusterBackupPolicyInventoryRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.HyperflexClusterBackupPolicyInventory{}
@@ -1466,7 +1465,7 @@ func dataSourceHyperflexClusterBackupPolicyInventoryRead(c context.Context, d *s
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of HyperflexClusterBackupPolicyInventory: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of HyperflexClusterBackupPolicyInventory: %s", responseErr.Error())
@@ -1483,7 +1482,7 @@ func dataSourceHyperflexClusterBackupPolicyInventoryRead(c context.Context, d *s
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching HyperflexClusterBackupPolicyInventory: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching HyperflexClusterBackupPolicyInventory: %s", responseErr.Error())

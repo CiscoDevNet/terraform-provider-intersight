@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Type** | **string** | The aggregator type. | 
 **Name** | **string** | Output name for the &#39;any&#39; value. | 
 **FieldName** | **string** | Name of the metric column. | 
-**MaxStringBytes** | Pointer to **int32** | null | [optional] [default to 1024]
+**MaxStringBytes** | Pointer to **int32** |  | [optional] [default to 1024]
 
 ## Methods
 

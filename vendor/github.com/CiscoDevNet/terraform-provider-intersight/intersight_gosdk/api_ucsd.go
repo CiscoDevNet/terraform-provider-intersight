@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // UcsdApiService UcsdApi service
 type UcsdApiService service
 
 type ApiDeleteUcsdBackupInfoRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *UcsdApiService
 	moid       string
 }
 
-func (r ApiDeleteUcsdBackupInfoRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteUcsdBackupInfoRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteUcsdBackupInfoExecute(r)
 }
 
 /*
 DeleteUcsdBackupInfo Delete a 'ucsd.BackupInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiDeleteUcsdBackupInfoRequest
 */
-func (a *UcsdApiService) DeleteUcsdBackupInfo(ctx _context.Context, moid string) ApiDeleteUcsdBackupInfoRequest {
+func (a *UcsdApiService) DeleteUcsdBackupInfo(ctx context.Context, moid string) ApiDeleteUcsdBackupInfoRequest {
 	return ApiDeleteUcsdBackupInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -54,26 +49,24 @@ func (a *UcsdApiService) DeleteUcsdBackupInfo(ctx _context.Context, moid string)
 }
 
 // Execute executes the request
-func (a *UcsdApiService) DeleteUcsdBackupInfoExecute(r ApiDeleteUcsdBackupInfoRequest) (*_nethttp.Response, error) {
+func (a *UcsdApiService) DeleteUcsdBackupInfoExecute(r ApiDeleteUcsdBackupInfoRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UcsdApiService.DeleteUcsdBackupInfo")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ucsd/BackupInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -92,7 +85,7 @@ func (a *UcsdApiService) DeleteUcsdBackupInfoExecute(r ApiDeleteUcsdBackupInfoRe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return nil, err
 	}
@@ -102,15 +95,15 @@ func (a *UcsdApiService) DeleteUcsdBackupInfoExecute(r ApiDeleteUcsdBackupInfoRe
 		return localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,23 +161,23 @@ func (a *UcsdApiService) DeleteUcsdBackupInfoExecute(r ApiDeleteUcsdBackupInfoRe
 }
 
 type ApiGetUcsdBackupInfoByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *UcsdApiService
 	moid       string
 }
 
-func (r ApiGetUcsdBackupInfoByMoidRequest) Execute() (UcsdBackupInfo, *_nethttp.Response, error) {
+func (r ApiGetUcsdBackupInfoByMoidRequest) Execute() (*UcsdBackupInfo, *http.Response, error) {
 	return r.ApiService.GetUcsdBackupInfoByMoidExecute(r)
 }
 
 /*
 GetUcsdBackupInfoByMoid Read a 'ucsd.BackupInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetUcsdBackupInfoByMoidRequest
 */
-func (a *UcsdApiService) GetUcsdBackupInfoByMoid(ctx _context.Context, moid string) ApiGetUcsdBackupInfoByMoidRequest {
+func (a *UcsdApiService) GetUcsdBackupInfoByMoid(ctx context.Context, moid string) ApiGetUcsdBackupInfoByMoidRequest {
 	return ApiGetUcsdBackupInfoByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -194,27 +187,25 @@ func (a *UcsdApiService) GetUcsdBackupInfoByMoid(ctx _context.Context, moid stri
 
 // Execute executes the request
 //  @return UcsdBackupInfo
-func (a *UcsdApiService) GetUcsdBackupInfoByMoidExecute(r ApiGetUcsdBackupInfoByMoidRequest) (UcsdBackupInfo, *_nethttp.Response, error) {
+func (a *UcsdApiService) GetUcsdBackupInfoByMoidExecute(r ApiGetUcsdBackupInfoByMoidRequest) (*UcsdBackupInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  UcsdBackupInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UcsdBackupInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UcsdApiService.GetUcsdBackupInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ucsd/BackupInfos/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -233,7 +224,7 @@ func (a *UcsdApiService) GetUcsdBackupInfoByMoidExecute(r ApiGetUcsdBackupInfoBy
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -243,15 +234,15 @@ func (a *UcsdApiService) GetUcsdBackupInfoByMoidExecute(r ApiGetUcsdBackupInfoBy
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -307,7 +298,7 @@ func (a *UcsdApiService) GetUcsdBackupInfoByMoidExecute(r ApiGetUcsdBackupInfoBy
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -318,7 +309,7 @@ func (a *UcsdApiService) GetUcsdBackupInfoByMoidExecute(r ApiGetUcsdBackupInfoBy
 }
 
 type ApiGetUcsdBackupInfoListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *UcsdApiService
 	filter      *string
 	orderby     *string
@@ -399,17 +390,17 @@ func (r ApiGetUcsdBackupInfoListRequest) Tags(tags string) ApiGetUcsdBackupInfoL
 	return r
 }
 
-func (r ApiGetUcsdBackupInfoListRequest) Execute() (UcsdBackupInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetUcsdBackupInfoListRequest) Execute() (*UcsdBackupInfoResponse, *http.Response, error) {
 	return r.ApiService.GetUcsdBackupInfoListExecute(r)
 }
 
 /*
 GetUcsdBackupInfoList Read a 'ucsd.BackupInfo' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetUcsdBackupInfoListRequest
 */
-func (a *UcsdApiService) GetUcsdBackupInfoList(ctx _context.Context) ApiGetUcsdBackupInfoListRequest {
+func (a *UcsdApiService) GetUcsdBackupInfoList(ctx context.Context) ApiGetUcsdBackupInfoListRequest {
 	return ApiGetUcsdBackupInfoListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -418,26 +409,24 @@ func (a *UcsdApiService) GetUcsdBackupInfoList(ctx _context.Context) ApiGetUcsdB
 
 // Execute executes the request
 //  @return UcsdBackupInfoResponse
-func (a *UcsdApiService) GetUcsdBackupInfoListExecute(r ApiGetUcsdBackupInfoListRequest) (UcsdBackupInfoResponse, *_nethttp.Response, error) {
+func (a *UcsdApiService) GetUcsdBackupInfoListExecute(r ApiGetUcsdBackupInfoListRequest) (*UcsdBackupInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  UcsdBackupInfoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UcsdBackupInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UcsdApiService.GetUcsdBackupInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/ucsd/BackupInfos"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -489,7 +478,7 @@ func (a *UcsdApiService) GetUcsdBackupInfoListExecute(r ApiGetUcsdBackupInfoList
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -499,15 +488,15 @@ func (a *UcsdApiService) GetUcsdBackupInfoListExecute(r ApiGetUcsdBackupInfoList
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -563,7 +552,7 @@ func (a *UcsdApiService) GetUcsdBackupInfoListExecute(r ApiGetUcsdBackupInfoList
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

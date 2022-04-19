@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,39 +13,34 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // RecommendationApiService RecommendationApi service
 type RecommendationApiService service
 
 type ApiGetRecommendationCapacityRunwayByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *RecommendationApiService
 	moid       string
 }
 
-func (r ApiGetRecommendationCapacityRunwayByMoidRequest) Execute() (RecommendationCapacityRunway, *_nethttp.Response, error) {
+func (r ApiGetRecommendationCapacityRunwayByMoidRequest) Execute() (*RecommendationCapacityRunway, *http.Response, error) {
 	return r.ApiService.GetRecommendationCapacityRunwayByMoidExecute(r)
 }
 
 /*
 GetRecommendationCapacityRunwayByMoid Read a 'recommendation.CapacityRunway' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetRecommendationCapacityRunwayByMoidRequest
 */
-func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoid(ctx _context.Context, moid string) ApiGetRecommendationCapacityRunwayByMoidRequest {
+func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoid(ctx context.Context, moid string) ApiGetRecommendationCapacityRunwayByMoidRequest {
 	return ApiGetRecommendationCapacityRunwayByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -55,27 +50,25 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoid(ctx _co
 
 // Execute executes the request
 //  @return RecommendationCapacityRunway
-func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoidExecute(r ApiGetRecommendationCapacityRunwayByMoidRequest) (RecommendationCapacityRunway, *_nethttp.Response, error) {
+func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoidExecute(r ApiGetRecommendationCapacityRunwayByMoidRequest) (*RecommendationCapacityRunway, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  RecommendationCapacityRunway
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RecommendationCapacityRunway
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecommendationApiService.GetRecommendationCapacityRunwayByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/recommendation/CapacityRunways/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -94,7 +87,7 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoidExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -104,15 +97,15 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoidExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -168,7 +161,7 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoidExecute(
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -179,7 +172,7 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayByMoidExecute(
 }
 
 type ApiGetRecommendationCapacityRunwayListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *RecommendationApiService
 	filter      *string
 	orderby     *string
@@ -260,17 +253,17 @@ func (r ApiGetRecommendationCapacityRunwayListRequest) Tags(tags string) ApiGetR
 	return r
 }
 
-func (r ApiGetRecommendationCapacityRunwayListRequest) Execute() (RecommendationCapacityRunwayResponse, *_nethttp.Response, error) {
+func (r ApiGetRecommendationCapacityRunwayListRequest) Execute() (*RecommendationCapacityRunwayResponse, *http.Response, error) {
 	return r.ApiService.GetRecommendationCapacityRunwayListExecute(r)
 }
 
 /*
 GetRecommendationCapacityRunwayList Read a 'recommendation.CapacityRunway' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetRecommendationCapacityRunwayListRequest
 */
-func (a *RecommendationApiService) GetRecommendationCapacityRunwayList(ctx _context.Context) ApiGetRecommendationCapacityRunwayListRequest {
+func (a *RecommendationApiService) GetRecommendationCapacityRunwayList(ctx context.Context) ApiGetRecommendationCapacityRunwayListRequest {
 	return ApiGetRecommendationCapacityRunwayListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -279,26 +272,24 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayList(ctx _cont
 
 // Execute executes the request
 //  @return RecommendationCapacityRunwayResponse
-func (a *RecommendationApiService) GetRecommendationCapacityRunwayListExecute(r ApiGetRecommendationCapacityRunwayListRequest) (RecommendationCapacityRunwayResponse, *_nethttp.Response, error) {
+func (a *RecommendationApiService) GetRecommendationCapacityRunwayListExecute(r ApiGetRecommendationCapacityRunwayListRequest) (*RecommendationCapacityRunwayResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  RecommendationCapacityRunwayResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RecommendationCapacityRunwayResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecommendationApiService.GetRecommendationCapacityRunwayList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/recommendation/CapacityRunways"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -350,7 +341,7 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayListExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -360,15 +351,15 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayListExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -424,7 +415,7 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayListExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -435,23 +426,23 @@ func (a *RecommendationApiService) GetRecommendationCapacityRunwayListExecute(r 
 }
 
 type ApiGetRecommendationPhysicalItemByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *RecommendationApiService
 	moid       string
 }
 
-func (r ApiGetRecommendationPhysicalItemByMoidRequest) Execute() (RecommendationPhysicalItem, *_nethttp.Response, error) {
+func (r ApiGetRecommendationPhysicalItemByMoidRequest) Execute() (*RecommendationPhysicalItem, *http.Response, error) {
 	return r.ApiService.GetRecommendationPhysicalItemByMoidExecute(r)
 }
 
 /*
 GetRecommendationPhysicalItemByMoid Read a 'recommendation.PhysicalItem' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetRecommendationPhysicalItemByMoidRequest
 */
-func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoid(ctx _context.Context, moid string) ApiGetRecommendationPhysicalItemByMoidRequest {
+func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoid(ctx context.Context, moid string) ApiGetRecommendationPhysicalItemByMoidRequest {
 	return ApiGetRecommendationPhysicalItemByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -461,27 +452,25 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoid(ctx _cont
 
 // Execute executes the request
 //  @return RecommendationPhysicalItem
-func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoidExecute(r ApiGetRecommendationPhysicalItemByMoidRequest) (RecommendationPhysicalItem, *_nethttp.Response, error) {
+func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoidExecute(r ApiGetRecommendationPhysicalItemByMoidRequest) (*RecommendationPhysicalItem, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  RecommendationPhysicalItem
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RecommendationPhysicalItem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecommendationApiService.GetRecommendationPhysicalItemByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/recommendation/PhysicalItems/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -500,7 +489,7 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoidExecute(r 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -510,15 +499,15 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -574,7 +563,7 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoidExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -585,7 +574,7 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemByMoidExecute(r 
 }
 
 type ApiGetRecommendationPhysicalItemListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *RecommendationApiService
 	filter      *string
 	orderby     *string
@@ -666,17 +655,17 @@ func (r ApiGetRecommendationPhysicalItemListRequest) Tags(tags string) ApiGetRec
 	return r
 }
 
-func (r ApiGetRecommendationPhysicalItemListRequest) Execute() (RecommendationPhysicalItemResponse, *_nethttp.Response, error) {
+func (r ApiGetRecommendationPhysicalItemListRequest) Execute() (*RecommendationPhysicalItemResponse, *http.Response, error) {
 	return r.ApiService.GetRecommendationPhysicalItemListExecute(r)
 }
 
 /*
 GetRecommendationPhysicalItemList Read a 'recommendation.PhysicalItem' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetRecommendationPhysicalItemListRequest
 */
-func (a *RecommendationApiService) GetRecommendationPhysicalItemList(ctx _context.Context) ApiGetRecommendationPhysicalItemListRequest {
+func (a *RecommendationApiService) GetRecommendationPhysicalItemList(ctx context.Context) ApiGetRecommendationPhysicalItemListRequest {
 	return ApiGetRecommendationPhysicalItemListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -685,26 +674,24 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemList(ctx _contex
 
 // Execute executes the request
 //  @return RecommendationPhysicalItemResponse
-func (a *RecommendationApiService) GetRecommendationPhysicalItemListExecute(r ApiGetRecommendationPhysicalItemListRequest) (RecommendationPhysicalItemResponse, *_nethttp.Response, error) {
+func (a *RecommendationApiService) GetRecommendationPhysicalItemListExecute(r ApiGetRecommendationPhysicalItemListRequest) (*RecommendationPhysicalItemResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  RecommendationPhysicalItemResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RecommendationPhysicalItemResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecommendationApiService.GetRecommendationPhysicalItemList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/recommendation/PhysicalItems"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -756,7 +743,7 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemListExecute(r Ap
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -766,15 +753,15 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -830,7 +817,7 @@ func (a *RecommendationApiService) GetRecommendationPhysicalItemListExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

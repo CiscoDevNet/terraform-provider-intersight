@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -140,11 +140,11 @@ func (o *StorageNetAppStorageVmAllOf) GetAggregates() []string {
 // GetAggregatesOk returns a tuple with the Aggregates field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StorageNetAppStorageVmAllOf) GetAggregatesOk() (*[]string, bool) {
+func (o *StorageNetAppStorageVmAllOf) GetAggregatesOk() ([]string, bool) {
 	if o == nil || o.Aggregates == nil {
 		return nil, false
 	}
-	return &o.Aggregates, true
+	return o.Aggregates, true
 }
 
 // HasAggregates returns a boolean if a field has been set.
@@ -237,11 +237,11 @@ func (o *StorageNetAppStorageVmAllOf) GetDnsDomains() []string {
 // GetDnsDomainsOk returns a tuple with the DnsDomains field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StorageNetAppStorageVmAllOf) GetDnsDomainsOk() (*[]string, bool) {
+func (o *StorageNetAppStorageVmAllOf) GetDnsDomainsOk() ([]string, bool) {
 	if o == nil || o.DnsDomains == nil {
 		return nil, false
 	}
-	return &o.DnsDomains, true
+	return o.DnsDomains, true
 }
 
 // HasDnsDomains returns a boolean if a field has been set.
@@ -398,11 +398,11 @@ func (o *StorageNetAppStorageVmAllOf) GetNameServers() []string {
 // GetNameServersOk returns a tuple with the NameServers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StorageNetAppStorageVmAllOf) GetNameServersOk() (*[]string, bool) {
+func (o *StorageNetAppStorageVmAllOf) GetNameServersOk() ([]string, bool) {
 	if o == nil || o.NameServers == nil {
 		return nil, false
 	}
-	return &o.NameServers, true
+	return o.NameServers, true
 }
 
 // HasNameServers returns a boolean if a field has been set.
@@ -655,11 +655,11 @@ func (o *StorageNetAppStorageVmAllOf) GetDiskPool() []StorageNetAppAggregateRela
 // GetDiskPoolOk returns a tuple with the DiskPool field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StorageNetAppStorageVmAllOf) GetDiskPoolOk() (*[]StorageNetAppAggregateRelationship, bool) {
+func (o *StorageNetAppStorageVmAllOf) GetDiskPoolOk() ([]StorageNetAppAggregateRelationship, bool) {
 	if o == nil || o.DiskPool == nil {
 		return nil, false
 	}
-	return &o.DiskPool, true
+	return o.DiskPool, true
 }
 
 // HasDiskPool returns a boolean if a field has been set.
@@ -688,11 +688,11 @@ func (o *StorageNetAppStorageVmAllOf) GetEvents() []StorageNetAppSvmEventRelatio
 // GetEventsOk returns a tuple with the Events field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StorageNetAppStorageVmAllOf) GetEventsOk() (*[]StorageNetAppSvmEventRelationship, bool) {
+func (o *StorageNetAppStorageVmAllOf) GetEventsOk() ([]StorageNetAppSvmEventRelationship, bool) {
 	if o == nil || o.Events == nil {
 		return nil, false
 	}
-	return &o.Events, true
+	return o.Events, true
 }
 
 // HasEvents returns a boolean if a field has been set.

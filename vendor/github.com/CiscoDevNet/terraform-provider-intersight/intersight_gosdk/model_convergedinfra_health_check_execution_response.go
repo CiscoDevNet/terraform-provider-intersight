@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -26,22 +26,30 @@ type ConvergedinfraHealthCheckExecutionResponse struct {
 
 // ConvergedinfraHealthCheckExecutionListAsConvergedinfraHealthCheckExecutionResponse is a convenience function that returns ConvergedinfraHealthCheckExecutionList wrapped in ConvergedinfraHealthCheckExecutionResponse
 func ConvergedinfraHealthCheckExecutionListAsConvergedinfraHealthCheckExecutionResponse(v *ConvergedinfraHealthCheckExecutionList) ConvergedinfraHealthCheckExecutionResponse {
-	return ConvergedinfraHealthCheckExecutionResponse{ConvergedinfraHealthCheckExecutionList: v}
+	return ConvergedinfraHealthCheckExecutionResponse{
+		ConvergedinfraHealthCheckExecutionList: v,
+	}
 }
 
 // MoAggregateTransformAsConvergedinfraHealthCheckExecutionResponse is a convenience function that returns MoAggregateTransform wrapped in ConvergedinfraHealthCheckExecutionResponse
 func MoAggregateTransformAsConvergedinfraHealthCheckExecutionResponse(v *MoAggregateTransform) ConvergedinfraHealthCheckExecutionResponse {
-	return ConvergedinfraHealthCheckExecutionResponse{MoAggregateTransform: v}
+	return ConvergedinfraHealthCheckExecutionResponse{
+		MoAggregateTransform: v,
+	}
 }
 
 // MoDocumentCountAsConvergedinfraHealthCheckExecutionResponse is a convenience function that returns MoDocumentCount wrapped in ConvergedinfraHealthCheckExecutionResponse
 func MoDocumentCountAsConvergedinfraHealthCheckExecutionResponse(v *MoDocumentCount) ConvergedinfraHealthCheckExecutionResponse {
-	return ConvergedinfraHealthCheckExecutionResponse{MoDocumentCount: v}
+	return ConvergedinfraHealthCheckExecutionResponse{
+		MoDocumentCount: v,
+	}
 }
 
 // MoTagSummaryAsConvergedinfraHealthCheckExecutionResponse is a convenience function that returns MoTagSummary wrapped in ConvergedinfraHealthCheckExecutionResponse
 func MoTagSummaryAsConvergedinfraHealthCheckExecutionResponse(v *MoTagSummary) ConvergedinfraHealthCheckExecutionResponse {
-	return ConvergedinfraHealthCheckExecutionResponse{MoTagSummary: v}
+	return ConvergedinfraHealthCheckExecutionResponse{
+		MoTagSummary: v,
+	}
 }
 
 // Unmarshal JSON data into one of the pointers in the struct
@@ -49,7 +57,7 @@ func (dst *ConvergedinfraHealthCheckExecutionResponse) UnmarshalJSON(data []byte
 	var err error
 	// use discriminator value to speed up the lookup
 	var jsonDict map[string]interface{}
-	err = json.Unmarshal(data, &jsonDict)
+	err = newStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("Failed to unmarshal JSON into map for the discriminator lookup.")
 	}
@@ -128,6 +136,9 @@ func (src ConvergedinfraHealthCheckExecutionResponse) MarshalJSON() ([]byte, err
 
 // Get the actual instance
 func (obj *ConvergedinfraHealthCheckExecutionResponse) GetActualInstance() interface{} {
+	if obj == nil {
+		return nil
+	}
 	if obj.ConvergedinfraHealthCheckExecutionList != nil {
 		return obj.ConvergedinfraHealthCheckExecutionList
 	}

@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -13,23 +13,18 @@ package intersight
 
 import (
 	"bytes"
-	_context "context"
-	_ioutil "io/ioutil"
-	_nethttp "net/http"
-	_neturl "net/url"
+	"context"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ _context.Context
 )
 
 // CloudApiService CloudApi service
 type CloudApiService service
 
 type ApiCreateCloudCollectInventoryRequest struct {
-	ctx                   _context.Context
+	ctx                   context.Context
 	ApiService            *CloudApiService
 	cloudCollectInventory *CloudCollectInventory
 	ifMatch               *string
@@ -54,17 +49,17 @@ func (r ApiCreateCloudCollectInventoryRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateCloudCollectInventoryRequest) Execute() (CloudCollectInventory, *_nethttp.Response, error) {
+func (r ApiCreateCloudCollectInventoryRequest) Execute() (*CloudCollectInventory, *http.Response, error) {
 	return r.ApiService.CreateCloudCollectInventoryExecute(r)
 }
 
 /*
 CreateCloudCollectInventory Create a 'cloud.CollectInventory' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateCloudCollectInventoryRequest
 */
-func (a *CloudApiService) CreateCloudCollectInventory(ctx _context.Context) ApiCreateCloudCollectInventoryRequest {
+func (a *CloudApiService) CreateCloudCollectInventory(ctx context.Context) ApiCreateCloudCollectInventoryRequest {
 	return ApiCreateCloudCollectInventoryRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -73,26 +68,24 @@ func (a *CloudApiService) CreateCloudCollectInventory(ctx _context.Context) ApiC
 
 // Execute executes the request
 //  @return CloudCollectInventory
-func (a *CloudApiService) CreateCloudCollectInventoryExecute(r ApiCreateCloudCollectInventoryRequest) (CloudCollectInventory, *_nethttp.Response, error) {
+func (a *CloudApiService) CreateCloudCollectInventoryExecute(r ApiCreateCloudCollectInventoryRequest) (*CloudCollectInventory, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudCollectInventory
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudCollectInventory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.CreateCloudCollectInventory")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/CollectInventories"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.cloudCollectInventory == nil {
 		return localVarReturnValue, nil, reportError("cloudCollectInventory is required and must be specified")
 	}
@@ -122,7 +115,7 @@ func (a *CloudApiService) CreateCloudCollectInventoryExecute(r ApiCreateCloudCol
 	}
 	// body params
 	localVarPostBody = r.cloudCollectInventory
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -132,15 +125,15 @@ func (a *CloudApiService) CreateCloudCollectInventoryExecute(r ApiCreateCloudCol
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -196,7 +189,7 @@ func (a *CloudApiService) CreateCloudCollectInventoryExecute(r ApiCreateCloudCol
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -207,23 +200,23 @@ func (a *CloudApiService) CreateCloudCollectInventoryExecute(r ApiCreateCloudCol
 }
 
 type ApiGetCloudAwsBillingUnitByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudAwsBillingUnitByMoidRequest) Execute() (CloudAwsBillingUnit, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsBillingUnitByMoidRequest) Execute() (*CloudAwsBillingUnit, *http.Response, error) {
 	return r.ApiService.GetCloudAwsBillingUnitByMoidExecute(r)
 }
 
 /*
 GetCloudAwsBillingUnitByMoid Read a 'cloud.AwsBillingUnit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudAwsBillingUnitByMoidRequest
 */
-func (a *CloudApiService) GetCloudAwsBillingUnitByMoid(ctx _context.Context, moid string) ApiGetCloudAwsBillingUnitByMoidRequest {
+func (a *CloudApiService) GetCloudAwsBillingUnitByMoid(ctx context.Context, moid string) ApiGetCloudAwsBillingUnitByMoidRequest {
 	return ApiGetCloudAwsBillingUnitByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -233,27 +226,25 @@ func (a *CloudApiService) GetCloudAwsBillingUnitByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return CloudAwsBillingUnit
-func (a *CloudApiService) GetCloudAwsBillingUnitByMoidExecute(r ApiGetCloudAwsBillingUnitByMoidRequest) (CloudAwsBillingUnit, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsBillingUnitByMoidExecute(r ApiGetCloudAwsBillingUnitByMoidRequest) (*CloudAwsBillingUnit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsBillingUnit
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsBillingUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsBillingUnitByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsBillingUnits/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -272,7 +263,7 @@ func (a *CloudApiService) GetCloudAwsBillingUnitByMoidExecute(r ApiGetCloudAwsBi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -282,15 +273,15 @@ func (a *CloudApiService) GetCloudAwsBillingUnitByMoidExecute(r ApiGetCloudAwsBi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -346,7 +337,7 @@ func (a *CloudApiService) GetCloudAwsBillingUnitByMoidExecute(r ApiGetCloudAwsBi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -357,7 +348,7 @@ func (a *CloudApiService) GetCloudAwsBillingUnitByMoidExecute(r ApiGetCloudAwsBi
 }
 
 type ApiGetCloudAwsBillingUnitListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -438,17 +429,17 @@ func (r ApiGetCloudAwsBillingUnitListRequest) Tags(tags string) ApiGetCloudAwsBi
 	return r
 }
 
-func (r ApiGetCloudAwsBillingUnitListRequest) Execute() (CloudAwsBillingUnitResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsBillingUnitListRequest) Execute() (*CloudAwsBillingUnitResponse, *http.Response, error) {
 	return r.ApiService.GetCloudAwsBillingUnitListExecute(r)
 }
 
 /*
 GetCloudAwsBillingUnitList Read a 'cloud.AwsBillingUnit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudAwsBillingUnitListRequest
 */
-func (a *CloudApiService) GetCloudAwsBillingUnitList(ctx _context.Context) ApiGetCloudAwsBillingUnitListRequest {
+func (a *CloudApiService) GetCloudAwsBillingUnitList(ctx context.Context) ApiGetCloudAwsBillingUnitListRequest {
 	return ApiGetCloudAwsBillingUnitListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -457,26 +448,24 @@ func (a *CloudApiService) GetCloudAwsBillingUnitList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return CloudAwsBillingUnitResponse
-func (a *CloudApiService) GetCloudAwsBillingUnitListExecute(r ApiGetCloudAwsBillingUnitListRequest) (CloudAwsBillingUnitResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsBillingUnitListExecute(r ApiGetCloudAwsBillingUnitListRequest) (*CloudAwsBillingUnitResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsBillingUnitResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsBillingUnitResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsBillingUnitList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsBillingUnits"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -528,7 +517,7 @@ func (a *CloudApiService) GetCloudAwsBillingUnitListExecute(r ApiGetCloudAwsBill
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -538,15 +527,15 @@ func (a *CloudApiService) GetCloudAwsBillingUnitListExecute(r ApiGetCloudAwsBill
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -602,7 +591,7 @@ func (a *CloudApiService) GetCloudAwsBillingUnitListExecute(r ApiGetCloudAwsBill
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -613,23 +602,23 @@ func (a *CloudApiService) GetCloudAwsBillingUnitListExecute(r ApiGetCloudAwsBill
 }
 
 type ApiGetCloudAwsKeyPairByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudAwsKeyPairByMoidRequest) Execute() (CloudAwsKeyPair, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsKeyPairByMoidRequest) Execute() (*CloudAwsKeyPair, *http.Response, error) {
 	return r.ApiService.GetCloudAwsKeyPairByMoidExecute(r)
 }
 
 /*
 GetCloudAwsKeyPairByMoid Read a 'cloud.AwsKeyPair' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudAwsKeyPairByMoidRequest
 */
-func (a *CloudApiService) GetCloudAwsKeyPairByMoid(ctx _context.Context, moid string) ApiGetCloudAwsKeyPairByMoidRequest {
+func (a *CloudApiService) GetCloudAwsKeyPairByMoid(ctx context.Context, moid string) ApiGetCloudAwsKeyPairByMoidRequest {
 	return ApiGetCloudAwsKeyPairByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -639,27 +628,25 @@ func (a *CloudApiService) GetCloudAwsKeyPairByMoid(ctx _context.Context, moid st
 
 // Execute executes the request
 //  @return CloudAwsKeyPair
-func (a *CloudApiService) GetCloudAwsKeyPairByMoidExecute(r ApiGetCloudAwsKeyPairByMoidRequest) (CloudAwsKeyPair, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsKeyPairByMoidExecute(r ApiGetCloudAwsKeyPairByMoidRequest) (*CloudAwsKeyPair, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsKeyPair
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsKeyPair
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsKeyPairByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsKeyPairs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -678,7 +665,7 @@ func (a *CloudApiService) GetCloudAwsKeyPairByMoidExecute(r ApiGetCloudAwsKeyPai
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -688,15 +675,15 @@ func (a *CloudApiService) GetCloudAwsKeyPairByMoidExecute(r ApiGetCloudAwsKeyPai
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -752,7 +739,7 @@ func (a *CloudApiService) GetCloudAwsKeyPairByMoidExecute(r ApiGetCloudAwsKeyPai
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -763,7 +750,7 @@ func (a *CloudApiService) GetCloudAwsKeyPairByMoidExecute(r ApiGetCloudAwsKeyPai
 }
 
 type ApiGetCloudAwsKeyPairListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -844,17 +831,17 @@ func (r ApiGetCloudAwsKeyPairListRequest) Tags(tags string) ApiGetCloudAwsKeyPai
 	return r
 }
 
-func (r ApiGetCloudAwsKeyPairListRequest) Execute() (CloudAwsKeyPairResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsKeyPairListRequest) Execute() (*CloudAwsKeyPairResponse, *http.Response, error) {
 	return r.ApiService.GetCloudAwsKeyPairListExecute(r)
 }
 
 /*
 GetCloudAwsKeyPairList Read a 'cloud.AwsKeyPair' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudAwsKeyPairListRequest
 */
-func (a *CloudApiService) GetCloudAwsKeyPairList(ctx _context.Context) ApiGetCloudAwsKeyPairListRequest {
+func (a *CloudApiService) GetCloudAwsKeyPairList(ctx context.Context) ApiGetCloudAwsKeyPairListRequest {
 	return ApiGetCloudAwsKeyPairListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -863,26 +850,24 @@ func (a *CloudApiService) GetCloudAwsKeyPairList(ctx _context.Context) ApiGetClo
 
 // Execute executes the request
 //  @return CloudAwsKeyPairResponse
-func (a *CloudApiService) GetCloudAwsKeyPairListExecute(r ApiGetCloudAwsKeyPairListRequest) (CloudAwsKeyPairResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsKeyPairListExecute(r ApiGetCloudAwsKeyPairListRequest) (*CloudAwsKeyPairResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsKeyPairResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsKeyPairResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsKeyPairList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsKeyPairs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -934,7 +919,7 @@ func (a *CloudApiService) GetCloudAwsKeyPairListExecute(r ApiGetCloudAwsKeyPairL
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -944,15 +929,15 @@ func (a *CloudApiService) GetCloudAwsKeyPairListExecute(r ApiGetCloudAwsKeyPairL
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1008,7 +993,7 @@ func (a *CloudApiService) GetCloudAwsKeyPairListExecute(r ApiGetCloudAwsKeyPairL
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1019,23 +1004,23 @@ func (a *CloudApiService) GetCloudAwsKeyPairListExecute(r ApiGetCloudAwsKeyPairL
 }
 
 type ApiGetCloudAwsNetworkInterfaceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudAwsNetworkInterfaceByMoidRequest) Execute() (CloudAwsNetworkInterface, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsNetworkInterfaceByMoidRequest) Execute() (*CloudAwsNetworkInterface, *http.Response, error) {
 	return r.ApiService.GetCloudAwsNetworkInterfaceByMoidExecute(r)
 }
 
 /*
 GetCloudAwsNetworkInterfaceByMoid Read a 'cloud.AwsNetworkInterface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudAwsNetworkInterfaceByMoidRequest
 */
-func (a *CloudApiService) GetCloudAwsNetworkInterfaceByMoid(ctx _context.Context, moid string) ApiGetCloudAwsNetworkInterfaceByMoidRequest {
+func (a *CloudApiService) GetCloudAwsNetworkInterfaceByMoid(ctx context.Context, moid string) ApiGetCloudAwsNetworkInterfaceByMoidRequest {
 	return ApiGetCloudAwsNetworkInterfaceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1045,27 +1030,25 @@ func (a *CloudApiService) GetCloudAwsNetworkInterfaceByMoid(ctx _context.Context
 
 // Execute executes the request
 //  @return CloudAwsNetworkInterface
-func (a *CloudApiService) GetCloudAwsNetworkInterfaceByMoidExecute(r ApiGetCloudAwsNetworkInterfaceByMoidRequest) (CloudAwsNetworkInterface, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsNetworkInterfaceByMoidExecute(r ApiGetCloudAwsNetworkInterfaceByMoidRequest) (*CloudAwsNetworkInterface, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsNetworkInterface
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsNetworkInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsNetworkInterfaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsNetworkInterfaces/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1084,7 +1067,7 @@ func (a *CloudApiService) GetCloudAwsNetworkInterfaceByMoidExecute(r ApiGetCloud
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1094,15 +1077,15 @@ func (a *CloudApiService) GetCloudAwsNetworkInterfaceByMoidExecute(r ApiGetCloud
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1158,7 +1141,7 @@ func (a *CloudApiService) GetCloudAwsNetworkInterfaceByMoidExecute(r ApiGetCloud
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1169,7 +1152,7 @@ func (a *CloudApiService) GetCloudAwsNetworkInterfaceByMoidExecute(r ApiGetCloud
 }
 
 type ApiGetCloudAwsNetworkInterfaceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -1250,17 +1233,17 @@ func (r ApiGetCloudAwsNetworkInterfaceListRequest) Tags(tags string) ApiGetCloud
 	return r
 }
 
-func (r ApiGetCloudAwsNetworkInterfaceListRequest) Execute() (CloudAwsNetworkInterfaceResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsNetworkInterfaceListRequest) Execute() (*CloudAwsNetworkInterfaceResponse, *http.Response, error) {
 	return r.ApiService.GetCloudAwsNetworkInterfaceListExecute(r)
 }
 
 /*
 GetCloudAwsNetworkInterfaceList Read a 'cloud.AwsNetworkInterface' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudAwsNetworkInterfaceListRequest
 */
-func (a *CloudApiService) GetCloudAwsNetworkInterfaceList(ctx _context.Context) ApiGetCloudAwsNetworkInterfaceListRequest {
+func (a *CloudApiService) GetCloudAwsNetworkInterfaceList(ctx context.Context) ApiGetCloudAwsNetworkInterfaceListRequest {
 	return ApiGetCloudAwsNetworkInterfaceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1269,26 +1252,24 @@ func (a *CloudApiService) GetCloudAwsNetworkInterfaceList(ctx _context.Context) 
 
 // Execute executes the request
 //  @return CloudAwsNetworkInterfaceResponse
-func (a *CloudApiService) GetCloudAwsNetworkInterfaceListExecute(r ApiGetCloudAwsNetworkInterfaceListRequest) (CloudAwsNetworkInterfaceResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsNetworkInterfaceListExecute(r ApiGetCloudAwsNetworkInterfaceListRequest) (*CloudAwsNetworkInterfaceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsNetworkInterfaceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsNetworkInterfaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsNetworkInterfaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsNetworkInterfaces"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1340,7 +1321,7 @@ func (a *CloudApiService) GetCloudAwsNetworkInterfaceListExecute(r ApiGetCloudAw
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1350,15 +1331,15 @@ func (a *CloudApiService) GetCloudAwsNetworkInterfaceListExecute(r ApiGetCloudAw
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1414,7 +1395,7 @@ func (a *CloudApiService) GetCloudAwsNetworkInterfaceListExecute(r ApiGetCloudAw
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1425,23 +1406,23 @@ func (a *CloudApiService) GetCloudAwsNetworkInterfaceListExecute(r ApiGetCloudAw
 }
 
 type ApiGetCloudAwsOrganizationalUnitByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudAwsOrganizationalUnitByMoidRequest) Execute() (CloudAwsOrganizationalUnit, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsOrganizationalUnitByMoidRequest) Execute() (*CloudAwsOrganizationalUnit, *http.Response, error) {
 	return r.ApiService.GetCloudAwsOrganizationalUnitByMoidExecute(r)
 }
 
 /*
 GetCloudAwsOrganizationalUnitByMoid Read a 'cloud.AwsOrganizationalUnit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudAwsOrganizationalUnitByMoidRequest
 */
-func (a *CloudApiService) GetCloudAwsOrganizationalUnitByMoid(ctx _context.Context, moid string) ApiGetCloudAwsOrganizationalUnitByMoidRequest {
+func (a *CloudApiService) GetCloudAwsOrganizationalUnitByMoid(ctx context.Context, moid string) ApiGetCloudAwsOrganizationalUnitByMoidRequest {
 	return ApiGetCloudAwsOrganizationalUnitByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1451,27 +1432,25 @@ func (a *CloudApiService) GetCloudAwsOrganizationalUnitByMoid(ctx _context.Conte
 
 // Execute executes the request
 //  @return CloudAwsOrganizationalUnit
-func (a *CloudApiService) GetCloudAwsOrganizationalUnitByMoidExecute(r ApiGetCloudAwsOrganizationalUnitByMoidRequest) (CloudAwsOrganizationalUnit, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsOrganizationalUnitByMoidExecute(r ApiGetCloudAwsOrganizationalUnitByMoidRequest) (*CloudAwsOrganizationalUnit, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsOrganizationalUnit
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsOrganizationalUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsOrganizationalUnitByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsOrganizationalUnits/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1490,7 +1469,7 @@ func (a *CloudApiService) GetCloudAwsOrganizationalUnitByMoidExecute(r ApiGetClo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1500,15 +1479,15 @@ func (a *CloudApiService) GetCloudAwsOrganizationalUnitByMoidExecute(r ApiGetClo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1564,7 +1543,7 @@ func (a *CloudApiService) GetCloudAwsOrganizationalUnitByMoidExecute(r ApiGetClo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1575,7 +1554,7 @@ func (a *CloudApiService) GetCloudAwsOrganizationalUnitByMoidExecute(r ApiGetClo
 }
 
 type ApiGetCloudAwsOrganizationalUnitListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -1656,17 +1635,17 @@ func (r ApiGetCloudAwsOrganizationalUnitListRequest) Tags(tags string) ApiGetClo
 	return r
 }
 
-func (r ApiGetCloudAwsOrganizationalUnitListRequest) Execute() (CloudAwsOrganizationalUnitResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsOrganizationalUnitListRequest) Execute() (*CloudAwsOrganizationalUnitResponse, *http.Response, error) {
 	return r.ApiService.GetCloudAwsOrganizationalUnitListExecute(r)
 }
 
 /*
 GetCloudAwsOrganizationalUnitList Read a 'cloud.AwsOrganizationalUnit' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudAwsOrganizationalUnitListRequest
 */
-func (a *CloudApiService) GetCloudAwsOrganizationalUnitList(ctx _context.Context) ApiGetCloudAwsOrganizationalUnitListRequest {
+func (a *CloudApiService) GetCloudAwsOrganizationalUnitList(ctx context.Context) ApiGetCloudAwsOrganizationalUnitListRequest {
 	return ApiGetCloudAwsOrganizationalUnitListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1675,26 +1654,24 @@ func (a *CloudApiService) GetCloudAwsOrganizationalUnitList(ctx _context.Context
 
 // Execute executes the request
 //  @return CloudAwsOrganizationalUnitResponse
-func (a *CloudApiService) GetCloudAwsOrganizationalUnitListExecute(r ApiGetCloudAwsOrganizationalUnitListRequest) (CloudAwsOrganizationalUnitResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsOrganizationalUnitListExecute(r ApiGetCloudAwsOrganizationalUnitListRequest) (*CloudAwsOrganizationalUnitResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsOrganizationalUnitResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsOrganizationalUnitResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsOrganizationalUnitList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsOrganizationalUnits"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -1746,7 +1723,7 @@ func (a *CloudApiService) GetCloudAwsOrganizationalUnitListExecute(r ApiGetCloud
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1756,15 +1733,15 @@ func (a *CloudApiService) GetCloudAwsOrganizationalUnitListExecute(r ApiGetCloud
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1820,7 +1797,7 @@ func (a *CloudApiService) GetCloudAwsOrganizationalUnitListExecute(r ApiGetCloud
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1831,23 +1808,23 @@ func (a *CloudApiService) GetCloudAwsOrganizationalUnitListExecute(r ApiGetCloud
 }
 
 type ApiGetCloudAwsSecurityGroupByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudAwsSecurityGroupByMoidRequest) Execute() (CloudAwsSecurityGroup, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsSecurityGroupByMoidRequest) Execute() (*CloudAwsSecurityGroup, *http.Response, error) {
 	return r.ApiService.GetCloudAwsSecurityGroupByMoidExecute(r)
 }
 
 /*
 GetCloudAwsSecurityGroupByMoid Read a 'cloud.AwsSecurityGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudAwsSecurityGroupByMoidRequest
 */
-func (a *CloudApiService) GetCloudAwsSecurityGroupByMoid(ctx _context.Context, moid string) ApiGetCloudAwsSecurityGroupByMoidRequest {
+func (a *CloudApiService) GetCloudAwsSecurityGroupByMoid(ctx context.Context, moid string) ApiGetCloudAwsSecurityGroupByMoidRequest {
 	return ApiGetCloudAwsSecurityGroupByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1857,27 +1834,25 @@ func (a *CloudApiService) GetCloudAwsSecurityGroupByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return CloudAwsSecurityGroup
-func (a *CloudApiService) GetCloudAwsSecurityGroupByMoidExecute(r ApiGetCloudAwsSecurityGroupByMoidRequest) (CloudAwsSecurityGroup, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsSecurityGroupByMoidExecute(r ApiGetCloudAwsSecurityGroupByMoidRequest) (*CloudAwsSecurityGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsSecurityGroup
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsSecurityGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsSecurityGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsSecurityGroups/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1896,7 +1871,7 @@ func (a *CloudApiService) GetCloudAwsSecurityGroupByMoidExecute(r ApiGetCloudAws
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1906,15 +1881,15 @@ func (a *CloudApiService) GetCloudAwsSecurityGroupByMoidExecute(r ApiGetCloudAws
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -1970,7 +1945,7 @@ func (a *CloudApiService) GetCloudAwsSecurityGroupByMoidExecute(r ApiGetCloudAws
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -1981,7 +1956,7 @@ func (a *CloudApiService) GetCloudAwsSecurityGroupByMoidExecute(r ApiGetCloudAws
 }
 
 type ApiGetCloudAwsSecurityGroupListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -2062,17 +2037,17 @@ func (r ApiGetCloudAwsSecurityGroupListRequest) Tags(tags string) ApiGetCloudAws
 	return r
 }
 
-func (r ApiGetCloudAwsSecurityGroupListRequest) Execute() (CloudAwsSecurityGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsSecurityGroupListRequest) Execute() (*CloudAwsSecurityGroupResponse, *http.Response, error) {
 	return r.ApiService.GetCloudAwsSecurityGroupListExecute(r)
 }
 
 /*
 GetCloudAwsSecurityGroupList Read a 'cloud.AwsSecurityGroup' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudAwsSecurityGroupListRequest
 */
-func (a *CloudApiService) GetCloudAwsSecurityGroupList(ctx _context.Context) ApiGetCloudAwsSecurityGroupListRequest {
+func (a *CloudApiService) GetCloudAwsSecurityGroupList(ctx context.Context) ApiGetCloudAwsSecurityGroupListRequest {
 	return ApiGetCloudAwsSecurityGroupListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2081,26 +2056,24 @@ func (a *CloudApiService) GetCloudAwsSecurityGroupList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return CloudAwsSecurityGroupResponse
-func (a *CloudApiService) GetCloudAwsSecurityGroupListExecute(r ApiGetCloudAwsSecurityGroupListRequest) (CloudAwsSecurityGroupResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsSecurityGroupListExecute(r ApiGetCloudAwsSecurityGroupListRequest) (*CloudAwsSecurityGroupResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsSecurityGroupResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsSecurityGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsSecurityGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsSecurityGroups"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2152,7 +2125,7 @@ func (a *CloudApiService) GetCloudAwsSecurityGroupListExecute(r ApiGetCloudAwsSe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2162,15 +2135,15 @@ func (a *CloudApiService) GetCloudAwsSecurityGroupListExecute(r ApiGetCloudAwsSe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2226,7 +2199,7 @@ func (a *CloudApiService) GetCloudAwsSecurityGroupListExecute(r ApiGetCloudAwsSe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2237,23 +2210,23 @@ func (a *CloudApiService) GetCloudAwsSecurityGroupListExecute(r ApiGetCloudAwsSe
 }
 
 type ApiGetCloudAwsSubnetByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudAwsSubnetByMoidRequest) Execute() (CloudAwsSubnet, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsSubnetByMoidRequest) Execute() (*CloudAwsSubnet, *http.Response, error) {
 	return r.ApiService.GetCloudAwsSubnetByMoidExecute(r)
 }
 
 /*
 GetCloudAwsSubnetByMoid Read a 'cloud.AwsSubnet' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudAwsSubnetByMoidRequest
 */
-func (a *CloudApiService) GetCloudAwsSubnetByMoid(ctx _context.Context, moid string) ApiGetCloudAwsSubnetByMoidRequest {
+func (a *CloudApiService) GetCloudAwsSubnetByMoid(ctx context.Context, moid string) ApiGetCloudAwsSubnetByMoidRequest {
 	return ApiGetCloudAwsSubnetByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2263,27 +2236,25 @@ func (a *CloudApiService) GetCloudAwsSubnetByMoid(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return CloudAwsSubnet
-func (a *CloudApiService) GetCloudAwsSubnetByMoidExecute(r ApiGetCloudAwsSubnetByMoidRequest) (CloudAwsSubnet, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsSubnetByMoidExecute(r ApiGetCloudAwsSubnetByMoidRequest) (*CloudAwsSubnet, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsSubnet
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsSubnet
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsSubnetByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsSubnets/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2302,7 +2273,7 @@ func (a *CloudApiService) GetCloudAwsSubnetByMoidExecute(r ApiGetCloudAwsSubnetB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2312,15 +2283,15 @@ func (a *CloudApiService) GetCloudAwsSubnetByMoidExecute(r ApiGetCloudAwsSubnetB
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2376,7 +2347,7 @@ func (a *CloudApiService) GetCloudAwsSubnetByMoidExecute(r ApiGetCloudAwsSubnetB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2387,7 +2358,7 @@ func (a *CloudApiService) GetCloudAwsSubnetByMoidExecute(r ApiGetCloudAwsSubnetB
 }
 
 type ApiGetCloudAwsSubnetListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -2468,17 +2439,17 @@ func (r ApiGetCloudAwsSubnetListRequest) Tags(tags string) ApiGetCloudAwsSubnetL
 	return r
 }
 
-func (r ApiGetCloudAwsSubnetListRequest) Execute() (CloudAwsSubnetResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsSubnetListRequest) Execute() (*CloudAwsSubnetResponse, *http.Response, error) {
 	return r.ApiService.GetCloudAwsSubnetListExecute(r)
 }
 
 /*
 GetCloudAwsSubnetList Read a 'cloud.AwsSubnet' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudAwsSubnetListRequest
 */
-func (a *CloudApiService) GetCloudAwsSubnetList(ctx _context.Context) ApiGetCloudAwsSubnetListRequest {
+func (a *CloudApiService) GetCloudAwsSubnetList(ctx context.Context) ApiGetCloudAwsSubnetListRequest {
 	return ApiGetCloudAwsSubnetListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2487,26 +2458,24 @@ func (a *CloudApiService) GetCloudAwsSubnetList(ctx _context.Context) ApiGetClou
 
 // Execute executes the request
 //  @return CloudAwsSubnetResponse
-func (a *CloudApiService) GetCloudAwsSubnetListExecute(r ApiGetCloudAwsSubnetListRequest) (CloudAwsSubnetResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsSubnetListExecute(r ApiGetCloudAwsSubnetListRequest) (*CloudAwsSubnetResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsSubnetResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsSubnetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsSubnetList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsSubnets"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2558,7 +2527,7 @@ func (a *CloudApiService) GetCloudAwsSubnetListExecute(r ApiGetCloudAwsSubnetLis
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2568,15 +2537,15 @@ func (a *CloudApiService) GetCloudAwsSubnetListExecute(r ApiGetCloudAwsSubnetLis
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2632,7 +2601,7 @@ func (a *CloudApiService) GetCloudAwsSubnetListExecute(r ApiGetCloudAwsSubnetLis
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2643,23 +2612,23 @@ func (a *CloudApiService) GetCloudAwsSubnetListExecute(r ApiGetCloudAwsSubnetLis
 }
 
 type ApiGetCloudAwsVirtualMachineByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudAwsVirtualMachineByMoidRequest) Execute() (CloudAwsVirtualMachine, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsVirtualMachineByMoidRequest) Execute() (*CloudAwsVirtualMachine, *http.Response, error) {
 	return r.ApiService.GetCloudAwsVirtualMachineByMoidExecute(r)
 }
 
 /*
 GetCloudAwsVirtualMachineByMoid Read a 'cloud.AwsVirtualMachine' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudAwsVirtualMachineByMoidRequest
 */
-func (a *CloudApiService) GetCloudAwsVirtualMachineByMoid(ctx _context.Context, moid string) ApiGetCloudAwsVirtualMachineByMoidRequest {
+func (a *CloudApiService) GetCloudAwsVirtualMachineByMoid(ctx context.Context, moid string) ApiGetCloudAwsVirtualMachineByMoidRequest {
 	return ApiGetCloudAwsVirtualMachineByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2669,27 +2638,25 @@ func (a *CloudApiService) GetCloudAwsVirtualMachineByMoid(ctx _context.Context, 
 
 // Execute executes the request
 //  @return CloudAwsVirtualMachine
-func (a *CloudApiService) GetCloudAwsVirtualMachineByMoidExecute(r ApiGetCloudAwsVirtualMachineByMoidRequest) (CloudAwsVirtualMachine, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsVirtualMachineByMoidExecute(r ApiGetCloudAwsVirtualMachineByMoidRequest) (*CloudAwsVirtualMachine, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsVirtualMachine
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsVirtualMachine
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsVirtualMachineByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsVirtualMachines/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2708,7 +2675,7 @@ func (a *CloudApiService) GetCloudAwsVirtualMachineByMoidExecute(r ApiGetCloudAw
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2718,15 +2685,15 @@ func (a *CloudApiService) GetCloudAwsVirtualMachineByMoidExecute(r ApiGetCloudAw
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -2782,7 +2749,7 @@ func (a *CloudApiService) GetCloudAwsVirtualMachineByMoidExecute(r ApiGetCloudAw
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -2793,7 +2760,7 @@ func (a *CloudApiService) GetCloudAwsVirtualMachineByMoidExecute(r ApiGetCloudAw
 }
 
 type ApiGetCloudAwsVirtualMachineListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -2874,17 +2841,17 @@ func (r ApiGetCloudAwsVirtualMachineListRequest) Tags(tags string) ApiGetCloudAw
 	return r
 }
 
-func (r ApiGetCloudAwsVirtualMachineListRequest) Execute() (CloudAwsVirtualMachineResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsVirtualMachineListRequest) Execute() (*CloudAwsVirtualMachineResponse, *http.Response, error) {
 	return r.ApiService.GetCloudAwsVirtualMachineListExecute(r)
 }
 
 /*
 GetCloudAwsVirtualMachineList Read a 'cloud.AwsVirtualMachine' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudAwsVirtualMachineListRequest
 */
-func (a *CloudApiService) GetCloudAwsVirtualMachineList(ctx _context.Context) ApiGetCloudAwsVirtualMachineListRequest {
+func (a *CloudApiService) GetCloudAwsVirtualMachineList(ctx context.Context) ApiGetCloudAwsVirtualMachineListRequest {
 	return ApiGetCloudAwsVirtualMachineListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -2893,26 +2860,24 @@ func (a *CloudApiService) GetCloudAwsVirtualMachineList(ctx _context.Context) Ap
 
 // Execute executes the request
 //  @return CloudAwsVirtualMachineResponse
-func (a *CloudApiService) GetCloudAwsVirtualMachineListExecute(r ApiGetCloudAwsVirtualMachineListRequest) (CloudAwsVirtualMachineResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsVirtualMachineListExecute(r ApiGetCloudAwsVirtualMachineListRequest) (*CloudAwsVirtualMachineResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsVirtualMachineResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsVirtualMachineResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsVirtualMachineList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsVirtualMachines"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -2964,7 +2929,7 @@ func (a *CloudApiService) GetCloudAwsVirtualMachineListExecute(r ApiGetCloudAwsV
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -2974,15 +2939,15 @@ func (a *CloudApiService) GetCloudAwsVirtualMachineListExecute(r ApiGetCloudAwsV
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3038,7 +3003,7 @@ func (a *CloudApiService) GetCloudAwsVirtualMachineListExecute(r ApiGetCloudAwsV
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3049,23 +3014,23 @@ func (a *CloudApiService) GetCloudAwsVirtualMachineListExecute(r ApiGetCloudAwsV
 }
 
 type ApiGetCloudAwsVolumeByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudAwsVolumeByMoidRequest) Execute() (CloudAwsVolume, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsVolumeByMoidRequest) Execute() (*CloudAwsVolume, *http.Response, error) {
 	return r.ApiService.GetCloudAwsVolumeByMoidExecute(r)
 }
 
 /*
 GetCloudAwsVolumeByMoid Read a 'cloud.AwsVolume' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudAwsVolumeByMoidRequest
 */
-func (a *CloudApiService) GetCloudAwsVolumeByMoid(ctx _context.Context, moid string) ApiGetCloudAwsVolumeByMoidRequest {
+func (a *CloudApiService) GetCloudAwsVolumeByMoid(ctx context.Context, moid string) ApiGetCloudAwsVolumeByMoidRequest {
 	return ApiGetCloudAwsVolumeByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3075,27 +3040,25 @@ func (a *CloudApiService) GetCloudAwsVolumeByMoid(ctx _context.Context, moid str
 
 // Execute executes the request
 //  @return CloudAwsVolume
-func (a *CloudApiService) GetCloudAwsVolumeByMoidExecute(r ApiGetCloudAwsVolumeByMoidRequest) (CloudAwsVolume, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsVolumeByMoidExecute(r ApiGetCloudAwsVolumeByMoidRequest) (*CloudAwsVolume, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsVolume
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsVolume
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsVolumeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsVolumes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3114,7 +3077,7 @@ func (a *CloudApiService) GetCloudAwsVolumeByMoidExecute(r ApiGetCloudAwsVolumeB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3124,15 +3087,15 @@ func (a *CloudApiService) GetCloudAwsVolumeByMoidExecute(r ApiGetCloudAwsVolumeB
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3188,7 +3151,7 @@ func (a *CloudApiService) GetCloudAwsVolumeByMoidExecute(r ApiGetCloudAwsVolumeB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3199,7 +3162,7 @@ func (a *CloudApiService) GetCloudAwsVolumeByMoidExecute(r ApiGetCloudAwsVolumeB
 }
 
 type ApiGetCloudAwsVolumeListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -3280,17 +3243,17 @@ func (r ApiGetCloudAwsVolumeListRequest) Tags(tags string) ApiGetCloudAwsVolumeL
 	return r
 }
 
-func (r ApiGetCloudAwsVolumeListRequest) Execute() (CloudAwsVolumeResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsVolumeListRequest) Execute() (*CloudAwsVolumeResponse, *http.Response, error) {
 	return r.ApiService.GetCloudAwsVolumeListExecute(r)
 }
 
 /*
 GetCloudAwsVolumeList Read a 'cloud.AwsVolume' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudAwsVolumeListRequest
 */
-func (a *CloudApiService) GetCloudAwsVolumeList(ctx _context.Context) ApiGetCloudAwsVolumeListRequest {
+func (a *CloudApiService) GetCloudAwsVolumeList(ctx context.Context) ApiGetCloudAwsVolumeListRequest {
 	return ApiGetCloudAwsVolumeListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3299,26 +3262,24 @@ func (a *CloudApiService) GetCloudAwsVolumeList(ctx _context.Context) ApiGetClou
 
 // Execute executes the request
 //  @return CloudAwsVolumeResponse
-func (a *CloudApiService) GetCloudAwsVolumeListExecute(r ApiGetCloudAwsVolumeListRequest) (CloudAwsVolumeResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsVolumeListExecute(r ApiGetCloudAwsVolumeListRequest) (*CloudAwsVolumeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsVolumeResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsVolumeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsVolumeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsVolumes"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3370,7 +3331,7 @@ func (a *CloudApiService) GetCloudAwsVolumeListExecute(r ApiGetCloudAwsVolumeLis
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3380,15 +3341,15 @@ func (a *CloudApiService) GetCloudAwsVolumeListExecute(r ApiGetCloudAwsVolumeLis
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3444,7 +3405,7 @@ func (a *CloudApiService) GetCloudAwsVolumeListExecute(r ApiGetCloudAwsVolumeLis
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3455,23 +3416,23 @@ func (a *CloudApiService) GetCloudAwsVolumeListExecute(r ApiGetCloudAwsVolumeLis
 }
 
 type ApiGetCloudAwsVpcByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudAwsVpcByMoidRequest) Execute() (CloudAwsVpc, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsVpcByMoidRequest) Execute() (*CloudAwsVpc, *http.Response, error) {
 	return r.ApiService.GetCloudAwsVpcByMoidExecute(r)
 }
 
 /*
 GetCloudAwsVpcByMoid Read a 'cloud.AwsVpc' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudAwsVpcByMoidRequest
 */
-func (a *CloudApiService) GetCloudAwsVpcByMoid(ctx _context.Context, moid string) ApiGetCloudAwsVpcByMoidRequest {
+func (a *CloudApiService) GetCloudAwsVpcByMoid(ctx context.Context, moid string) ApiGetCloudAwsVpcByMoidRequest {
 	return ApiGetCloudAwsVpcByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3481,27 +3442,25 @@ func (a *CloudApiService) GetCloudAwsVpcByMoid(ctx _context.Context, moid string
 
 // Execute executes the request
 //  @return CloudAwsVpc
-func (a *CloudApiService) GetCloudAwsVpcByMoidExecute(r ApiGetCloudAwsVpcByMoidRequest) (CloudAwsVpc, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsVpcByMoidExecute(r ApiGetCloudAwsVpcByMoidRequest) (*CloudAwsVpc, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsVpc
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsVpc
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsVpcByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsVpcs/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3520,7 +3479,7 @@ func (a *CloudApiService) GetCloudAwsVpcByMoidExecute(r ApiGetCloudAwsVpcByMoidR
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3530,15 +3489,15 @@ func (a *CloudApiService) GetCloudAwsVpcByMoidExecute(r ApiGetCloudAwsVpcByMoidR
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3594,7 +3553,7 @@ func (a *CloudApiService) GetCloudAwsVpcByMoidExecute(r ApiGetCloudAwsVpcByMoidR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3605,7 +3564,7 @@ func (a *CloudApiService) GetCloudAwsVpcByMoidExecute(r ApiGetCloudAwsVpcByMoidR
 }
 
 type ApiGetCloudAwsVpcListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -3686,17 +3645,17 @@ func (r ApiGetCloudAwsVpcListRequest) Tags(tags string) ApiGetCloudAwsVpcListReq
 	return r
 }
 
-func (r ApiGetCloudAwsVpcListRequest) Execute() (CloudAwsVpcResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudAwsVpcListRequest) Execute() (*CloudAwsVpcResponse, *http.Response, error) {
 	return r.ApiService.GetCloudAwsVpcListExecute(r)
 }
 
 /*
 GetCloudAwsVpcList Read a 'cloud.AwsVpc' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudAwsVpcListRequest
 */
-func (a *CloudApiService) GetCloudAwsVpcList(ctx _context.Context) ApiGetCloudAwsVpcListRequest {
+func (a *CloudApiService) GetCloudAwsVpcList(ctx context.Context) ApiGetCloudAwsVpcListRequest {
 	return ApiGetCloudAwsVpcListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3705,26 +3664,24 @@ func (a *CloudApiService) GetCloudAwsVpcList(ctx _context.Context) ApiGetCloudAw
 
 // Execute executes the request
 //  @return CloudAwsVpcResponse
-func (a *CloudApiService) GetCloudAwsVpcListExecute(r ApiGetCloudAwsVpcListRequest) (CloudAwsVpcResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudAwsVpcListExecute(r ApiGetCloudAwsVpcListRequest) (*CloudAwsVpcResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsVpcResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsVpcResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudAwsVpcList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsVpcs"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -3776,7 +3733,7 @@ func (a *CloudApiService) GetCloudAwsVpcListExecute(r ApiGetCloudAwsVpcListReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3786,15 +3743,15 @@ func (a *CloudApiService) GetCloudAwsVpcListExecute(r ApiGetCloudAwsVpcListReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -3850,7 +3807,7 @@ func (a *CloudApiService) GetCloudAwsVpcListExecute(r ApiGetCloudAwsVpcListReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -3861,23 +3818,23 @@ func (a *CloudApiService) GetCloudAwsVpcListExecute(r ApiGetCloudAwsVpcListReque
 }
 
 type ApiGetCloudRegionsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudRegionsByMoidRequest) Execute() (CloudRegions, *_nethttp.Response, error) {
+func (r ApiGetCloudRegionsByMoidRequest) Execute() (*CloudRegions, *http.Response, error) {
 	return r.ApiService.GetCloudRegionsByMoidExecute(r)
 }
 
 /*
 GetCloudRegionsByMoid Read a 'cloud.Regions' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudRegionsByMoidRequest
 */
-func (a *CloudApiService) GetCloudRegionsByMoid(ctx _context.Context, moid string) ApiGetCloudRegionsByMoidRequest {
+func (a *CloudApiService) GetCloudRegionsByMoid(ctx context.Context, moid string) ApiGetCloudRegionsByMoidRequest {
 	return ApiGetCloudRegionsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -3887,27 +3844,25 @@ func (a *CloudApiService) GetCloudRegionsByMoid(ctx _context.Context, moid strin
 
 // Execute executes the request
 //  @return CloudRegions
-func (a *CloudApiService) GetCloudRegionsByMoidExecute(r ApiGetCloudRegionsByMoidRequest) (CloudRegions, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudRegionsByMoidExecute(r ApiGetCloudRegionsByMoidRequest) (*CloudRegions, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudRegions
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudRegions
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudRegionsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/Regions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3926,7 +3881,7 @@ func (a *CloudApiService) GetCloudRegionsByMoidExecute(r ApiGetCloudRegionsByMoi
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -3936,15 +3891,15 @@ func (a *CloudApiService) GetCloudRegionsByMoidExecute(r ApiGetCloudRegionsByMoi
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4000,7 +3955,7 @@ func (a *CloudApiService) GetCloudRegionsByMoidExecute(r ApiGetCloudRegionsByMoi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4011,7 +3966,7 @@ func (a *CloudApiService) GetCloudRegionsByMoidExecute(r ApiGetCloudRegionsByMoi
 }
 
 type ApiGetCloudRegionsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -4092,17 +4047,17 @@ func (r ApiGetCloudRegionsListRequest) Tags(tags string) ApiGetCloudRegionsListR
 	return r
 }
 
-func (r ApiGetCloudRegionsListRequest) Execute() (CloudRegionsResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudRegionsListRequest) Execute() (*CloudRegionsResponse, *http.Response, error) {
 	return r.ApiService.GetCloudRegionsListExecute(r)
 }
 
 /*
 GetCloudRegionsList Read a 'cloud.Regions' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudRegionsListRequest
 */
-func (a *CloudApiService) GetCloudRegionsList(ctx _context.Context) ApiGetCloudRegionsListRequest {
+func (a *CloudApiService) GetCloudRegionsList(ctx context.Context) ApiGetCloudRegionsListRequest {
 	return ApiGetCloudRegionsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4111,26 +4066,24 @@ func (a *CloudApiService) GetCloudRegionsList(ctx _context.Context) ApiGetCloudR
 
 // Execute executes the request
 //  @return CloudRegionsResponse
-func (a *CloudApiService) GetCloudRegionsListExecute(r ApiGetCloudRegionsListRequest) (CloudRegionsResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudRegionsListExecute(r ApiGetCloudRegionsListRequest) (*CloudRegionsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudRegionsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudRegionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudRegionsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/Regions"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -4182,7 +4135,7 @@ func (a *CloudApiService) GetCloudRegionsListExecute(r ApiGetCloudRegionsListReq
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4192,15 +4145,15 @@ func (a *CloudApiService) GetCloudRegionsListExecute(r ApiGetCloudRegionsListReq
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4256,7 +4209,7 @@ func (a *CloudApiService) GetCloudRegionsListExecute(r ApiGetCloudRegionsListReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4267,23 +4220,23 @@ func (a *CloudApiService) GetCloudRegionsListExecute(r ApiGetCloudRegionsListReq
 }
 
 type ApiGetCloudSkuContainerTypeByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudSkuContainerTypeByMoidRequest) Execute() (CloudSkuContainerType, *_nethttp.Response, error) {
+func (r ApiGetCloudSkuContainerTypeByMoidRequest) Execute() (*CloudSkuContainerType, *http.Response, error) {
 	return r.ApiService.GetCloudSkuContainerTypeByMoidExecute(r)
 }
 
 /*
 GetCloudSkuContainerTypeByMoid Read a 'cloud.SkuContainerType' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudSkuContainerTypeByMoidRequest
 */
-func (a *CloudApiService) GetCloudSkuContainerTypeByMoid(ctx _context.Context, moid string) ApiGetCloudSkuContainerTypeByMoidRequest {
+func (a *CloudApiService) GetCloudSkuContainerTypeByMoid(ctx context.Context, moid string) ApiGetCloudSkuContainerTypeByMoidRequest {
 	return ApiGetCloudSkuContainerTypeByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4293,27 +4246,25 @@ func (a *CloudApiService) GetCloudSkuContainerTypeByMoid(ctx _context.Context, m
 
 // Execute executes the request
 //  @return CloudSkuContainerType
-func (a *CloudApiService) GetCloudSkuContainerTypeByMoidExecute(r ApiGetCloudSkuContainerTypeByMoidRequest) (CloudSkuContainerType, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudSkuContainerTypeByMoidExecute(r ApiGetCloudSkuContainerTypeByMoidRequest) (*CloudSkuContainerType, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudSkuContainerType
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudSkuContainerType
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudSkuContainerTypeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/SkuContainerTypes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4332,7 +4283,7 @@ func (a *CloudApiService) GetCloudSkuContainerTypeByMoidExecute(r ApiGetCloudSku
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4342,15 +4293,15 @@ func (a *CloudApiService) GetCloudSkuContainerTypeByMoidExecute(r ApiGetCloudSku
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4406,7 +4357,7 @@ func (a *CloudApiService) GetCloudSkuContainerTypeByMoidExecute(r ApiGetCloudSku
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4417,7 +4368,7 @@ func (a *CloudApiService) GetCloudSkuContainerTypeByMoidExecute(r ApiGetCloudSku
 }
 
 type ApiGetCloudSkuContainerTypeListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -4498,17 +4449,17 @@ func (r ApiGetCloudSkuContainerTypeListRequest) Tags(tags string) ApiGetCloudSku
 	return r
 }
 
-func (r ApiGetCloudSkuContainerTypeListRequest) Execute() (CloudSkuContainerTypeResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudSkuContainerTypeListRequest) Execute() (*CloudSkuContainerTypeResponse, *http.Response, error) {
 	return r.ApiService.GetCloudSkuContainerTypeListExecute(r)
 }
 
 /*
 GetCloudSkuContainerTypeList Read a 'cloud.SkuContainerType' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudSkuContainerTypeListRequest
 */
-func (a *CloudApiService) GetCloudSkuContainerTypeList(ctx _context.Context) ApiGetCloudSkuContainerTypeListRequest {
+func (a *CloudApiService) GetCloudSkuContainerTypeList(ctx context.Context) ApiGetCloudSkuContainerTypeListRequest {
 	return ApiGetCloudSkuContainerTypeListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4517,26 +4468,24 @@ func (a *CloudApiService) GetCloudSkuContainerTypeList(ctx _context.Context) Api
 
 // Execute executes the request
 //  @return CloudSkuContainerTypeResponse
-func (a *CloudApiService) GetCloudSkuContainerTypeListExecute(r ApiGetCloudSkuContainerTypeListRequest) (CloudSkuContainerTypeResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudSkuContainerTypeListExecute(r ApiGetCloudSkuContainerTypeListRequest) (*CloudSkuContainerTypeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudSkuContainerTypeResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudSkuContainerTypeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudSkuContainerTypeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/SkuContainerTypes"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -4588,7 +4537,7 @@ func (a *CloudApiService) GetCloudSkuContainerTypeListExecute(r ApiGetCloudSkuCo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4598,15 +4547,15 @@ func (a *CloudApiService) GetCloudSkuContainerTypeListExecute(r ApiGetCloudSkuCo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4662,7 +4611,7 @@ func (a *CloudApiService) GetCloudSkuContainerTypeListExecute(r ApiGetCloudSkuCo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4673,23 +4622,23 @@ func (a *CloudApiService) GetCloudSkuContainerTypeListExecute(r ApiGetCloudSkuCo
 }
 
 type ApiGetCloudSkuDatabaseTypeByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudSkuDatabaseTypeByMoidRequest) Execute() (CloudSkuDatabaseType, *_nethttp.Response, error) {
+func (r ApiGetCloudSkuDatabaseTypeByMoidRequest) Execute() (*CloudSkuDatabaseType, *http.Response, error) {
 	return r.ApiService.GetCloudSkuDatabaseTypeByMoidExecute(r)
 }
 
 /*
 GetCloudSkuDatabaseTypeByMoid Read a 'cloud.SkuDatabaseType' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudSkuDatabaseTypeByMoidRequest
 */
-func (a *CloudApiService) GetCloudSkuDatabaseTypeByMoid(ctx _context.Context, moid string) ApiGetCloudSkuDatabaseTypeByMoidRequest {
+func (a *CloudApiService) GetCloudSkuDatabaseTypeByMoid(ctx context.Context, moid string) ApiGetCloudSkuDatabaseTypeByMoidRequest {
 	return ApiGetCloudSkuDatabaseTypeByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4699,27 +4648,25 @@ func (a *CloudApiService) GetCloudSkuDatabaseTypeByMoid(ctx _context.Context, mo
 
 // Execute executes the request
 //  @return CloudSkuDatabaseType
-func (a *CloudApiService) GetCloudSkuDatabaseTypeByMoidExecute(r ApiGetCloudSkuDatabaseTypeByMoidRequest) (CloudSkuDatabaseType, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudSkuDatabaseTypeByMoidExecute(r ApiGetCloudSkuDatabaseTypeByMoidRequest) (*CloudSkuDatabaseType, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudSkuDatabaseType
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudSkuDatabaseType
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudSkuDatabaseTypeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/SkuDatabaseTypes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4738,7 +4685,7 @@ func (a *CloudApiService) GetCloudSkuDatabaseTypeByMoidExecute(r ApiGetCloudSkuD
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -4748,15 +4695,15 @@ func (a *CloudApiService) GetCloudSkuDatabaseTypeByMoidExecute(r ApiGetCloudSkuD
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -4812,7 +4759,7 @@ func (a *CloudApiService) GetCloudSkuDatabaseTypeByMoidExecute(r ApiGetCloudSkuD
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -4823,7 +4770,7 @@ func (a *CloudApiService) GetCloudSkuDatabaseTypeByMoidExecute(r ApiGetCloudSkuD
 }
 
 type ApiGetCloudSkuDatabaseTypeListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -4904,17 +4851,17 @@ func (r ApiGetCloudSkuDatabaseTypeListRequest) Tags(tags string) ApiGetCloudSkuD
 	return r
 }
 
-func (r ApiGetCloudSkuDatabaseTypeListRequest) Execute() (CloudSkuDatabaseTypeResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudSkuDatabaseTypeListRequest) Execute() (*CloudSkuDatabaseTypeResponse, *http.Response, error) {
 	return r.ApiService.GetCloudSkuDatabaseTypeListExecute(r)
 }
 
 /*
 GetCloudSkuDatabaseTypeList Read a 'cloud.SkuDatabaseType' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudSkuDatabaseTypeListRequest
 */
-func (a *CloudApiService) GetCloudSkuDatabaseTypeList(ctx _context.Context) ApiGetCloudSkuDatabaseTypeListRequest {
+func (a *CloudApiService) GetCloudSkuDatabaseTypeList(ctx context.Context) ApiGetCloudSkuDatabaseTypeListRequest {
 	return ApiGetCloudSkuDatabaseTypeListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -4923,26 +4870,24 @@ func (a *CloudApiService) GetCloudSkuDatabaseTypeList(ctx _context.Context) ApiG
 
 // Execute executes the request
 //  @return CloudSkuDatabaseTypeResponse
-func (a *CloudApiService) GetCloudSkuDatabaseTypeListExecute(r ApiGetCloudSkuDatabaseTypeListRequest) (CloudSkuDatabaseTypeResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudSkuDatabaseTypeListExecute(r ApiGetCloudSkuDatabaseTypeListRequest) (*CloudSkuDatabaseTypeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudSkuDatabaseTypeResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudSkuDatabaseTypeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudSkuDatabaseTypeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/SkuDatabaseTypes"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -4994,7 +4939,7 @@ func (a *CloudApiService) GetCloudSkuDatabaseTypeListExecute(r ApiGetCloudSkuDat
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5004,15 +4949,15 @@ func (a *CloudApiService) GetCloudSkuDatabaseTypeListExecute(r ApiGetCloudSkuDat
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5068,7 +5013,7 @@ func (a *CloudApiService) GetCloudSkuDatabaseTypeListExecute(r ApiGetCloudSkuDat
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5079,23 +5024,23 @@ func (a *CloudApiService) GetCloudSkuDatabaseTypeListExecute(r ApiGetCloudSkuDat
 }
 
 type ApiGetCloudSkuInstanceTypeByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudSkuInstanceTypeByMoidRequest) Execute() (CloudSkuInstanceType, *_nethttp.Response, error) {
+func (r ApiGetCloudSkuInstanceTypeByMoidRequest) Execute() (*CloudSkuInstanceType, *http.Response, error) {
 	return r.ApiService.GetCloudSkuInstanceTypeByMoidExecute(r)
 }
 
 /*
 GetCloudSkuInstanceTypeByMoid Read a 'cloud.SkuInstanceType' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudSkuInstanceTypeByMoidRequest
 */
-func (a *CloudApiService) GetCloudSkuInstanceTypeByMoid(ctx _context.Context, moid string) ApiGetCloudSkuInstanceTypeByMoidRequest {
+func (a *CloudApiService) GetCloudSkuInstanceTypeByMoid(ctx context.Context, moid string) ApiGetCloudSkuInstanceTypeByMoidRequest {
 	return ApiGetCloudSkuInstanceTypeByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5105,27 +5050,25 @@ func (a *CloudApiService) GetCloudSkuInstanceTypeByMoid(ctx _context.Context, mo
 
 // Execute executes the request
 //  @return CloudSkuInstanceType
-func (a *CloudApiService) GetCloudSkuInstanceTypeByMoidExecute(r ApiGetCloudSkuInstanceTypeByMoidRequest) (CloudSkuInstanceType, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudSkuInstanceTypeByMoidExecute(r ApiGetCloudSkuInstanceTypeByMoidRequest) (*CloudSkuInstanceType, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudSkuInstanceType
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudSkuInstanceType
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudSkuInstanceTypeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/SkuInstanceTypes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5144,7 +5087,7 @@ func (a *CloudApiService) GetCloudSkuInstanceTypeByMoidExecute(r ApiGetCloudSkuI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5154,15 +5097,15 @@ func (a *CloudApiService) GetCloudSkuInstanceTypeByMoidExecute(r ApiGetCloudSkuI
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5218,7 +5161,7 @@ func (a *CloudApiService) GetCloudSkuInstanceTypeByMoidExecute(r ApiGetCloudSkuI
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5229,7 +5172,7 @@ func (a *CloudApiService) GetCloudSkuInstanceTypeByMoidExecute(r ApiGetCloudSkuI
 }
 
 type ApiGetCloudSkuInstanceTypeListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -5310,17 +5253,17 @@ func (r ApiGetCloudSkuInstanceTypeListRequest) Tags(tags string) ApiGetCloudSkuI
 	return r
 }
 
-func (r ApiGetCloudSkuInstanceTypeListRequest) Execute() (CloudSkuInstanceTypeResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudSkuInstanceTypeListRequest) Execute() (*CloudSkuInstanceTypeResponse, *http.Response, error) {
 	return r.ApiService.GetCloudSkuInstanceTypeListExecute(r)
 }
 
 /*
 GetCloudSkuInstanceTypeList Read a 'cloud.SkuInstanceType' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudSkuInstanceTypeListRequest
 */
-func (a *CloudApiService) GetCloudSkuInstanceTypeList(ctx _context.Context) ApiGetCloudSkuInstanceTypeListRequest {
+func (a *CloudApiService) GetCloudSkuInstanceTypeList(ctx context.Context) ApiGetCloudSkuInstanceTypeListRequest {
 	return ApiGetCloudSkuInstanceTypeListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5329,26 +5272,24 @@ func (a *CloudApiService) GetCloudSkuInstanceTypeList(ctx _context.Context) ApiG
 
 // Execute executes the request
 //  @return CloudSkuInstanceTypeResponse
-func (a *CloudApiService) GetCloudSkuInstanceTypeListExecute(r ApiGetCloudSkuInstanceTypeListRequest) (CloudSkuInstanceTypeResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudSkuInstanceTypeListExecute(r ApiGetCloudSkuInstanceTypeListRequest) (*CloudSkuInstanceTypeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudSkuInstanceTypeResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudSkuInstanceTypeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudSkuInstanceTypeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/SkuInstanceTypes"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -5400,7 +5341,7 @@ func (a *CloudApiService) GetCloudSkuInstanceTypeListExecute(r ApiGetCloudSkuIns
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5410,15 +5351,15 @@ func (a *CloudApiService) GetCloudSkuInstanceTypeListExecute(r ApiGetCloudSkuIns
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5474,7 +5415,7 @@ func (a *CloudApiService) GetCloudSkuInstanceTypeListExecute(r ApiGetCloudSkuIns
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5485,23 +5426,23 @@ func (a *CloudApiService) GetCloudSkuInstanceTypeListExecute(r ApiGetCloudSkuIns
 }
 
 type ApiGetCloudSkuNetworkTypeByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudSkuNetworkTypeByMoidRequest) Execute() (CloudSkuNetworkType, *_nethttp.Response, error) {
+func (r ApiGetCloudSkuNetworkTypeByMoidRequest) Execute() (*CloudSkuNetworkType, *http.Response, error) {
 	return r.ApiService.GetCloudSkuNetworkTypeByMoidExecute(r)
 }
 
 /*
 GetCloudSkuNetworkTypeByMoid Read a 'cloud.SkuNetworkType' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudSkuNetworkTypeByMoidRequest
 */
-func (a *CloudApiService) GetCloudSkuNetworkTypeByMoid(ctx _context.Context, moid string) ApiGetCloudSkuNetworkTypeByMoidRequest {
+func (a *CloudApiService) GetCloudSkuNetworkTypeByMoid(ctx context.Context, moid string) ApiGetCloudSkuNetworkTypeByMoidRequest {
 	return ApiGetCloudSkuNetworkTypeByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5511,27 +5452,25 @@ func (a *CloudApiService) GetCloudSkuNetworkTypeByMoid(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return CloudSkuNetworkType
-func (a *CloudApiService) GetCloudSkuNetworkTypeByMoidExecute(r ApiGetCloudSkuNetworkTypeByMoidRequest) (CloudSkuNetworkType, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudSkuNetworkTypeByMoidExecute(r ApiGetCloudSkuNetworkTypeByMoidRequest) (*CloudSkuNetworkType, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudSkuNetworkType
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudSkuNetworkType
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudSkuNetworkTypeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/SkuNetworkTypes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5550,7 +5489,7 @@ func (a *CloudApiService) GetCloudSkuNetworkTypeByMoidExecute(r ApiGetCloudSkuNe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5560,15 +5499,15 @@ func (a *CloudApiService) GetCloudSkuNetworkTypeByMoidExecute(r ApiGetCloudSkuNe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5624,7 +5563,7 @@ func (a *CloudApiService) GetCloudSkuNetworkTypeByMoidExecute(r ApiGetCloudSkuNe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5635,7 +5574,7 @@ func (a *CloudApiService) GetCloudSkuNetworkTypeByMoidExecute(r ApiGetCloudSkuNe
 }
 
 type ApiGetCloudSkuNetworkTypeListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -5716,17 +5655,17 @@ func (r ApiGetCloudSkuNetworkTypeListRequest) Tags(tags string) ApiGetCloudSkuNe
 	return r
 }
 
-func (r ApiGetCloudSkuNetworkTypeListRequest) Execute() (CloudSkuNetworkTypeResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudSkuNetworkTypeListRequest) Execute() (*CloudSkuNetworkTypeResponse, *http.Response, error) {
 	return r.ApiService.GetCloudSkuNetworkTypeListExecute(r)
 }
 
 /*
 GetCloudSkuNetworkTypeList Read a 'cloud.SkuNetworkType' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudSkuNetworkTypeListRequest
 */
-func (a *CloudApiService) GetCloudSkuNetworkTypeList(ctx _context.Context) ApiGetCloudSkuNetworkTypeListRequest {
+func (a *CloudApiService) GetCloudSkuNetworkTypeList(ctx context.Context) ApiGetCloudSkuNetworkTypeListRequest {
 	return ApiGetCloudSkuNetworkTypeListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5735,26 +5674,24 @@ func (a *CloudApiService) GetCloudSkuNetworkTypeList(ctx _context.Context) ApiGe
 
 // Execute executes the request
 //  @return CloudSkuNetworkTypeResponse
-func (a *CloudApiService) GetCloudSkuNetworkTypeListExecute(r ApiGetCloudSkuNetworkTypeListRequest) (CloudSkuNetworkTypeResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudSkuNetworkTypeListExecute(r ApiGetCloudSkuNetworkTypeListRequest) (*CloudSkuNetworkTypeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudSkuNetworkTypeResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudSkuNetworkTypeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudSkuNetworkTypeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/SkuNetworkTypes"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -5806,7 +5743,7 @@ func (a *CloudApiService) GetCloudSkuNetworkTypeListExecute(r ApiGetCloudSkuNetw
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5816,15 +5753,15 @@ func (a *CloudApiService) GetCloudSkuNetworkTypeListExecute(r ApiGetCloudSkuNetw
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -5880,7 +5817,7 @@ func (a *CloudApiService) GetCloudSkuNetworkTypeListExecute(r ApiGetCloudSkuNetw
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -5891,23 +5828,23 @@ func (a *CloudApiService) GetCloudSkuNetworkTypeListExecute(r ApiGetCloudSkuNetw
 }
 
 type ApiGetCloudSkuRegionRateCardsByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudSkuRegionRateCardsByMoidRequest) Execute() (CloudSkuRegionRateCards, *_nethttp.Response, error) {
+func (r ApiGetCloudSkuRegionRateCardsByMoidRequest) Execute() (*CloudSkuRegionRateCards, *http.Response, error) {
 	return r.ApiService.GetCloudSkuRegionRateCardsByMoidExecute(r)
 }
 
 /*
 GetCloudSkuRegionRateCardsByMoid Read a 'cloud.SkuRegionRateCards' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudSkuRegionRateCardsByMoidRequest
 */
-func (a *CloudApiService) GetCloudSkuRegionRateCardsByMoid(ctx _context.Context, moid string) ApiGetCloudSkuRegionRateCardsByMoidRequest {
+func (a *CloudApiService) GetCloudSkuRegionRateCardsByMoid(ctx context.Context, moid string) ApiGetCloudSkuRegionRateCardsByMoidRequest {
 	return ApiGetCloudSkuRegionRateCardsByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -5917,27 +5854,25 @@ func (a *CloudApiService) GetCloudSkuRegionRateCardsByMoid(ctx _context.Context,
 
 // Execute executes the request
 //  @return CloudSkuRegionRateCards
-func (a *CloudApiService) GetCloudSkuRegionRateCardsByMoidExecute(r ApiGetCloudSkuRegionRateCardsByMoidRequest) (CloudSkuRegionRateCards, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudSkuRegionRateCardsByMoidExecute(r ApiGetCloudSkuRegionRateCardsByMoidRequest) (*CloudSkuRegionRateCards, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudSkuRegionRateCards
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudSkuRegionRateCards
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudSkuRegionRateCardsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/SkuRegionRateCards/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5956,7 +5891,7 @@ func (a *CloudApiService) GetCloudSkuRegionRateCardsByMoidExecute(r ApiGetCloudS
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -5966,15 +5901,15 @@ func (a *CloudApiService) GetCloudSkuRegionRateCardsByMoidExecute(r ApiGetCloudS
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6030,7 +5965,7 @@ func (a *CloudApiService) GetCloudSkuRegionRateCardsByMoidExecute(r ApiGetCloudS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6041,7 +5976,7 @@ func (a *CloudApiService) GetCloudSkuRegionRateCardsByMoidExecute(r ApiGetCloudS
 }
 
 type ApiGetCloudSkuRegionRateCardsListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -6122,17 +6057,17 @@ func (r ApiGetCloudSkuRegionRateCardsListRequest) Tags(tags string) ApiGetCloudS
 	return r
 }
 
-func (r ApiGetCloudSkuRegionRateCardsListRequest) Execute() (CloudSkuRegionRateCardsResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudSkuRegionRateCardsListRequest) Execute() (*CloudSkuRegionRateCardsResponse, *http.Response, error) {
 	return r.ApiService.GetCloudSkuRegionRateCardsListExecute(r)
 }
 
 /*
 GetCloudSkuRegionRateCardsList Read a 'cloud.SkuRegionRateCards' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudSkuRegionRateCardsListRequest
 */
-func (a *CloudApiService) GetCloudSkuRegionRateCardsList(ctx _context.Context) ApiGetCloudSkuRegionRateCardsListRequest {
+func (a *CloudApiService) GetCloudSkuRegionRateCardsList(ctx context.Context) ApiGetCloudSkuRegionRateCardsListRequest {
 	return ApiGetCloudSkuRegionRateCardsListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6141,26 +6076,24 @@ func (a *CloudApiService) GetCloudSkuRegionRateCardsList(ctx _context.Context) A
 
 // Execute executes the request
 //  @return CloudSkuRegionRateCardsResponse
-func (a *CloudApiService) GetCloudSkuRegionRateCardsListExecute(r ApiGetCloudSkuRegionRateCardsListRequest) (CloudSkuRegionRateCardsResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudSkuRegionRateCardsListExecute(r ApiGetCloudSkuRegionRateCardsListRequest) (*CloudSkuRegionRateCardsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudSkuRegionRateCardsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudSkuRegionRateCardsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudSkuRegionRateCardsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/SkuRegionRateCards"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -6212,7 +6145,7 @@ func (a *CloudApiService) GetCloudSkuRegionRateCardsListExecute(r ApiGetCloudSku
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6222,15 +6155,15 @@ func (a *CloudApiService) GetCloudSkuRegionRateCardsListExecute(r ApiGetCloudSku
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6286,7 +6219,7 @@ func (a *CloudApiService) GetCloudSkuRegionRateCardsListExecute(r ApiGetCloudSku
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6297,23 +6230,23 @@ func (a *CloudApiService) GetCloudSkuRegionRateCardsListExecute(r ApiGetCloudSku
 }
 
 type ApiGetCloudSkuVolumeTypeByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudSkuVolumeTypeByMoidRequest) Execute() (CloudSkuVolumeType, *_nethttp.Response, error) {
+func (r ApiGetCloudSkuVolumeTypeByMoidRequest) Execute() (*CloudSkuVolumeType, *http.Response, error) {
 	return r.ApiService.GetCloudSkuVolumeTypeByMoidExecute(r)
 }
 
 /*
 GetCloudSkuVolumeTypeByMoid Read a 'cloud.SkuVolumeType' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudSkuVolumeTypeByMoidRequest
 */
-func (a *CloudApiService) GetCloudSkuVolumeTypeByMoid(ctx _context.Context, moid string) ApiGetCloudSkuVolumeTypeByMoidRequest {
+func (a *CloudApiService) GetCloudSkuVolumeTypeByMoid(ctx context.Context, moid string) ApiGetCloudSkuVolumeTypeByMoidRequest {
 	return ApiGetCloudSkuVolumeTypeByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6323,27 +6256,25 @@ func (a *CloudApiService) GetCloudSkuVolumeTypeByMoid(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return CloudSkuVolumeType
-func (a *CloudApiService) GetCloudSkuVolumeTypeByMoidExecute(r ApiGetCloudSkuVolumeTypeByMoidRequest) (CloudSkuVolumeType, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudSkuVolumeTypeByMoidExecute(r ApiGetCloudSkuVolumeTypeByMoidRequest) (*CloudSkuVolumeType, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudSkuVolumeType
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudSkuVolumeType
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudSkuVolumeTypeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/SkuVolumeTypes/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6362,7 +6293,7 @@ func (a *CloudApiService) GetCloudSkuVolumeTypeByMoidExecute(r ApiGetCloudSkuVol
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6372,15 +6303,15 @@ func (a *CloudApiService) GetCloudSkuVolumeTypeByMoidExecute(r ApiGetCloudSkuVol
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6436,7 +6367,7 @@ func (a *CloudApiService) GetCloudSkuVolumeTypeByMoidExecute(r ApiGetCloudSkuVol
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6447,7 +6378,7 @@ func (a *CloudApiService) GetCloudSkuVolumeTypeByMoidExecute(r ApiGetCloudSkuVol
 }
 
 type ApiGetCloudSkuVolumeTypeListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -6528,17 +6459,17 @@ func (r ApiGetCloudSkuVolumeTypeListRequest) Tags(tags string) ApiGetCloudSkuVol
 	return r
 }
 
-func (r ApiGetCloudSkuVolumeTypeListRequest) Execute() (CloudSkuVolumeTypeResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudSkuVolumeTypeListRequest) Execute() (*CloudSkuVolumeTypeResponse, *http.Response, error) {
 	return r.ApiService.GetCloudSkuVolumeTypeListExecute(r)
 }
 
 /*
 GetCloudSkuVolumeTypeList Read a 'cloud.SkuVolumeType' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudSkuVolumeTypeListRequest
 */
-func (a *CloudApiService) GetCloudSkuVolumeTypeList(ctx _context.Context) ApiGetCloudSkuVolumeTypeListRequest {
+func (a *CloudApiService) GetCloudSkuVolumeTypeList(ctx context.Context) ApiGetCloudSkuVolumeTypeListRequest {
 	return ApiGetCloudSkuVolumeTypeListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6547,26 +6478,24 @@ func (a *CloudApiService) GetCloudSkuVolumeTypeList(ctx _context.Context) ApiGet
 
 // Execute executes the request
 //  @return CloudSkuVolumeTypeResponse
-func (a *CloudApiService) GetCloudSkuVolumeTypeListExecute(r ApiGetCloudSkuVolumeTypeListRequest) (CloudSkuVolumeTypeResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudSkuVolumeTypeListExecute(r ApiGetCloudSkuVolumeTypeListRequest) (*CloudSkuVolumeTypeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudSkuVolumeTypeResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudSkuVolumeTypeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudSkuVolumeTypeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/SkuVolumeTypes"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -6618,7 +6547,7 @@ func (a *CloudApiService) GetCloudSkuVolumeTypeListExecute(r ApiGetCloudSkuVolum
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6628,15 +6557,15 @@ func (a *CloudApiService) GetCloudSkuVolumeTypeListExecute(r ApiGetCloudSkuVolum
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6692,7 +6621,7 @@ func (a *CloudApiService) GetCloudSkuVolumeTypeListExecute(r ApiGetCloudSkuVolum
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6703,23 +6632,23 @@ func (a *CloudApiService) GetCloudSkuVolumeTypeListExecute(r ApiGetCloudSkuVolum
 }
 
 type ApiGetCloudTfcAgentpoolByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudTfcAgentpoolByMoidRequest) Execute() (CloudTfcAgentpool, *_nethttp.Response, error) {
+func (r ApiGetCloudTfcAgentpoolByMoidRequest) Execute() (*CloudTfcAgentpool, *http.Response, error) {
 	return r.ApiService.GetCloudTfcAgentpoolByMoidExecute(r)
 }
 
 /*
 GetCloudTfcAgentpoolByMoid Read a 'cloud.TfcAgentpool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudTfcAgentpoolByMoidRequest
 */
-func (a *CloudApiService) GetCloudTfcAgentpoolByMoid(ctx _context.Context, moid string) ApiGetCloudTfcAgentpoolByMoidRequest {
+func (a *CloudApiService) GetCloudTfcAgentpoolByMoid(ctx context.Context, moid string) ApiGetCloudTfcAgentpoolByMoidRequest {
 	return ApiGetCloudTfcAgentpoolByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6729,27 +6658,25 @@ func (a *CloudApiService) GetCloudTfcAgentpoolByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return CloudTfcAgentpool
-func (a *CloudApiService) GetCloudTfcAgentpoolByMoidExecute(r ApiGetCloudTfcAgentpoolByMoidRequest) (CloudTfcAgentpool, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudTfcAgentpoolByMoidExecute(r ApiGetCloudTfcAgentpoolByMoidRequest) (*CloudTfcAgentpool, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudTfcAgentpool
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudTfcAgentpool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudTfcAgentpoolByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/TfcAgentpools/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6768,7 +6695,7 @@ func (a *CloudApiService) GetCloudTfcAgentpoolByMoidExecute(r ApiGetCloudTfcAgen
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -6778,15 +6705,15 @@ func (a *CloudApiService) GetCloudTfcAgentpoolByMoidExecute(r ApiGetCloudTfcAgen
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -6842,7 +6769,7 @@ func (a *CloudApiService) GetCloudTfcAgentpoolByMoidExecute(r ApiGetCloudTfcAgen
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -6853,7 +6780,7 @@ func (a *CloudApiService) GetCloudTfcAgentpoolByMoidExecute(r ApiGetCloudTfcAgen
 }
 
 type ApiGetCloudTfcAgentpoolListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -6934,17 +6861,17 @@ func (r ApiGetCloudTfcAgentpoolListRequest) Tags(tags string) ApiGetCloudTfcAgen
 	return r
 }
 
-func (r ApiGetCloudTfcAgentpoolListRequest) Execute() (CloudTfcAgentpoolResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudTfcAgentpoolListRequest) Execute() (*CloudTfcAgentpoolResponse, *http.Response, error) {
 	return r.ApiService.GetCloudTfcAgentpoolListExecute(r)
 }
 
 /*
 GetCloudTfcAgentpoolList Read a 'cloud.TfcAgentpool' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudTfcAgentpoolListRequest
 */
-func (a *CloudApiService) GetCloudTfcAgentpoolList(ctx _context.Context) ApiGetCloudTfcAgentpoolListRequest {
+func (a *CloudApiService) GetCloudTfcAgentpoolList(ctx context.Context) ApiGetCloudTfcAgentpoolListRequest {
 	return ApiGetCloudTfcAgentpoolListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -6953,26 +6880,24 @@ func (a *CloudApiService) GetCloudTfcAgentpoolList(ctx _context.Context) ApiGetC
 
 // Execute executes the request
 //  @return CloudTfcAgentpoolResponse
-func (a *CloudApiService) GetCloudTfcAgentpoolListExecute(r ApiGetCloudTfcAgentpoolListRequest) (CloudTfcAgentpoolResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudTfcAgentpoolListExecute(r ApiGetCloudTfcAgentpoolListRequest) (*CloudTfcAgentpoolResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudTfcAgentpoolResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudTfcAgentpoolResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudTfcAgentpoolList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/TfcAgentpools"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -7024,7 +6949,7 @@ func (a *CloudApiService) GetCloudTfcAgentpoolListExecute(r ApiGetCloudTfcAgentp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7034,15 +6959,15 @@ func (a *CloudApiService) GetCloudTfcAgentpoolListExecute(r ApiGetCloudTfcAgentp
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7098,7 +7023,7 @@ func (a *CloudApiService) GetCloudTfcAgentpoolListExecute(r ApiGetCloudTfcAgentp
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7109,23 +7034,23 @@ func (a *CloudApiService) GetCloudTfcAgentpoolListExecute(r ApiGetCloudTfcAgentp
 }
 
 type ApiGetCloudTfcOrganizationByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudTfcOrganizationByMoidRequest) Execute() (CloudTfcOrganization, *_nethttp.Response, error) {
+func (r ApiGetCloudTfcOrganizationByMoidRequest) Execute() (*CloudTfcOrganization, *http.Response, error) {
 	return r.ApiService.GetCloudTfcOrganizationByMoidExecute(r)
 }
 
 /*
 GetCloudTfcOrganizationByMoid Read a 'cloud.TfcOrganization' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudTfcOrganizationByMoidRequest
 */
-func (a *CloudApiService) GetCloudTfcOrganizationByMoid(ctx _context.Context, moid string) ApiGetCloudTfcOrganizationByMoidRequest {
+func (a *CloudApiService) GetCloudTfcOrganizationByMoid(ctx context.Context, moid string) ApiGetCloudTfcOrganizationByMoidRequest {
 	return ApiGetCloudTfcOrganizationByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7135,27 +7060,25 @@ func (a *CloudApiService) GetCloudTfcOrganizationByMoid(ctx _context.Context, mo
 
 // Execute executes the request
 //  @return CloudTfcOrganization
-func (a *CloudApiService) GetCloudTfcOrganizationByMoidExecute(r ApiGetCloudTfcOrganizationByMoidRequest) (CloudTfcOrganization, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudTfcOrganizationByMoidExecute(r ApiGetCloudTfcOrganizationByMoidRequest) (*CloudTfcOrganization, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudTfcOrganization
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudTfcOrganization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudTfcOrganizationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/TfcOrganizations/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7174,7 +7097,7 @@ func (a *CloudApiService) GetCloudTfcOrganizationByMoidExecute(r ApiGetCloudTfcO
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7184,15 +7107,15 @@ func (a *CloudApiService) GetCloudTfcOrganizationByMoidExecute(r ApiGetCloudTfcO
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7248,7 +7171,7 @@ func (a *CloudApiService) GetCloudTfcOrganizationByMoidExecute(r ApiGetCloudTfcO
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7259,7 +7182,7 @@ func (a *CloudApiService) GetCloudTfcOrganizationByMoidExecute(r ApiGetCloudTfcO
 }
 
 type ApiGetCloudTfcOrganizationListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -7340,17 +7263,17 @@ func (r ApiGetCloudTfcOrganizationListRequest) Tags(tags string) ApiGetCloudTfcO
 	return r
 }
 
-func (r ApiGetCloudTfcOrganizationListRequest) Execute() (CloudTfcOrganizationResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudTfcOrganizationListRequest) Execute() (*CloudTfcOrganizationResponse, *http.Response, error) {
 	return r.ApiService.GetCloudTfcOrganizationListExecute(r)
 }
 
 /*
 GetCloudTfcOrganizationList Read a 'cloud.TfcOrganization' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudTfcOrganizationListRequest
 */
-func (a *CloudApiService) GetCloudTfcOrganizationList(ctx _context.Context) ApiGetCloudTfcOrganizationListRequest {
+func (a *CloudApiService) GetCloudTfcOrganizationList(ctx context.Context) ApiGetCloudTfcOrganizationListRequest {
 	return ApiGetCloudTfcOrganizationListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7359,26 +7282,24 @@ func (a *CloudApiService) GetCloudTfcOrganizationList(ctx _context.Context) ApiG
 
 // Execute executes the request
 //  @return CloudTfcOrganizationResponse
-func (a *CloudApiService) GetCloudTfcOrganizationListExecute(r ApiGetCloudTfcOrganizationListRequest) (CloudTfcOrganizationResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudTfcOrganizationListExecute(r ApiGetCloudTfcOrganizationListRequest) (*CloudTfcOrganizationResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudTfcOrganizationResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudTfcOrganizationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudTfcOrganizationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/TfcOrganizations"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -7430,7 +7351,7 @@ func (a *CloudApiService) GetCloudTfcOrganizationListExecute(r ApiGetCloudTfcOrg
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7440,15 +7361,15 @@ func (a *CloudApiService) GetCloudTfcOrganizationListExecute(r ApiGetCloudTfcOrg
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7504,7 +7425,7 @@ func (a *CloudApiService) GetCloudTfcOrganizationListExecute(r ApiGetCloudTfcOrg
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7515,23 +7436,23 @@ func (a *CloudApiService) GetCloudTfcOrganizationListExecute(r ApiGetCloudTfcOrg
 }
 
 type ApiGetCloudTfcWorkspaceByMoidRequest struct {
-	ctx        _context.Context
+	ctx        context.Context
 	ApiService *CloudApiService
 	moid       string
 }
 
-func (r ApiGetCloudTfcWorkspaceByMoidRequest) Execute() (CloudTfcWorkspace, *_nethttp.Response, error) {
+func (r ApiGetCloudTfcWorkspaceByMoidRequest) Execute() (*CloudTfcWorkspace, *http.Response, error) {
 	return r.ApiService.GetCloudTfcWorkspaceByMoidExecute(r)
 }
 
 /*
 GetCloudTfcWorkspaceByMoid Read a 'cloud.TfcWorkspace' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiGetCloudTfcWorkspaceByMoidRequest
 */
-func (a *CloudApiService) GetCloudTfcWorkspaceByMoid(ctx _context.Context, moid string) ApiGetCloudTfcWorkspaceByMoidRequest {
+func (a *CloudApiService) GetCloudTfcWorkspaceByMoid(ctx context.Context, moid string) ApiGetCloudTfcWorkspaceByMoidRequest {
 	return ApiGetCloudTfcWorkspaceByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7541,27 +7462,25 @@ func (a *CloudApiService) GetCloudTfcWorkspaceByMoid(ctx _context.Context, moid 
 
 // Execute executes the request
 //  @return CloudTfcWorkspace
-func (a *CloudApiService) GetCloudTfcWorkspaceByMoidExecute(r ApiGetCloudTfcWorkspaceByMoidRequest) (CloudTfcWorkspace, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudTfcWorkspaceByMoidExecute(r ApiGetCloudTfcWorkspaceByMoidRequest) (*CloudTfcWorkspace, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudTfcWorkspace
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudTfcWorkspace
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudTfcWorkspaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/TfcWorkspaces/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7580,7 +7499,7 @@ func (a *CloudApiService) GetCloudTfcWorkspaceByMoidExecute(r ApiGetCloudTfcWork
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7590,15 +7509,15 @@ func (a *CloudApiService) GetCloudTfcWorkspaceByMoidExecute(r ApiGetCloudTfcWork
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7654,7 +7573,7 @@ func (a *CloudApiService) GetCloudTfcWorkspaceByMoidExecute(r ApiGetCloudTfcWork
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7665,7 +7584,7 @@ func (a *CloudApiService) GetCloudTfcWorkspaceByMoidExecute(r ApiGetCloudTfcWork
 }
 
 type ApiGetCloudTfcWorkspaceListRequest struct {
-	ctx         _context.Context
+	ctx         context.Context
 	ApiService  *CloudApiService
 	filter      *string
 	orderby     *string
@@ -7746,17 +7665,17 @@ func (r ApiGetCloudTfcWorkspaceListRequest) Tags(tags string) ApiGetCloudTfcWork
 	return r
 }
 
-func (r ApiGetCloudTfcWorkspaceListRequest) Execute() (CloudTfcWorkspaceResponse, *_nethttp.Response, error) {
+func (r ApiGetCloudTfcWorkspaceListRequest) Execute() (*CloudTfcWorkspaceResponse, *http.Response, error) {
 	return r.ApiService.GetCloudTfcWorkspaceListExecute(r)
 }
 
 /*
 GetCloudTfcWorkspaceList Read a 'cloud.TfcWorkspace' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetCloudTfcWorkspaceListRequest
 */
-func (a *CloudApiService) GetCloudTfcWorkspaceList(ctx _context.Context) ApiGetCloudTfcWorkspaceListRequest {
+func (a *CloudApiService) GetCloudTfcWorkspaceList(ctx context.Context) ApiGetCloudTfcWorkspaceListRequest {
 	return ApiGetCloudTfcWorkspaceListRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7765,26 +7684,24 @@ func (a *CloudApiService) GetCloudTfcWorkspaceList(ctx _context.Context) ApiGetC
 
 // Execute executes the request
 //  @return CloudTfcWorkspaceResponse
-func (a *CloudApiService) GetCloudTfcWorkspaceListExecute(r ApiGetCloudTfcWorkspaceListRequest) (CloudTfcWorkspaceResponse, *_nethttp.Response, error) {
+func (a *CloudApiService) GetCloudTfcWorkspaceListExecute(r ApiGetCloudTfcWorkspaceListRequest) (*CloudTfcWorkspaceResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudTfcWorkspaceResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudTfcWorkspaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.GetCloudTfcWorkspaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/TfcWorkspaces"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 
 	if r.filter != nil {
 		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
@@ -7836,7 +7753,7 @@ func (a *CloudApiService) GetCloudTfcWorkspaceListExecute(r ApiGetCloudTfcWorksp
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -7846,15 +7763,15 @@ func (a *CloudApiService) GetCloudTfcWorkspaceListExecute(r ApiGetCloudTfcWorksp
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -7910,7 +7827,7 @@ func (a *CloudApiService) GetCloudTfcWorkspaceListExecute(r ApiGetCloudTfcWorksp
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -7921,7 +7838,7 @@ func (a *CloudApiService) GetCloudTfcWorkspaceListExecute(r ApiGetCloudTfcWorksp
 }
 
 type ApiPatchCloudAwsVirtualMachineRequest struct {
-	ctx                    _context.Context
+	ctx                    context.Context
 	ApiService             *CloudApiService
 	moid                   string
 	cloudAwsVirtualMachine *CloudAwsVirtualMachine
@@ -7940,18 +7857,18 @@ func (r ApiPatchCloudAwsVirtualMachineRequest) IfMatch(ifMatch string) ApiPatchC
 	return r
 }
 
-func (r ApiPatchCloudAwsVirtualMachineRequest) Execute() (CloudAwsVirtualMachine, *_nethttp.Response, error) {
+func (r ApiPatchCloudAwsVirtualMachineRequest) Execute() (*CloudAwsVirtualMachine, *http.Response, error) {
 	return r.ApiService.PatchCloudAwsVirtualMachineExecute(r)
 }
 
 /*
 PatchCloudAwsVirtualMachine Update a 'cloud.AwsVirtualMachine' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchCloudAwsVirtualMachineRequest
 */
-func (a *CloudApiService) PatchCloudAwsVirtualMachine(ctx _context.Context, moid string) ApiPatchCloudAwsVirtualMachineRequest {
+func (a *CloudApiService) PatchCloudAwsVirtualMachine(ctx context.Context, moid string) ApiPatchCloudAwsVirtualMachineRequest {
 	return ApiPatchCloudAwsVirtualMachineRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -7961,27 +7878,25 @@ func (a *CloudApiService) PatchCloudAwsVirtualMachine(ctx _context.Context, moid
 
 // Execute executes the request
 //  @return CloudAwsVirtualMachine
-func (a *CloudApiService) PatchCloudAwsVirtualMachineExecute(r ApiPatchCloudAwsVirtualMachineRequest) (CloudAwsVirtualMachine, *_nethttp.Response, error) {
+func (a *CloudApiService) PatchCloudAwsVirtualMachineExecute(r ApiPatchCloudAwsVirtualMachineRequest) (*CloudAwsVirtualMachine, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsVirtualMachine
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsVirtualMachine
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.PatchCloudAwsVirtualMachine")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsVirtualMachines/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.cloudAwsVirtualMachine == nil {
 		return localVarReturnValue, nil, reportError("cloudAwsVirtualMachine is required and must be specified")
 	}
@@ -8008,7 +7923,7 @@ func (a *CloudApiService) PatchCloudAwsVirtualMachineExecute(r ApiPatchCloudAwsV
 	}
 	// body params
 	localVarPostBody = r.cloudAwsVirtualMachine
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8018,15 +7933,15 @@ func (a *CloudApiService) PatchCloudAwsVirtualMachineExecute(r ApiPatchCloudAwsV
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8082,7 +7997,7 @@ func (a *CloudApiService) PatchCloudAwsVirtualMachineExecute(r ApiPatchCloudAwsV
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8093,7 +8008,7 @@ func (a *CloudApiService) PatchCloudAwsVirtualMachineExecute(r ApiPatchCloudAwsV
 }
 
 type ApiPatchCloudRegionsRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *CloudApiService
 	moid         string
 	cloudRegions *CloudRegions
@@ -8112,18 +8027,18 @@ func (r ApiPatchCloudRegionsRequest) IfMatch(ifMatch string) ApiPatchCloudRegion
 	return r
 }
 
-func (r ApiPatchCloudRegionsRequest) Execute() (CloudRegions, *_nethttp.Response, error) {
+func (r ApiPatchCloudRegionsRequest) Execute() (*CloudRegions, *http.Response, error) {
 	return r.ApiService.PatchCloudRegionsExecute(r)
 }
 
 /*
 PatchCloudRegions Update a 'cloud.Regions' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiPatchCloudRegionsRequest
 */
-func (a *CloudApiService) PatchCloudRegions(ctx _context.Context, moid string) ApiPatchCloudRegionsRequest {
+func (a *CloudApiService) PatchCloudRegions(ctx context.Context, moid string) ApiPatchCloudRegionsRequest {
 	return ApiPatchCloudRegionsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8133,27 +8048,25 @@ func (a *CloudApiService) PatchCloudRegions(ctx _context.Context, moid string) A
 
 // Execute executes the request
 //  @return CloudRegions
-func (a *CloudApiService) PatchCloudRegionsExecute(r ApiPatchCloudRegionsRequest) (CloudRegions, *_nethttp.Response, error) {
+func (a *CloudApiService) PatchCloudRegionsExecute(r ApiPatchCloudRegionsRequest) (*CloudRegions, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPatch
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudRegions
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudRegions
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.PatchCloudRegions")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/Regions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.cloudRegions == nil {
 		return localVarReturnValue, nil, reportError("cloudRegions is required and must be specified")
 	}
@@ -8180,7 +8093,7 @@ func (a *CloudApiService) PatchCloudRegionsExecute(r ApiPatchCloudRegionsRequest
 	}
 	// body params
 	localVarPostBody = r.cloudRegions
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8190,15 +8103,15 @@ func (a *CloudApiService) PatchCloudRegionsExecute(r ApiPatchCloudRegionsRequest
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8254,7 +8167,7 @@ func (a *CloudApiService) PatchCloudRegionsExecute(r ApiPatchCloudRegionsRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8265,7 +8178,7 @@ func (a *CloudApiService) PatchCloudRegionsExecute(r ApiPatchCloudRegionsRequest
 }
 
 type ApiUpdateCloudAwsVirtualMachineRequest struct {
-	ctx                    _context.Context
+	ctx                    context.Context
 	ApiService             *CloudApiService
 	moid                   string
 	cloudAwsVirtualMachine *CloudAwsVirtualMachine
@@ -8284,18 +8197,18 @@ func (r ApiUpdateCloudAwsVirtualMachineRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateCloudAwsVirtualMachineRequest) Execute() (CloudAwsVirtualMachine, *_nethttp.Response, error) {
+func (r ApiUpdateCloudAwsVirtualMachineRequest) Execute() (*CloudAwsVirtualMachine, *http.Response, error) {
 	return r.ApiService.UpdateCloudAwsVirtualMachineExecute(r)
 }
 
 /*
 UpdateCloudAwsVirtualMachine Update a 'cloud.AwsVirtualMachine' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateCloudAwsVirtualMachineRequest
 */
-func (a *CloudApiService) UpdateCloudAwsVirtualMachine(ctx _context.Context, moid string) ApiUpdateCloudAwsVirtualMachineRequest {
+func (a *CloudApiService) UpdateCloudAwsVirtualMachine(ctx context.Context, moid string) ApiUpdateCloudAwsVirtualMachineRequest {
 	return ApiUpdateCloudAwsVirtualMachineRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8305,27 +8218,25 @@ func (a *CloudApiService) UpdateCloudAwsVirtualMachine(ctx _context.Context, moi
 
 // Execute executes the request
 //  @return CloudAwsVirtualMachine
-func (a *CloudApiService) UpdateCloudAwsVirtualMachineExecute(r ApiUpdateCloudAwsVirtualMachineRequest) (CloudAwsVirtualMachine, *_nethttp.Response, error) {
+func (a *CloudApiService) UpdateCloudAwsVirtualMachineExecute(r ApiUpdateCloudAwsVirtualMachineRequest) (*CloudAwsVirtualMachine, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudAwsVirtualMachine
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudAwsVirtualMachine
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.UpdateCloudAwsVirtualMachine")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/AwsVirtualMachines/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.cloudAwsVirtualMachine == nil {
 		return localVarReturnValue, nil, reportError("cloudAwsVirtualMachine is required and must be specified")
 	}
@@ -8352,7 +8263,7 @@ func (a *CloudApiService) UpdateCloudAwsVirtualMachineExecute(r ApiUpdateCloudAw
 	}
 	// body params
 	localVarPostBody = r.cloudAwsVirtualMachine
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8362,15 +8273,15 @@ func (a *CloudApiService) UpdateCloudAwsVirtualMachineExecute(r ApiUpdateCloudAw
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8426,7 +8337,7 @@ func (a *CloudApiService) UpdateCloudAwsVirtualMachineExecute(r ApiUpdateCloudAw
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}
@@ -8437,7 +8348,7 @@ func (a *CloudApiService) UpdateCloudAwsVirtualMachineExecute(r ApiUpdateCloudAw
 }
 
 type ApiUpdateCloudRegionsRequest struct {
-	ctx          _context.Context
+	ctx          context.Context
 	ApiService   *CloudApiService
 	moid         string
 	cloudRegions *CloudRegions
@@ -8456,18 +8367,18 @@ func (r ApiUpdateCloudRegionsRequest) IfMatch(ifMatch string) ApiUpdateCloudRegi
 	return r
 }
 
-func (r ApiUpdateCloudRegionsRequest) Execute() (CloudRegions, *_nethttp.Response, error) {
+func (r ApiUpdateCloudRegionsRequest) Execute() (*CloudRegions, *http.Response, error) {
 	return r.ApiService.UpdateCloudRegionsExecute(r)
 }
 
 /*
 UpdateCloudRegions Update a 'cloud.Regions' resource.
 
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param moid The unique Moid identifier of a resource instance.
  @return ApiUpdateCloudRegionsRequest
 */
-func (a *CloudApiService) UpdateCloudRegions(ctx _context.Context, moid string) ApiUpdateCloudRegionsRequest {
+func (a *CloudApiService) UpdateCloudRegions(ctx context.Context, moid string) ApiUpdateCloudRegionsRequest {
 	return ApiUpdateCloudRegionsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -8477,27 +8388,25 @@ func (a *CloudApiService) UpdateCloudRegions(ctx _context.Context, moid string) 
 
 // Execute executes the request
 //  @return CloudRegions
-func (a *CloudApiService) UpdateCloudRegionsExecute(r ApiUpdateCloudRegionsRequest) (CloudRegions, *_nethttp.Response, error) {
+func (a *CloudApiService) UpdateCloudRegionsExecute(r ApiUpdateCloudRegionsRequest) (*CloudRegions, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CloudRegions
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CloudRegions
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CloudApiService.UpdateCloudRegions")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/cloud/Regions/{Moid}"
-	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", url.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
 	if r.cloudRegions == nil {
 		return localVarReturnValue, nil, reportError("cloudRegions is required and must be specified")
 	}
@@ -8524,7 +8433,7 @@ func (a *CloudApiService) UpdateCloudRegionsExecute(r ApiUpdateCloudRegionsReque
 	}
 	// body params
 	localVarPostBody = r.cloudRegions
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -8534,15 +8443,15 @@ func (a *CloudApiService) UpdateCloudRegionsExecute(r ApiUpdateCloudRegionsReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
@@ -8598,7 +8507,7 @@ func (a *CloudApiService) UpdateCloudRegionsExecute(r ApiUpdateCloudRegionsReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := GenericOpenAPIError{
+		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: err.Error(),
 		}

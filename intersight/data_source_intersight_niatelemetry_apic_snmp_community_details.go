@@ -717,7 +717,6 @@ func dataSourceNiatelemetryApicSnmpCommunityDetails() *schema.Resource {
 
 func dataSourceNiatelemetryApicSnmpCommunityDetailsRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryApicSnmpCommunityDetails{}
@@ -1087,7 +1086,7 @@ func dataSourceNiatelemetryApicSnmpCommunityDetailsRead(c context.Context, d *sc
 	if responseErr != nil {
 		errorType := fmt.Sprintf("%T", responseErr)
 		if strings.Contains(errorType, "GenericOpenAPIError") {
-			responseErr := responseErr.(models.GenericOpenAPIError)
+			responseErr := responseErr.(*models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while fetching count of NiatelemetryApicSnmpCommunityDetails: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		return diag.Errorf("error occurred while fetching count of NiatelemetryApicSnmpCommunityDetails: %s", responseErr.Error())
@@ -1104,7 +1103,7 @@ func dataSourceNiatelemetryApicSnmpCommunityDetailsRead(c context.Context, d *sc
 		if responseErr != nil {
 			errorType := fmt.Sprintf("%T", responseErr)
 			if strings.Contains(errorType, "GenericOpenAPIError") {
-				responseErr := responseErr.(models.GenericOpenAPIError)
+				responseErr := responseErr.(*models.GenericOpenAPIError)
 				return diag.Errorf("error occurred while fetching NiatelemetryApicSnmpCommunityDetails: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 			}
 			return diag.Errorf("error occurred while fetching NiatelemetryApicSnmpCommunityDetails: %s", responseErr.Error())

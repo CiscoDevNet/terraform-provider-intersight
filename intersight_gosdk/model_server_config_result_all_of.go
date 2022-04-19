@@ -3,7 +3,7 @@ Cisco Intersight
 
 Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document.
 
-API version: 1.0.9-5808
+API version: 1.0.9-6207
 Contact: intersight@cisco.com
 */
 
@@ -20,8 +20,9 @@ type ServerConfigResultAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType string                     `json:"ObjectType"`
-	Profile    *ServerProfileRelationship `json:"Profile,omitempty"`
+	ObjectType      string                         `json:"ObjectType"`
+	AppliedPolicies []PolicyPolicyStatus           `json:"AppliedPolicies,omitempty"`
+	Profile         *ServerBaseProfileRelationship `json:"Profile,omitempty"`
 	// An array of relationships to serverConfigResultEntry resources.
 	ResultEntries        []ServerConfigResultEntryRelationship `json:"ResultEntries,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -100,10 +101,43 @@ func (o *ServerConfigResultAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
+// GetAppliedPolicies returns the AppliedPolicies field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ServerConfigResultAllOf) GetAppliedPolicies() []PolicyPolicyStatus {
+	if o == nil {
+		var ret []PolicyPolicyStatus
+		return ret
+	}
+	return o.AppliedPolicies
+}
+
+// GetAppliedPoliciesOk returns a tuple with the AppliedPolicies field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ServerConfigResultAllOf) GetAppliedPoliciesOk() ([]PolicyPolicyStatus, bool) {
+	if o == nil || o.AppliedPolicies == nil {
+		return nil, false
+	}
+	return o.AppliedPolicies, true
+}
+
+// HasAppliedPolicies returns a boolean if a field has been set.
+func (o *ServerConfigResultAllOf) HasAppliedPolicies() bool {
+	if o != nil && o.AppliedPolicies != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAppliedPolicies gets a reference to the given []PolicyPolicyStatus and assigns it to the AppliedPolicies field.
+func (o *ServerConfigResultAllOf) SetAppliedPolicies(v []PolicyPolicyStatus) {
+	o.AppliedPolicies = v
+}
+
 // GetProfile returns the Profile field value if set, zero value otherwise.
-func (o *ServerConfigResultAllOf) GetProfile() ServerProfileRelationship {
+func (o *ServerConfigResultAllOf) GetProfile() ServerBaseProfileRelationship {
 	if o == nil || o.Profile == nil {
-		var ret ServerProfileRelationship
+		var ret ServerBaseProfileRelationship
 		return ret
 	}
 	return *o.Profile
@@ -111,7 +145,7 @@ func (o *ServerConfigResultAllOf) GetProfile() ServerProfileRelationship {
 
 // GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ServerConfigResultAllOf) GetProfileOk() (*ServerProfileRelationship, bool) {
+func (o *ServerConfigResultAllOf) GetProfileOk() (*ServerBaseProfileRelationship, bool) {
 	if o == nil || o.Profile == nil {
 		return nil, false
 	}
@@ -127,8 +161,8 @@ func (o *ServerConfigResultAllOf) HasProfile() bool {
 	return false
 }
 
-// SetProfile gets a reference to the given ServerProfileRelationship and assigns it to the Profile field.
-func (o *ServerConfigResultAllOf) SetProfile(v ServerProfileRelationship) {
+// SetProfile gets a reference to the given ServerBaseProfileRelationship and assigns it to the Profile field.
+func (o *ServerConfigResultAllOf) SetProfile(v ServerBaseProfileRelationship) {
 	o.Profile = &v
 }
 
@@ -144,11 +178,11 @@ func (o *ServerConfigResultAllOf) GetResultEntries() []ServerConfigResultEntryRe
 // GetResultEntriesOk returns a tuple with the ResultEntries field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ServerConfigResultAllOf) GetResultEntriesOk() (*[]ServerConfigResultEntryRelationship, bool) {
+func (o *ServerConfigResultAllOf) GetResultEntriesOk() ([]ServerConfigResultEntryRelationship, bool) {
 	if o == nil || o.ResultEntries == nil {
 		return nil, false
 	}
-	return &o.ResultEntries, true
+	return o.ResultEntries, true
 }
 
 // HasResultEntries returns a boolean if a field has been set.
@@ -172,6 +206,9 @@ func (o ServerConfigResultAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
+	}
+	if o.AppliedPolicies != nil {
+		toSerialize["AppliedPolicies"] = o.AppliedPolicies
 	}
 	if o.Profile != nil {
 		toSerialize["Profile"] = o.Profile
@@ -199,6 +236,7 @@ func (o *ServerConfigResultAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "AppliedPolicies")
 		delete(additionalProperties, "Profile")
 		delete(additionalProperties, "ResultEntries")
 		o.AdditionalProperties = additionalProperties
